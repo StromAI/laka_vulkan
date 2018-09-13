@@ -56,3 +56,7 @@ zlib/libpng License.</br>
 本项目需要绞尽脑汁满足目标 也考验阅读文档、整理信息的能力和耐心.</br></br>
 Q群:679351558</br></br>
 做人要真诚,非诚勿扰.
+
+## 如何配置Vulkan开发环境?
+
+请参考:https://zhuanlan.zhihu.com/p/44502301
