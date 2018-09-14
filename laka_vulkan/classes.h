@@ -18,6 +18,9 @@ class Instance;
 class Physical_device;
 class Physical_device_group;
 class Device_creator;
+
+struct Device_api;
+
 class Device;
 class Queue;
 class Device_memory;

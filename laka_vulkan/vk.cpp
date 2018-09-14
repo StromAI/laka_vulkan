@@ -110,7 +110,7 @@ namespace laka {    namespace vk {
 
             layer_properties.layer_extension_properties.resize(layer_count);
 
-            for (size_t i = 0; i < layer_count; i++)
+            for (size_t i = 0; i < layer_count; ++i)
             {
                 uint32_t count = 0;
                 auto ret = vkEnumerateInstanceExtensionProperties(
@@ -274,7 +274,7 @@ namespace laka {    namespace vk {
                         show_err("!!!!!!!!!!!在设备组中的物理设备的句柄 与枚举全部设备的句柄不一样");
                     }
                 }
-                i++;
+                ++i;
             }
         }
         else {
@@ -595,6 +595,8 @@ namespace laka {    namespace vk {
 		shared_ptr<Instance> instance_,
 		shared_ptr<Device_creator> device_creator_,
 		vector<Physical_device*>& physical_devices_,
+		vector<User_choose_queue_info>& queue_infos_,
+		vector<VkQueueFamilyProperties>& qf_properties_,
 		VkDevice handle_,
 		const VkAllocationCallbacks* allocation_callbacks_)
 		: instance(instance_)
@@ -602,17 +604,48 @@ namespace laka {    namespace vk {
 		, device_creator(device_creator_)
 		, physical_devices(physical_devices_)
 		, allocation_callbacks(allocation_callbacks_)
+		, queue_familys(qf_properties_.size())
     {
+		init_show;
+
 #define load_vk_device_api(api_name__) \
     api.api_name__ = (PFN_##api_name__)return_api(#api_name__);
 
         table_vk_api_device(load_vk_device_api ZK, , , YK FH);
         table_vk_api_cmd(load_vk_device_api ZK, , , YK FH);
         
-        //先不管队列 后边要用再完善
+		if (queue_infos_.size() < 0)
+		{
+			show_wrn("用户没有给出队列信息");
+			return;
+		}
 
+		//填写queue_familys	按队列族索引为i 那么就填写到queue_familys[i].
+			//没有用到的qf索引 相应的位置queues.size()为0
 
+		for (size_t i = 0; i < qf_properties_.size(); ++i)
+		{
+			queue_familys[i].properties = qf_properties_[i];
+			queue_familys[i].qf_index = i;
+		}
 
+			//假设queue_infos_中的元素 其队列族index不会重复 会的话也不知道vk会怎么处理.待提问.
+		for (auto&& qi:queue_infos_)
+		{
+			auto curr_qf_index = qi.queue_family_index;
+			queue_familys[curr_qf_index].queues.resize(qi.queue_priorities.size());
+			
+			uint32_t index_temp=0;
+			for (auto&&curr_q: queue_familys[curr_qf_index].queues)
+			{
+				curr_q.api = &api;
+				curr_q.index = index_temp;
+				
+				curr_q.family_index = qi.queue_family_index;
+				api.vkGetDeviceQueue(handle, curr_q.family_index, curr_q.index, &curr_q.handle);
+				++index_temp;
+			}
+		}
     }
 
     Device::~Device()
@@ -626,7 +659,7 @@ namespace laka {    namespace vk {
 
     shared_ptr<Device> Device_creator::get_a_device(
         Physical_device& physical_device_,
-        VkDeviceCreateInfo* create_info_)
+        VkDeviceCreateInfo& create_info_)
     {
         init_show;
         shared_ptr<Device> device_sptr;
@@ -638,7 +671,7 @@ namespace laka {    namespace vk {
         VkDevice device_handle;
         auto ret = instance->api.vkCreateDevice(
             physical_device_.handle, 
-            create_info_, 
+            &create_info_, 
             allocation_callbacks, 
             &device_handle
         );
@@ -647,12 +680,28 @@ namespace laka {    namespace vk {
 
         vector<Physical_device*> pds;
         //还需遍历pnext 找出所有物理设备指针放进去.
+			//待提问:如果pNext重复出现相同类型的扩展结构 vk会如何处理?
+
+		
+		
+		//遍历队列信息 放进去.
+		vector<User_choose_queue_info> queue_infos(create_info_.queueCreateInfoCount);
+		for (size_t i = 0; i < queue_infos.size(); ++i)
+		{
+			queue_infos[i].queue_family_index = create_info_.pQueueCreateInfos[i].queueFamilyIndex;
+			queue_infos[i].queue_priorities.resize(create_info_.pQueueCreateInfos[i].queueCount);
+		}
+
+
+		auto queue_familys = physical_device_.get_queue_family_properties();
 
         device_sptr.reset(
             new Device(
                 instance, 
                 shared_from_this(), 
                 pds,
+				queue_infos,
+				*queue_familys,
                 device_handle,
 				allocation_callbacks
             ));
@@ -680,7 +729,7 @@ namespace laka {    namespace vk {
         vector<Queue_family_info> my_queue_familys;
         my_queue_familys.resize(queue_familys->size());
 
-        for (size_t i = 0; i < my_queue_familys.size(); i++)
+        for (size_t i = 0; i < my_queue_familys.size(); ++i)
         {
             my_queue_familys[i].index = static_cast<uint32_t>(i);
             my_queue_familys[i].properties = (*queue_familys)[i];
@@ -699,7 +748,7 @@ namespace laka {    namespace vk {
 		vector<VkDeviceQueueCreateInfo> q_create_infos(user_choosed_q_create_infos.size());
 		vector<VkDeviceQueueGlobalPriorityCreateInfoEXT> q_gpci_ext(user_choosed_q_create_infos.size());
 
-		for (size_t i = 0; i < user_choosed_q_create_infos.size(); i++)
+		for (size_t i = 0; i < user_choosed_q_create_infos.size(); ++i)
 		{
 			void* pnext;
 			if (user_choosed_q_create_infos[i].global_priority == 0)
@@ -759,6 +808,8 @@ namespace laka {    namespace vk {
             instance, 
 			shared_from_this(),
 			pds, 
+			user_choosed_q_create_infos,
+			*queue_familys,
 			device_handle, 
 			allocation_callbacks
 		));
@@ -806,7 +857,7 @@ namespace laka {    namespace vk {
         vector<Queue_family_info> my_queue_familys;
         my_queue_familys.resize(queue_familys->size());
 
-        for (size_t i = 0; i < my_queue_familys.size(); i++)
+        for (size_t i = 0; i < my_queue_familys.size(); ++i)
         {
             my_queue_familys[i].index = static_cast<uint32_t>(i);
             my_queue_familys[i].properties = (*queue_familys)[i];
@@ -832,7 +883,7 @@ namespace laka {    namespace vk {
 		vector<VkDeviceQueueCreateInfo> q_create_infos(user_choosed_q_create_infos.size());
 		vector<VkDeviceQueueGlobalPriorityCreateInfoEXT> q_gpci_ext(user_choosed_q_create_infos.size());
 
-		for (size_t i = 0; i < user_choosed_q_create_infos.size(); i++)
+		for (size_t i = 0; i < user_choosed_q_create_infos.size(); ++i)
 		{
 			void* pnext;
 			if (user_choosed_q_create_infos[i].global_priority == 0)
@@ -899,6 +950,8 @@ namespace laka {    namespace vk {
             instance,
             shared_from_this(),
             pds,
+			user_choosed_q_create_infos,
+			*queue_familys,
             device_handle,
 			allocation_callbacks
         ));
@@ -1681,7 +1734,7 @@ namespace laka {    namespace vk {
 			init_show;
 			show_err("创建 command buffer 失败");
 
-			for (size_t i = 0; i < buffer_handles.size(); i++)
+			for (size_t i = 0; i < buffer_handles.size(); ++i)
 			{
 				//是否应当这样处理???
 				if (buffer_handles[i] != VK_NULL_HANDLE)
@@ -1847,7 +1900,7 @@ namespace laka {    namespace vk {
 		:descriptor_pool(descriptor_pool_)
 		, elements(handles_.size())
 	{
-		for (size_t i; i < elements.size(); i++)
+		for (size_t i; i < elements.size(); ++i)
 		{
 			elements[i].handle = handles_[i];
 		}
@@ -1857,7 +1910,7 @@ namespace laka {    namespace vk {
 	Descriptor_sets::~Descriptor_sets()
 	{
 		vector<VkDescriptorSet> handles(elements.size());
-		for (size_t i = 0; i < elements.size(); i++)
+		for (size_t i = 0; i < elements.size(); ++i)
 		{
 			handles[i] = elements[i].handle;
 		}
@@ -1901,7 +1954,7 @@ namespace laka {    namespace vk {
 			init_show;
 			show_err("创建 descriptor set 失败");
 
-			for (size_t i = 0; i < descriptor_sets_handles.size(); i++)
+			for (size_t i = 0; i < descriptor_sets_handles.size(); ++i)
 			{
 				if (descriptor_sets_handles[i] != VK_NULL_HANDLE)
 				{
@@ -2673,6 +2726,17 @@ namespace laka {    namespace vk {
 		return sult;
 	}
 
+	VkResult Buffer::bind(
+		std::shared_ptr<Device_memory> device_memroy_,
+		VkDeviceSize memory_offset_)
+	{
+		auto ret = device->api.vkBindBufferMemory(device->handle, handle, device_memroy_->handle, memory_offset_);
+		show_result(ret);
+		return ret;
+	}
+
+
+
 	std::shared_ptr<std::vector<VkSparseImageMemoryRequirements>> 
 		Image::get_sparse_memory_requirements()
 	{
@@ -2705,6 +2769,21 @@ namespace laka {    namespace vk {
 		device->api.vkGetImageMemoryRequirements(device->handle, handle, &sult);
 		return sult;
 	}
+
+	VkResult Image::bind(
+		std::shared_ptr<Device_memory> device_memory_,
+		VkDeviceSize memory_offset_)
+	{
+		auto ret = device->api.vkBindImageMemory(
+			device->handle, 
+			handle, 
+			device_memory_->handle, 
+			memory_offset_
+		);
+		show_result(ret);
+		return ret;
+	}
+
 
 
 	VkResult Command_pool::reset(VkCommandPoolResetFlags flags)
@@ -2830,6 +2909,15 @@ namespace laka {    namespace vk {
 		device->api.vkGetRenderAreaGranularity(device->handle, handle, &sult);
 		return sult;
 	}
+
+
+	VkResult Queue::wait_idle()
+	{
+		auto ret = api->vkQueueWaitIdle(handle);
+		show_result(ret);
+		return ret;
+	}
+
 
 
 

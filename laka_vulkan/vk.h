@@ -204,9 +204,7 @@ namespace laka { namespace vk {
 		uint32_t index;
         uint32_t family_index;
 
-        struct {
-            table_vk_api_queue(vk_fun ZK, , , YK FH);
-        }api;
+        Device_api* api;
 
         VkResult wait_idle();
         VkResult submit();
@@ -231,7 +229,7 @@ namespace laka { namespace vk {
 
         std::shared_ptr<Device> get_a_device(
             Physical_device& physical_device_,
-            VkDeviceCreateInfo* create_info_);
+            VkDeviceCreateInfo& create_info_);
 
         std::shared_ptr<Device> get_a_device(
             Physical_device& physical_device_,
@@ -336,6 +334,11 @@ namespace laka { namespace vk {
 
         VkMemoryRequirements get_memory_requirements();
 
+		VkResult bind(
+			std::shared_ptr<Device_memory> device_memroy_,
+			VkDeviceSize memory_offset_);
+		//绑定后是否会影响生命周期? 待查待提问.
+
         std::shared_ptr<Device> device;
         VkBuffer handle;
     };
@@ -439,6 +442,10 @@ namespace laka { namespace vk {
 
 		VkSubresourceLayout get_subresource_layout(const VkImageSubresource*);
 
+		VkResult bind(
+			std::shared_ptr<Device_memory> device_memory_,
+			VkDeviceSize memory_offset_);
+
         std::shared_ptr<Device> device;
         VkImage handle;
     };
@@ -486,7 +493,6 @@ namespace laka { namespace vk {
 	
 
 	
-	struct Device_api;
 
 	class Command_buffer_base {
 	protected:
@@ -1056,6 +1062,8 @@ namespace laka { namespace vk {
 			std::shared_ptr<Instance> instance_,
 			std::shared_ptr<Device_creator> device_creator_,
 			std::vector<Physical_device*>& physical_devices_,
+			std::vector<User_choose_queue_info>& queue_infos_,
+			std::vector<VkQueueFamilyProperties>& qf_properties_,
 			VkDevice handle_,
 			const VkAllocationCallbacks* allocation_callbacks_ = nullptr);
         
