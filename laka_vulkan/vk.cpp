@@ -1396,14 +1396,16 @@ namespace laka {    namespace vk {
             return image_sptr;
         }
 
-        image_sptr.reset(new Image(shared_from_this(),image_handle, allocator));
+        image_sptr.reset(new Image(shared_from_this(),image_handle, initialLayout_, allocator));
 
         return image_sptr;
     }
 
-    Image::Image(Device::Sptr device_, VkImage handle_, const VkAllocationCallbacks* pAllocator_)
+	Image::Image(
+		Device::Sptr device_, VkImage handle_, VkImageLayout layout_, const VkAllocationCallbacks* pAllocator_)
         : device(device_)
         , handle(handle_)
+		, layout(layout_)
         , allocation_callbacks(pAllocator_)
     {   }
 
@@ -2917,6 +2919,396 @@ namespace laka {    namespace vk {
 		show_result(ret);
 		return ret;
 	}
+
+	void Command_buffer_base::bind(std::shared_ptr<Compute_pipeline> pipeline_sptr_)
+	{
+		api->vkCmdBindPipeline(
+			handle, VkPipelineBindPoint::VK_PIPELINE_BIND_POINT_COMPUTE, pipeline_sptr_->handle);
+	}
+	void Command_buffer_base::bind(std::shared_ptr<Graphics_pipeline> pipeline_sptr_)
+	{
+		api->vkCmdBindPipeline(
+			handle, VkPipelineBindPoint::VK_PIPELINE_BIND_POINT_GRAPHICS, pipeline_sptr_->handle);
+	}
+
+	void Command_buffer_base::bind(
+		std::shared_ptr<Buffer> buffer_sptr_,
+		VkDeviceSize offset_,
+		VkIndexType index_type)
+	{
+		api->vkCmdBindIndexBuffer(handle, buffer_sptr_->handle, offset_, index_type);
+	}
+
+
+	void Command_buffer_base::bind(
+		std::vector<std::shared_ptr<Buffer>>& buffer_sptrs_,
+		std::vector<VkDeviceSize>& offsets_,
+		uint32_t first_binding_)
+	{
+		vector<VkBuffer> buffer_handles(buffer_sptrs_.size());
+		for (size_t i = 0; i < buffer_sptrs_.size(); ++i)
+		{
+			buffer_handles[i] = buffer_sptrs_[i]->handle;
+		}
+
+		api->vkCmdBindVertexBuffers(
+			handle,
+			first_binding_,
+			static_cast<uint32_t>(buffer_handles.size()),
+			&buffer_handles[0],
+			&offsets_[0]
+		);
+	}
+
+
+	void Command_buffer_base::set_blend_constants(const float blend_[4])
+	{
+		api->vkCmdSetBlendConstants(handle, blend_);
+	}
+
+	void Command_buffer_base::set_depth_bias(
+		float depthBiasConstantFactor,
+		float depthBiasClamp,
+		float depthBiasSlopeFactor)
+	{
+		api->vkCmdSetDepthBias(handle, depthBiasSlopeFactor, depthBiasClamp, depthBiasSlopeFactor);
+	}
+
+	void Command_buffer_base::set_depth_bounds(float minDepthBounds, float maxDepthBounds)
+	{
+		api->vkCmdSetDepthBounds(handle, minDepthBounds, maxDepthBounds);
+	}
+
+	void Command_buffer_base::set_device_mask(uint32_t mask_)
+	{
+		api->vkCmdSetDeviceMask(handle, mask_);
+	}
+
+	void Command_buffer_base::set_line_width(float line_width_)
+	{
+		api->vkCmdSetLineWidth(handle, line_width_);
+	}
+
+	void Command_buffer_base::set_scissor(
+		uint32_t firstScissor,
+		uint32_t scissorCount,
+		const VkRect2D* pScissors)
+	{
+		api->vkCmdSetScissor(handle, firstScissor, scissorCount, pScissors);
+	}
+
+	void Command_buffer_base::set_stencil_compare_mask(VkStencilFaceFlags faceMask, uint32_t compareMask)
+	{
+		api->vkCmdSetStencilCompareMask(handle, faceMask, compareMask);
+	}
+
+	void Command_buffer_base::set_stencil_reference(VkStencilFaceFlags faceMask, uint32_t reference)
+	{
+		api->vkCmdSetStencilReference(handle, faceMask, reference);
+	}
+
+	void Command_buffer_base::set_stencil_write_mask(
+		VkStencilFaceFlags faceMask,
+		uint32_t writeMask)
+	{
+		api->vkCmdSetStencilWriteMask(handle, faceMask, writeMask);
+	}
+
+	void Command_buffer_base::set_viewport(
+		uint32_t firstViewport,
+		std::vector<VkViewport>& viewports_)
+	{
+		api->vkCmdSetViewport(
+			handle,
+			firstViewport,
+			static_cast<uint32_t>(viewports_.size()),
+			&viewports_[0]
+		);
+	}
+
+	void Command_buffer_base::event_set(Event& event_, VkPipelineStageFlags stageMask)
+	{
+		api->vkCmdSetEvent(handle, event_.handle, stageMask);
+	}
+
+	void Command_buffer_base::event_reset(Event& event_, VkPipelineStageFlags stageMask)
+	{
+		api->vkCmdSetEvent(handle, event_.handle, stageMask);
+	}
+
+	void Command_buffer_base::query_begin(Query_pool& queryPool, uint32_t query, VkQueryControlFlags flags)
+	{
+		api->vkCmdBeginQuery(handle, queryPool.handle, query, flags);
+	}
+
+	void Command_buffer_base::query_reset(
+		Query_pool&                                 queryPool,
+		uint32_t                                    firstQuery,
+		uint32_t                                    queryCount)
+	{
+		api->vkCmdResetQueryPool(handle, queryPool.handle, firstQuery, queryCount);
+	}
+
+	void Command_buffer_base::query_end(
+		Query_pool&	queryPool,
+		uint32_t	query)
+	{
+		api->vkCmdEndQuery(handle, queryPool.handle, query);
+	}
+
+	void Command_buffer_base::query_copy_results(
+		Query_pool&                                 queryPool,
+		uint32_t                                    firstQuery,
+		uint32_t                                    queryCount,
+		Buffer&                                     dstBuffer,
+		VkDeviceSize                                dstOffset,
+		VkDeviceSize                                stride,
+		VkQueryResultFlags                          flags)
+	{
+		api->vkCmdCopyQueryPoolResults(
+			handle,
+			queryPool.handle,
+			firstQuery,
+			queryCount,
+			dstBuffer.handle,
+			dstOffset,
+			stride,
+			flags
+		);
+	}
+
+	void Command_buffer_base::commands_execute(Command_buffers& pCommandBuffers)
+	{
+		vector<VkCommandBuffer> buffer_handles(pCommandBuffers.elements.size());
+
+		for (size_t i = 0; i < pCommandBuffers.elements.size(); ++i)
+		{
+			buffer_handles[i] = pCommandBuffers.elements[i].handle;
+		}
+
+		api->vkCmdExecuteCommands(
+			handle,
+			static_cast<uint32_t>(pCommandBuffers.elements.size()),
+			&buffer_handles[0]
+		);
+	}
+
+
+	void Command_buffer_base::buffer_update(
+		Buffer&                                     dstBuffer,
+		VkDeviceSize                                dstOffset,
+		VkDeviceSize                                dataSize,
+		const void*                                 pData)
+	{
+		api->vkCmdUpdateBuffer(handle, dstBuffer.handle, dstOffset, dataSize, pData);
+	}
+
+	void Command_buffer_base::buffer_fill(
+		Buffer&                                    dstBuffer,
+		VkDeviceSize                                dstOffset,
+		VkDeviceSize                                size,
+		uint32_t                                    data)
+	{
+		api->vkCmdFillBuffer(handle, dstBuffer.handle, dstOffset, size, data);
+	}
+
+	void Command_buffer_base::buffer_copy_to_buffer(
+		Buffer&                                    srcBuffer,
+		Buffer&                                    dstBuffer,
+		std::vector<VkBufferCopy>&                  regions)
+	{
+		api->vkCmdCopyBuffer(
+			handle,
+			srcBuffer.handle,
+			dstBuffer.handle,
+			static_cast<uint32_t>(regions.size()),
+			&regions[0]
+		);
+	}
+
+	void Command_buffer_base::buffer_copy_to_image(
+		Buffer&										srcBuffer,
+		Image&										dstImage,
+		VkImageLayout								dstImage_layout,
+		std::vector<VkBufferImageCopy>&				pRegions)
+	{
+		api->vkCmdCopyBufferToImage(
+			handle, 
+			srcBuffer.handle, 
+			dstImage.handle, 
+			dstImage_layout,
+			static_cast<uint32_t>(pRegions.size()),
+			&pRegions[0]
+		);
+	}
+
+	void Command_buffer_base::clear_attachments(
+		std::vector<VkClearAttachment>&             pAttachments,
+		std::vector <VkClearRect>&                  pRects)
+	{
+		api->vkCmdClearAttachments(
+			handle,
+			static_cast<uint32_t>(pAttachments.size()),
+			&pAttachments[0],
+			static_cast<uint32_t>(pRects.size()),
+			&pRects[0]
+		);
+	}
+
+	void Command_buffer_base::image_clear_color(
+		Image&                                      image,
+		VkImageLayout                               imageLayout,
+		const VkClearColorValue*                    pColor,
+		std::vector<VkImageSubresourceRange>&        pRanges)
+	{
+		api->vkCmdClearColorImage(
+			handle,
+			image.handle,
+			imageLayout,
+			pColor,
+			static_cast<uint32_t>(pRanges.size()),
+			&pRanges[0]
+		);
+	}
+
+	void Command_buffer_base::image_clear_depth_stencil(
+		Image&                                      image,
+		VkImageLayout                               imageLayout,
+		const VkClearDepthStencilValue*             pDepthStencil,
+		std::vector<VkImageSubresourceRange>&        pRanges)
+	{
+		api->vkCmdClearDepthStencilImage(
+			handle, 
+			image.handle, 
+			imageLayout, 
+			pDepthStencil,
+			static_cast<uint32_t>(pRanges.size()),
+			&pRanges[0]
+		);
+	}
+
+	void Command_buffer_base::image_blit(
+		Image&                                      srcImage,
+		VkImageLayout                               srcImageLayout,
+		Image&                                      dstImage,
+		VkImageLayout                               dstImageLayout,
+		std::vector<VkImageBlit>&                   pRegions,
+		VkFilter                                    filter)
+	{
+		api->vkCmdBlitImage(
+			handle,
+			srcImage.handle,
+			srcImageLayout,
+			dstImage.handle,
+			dstImageLayout,
+			static_cast<uint32_t>(pRegions.size()),
+			&pRegions[0],
+			filter
+		);
+	}
+
+	void Command_buffer_base::image_copy(
+		Image&                                     srcImage,
+		VkImageLayout                               srcImageLayout,
+		Image&                                     dstImage,
+		VkImageLayout                               dstImageLayout,
+		std::vector<VkImageCopy>&                          pRegions)
+	{
+		api->vkCmdCopyImage(
+			handle,
+			srcImage.handle,
+			srcImageLayout,
+			dstImage.handle,
+			dstImageLayout,
+			static_cast<uint32_t>(pRegions.size()),
+			&pRegions[0]
+		);
+	}
+
+	void Command_buffer_base::image_copy_to_buffer(
+		Image&                                      srcImage,
+		VkImageLayout                               srcImageLayout,
+		Buffer&                                     dstBuffer,
+		std::vector <VkBufferImageCopy>&            pRegions)
+	{
+		api->vkCmdCopyImageToBuffer(
+			handle, 
+			srcImage.handle, 
+			srcImageLayout, 
+			dstBuffer.handle,
+			static_cast<uint32_t>(pRegions.size()),
+			&pRegions[0]
+		);
+	}
+
+	void Command_buffer_base::dispatch(
+		uint32_t                                    groupCountX,
+		uint32_t                                    groupCountY,
+		uint32_t                                    groupCountZ)
+	{
+		api->vkCmdDispatch(handle, groupCountX, groupCountY, groupCountZ);
+	}
+
+	void Command_buffer_base::dispatch_base(
+		uint32_t                                    baseGroupX,
+		uint32_t                                    baseGroupY,
+		uint32_t                                    baseGroupZ,
+		uint32_t                                    groupCountX,
+		uint32_t                                    groupCountY,
+		uint32_t                                    groupCountZ)
+	{
+		api->vkCmdDispatchBase(
+			handle,baseGroupX, baseGroupY, baseGroupZ, groupCountX, groupCountY, groupCountZ);
+	}
+
+
+	void Command_buffer_base::dispatch_indirect(
+		Buffer&                                    buffer,
+		VkDeviceSize                                offset)
+	{
+		api->vkCmdDispatchIndirect(handle, buffer.handle, offset);
+	}
+
+	void Command_buffer_base::write_timestamp(
+		VkPipelineStageFlagBits                     pipelineStage,
+		Query_pool&                                 queryPool,
+		uint32_t                                    query)
+	{
+		api->vkCmdWriteTimestamp(handle, pipelineStage, queryPool.handle, query);
+	}
+
+	void Command_buffer_base::push_constants(
+		Pipeline_layout&                            layout,
+		VkShaderStageFlags                          stageFlags,
+		uint32_t                                    offset,
+		uint32_t                                    size,
+		const void*                                 pValues)
+	{
+		api->vkCmdPushConstants(handle, layout.handle, stageFlags, offset, size, pValues);
+	}
+
+	void Command_buffer_base::image_resolve(
+		Image&                                      srcImage,
+		VkImageLayout                               srcImageLayout,
+		Image&                                      dstImage,
+		VkImageLayout                               dstImageLayout,
+		std::vector<VkImageResolve>                 pRegions)
+	{
+		api->vkCmdResolveImage(
+			handle,
+			srcImage.handle,
+			srcImageLayout,
+			dstImage.handle,
+			dstImageLayout,
+			static_cast<uint32_t>(pRegions.size()),
+			&pRegions[0]
+		);
+	}
+	 
+
+
+
+
 
 
 

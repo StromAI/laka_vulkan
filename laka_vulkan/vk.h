@@ -372,6 +372,7 @@ namespace laka { namespace vk {
         Image(
             std::shared_ptr<Device> device_,
             VkImage handle_,
+			VkImageLayout layout_,
             const VkAllocationCallbacks* pAllocator_);
 
         const VkAllocationCallbacks* allocation_callbacks;
@@ -446,6 +447,7 @@ namespace laka { namespace vk {
 			std::shared_ptr<Device_memory> device_memory_,
 			VkDeviceSize memory_offset_);
 
+		VkImageLayout layout;
         std::shared_ptr<Device> device;
         VkImage handle;
     };
@@ -492,7 +494,8 @@ namespace laka { namespace vk {
     };
 	
 
-	
+	//Command_buffer,Descriptor_set 
+		//是否应当只做成Command_buffers Descriptor_sets.
 
 	class Command_buffer_base {
 	protected:
@@ -505,9 +508,191 @@ namespace laka { namespace vk {
 		VkResult reset(VkCommandBufferResetFlags flags_);
 		VkResult end();
 
+		//如果cmd的api都是void返回值 那么可以用它来返回Commd_buffer自身.设个语法糖.
+
+		void bind(std::shared_ptr<Compute_pipeline> pipeline_sptr_); //需要修正生命周期
+		void bind(std::shared_ptr<Graphics_pipeline> pipeline_sptr_);
+
+		void bind(
+			std::shared_ptr<Buffer> buffer_sptr_,
+			VkDeviceSize offset_,
+			VkIndexType index_type);
+
+		void bind(
+			std::vector<std::shared_ptr<Buffer>>& buffer_sptrs_, //todo:为一些对象提供vector版
+			std::vector<VkDeviceSize>& offsets_,
+			uint32_t first_binding_);
+
+		
+		void set_blend_constants(const float blend_[4]);
+
+		void set_depth_bias(
+			float depthBiasConstantFactor,
+			float depthBiasClamp,
+			float depthBiasSlopeFactor);
+
+		void set_depth_bounds(
+			float minDepthBounds,
+			float maxDepthBounds);
+
+		void set_device_mask(uint32_t mask_);
+
+		void set_line_width(float line_width_);
+
+		void set_scissor(
+			uint32_t firstScissor,
+			uint32_t scissorCount,
+			const VkRect2D* pScissors);
+
+		void set_stencil_compare_mask(
+			VkStencilFaceFlags faceMask,
+			uint32_t			compareMask);
+
+		void set_stencil_reference(
+			VkStencilFaceFlags	faceMask,
+			uint32_t			reference);
+
+		void set_stencil_write_mask(
+			VkStencilFaceFlags faceMask,
+			uint32_t writeMask);
+
+		void set_viewport(
+			uint32_t firstViewport,
+			std::vector<VkViewport>& viewports_);
+
+		void event_set(Event&  event_,VkPipelineStageFlags	stageMask);
+
+		void event_reset(Event& event_, VkPipelineStageFlags stageMask);
+
+		void query_begin(
+			Query_pool&	queryPool,
+			uint32_t	query,
+			VkQueryControlFlags	flags);
+
+		void query_reset(
+			Query_pool&	queryPool,
+			uint32_t	firstQuery,
+			uint32_t	queryCount);
+
+		void query_end(
+			Query_pool&	queryPool,
+			uint32_t	query);
+
+		void query_copy_results(
+			Query_pool&                                 queryPool,
+			uint32_t                                    firstQuery,
+			uint32_t                                    queryCount,
+			Buffer&                                     dstBuffer,
+			VkDeviceSize                                dstOffset,
+			VkDeviceSize                                stride,
+			VkQueryResultFlags                          flags);
+
+		void commands_execute(Command_buffers& pCommandBuffers);
+
+		void buffer_update(
+			Buffer&	                                    dstBuffer,
+			VkDeviceSize                                dstOffset,
+			VkDeviceSize                                dataSize,
+			const void*								    pData);
+
+		void buffer_fill(
+			Buffer&                                    dstBuffer,
+			VkDeviceSize                                dstOffset,
+			VkDeviceSize                                size,
+			uint32_t                                    data);
+
+		void buffer_copy_to_buffer(
+			Buffer&                                    srcBuffer,
+			Buffer&                                    dstBuffer,
+			std::vector<VkBufferCopy>&                 regions);
+
+		void buffer_copy_to_image(
+			Buffer&										srcBuffer,
+			Image&										dstImage,
+			VkImageLayout								dstImage_layout,
+			std::vector<VkBufferImageCopy>&				pRegions);
+
+		void clear_attachments(
+			std::vector<VkClearAttachment>&             pAttachments,
+			std::vector <VkClearRect>&                  pRects);
+
+		void image_clear_color(
+			Image&                                     image,
+			VkImageLayout                               imageLayout,//检查有没有可能多个布局能用在一种图上
+			const VkClearColorValue*                    pColor,
+			std::vector<VkImageSubresourceRange>&        pRanges);
+
+		void image_clear_depth_stencil(
+			Image&                                      image,
+			VkImageLayout                               imageLayout,
+			const VkClearDepthStencilValue*             pDepthStencil,
+			std::vector<VkImageSubresourceRange>&        pRanges);
+
+		void image_blit(
+			Image&                                      srcImage,
+			VkImageLayout                               srcImageLayout,
+			Image&                                      dstImage,
+			VkImageLayout                               dstImageLayout,
+			std::vector<VkImageBlit>&                   pRegions,
+			VkFilter                                    filter);
+
+		void image_copy(
+			Image&										srcImage,
+			VkImageLayout                               srcImageLayout,
+			Image&										dstImage,
+			VkImageLayout                               dstImageLayout,
+			std::vector<VkImageCopy>&                   pRegions);
+
+		void image_copy_to_buffer(
+			Image&                                     srcImage,
+			VkImageLayout                               srcImageLayout,
+			Buffer&                                     dstBuffer,
+			std::vector <VkBufferImageCopy>&            pRegions);
+
+		void dispatch(
+			uint32_t                                    groupCountX,
+			uint32_t                                    groupCountY,
+			uint32_t                                    groupCountZ);
+
+		void dispatch_base(
+			uint32_t                                    baseGroupX,
+			uint32_t                                    baseGroupY,
+			uint32_t                                    baseGroupZ,
+			uint32_t                                    groupCountX,
+			uint32_t                                    groupCountY,
+			uint32_t                                    groupCountZ);
+
+		void dispatch_indirect(
+			Buffer&                                    buffer,
+			VkDeviceSize                                offset);
+
+		void write_timestamp(
+			VkPipelineStageFlagBits                     pipelineStage,
+			Query_pool&                                 queryPool,
+			uint32_t                                    query);
+
+		void push_constants(
+			Pipeline_layout&                            layout,
+			VkShaderStageFlags                          stageFlags,
+			uint32_t                                    offset,
+			uint32_t                                    size,
+			const void*                                 pValues);
+
+		void image_resolve(
+			Image&                                      srcImage,
+			VkImageLayout                               srcImageLayout,
+			Image&                                      dstImage,
+			VkImageLayout                               dstImageLayout,
+			std::vector<VkImageResolve>                 pRegions);
+
+
+
+
+
+
 
 	};
-
+	 
 	class Command_buffer
 		:public std::enable_shared_from_this<Command_buffer>
 		, Command_buffer_base {
@@ -1348,6 +1533,9 @@ namespace laka { namespace vk {
 
 
 
+	class Surface {
+		//顺序上放最后边做 暂时不给直接的画面了.
+	};
 
 
 }}
