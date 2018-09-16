@@ -3305,7 +3305,92 @@ namespace laka {    namespace vk {
 		);
 	}
 	 
+	void Command_buffer_base::render_pass_begin(
+		Render_pass&			render_pass,
+		Frame_buffer&			framebuffer,
+		VkRect2D				renderArea,
+		uint32_t				clearValueCount,
+		const VkClearValue*		pClearValues,
+		VkSubpassContents       contents,
+		const void*				pNext/* = nullptr*/)
+	{
+		VkRenderPassBeginInfo info{
+			VK_STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO,
+			pNext,
+			render_pass.handle,
+			framebuffer.handle,
+			renderArea,
+			clearValueCount,
+			pClearValues
+		};
 
+		api->vkCmdBeginRenderPass(handle, &info, contents);
+	}
+
+	void Command_buffer_base::next_subpass(VkSubpassContents contents)
+	{
+		api->vkCmdNextSubpass(handle, contents);
+	}
+
+	void Command_buffer_base::render_pass_end()
+	{
+		api->vkCmdEndRenderPass(handle);
+	}
+
+
+#define cast_u32(...) static_cast<uint32_t>(__VA_ARGS__)
+
+	void Command_buffer_base::wait_events(
+		std::vector<Event>& events_,
+		VkPipelineStageFlags                        srcStageMask,
+		VkPipelineStageFlags                        dstStageMask,
+		std::vector<VkMemoryBarrier>&				memory_barriers_,
+		std::vector<VkBufferMemoryBarrier>& 		buffer_memory_barriers_,
+		std::vector<VkImageMemoryBarrier>&			image_memory_barriers_)
+	{
+		vector<VkEvent> event_handels(events_.size());
+		for (size_t i = 0; i < events_.size(); i++)
+		{
+			event_handels[i] = events_[i].handle;
+		}
+
+		api->vkCmdWaitEvents(
+			handle,
+			cast_u32(events_.size()),
+			&event_handels[0],
+			srcStageMask,
+			dstStageMask,
+			cast_u32(memory_barriers_.size()),
+			&memory_barriers_[0],
+			cast_u32(buffer_memory_barriers_.size()),
+			&buffer_memory_barriers_[0],
+			cast_u32(image_memory_barriers_.size()),
+			&image_memory_barriers_[0]
+		);
+	}
+
+	void Command_buffer_base::pipeline_barrier(
+		VkCommandBuffer                             commandBuffer,
+		VkPipelineStageFlags                        srcStageMask,
+		VkPipelineStageFlags                        dstStageMask,
+		VkDependencyFlags                           dependencyFlags,
+		std::vector<VkMemoryBarrier>&				memory_barriers_,
+		std::vector<VkBufferMemoryBarrier>& 		buffer_memory_barriers_,
+		std::vector<VkImageMemoryBarrier>&			image_memory_barriers_)
+	{
+		api->vkCmdPipelineBarrier(
+			handle,
+			srcStageMask,
+			dstStageMask,
+			dependencyFlags,
+			cast_u32(memory_barriers_.size()),
+			&memory_barriers_[0],
+			cast_u32(buffer_memory_barriers_.size()),
+			&buffer_memory_barriers_[0],
+			cast_u32(image_memory_barriers_.size()),
+			&image_memory_barriers_[0]
+		);
+	}
 
 
 

@@ -685,9 +685,37 @@ namespace laka { namespace vk {
 			VkImageLayout                               dstImageLayout,
 			std::vector<VkImageResolve>                 pRegions);
 
+		void render_pass_begin(
+			Render_pass&			render_pass,
+			Frame_buffer&			framebuffer,
+			VkRect2D				renderArea,
+			uint32_t				clearValueCount,
+			const VkClearValue*		pClearValues,
+			VkSubpassContents       contents,
+			const void*				pNext = nullptr);
 
+		void next_subpass(VkSubpassContents contents);
 
+		void render_pass_end();
 
+		void wait_events(
+			std::vector<Event>& events_,
+			VkPipelineStageFlags                        srcStageMask,
+			VkPipelineStageFlags                        dstStageMask,
+			std::vector<VkMemoryBarrier>&				memory_barriers_,
+			std::vector<VkBufferMemoryBarrier>& 		buffer_memory_barriers_,
+			std::vector<VkImageMemoryBarrier>&			image_memory_barriers_);
+
+		//屏障可以用更形象的方式来使用.
+
+		void pipeline_barrier(
+			VkCommandBuffer                             commandBuffer,
+			VkPipelineStageFlags                        srcStageMask,
+			VkPipelineStageFlags                        dstStageMask,
+			VkDependencyFlags                           dependencyFlags,
+			std::vector<VkMemoryBarrier>&				memory_barriers_,
+			std::vector<VkBufferMemoryBarrier>& 		buffer_memory_barriers_,
+			std::vector<VkImageMemoryBarrier>&			image_memory_barriers_);
 
 
 
