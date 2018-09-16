@@ -3392,7 +3392,92 @@ namespace laka {    namespace vk {
 		);
 	}
 
+	void Command_buffer_base::draw(
+		uint32_t                                    vertexCount,
+		uint32_t                                    instanceCount,
+		uint32_t                                    firstVertex,
+		uint32_t                                    firstInstance)
+	{
+		api->vkCmdDraw(
+			handle, vertexCount, instanceCount, firstVertex, firstInstance);
+	}
 
+	void Command_buffer_base::draw_indexed(
+		uint32_t                                    indexCount,
+		uint32_t                                    instanceCount,
+		uint32_t                                    firstIndex,
+		int32_t                                     vertexOffset,
+		uint32_t                                    firstInstance)
+	{
+		api->vkCmdDrawIndexed(
+			handle,
+			indexCount,
+			instanceCount,
+			firstIndex,
+			vertexOffset,
+			firstInstance
+		);
+	}
+
+	void Command_buffer_base::draw_indexed_indirect(
+		Buffer&                                    buffer,
+		VkDeviceSize                                offset,
+		uint32_t                                    drawCount,
+		uint32_t                                    stride)
+	{
+		api->vkCmdDrawIndexedIndirect(
+			handle,
+			buffer.handle,
+			offset,
+			drawCount,
+			stride
+		);
+	}
+
+	void Command_buffer_base::draw_indirect(
+		Buffer&                                     buffer,
+		VkDeviceSize                                offset,
+		uint32_t                                    drawCount,
+		uint32_t                                    stride)
+	{
+		api->vkCmdDrawIndirect(
+			handle,
+			buffer.handle,
+			offset,
+			drawCount,
+			stride
+		);
+	}
+
+	VkResult Query_pool::get_results(
+		uint32_t                                    firstQuery,
+		uint32_t                                    queryCount,
+		size_t                                      dataSize,
+		void*                                       pData,
+		VkDeviceSize                                stride,
+		VkQueryResultFlags                          flags)
+	{
+		auto ret = device->api.vkGetQueryPoolResults(
+			device->handle, handle, firstQuery, queryCount, dataSize, pData, stride, flags);
+		show_result(ret);
+
+		return ret;
+	}
+
+	VkResult Pipeline_cache::get_data(
+		size_t*                                     pDataSize,
+		void*                                       pData)
+	{
+		auto ret = device->api.vkGetPipelineCacheData(
+			device->handle,
+			handle,
+			pDataSize,
+			pData
+		);
+		show_result(ret);
+
+		return ret;
+	}
 
 
 

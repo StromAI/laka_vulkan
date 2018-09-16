@@ -717,6 +717,35 @@ namespace laka { namespace vk {
 			std::vector<VkBufferMemoryBarrier>& 		buffer_memory_barriers_,
 			std::vector<VkImageMemoryBarrier>&			image_memory_barriers_);
 
+		void draw(
+			uint32_t                                    vertexCount,
+			uint32_t                                    instanceCount,
+			uint32_t                                    firstVertex,
+			uint32_t                                    firstInstance);
+
+		void draw_indexed(
+			uint32_t                                    indexCount,
+			uint32_t                                    instanceCount,
+			uint32_t                                    firstIndex,
+			int32_t                                     vertexOffset,
+			uint32_t                                    firstInstance);
+
+		void draw_indexed_indirect(
+			Buffer&                                    buffer,
+			VkDeviceSize                                offset,
+			uint32_t                                    drawCount,
+			uint32_t                                    stride);
+
+		void draw_indirect(
+			Buffer&                                     buffer,
+			VkDeviceSize                                offset,
+			uint32_t                                    drawCount,
+			uint32_t                                    stride);
+
+
+
+
+
 
 
 	};
@@ -939,6 +968,14 @@ namespace laka { namespace vk {
             E_Pipeline_statistic operator | (E_Pipeline_statistic value_);
             E_Pipeline_statistic operator | (Bits value_);
         };
+
+		VkResult get_results(
+			uint32_t                                    firstQuery,
+			uint32_t                                    queryCount,
+			size_t                                      dataSize,
+			void*                                       pData,
+			VkDeviceSize                                stride,
+			VkQueryResultFlags                          flags);
 
         ~Query_pool();
 
@@ -1172,8 +1209,6 @@ namespace laka { namespace vk {
 
 
 
-
-    
     class Pipeline_layout
         :public std::enable_shared_from_this<Pipeline_layout> {
     private:
@@ -1245,6 +1280,11 @@ namespace laka { namespace vk {
         ~Pipeline_cache();
 
         //std::shared_ptr<std::vector<char>> get_data();
+		//对pData这种,大概得用vector<uchar>
+
+		VkResult get_data(
+			size_t*                                     pDataSize,
+			void*                                       pData);
 
         std::shared_ptr<Device> device;
         VkPipelineCache handle;
