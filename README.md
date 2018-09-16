@@ -49,17 +49,17 @@ zlib/libpng License.</br>
 
 真正核心的就是vk.h和vk.cpp了. 我希望项目成型后,使用者就放这两个文件到项目里就能用,干净利落没有任何麻烦的地方.
 
-classes.h 类的前置声明.这种文件独立存在,仅仅是为了编码时看得舒服点.
+classes.h: 类的前置声明.这种文件独立存在,仅仅是为了编码时看得舒服点.
 
-common.h common.cpp 一些宏,以及具有通用性的函数.比如加载dll模块,为spdlog定义的宏等.
+common.h common.cpp: 一些宏,以及具有通用性的函数.比如加载dll模块,为spdlog定义的宏等.
 
-laka_vk_define.h  用来存放有关vulkan api的列表,我净化代码用(懒)的技巧.
+laka_vk_define.h: 用来存放有关vulkan api的列表,我净化代码用(懒)的技巧.
 
-vk_shortcut.cpp   里面的内容主要跟简化api参数有关.
+vk_shortcut.cpp: 里面的内容主要跟简化api参数有关.
 
-vk_mean.h vk_mean.cpp 专门用来写解释vk各种枚举 结构体的功能,为使用者省去查手册的麻烦(当然也有点过度负责, 还要随时保持和手册同步, 这也是最苦力的工作量了吧).
+vk_mean.h vk_mean.cpp: 专门用来写解释vk各种枚举 结构体的功能,为使用者省去查手册的麻烦(当然也有点过度负责, 还要随时保持和手册同步, 这也是最苦力的工作量了吧).
 
-
+名为vk 的excel文件: 存放一些整理后的vulkan的信息.有点参考价值.
 
 ## 资料
 
