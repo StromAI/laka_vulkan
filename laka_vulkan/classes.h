@@ -47,12 +47,12 @@ class Buffer_view;
 class Image_view;
 
 class Descriptor_set;
-class Descriptor_sets;
+class Descriptor_set_s;
 class Descriptor_update_template;
 
 class Command_buffer_base;
 class Command_buffer;
-class Command_buffers;
+class Command_buffer_s;
 
 class Frame_buffer;
 struct Queue_family_info;
@@ -64,3 +64,34 @@ struct Pramater_choose_queue_family;
 
 class Command_buffer_old;
 class Command_buffers_old;
+
+
+
+//class Buffer_views;
+//class Buffers;
+//class Image_views;
+//class Images;
+//class Samplers;
+//class Sampler_Ycbcr_conversions;
+//class Command_buffers;
+//class Command_pools;
+//class Descriptor_set_layouts;
+//class Descriptor_pools;
+//class Query_pools;
+//class Descriptor_update_templates;
+//class Descriptor_set_layouts;
+//class Frame_buffers;
+//class Render_passs;
+//class Compute_pipelines;
+//class Graphics_pipelines;
+//class Pipeline_layouts;
+//class Pipeline_caches;
+//class Semaphores;
+//class Fences;
+//class Events;
+//class Shader_modules;
+//class Device_memorys;
+
+
+
+

@@ -19,6 +19,7 @@ Permission is granted to anyone to use this software for any purpose, including 
 #include <vector>
 #include <list>
 #include <map>
+#include <initializer_list>
 
 #include "laka_vk_define.h"
 #include "vk_bits.h"
@@ -30,6 +31,7 @@ table_vk_enum(std::shared_ptr<std::string> mean ZK, , , YK FH);
 namespace laka { namespace vk {
 
 #include "classes.h"
+
 
     Module_handle get_module();
     PFN_vkVoidFunction get_instance_proc_address(
@@ -82,7 +84,6 @@ namespace laka { namespace vk {
 		VkDeviceQueueCreateFlags create_flags;
 		VkQueueGlobalPriorityEXT global_priority;
     };
-
     struct Pramater_choose_physical_device {
         Physical_device& if_you_feel_the_physical_device_not_ok_so_return_false;
     };
@@ -90,7 +91,6 @@ namespace laka { namespace vk {
         std::vector<Queue_family_info> const& give_you_queue_family_info_;
         std::vector<User_choose_queue_info>& waiting_for_your_filled_info_;
     };
-
 
     class Instance
         :public std::enable_shared_from_this<Instance> {
@@ -100,10 +100,13 @@ namespace laka { namespace vk {
             VkAllocationCallbacks* allocator_callbacks_ptr_);
 
         VkAllocationCallbacks allocator_callbacks;
-    public:
+	public:
+		typedef std::shared_ptr<Instance> Sptr;
+
+		Sptr get_sptr();
+
         ~Instance();
 
-        typedef std::shared_ptr<Instance> Sptr;
 
         static Sptr get_new(
             std::vector<const char*>* enabled_extension_names_ = nullptr,
@@ -207,8 +210,14 @@ namespace laka { namespace vk {
         Device_api* api;
 
         VkResult wait_idle();
-        VkResult submit();
-        VkResult bind_sparse();
+
+        VkResult submit(
+			std::vector<VkSubmitInfo>& pSubmitInfo,
+			Fence&	fence);
+
+        VkResult bind_sparse(
+			std::vector<VkBindSparseInfo>&              pBindInfo,
+			Fence&                                      fence);
     };
 
     class Device_creator
@@ -253,6 +262,258 @@ namespace laka { namespace vk {
     };
 
 
+	//提供复数形式的对象 尽量不涉及生命周期 
+	//(因为有些api执行时需要暂时hold住,所以肯定会有涉及 修正生命周期时再处理
+	//class Buffer_views 
+	//	:public std::shared_ptr<Buffer_views>{
+	//public:
+	//	typedef std::shared_ptr<Buffer_views> Sptr;
+	//	Buffer_views();
+	//	Buffer_views(std::initializer_list<Buffer_view>);
+	//	Buffer_views& operator+(std::initializer_list<Buffer>);
+	//	std::vector<VkBuffer> handles;
+	//};
+#define dclr_sclass( name__, handle_type__) \
+	class name__##s : public std::enable_shared_from_this<name__##s>	{\
+		public:\
+			typedef std::shared_ptr<name__##s> Sptr;\
+			Sptr get_sptr();\
+			name__##s();\
+			name__##s(std::initializer_list<name__>);\
+			name__##s& operator+(std::initializer_list<name__>);\
+			std::vector<handle_type__> handles;
+
+
+	dclr_sclass(Buffer_view,VkBufferView)
+
+	};
+
+	dclr_sclass(Buffer, VkBuffer)
+
+	};
+
+	dclr_sclass(Image_view, VkImageView)
+
+	};
+
+	dclr_sclass(Image, VkImage)
+
+	};
+
+	dclr_sclass(Sampler, VkSampler)
+
+	};
+
+	dclr_sclass(Sampler_Ycbcr_conversion, VkSamplerYcbcrConversion)
+
+	};
+
+	dclr_sclass(Command_buffer, VkCommandBuffer)
+
+	};
+
+	dclr_sclass(Command_pool, VkCommandPool)
+
+	};
+
+	dclr_sclass(Descriptor_set_layout, VkDescriptorSetLayout)
+
+	};
+
+	dclr_sclass(Descriptor_set, VkDescriptorSet)
+
+	};
+
+	dclr_sclass(Descriptor_pool, VkDescriptorPool)
+
+	};
+
+	dclr_sclass(Descriptor_update_template, VkDescriptorUpdateTemplate)
+
+	};
+
+	dclr_sclass(Query_pool, VkQueryPool)
+
+	};
+
+	dclr_sclass(Frame_buffer, VkFramebuffer)
+
+	};
+
+	dclr_sclass(Render_pass, VkRenderPass)
+
+	};
+
+	dclr_sclass(Compute_pipeline, VkPipeline)
+
+	};
+
+	dclr_sclass(Graphics_pipeline, VkPipeline)
+
+	};
+
+	dclr_sclass(Pipeline_layout, VkPipelineLayout)
+
+	};
+
+	dclr_sclass(Pipeline_cache, VkPipelineCache)
+
+	};
+
+	dclr_sclass(Semaphore, VkSemaphore)
+
+	};
+
+	dclr_sclass(Fence, VkFence)
+
+	};
+
+	dclr_sclass(Event, VkEvent)
+
+	};
+
+	dclr_sclass(Shader_module, VkShaderModule)
+
+	};
+
+	dclr_sclass(Device_memory, VkDeviceMemory)
+
+	};
+
+#undef dclr_sclass
+
+	class Semaphore :public std::enable_shared_from_this<Semaphore> {
+	private:
+		friend class Device;
+
+		Semaphore(
+			std::shared_ptr<Device> device_,
+			VkSemaphore handle_,
+			const VkAllocationCallbacks* pAllocator_);
+
+		const VkAllocationCallbacks* allocation_callbacks;
+	public:
+		typedef std::shared_ptr<Semaphore> Sptr;
+
+		Sptr get_sptr();
+
+		~Semaphore();
+
+		std::shared_ptr<Device> device;
+		VkSemaphore handle;
+	};
+
+	class Fence :public std::enable_shared_from_this<Fence> {
+	private:
+		friend class Device;
+
+		Fence(
+			std::shared_ptr<Device> device_,
+			VkFence handle_,
+			const VkAllocationCallbacks* pAllocator_);
+
+		const VkAllocationCallbacks* allocation_callbacks;
+	public:
+		typedef std::shared_ptr<Fence> Sptr;
+
+		Sptr get_sptr();
+
+		~Fence();
+
+		VkResult reset();
+
+		VkResult reset(std::vector<VkFence>& fences_);
+
+		VkResult get_status();
+
+		VkResult wait(uint64_t timeout_);
+
+		VkResult wait(bool wait_all_, uint64_t timeout_, std::vector<VkFence>& fences_);
+
+		std::shared_ptr<Device> device;
+		VkFence handle;
+	};
+
+	class Event :public std::enable_shared_from_this<Event> {
+	private:
+		friend class Device;
+
+		Event(
+			std::shared_ptr<Device> device_,
+			VkEvent handle_,
+			const VkAllocationCallbacks* pAllocator_);
+
+		VkResult set();
+		VkResult get_event_status();
+		void reset();
+
+		const VkAllocationCallbacks* allocation_callbacks;
+	public:
+		typedef std::shared_ptr<Event> Sptr;
+
+		Sptr get_sptr();
+
+		~Event();
+
+		std::shared_ptr<Device> device;
+		VkEvent handle;
+	};
+
+	class Shader_module
+		:public std::enable_shared_from_this<Shader_module> {
+	private:
+		friend class Device;
+
+		Shader_module(
+			std::shared_ptr<Device>    device_,
+			VkShaderModule handle_,
+			const VkAllocationCallbacks* pAllocator_);
+
+		const VkAllocationCallbacks* allocation_callbacks;
+	public:
+		typedef std::shared_ptr<Shader_module> Sptr;
+
+		Sptr get_sptr();
+
+		~Shader_module();
+
+		std::shared_ptr<Device> device;
+		VkShaderModule handle;
+	};
+
+
+	class Device_memory
+		:public std::enable_shared_from_this<Device_memory> {
+	private:
+		friend class Device;
+
+		const VkAllocationCallbacks* allocation_callbacks;
+
+		Device_memory(
+			std::shared_ptr<Device> device_,
+			VkDeviceMemory handle_,
+			const VkAllocationCallbacks* allocation_callbacks_
+		);
+	public:
+		typedef std::shared_ptr<Device_memory> Sptr;
+
+		Sptr get_sptr();
+
+		~Device_memory();
+
+		VkDeviceSize get_commitment();
+
+		void* map_memory(
+			VkDeviceSize                                offset_,
+			VkDeviceSize                                size_,
+			VkMemoryMapFlags                            flags_);
+
+		void unmap_memory();
+
+		VkDeviceMemory handle;
+		std::shared_ptr<Device> device;
+	};
+
     class Buffer_view
         :public std::enable_shared_from_this<Buffer_view> {
     private:
@@ -266,14 +527,16 @@ namespace laka { namespace vk {
 
         const VkAllocationCallbacks* allocation_callbacks;
     public:
-        typedef std::shared_ptr<Buffer_view> Sptr;
+		typedef std::shared_ptr<Buffer_view> Sptr;
+
+		Sptr get_sptr();
 
         ~Buffer_view();
 
         std::shared_ptr<Buffer> buffer;
         VkBufferView handle;
     };
-
+	
     class Buffer :public std::enable_shared_from_this<Buffer> {
     private:
         friend class Device;
@@ -285,7 +548,9 @@ namespace laka { namespace vk {
 
         const VkAllocationCallbacks* allocation_callbacks;
     public:
-        typedef std::shared_ptr<Buffer> Sptr;
+		typedef std::shared_ptr<Buffer> Sptr;
+
+		Sptr get_sptr();
 
         class E_Create {
         public:
@@ -342,6 +607,7 @@ namespace laka { namespace vk {
         std::shared_ptr<Device> device;
         VkBuffer handle;
     };
+	
 
     class Image_view
         :public std::enable_shared_from_this<Image_view> {
@@ -356,7 +622,9 @@ namespace laka { namespace vk {
         const VkAllocationCallbacks* allocation_callbacks;
 
     public:
-        typedef std::shared_ptr<Image_view> Sptr;
+		typedef std::shared_ptr<Image_view> Sptr;
+
+		Sptr get_sptr();
 
         ~Image_view();
 
@@ -377,7 +645,9 @@ namespace laka { namespace vk {
 
         const VkAllocationCallbacks* allocation_callbacks;
     public:
-        typedef std::shared_ptr<Image> Sptr;
+		typedef std::shared_ptr<Image> Sptr;
+
+		Sptr get_sptr();
 
         class E_Create {
         public:
@@ -452,7 +722,6 @@ namespace laka { namespace vk {
         VkImage handle;
     };
 
-
     class Sampler
         :public std::enable_shared_from_this<Sampler> {
     private:
@@ -465,7 +734,9 @@ namespace laka { namespace vk {
 
         const VkAllocationCallbacks* allocation_callbacks;
     public:
-        typedef std::shared_ptr<Sampler> Sptr;
+		typedef std::shared_ptr<Sampler> Sptr;
+
+		Sptr get_sptr();
 
         ~Sampler();
 
@@ -485,14 +756,15 @@ namespace laka { namespace vk {
 
         const VkAllocationCallbacks* allocation_callbacks;
     public:
-        typedef std::shared_ptr<Sampler_Ycbcr_conversion> Sptr;
+		typedef std::shared_ptr<Sampler_Ycbcr_conversion> Sptr;
+
+		Sptr get_sptr();
 
         ~Sampler_Ycbcr_conversion();
 
         std::shared_ptr<Device> device;
         VkSamplerYcbcrConversion handle;
     };
-	
 
 	//Command_buffer,Descriptor_set 
 		//是否应当只做成Command_buffers Descriptor_sets.
@@ -501,27 +773,41 @@ namespace laka { namespace vk {
 	protected:
 		Command_buffer_base();
 	public:
-		
+
 		VkCommandBuffer handle;
 		Device_api* api;
+
+
+		VkResult begin(
+		VkCommandBufferUsageFlags                flags,
+		const VkCommandBufferInheritanceInfo*    pInheritanceInfo = nullptr,
+		void*                         pNext = nullptr);
 
 		VkResult reset(VkCommandBufferResetFlags flags_);
 		VkResult end();
 
 		//如果cmd的api都是void返回值 那么可以用它来返回Commd_buffer自身.设个语法糖.
 
-		void bind(std::shared_ptr<Compute_pipeline> pipeline_sptr_); //需要修正生命周期
-		void bind(std::shared_ptr<Graphics_pipeline> pipeline_sptr_);
+		void bind_pipeline(std::shared_ptr<Compute_pipeline> pipeline_sptr_); //需要修正生命周期
+		void bind_pipeline(std::shared_ptr<Graphics_pipeline> pipeline_sptr_);
 
-		void bind(
+		void bind_buffer(
 			std::shared_ptr<Buffer> buffer_sptr_,
 			VkDeviceSize offset_,
 			VkIndexType index_type);
 
-		void bind(
+		void bind_buffers(
 			std::vector<std::shared_ptr<Buffer>>& buffer_sptrs_, //todo:为一些对象提供vector版
 			std::vector<VkDeviceSize>& offsets_,
 			uint32_t first_binding_);
+
+		void bind_descriptor_sets(
+			VkPipelineBindPoint                         pipelineBindPoint,
+			Pipeline_layout&                            layout,
+			uint32_t                                    firstSet,
+			Descriptor_set_s&							descriptor_sets,
+			std::vector<uint32_t>                       dynamic_offsets);
+
 
 		
 		void set_blend_constants(const float blend_[4]);
@@ -587,7 +873,7 @@ namespace laka { namespace vk {
 			VkDeviceSize                                stride,
 			VkQueryResultFlags                          flags);
 
-		void commands_execute(Command_buffers& pCommandBuffers);
+		void commands_execute(Command_buffer_s& pCommandBuffers);
 
 		void buffer_update(
 			Buffer&	                                    dstBuffer,
@@ -747,12 +1033,11 @@ namespace laka { namespace vk {
 
 
 
-
 	};
 	 
 	class Command_buffer
-		:public std::enable_shared_from_this<Command_buffer>
-		, Command_buffer_base {
+		:public Command_buffer_base 
+		,public std::enable_shared_from_this<Command_buffer>{
 	private:
 		friend class Command_pool;
 
@@ -762,32 +1047,35 @@ namespace laka { namespace vk {
 	public:
 		typedef std::shared_ptr<Command_buffer> Sptr;
 
+		Sptr get_sptr();
+
 		~Command_buffer();
 
 		std::shared_ptr<Command_pool> command_pool;
 	};
 
-	class Command_buffers
-		:public std::enable_shared_from_this<Command_buffers> {
+	class Command_buffer_s
+		:public std::enable_shared_from_this<Command_buffer_s> {
 	private:
 		friend class Command_pool;
 
-		Command_buffers(
+		Command_buffer_s(
 			std::shared_ptr<Command_pool> comman_pool_,
 			std::vector<VkCommandBuffer> handles_);
 	public:
-		typedef std::shared_ptr<Command_buffers> Sptr;
+		typedef std::shared_ptr<Command_buffer_s> Sptr;
+
+		Sptr get_sptr();
 
 		class Command_buffer :public Command_buffer_base{};
 
-		~Command_buffers();
+		~Command_buffer_s();
 
 		std::vector<Command_buffer> elements;
 		std::shared_ptr<Command_pool> command_pool;
 	};
 
-	
-    class Command_pool
+	class Command_pool
         :public std::enable_shared_from_this<Command_pool> {
     private:
         friend class Device;
@@ -799,7 +1087,9 @@ namespace laka { namespace vk {
 
         const VkAllocationCallbacks* allocation_callbacks;
     public:
-        typedef std::shared_ptr<Command_pool> Sptr;
+		typedef std::shared_ptr<Command_pool> Sptr;
+
+		Sptr get_sptr();
 
         class E_Create {
         public:
@@ -828,7 +1118,7 @@ namespace laka { namespace vk {
 			则实现必须从此命令中销毁所有成功创建的命令缓冲区对象，
 			将pCommandBuffers阵列的所有条目设置为NULL并返回错误。
 		*/
-		std::shared_ptr<Command_buffers> get_a_command_buffers(
+		std::shared_ptr<Command_buffer_s> get_a_command_buffers(
 			VkCommandPool           commandPool,
 			uint32_t                command_buffer_count_,
 			VkCommandBufferLevel    level);
@@ -844,7 +1134,6 @@ namespace laka { namespace vk {
     };
 
 
-
 	class Descriptor_set_base {
 	protected:
 		Descriptor_set_base();
@@ -854,8 +1143,8 @@ namespace laka { namespace vk {
 	};
 
 	class Descriptor_set 
-		:public std::enable_shared_from_this<Descriptor_set>
-		,Descriptor_set_base{
+		:public Descriptor_set_base 
+		,public std::enable_shared_from_this<Descriptor_set>{
 	private:
 		friend Descriptor_pool;
 
@@ -865,25 +1154,45 @@ namespace laka { namespace vk {
 	public:
 		typedef std::shared_ptr<Descriptor_set> Sptr;
 
+		Sptr get_sptr();
+
 		~Descriptor_set();
+
+
+		void update_with_template(
+			Descriptor_update_template&                  descriptorUpdateTemplate,
+			const void*                                 pData);
+
+		void update(
+			VkWriteDescriptorSet&          pDescriptorWrites,
+			VkCopyDescriptorSet&           pDescriptorCopies);
+
 
 		std::shared_ptr<Descriptor_pool> descriptor_pool;
 	};
 
-	class Descriptor_sets
-		:public std::enable_shared_from_this<Descriptor_sets> {
+	class Descriptor_set_s
+		:public std::enable_shared_from_this<Descriptor_set_s> {
 	private:
 		friend class Descriptor_pool;
 
-		Descriptor_sets(
+		Descriptor_set_s(
 			std::shared_ptr<Descriptor_pool> descriptor_pool_,
 			std::vector<VkDescriptorSet>& handles_);
 	public:
-		typedef std::shared_ptr<Descriptor_sets> Sptr;
+		typedef std::shared_ptr<Descriptor_set_s> Sptr;
+
+		Sptr get_sptr();
 
 		class Descriptor_set :public Descriptor_set_base {};
 
-		~Descriptor_sets();
+		~Descriptor_set_s();
+
+
+		void update(
+			std::vector<VkWriteDescriptorSet>&          pDescriptorWrites,
+			std::vector<VkCopyDescriptorSet>&           pDescriptorCopies);
+
 
 		std::vector<Descriptor_set> elements;
 		std::shared_ptr<Descriptor_pool> descriptor_pool;
@@ -901,7 +1210,9 @@ namespace laka { namespace vk {
 
         const VkAllocationCallbacks* allocation_callbacks;
     public:
-        typedef std::shared_ptr<Descriptor_pool> Sptr;
+		typedef std::shared_ptr<Descriptor_pool> Sptr;
+
+		Sptr get_sptr();
 
         class E_Create {
         public:
@@ -921,7 +1232,7 @@ namespace laka { namespace vk {
 			VkDescriptorSetLayout set_layout,
 			const void* next_ = nullptr);
 
-		std::shared_ptr<Descriptor_sets> get_descriptor_sets(
+		std::shared_ptr<Descriptor_set_s> get_descriptor_sets(
 			std::vector<VkDescriptorSetLayout>& set_layouts,
 			const void* next_ = nullptr);
 
@@ -932,57 +1243,6 @@ namespace laka { namespace vk {
         std::shared_ptr<Device> device;
         VkDescriptorPool handle;
     };
-
-
-    class Query_pool
-        :public std::enable_shared_from_this<Query_pool> {
-    private:
-        friend class Device;
-
-        Query_pool(
-            std::shared_ptr<Device> device_,
-            VkQueryPool handle_,
-            const VkAllocationCallbacks* pAllocator_);
-
-        const VkAllocationCallbacks* allocation_callbacks;
-    public:
-        typedef std::shared_ptr<Query_pool> Sptr;
-
-        class E_Pipeline_statistic {
-        public:
-            enum Bits {
-                E_input_assembly_vertices = VK_QUERY_PIPELINE_STATISTIC_INPUT_ASSEMBLY_VERTICES_BIT,
-                E_input_assmbly_primitives = VK_QUERY_PIPELINE_STATISTIC_INPUT_ASSEMBLY_PRIMITIVES_BIT,
-                E_vertex_shader_invocations = VK_QUERY_PIPELINE_STATISTIC_VERTEX_SHADER_INVOCATIONS_BIT,
-                E_geometry_shader_invocations =  VK_QUERY_PIPELINE_STATISTIC_GEOMETRY_SHADER_INVOCATIONS_BIT,
-                E_geometry_shader_primitives = VK_QUERY_PIPELINE_STATISTIC_GEOMETRY_SHADER_PRIMITIVES_BIT,
-                E_clipping_invocattions = VK_QUERY_PIPELINE_STATISTIC_CLIPPING_INVOCATIONS_BIT,
-                E_clipping_primitives =  VK_QUERY_PIPELINE_STATISTIC_CLIPPING_PRIMITIVES_BIT,
-                E_fragment_shader_invocations = VK_QUERY_PIPELINE_STATISTIC_FRAGMENT_SHADER_INVOCATIONS_BIT,
-                E_tessellation_control_shader_patches = VK_QUERY_PIPELINE_STATISTIC_TESSELLATION_CONTROL_SHADER_PATCHES_BIT,
-                E_tessellation_evaluation_shader_invocations = VK_QUERY_PIPELINE_STATISTIC_TESSELLATION_EVALUATION_SHADER_INVOCATIONS_BIT,
-                E_compute_shader_invocations = VK_QUERY_PIPELINE_STATISTIC_COMPUTE_SHADER_INVOCATIONS_BIT,
-            };
-            int flag;
-            E_Pipeline_statistic(int flag_);
-            E_Pipeline_statistic operator | (E_Pipeline_statistic value_);
-            E_Pipeline_statistic operator | (Bits value_);
-        };
-
-		VkResult get_results(
-			uint32_t                                    firstQuery,
-			uint32_t                                    queryCount,
-			size_t                                      dataSize,
-			void*                                       pData,
-			VkDeviceSize                                stride,
-			VkQueryResultFlags                          flags);
-
-        ~Query_pool();
-
-        std::shared_ptr<Device> device;
-        VkQueryPool handle;
-    };
-
 
 	/*
 	typedef struct VkDescriptorUpdateTemplateCreateInfo {
@@ -1038,7 +1298,9 @@ namespace laka { namespace vk {
 
         const VkAllocationCallbacks* allocation_callbacks;
     public:
-        typedef std::shared_ptr<Descriptor_update_template> Sptr;
+		typedef std::shared_ptr<Descriptor_update_template> Sptr;
+
+		Sptr get_sptr();
 
         ~Descriptor_update_template();
 
@@ -1049,7 +1311,6 @@ namespace laka { namespace vk {
 
         VkDescriptorUpdateTemplate handle;
     };
-
 
     class Descriptor_set_layout
         :public std::enable_shared_from_this<Descriptor_set_layout> {
@@ -1063,7 +1324,9 @@ namespace laka { namespace vk {
 
         const VkAllocationCallbacks* allocation_callbacks;
     public:
-        typedef std::shared_ptr<Descriptor_set_layout> Sptr;
+		typedef std::shared_ptr<Descriptor_set_layout> Sptr;
+
+		Sptr get_sptr();
 
         class E_Create {
         public:
@@ -1087,7 +1350,56 @@ namespace laka { namespace vk {
         VkDescriptorSetLayout handle;
     };
 
+	class Query_pool
+		:public std::enable_shared_from_this<Query_pool> {
+	private:
+		friend class Device;
 
+		Query_pool(
+			std::shared_ptr<Device> device_,
+			VkQueryPool handle_,
+			const VkAllocationCallbacks* pAllocator_);
+
+		const VkAllocationCallbacks* allocation_callbacks;
+	public:
+		typedef std::shared_ptr<Query_pool> Sptr;
+
+		Sptr get_sptr();
+
+		class E_Pipeline_statistic {
+		public:
+			enum Bits {
+				E_input_assembly_vertices = VK_QUERY_PIPELINE_STATISTIC_INPUT_ASSEMBLY_VERTICES_BIT,
+				E_input_assmbly_primitives = VK_QUERY_PIPELINE_STATISTIC_INPUT_ASSEMBLY_PRIMITIVES_BIT,
+				E_vertex_shader_invocations = VK_QUERY_PIPELINE_STATISTIC_VERTEX_SHADER_INVOCATIONS_BIT,
+				E_geometry_shader_invocations = VK_QUERY_PIPELINE_STATISTIC_GEOMETRY_SHADER_INVOCATIONS_BIT,
+				E_geometry_shader_primitives = VK_QUERY_PIPELINE_STATISTIC_GEOMETRY_SHADER_PRIMITIVES_BIT,
+				E_clipping_invocattions = VK_QUERY_PIPELINE_STATISTIC_CLIPPING_INVOCATIONS_BIT,
+				E_clipping_primitives = VK_QUERY_PIPELINE_STATISTIC_CLIPPING_PRIMITIVES_BIT,
+				E_fragment_shader_invocations = VK_QUERY_PIPELINE_STATISTIC_FRAGMENT_SHADER_INVOCATIONS_BIT,
+				E_tessellation_control_shader_patches = VK_QUERY_PIPELINE_STATISTIC_TESSELLATION_CONTROL_SHADER_PATCHES_BIT,
+				E_tessellation_evaluation_shader_invocations = VK_QUERY_PIPELINE_STATISTIC_TESSELLATION_EVALUATION_SHADER_INVOCATIONS_BIT,
+				E_compute_shader_invocations = VK_QUERY_PIPELINE_STATISTIC_COMPUTE_SHADER_INVOCATIONS_BIT,
+			};
+			int flag;
+			E_Pipeline_statistic(int flag_);
+			E_Pipeline_statistic operator | (E_Pipeline_statistic value_);
+			E_Pipeline_statistic operator | (Bits value_);
+		};
+
+		VkResult get_results(
+			uint32_t                                    firstQuery,
+			uint32_t                                    queryCount,
+			size_t                                      dataSize,
+			void*                                       pData,
+			VkDeviceSize                                stride,
+			VkQueryResultFlags                          flags);
+
+		~Query_pool();
+
+		std::shared_ptr<Device> device;
+		VkQueryPool handle;
+	};
 
     class Frame_buffer
         :public std::enable_shared_from_this<Frame_buffer> {
@@ -1101,7 +1413,9 @@ namespace laka { namespace vk {
 
         const VkAllocationCallbacks* allocation_callbacks;
     public:
-        typedef std::shared_ptr<Frame_buffer> Sptr;
+		typedef std::shared_ptr<Frame_buffer> Sptr;
+
+		Sptr get_sptr();
 
         ~Frame_buffer();
 
@@ -1121,7 +1435,9 @@ namespace laka { namespace vk {
 
         const VkAllocationCallbacks* allocation_callbacks;
     public:
-        typedef std::shared_ptr<Render_pass> Sptr;
+		typedef std::shared_ptr<Render_pass> Sptr;
+
+		Sptr get_sptr();
 
         ~Render_pass();
 
@@ -1138,7 +1454,95 @@ namespace laka { namespace vk {
         VkRenderPass handle;
     };
 
+	class Pipeline_layout
+		:public std::enable_shared_from_this<Pipeline_layout> {
+	private:
+		friend class Device;
+		friend class Descriptor_set_layout;
 
+		Pipeline_layout(
+			std::shared_ptr<Device> device_,
+			VkPipelineLayout handle_,
+			const VkAllocationCallbacks* pAllocator_);
+
+		const VkAllocationCallbacks* allocation_callbacks;
+	public:
+		typedef std::shared_ptr<Pipeline_layout> Sptr;
+
+		Sptr get_sptr();
+
+		~Pipeline_layout();
+
+		std::shared_ptr<Descriptor_update_template> get_a_descriptor_update_template(
+			std::vector<VkDescriptorUpdateTemplateEntry>& entrys_,
+			VkPipelineBindPoint bind_point_,
+			uint32_t set_,
+			const VkAllocationCallbacks* pAllocator_ = nullptr);
+
+		std::shared_ptr<Compute_pipeline> get_a_compute_pipeline(
+			VkPipelineCreateFlags               flags,
+			std::shared_ptr<Pipeline_cache>		pipeline_cache_,
+			std::shared_ptr<Shader_module>      module_,
+			const char*                         pName,//shader 入口点名称
+			VkShaderStageFlagBits               stage_flags,
+			const VkSpecializationInfo*         pSpecializationInfo = nullptr,
+			const VkAllocationCallbacks*		pAllocator_ = nullptr);
+
+		std::shared_ptr<Graphics_pipeline> get_a_graphics_pipeline(
+			VkPipelineCreateFlags							flag_,
+			Render_pass&									render_pass_,
+			uint32_t										subpass,
+			Pipeline_cache*									cache_,
+			std::vector<VkPipelineShaderStageCreateInfo>	stages_,
+			const VkPipelineVertexInputStateCreateInfo*		vertex_input_state_,
+			const VkPipelineInputAssemblyStateCreateInfo*	input_assembly_state_,
+			const VkPipelineTessellationStateCreateInfo*	tessellation_state_,
+			const VkPipelineViewportStateCreateInfo*		view_port_state_,
+			const VkPipelineRasterizationStateCreateInfo*	rasterization_state_,
+			const VkPipelineMultisampleStateCreateInfo*		multi_sample_state_,
+			const VkPipelineDepthStencilStateCreateInfo*	depth_stencil_state_,
+			const VkPipelineColorBlendStateCreateInfo*		color_blend_state_,
+			const VkPipelineDynamicStateCreateInfo*			dynamic_satate_,
+			void* next_ = nullptr,
+			const VkAllocationCallbacks* allocator_ = nullptr);
+
+		std::shared_ptr<Device> device;
+		VkPipelineLayout handle;
+	};
+
+	class Pipeline_cache
+		:public std::enable_shared_from_this<Pipeline_cache> {
+	private:
+		friend  class Device;
+
+		Pipeline_cache(
+			std::shared_ptr<Device> device_,
+			VkPipelineCache handle_,
+			const VkAllocationCallbacks* pAllocator_);
+
+		const VkAllocationCallbacks* allocation_callbacks;
+	public:
+		typedef std::shared_ptr<Pipeline_cache> Sptr;
+
+		Sptr get_sptr();
+
+		~Pipeline_cache();
+
+		//std::shared_ptr<std::vector<char>> get_data();
+		//对pData这种,大概得用vector<uchar>
+
+		VkResult get_data(
+			size_t*                                     pDataSize,
+			void*                                       pData);
+
+		VkResult merge(
+			Pipeline_cache&                             srcCache);
+		//很多对象都会有放在一个数组中处理的情况 需要有一种新方式来处理
+
+
+		std::shared_ptr<Device> device;
+		VkPipelineCache handle;
+	};
 
     class Compute_pipeline 
         :public std::enable_shared_from_this<Compute_pipeline>{
@@ -1158,7 +1562,9 @@ namespace laka { namespace vk {
 		
 		int32_t index;
     public:
-        typedef std::shared_ptr<Compute_pipeline> Sptr;
+		typedef std::shared_ptr<Compute_pipeline> Sptr;
+
+		Sptr get_sptr();
 
         ~Compute_pipeline();
 
@@ -1195,7 +1601,9 @@ namespace laka { namespace vk {
 
         const VkAllocationCallbacks* allocation_callbacks;
     public:
-        typedef std::shared_ptr<Graphics_pipeline> Sptr;
+		typedef std::shared_ptr<Graphics_pipeline> Sptr;
+
+		Sptr get_sptr();
 
         ~Graphics_pipeline();
 
@@ -1207,89 +1615,9 @@ namespace laka { namespace vk {
         VkPipeline handle;
     };
 
-
-
-    class Pipeline_layout
-        :public std::enable_shared_from_this<Pipeline_layout> {
-    private:
-        friend class Device;
-        friend class Descriptor_set_layout;
-
-        Pipeline_layout(
-            std::shared_ptr<Device> device_,
-            VkPipelineLayout handle_,
-            const VkAllocationCallbacks* pAllocator_);
-
-        const VkAllocationCallbacks* allocation_callbacks;
-    public:
-        typedef std::shared_ptr<Pipeline_layout> Sptr;
-
-        ~Pipeline_layout();
-
-		std::shared_ptr<Descriptor_update_template> get_a_descriptor_update_template(
-			std::vector<VkDescriptorUpdateTemplateEntry>& entrys_,
-			VkPipelineBindPoint bind_point_,
-			uint32_t set_,
-			const VkAllocationCallbacks* pAllocator_ = nullptr);
-
-        std::shared_ptr<Compute_pipeline> get_a_compute_pipeline(
-            VkPipelineCreateFlags               flags,
-            std::shared_ptr<Pipeline_cache>		pipeline_cache_,
-            std::shared_ptr<Shader_module>      module_,
-            const char*                         pName,//shader 入口点名称
-            VkShaderStageFlagBits               stage_flags,
-            const VkSpecializationInfo*         pSpecializationInfo = nullptr,
-            const VkAllocationCallbacks*		pAllocator_ = nullptr);
-
-		std::shared_ptr<Graphics_pipeline> get_a_graphics_pipeline(
-			VkPipelineCreateFlags							flag_,
-			Render_pass&									render_pass_,
-			uint32_t										subpass,
-			Pipeline_cache*									cache_,
-			std::vector<VkPipelineShaderStageCreateInfo>	stages_,
-			const VkPipelineVertexInputStateCreateInfo*		vertex_input_state_,
-			const VkPipelineInputAssemblyStateCreateInfo*	input_assembly_state_,
-			const VkPipelineTessellationStateCreateInfo*	tessellation_state_,
-			const VkPipelineViewportStateCreateInfo*		view_port_state_,
-			const VkPipelineRasterizationStateCreateInfo*	rasterization_state_,
-			const VkPipelineMultisampleStateCreateInfo*		multi_sample_state_,
-			const VkPipelineDepthStencilStateCreateInfo*	depth_stencil_state_,
-			const VkPipelineColorBlendStateCreateInfo*		color_blend_state_,
-			const VkPipelineDynamicStateCreateInfo*			dynamic_satate_,
-			void* next_ = nullptr,
-			const VkAllocationCallbacks* allocator_ = nullptr);
-
-        std::shared_ptr<Device> device;
-        VkPipelineLayout handle;
-    };
-
-    class Pipeline_cache
-        :public std::enable_shared_from_this<Pipeline_cache> {
-    private:
-        friend  class Device;
-
-        Pipeline_cache(
-            std::shared_ptr<Device> device_,
-            VkPipelineCache handle_,
-            const VkAllocationCallbacks* pAllocator_);
-
-        const VkAllocationCallbacks* allocation_callbacks;
-    public:
-        typedef std::shared_ptr<Pipeline_cache> Sptr;
-
-        ~Pipeline_cache();
-
-        //std::shared_ptr<std::vector<char>> get_data();
-		//对pData这种,大概得用vector<uchar>
-
-		VkResult get_data(
-			size_t*                                     pDataSize,
-			void*                                       pData);
-
-        std::shared_ptr<Device> device;
-        VkPipelineCache handle;
-    };
-
+	class Surface {
+		//顺序上放最后边做 暂时不给直接的画面了.
+	};
 
 
     struct Pramater_choose_memory_type {
@@ -1300,7 +1628,6 @@ namespace laka { namespace vk {
     {
         uint32_t memory_type_index;
     };
-
 	struct Device_api {
 		table_vk_api_device(vk_fun ZK, , , YK FH);
 		table_vk_api_cmd(vk_fun ZK, , , YK FH);
@@ -1322,7 +1649,9 @@ namespace laka { namespace vk {
         
         PFN_vkVoidFunction return_api(const char* api_name_);
     public:
-        typedef std::shared_ptr<Device> Sptr;
+		typedef std::shared_ptr<Device> Sptr;
+
+		Sptr get_sptr();
 
         ~Device();
 
@@ -1474,136 +1803,35 @@ namespace laka { namespace vk {
         VkResult wait_for_fences(std::vector<VkFence>& fences_, bool wait_all_, uint64_t timeout_);
     };
 
-
-    class Semaphore :public std::enable_shared_from_this<Semaphore> {
-    private:
-        friend class Device;
-
-        Semaphore(
-            std::shared_ptr<Device> device_,
-            VkSemaphore handle_,
-            const VkAllocationCallbacks* pAllocator_);
-
-        const VkAllocationCallbacks* allocation_callbacks;
-    public:
-        typedef std::shared_ptr<Semaphore> Sptr;
-
-        ~Semaphore();
-
-        std::shared_ptr<Device> device;
-        VkSemaphore handle;
-    };
-
-	
-    class Fence :public std::enable_shared_from_this<Fence> {
-    private:
-        friend class Device;
-
-        Fence(
-            std::shared_ptr<Device> device_,
-            VkFence handle_,
-            const VkAllocationCallbacks* pAllocator_);
-
-        const VkAllocationCallbacks* allocation_callbacks;
-    public:
-        typedef std::shared_ptr<Fence> Sptr;
-
-        ~Fence();
-
-        VkResult reset();
-        
-		VkResult reset(std::vector<VkFence>& fences_);
-		
-		VkResult get_status();
-
-		VkResult wait(uint64_t timeout_);
-
-		VkResult wait(bool wait_all_, uint64_t timeout_, std::vector<VkFence>& fences_);
-
-        std::shared_ptr<Device> device;
-        VkFence handle;
-    };
-
-    class Event :public std::enable_shared_from_this<Event> {
-    private:
-        friend class Device;
-
-        Event(
-            std::shared_ptr<Device> device_,
-            VkEvent handle_,
-            const VkAllocationCallbacks* pAllocator_);
-
-        VkResult set();
-        VkResult get_event_status();
-        void reset();
-
-        const VkAllocationCallbacks* allocation_callbacks;
-    public:
-        typedef std::shared_ptr<Event> Sptr;
-
-        ~Event();
-
-        std::shared_ptr<Device> device;
-        VkEvent handle;
-    };
-
-    class Shader_module
-        :public std::enable_shared_from_this<Shader_module> {
-    private:
-        friend class Device;
-
-        Shader_module(
-            Device::Sptr    device_,
-            VkShaderModule handle_,
-            const VkAllocationCallbacks* pAllocator_);
-
-        const VkAllocationCallbacks* allocation_callbacks;
-    public:
-        typedef std::shared_ptr<Shader_module> Sptr;
-
-        ~Shader_module();
-
-        std::shared_ptr<Device> device;
-        VkShaderModule handle;
-    };
+#define table_laka_vk_objs(a,aa, bb, b) \
+a aa##Instance##bb b \
+a aa##Semaphore##bb b \
+a aa##Fence##bb b \
+a aa##Event##bb b \
+a aa##Shader_module##bb b \
+a aa##Device_memory##bb b \
+a aa##Buffer_view##bb b \
+a aa##Buffer##bb b \
+a aa##Image_view##bb b \
+a aa##Image##bb b \
+a aa##Sampler##bb b \
+a aa##Sampler_Ycbcr_conversion##bb b \
+a aa##Command_buffer##bb b \
+a aa##Command_pool##bb b \
+a aa##Descriptor_set##bb b \
+a aa##Descriptor_pool##bb b \
+a aa##Descriptor_update_template##bb b \
+a aa##Descriptor_set_layout##bb b \
+a aa##Query_pool##bb b \
+a aa##Frame_buffer##bb b \
+a aa##Render_pass##bb b \
+a aa##Pipeline_layout##bb b \
+a aa##Pipeline_cache##bb b \
+a aa##Compute_pipeline##bb b \
+a aa##Graphics_pipeline##bb b \
+a aa##Device##bb b \
 
 
-
-    class Device_memory
-        :public std::enable_shared_from_this<Device_memory> {
-    private:
-        friend class Device;
-
-        const VkAllocationCallbacks* allocation_callbacks;
-
-        Device_memory(
-            std::shared_ptr<Device> device_,
-            VkDeviceMemory handle_,
-            const VkAllocationCallbacks* allocation_callbacks_
-        );
-    public:
-        typedef std::shared_ptr<Device_memory> Sptr;
-
-        ~Device_memory();
-
-        VkDeviceSize get_commitment();
-
-        void* map_memory(
-            VkDeviceSize                                offset_,
-            VkDeviceSize                                size_,
-            VkMemoryMapFlags                            flags_);
-
-        void unmap_memory();
-
-        VkDeviceMemory handle;
-        std::shared_ptr<Device> device;
-    };
-
-
-
-	class Surface {
-		//顺序上放最后边做 暂时不给直接的画面了.
-	};
 
 
 }}

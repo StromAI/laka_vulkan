@@ -21,6 +21,10 @@ Permission is granted to anyone to use this software for any purpose, including 
 
 #include "vk_mean.h"
 
+
+
+#include <initializer_list>
+
 using namespace std;
 using namespace laka::vk;
 
@@ -140,6 +144,11 @@ void test_all()
 		VkSharingMode::VK_SHARING_MODE_BEGIN_RANGE, 
 		{0,1}
 	);
+
+
+	
+
+
 
 
 }

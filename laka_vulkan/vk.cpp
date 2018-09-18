@@ -1710,12 +1710,12 @@ namespace laka {    namespace vk {
 
 	
 
-	shared_ptr<Command_buffers> Command_pool::get_a_command_buffers(
+	shared_ptr<Command_buffer_s> Command_pool::get_a_command_buffers(
 		VkCommandPool commandPool,
 		uint32_t command_buffer_count_,
 		VkCommandBufferLevel level)
 	{
-		shared_ptr<Command_buffers> sptr;
+		shared_ptr<Command_buffer_s> sptr;
 
 		VkCommandBufferAllocateInfo info{
 			VK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO,
@@ -1750,11 +1750,11 @@ namespace laka {    namespace vk {
 		}
 
 		sptr.reset(
-			new Command_buffers(shared_from_this(), buffer_handles));
+			new Command_buffer_s(shared_from_this(), buffer_handles));
 
 		return sptr;
 	}
-	Command_buffers::Command_buffers(
+	Command_buffer_s::Command_buffer_s(
 		shared_ptr<Command_pool> comman_pool_, vector<VkCommandBuffer> handles_)
 		:elements(handles_.size())
 	{
@@ -1766,7 +1766,7 @@ namespace laka {    namespace vk {
 			count++;
 		}
 	}
-	Command_buffers::~Command_buffers()
+	Command_buffer_s::~Command_buffer_s()
 	{
 		init_show;
 		show_function_name;
@@ -1896,7 +1896,7 @@ namespace laka {    namespace vk {
 	}
 
 	
-	Descriptor_sets::Descriptor_sets(
+	Descriptor_set_s::Descriptor_set_s(
 		shared_ptr<Descriptor_pool> descriptor_pool_,
 		vector<VkDescriptorSet>& handles_)
 		:descriptor_pool(descriptor_pool_)
@@ -1909,7 +1909,7 @@ namespace laka {    namespace vk {
 	}
 
 
-	Descriptor_sets::~Descriptor_sets()
+	Descriptor_set_s::~Descriptor_set_s()
 	{
 		vector<VkDescriptorSet> handles(elements.size());
 		for (size_t i = 0; i < elements.size(); ++i)
@@ -1931,11 +1931,11 @@ namespace laka {    namespace vk {
 	}
 
 
-	shared_ptr<Descriptor_sets> Descriptor_pool::get_descriptor_sets(
+	shared_ptr<Descriptor_set_s> Descriptor_pool::get_descriptor_sets(
 		vector<VkDescriptorSetLayout>& set_layouts,
 		const void* next_ /* = nullptr */)
 	{
-		shared_ptr<Descriptor_sets> descriptor_sets_sptr;
+		shared_ptr<Descriptor_set_s> descriptor_sets_sptr;
 
 		VkDescriptorSetAllocateInfo info{
 			VK_STRUCTURE_TYPE_DESCRIPTOR_SET_ALLOCATE_INFO,
@@ -1975,7 +1975,7 @@ namespace laka {    namespace vk {
 		}
 
 		descriptor_sets_sptr.reset(
-			new Descriptor_sets(shared_from_this(), descriptor_sets_handles)
+			new Descriptor_set_s(shared_from_this(), descriptor_sets_handles)
 		);
 
 		return descriptor_sets_sptr;
@@ -2920,18 +2920,72 @@ namespace laka {    namespace vk {
 		return ret;
 	}
 
-	void Command_buffer_base::bind(std::shared_ptr<Compute_pipeline> pipeline_sptr_)
+	VkResult Queue::bind_sparse(
+		std::vector<VkBindSparseInfo>&              pBindInfo,
+		Fence&                                     fence)
+	{
+		auto ret = api->vkQueueBindSparse(
+			handle,
+			static_cast<uint32_t>(pBindInfo.size()),
+			&pBindInfo[0],
+			fence.handle
+		);
+		show_result(ret);
+
+		return ret;
+	}
+
+	VkResult Queue::submit(
+		std::vector<VkSubmitInfo>& pSubmitInfo,
+		Fence&	fence)
+	{
+		auto ret = api->vkQueueSubmit(
+			handle,
+			static_cast<uint32_t>(pSubmitInfo.size()),
+			&pSubmitInfo[0],
+			fence.handle
+		);
+		show_result(ret);
+
+		return ret;
+	}
+
+
+
+	VkResult  Command_buffer_base::begin(
+		VkCommandBufferUsageFlags                flags,
+		const VkCommandBufferInheritanceInfo*    pInheritanceInfo,
+		void*                         pNext)
+	{
+		VkCommandBufferBeginInfo info{
+			VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO,
+			pNext,
+			flags,
+			pInheritanceInfo
+		};
+
+		auto ret = api->vkBeginCommandBuffer(
+			handle,
+			&info
+		);
+		show_result(ret);
+
+		return ret;
+	}
+
+
+	void Command_buffer_base::bind_pipeline(std::shared_ptr<Compute_pipeline> pipeline_sptr_)
 	{
 		api->vkCmdBindPipeline(
 			handle, VkPipelineBindPoint::VK_PIPELINE_BIND_POINT_COMPUTE, pipeline_sptr_->handle);
 	}
-	void Command_buffer_base::bind(std::shared_ptr<Graphics_pipeline> pipeline_sptr_)
+	void Command_buffer_base::bind_pipeline(std::shared_ptr<Graphics_pipeline> pipeline_sptr_)
 	{
 		api->vkCmdBindPipeline(
 			handle, VkPipelineBindPoint::VK_PIPELINE_BIND_POINT_GRAPHICS, pipeline_sptr_->handle);
 	}
 
-	void Command_buffer_base::bind(
+	void Command_buffer_base::bind_buffer(
 		std::shared_ptr<Buffer> buffer_sptr_,
 		VkDeviceSize offset_,
 		VkIndexType index_type)
@@ -2940,7 +2994,7 @@ namespace laka {    namespace vk {
 	}
 
 
-	void Command_buffer_base::bind(
+	void Command_buffer_base::bind_buffers(
 		std::vector<std::shared_ptr<Buffer>>& buffer_sptrs_,
 		std::vector<VkDeviceSize>& offsets_,
 		uint32_t first_binding_)
@@ -2957,6 +3011,31 @@ namespace laka {    namespace vk {
 			static_cast<uint32_t>(buffer_handles.size()),
 			&buffer_handles[0],
 			&offsets_[0]
+		);
+	}
+
+	void Command_buffer_base::bind_descriptor_sets(
+		VkPipelineBindPoint                         pipelineBindPoint,
+		Pipeline_layout&                            layout,
+		uint32_t                                    firstSet,
+		Descriptor_set_s&							descriptor_sets,
+		std::vector<uint32_t>                       dynamic_offsets)
+	{
+		vector<VkDescriptorSet> d_set_handles(descriptor_sets.elements.size());
+		for (size_t i = 0; i < descriptor_sets.elements.size(); i++)
+		{
+			d_set_handles[i] = descriptor_sets.elements[i].handle;
+		}
+
+		api->vkCmdBindDescriptorSets(
+			handle,
+			pipelineBindPoint,
+			layout.handle,
+			firstSet,
+			static_cast<uint32_t>(d_set_handles.size()),
+			&d_set_handles[0],
+			static_cast<uint32_t>(dynamic_offsets.size()),
+			&dynamic_offsets[0]
 		);
 	}
 
@@ -3077,7 +3156,7 @@ namespace laka {    namespace vk {
 		);
 	}
 
-	void Command_buffer_base::commands_execute(Command_buffers& pCommandBuffers)
+	void Command_buffer_base::commands_execute(Command_buffer_s& pCommandBuffers)
 	{
 		vector<VkCommandBuffer> buffer_handles(pCommandBuffers.elements.size());
 
@@ -3478,6 +3557,174 @@ namespace laka {    namespace vk {
 
 		return ret;
 	}
+
+	VkResult Pipeline_cache::merge(
+		Pipeline_cache&                             srcCache)
+	{
+		auto ret = device->api.vkMergePipelineCaches(device->handle, handle, 1, &srcCache.handle);
+		show_result(ret);
+		return ret;
+	}
+
+
+	void Descriptor_set::update_with_template(
+		Descriptor_update_template&                 descriptorUpdateTemplate,
+		const void*                                 pData)
+	{
+		descriptor_pool->device->api.vkUpdateDescriptorSetWithTemplate(
+			descriptor_pool->device->handle,
+			handle,
+			descriptorUpdateTemplate.handle,
+			pData
+		);
+	}
+
+	void Descriptor_set::update(
+		VkWriteDescriptorSet&          pDescriptorWrites,
+		VkCopyDescriptorSet&           pDescriptorCopies)
+	{
+		descriptor_pool->device->api.vkUpdateDescriptorSets(
+			descriptor_pool->device->handle,
+			1,
+			&pDescriptorWrites,
+			1,
+			&pDescriptorCopies
+		);
+	}
+
+	void Descriptor_set_s::update(
+		std::vector<VkWriteDescriptorSet>&          pDescriptorWrites,
+		std::vector<VkCopyDescriptorSet>&           pDescriptorCopies)
+	{
+		descriptor_pool->device->api.vkUpdateDescriptorSets(
+			descriptor_pool->device->handle,
+			cast_u32(pDescriptorWrites.size()),
+			&pDescriptorWrites[0],
+			cast_u32(pDescriptorCopies.size()),
+			&pDescriptorCopies[0]
+		);
+	}
+
+
+
+
+#define table_laka_vk_sptr_objs(a,aa,bb,b) \
+a aa##Instance##bb b \
+a aa##Semaphore##bb b \
+a aa##Fence##bb b \
+a aa##Event##bb b \
+a aa##Shader_module##bb b \
+a aa##Device_memory##bb b \
+a aa##Buffer_view##bb b \
+a aa##Buffer##bb b \
+a aa##Image_view##bb b \
+a aa##Image##bb b \
+a aa##Sampler##bb b \
+a aa##Sampler_Ycbcr_conversion##bb b \
+a aa##Command_buffer##bb b \
+a aa##Command_pool##bb b \
+a aa##Descriptor_set##bb b \
+a aa##Descriptor_pool##bb b \
+a aa##Descriptor_update_template##bb b \
+a aa##Descriptor_set_layout##bb b \
+a aa##Query_pool##bb b \
+a aa##Frame_buffer##bb b \
+a aa##Render_pass##bb b \
+a aa##Pipeline_layout##bb b \
+a aa##Pipeline_cache##bb b \
+a aa##Compute_pipeline##bb b \
+a aa##Graphics_pipeline##bb b \
+a aa##Device##bb b \
+a aa##Command_buffer_s##bb b \
+a aa##Descriptor_set_s##bb b \
+a aa##Semaphores##bb b \
+a aa##Fences##bb b \
+a aa##Events##bb b \
+a aa##Shader_modules##bb b \
+a aa##Device_memorys##bb b \
+a aa##Buffer_views##bb b \
+a aa##Buffers##bb b \
+a aa##Image_views##bb b \
+a aa##Images##bb b \
+a aa##Samplers##bb b \
+a aa##Sampler_Ycbcr_conversions##bb b \
+a aa##Command_buffers##bb b \
+a aa##Command_pools##bb b \
+a aa##Descriptor_sets##bb b \
+a aa##Descriptor_pools##bb b \
+a aa##Descriptor_update_templates##bb b \
+a aa##Descriptor_set_layouts##bb b \
+a aa##Query_pools##bb b \
+a aa##Frame_buffers##bb b \
+a aa##Render_passs##bb b \
+a aa##Pipeline_layouts##bb b \
+a aa##Pipeline_caches##bb b \
+a aa##Compute_pipelines##bb b \
+a aa##Graphics_pipelines##bb b \
+
+
+#define def_get_sptr(name__) \
+name__::Sptr name__::get_sptr()\
+	{	return shared_from_this();	} 
+
+	table_laka_vk_sptr_objs(def_get_sptr ZK, , , YK)
+
+#undef def_get_sptr
+
+#define table_laka_vk_sobjs(a, aa,bb,b)\
+a aa##Buffer##bb b \
+a aa##Image_view##bb b \
+a aa##Image##bb b \
+a aa##Sampler##bb b \
+a aa##Sampler_Ycbcr_conversion##bb b \
+a aa##Command_buffer##bb b \
+a aa##Command_pool##bb b \
+a aa##Descriptor_set##bb b \
+a aa##Descriptor_pool##bb b \
+a aa##Descriptor_update_template##bb b \
+a aa##Descriptor_set_layout##bb b \
+a aa##Query_pool##bb b \
+a aa##Frame_buffer##bb b \
+a aa##Render_pass##bb b \
+a aa##Pipeline_layout##bb b \
+a aa##Pipeline_cache##bb b \
+a aa##Compute_pipeline##bb b \
+a aa##Graphics_pipeline##bb b \
+
+#define def_sobjs(name__) \
+name__##s::name__##s(){};\
+name__##s::name__##s(std::initializer_list<name__> p_)\
+	:handles(p_.size())\
+{\
+	size_t count = 0;\
+	for(auto&& itor:p_){	handles[count++]=itor.handle;	}\
+}
+
+	table_laka_vk_sobjs(def_sobjs ZK, , , YK)
+
+#undef def_sobjs
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
