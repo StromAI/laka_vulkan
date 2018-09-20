@@ -92,6 +92,7 @@ namespace laka { namespace vk {
         std::vector<User_choose_queue_info>& waiting_for_your_filled_info_;
     };
 
+
     class Instance
         :public std::enable_shared_from_this<Instance> {
     private:
@@ -102,6 +103,9 @@ namespace laka { namespace vk {
         VkAllocationCallbacks allocator_callbacks;
 	public:
 		typedef std::shared_ptr<Instance> Sptr;
+
+
+
 
 		Sptr get_sptr();
 

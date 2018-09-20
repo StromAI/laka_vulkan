@@ -3704,11 +3704,7 @@ name__##s::name__##s(std::initializer_list<name__> p_)\
 
 #undef def_sobjs
 
-
-
-
-
-
+	
 
 
 

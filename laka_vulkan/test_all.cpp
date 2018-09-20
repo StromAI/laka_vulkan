@@ -28,9 +28,27 @@ Permission is granted to anyone to use this software for any purpose, including 
 using namespace std;
 using namespace laka::vk;
 
+class Test_fuck {};
+
+class Fuck1 :public Test_fuck {};
+class Fuck2 :public Test_fuck {};
+class Fuck3 :public Test_fuck {};
+
+void test_function(Test_fuck& t)
+{
+
+}
+
+
 
 void test_all()
 {
+	Fuck1 fuck1;
+	Fuck2 fuck2;
+	Fuck3 fuck3;
+
+	test_function(fuck1);//VS没有引导信息
+
     init_show;
 
     show_info("实例版本:{}", version_str(get_instance_version()));
