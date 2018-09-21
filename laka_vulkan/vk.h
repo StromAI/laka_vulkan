@@ -102,15 +102,9 @@ namespace laka { namespace vk {
 
         VkAllocationCallbacks allocator_callbacks;
 	public:
-		typedef std::shared_ptr<Instance> Sptr;
-
-
-
-
-		Sptr get_sptr();
+		using Sptr = std::shared_ptr<Instance>;
 
         ~Instance();
-
 
         static Sptr get_new(
             std::vector<const char*>* enabled_extension_names_ = nullptr,
@@ -238,7 +232,7 @@ namespace laka { namespace vk {
 
         const VkAllocationCallbacks* allocation_callbacks;
     public:
-        typedef std::shared_ptr<Device_creator> Sptr;
+        using Sptr = std::shared_ptr<Device_creator>;
 
         std::shared_ptr<Device> get_a_device(
             Physical_device& physical_device_,
@@ -271,7 +265,7 @@ namespace laka { namespace vk {
 	//class Buffer_views 
 	//	:public std::shared_ptr<Buffer_views>{
 	//public:
-	//	typedef std::shared_ptr<Buffer_views> Sptr;
+	//	using Sptr = std::shared_ptr<Buffer_views>;
 	//	Buffer_views();
 	//	Buffer_views(std::initializer_list<Buffer_view>);
 	//	Buffer_views& operator+(std::initializer_list<Buffer>);
@@ -280,8 +274,8 @@ namespace laka { namespace vk {
 #define dclr_sclass( name__, handle_type__) \
 	class name__##s : public std::enable_shared_from_this<name__##s>	{\
 		public:\
-			typedef std::shared_ptr<name__##s> Sptr;\
-			Sptr get_sptr();\
+			using Sptr = std::shared_ptr<name__##s>;\
+			\
 			name__##s();\
 			name__##s(std::initializer_list<name__>);\
 			name__##s& operator+(std::initializer_list<name__>);\
@@ -397,9 +391,9 @@ namespace laka { namespace vk {
 
 		const VkAllocationCallbacks* allocation_callbacks;
 	public:
-		typedef std::shared_ptr<Semaphore> Sptr;
+		using Sptr = std::shared_ptr<Semaphore>;
 
-		Sptr get_sptr();
+		
 
 		~Semaphore();
 
@@ -418,9 +412,9 @@ namespace laka { namespace vk {
 
 		const VkAllocationCallbacks* allocation_callbacks;
 	public:
-		typedef std::shared_ptr<Fence> Sptr;
+		using Sptr = std::shared_ptr<Fence>;
 
-		Sptr get_sptr();
+		
 
 		~Fence();
 
@@ -453,9 +447,9 @@ namespace laka { namespace vk {
 
 		const VkAllocationCallbacks* allocation_callbacks;
 	public:
-		typedef std::shared_ptr<Event> Sptr;
+		using Sptr = std::shared_ptr<Event>;
 
-		Sptr get_sptr();
+		
 
 		~Event();
 
@@ -475,9 +469,9 @@ namespace laka { namespace vk {
 
 		const VkAllocationCallbacks* allocation_callbacks;
 	public:
-		typedef std::shared_ptr<Shader_module> Sptr;
+		using Sptr = std::shared_ptr<Shader_module>;
 
-		Sptr get_sptr();
+		
 
 		~Shader_module();
 
@@ -499,9 +493,9 @@ namespace laka { namespace vk {
 			const VkAllocationCallbacks* allocation_callbacks_
 		);
 	public:
-		typedef std::shared_ptr<Device_memory> Sptr;
+		using Sptr = std::shared_ptr<Device_memory>;
 
-		Sptr get_sptr();
+		
 
 		~Device_memory();
 
@@ -531,9 +525,9 @@ namespace laka { namespace vk {
 
         const VkAllocationCallbacks* allocation_callbacks;
     public:
-		typedef std::shared_ptr<Buffer_view> Sptr;
+		using Sptr = std::shared_ptr<Buffer_view>;
 
-		Sptr get_sptr();
+		
 
         ~Buffer_view();
 
@@ -552,9 +546,9 @@ namespace laka { namespace vk {
 
         const VkAllocationCallbacks* allocation_callbacks;
     public:
-		typedef std::shared_ptr<Buffer> Sptr;
+		using Sptr = std::shared_ptr<Buffer>;
 
-		Sptr get_sptr();
+		
 
         class E_Create {
         public:
@@ -626,9 +620,9 @@ namespace laka { namespace vk {
         const VkAllocationCallbacks* allocation_callbacks;
 
     public:
-		typedef std::shared_ptr<Image_view> Sptr;
+		using Sptr = std::shared_ptr<Image_view>;
 
-		Sptr get_sptr();
+		
 
         ~Image_view();
 
@@ -649,9 +643,9 @@ namespace laka { namespace vk {
 
         const VkAllocationCallbacks* allocation_callbacks;
     public:
-		typedef std::shared_ptr<Image> Sptr;
+		using Sptr = std::shared_ptr<Image>;
 
-		Sptr get_sptr();
+		
 
         class E_Create {
         public:
@@ -738,9 +732,9 @@ namespace laka { namespace vk {
 
         const VkAllocationCallbacks* allocation_callbacks;
     public:
-		typedef std::shared_ptr<Sampler> Sptr;
+		using Sptr = std::shared_ptr<Sampler>;
 
-		Sptr get_sptr();
+		
 
         ~Sampler();
 
@@ -760,9 +754,9 @@ namespace laka { namespace vk {
 
         const VkAllocationCallbacks* allocation_callbacks;
     public:
-		typedef std::shared_ptr<Sampler_Ycbcr_conversion> Sptr;
+		using Sptr = std::shared_ptr<Sampler_Ycbcr_conversion>;
 
-		Sptr get_sptr();
+		
 
         ~Sampler_Ycbcr_conversion();
 
@@ -1049,9 +1043,9 @@ namespace laka { namespace vk {
 			std::shared_ptr<Command_pool> command_pool_, VkCommandBuffer handle_);
 
 	public:
-		typedef std::shared_ptr<Command_buffer> Sptr;
+		using Sptr = std::shared_ptr<Command_buffer>;
 
-		Sptr get_sptr();
+		
 
 		~Command_buffer();
 
@@ -1067,9 +1061,9 @@ namespace laka { namespace vk {
 			std::shared_ptr<Command_pool> comman_pool_,
 			std::vector<VkCommandBuffer> handles_);
 	public:
-		typedef std::shared_ptr<Command_buffer_s> Sptr;
+		using Sptr = std::shared_ptr<Command_buffer_s>;
 
-		Sptr get_sptr();
+		
 
 		class Command_buffer :public Command_buffer_base{};
 
@@ -1091,9 +1085,9 @@ namespace laka { namespace vk {
 
         const VkAllocationCallbacks* allocation_callbacks;
     public:
-		typedef std::shared_ptr<Command_pool> Sptr;
+		using Sptr = std::shared_ptr<Command_pool>;
 
-		Sptr get_sptr();
+		
 
         class E_Create {
         public:
@@ -1156,9 +1150,9 @@ namespace laka { namespace vk {
 			std::shared_ptr<Descriptor_pool> descriptor_pool_,
 			VkDescriptorSet handle_);
 	public:
-		typedef std::shared_ptr<Descriptor_set> Sptr;
+		using Sptr = std::shared_ptr<Descriptor_set>;
 
-		Sptr get_sptr();
+		
 
 		~Descriptor_set();
 
@@ -1184,9 +1178,9 @@ namespace laka { namespace vk {
 			std::shared_ptr<Descriptor_pool> descriptor_pool_,
 			std::vector<VkDescriptorSet>& handles_);
 	public:
-		typedef std::shared_ptr<Descriptor_set_s> Sptr;
+		using Sptr = std::shared_ptr<Descriptor_set_s>;
 
-		Sptr get_sptr();
+		
 
 		class Descriptor_set :public Descriptor_set_base {};
 
@@ -1214,9 +1208,9 @@ namespace laka { namespace vk {
 
         const VkAllocationCallbacks* allocation_callbacks;
     public:
-		typedef std::shared_ptr<Descriptor_pool> Sptr;
+		using Sptr = std::shared_ptr<Descriptor_pool>;
 
-		Sptr get_sptr();
+		
 
         class E_Create {
         public:
@@ -1302,9 +1296,9 @@ namespace laka { namespace vk {
 
         const VkAllocationCallbacks* allocation_callbacks;
     public:
-		typedef std::shared_ptr<Descriptor_update_template> Sptr;
+		using Sptr = std::shared_ptr<Descriptor_update_template>;
 
-		Sptr get_sptr();
+		
 
         ~Descriptor_update_template();
 
@@ -1328,9 +1322,9 @@ namespace laka { namespace vk {
 
         const VkAllocationCallbacks* allocation_callbacks;
     public:
-		typedef std::shared_ptr<Descriptor_set_layout> Sptr;
+		using Sptr = std::shared_ptr<Descriptor_set_layout>;
 
-		Sptr get_sptr();
+		
 
         class E_Create {
         public:
@@ -1366,9 +1360,9 @@ namespace laka { namespace vk {
 
 		const VkAllocationCallbacks* allocation_callbacks;
 	public:
-		typedef std::shared_ptr<Query_pool> Sptr;
+		using Sptr = std::shared_ptr<Query_pool>;
 
-		Sptr get_sptr();
+		
 
 		class E_Pipeline_statistic {
 		public:
@@ -1417,9 +1411,9 @@ namespace laka { namespace vk {
 
         const VkAllocationCallbacks* allocation_callbacks;
     public:
-		typedef std::shared_ptr<Frame_buffer> Sptr;
+		using Sptr = std::shared_ptr<Frame_buffer>;
 
-		Sptr get_sptr();
+		
 
         ~Frame_buffer();
 
@@ -1439,9 +1433,9 @@ namespace laka { namespace vk {
 
         const VkAllocationCallbacks* allocation_callbacks;
     public:
-		typedef std::shared_ptr<Render_pass> Sptr;
+		using Sptr = std::shared_ptr<Render_pass>;
 
-		Sptr get_sptr();
+		
 
         ~Render_pass();
 
@@ -1471,9 +1465,9 @@ namespace laka { namespace vk {
 
 		const VkAllocationCallbacks* allocation_callbacks;
 	public:
-		typedef std::shared_ptr<Pipeline_layout> Sptr;
+		using Sptr = std::shared_ptr<Pipeline_layout>;
 
-		Sptr get_sptr();
+		
 
 		~Pipeline_layout();
 
@@ -1526,9 +1520,9 @@ namespace laka { namespace vk {
 
 		const VkAllocationCallbacks* allocation_callbacks;
 	public:
-		typedef std::shared_ptr<Pipeline_cache> Sptr;
+		using Sptr = std::shared_ptr<Pipeline_cache>;
 
-		Sptr get_sptr();
+		
 
 		~Pipeline_cache();
 
@@ -1566,9 +1560,9 @@ namespace laka { namespace vk {
 		
 		int32_t index;
     public:
-		typedef std::shared_ptr<Compute_pipeline> Sptr;
+		using Sptr = std::shared_ptr<Compute_pipeline>;
 
-		Sptr get_sptr();
+		
 
         ~Compute_pipeline();
 
@@ -1605,9 +1599,9 @@ namespace laka { namespace vk {
 
         const VkAllocationCallbacks* allocation_callbacks;
     public:
-		typedef std::shared_ptr<Graphics_pipeline> Sptr;
+		using Sptr = std::shared_ptr<Graphics_pipeline>;
 
-		Sptr get_sptr();
+		
 
         ~Graphics_pipeline();
 
@@ -1653,9 +1647,9 @@ namespace laka { namespace vk {
         
         PFN_vkVoidFunction return_api(const char* api_name_);
     public:
-		typedef std::shared_ptr<Device> Sptr;
+		using Sptr = std::shared_ptr<Device>;
 
-		Sptr get_sptr();
+		
 
         ~Device();
 

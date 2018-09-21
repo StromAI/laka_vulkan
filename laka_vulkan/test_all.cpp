@@ -28,26 +28,29 @@ Permission is granted to anyone to use this software for any purpose, including 
 using namespace std;
 using namespace laka::vk;
 
-class Test_fuck {};
+//dfasdfsafds
+class Test_fuck { void* pNext; };
 
 class Fuck1 :public Test_fuck {};
 class Fuck2 :public Test_fuck {};
 class Fuck3 :public Test_fuck {};
 
+//fdsafsdfsd
 void test_function(Test_fuck& t)
 {
-
+	
 }
-
-
 
 void test_all()
 {
+
+	Test_fuck fuck;
 	Fuck1 fuck1;
 	Fuck2 fuck2;
 	Fuck3 fuck3;
 
-	test_function(fuck1);//VS没有引导信息
+	test_function(fuck1);
+	
 
     init_show;
 
