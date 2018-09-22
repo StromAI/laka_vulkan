@@ -46,8 +46,8 @@ namespace laka { namespace vk {
     PFN_vkVoidFunction return_vk_api(
         VkInstance instance_,
         const char* function_name_,
-        Execute_function excute_
-    ) {
+        Execute_function excute_) 
+	{
         init_show;
         show_debug("¼ÓÔØvulkanº¯Êý:{0}", function_name_);
         auto fp = get_instance_proc_address(instance_, function_name_);
