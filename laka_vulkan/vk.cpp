@@ -13,7 +13,6 @@ Permission is granted to anyone to use this software for any purpose, including 
 
 */
 
-
 #include "vk.h"
 
 using namespace std;
@@ -78,6 +77,15 @@ namespace laka {    namespace vk {
         }
         return version;
     }
+
+
+	VkAllocationCallbacks* default_allocation_cb()
+	{
+		static VkAllocationCallbacks cb;
+		return &cb;
+	}
+
+
 
     class Layer_properties {
     public:
@@ -283,11 +291,11 @@ namespace laka {    namespace vk {
     }
 
     Instance::Sptr Instance::get_new(
-        vector<const char*>* enabled_extension_names_/* = nullptr*/,
+		initializer_list<const char*> enabled_extension_names_ /* = {}*/,
         uint32_t api_version_/* = VK_MAKE_VERSION(1, 1, 82)*/,
         const void* next_/* = nullptr*/,
         VkAllocationCallbacks* allocator_/* = nullptr*/,
-        vector<const char*>* enabled_layer_names_/* = nullptr*/,
+		initializer_list<const char*> enabled_layer_names_ /* = {}*/,
         const char* app_name_/* = "laka::vk"*/,
         uint32_t app_version_/* = VK_MAKE_VERSION(0, 0, 1)*/,
         const char* engine_name_/* = "laka::vk::engine"*/,
@@ -307,16 +315,19 @@ namespace laka {    namespace vk {
             api_version_
         };
 
-        VkInstanceCreateInfo info{
-            VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO,
-            next_,
-            0,
-            &app_info,
-            static_cast<uint32_t>(enabled_layer_names_ == nullptr ? 0 : enabled_layer_names_->size()),
-            enabled_layer_names_ == nullptr ? nullptr : &(*enabled_layer_names_)[0],
-            static_cast<uint32_t>(enabled_extension_names_ == nullptr ? 0 : enabled_extension_names_->size()),
-            enabled_extension_names_ == nullptr ? nullptr : &(*enabled_extension_names_)[0]
-        };
+		std::vector<const char*> ex_names(enabled_extension_names_);
+		std::vector<const char*> ly_names(enabled_layer_names_);
+
+		VkInstanceCreateInfo info{
+			VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO,
+			next_,
+			0,
+			&app_info,
+			static_cast<uint32_t>(enabled_layer_names_.size()),
+			enabled_layer_names_.size()>0 ? nullptr : &ly_names[0],
+			static_cast<uint32_t>(enabled_extension_names_.size()),
+			enabled_extension_names_.size() > 0 ? nullptr : &ex_names[0]
+		};
 
         VkInstance this_handle;
         auto ret = vkCreateInstance(&info, allocator_, &this_handle);
@@ -626,7 +637,7 @@ namespace laka {    namespace vk {
 		for (size_t i = 0; i < qf_properties_.size(); ++i)
 		{
 			queue_familys[i].properties = qf_properties_[i];
-			queue_familys[i].qf_index = i;
+			queue_familys[i].qf_index = static_cast<uint32_t>(i);
 		}
 
 			//假设queue_infos_中的元素 其队列族index不会重复 会的话也不知道vk会怎么处理.待提问.
@@ -1902,7 +1913,7 @@ namespace laka {    namespace vk {
 		:descriptor_pool(descriptor_pool_)
 		, elements(handles_.size())
 	{
-		for (size_t i; i < elements.size(); ++i)
+		for (size_t i = 0; i < elements.size(); ++i)
 		{
 			elements[i].handle = handles_[i];
 		}
@@ -2939,6 +2950,9 @@ namespace laka {    namespace vk {
 		std::vector<VkSubmitInfo>& pSubmitInfo,
 		Fence&	fence)
 	{
+
+
+
 		auto ret = api->vkQueueSubmit(
 			handle,
 			static_cast<uint32_t>(pSubmitInfo.size()),

@@ -29,7 +29,9 @@ using namespace std;
 using namespace laka::vk;
 
 //dfasdfsafds
-class Test_fuck { void* pNext; };
+class Test_fuck {
+	void* pNext;
+};
 
 class Fuck1 :public Test_fuck {};
 class Fuck2 :public Test_fuck {};
@@ -43,25 +45,20 @@ void test_function(Test_fuck& t)
 
 void test_all()
 {
-
 	Test_fuck fuck;
 	Fuck1 fuck1;
 	Fuck2 fuck2;
 	Fuck3 fuck3;
 
 	test_function(fuck1);
-	
 
     init_show;
 
     show_info("实例版本:{}", version_str(get_instance_version()));
 
-    vector<const char*> enable_extension_names = {
-        VK_KHR_SURFACE_EXTENSION_NAME,
-        surface_extension_name
-    };
-
-    auto instance = Instance::get_new(&enable_extension_names);
+	auto instance = Instance::get_new(
+		{VK_KHR_SURFACE_EXTENSION_NAME,surface_extension_name}
+	);
 
     show_info("实例句柄:{}", (void*)instance->handle);
     show_info("空间分配回调函数结构体指针:{}", (void*)instance->allocator_callbacks_ptr);
@@ -168,6 +165,10 @@ void test_all()
 
 
 	
+
+
+
+
 
 
 

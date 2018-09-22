@@ -13,6 +13,21 @@ Permission is granted to anyone to use this software for any purpose, including 
 
 */
 
+/*
+https://zh.cppreference.com/w/cpp/utility/initializer_list
+(C++14 前)
+底层数组不保证在原始 initializer_list 对象的生存期结束后继续存在。
+std::initializer_list 的存储是未指定的（即它可以是自动、临时或静态只读内存，依赖场合）。
+(C++14 起)
+底层数组是 const T[N] 类型的临时数组，
+其中每个元素都从原始初始化器列表的对应元素复制初始化（除非窄化转换非法）。
+底层数组的生存期与任何其他临时对象相同，
+除了从数组初始化 initializer_list 对象会延长数组的生存期，
+恰如绑定引用到临时量（有例外，例如对于初始化非静态类成员）。底层数组可以分配在只读内存。
+
+意味着C++14前 未必是以数组存储或者作为参数在函数执行期内继续存在?
+*/
+//由于上述原因,本代码只适合支持C++14以上特性的编译器.
 
 #pragma once
 #include <memory>
@@ -32,7 +47,6 @@ namespace laka { namespace vk {
 
 #include "classes.h"
 
-
     Module_handle get_module();
     PFN_vkVoidFunction get_instance_proc_address(
         VkInstance instance_, const char* function_name_);
@@ -42,7 +56,18 @@ namespace laka { namespace vk {
 
     std::string version_str(uint32_t version);
 
-    template<typename Execute_function>
+	//默认的VkAllocationCallbacks指针
+	//使用它作为实参,vk的子对象创建时就使用父对象的VkAllocationCallbacks
+	//有更好的建议吗?
+	VkAllocationCallbacks* default_allocation_cb();
+	
+	//学习了官方Vk-Hpp中的ArrayProxy 
+	//作用是为api的数组参数提供多样化快捷使用 而省掉多个重载函数
+
+	
+
+
+	template<typename Execute_function>
     PFN_vkVoidFunction return_vk_api(
         VkInstance instance_,
         const char* function_name_,
@@ -76,9 +101,7 @@ namespace laka { namespace vk {
 
     uint32_t get_instance_version();
 
-
-
-    struct User_choose_queue_info {
+	struct User_choose_queue_info {
         uint32_t queue_family_index;//想要从index队列族创建队列
         std::vector<float> queue_priorities;//每个队列的优先级
 		VkDeviceQueueCreateFlags create_flags;
@@ -107,11 +130,11 @@ namespace laka { namespace vk {
         ~Instance();
 
         static Sptr get_new(
-            std::vector<const char*>* enabled_extension_names_ = nullptr,
+			std::initializer_list<const char*> enabled_extension_names_ = {},
             uint32_t api_version_ = VK_MAKE_VERSION(1,1,82),
             const void* next_ = nullptr,
             VkAllocationCallbacks* allocator_ = nullptr,
-            std::vector<const char*>* enabled_layer_names_ = nullptr,
+			std::initializer_list<const char*> enabled_layer_names_ = {},
             const char* app_name_ = "laka::vk",
             uint32_t app_version_ = VK_MAKE_VERSION(0,0,1),
             const char* engine_name_ = "laka::vk::engine",
