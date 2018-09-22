@@ -60,12 +60,8 @@ struct Queue_family_info;
 struct Pramater_choose_physical_device;
 struct Pramater_choose_queue_family;
 
-
-
 class Command_buffer_old;
 class Command_buffers_old;
-
-
 
 //class Buffer_views;
 //class Buffers;
@@ -91,7 +87,3 @@ class Command_buffers_old;
 //class Events;
 //class Shader_modules;
 //class Device_memorys;
-
-
-
-
