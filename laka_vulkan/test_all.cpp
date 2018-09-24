@@ -39,8 +39,33 @@ void test_function(Test_fuck& t)
 {
 }
 
+struct Test_struct {
+	VkPhysicalDeviceExternalBufferInfo info;
+	Test_struct( /**/ )
+		:info({ 
+			VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_BUFFER_INFO,
+			nullptr,
+			/*????*/ })
+	{};
+};
+
+void test_f2(Test_struct ts)
+{
+
+}
+
 void test_all()
 {
+	//test_f2( { {VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_BUFFER_INFO } } )
+
+
+
+
+
+
+
+
+
 	Test_fuck fuck;
 	Fuck1 fuck1;
 	Fuck2 fuck2;

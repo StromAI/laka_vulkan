@@ -393,14 +393,13 @@ namespace laka { namespace vk {
 			const VkPhysicalDeviceSparseImageFormatInfo2* format_info_)
 	{
 		init_show;
-		auto& array = *new vector<VkSparseImageFormatProperties2>;
-		shared_ptr<vector<VkSparseImageFormatProperties2>> sptr(&array);
-
+		
+		shared_ptr<vector<VkSparseImageFormatProperties2>> sptr(new vector<VkSparseImageFormatProperties2>);
 		uint32_t count = 0;
 		load_vk_array(
 			handle DH format_info_,
 			instance->api.vkGetPhysicalDeviceSparseImageFormatProperties2,
-			array,
+			(*sptr),
 			"物理设备 {0} 的稀疏图像格式属性 数量为:{1}", (void*)handle, count
 		);
 
@@ -456,21 +455,19 @@ namespace laka { namespace vk {
 	shared_ptr<VkPhysicalDeviceProperties>
 		Physical_device::get_properties()
 	{
-		auto& array = *new VkPhysicalDeviceProperties;
+		shared_ptr<VkPhysicalDeviceProperties> sptr(new VkPhysicalDeviceProperties);
 
-		instance->api.vkGetPhysicalDeviceProperties(handle, &array);
+		instance->api.vkGetPhysicalDeviceProperties(handle, sptr.get() );
 
-		shared_ptr<VkPhysicalDeviceProperties> sptr(&array);
 		return sptr;
 	}
 
 	shared_ptr<VkPhysicalDeviceMemoryProperties>
 		Physical_device::get_memory_properties()
 	{
-		auto& array = *new VkPhysicalDeviceMemoryProperties;
-		shared_ptr<VkPhysicalDeviceMemoryProperties> sptr(&array);
+		shared_ptr<VkPhysicalDeviceMemoryProperties> sptr(new VkPhysicalDeviceMemoryProperties);
 
-		instance->api.vkGetPhysicalDeviceMemoryProperties(handle, &array);
+		instance->api.vkGetPhysicalDeviceMemoryProperties(handle, sptr.get() );
 
 		return sptr;
 	}
@@ -492,31 +489,44 @@ namespace laka { namespace vk {
 
 	shared_ptr<VkExternalBufferProperties>
 		Physical_device::get_external_buffer_properties(
-			const VkPhysicalDeviceExternalBufferInfo* external_buffer_info_)
+			VkBufferCreateFlags c_flags_,
+			VkBufferUsageFlags	u_flags_,
+			VkExternalMemoryHandleTypeFlagBits	handle_type_)
 	{
-		auto& array = *new VkExternalBufferProperties;
-		shared_ptr<VkExternalBufferProperties> sptr(&array);
+		shared_ptr<VkExternalBufferProperties> sptr(new VkExternalBufferProperties);
+
+		VkPhysicalDeviceExternalBufferInfo external_buffer_info_{
+			VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_BUFFER_INFO,
+			nullptr,
+			c_flags_,
+			u_flags_,
+			handle_type_
+		};
 
 		instance->api.vkGetPhysicalDeviceExternalBufferProperties(
 			handle,
-			external_buffer_info_,
-			&array
+			&external_buffer_info_,
+			sptr.get()
 		);
-
 		return sptr;
 	}
 
 	shared_ptr<VkExternalFenceProperties>
 		Physical_device::get_external_fence_properties(
-			const VkPhysicalDeviceExternalFenceInfo* external_fence_info_)
+			VkExternalFenceHandleTypeFlagBits    handle_type_)
 	{
-		auto& array = *new VkExternalFenceProperties;
-		shared_ptr<VkExternalFenceProperties> sptr(&array);
+		shared_ptr<VkExternalFenceProperties> sptr(new VkExternalFenceProperties);
+
+		VkPhysicalDeviceExternalFenceInfo external_fence_info{
+			VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_FENCE_INFO,
+			nullptr,
+			handle_type_
+		};
 
 		instance->api.vkGetPhysicalDeviceExternalFenceProperties(
 			handle,
-			external_fence_info_,
-			&array
+			&external_fence_info,
+			sptr.get()
 		);
 
 		return sptr;
@@ -524,15 +534,20 @@ namespace laka { namespace vk {
 
 	shared_ptr<VkExternalSemaphoreProperties>
 		Physical_device::get_external_semphore_properties(
-			const VkPhysicalDeviceExternalSemaphoreInfo* external_semaphore_info_)
+			VkExternalSemaphoreHandleTypeFlagBits    handle_type_)
 	{
-		auto& array = *new VkExternalSemaphoreProperties;
-		shared_ptr<VkExternalSemaphoreProperties> sptr(&array);
+		shared_ptr<VkExternalSemaphoreProperties> sptr(new VkExternalSemaphoreProperties);
+
+		VkPhysicalDeviceExternalSemaphoreInfo external_semaphore_info{
+			VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_SEMAPHORE_INFO,
+			nullptr,
+			handle_type_
+		};
 
 		instance->api.vkGetPhysicalDeviceExternalSemaphoreProperties(
 			handle,
-			external_semaphore_info_,
-			&array
+			&external_semaphore_info,
+			sptr.get()
 		);
 
 		return sptr;
@@ -540,16 +555,31 @@ namespace laka { namespace vk {
 
 	shared_ptr<VkImageFormatProperties2>
 		Physical_device::get_image_format_properties(
-			const VkPhysicalDeviceImageFormatInfo2* image_format_info_)
+			VkFormat                                    format_,
+			VkImageType                                 type_,
+			VkImageTiling                               tiling_,
+			VkImageUsageFlags                           usage_,
+			VkImageCreateFlags                          flags_,
+			void*										next_)
 	{
-		auto& array = *new VkImageFormatProperties2;
-		shared_ptr<VkImageFormatProperties2> sptr(&array);
+		shared_ptr<VkImageFormatProperties2> sptr(new VkImageFormatProperties2);
+
+		VkPhysicalDeviceImageFormatInfo2 image_format_info{
+			VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_FORMAT_INFO_2,
+			next_,
+			format_,
+			type_,
+			tiling_,
+			usage_,
+			flags_
+		};
 
 		instance->api.vkGetPhysicalDeviceImageFormatProperties2(
 			handle,
-			image_format_info_,
-			&array
+			&image_format_info,
+			sptr.get()
 		);
+
 		return sptr;
 	}
 

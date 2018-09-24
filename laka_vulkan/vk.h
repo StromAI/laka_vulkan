@@ -29,6 +29,10 @@ std::initializer_list 的存储是未指定的（即它可以是自动、临时或静态只读内存，依赖
 */
 //由于上述原因,本代码只适合支持C++14以上特性的编译器.
 
+
+//忽然觉得没必要将参数拍扁,使用官方封装好的结构体才更容易复用.
+//但如果在调用函数时直接输入参数会更好
+
 #pragma once
 #include <memory>
 #include <array>
@@ -220,17 +224,27 @@ namespace laka {namespace vk {
 			get_format_properties(VkFormat format_);
 
 		std::shared_ptr<VkExternalBufferProperties>
-			get_external_buffer_properties(const VkPhysicalDeviceExternalBufferInfo* external_buffer_info_);
+			get_external_buffer_properties(
+				VkBufferCreateFlags c_flags_,
+				VkBufferUsageFlags	u_flags_,
+				VkExternalMemoryHandleTypeFlagBits	handle_type_);
 
 		std::shared_ptr<VkExternalFenceProperties>
-			get_external_fence_properties(const VkPhysicalDeviceExternalFenceInfo* external_fence_info_);
+			get_external_fence_properties(
+				VkExternalFenceHandleTypeFlagBits    handle_type_);
 
 		std::shared_ptr<VkExternalSemaphoreProperties>
-			get_external_semphore_properties(const VkPhysicalDeviceExternalSemaphoreInfo* external_semaphore_info_);
+			get_external_semphore_properties(
+				VkExternalSemaphoreHandleTypeFlagBits    handle_type_);
 
 		std::shared_ptr<VkImageFormatProperties2>
 			get_image_format_properties(
-				const VkPhysicalDeviceImageFormatInfo2* image_format_info_);
+				VkFormat                                    format_,
+				VkImageType                                 type_,
+				VkImageTiling                               tiling_,
+				VkImageUsageFlags                           usage_,
+				VkImageCreateFlags                          flags_,
+				void*										next_ = nullptr);
 
 		std::shared_ptr<std::vector<VkSparseImageFormatProperties2>>
 			get_sparse_image_format_properties(
