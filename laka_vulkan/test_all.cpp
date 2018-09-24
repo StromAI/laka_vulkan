@@ -56,7 +56,6 @@ void test_f2(Test_struct ts)
 
 void test_all()
 {
-	//test_f2( { {VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_BUFFER_INFO } } )
 
 
 
