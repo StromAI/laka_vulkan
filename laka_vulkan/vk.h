@@ -31,10 +31,10 @@ std::initializer_list 的存储是未指定的（即它可以是自动、临时或静态只读内存，依赖
 
 #pragma once
 #include <memory>
+#include <array>
 #include <vector>
-#include <list>
-#include <map>
 #include <initializer_list>
+#include <type_traits>
 
 #include "laka_vk_define.h"
 #include "vk_bits.h"
@@ -43,256 +43,295 @@ table_vk_flag(std::shared_ptr<std::string> mean ZK, , s, YK FH);
 table_vk_flag(std::shared_ptr<std::string> mean ZK, , Bits, YK FH);
 table_vk_enum(std::shared_ptr<std::string> mean ZK, , , YK FH);
 
-namespace laka {
-	namespace vk {
+namespace laka {namespace vk {
 #include "classes.h"
 
-		Module_handle get_module();
-		PFN_vkVoidFunction get_instance_proc_address(
-			VkInstance instance_, const char* function_name_);
+	Module_handle get_module();
+	PFN_vkVoidFunction get_instance_proc_address(
+		VkInstance instance_, const char* function_name_);
 
-		void show_result(VkResult ret_);
-		void show_result_assert(VkResult ret_);
+	void show_result(VkResult ret_);
+	void show_result_assert(VkResult ret_);
 
-		std::string version_str(uint32_t version);
+	std::string version_str(uint32_t version);
 
-		//默认的VkAllocationCallbacks指针
-		//使用它作为实参,vk的子对象创建时就使用父对象的VkAllocationCallbacks
-		//有更好的建议吗?
-		VkAllocationCallbacks* default_allocation_cb();
+	//默认的VkAllocationCallbacks指针
+	//使用它作为实参,vk的子对象创建时就使用父对象的VkAllocationCallbacks
+	//有更好的建议吗?
+	VkAllocationCallbacks* default_allocation_cb();
 
-		//学习了官方Vk-Hpp中的ArrayProxy
-		//作用是为api的数组参数提供多样化快捷使用 而省掉多个重载函数
-		template<typename T>
-		class Array_value {
+	//学习了官方Vk-Hpp中的ArrayProxy (首次
+	//作用是为api的数组参数提供多样化快捷使用 而省掉多个重载函数
+	//我水平不够 只能设计成const 作为一次性的东西 在封装函数的内部用一用
+	template<typename T>
+	class Array_value {
+	private:
+		const uint32_t value_count;
+		const T* first_value_ptr;
+	public:
+		const T* first_value() 
+			{ return first_value_ptr; }
+		const T* last_value() 
+			{ return first_value_ptr + value_count - 1; }
+		const T* data() 
+			{ return value_count > 0 ? first_value_ptr : nullptr; }
+		uint32_t size() 
+			{ return value_count; }
 
-		};
+		Array_value(T* only_value_ptr_)
+			: value_count(1)
+			, first_value_ptr(only_value_ptr_)
+		{}
 
-		template<typename Execute_function>
-		PFN_vkVoidFunction return_vk_api(
-			VkInstance instance_,
-			const char* function_name_,
-			Execute_function excute_
-		) {
-			init_show;
-			show_debug("加载vulkan函数:{0}", function_name_);
-			auto fp = get_instance_proc_address(instance_, function_name_);
-			if (fp != NULL)
-			{
-				show_debug("\t成功获得函数地址:{}", (size_t)fp);
-			}
-			else
-			{
-				show_err("\t获取函数地址失败");
-				excute_();
-			}
-			return fp;
-		}
+		Array_value(uint32_t count_, T* first_value_ptr_)
+			: value_count(count_)
+			, first_value_ptr(first_value_ptr_)
+		{}
 
-		template <typename Execute_function>
-		PFN_vkVoidFunction return_vk_api(const char* function_name_, Execute_function excute_)
+		Array_value(std::initializer_list<T> data)
+			: value_count(static_cast<uint32_t>(data.size()))
+			, first_value_ptr(data.begin())
+		{}
+
+		Array_value(std::vector<T>& vector_)
+			:value_count(static_cast<uint32_t>(vector_.size()))
+			, first_value_ptr(vector_.data())
+		{}
+
+		template<size_t N>
+		Array_value(std::array<T, N>& array_)
+			: value_count(static_cast<uint32_t>(array_.size()))
+			, first_value_ptr(array_.data())
+		{}
+	};
+
+	//不一定要暴露
+#if 1
+	template<typename Execute_function>
+	PFN_vkVoidFunction return_vk_api(
+		VkInstance instance_,
+		const char* function_name_,
+		Execute_function excute_)
+	{
+		init_show;
+		show_debug("加载vulkan函数:{0}", function_name_);
+		auto fp = get_instance_proc_address(instance_, function_name_);
+		if (fp != NULL)
 		{
-			return return_vk_api(nullptr, function_name_, excute_);
+			show_debug("\t成功获得函数地址:{}", (size_t)fp);
 		}
+		else
+		{
+			show_err("\t获取函数地址失败");
+			excute_();
+		}
+		return fp;
+	}
+	template <typename Execute_function>
+	PFN_vkVoidFunction return_vk_api(const char* function_name_, Execute_function excute_)
+	{
+		return return_vk_api(nullptr, function_name_, excute_);
+	}
+	PFN_vkVoidFunction return_vk_api(const char* function_name_);
+	PFN_vkVoidFunction return_vk_api_must(const char* function_name_);
+	PFN_vkVoidFunction return_vk_api(VkInstance instance_, const char* function_name_);
+	PFN_vkVoidFunction return_vk_api_must(VkInstance instance_, const char* function_name_);
 
-		PFN_vkVoidFunction return_vk_api(const char* function_name_);
-		PFN_vkVoidFunction return_vk_api_must(const char* function_name_);
-		PFN_vkVoidFunction return_vk_api(VkInstance instance_, const char* function_name_);
-		PFN_vkVoidFunction return_vk_api_must(VkInstance instance_, const char* function_name_);
+#endif
 
-		uint32_t get_instance_version();
+	uint32_t get_instance_version();
 
-		struct User_choose_queue_info {
-			uint32_t queue_family_index;//想要从index队列族创建队列
-			std::vector<float> queue_priorities;//每个队列的优先级
-			VkDeviceQueueCreateFlags create_flags;
-			VkQueueGlobalPriorityEXT global_priority;
-		};
-		struct Pramater_choose_physical_device {
-			Physical_device& if_you_feel_the_physical_device_not_ok_so_return_false;
-		};
-		struct Pramater_choose_queue_family {
-			std::vector<Queue_family_info> const& give_you_queue_family_info_;
-			std::vector<User_choose_queue_info>& waiting_for_your_filled_info_;
-		};
+	struct User_choose_queue_info {
+		uint32_t queue_family_index;//想要从index队列族创建队列
+		std::vector<float> queue_priorities;//每个队列的优先级
+		VkDeviceQueueCreateFlags create_flags;
+		VkQueueGlobalPriorityEXT global_priority;
+	};
+	struct Pramater_choose_physical_device {
+		Physical_device& if_you_feel_the_physical_device_not_ok_so_return_false;
+	};
+	struct Pramater_choose_queue_family {
+		std::vector<Queue_family_info> const& give_you_queue_family_info_;
+		std::vector<User_choose_queue_info>& waiting_for_your_filled_info_;
+	};
 
-		class Instance
-			:public std::enable_shared_from_this<Instance> {
-		private:
-			Instance(
-				VkInstance handle_,
-				VkAllocationCallbacks* allocator_callbacks_ptr_);
+	class Instance
+		:public std::enable_shared_from_this<Instance> {
+	private:
+		Instance(
+			VkInstance handle_,
+			VkAllocationCallbacks* allocator_callbacks_ptr_);
 
-			VkAllocationCallbacks allocator_callbacks;
-		public:
-			using Sptr = std::shared_ptr<Instance>;
+		VkAllocationCallbacks allocator_callbacks;
+	public:
+		using Sptr = std::shared_ptr<Instance>;
 
-			~Instance();
+		~Instance();
 
-			static Sptr get_new(
-				std::initializer_list<const char*> enabled_extension_names_ = {},
-				uint32_t api_version_ = VK_MAKE_VERSION(1, 1, 82),
-				const void* next_ = nullptr,
-				VkAllocationCallbacks* allocator_ = nullptr,
-				std::initializer_list<const char*> enabled_layer_names_ = {},
-				const char* app_name_ = "laka::vk",
-				uint32_t app_version_ = VK_MAKE_VERSION(0, 0, 1),
-				const char* engine_name_ = "laka::vk::engine",
-				uint32_t engine_version_ = VK_MAKE_VERSION(0, 0, 1));
+		static Sptr get_new(
+			Array_value<const char*> enabled_extension_names_ = {},
+			uint32_t api_version_ = VK_MAKE_VERSION(1, 1, 82),
+			const void* next_ = nullptr,
+			VkAllocationCallbacks* allocator_ = nullptr,
+			Array_value<const char*> enabled_layer_names_ = {},
+			const char* app_name_ = "laka::vk",
+			uint32_t app_version_ = VK_MAKE_VERSION(0, 0, 1),
+			const char* engine_name_ = "laka::vk::engine",
+			uint32_t engine_version_ = VK_MAKE_VERSION(0, 0, 1));
 
-			std::shared_ptr<Device_creator> get_a_device_creator(
-				bool(*choose_physical_device_)(Pramater_choose_physical_device& pramater_),
-				bool(*choose_queue_family_)(Pramater_choose_queue_family& pramater_),
-				VkAllocationCallbacks* allocator_ = nullptr);
+		std::shared_ptr<Device_creator> get_a_device_creator(
+			bool(*choose_physical_device_)(Pramater_choose_physical_device& pramater_),
+			bool(*choose_queue_family_)(Pramater_choose_queue_family& pramater_),
+			VkAllocationCallbacks* allocator_ = default_allocation_cb());
 
-			struct {
-				table_vk_api_instance(vk_fun ZK, , , YK FH);
-				table_vk_api_physical_device(vk_fun ZK, , , YK FH);
-				table_vk_api_physical_device_khr(vk_fun ZK, , , YK FH);
-			}api;
+		struct {
+			table_vk_api_instance(vk_fun ZK, , , YK FH);
+			table_vk_api_physical_device(vk_fun ZK, , , YK FH);
+			table_vk_api_physical_device_khr(vk_fun ZK, , , YK FH);
+		}api;
 
-			const VkInstance handle;
-			const VkAllocationCallbacks* allocator_callbacks_ptr;
-			std::vector<Physical_device_group> physical_device_groups;
-			std::vector<Physical_device> physical_devices;
-		};
+		const VkInstance handle;
+		const VkAllocationCallbacks* allocator_callbacks_ptr;
+		std::vector<Physical_device_group> physical_device_groups;
+		std::vector<Physical_device> physical_devices;
+	};
 
-		class Physical_device {
-		public:
-			std::shared_ptr<std::vector<VkLayerProperties>>
-				get_layer_propertiess();
+	class Physical_device {
+	public:
+		std::shared_ptr<std::vector<VkLayerProperties>>
+			get_layer_propertiess();
 
-			std::shared_ptr<std::vector<VkExtensionProperties>>
-				get_extension_properties(const char* layer_name_);
+		std::shared_ptr<std::vector<VkExtensionProperties>>
+			get_extension_properties(const char* layer_name_);
 
-			std::shared_ptr<VkPhysicalDeviceFeatures>
-				get_features();
+		std::shared_ptr<VkPhysicalDeviceFeatures>
+			get_features();
 
-			std::shared_ptr<VkPhysicalDeviceProperties>
-				get_properties();
+		std::shared_ptr<VkPhysicalDeviceProperties>
+			get_properties();
 
-			std::shared_ptr<VkPhysicalDeviceMemoryProperties>
-				get_memory_properties();
+		std::shared_ptr<VkPhysicalDeviceMemoryProperties>
+			get_memory_properties();
 
-			std::shared_ptr<std::vector<VkQueueFamilyProperties>>
-				get_queue_family_properties();
+		std::shared_ptr<std::vector<VkQueueFamilyProperties>>
+			get_queue_family_properties();
 
-			std::shared_ptr<VkFormatProperties>
-				get_format_properties(VkFormat format_);
+		std::shared_ptr<VkFormatProperties>
+			get_format_properties(VkFormat format_);
 
-			std::shared_ptr<VkExternalBufferProperties>
-				get_external_buffer_properties(const VkPhysicalDeviceExternalBufferInfo* external_buffer_info_);
+		std::shared_ptr<VkExternalBufferProperties>
+			get_external_buffer_properties(const VkPhysicalDeviceExternalBufferInfo* external_buffer_info_);
 
-			std::shared_ptr<VkExternalFenceProperties>
-				get_external_fence_properties(const VkPhysicalDeviceExternalFenceInfo* external_fence_info_);
+		std::shared_ptr<VkExternalFenceProperties>
+			get_external_fence_properties(const VkPhysicalDeviceExternalFenceInfo* external_fence_info_);
 
-			std::shared_ptr<VkExternalSemaphoreProperties>
-				get_external_semphore_properties(const VkPhysicalDeviceExternalSemaphoreInfo* external_semaphore_info_);
+		std::shared_ptr<VkExternalSemaphoreProperties>
+			get_external_semphore_properties(const VkPhysicalDeviceExternalSemaphoreInfo* external_semaphore_info_);
 
-			std::shared_ptr<VkImageFormatProperties2>
-				get_image_format_properties(
-					const VkPhysicalDeviceImageFormatInfo2* image_format_info_);
+		std::shared_ptr<VkImageFormatProperties2>
+			get_image_format_properties(
+				const VkPhysicalDeviceImageFormatInfo2* image_format_info_);
 
-			std::shared_ptr<std::vector<VkSparseImageFormatProperties2>>
-				get_sparse_image_format_properties(
-					const VkPhysicalDeviceSparseImageFormatInfo2* format_info_);
+		std::shared_ptr<std::vector<VkSparseImageFormatProperties2>>
+			get_sparse_image_format_properties(
+				const VkPhysicalDeviceSparseImageFormatInfo2* format_info_);
 
-			Instance* instance;
-			VkPhysicalDevice handle;
-			std::vector<Queue_family_info> queue_familys;
-		};
+		Instance* instance;
+		VkPhysicalDevice handle;
+		std::vector<Queue_family_info> queue_familys;
+	};
 
-		class Physical_device_group {
-		public:
-			Instance * instance;
-			VkPhysicalDeviceGroupProperties properties;
-			std::vector<Physical_device*> physical_devices;
-		};
+	class Physical_device_group {
+	public:
+		Instance * instance;
+		VkPhysicalDeviceGroupProperties properties;
+		std::vector<Physical_device*> physical_devices;
+	};
 
-		struct Queue_family_info {
-			uint32_t index;
-			VkQueueFamilyProperties properties;
-		};
+	struct Queue_family_info {
+		uint32_t index;
+		VkQueueFamilyProperties properties;
+	};
 
-		class Queue_family {
-		public:
-			uint32_t qf_index;
-			VkQueueFamilyProperties properties;
-			std::vector<Queue> queues;
-		};
+	class Queue_family {
+	public:
+		uint32_t qf_index;
+		VkQueueFamilyProperties properties;
+		std::vector<Queue> queues;
+	};
 
-		class Queue {
-		public:
-			//VkDevice device_handle;
-			VkQueue handle;
-			uint32_t index;
-			uint32_t family_index;
+	class Queue {
+	public:
+		//VkDevice device_handle;
+		VkQueue handle;
+		uint32_t index;
+		uint32_t family_index;
 
-			Device_api* api;
+		Device_api* api;
 
-			VkResult wait_idle();
+		VkResult wait_idle();
+		//...
+		VkResult submit(
+			std::vector<VkSubmitInfo>& pSubmitInfo,
+			Fence&	fence);
+		//...
+		VkResult bind_sparse(
+			std::vector<VkBindSparseInfo>&              pBindInfo,
+			Fence&                                      fence);
+	};
 
-			VkResult submit(
-				std::vector<VkSubmitInfo>& pSubmitInfo,
-				Fence&	fence);
+	class Device_creator
+		: public std::enable_shared_from_this<Device_creator> {
+	private:
+		friend class Device;
+		friend class Instance;
 
-			VkResult bind_sparse(
-				std::vector<VkBindSparseInfo>&              pBindInfo,
-				Fence&                                      fence);
-		};
+		Device_creator(
+			std::shared_ptr<Instance> instance_,
+			bool(*choose_physical_device_)(Pramater_choose_physical_device& physical_device_),
+			bool(*choose_queue_family_)(Pramater_choose_queue_family& parmater_),
+			const VkAllocationCallbacks* allocator_);
 
-		class Device_creator
-			: public std::enable_shared_from_this<Device_creator> {
-		private:
-			friend class Device;
-			friend class Instance;
+		const VkAllocationCallbacks* allocation_callbacks;
+	public:
+		using Sptr = std::shared_ptr<Device_creator>;
 
-			Device_creator(
-				std::shared_ptr<Instance> instance_,
-				bool(*choose_physical_device_)(Pramater_choose_physical_device& physical_device_),
-				bool(*choose_queue_family_)(Pramater_choose_queue_family& parmater_),
-				const VkAllocationCallbacks* allocator_ = nullptr);
+		std::shared_ptr<Device> get_a_device(
+			Physical_device& physical_device_,
+			VkDeviceCreateInfo& create_info_);
 
-			const VkAllocationCallbacks* allocation_callbacks;
-		public:
-			using Sptr = std::shared_ptr<Device_creator>;
+		std::shared_ptr<Device> get_a_device(
+			Physical_device& physical_device_,
+			Array_value<char*> enabled_extensions_ = {},
+			VkPhysicalDeviceFeatures* features_ = nullptr);
 
-			std::shared_ptr<Device> get_a_device(
-				Physical_device& physical_device_,
-				VkDeviceCreateInfo& create_info_);
+		std::shared_ptr<Device> get_a_device(
+			Physical_device_group& physica_device_group_,
+			Array_value<char*> enabled_extensions_ = {},
+			VkPhysicalDeviceFeatures* features_ = nullptr);
 
-			std::shared_ptr<Device> get_a_device(
-				Physical_device& physical_device_,
-				std::vector<char*>* enabled_extensions_ = nullptr,
-				VkPhysicalDeviceFeatures* features_ = nullptr);
+		//std::shared_ptr<Device> get_a_device(
+		//	std::list<Physical_device>& physical_devices_,
+		//	std::vector<char*>* enabled_extensions_ = nullptr,
+		//	VkPhysicalDeviceFeatures* features_ = nullptr);
 
-			std::shared_ptr<Device> get_a_device(
-				Physical_device_group& physica_device_group_,
-				std::vector<char*>* enabled_extensions_ = nullptr,
-				VkPhysicalDeviceFeatures* features_ = nullptr);
+		std::shared_ptr<Instance> instance;
 
-			//std::shared_ptr<Device> get_a_device(
-			//	std::list<Physical_device>& physical_devices_,
-			//	std::vector<char*>* enabled_extensions_ = nullptr,
-			//	VkPhysicalDeviceFeatures* features_ = nullptr);
+		bool(*choose_physical_device_function)(Pramater_choose_physical_device& physical_device_);
+		bool(*choose_queue_family_function)(Pramater_choose_queue_family& parmatwr_);
+	};
 
-			std::shared_ptr<Instance> instance;
-
-			bool(*choose_physical_device_function)(Pramater_choose_physical_device& physical_device_);
-			bool(*choose_queue_family_function)(Pramater_choose_queue_family& parmatwr_);
-		};
-
-		//提供复数形式的对象 尽量不涉及生命周期
-		//(因为有些api执行时需要暂时hold住,所以肯定会有涉及 修正生命周期时再处理
-		//class Buffer_views
-		//	:public std::shared_ptr<Buffer_views>{
-		//public:
-		//	using Sptr = std::shared_ptr<Buffer_views>;
-		//	Buffer_views();
-		//	Buffer_views(std::initializer_list<Buffer_view>);
-		//	Buffer_views& operator+(std::initializer_list<Buffer>);
-		//	std::vector<VkBuffer> handles;
-		//};
+	//提供复数形式的对象 尽量不涉及生命周期
+	//(因为有些api执行时需要暂时hold住,所以肯定会有涉及 修正生命周期时再处理
+	//class Buffer_views
+	//	:public std::shared_ptr<Buffer_views>{
+	//public:
+	//	using Sptr = std::shared_ptr<Buffer_views>;
+	//	Buffer_views();
+	//	Buffer_views(std::initializer_list<Buffer_view>);
+	//	Buffer_views& operator+(std::initializer_list<Buffer>);
+	//	std::vector<VkBuffer> handles;
+	//};
 #define dclr_sclass( name__, handle_type__) \
 	class name__##s : public std::enable_shared_from_this<name__##s>	{\
 		public:\
@@ -384,7 +423,7 @@ dclr_sclass(Image, VkImage)
 		Semaphore(
 			std::shared_ptr<Device> device_,
 			VkSemaphore handle_,
-			const VkAllocationCallbacks* pAllocator_);
+			const VkAllocationCallbacks* allocator_);
 
 		const VkAllocationCallbacks* allocation_callbacks;
 	public:
@@ -403,7 +442,7 @@ dclr_sclass(Image, VkImage)
 		Fence(
 			std::shared_ptr<Device> device_,
 			VkFence handle_,
-			const VkAllocationCallbacks* pAllocator_);
+			const VkAllocationCallbacks* allocator_);
 
 		const VkAllocationCallbacks* allocation_callbacks;
 	public:
@@ -413,13 +452,13 @@ dclr_sclass(Image, VkImage)
 
 		VkResult reset();
 
-		VkResult reset(std::vector<VkFence>& fences_);
+		VkResult reset(Array_value<VkFence> fences_);
 
 		VkResult get_status();
 
 		VkResult wait(uint64_t timeout_);
 
-		VkResult wait(bool wait_all_, uint64_t timeout_, std::vector<VkFence>& fences_);
+		VkResult wait(bool wait_all_, uint64_t timeout_, Array_value<VkFence> fences_);
 
 		std::shared_ptr<Device> device;
 		VkFence handle;
@@ -432,7 +471,7 @@ dclr_sclass(Image, VkImage)
 		Event(
 			std::shared_ptr<Device> device_,
 			VkEvent handle_,
-			const VkAllocationCallbacks* pAllocator_);
+			const VkAllocationCallbacks* allocator_);
 
 		VkResult set();
 		VkResult get_event_status();
@@ -456,7 +495,7 @@ dclr_sclass(Image, VkImage)
 		Shader_module(
 			std::shared_ptr<Device>    device_,
 			VkShaderModule handle_,
-			const VkAllocationCallbacks* pAllocator_);
+			const VkAllocationCallbacks* allocator_);
 
 		const VkAllocationCallbacks* allocation_callbacks;
 	public:
@@ -506,7 +545,7 @@ dclr_sclass(Image, VkImage)
 		Buffer_view(
 			std::shared_ptr<Buffer> buffer_,
 			VkBufferView handle_,
-			const VkAllocationCallbacks* pAllocator_
+			const VkAllocationCallbacks* allocator_
 		);
 
 		const VkAllocationCallbacks* allocation_callbacks;
@@ -526,7 +565,7 @@ dclr_sclass(Image, VkImage)
 		Buffer(
 			std::shared_ptr<Device> device_,
 			VkBuffer handle_,
-			const VkAllocationCallbacks* pAllocator_);
+			const VkAllocationCallbacks* allocator_);
 
 		const VkAllocationCallbacks* allocation_callbacks;
 	public:
@@ -574,7 +613,7 @@ dclr_sclass(Image, VkImage)
 			VkFormat		format_,
 			VkDeviceSize	offset_,
 			VkDeviceSize	range_,
-			const VkAllocationCallbacks* pAllocator_ = nullptr
+			const VkAllocationCallbacks* allocator_ = default_allocation_cb()
 		);
 
 		VkMemoryRequirements get_memory_requirements();
@@ -596,7 +635,7 @@ dclr_sclass(Image, VkImage)
 		Image_view(
 			std::shared_ptr<Image> image_,
 			VkImageView handle_,
-			const VkAllocationCallbacks* pAllocator_);
+			const VkAllocationCallbacks* allocator_);
 
 		const VkAllocationCallbacks* allocation_callbacks;
 
@@ -618,7 +657,7 @@ dclr_sclass(Image, VkImage)
 			std::shared_ptr<Device> device_,
 			VkImage handle_,
 			VkImageLayout layout_,
-			const VkAllocationCallbacks* pAllocator_);
+			const VkAllocationCallbacks* allocator_);
 
 		const VkAllocationCallbacks* allocation_callbacks;
 	public:
@@ -680,10 +719,11 @@ dclr_sclass(Image, VkImage)
 			VkComponentMapping		components_,
 			VkImageSubresourceRange subresourceRange_,
 			const void* next_ = nullptr,
-			const VkAllocationCallbacks* pAllocator_ = nullptr);
+			const VkAllocationCallbacks* allocator_ = default_allocation_cb() );
 
 		VkMemoryRequirements get_image_memory_requirements();
 
+		//...
 		std::shared_ptr<std::vector<VkSparseImageMemoryRequirements>> get_sparse_memory_requirements();
 
 		VkSubresourceLayout get_subresource_layout(const VkImageSubresource*);
@@ -705,7 +745,7 @@ dclr_sclass(Image, VkImage)
 		Sampler(
 			std::shared_ptr<Device> device_,
 			VkSampler handle_,
-			const VkAllocationCallbacks* pAllocator_);
+			const VkAllocationCallbacks* allocator_);
 
 		const VkAllocationCallbacks* allocation_callbacks;
 	public:
@@ -725,7 +765,7 @@ dclr_sclass(Image, VkImage)
 		Sampler_Ycbcr_conversion(
 			std::shared_ptr<Device> device_,
 			VkSamplerYcbcrConversion handle_,
-			const VkAllocationCallbacks* pAllocator_);
+			const VkAllocationCallbacks* allocator_);
 
 		const VkAllocationCallbacks* allocation_callbacks;
 	public:
@@ -767,8 +807,8 @@ dclr_sclass(Image, VkImage)
 			VkIndexType index_type);
 
 		void bind_buffers(
-			std::vector<std::shared_ptr<Buffer>>& buffer_sptrs_, //todo:为一些对象提供vector版
-			std::vector<VkDeviceSize>& offsets_,
+			Array_value<std::shared_ptr<Buffer>> buffer_sptrs_, //todo:为一些对象提供vector版
+			Array_value<VkDeviceSize> offsets_,
 			uint32_t first_binding_);
 
 		void bind_descriptor_sets(
@@ -776,7 +816,7 @@ dclr_sclass(Image, VkImage)
 			Pipeline_layout&                            layout,
 			uint32_t                                    firstSet,
 			Descriptor_set_s&							descriptor_sets,
-			std::vector<uint32_t>                       dynamic_offsets);
+			Array_value<uint32_t>                       dynamic_offsets);
 
 		void set_blend_constants(const float blend_[4]);
 
@@ -812,7 +852,7 @@ dclr_sclass(Image, VkImage)
 
 		void set_viewport(
 			uint32_t firstViewport,
-			std::vector<VkViewport>& viewports_);
+			Array_value<VkViewport> viewports_);
 
 		void event_set(Event&  event_, VkPipelineStageFlags	stageMask);
 
@@ -858,36 +898,36 @@ dclr_sclass(Image, VkImage)
 		void buffer_copy_to_buffer(
 			Buffer&                                    srcBuffer,
 			Buffer&                                    dstBuffer,
-			std::vector<VkBufferCopy>&                 regions);
+			Array_value<VkBufferCopy>                  regions);
 
 		void buffer_copy_to_image(
 			Buffer&										srcBuffer,
 			Image&										dstImage,
 			VkImageLayout								dstImage_layout,
-			std::vector<VkBufferImageCopy>&				pRegions);
+			Array_value<VkBufferImageCopy>				pRegions);
 
 		void clear_attachments(
-			std::vector<VkClearAttachment>&             pAttachments,
-			std::vector <VkClearRect>&                  pRects);
+			Array_value<VkClearAttachment>              pAttachments,
+			Array_value <VkClearRect>                   pRects);
 
 		void image_clear_color(
 			Image&                                     image,
 			VkImageLayout                               imageLayout,//检查有没有可能多个布局能用在一种图上
 			const VkClearColorValue*                    pColor,
-			std::vector<VkImageSubresourceRange>&        pRanges);
+			Array_value<VkImageSubresourceRange>        pRanges);
 
 		void image_clear_depth_stencil(
 			Image&                                      image,
 			VkImageLayout                               imageLayout,
 			const VkClearDepthStencilValue*             pDepthStencil,
-			std::vector<VkImageSubresourceRange>&        pRanges);
+			Array_value<VkImageSubresourceRange>        pRanges);
 
 		void image_blit(
 			Image&                                      srcImage,
 			VkImageLayout                               srcImageLayout,
 			Image&                                      dstImage,
 			VkImageLayout                               dstImageLayout,
-			std::vector<VkImageBlit>&                   pRegions,
+			Array_value<VkImageBlit>                    pRegions,
 			VkFilter                                    filter);
 
 		void image_copy(
@@ -895,13 +935,13 @@ dclr_sclass(Image, VkImage)
 			VkImageLayout                               srcImageLayout,
 			Image&										dstImage,
 			VkImageLayout                               dstImageLayout,
-			std::vector<VkImageCopy>&                   pRegions);
+			Array_value<VkImageCopy>                    pRegions);
 
 		void image_copy_to_buffer(
 			Image&                                     srcImage,
 			VkImageLayout                               srcImageLayout,
 			Buffer&                                     dstBuffer,
-			std::vector <VkBufferImageCopy>&            pRegions);
+			Array_value<VkBufferImageCopy>            pRegions);
 
 		void dispatch(
 			uint32_t                                    groupCountX,
@@ -937,7 +977,7 @@ dclr_sclass(Image, VkImage)
 			VkImageLayout                               srcImageLayout,
 			Image&                                      dstImage,
 			VkImageLayout                               dstImageLayout,
-			std::vector<VkImageResolve>                 pRegions);
+			Array_value<VkImageResolve>                 pRegions);
 
 		void render_pass_begin(
 			Render_pass&			render_pass,
@@ -953,12 +993,12 @@ dclr_sclass(Image, VkImage)
 		void render_pass_end();
 
 		void wait_events(
-			std::vector<Event>& events_,
+			Array_value<std::shared_ptr<Event>>			events_,
 			VkPipelineStageFlags                        srcStageMask,
 			VkPipelineStageFlags                        dstStageMask,
-			std::vector<VkMemoryBarrier>&				memory_barriers_,
-			std::vector<VkBufferMemoryBarrier>& 		buffer_memory_barriers_,
-			std::vector<VkImageMemoryBarrier>&			image_memory_barriers_);
+			Array_value<VkMemoryBarrier> 				memory_barriers_,
+			Array_value<VkBufferMemoryBarrier>  		buffer_memory_barriers_,
+			Array_value<VkImageMemoryBarrier> 			image_memory_barriers_);
 
 		//屏障可以用更形象的方式来使用.
 
@@ -967,9 +1007,9 @@ dclr_sclass(Image, VkImage)
 			VkPipelineStageFlags                        srcStageMask,
 			VkPipelineStageFlags                        dstStageMask,
 			VkDependencyFlags                           dependencyFlags,
-			std::vector<VkMemoryBarrier>&				memory_barriers_,
-			std::vector<VkBufferMemoryBarrier>& 		buffer_memory_barriers_,
-			std::vector<VkImageMemoryBarrier>&			image_memory_barriers_);
+			Array_value<VkMemoryBarrier>				memory_barriers_,
+			Array_value<VkBufferMemoryBarrier> 			buffer_memory_barriers_,
+			Array_value<VkImageMemoryBarrier>			image_memory_barriers_);
 
 		void draw(
 			uint32_t                                    vertexCount,
@@ -1041,7 +1081,7 @@ dclr_sclass(Image, VkImage)
 		Command_pool(
 			std::shared_ptr<Device> device_,
 			VkCommandPool handle_,
-			const VkAllocationCallbacks* pAllocator_);
+			const VkAllocationCallbacks* allocator_);
 
 		const VkAllocationCallbacks* allocation_callbacks;
 	public:
@@ -1134,8 +1174,8 @@ dclr_sclass(Image, VkImage)
 		~Descriptor_set_s();
 
 		void update(
-			std::vector<VkWriteDescriptorSet>&          pDescriptorWrites,
-			std::vector<VkCopyDescriptorSet>&           pDescriptorCopies);
+			Array_value<VkWriteDescriptorSet>           pDescriptorWrites,
+			Array_value<VkCopyDescriptorSet>            pDescriptorCopies);
 
 		std::vector<Descriptor_set> elements;
 		std::shared_ptr<Descriptor_pool> descriptor_pool;
@@ -1149,7 +1189,7 @@ dclr_sclass(Image, VkImage)
 		Descriptor_pool(
 			std::shared_ptr<Device> device_,
 			VkDescriptorPool handle_,
-			const VkAllocationCallbacks* pAllocator_);
+			const VkAllocationCallbacks* allocator_);
 
 		const VkAllocationCallbacks* allocation_callbacks;
 	public:
@@ -1174,6 +1214,7 @@ dclr_sclass(Image, VkImage)
 			const void* next_ = nullptr);
 
 		std::shared_ptr<Descriptor_set_s> get_descriptor_sets(
+			//...
 			std::vector<VkDescriptorSetLayout>& set_layouts,
 			const void* next_ = nullptr);
 
@@ -1225,12 +1266,12 @@ dclr_sclass(Image, VkImage)
 		Descriptor_update_template(
 			std::shared_ptr<Descriptor_set_layout> descriptor_set_layout_,
 			VkDescriptorUpdateTemplate handle_,
-			const VkAllocationCallbacks* pAllocator_);
+			const VkAllocationCallbacks* allocator_);
 
 		Descriptor_update_template(
 			std::shared_ptr< Pipeline_layout> pipeline_layout_,
 			VkDescriptorUpdateTemplate handle_,
-			const VkAllocationCallbacks* pAllocator_);
+			const VkAllocationCallbacks* allocator_);
 
 		const VkAllocationCallbacks* allocation_callbacks;
 	public:
@@ -1252,7 +1293,7 @@ dclr_sclass(Image, VkImage)
 		Descriptor_set_layout(
 			std::shared_ptr<Device> device_,
 			VkDescriptorSetLayout handle_,
-			const VkAllocationCallbacks* pAllocator_);
+			const VkAllocationCallbacks* allocator_);
 
 		const VkAllocationCallbacks* allocation_callbacks;
 	public:
@@ -1273,8 +1314,8 @@ dclr_sclass(Image, VkImage)
 		~Descriptor_set_layout();
 
 		std::shared_ptr<Descriptor_update_template> get_a_descriptor_update_template(
-			std::vector<VkDescriptorUpdateTemplateEntry>& entrys_,
-			const VkAllocationCallbacks* pAllocator_);
+			Array_value<VkDescriptorUpdateTemplateEntry> entrys_,
+			const VkAllocationCallbacks* allocator_ = default_allocation_cb());
 
 		std::shared_ptr<Device> device;
 		VkDescriptorSetLayout handle;
@@ -1288,7 +1329,7 @@ dclr_sclass(Image, VkImage)
 		Query_pool(
 			std::shared_ptr<Device> device_,
 			VkQueryPool handle_,
-			const VkAllocationCallbacks* pAllocator_);
+			const VkAllocationCallbacks* allocator_);
 
 		const VkAllocationCallbacks* allocation_callbacks;
 	public:
@@ -1337,7 +1378,7 @@ dclr_sclass(Image, VkImage)
 		Frame_buffer(
 			std::shared_ptr<Render_pass> render_pass_,
 			VkFramebuffer handle_,
-			const VkAllocationCallbacks* pAllocator_);
+			const VkAllocationCallbacks* allocator_);
 
 		const VkAllocationCallbacks* allocation_callbacks;
 	public:
@@ -1357,7 +1398,7 @@ dclr_sclass(Image, VkImage)
 		Render_pass(
 			std::shared_ptr<Device> device_,
 			VkRenderPass handle_,
-			const VkAllocationCallbacks* pAllocator_);
+			const VkAllocationCallbacks* allocator_);
 
 		const VkAllocationCallbacks* allocation_callbacks;
 	public:
@@ -1366,11 +1407,11 @@ dclr_sclass(Image, VkImage)
 		~Render_pass();
 
 		std::shared_ptr<Frame_buffer> get_a_frame_buffer(
-			std::vector<VkImageView>* attachments,
+			Array_value<VkImageView> attachments,
 			uint32_t width,
 			uint32_t height,
 			uint32_t layers,
-			const VkAllocationCallbacks* pAllocator_ = nullptr);
+			const VkAllocationCallbacks* allocator_ = default_allocation_cb());
 
 		VkExtent2D get_area_granularity();
 
@@ -1387,7 +1428,7 @@ dclr_sclass(Image, VkImage)
 		Pipeline_layout(
 			std::shared_ptr<Device> device_,
 			VkPipelineLayout handle_,
-			const VkAllocationCallbacks* pAllocator_);
+			const VkAllocationCallbacks* allocator_);
 
 		const VkAllocationCallbacks* allocation_callbacks;
 	public:
@@ -1396,10 +1437,10 @@ dclr_sclass(Image, VkImage)
 		~Pipeline_layout();
 
 		std::shared_ptr<Descriptor_update_template> get_a_descriptor_update_template(
-			std::vector<VkDescriptorUpdateTemplateEntry>& entrys_,
+			Array_value<VkDescriptorUpdateTemplateEntry> entrys_,
 			VkPipelineBindPoint bind_point_,
 			uint32_t set_,
-			const VkAllocationCallbacks* pAllocator_ = nullptr);
+			const VkAllocationCallbacks* allocator_ = default_allocation_cb());
 
 		std::shared_ptr<Compute_pipeline> get_a_compute_pipeline(
 			VkPipelineCreateFlags               flags,
@@ -1408,14 +1449,14 @@ dclr_sclass(Image, VkImage)
 			const char*                         pName,//shader 入口点名称
 			VkShaderStageFlagBits               stage_flags,
 			const VkSpecializationInfo*         pSpecializationInfo = nullptr,
-			const VkAllocationCallbacks*		pAllocator_ = nullptr);
+			const VkAllocationCallbacks*		allocator_ = default_allocation_cb());
 
 		std::shared_ptr<Graphics_pipeline> get_a_graphics_pipeline(
 			VkPipelineCreateFlags							flag_,
 			Render_pass&									render_pass_,
 			uint32_t										subpass,
 			Pipeline_cache*									cache_,
-			std::vector<VkPipelineShaderStageCreateInfo>	stages_,
+			Array_value<VkPipelineShaderStageCreateInfo>	stages_,
 			const VkPipelineVertexInputStateCreateInfo*		vertex_input_state_,
 			const VkPipelineInputAssemblyStateCreateInfo*	input_assembly_state_,
 			const VkPipelineTessellationStateCreateInfo*	tessellation_state_,
@@ -1426,7 +1467,7 @@ dclr_sclass(Image, VkImage)
 			const VkPipelineColorBlendStateCreateInfo*		color_blend_state_,
 			const VkPipelineDynamicStateCreateInfo*			dynamic_satate_,
 			void* next_ = nullptr,
-			const VkAllocationCallbacks* allocator_ = nullptr);
+			const VkAllocationCallbacks* allocator_ = default_allocation_cb());
 
 		std::shared_ptr<Device> device;
 		VkPipelineLayout handle;
@@ -1440,7 +1481,7 @@ dclr_sclass(Image, VkImage)
 		Pipeline_cache(
 			std::shared_ptr<Device> device_,
 			VkPipelineCache handle_,
-			const VkAllocationCallbacks* pAllocator_);
+			const VkAllocationCallbacks* allocator_);
 
 		const VkAllocationCallbacks* allocation_callbacks;
 	public:
@@ -1473,7 +1514,7 @@ dclr_sclass(Image, VkImage)
 			std::shared_ptr<Pipeline_cache>     pipeline_cache,
 			std::shared_ptr<Shader_module>      shader_module_,
 			VkPipeline handle_,
-			const VkAllocationCallbacks* allocation_callbacks_,
+			const VkAllocationCallbacks*		allocation_callbacks_,
 			int32_t base_index_ = -1,
 			std::shared_ptr<Compute_pipeline>	compute_pipeline_ = nullptr);
 
@@ -1493,7 +1534,7 @@ dclr_sclass(Image, VkImage)
 			VkShaderStageFlagBits               stage_flags,
 			std::shared_ptr< Pipeline_layout>	pipeline_layout_ = nullptr,
 			const VkSpecializationInfo*			pSpecializationInfo = nullptr,
-			const VkAllocationCallbacks*		pAllocator_ = nullptr);
+			const VkAllocationCallbacks*		allocator_ = default_allocation_cb());
 
 		std::shared_ptr<Pipeline_layout>    pipeline_layout;
 		std::shared_ptr<Pipeline_cache>     pipeline_cache;
@@ -1559,7 +1600,7 @@ dclr_sclass(Image, VkImage)
 			std::vector<User_choose_queue_info>& queue_infos_,
 			std::vector<VkQueueFamilyProperties>& qf_properties_,
 			VkDevice handle_,
-			const VkAllocationCallbacks* allocation_callbacks_ = nullptr);
+			const VkAllocationCallbacks* allocation_callbacks_);
 
 		PFN_vkVoidFunction return_api(const char* api_name_);
 	public:
@@ -1581,20 +1622,20 @@ dclr_sclass(Image, VkImage)
 
 		std::shared_ptr <Semaphore> get_a_semaphore(
 			const void* next_ = nullptr,
-			const VkAllocationCallbacks* pAllocator_ = nullptr);
+			const VkAllocationCallbacks* allocator_ = default_allocation_cb());
 
 		std::shared_ptr <Fence> get_a_fence(
 			const void* next_ = nullptr,
-			const VkAllocationCallbacks* pAllocator_ = nullptr);
+			const VkAllocationCallbacks* allocator_ = default_allocation_cb());
 
 		std::shared_ptr <Event> get_a_event(
-			const VkAllocationCallbacks* pAllocator_ = nullptr);
+			const VkAllocationCallbacks* allocator_ = default_allocation_cb());
 
 		std::shared_ptr<Shader_module> get_a_shader_module(
 			const uint32_t*     code_ptr_,
 			size_t              code_size_,
-			const void* next_ = nullptr,
-			const VkAllocationCallbacks* pAllocator_ = nullptr);
+			const void* next_	= nullptr,
+			const VkAllocationCallbacks* allocator_ = default_allocation_cb());
 
 		std::shared_ptr<Device_memory> get_a_device_memory(
 			VkDeviceSize memory_size_,
@@ -1602,17 +1643,16 @@ dclr_sclass(Image, VkImage)
 				Pramater_choose_memory_type& pramater_choose_,
 				Pramater_choose_result& choose_result_),
 			void* next_ = nullptr,
-			//todo:pNext还需要做得更方便点
-			const VkAllocationCallbacks* allocation_callbacks_ = nullptr);
+			const VkAllocationCallbacks* allocation_callbacks_ = default_allocation_cb());
 
 		std::shared_ptr<Buffer> get_a_buffer(
 			VkDeviceSize		buffer_size_,
 			Buffer::E_Create    create_flags_,
 			Buffer::E_Usage	    usage_flags_,
 			VkSharingMode		sharing_mode_,
-			std::vector<uint32_t> queue_family_indices_,
+			Array_value<uint32_t> queue_family_indices_,
 			const void* next_ = nullptr,
-			const VkAllocationCallbacks* pAllocator_ = nullptr);
+			const VkAllocationCallbacks* allocator_ = default_allocation_cb());
 
 		std::shared_ptr<Image> get_a_image(
 			Image::E_Create         create_fb_,
@@ -1625,10 +1665,10 @@ dclr_sclass(Image, VkImage)
 			Image::E_Usage          usage_fb_,
 			VkSharingMode           sharingMode_,
 			VkImageTiling           tiling_,
-			std::vector<uint32_t>	queue_family_indices_,
+			Array_value<uint32_t>	queue_family_indices_,
 			VkImageLayout           initialLayout_,
 			const void*             next_ = nullptr,
-			const VkAllocationCallbacks* pAllocator_ = nullptr);
+			const VkAllocationCallbacks* allocator_ = default_allocation_cb());
 
 		std::shared_ptr<Sampler> get_a_sampler(
 			VkFilter                magFilter,
@@ -1647,7 +1687,7 @@ dclr_sclass(Image, VkImage)
 			VkBorderColor           borderColor,
 			VkBool32                unnormalizedCoordinates,
 			const void* next_ = nullptr,
-			const VkAllocationCallbacks* pAllocator_ = nullptr);
+			const VkAllocationCallbacks* allocator_ = default_allocation_cb() );
 
 		std::shared_ptr<Sampler_Ycbcr_conversion> get_a_sampler_ycbcr_conversion(
 			VkFormat                        format_,
@@ -1659,57 +1699,60 @@ dclr_sclass(Image, VkImage)
 			VkFilter                        chromaFilter,
 			VkBool32                        forceExplicitReconstruction,
 			const void*                     next_ = nullptr,
-			const VkAllocationCallbacks*    pAllocator_ = nullptr);
+			const VkAllocationCallbacks*    allocator_ = default_allocation_cb());
 
 		std::shared_ptr<Command_pool> get_a_command_pool(
 			uint32_t                    queueFamilyIndex,
 			Command_pool::E_Create      flags_,
-			const VkAllocationCallbacks* pAllocator_ = nullptr);
+			const VkAllocationCallbacks* allocator_ = default_allocation_cb());
 
 		std::shared_ptr<Descriptor_pool> get_a_descriptor_pool(
 			uint32_t                                maxSets,
-			std::vector<VkDescriptorPoolSize>&     poolSizes,
+			Array_value<VkDescriptorPoolSize>     poolSizes,
 			Descriptor_pool::E_Create               flags_,
-			const VkAllocationCallbacks*            pAllocator_ = nullptr);
+			const VkAllocationCallbacks*            allocator_ = default_allocation_cb());
 
 		std::shared_ptr<Query_pool> get_a_query_pool(
 			VkQueryType query_type,
 			uint32_t    query_count,
 			Query_pool::E_Pipeline_statistic queue_pipeline_statistic_flags_,
-			const VkAllocationCallbacks* pAllocator_ = nullptr);
+			const VkAllocationCallbacks* allocator_ = default_allocation_cb());
 
 		std::shared_ptr<Descriptor_set_layout> get_a_descriptor_set_layout(
-			std::vector<VkDescriptorSetLayoutBinding>* bindings_,
-			Descriptor_set_layout::E_Create flags_,
+			Descriptor_set_layout::E_Create				flags_,
+			Array_value<VkDescriptorSetLayoutBinding>	bindings_ = {},
 			const void* next_ = nullptr,
-			const VkAllocationCallbacks* pAllocator_ = nullptr);
+			const VkAllocationCallbacks* allocator_ = default_allocation_cb());
 
 		std::shared_ptr<Render_pass> get_a_render_pass(
-			std::vector<VkAttachmentDescription>* attachments,
-			std::vector<VkSubpassDescription>* subpasses,
-			std::vector<VkSubpassDependency>* dependencies,
+			Array_value<VkAttachmentDescription> attachments = {},
+			Array_value<VkSubpassDescription> subpasses = {},
+			Array_value<VkSubpassDependency> dependencies = {},
 			const void* next_ = nullptr,
-			const VkAllocationCallbacks* pAllocator_ = nullptr);
+			const VkAllocationCallbacks* allocator_ =default_allocation_cb());
 
 		std::shared_ptr<Pipeline_layout> get_a_pipeline_layout(
-			std::vector<VkPushConstantRange>* push_constant_ranges_ = nullptr,
-			const VkAllocationCallbacks* pAllocator_ = nullptr);
+			Array_value<VkPushConstantRange>  push_constant_ranges_ = {},
+			const VkAllocationCallbacks* allocator_ = default_allocation_cb());
 
 		std::shared_ptr<Pipeline_cache> get_a_pipeline_cache(
 			size_t      initial_data_size = 0,
 			const void* initial_data_ = nullptr,
-			const VkAllocationCallbacks* pAllocator_ = nullptr);
+			const VkAllocationCallbacks* allocator_ = default_allocation_cb());
 
 		VkResult invalidate_mapped_memory_ranges(
-			std::vector<VkMappedMemoryRange>& mapped_memory_ranges_);
+			Array_value<VkMappedMemoryRange> mapped_memory_ranges_);
 
-		VkPeerMemoryFeatureFlags* get_peer_memory_feature(
+		VkPeerMemoryFeatureFlags get_peer_memory_feature(
 			uint32_t                                    heapIndex_,
 			uint32_t                                    localDeviceIndex_,
 			uint32_t                                    remoteDeviceIndex_);
 
 		VkResult wait_idle();
-		VkResult wait_for_fences(std::vector<VkFence>& fences_, bool wait_all_, uint64_t timeout_);
+		VkResult wait_for_fences(
+			Array_value<VkFence> fences_, 
+			uint64_t timeout_,
+			bool wait_all_ = true);
 	};
 
 #define table_laka_vk_objs(a,aa, bb, b) \

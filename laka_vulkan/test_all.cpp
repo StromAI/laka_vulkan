@@ -48,6 +48,14 @@ void test_all()
 
 	test_function(fuck);
 
+	vector<int> v_int{0,1,2};
+
+	array<int,3> a_int{3,4,5};
+
+	Array_value<int> array_vint(v_int);
+
+	Array_value<int> array_aint(a_int);
+
 	init_show;
 
 	show_info("ÊµÀý°æ±¾:{}", version_str(get_instance_version()));
