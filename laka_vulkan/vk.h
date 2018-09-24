@@ -196,7 +196,7 @@ namespace laka {namespace vk {
 		std::vector<Physical_device> physical_devices;
 	};
 
-	class Physical_device {
+	class Physical_device { 
 	public:
 		std::shared_ptr<std::vector<VkLayerProperties>>
 			get_layer_propertiess();
