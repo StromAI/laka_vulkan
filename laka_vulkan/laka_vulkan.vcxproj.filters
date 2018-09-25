@@ -64,5 +64,8 @@
     <None Include="vk.xlsx">
       <Filter>资源文件</Filter>
     </None>
+    <None Include="vk.db">
+      <Filter>资源文件</Filter>
+    </None>
   </ItemGroup>
 </Project>

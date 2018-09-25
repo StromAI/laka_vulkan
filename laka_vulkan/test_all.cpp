@@ -20,8 +20,6 @@ Permission is granted to anyone to use this software for any purpose, including 
 
 #include "vk_mean.h"
 
-#include <initializer_list>
-
 using namespace std;
 using namespace laka::vk;
 
@@ -29,48 +27,22 @@ using namespace laka::vk;
 class Test_fuck {
 	void* pNext;
 };
-
 class Fuck1 :public Test_fuck {};
 class Fuck2 :public Test_fuck {};
 class Fuck3 :public Test_fuck {};
-
 //fdsafsdfsd
 void test_function(Test_fuck& t)
 {
 }
-
-struct Test_struct {
-	VkPhysicalDeviceExternalBufferInfo info;
-	Test_struct( /**/ )
-		:info({ 
-			VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_BUFFER_INFO,
-			nullptr,
-			/*????*/ })
-	{};
-};
-
-void test_f2(Test_struct ts)
-{
-
-}
-
 void test_all()
 {
-
-
-
-
-
-
-
-
+	init_show;
 
 	Test_fuck fuck;
 	Fuck1 fuck1;
 	Fuck2 fuck2;
 	Fuck3 fuck3;
 
-	test_function(fuck);
 
 	vector<int> v_int{0,1,2};
 
@@ -79,9 +51,6 @@ void test_all()
 	Array_value<int> array_vint(v_int);
 
 	Array_value<int> array_aint(a_int);
-
-	init_show;
-
 	show_info("ÊµÀý°æ±¾:{}", version_str(get_instance_version()));
 
 	auto instance = Instance::get_new(

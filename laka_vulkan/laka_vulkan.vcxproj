@@ -134,6 +134,7 @@
     <ClInclude Include="vk_mean.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="vk.db" />
     <None Include="vk.xlsx" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

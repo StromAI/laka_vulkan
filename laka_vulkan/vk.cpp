@@ -2611,7 +2611,7 @@ namespace laka { namespace vk {
 			next_,
 			flag_,
 			static_cast<uint32_t>(stages_.size()),
-			stages_.data,
+			stages_.data(),
 			vertex_input_state_,
 			input_assembly_state_,
 			tessellation_state_,
@@ -2692,9 +2692,10 @@ namespace laka { namespace vk {
 		uint64_t timeout_,
 		bool wait_all_)
 	{
-		api.vkWaitForFences(
+		auto ret = api.vkWaitForFences(
 			handle, fences_.size(), fences_.data(), wait_all_?VK_TRUE:VK_FALSE, timeout_
 		);
+		return ret;
 	}
 
 	VkDeviceSize Device_memory::get_commitment()

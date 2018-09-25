@@ -66,7 +66,7 @@ namespace laka {namespace vk {
 
 	//学习了官方Vk-Hpp中的ArrayProxy (首次
 	//作用是为api的数组参数提供多样化快捷使用 而省掉多个重载函数
-	//我水平不够 只能设计成const 作为一次性的东西 在封装函数的内部用一用
+	//作为一次性的东西 在封装函数的内部用一用
 	template<typename T>
 	class Array_value {
 	private:
@@ -108,6 +108,34 @@ namespace laka {namespace vk {
 			, first_value_ptr(array_.data())
 		{}
 	};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 	//不一定要暴露
 #if 1
