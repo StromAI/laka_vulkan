@@ -43,7 +43,6 @@ void test_all()
 	Fuck2 fuck2;
 	Fuck3 fuck3;
 
-
 	vector<int> v_int{0,1,2};
 
 	array<int,3> a_int{3,4,5};
