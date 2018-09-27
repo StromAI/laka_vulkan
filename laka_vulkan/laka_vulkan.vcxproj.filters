@@ -64,7 +64,13 @@
     <None Include="vk.xlsx">
       <Filter>资源文件</Filter>
     </None>
-    <None Include="vk.db">
+    <None Include="valid_usage_json2sqlite3.py">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="validusage.json">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="vk_1.1.85.db">
       <Filter>资源文件</Filter>
     </None>
   </ItemGroup>

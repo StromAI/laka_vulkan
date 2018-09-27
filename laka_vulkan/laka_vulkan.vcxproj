@@ -134,8 +134,10 @@
     <ClInclude Include="vk_mean.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="vk.db" />
+    <None Include="validusage.json" />
+    <None Include="valid_usage_json2sqlite3.py" />
     <None Include="vk.xlsx" />
+    <None Include="vk_1.1.85.db" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
