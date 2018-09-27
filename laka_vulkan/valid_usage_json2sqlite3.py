@@ -15,10 +15,10 @@ count =0
 for api_struct_name in j:
     for tj in j[api_struct_name]:
         for parmater_list in j[api_struct_name][tj]:
-            count = count + 1
-            c.execute(
-                "INSERT INTO sub (sub_name,as_name,valid_usage) VALUES (?, ?, ?)",
-                (parmater_list["vuid"],api_struct_name,parmater_list["text"]))
-
-print count
-vk_db.commit()
+            str = tj.replace("(","")
+            str2 = str.replace(")","")
+            str_list = str2.split("+")
+            for s in str_list:
+                ss = s.split(",")
+                for ss_ in ss:
+                    print ss_
