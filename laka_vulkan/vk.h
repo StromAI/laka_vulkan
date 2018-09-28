@@ -201,15 +201,15 @@ namespace laka {namespace vk {
 		~Instance();
 
 		static Sptr get_new(
-			Array_value<const char*> enabled_extension_names_ = {},
-			uint32_t api_version_ = VK_MAKE_VERSION(1, 1, 82),
-			const void* next_ = nullptr,
-			VkAllocationCallbacks* allocator_ = nullptr,
-			Array_value<const char*> enabled_layer_names_ = {},
-			const char* app_name_ = "laka::vk",
-			uint32_t app_version_ = VK_MAKE_VERSION(0, 0, 1),
-			const char* engine_name_ = "laka::vk::engine",
-			uint32_t engine_version_ = VK_MAKE_VERSION(0, 0, 1));
+			Array_value<const char*> enabled_extension_names_   = {},
+			uint32_t api_version_                           = VK_MAKE_VERSION(1, 1, 82),
+			const void* next_                               = nullptr,
+			VkAllocationCallbacks* allocator_               = nullptr,
+			Array_value<const char*> enabled_layer_names_   = {},
+			const char* app_name_                           = "laka::vk",
+			uint32_t app_version_                           = VK_MAKE_VERSION(0, 0, 1),
+			const char* engine_name_                        = "laka::vk::engine",
+			uint32_t engine_version_                        = VK_MAKE_VERSION(0, 0, 1));
 
 		std::shared_ptr<Device_creator> get_a_device_creator(
 			bool(*choose_physical_device_)(Pramater_choose_physical_device& pramater_),
@@ -344,13 +344,13 @@ namespace laka {namespace vk {
 
 		std::shared_ptr<Device> get_a_device(
 			Physical_device& physical_device_,
-			Array_value<char*> enabled_extensions_ = {},
-			VkPhysicalDeviceFeatures* features_ = nullptr);
+			Array_value<char*> enabled_extensions_  = {},
+			VkPhysicalDeviceFeatures* features_     = nullptr);
 
 		std::shared_ptr<Device> get_a_device(
 			Physical_device_group& physica_device_group_,
-			Array_value<char*> enabled_extensions_ = {},
-			VkPhysicalDeviceFeatures* features_ = nullptr);
+			Array_value<char*> enabled_extensions_  = {},
+			VkPhysicalDeviceFeatures* features_     = nullptr);
 
 		//std::shared_ptr<Device> get_a_device(
 		//	std::list<Physical_device>& physical_devices_,

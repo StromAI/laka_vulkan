@@ -23,6 +23,11 @@ Permission is granted to anyone to use this software for any purpose, including 
 using namespace std;
 using namespace laka::vk;
 
+
+
+
+
+
 //dfasdfsafds
 class Test_fuck {
 	void* pNext;
@@ -34,6 +39,9 @@ class Fuck3 :public Test_fuck {};
 void test_function(Test_fuck& t)
 {
 }
+void test_function(Test_fuck t)
+{
+}
 void test_all()
 {
 	init_show;
@@ -42,6 +50,7 @@ void test_all()
 	Fuck1 fuck1;
 	Fuck2 fuck2;
 	Fuck3 fuck3;
+
 
 	vector<int> v_int{0,1,2};
 
