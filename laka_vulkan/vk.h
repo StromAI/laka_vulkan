@@ -66,7 +66,7 @@ namespace laka {namespace vk {
 
 	//学习了官方Vk-Hpp中的ArrayProxy (首次
 	//作用是为api的数组参数提供多样化快捷使用 而省掉多个重载函数
-	//作为一次性的东西 在封装函数的内部用一用
+	//仅作为一次性的东西 在封装函数的内部用一用
 	template<typename T>
 	class Array_value {
 	private:
@@ -81,6 +81,11 @@ namespace laka {namespace vk {
 			{ return value_count > 0 ? first_value_ptr : nullptr; }
 		uint32_t size() 
 			{ return value_count; }
+
+        Array_value()
+            :value_count(0)
+            ,first_value_ptr(nullptr)
+        {}
 
 		Array_value(T* only_value_ptr_)
 			: value_count(1)
@@ -229,6 +234,8 @@ namespace laka {namespace vk {
 	};
 
 	class Physical_device { 
+    private:
+
 	public:
 		std::shared_ptr<std::vector<VkLayerProperties>>
 			get_layer_propertiess();
@@ -374,6 +381,9 @@ namespace laka {namespace vk {
 	//	Buffer_views& operator+(std::initializer_list<Buffer>);
 	//	std::vector<VkBuffer> handles;
 	//};
+
+#if 1
+
 #define dclr_sclass( name__, handle_type__) \
 	class name__##s : public std::enable_shared_from_this<name__##s>	{\
 		public:\
@@ -457,6 +467,8 @@ dclr_sclass(Image, VkImage)
 	};
 
 #undef dclr_sclass
+
+#endif
 
 	class Semaphore :public std::enable_shared_from_this<Semaphore> {
 	private:

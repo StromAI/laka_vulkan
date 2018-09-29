@@ -21,8 +21,48 @@ Permission is granted to anyone to use this software for any purpose, including 
 
 namespace laka { namespace vk {
 
-    
+    template<typename Enum__>
+    struct E {
+        using Bits = Enum__;
+        int flag;
+        
+        E()
+            :flag(0)
+        {}
 
+        E(int flag_)
+            :flag(flag_)
+        {}
+
+        E& operator| (E value_)
+        {
+            flag |= value_.flag;
+            return *this;
+        }
+
+        E& operator|(Bits value_)
+        {
+            flag |= value_;
+            return *this;
+        }
+
+
+
+    };
+
+
+    class Name1 {
+    public:
+        enum Bit {
+            E1 = 0x1
+        };
+        Bit flag;
+
+        Name1& on_E1;
+    };
+
+
+    
 
 
 }}
