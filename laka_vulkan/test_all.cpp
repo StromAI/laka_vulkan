@@ -40,9 +40,6 @@ void test_function(Test_fuck& t)
 {
 }
 
-
-
-
 //要想方便地使用 又要利用类型系统保证安全 
 //
 

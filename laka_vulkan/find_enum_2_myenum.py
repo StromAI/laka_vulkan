@@ -17,6 +17,6 @@ for itr in the_list:
     for sub_value in sub_value_list:
         sub_value_list[i] = sub_value.replace(" ","").replace("=","")
         i=i+1
-    print sub_value_list
-    print sub_name_list
+
+    
 

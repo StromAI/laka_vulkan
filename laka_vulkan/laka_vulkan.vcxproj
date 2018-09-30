@@ -138,7 +138,7 @@
     <None Include="validusage.json" />
     <None Include="valid_usage_json2sqlite3.py" />
     <None Include="vk.xlsx" />
-    <None Include="vk1.1.82.html" />
+    <None Include="vk1.1.82.fuckhtml" />
     <None Include="vk_1.1.85.db" />
   </ItemGroup>
   <ItemGroup>

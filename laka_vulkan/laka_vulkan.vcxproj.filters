@@ -76,7 +76,7 @@
     <None Include="vk_1.1.85.db">
       <Filter>资源文件</Filter>
     </None>
-    <None Include="vk1.1.82.html">
+    <None Include="vk1.1.82.fuckhtml">
       <Filter>资源文件</Filter>
     </None>
   </ItemGroup>
