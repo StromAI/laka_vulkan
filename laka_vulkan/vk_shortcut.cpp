@@ -50,6 +50,3 @@ define_flags(Descriptor_pool, E_Create);
 define_flags(Query_pool, E_Pipeline_statistic);
 
 define_flags(Descriptor_set_layout, E_Create);
-
-
-

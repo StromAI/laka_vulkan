@@ -13,13 +13,10 @@ Permission is granted to anyone to use this software for any purpose, including 
 
 */
 
-
-
 #include "vk.h"
 #include "vk_mean.h"
 
 using namespace std;
-
 
 static const char* Unknow_mean = "未知的含义";
 
@@ -445,8 +442,6 @@ shared_ptr<string> mean(VkSubpassDescriptionFlagBits e_)
 //
 //}
 
-
-
 shared_ptr<string> mean(VkLayerProperties& stru_)
 {
     shared_ptr<string> result_string(new string);
@@ -464,7 +459,7 @@ shared_ptr<string> mean(VkExtensionProperties& stru_)
 {
     shared_ptr<string> result_string(new string);
     auto& s = *result_string;
-    
+
     s = s +
         "扩展名称:" + stru_.extensionName +
         "扩展的版本:" + laka::vk::version_str(stru_.specVersion);
@@ -478,7 +473,7 @@ shared_ptr<string> mean(VkPhysicalDeviceFeatures& stru_)
     auto& s = *result_string;
 
 #define mean_bool__(name__) \
-#name__ ":" + (stru_.name__?"是":"否") + "\n" + 
+#name__ ":" + (stru_.name__?"是":"否") + "\n" +
 
 #define table_physical_device_features(a ,b) \
  a robustBufferAccess b \
@@ -563,7 +558,6 @@ shared_ptr<string> mean(VkPhysicalDeviceFeatures& stru_)
 //
 //}
 
-
 shared_ptr<std::string> mean(VkResult e_)
 {
     static const char* mean0[] = {
@@ -612,7 +606,6 @@ shared_ptr<std::string> mean(VkResult e_)
     }
     if (e_ <= -1 && e_ >= -12)
     {
-
         return shared_ptr<string>(new string(mean1[e_*-1]));
     }
 
@@ -632,49 +625,46 @@ shared_ptr<std::string> mean(VkResult e_)
         return shared_ptr<string>(new string(Unknow_mean));
         break;
     }
-
-
 }
 
-namespace laka { namespace vk {
+namespace laka {
+    namespace vk {
+        std::string version_str(uint32_t version)
+        {
+            std::string s;
+            s += std::to_string(VK_VERSION_MAJOR(version));
+            s += ".";
+            s += std::to_string(VK_VERSION_MINOR(version));
+            s += ".";
+            s += std::to_string(VK_VERSION_PATCH(version));
+            return s;
+        }
 
-    std::string version_str(uint32_t version)
-    {
-        std::string s;
-        s += std::to_string(VK_VERSION_MAJOR(version));
-        s += ".";
-        s += std::to_string(VK_VERSION_MINOR(version));
-        s += ".";
-        s += std::to_string(VK_VERSION_PATCH(version));
-        return s;
+        void show_result(VkResult ret_)
+        {
+            init_show;
+            if (ret_ >= 0)
+            {
+                show_debug("{}", mean(ret_)->c_str());
+            }
+            else
+            {
+                show_err("{}", mean(ret_)->c_str());
+            }
+        }
+
+        void show_result_assert(VkResult ret_)
+        {
+            init_show;
+            if (ret_ > 0)
+            {
+                show_debug("{}", mean(ret_)->c_str());
+            }
+            else
+            {
+                show_err("{}", mean(ret_)->c_str());
+                assert(ret_ >= 0);
+            }
+        }
     }
-
-    void show_result(VkResult ret_)
-    {
-        init_show;
-        if (ret_ >= 0)
-        {
-            show_debug("{}", mean(ret_)->c_str());
-        }
-        else
-        {
-            show_err("{}", mean(ret_)->c_str());
-        }
-    }
-
-    void show_result_assert(VkResult ret_)
-    {
-        init_show;
-        if (ret_ > 0)
-        {
-            show_debug("{}", mean(ret_)->c_str());
-        }
-        else
-        {
-            show_err("{}", mean(ret_)->c_str());
-            assert(ret_ >= 0);
-        }
-    }
-
-}}
-
+}

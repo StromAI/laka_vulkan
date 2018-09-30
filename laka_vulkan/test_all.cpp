@@ -40,155 +40,154 @@ void test_function(Test_fuck& t)
 {
 }
 
-//要想方便地使用 又要利用类型系统保证安全 
+//要想方便地使用 又要利用类型系统保证安全
+//class Ffffuck {
+//private:
+//    Ffffuck(int flags_) :flag(flags_) {}
+//
+//public:
+//    int flag;
+//    enum class Bits {
+//        VK_SPARSE_IMAGE_FORMAT_SINGLE_MIPTAIL_BIT = 0x00000001,
+//        VK_SPARSE_IMAGE_FORMAT_ALIGNED_MIP_SIZE_BIT = 0x00000002,
+//        VK_SPARSE_IMAGE_FORMAT_NONSTANDARD_BLOCK_SIZE_BIT = 0x00000004,
+//        VK_SPARSE_IMAGE_FORMAT_FLAG_BITS_MAX_ENUM = 0x7FFFFFFF,
+//    };
+//
+//    Ffffuck(Bits bits_)
+//        :flag(static_cast<int>(bits_) ) 
+//    {}
+//
+//    Ffffuck(Ffffuck const& flag_) 
+//        :flag(flag_.flag) 
+//    {}
+//    
+//    Ffffuck(initializer_list<Bits> bit_list)
+//    {
+//        for (auto&& bit : bit_list)
+//        {
+//            flag |= static_cast<int>(bit);
+//        }
+//    }
+//
+//    Ffffuck& operator = (Ffffuck flag_)
+//    {
+//        flag = flag_.flag;
+//        return *this;
+//    }
+//
+//    Ffffuck operator | (Bits bit_)
+//    {
+//        return flag | static_cast<int>(bit_);
+//    }
+//
+//    Ffffuck& operator |= (Bits bit_)
+//    {
+//        flag |= static_cast<int>(bit_);
+//        return *this;
+//    }
+//
+//    Ffffuck operator | (Ffffuck flag_)
+//    {
+//        return flag | flag_.flag;
+//    }
+//
+//    Ffffuck& operator |= (Ffffuck flag_)
+//    {
+//        flag |= flag_.flag;
+//        return *this;
+//    }
+//    
+//    Ffffuck operator & (Ffffuck flag_)
+//    {
+//        return flag & flag_.flag;
+//    }
+//
+//    Ffffuck& operator &= (Ffffuck flag_)
+//    {
+//        flag &= flag_.flag;
+//        return *this;
+//    }
+//
+//    Ffffuck operator ^ (Ffffuck flag_)
+//    {
+//        return flag ^ flag_.flag;
+//    }
+//
+//    Ffffuck& operator ^= (Ffffuck flag_)
+//    {
+//        flag ^= flag_.flag;
+//        return *this;
+//    }
+//
+//    Ffffuck operator ~ ()
+//    {
+//        return all_flags().flag^flag;
+//    }
+//
+//    bool operator !()
+//    {
+//        return !flag;
+//    }
+//
+//    bool operator == (Ffffuck flag_)
+//    {
+//        return flag == flag_.flag;
+//    }
+//
+//    bool operator == (Bits bit_)
+//    {
+//        return flag == static_cast<int>(bit_);
+//    }
+//
+//    bool operator != (Ffffuck flag_)
+//    {
+//        return flag != flag_.flag;
+//    }
+//
+//    bool operator != (Bits bit_)
+//    {
+//        return flag != static_cast<int>(bit_);
+//    }
+//
+//    operator bool()
+//    {
+//        return !!flag;
+//    }
+//
+//    Ffffuck all_flags()
+//    {
+//        return VK_SPARSE_IMAGE_FORMAT_SINGLE_MIPTAIL_BIT |
+//            VK_SPARSE_IMAGE_FORMAT_ALIGNED_MIP_SIZE_BIT |
+//            VK_SPARSE_IMAGE_FORMAT_NONSTANDARD_BLOCK_SIZE_BIT;
+//    }
+//
+//    Ffffuck& clear()
+//    {
+//        flag = 0;
+//        return *this;
+//    }
+//
+//    Ffffuck& e_single_miptail_on() 
+//    {
+//        (flag |= VK_SPARSE_IMAGE_FORMAT_SINGLE_MIPTAIL_BIT);
+//        return *this;
+//    }
+//
+//    Ffffuck& e_single_miptail_off()
+//    {
+//        flag &= ~VK_SPARSE_IMAGE_FORMAT_SINGLE_MIPTAIL_BIT;
+//        return *this;
+//    }
+//};
+//
+//Ffffuck operator|(Ffffuck::Bits bit1_, Ffffuck::Bits bit2_)
+//{
+//    Ffffuck flags(bit1_);
+//    return flags | bit2_;
+//}
 
-class Ffffuck {
-private:
-    Ffffuck(int flags_) :flag(flags_) {}
-
-public:
-    int flag;
-    enum class Bits {
-        VK_SPARSE_IMAGE_FORMAT_SINGLE_MIPTAIL_BIT = 0x00000001,
-        VK_SPARSE_IMAGE_FORMAT_ALIGNED_MIP_SIZE_BIT = 0x00000002,
-        VK_SPARSE_IMAGE_FORMAT_NONSTANDARD_BLOCK_SIZE_BIT = 0x00000004,
-        VK_SPARSE_IMAGE_FORMAT_FLAG_BITS_MAX_ENUM = 0x7FFFFFFF,
-    };
-
-    Ffffuck(Bits bits_)
-        :flag(static_cast<int>(bits_) ) 
-    {}
-
-    Ffffuck(Ffffuck const& flag_) 
-        :flag(flag_.flag) 
-    {}
-    
-    Ffffuck(initializer_list<Bits> bit_list)
-    {
-        for (auto&& bit : bit_list)
-        {
-            flag |= static_cast<int>(bit);
-        }
-    }
-
-    Ffffuck& operator = (Ffffuck flag_)
-    {
-        flag = flag_.flag;
-        return *this;
-    }
-
-    Ffffuck operator | (Bits bit_)
-    {
-        return flag | static_cast<int>(bit_);
-    }
-
-    Ffffuck& operator |= (Bits bit_)
-    {
-        flag |= static_cast<int>(bit_);
-        return *this;
-    }
-
-    Ffffuck operator | (Ffffuck flag_)
-    {
-        return flag | flag_.flag;
-    }
-
-    Ffffuck& operator |= (Ffffuck flag_)
-    {
-        flag |= flag_.flag;
-        return *this;
-    }
-    
-    Ffffuck operator & (Ffffuck flag_)
-    {
-        return flag & flag_.flag;
-    }
-
-    Ffffuck& operator &= (Ffffuck flag_)
-    {
-        flag &= flag_.flag;
-        return *this;
-    }
-
-    Ffffuck operator ^ (Ffffuck flag_)
-    {
-        return flag ^ flag_.flag;
-    }
-
-    Ffffuck& operator ^= (Ffffuck flag_)
-    {
-        flag ^= flag_.flag;
-        return *this;
-    }
-
-    Ffffuck operator ~ ()
-    {
-        return all_flags().flag^flag;
-    }
-
-    bool operator !()
-    {
-        return !flag;
-    }
-
-    bool operator == (Ffffuck flag_)
-    {
-        return flag == flag_.flag;
-    }
-
-    bool operator == (Bits bit_)
-    {
-        return flag == static_cast<int>(bit_);
-    }
-
-    bool operator != (Ffffuck flag_)
-    {
-        return flag != flag_.flag;
-    }
-
-    bool operator != (Bits bit_)
-    {
-        return flag != static_cast<int>(bit_);
-    }
-
-    operator bool()
-    {
-        return !!flag;
-    }
-
-    Ffffuck all_flags()
-    {
-        return VK_SPARSE_IMAGE_FORMAT_SINGLE_MIPTAIL_BIT |
-            VK_SPARSE_IMAGE_FORMAT_ALIGNED_MIP_SIZE_BIT |
-            VK_SPARSE_IMAGE_FORMAT_NONSTANDARD_BLOCK_SIZE_BIT;
-    }
-
-    Ffffuck& clear()
-    {
-        flag = 0;
-        return *this;
-    }
-
-    Ffffuck& e_single_miptail_on() 
-    {
-        (flag |= VK_SPARSE_IMAGE_FORMAT_SINGLE_MIPTAIL_BIT);
-        return *this;
-    }
-
-    Ffffuck& e_single_miptail_off()
-    {
-        flag &= ~VK_SPARSE_IMAGE_FORMAT_SINGLE_MIPTAIL_BIT;
-        return *this;
-    }
-};
-
-Ffffuck operator|(Ffffuck::Bits bit1_, Ffffuck::Bits bit2_)
-{
-    Ffffuck flags(bit1_);
-    return flags | bit2_;
-}
-
-void fun(Ffffuck flags_)
+void fun(F_queue flags_)
 {
 
 }
@@ -209,16 +208,12 @@ void test_all()
         e_protected_bit = 0x00000008,
     };
 
-
-
-    fun(
-        {
-            Ffffuck::Bits::VK_SPARSE_IMAGE_FORMAT_ALIGNED_MIP_SIZE_BIT ,
-            Ffffuck::Bits::VK_SPARSE_IMAGE_FORMAT_FLAG_BITS_MAX_ENUM 
-        }
-    );
-
-
+    fun({});
+    fun(F_queue::Bits::e_protected | F_queue::Bits::e_compute);
+    fun({ F_queue::Bits::e_compute ,F_queue::Bits::e_protected});
+    F_queue flag_q;
+    flag_q.e_compute_on().e_protected_on();//为了能这么用,特意搞成生成代码.
+    fun(flag_q);
 
 	vector<int> v_int{0,1,2};
 

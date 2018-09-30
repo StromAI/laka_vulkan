@@ -119,8 +119,10 @@
   <ItemGroup>
     <ClCompile Include="common.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="pNext.cpp" />
     <ClCompile Include="test_all.cpp" />
     <ClCompile Include="vk.cpp" />
+    <ClCompile Include="vk_bits.cpp" />
     <ClCompile Include="vk_mean.cpp" />
     <ClCompile Include="vk_shortcut.cpp" />
   </ItemGroup>
@@ -129,6 +131,7 @@
     <ClInclude Include="common.h" />
     <ClInclude Include="find_enum_2_myenum.py" />
     <ClInclude Include="laka_vk_define.h" />
+    <ClInclude Include="pNext.h" />
     <ClInclude Include="test.h" />
     <ClInclude Include="vk.h" />
     <ClInclude Include="vk_bits.h" />

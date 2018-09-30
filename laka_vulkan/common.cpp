@@ -48,13 +48,10 @@ public:
 
     ~My_init()
     {
-
         spdlog::drop_all();
         printf("基础功能析构完成\n");
     }
 };
-
-
 
 static My_init init;
 

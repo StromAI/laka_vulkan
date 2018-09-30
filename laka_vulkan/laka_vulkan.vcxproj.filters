@@ -36,6 +36,12 @@
     <ClCompile Include="test_all.cpp">
       <Filter>测试</Filter>
     </ClCompile>
+    <ClCompile Include="vk_bits.cpp">
+      <Filter>基础</Filter>
+    </ClCompile>
+    <ClCompile Include="pNext.cpp">
+      <Filter>测试</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="common.h">
@@ -61,6 +67,9 @@
     </ClInclude>
     <ClInclude Include="find_enum_2_myenum.py">
       <Filter>资源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="pNext.h">
+      <Filter>封装</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
