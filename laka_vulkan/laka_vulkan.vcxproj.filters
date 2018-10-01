@@ -39,8 +39,11 @@
     <ClCompile Include="vk_bits.cpp">
       <Filter>基础</Filter>
     </ClCompile>
+    <ClCompile Include="vk_enums.cpp">
+      <Filter>基础</Filter>
+    </ClCompile>
     <ClCompile Include="pNext.cpp">
-      <Filter>测试</Filter>
+      <Filter>基础</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -65,11 +68,14 @@
     <ClInclude Include="test.h">
       <Filter>测试</Filter>
     </ClInclude>
-    <ClInclude Include="find_enum_2_myenum.py">
+    <ClInclude Include="find_bits2my_bits.py">
       <Filter>资源文件</Filter>
     </ClInclude>
+    <ClInclude Include="vk_enums.h">
+      <Filter>基础</Filter>
+    </ClInclude>
     <ClInclude Include="pNext.h">
-      <Filter>封装</Filter>
+      <Filter>基础</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -86,6 +92,12 @@
       <Filter>资源文件</Filter>
     </None>
     <None Include="vk1.1.82.fuckhtml">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="find_struct_2_my_struct.py">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="find_enum2my_enum.py">
       <Filter>资源文件</Filter>
     </None>
   </ItemGroup>

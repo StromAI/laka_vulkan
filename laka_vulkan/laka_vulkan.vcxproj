@@ -123,21 +123,25 @@
     <ClCompile Include="test_all.cpp" />
     <ClCompile Include="vk.cpp" />
     <ClCompile Include="vk_bits.cpp" />
+    <ClCompile Include="vk_enums.cpp" />
     <ClCompile Include="vk_mean.cpp" />
     <ClCompile Include="vk_shortcut.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="classes.h" />
     <ClInclude Include="common.h" />
-    <ClInclude Include="find_enum_2_myenum.py" />
+    <ClInclude Include="find_bits2my_bits.py" />
     <ClInclude Include="laka_vk_define.h" />
     <ClInclude Include="pNext.h" />
     <ClInclude Include="test.h" />
     <ClInclude Include="vk.h" />
     <ClInclude Include="vk_bits.h" />
+    <ClInclude Include="vk_enums.h" />
     <ClInclude Include="vk_mean.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="find_enum2my_enum.py" />
+    <None Include="find_struct_2_my_struct.py" />
     <None Include="validusage.json" />
     <None Include="valid_usage_json2sqlite3.py" />
     <None Include="vk.xlsx" />
