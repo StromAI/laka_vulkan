@@ -126,6 +126,7 @@
     <ClCompile Include="vk_enums.cpp" />
     <ClCompile Include="vk_mean.cpp" />
     <ClCompile Include="vk_shortcut.cpp" />
+    <ClCompile Include="vk_structs.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="classes.h" />
@@ -138,6 +139,7 @@
     <ClInclude Include="vk_bits.h" />
     <ClInclude Include="vk_enums.h" />
     <ClInclude Include="vk_mean.h" />
+    <ClInclude Include="vk_structs.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="find_enum2my_enum.py" />

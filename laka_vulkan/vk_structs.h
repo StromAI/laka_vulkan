@@ -13,4 +13,9 @@ Permission is granted to anyone to use this software for any purpose, including 
 
 */
 
-#include "pNext.h"
+#pragma once
+#include "vulkan/vulkan.h"
+namespace laka { namespace vk {
+
+}}
+

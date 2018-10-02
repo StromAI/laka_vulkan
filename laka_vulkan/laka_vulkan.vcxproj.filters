@@ -16,6 +16,9 @@
     <Filter Include="基础">
       <UniqueIdentifier>{d8627b9c-2e27-419e-bc68-11464302bc1c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="基础\提取和生成代码">
+      <UniqueIdentifier>{193fab4d-9fdd-495f-94bd-1bd33885073f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -36,14 +39,17 @@
     <ClCompile Include="test_all.cpp">
       <Filter>测试</Filter>
     </ClCompile>
+    <ClCompile Include="pNext.cpp">
+      <Filter>基础\提取和生成代码</Filter>
+    </ClCompile>
     <ClCompile Include="vk_bits.cpp">
-      <Filter>基础</Filter>
+      <Filter>基础\提取和生成代码</Filter>
     </ClCompile>
     <ClCompile Include="vk_enums.cpp">
-      <Filter>基础</Filter>
+      <Filter>基础\提取和生成代码</Filter>
     </ClCompile>
-    <ClCompile Include="pNext.cpp">
-      <Filter>基础</Filter>
+    <ClCompile Include="vk_structs.cpp">
+      <Filter>基础\提取和生成代码</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -56,9 +62,6 @@
     <ClInclude Include="vk_mean.h">
       <Filter>基础</Filter>
     </ClInclude>
-    <ClInclude Include="vk_bits.h">
-      <Filter>基础</Filter>
-    </ClInclude>
     <ClInclude Include="classes.h">
       <Filter>基础</Filter>
     </ClInclude>
@@ -69,13 +72,19 @@
       <Filter>测试</Filter>
     </ClInclude>
     <ClInclude Include="find_bits2my_bits.py">
-      <Filter>资源文件</Filter>
-    </ClInclude>
-    <ClInclude Include="vk_enums.h">
-      <Filter>基础</Filter>
+      <Filter>基础\提取和生成代码</Filter>
     </ClInclude>
     <ClInclude Include="pNext.h">
-      <Filter>基础</Filter>
+      <Filter>基础\提取和生成代码</Filter>
+    </ClInclude>
+    <ClInclude Include="vk_bits.h">
+      <Filter>基础\提取和生成代码</Filter>
+    </ClInclude>
+    <ClInclude Include="vk_enums.h">
+      <Filter>基础\提取和生成代码</Filter>
+    </ClInclude>
+    <ClInclude Include="vk_structs.h">
+      <Filter>基础\提取和生成代码</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -94,11 +103,11 @@
     <None Include="vk1.1.82.fuckhtml">
       <Filter>资源文件</Filter>
     </None>
-    <None Include="find_struct_2_my_struct.py">
-      <Filter>资源文件</Filter>
-    </None>
     <None Include="find_enum2my_enum.py">
-      <Filter>资源文件</Filter>
+      <Filter>基础\提取和生成代码</Filter>
+    </None>
+    <None Include="find_struct_2_my_struct.py">
+      <Filter>基础\提取和生成代码</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
