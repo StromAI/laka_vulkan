@@ -1,3 +1,4 @@
+﻿#coding=utf-8
 '''
 Copyright (c) 2018 gchihiha
 
@@ -15,14 +16,119 @@ Permission is granted to anyone to use this software for any purpose, including 
 import re
 from bs4 import BeautifulSoup
 
-file = open("D:\\project\\laka_vulkan\\laka_vulkan\\vk.xml").read()
+file = open(".\\vk.xml").read()
 
 soup = BeautifulSoup(file)
 
 struct_list = soup.registry.types.find_all('type',attrs={'category':'struct'})
 
 for struct in struct_list:
-    print struct
+    if struct.get('alias') != None:
+        continue
+
+    struct_name = struct.get('name')
+    comment = struct.get('comment')
+    if comment == None:
+        comment = ""
+    
+    returnedonly = struct.get('returnedonly')
+    if returnedonly == "true":
+        returnedonly = "just return onle\n"
+    else:
+        returnedonly = ""
+
+    structextends = struct.get('structextends')
+    if structextends == None:
+        structextends = ""
+    else:
+        structextends = "can be pNext insert into:\t"+structextends+"\n"
+
+    comment_out = '/*\n'+returnedonly+structextends+comment+"*/\n"
+
+    out = comment_out+struct_name+"{\n"
+
+    member_list = struct.find_all('member')
+
+    member_name_list = []
+    for member in member_list:
+        member_name = ""
+        member_type = ""
+        member_values = ""
+        member_len = ""
+        member_altlen = ""
+        member_optional = ""
+        member_externsync = ""
+        member_noautovalidity = ""
+        member_text = ""
+        member_out = ""
+        
+        member_name = member.find_all('name')[0].get_text()
+        member_type = member.type.get_text()
+        member_text = member.get_text()
+
+        member_name_list.append(member_name)
+
+        temp = member.comment
+        if temp!=None:
+            temp=temp.get_text()
+            member_text=member_text.replace(temp,"")
+
+        temp = member.get('values')
+        if temp!=None:
+            member_values = " = "+temp
+
+        temp = member.get('len')
+        if temp!=None:
+            member_len = "(len:"+temp+")"
+
+        temp = member.get('altlen')
+        if temp!=None:
+            member_altlen = "(altlen)"
+
+        temp = member.get('externsync')
+        if temp!=None:
+            member_externsync = "(externsync)"
+
+        temp = member.get('noautovalidity')
+        if temp!=None:
+            member_noautovalidity = "(noautovalidity)"
+
+        temp = member.get('optional')
+        if temp!=None:
+            if member_text.find('*') != -1:
+                member_values = " = nullptr"
+            else:
+                if member_type == " = HANDLE":
+                    member_values = " = INVALID_HANDLE_VALUE"
+                if member_type == " = LPCWSTR":
+                    member_values = " = nullptr"
+                if member_type[0] == 'V' and member_type[1]=='k' and member_type.find('Flag')==-1:
+                    member_values = " = VK_NULL_HANDLE"
+
+        member_comment = "\t//"+member_len+member_altlen+member_externsync+member_noautovalidity
+        if member_comment == "\t//":
+            member_comment = ""
+
+        temp = member.comment
+        if temp!=None:
+            member_comment+=temp.get_text()
+
+        member_out+=member_text+member_values+";"+member_comment+"\n"
+
+        out += member_out
+    out+="};\n"
+    print out
+
+    
+
+
+    '''
+    requires        
+    returnedonly    
+    comment         
+    structextends
+    alias
+    '''
 
 
 

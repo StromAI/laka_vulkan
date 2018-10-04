@@ -192,6 +192,14 @@ void fun(F_queue flags_)
 
 }
 
+
+struct shit {
+    int s1 = 10;
+};
+
+
+
+
 void test_all()
 {
     init_show;
