@@ -144,6 +144,7 @@
   <ItemGroup>
     <None Include="find_enum2my_enum.py" />
     <None Include="find_struct_2_my_struct.py" />
+    <None Include="pNext.py" />
     <None Include="validusage.json" />
     <None Include="valid_usage_json2sqlite3.py" />
     <None Include="vk.xlsx" />
@@ -152,6 +153,11 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="vk1.1.82.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="vk.xml">
+      <SubType>Designer</SubType>
+    </Xml>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

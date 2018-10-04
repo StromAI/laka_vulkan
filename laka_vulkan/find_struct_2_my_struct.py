@@ -13,14 +13,23 @@ Permission is granted to anyone to use this software for any purpose, including 
 '''
 
 import re
+from bs4 import BeautifulSoup
 
-vk_file = open("vk1.1.82.txt","r").read()
+file = open("D:\\project\\laka_vulkan\\laka_vulkan\\vk.xml").read()
 
-the_list = re.findall(r'typedef[ ]*enum[ ]*Vk[\w,\d]*FlagBits[\w,\d,\s,{,},\,=,]*;', vk_file, re.DOTALL)
+soup = BeautifulSoup(file)
+
+struct_list = soup.registry.types.find_all('type',attrs={'category':'struct'})
+
+for struct in struct_list:
+    print struct
+
+
+
 count =0
 
-out_cpp_file = open("vk_structs.cpp", "w")
-out_h_file = open("vk_structs.h","w")
+#out_cpp_file = open("vk_structs.cpp", "w")
+#out_h_file = open("vk_structs.h","w")
 
 code = \
 "/*\n"\
@@ -41,17 +50,15 @@ code+=\
 "#include \"vk_structs.h\"\n"\
 "namespace laka { namespace vk {\n"
 
-for itr in the_list:
-    pass
 
 h_code+="\n}}\n"
 code+="\n}}\n"
 
-print >> out_cpp_file,"%s" % (code)
-out_cpp_file.close()
+#print >> out_cpp_file,"%s" % (code)
+#out_cpp_file.close()
 
-print >> out_h_file,"%s" % (h_code)
-out_h_file.close()
+#print >> out_h_file,"%s" % (h_code)
+#out_h_file.close()
 
 #print code
 #print h_code
