@@ -193,10 +193,6 @@ void fun(F_queue flags_)
 }
 
 
-struct shit {
-    int s1 = 10;
-};
-
 
 
 

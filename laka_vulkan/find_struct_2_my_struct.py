@@ -22,18 +22,20 @@ soup = BeautifulSoup(file)
 
 struct_list = soup.registry.types.find_all('type',attrs={'category':'struct'})
 
+final_out = ""
+
 for struct in struct_list:
     if struct.get('alias') != None:
         continue
 
-    struct_name = struct.get('name')
+    struct_name = struct.get('name')[2:]
     comment = struct.get('comment')
     if comment == None:
         comment = ""
     
     returnedonly = struct.get('returnedonly')
     if returnedonly == "true":
-        returnedonly = "just return onle\n"
+        returnedonly = "just return only\n"
     else:
         returnedonly = ""
 
@@ -45,11 +47,12 @@ for struct in struct_list:
 
     comment_out = '/*\n'+returnedonly+structextends+comment+"*/\n"
 
-    out = comment_out+struct_name+"{\n"
+    out = comment_out+"struct " + struct_name+"{\n"
 
     member_list = struct.find_all('member')
 
     member_name_list = []
+    member_text_list = []
     for member in member_list:
         member_name = ""
         member_type = ""
@@ -62,16 +65,26 @@ for struct in struct_list:
         member_text = ""
         member_out = ""
         
+        member.type.string = member.type.get_text()+" "
+
         member_name = member.find_all('name')[0].get_text()
         member_type = member.type.get_text()
         member_text = member.get_text()
-
-        member_name_list.append(member_name)
 
         temp = member.comment
         if temp!=None:
             temp=temp.get_text()
             member_text=member_text.replace(temp,"")
+        
+        member_name_list.append(member_name)
+
+        
+        real_text = member_text
+        if member_text.find('[')!=-1:
+            real_text = re.sub(r'\[[A-Z_a-z0-9]*\]',"",member_text)
+            real_text = real_text.replace(member_type,member_type+"*")
+        
+        member_text_list.append(real_text)
 
         temp = member.get('values')
         if temp!=None:
@@ -100,42 +113,37 @@ for struct in struct_list:
             else:
                 if member_type == " = HANDLE":
                     member_values = " = INVALID_HANDLE_VALUE"
-                if member_type == " = LPCWSTR":
-                    member_values = " = nullptr"
-                if member_type[0] == 'V' and member_type[1]=='k' and member_type.find('Flag')==-1:
-                    member_values = " = VK_NULL_HANDLE"
+                else:
+                    if member_type == " = LPCWSTR":
+                        member_values = " = nullptr"
+                    else:
+                        if member_type[0] == 'V' and member_type[1]=='k' and member_type.find('Flag')==-1:
+                            member_values = " = VK_NULL_HANDLE"
+                        else:
+                            if member_type.find('Flag')==-1:
+                                member_values = " = 0"
+        if member_name == "pNext":
+            member_values = " = nullptr"
 
         member_comment = "\t//"+member_len+member_altlen+member_externsync+member_noautovalidity
-        if member_comment == "\t//":
-            member_comment = ""
-
         temp = member.comment
         if temp!=None:
             member_comment+=temp.get_text()
+        if member_comment == "\t//":
+            member_comment = ""
 
         member_out+=member_text+member_values+";"+member_comment+"\n"
 
         out += member_out
-    out+="};\n"
-    print out
-
     
+    out+="};\n\n"
 
-
-    '''
-    requires        
-    returnedonly    
-    comment         
-    structextends
-    alias
-    '''
-
-
+    final_out+=out
 
 count =0
 
-#out_cpp_file = open("vk_structs.cpp", "w")
-#out_h_file = open("vk_structs.h","w")
+out_cpp_file = open("vk_structs.cpp", "w")
+out_h_file = open("vk_structs.h","w")
 
 code = \
 "/*\n"\
@@ -156,15 +164,16 @@ code+=\
 "#include \"vk_structs.h\"\n"\
 "namespace laka { namespace vk {\n"
 
+h_code+=final_out
 
 h_code+="\n}}\n"
 code+="\n}}\n"
 
-#print >> out_cpp_file,"%s" % (code)
-#out_cpp_file.close()
+print >> out_cpp_file,"%s" % (code)
+out_cpp_file.close()
 
-#print >> out_h_file,"%s" % (h_code)
-#out_h_file.close()
+print >> out_h_file,"%s" % (h_code)
+out_h_file.close()
 
 #print code
 #print h_code
