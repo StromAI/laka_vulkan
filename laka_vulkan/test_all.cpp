@@ -192,13 +192,68 @@ void fun(F_queue flags_)
 
 }
 
+/*
+struct name:    VkBindImageMemoryInfo
+VkBindImageMemoryDeviceGroupInfo
+VkBindImageMemorySwapchainInfoKHR
+VkBindImagePlaneMemoryInfo
+*/
 
+/*
+VkBindImageMemoryInfo
+VkBindImageMemoryDeviceGroupInfo
+VkBindImageMemorySwapchainInfoKHR
+VkBindImagePlaneMemoryInfo
+*/
+struct BindImageMemoryInfo_base {
+protected:
+    VkStructureType    sType;
+    const void*        pNext;
 
+    BindImageMemoryInfo_base();
+    ~BindImageMemoryInfo_base();
+public:
+    BindImageMemoryInfo_base& operator<<(BindImageMemoryInfo_base& shit);
+};
+
+BindImageMemoryInfo_base::BindImageMemoryInfo_base() :pNext(nullptr) {};
+BindImageMemoryInfo_base::~BindImageMemoryInfo_base() {};
+
+BindImageMemoryInfo_base& BindImageMemoryInfo_base::operator<<(BindImageMemoryInfo_base& shit_)
+{
+    shit_.pNext = pNext;
+    pNext = &shit_;
+    return *this;
+}
+
+struct BindImageMemoryInfo :public BindImageMemoryInfo_base {
+    VkImage            image;
+    VkDeviceMemory     memory;
+    VkDeviceSize       memoryOffset;
+};
+
+struct BindImageMemroyDeviceGroupInfo :public BindImageMemoryInfo_base{
+    uint32_t           deviceIndexCount;
+    const uint32_t*    pDeviceIndices;
+    uint32_t           splitInstanceBindRegionCount;
+    const VkRect2D*    pSplitInstanceBindRegions;
+};
 
 
 void test_all()
 {
     init_show;
+
+    show_info("{} {} {}", 
+        sizeof(BindImageMemoryInfo_base),
+        sizeof(BindImageMemroyDeviceGroupInfo), 
+        sizeof(VkBindImageMemoryDeviceGroupInfo)
+    );
+
+    BindImageMemroyDeviceGroupInfo b;
+    BindImageMemoryInfo c;
+
+    b << c;
 
     Test_fuck fuck;
     Fuck1 fuck1;

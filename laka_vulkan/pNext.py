@@ -22,28 +22,108 @@ soup = BeautifulSoup(file)
 
 struct_list = soup.registry.types.find_all('type',attrs={'category':'struct'})
 
-final_out = ""
+cpp_out = ""
+h_out = ""
 
+
+class Member:
+    name_ = ""
+    type_ = ""
+    values_ = ""
+    comment_ = ""
+    text_ = ""
 
 sdict = dict([])
+ssdict = dict([])
+flag_dict = dict([])
+
 for struct in struct_list:
     struct_name = struct.get('name')
     sdict[struct_name] = list()
+    ssdict[struct_name] = list()
+    flag_dict[struct_name] = False
+
+    member_list = struct.find_all('member')
+
+    for member in member_list:
+        m = Member()
+        m.name_ = member.find_all('name')[0].get_text()
+        m.type_ = member.type.get_text()
+        member.type.string = member.type.get_text()+" "
+        m.text_ = member.get_text()
+
+        temp = member.comment
+        if temp!=None:
+            temp = temp.get_text()
+            m.text_ = m.text_.replace(temp,"")
+        
+        ssdict[struct_name].append(m)
+
 
 for struct in struct_list:
     struct_name = struct.get('name')
-    
     structextends = struct.get('structextends')
+
     if structextends != None:
-        sdict[struct_name].append(structextends)
+        if structextends.find(",") != -1:
+            temp_list = structextends.split(",")
+            for temp in temp_list:
+                sdict[temp].append(struct_name)
+        else:
+            sdict[structextends].append(struct_name)
 
 for struct in struct_list:
-    if len(sdict[struct_name])>=0:
-        print sdict[struct_name]
-
-
-
+    struct_name = struct.get('name')
+    if len(sdict[struct_name])==0:
+        continue
     
+    base_name = struct_name[2:]+"_base"
+
+    base_declare =\
+        "struct "+base_name+"{\n"\
+        "protected:\n"\
+            "VkStructureType sType;\n"\
+            "const void* pNext;\n"+\
+            base_name+"();\n"\
+            "~"+base_name+"();\n"\
+        "public:\n"+\
+            base_name+"& operator<<("+base_name+"& base_);\n"\
+        "};\n\n"
+    
+    base_define = \
+        base_name+"::"+base_name+"():pNext(nullptr){};\n"+\
+        base_name+"::~"+base_name+"(){};\n\n"+\
+        base_name+"& "+base_name+"::operator<<("+base_name+"& base_)"\
+        "{\n"\
+            "base_.pNext = pNext;\n"\
+            "pNext = &base_;\n"\
+            "return *this;\n"\
+        "}\n\n"
+
+
+    big_name = struct_name[2:]
+    big_declare = "struct "+big_name+":public "+base_name+"{\n"
+    for m in ssdict[struct_name]:
+        if m.name_ != "pNext" and m.name_ != "sType":
+            big_declare = big_declare + m.text_+";\n"
+    big_declare = big_declare + "};\n"
+
+    nexts_declare = ""
+    for current_struct_name in sdict[struct_name]:
+        if flag_dict[current_struct_name] == True:
+            continue
+        next_name = current_struct_name[2:]
+        nexts_declare = nexts_declare + "struct "+next_name+":public "+base_name+"{\n"
+        for m in ssdict[current_struct_name]:
+            if m.name_ != "pNext" and m.name_ != "sType":
+                pass
+                nexts_declare = nexts_declare + m.text_+";\n"
+        flag_dict[current_struct_name] = True
+        nexts_declare = nexts_declare + "};\n\n"
+
+    h_out+=base_declare+nexts_declare
+    cpp_out+=base_define
+
 
 
 count =0
@@ -64,13 +144,15 @@ h_code = code
 h_code += \
 "#pragma once\n"\
 "#include \"vulkan/vulkan.h\"\n"\
+"#include \"common.h\"\n"\
 "namespace laka { namespace vk {\n"
 
 code+=\
-"#include \"vk_structs.h\"\n"\
+"#include \"pNext.h\"\n"\
 "namespace laka { namespace vk {\n"
 
-h_code+=final_out
+h_code+=h_out
+code+=cpp_out
 
 h_code+="\n}}\n"
 code+="\n}}\n"
@@ -83,3 +165,5 @@ out_h_file.close()
 
 #print code
 #print h_code
+
+
