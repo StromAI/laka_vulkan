@@ -19,6 +19,9 @@
     <Filter Include="基础\提取和生成代码">
       <UniqueIdentifier>{193fab4d-9fdd-495f-94bd-1bd33885073f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="资源文件\不再使用">
+      <UniqueIdentifier>{1689be86-7495-4d9d-929e-3d99a4ce2e79}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -71,9 +74,6 @@
     <ClInclude Include="test.h">
       <Filter>测试</Filter>
     </ClInclude>
-    <ClInclude Include="find_bits2my_bits.py">
-      <Filter>基础\提取和生成代码</Filter>
-    </ClInclude>
     <ClInclude Include="vk_bits.h">
       <Filter>基础\提取和生成代码</Filter>
     </ClInclude>
@@ -86,41 +86,47 @@
     <ClInclude Include="pNext.h">
       <Filter>基础\提取和生成代码</Filter>
     </ClInclude>
+    <ClInclude Include="find_bits2my_bits.py">
+      <Filter>资源文件\不再使用</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="vk.xlsx">
       <Filter>资源文件</Filter>
     </None>
-    <None Include="valid_usage_json2sqlite3.py">
-      <Filter>资源文件</Filter>
+    <None Include="pNext.py">
+      <Filter>基础\提取和生成代码</Filter>
     </None>
-    <None Include="validusage.json">
-      <Filter>资源文件</Filter>
-    </None>
-    <None Include="vk_1.1.85.db">
-      <Filter>资源文件</Filter>
-    </None>
-    <None Include="vk1.1.82.fuckhtml">
-      <Filter>资源文件</Filter>
+    <None Include="vk_bits.py">
+      <Filter>基础\提取和生成代码</Filter>
     </None>
     <None Include="find_enum2my_enum.py">
       <Filter>基础\提取和生成代码</Filter>
     </None>
     <None Include="find_struct_2_my_struct.py">
-      <Filter>基础\提取和生成代码</Filter>
+      <Filter>资源文件\不再使用</Filter>
     </None>
-    <None Include="pNext.py">
-      <Filter>基础\提取和生成代码</Filter>
+    <None Include="valid_usage_json2sqlite3.py">
+      <Filter>资源文件\不再使用</Filter>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="vk1.1.82.txt">
-      <Filter>资源文件</Filter>
-    </Text>
+    <None Include="validusage.json">
+      <Filter>资源文件\不再使用</Filter>
+    </None>
+    <None Include="vk_1.1.85.db">
+      <Filter>资源文件\不再使用</Filter>
+    </None>
+    <None Include="vk1.1.82.fuckhtml">
+      <Filter>资源文件\不再使用</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Xml Include="vk.xml">
       <Filter>资源文件</Filter>
     </Xml>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="vk1.1.82.txt">
+      <Filter>资源文件\不再使用</Filter>
+    </Text>
   </ItemGroup>
 </Project>

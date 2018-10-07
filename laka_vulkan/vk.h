@@ -42,6 +42,7 @@ std::initializer_list 的存储是未指定的（即它可以是自动、临时或静态只读内存，依赖
 
 #include "laka_vk_define.h"
 #include "vk_bits.h"
+#include "pNext.h"
 
 table_vk_flag(std::shared_ptr<std::string> mean ZK, , s, YK FH);
 table_vk_flag(std::shared_ptr<std::string> mean ZK, , Bits, YK FH);
@@ -63,84 +64,7 @@ namespace laka {namespace vk {
 	//使用它作为实参,vk的子对象创建时就使用父对象的VkAllocationCallbacks
 	//有更好的建议吗?
 	VkAllocationCallbacks* default_allocation_cb();
-
-	//学习了官方Vk-Hpp中的ArrayProxy (首次
-	//作用是为api的数组参数提供多样化快捷使用 而省掉多个重载函数
-	//仅作为一次性的东西 在封装函数的内部用一用
-	template<typename T>
-	class Array_value {
-	private:
-		const uint32_t value_count;
-		const T* first_value_ptr;
-	public:
-		const T* first_value() 
-			{ return first_value_ptr; }
-		const T* last_value() 
-			{ return first_value_ptr + value_count - 1; }
-		const T* data() 
-			{ return value_count > 0 ? first_value_ptr : nullptr; }
-		uint32_t size() 
-			{ return value_count; }
-
-        Array_value()
-            :value_count(0)
-            ,first_value_ptr(nullptr)
-        {}
-
-		Array_value(T* only_value_ptr_)
-			: value_count(1)
-			, first_value_ptr(only_value_ptr_)
-		{}
-
-		Array_value(uint32_t count_, T* first_value_ptr_)
-			: value_count(count_)
-			, first_value_ptr(first_value_ptr_)
-		{}
-
-		Array_value(std::initializer_list<T> data)
-			: value_count(static_cast<uint32_t>(data.size()))
-			, first_value_ptr(data.begin())
-		{}
-
-		Array_value(std::vector<T>& vector_)
-			:value_count(static_cast<uint32_t>(vector_.size()))
-			, first_value_ptr(vector_.data())
-		{}
-
-		template<size_t N>
-		Array_value(std::array<T, N>& array_)
-			: value_count(static_cast<uint32_t>(array_.size()))
-			, first_value_ptr(array_.data())
-		{}
-	};
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    
 
 	//不一定要暴露
 #if 1

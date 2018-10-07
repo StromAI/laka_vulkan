@@ -17,6 +17,8 @@ Permission is granted to anyone to use this software for any purpose, including 
 #pragma once
 #include <string>
 #include <stdexcept>
+#include <type_traits>
+
 #include "spdlog/spdlog.h"
 #include "current_function.hpp"
 #include "assert.h"
@@ -257,5 +259,67 @@ Module_handle load_module_must(const char* module_name_);
 void* load_module_function(Module_handle module_handle_, const char* function_name_);
 
 void* load_module_function_must(Module_handle module_handle_, const char* function_name_);
+
+
+
+//学习了官方Vk-Hpp中的ArrayProxy (首次
+//作用是为api的数组参数提供多样化快捷使用 而省掉多个重载函数
+//仅作为一次性的东西 在封装函数的内部用一用
+template<typename T>
+class Array_value {
+private:
+    const uint32_t value_count;
+    const T* first_value_ptr;
+public:
+    const T* first_value()
+    {
+        return first_value_ptr;
+    }
+    const T* last_value()
+    {
+        return first_value_ptr + value_count - 1;
+    }
+    const T* data()
+    {
+        return value_count > 0 ? first_value_ptr : nullptr;
+    }
+    uint32_t size()
+    {
+        return value_count;
+    }
+
+    Array_value()
+        :value_count(0)
+        , first_value_ptr(nullptr)
+    {}
+
+    Array_value(T* only_value_ptr_)
+        : value_count(1)
+        , first_value_ptr(only_value_ptr_)
+    {}
+
+    Array_value(uint32_t count_, T* first_value_ptr_)
+        : value_count(count_)
+        , first_value_ptr(first_value_ptr_)
+    {}
+
+    Array_value(std::initializer_list<T> data)
+        : value_count(static_cast<uint32_t>(data.size()))
+        , first_value_ptr(data.begin())
+    {}
+
+    Array_value(std::vector<T>& vector_)
+        :value_count(static_cast<uint32_t>(vector_.size()))
+        , first_value_ptr(vector_.data())
+    {}
+
+    template<size_t N>
+    Array_value(std::array<T, N>& array_)
+        : value_count(static_cast<uint32_t>(array_.size()))
+        , first_value_ptr(array_.data())
+    {}
+
+};
+
 
 

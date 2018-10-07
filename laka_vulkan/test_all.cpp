@@ -24,22 +24,6 @@ using namespace std;
 using namespace laka::vk;
 
 
-
-
-
-
-//dfasdfsafds
-class Test_fuck {
-	void* pNext;
-};
-class Fuck1 :public Test_fuck {};
-class Fuck2 :public Test_fuck {};
-class Fuck3 :public Test_fuck {};
-//fdsafsdfsd
-void test_function(Test_fuck& t)
-{
-}
-
 //要想方便地使用 又要利用类型系统保证安全
 //class Ffffuck {
 //private:
@@ -187,17 +171,14 @@ void test_function(Test_fuck& t)
 //    return flags | bit2_;
 //}
 
-void fun(F_queue flags_)
-{
 
-}
-
+/*
 /*
 struct name:    VkBindImageMemoryInfo
 VkBindImageMemoryDeviceGroupInfo
 VkBindImageMemorySwapchainInfoKHR
 VkBindImagePlaneMemoryInfo
-*/
+//*/
 
 /*
 VkBindImageMemoryInfo
@@ -205,6 +186,8 @@ VkBindImageMemoryDeviceGroupInfo
 VkBindImageMemorySwapchainInfoKHR
 VkBindImagePlaneMemoryInfo
 */
+
+/*
 struct BindImageMemoryInfo_base {
 protected:
     VkStructureType    sType;
@@ -239,34 +222,38 @@ struct BindImageMemroyDeviceGroupInfo :public BindImageMemoryInfo_base{
     const VkRect2D*    pSplitInstanceBindRegions;
 };
 
+//*/
+
+
+
+
+//dfasdfsafds
+class Test_fuck {
+    void* pNext;
+};
+class Fuck1 :public Test_fuck {};
+class Fuck2 :public Test_fuck {};
+class Fuck3 :public Test_fuck {};
+//fdsafsdfsd
+void test_function(Test_fuck& t)
+{
+}
+
+void fun(F_queue flags_)
+{
+
+}
 
 void test_all()
 {
     init_show;
-
-    show_info("{} {} {}", 
-        sizeof(BindImageMemoryInfo_base),
-        sizeof(BindImageMemroyDeviceGroupInfo), 
-        sizeof(VkBindImageMemoryDeviceGroupInfo)
-    );
-
-    BindImageMemroyDeviceGroupInfo b;
-    BindImageMemoryInfo c;
-
-    b << c;
 
     Test_fuck fuck;
     Fuck1 fuck1;
     Fuck2 fuck2;
     Fuck3 fuck3;
 
-    enum class test_enum {
-        e_sparse_binding_bit = 0x00000001,
-        e_sparse_residency_bit = 0x00000002,
-        e_sparse_aliased_bit = 0x00000004,
-        e_protected_bit = 0x00000008,
-    };
-
+    //封装后的位标的用法
     fun({});
     fun(F_queue::Bits::e_protected | F_queue::Bits::e_compute);
     fun({ F_queue::Bits::e_compute ,F_queue::Bits::e_protected});

@@ -150,6 +150,7 @@
     <None Include="vk.xlsx" />
     <None Include="vk1.1.82.fuckhtml" />
     <None Include="vk_1.1.85.db" />
+    <None Include="vk_bits.py" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="vk1.1.82.txt" />

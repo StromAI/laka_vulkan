@@ -488,10 +488,10 @@ namespace laka { namespace vk {
 	}
 
 	shared_ptr<VkExternalBufferProperties>
-		Physical_device::get_external_buffer_properties(
-			VkBufferCreateFlags c_flags_,
-			VkBufferUsageFlags	u_flags_,
-			VkExternalMemoryHandleTypeFlagBits	handle_type_)
+        Physical_device::get_external_buffer_properties(
+            F_buffer_create c_flags_,
+            F_buffer_usage	u_flags_,
+            F_external_memory_handle_type	handle_type_)
 	{
 		shared_ptr<VkExternalBufferProperties> sptr(new VkExternalBufferProperties);
 
@@ -500,7 +500,7 @@ namespace laka { namespace vk {
 			nullptr,
 			c_flags_,
 			u_flags_,
-			handle_type_
+			handle_type_.get()
 		};
 
 		instance->api.vkGetPhysicalDeviceExternalBufferProperties(

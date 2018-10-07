@@ -13,6 +13,12 @@ Permission is granted to anyone to use this software for any purpose, including 
 3. This notice may not be removed or altered from any source distribution.
 '''
 
+'''
+原本是用正则的 很快写完也感觉更方便 但考虑到规范性还是用解析xml来做
+
+有了vk.xml 基本上可以撇开网页文档 只需看这个文件就行
+'''
+
 import re
 from bs4 import BeautifulSoup
 
@@ -37,6 +43,73 @@ sdict = dict([])
 ssdict = dict([])
 flag_dict = dict([])
 
+def out_declare_member(struct_name_,base_name_):
+    name = struct_name_[2:]
+    declare = "struct "+name+":public "+base_name_+"{\n"
+    for m in ssdict[struct_name_]:
+        if m.name_=="pNext" or m.name_ == "sType":
+            continue
+    
+        declare += m.text_+";\n"
+
+    declare = declare+name+"(\n"
+    i = 0
+    for m in ssdict[struct_name]:
+        if m.name_=="pNext" or m.name_ == "sType":
+            continue
+
+        if i!=0:
+            declare+=",\n"
+        if m.type_.find('[') != -1:
+            declare += "Array_value<"+re.sub(r'[\[A-Za-z0-9_]*\]',"",m.type_)+">"+m.name_+"_"
+        else:
+            declare+=m.type_ +" "+m.name_+"_"
+        i+=1
+    declare = declare+");\n"
+    declare = declare + "};\n\n"
+    return declare
+
+
+def out_define(struct_name):
+    name= struct_name[2:]
+    define = name+"::"+name+"(\n"
+    i=0
+    for m in ssdict[struct_name]:
+        if m.name_=="pNext" or m.name_ == "sType":
+            continue
+
+        if i!=0:
+            define+=",\n"
+        if m.type_.find('[') != -1:
+            define += "Array_value<"+re.sub(r'[\[A-Za-z0-9_]*\]',"",m.type_)+">"+m.name_+"_"
+        else:
+            define+=m.type_ +" "+m.name_+"_"
+        i+=1
+    define+=")\n:"
+
+    array_init = ""
+    i=0
+    for m in ssdict[struct_name]:
+        if m.name_=="pNext" or m.name_ == "sType":
+            continue
+
+        if m.type_.find('[') != -1:
+            array_length = re.search(r'\[[A-Za-z0-9_]*\]',m.type_).group().replace("[","").replace("]","")
+            array_init += "\nif("+array_length+"<"+m.name_+"_.size() ){ init_show;show_err(\"array "+m.name_+" is too long\");return ;}"
+            array_init += "\nelse{ memcpy(&"+m.name_+"[0],"+m.name_+"_.data(),"+m.name_+"_.size() "+");}"
+            continue
+
+        if i!=0:
+            define+="\n,"
+        define+=m.name_+"("+m.name_+"_)"
+        i+=1
+    define+=\
+        "{"+\
+        array_init\
+        +"\n}\n\n"
+    return define
+
+
 for struct in struct_list:
     struct_name = struct.get('name')
     sdict[struct_name] = list()
@@ -45,10 +118,11 @@ for struct in struct_list:
 
     member_list = struct.find_all('member')
 
+    stype_str = ""
+
     for member in member_list:
         m = Member()
         m.name_ = member.find_all('name')[0].get_text()
-        m.type_ = member.type.get_text()
         member.type.string = member.type.get_text()+" "
         m.text_ = member.get_text()
 
@@ -56,8 +130,14 @@ for struct in struct_list:
         if temp!=None:
             temp = temp.get_text()
             m.text_ = m.text_.replace(temp,"")
+        m.type_ = m.text_.replace(m.name_,"")
         
         ssdict[struct_name].append(m)
+
+        temp = member.get('values')
+        if temp!=None and m.name_=="sType":
+            m.values_ = ",sType("+temp+")"
+                
 
 
 for struct in struct_list:
@@ -100,29 +180,23 @@ for struct in struct_list:
             "return *this;\n"\
         "}\n\n"
 
+    
 
     big_name = struct_name[2:]
-    big_declare = "struct "+big_name+":public "+base_name+"{\n"
-    for m in ssdict[struct_name]:
-        if m.name_ != "pNext" and m.name_ != "sType":
-            big_declare = big_declare + m.text_+";\n"
-    big_declare = big_declare + "};\n"
+    big_declare = out_declare_member(struct_name,base_name)
+
+    big_define = out_define(struct_name)
 
     nexts_declare = ""
     for current_struct_name in sdict[struct_name]:
         if flag_dict[current_struct_name] == True:
             continue
         next_name = current_struct_name[2:]
-        nexts_declare = nexts_declare + "struct "+next_name+":public "+base_name+"{\n"
-        for m in ssdict[current_struct_name]:
-            if m.name_ != "pNext" and m.name_ != "sType":
-                pass
-                nexts_declare = nexts_declare + m.text_+";\n"
-        flag_dict[current_struct_name] = True
-        nexts_declare = nexts_declare + "};\n\n"
+        nexts_declare = out_declare_member(struct_name,base_name)
+
 
     h_out+=base_declare+nexts_declare
-    cpp_out+=base_define
+    cpp_out+=base_define+big_define
 
 
 
