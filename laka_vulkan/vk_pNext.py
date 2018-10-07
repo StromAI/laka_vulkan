@@ -202,8 +202,8 @@ for struct in struct_list:
 
 count =0
 
-out_cpp_file = open("pNext.cpp", "w")
-out_h_file = open("pNext.h","w")
+out_cpp_file = open("vk_pNext.cpp", "w")
+out_h_file = open("vk_pNext.h","w")
 
 code = \
 "/*\n"\
@@ -222,7 +222,7 @@ h_code += \
 "namespace laka { namespace vk {\n"
 
 code+=\
-"#include \"pNext.h\"\n"\
+"#include \"vk_pNext.h\"\n"\
 "namespace laka { namespace vk {\n"
 
 h_code+=h_out

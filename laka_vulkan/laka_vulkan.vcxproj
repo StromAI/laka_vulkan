@@ -119,7 +119,7 @@
   <ItemGroup>
     <ClCompile Include="common.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="pNext.cpp" />
+    <ClCompile Include="vk_pNext.cpp" />
     <ClCompile Include="test_all.cpp" />
     <ClCompile Include="vk.cpp" />
     <ClCompile Include="vk_bits.cpp" />
@@ -133,7 +133,7 @@
     <ClInclude Include="common.h" />
     <ClInclude Include="find_bits2my_bits.py" />
     <ClInclude Include="laka_vk_define.h" />
-    <ClInclude Include="pNext.h" />
+    <ClInclude Include="vk_pNext.h" />
     <ClInclude Include="test.h" />
     <ClInclude Include="vk.h" />
     <ClInclude Include="vk_bits.h" />
@@ -142,9 +142,11 @@
     <ClInclude Include="vk_structs.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="enum.py" />
     <None Include="find_enum2my_enum.py" />
     <None Include="find_struct_2_my_struct.py" />
-    <None Include="pNext.py" />
+    <None Include="vk_pNext.py" />
+    <None Include="structs.py" />
     <None Include="validusage.json" />
     <None Include="valid_usage_json2sqlite3.py" />
     <None Include="vk.xlsx" />

@@ -58,7 +58,7 @@ for enum in enum_list:
         name+"(int flag_);\n"+\
     "public:\n"\
         "int flag;\n"\
-        "enum class Bits{\n"
+        "enum B{\n"
 
     new_m_name_list = []
 
@@ -66,7 +66,7 @@ for enum in enum_list:
         m_name = member.get('name')
         if m_name.find("_MAX_NUM") != -1:
             continue
-        new_m_name = "e_"+m_name.replace(fuck_name+"_","")
+        new_m_name = "b_"+m_name.replace(fuck_name+"_","")
         new_m_name = re.sub(r'_BIT$',"",new_m_name).lower()
         new_m_name_list.append(new_m_name)
         h_out+=new_m_name+" = "+m_name+",\n"
@@ -74,12 +74,12 @@ for enum in enum_list:
     h_out+="};\n"
     h_out+=\
     "{0}();\n"\
-    "{0}(Bits bits_);\n"\
+    "{0}(B bits_);\n"\
     "{0}({0} const& flag_);\n"\
-    "{0}(std::initializer_list<Bits> bit_list);\n"\
+    "{0}(std::initializer_list<B> bit_list);\n"\
     "{0}& operator = ({0} flag_);\n"\
-    "{0} operator | (Bits bit_);\n"\
-    "{0}& operator |= (Bits bit_);\n"\
+    "{0} operator | (B bit_);\n"\
+    "{0}& operator |= (B bit_);\n"\
     "{0} operator | ({0} flag_);\n"\
     "{0}& operator |= ({0} flag_);\n"\
     "{0} operator & ({0} flag_);\n"\
@@ -89,9 +89,9 @@ for enum in enum_list:
     "{0} operator ~ ();\n"\
     "bool operator !();\n"\
     "bool operator == ({0} flag_);\n"\
-    "bool operator == (Bits bit_);\n"\
+    "bool operator == (B bit_);\n"\
     "bool operator != ({0} flag_);\n"\
-    "bool operator != (Bits bit_);\n"\
+    "bool operator != (B bit_);\n"\
     "operator bool();\n"\
     "{0} all_flags();\n"\
     "{0}& clear();\n".format(name).replace("@","{").replace("$","}")
@@ -99,19 +99,19 @@ for enum in enum_list:
     h_out+=enum.get('name') + " get();\n"
     
     for new_m_nmae in new_m_name_list:
-        h_out+=name+"& "+new_m_nmae+"_on();\n"
-        h_out+=name+"& "+new_m_nmae+"_off();\n"
+        h_out+=name+"& "+"on_"+new_m_nmae[2:]+"();\n"
+        h_out+=name+"& "+"off_"+new_m_nmae[2:]+"();\n"
     h_out+="};\n"
-    h_out+=name+" operator|("+name+"::Bits bit1_,"+name+"::Bits bit2_);\n\n\n"
+    h_out+=name+" operator|("+name+"::B bit1_,"+name+"::B bit2_);\n\n\n"
 
     cpp_out+=\
     "{0}::{0}():flag(0)@$\n"\
-    "{0}::{0}({0}::Bits bits_):flag(static_cast<int>(bits_))@$\n"\
+    "{0}::{0}({0}::B bits_):flag(static_cast<int>(bits_))@$\n"\
     "{0}::{0}({0} const& flag_):flag(flag_.flag)@$\n"\
-    "{0}::{0}(std::initializer_list<Bits> bit_list)@for (auto&& bit : bit_list)@flag |= static_cast<int>(bit);$$\n"\
+    "{0}::{0}(std::initializer_list<B> bit_list)@for (auto&& bit : bit_list)@flag |= static_cast<int>(bit);$$\n"\
     "{0}& {0}::operator = ({0} flag_)@flag = flag_.flag;return *this;$\n"\
-    "{0} {0}::operator | (Bits bit_)@return flag | static_cast<int>(bit_);$\n"\
-    "{0}& {0}::operator |= (Bits bit_)@flag |= static_cast<int>(bit_);return *this;$\n"\
+    "{0} {0}::operator | (B bit_)@return flag | static_cast<int>(bit_);$\n"\
+    "{0}& {0}::operator |= (B bit_)@flag |= static_cast<int>(bit_);return *this;$\n"\
     "{0} {0}::operator | ({0} flag_)@return flag | flag_.flag;$\n"\
     "{0}& {0}::operator |= ({0} flag_)@flag |= flag_.flag;return *this;$\n"\
     "{0} {0}::operator & ({0} flag_)@return flag & flag_.flag;$\n"\
@@ -121,12 +121,12 @@ for enum in enum_list:
     "{0} {0}::operator ~ ()@return all_flags().flag^flag;$\n"\
     "bool {0}::operator !()@return !flag;$\n"\
     "bool {0}::operator == ({0} flag_)@return flag == flag_.flag;$\n"\
-    "bool {0}::operator == (Bits bit_)@return flag == static_cast<int>(bit_);$\n"\
+    "bool {0}::operator == (B bit_)@return flag == static_cast<int>(bit_);$\n"\
     "bool {0}::operator != ({0} flag_)@return flag != flag_.flag;$\n"\
-    "bool {0}::operator != (Bits bit_)@return flag != static_cast<int>(bit_);$\n"\
+    "bool {0}::operator != (B bit_)@return flag != static_cast<int>(bit_);$\n"\
     "{0}::operator bool()@return !!flag;$\n"\
     "{0}& {0}::clear()@flag = 0;return *this;$\n"\
-    "{0} operator|({0}::Bits bit1_, {0}::Bits bit2_)@{0} flags(bit1_);return flags | bit2_;$\n"\
+    "{0} operator|({0}::B bit1_, {0}::B bit2_)@{0} flags(bit1_);return flags | bit2_;$\n"\
     "{0}::{0}(int flags_):flag(flags_) @$\n{0} {0}::all_flags()@\n return "\
         .format(name).replace("@","{").replace("$","}")
     i = 0
@@ -144,9 +144,10 @@ for enum in enum_list:
     for member in member_list:
         m_name = member.get('name')
         cpp_out += name+"& "+name+ "::"+\
-                new_m_name_list[i] + "_on()\n{ flag |= " + m_name + "; return *this; }\n\n"
+                "on_"+new_m_name_list[i][2:] + "()\n{ flag |= " + m_name + "; return *this; }\n\n"
         cpp_out += name+"& "+name+ "::" +\
-                new_m_name_list[i] +"_off()\n{ flag &= ~" + m_name + "; return *this; }\n\n"
+                "off_"+new_m_name_list[i][2:] +"()\n{ flag &= ~" + m_name + "; return *this; }\n\n"
+        i+=1
     cpp_out+="\n\n"
 
 

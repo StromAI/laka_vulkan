@@ -41,8 +41,9 @@ std::initializer_list 的存储是未指定的（即它可以是自动、临时或静态只读内存，依赖
 #include <type_traits>
 
 #include "laka_vk_define.h"
+#include "vk_enums.h"
 #include "vk_bits.h"
-#include "pNext.h"
+#include "vk_pNext.h"
 
 table_vk_flag(std::shared_ptr<std::string> mean ZK, , s, YK FH);
 table_vk_flag(std::shared_ptr<std::string> mean ZK, , Bits, YK FH);
@@ -54,7 +55,7 @@ namespace laka {namespace vk {
 	Module_handle get_module();
 	PFN_vkVoidFunction get_instance_proc_address(
 		VkInstance instance_, const char* function_name_);
-
+    
 	void show_result(VkResult ret_);
 	void show_result_assert(VkResult ret_);
 
@@ -184,25 +185,25 @@ namespace laka {namespace vk {
 
 		std::shared_ptr<VkExternalBufferProperties>
 			get_external_buffer_properties(
-				VkBufferCreateFlags c_flags_,
-				VkBufferUsageFlags	u_flags_,
-				VkExternalMemoryHandleTypeFlagBits	handle_type_);
+				F_buffer_create c_flags_,
+				F_buffer_usage	u_flags_,
+				F_external_memory_handle_type handle_type_);
 
 		std::shared_ptr<VkExternalFenceProperties>
 			get_external_fence_properties(
-				VkExternalFenceHandleTypeFlagBits    handle_type_);
+				F_external_fence_handle_type    handle_type_);
 
 		std::shared_ptr<VkExternalSemaphoreProperties>
 			get_external_semphore_properties(
-				VkExternalSemaphoreHandleTypeFlagBits    handle_type_);
+				F_external_semaphore_handle_type    handle_type_);
 
 		std::shared_ptr<VkImageFormatProperties2>
 			get_image_format_properties(
 				VkFormat                                    format_,
 				VkImageType                                 type_,
 				VkImageTiling                               tiling_,
-				VkImageUsageFlags                           usage_,
-				VkImageCreateFlags                          flags_,
+				F_image_usage                               usage_,
+				F_image_create                              flags_,
 				void*										next_ = nullptr);
 
 		std::shared_ptr<std::vector<VkSparseImageFormatProperties2>>
@@ -216,7 +217,7 @@ namespace laka {namespace vk {
 
 	class Physical_device_group {
 	public:
-		Instance * instance;
+		Instance* instance;
 		VkPhysicalDeviceGroupProperties properties;
 		std::vector<Physical_device*> physical_devices;
 	};
@@ -507,7 +508,7 @@ dclr_sclass(Image, VkImage)
 		void* map_memory(
 			VkDeviceSize                                offset_,
 			VkDeviceSize                                size_,
-			VkMemoryMapFlags                            flags_);
+			VkMemoryMapFlags                            flags_ = 0);//is a bitmask type for setting a mask, but is currently reserved for future use.
 
 		void unmap_memory();
 
@@ -548,42 +549,6 @@ dclr_sclass(Image, VkImage)
 		const VkAllocationCallbacks* allocation_callbacks;
 	public:
 		using Sptr = std::shared_ptr<Buffer>;
-
-		class E_Create {
-		public:
-			enum Bits {
-				E_sparse_binding = VK_BUFFER_CREATE_SPARSE_BINDING_BIT,
-				E_sparse_residency = VK_BUFFER_CREATE_SPARSE_RESIDENCY_BIT,
-				E_sparse_aliased = VK_BUFFER_CREATE_SPARSE_ALIASED_BIT,
-				E_protected = VK_BUFFER_CREATE_PROTECTED_BIT
-			};
-
-			int flag;
-			E_Create(int flag_);
-			E_Create operator | (E_Create value_);
-			E_Create operator | (Bits value_);
-		};
-
-		class E_Usage {
-		public:
-			enum Bits {
-				E_transfer_src = VK_BUFFER_USAGE_TRANSFER_SRC_BIT,
-				transfer_dst = VK_BUFFER_USAGE_TRANSFER_DST_BIT,
-				E_uniform_texel_buffer = VK_BUFFER_USAGE_UNIFORM_TEXEL_BUFFER_BIT,
-				E_storage_texel_buffer = VK_BUFFER_USAGE_STORAGE_TEXEL_BUFFER_BIT,
-				E_uniform_buffer = VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT,
-				E_storage_buffer = VK_BUFFER_USAGE_STORAGE_BUFFER_BIT,
-				E_index_buffer = VK_BUFFER_USAGE_INDEX_BUFFER_BIT,
-				E_vertex_buffer = VK_BUFFER_USAGE_VERTEX_BUFFER_BIT,
-				E_indirect_buffer = VK_BUFFER_USAGE_INDIRECT_BUFFER_BIT,
-				E_conditional_rendering = VK_BUFFER_USAGE_CONDITIONAL_RENDERING_BIT_EXT,
-			};
-
-			int flag;
-			E_Usage(int flag_);
-			E_Usage operator | (E_Usage value_);
-			E_Usage operator | (Bits value_);
-		};
 
 		~Buffer();
 
@@ -640,54 +605,6 @@ dclr_sclass(Image, VkImage)
 		const VkAllocationCallbacks* allocation_callbacks;
 	public:
 		using Sptr = std::shared_ptr<Image>;
-
-		class E_Create {
-		public:
-			enum Bits {
-				E_sparse_binding = VK_IMAGE_CREATE_SPARSE_BINDING_BIT,
-				E_sparse_residency = VK_IMAGE_CREATE_SPARSE_RESIDENCY_BIT,
-				E_sparse_aliased = VK_IMAGE_CREATE_SPARSE_ALIASED_BIT,
-				E_mutable_format = VK_IMAGE_CREATE_MUTABLE_FORMAT_BIT,
-				E_cube_compatible = VK_IMAGE_CREATE_CUBE_COMPATIBLE_BIT,
-				E_alias = VK_IMAGE_CREATE_ALIAS_BIT,
-				E_split_instance_bind_regions = VK_IMAGE_CREATE_SPLIT_INSTANCE_BIND_REGIONS_BIT,
-				E_2d_array_compatible = VK_IMAGE_CREATE_2D_ARRAY_COMPATIBLE_BIT,
-				E_block_texel_view_compatible = VK_IMAGE_CREATE_BLOCK_TEXEL_VIEW_COMPATIBLE_BIT,
-				E_extended_usage = VK_IMAGE_CREATE_EXTENDED_USAGE_BIT,
-				E_protected = VK_IMAGE_CREATE_PROTECTED_BIT,
-				E_disjoint = VK_IMAGE_CREATE_DISJOINT_BIT,
-
-				E_sample_locations_compatible_depth_ext = VK_IMAGE_CREATE_SAMPLE_LOCATIONS_COMPATIBLE_DEPTH_BIT_EXT,
-				E_split_instance_bind_regions_khr = VK_IMAGE_CREATE_SPLIT_INSTANCE_BIND_REGIONS_BIT_KHR,
-				E_2d_array_compatible_khr = VK_IMAGE_CREATE_2D_ARRAY_COMPATIBLE_BIT_KHR,
-				E_block_texel_view_compatible_khr = VK_IMAGE_CREATE_BLOCK_TEXEL_VIEW_COMPATIBLE_BIT_KHR,
-				E_extended_usage_khr = VK_IMAGE_CREATE_EXTENDED_USAGE_BIT_KHR,
-				E_disjoint_khr = VK_IMAGE_CREATE_DISJOINT_BIT_KHR,
-				E_alias_khr = VK_IMAGE_CREATE_ALIAS_BIT_KHR,
-			};
-			int flag;
-			E_Create(int flag_);
-			E_Create operator | (E_Create value_);
-			E_Create operator | (Bits value_);
-		};
-
-		class E_Usage {
-		public:
-			enum Bits {
-				E_transfer_src = VK_IMAGE_USAGE_TRANSFER_SRC_BIT,
-				E_transfer_dst = VK_IMAGE_USAGE_TRANSFER_DST_BIT,
-				E_sampled = VK_IMAGE_USAGE_SAMPLED_BIT,
-				E_storage = VK_IMAGE_USAGE_STORAGE_BIT,
-				E_color_attachment = VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT,
-				E_depth_stencil_attachment = VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT,
-				E_transient_attachment = VK_IMAGE_USAGE_TRANSIENT_ATTACHMENT_BIT,
-				E_input_attachment = VK_IMAGE_USAGE_INPUT_ATTACHMENT_BIT,
-			};
-			int flag;
-			E_Usage(int flag_);
-			E_Usage operator | (E_Usage value_);
-			E_Usage operator | (Bits value_);
-		};
 
 		~Image();
 
@@ -767,11 +684,11 @@ dclr_sclass(Image, VkImage)
 		Device_api* api;
 
 		VkResult begin(
-			VkCommandBufferUsageFlags                flags,
-			const VkCommandBufferInheritanceInfo*    pInheritanceInfo = nullptr,
+			F_command_buffer_usage                  flags,
+			const VkCommandBufferInheritanceInfo*   pInheritanceInfo = nullptr,
 			void*                         pNext = nullptr);
 
-		VkResult reset(VkCommandBufferResetFlags flags_);
+		VkResult reset(F_command_buffer_reset flags_);
 		VkResult end();
 
 		//如果cmd的api都是void返回值 那么可以用它来返回Commd_buffer自身.设个语法糖.
@@ -817,29 +734,29 @@ dclr_sclass(Image, VkImage)
 			const VkRect2D* pScissors);
 
 		void set_stencil_compare_mask(
-			VkStencilFaceFlags faceMask,
+            F_stencil_face      faceMask,
 			uint32_t			compareMask);
 
 		void set_stencil_reference(
-			VkStencilFaceFlags	faceMask,
+            F_stencil_face	    faceMask,
 			uint32_t			reference);
 
 		void set_stencil_write_mask(
-			VkStencilFaceFlags faceMask,
-			uint32_t writeMask);
+			F_stencil_face      faceMask,
+			uint32_t            writeMask);
 
 		void set_viewport(
 			uint32_t firstViewport,
 			Array_value<VkViewport> viewports_);
 
-		void event_set(Event&  event_, VkPipelineStageFlags	stageMask);
+		void event_set(Event&  event_, F_pipeline_stage	stageMask);
 
-		void event_reset(Event& event_, VkPipelineStageFlags stageMask);
+		void event_reset(Event& event_, F_pipeline_stage stageMask);
 
 		void query_begin(
 			Query_pool&	queryPool,
 			uint32_t	query,
-			VkQueryControlFlags	flags);
+			F_query_control	flags);
 
 		void query_reset(
 			Query_pool&	queryPool,
@@ -857,7 +774,7 @@ dclr_sclass(Image, VkImage)
 			Buffer&                                     dstBuffer,
 			VkDeviceSize                                dstOffset,
 			VkDeviceSize                                stride,
-			VkQueryResultFlags                          flags);
+			F_query_result                              flags);
 
 		void commands_execute(Command_buffer_s& pCommandBuffers);
 
@@ -889,7 +806,7 @@ dclr_sclass(Image, VkImage)
 			Array_value <VkClearRect>                   pRects);
 
 		void image_clear_color(
-			Image&                                     image,
+			Image&                                      image,
 			VkImageLayout                               imageLayout,//检查有没有可能多个布局能用在一种图上
 			const VkClearColorValue*                    pColor,
 			Array_value<VkImageSubresourceRange>        pRanges);
@@ -939,13 +856,13 @@ dclr_sclass(Image, VkImage)
 			VkDeviceSize                                offset);
 
 		void write_timestamp(
-			VkPipelineStageFlagBits                     pipelineStage,
+			F_pipeline_stage                            pipelineStage,
 			Query_pool&                                 queryPool,
 			uint32_t                                    query);
 
 		void push_constants(
 			Pipeline_layout&                            layout,
-			VkShaderStageFlags                          stageFlags,
+			F_shader_stage                              stageFlags,
 			uint32_t                                    offset,
 			uint32_t                                    size,
 			const void*                                 pValues);
@@ -972,8 +889,8 @@ dclr_sclass(Image, VkImage)
 
 		void wait_events(
 			Array_value<std::shared_ptr<Event>>			events_,
-			VkPipelineStageFlags                        srcStageMask,
-			VkPipelineStageFlags                        dstStageMask,
+            F_pipeline_stage                            srcStageMask,
+            F_pipeline_stage                            dstStageMask,
 			Array_value<VkMemoryBarrier> 				memory_barriers_,
 			Array_value<VkBufferMemoryBarrier>  		buffer_memory_barriers_,
 			Array_value<VkImageMemoryBarrier> 			image_memory_barriers_);
@@ -982,9 +899,9 @@ dclr_sclass(Image, VkImage)
 
 		void pipeline_barrier(
 			VkCommandBuffer                             commandBuffer,
-			VkPipelineStageFlags                        srcStageMask,
-			VkPipelineStageFlags                        dstStageMask,
-			VkDependencyFlags                           dependencyFlags,
+            F_pipeline_stage                            srcStageMask,
+            F_pipeline_stage                            dstStageMask,
+			F_dependency                                dependencyFlags,
 			Array_value<VkMemoryBarrier>				memory_barriers_,
 			Array_value<VkBufferMemoryBarrier> 			buffer_memory_barriers_,
 			Array_value<VkImageMemoryBarrier>			image_memory_barriers_);
@@ -1065,19 +982,6 @@ dclr_sclass(Image, VkImage)
 	public:
 		using Sptr = std::shared_ptr<Command_pool>;
 
-		class E_Create {
-		public:
-			enum Bits {
-				E_transient = VK_COMMAND_POOL_CREATE_TRANSIENT_BIT,
-				E_reset_command_buffer = VK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT,
-				E_protected = VK_COMMAND_POOL_CREATE_PROTECTED_BIT
-			};
-			int flag;
-			E_Create(int flag_);
-			E_Create operator | (E_Create value_);
-			E_Create operator | (Bits value_);
-		};
-
 		~Command_pool();
 
 		std::shared_ptr<Command_buffer> get_a_command_buffer(
@@ -1095,9 +999,9 @@ dclr_sclass(Image, VkImage)
 			uint32_t                command_buffer_count_,
 			VkCommandBufferLevel    level);
 
-		VkResult reset(VkCommandPoolResetFlags flags);
+		VkResult reset(F_command_pool_reset flags);
 
-		void trim(VkCommandPoolTrimFlags flags);
+		void trim(VkCommandPoolTrimFlags flags = 0);//is a bitmask type for setting a mask, but is currently reserved for future use.
 
 		std::shared_ptr<Device> device;
 		VkCommandPool handle;
@@ -1173,18 +1077,6 @@ dclr_sclass(Image, VkImage)
 	public:
 		using Sptr = std::shared_ptr<Descriptor_pool>;
 
-		class E_Create {
-		public:
-			enum Bits {
-				E_free_descriptor_set = VK_DESCRIPTOR_POOL_CREATE_FREE_DESCRIPTOR_SET_BIT,
-				E_update_after_bind = VK_DESCRIPTOR_POOL_CREATE_UPDATE_AFTER_BIND_BIT_EXT,
-			};
-			int flag;
-			E_Create(int flag_);
-			E_Create operator | (E_Create value_);
-			E_Create operator | (Bits value_);
-		};
-
 		~Descriptor_pool();
 
 		std::shared_ptr<Descriptor_set> get_a_descriptor_set(
@@ -1196,7 +1088,7 @@ dclr_sclass(Image, VkImage)
 			std::vector<VkDescriptorSetLayout>& set_layouts,
 			const void* next_ = nullptr);
 
-		VkResult reset(VkDescriptorPoolResetFlags flags);
+		VkResult reset( VkDescriptorPoolResetFlags flags = 0);//is a bitmask type for setting a mask, but is currently reserved for future use.
 
 		std::shared_ptr<Device> device;
 		VkDescriptorPool handle;
@@ -1277,18 +1169,6 @@ dclr_sclass(Image, VkImage)
 	public:
 		using Sptr = std::shared_ptr<Descriptor_set_layout>;
 
-		class E_Create {
-		public:
-			enum Bits {
-				E_push_descriptor = VK_DESCRIPTOR_SET_LAYOUT_CREATE_PUSH_DESCRIPTOR_BIT_KHR,
-				E_update_after_bind_pool = VK_DESCRIPTOR_SET_LAYOUT_CREATE_UPDATE_AFTER_BIND_POOL_BIT_EXT,
-			};
-			int flag;
-			E_Create(int flag_);
-			E_Create operator | (E_Create value_);
-			E_Create operator | (Bits value_);
-		};
-
 		~Descriptor_set_layout();
 
 		std::shared_ptr<Descriptor_update_template> get_a_descriptor_update_template(
@@ -1313,34 +1193,13 @@ dclr_sclass(Image, VkImage)
 	public:
 		using Sptr = std::shared_ptr<Query_pool>;
 
-		class E_Pipeline_statistic {
-		public:
-			enum Bits {
-				E_input_assembly_vertices = VK_QUERY_PIPELINE_STATISTIC_INPUT_ASSEMBLY_VERTICES_BIT,
-				E_input_assmbly_primitives = VK_QUERY_PIPELINE_STATISTIC_INPUT_ASSEMBLY_PRIMITIVES_BIT,
-				E_vertex_shader_invocations = VK_QUERY_PIPELINE_STATISTIC_VERTEX_SHADER_INVOCATIONS_BIT,
-				E_geometry_shader_invocations = VK_QUERY_PIPELINE_STATISTIC_GEOMETRY_SHADER_INVOCATIONS_BIT,
-				E_geometry_shader_primitives = VK_QUERY_PIPELINE_STATISTIC_GEOMETRY_SHADER_PRIMITIVES_BIT,
-				E_clipping_invocattions = VK_QUERY_PIPELINE_STATISTIC_CLIPPING_INVOCATIONS_BIT,
-				E_clipping_primitives = VK_QUERY_PIPELINE_STATISTIC_CLIPPING_PRIMITIVES_BIT,
-				E_fragment_shader_invocations = VK_QUERY_PIPELINE_STATISTIC_FRAGMENT_SHADER_INVOCATIONS_BIT,
-				E_tessellation_control_shader_patches = VK_QUERY_PIPELINE_STATISTIC_TESSELLATION_CONTROL_SHADER_PATCHES_BIT,
-				E_tessellation_evaluation_shader_invocations = VK_QUERY_PIPELINE_STATISTIC_TESSELLATION_EVALUATION_SHADER_INVOCATIONS_BIT,
-				E_compute_shader_invocations = VK_QUERY_PIPELINE_STATISTIC_COMPUTE_SHADER_INVOCATIONS_BIT,
-			};
-			int flag;
-			E_Pipeline_statistic(int flag_);
-			E_Pipeline_statistic operator | (E_Pipeline_statistic value_);
-			E_Pipeline_statistic operator | (Bits value_);
-		};
-
 		VkResult get_results(
 			uint32_t                                    firstQuery,
 			uint32_t                                    queryCount,
 			size_t                                      dataSize,
 			void*                                       pData,
 			VkDeviceSize                                stride,
-			VkQueryResultFlags                          flags);
+			F_query_result                              flags);
 
 		~Query_pool();
 
@@ -1421,16 +1280,16 @@ dclr_sclass(Image, VkImage)
 			const VkAllocationCallbacks* allocator_ = default_allocation_cb());
 
 		std::shared_ptr<Compute_pipeline> get_a_compute_pipeline(
-			VkPipelineCreateFlags               flags,
+			F_pipeline_create                   flags,
 			std::shared_ptr<Pipeline_cache>		pipeline_cache_,
 			std::shared_ptr<Shader_module>      module_,
 			const char*                         pName,//shader 入口点名称
-			VkShaderStageFlagBits               stage_flags,
+			F_shader_stage                      stage_flags,
 			const VkSpecializationInfo*         pSpecializationInfo = nullptr,
 			const VkAllocationCallbacks*		allocator_ = default_allocation_cb());
 
 		std::shared_ptr<Graphics_pipeline> get_a_graphics_pipeline(
-			VkPipelineCreateFlags							flag_,
+            F_pipeline_create							    flag_,
 			Render_pass&									render_pass_,
 			uint32_t										subpass,
 			Pipeline_cache*									cache_,
@@ -1505,11 +1364,11 @@ dclr_sclass(Image, VkImage)
 		~Compute_pipeline();
 
 		std::shared_ptr<Compute_pipeline> get_a_compute_pipeline(
-			VkPipelineCreateFlags               flags,
+			F_pipeline_create                   flags,
 			std::shared_ptr<Pipeline_cache>		pipeline_cache_,
 			std::shared_ptr<Shader_module>		module_,
 			const char*                         rukou_name_,
-			VkShaderStageFlagBits               stage_flags,
+			F_shader_stage                      stage_flags,
 			std::shared_ptr< Pipeline_layout>	pipeline_layout_ = nullptr,
 			const VkSpecializationInfo*			pSpecializationInfo = nullptr,
 			const VkAllocationCallbacks*		allocator_ = default_allocation_cb());
@@ -1625,22 +1484,22 @@ dclr_sclass(Image, VkImage)
 
 		std::shared_ptr<Buffer> get_a_buffer(
 			VkDeviceSize		buffer_size_,
-			Buffer::E_Create    create_flags_,
-			Buffer::E_Usage	    usage_flags_,
-			VkSharingMode		sharing_mode_,
+			F_buffer_create     create_flags_,
+			F_buffer_usage	    usage_flags_,
+			E_sharing_mode		sharing_mode_,
 			Array_value<uint32_t> queue_family_indices_,
 			const void* next_ = nullptr,
 			const VkAllocationCallbacks* allocator_ = default_allocation_cb());
 
 		std::shared_ptr<Image> get_a_image(
-			Image::E_Create         create_fb_,
+			F_image_create          create_fb_,
 			VkImageType             imageType_,
 			VkFormat                format_,
 			VkExtent3D              extent_,
 			uint32_t                mipLevels_,
 			uint32_t                arrayLayers_,
-			VkSampleCountFlagBits   samples_,
-			Image::E_Usage          usage_fb_,
+			F_sample_count          samples_,
+			F_image_usage           usage_fb_,
 			VkSharingMode           sharingMode_,
 			VkImageTiling           tiling_,
 			Array_value<uint32_t>	queue_family_indices_,
@@ -1681,24 +1540,24 @@ dclr_sclass(Image, VkImage)
 
 		std::shared_ptr<Command_pool> get_a_command_pool(
 			uint32_t                    queueFamilyIndex,
-			Command_pool::E_Create      flags_,
+			F_command_pool_create       flags_,
 			const VkAllocationCallbacks* allocator_ = default_allocation_cb());
 
 		std::shared_ptr<Descriptor_pool> get_a_descriptor_pool(
 			uint32_t                                maxSets,
-			Array_value<VkDescriptorPoolSize>     poolSizes,
-			Descriptor_pool::E_Create               flags_,
+			Array_value<VkDescriptorPoolSize>       poolSizes,
+            F_command_pool_create                   flags_,
 			const VkAllocationCallbacks*            allocator_ = default_allocation_cb());
 
 		std::shared_ptr<Query_pool> get_a_query_pool(
 			VkQueryType query_type,
 			uint32_t    query_count,
-			Query_pool::E_Pipeline_statistic queue_pipeline_statistic_flags_,
+			F_query_pipeline_statistic queue_pipeline_statistic_flags_,
 			const VkAllocationCallbacks* allocator_ = default_allocation_cb());
 
 		std::shared_ptr<Descriptor_set_layout> get_a_descriptor_set_layout(
-			Descriptor_set_layout::E_Create				flags_,
-			Array_value<VkDescriptorSetLayoutBinding>	bindings_ = {},
+            VkDescriptorSetLayoutCreateFlags				flags_,//手册中有但vk.xml中没有
+			Array_value<VkDescriptorSetLayoutBinding>	    bindings_ = {},
 			const void* next_ = nullptr,
 			const VkAllocationCallbacks* allocator_ = default_allocation_cb());
 
@@ -1721,7 +1580,7 @@ dclr_sclass(Image, VkImage)
 		VkResult invalidate_mapped_memory_ranges(
 			Array_value<VkMappedMemoryRange> mapped_memory_ranges_);
 
-		VkPeerMemoryFeatureFlags get_peer_memory_feature(
+		F_peer_memory_feature get_peer_memory_feature(
 			uint32_t                                    heapIndex_,
 			uint32_t                                    localDeviceIndex_,
 			uint32_t                                    remoteDeviceIndex_);

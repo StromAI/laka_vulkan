@@ -255,10 +255,10 @@ void test_all()
 
     //封装后的位标的用法
     fun({});
-    fun(F_queue::Bits::e_protected | F_queue::Bits::e_compute);
-    fun({ F_queue::Bits::e_compute ,F_queue::Bits::e_protected});
+    fun(F_queue::B::b_graphics | F_queue::B::b_compute);
+    fun({ F_queue::B::b_compute ,F_queue::B::b_compute});
     F_queue flag_q;
-    flag_q.e_compute_on().e_protected_on();//为了能这么用,特意搞成生成代码.
+    flag_q.on_compute().on_graphics();//为了能这么用,特意搞成生成代码.
     fun(flag_q);
 
 	vector<int> v_int{0,1,2};
@@ -366,13 +366,11 @@ void test_all()
 
 	auto event_temp = device->get_a_event();
 
-	auto buffer = device->get_a_buffer(
-		2048,
-		Buffer::E_Create::E_sparse_residency
-		| Buffer::E_Create::E_sparse_binding,
-		Buffer::E_Usage::E_vertex_buffer
-		| Buffer::E_Usage::E_conditional_rendering,
-		VkSharingMode::VK_SHARING_MODE_BEGIN_RANGE,
-		{ 0,1 }
-	);
+    auto buffer = device->get_a_buffer(
+        2048, 
+        F_buffer_create::b_sparse_binding, 
+        F_buffer_usage::b_storage_texel_buffer, 
+        E_sharing_mode::e_concurrent,
+        { 0,1 }
+    );
 }
