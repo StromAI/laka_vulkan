@@ -15,6 +15,8 @@ Permission is granted to anyone to use this software for any purpose, including 
 
 #pragma once
 #include "vulkan/vulkan.h"
+#include "common.h"
 namespace laka { namespace vk {
+
 }}
 
