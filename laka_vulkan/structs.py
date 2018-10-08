@@ -132,6 +132,8 @@ class Struct:
 class S_member:
     m_name = ""
     m_type = ""
+    m_type_only = ""
+    m_array = ""
     m_value = ""
     m_len = ""
     m_altlen = ""
@@ -139,10 +141,13 @@ class S_member:
     m_externsync = ""
     m_noautovalidity = ""
     text = ""
+    comment = ""
     def prt(this_):
         print "\t-----------------------"
         print "\tname:\t"+this_.m_name
         print "\ttype:\t"+this_.m_type
+        print "\ttype only:\t"+this_.m_type_only
+        print "\tarray:\t"+this_.m_array
         print "\tvalue:\t"+this_.m_value
         print "\tlen:\t"+this_.m_len
         print "\taltlen:\t"+this_.m_altlen
@@ -150,6 +155,7 @@ class S_member:
         print "\texternsync:\t"+this_.m_externsync
         print "\tnoautovalidity\t"+this_.m_noautovalidity
         print "\ttext:\t"+this_.text
+        print "\tcomment:\t"+this_.comment
 
 struct_list = soup.registry.types.find_all('type',attrs={'category':'struct'})
 
@@ -194,30 +200,28 @@ for struct in struct_list:
         structextends = "can be pNext insert into:\t"+structextends+"\n"
 
     my_struct.comment = "/*\n"+returnedonly+structextends+comment+"*/\n"
+    
+    
 
-    '''
-    class S_member:
-    m_name = ""
-    m_type = ""
-    m_value = ""
-    m_len = ""
-    m_altlen = ""
-    m_optional=""
-    m_externsync = ""
-    m_noautovalidity = ""
-    text = ""
-    '''
     member_list = struct.find_all('member')
     for member in member_list:
         m = S_member()
         m.m_name = member.find_all('name')[0].get_text()
-        m.m_type = member.type.get_text()
         m.text = member.get_text()
-
+        
         temp = member.comment
+        temp1 = ""
         if temp!=None:
-            temp1 = temp.get_text()
-            m.text = m.text.replace(temp1,"")
+            m.comment = temp1 = temp.get_text()
+        m.text = m.text.replace(temp1,"")
+        m.m_type = m.text.replace(m.m_name,"")
+        m.m_type_only=member.type.get_text()
+
+        m.m_array = ""
+        temp = re.search(r'\[[A-Za-z0-9_]*\]',m.text)
+        if temp!=None:
+            m.m_array = temp.group().replace("[","").replace("]","")
+
 
         if m.text.find('[')!=-1:
             m.text = re.sub(r'\[[A-Z_a-z0-9]*\]',"",m.text).replace(m.m_type,m.m_type+"*")
@@ -228,11 +232,11 @@ for struct in struct_list:
 
         temp = member.get('len')
         if temp!=None:
-            m.m_len = "(len:"+temp+")"
+            m.m_len = temp
 
         temp = member.get('altlen')
         if temp!=None:
-            m.altlen = "(altlen)"
+            m.altlen = "altlen"
 
         temp = member.get('externsync')
         if temp!=None:
@@ -260,12 +264,12 @@ for struct2 in struct_list:
         
 for struct3 in struct_list:
     struct_name = struct3.get('name')
-    s = struct_dict[struct_name]
-    #s.prt()
+    s = struct_dict.get(struct_name)
+    if s!=None:
+        s.prt()
     #处理带有sType pNext的struct
 
 
-name_dict['VkPhysicalDeviceRaytracingPropertiesNVX'].prt()
 
 out_cpp_file = open(file_name+".cpp", "w")
 out_h_file = open(file_name+".h","w")
