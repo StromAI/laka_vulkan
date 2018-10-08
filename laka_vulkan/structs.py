@@ -30,60 +30,242 @@ for author_node in author_list:
     author_name_list.append(author_node.get('name') )
 print author_name_list
 
+class MyName:
+    my_name = ""
+    vk_name = ""
+    fuck_name = ""
+    sub_names = []
+    houzhui = ""
+    def prt(this_):
+        print "---------------------------------------"
+        print "vk name:\t"+this_.vk_name
+        print "my name:\t"+this_.my_name
+        print "houzhui name:\t"+this_.houzhui
+        print "fuck name:\t"+this_.fuck_name
+        print "sub name:"
+        print this_.sub_names
 
-def get_new_name(old_name):
-    old_name = re.search(r'')
+def get_my_name(vk_name_,qianzhui_,vk_):
+    my_name = MyName()
+    my_name.vk_name = vk_name_
+    temp1 = re.sub(r'^'+vk_,"",vk_name_)
+    temp2 = temp1
+    for hz in author_name_list:
+        temp3 = re.search( str(hz+"$"),temp1)
+        if temp3 != None:
+            my_name.houzhui = temp3.group()
+            temp2 = re.sub( my_name.houzhui+"$" ,"",temp2)
+    temp_list1 = re.findall(r'[A-Z][a-z]+|[A-Z]|[0-9]+',temp2)
+    temp_list2 = []
+    
 
+    i=0
+    while i<len(temp_list1):
+        temp_sub1 = ""
+        if temp_list1[i].isupper():
+            while i<len(temp_list1) and temp_list1[i].isupper():
+                temp_sub1 += temp_list1[i]
+                i+=1
+            temp_list2.append(temp_sub1)
+        else:
+            if temp_list1[i].isdigit():
+                while i<len(temp_list1) and temp_list1[i].isdigit():
+                    temp_sub1 += temp_list1[i]
+                    i+=1
+                temp_list2.append(temp_sub1)
+            else:
+                temp_sub1 += temp_list1[i]
+                i+=1
+                temp_list2.append(temp_sub1)
+    temp_list3 = []
+    i=0
+    j=0
+    while i<len(temp_list2):
+        temp_sub = temp_list2[i]
+        if temp_list2[i].isdigit():
+            if i+1<len(temp_list2):
+                if temp_list2[i+1] == 'D' or temp_list2[i+1] == 'Bit':
+                    temp_sub = temp_list2[i]+temp_list2[i+1]
+                    i+=1
+                else:
+                    if j>0 :
+                        temp_list3[j-1]+=temp_sub
+                        i+=1
+                        continue
+            else:
+                if j>0 :
+                    temp_list3[j-1]+=temp_sub
+                    i+=1
+                    continue
+        temp_list3.append(temp_sub)
+        i+=1
+        j+=1
+    my_name.sub_names = temp_list3[:]
+    my_name.my_name = qianzhui_
+    my_name.fuck_name = vk_
+    for sub_name in my_name.sub_names:
+        my_name.my_name += "_"+sub_name.lower()
+        my_name.fuck_name += "_"+sub_name
+
+    return my_name
+
+class Struct:
+    vk_name = ""
+    my_name = ""
+    comment = ""
+    returned_only = ""
+    struct_extends = []
+    struct_extends_to = ""
+    members = []
+    def prt(this_):
+        print "--------------------------------------------"
+        print "vk name\t:" +this_.vk_name
+        print "my name\t:"+this_.my_name
+        print this_.returned_only
+        print this_.comment
+        print "extends to:\t"+ this_.struct_extends_to
+        print "extends:\t"
+        print this_.struct_extends
+        for m in this_.members:
+            m.prt()
+
+class S_member:
+    m_name = ""
+    m_type = ""
+    m_value = ""
+    m_len = ""
+    m_altlen = ""
+    m_optional=""
+    m_externsync = ""
+    m_noautovalidity = ""
+    text = ""
+    def prt(this_):
+        print "\t-----------------------"
+        print "\tname:\t"+this_.m_name
+        print "\ttype:\t"+this_.m_type
+        print "\tvalue:\t"+this_.m_value
+        print "\tlen:\t"+this_.m_len
+        print "\taltlen:\t"+this_.m_altlen
+        print "\toptional:\t"+this_.m_optional
+        print "\texternsync:\t"+this_.m_externsync
+        print "\tnoautovalidity\t"+this_.m_noautovalidity
+        print "\ttext:\t"+this_.text
 
 struct_list = soup.registry.types.find_all('type',attrs={'category':'struct'})
 
-old2new_dict = dict([])
-new2old_dict = dict([])
+name_dict = dict([])
+struct_dict = dict([])
 
 for struct in struct_list:
     member_list = struct.find_all('member')
     if len(member_list)<=0:
         continue
+    if struct.get('alias') != None:
+        continue
 
     old_name = struct.get('name')
-
-    new_name = old_name[2:]
+    my_name = get_my_name(old_name,"S","Vk")
+    name_dict[my_name.my_name] = my_name
+    name_dict[my_name.vk_name] = my_name
     
-    houzhui = ""
-    i = 0
-    for hz in author_name_list:
-        temp = re.search(hz+'$',new_name)
-        if temp != None:
-            houzhui = temp.group()
-            new_name = new_name.replace(houzhui,"")
-    
-    print old_name
-    print houzhui
+    my_struct = Struct()
+    my_struct.vk_name = old_name
+    my_struct.my_name = my_name.my_name
+    my_struct.returned_only = struct.get('returnedonly')
+    my_struct.members = list()
+    my_struct.struct_extends = list()
 
-    if temp!=None:
-        houzhui = temp.group()
-    sub_names = re.findall(r'[A-Z]+[a-z]*',new_name)
-    new_name = ""
-    i= 0
-    for sub_name in sub_names:
-        if i!=0:
-            new_name+="_"
-        new_name+=sub_name
-        i+=1
 
-    fuck_name = "VK_"+ new_name.upper()
-    
-    if houzhui!="":
-        new_name+="_"+houzhui
+    comment = struct.get('comment')
+    if comment == None:
+        comment = ""
 
-    new_name = "S_"+new_name.lower()
+    returnedonly = ""
+    if returnedonly == "true":
+        returnedonly = "just return only\n"
+    else:
+        returnedonly = ""
+        
+    structextends = struct.get('structextends')
+    if structextends == None:
+        structextends = ""
+    else:
+        my_struct.struct_extends_to = structextends
+        structextends = "can be pNext insert into:\t"+structextends+"\n"
+
+    my_struct.comment = "/*\n"+returnedonly+structextends+comment+"*/\n"
 
     '''
-    print "----------"+old_name+"-----------"
-    print new_name
-    print sub_names
-    print houzhui
+    class S_member:
+    m_name = ""
+    m_type = ""
+    m_value = ""
+    m_len = ""
+    m_altlen = ""
+    m_optional=""
+    m_externsync = ""
+    m_noautovalidity = ""
+    text = ""
     '''
+    member_list = struct.find_all('member')
+    for member in member_list:
+        m = S_member()
+        m.m_name = member.find_all('name')[0].get_text()
+        m.m_type = member.type.get_text()
+        m.text = member.get_text()
+
+        temp = member.comment
+        if temp!=None:
+            temp1 = temp.get_text()
+            m.text = m.text.replace(temp1,"")
+
+        if m.text.find('[')!=-1:
+            m.text = re.sub(r'\[[A-Z_a-z0-9]*\]',"",m.text).replace(m.m_type,m.m_type+"*")
+        
+        temp = member.get('values')
+        if temp!=None:
+            m.m_value = temp
+
+        temp = member.get('len')
+        if temp!=None:
+            m.m_len = "(len:"+temp+")"
+
+        temp = member.get('altlen')
+        if temp!=None:
+            m.altlen = "(altlen)"
+
+        temp = member.get('externsync')
+        if temp!=None:
+            m.m_externsync = "(externsync)"
+
+        temp = member.get('noautovalidity')
+        if temp!=None:
+            m.m_noautovalidity = "(noautovalidity)"
+
+        my_struct.members.append(m)
+
+    struct_dict[old_name] = my_struct
+
+    #pNext
+for struct2 in struct_list:
+    struct_name = struct2.get('name')
+    structextends = struct2.get('structextends')
+
+    if structextends != None:
+        temp_list = structextends.split(",")
+        
+        for temp in temp_list:
+            struct_dict[temp].struct_extends.append(struct_name)
+        
+        
+for struct3 in struct_list:
+    struct_name = struct3.get('name')
+    s = struct_dict[struct_name]
+    #s.prt()
+    #处理带有sType pNext的struct
+
+
+name_dict['VkPhysicalDeviceRaytracingPropertiesNVX'].prt()
 
 out_cpp_file = open(file_name+".cpp", "w")
 out_h_file = open(file_name+".h","w")
