@@ -820,7 +820,7 @@ e_viv = VK_VENDOR_ID_VIV,
 e_vsi = VK_VENDOR_ID_VSI,
 e_kazan = VK_VENDOR_ID_KAZAN,
 };
-
+#if 0
 /*VkDriverIdKHR*/
 enum class E_driver_id_khr{
 e_amd_proprietary_khr = VK_DRIVER_ID_AMD_PROPRIETARY_KHR,
@@ -833,7 +833,7 @@ e_imagination_proprietary_khr = VK_DRIVER_ID_IMAGINATION_PROPRIETARY_KHR,
 e_qualcomm_proprietary_khr = VK_DRIVER_ID_QUALCOMM_PROPRIETARY_KHR,
 e_arm_proprietary_khr = VK_DRIVER_ID_ARM_PROPRIETARY_KHR,
 };
-
+#endif
 /*VkShadingRatePaletteEntryNV*/
 enum class E_shading_rate_palette_entry_nv{
 e_no_invocations_nv = VK_SHADING_RATE_PALETTE_ENTRY_NO_INVOCATIONS_NV,

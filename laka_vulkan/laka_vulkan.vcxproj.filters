@@ -22,6 +22,9 @@
     <Filter Include="资源文件\不再使用">
       <UniqueIdentifier>{1689be86-7495-4d9d-929e-3d99a4ce2e79}</UniqueIdentifier>
     </Filter>
+    <Filter Include="资源文件\pyCharm项目">
+      <UniqueIdentifier>{c2176dce-a106-40bd-8a1e-baef2145694f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -94,9 +97,6 @@
     <None Include="vk.xlsx">
       <Filter>资源文件</Filter>
     </None>
-    <None Include="vk_bits.py">
-      <Filter>基础\提取和生成代码</Filter>
-    </None>
     <None Include="find_struct_2_my_struct.py">
       <Filter>资源文件\不再使用</Filter>
     </None>
@@ -112,22 +112,40 @@
     <None Include="vk1.1.82.fuckhtml">
       <Filter>资源文件\不再使用</Filter>
     </None>
-    <None Include="enum.py">
-      <Filter>基础\提取和生成代码</Filter>
-    </None>
     <None Include="find_enum2my_enum.py">
       <Filter>资源文件\不再使用</Filter>
     </None>
-    <None Include="structs.py">
+    <None Include="code_generation\vk_bits.py">
       <Filter>基础\提取和生成代码</Filter>
     </None>
-    <None Include="vk_pNext.py">
+    <None Include="code_generation\vk_enums.py">
       <Filter>基础\提取和生成代码</Filter>
+    </None>
+    <None Include="code_generation\vk_pNext.py">
+      <Filter>基础\提取和生成代码</Filter>
+    </None>
+    <None Include="code_generation\vk_structs.py">
+      <Filter>基础\提取和生成代码</Filter>
+    </None>
+    <None Include="code_generation\.idea\code_generation.iml">
+      <Filter>资源文件\pyCharm项目</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
     <Xml Include="vk.xml">
       <Filter>资源文件</Filter>
+    </Xml>
+    <Xml Include="code_generation\.idea\misc.xml">
+      <Filter>资源文件\pyCharm项目</Filter>
+    </Xml>
+    <Xml Include="code_generation\.idea\modules.xml">
+      <Filter>资源文件\pyCharm项目</Filter>
+    </Xml>
+    <Xml Include="code_generation\.idea\vcs.xml">
+      <Filter>资源文件\pyCharm项目</Filter>
+    </Xml>
+    <Xml Include="code_generation\.idea\workspace.xml">
+      <Filter>资源文件\pyCharm项目</Filter>
     </Xml>
   </ItemGroup>
   <ItemGroup>

@@ -44,6 +44,7 @@ std::initializer_list 的存储是未指定的（即它可以是自动、临时或静态只读内存，依赖
 #include "vk_enums.h"
 #include "vk_bits.h"
 #include "vk_pNext.h"
+#include "vk_structs.h"
 
 table_vk_flag(std::shared_ptr<std::string> mean ZK, , s, YK FH);
 table_vk_flag(std::shared_ptr<std::string> mean ZK, , Bits, YK FH);

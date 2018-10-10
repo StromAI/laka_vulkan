@@ -142,22 +142,27 @@
     <ClInclude Include="vk_structs.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="enum.py" />
+    <None Include="code_generation\.idea\code_generation.iml" />
+    <None Include="code_generation\vk_bits.py" />
+    <None Include="code_generation\vk_enums.py" />
+    <None Include="code_generation\vk_pNext.py" />
+    <None Include="code_generation\vk_structs.py" />
     <None Include="find_enum2my_enum.py" />
     <None Include="find_struct_2_my_struct.py" />
-    <None Include="vk_pNext.py" />
-    <None Include="structs.py" />
     <None Include="validusage.json" />
     <None Include="valid_usage_json2sqlite3.py" />
     <None Include="vk.xlsx" />
     <None Include="vk1.1.82.fuckhtml" />
     <None Include="vk_1.1.85.db" />
-    <None Include="vk_bits.py" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="vk1.1.82.txt" />
   </ItemGroup>
   <ItemGroup>
+    <Xml Include="code_generation\.idea\misc.xml" />
+    <Xml Include="code_generation\.idea\modules.xml" />
+    <Xml Include="code_generation\.idea\vcs.xml" />
+    <Xml Include="code_generation\.idea\workspace.xml" />
     <Xml Include="vk.xml">
       <SubType>Designer</SubType>
     </Xml>
