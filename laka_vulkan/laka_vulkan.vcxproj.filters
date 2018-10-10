@@ -48,9 +48,6 @@
     <ClCompile Include="vk_bits.cpp">
       <Filter>基础\提取和生成代码</Filter>
     </ClCompile>
-    <ClCompile Include="vk_enums.cpp">
-      <Filter>基础\提取和生成代码</Filter>
-    </ClCompile>
     <ClCompile Include="vk_structs.cpp">
       <Filter>基础\提取和生成代码</Filter>
     </ClCompile>

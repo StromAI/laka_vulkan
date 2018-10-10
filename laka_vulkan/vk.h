@@ -13,23 +13,6 @@ Permission is granted to anyone to use this software for any purpose, including 
 
 */
 
-/*
-https://zh.cppreference.com/w/cpp/utility/initializer_list
-(C++14 前)
-底层数组不保证在原始 initializer_list 对象的生存期结束后继续存在。
-std::initializer_list 的存储是未指定的（即它可以是自动、临时或静态只读内存，依赖场合）。
-(C++14 起)
-底层数组是 const T[N] 类型的临时数组，
-其中每个元素都从原始初始化器列表的对应元素复制初始化（除非窄化转换非法）。
-底层数组的生存期与任何其他临时对象相同，
-除了从数组初始化 initializer_list 对象会延长数组的生存期，
-恰如绑定引用到临时量（有例外，例如对于初始化非静态类成员）。底层数组可以分配在只读内存。
-
-意味着C++14前 未必是以数组存储或者作为参数在函数执行期内继续存在?
-*/
-//由于上述原因,本代码只适合支持C++14以上特性的编译器.
-
-
 //忽然觉得没必要将参数拍扁,使用官方封装好的结构体才更容易复用.
 //但如果在调用函数时直接输入参数会更好
 

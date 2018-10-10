@@ -15,15 +15,20 @@ Permission is granted to anyone to use this software for any purpose, including 
 
 import re
 from bs4 import BeautifulSoup
-#todo:整理代码
-#todo:加入enum
-#todo:加入flags
-#todo:生成pNext
-#todo:解决WSI问题 宏开关
+#todo:处理struct 成员初始值 包括不限于sType 并写入成员注释
+#todo:生成pNext struct    并写入注释
+#todo:确定struct 的父子关系 写入注释
+#todo:flags于flagbits的问题
 
-file_name = "vk_structs"
-cpp_out = ""
-h_out = ""
+my_format = \
+"/*\n"\
+"Copyright (c) 2018 gchihiha\n\n"\
+"This software is provided 'as-is', without any express or implied warranty. In no event will the authors be held liable for any damages arising from the use of this software.\n\n"\
+"Permission is granted to anyone to use this software for any purpose, including commercial applications, and to alter it and redistribute it freely, subject to the following restrictions:\n\n"\
+"1. The origin of this software must not be misrepresented; you must not claim that you wrote the original software. If you use this software in a product, an acknowledgment in the product documentation would be appreciated but is not required.\n\n"\
+"2. Altered source versions must be plainly marked as such, and must not be misrepresented as being the original software.\n\n"\
+"3. This notice may not be removed or altered from any source distribution.\n\n"\
+"*/\n\n"
 
 file = open("..\\vk.xml").read()
 soup = BeautifulSoup(file)
@@ -36,9 +41,12 @@ for author_node in author_list:
 
 platform_nodes = soup.registry.platforms.find_all('platform')
 platform_list = []
+wsi_dict = dict([])
 for p_node in platform_nodes:
-    platform_list.append(p_node.get('name') )
-print platform_list
+    name = p_node.get('name')
+    macro = p_node.get('protect')
+    platform_list.append(name)
+    wsi_dict[name] = macro
 
 class MyName:
     my_name = ""
@@ -65,10 +73,8 @@ def get_my_name(vk_name_,qianzhui_,vk_):
         if temp3 != None:
             my_name.houzhui = temp3.group()
             temp2 = re.sub( my_name.houzhui+"$" ,"",temp2)
-    temp_list1 = re.findall(r'[A-Z][a-z]+|[A-Z]|[0-9]+',temp2)
+    temp_list1 = temp_list1 = re.findall(r'[A-Z][a-z]+|[A-Z]|[0-9]+',temp2)
     temp_list2 = []
-    
-
     i=0
     while i<len(temp_list1):
         temp_sub1 = ""
@@ -121,6 +127,252 @@ def get_my_name(vk_name_,qianzhui_,vk_):
         my_name.my_name+="_"+my_name.houzhui
     return my_name
 
+name_dict = dict([])
+
+
+#处理enum
+enum_file_name = "vk_enums"
+
+cpp_out = ""
+h_out = ""
+
+enum_list = soup.registry.find_all('enums',attrs={'type':'enum'})
+for enum in enum_list:
+    enum_vk_name = enum.get('name')
+    my_name = get_my_name(enum_vk_name, "E", "Vk")
+    name_dict[my_name.my_name] = my_name
+    name_dict[my_name.vk_name] = my_name
+
+    comment0=""
+    comment_temp = enum.get('comment')
+    if comment_temp !=None:
+        comment0 = comment_temp
+    h_out += "/*\t" + enum_vk_name +"\n"+ comment0 +"*/\n"
+
+    de = 0
+    if my_name.vk_name == "VkDriverIdKHR":
+        de = 1
+
+    h_out += \
+    "enum class " + my_name.my_name + "{\n"
+
+    if de == 1:
+        h_out += "#if 0\n"
+
+    member_list = enum.find_all('enum')
+    if len(member_list) <= 0:
+        h_out+="using "+my_name.my_name+" = "+enum_vk_name+";\n\n"
+        continue
+
+    for member in member_list:
+        m_vk_name = member.get('name')
+        m_my_name = get_my_name(m_vk_name, "e", "VK")
+        m_my_name.my_name = "e"+m_vk_name.replace(my_name.fuck_name.upper(),"").lower()
+        m_my_name.my_name = m_my_name.my_name.replace(my_name.fuck_name.lower(), "")
+
+        name_dict[m_my_name.my_name] = m_my_name
+        name_dict[m_my_name.vk_name] = m_my_name
+
+        h_out += m_my_name.my_name + " = " + m_vk_name + ",\n"
+
+    if de == 1:
+        h_out += "#endif \n\n"
+
+    h_out += "};\n\n"
+
+
+out_h_file = open("..\\" + enum_file_name + ".h", "w")
+
+code = my_format
+h_code = code
+h_code += \
+"#pragma once\n"\
+"#include \"vulkan/vulkan.h\"\n"\
+"#include \"common.h\"\n"\
+"namespace laka { namespace vk {\n"
+h_code+=h_out+\
+"\n}}\n"
+
+print >> out_h_file,"%s" % (h_code)
+out_h_file.close()
+
+
+#处理flag bits
+flagbits_file_name = "vk_bits"
+
+cpp_out = ""
+h_out = ""
+
+flag_bits_list = soup.registry.find_all('enums',attrs={'type':'bitmask'})
+for enum in flag_bits_list:
+    vk_name = name = enum.get('name').replace("FlagBits", "")
+
+    sub_names = re.findall(r'[A-Z]+[a-z]*', name)
+    class_name = ""
+    for sub_name in sub_names:
+        class_name += sub_name + "_"
+
+    class_name = re.sub(r'_$', "", class_name)
+    class_name = re.sub("^Vk","",class_name)
+    fuck_name = "VK"+re.sub(r'_[A-Z]+[A-Z]*$', "", class_name).upper()
+
+    name = "F" + class_name.lower()
+
+    my_name = get_my_name(enum.get('name').replace("FlagBits", ""),"F","Vk")
+    my_name.my_name = name
+    my_name.vk_name = enum.get('name')
+    name_dict[my_name.my_name] = my_name
+    name_dict[my_name.vk_name] = my_name
+
+    comment = ""
+    temp = enum.get('comment')
+    if temp!=None:
+        comment = "\n"+temp
+    h_out+="/*\t"+vk_name+comment+"*/\n"
+    member_list = enum.find_all('enum')
+    if len(member_list) <= 0:
+        h_out+="using "+my_name.my_name+" = \n\t\t\t"+my_name.vk_name+";\n\n"
+        continue
+
+    h_out += \
+        "class " + name + " {\n" + \
+        "private:\n" + \
+        name + "(int flag_);\n" + \
+        "public:\n" \
+        "int flag;\n" \
+        "enum B{\n"
+
+    new_m_name_list = []
+    for member in member_list:
+        m_name = member.get('name')
+        if m_name.find("_MAX_NUM") != -1:
+            continue
+        new_m_name = "b_" + m_name.replace(fuck_name + "_", "")
+        new_m_name = re.sub(r'_BIT$', "", new_m_name).lower()
+        new_m_name_list.append(new_m_name)
+
+        m_comment = ""
+        temp = member.get('comment')
+        if temp!=None:
+            m_comment+=temp
+        if m_comment!="":
+            h_out += "/*"+m_comment+"*/\n"
+        h_out += "\t"+new_m_name + " = " + m_name + ",\n"
+
+
+    h_out += "};\n"
+    h_out += \
+        "{0}();\n" \
+        "{0}(B bits_);\n" \
+        "{0}({0} const& flag_);\n" \
+        "{0}(std::initializer_list<B> bit_list);\n" \
+        "{0}& operator = ({0} flag_);\n" \
+        "{0} operator | (B bit_);\n" \
+        "{0}& operator |= (B bit_);\n" \
+        "{0} operator | ({0} flag_);\n" \
+        "{0}& operator |= ({0} flag_);\n" \
+        "{0} operator & ({0} flag_);\n" \
+        "{0}& operator &= ({0} flag_);\n" \
+        "{0} operator ^ ({0} flag_);\n" \
+        "{0}& operator ^= ({0} flag_);\n" \
+        "{0} operator ~ ();\n" \
+        "bool operator !();\n" \
+        "bool operator == ({0} flag_);\n" \
+        "bool operator == (B bit_);\n" \
+        "bool operator != ({0} flag_);\n" \
+        "bool operator != (B bit_);\n" \
+        "operator bool();\n" \
+        "{0} all_flags();\n" \
+        "{0}& clear();\n".format(name).replace("@", "{").replace("$", "}")
+
+    h_out += enum.get('name') + " get();\n"
+
+    for new_m_nmae in new_m_name_list:
+        h_out += name + "& " + "on_" + new_m_nmae[2:] + "();\n"
+        h_out += name + "& " + "off_" + new_m_nmae[2:] + "();\n"
+    h_out += "};\n"
+    h_out += name + " operator|(" + name + "::B bit1_," + name + "::B bit2_);\n\n\n"
+
+    cpp_out += \
+        "{0}::{0}():flag(0)@$\n" \
+        "{0}::{0}({0}::B bits_):flag(static_cast<int>(bits_))@$\n" \
+        "{0}::{0}({0} const& flag_):flag(flag_.flag)@$\n" \
+        "{0}::{0}(std::initializer_list<B> bit_list)@for (auto&& bit : bit_list)@flag |= static_cast<int>(bit);$$\n" \
+        "{0}& {0}::operator = ({0} flag_)@flag = flag_.flag;return *this;$\n" \
+        "{0} {0}::operator | (B bit_)@return flag | static_cast<int>(bit_);$\n" \
+        "{0}& {0}::operator |= (B bit_)@flag |= static_cast<int>(bit_);return *this;$\n" \
+        "{0} {0}::operator | ({0} flag_)@return flag | flag_.flag;$\n" \
+        "{0}& {0}::operator |= ({0} flag_)@flag |= flag_.flag;return *this;$\n" \
+        "{0} {0}::operator & ({0} flag_)@return flag & flag_.flag;$\n" \
+        "{0}& {0}::operator &= ({0} flag_)@flag &= flag_.flag;return *this;$\n" \
+        "{0} {0}::operator ^ ({0} flag_)@return flag ^ flag_.flag;$\n" \
+        "{0}& {0}::operator ^= ({0} flag_)@flag ^= flag_.flag;return *this;$\n" \
+        "{0} {0}::operator ~ ()@return all_flags().flag^flag;$\n" \
+        "bool {0}::operator !()@return !flag;$\n" \
+        "bool {0}::operator == ({0} flag_)@return flag == flag_.flag;$\n" \
+        "bool {0}::operator == (B bit_)@return flag == static_cast<int>(bit_);$\n" \
+        "bool {0}::operator != ({0} flag_)@return flag != flag_.flag;$\n" \
+        "bool {0}::operator != (B bit_)@return flag != static_cast<int>(bit_);$\n" \
+        "{0}::operator bool()@return !!flag;$\n" \
+        "{0}& {0}::clear()@flag = 0;return *this;$\n" \
+        "{0} operator|({0}::B bit1_, {0}::B bit2_)@{0} flags(bit1_);return flags | bit2_;$\n" \
+        "{0}::{0}(int flags_):flag(flags_) @$\n{0} {0}::all_flags()@\n return " \
+            .format(name).replace("@", "{").replace("$", "}")
+    i = 0
+    for member in member_list:
+        m_name = member.get('name')
+        if i != 0:
+            cpp_out += " | \n"
+        cpp_out += m_name
+        i += 1
+    cpp_out += ";\n}\n"
+
+    cpp_out += enum.get('name') + " " + name + "::get()\n{ return (" + enum.get('name') + ")flag;}\n"
+
+    i = 0
+    for member in member_list:
+        m_name = member.get('name')
+        cpp_out += name + "& " + name + "::" + \
+                   "on_" + new_m_name_list[i][2:] + "()\n{ flag |= " + m_name + "; return *this; }\n\n"
+        cpp_out += name + "& " + name + "::" + \
+                   "off_" + new_m_name_list[i][2:] + "()\n{ flag &= ~" + m_name + "; return *this; }\n\n"
+        i += 1
+    cpp_out += "\n\n"
+
+code = my_format
+h_code = code
+h_code += \
+"#pragma once\n"\
+"#include \"vulkan/vulkan.h\"\n"\
+"#include \"common.h\"\n"\
+"namespace laka { namespace vk {\n"
+
+code+=\
+"#include \""+flagbits_file_name+".h\"\n"\
+"namespace laka { namespace vk {\n"
+
+h_code+=h_out
+code+=cpp_out
+
+h_code+="\n}}\n"
+code+="\n}}\n"
+
+
+out_cpp_file = open("..\\"+flagbits_file_name+".cpp", "w")
+out_h_file = open("..\\"+flagbits_file_name+".h","w")
+
+print >> out_cpp_file,"%s" % (code)
+out_cpp_file.close()
+
+print >> out_h_file,"%s" % (h_code)
+out_h_file.close()
+
+#处理struct=====================================
+struct_file_name = "vk_structs"
+
+cpp_out = ""
+h_out = ""
+
 class Struct:
     alias = ""
     g = 0
@@ -158,6 +410,7 @@ class S_member:
     m_noautovalidity = ""
     text = ""
     comment = ""
+
     def prt(this_):
         print "\t-----------------------"
         print "\tname:\t"+this_.m_name
@@ -173,13 +426,16 @@ class S_member:
         print "\ttext:\t"+this_.text
         print "\tcomment:\t"+this_.comment
 
-struct_list = soup.registry.types.find_all('type',attrs={'category':'struct'})
+    def declare(self_):
+        pass
 
-name_dict = dict([])
+    def define(self_):
+        pass
+
+struct_list = soup.registry.types.find_all('type',attrs={'category':'struct'})
 struct_dict = dict([])
 
 for struct in struct_list:
-
     struct_vk_name = struct.get('name')
     my_name = get_my_name(struct_vk_name, "S", "Vk")
     name_dict[my_name.my_name] = my_name
@@ -212,10 +468,16 @@ for struct in struct_list:
         m.m_name = member.find_all('name')[0].get_text()
         m.text = member.get_text()
 
+        m.comment = ""
+        temp = member.get('optional')
+        if temp != None:
+            m.comment = "|optional|\t"
+
         temp = member.comment
         temp1 = ""
         if temp!=None:
             m.comment = temp1 = temp.get_text()
+
         m.text = m.text.replace(temp1,"")
         m.m_type = m.text.replace(m.m_name,"")
         m.m_type_only=member.type.get_text()
@@ -298,7 +560,7 @@ for struct_node in struct_list:
     struct = struct_dict[struct_node.get('name')]
 
     if struct.alias != "":
-        h_out += "using " + struct.my_name + " = " + struct.vk_name + ";//" + str(count + 1) + "\n\n"
+        h_out += "using " + struct.my_name + " = \n\t\t\t\t" + struct.vk_name + ";//" + str(count + 1) + "\n\n"
         struct.g = 1
         count += 1
         continue
@@ -344,10 +606,24 @@ while count<len(struct_dict):
         else:
             no_sType_count += 1
 
+        sub_name_0 = name_dict[struct3.vk_name].sub_names[0].lower()
+        if sub_name_0 == "mac":
+            sub_name_0 += name_dict[struct3.vk_name].sub_names[1].lower()
+        is_wsi = 0
+        for wsi_name in platform_list:
+            if  sub_name_0 == wsi_name:
+                is_wsi = 1
+                break
+
+        if is_wsi == 1:
+            h_out+="#ifdef "+wsi_dict[wsi_name]+"\n"
+
         h_out += \
         struct3.comment+\
-        "struct "+struct3.my_name+"{"+"\n//"+str(count+1)+"\n"
+        "typedef struct "+struct3.my_name+"{\n"#+"\n//"+str(count+1)+"\n"
         for m in struct3.members:
+            if m.m_name == 'sType':
+                h_out+="private:\n"
             new_type_name = old_type_name = m.m_type_only
             temp = name_dict.get(old_type_name)
             if temp!=None:
@@ -358,34 +634,101 @@ while count<len(struct_dict):
             if m.comment!="":
                 h_out+="/*"+m.comment+"*/\n"
             h_out+="\t"+out
-        h_out+="};\n\n"
+            if m.m_name == "pNext":
+                h_out+="public:\n"
+
+        #构造函数声明
+        h_out+=struct3.my_name+"(\n"
+        temp = 0
+        for m in struct3.members:
+            if m.m_name == 'sType' or m.m_name =='pNext':
+                continue
+
+            if temp!=0:
+                h_out+="\n\t,"
+            else:
+                h_out+="\t "
+            temp += 1
+
+            the_text = m.text
+            mType = m.m_type
+
+            temp2 = name_dict.get(m.m_type_only)
+            if temp2 != None:
+                mType = temp2.my_name
+
+            the_text = the_text.replace(m.m_type_only,mType+" ")+"_"
+            h_out+=the_text
+
+        h_out+=");\n};\n\n"
+        if is_wsi == 1:
+            h_out+="#endif\n\n"
+
+        #构造函数定义
+        cpp_out += struct3.my_name +"::"+struct3.my_name+"("
+        temp = 0
+        for m in struct3.members:
+            if m.m_name == 'sType' or m.m_name =='pNext':
+                continue
+            cpp_out += "\n\t"
+            if temp!=0:
+                cpp_out+=","
+            temp+=1
+
+            the_text = m.text
+            mType = m.m_type
+
+            temp2 = name_dict.get(m.m_type_only)
+
+            if temp2 != None:
+                mType = temp2.my_name
+
+            the_text = the_text.replace(m.m_type_only, mType + " ") + "_"
+
+            cpp_out += the_text
+
+        cpp_out+="):"
+        temp = 0
+        for m in struct3.members:
+            cpp_out += "\n\t\t"
+            if temp!=0:
+                cpp_out+=","
+            temp+=1
+
+            if m.m_name == 'sType':
+                stype_name = ""
+
+                new_stype_name = name_dict.get(m.m_value)
+                if new_stype_name!=None:
+                    stype_name = new_stype_name.my_name
+                cpp_out+=m.m_name+"(E_structure_type::"+stype_name+")"
+                continue
+            if m.m_name == "pNext":
+                cpp_out+=m.m_name+"(nullptr)"
+                continue
+            cpp_out+=m.m_name+"("+m.m_name+"_)"
+        cpp_out+="\n{\t}\n\n"
 
         struct3.g=1
         count+=1
 
 h_out += "\n//"+str(len(struct_dict))
 
-out_cpp_file = open("..\\"+file_name+".cpp", "w")
-out_h_file = open("..\\"+file_name+".h","w")
+out_cpp_file = open("..\\" + struct_file_name + ".cpp", "w")
+out_h_file = open("..\\" + struct_file_name + ".h", "w")
 
-code = \
-"/*\n"\
-"Copyright (c) 2018 gchihiha\n\n"\
-"This software is provided 'as-is', without any express or implied warranty. In no event will the authors be held liable for any damages arising from the use of this software.\n\n"\
-"Permission is granted to anyone to use this software for any purpose, including commercial applications, and to alter it and redistribute it freely, subject to the following restrictions:\n\n"\
-"1. The origin of this software must not be misrepresented; you must not claim that you wrote the original software. If you use this software in a product, an acknowledgment in the product documentation would be appreciated but is not required.\n\n"\
-"2. Altered source versions must be plainly marked as such, and must not be misrepresented as being the original software.\n\n"\
-"3. This notice may not be removed or altered from any source distribution.\n\n"\
-"*/\n\n"
+code = my_format
 h_code = code
 h_code += \
 "#pragma once\n"\
 "#include \"vulkan/vulkan.h\"\n"\
 "#include \"common.h\"\n"\
+"#include \""+enum_file_name+".h\"\n"\
+"#include \""+flagbits_file_name+".h\"\n"\
 "namespace laka { namespace vk {\n"
 
 code+=\
-"#include \""+file_name+".h\"\n"\
+"#include \"" + struct_file_name + ".h\"\n"\
 "namespace laka { namespace vk {\n"
 
 h_code+=h_out

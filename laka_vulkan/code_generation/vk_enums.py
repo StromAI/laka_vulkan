@@ -23,6 +23,7 @@ h_out = ""
 
 file = open("..\\vk.xml").read()
 soup = BeautifulSoup(file)
+
 enum_list = soup.registry.find_all('enums',attrs={'type':'enum'})
 
 author_nodes = soup.registry.find_all('tags',attrs={"comment":"Vulkan vendor/author tags for extensions and layers"})

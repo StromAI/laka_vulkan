@@ -17,7 +17,8 @@ Permission is granted to anyone to use this software for any purpose, including 
 #include "vulkan/vulkan.h"
 #include "common.h"
 namespace laka { namespace vk {
-/*VkImageLayout*/
+/*	VkImageLayout
+*/
 enum class E_image_layout{
 e_undefined = VK_IMAGE_LAYOUT_UNDEFINED,
 e_general = VK_IMAGE_LAYOUT_GENERAL,
@@ -30,33 +31,38 @@ e_transfer_dst_optimal = VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL,
 e_preinitialized = VK_IMAGE_LAYOUT_PREINITIALIZED,
 };
 
-/*VkAttachmentLoadOp*/
+/*	VkAttachmentLoadOp
+*/
 enum class E_attachment_load_op{
 e_load = VK_ATTACHMENT_LOAD_OP_LOAD,
 e_clear = VK_ATTACHMENT_LOAD_OP_CLEAR,
 e_dont_care = VK_ATTACHMENT_LOAD_OP_DONT_CARE,
 };
 
-/*VkAttachmentStoreOp*/
+/*	VkAttachmentStoreOp
+*/
 enum class E_attachment_store_op{
 e_store = VK_ATTACHMENT_STORE_OP_STORE,
 e_dont_care = VK_ATTACHMENT_STORE_OP_DONT_CARE,
 };
 
-/*VkImageType*/
+/*	VkImageType
+*/
 enum class E_image_type{
 e_1d = VK_IMAGE_TYPE_1D,
 e_2d = VK_IMAGE_TYPE_2D,
 e_3d = VK_IMAGE_TYPE_3D,
 };
 
-/*VkImageTiling*/
+/*	VkImageTiling
+*/
 enum class E_image_tiling{
 e_optimal = VK_IMAGE_TILING_OPTIMAL,
 e_linear = VK_IMAGE_TILING_LINEAR,
 };
 
-/*VkImageViewType*/
+/*	VkImageViewType
+*/
 enum class E_image_view_type{
 e_1d = VK_IMAGE_VIEW_TYPE_1D,
 e_2d = VK_IMAGE_VIEW_TYPE_2D,
@@ -67,13 +73,15 @@ e_2d_array = VK_IMAGE_VIEW_TYPE_2D_ARRAY,
 e_cube_array = VK_IMAGE_VIEW_TYPE_CUBE_ARRAY,
 };
 
-/*VkCommandBufferLevel*/
+/*	VkCommandBufferLevel
+*/
 enum class E_command_buffer_level{
 e_primary = VK_COMMAND_BUFFER_LEVEL_PRIMARY,
 e_secondary = VK_COMMAND_BUFFER_LEVEL_SECONDARY,
 };
 
-/*VkComponentSwizzle*/
+/*	VkComponentSwizzle
+*/
 enum class E_component_swizzle{
 e_identity = VK_COMPONENT_SWIZZLE_IDENTITY,
 e_zero = VK_COMPONENT_SWIZZLE_ZERO,
@@ -84,7 +92,8 @@ e_b = VK_COMPONENT_SWIZZLE_B,
 e_a = VK_COMPONENT_SWIZZLE_A,
 };
 
-/*VkDescriptorType*/
+/*	VkDescriptorType
+*/
 enum class E_descriptor_type{
 e_sampler = VK_DESCRIPTOR_TYPE_SAMPLER,
 e_combined_image_sampler = VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,
@@ -99,14 +108,16 @@ e_storage_buffer_dynamic = VK_DESCRIPTOR_TYPE_STORAGE_BUFFER_DYNAMIC,
 e_input_attachment = VK_DESCRIPTOR_TYPE_INPUT_ATTACHMENT,
 };
 
-/*VkQueryType*/
+/*	VkQueryType
+*/
 enum class E_query_type{
 e_occlusion = VK_QUERY_TYPE_OCCLUSION,
 e_pipeline_statistics = VK_QUERY_TYPE_PIPELINE_STATISTICS,
 e_timestamp = VK_QUERY_TYPE_TIMESTAMP,
 };
 
-/*VkBorderColor*/
+/*	VkBorderColor
+*/
 enum class E_border_color{
 e_float_transparent_black = VK_BORDER_COLOR_FLOAT_TRANSPARENT_BLACK,
 e_int_transparent_black = VK_BORDER_COLOR_INT_TRANSPARENT_BLACK,
@@ -116,18 +127,21 @@ e_float_opaque_white = VK_BORDER_COLOR_FLOAT_OPAQUE_WHITE,
 e_int_opaque_white = VK_BORDER_COLOR_INT_OPAQUE_WHITE,
 };
 
-/*VkPipelineBindPoint*/
+/*	VkPipelineBindPoint
+*/
 enum class E_pipeline_bind_point{
 e_graphics = VK_PIPELINE_BIND_POINT_GRAPHICS,
 e_compute = VK_PIPELINE_BIND_POINT_COMPUTE,
 };
 
-/*VkPipelineCacheHeaderVersion*/
+/*	VkPipelineCacheHeaderVersion
+*/
 enum class E_pipeline_cache_header_version{
 e_one = VK_PIPELINE_CACHE_HEADER_VERSION_ONE,
 };
 
-/*VkPrimitiveTopology*/
+/*	VkPrimitiveTopology
+*/
 enum class E_primitive_topology{
 e_point_list = VK_PRIMITIVE_TOPOLOGY_POINT_LIST,
 e_line_list = VK_PRIMITIVE_TOPOLOGY_LINE_LIST,
@@ -142,31 +156,36 @@ e_triangle_strip_with_adjacency = VK_PRIMITIVE_TOPOLOGY_TRIANGLE_STRIP_WITH_ADJA
 e_patch_list = VK_PRIMITIVE_TOPOLOGY_PATCH_LIST,
 };
 
-/*VkSharingMode*/
+/*	VkSharingMode
+*/
 enum class E_sharing_mode{
 e_exclusive = VK_SHARING_MODE_EXCLUSIVE,
 e_concurrent = VK_SHARING_MODE_CONCURRENT,
 };
 
-/*VkIndexType*/
+/*	VkIndexType
+*/
 enum class E_index_type{
 e_uint16 = VK_INDEX_TYPE_UINT16,
 e_uint32 = VK_INDEX_TYPE_UINT32,
 };
 
-/*VkFilter*/
+/*	VkFilter
+*/
 enum class E_filter{
 e_nearest = VK_FILTER_NEAREST,
 e_linear = VK_FILTER_LINEAR,
 };
 
-/*VkSamplerMipmapMode*/
+/*	VkSamplerMipmapMode
+*/
 enum class E_sampler_mipmap_mode{
 e_nearest = VK_SAMPLER_MIPMAP_MODE_NEAREST,
 e_linear = VK_SAMPLER_MIPMAP_MODE_LINEAR,
 };
 
-/*VkSamplerAddressMode*/
+/*	VkSamplerAddressMode
+*/
 enum class E_sampler_address_mode{
 e_repeat = VK_SAMPLER_ADDRESS_MODE_REPEAT,
 e_mirrored_repeat = VK_SAMPLER_ADDRESS_MODE_MIRRORED_REPEAT,
@@ -174,7 +193,8 @@ e_clamp_to_edge = VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE,
 e_clamp_to_border = VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_BORDER,
 };
 
-/*VkCompareOp*/
+/*	VkCompareOp
+*/
 enum class E_compare_op{
 e_never = VK_COMPARE_OP_NEVER,
 e_less = VK_COMPARE_OP_LESS,
@@ -186,20 +206,23 @@ e_greater_or_equal = VK_COMPARE_OP_GREATER_OR_EQUAL,
 e_always = VK_COMPARE_OP_ALWAYS,
 };
 
-/*VkPolygonMode*/
+/*	VkPolygonMode
+*/
 enum class E_polygon_mode{
 e_fill = VK_POLYGON_MODE_FILL,
 e_line = VK_POLYGON_MODE_LINE,
 e_point = VK_POLYGON_MODE_POINT,
 };
 
-/*VkFrontFace*/
+/*	VkFrontFace
+*/
 enum class E_front_face{
 e_counter_clockwise = VK_FRONT_FACE_COUNTER_CLOCKWISE,
 e_clockwise = VK_FRONT_FACE_CLOCKWISE,
 };
 
-/*VkBlendFactor*/
+/*	VkBlendFactor
+*/
 enum class E_blend_factor{
 e_zero = VK_BLEND_FACTOR_ZERO,
 e_one = VK_BLEND_FACTOR_ONE,
@@ -222,7 +245,8 @@ e_src1_alpha = VK_BLEND_FACTOR_SRC1_ALPHA,
 e_one_minus_src1_alpha = VK_BLEND_FACTOR_ONE_MINUS_SRC1_ALPHA,
 };
 
-/*VkBlendOp*/
+/*	VkBlendOp
+*/
 enum class E_blend_op{
 e_add = VK_BLEND_OP_ADD,
 e_subtract = VK_BLEND_OP_SUBTRACT,
@@ -231,7 +255,8 @@ e_min = VK_BLEND_OP_MIN,
 e_max = VK_BLEND_OP_MAX,
 };
 
-/*VkStencilOp*/
+/*	VkStencilOp
+*/
 enum class E_stencil_op{
 e_keep = VK_STENCIL_OP_KEEP,
 e_zero = VK_STENCIL_OP_ZERO,
@@ -243,7 +268,8 @@ e_increment_and_wrap = VK_STENCIL_OP_INCREMENT_AND_WRAP,
 e_decrement_and_wrap = VK_STENCIL_OP_DECREMENT_AND_WRAP,
 };
 
-/*VkLogicOp*/
+/*	VkLogicOp
+*/
 enum class E_logic_op{
 e_clear = VK_LOGIC_OP_CLEAR,
 e_and = VK_LOGIC_OP_AND,
@@ -263,12 +289,14 @@ e_nand = VK_LOGIC_OP_NAND,
 e_set = VK_LOGIC_OP_SET,
 };
 
-/*VkInternalAllocationType*/
+/*	VkInternalAllocationType
+*/
 enum class E_internal_allocation_type{
 e_executable = VK_INTERNAL_ALLOCATION_TYPE_EXECUTABLE,
 };
 
-/*VkSystemAllocationScope*/
+/*	VkSystemAllocationScope
+*/
 enum class E_system_allocation_scope{
 e_command = VK_SYSTEM_ALLOCATION_SCOPE_COMMAND,
 e_object = VK_SYSTEM_ALLOCATION_SCOPE_OBJECT,
@@ -277,7 +305,8 @@ e_device = VK_SYSTEM_ALLOCATION_SCOPE_DEVICE,
 e_instance = VK_SYSTEM_ALLOCATION_SCOPE_INSTANCE,
 };
 
-/*VkPhysicalDeviceType*/
+/*	VkPhysicalDeviceType
+*/
 enum class E_physical_device_type{
 e_other = VK_PHYSICAL_DEVICE_TYPE_OTHER,
 e_integrated_gpu = VK_PHYSICAL_DEVICE_TYPE_INTEGRATED_GPU,
@@ -286,13 +315,15 @@ e_virtual_gpu = VK_PHYSICAL_DEVICE_TYPE_VIRTUAL_GPU,
 e_cpu = VK_PHYSICAL_DEVICE_TYPE_CPU,
 };
 
-/*VkVertexInputRate*/
+/*	VkVertexInputRate
+*/
 enum class E_vertex_input_rate{
 e_vertex = VK_VERTEX_INPUT_RATE_VERTEX,
 e_instance = VK_VERTEX_INPUT_RATE_INSTANCE,
 };
 
-/*VkFormat*/
+/*	VkFormat
+Vulkan format definitions*/
 enum class E_format{
 e_undefined = VK_FORMAT_UNDEFINED,
 e_r4g4_unorm_pack8 = VK_FORMAT_R4G4_UNORM_PACK8,
@@ -481,7 +512,8 @@ e_astc_12x12_unorm_block = VK_FORMAT_ASTC_12x12_UNORM_BLOCK,
 e_astc_12x12_srgb_block = VK_FORMAT_ASTC_12x12_SRGB_BLOCK,
 };
 
-/*VkStructureType*/
+/*	VkStructureType
+Structure type enumerant*/
 enum class E_structure_type{
 e_application_info = VK_STRUCTURE_TYPE_APPLICATION_INFO,
 e_instance_create_info = VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO,
@@ -534,35 +566,38 @@ e_loader_instance_create_info = VK_STRUCTURE_TYPE_LOADER_INSTANCE_CREATE_INFO,
 e_loader_device_create_info = VK_STRUCTURE_TYPE_LOADER_DEVICE_CREATE_INFO,
 };
 
-/*VkSubpassContents*/
+/*	VkSubpassContents
+*/
 enum class E_subpass_contents{
 e_inline = VK_SUBPASS_CONTENTS_INLINE,
 e_secondary_command_buffers = VK_SUBPASS_CONTENTS_SECONDARY_COMMAND_BUFFERS,
 };
 
-/*VkResult*/
+/*	VkResult
+API result codes*/
 enum class E_result{
-e_vk_success = VK_SUCCESS,
-e_vk_not_ready = VK_NOT_READY,
-e_vk_timeout = VK_TIMEOUT,
-e_vk_event_set = VK_EVENT_SET,
-e_vk_event_reset = VK_EVENT_RESET,
-e_vk_incomplete = VK_INCOMPLETE,
-e_vk_error_out_of_host_memory = VK_ERROR_OUT_OF_HOST_MEMORY,
-e_vk_error_out_of_device_memory = VK_ERROR_OUT_OF_DEVICE_MEMORY,
-e_vk_error_initialization_failed = VK_ERROR_INITIALIZATION_FAILED,
-e_vk_error_device_lost = VK_ERROR_DEVICE_LOST,
-e_vk_error_memory_map_failed = VK_ERROR_MEMORY_MAP_FAILED,
-e_vk_error_layer_not_present = VK_ERROR_LAYER_NOT_PRESENT,
-e_vk_error_extension_not_present = VK_ERROR_EXTENSION_NOT_PRESENT,
-e_vk_error_feature_not_present = VK_ERROR_FEATURE_NOT_PRESENT,
-e_vk_error_incompatible_driver = VK_ERROR_INCOMPATIBLE_DRIVER,
-e_vk_error_too_many_objects = VK_ERROR_TOO_MANY_OBJECTS,
-e_vk_error_format_not_supported = VK_ERROR_FORMAT_NOT_SUPPORTED,
-e_vk_error_fragmented_pool = VK_ERROR_FRAGMENTED_POOL,
+evk_success = VK_SUCCESS,
+evk_not_ready = VK_NOT_READY,
+evk_timeout = VK_TIMEOUT,
+evk_event_set = VK_EVENT_SET,
+evk_event_reset = VK_EVENT_RESET,
+evk_incomplete = VK_INCOMPLETE,
+evk_error_out_of_host_memory = VK_ERROR_OUT_OF_HOST_MEMORY,
+evk_error_out_of_device_memory = VK_ERROR_OUT_OF_DEVICE_MEMORY,
+evk_error_initialization_failed = VK_ERROR_INITIALIZATION_FAILED,
+evk_error_device_lost = VK_ERROR_DEVICE_LOST,
+evk_error_memory_map_failed = VK_ERROR_MEMORY_MAP_FAILED,
+evk_error_layer_not_present = VK_ERROR_LAYER_NOT_PRESENT,
+evk_error_extension_not_present = VK_ERROR_EXTENSION_NOT_PRESENT,
+evk_error_feature_not_present = VK_ERROR_FEATURE_NOT_PRESENT,
+evk_error_incompatible_driver = VK_ERROR_INCOMPATIBLE_DRIVER,
+evk_error_too_many_objects = VK_ERROR_TOO_MANY_OBJECTS,
+evk_error_format_not_supported = VK_ERROR_FORMAT_NOT_SUPPORTED,
+evk_error_fragmented_pool = VK_ERROR_FRAGMENTED_POOL,
 };
 
-/*VkDynamicState*/
+/*	VkDynamicState
+*/
 enum class E_dynamic_state{
 e_viewport = VK_DYNAMIC_STATE_VIEWPORT,
 e_scissor = VK_DYNAMIC_STATE_SCISSOR,
@@ -575,12 +610,14 @@ e_stencil_write_mask = VK_DYNAMIC_STATE_STENCIL_WRITE_MASK,
 e_stencil_reference = VK_DYNAMIC_STATE_STENCIL_REFERENCE,
 };
 
-/*VkDescriptorUpdateTemplateType*/
+/*	VkDescriptorUpdateTemplateType
+*/
 enum class E_descriptor_update_template_type{
 e_descriptor_set = VK_DESCRIPTOR_UPDATE_TEMPLATE_TYPE_DESCRIPTOR_SET,
 };
 
-/*VkObjectType*/
+/*	VkObjectType
+Enums to track objects of various types*/
 enum class E_object_type{
 e_unknown = VK_OBJECT_TYPE_UNKNOWN,
 e_instance = VK_OBJECT_TYPE_INSTANCE,
@@ -610,22 +647,25 @@ e_framebuffer = VK_OBJECT_TYPE_FRAMEBUFFER,
 e_command_pool = VK_OBJECT_TYPE_COMMAND_POOL,
 };
 
-/*VkPresentModeKHR*/
-enum class E_present_mode_khr{
+/*	VkPresentModeKHR
+*/
+enum class E_present_mode_KHR{
 e_immediate_khr = VK_PRESENT_MODE_IMMEDIATE_KHR,
 e_mailbox_khr = VK_PRESENT_MODE_MAILBOX_KHR,
 e_fifo_khr = VK_PRESENT_MODE_FIFO_KHR,
 e_fifo_relaxed_khr = VK_PRESENT_MODE_FIFO_RELAXED_KHR,
 };
 
-/*VkColorSpaceKHR*/
-enum class E_color_space_khr{
+/*	VkColorSpaceKHR
+*/
+enum class E_color_space_KHR{
 e_srgb_nonlinear_khr = VK_COLOR_SPACE_SRGB_NONLINEAR_KHR,
-e_vk_colorspace_srgb_nonlinear_khr = VK_COLORSPACE_SRGB_NONLINEAR_KHR,
+evk_colorspace_srgb_nonlinear_khr = VK_COLORSPACE_SRGB_NONLINEAR_KHR,
 };
 
-/*VkDebugReportObjectTypeEXT*/
-enum class E_debug_report_object_type_ext{
+/*	VkDebugReportObjectTypeEXT
+*/
+enum class E_debug_report_object_type_EXT{
 e_unknown_ext = VK_DEBUG_REPORT_OBJECT_TYPE_UNKNOWN_EXT,
 e_instance_ext = VK_DEBUG_REPORT_OBJECT_TYPE_INSTANCE_EXT,
 e_physical_device_ext = VK_DEBUG_REPORT_OBJECT_TYPE_PHYSICAL_DEVICE_EXT,
@@ -664,20 +704,23 @@ e_validation_cache_ext_ext = VK_DEBUG_REPORT_OBJECT_TYPE_VALIDATION_CACHE_EXT_EX
 e_validation_cache_ext = VK_DEBUG_REPORT_OBJECT_TYPE_VALIDATION_CACHE_EXT,
 };
 
-/*VkRasterizationOrderAMD*/
-enum class E_rasterization_order_amd{
+/*	VkRasterizationOrderAMD
+*/
+enum class E_rasterization_order_AMD{
 e_strict_amd = VK_RASTERIZATION_ORDER_STRICT_AMD,
 e_relaxed_amd = VK_RASTERIZATION_ORDER_RELAXED_AMD,
 };
 
-/*VkValidationCheckEXT*/
-enum class E_validation_check_ext{
+/*	VkValidationCheckEXT
+*/
+enum class E_validation_check_EXT{
 e_all_ext = VK_VALIDATION_CHECK_ALL_EXT,
 e_shaders_ext = VK_VALIDATION_CHECK_SHADERS_EXT,
 };
 
-/*VkIndirectCommandsTokenTypeNVX*/
-enum class E_indirect_commands_token_type_nvx{
+/*	VkIndirectCommandsTokenTypeNVX
+*/
+enum class E_indirect_commands_token_type_NVX{
 e_pipeline_nvx = VK_INDIRECT_COMMANDS_TOKEN_TYPE_PIPELINE_NVX,
 e_descriptor_set_nvx = VK_INDIRECT_COMMANDS_TOKEN_TYPE_DESCRIPTOR_SET_NVX,
 e_index_buffer_nvx = VK_INDIRECT_COMMANDS_TOKEN_TYPE_INDEX_BUFFER_NVX,
@@ -688,8 +731,9 @@ e_draw_nvx = VK_INDIRECT_COMMANDS_TOKEN_TYPE_DRAW_NVX,
 e_dispatch_nvx = VK_INDIRECT_COMMANDS_TOKEN_TYPE_DISPATCH_NVX,
 };
 
-/*VkObjectEntryTypeNVX*/
-enum class E_object_entry_type_nvx{
+/*	VkObjectEntryTypeNVX
+*/
+enum class E_object_entry_type_NVX{
 e_descriptor_set_nvx = VK_OBJECT_ENTRY_TYPE_DESCRIPTOR_SET_NVX,
 e_pipeline_nvx = VK_OBJECT_ENTRY_TYPE_PIPELINE_NVX,
 e_index_buffer_nvx = VK_OBJECT_ENTRY_TYPE_INDEX_BUFFER_NVX,
@@ -697,25 +741,29 @@ e_vertex_buffer_nvx = VK_OBJECT_ENTRY_TYPE_VERTEX_BUFFER_NVX,
 e_push_constant_nvx = VK_OBJECT_ENTRY_TYPE_PUSH_CONSTANT_NVX,
 };
 
-/*VkDisplayPowerStateEXT*/
-enum class E_display_power_state_ext{
+/*	VkDisplayPowerStateEXT
+*/
+enum class E_display_power_state_EXT{
 e_off_ext = VK_DISPLAY_POWER_STATE_OFF_EXT,
 e_suspend_ext = VK_DISPLAY_POWER_STATE_SUSPEND_EXT,
 e_on_ext = VK_DISPLAY_POWER_STATE_ON_EXT,
 };
 
-/*VkDeviceEventTypeEXT*/
-enum class E_device_event_type_ext{
+/*	VkDeviceEventTypeEXT
+*/
+enum class E_device_event_type_EXT{
 e_display_hotplug_ext = VK_DEVICE_EVENT_TYPE_DISPLAY_HOTPLUG_EXT,
 };
 
-/*VkDisplayEventTypeEXT*/
-enum class E_display_event_type_ext{
+/*	VkDisplayEventTypeEXT
+*/
+enum class E_display_event_type_EXT{
 e_first_pixel_out_ext = VK_DISPLAY_EVENT_TYPE_FIRST_PIXEL_OUT_EXT,
 };
 
-/*VkViewportCoordinateSwizzleNV*/
-enum class E_viewport_coordinate_swizzle_nv{
+/*	VkViewportCoordinateSwizzleNV
+*/
+enum class E_viewport_coordinate_swizzle_NV{
 e_positive_x_nv = VK_VIEWPORT_COORDINATE_SWIZZLE_POSITIVE_X_NV,
 e_negative_x_nv = VK_VIEWPORT_COORDINATE_SWIZZLE_NEGATIVE_X_NV,
 e_positive_y_nv = VK_VIEWPORT_COORDINATE_SWIZZLE_POSITIVE_Y_NV,
@@ -726,32 +774,37 @@ e_positive_w_nv = VK_VIEWPORT_COORDINATE_SWIZZLE_POSITIVE_W_NV,
 e_negative_w_nv = VK_VIEWPORT_COORDINATE_SWIZZLE_NEGATIVE_W_NV,
 };
 
-/*VkDiscardRectangleModeEXT*/
-enum class E_discard_rectangle_mode_ext{
+/*	VkDiscardRectangleModeEXT
+*/
+enum class E_discard_rectangle_mode_EXT{
 e_inclusive_ext = VK_DISCARD_RECTANGLE_MODE_INCLUSIVE_EXT,
 e_exclusive_ext = VK_DISCARD_RECTANGLE_MODE_EXCLUSIVE_EXT,
 };
 
-/*VkPointClippingBehavior*/
+/*	VkPointClippingBehavior
+*/
 enum class E_point_clipping_behavior{
 e_all_clip_planes = VK_POINT_CLIPPING_BEHAVIOR_ALL_CLIP_PLANES,
 e_user_clip_planes_only = VK_POINT_CLIPPING_BEHAVIOR_USER_CLIP_PLANES_ONLY,
 };
 
-/*VkSamplerReductionModeEXT*/
-enum class E_sampler_reduction_mode_ext{
+/*	VkSamplerReductionModeEXT
+*/
+enum class E_sampler_reduction_mode_EXT{
 e_weighted_average_ext = VK_SAMPLER_REDUCTION_MODE_WEIGHTED_AVERAGE_EXT,
 e_min_ext = VK_SAMPLER_REDUCTION_MODE_MIN_EXT,
 e_max_ext = VK_SAMPLER_REDUCTION_MODE_MAX_EXT,
 };
 
-/*VkTessellationDomainOrigin*/
+/*	VkTessellationDomainOrigin
+*/
 enum class E_tessellation_domain_origin{
 e_upper_left = VK_TESSELLATION_DOMAIN_ORIGIN_UPPER_LEFT,
 e_lower_left = VK_TESSELLATION_DOMAIN_ORIGIN_LOWER_LEFT,
 };
 
-/*VkSamplerYcbcrModelConversion*/
+/*	VkSamplerYcbcrModelConversion
+*/
 enum class E_sampler_ycbcr_model_conversion{
 e_rgb_identity = VK_SAMPLER_YCBCR_MODEL_CONVERSION_RGB_IDENTITY,
 e_ycbcr_identity = VK_SAMPLER_YCBCR_MODEL_CONVERSION_YCBCR_IDENTITY,
@@ -760,69 +813,80 @@ e_ycbcr_601 = VK_SAMPLER_YCBCR_MODEL_CONVERSION_YCBCR_601,
 e_ycbcr_2020 = VK_SAMPLER_YCBCR_MODEL_CONVERSION_YCBCR_2020,
 };
 
-/*VkSamplerYcbcrRange*/
+/*	VkSamplerYcbcrRange
+*/
 enum class E_sampler_ycbcr_range{
 e_itu_full = VK_SAMPLER_YCBCR_RANGE_ITU_FULL,
 e_itu_narrow = VK_SAMPLER_YCBCR_RANGE_ITU_NARROW,
 };
 
-/*VkChromaLocation*/
+/*	VkChromaLocation
+*/
 enum class E_chroma_location{
 e_cosited_even = VK_CHROMA_LOCATION_COSITED_EVEN,
 e_midpoint = VK_CHROMA_LOCATION_MIDPOINT,
 };
 
-/*VkBlendOverlapEXT*/
-enum class E_blend_overlap_ext{
+/*	VkBlendOverlapEXT
+*/
+enum class E_blend_overlap_EXT{
 e_uncorrelated_ext = VK_BLEND_OVERLAP_UNCORRELATED_EXT,
 e_disjoint_ext = VK_BLEND_OVERLAP_DISJOINT_EXT,
 e_conjoint_ext = VK_BLEND_OVERLAP_CONJOINT_EXT,
 };
 
-/*VkCoverageModulationModeNV*/
-enum class E_coverage_modulation_mode_nv{
+/*	VkCoverageModulationModeNV
+*/
+enum class E_coverage_modulation_mode_NV{
 e_none_nv = VK_COVERAGE_MODULATION_MODE_NONE_NV,
 e_rgb_nv = VK_COVERAGE_MODULATION_MODE_RGB_NV,
 e_alpha_nv = VK_COVERAGE_MODULATION_MODE_ALPHA_NV,
 e_rgba_nv = VK_COVERAGE_MODULATION_MODE_RGBA_NV,
 };
 
-/*VkValidationCacheHeaderVersionEXT*/
-enum class E_validation_cache_header_version_ext{
+/*	VkValidationCacheHeaderVersionEXT
+*/
+enum class E_validation_cache_header_version_EXT{
 e_one_ext = VK_VALIDATION_CACHE_HEADER_VERSION_ONE_EXT,
 };
 
-/*VkShaderInfoTypeAMD*/
-enum class E_shader_info_type_amd{
+/*	VkShaderInfoTypeAMD
+*/
+enum class E_shader_info_type_AMD{
 e_statistics_amd = VK_SHADER_INFO_TYPE_STATISTICS_AMD,
 e_binary_amd = VK_SHADER_INFO_TYPE_BINARY_AMD,
 e_disassembly_amd = VK_SHADER_INFO_TYPE_DISASSEMBLY_AMD,
 };
 
-/*VkQueueGlobalPriorityEXT*/
-enum class E_queue_global_priority_ext{
+/*	VkQueueGlobalPriorityEXT
+*/
+enum class E_queue_global_priority_EXT{
 e_low_ext = VK_QUEUE_GLOBAL_PRIORITY_LOW_EXT,
 e_medium_ext = VK_QUEUE_GLOBAL_PRIORITY_MEDIUM_EXT,
 e_high_ext = VK_QUEUE_GLOBAL_PRIORITY_HIGH_EXT,
 e_realtime_ext = VK_QUEUE_GLOBAL_PRIORITY_REALTIME_EXT,
 };
 
-/*VkConservativeRasterizationModeEXT*/
-enum class E_conservative_rasterization_mode_ext{
+/*	VkConservativeRasterizationModeEXT
+*/
+enum class E_conservative_rasterization_mode_EXT{
 e_disabled_ext = VK_CONSERVATIVE_RASTERIZATION_MODE_DISABLED_EXT,
 e_overestimate_ext = VK_CONSERVATIVE_RASTERIZATION_MODE_OVERESTIMATE_EXT,
 e_underestimate_ext = VK_CONSERVATIVE_RASTERIZATION_MODE_UNDERESTIMATE_EXT,
 };
 
-/*VkVendorId*/
+/*	VkVendorId
+*/
 enum class E_vendor_id{
 e_viv = VK_VENDOR_ID_VIV,
 e_vsi = VK_VENDOR_ID_VSI,
 e_kazan = VK_VENDOR_ID_KAZAN,
 };
+
+/*	VkDriverIdKHR
+*/
+enum class E_driver_id_KHR{
 #if 0
-/*VkDriverIdKHR*/
-enum class E_driver_id_khr{
 e_amd_proprietary_khr = VK_DRIVER_ID_AMD_PROPRIETARY_KHR,
 e_amd_open_source_khr = VK_DRIVER_ID_AMD_OPEN_SOURCE_KHR,
 e_mesa_radv_khr = VK_DRIVER_ID_MESA_RADV_KHR,
@@ -832,10 +896,13 @@ e_intel_open_source_mesa_khr = VK_DRIVER_ID_INTEL_OPEN_SOURCE_MESA_KHR,
 e_imagination_proprietary_khr = VK_DRIVER_ID_IMAGINATION_PROPRIETARY_KHR,
 e_qualcomm_proprietary_khr = VK_DRIVER_ID_QUALCOMM_PROPRIETARY_KHR,
 e_arm_proprietary_khr = VK_DRIVER_ID_ARM_PROPRIETARY_KHR,
+#endif 
+
 };
-#endif
-/*VkShadingRatePaletteEntryNV*/
-enum class E_shading_rate_palette_entry_nv{
+
+/*	VkShadingRatePaletteEntryNV
+*/
+enum class E_shading_rate_palette_entry_NV{
 e_no_invocations_nv = VK_SHADING_RATE_PALETTE_ENTRY_NO_INVOCATIONS_NV,
 e_16_invocations_per_pixel_nv = VK_SHADING_RATE_PALETTE_ENTRY_16_INVOCATIONS_PER_PIXEL_NV,
 e_8_invocations_per_pixel_nv = VK_SHADING_RATE_PALETTE_ENTRY_8_INVOCATIONS_PER_PIXEL_NV,
@@ -850,28 +917,32 @@ e_1_invocation_per_2x4_pixels_nv = VK_SHADING_RATE_PALETTE_ENTRY_1_INVOCATION_PE
 e_1_invocation_per_4x4_pixels_nv = VK_SHADING_RATE_PALETTE_ENTRY_1_INVOCATION_PER_4X4_PIXELS_NV,
 };
 
-/*VkCoarseSampleOrderTypeNV*/
-enum class E_coarse_sample_order_type_nv{
+/*	VkCoarseSampleOrderTypeNV
+*/
+enum class E_coarse_sample_order_type_NV{
 e_default_nv = VK_COARSE_SAMPLE_ORDER_TYPE_DEFAULT_NV,
 e_custom_nv = VK_COARSE_SAMPLE_ORDER_TYPE_CUSTOM_NV,
 e_pixel_major_nv = VK_COARSE_SAMPLE_ORDER_TYPE_PIXEL_MAJOR_NV,
 e_sample_major_nv = VK_COARSE_SAMPLE_ORDER_TYPE_SAMPLE_MAJOR_NV,
 };
 
-/*VkCopyAccelerationStructureModeNVX*/
-enum class E_copy_acceleration_structure_mode_nvx{
+/*	VkCopyAccelerationStructureModeNVX
+*/
+enum class E_copy_acceleration_structure_mode_NVX{
 e_clone_nvx = VK_COPY_ACCELERATION_STRUCTURE_MODE_CLONE_NVX,
 e_compact_nvx = VK_COPY_ACCELERATION_STRUCTURE_MODE_COMPACT_NVX,
 };
 
-/*VkAccelerationStructureTypeNVX*/
-enum class E_acceleration_structure_type_nvx{
+/*	VkAccelerationStructureTypeNVX
+*/
+enum class E_acceleration_structure_type_NVX{
 e_top_level_nvx = VK_ACCELERATION_STRUCTURE_TYPE_TOP_LEVEL_NVX,
 e_bottom_level_nvx = VK_ACCELERATION_STRUCTURE_TYPE_BOTTOM_LEVEL_NVX,
 };
 
-/*VkGeometryTypeNVX*/
-enum class E_geometry_type_nvx{
+/*	VkGeometryTypeNVX
+*/
+enum class E_geometry_type_NVX{
 e_triangles_nvx = VK_GEOMETRY_TYPE_TRIANGLES_NVX,
 e_aabbs_nvx = VK_GEOMETRY_TYPE_AABBS_NVX,
 };

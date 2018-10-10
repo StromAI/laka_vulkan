@@ -17,16 +17,17 @@ Permission is granted to anyone to use this software for any purpose, including 
 #include "vulkan/vulkan.h"
 #include "common.h"
 namespace laka { namespace vk {
+/*	VkCullMode*/
 class F_cull_mode {
 private:
 F_cull_mode(int flag_);
 public:
 int flag;
 enum B{
-b_none = VK_CULL_MODE_NONE,
-b_front = VK_CULL_MODE_FRONT_BIT,
-b_back = VK_CULL_MODE_BACK_BIT,
-b_front_and_back = VK_CULL_MODE_FRONT_AND_BACK,
+	b_none = VK_CULL_MODE_NONE,
+	b_front = VK_CULL_MODE_FRONT_BIT,
+	b_back = VK_CULL_MODE_BACK_BIT,
+	b_front_and_back = VK_CULL_MODE_FRONT_AND_BACK,
 };
 F_cull_mode();
 F_cull_mode(B bits_);
@@ -63,16 +64,21 @@ F_cull_mode& off_front_and_back();
 F_cull_mode operator|(F_cull_mode::B bit1_,F_cull_mode::B bit2_);
 
 
+/*	VkQueue*/
 class F_queue {
 private:
 F_queue(int flag_);
 public:
 int flag;
 enum B{
-b_graphics = VK_QUEUE_GRAPHICS_BIT,
-b_compute = VK_QUEUE_COMPUTE_BIT,
-b_transfer = VK_QUEUE_TRANSFER_BIT,
-b_sparse_binding = VK_QUEUE_SPARSE_BINDING_BIT,
+/*Queue supports graphics operations*/
+	b_graphics = VK_QUEUE_GRAPHICS_BIT,
+/*Queue supports compute operations*/
+	b_compute = VK_QUEUE_COMPUTE_BIT,
+/*Queue supports transfer operations*/
+	b_transfer = VK_QUEUE_TRANSFER_BIT,
+/*Queue supports sparse resource memory management operations*/
+	b_sparse_binding = VK_QUEUE_SPARSE_BINDING_BIT,
 };
 F_queue();
 F_queue(B bits_);
@@ -109,17 +115,31 @@ F_queue& off_sparse_binding();
 F_queue operator|(F_queue::B bit1_,F_queue::B bit2_);
 
 
+/*	VkRenderPassCreate*/
+using F_render_pass_create = 
+			VkRenderPassCreateFlagBits;
+
+/*	VkDeviceQueueCreate*/
+using F_device_queue_create = 
+			VkDeviceQueueCreateFlagBits;
+
+/*	VkMemoryProperty*/
 class F_memory_property {
 private:
 F_memory_property(int flag_);
 public:
 int flag;
 enum B{
-b_device_local = VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT,
-b_host_visible = VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT,
-b_host_coherent = VK_MEMORY_PROPERTY_HOST_COHERENT_BIT,
-b_host_cached = VK_MEMORY_PROPERTY_HOST_CACHED_BIT,
-b_lazily_allocated = VK_MEMORY_PROPERTY_LAZILY_ALLOCATED_BIT,
+/*If otherwise stated, then allocate memory on device*/
+	b_device_local = VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT,
+/*Memory is mappable by host*/
+	b_host_visible = VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT,
+/*Memory will have i/o coherency. If not set, application may need to use vkFlushMappedMemoryRanges and vkInvalidateMappedMemoryRanges to flush/invalidate host cache*/
+	b_host_coherent = VK_MEMORY_PROPERTY_HOST_COHERENT_BIT,
+/*Memory will be cached by the host*/
+	b_host_cached = VK_MEMORY_PROPERTY_HOST_CACHED_BIT,
+/*Memory may be allocated by the driver when it is required*/
+	b_lazily_allocated = VK_MEMORY_PROPERTY_LAZILY_ALLOCATED_BIT,
 };
 F_memory_property();
 F_memory_property(B bits_);
@@ -158,13 +178,15 @@ F_memory_property& off_lazily_allocated();
 F_memory_property operator|(F_memory_property::B bit1_,F_memory_property::B bit2_);
 
 
+/*	VkMemoryHeap*/
 class F_memory_heap {
 private:
 F_memory_heap(int flag_);
 public:
 int flag;
 enum B{
-b_device_local = VK_MEMORY_HEAP_DEVICE_LOCAL_BIT,
+/*If set, heap represents device memory*/
+	b_device_local = VK_MEMORY_HEAP_DEVICE_LOCAL_BIT,
 };
 F_memory_heap();
 F_memory_heap(B bits_);
@@ -195,29 +217,47 @@ F_memory_heap& off_device_local();
 F_memory_heap operator|(F_memory_heap::B bit1_,F_memory_heap::B bit2_);
 
 
+/*	VkAccess*/
 class F_access {
 private:
 F_access(int flag_);
 public:
 int flag;
 enum B{
-b_indirect_command_read = VK_ACCESS_INDIRECT_COMMAND_READ_BIT,
-b_index_read = VK_ACCESS_INDEX_READ_BIT,
-b_vertex_attribute_read = VK_ACCESS_VERTEX_ATTRIBUTE_READ_BIT,
-b_uniform_read = VK_ACCESS_UNIFORM_READ_BIT,
-b_input_attachment_read = VK_ACCESS_INPUT_ATTACHMENT_READ_BIT,
-b_shader_read = VK_ACCESS_SHADER_READ_BIT,
-b_shader_write = VK_ACCESS_SHADER_WRITE_BIT,
-b_color_attachment_read = VK_ACCESS_COLOR_ATTACHMENT_READ_BIT,
-b_color_attachment_write = VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT,
-b_depth_stencil_attachment_read = VK_ACCESS_DEPTH_STENCIL_ATTACHMENT_READ_BIT,
-b_depth_stencil_attachment_write = VK_ACCESS_DEPTH_STENCIL_ATTACHMENT_WRITE_BIT,
-b_transfer_read = VK_ACCESS_TRANSFER_READ_BIT,
-b_transfer_write = VK_ACCESS_TRANSFER_WRITE_BIT,
-b_host_read = VK_ACCESS_HOST_READ_BIT,
-b_host_write = VK_ACCESS_HOST_WRITE_BIT,
-b_memory_read = VK_ACCESS_MEMORY_READ_BIT,
-b_memory_write = VK_ACCESS_MEMORY_WRITE_BIT,
+/*Controls coherency of indirect command reads*/
+	b_indirect_command_read = VK_ACCESS_INDIRECT_COMMAND_READ_BIT,
+/*Controls coherency of index reads*/
+	b_index_read = VK_ACCESS_INDEX_READ_BIT,
+/*Controls coherency of vertex attribute reads*/
+	b_vertex_attribute_read = VK_ACCESS_VERTEX_ATTRIBUTE_READ_BIT,
+/*Controls coherency of uniform buffer reads*/
+	b_uniform_read = VK_ACCESS_UNIFORM_READ_BIT,
+/*Controls coherency of input attachment reads*/
+	b_input_attachment_read = VK_ACCESS_INPUT_ATTACHMENT_READ_BIT,
+/*Controls coherency of shader reads*/
+	b_shader_read = VK_ACCESS_SHADER_READ_BIT,
+/*Controls coherency of shader writes*/
+	b_shader_write = VK_ACCESS_SHADER_WRITE_BIT,
+/*Controls coherency of color attachment reads*/
+	b_color_attachment_read = VK_ACCESS_COLOR_ATTACHMENT_READ_BIT,
+/*Controls coherency of color attachment writes*/
+	b_color_attachment_write = VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT,
+/*Controls coherency of depth/stencil attachment reads*/
+	b_depth_stencil_attachment_read = VK_ACCESS_DEPTH_STENCIL_ATTACHMENT_READ_BIT,
+/*Controls coherency of depth/stencil attachment writes*/
+	b_depth_stencil_attachment_write = VK_ACCESS_DEPTH_STENCIL_ATTACHMENT_WRITE_BIT,
+/*Controls coherency of transfer reads*/
+	b_transfer_read = VK_ACCESS_TRANSFER_READ_BIT,
+/*Controls coherency of transfer writes*/
+	b_transfer_write = VK_ACCESS_TRANSFER_WRITE_BIT,
+/*Controls coherency of host reads*/
+	b_host_read = VK_ACCESS_HOST_READ_BIT,
+/*Controls coherency of host writes*/
+	b_host_write = VK_ACCESS_HOST_WRITE_BIT,
+/*Controls coherency of memory reads*/
+	b_memory_read = VK_ACCESS_MEMORY_READ_BIT,
+/*Controls coherency of memory writes*/
+	b_memory_write = VK_ACCESS_MEMORY_WRITE_BIT,
 };
 F_access();
 F_access(B bits_);
@@ -280,21 +320,31 @@ F_access& off_memory_write();
 F_access operator|(F_access::B bit1_,F_access::B bit2_);
 
 
+/*	VkBufferUsage*/
 class F_buffer_usage {
 private:
 F_buffer_usage(int flag_);
 public:
 int flag;
 enum B{
-b_transfer_src = VK_BUFFER_USAGE_TRANSFER_SRC_BIT,
-b_transfer_dst = VK_BUFFER_USAGE_TRANSFER_DST_BIT,
-b_uniform_texel_buffer = VK_BUFFER_USAGE_UNIFORM_TEXEL_BUFFER_BIT,
-b_storage_texel_buffer = VK_BUFFER_USAGE_STORAGE_TEXEL_BUFFER_BIT,
-b_uniform_buffer = VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT,
-b_storage_buffer = VK_BUFFER_USAGE_STORAGE_BUFFER_BIT,
-b_index_buffer = VK_BUFFER_USAGE_INDEX_BUFFER_BIT,
-b_vertex_buffer = VK_BUFFER_USAGE_VERTEX_BUFFER_BIT,
-b_indirect_buffer = VK_BUFFER_USAGE_INDIRECT_BUFFER_BIT,
+/*Can be used as a source of transfer operations*/
+	b_transfer_src = VK_BUFFER_USAGE_TRANSFER_SRC_BIT,
+/*Can be used as a destination of transfer operations*/
+	b_transfer_dst = VK_BUFFER_USAGE_TRANSFER_DST_BIT,
+/*Can be used as TBO*/
+	b_uniform_texel_buffer = VK_BUFFER_USAGE_UNIFORM_TEXEL_BUFFER_BIT,
+/*Can be used as IBO*/
+	b_storage_texel_buffer = VK_BUFFER_USAGE_STORAGE_TEXEL_BUFFER_BIT,
+/*Can be used as UBO*/
+	b_uniform_buffer = VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT,
+/*Can be used as SSBO*/
+	b_storage_buffer = VK_BUFFER_USAGE_STORAGE_BUFFER_BIT,
+/*Can be used as source of fixed-function index fetch (index buffer)*/
+	b_index_buffer = VK_BUFFER_USAGE_INDEX_BUFFER_BIT,
+/*Can be used as source of fixed-function vertex fetch (VBO)*/
+	b_vertex_buffer = VK_BUFFER_USAGE_VERTEX_BUFFER_BIT,
+/*Can be the source of indirect parameters (e.g. indirect buffer, parameter buffer)*/
+	b_indirect_buffer = VK_BUFFER_USAGE_INDIRECT_BUFFER_BIT,
 };
 F_buffer_usage();
 F_buffer_usage(B bits_);
@@ -341,15 +391,19 @@ F_buffer_usage& off_indirect_buffer();
 F_buffer_usage operator|(F_buffer_usage::B bit1_,F_buffer_usage::B bit2_);
 
 
+/*	VkBufferCreate*/
 class F_buffer_create {
 private:
 F_buffer_create(int flag_);
 public:
 int flag;
 enum B{
-b_sparse_binding = VK_BUFFER_CREATE_SPARSE_BINDING_BIT,
-b_sparse_residency = VK_BUFFER_CREATE_SPARSE_RESIDENCY_BIT,
-b_sparse_aliased = VK_BUFFER_CREATE_SPARSE_ALIASED_BIT,
+/*Buffer should support sparse backing*/
+	b_sparse_binding = VK_BUFFER_CREATE_SPARSE_BINDING_BIT,
+/*Buffer should support sparse backing with partial residency*/
+	b_sparse_residency = VK_BUFFER_CREATE_SPARSE_RESIDENCY_BIT,
+/*Buffer should support constent data access to physical memory ranges mapped into multiple locations of sparse buffers*/
+	b_sparse_aliased = VK_BUFFER_CREATE_SPARSE_ALIASED_BIT,
 };
 F_buffer_create();
 F_buffer_create(B bits_);
@@ -384,20 +438,21 @@ F_buffer_create& off_sparse_aliased();
 F_buffer_create operator|(F_buffer_create::B bit1_,F_buffer_create::B bit2_);
 
 
+/*	VkShaderStage*/
 class F_shader_stage {
 private:
 F_shader_stage(int flag_);
 public:
 int flag;
 enum B{
-b_vertex = VK_SHADER_STAGE_VERTEX_BIT,
-b_tessellation_control = VK_SHADER_STAGE_TESSELLATION_CONTROL_BIT,
-b_tessellation_evaluation = VK_SHADER_STAGE_TESSELLATION_EVALUATION_BIT,
-b_geometry = VK_SHADER_STAGE_GEOMETRY_BIT,
-b_fragment = VK_SHADER_STAGE_FRAGMENT_BIT,
-b_compute = VK_SHADER_STAGE_COMPUTE_BIT,
-b_all_graphics = VK_SHADER_STAGE_ALL_GRAPHICS,
-b_all = VK_SHADER_STAGE_ALL,
+	b_vertex = VK_SHADER_STAGE_VERTEX_BIT,
+	b_tessellation_control = VK_SHADER_STAGE_TESSELLATION_CONTROL_BIT,
+	b_tessellation_evaluation = VK_SHADER_STAGE_TESSELLATION_EVALUATION_BIT,
+	b_geometry = VK_SHADER_STAGE_GEOMETRY_BIT,
+	b_fragment = VK_SHADER_STAGE_FRAGMENT_BIT,
+	b_compute = VK_SHADER_STAGE_COMPUTE_BIT,
+	b_all_graphics = VK_SHADER_STAGE_ALL_GRAPHICS,
+	b_all = VK_SHADER_STAGE_ALL,
 };
 F_shader_stage();
 F_shader_stage(B bits_);
@@ -442,20 +497,29 @@ F_shader_stage& off_all();
 F_shader_stage operator|(F_shader_stage::B bit1_,F_shader_stage::B bit2_);
 
 
+/*	VkImageUsage*/
 class F_image_usage {
 private:
 F_image_usage(int flag_);
 public:
 int flag;
 enum B{
-b_transfer_src = VK_IMAGE_USAGE_TRANSFER_SRC_BIT,
-b_transfer_dst = VK_IMAGE_USAGE_TRANSFER_DST_BIT,
-b_sampled = VK_IMAGE_USAGE_SAMPLED_BIT,
-b_storage = VK_IMAGE_USAGE_STORAGE_BIT,
-b_color_attachment = VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT,
-b_depth_stencil_attachment = VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT,
-b_transient_attachment = VK_IMAGE_USAGE_TRANSIENT_ATTACHMENT_BIT,
-b_input_attachment = VK_IMAGE_USAGE_INPUT_ATTACHMENT_BIT,
+/*Can be used as a source of transfer operations*/
+	b_transfer_src = VK_IMAGE_USAGE_TRANSFER_SRC_BIT,
+/*Can be used as a destination of transfer operations*/
+	b_transfer_dst = VK_IMAGE_USAGE_TRANSFER_DST_BIT,
+/*Can be sampled from (SAMPLED_IMAGE and COMBINED_IMAGE_SAMPLER descriptor types)*/
+	b_sampled = VK_IMAGE_USAGE_SAMPLED_BIT,
+/*Can be used as storage image (STORAGE_IMAGE descriptor type)*/
+	b_storage = VK_IMAGE_USAGE_STORAGE_BIT,
+/*Can be used as framebuffer color attachment*/
+	b_color_attachment = VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT,
+/*Can be used as framebuffer depth/stencil attachment*/
+	b_depth_stencil_attachment = VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT,
+/*Image data not needed outside of rendering*/
+	b_transient_attachment = VK_IMAGE_USAGE_TRANSIENT_ATTACHMENT_BIT,
+/*Can be used as framebuffer input attachment*/
+	b_input_attachment = VK_IMAGE_USAGE_INPUT_ATTACHMENT_BIT,
 };
 F_image_usage();
 F_image_usage(B bits_);
@@ -500,17 +564,23 @@ F_image_usage& off_input_attachment();
 F_image_usage operator|(F_image_usage::B bit1_,F_image_usage::B bit2_);
 
 
+/*	VkImageCreate*/
 class F_image_create {
 private:
 F_image_create(int flag_);
 public:
 int flag;
 enum B{
-b_sparse_binding = VK_IMAGE_CREATE_SPARSE_BINDING_BIT,
-b_sparse_residency = VK_IMAGE_CREATE_SPARSE_RESIDENCY_BIT,
-b_sparse_aliased = VK_IMAGE_CREATE_SPARSE_ALIASED_BIT,
-b_mutable_format = VK_IMAGE_CREATE_MUTABLE_FORMAT_BIT,
-b_cube_compatible = VK_IMAGE_CREATE_CUBE_COMPATIBLE_BIT,
+/*Image should support sparse backing*/
+	b_sparse_binding = VK_IMAGE_CREATE_SPARSE_BINDING_BIT,
+/*Image should support sparse backing with partial residency*/
+	b_sparse_residency = VK_IMAGE_CREATE_SPARSE_RESIDENCY_BIT,
+/*Image should support constent data access to physical memory ranges mapped into multiple locations of sparse images*/
+	b_sparse_aliased = VK_IMAGE_CREATE_SPARSE_ALIASED_BIT,
+/*Allows image views to have different format than the base image*/
+	b_mutable_format = VK_IMAGE_CREATE_MUTABLE_FORMAT_BIT,
+/*Allows creating image views with cube type from the created image*/
+	b_cube_compatible = VK_IMAGE_CREATE_CUBE_COMPATIBLE_BIT,
 };
 F_image_create();
 F_image_create(B bits_);
@@ -549,15 +619,16 @@ F_image_create& off_cube_compatible();
 F_image_create operator|(F_image_create::B bit1_,F_image_create::B bit2_);
 
 
+/*	VkPipelineCreate*/
 class F_pipeline_create {
 private:
 F_pipeline_create(int flag_);
 public:
 int flag;
 enum B{
-b_disable_optimization = VK_PIPELINE_CREATE_DISABLE_OPTIMIZATION_BIT,
-b_allow_derivatives = VK_PIPELINE_CREATE_ALLOW_DERIVATIVES_BIT,
-b_derivative = VK_PIPELINE_CREATE_DERIVATIVE_BIT,
+	b_disable_optimization = VK_PIPELINE_CREATE_DISABLE_OPTIMIZATION_BIT,
+	b_allow_derivatives = VK_PIPELINE_CREATE_ALLOW_DERIVATIVES_BIT,
+	b_derivative = VK_PIPELINE_CREATE_DERIVATIVE_BIT,
 };
 F_pipeline_create();
 F_pipeline_create(B bits_);
@@ -592,16 +663,17 @@ F_pipeline_create& off_derivative();
 F_pipeline_create operator|(F_pipeline_create::B bit1_,F_pipeline_create::B bit2_);
 
 
+/*	VkColorComponent*/
 class F_color_component {
 private:
 F_color_component(int flag_);
 public:
 int flag;
 enum B{
-b_r = VK_COLOR_COMPONENT_R_BIT,
-b_g = VK_COLOR_COMPONENT_G_BIT,
-b_b = VK_COLOR_COMPONENT_B_BIT,
-b_a = VK_COLOR_COMPONENT_A_BIT,
+	b_r = VK_COLOR_COMPONENT_R_BIT,
+	b_g = VK_COLOR_COMPONENT_G_BIT,
+	b_b = VK_COLOR_COMPONENT_B_BIT,
+	b_a = VK_COLOR_COMPONENT_A_BIT,
 };
 F_color_component();
 F_color_component(B bits_);
@@ -638,13 +710,14 @@ F_color_component& off_a();
 F_color_component operator|(F_color_component::B bit1_,F_color_component::B bit2_);
 
 
+/*	VkFenceCreate*/
 class F_fence_create {
 private:
 F_fence_create(int flag_);
 public:
 int flag;
 enum B{
-b_signaled = VK_FENCE_CREATE_SIGNALED_BIT,
+	b_signaled = VK_FENCE_CREATE_SIGNALED_BIT,
 };
 F_fence_create();
 F_fence_create(B bits_);
@@ -675,25 +748,39 @@ F_fence_create& off_signaled();
 F_fence_create operator|(F_fence_create::B bit1_,F_fence_create::B bit2_);
 
 
+/*	VkFormatFeature*/
 class F_format_feature {
 private:
 F_format_feature(int flag_);
 public:
 int flag;
 enum B{
-b_sampled_image = VK_FORMAT_FEATURE_SAMPLED_IMAGE_BIT,
-b_storage_image = VK_FORMAT_FEATURE_STORAGE_IMAGE_BIT,
-b_storage_image_atomic = VK_FORMAT_FEATURE_STORAGE_IMAGE_ATOMIC_BIT,
-b_uniform_texel_buffer = VK_FORMAT_FEATURE_UNIFORM_TEXEL_BUFFER_BIT,
-b_storage_texel_buffer = VK_FORMAT_FEATURE_STORAGE_TEXEL_BUFFER_BIT,
-b_storage_texel_buffer_atomic = VK_FORMAT_FEATURE_STORAGE_TEXEL_BUFFER_ATOMIC_BIT,
-b_vertex_buffer = VK_FORMAT_FEATURE_VERTEX_BUFFER_BIT,
-b_color_attachment = VK_FORMAT_FEATURE_COLOR_ATTACHMENT_BIT,
-b_color_attachment_blend = VK_FORMAT_FEATURE_COLOR_ATTACHMENT_BLEND_BIT,
-b_depth_stencil_attachment = VK_FORMAT_FEATURE_DEPTH_STENCIL_ATTACHMENT_BIT,
-b_blit_src = VK_FORMAT_FEATURE_BLIT_SRC_BIT,
-b_blit_dst = VK_FORMAT_FEATURE_BLIT_DST_BIT,
-b_sampled_image_filter_linear = VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT,
+/*Format can be used for sampled images (SAMPLED_IMAGE and COMBINED_IMAGE_SAMPLER descriptor types)*/
+	b_sampled_image = VK_FORMAT_FEATURE_SAMPLED_IMAGE_BIT,
+/*Format can be used for storage images (STORAGE_IMAGE descriptor type)*/
+	b_storage_image = VK_FORMAT_FEATURE_STORAGE_IMAGE_BIT,
+/*Format supports atomic operations in case it is used for storage images*/
+	b_storage_image_atomic = VK_FORMAT_FEATURE_STORAGE_IMAGE_ATOMIC_BIT,
+/*Format can be used for uniform texel buffers (TBOs)*/
+	b_uniform_texel_buffer = VK_FORMAT_FEATURE_UNIFORM_TEXEL_BUFFER_BIT,
+/*Format can be used for storage texel buffers (IBOs)*/
+	b_storage_texel_buffer = VK_FORMAT_FEATURE_STORAGE_TEXEL_BUFFER_BIT,
+/*Format supports atomic operations in case it is used for storage texel buffers*/
+	b_storage_texel_buffer_atomic = VK_FORMAT_FEATURE_STORAGE_TEXEL_BUFFER_ATOMIC_BIT,
+/*Format can be used for vertex buffers (VBOs)*/
+	b_vertex_buffer = VK_FORMAT_FEATURE_VERTEX_BUFFER_BIT,
+/*Format can be used for color attachment images*/
+	b_color_attachment = VK_FORMAT_FEATURE_COLOR_ATTACHMENT_BIT,
+/*Format supports blending in case it is used for color attachment images*/
+	b_color_attachment_blend = VK_FORMAT_FEATURE_COLOR_ATTACHMENT_BLEND_BIT,
+/*Format can be used for depth/stencil attachment images*/
+	b_depth_stencil_attachment = VK_FORMAT_FEATURE_DEPTH_STENCIL_ATTACHMENT_BIT,
+/*Format can be used as the source image of blits with vkCmdBlitImage*/
+	b_blit_src = VK_FORMAT_FEATURE_BLIT_SRC_BIT,
+/*Format can be used as the destination image of blits with vkCmdBlitImage*/
+	b_blit_dst = VK_FORMAT_FEATURE_BLIT_DST_BIT,
+/*Format can be filtered with VK_FILTER_LINEAR when being sampled*/
+	b_sampled_image_filter_linear = VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT,
 };
 F_format_feature();
 F_format_feature(B bits_);
@@ -748,13 +835,15 @@ F_format_feature& off_sampled_image_filter_linear();
 F_format_feature operator|(F_format_feature::B bit1_,F_format_feature::B bit2_);
 
 
+/*	VkQueryControl*/
 class F_query_control {
 private:
 F_query_control(int flag_);
 public:
 int flag;
 enum B{
-b_precise = VK_QUERY_CONTROL_PRECISE_BIT,
+/*Require precise results to be collected by the query*/
+	b_precise = VK_QUERY_CONTROL_PRECISE_BIT,
 };
 F_query_control();
 F_query_control(B bits_);
@@ -785,16 +874,21 @@ F_query_control& off_precise();
 F_query_control operator|(F_query_control::B bit1_,F_query_control::B bit2_);
 
 
+/*	VkQueryResult*/
 class F_query_result {
 private:
 F_query_result(int flag_);
 public:
 int flag;
 enum B{
-b_64 = VK_QUERY_RESULT_64_BIT,
-b_wait = VK_QUERY_RESULT_WAIT_BIT,
-b_with_availability = VK_QUERY_RESULT_WITH_AVAILABILITY_BIT,
-b_partial = VK_QUERY_RESULT_PARTIAL_BIT,
+/*Results of the queries are written to the destination buffer as 64-bit values*/
+	b_64 = VK_QUERY_RESULT_64_BIT,
+/*Results of the queries are waited on before proceeding with the result copy*/
+	b_wait = VK_QUERY_RESULT_WAIT_BIT,
+/*Besides the results of the query, the availability of the results is also written*/
+	b_with_availability = VK_QUERY_RESULT_WITH_AVAILABILITY_BIT,
+/*Copy the partial results of the query even if the final results are not available*/
+	b_partial = VK_QUERY_RESULT_PARTIAL_BIT,
 };
 F_query_result();
 F_query_result(B bits_);
@@ -831,15 +925,17 @@ F_query_result& off_partial();
 F_query_result operator|(F_query_result::B bit1_,F_query_result::B bit2_);
 
 
+/*	VkCommandBufferUsage*/
 class F_command_buffer_usage {
 private:
 F_command_buffer_usage(int flag_);
 public:
 int flag;
 enum B{
-b_one_time_submit = VK_COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT,
-b_render_pass_continue = VK_COMMAND_BUFFER_USAGE_RENDER_PASS_CONTINUE_BIT,
-b_simultaneous_use = VK_COMMAND_BUFFER_USAGE_SIMULTANEOUS_USE_BIT,
+	b_one_time_submit = VK_COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT,
+	b_render_pass_continue = VK_COMMAND_BUFFER_USAGE_RENDER_PASS_CONTINUE_BIT,
+/*Command buffer may be submitted/executed more than once simultaneously*/
+	b_simultaneous_use = VK_COMMAND_BUFFER_USAGE_SIMULTANEOUS_USE_BIT,
 };
 F_command_buffer_usage();
 F_command_buffer_usage(B bits_);
@@ -874,23 +970,35 @@ F_command_buffer_usage& off_simultaneous_use();
 F_command_buffer_usage operator|(F_command_buffer_usage::B bit1_,F_command_buffer_usage::B bit2_);
 
 
+/*	VkQueryPipelineStatistic*/
 class F_query_pipeline_statistic {
 private:
 F_query_pipeline_statistic(int flag_);
 public:
 int flag;
 enum B{
-b_input_assembly_vertices = VK_QUERY_PIPELINE_STATISTIC_INPUT_ASSEMBLY_VERTICES_BIT,
-b_input_assembly_primitives = VK_QUERY_PIPELINE_STATISTIC_INPUT_ASSEMBLY_PRIMITIVES_BIT,
-b_vertex_shader_invocations = VK_QUERY_PIPELINE_STATISTIC_VERTEX_SHADER_INVOCATIONS_BIT,
-b_geometry_shader_invocations = VK_QUERY_PIPELINE_STATISTIC_GEOMETRY_SHADER_INVOCATIONS_BIT,
-b_geometry_shader_primitives = VK_QUERY_PIPELINE_STATISTIC_GEOMETRY_SHADER_PRIMITIVES_BIT,
-b_clipping_invocations = VK_QUERY_PIPELINE_STATISTIC_CLIPPING_INVOCATIONS_BIT,
-b_clipping_primitives = VK_QUERY_PIPELINE_STATISTIC_CLIPPING_PRIMITIVES_BIT,
-b_fragment_shader_invocations = VK_QUERY_PIPELINE_STATISTIC_FRAGMENT_SHADER_INVOCATIONS_BIT,
-b_tessellation_control_shader_patches = VK_QUERY_PIPELINE_STATISTIC_TESSELLATION_CONTROL_SHADER_PATCHES_BIT,
-b_tessellation_evaluation_shader_invocations = VK_QUERY_PIPELINE_STATISTIC_TESSELLATION_EVALUATION_SHADER_INVOCATIONS_BIT,
-b_compute_shader_invocations = VK_QUERY_PIPELINE_STATISTIC_COMPUTE_SHADER_INVOCATIONS_BIT,
+/*Optional*/
+	b_input_assembly_vertices = VK_QUERY_PIPELINE_STATISTIC_INPUT_ASSEMBLY_VERTICES_BIT,
+/*Optional*/
+	b_input_assembly_primitives = VK_QUERY_PIPELINE_STATISTIC_INPUT_ASSEMBLY_PRIMITIVES_BIT,
+/*Optional*/
+	b_vertex_shader_invocations = VK_QUERY_PIPELINE_STATISTIC_VERTEX_SHADER_INVOCATIONS_BIT,
+/*Optional*/
+	b_geometry_shader_invocations = VK_QUERY_PIPELINE_STATISTIC_GEOMETRY_SHADER_INVOCATIONS_BIT,
+/*Optional*/
+	b_geometry_shader_primitives = VK_QUERY_PIPELINE_STATISTIC_GEOMETRY_SHADER_PRIMITIVES_BIT,
+/*Optional*/
+	b_clipping_invocations = VK_QUERY_PIPELINE_STATISTIC_CLIPPING_INVOCATIONS_BIT,
+/*Optional*/
+	b_clipping_primitives = VK_QUERY_PIPELINE_STATISTIC_CLIPPING_PRIMITIVES_BIT,
+/*Optional*/
+	b_fragment_shader_invocations = VK_QUERY_PIPELINE_STATISTIC_FRAGMENT_SHADER_INVOCATIONS_BIT,
+/*Optional*/
+	b_tessellation_control_shader_patches = VK_QUERY_PIPELINE_STATISTIC_TESSELLATION_CONTROL_SHADER_PATCHES_BIT,
+/*Optional*/
+	b_tessellation_evaluation_shader_invocations = VK_QUERY_PIPELINE_STATISTIC_TESSELLATION_EVALUATION_SHADER_INVOCATIONS_BIT,
+/*Optional*/
+	b_compute_shader_invocations = VK_QUERY_PIPELINE_STATISTIC_COMPUTE_SHADER_INVOCATIONS_BIT,
 };
 F_query_pipeline_statistic();
 F_query_pipeline_statistic(B bits_);
@@ -941,16 +1049,17 @@ F_query_pipeline_statistic& off_compute_shader_invocations();
 F_query_pipeline_statistic operator|(F_query_pipeline_statistic::B bit1_,F_query_pipeline_statistic::B bit2_);
 
 
+/*	VkImageAspect*/
 class F_image_aspect {
 private:
 F_image_aspect(int flag_);
 public:
 int flag;
 enum B{
-b_color = VK_IMAGE_ASPECT_COLOR_BIT,
-b_depth = VK_IMAGE_ASPECT_DEPTH_BIT,
-b_stencil = VK_IMAGE_ASPECT_STENCIL_BIT,
-b_metadata = VK_IMAGE_ASPECT_METADATA_BIT,
+	b_color = VK_IMAGE_ASPECT_COLOR_BIT,
+	b_depth = VK_IMAGE_ASPECT_DEPTH_BIT,
+	b_stencil = VK_IMAGE_ASPECT_STENCIL_BIT,
+	b_metadata = VK_IMAGE_ASPECT_METADATA_BIT,
 };
 F_image_aspect();
 F_image_aspect(B bits_);
@@ -987,15 +1096,19 @@ F_image_aspect& off_metadata();
 F_image_aspect operator|(F_image_aspect::B bit1_,F_image_aspect::B bit2_);
 
 
+/*	VkSparseImageFormat*/
 class F_sparse_image_format {
 private:
 F_sparse_image_format(int flag_);
 public:
 int flag;
 enum B{
-b_single_miptail = VK_SPARSE_IMAGE_FORMAT_SINGLE_MIPTAIL_BIT,
-b_aligned_mip_size = VK_SPARSE_IMAGE_FORMAT_ALIGNED_MIP_SIZE_BIT,
-b_nonstandard_block_size = VK_SPARSE_IMAGE_FORMAT_NONSTANDARD_BLOCK_SIZE_BIT,
+/*Image uses a single mip tail region for all array layers*/
+	b_single_miptail = VK_SPARSE_IMAGE_FORMAT_SINGLE_MIPTAIL_BIT,
+/*Image requires mip level dimensions to be an integer multiple of the sparse image block dimensions for non-tail mip levels.*/
+	b_aligned_mip_size = VK_SPARSE_IMAGE_FORMAT_ALIGNED_MIP_SIZE_BIT,
+/*Image uses a non-standard sparse image block dimensions*/
+	b_nonstandard_block_size = VK_SPARSE_IMAGE_FORMAT_NONSTANDARD_BLOCK_SIZE_BIT,
 };
 F_sparse_image_format();
 F_sparse_image_format(B bits_);
@@ -1030,13 +1143,15 @@ F_sparse_image_format& off_nonstandard_block_size();
 F_sparse_image_format operator|(F_sparse_image_format::B bit1_,F_sparse_image_format::B bit2_);
 
 
+/*	VkSparseMemoryBind*/
 class F_sparse_memory_bind {
 private:
 F_sparse_memory_bind(int flag_);
 public:
 int flag;
 enum B{
-b_metadata = VK_SPARSE_MEMORY_BIND_METADATA_BIT,
+/*Operation binds resource metadata to memory*/
+	b_metadata = VK_SPARSE_MEMORY_BIND_METADATA_BIT,
 };
 F_sparse_memory_bind();
 F_sparse_memory_bind(B bits_);
@@ -1067,29 +1182,47 @@ F_sparse_memory_bind& off_metadata();
 F_sparse_memory_bind operator|(F_sparse_memory_bind::B bit1_,F_sparse_memory_bind::B bit2_);
 
 
+/*	VkPipelineStage*/
 class F_pipeline_stage {
 private:
 F_pipeline_stage(int flag_);
 public:
 int flag;
 enum B{
-b_top_of_pipe = VK_PIPELINE_STAGE_TOP_OF_PIPE_BIT,
-b_draw_indirect = VK_PIPELINE_STAGE_DRAW_INDIRECT_BIT,
-b_vertex_input = VK_PIPELINE_STAGE_VERTEX_INPUT_BIT,
-b_vertex_shader = VK_PIPELINE_STAGE_VERTEX_SHADER_BIT,
-b_tessellation_control_shader = VK_PIPELINE_STAGE_TESSELLATION_CONTROL_SHADER_BIT,
-b_tessellation_evaluation_shader = VK_PIPELINE_STAGE_TESSELLATION_EVALUATION_SHADER_BIT,
-b_geometry_shader = VK_PIPELINE_STAGE_GEOMETRY_SHADER_BIT,
-b_fragment_shader = VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT,
-b_early_fragment_tests = VK_PIPELINE_STAGE_EARLY_FRAGMENT_TESTS_BIT,
-b_late_fragment_tests = VK_PIPELINE_STAGE_LATE_FRAGMENT_TESTS_BIT,
-b_color_attachment_output = VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT,
-b_compute_shader = VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,
-b_transfer = VK_PIPELINE_STAGE_TRANSFER_BIT,
-b_bottom_of_pipe = VK_PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT,
-b_host = VK_PIPELINE_STAGE_HOST_BIT,
-b_all_graphics = VK_PIPELINE_STAGE_ALL_GRAPHICS_BIT,
-b_all_commands = VK_PIPELINE_STAGE_ALL_COMMANDS_BIT,
+/*Before subsequent commands are processed*/
+	b_top_of_pipe = VK_PIPELINE_STAGE_TOP_OF_PIPE_BIT,
+/*Draw/DispatchIndirect command fetch*/
+	b_draw_indirect = VK_PIPELINE_STAGE_DRAW_INDIRECT_BIT,
+/*Vertex/index fetch*/
+	b_vertex_input = VK_PIPELINE_STAGE_VERTEX_INPUT_BIT,
+/*Vertex shading*/
+	b_vertex_shader = VK_PIPELINE_STAGE_VERTEX_SHADER_BIT,
+/*Tessellation control shading*/
+	b_tessellation_control_shader = VK_PIPELINE_STAGE_TESSELLATION_CONTROL_SHADER_BIT,
+/*Tessellation evaluation shading*/
+	b_tessellation_evaluation_shader = VK_PIPELINE_STAGE_TESSELLATION_EVALUATION_SHADER_BIT,
+/*Geometry shading*/
+	b_geometry_shader = VK_PIPELINE_STAGE_GEOMETRY_SHADER_BIT,
+/*Fragment shading*/
+	b_fragment_shader = VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT,
+/*Early fragment (depth and stencil) tests*/
+	b_early_fragment_tests = VK_PIPELINE_STAGE_EARLY_FRAGMENT_TESTS_BIT,
+/*Late fragment (depth and stencil) tests*/
+	b_late_fragment_tests = VK_PIPELINE_STAGE_LATE_FRAGMENT_TESTS_BIT,
+/*Color attachment writes*/
+	b_color_attachment_output = VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT,
+/*Compute shading*/
+	b_compute_shader = VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,
+/*Transfer/copy operations*/
+	b_transfer = VK_PIPELINE_STAGE_TRANSFER_BIT,
+/*After previous commands have completed*/
+	b_bottom_of_pipe = VK_PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT,
+/*Indicates host (CPU) is a source/sink of the dependency*/
+	b_host = VK_PIPELINE_STAGE_HOST_BIT,
+/*All stages of the graphics pipeline*/
+	b_all_graphics = VK_PIPELINE_STAGE_ALL_GRAPHICS_BIT,
+/*All stages supported on the queue*/
+	b_all_commands = VK_PIPELINE_STAGE_ALL_COMMANDS_BIT,
 };
 F_pipeline_stage();
 F_pipeline_stage(B bits_);
@@ -1152,14 +1285,17 @@ F_pipeline_stage& off_all_commands();
 F_pipeline_stage operator|(F_pipeline_stage::B bit1_,F_pipeline_stage::B bit2_);
 
 
+/*	VkCommandPoolCreate*/
 class F_command_pool_create {
 private:
 F_command_pool_create(int flag_);
 public:
 int flag;
 enum B{
-b_transient = VK_COMMAND_POOL_CREATE_TRANSIENT_BIT,
-b_reset_command_buffer = VK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT,
+/*Command buffers have a short lifetime*/
+	b_transient = VK_COMMAND_POOL_CREATE_TRANSIENT_BIT,
+/*Command buffers may release their memory individually*/
+	b_reset_command_buffer = VK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT,
 };
 F_command_pool_create();
 F_command_pool_create(B bits_);
@@ -1192,13 +1328,15 @@ F_command_pool_create& off_reset_command_buffer();
 F_command_pool_create operator|(F_command_pool_create::B bit1_,F_command_pool_create::B bit2_);
 
 
+/*	VkCommandPoolReset*/
 class F_command_pool_reset {
 private:
 F_command_pool_reset(int flag_);
 public:
 int flag;
 enum B{
-b_release_resources = VK_COMMAND_POOL_RESET_RELEASE_RESOURCES_BIT,
+/*Release resources owned by the pool*/
+	b_release_resources = VK_COMMAND_POOL_RESET_RELEASE_RESOURCES_BIT,
 };
 F_command_pool_reset();
 F_command_pool_reset(B bits_);
@@ -1229,13 +1367,15 @@ F_command_pool_reset& off_release_resources();
 F_command_pool_reset operator|(F_command_pool_reset::B bit1_,F_command_pool_reset::B bit2_);
 
 
+/*	VkCommandBufferReset*/
 class F_command_buffer_reset {
 private:
 F_command_buffer_reset(int flag_);
 public:
 int flag;
 enum B{
-b_release_resources = VK_COMMAND_BUFFER_RESET_RELEASE_RESOURCES_BIT,
+/*Release resources owned by the buffer*/
+	b_release_resources = VK_COMMAND_BUFFER_RESET_RELEASE_RESOURCES_BIT,
 };
 F_command_buffer_reset();
 F_command_buffer_reset(B bits_);
@@ -1266,19 +1406,27 @@ F_command_buffer_reset& off_release_resources();
 F_command_buffer_reset operator|(F_command_buffer_reset::B bit1_,F_command_buffer_reset::B bit2_);
 
 
+/*	VkSampleCount*/
 class F_sample_count {
 private:
 F_sample_count(int flag_);
 public:
 int flag;
 enum B{
-b_1 = VK_SAMPLE_COUNT_1_BIT,
-b_2 = VK_SAMPLE_COUNT_2_BIT,
-b_4 = VK_SAMPLE_COUNT_4_BIT,
-b_8 = VK_SAMPLE_COUNT_8_BIT,
-b_16 = VK_SAMPLE_COUNT_16_BIT,
-b_32 = VK_SAMPLE_COUNT_32_BIT,
-b_64 = VK_SAMPLE_COUNT_64_BIT,
+/*Sample count 1 supported*/
+	b_1 = VK_SAMPLE_COUNT_1_BIT,
+/*Sample count 2 supported*/
+	b_2 = VK_SAMPLE_COUNT_2_BIT,
+/*Sample count 4 supported*/
+	b_4 = VK_SAMPLE_COUNT_4_BIT,
+/*Sample count 8 supported*/
+	b_8 = VK_SAMPLE_COUNT_8_BIT,
+/*Sample count 16 supported*/
+	b_16 = VK_SAMPLE_COUNT_16_BIT,
+/*Sample count 32 supported*/
+	b_32 = VK_SAMPLE_COUNT_32_BIT,
+/*Sample count 64 supported*/
+	b_64 = VK_SAMPLE_COUNT_64_BIT,
 };
 F_sample_count();
 F_sample_count(B bits_);
@@ -1321,13 +1469,15 @@ F_sample_count& off_64();
 F_sample_count operator|(F_sample_count::B bit1_,F_sample_count::B bit2_);
 
 
+/*	VkAttachmentDescription*/
 class F_attachment_description {
 private:
 F_attachment_description(int flag_);
 public:
 int flag;
 enum B{
-b_may_alias = VK_ATTACHMENT_DESCRIPTION_MAY_ALIAS_BIT,
+/*The attachment may alias physical memory of another attachment in the same render pass*/
+	b_may_alias = VK_ATTACHMENT_DESCRIPTION_MAY_ALIAS_BIT,
 };
 F_attachment_description();
 F_attachment_description(B bits_);
@@ -1358,15 +1508,19 @@ F_attachment_description& off_may_alias();
 F_attachment_description operator|(F_attachment_description::B bit1_,F_attachment_description::B bit2_);
 
 
+/*	VkStencilFace*/
 class F_stencil_face {
 private:
 F_stencil_face(int flag_);
 public:
 int flag;
 enum B{
-b_front = VK_STENCIL_FACE_FRONT_BIT,
-b_back = VK_STENCIL_FACE_BACK_BIT,
-b_vk_stencil_front_and_back = VK_STENCIL_FRONT_AND_BACK,
+/*Front face*/
+	b_front = VK_STENCIL_FACE_FRONT_BIT,
+/*Back face*/
+	b_back = VK_STENCIL_FACE_BACK_BIT,
+/*Front and back faces*/
+	b_vk_stencil_front_and_back = VK_STENCIL_FRONT_AND_BACK,
 };
 F_stencil_face();
 F_stencil_face(B bits_);
@@ -1401,13 +1555,15 @@ F_stencil_face& off_vk_stencil_front_and_back();
 F_stencil_face operator|(F_stencil_face::B bit1_,F_stencil_face::B bit2_);
 
 
+/*	VkDescriptorPoolCreate*/
 class F_descriptor_pool_create {
 private:
 F_descriptor_pool_create(int flag_);
 public:
 int flag;
 enum B{
-b_free_descriptor_set = VK_DESCRIPTOR_POOL_CREATE_FREE_DESCRIPTOR_SET_BIT,
+/*Descriptor sets may be freed individually*/
+	b_free_descriptor_set = VK_DESCRIPTOR_POOL_CREATE_FREE_DESCRIPTOR_SET_BIT,
 };
 F_descriptor_pool_create();
 F_descriptor_pool_create(B bits_);
@@ -1438,13 +1594,15 @@ F_descriptor_pool_create& off_free_descriptor_set();
 F_descriptor_pool_create operator|(F_descriptor_pool_create::B bit1_,F_descriptor_pool_create::B bit2_);
 
 
+/*	VkDependency*/
 class F_dependency {
 private:
 F_dependency(int flag_);
 public:
 int flag;
 enum B{
-b_by_region = VK_DEPENDENCY_BY_REGION_BIT,
+/*Dependency is per pixel region */
+	b_by_region = VK_DEPENDENCY_BY_REGION_BIT,
 };
 F_dependency();
 F_dependency(B bits_);
@@ -1475,16 +1633,17 @@ F_dependency& off_by_region();
 F_dependency operator|(F_dependency::B bit1_,F_dependency::B bit2_);
 
 
+/*	VkDisplayPlaneAlphaKHR*/
 class F_display_plane_alpha_khr {
 private:
 F_display_plane_alpha_khr(int flag_);
 public:
 int flag;
 enum B{
-b_opaque_bit_khr = VK_DISPLAY_PLANE_ALPHA_OPAQUE_BIT_KHR,
-b_global_bit_khr = VK_DISPLAY_PLANE_ALPHA_GLOBAL_BIT_KHR,
-b_per_pixel_bit_khr = VK_DISPLAY_PLANE_ALPHA_PER_PIXEL_BIT_KHR,
-b_per_pixel_premultiplied_bit_khr = VK_DISPLAY_PLANE_ALPHA_PER_PIXEL_PREMULTIPLIED_BIT_KHR,
+	b_opaque_bit_khr = VK_DISPLAY_PLANE_ALPHA_OPAQUE_BIT_KHR,
+	b_global_bit_khr = VK_DISPLAY_PLANE_ALPHA_GLOBAL_BIT_KHR,
+	b_per_pixel_bit_khr = VK_DISPLAY_PLANE_ALPHA_PER_PIXEL_BIT_KHR,
+	b_per_pixel_premultiplied_bit_khr = VK_DISPLAY_PLANE_ALPHA_PER_PIXEL_PREMULTIPLIED_BIT_KHR,
 };
 F_display_plane_alpha_khr();
 F_display_plane_alpha_khr(B bits_);
@@ -1521,16 +1680,17 @@ F_display_plane_alpha_khr& off_per_pixel_premultiplied_bit_khr();
 F_display_plane_alpha_khr operator|(F_display_plane_alpha_khr::B bit1_,F_display_plane_alpha_khr::B bit2_);
 
 
+/*	VkCompositeAlphaKHR*/
 class F_composite_alpha_khr {
 private:
 F_composite_alpha_khr(int flag_);
 public:
 int flag;
 enum B{
-b_opaque_bit_khr = VK_COMPOSITE_ALPHA_OPAQUE_BIT_KHR,
-b_pre_multiplied_bit_khr = VK_COMPOSITE_ALPHA_PRE_MULTIPLIED_BIT_KHR,
-b_post_multiplied_bit_khr = VK_COMPOSITE_ALPHA_POST_MULTIPLIED_BIT_KHR,
-b_inherit_bit_khr = VK_COMPOSITE_ALPHA_INHERIT_BIT_KHR,
+	b_opaque_bit_khr = VK_COMPOSITE_ALPHA_OPAQUE_BIT_KHR,
+	b_pre_multiplied_bit_khr = VK_COMPOSITE_ALPHA_PRE_MULTIPLIED_BIT_KHR,
+	b_post_multiplied_bit_khr = VK_COMPOSITE_ALPHA_POST_MULTIPLIED_BIT_KHR,
+	b_inherit_bit_khr = VK_COMPOSITE_ALPHA_INHERIT_BIT_KHR,
 };
 F_composite_alpha_khr();
 F_composite_alpha_khr(B bits_);
@@ -1567,21 +1727,22 @@ F_composite_alpha_khr& off_inherit_bit_khr();
 F_composite_alpha_khr operator|(F_composite_alpha_khr::B bit1_,F_composite_alpha_khr::B bit2_);
 
 
+/*	VkSurfaceTransformKHR*/
 class F_surface_transform_khr {
 private:
 F_surface_transform_khr(int flag_);
 public:
 int flag;
 enum B{
-b_identity_bit_khr = VK_SURFACE_TRANSFORM_IDENTITY_BIT_KHR,
-b_rotate_90_bit_khr = VK_SURFACE_TRANSFORM_ROTATE_90_BIT_KHR,
-b_rotate_180_bit_khr = VK_SURFACE_TRANSFORM_ROTATE_180_BIT_KHR,
-b_rotate_270_bit_khr = VK_SURFACE_TRANSFORM_ROTATE_270_BIT_KHR,
-b_horizontal_mirror_bit_khr = VK_SURFACE_TRANSFORM_HORIZONTAL_MIRROR_BIT_KHR,
-b_horizontal_mirror_rotate_90_bit_khr = VK_SURFACE_TRANSFORM_HORIZONTAL_MIRROR_ROTATE_90_BIT_KHR,
-b_horizontal_mirror_rotate_180_bit_khr = VK_SURFACE_TRANSFORM_HORIZONTAL_MIRROR_ROTATE_180_BIT_KHR,
-b_horizontal_mirror_rotate_270_bit_khr = VK_SURFACE_TRANSFORM_HORIZONTAL_MIRROR_ROTATE_270_BIT_KHR,
-b_inherit_bit_khr = VK_SURFACE_TRANSFORM_INHERIT_BIT_KHR,
+	b_identity_bit_khr = VK_SURFACE_TRANSFORM_IDENTITY_BIT_KHR,
+	b_rotate_90_bit_khr = VK_SURFACE_TRANSFORM_ROTATE_90_BIT_KHR,
+	b_rotate_180_bit_khr = VK_SURFACE_TRANSFORM_ROTATE_180_BIT_KHR,
+	b_rotate_270_bit_khr = VK_SURFACE_TRANSFORM_ROTATE_270_BIT_KHR,
+	b_horizontal_mirror_bit_khr = VK_SURFACE_TRANSFORM_HORIZONTAL_MIRROR_BIT_KHR,
+	b_horizontal_mirror_rotate_90_bit_khr = VK_SURFACE_TRANSFORM_HORIZONTAL_MIRROR_ROTATE_90_BIT_KHR,
+	b_horizontal_mirror_rotate_180_bit_khr = VK_SURFACE_TRANSFORM_HORIZONTAL_MIRROR_ROTATE_180_BIT_KHR,
+	b_horizontal_mirror_rotate_270_bit_khr = VK_SURFACE_TRANSFORM_HORIZONTAL_MIRROR_ROTATE_270_BIT_KHR,
+	b_inherit_bit_khr = VK_SURFACE_TRANSFORM_INHERIT_BIT_KHR,
 };
 F_surface_transform_khr();
 F_surface_transform_khr(B bits_);
@@ -1628,17 +1789,18 @@ F_surface_transform_khr& off_inherit_bit_khr();
 F_surface_transform_khr operator|(F_surface_transform_khr::B bit1_,F_surface_transform_khr::B bit2_);
 
 
+/*	VkDebugReportEXT*/
 class F_debug_report_ext {
 private:
 F_debug_report_ext(int flag_);
 public:
 int flag;
 enum B{
-b_information_bit_ext = VK_DEBUG_REPORT_INFORMATION_BIT_EXT,
-b_warning_bit_ext = VK_DEBUG_REPORT_WARNING_BIT_EXT,
-b_performance_warning_bit_ext = VK_DEBUG_REPORT_PERFORMANCE_WARNING_BIT_EXT,
-b_error_bit_ext = VK_DEBUG_REPORT_ERROR_BIT_EXT,
-b_debug_bit_ext = VK_DEBUG_REPORT_DEBUG_BIT_EXT,
+	b_information_bit_ext = VK_DEBUG_REPORT_INFORMATION_BIT_EXT,
+	b_warning_bit_ext = VK_DEBUG_REPORT_WARNING_BIT_EXT,
+	b_performance_warning_bit_ext = VK_DEBUG_REPORT_PERFORMANCE_WARNING_BIT_EXT,
+	b_error_bit_ext = VK_DEBUG_REPORT_ERROR_BIT_EXT,
+	b_debug_bit_ext = VK_DEBUG_REPORT_DEBUG_BIT_EXT,
 };
 F_debug_report_ext();
 F_debug_report_ext(B bits_);
@@ -1677,16 +1839,17 @@ F_debug_report_ext& off_debug_bit_ext();
 F_debug_report_ext operator|(F_debug_report_ext::B bit1_,F_debug_report_ext::B bit2_);
 
 
+/*	VkExternalMemoryHandleTypeNV*/
 class F_external_memory_handle_type_nv {
 private:
 F_external_memory_handle_type_nv(int flag_);
 public:
 int flag;
 enum B{
-b_opaque_win32_bit_nv = VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_BIT_NV,
-b_opaque_win32_kmt_bit_nv = VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT_NV,
-b_d3d11_image_bit_nv = VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_IMAGE_BIT_NV,
-b_d3d11_image_kmt_bit_nv = VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_IMAGE_KMT_BIT_NV,
+	b_opaque_win32_bit_nv = VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_BIT_NV,
+	b_opaque_win32_kmt_bit_nv = VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT_NV,
+	b_d3d11_image_bit_nv = VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_IMAGE_BIT_NV,
+	b_d3d11_image_kmt_bit_nv = VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_IMAGE_KMT_BIT_NV,
 };
 F_external_memory_handle_type_nv();
 F_external_memory_handle_type_nv(B bits_);
@@ -1723,15 +1886,16 @@ F_external_memory_handle_type_nv& off_d3d11_image_kmt_bit_nv();
 F_external_memory_handle_type_nv operator|(F_external_memory_handle_type_nv::B bit1_,F_external_memory_handle_type_nv::B bit2_);
 
 
+/*	VkExternalMemoryFeatureNV*/
 class F_external_memory_feature_nv {
 private:
 F_external_memory_feature_nv(int flag_);
 public:
 int flag;
 enum B{
-b_dedicated_only_bit_nv = VK_EXTERNAL_MEMORY_FEATURE_DEDICATED_ONLY_BIT_NV,
-b_exportable_bit_nv = VK_EXTERNAL_MEMORY_FEATURE_EXPORTABLE_BIT_NV,
-b_importable_bit_nv = VK_EXTERNAL_MEMORY_FEATURE_IMPORTABLE_BIT_NV,
+	b_dedicated_only_bit_nv = VK_EXTERNAL_MEMORY_FEATURE_DEDICATED_ONLY_BIT_NV,
+	b_exportable_bit_nv = VK_EXTERNAL_MEMORY_FEATURE_EXPORTABLE_BIT_NV,
+	b_importable_bit_nv = VK_EXTERNAL_MEMORY_FEATURE_IMPORTABLE_BIT_NV,
 };
 F_external_memory_feature_nv();
 F_external_memory_feature_nv(B bits_);
@@ -1766,20 +1930,29 @@ F_external_memory_feature_nv& off_importable_bit_nv();
 F_external_memory_feature_nv operator|(F_external_memory_feature_nv::B bit1_,F_external_memory_feature_nv::B bit2_);
 
 
+/*	VkSubgroupFeature*/
 class F_subgroup_feature {
 private:
 F_subgroup_feature(int flag_);
 public:
 int flag;
 enum B{
-b_basic = VK_SUBGROUP_FEATURE_BASIC_BIT,
-b_vote = VK_SUBGROUP_FEATURE_VOTE_BIT,
-b_arithmetic = VK_SUBGROUP_FEATURE_ARITHMETIC_BIT,
-b_ballot = VK_SUBGROUP_FEATURE_BALLOT_BIT,
-b_shuffle = VK_SUBGROUP_FEATURE_SHUFFLE_BIT,
-b_shuffle_relative = VK_SUBGROUP_FEATURE_SHUFFLE_RELATIVE_BIT,
-b_clustered = VK_SUBGROUP_FEATURE_CLUSTERED_BIT,
-b_quad = VK_SUBGROUP_FEATURE_QUAD_BIT,
+/*Basic subgroup operations*/
+	b_basic = VK_SUBGROUP_FEATURE_BASIC_BIT,
+/*Vote subgroup operations*/
+	b_vote = VK_SUBGROUP_FEATURE_VOTE_BIT,
+/*Arithmetic subgroup operations*/
+	b_arithmetic = VK_SUBGROUP_FEATURE_ARITHMETIC_BIT,
+/*Ballot subgroup operations*/
+	b_ballot = VK_SUBGROUP_FEATURE_BALLOT_BIT,
+/*Shuffle subgroup operations*/
+	b_shuffle = VK_SUBGROUP_FEATURE_SHUFFLE_BIT,
+/*Shuffle relative subgroup operations*/
+	b_shuffle_relative = VK_SUBGROUP_FEATURE_SHUFFLE_RELATIVE_BIT,
+/*Clustered subgroup operations*/
+	b_clustered = VK_SUBGROUP_FEATURE_CLUSTERED_BIT,
+/*Quad subgroup operations*/
+	b_quad = VK_SUBGROUP_FEATURE_QUAD_BIT,
 };
 F_subgroup_feature();
 F_subgroup_feature(B bits_);
@@ -1824,16 +1997,17 @@ F_subgroup_feature& off_quad();
 F_subgroup_feature operator|(F_subgroup_feature::B bit1_,F_subgroup_feature::B bit2_);
 
 
+/*	VkIndirectCommandsLayoutUsageNVX*/
 class F_indirect_commands_layout_usage_nvx {
 private:
 F_indirect_commands_layout_usage_nvx(int flag_);
 public:
 int flag;
 enum B{
-b_unordered_sequences_bit_nvx = VK_INDIRECT_COMMANDS_LAYOUT_USAGE_UNORDERED_SEQUENCES_BIT_NVX,
-b_sparse_sequences_bit_nvx = VK_INDIRECT_COMMANDS_LAYOUT_USAGE_SPARSE_SEQUENCES_BIT_NVX,
-b_empty_executions_bit_nvx = VK_INDIRECT_COMMANDS_LAYOUT_USAGE_EMPTY_EXECUTIONS_BIT_NVX,
-b_indexed_sequences_bit_nvx = VK_INDIRECT_COMMANDS_LAYOUT_USAGE_INDEXED_SEQUENCES_BIT_NVX,
+	b_unordered_sequences_bit_nvx = VK_INDIRECT_COMMANDS_LAYOUT_USAGE_UNORDERED_SEQUENCES_BIT_NVX,
+	b_sparse_sequences_bit_nvx = VK_INDIRECT_COMMANDS_LAYOUT_USAGE_SPARSE_SEQUENCES_BIT_NVX,
+	b_empty_executions_bit_nvx = VK_INDIRECT_COMMANDS_LAYOUT_USAGE_EMPTY_EXECUTIONS_BIT_NVX,
+	b_indexed_sequences_bit_nvx = VK_INDIRECT_COMMANDS_LAYOUT_USAGE_INDEXED_SEQUENCES_BIT_NVX,
 };
 F_indirect_commands_layout_usage_nvx();
 F_indirect_commands_layout_usage_nvx(B bits_);
@@ -1870,14 +2044,15 @@ F_indirect_commands_layout_usage_nvx& off_indexed_sequences_bit_nvx();
 F_indirect_commands_layout_usage_nvx operator|(F_indirect_commands_layout_usage_nvx::B bit1_,F_indirect_commands_layout_usage_nvx::B bit2_);
 
 
+/*	VkObjectEntryUsageNVX*/
 class F_object_entry_usage_nvx {
 private:
 F_object_entry_usage_nvx(int flag_);
 public:
 int flag;
 enum B{
-b_graphics_bit_nvx = VK_OBJECT_ENTRY_USAGE_GRAPHICS_BIT_NVX,
-b_compute_bit_nvx = VK_OBJECT_ENTRY_USAGE_COMPUTE_BIT_NVX,
+	b_graphics_bit_nvx = VK_OBJECT_ENTRY_USAGE_GRAPHICS_BIT_NVX,
+	b_compute_bit_nvx = VK_OBJECT_ENTRY_USAGE_COMPUTE_BIT_NVX,
 };
 F_object_entry_usage_nvx();
 F_object_entry_usage_nvx(B bits_);
@@ -1910,19 +2085,24 @@ F_object_entry_usage_nvx& off_compute_bit_nvx();
 F_object_entry_usage_nvx operator|(F_object_entry_usage_nvx::B bit1_,F_object_entry_usage_nvx::B bit2_);
 
 
+/*	VkDescriptorSetLayoutCreate*/
+using F_descriptor_set_layout_create = 
+			VkDescriptorSetLayoutCreateFlagBits;
+
+/*	VkExternalMemoryHandleType*/
 class F_external_memory_handle_type {
 private:
 F_external_memory_handle_type(int flag_);
 public:
 int flag;
 enum B{
-b_opaque_fd = VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_FD_BIT,
-b_opaque_win32 = VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_BIT,
-b_opaque_win32_kmt = VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT,
-b_d3d11_texture = VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_TEXTURE_BIT,
-b_d3d11_texture_kmt = VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_TEXTURE_KMT_BIT,
-b_d3d12_heap = VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_HEAP_BIT,
-b_d3d12_resource = VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_RESOURCE_BIT,
+	b_opaque_fd = VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_FD_BIT,
+	b_opaque_win32 = VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_BIT,
+	b_opaque_win32_kmt = VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT,
+	b_d3d11_texture = VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_TEXTURE_BIT,
+	b_d3d11_texture_kmt = VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_TEXTURE_KMT_BIT,
+	b_d3d12_heap = VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_HEAP_BIT,
+	b_d3d12_resource = VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_RESOURCE_BIT,
 };
 F_external_memory_handle_type();
 F_external_memory_handle_type(B bits_);
@@ -1965,15 +2145,16 @@ F_external_memory_handle_type& off_d3d12_resource();
 F_external_memory_handle_type operator|(F_external_memory_handle_type::B bit1_,F_external_memory_handle_type::B bit2_);
 
 
+/*	VkExternalMemoryFeature*/
 class F_external_memory_feature {
 private:
 F_external_memory_feature(int flag_);
 public:
 int flag;
 enum B{
-b_dedicated_only = VK_EXTERNAL_MEMORY_FEATURE_DEDICATED_ONLY_BIT,
-b_exportable = VK_EXTERNAL_MEMORY_FEATURE_EXPORTABLE_BIT,
-b_importable = VK_EXTERNAL_MEMORY_FEATURE_IMPORTABLE_BIT,
+	b_dedicated_only = VK_EXTERNAL_MEMORY_FEATURE_DEDICATED_ONLY_BIT,
+	b_exportable = VK_EXTERNAL_MEMORY_FEATURE_EXPORTABLE_BIT,
+	b_importable = VK_EXTERNAL_MEMORY_FEATURE_IMPORTABLE_BIT,
 };
 F_external_memory_feature();
 F_external_memory_feature(B bits_);
@@ -2008,17 +2189,18 @@ F_external_memory_feature& off_importable();
 F_external_memory_feature operator|(F_external_memory_feature::B bit1_,F_external_memory_feature::B bit2_);
 
 
+/*	VkExternalSemaphoreHandleType*/
 class F_external_semaphore_handle_type {
 private:
 F_external_semaphore_handle_type(int flag_);
 public:
 int flag;
 enum B{
-b_opaque_fd = VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_FD_BIT,
-b_opaque_win32 = VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_BIT,
-b_opaque_win32_kmt = VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT,
-b_d3d12_fence = VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_D3D12_FENCE_BIT,
-b_sync_fd = VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_SYNC_FD_BIT,
+	b_opaque_fd = VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_FD_BIT,
+	b_opaque_win32 = VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_BIT,
+	b_opaque_win32_kmt = VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT,
+	b_d3d12_fence = VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_D3D12_FENCE_BIT,
+	b_sync_fd = VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_SYNC_FD_BIT,
 };
 F_external_semaphore_handle_type();
 F_external_semaphore_handle_type(B bits_);
@@ -2057,14 +2239,15 @@ F_external_semaphore_handle_type& off_sync_fd();
 F_external_semaphore_handle_type operator|(F_external_semaphore_handle_type::B bit1_,F_external_semaphore_handle_type::B bit2_);
 
 
+/*	VkExternalSemaphoreFeature*/
 class F_external_semaphore_feature {
 private:
 F_external_semaphore_feature(int flag_);
 public:
 int flag;
 enum B{
-b_exportable = VK_EXTERNAL_SEMAPHORE_FEATURE_EXPORTABLE_BIT,
-b_importable = VK_EXTERNAL_SEMAPHORE_FEATURE_IMPORTABLE_BIT,
+	b_exportable = VK_EXTERNAL_SEMAPHORE_FEATURE_EXPORTABLE_BIT,
+	b_importable = VK_EXTERNAL_SEMAPHORE_FEATURE_IMPORTABLE_BIT,
 };
 F_external_semaphore_feature();
 F_external_semaphore_feature(B bits_);
@@ -2097,13 +2280,14 @@ F_external_semaphore_feature& off_importable();
 F_external_semaphore_feature operator|(F_external_semaphore_feature::B bit1_,F_external_semaphore_feature::B bit2_);
 
 
+/*	VkSemaphoreImport*/
 class F_semaphore_import {
 private:
 F_semaphore_import(int flag_);
 public:
 int flag;
 enum B{
-b_temporary = VK_SEMAPHORE_IMPORT_TEMPORARY_BIT,
+	b_temporary = VK_SEMAPHORE_IMPORT_TEMPORARY_BIT,
 };
 F_semaphore_import();
 F_semaphore_import(B bits_);
@@ -2134,16 +2318,17 @@ F_semaphore_import& off_temporary();
 F_semaphore_import operator|(F_semaphore_import::B bit1_,F_semaphore_import::B bit2_);
 
 
+/*	VkExternalFenceHandleType*/
 class F_external_fence_handle_type {
 private:
 F_external_fence_handle_type(int flag_);
 public:
 int flag;
 enum B{
-b_opaque_fd = VK_EXTERNAL_FENCE_HANDLE_TYPE_OPAQUE_FD_BIT,
-b_opaque_win32 = VK_EXTERNAL_FENCE_HANDLE_TYPE_OPAQUE_WIN32_BIT,
-b_opaque_win32_kmt = VK_EXTERNAL_FENCE_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT,
-b_sync_fd = VK_EXTERNAL_FENCE_HANDLE_TYPE_SYNC_FD_BIT,
+	b_opaque_fd = VK_EXTERNAL_FENCE_HANDLE_TYPE_OPAQUE_FD_BIT,
+	b_opaque_win32 = VK_EXTERNAL_FENCE_HANDLE_TYPE_OPAQUE_WIN32_BIT,
+	b_opaque_win32_kmt = VK_EXTERNAL_FENCE_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT,
+	b_sync_fd = VK_EXTERNAL_FENCE_HANDLE_TYPE_SYNC_FD_BIT,
 };
 F_external_fence_handle_type();
 F_external_fence_handle_type(B bits_);
@@ -2180,14 +2365,15 @@ F_external_fence_handle_type& off_sync_fd();
 F_external_fence_handle_type operator|(F_external_fence_handle_type::B bit1_,F_external_fence_handle_type::B bit2_);
 
 
+/*	VkExternalFenceFeature*/
 class F_external_fence_feature {
 private:
 F_external_fence_feature(int flag_);
 public:
 int flag;
 enum B{
-b_exportable = VK_EXTERNAL_FENCE_FEATURE_EXPORTABLE_BIT,
-b_importable = VK_EXTERNAL_FENCE_FEATURE_IMPORTABLE_BIT,
+	b_exportable = VK_EXTERNAL_FENCE_FEATURE_EXPORTABLE_BIT,
+	b_importable = VK_EXTERNAL_FENCE_FEATURE_IMPORTABLE_BIT,
 };
 F_external_fence_feature();
 F_external_fence_feature(B bits_);
@@ -2220,13 +2406,14 @@ F_external_fence_feature& off_importable();
 F_external_fence_feature operator|(F_external_fence_feature::B bit1_,F_external_fence_feature::B bit2_);
 
 
+/*	VkFenceImport*/
 class F_fence_import {
 private:
 F_fence_import(int flag_);
 public:
 int flag;
 enum B{
-b_temporary = VK_FENCE_IMPORT_TEMPORARY_BIT,
+	b_temporary = VK_FENCE_IMPORT_TEMPORARY_BIT,
 };
 F_fence_import();
 F_fence_import(B bits_);
@@ -2257,13 +2444,14 @@ F_fence_import& off_temporary();
 F_fence_import operator|(F_fence_import::B bit1_,F_fence_import::B bit2_);
 
 
+/*	VkSurfaceCounterEXT*/
 class F_surface_counter_ext {
 private:
 F_surface_counter_ext(int flag_);
 public:
 int flag;
 enum B{
-b_vblank_ext = VK_SURFACE_COUNTER_VBLANK_EXT,
+	b_vblank_ext = VK_SURFACE_COUNTER_VBLANK_EXT,
 };
 F_surface_counter_ext();
 F_surface_counter_ext(B bits_);
@@ -2294,16 +2482,21 @@ F_surface_counter_ext& off_vblank_ext();
 F_surface_counter_ext operator|(F_surface_counter_ext::B bit1_,F_surface_counter_ext::B bit2_);
 
 
+/*	VkPeerMemoryFeature*/
 class F_peer_memory_feature {
 private:
 F_peer_memory_feature(int flag_);
 public:
 int flag;
 enum B{
-b_copy_src = VK_PEER_MEMORY_FEATURE_COPY_SRC_BIT,
-b_copy_dst = VK_PEER_MEMORY_FEATURE_COPY_DST_BIT,
-b_generic_src = VK_PEER_MEMORY_FEATURE_GENERIC_SRC_BIT,
-b_generic_dst = VK_PEER_MEMORY_FEATURE_GENERIC_DST_BIT,
+/*Can read with vkCmdCopy commands*/
+	b_copy_src = VK_PEER_MEMORY_FEATURE_COPY_SRC_BIT,
+/*Can write with vkCmdCopy commands*/
+	b_copy_dst = VK_PEER_MEMORY_FEATURE_COPY_DST_BIT,
+/*Can read with any access type/command*/
+	b_generic_src = VK_PEER_MEMORY_FEATURE_GENERIC_SRC_BIT,
+/*Can write with and access type/command*/
+	b_generic_dst = VK_PEER_MEMORY_FEATURE_GENERIC_DST_BIT,
 };
 F_peer_memory_feature();
 F_peer_memory_feature(B bits_);
@@ -2340,13 +2533,15 @@ F_peer_memory_feature& off_generic_dst();
 F_peer_memory_feature operator|(F_peer_memory_feature::B bit1_,F_peer_memory_feature::B bit2_);
 
 
+/*	VkMemoryAllocate*/
 class F_memory_allocate {
 private:
 F_memory_allocate(int flag_);
 public:
 int flag;
 enum B{
-b_device_mask = VK_MEMORY_ALLOCATE_DEVICE_MASK_BIT,
+/*Force allocation on specific devices*/
+	b_device_mask = VK_MEMORY_ALLOCATE_DEVICE_MASK_BIT,
 };
 F_memory_allocate();
 F_memory_allocate(B bits_);
@@ -2377,16 +2572,21 @@ F_memory_allocate& off_device_mask();
 F_memory_allocate operator|(F_memory_allocate::B bit1_,F_memory_allocate::B bit2_);
 
 
+/*	VkDeviceGroupPresentModeKHR*/
 class F_device_group_present_mode_khr {
 private:
 F_device_group_present_mode_khr(int flag_);
 public:
 int flag;
 enum B{
-b_local_bit_khr = VK_DEVICE_GROUP_PRESENT_MODE_LOCAL_BIT_KHR,
-b_remote_bit_khr = VK_DEVICE_GROUP_PRESENT_MODE_REMOTE_BIT_KHR,
-b_sum_bit_khr = VK_DEVICE_GROUP_PRESENT_MODE_SUM_BIT_KHR,
-b_local_multi_device_bit_khr = VK_DEVICE_GROUP_PRESENT_MODE_LOCAL_MULTI_DEVICE_BIT_KHR,
+/*Present from local memory*/
+	b_local_bit_khr = VK_DEVICE_GROUP_PRESENT_MODE_LOCAL_BIT_KHR,
+/*Present from remote memory*/
+	b_remote_bit_khr = VK_DEVICE_GROUP_PRESENT_MODE_REMOTE_BIT_KHR,
+/*Present sum of local and/or remote memory*/
+	b_sum_bit_khr = VK_DEVICE_GROUP_PRESENT_MODE_SUM_BIT_KHR,
+/*Each physical device presents from local memory*/
+	b_local_multi_device_bit_khr = VK_DEVICE_GROUP_PRESENT_MODE_LOCAL_MULTI_DEVICE_BIT_KHR,
 };
 F_device_group_present_mode_khr();
 F_device_group_present_mode_khr(B bits_);
@@ -2423,16 +2623,25 @@ F_device_group_present_mode_khr& off_local_multi_device_bit_khr();
 F_device_group_present_mode_khr operator|(F_device_group_present_mode_khr::B bit1_,F_device_group_present_mode_khr::B bit2_);
 
 
+/*	VkSwapchainCreateKHR*/
+using F_swapchain_create_khr = 
+			VkSwapchainCreateFlagBitsKHR;
+
+/*	VkSubpassDescription*/
+using F_subpass_description = 
+			VkSubpassDescriptionFlagBits;
+
+/*	VkDebugUtilsMessageSeverityEXT*/
 class F_debug_utils_message_severity_ext {
 private:
 F_debug_utils_message_severity_ext(int flag_);
 public:
 int flag;
 enum B{
-b_verbose_bit_ext = VK_DEBUG_UTILS_MESSAGE_SEVERITY_VERBOSE_BIT_EXT,
-b_info_bit_ext = VK_DEBUG_UTILS_MESSAGE_SEVERITY_INFO_BIT_EXT,
-b_warning_bit_ext = VK_DEBUG_UTILS_MESSAGE_SEVERITY_WARNING_BIT_EXT,
-b_error_bit_ext = VK_DEBUG_UTILS_MESSAGE_SEVERITY_ERROR_BIT_EXT,
+	b_verbose_bit_ext = VK_DEBUG_UTILS_MESSAGE_SEVERITY_VERBOSE_BIT_EXT,
+	b_info_bit_ext = VK_DEBUG_UTILS_MESSAGE_SEVERITY_INFO_BIT_EXT,
+	b_warning_bit_ext = VK_DEBUG_UTILS_MESSAGE_SEVERITY_WARNING_BIT_EXT,
+	b_error_bit_ext = VK_DEBUG_UTILS_MESSAGE_SEVERITY_ERROR_BIT_EXT,
 };
 F_debug_utils_message_severity_ext();
 F_debug_utils_message_severity_ext(B bits_);
@@ -2469,15 +2678,16 @@ F_debug_utils_message_severity_ext& off_error_bit_ext();
 F_debug_utils_message_severity_ext operator|(F_debug_utils_message_severity_ext::B bit1_,F_debug_utils_message_severity_ext::B bit2_);
 
 
+/*	VkDebugUtilsMessageTypeEXT*/
 class F_debug_utils_message_type_ext {
 private:
 F_debug_utils_message_type_ext(int flag_);
 public:
 int flag;
 enum B{
-b_general_bit_ext = VK_DEBUG_UTILS_MESSAGE_TYPE_GENERAL_BIT_EXT,
-b_validation_bit_ext = VK_DEBUG_UTILS_MESSAGE_TYPE_VALIDATION_BIT_EXT,
-b_performance_bit_ext = VK_DEBUG_UTILS_MESSAGE_TYPE_PERFORMANCE_BIT_EXT,
+	b_general_bit_ext = VK_DEBUG_UTILS_MESSAGE_TYPE_GENERAL_BIT_EXT,
+	b_validation_bit_ext = VK_DEBUG_UTILS_MESSAGE_TYPE_VALIDATION_BIT_EXT,
+	b_performance_bit_ext = VK_DEBUG_UTILS_MESSAGE_TYPE_PERFORMANCE_BIT_EXT,
 };
 F_debug_utils_message_type_ext();
 F_debug_utils_message_type_ext(B bits_);
@@ -2512,16 +2722,17 @@ F_debug_utils_message_type_ext& off_performance_bit_ext();
 F_debug_utils_message_type_ext operator|(F_debug_utils_message_type_ext::B bit1_,F_debug_utils_message_type_ext::B bit2_);
 
 
+/*	VkDescriptorBindingEXT*/
 class F_descriptor_binding_ext {
 private:
 F_descriptor_binding_ext(int flag_);
 public:
 int flag;
 enum B{
-b_update_after_bind_bit_ext = VK_DESCRIPTOR_BINDING_UPDATE_AFTER_BIND_BIT_EXT,
-b_update_unused_while_pending_bit_ext = VK_DESCRIPTOR_BINDING_UPDATE_UNUSED_WHILE_PENDING_BIT_EXT,
-b_partially_bound_bit_ext = VK_DESCRIPTOR_BINDING_PARTIALLY_BOUND_BIT_EXT,
-b_variable_descriptor_count_bit_ext = VK_DESCRIPTOR_BINDING_VARIABLE_DESCRIPTOR_COUNT_BIT_EXT,
+	b_update_after_bind_bit_ext = VK_DESCRIPTOR_BINDING_UPDATE_AFTER_BIND_BIT_EXT,
+	b_update_unused_while_pending_bit_ext = VK_DESCRIPTOR_BINDING_UPDATE_UNUSED_WHILE_PENDING_BIT_EXT,
+	b_partially_bound_bit_ext = VK_DESCRIPTOR_BINDING_PARTIALLY_BOUND_BIT_EXT,
+	b_variable_descriptor_count_bit_ext = VK_DESCRIPTOR_BINDING_VARIABLE_DESCRIPTOR_COUNT_BIT_EXT,
 };
 F_descriptor_binding_ext();
 F_descriptor_binding_ext(B bits_);
@@ -2558,13 +2769,14 @@ F_descriptor_binding_ext& off_variable_descriptor_count_bit_ext();
 F_descriptor_binding_ext operator|(F_descriptor_binding_ext::B bit1_,F_descriptor_binding_ext::B bit2_);
 
 
+/*	VkConditionalRenderingEXT*/
 class F_conditional_rendering_ext {
 private:
 F_conditional_rendering_ext(int flag_);
 public:
 int flag;
 enum B{
-b_inverted_bit_ext = VK_CONDITIONAL_RENDERING_INVERTED_BIT_EXT,
+	b_inverted_bit_ext = VK_CONDITIONAL_RENDERING_INVERTED_BIT_EXT,
 };
 F_conditional_rendering_ext();
 F_conditional_rendering_ext(B bits_);
@@ -2595,16 +2807,17 @@ F_conditional_rendering_ext& off_inverted_bit_ext();
 F_conditional_rendering_ext operator|(F_conditional_rendering_ext::B bit1_,F_conditional_rendering_ext::B bit2_);
 
 
+/*	VkGeometryInstanceNVX*/
 class F_geometry_instance_nvx {
 private:
 F_geometry_instance_nvx(int flag_);
 public:
 int flag;
 enum B{
-b_triangle_cull_disable_bit_nvx = VK_GEOMETRY_INSTANCE_TRIANGLE_CULL_DISABLE_BIT_NVX,
-b_triangle_cull_flip_winding_bit_nvx = VK_GEOMETRY_INSTANCE_TRIANGLE_CULL_FLIP_WINDING_BIT_NVX,
-b_force_opaque_bit_nvx = VK_GEOMETRY_INSTANCE_FORCE_OPAQUE_BIT_NVX,
-b_force_no_opaque_bit_nvx = VK_GEOMETRY_INSTANCE_FORCE_NO_OPAQUE_BIT_NVX,
+	b_triangle_cull_disable_bit_nvx = VK_GEOMETRY_INSTANCE_TRIANGLE_CULL_DISABLE_BIT_NVX,
+	b_triangle_cull_flip_winding_bit_nvx = VK_GEOMETRY_INSTANCE_TRIANGLE_CULL_FLIP_WINDING_BIT_NVX,
+	b_force_opaque_bit_nvx = VK_GEOMETRY_INSTANCE_FORCE_OPAQUE_BIT_NVX,
+	b_force_no_opaque_bit_nvx = VK_GEOMETRY_INSTANCE_FORCE_NO_OPAQUE_BIT_NVX,
 };
 F_geometry_instance_nvx();
 F_geometry_instance_nvx(B bits_);
@@ -2641,14 +2854,15 @@ F_geometry_instance_nvx& off_force_no_opaque_bit_nvx();
 F_geometry_instance_nvx operator|(F_geometry_instance_nvx::B bit1_,F_geometry_instance_nvx::B bit2_);
 
 
+/*	VkGeometryNVX*/
 class F_geometry_nvx {
 private:
 F_geometry_nvx(int flag_);
 public:
 int flag;
 enum B{
-b_opaque_bit_nvx = VK_GEOMETRY_OPAQUE_BIT_NVX,
-b_no_duplicate_any_hit_invocation_bit_nvx = VK_GEOMETRY_NO_DUPLICATE_ANY_HIT_INVOCATION_BIT_NVX,
+	b_opaque_bit_nvx = VK_GEOMETRY_OPAQUE_BIT_NVX,
+	b_no_duplicate_any_hit_invocation_bit_nvx = VK_GEOMETRY_NO_DUPLICATE_ANY_HIT_INVOCATION_BIT_NVX,
 };
 F_geometry_nvx();
 F_geometry_nvx(B bits_);
@@ -2681,17 +2895,18 @@ F_geometry_nvx& off_no_duplicate_any_hit_invocation_bit_nvx();
 F_geometry_nvx operator|(F_geometry_nvx::B bit1_,F_geometry_nvx::B bit2_);
 
 
+/*	VkBuildAccelerationStructureNVX*/
 class F_build_acceleration_structure_nvx {
 private:
 F_build_acceleration_structure_nvx(int flag_);
 public:
 int flag;
 enum B{
-b_allow_update_bit_nvx = VK_BUILD_ACCELERATION_STRUCTURE_ALLOW_UPDATE_BIT_NVX,
-b_allow_compaction_bit_nvx = VK_BUILD_ACCELERATION_STRUCTURE_ALLOW_COMPACTION_BIT_NVX,
-b_prefer_fast_trace_bit_nvx = VK_BUILD_ACCELERATION_STRUCTURE_PREFER_FAST_TRACE_BIT_NVX,
-b_prefer_fast_build_bit_nvx = VK_BUILD_ACCELERATION_STRUCTURE_PREFER_FAST_BUILD_BIT_NVX,
-b_low_memory_bit_nvx = VK_BUILD_ACCELERATION_STRUCTURE_LOW_MEMORY_BIT_NVX,
+	b_allow_update_bit_nvx = VK_BUILD_ACCELERATION_STRUCTURE_ALLOW_UPDATE_BIT_NVX,
+	b_allow_compaction_bit_nvx = VK_BUILD_ACCELERATION_STRUCTURE_ALLOW_COMPACTION_BIT_NVX,
+	b_prefer_fast_trace_bit_nvx = VK_BUILD_ACCELERATION_STRUCTURE_PREFER_FAST_TRACE_BIT_NVX,
+	b_prefer_fast_build_bit_nvx = VK_BUILD_ACCELERATION_STRUCTURE_PREFER_FAST_BUILD_BIT_NVX,
+	b_low_memory_bit_nvx = VK_BUILD_ACCELERATION_STRUCTURE_LOW_MEMORY_BIT_NVX,
 };
 F_build_acceleration_structure_nvx();
 F_build_acceleration_structure_nvx(B bits_);
