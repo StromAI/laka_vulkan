@@ -15,10 +15,12 @@ Permission is granted to anyone to use this software for any purpose, including 
 
 import re
 from bs4 import BeautifulSoup
-#todo:处理struct 成员初始值 包括不限于sType 并写入成员注释
+#todo:处理struct 成员初始值 包括不限于sType
 #todo:生成pNext struct    并写入注释
+#todo:为存在私有成员的struct 添加方便使用的函数
+#todo:处理数组成员 count+数组 的成员
 #todo:确定struct 的父子关系 写入注释
-#todo:flags于flagbits的问题
+#这些翻着语法手册搞的东西 补丁式写作法 可以说是非常辣鸡的代码 todo:搞完重写一遍 加上注释方便查看
 
 my_format = \
 "/*\n"\
@@ -55,13 +57,13 @@ class MyName:
     sub_names = []
     houzhui = ""
     def prt(this_):
-        print "---------------------------------------"
-        print "vk name:\t"+this_.vk_name
-        print "my name:\t"+this_.my_name
-        print "houzhui name:\t"+this_.houzhui
-        print "fuck name:\t"+this_.fuck_name
-        print "sub name:"
-        print this_.sub_names
+        print ("---------------------------------------")
+        print ("vk name:\t"+this_.vk_name)
+        print ("my name:\t"+this_.my_name)
+        print ("houzhui name:\t"+this_.houzhui)
+        print ("fuck name:\t"+this_.fuck_name)
+        print ("sub name:")
+        print (this_.sub_names)
 
 def get_my_name(vk_name_,qianzhui_,vk_):
     my_name = MyName()
@@ -193,7 +195,7 @@ h_code += \
 h_code+=h_out+\
 "\n}}\n"
 
-print >> out_h_file,"%s" % (h_code)
+out_h_file.write(h_code)
 out_h_file.close()
 
 
@@ -205,6 +207,7 @@ h_out = ""
 
 flag_bits_list = soup.registry.find_all('enums',attrs={'type':'bitmask'})
 for enum in flag_bits_list:
+
     vk_name = name = enum.get('name').replace("FlagBits", "")
 
     sub_names = re.findall(r'[A-Z]+[a-z]*', name)
@@ -224,11 +227,18 @@ for enum in flag_bits_list:
     name_dict[my_name.my_name] = my_name
     name_dict[my_name.vk_name] = my_name
 
+    name_dict[my_name.vk_name.replace("FlagBits","Flags")] = my_name
+
     comment = ""
     temp = enum.get('comment')
     if temp!=None:
         comment = "\n"+temp
     h_out+="/*\t"+vk_name+comment+"*/\n"
+
+    #if enum.get('name') == 'VkRenderPassCreateFlagBits':
+        #h_out+="/**/\n\n"
+        #continue
+
     member_list = enum.find_all('enum')
     if len(member_list) <= 0:
         h_out+="using "+my_name.my_name+" = \n\t\t\t"+my_name.vk_name+";\n\n"
@@ -361,10 +371,10 @@ code+="\n}}\n"
 out_cpp_file = open("..\\"+flagbits_file_name+".cpp", "w")
 out_h_file = open("..\\"+flagbits_file_name+".h","w")
 
-print >> out_cpp_file,"%s" % (code)
+out_cpp_file.write(code)
 out_cpp_file.close()
 
-print >> out_h_file,"%s" % (h_code)
+out_h_file.write(h_code)
 out_h_file.close()
 
 #处理struct=====================================
@@ -386,14 +396,14 @@ class Struct:
     members = []
 
     def prt(this_):
-        print "--------------------------------------------"
-        print "vk name\t:" +this_.vk_name
-        print "my name\t:"+this_.my_name
-        print this_.returned_only
-        print this_.comment
-        print "extends to:\t"+ this_.struct_extends_to
-        print "extends:\t"
-        print this_.struct_extends
+        print ("--------------------------------------------")
+        print ("vk name\t:" +this_.vk_name)
+        print ("my name\t:"+this_.my_name)
+        print (this_.returned_only)
+        print (this_.comment)
+        print ("extends to:\t"+ this_.struct_extends_to)
+        print ("extends:\t")
+        print (this_.struct_extends)
         for m in this_.members:
             m.prt()
 
@@ -410,27 +420,23 @@ class S_member:
     m_noautovalidity = ""
     text = ""
     comment = ""
+    type_text = ""
+    array_len = ""
 
     def prt(this_):
-        print "\t-----------------------"
-        print "\tname:\t"+this_.m_name
-        print "\ttype:\t"+this_.m_type
-        print "\ttype only:\t"+this_.m_type_only
-        print "\tarray:\t"+this_.m_array
-        print "\tvalue:\t"+this_.m_value
-        print "\tlen:\t"+this_.m_len
-        print "\taltlen:\t"+this_.m_altlen
-        print "\toptional:\t"+this_.m_optional
-        print "\texternsync:\t"+this_.m_externsync
-        print "\tnoautovalidity\t"+this_.m_noautovalidity
-        print "\ttext:\t"+this_.text
-        print "\tcomment:\t"+this_.comment
-
-    def declare(self_):
-        pass
-
-    def define(self_):
-        pass
+        print ("\t-----------------------")
+        print ("\tname:\t"+this_.m_name)
+        print ("\ttype:\t"+this_.m_type)
+        print ("\ttype only:\t"+this_.m_type_only)
+        print ("\tarray:\t"+this_.m_array)
+        print ("\tvalue:\t"+this_.m_value)
+        print ("\tlen:\t"+this_.m_len)
+        print ("\taltlen:\t"+this_.m_altlen)
+        print ("\toptional:\t"+this_.m_optional)
+        print ("\texternsync:\t"+this_.m_externsync)
+        print ("\tnoautovalidity\t"+this_.m_noautovalidity)
+        print ("\ttext:\t"+this_.text)
+        print ("\tcomment:\t"+this_.comment)
 
 struct_list = soup.registry.types.find_all('type',attrs={'category':'struct'})
 struct_dict = dict([])
@@ -488,8 +494,8 @@ for struct in struct_list:
             m.m_array = temp.group().replace("[","").replace("]","")
 
 
-        if m.text.find('[')!=-1:
-            m.text = re.sub(r'\[[A-Z_a-z0-9]*\]',"",m.text).replace(m.m_type,m.m_type+"*")
+        #if m.text.find('[')!=-1:
+            #m.text = re.sub(r'\[[A-Z_a-z0-9]*\]',"",m.text).replace(m.m_type,m.m_type+"*")
 
         temp = member.get('values')
         if temp!=None:
@@ -618,96 +624,115 @@ while count<len(struct_dict):
         if is_wsi == 1:
             h_out+="#ifdef "+wsi_dict[wsi_name]+"\n"
 
+        is_have_stype_pNext = 0
+
+        #成员声明
         h_out += \
         struct3.comment+\
         "typedef struct "+struct3.my_name+"{\n"#+"\n//"+str(count+1)+"\n"
         for m in struct3.members:
             if m.m_name == 'sType':
-                h_out+="private:\n"
+                h_out+="private:\n\tVkStructureType sTpye "
+                if struct3.vk_name != "VkBaseOutStructure" and struct3.vk_name!="VkBaseInStructure":
+                    h_out+="= "+m.m_value
+                h_out+=";\n"
+                is_have_stype_pNext = 1
+                continue
+            if m.m_name == 'pNext':
+                h_out+="\tvoid* pNext = nullptr;\npublic:\n"
+                is_have_stype_pNext = 1
+                continue
             new_type_name = old_type_name = m.m_type_only
             temp = name_dict.get(old_type_name)
             if temp!=None:
                 new_type_name = temp.my_name
             out = m.text.replace(old_type_name,new_type_name+" ",1)+";\n"
             out = re.sub(r' [ ]*\*', "*", out)
-            out = re.sub(r' [ ]*',"\t",out)
+            out = re.sub(r'[ \t]+'," ",out)
             if m.comment!="":
                 h_out+="/*"+m.comment+"*/\n"
             h_out+="\t"+out
-            if m.m_name == "pNext":
-                h_out+="public:\n"
+        if is_have_stype_pNext == 0:
+            h_out+="};\n\n"
+            if is_wsi == 1:
+                cpp_out+="#endif\n\n"
+
+            struct3.g=1
+            count+=1
+            continue
 
         #构造函数声明
-        h_out+=struct3.my_name+"(\n"
+        h_out+="\n"+struct3.my_name+"(\n"
         temp = 0
+        sm_str = ""
         for m in struct3.members:
             if m.m_name == 'sType' or m.m_name =='pNext':
                 continue
-
             if temp!=0:
-                h_out+="\n\t,"
+                sm_str+="\n\t,"
             else:
-                h_out+="\t "
+                sm_str+="\t "
             temp += 1
 
             the_text = m.text
-            mType = m.m_type
+            temp_new_type = name_dict.get(m.m_type_only)
+            type_only = m.m_type_only
+            if temp_new_type != None:
+                type_only = temp_new_type.my_name
+            the_text = the_text.replace(m.m_type_only, type_only + " ")
+            the_text = re.sub(r' [ ]*]','\t',the_text)
+            the_text = re.sub(r'[ \t]*\*','*',the_text)
 
-            temp2 = name_dict.get(m.m_type_only)
-            if temp2 != None:
-                mType = temp2.my_name
-
-            the_text = the_text.replace(m.m_type_only,mType+" ")+"_"
-            h_out+=the_text
+            array_len = ""
+            if the_text.find('[') == -1:
+                the_text = the_text+"_"
+            else:
+                the_text = the_text.replace("[","_[")
+                array_len = re.search(r'\[.*\]',the_text).group()
+                temp_type = the_text.replace(array_len,"").replace(m.m_name+"_","")
+                temp_type = re.sub(r'[ ]+',' ',temp_type)
+                array_len = array_len.replace('[','').replace(']','')
+                m.type_text = temp_type
+                m.array_len = array_len
+                the_text = "std::array< "+temp_type+","+array_len+" > "+m.m_name+"_"
+            m.declare = the_text
+            sm_str+=the_text
+        h_out+=sm_str
 
         h_out+=");\n};\n\n"
         if is_wsi == 1:
             h_out+="#endif\n\n"
 
         #构造函数定义
-        cpp_out += struct3.my_name +"::"+struct3.my_name+"("
+        if is_wsi == 1:
+            cpp_out+="#ifdef "+wsi_dict[wsi_name]+"\n"
+
+        cpp_out += struct3.my_name +"::"+struct3.my_name+"(\n"+sm_str+")"
         temp = 0
         for m in struct3.members:
             if m.m_name == 'sType' or m.m_name =='pNext':
                 continue
-            cpp_out += "\n\t"
-            if temp!=0:
-                cpp_out+=","
-            temp+=1
+            if m.text.find('[') != -1:
+                continue
 
-            the_text = m.text
-            mType = m.m_type
-
-            temp2 = name_dict.get(m.m_type_only)
-
-            if temp2 != None:
-                mType = temp2.my_name
-
-            the_text = the_text.replace(m.m_type_only, mType + " ") + "_"
-
-            cpp_out += the_text
-
-        cpp_out+="):"
-        temp = 0
-        for m in struct3.members:
             cpp_out += "\n\t\t"
-            if temp!=0:
+            if temp==0:
+                cpp_out+=":"
+            else:
                 cpp_out+=","
             temp+=1
-
-            if m.m_name == 'sType':
-                stype_name = ""
-
-                new_stype_name = name_dict.get(m.m_value)
-                if new_stype_name!=None:
-                    stype_name = new_stype_name.my_name
-                cpp_out+=m.m_name+"(E_structure_type::"+stype_name+")"
-                continue
-            if m.m_name == "pNext":
-                cpp_out+=m.m_name+"(nullptr)"
-                continue
             cpp_out+=m.m_name+"("+m.m_name+"_)"
-        cpp_out+="\n{\t}\n\n"
+        cpp_out+="\n{\n"
+
+        for m in struct3.members:
+            if m.text.find('[') == -1:
+                continue
+            cpp_out+="memcpy(&"+m.m_name+","+m.m_name+"_.data(),"+\
+                     m.array_len+"*sizeof("+"decltype("+m.m_name+")) );\n"
+        cpp_out+="}\n\n"
+
+        if is_wsi == 1:
+            cpp_out+="#endif\n\n"
 
         struct3.g=1
         count+=1
@@ -723,13 +748,14 @@ h_code += \
 "#pragma once\n"\
 "#include \"vulkan/vulkan.h\"\n"\
 "#include \"common.h\"\n"\
+"#include <array>\n"\
 "#include \""+enum_file_name+".h\"\n"\
 "#include \""+flagbits_file_name+".h\"\n"\
 "namespace laka { namespace vk {\n"
 
 code+=\
 "#include \"" + struct_file_name + ".h\"\n"\
-"namespace laka { namespace vk {\n"
+"namespace laka { namespace vk {\n\nusing namespace std;\n\n"
 
 h_code+=h_out
 code+=cpp_out
@@ -737,10 +763,10 @@ code+=cpp_out
 h_code+="\n}}\n"
 code+="\n}}\n"
 
-print >> out_cpp_file,"%s" % (code)
+out_cpp_file.write(code)
 out_cpp_file.close()
 
-print >> out_h_file,"%s" % (h_code)
+out_h_file.write(h_code)
 out_h_file.close()
 
 #print code
