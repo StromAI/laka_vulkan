@@ -13,6 +13,15 @@ Permission is granted to anyone to use this software for any purpose, including 
 3. This notice may not be removed or altered from any source distribution.
 '''
 
+'''
+The C++ ISO standard says:
+"A function defined within a class definition is an inline function."
+But, this doesn't mean the function will necessarily be inlined: 
+generally nowadays, it appears that the compiler will decide if inlining the function will lead to any benefits.
+出于保守 都是将函数定义干脆写在cpp文件中的 所以优化时还必须注意成员函数的复杂程度 尽量简短
+'''
+
+
 import re
 from bs4 import BeautifulSoup
 #todo:处理struct 成员初始值 包括不限于sType
@@ -20,6 +29,7 @@ from bs4 import BeautifulSoup
 #todo:为存在私有成员的struct 添加方便使用的函数
 #todo:处理数组成员 count+数组 的成员
 #todo:确定struct 的父子关系 写入注释
+#todo:将所有成员函数写在类定义中 若发现复杂的函数还是写在cpp中
 #这些翻着语法手册搞的东西 补丁式写作法 可以说是非常辣鸡的代码 todo:搞完重写一遍 加上注释方便查看
 
 my_format = \
@@ -649,6 +659,12 @@ while count<len(struct_dict):
             out = m.text.replace(old_type_name,new_type_name+" ",1)+";\n"
             out = re.sub(r' [ ]*\*', "*", out)
             out = re.sub(r'[ \t]+'," ",out)
+            mValue = ""
+            if struct3.returned_only != "true":
+                mValue += " = "
+                print (new_type_name)
+
+
             if m.comment!="":
                 h_out+="/*"+m.comment+"*/\n"
             h_out+="\t"+out
@@ -729,8 +745,11 @@ while count<len(struct_dict):
                 continue
             cpp_out+="memcpy(&"+m.m_name+","+m.m_name+"_.data(),"+\
                      m.array_len+"*sizeof("+"decltype("+m.m_name+")) );\n"
-        cpp_out+="}\n\n"
 
+
+
+
+        cpp_out+="}\n\n"
         if is_wsi == 1:
             cpp_out+="#endif\n\n"
 
