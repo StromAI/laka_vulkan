@@ -147,6 +147,8 @@ class Struct:
     struct_extends_to = ""
     baba = []
     have_sType = 0
+    is_wsi = 0
+
 
 class Member:
     vk_name = ""
@@ -448,6 +450,16 @@ for struct in struct_list:
 
         s_obj.members.append(m)
 
+    sub_name0 = name_dict[s_obj.vk_name].sub_names[0].lower()
+    if sub_name0 == "mac":
+        sub_name0 += name_dict[s_obj.vk_name].sub_names[1].lower()
+
+    # 判断是否平台相关
+    for wsi_name in wsi_list:
+        if sub_name0 == wsi_name:
+            s_obj.is_wsi = 1
+            break
+
     struct_dict[s_obj.vk_name] = s_obj
 
 for struct in struct_list:
@@ -511,7 +523,7 @@ while i<len(s_list):
 
 
 #输出与没有这堆struct作为成员的结构
-struct_out+="\n/*---------------- 无依赖的 struct ---------------------*/\n\n"
+struct_out+="\n/*---------------- simple struct ---------------------*/\n\n"
 
 i = 0
 while i < len(s_list):
@@ -541,6 +553,56 @@ while i < len(s_list):
     s.g = 1
 
     s_list.pop(i)
+
+struct_out+="\n/*---------------- struct ---------------------*/\n\n"
+
+i = 0
+while len(s_list) > 0:
+    if i >= len(s_list):
+        i = 0
+
+    s = s_list[i]
+
+    #判断各成员是否已生成
+    is_dependent_generated = 1
+    #判断成员中是否有sTpye或pNext
+    is_no_sType = 1
+    for m in s.members:
+        if m.name == "sType" or m.name == "pNext":
+            is_no_sType = 0
+        m_s = struct_dict.get(m.type_only)
+        if m_s!=None and m_s.g == 0:
+            is_not_generated = 0
+
+    #成员还未生成则跳过
+    if is_dependent_generated != 1:
+        i+=1
+        continue
+
+
+    #平台相关struct用宏包起
+    if s.is_wsi == 1:
+        struct_out += "#ifdef "+wsi_dict[wsi_name]+"\n"
+
+    struct_out += "/*"+s.comment+"*/\n"
+    struct_out+="struct\t\t"+s.my_name+"{\n"
+    for m in s.members:
+        if m.name == "sType":
+            struct_out+="private:\n"
+        struct_out+="\t"+m.final_text+";\n"
+        if m.name == "pNext":
+            struct_out+="public:\n"
+    struct_out += "};\n"
+
+    if s.is_wsi == 1:
+        struct_out+="#endif\n"
+
+    print struct_out
+
+    s.g = 1
+    s_list.pop(i)
+
+
 
 all_out += enum_out+flagbits_out+struct_out
 all_out += "\n}}\n"

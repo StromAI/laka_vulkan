@@ -4230,7 +4230,10 @@ using S_physical_device_maintenance3_properties_KHR =
 using S_descriptor_set_layout_support_KHR = 
 				VkDescriptorSetLayoutSupportKHR;
 
-/*---------------- ÎÞÒÀÀµµÄ struct ---------------------*//*	VkOffset2D
+
+/*---------------- simple struct ---------------------*/
+
+/*	VkOffset2D
 */
 struct		S_offset_2d{
 	int32_t x;
@@ -4904,6 +4907,4000 @@ struct		S_drm_format_modifier_properties_EXT{
 	uint64_t drmFormatModifier;
 	uint32_t drmFormatModifierPlaneCount;
 	F_format_feature drmFormatModifierTilingFeatures;
+};
+
+/*---------------- struct ---------------------*/
+
+/*	VkBaseOutStructure
+*/
+struct		S_base_out_structure{
+private:
+	E_structure_type sType;
+	struct S_base_out_structure * pNext;
+public:
+};
+/*	VkBaseInStructure
+*/
+struct		S_base_in_structure{
+private:
+	E_structure_type sType;
+	const struct S_base_in_structure * pNext;
+public:
+};
+/*	VkRect2D
+*/
+struct		S_rect_2d{
+	S_offset_2d offset;
+	S_extent_2d extent;
+};
+/*	VkClearRect
+*/
+struct		S_clear_rect{
+	S_rect_2d rect;
+	uint32_t baseArrayLayer;
+	uint32_t layerCount;
+};
+/*	VkPhysicalDeviceProperties
+(returnedonly)
+ex:
+	VkPhysicalDeviceShadingRateImagePropertiesNV
+*/
+struct		S_physical_device_properties{
+	uint32_t apiVersion;
+	uint32_t driverVersion;
+	uint32_t vendorID;
+	uint32_t deviceID;
+	E_physical_device_type deviceType;
+	char deviceName[VK_MAX_PHYSICAL_DEVICE_NAME_SIZE];
+	uint8_t pipelineCacheUUID[VK_UUID_SIZE];
+	S_physical_device_limits limits;
+	S_physical_device_sparse_properties sparseProperties;
+};
+/*	VkApplicationInfo
+*/
+struct		S_application_info{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	const char * pApplicationName;
+	uint32_t applicationVersion;
+	const char * pEngineName;
+	uint32_t engineVersion;
+	uint32_t apiVersion;
+};
+/*	VkDeviceQueueCreateInfo
+ex:
+	VkDeviceQueueGlobalPriorityCreateInfoEXT
+*/
+struct		S_device_queue_create_info{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	F_device_queue_create flags;
+	uint32_t queueFamilyIndex;
+	uint32_t queueCount;
+	const float * pQueuePriorities;
+};
+/*	VkDeviceCreateInfo
+ex:
+	VkPhysicalDeviceFeatures2
+	VkPhysicalDeviceVariablePointerFeatures
+	VkPhysicalDeviceMultiviewFeatures
+	VkDeviceGroupDeviceCreateInfo
+	VkPhysicalDevice16BitStorageFeatures
+	VkPhysicalDeviceSamplerYcbcrConversionFeatures
+	VkPhysicalDeviceProtectedMemoryFeatures
+	VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT
+	VkPhysicalDeviceInlineUniformBlockFeaturesEXT
+	VkPhysicalDeviceShaderDrawParameterFeatures
+	VkPhysicalDeviceDescriptorIndexingFeaturesEXT
+	VkPhysicalDevice8BitStorageFeaturesKHR
+	VkPhysicalDeviceConditionalRenderingFeaturesEXT
+	VkPhysicalDeviceVulkanMemoryModelFeaturesKHR
+	VkPhysicalDeviceShaderAtomicInt64FeaturesKHR
+	VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT
+	VkPhysicalDeviceASTCDecodeFeaturesEXT
+	VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV
+	VkPhysicalDeviceExclusiveScissorFeaturesNV
+	VkPhysicalDeviceCornerSampledImageFeaturesNV
+	VkPhysicalDeviceComputeShaderDerivativesFeaturesNV
+	VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV
+	VkPhysicalDeviceShaderImageFootprintFeaturesNV
+	VkPhysicalDeviceShadingRateImageFeaturesNV
+	VkPhysicalDeviceMeshShaderFeaturesNV
+*/
+struct		S_device_create_info{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	VkDeviceCreateFlags flags;
+	uint32_t queueCreateInfoCount;
+	const S_device_queue_create_info * pQueueCreateInfos;
+	uint32_t enabledLayerCount;
+	const char * const* ppEnabledLayerNames;
+	uint32_t enabledExtensionCount;
+	const char * const* ppEnabledExtensionNames;
+	const S_physical_device_features * pEnabledFeatures;
+};
+/*	VkInstanceCreateInfo
+ex:
+	VkDebugReportCallbackCreateInfoEXT
+	VkValidationFlagsEXT
+	VkDebugUtilsMessengerCreateInfoEXT
+*/
+struct		S_instance_create_info{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	VkInstanceCreateFlags flags;
+	const S_application_info * pApplicationInfo;
+	uint32_t enabledLayerCount;
+	const char * const* ppEnabledLayerNames;
+	uint32_t enabledExtensionCount;
+	const char * const* ppEnabledExtensionNames;
+};
+/*	VkQueueFamilyProperties
+(returnedonly)
+*/
+struct		S_queue_family_properties{
+	F_queue queueFlags;
+	uint32_t queueCount;
+	uint32_t timestampValidBits;
+	S_extent_3d minImageTransferGranularity;
+};
+/*	VkPhysicalDeviceMemoryProperties
+(returnedonly)
+*/
+struct		S_physical_device_memory_properties{
+	uint32_t memoryTypeCount;
+	S_memory_type memoryTypes[VK_MAX_MEMORY_TYPES];
+	uint32_t memoryHeapCount;
+	S_memory_heap memoryHeaps[VK_MAX_MEMORY_HEAPS];
+};
+/*	VkMemoryAllocateInfo
+ex:
+	VkDedicatedAllocationMemoryAllocateInfoNV
+	VkExportMemoryAllocateInfoNV
+	VkImportMemoryWin32HandleInfoNV
+	VkExportMemoryWin32HandleInfoNV
+	VkExportMemoryAllocateInfo
+	VkImportMemoryWin32HandleInfoKHR
+	VkExportMemoryWin32HandleInfoKHR
+	VkImportMemoryFdInfoKHR
+	VkMemoryAllocateFlagsInfo
+	VkMemoryDedicatedAllocateInfo
+	VkImportMemoryHostPointerInfoEXT
+	VkImportAndroidHardwareBufferInfoANDROID
+*/
+struct		S_memory_allocate_info{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	VkDeviceSize allocationSize;
+	uint32_t memoryTypeIndex;
+};
+/*	VkSparseImageFormatProperties
+(returnedonly)
+*/
+struct		S_sparse_image_format_properties{
+	F_image_aspect aspectMask;
+	S_extent_3d imageGranularity;
+	F_sparse_image_format flags;
+};
+/*	VkSparseImageMemoryRequirements
+(returnedonly)
+*/
+struct		S_sparse_image_memory_requirements{
+	S_sparse_image_format_properties formatProperties;
+	uint32_t imageMipTailFirstLod;
+	VkDeviceSize imageMipTailSize;
+	VkDeviceSize imageMipTailOffset;
+	VkDeviceSize imageMipTailStride;
+};
+/*	VkMappedMemoryRange
+*/
+struct		S_mapped_memory_range{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	VkDeviceMemory memory;
+	VkDeviceSize offset;
+	VkDeviceSize size;
+};
+/*	VkImageFormatProperties
+(returnedonly)
+*/
+struct		S_image_format_properties{
+	S_extent_3d maxExtent;
+	uint32_t maxMipLevels;
+	uint32_t maxArrayLayers;
+	F_sample_count sampleCounts;
+	VkDeviceSize maxResourceSize;
+};
+/*	VkWriteDescriptorSet
+ex:
+	VkWriteDescriptorSetInlineUniformBlockEXT
+	VkDescriptorAccelerationStructureInfoNVX
+*/
+struct		S_write_descriptor_set{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	VkDescriptorSet dstSet;
+	uint32_t dstBinding;
+	uint32_t dstArrayElement;
+	uint32_t descriptorCount;
+	E_descriptor_type descriptorType;
+	const S_descriptor_image_info * pImageInfo;
+	const S_descriptor_buffer_info * pBufferInfo;
+	const VkBufferView * pTexelBufferView;
+};
+/*	VkCopyDescriptorSet
+*/
+struct		S_copy_descriptor_set{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	VkDescriptorSet srcSet;
+	uint32_t srcBinding;
+	uint32_t srcArrayElement;
+	VkDescriptorSet dstSet;
+	uint32_t dstBinding;
+	uint32_t dstArrayElement;
+	uint32_t descriptorCount;
+};
+/*	VkBufferCreateInfo
+ex:
+	VkDedicatedAllocationBufferCreateInfoNV
+	VkExternalMemoryBufferCreateInfo
+*/
+struct		S_buffer_create_info{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	F_buffer_create flags;
+	VkDeviceSize size;
+	F_buffer_usage usage;
+	E_sharing_mode sharingMode;
+	uint32_t queueFamilyIndexCount;
+	const uint32_t * pQueueFamilyIndices;
+};
+/*	VkBufferViewCreateInfo
+*/
+struct		S_buffer_view_create_info{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	VkBufferViewCreateFlags flags;
+	VkBuffer buffer;
+	E_format format;
+	VkDeviceSize offset;
+	VkDeviceSize range;
+};
+/*	VkMemoryBarrier
+*/
+struct		S_memory_barrier{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	F_access srcAccessMask;
+	F_access dstAccessMask;
+};
+/*	VkBufferMemoryBarrier
+*/
+struct		S_buffer_memory_barrier{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	F_access srcAccessMask;
+	F_access dstAccessMask;
+	uint32_t srcQueueFamilyIndex;
+	uint32_t dstQueueFamilyIndex;
+	VkBuffer buffer;
+	VkDeviceSize offset;
+	VkDeviceSize size;
+};
+/*	VkImageMemoryBarrier
+ex:
+	VkSampleLocationsInfoEXT
+*/
+struct		S_image_memory_barrier{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	F_access srcAccessMask;
+	F_access dstAccessMask;
+	E_image_layout oldLayout;
+	E_image_layout newLayout;
+	uint32_t srcQueueFamilyIndex;
+	uint32_t dstQueueFamilyIndex;
+	VkImage image;
+	S_image_subresource_range subresourceRange;
+};
+/*	VkImageCreateInfo
+ex:
+	VkDedicatedAllocationImageCreateInfoNV
+	VkExternalMemoryImageCreateInfoNV
+	VkExternalMemoryImageCreateInfo
+	VkImageSwapchainCreateInfoKHR
+	VkImageFormatListCreateInfoKHR
+	VkExternalFormatANDROID
+	VkImageDrmFormatModifierListCreateInfoEXT
+	VkImageDrmFormatModifierExplicitCreateInfoEXT
+*/
+struct		S_image_create_info{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	F_image_create flags;
+	E_image_type imageType;
+	E_format format;
+	S_extent_3d extent;
+	uint32_t mipLevels;
+	uint32_t arrayLayers;
+	F_sample_count samples;
+	E_image_tiling tiling;
+	F_image_usage usage;
+	E_sharing_mode sharingMode;
+	uint32_t queueFamilyIndexCount;
+	const uint32_t * pQueueFamilyIndices;
+	E_image_layout initialLayout;
+};
+/*	VkImageViewCreateInfo
+ex:
+	VkImageViewUsageCreateInfo
+	VkSamplerYcbcrConversionInfo
+	VkImageViewASTCDecodeModeEXT
+*/
+struct		S_image_view_create_info{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	VkImageViewCreateFlags flags;
+	VkImage image;
+	E_image_view_type viewType;
+	E_format format;
+	S_component_mapping components;
+	S_image_subresource_range subresourceRange;
+};
+/*	VkSparseImageMemoryBind
+*/
+struct		S_sparse_image_memory_bind{
+	S_image_subresource subresource;
+	S_offset_3d offset;
+	S_extent_3d extent;
+	VkDeviceMemory memory;
+	VkDeviceSize memoryOffset;
+	F_sparse_memory_bind flags;
+};
+/*	VkSparseBufferMemoryBindInfo
+*/
+struct		S_sparse_buffer_memory_bind_info{
+	VkBuffer buffer;
+	uint32_t bindCount;
+	const S_sparse_memory_bind * pBinds;
+};
+/*	VkSparseImageOpaqueMemoryBindInfo
+*/
+struct		S_sparse_image_opaque_memory_bind_info{
+	VkImage image;
+	uint32_t bindCount;
+	const S_sparse_memory_bind * pBinds;
+};
+/*	VkSparseImageMemoryBindInfo
+*/
+struct		S_sparse_image_memory_bind_info{
+	VkImage image;
+	uint32_t bindCount;
+	const S_sparse_image_memory_bind * pBinds;
+};
+/*	VkBindSparseInfo
+ex:
+	VkDeviceGroupBindSparseInfo
+*/
+struct		S_bind_sparse_info{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	uint32_t waitSemaphoreCount;
+	const VkSemaphore * pWaitSemaphores;
+	uint32_t bufferBindCount;
+	const S_sparse_buffer_memory_bind_info * pBufferBinds;
+	uint32_t imageOpaqueBindCount;
+	const S_sparse_image_opaque_memory_bind_info * pImageOpaqueBinds;
+	uint32_t imageBindCount;
+	const S_sparse_image_memory_bind_info * pImageBinds;
+	uint32_t signalSemaphoreCount;
+	const VkSemaphore * pSignalSemaphores;
+};
+/*	VkImageCopy
+*/
+struct		S_image_copy{
+	S_image_subresource_layers srcSubresource;
+	S_offset_3d srcOffset;
+	S_image_subresource_layers dstSubresource;
+	S_offset_3d dstOffset;
+	S_extent_3d extent;
+};
+/*	VkImageBlit
+*/
+struct		S_image_blit{
+	S_image_subresource_layers srcSubresource;
+	S_offset_3d srcOffsets[2];
+	S_image_subresource_layers dstSubresource;
+	S_offset_3d dstOffsets[2];
+};
+/*	VkBufferImageCopy
+*/
+struct		S_buffer_image_copy{
+	VkDeviceSize bufferOffset;
+	uint32_t bufferRowLength;
+	uint32_t bufferImageHeight;
+	S_image_subresource_layers imageSubresource;
+	S_offset_3d imageOffset;
+	S_extent_3d imageExtent;
+};
+/*	VkImageResolve
+*/
+struct		S_image_resolve{
+	S_image_subresource_layers srcSubresource;
+	S_offset_3d srcOffset;
+	S_image_subresource_layers dstSubresource;
+	S_offset_3d dstOffset;
+	S_extent_3d extent;
+};
+/*	VkShaderModuleCreateInfo
+ex:
+	VkShaderModuleValidationCacheCreateInfoEXT
+*/
+struct		S_shader_module_create_info{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	VkShaderModuleCreateFlags flags;
+	size_t codeSize;
+	const uint32_t * pCode;
+};
+/*	VkDescriptorSetLayoutCreateInfo
+ex:
+	VkDescriptorSetLayoutBindingFlagsCreateInfoEXT
+*/
+struct		S_descriptor_set_layout_create_info{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	F_descriptor_set_layout_create flags;
+	uint32_t bindingCount;
+	const S_descriptor_set_layout_binding * pBindings;
+};
+/*	VkDescriptorPoolCreateInfo
+ex:
+	VkDescriptorPoolInlineUniformBlockCreateInfoEXT
+*/
+struct		S_descriptor_pool_create_info{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	F_descriptor_pool_create flags;
+	uint32_t maxSets;
+	uint32_t poolSizeCount;
+	const S_descriptor_pool_size * pPoolSizes;
+};
+/*	VkDescriptorSetAllocateInfo
+ex:
+	VkDescriptorSetVariableDescriptorCountAllocateInfoEXT
+*/
+struct		S_descriptor_set_allocate_info{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	VkDescriptorPool descriptorPool;
+	uint32_t descriptorSetCount;
+	const VkDescriptorSetLayout * pSetLayouts;
+};
+/*	VkSpecializationInfo
+*/
+struct		S_specialization_info{
+	uint32_t mapEntryCount;
+	const S_specialization_map_entry * pMapEntries;
+	size_t dataSize;
+	const void * pData;
+};
+/*	VkPipelineShaderStageCreateInfo
+*/
+struct		S_pipeline_shader_stage_create_info{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	VkPipelineShaderStageCreateFlags flags;
+	F_shader_stage stage;
+	VkShaderModule module;
+	const char * pName;
+	const S_specialization_info * pSpecializationInfo;
+};
+/*	VkComputePipelineCreateInfo
+*/
+struct		S_compute_pipeline_create_info{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	F_pipeline_create flags;
+	S_pipeline_shader_stage_create_info stage;
+	VkPipelineLayout layout;
+	VkPipeline basePipelineHandle;
+	int32_t basePipelineIndex;
+};
+/*	VkPipelineVertexInputStateCreateInfo
+ex:
+	VkPipelineVertexInputDivisorStateCreateInfoEXT
+*/
+struct		S_pipeline_vertex_input_state_create_info{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	VkPipelineVertexInputStateCreateFlags flags;
+	uint32_t vertexBindingDescriptionCount;
+	const S_vertex_input_binding_description * pVertexBindingDescriptions;
+	uint32_t vertexAttributeDescriptionCount;
+	const S_vertex_input_attribute_description * pVertexAttributeDescriptions;
+};
+/*	VkPipelineInputAssemblyStateCreateInfo
+*/
+struct		S_pipeline_input_assembly_state_create_info{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	VkPipelineInputAssemblyStateCreateFlags flags;
+	E_primitive_topology topology;
+	VkBool32 primitiveRestartEnable;
+};
+/*	VkPipelineTessellationStateCreateInfo
+ex:
+	VkPipelineTessellationDomainOriginStateCreateInfo
+*/
+struct		S_pipeline_tessellation_state_create_info{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	VkPipelineTessellationStateCreateFlags flags;
+	uint32_t patchControlPoints;
+};
+/*	VkPipelineViewportStateCreateInfo
+ex:
+	VkPipelineViewportWScalingStateCreateInfoNV
+	VkPipelineViewportSwizzleStateCreateInfoNV
+	VkPipelineViewportExclusiveScissorStateCreateInfoNV
+	VkPipelineViewportShadingRateImageStateCreateInfoNV
+	VkPipelineViewportCoarseSampleOrderStateCreateInfoNV
+*/
+struct		S_pipeline_viewport_state_create_info{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	VkPipelineViewportStateCreateFlags flags;
+	uint32_t viewportCount;
+	const S_viewport * pViewports;
+	uint32_t scissorCount;
+	const S_rect_2d * pScissors;
+};
+/*	VkPipelineRasterizationStateCreateInfo
+ex:
+	VkPipelineRasterizationStateRasterizationOrderAMD
+	VkPipelineRasterizationConservativeStateCreateInfoEXT
+*/
+struct		S_pipeline_rasterization_state_create_info{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	VkPipelineRasterizationStateCreateFlags flags;
+	VkBool32 depthClampEnable;
+	VkBool32 rasterizerDiscardEnable;
+	E_polygon_mode polygonMode;
+	F_cull_mode cullMode;
+	E_front_face frontFace;
+	VkBool32 depthBiasEnable;
+	float depthBiasConstantFactor;
+	float depthBiasClamp;
+	float depthBiasSlopeFactor;
+	float lineWidth;
+};
+/*	VkPipelineMultisampleStateCreateInfo
+ex:
+	VkPipelineCoverageToColorStateCreateInfoNV
+	VkPipelineSampleLocationsStateCreateInfoEXT
+	VkPipelineCoverageModulationStateCreateInfoNV
+*/
+struct		S_pipeline_multisample_state_create_info{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	VkPipelineMultisampleStateCreateFlags flags;
+	F_sample_count rasterizationSamples;
+	VkBool32 sampleShadingEnable;
+	float minSampleShading;
+	const VkSampleMask * pSampleMask;
+	VkBool32 alphaToCoverageEnable;
+	VkBool32 alphaToOneEnable;
+};
+/*	VkPipelineColorBlendStateCreateInfo
+ex:
+	VkPipelineColorBlendAdvancedStateCreateInfoEXT
+*/
+struct		S_pipeline_color_blend_state_create_info{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	VkPipelineColorBlendStateCreateFlags flags;
+	VkBool32 logicOpEnable;
+	E_logic_op logicOp;
+	uint32_t attachmentCount;
+	const S_pipeline_color_blend_attachment_state * pAttachments;
+	float blendConstants[4];
+};
+/*	VkPipelineDynamicStateCreateInfo
+*/
+struct		S_pipeline_dynamic_state_create_info{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	VkPipelineDynamicStateCreateFlags flags;
+	uint32_t dynamicStateCount;
+	const E_dynamic_state * pDynamicStates;
+};
+/*	VkPipelineDepthStencilStateCreateInfo
+*/
+struct		S_pipeline_depth_stencil_state_create_info{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	VkPipelineDepthStencilStateCreateFlags flags;
+	VkBool32 depthTestEnable;
+	VkBool32 depthWriteEnable;
+	E_compare_op depthCompareOp;
+	VkBool32 depthBoundsTestEnable;
+	VkBool32 stencilTestEnable;
+	S_stencil_op_state front;
+	S_stencil_op_state back;
+	float minDepthBounds;
+	float maxDepthBounds;
+};
+/*	VkGraphicsPipelineCreateInfo
+ex:
+	VkPipelineDiscardRectangleStateCreateInfoEXT
+	VkPipelineRepresentativeFragmentTestStateCreateInfoNV
+*/
+struct		S_graphics_pipeline_create_info{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	F_pipeline_create flags;
+	uint32_t stageCount;
+	const S_pipeline_shader_stage_create_info * pStages;
+	const S_pipeline_vertex_input_state_create_info * pVertexInputState;
+	const S_pipeline_input_assembly_state_create_info * pInputAssemblyState;
+	const S_pipeline_tessellation_state_create_info * pTessellationState;
+	const S_pipeline_viewport_state_create_info * pViewportState;
+	const S_pipeline_rasterization_state_create_info * pRasterizationState;
+	const S_pipeline_multisample_state_create_info * pMultisampleState;
+	const S_pipeline_depth_stencil_state_create_info * pDepthStencilState;
+	const S_pipeline_color_blend_state_create_info * pColorBlendState;
+	const S_pipeline_dynamic_state_create_info * pDynamicState;
+	VkPipelineLayout layout;
+	VkRenderPass renderPass;
+	uint32_t subpass;
+	VkPipeline basePipelineHandle;
+	int32_t basePipelineIndex;
+};
+/*	VkPipelineCacheCreateInfo
+*/
+struct		S_pipeline_cache_create_info{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	VkPipelineCacheCreateFlags flags;
+	size_t initialDataSize;
+	const void * pInitialData;
+};
+/*	VkPipelineLayoutCreateInfo
+*/
+struct		S_pipeline_layout_create_info{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	VkPipelineLayoutCreateFlags flags;
+	uint32_t setLayoutCount;
+	const VkDescriptorSetLayout * pSetLayouts;
+	uint32_t pushConstantRangeCount;
+	const S_push_constant_range * pPushConstantRanges;
+};
+/*	VkSamplerCreateInfo
+ex:
+	VkSamplerYcbcrConversionInfo
+	VkSamplerReductionModeCreateInfoEXT
+*/
+struct		S_sampler_create_info{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	VkSamplerCreateFlags flags;
+	E_filter magFilter;
+	E_filter minFilter;
+	E_sampler_mipmap_mode mipmapMode;
+	E_sampler_address_mode addressModeU;
+	E_sampler_address_mode addressModeV;
+	E_sampler_address_mode addressModeW;
+	float mipLodBias;
+	VkBool32 anisotropyEnable;
+	float maxAnisotropy;
+	VkBool32 compareEnable;
+	E_compare_op compareOp;
+	float minLod;
+	float maxLod;
+	E_border_color borderColor;
+	VkBool32 unnormalizedCoordinates;
+};
+/*	VkCommandPoolCreateInfo
+*/
+struct		S_command_pool_create_info{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	F_command_pool_create flags;
+	uint32_t queueFamilyIndex;
+};
+/*	VkCommandBufferAllocateInfo
+*/
+struct		S_command_buffer_allocate_info{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	VkCommandPool commandPool;
+	E_command_buffer_level level;
+	uint32_t commandBufferCount;
+};
+/*	VkCommandBufferInheritanceInfo
+ex:
+	VkCommandBufferInheritanceConditionalRenderingInfoEXT
+*/
+struct		S_command_buffer_inheritance_info{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	VkRenderPass renderPass;
+	uint32_t subpass;
+	VkFramebuffer framebuffer;
+	VkBool32 occlusionQueryEnable;
+	F_query_control queryFlags;
+	F_query_pipeline_statistic pipelineStatistics;
+};
+/*	VkCommandBufferBeginInfo
+ex:
+	VkDeviceGroupCommandBufferBeginInfo
+*/
+struct		S_command_buffer_begin_info{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	F_command_buffer_usage flags;
+	const S_command_buffer_inheritance_info * pInheritanceInfo;
+};
+/*	VkRenderPassBeginInfo
+ex:
+	VkDeviceGroupRenderPassBeginInfo
+	VkRenderPassSampleLocationsBeginInfoEXT
+*/
+struct		S_render_pass_begin_info{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	VkRenderPass renderPass;
+	VkFramebuffer framebuffer;
+	S_rect_2d renderArea;
+	uint32_t clearValueCount;
+	const VkClearValue * pClearValues;
+};
+/*	VkSubpassDescription
+*/
+struct		S_subpass_description{
+	F_subpass_description flags;
+	E_pipeline_bind_point pipelineBindPoint;
+	uint32_t inputAttachmentCount;
+	const S_attachment_reference * pInputAttachments;
+	uint32_t colorAttachmentCount;
+	const S_attachment_reference * pColorAttachments;
+	const S_attachment_reference * pResolveAttachments;
+	const S_attachment_reference * pDepthStencilAttachment;
+	uint32_t preserveAttachmentCount;
+	const uint32_t * pPreserveAttachments;
+};
+/*	VkRenderPassCreateInfo
+ex:
+	VkRenderPassMultiviewCreateInfo
+	VkRenderPassInputAttachmentAspectCreateInfo
+*/
+struct		S_render_pass_create_info{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	F_render_pass_create flags;
+	uint32_t attachmentCount;
+	const S_attachment_description * pAttachments;
+	uint32_t subpassCount;
+	const S_subpass_description * pSubpasses;
+	uint32_t dependencyCount;
+	const S_subpass_dependency * pDependencies;
+};
+/*	VkEventCreateInfo
+*/
+struct		S_event_create_info{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	VkEventCreateFlags flags;
+};
+/*	VkFenceCreateInfo
+ex:
+	VkExportFenceCreateInfo
+	VkExportFenceWin32HandleInfoKHR
+*/
+struct		S_fence_create_info{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	F_fence_create flags;
+};
+/*	VkSemaphoreCreateInfo
+ex:
+	VkExportSemaphoreCreateInfo
+	VkExportSemaphoreWin32HandleInfoKHR
+*/
+struct		S_semaphore_create_info{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	VkSemaphoreCreateFlags flags;
+};
+/*	VkQueryPoolCreateInfo
+*/
+struct		S_query_pool_create_info{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	VkQueryPoolCreateFlags flags;
+	E_query_type queryType;
+	uint32_t queryCount;
+	F_query_pipeline_statistic pipelineStatistics;
+};
+/*	VkFramebufferCreateInfo
+*/
+struct		S_framebuffer_create_info{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	VkFramebufferCreateFlags flags;
+	VkRenderPass renderPass;
+	uint32_t attachmentCount;
+	const VkImageView * pAttachments;
+	uint32_t width;
+	uint32_t height;
+	uint32_t layers;
+};
+/*	VkSubmitInfo
+ex:
+	VkWin32KeyedMutexAcquireReleaseInfoNV
+	VkWin32KeyedMutexAcquireReleaseInfoKHR
+	VkD3D12FenceSubmitInfoKHR
+	VkDeviceGroupSubmitInfo
+	VkProtectedSubmitInfo
+*/
+struct		S_submit_info{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	uint32_t waitSemaphoreCount;
+	const VkSemaphore * pWaitSemaphores;
+	const F_pipeline_stage * pWaitDstStageMask;
+	uint32_t commandBufferCount;
+	const VkCommandBuffer * pCommandBuffers;
+	uint32_t signalSemaphoreCount;
+	const VkSemaphore * pSignalSemaphores;
+};
+/*	VkDisplayPropertiesKHR
+(returnedonly)
+*/
+struct		S_display_properties_KHR{
+	VkDisplayKHR display;
+	const char * displayName;
+	S_extent_2d physicalDimensions;
+	S_extent_2d physicalResolution;
+	F_surface_transform_KHR supportedTransforms;
+	VkBool32 planeReorderPossible;
+	VkBool32 persistentContent;
+};
+/*	VkDisplayModeParametersKHR
+*/
+struct		S_display_mode_parameters_KHR{
+	S_extent_2d visibleRegion;
+	uint32_t refreshRate;
+};
+/*	VkDisplayModePropertiesKHR
+(returnedonly)
+*/
+struct		S_display_mode_properties_KHR{
+	VkDisplayModeKHR displayMode;
+	S_display_mode_parameters_KHR parameters;
+};
+/*	VkDisplayModeCreateInfoKHR
+*/
+struct		S_display_mode_create_info_KHR{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	VkDisplayModeCreateFlagsKHR flags;
+	S_display_mode_parameters_KHR parameters;
+};
+/*	VkDisplayPlaneCapabilitiesKHR
+(returnedonly)
+*/
+struct		S_display_plane_capabilities_KHR{
+	F_display_plane_alpha_KHR supportedAlpha;
+	S_offset_2d minSrcPosition;
+	S_offset_2d maxSrcPosition;
+	S_extent_2d minSrcExtent;
+	S_extent_2d maxSrcExtent;
+	S_offset_2d minDstPosition;
+	S_offset_2d maxDstPosition;
+	S_extent_2d minDstExtent;
+	S_extent_2d maxDstExtent;
+};
+/*	VkDisplaySurfaceCreateInfoKHR
+*/
+struct		S_display_surface_create_info_KHR{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	VkDisplaySurfaceCreateFlagsKHR flags;
+	VkDisplayModeKHR displayMode;
+	uint32_t planeIndex;
+	uint32_t planeStackIndex;
+	F_surface_transform_KHR transform;
+	float globalAlpha;
+	F_display_plane_alpha_KHR alphaMode;
+	S_extent_2d imageExtent;
+};
+/*	VkDisplayPresentInfoKHR
+ex to: VkPresentInfoKHR
+*/
+struct		S_display_present_info_KHR{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	S_rect_2d srcRect;
+	S_rect_2d dstRect;
+	VkBool32 persistent;
+};
+/*	VkSurfaceCapabilitiesKHR
+(returnedonly)
+*/
+struct		S_surface_capabilities_KHR{
+	uint32_t minImageCount;
+	uint32_t maxImageCount;
+	S_extent_2d currentExtent;
+	S_extent_2d minImageExtent;
+	S_extent_2d maxImageExtent;
+	uint32_t maxImageArrayLayers;
+	F_surface_transform_KHR supportedTransforms;
+	F_surface_transform_KHR currentTransform;
+	F_composite_alpha_KHR supportedCompositeAlpha;
+	F_image_usage supportedUsageFlags;
+};
+#ifdef VK_USE_PLATFORM_MACOS_MVK
+/*	VkAndroidSurfaceCreateInfoKHR
+*/
+struct		S_android_surface_create_info_KHR{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	VkAndroidSurfaceCreateFlagsKHR flags;
+	struct ANativeWindow * window;
+};
+#endif
+#ifdef VK_USE_PLATFORM_MACOS_MVK
+/*	VkMirSurfaceCreateInfoKHR
+*/
+struct		S_mir_surface_create_info_KHR{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	VkMirSurfaceCreateFlagsKHR flags;
+	MirConnection * connection;
+	MirSurface * mirSurface;
+};
+#endif
+#ifdef VK_USE_PLATFORM_MACOS_MVK
+/*	VkViSurfaceCreateInfoNN
+*/
+struct		S_vi_surface_create_info_NN{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	VkViSurfaceCreateFlagsNN flags;
+	void * window;
+};
+#endif
+#ifdef VK_USE_PLATFORM_MACOS_MVK
+/*	VkWaylandSurfaceCreateInfoKHR
+*/
+struct		S_wayland_surface_create_info_KHR{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	VkWaylandSurfaceCreateFlagsKHR flags;
+	struct wl_display * display;
+	struct wl_surface * surface;
+};
+#endif
+#ifdef VK_USE_PLATFORM_MACOS_MVK
+/*	VkWin32SurfaceCreateInfoKHR
+*/
+struct		S_win32_surface_create_info_KHR{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	VkWin32SurfaceCreateFlagsKHR flags;
+	HINSTANCE hinstance;
+	HWND hwnd;
+};
+#endif
+#ifdef VK_USE_PLATFORM_MACOS_MVK
+/*	VkXlibSurfaceCreateInfoKHR
+*/
+struct		S_xlib_surface_create_info_KHR{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	VkXlibSurfaceCreateFlagsKHR flags;
+	Display * dpy;
+	Window window;
+};
+#endif
+#ifdef VK_USE_PLATFORM_MACOS_MVK
+/*	VkXcbSurfaceCreateInfoKHR
+*/
+struct		S_xcb_surface_create_info_KHR{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	VkXcbSurfaceCreateFlagsKHR flags;
+	xcb_connection_t * connection;
+	xcb_window_t window;
+};
+#endif
+/*	VkSwapchainCreateInfoKHR
+ex:
+	VkSwapchainCounterCreateInfoEXT
+	VkDeviceGroupSwapchainCreateInfoKHR
+*/
+struct		S_swapchain_create_info_KHR{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	F_swapchain_create_KHR flags;
+	VkSurfaceKHR surface;
+	uint32_t minImageCount;
+	E_format imageFormat;
+	E_color_space_KHR imageColorSpace;
+	S_extent_2d imageExtent;
+	uint32_t imageArrayLayers;
+	F_image_usage imageUsage;
+	E_sharing_mode imageSharingMode;
+	uint32_t queueFamilyIndexCount;
+	const uint32_t * pQueueFamilyIndices;
+	F_surface_transform_KHR preTransform;
+	F_composite_alpha_KHR compositeAlpha;
+	E_present_mode_KHR presentMode;
+	VkBool32 clipped;
+	VkSwapchainKHR oldSwapchain;
+};
+/*	VkPresentInfoKHR
+ex:
+	VkDisplayPresentInfoKHR
+	VkPresentRegionsKHR
+	VkDeviceGroupPresentInfoKHR
+	VkPresentTimesInfoGOOGLE
+*/
+struct		S_present_info_KHR{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	uint32_t waitSemaphoreCount;
+	const VkSemaphore * pWaitSemaphores;
+	uint32_t swapchainCount;
+	const VkSwapchainKHR * pSwapchains;
+	const uint32_t * pImageIndices;
+	E_result * pResults;
+};
+/*	VkDebugReportCallbackCreateInfoEXT
+ex to: VkInstanceCreateInfo
+*/
+struct		S_debug_report_callback_create_info_EXT{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	F_debug_report_EXT flags;
+	PFN_vkDebugReportCallbackEXT pfnCallback;
+	void * pUserData;
+};
+/*	VkValidationFlagsEXT
+ex to: VkInstanceCreateInfo
+*/
+struct		S_validation_flags_EXT{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	uint32_t disabledValidationCheckCount;
+	const E_validation_check_EXT * pDisabledValidationChecks;
+};
+/*	VkPipelineRasterizationStateRasterizationOrderAMD
+ex to: VkPipelineRasterizationStateCreateInfo
+*/
+struct		S_pipeline_rasterization_state_rasterization_order_AMD{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	E_rasterization_order_AMD rasterizationOrder;
+};
+/*	VkDebugMarkerObjectNameInfoEXT
+*/
+struct		S_debug_marker_object_name_info_EXT{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	E_debug_report_object_type_EXT objectType;
+	uint64_t object;
+	const char * pObjectName;
+};
+/*	VkDebugMarkerObjectTagInfoEXT
+*/
+struct		S_debug_marker_object_tag_info_EXT{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	E_debug_report_object_type_EXT objectType;
+	uint64_t object;
+	uint64_t tagName;
+	size_t tagSize;
+	const void * pTag;
+};
+/*	VkDebugMarkerMarkerInfoEXT
+*/
+struct		S_debug_marker_marker_info_EXT{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	const char * pMarkerName;
+	float color[4];
+};
+/*	VkDedicatedAllocationImageCreateInfoNV
+ex to: VkImageCreateInfo
+*/
+struct		S_dedicated_allocation_image_create_info_NV{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	VkBool32 dedicatedAllocation;
+};
+/*	VkDedicatedAllocationBufferCreateInfoNV
+ex to: VkBufferCreateInfo
+*/
+struct		S_dedicated_allocation_buffer_create_info_NV{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	VkBool32 dedicatedAllocation;
+};
+/*	VkDedicatedAllocationMemoryAllocateInfoNV
+ex to: VkMemoryAllocateInfo
+*/
+struct		S_dedicated_allocation_memory_allocate_info_NV{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	VkImage image;
+	VkBuffer buffer;
+};
+/*	VkExternalImageFormatPropertiesNV
+(returnedonly)
+*/
+struct		S_external_image_format_properties_NV{
+	S_image_format_properties imageFormatProperties;
+	F_external_memory_feature_NV externalMemoryFeatures;
+	F_external_memory_handle_type_NV exportFromImportedHandleTypes;
+	F_external_memory_handle_type_NV compatibleHandleTypes;
+};
+/*	VkExternalMemoryImageCreateInfoNV
+ex to: VkImageCreateInfo
+*/
+struct		S_external_memory_image_create_info_NV{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	F_external_memory_handle_type_NV handleTypes;
+};
+/*	VkExportMemoryAllocateInfoNV
+ex to: VkMemoryAllocateInfo
+*/
+struct		S_export_memory_allocate_info_NV{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	F_external_memory_handle_type_NV handleTypes;
+};
+/*	VkImportMemoryWin32HandleInfoNV
+ex to: VkMemoryAllocateInfo
+*/
+struct		S_import_memory_win32_handle_info_NV{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	F_external_memory_handle_type_NV handleType;
+	HANDLE handle;
+};
+/*	VkExportMemoryWin32HandleInfoNV
+ex to: VkMemoryAllocateInfo
+*/
+struct		S_export_memory_win32_handle_info_NV{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	const SECURITY_ATTRIBUTES * pAttributes;
+	DWORD dwAccess;
+};
+#ifdef VK_USE_PLATFORM_MACOS_MVK
+/*	VkWin32KeyedMutexAcquireReleaseInfoNV
+ex to: VkSubmitInfo
+*/
+struct		S_win32_keyed_mutex_acquire_release_info_NV{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	uint32_t acquireCount;
+	const VkDeviceMemory * pAcquireSyncs;
+	const uint64_t * pAcquireKeys;
+	const uint32_t * pAcquireTimeoutMilliseconds;
+	uint32_t releaseCount;
+	const VkDeviceMemory * pReleaseSyncs;
+	const uint64_t * pReleaseKeys;
+};
+#endif
+/*	VkDeviceGeneratedCommandsFeaturesNVX
+*/
+struct		S_device_generated_commands_features_NVX{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	VkBool32 computeBindingPointSupport;
+};
+/*	VkDeviceGeneratedCommandsLimitsNVX
+*/
+struct		S_device_generated_commands_limits_NVX{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	uint32_t maxIndirectCommandsLayoutTokenCount;
+	uint32_t maxObjectEntryCounts;
+	uint32_t minSequenceCountBufferOffsetAlignment;
+	uint32_t minSequenceIndexBufferOffsetAlignment;
+	uint32_t minCommandsTokenBufferOffsetAlignment;
+};
+/*	VkIndirectCommandsLayoutCreateInfoNVX
+*/
+struct		S_indirect_commands_layout_create_info_NVX{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	E_pipeline_bind_point pipelineBindPoint;
+	F_indirect_commands_layout_usage_NVX flags;
+	uint32_t tokenCount;
+	const S_indirect_commands_layout_token_NVX * pTokens;
+};
+/*	VkCmdProcessCommandsInfoNVX
+*/
+struct		S_cmd_process_commands_info_NVX{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	VkObjectTableNVX objectTable;
+	VkIndirectCommandsLayoutNVX indirectCommandsLayout;
+	uint32_t indirectCommandsTokenCount;
+	const S_indirect_commands_token_NVX * pIndirectCommandsTokens;
+	uint32_t maxSequencesCount;
+	VkCommandBuffer targetCommandBuffer;
+	VkBuffer sequencesCountBuffer;
+	VkDeviceSize sequencesCountOffset;
+	VkBuffer sequencesIndexBuffer;
+	VkDeviceSize sequencesIndexOffset;
+};
+/*	VkCmdReserveSpaceForCommandsInfoNVX
+*/
+struct		S_cmd_reserve_space_for_commands_info_NVX{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	VkObjectTableNVX objectTable;
+	VkIndirectCommandsLayoutNVX indirectCommandsLayout;
+	uint32_t maxSequencesCount;
+};
+/*	VkObjectTableCreateInfoNVX
+*/
+struct		S_object_table_create_info_NVX{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	uint32_t objectCount;
+	const E_object_entry_type_NVX * pObjectEntryTypes;
+	const uint32_t * pObjectEntryCounts;
+	const F_object_entry_usage_NVX * pObjectEntryUsageFlags;
+	uint32_t maxUniformBuffersPerDescriptor;
+	uint32_t maxStorageBuffersPerDescriptor;
+	uint32_t maxStorageImagesPerDescriptor;
+	uint32_t maxSampledImagesPerDescriptor;
+	uint32_t maxPipelineLayouts;
+};
+/*	VkPhysicalDeviceFeatures2
+ex to: VkDeviceCreateInfo
+ex:
+	VkPhysicalDeviceVariablePointerFeatures
+	VkPhysicalDeviceMultiviewFeatures
+	VkPhysicalDevice16BitStorageFeatures
+	VkPhysicalDeviceSamplerYcbcrConversionFeatures
+	VkPhysicalDeviceProtectedMemoryFeatures
+	VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT
+	VkPhysicalDeviceInlineUniformBlockFeaturesEXT
+	VkPhysicalDeviceShaderDrawParameterFeatures
+	VkPhysicalDeviceDescriptorIndexingFeaturesEXT
+	VkPhysicalDevice8BitStorageFeaturesKHR
+	VkPhysicalDeviceConditionalRenderingFeaturesEXT
+	VkPhysicalDeviceVulkanMemoryModelFeaturesKHR
+	VkPhysicalDeviceShaderAtomicInt64FeaturesKHR
+	VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT
+	VkPhysicalDeviceASTCDecodeFeaturesEXT
+	VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV
+	VkPhysicalDeviceExclusiveScissorFeaturesNV
+	VkPhysicalDeviceCornerSampledImageFeaturesNV
+	VkPhysicalDeviceComputeShaderDerivativesFeaturesNV
+	VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV
+	VkPhysicalDeviceShaderImageFootprintFeaturesNV
+	VkPhysicalDeviceShadingRateImageFeaturesNV
+	VkPhysicalDeviceMeshShaderFeaturesNV
+*/
+struct		S_physical_device_features2{
+private:
+	E_structure_type sType;
+	void * pNext;
+public:
+	S_physical_device_features features;
+};
+/*	VkPhysicalDeviceProperties2
+(returnedonly)
+ex:
+	VkPhysicalDevicePushDescriptorPropertiesKHR
+	VkPhysicalDeviceDriverPropertiesKHR
+	VkPhysicalDeviceIDProperties
+	VkPhysicalDeviceMultiviewProperties
+	VkPhysicalDeviceDiscardRectanglePropertiesEXT
+	VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX
+	VkPhysicalDeviceSubgroupProperties
+	VkPhysicalDevicePointClippingProperties
+	VkPhysicalDeviceProtectedMemoryProperties
+	VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT
+	VkPhysicalDeviceSampleLocationsPropertiesEXT
+	VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT
+	VkPhysicalDeviceInlineUniformBlockPropertiesEXT
+	VkPhysicalDeviceMaintenance3Properties
+	VkPhysicalDeviceExternalMemoryHostPropertiesEXT
+	VkPhysicalDeviceConservativeRasterizationPropertiesEXT
+	VkPhysicalDeviceShaderCorePropertiesAMD
+	VkPhysicalDeviceDescriptorIndexingPropertiesEXT
+	VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT
+	VkPhysicalDeviceMeshShaderPropertiesNV
+	VkPhysicalDeviceRaytracingPropertiesNVX
+*/
+struct		S_physical_device_properties2{
+private:
+	E_structure_type sType;
+	void * pNext;
+public:
+	S_physical_device_properties properties;
+};
+/*	VkFormatProperties2
+(returnedonly)
+ex:
+	VkDrmFormatModifierPropertiesListEXT
+*/
+struct		S_format_properties2{
+private:
+	E_structure_type sType;
+	void * pNext;
+public:
+	S_format_properties formatProperties;
+};
+/*	VkImageFormatProperties2
+(returnedonly)
+ex:
+	VkExternalImageFormatProperties
+	VkSamplerYcbcrConversionImageFormatProperties
+	VkTextureLODGatherFormatPropertiesAMD
+	VkAndroidHardwareBufferUsageANDROID
+*/
+struct		S_image_format_properties2{
+private:
+	E_structure_type sType;
+	void * pNext;
+public:
+	S_image_format_properties imageFormatProperties;
+};
+/*	VkPhysicalDeviceImageFormatInfo2
+ex:
+	VkPhysicalDeviceExternalImageFormatInfo
+	VkPhysicalDeviceImageDrmFormatModifierInfoEXT
+*/
+struct		S_physical_device_image_format_info2{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	E_format format;
+	E_image_type type;
+	E_image_tiling tiling;
+	F_image_usage usage;
+	F_image_create flags;
+};
+/*	VkQueueFamilyProperties2
+(returnedonly)
+ex:
+	VkQueueFamilyCheckpointPropertiesNV
+*/
+struct		S_queue_family_properties2{
+private:
+	E_structure_type sType;
+	void * pNext;
+public:
+	S_queue_family_properties queueFamilyProperties;
+};
+/*	VkPhysicalDeviceMemoryProperties2
+(returnedonly)
+*/
+struct		S_physical_device_memory_properties2{
+private:
+	E_structure_type sType;
+	void * pNext;
+public:
+	S_physical_device_memory_properties memoryProperties;
+};
+/*	VkSparseImageFormatProperties2
+(returnedonly)
+*/
+struct		S_sparse_image_format_properties2{
+private:
+	E_structure_type sType;
+	void * pNext;
+public:
+	S_sparse_image_format_properties properties;
+};
+/*	VkPhysicalDeviceSparseImageFormatInfo2
+*/
+struct		S_physical_device_sparse_image_format_info2{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	E_format format;
+	E_image_type type;
+	F_sample_count samples;
+	F_image_usage usage;
+	E_image_tiling tiling;
+};
+/*	VkPhysicalDevicePushDescriptorPropertiesKHR
+ex to: VkPhysicalDeviceProperties2
+*/
+struct		S_physical_device_push_descriptor_properties_KHR{
+private:
+	E_structure_type sType;
+	void * pNext;
+public:
+	uint32_t maxPushDescriptors;
+};
+/*	VkPhysicalDeviceDriverPropertiesKHR
+(returnedonly)
+ex to: VkPhysicalDeviceProperties2
+*/
+struct		S_physical_device_driver_properties_KHR{
+private:
+	E_structure_type sType;
+	void * pNext;
+public:
+	uint32_t driverID;
+	char driverName[VK_MAX_DRIVER_NAME_SIZE_KHR];
+	char driverInfo[VK_MAX_DRIVER_INFO_SIZE_KHR];
+	S_conformance_version_KHR conformanceVersion;
+};
+/*	VkPresentRegionsKHR
+ex to: VkPresentInfoKHR
+*/
+struct		S_present_regions_KHR{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	uint32_t swapchainCount;
+	const S_present_region_KHR * pRegions;
+};
+/*	VkPresentRegionKHR
+*/
+struct		S_present_region_KHR{
+	uint32_t rectangleCount;
+	const S_rect_layer_KHR * pRectangles;
+};
+/*	VkRectLayerKHR
+*/
+struct		S_rect_layer_KHR{
+	S_offset_2d offset;
+	S_extent_2d extent;
+	uint32_t layer;
+};
+/*	VkPhysicalDeviceVariablePointerFeatures
+ex to: VkPhysicalDeviceFeatures2,VkDeviceCreateInfo
+*/
+struct		S_physical_device_variable_pointer_features{
+private:
+	E_structure_type sType;
+	void * pNext;
+public:
+	VkBool32 variablePointersStorageBuffer;
+	VkBool32 variablePointers;
+};
+/*	VkPhysicalDeviceExternalImageFormatInfo
+ex to: VkPhysicalDeviceImageFormatInfo2
+*/
+struct		S_physical_device_external_image_format_info{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	F_external_memory_handle_type handleType;
+};
+/*	VkExternalImageFormatProperties
+(returnedonly)
+ex to: VkImageFormatProperties2
+*/
+struct		S_external_image_format_properties{
+private:
+	E_structure_type sType;
+	void * pNext;
+public:
+	S_external_memory_properties externalMemoryProperties;
+};
+/*	VkPhysicalDeviceExternalBufferInfo
+*/
+struct		S_physical_device_external_buffer_info{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	F_buffer_create flags;
+	F_buffer_usage usage;
+	F_external_memory_handle_type handleType;
+};
+/*	VkExternalBufferProperties
+(returnedonly)
+*/
+struct		S_external_buffer_properties{
+private:
+	E_structure_type sType;
+	void * pNext;
+public:
+	S_external_memory_properties externalMemoryProperties;
+};
+/*	VkPhysicalDeviceIDProperties
+(returnedonly)
+ex to: VkPhysicalDeviceProperties2
+*/
+struct		S_physical_device_id_properties{
+private:
+	E_structure_type sType;
+	void * pNext;
+public:
+	uint8_t deviceUUID[VK_UUID_SIZE];
+	uint8_t driverUUID[VK_UUID_SIZE];
+	uint8_t deviceLUID[VK_LUID_SIZE];
+	uint32_t deviceNodeMask;
+	VkBool32 deviceLUIDValid;
+};
+/*	VkExternalMemoryImageCreateInfo
+ex to: VkImageCreateInfo
+*/
+struct		S_external_memory_image_create_info{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	F_external_memory_handle_type handleTypes;
+};
+/*	VkExternalMemoryBufferCreateInfo
+ex to: VkBufferCreateInfo
+*/
+struct		S_external_memory_buffer_create_info{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	F_external_memory_handle_type handleTypes;
+};
+/*	VkExportMemoryAllocateInfo
+ex to: VkMemoryAllocateInfo
+*/
+struct		S_export_memory_allocate_info{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	F_external_memory_handle_type handleTypes;
+};
+/*	VkImportMemoryWin32HandleInfoKHR
+ex to: VkMemoryAllocateInfo
+*/
+struct		S_import_memory_win32_handle_info_KHR{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	F_external_memory_handle_type handleType;
+	HANDLE handle;
+	LPCWSTR name;
+};
+/*	VkExportMemoryWin32HandleInfoKHR
+ex to: VkMemoryAllocateInfo
+*/
+struct		S_export_memory_win32_handle_info_KHR{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	const SECURITY_ATTRIBUTES * pAttributes;
+	DWORD dwAccess;
+	LPCWSTR name;
+};
+/*	VkMemoryWin32HandlePropertiesKHR
+(returnedonly)
+*/
+struct		S_memory_win32_handle_properties_KHR{
+private:
+	E_structure_type sType;
+	void * pNext;
+public:
+	uint32_t memoryTypeBits;
+};
+/*	VkMemoryGetWin32HandleInfoKHR
+*/
+struct		S_memory_get_win32_handle_info_KHR{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	VkDeviceMemory memory;
+	F_external_memory_handle_type handleType;
+};
+/*	VkImportMemoryFdInfoKHR
+ex to: VkMemoryAllocateInfo
+*/
+struct		S_import_memory_fd_info_KHR{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	F_external_memory_handle_type handleType;
+	int fd;
+};
+/*	VkMemoryFdPropertiesKHR
+(returnedonly)
+*/
+struct		S_memory_fd_properties_KHR{
+private:
+	E_structure_type sType;
+	void * pNext;
+public:
+	uint32_t memoryTypeBits;
+};
+/*	VkMemoryGetFdInfoKHR
+*/
+struct		S_memory_get_fd_info_KHR{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	VkDeviceMemory memory;
+	F_external_memory_handle_type handleType;
+};
+#ifdef VK_USE_PLATFORM_MACOS_MVK
+/*	VkWin32KeyedMutexAcquireReleaseInfoKHR
+ex to: VkSubmitInfo
+*/
+struct		S_win32_keyed_mutex_acquire_release_info_KHR{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	uint32_t acquireCount;
+	const VkDeviceMemory * pAcquireSyncs;
+	const uint64_t * pAcquireKeys;
+	const uint32_t * pAcquireTimeouts;
+	uint32_t releaseCount;
+	const VkDeviceMemory * pReleaseSyncs;
+	const uint64_t * pReleaseKeys;
+};
+#endif
+/*	VkPhysicalDeviceExternalSemaphoreInfo
+*/
+struct		S_physical_device_external_semaphore_info{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	F_external_semaphore_handle_type handleType;
+};
+/*	VkExternalSemaphoreProperties
+(returnedonly)
+*/
+struct		S_external_semaphore_properties{
+private:
+	E_structure_type sType;
+	void * pNext;
+public:
+	F_external_semaphore_handle_type exportFromImportedHandleTypes;
+	F_external_semaphore_handle_type compatibleHandleTypes;
+	F_external_semaphore_feature externalSemaphoreFeatures;
+};
+/*	VkExportSemaphoreCreateInfo
+ex to: VkSemaphoreCreateInfo
+*/
+struct		S_export_semaphore_create_info{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	F_external_semaphore_handle_type handleTypes;
+};
+/*	VkImportSemaphoreWin32HandleInfoKHR
+*/
+struct		S_import_semaphore_win32_handle_info_KHR{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	VkSemaphore semaphore;
+	F_semaphore_import flags;
+	F_external_semaphore_handle_type handleType;
+	HANDLE handle;
+	LPCWSTR name;
+};
+/*	VkExportSemaphoreWin32HandleInfoKHR
+ex to: VkSemaphoreCreateInfo
+*/
+struct		S_export_semaphore_win32_handle_info_KHR{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	const SECURITY_ATTRIBUTES * pAttributes;
+	DWORD dwAccess;
+	LPCWSTR name;
+};
+/*	VkD3D12FenceSubmitInfoKHR
+ex to: VkSubmitInfo
+*/
+struct		S_d_3d12_fence_submit_info_KHR{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	uint32_t waitSemaphoreValuesCount;
+	const uint64_t * pWaitSemaphoreValues;
+	uint32_t signalSemaphoreValuesCount;
+	const uint64_t * pSignalSemaphoreValues;
+};
+/*	VkSemaphoreGetWin32HandleInfoKHR
+*/
+struct		S_semaphore_get_win32_handle_info_KHR{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	VkSemaphore semaphore;
+	F_external_semaphore_handle_type handleType;
+};
+/*	VkImportSemaphoreFdInfoKHR
+*/
+struct		S_import_semaphore_fd_info_KHR{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	VkSemaphore semaphore;
+	F_semaphore_import flags;
+	F_external_semaphore_handle_type handleType;
+	int fd;
+};
+/*	VkSemaphoreGetFdInfoKHR
+*/
+struct		S_semaphore_get_fd_info_KHR{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	VkSemaphore semaphore;
+	F_external_semaphore_handle_type handleType;
+};
+/*	VkPhysicalDeviceExternalFenceInfo
+*/
+struct		S_physical_device_external_fence_info{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	F_external_fence_handle_type handleType;
+};
+/*	VkExternalFenceProperties
+(returnedonly)
+*/
+struct		S_external_fence_properties{
+private:
+	E_structure_type sType;
+	void * pNext;
+public:
+	F_external_fence_handle_type exportFromImportedHandleTypes;
+	F_external_fence_handle_type compatibleHandleTypes;
+	F_external_fence_feature externalFenceFeatures;
+};
+/*	VkExportFenceCreateInfo
+ex to: VkFenceCreateInfo
+*/
+struct		S_export_fence_create_info{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	F_external_fence_handle_type handleTypes;
+};
+/*	VkImportFenceWin32HandleInfoKHR
+*/
+struct		S_import_fence_win32_handle_info_KHR{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	VkFence fence;
+	F_fence_import flags;
+	F_external_fence_handle_type handleType;
+	HANDLE handle;
+	LPCWSTR name;
+};
+/*	VkExportFenceWin32HandleInfoKHR
+ex to: VkFenceCreateInfo
+*/
+struct		S_export_fence_win32_handle_info_KHR{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	const SECURITY_ATTRIBUTES * pAttributes;
+	DWORD dwAccess;
+	LPCWSTR name;
+};
+/*	VkFenceGetWin32HandleInfoKHR
+*/
+struct		S_fence_get_win32_handle_info_KHR{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	VkFence fence;
+	F_external_fence_handle_type handleType;
+};
+/*	VkImportFenceFdInfoKHR
+*/
+struct		S_import_fence_fd_info_KHR{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	VkFence fence;
+	F_fence_import flags;
+	F_external_fence_handle_type handleType;
+	int fd;
+};
+/*	VkFenceGetFdInfoKHR
+*/
+struct		S_fence_get_fd_info_KHR{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	VkFence fence;
+	F_external_fence_handle_type handleType;
+};
+/*	VkPhysicalDeviceMultiviewFeatures
+ex to: VkPhysicalDeviceFeatures2,VkDeviceCreateInfo
+*/
+struct		S_physical_device_multiview_features{
+private:
+	E_structure_type sType;
+	void * pNext;
+public:
+	VkBool32 multiview;
+	VkBool32 multiviewGeometryShader;
+	VkBool32 multiviewTessellationShader;
+};
+/*	VkPhysicalDeviceMultiviewProperties
+(returnedonly)
+ex to: VkPhysicalDeviceProperties2
+*/
+struct		S_physical_device_multiview_properties{
+private:
+	E_structure_type sType;
+	void * pNext;
+public:
+	uint32_t maxMultiviewViewCount;
+	uint32_t maxMultiviewInstanceIndex;
+};
+/*	VkRenderPassMultiviewCreateInfo
+ex to: VkRenderPassCreateInfo
+*/
+struct		S_render_pass_multiview_create_info{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	uint32_t subpassCount;
+	const uint32_t * pViewMasks;
+	uint32_t dependencyCount;
+	const int32_t * pViewOffsets;
+	uint32_t correlationMaskCount;
+	const uint32_t * pCorrelationMasks;
+};
+/*	VkSurfaceCapabilities2EXT
+(returnedonly)
+*/
+struct		S_surface_capabilities2_EXT{
+private:
+	E_structure_type sType;
+	void * pNext;
+public:
+	uint32_t minImageCount;
+	uint32_t maxImageCount;
+	S_extent_2d currentExtent;
+	S_extent_2d minImageExtent;
+	S_extent_2d maxImageExtent;
+	uint32_t maxImageArrayLayers;
+	F_surface_transform_KHR supportedTransforms;
+	F_surface_transform_KHR currentTransform;
+	F_composite_alpha_KHR supportedCompositeAlpha;
+	F_image_usage supportedUsageFlags;
+	F_surface_counter_EXT supportedSurfaceCounters;
+};
+/*	VkDisplayPowerInfoEXT
+*/
+struct		S_display_power_info_EXT{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	E_display_power_state_EXT powerState;
+};
+/*	VkDeviceEventInfoEXT
+*/
+struct		S_device_event_info_EXT{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	E_device_event_type_EXT deviceEvent;
+};
+/*	VkDisplayEventInfoEXT
+*/
+struct		S_display_event_info_EXT{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	E_display_event_type_EXT displayEvent;
+};
+/*	VkSwapchainCounterCreateInfoEXT
+ex to: VkSwapchainCreateInfoKHR
+*/
+struct		S_swapchain_counter_create_info_EXT{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	F_surface_counter_EXT surfaceCounters;
+};
+/*	VkPhysicalDeviceGroupProperties
+(returnedonly)
+*/
+struct		S_physical_device_group_properties{
+private:
+	E_structure_type sType;
+	void * pNext;
+public:
+	uint32_t physicalDeviceCount;
+	VkPhysicalDevice physicalDevices[VK_MAX_DEVICE_GROUP_SIZE];
+	VkBool32 subsetAllocation;
+};
+/*	VkMemoryAllocateFlagsInfo
+ex to: VkMemoryAllocateInfo
+*/
+struct		S_memory_allocate_flags_info{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	F_memory_allocate flags;
+	uint32_t deviceMask;
+};
+/*	VkBindBufferMemoryInfo
+ex:
+	VkBindBufferMemoryDeviceGroupInfo
+*/
+struct		S_bind_buffer_memory_info{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	VkBuffer buffer;
+	VkDeviceMemory memory;
+	VkDeviceSize memoryOffset;
+};
+/*	VkBindBufferMemoryDeviceGroupInfo
+ex to: VkBindBufferMemoryInfo
+*/
+struct		S_bind_buffer_memory_device_group_info{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	uint32_t deviceIndexCount;
+	const uint32_t * pDeviceIndices;
+};
+/*	VkBindImageMemoryInfo
+ex:
+	VkBindImageMemoryDeviceGroupInfo
+	VkBindImageMemorySwapchainInfoKHR
+	VkBindImagePlaneMemoryInfo
+*/
+struct		S_bind_image_memory_info{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	VkImage image;
+	VkDeviceMemory memory;
+	VkDeviceSize memoryOffset;
+};
+/*	VkBindImageMemoryDeviceGroupInfo
+ex to: VkBindImageMemoryInfo
+*/
+struct		S_bind_image_memory_device_group_info{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	uint32_t deviceIndexCount;
+	const uint32_t * pDeviceIndices;
+	uint32_t splitInstanceBindRegionCount;
+	const S_rect_2d * pSplitInstanceBindRegions;
+};
+/*	VkDeviceGroupRenderPassBeginInfo
+ex to: VkRenderPassBeginInfo
+*/
+struct		S_device_group_render_pass_begin_info{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	uint32_t deviceMask;
+	uint32_t deviceRenderAreaCount;
+	const S_rect_2d * pDeviceRenderAreas;
+};
+/*	VkDeviceGroupCommandBufferBeginInfo
+ex to: VkCommandBufferBeginInfo
+*/
+struct		S_device_group_command_buffer_begin_info{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	uint32_t deviceMask;
+};
+/*	VkDeviceGroupSubmitInfo
+ex to: VkSubmitInfo
+*/
+struct		S_device_group_submit_info{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	uint32_t waitSemaphoreCount;
+	const uint32_t * pWaitSemaphoreDeviceIndices;
+	uint32_t commandBufferCount;
+	const uint32_t * pCommandBufferDeviceMasks;
+	uint32_t signalSemaphoreCount;
+	const uint32_t * pSignalSemaphoreDeviceIndices;
+};
+/*	VkDeviceGroupBindSparseInfo
+ex to: VkBindSparseInfo
+*/
+struct		S_device_group_bind_sparse_info{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	uint32_t resourceDeviceIndex;
+	uint32_t memoryDeviceIndex;
+};
+/*	VkDeviceGroupPresentCapabilitiesKHR
+(returnedonly)
+*/
+struct		S_device_group_present_capabilities_KHR{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	uint32_t presentMask[VK_MAX_DEVICE_GROUP_SIZE];
+	F_device_group_present_mode_KHR modes;
+};
+/*	VkImageSwapchainCreateInfoKHR
+ex to: VkImageCreateInfo
+*/
+struct		S_image_swapchain_create_info_KHR{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	VkSwapchainKHR swapchain;
+};
+/*	VkBindImageMemorySwapchainInfoKHR
+ex to: VkBindImageMemoryInfo
+*/
+struct		S_bind_image_memory_swapchain_info_KHR{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	VkSwapchainKHR swapchain;
+	uint32_t imageIndex;
+};
+/*	VkAcquireNextImageInfoKHR
+*/
+struct		S_acquire_next_image_info_KHR{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	VkSwapchainKHR swapchain;
+	uint64_t timeout;
+	VkSemaphore semaphore;
+	VkFence fence;
+	uint32_t deviceMask;
+};
+/*	VkDeviceGroupPresentInfoKHR
+ex to: VkPresentInfoKHR
+*/
+struct		S_device_group_present_info_KHR{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	uint32_t swapchainCount;
+	const uint32_t * pDeviceMasks;
+	F_device_group_present_mode_KHR mode;
+};
+/*	VkDeviceGroupDeviceCreateInfo
+ex to: VkDeviceCreateInfo
+*/
+struct		S_device_group_device_create_info{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	uint32_t physicalDeviceCount;
+	const VkPhysicalDevice * pPhysicalDevices;
+};
+/*	VkDeviceGroupSwapchainCreateInfoKHR
+ex to: VkSwapchainCreateInfoKHR
+*/
+struct		S_device_group_swapchain_create_info_KHR{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	F_device_group_present_mode_KHR modes;
+};
+/*	VkDescriptorUpdateTemplateCreateInfo
+*/
+struct		S_descriptor_update_template_create_info{
+private:
+	E_structure_type sType;
+	void * pNext;
+public:
+	VkDescriptorUpdateTemplateCreateFlags flags;
+	uint32_t descriptorUpdateEntryCount;
+	const S_descriptor_update_template_entry * pDescriptorUpdateEntries;
+	E_descriptor_update_template_type templateType;
+	VkDescriptorSetLayout descriptorSetLayout;
+	E_pipeline_bind_point pipelineBindPoint;
+	VkPipelineLayout pipelineLayout;
+	uint32_t set;
+};
+/*	VkHdrMetadataEXT
+*/
+struct		S_hdr_metadata_EXT{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	S_xy_color_EXT displayPrimaryRed;
+	S_xy_color_EXT displayPrimaryGreen;
+	S_xy_color_EXT displayPrimaryBlue;
+	S_xy_color_EXT whitePoint;
+	float maxLuminance;
+	float minLuminance;
+	float maxContentLightLevel;
+	float maxFrameAverageLightLevel;
+};
+/*	VkPresentTimesInfoGOOGLE
+ex to: VkPresentInfoKHR
+*/
+struct		S_present_times_info_GOOGLE{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	uint32_t swapchainCount;
+	const S_present_time_GOOGLE * pTimes;
+};
+#ifdef VK_USE_PLATFORM_MACOS_MVK
+/*	VkIOSSurfaceCreateInfoMVK
+*/
+struct		S_ios_surface_create_info_MVK{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	VkIOSSurfaceCreateFlagsMVK flags;
+	const void * pView;
+};
+#endif
+#ifdef VK_USE_PLATFORM_MACOS_MVK
+/*	VkMacOSSurfaceCreateInfoMVK
+*/
+struct		S_mac_os_surface_create_info_MVK{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	VkMacOSSurfaceCreateFlagsMVK flags;
+	const void * pView;
+};
+#endif
+/*	VkPipelineViewportWScalingStateCreateInfoNV
+ex to: VkPipelineViewportStateCreateInfo
+*/
+struct		S_pipeline_viewport_w_scaling_state_create_info_NV{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	VkBool32 viewportWScalingEnable;
+	uint32_t viewportCount;
+	const S_viewport_w_scaling_NV * pViewportWScalings;
+};
+/*	VkPipelineViewportSwizzleStateCreateInfoNV
+ex to: VkPipelineViewportStateCreateInfo
+*/
+struct		S_pipeline_viewport_swizzle_state_create_info_NV{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	VkPipelineViewportSwizzleStateCreateFlagsNV flags;
+	uint32_t viewportCount;
+	const S_viewport_swizzle_NV * pViewportSwizzles;
+};
+/*	VkPhysicalDeviceDiscardRectanglePropertiesEXT
+ex to: VkPhysicalDeviceProperties2
+*/
+struct		S_physical_device_discard_rectangle_properties_EXT{
+private:
+	E_structure_type sType;
+	void * pNext;
+public:
+	uint32_t maxDiscardRectangles;
+};
+/*	VkPipelineDiscardRectangleStateCreateInfoEXT
+ex to: VkGraphicsPipelineCreateInfo
+*/
+struct		S_pipeline_discard_rectangle_state_create_info_EXT{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	VkPipelineDiscardRectangleStateCreateFlagsEXT flags;
+	E_discard_rectangle_mode_EXT discardRectangleMode;
+	uint32_t discardRectangleCount;
+	const S_rect_2d * pDiscardRectangles;
+};
+/*	VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX
+(returnedonly)
+ex to: VkPhysicalDeviceProperties2
+*/
+struct		S_physical_device_multiview_per_view_attributes_properties_NVX{
+private:
+	E_structure_type sType;
+	void * pNext;
+public:
+	VkBool32 perViewPositionAllComponents;
+};
+/*	VkRenderPassInputAttachmentAspectCreateInfo
+ex to: VkRenderPassCreateInfo
+*/
+struct		S_render_pass_input_attachment_aspect_create_info{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	uint32_t aspectReferenceCount;
+	const S_input_attachment_aspect_reference * pAspectReferences;
+};
+/*	VkPhysicalDeviceSurfaceInfo2KHR
+*/
+struct		S_physical_device_surface_info2_KHR{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	VkSurfaceKHR surface;
+};
+/*	VkSurfaceCapabilities2KHR
+(returnedonly)
+ex:
+	VkSharedPresentSurfaceCapabilitiesKHR
+*/
+struct		S_surface_capabilities2_KHR{
+private:
+	E_structure_type sType;
+	void * pNext;
+public:
+	S_surface_capabilities_KHR surfaceCapabilities;
+};
+/*	VkSurfaceFormat2KHR
+(returnedonly)
+*/
+struct		S_surface_format2_KHR{
+private:
+	E_structure_type sType;
+	void * pNext;
+public:
+	S_surface_format_KHR surfaceFormat;
+};
+/*	VkDisplayProperties2KHR
+(returnedonly)
+*/
+struct		S_display_properties2_KHR{
+private:
+	E_structure_type sType;
+	void * pNext;
+public:
+	S_display_properties_KHR displayProperties;
+};
+/*	VkDisplayPlaneProperties2KHR
+(returnedonly)
+*/
+struct		S_display_plane_properties2_KHR{
+private:
+	E_structure_type sType;
+	void * pNext;
+public:
+	S_display_plane_properties_KHR displayPlaneProperties;
+};
+/*	VkDisplayModeProperties2KHR
+(returnedonly)
+*/
+struct		S_display_mode_properties2_KHR{
+private:
+	E_structure_type sType;
+	void * pNext;
+public:
+	S_display_mode_properties_KHR displayModeProperties;
+};
+/*	VkDisplayPlaneInfo2KHR
+*/
+struct		S_display_plane_info2_KHR{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	VkDisplayModeKHR mode;
+	uint32_t planeIndex;
+};
+/*	VkDisplayPlaneCapabilities2KHR
+(returnedonly)
+*/
+struct		S_display_plane_capabilities2_KHR{
+private:
+	E_structure_type sType;
+	void * pNext;
+public:
+	S_display_plane_capabilities_KHR capabilities;
+};
+/*	VkSharedPresentSurfaceCapabilitiesKHR
+(returnedonly)
+ex to: VkSurfaceCapabilities2KHR
+*/
+struct		S_shared_present_surface_capabilities_KHR{
+private:
+	E_structure_type sType;
+	void * pNext;
+public:
+	F_image_usage sharedPresentSupportedUsageFlags;
+};
+/*	VkPhysicalDevice16BitStorageFeatures
+ex to: VkPhysicalDeviceFeatures2,VkDeviceCreateInfo
+*/
+struct		S_physical_device_16bit_storage_features{
+private:
+	E_structure_type sType;
+	void * pNext;
+public:
+	VkBool32 storageBuffer16BitAccess;
+	VkBool32 uniformAndStorageBuffer16BitAccess;
+	VkBool32 storagePushConstant16;
+	VkBool32 storageInputOutput16;
+};
+/*	VkPhysicalDeviceSubgroupProperties
+(returnedonly)
+ex to: VkPhysicalDeviceProperties2
+*/
+struct		S_physical_device_subgroup_properties{
+private:
+	E_structure_type sType;
+	void * pNext;
+public:
+	uint32_t subgroupSize;
+	F_shader_stage supportedStages;
+	F_subgroup_feature supportedOperations;
+	VkBool32 quadOperationsInAllStages;
+};
+/*	VkBufferMemoryRequirementsInfo2
+*/
+struct		S_buffer_memory_requirements_info2{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	VkBuffer buffer;
+};
+/*	VkImageMemoryRequirementsInfo2
+ex:
+	VkImagePlaneMemoryRequirementsInfo
+*/
+struct		S_image_memory_requirements_info2{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	VkImage image;
+};
+/*	VkImageSparseMemoryRequirementsInfo2
+*/
+struct		S_image_sparse_memory_requirements_info2{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	VkImage image;
+};
+/*	VkMemoryRequirements2
+(returnedonly)
+ex:
+	VkMemoryDedicatedRequirements
+*/
+struct		S_memory_requirements2{
+private:
+	E_structure_type sType;
+	void * pNext;
+public:
+	S_memory_requirements memoryRequirements;
+};
+/*	VkSparseImageMemoryRequirements2
+(returnedonly)
+*/
+struct		S_sparse_image_memory_requirements2{
+private:
+	E_structure_type sType;
+	void * pNext;
+public:
+	S_sparse_image_memory_requirements memoryRequirements;
+};
+/*	VkPhysicalDevicePointClippingProperties
+(returnedonly)
+ex to: VkPhysicalDeviceProperties2
+*/
+struct		S_physical_device_point_clipping_properties{
+private:
+	E_structure_type sType;
+	void * pNext;
+public:
+	E_point_clipping_behavior pointClippingBehavior;
+};
+/*	VkMemoryDedicatedRequirements
+(returnedonly)
+ex to: VkMemoryRequirements2
+*/
+struct		S_memory_dedicated_requirements{
+private:
+	E_structure_type sType;
+	void * pNext;
+public:
+	VkBool32 prefersDedicatedAllocation;
+	VkBool32 requiresDedicatedAllocation;
+};
+/*	VkMemoryDedicatedAllocateInfo
+ex to: VkMemoryAllocateInfo
+*/
+struct		S_memory_dedicated_allocate_info{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	VkImage image;
+	VkBuffer buffer;
+};
+/*	VkImageViewUsageCreateInfo
+ex to: VkImageViewCreateInfo
+*/
+struct		S_image_view_usage_create_info{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	F_image_usage usage;
+};
+/*	VkPipelineTessellationDomainOriginStateCreateInfo
+ex to: VkPipelineTessellationStateCreateInfo
+*/
+struct		S_pipeline_tessellation_domain_origin_state_create_info{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	E_tessellation_domain_origin domainOrigin;
+};
+/*	VkSamplerYcbcrConversionInfo
+ex to: VkSamplerCreateInfo,VkImageViewCreateInfo
+*/
+struct		S_sampler_ycbcr_conversion_info{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	VkSamplerYcbcrConversion conversion;
+};
+/*	VkSamplerYcbcrConversionCreateInfo
+ex:
+	VkExternalFormatANDROID
+*/
+struct		S_sampler_ycbcr_conversion_create_info{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	E_format format;
+	E_sampler_ycbcr_model_conversion ycbcrModel;
+	E_sampler_ycbcr_range ycbcrRange;
+	S_component_mapping components;
+	E_chroma_location xChromaOffset;
+	E_chroma_location yChromaOffset;
+	E_filter chromaFilter;
+	VkBool32 forceExplicitReconstruction;
+};
+/*	VkBindImagePlaneMemoryInfo
+ex to: VkBindImageMemoryInfo
+*/
+struct		S_bind_image_plane_memory_info{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	F_image_aspect planeAspect;
+};
+/*	VkImagePlaneMemoryRequirementsInfo
+ex to: VkImageMemoryRequirementsInfo2
+*/
+struct		S_image_plane_memory_requirements_info{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	F_image_aspect planeAspect;
+};
+/*	VkPhysicalDeviceSamplerYcbcrConversionFeatures
+ex to: VkPhysicalDeviceFeatures2,VkDeviceCreateInfo
+*/
+struct		S_physical_device_sampler_ycbcr_conversion_features{
+private:
+	E_structure_type sType;
+	void * pNext;
+public:
+	VkBool32 samplerYcbcrConversion;
+};
+/*	VkSamplerYcbcrConversionImageFormatProperties
+(returnedonly)
+ex to: VkImageFormatProperties2
+*/
+struct		S_sampler_ycbcr_conversion_image_format_properties{
+private:
+	E_structure_type sType;
+	void * pNext;
+public:
+	uint32_t combinedImageSamplerDescriptorCount;
+};
+/*	VkTextureLODGatherFormatPropertiesAMD
+(returnedonly)
+ex to: VkImageFormatProperties2
+*/
+struct		S_texture_lod_gather_format_properties_AMD{
+private:
+	E_structure_type sType;
+	void * pNext;
+public:
+	VkBool32 supportsTextureGatherLODBiasAMD;
+};
+/*	VkConditionalRenderingBeginInfoEXT
+*/
+struct		S_conditional_rendering_begin_info_EXT{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	VkBuffer buffer;
+	VkDeviceSize offset;
+	F_conditional_rendering_EXT flags;
+};
+/*	VkProtectedSubmitInfo
+ex to: VkSubmitInfo
+*/
+struct		S_protected_submit_info{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	VkBool32 protectedSubmit;
+};
+/*	VkPhysicalDeviceProtectedMemoryFeatures
+ex to: VkPhysicalDeviceFeatures2,VkDeviceCreateInfo
+*/
+struct		S_physical_device_protected_memory_features{
+private:
+	E_structure_type sType;
+	void * pNext;
+public:
+	VkBool32 protectedMemory;
+};
+/*	VkPhysicalDeviceProtectedMemoryProperties
+ex to: VkPhysicalDeviceProperties2
+*/
+struct		S_physical_device_protected_memory_properties{
+private:
+	E_structure_type sType;
+	void * pNext;
+public:
+	VkBool32 protectedNoFault;
+};
+/*	VkDeviceQueueInfo2
+*/
+struct		S_device_queue_info2{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	F_device_queue_create flags;
+	uint32_t queueFamilyIndex;
+	uint32_t queueIndex;
+};
+/*	VkPipelineCoverageToColorStateCreateInfoNV
+ex to: VkPipelineMultisampleStateCreateInfo
+*/
+struct		S_pipeline_coverage_to_color_state_create_info_NV{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	VkPipelineCoverageToColorStateCreateFlagsNV flags;
+	VkBool32 coverageToColorEnable;
+	uint32_t coverageToColorLocation;
+};
+/*	VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT
+(returnedonly)
+ex to: VkPhysicalDeviceProperties2
+*/
+struct		S_physical_device_sampler_filter_minmax_properties_EXT{
+private:
+	E_structure_type sType;
+	void * pNext;
+public:
+	VkBool32 filterMinmaxSingleComponentFormats;
+	VkBool32 filterMinmaxImageComponentMapping;
+};
+/*	VkSampleLocationsInfoEXT
+ex to: VkImageMemoryBarrier
+*/
+struct		S_sample_locations_info_EXT{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	F_sample_count sampleLocationsPerPixel;
+	S_extent_2d sampleLocationGridSize;
+	uint32_t sampleLocationsCount;
+	const S_sample_location_EXT * pSampleLocations;
+};
+/*	VkAttachmentSampleLocationsEXT
+*/
+struct		S_attachment_sample_locations_EXT{
+	uint32_t attachmentIndex;
+	S_sample_locations_info_EXT sampleLocationsInfo;
+};
+/*	VkSubpassSampleLocationsEXT
+*/
+struct		S_subpass_sample_locations_EXT{
+	uint32_t subpassIndex;
+	S_sample_locations_info_EXT sampleLocationsInfo;
+};
+/*	VkRenderPassSampleLocationsBeginInfoEXT
+ex to: VkRenderPassBeginInfo
+*/
+struct		S_render_pass_sample_locations_begin_info_EXT{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	uint32_t attachmentInitialSampleLocationsCount;
+	const S_attachment_sample_locations_EXT * pAttachmentInitialSampleLocations;
+	uint32_t postSubpassSampleLocationsCount;
+	const S_subpass_sample_locations_EXT * pPostSubpassSampleLocations;
+};
+/*	VkPipelineSampleLocationsStateCreateInfoEXT
+ex to: VkPipelineMultisampleStateCreateInfo
+*/
+struct		S_pipeline_sample_locations_state_create_info_EXT{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	VkBool32 sampleLocationsEnable;
+	S_sample_locations_info_EXT sampleLocationsInfo;
+};
+/*	VkPhysicalDeviceSampleLocationsPropertiesEXT
+(returnedonly)
+ex to: VkPhysicalDeviceProperties2
+*/
+struct		S_physical_device_sample_locations_properties_EXT{
+private:
+	E_structure_type sType;
+	void * pNext;
+public:
+	F_sample_count sampleLocationSampleCounts;
+	S_extent_2d maxSampleLocationGridSize;
+	float sampleLocationCoordinateRange[2];
+	uint32_t sampleLocationSubPixelBits;
+	VkBool32 variableSampleLocations;
+};
+/*	VkMultisamplePropertiesEXT
+(returnedonly)
+*/
+struct		S_multisample_properties_EXT{
+private:
+	E_structure_type sType;
+	void * pNext;
+public:
+	S_extent_2d maxSampleLocationGridSize;
+};
+/*	VkSamplerReductionModeCreateInfoEXT
+ex to: VkSamplerCreateInfo
+*/
+struct		S_sampler_reduction_mode_create_info_EXT{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	E_sampler_reduction_mode_EXT reductionMode;
+};
+/*	VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT
+ex to: VkPhysicalDeviceFeatures2,VkDeviceCreateInfo
+*/
+struct		S_physical_device_blend_operation_advanced_features_EXT{
+private:
+	E_structure_type sType;
+	void * pNext;
+public:
+	VkBool32 advancedBlendCoherentOperations;
+};
+/*	VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT
+(returnedonly)
+ex to: VkPhysicalDeviceProperties2
+*/
+struct		S_physical_device_blend_operation_advanced_properties_EXT{
+private:
+	E_structure_type sType;
+	void * pNext;
+public:
+	uint32_t advancedBlendMaxColorAttachments;
+	VkBool32 advancedBlendIndependentBlend;
+	VkBool32 advancedBlendNonPremultipliedSrcColor;
+	VkBool32 advancedBlendNonPremultipliedDstColor;
+	VkBool32 advancedBlendCorrelatedOverlap;
+	VkBool32 advancedBlendAllOperations;
+};
+/*	VkPipelineColorBlendAdvancedStateCreateInfoEXT
+ex to: VkPipelineColorBlendStateCreateInfo
+*/
+struct		S_pipeline_color_blend_advanced_state_create_info_EXT{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	VkBool32 srcPremultiplied;
+	VkBool32 dstPremultiplied;
+	E_blend_overlap_EXT blendOverlap;
+};
+/*	VkPhysicalDeviceInlineUniformBlockFeaturesEXT
+(returnedonly)
+ex to: VkPhysicalDeviceFeatures2,VkDeviceCreateInfo
+*/
+struct		S_physical_device_inline_uniform_block_features_EXT{
+private:
+	E_structure_type sType;
+	void * pNext;
+public:
+	VkBool32 inlineUniformBlock;
+	VkBool32 descriptorBindingInlineUniformBlockUpdateAfterBind;
+};
+/*	VkPhysicalDeviceInlineUniformBlockPropertiesEXT
+(returnedonly)
+ex to: VkPhysicalDeviceProperties2
+*/
+struct		S_physical_device_inline_uniform_block_properties_EXT{
+private:
+	E_structure_type sType;
+	void * pNext;
+public:
+	uint32_t maxInlineUniformBlockSize;
+	uint32_t maxPerStageDescriptorInlineUniformBlocks;
+	uint32_t maxPerStageDescriptorUpdateAfterBindInlineUniformBlocks;
+	uint32_t maxDescriptorSetInlineUniformBlocks;
+	uint32_t maxDescriptorSetUpdateAfterBindInlineUniformBlocks;
+};
+/*	VkWriteDescriptorSetInlineUniformBlockEXT
+ex to: VkWriteDescriptorSet
+*/
+struct		S_write_descriptor_set_inline_uniform_block_EXT{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	uint32_t dataSize;
+	const void * pData;
+};
+/*	VkDescriptorPoolInlineUniformBlockCreateInfoEXT
+ex to: VkDescriptorPoolCreateInfo
+*/
+struct		S_descriptor_pool_inline_uniform_block_create_info_EXT{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	uint32_t maxInlineUniformBlockBindings;
+};
+/*	VkPipelineCoverageModulationStateCreateInfoNV
+ex to: VkPipelineMultisampleStateCreateInfo
+*/
+struct		S_pipeline_coverage_modulation_state_create_info_NV{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	VkPipelineCoverageModulationStateCreateFlagsNV flags;
+	E_coverage_modulation_mode_NV coverageModulationMode;
+	VkBool32 coverageModulationTableEnable;
+	uint32_t coverageModulationTableCount;
+	const float * pCoverageModulationTable;
+};
+/*	VkImageFormatListCreateInfoKHR
+ex to: VkImageCreateInfo
+*/
+struct		S_image_format_list_create_info_KHR{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	uint32_t viewFormatCount;
+	const E_format * pViewFormats;
+};
+/*	VkValidationCacheCreateInfoEXT
+*/
+struct		S_validation_cache_create_info_EXT{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	VkValidationCacheCreateFlagsEXT flags;
+	size_t initialDataSize;
+	const void * pInitialData;
+};
+/*	VkShaderModuleValidationCacheCreateInfoEXT
+ex to: VkShaderModuleCreateInfo
+*/
+struct		S_shader_module_validation_cache_create_info_EXT{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	VkValidationCacheEXT validationCache;
+};
+/*	VkPhysicalDeviceMaintenance3Properties
+(returnedonly)
+ex to: VkPhysicalDeviceProperties2
+*/
+struct		S_physical_device_maintenance3_properties{
+private:
+	E_structure_type sType;
+	void * pNext;
+public:
+	uint32_t maxPerSetDescriptors;
+	VkDeviceSize maxMemoryAllocationSize;
+};
+/*	VkDescriptorSetLayoutSupport
+(returnedonly)
+ex:
+	VkDescriptorSetVariableDescriptorCountLayoutSupportEXT
+*/
+struct		S_descriptor_set_layout_support{
+private:
+	E_structure_type sType;
+	void * pNext;
+public:
+	VkBool32 supported;
+};
+/*	VkPhysicalDeviceShaderDrawParameterFeatures
+ex to: VkPhysicalDeviceFeatures2,VkDeviceCreateInfo
+*/
+struct		S_physical_device_shader_draw_parameter_features{
+private:
+	E_structure_type sType;
+	void * pNext;
+public:
+	VkBool32 shaderDrawParameters;
+};
+/*	VkNativeBufferANDROID
+*/
+struct		S_native_buffer_ANDROID{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	const void * handle;
+	int stride;
+	int format;
+	int usage;
+};
+/*	VkShaderStatisticsInfoAMD
+(returnedonly)
+*/
+struct		S_shader_statistics_info_AMD{
+	F_shader_stage shaderStageMask;
+	S_shader_resource_usage_AMD resourceUsage;
+	uint32_t numPhysicalVgprs;
+	uint32_t numPhysicalSgprs;
+	uint32_t numAvailableVgprs;
+	uint32_t numAvailableSgprs;
+	uint32_t computeWorkGroupSize[3];
+};
+/*	VkDeviceQueueGlobalPriorityCreateInfoEXT
+ex to: VkDeviceQueueCreateInfo
+*/
+struct		S_device_queue_global_priority_create_info_EXT{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	E_queue_global_priority_EXT globalPriority;
+};
+/*	VkDebugUtilsObjectNameInfoEXT
+*/
+struct		S_debug_utils_object_name_info_EXT{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	E_object_type objectType;
+	uint64_t objectHandle;
+	const char * pObjectName;
+};
+/*	VkDebugUtilsObjectTagInfoEXT
+*/
+struct		S_debug_utils_object_tag_info_EXT{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	E_object_type objectType;
+	uint64_t objectHandle;
+	uint64_t tagName;
+	size_t tagSize;
+	const void * pTag;
+};
+/*	VkDebugUtilsLabelEXT
+*/
+struct		S_debug_utils_label_EXT{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	const char * pLabelName;
+	float color[4];
+};
+/*	VkDebugUtilsMessengerCreateInfoEXT
+ex to: VkInstanceCreateInfo
+*/
+struct		S_debug_utils_messenger_create_info_EXT{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	VkDebugUtilsMessengerCreateFlagsEXT flags;
+	F_debug_utils_message_severity_EXT messageSeverity;
+	F_debug_utils_message_type_EXT messageType;
+	PFN_vkDebugUtilsMessengerCallbackEXT pfnUserCallback;
+	void * pUserData;
+};
+/*	VkDebugUtilsMessengerCallbackDataEXT
+*/
+struct		S_debug_utils_messenger_callback_data_EXT{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	VkDebugUtilsMessengerCallbackDataFlagsEXT flags;
+	const char * pMessageIdName;
+	int32_t messageIdNumber;
+	const char * pMessage;
+	uint32_t queueLabelCount;
+	S_debug_utils_label_EXT * pQueueLabels;
+	uint32_t cmdBufLabelCount;
+	S_debug_utils_label_EXT * pCmdBufLabels;
+	uint32_t objectCount;
+	S_debug_utils_object_name_info_EXT * pObjects;
+};
+/*	VkImportMemoryHostPointerInfoEXT
+ex to: VkMemoryAllocateInfo
+*/
+struct		S_import_memory_host_pointer_info_EXT{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	F_external_memory_handle_type handleType;
+	void * pHostPointer;
+};
+/*	VkMemoryHostPointerPropertiesEXT
+*/
+struct		S_memory_host_pointer_properties_EXT{
+private:
+	E_structure_type sType;
+	void * pNext;
+public:
+	uint32_t memoryTypeBits;
+};
+/*	VkPhysicalDeviceExternalMemoryHostPropertiesEXT
+ex to: VkPhysicalDeviceProperties2
+*/
+struct		S_physical_device_external_memory_host_properties_EXT{
+private:
+	E_structure_type sType;
+	void * pNext;
+public:
+	VkDeviceSize minImportedHostPointerAlignment;
+};
+/*	VkPhysicalDeviceConservativeRasterizationPropertiesEXT
+ex to: VkPhysicalDeviceProperties2
+*/
+struct		S_physical_device_conservative_rasterization_properties_EXT{
+private:
+	E_structure_type sType;
+	void * pNext;
+public:
+	float primitiveOverestimationSize;
+	float maxExtraPrimitiveOverestimationSize;
+	float extraPrimitiveOverestimationSizeGranularity;
+	VkBool32 primitiveUnderestimation;
+	VkBool32 conservativePointAndLineRasterization;
+	VkBool32 degenerateTrianglesRasterized;
+	VkBool32 degenerateLinesRasterized;
+	VkBool32 fullyCoveredFragmentShaderInputVariable;
+	VkBool32 conservativeRasterizationPostDepthCoverage;
+};
+/*	VkPhysicalDeviceShaderCorePropertiesAMD
+(returnedonly)
+ex to: VkPhysicalDeviceProperties2
+*/
+struct		S_physical_device_shader_core_properties_AMD{
+private:
+	E_structure_type sType;
+	void * pNext;
+public:
+	uint32_t shaderEngineCount;
+	uint32_t shaderArraysPerEngineCount;
+	uint32_t computeUnitsPerShaderArray;
+	uint32_t simdPerComputeUnit;
+	uint32_t wavefrontsPerSimd;
+	uint32_t wavefrontSize;
+	uint32_t sgprsPerSimd;
+	uint32_t minSgprAllocation;
+	uint32_t maxSgprAllocation;
+	uint32_t sgprAllocationGranularity;
+	uint32_t vgprsPerSimd;
+	uint32_t minVgprAllocation;
+	uint32_t maxVgprAllocation;
+	uint32_t vgprAllocationGranularity;
+};
+/*	VkPipelineRasterizationConservativeStateCreateInfoEXT
+ex to: VkPipelineRasterizationStateCreateInfo
+*/
+struct		S_pipeline_rasterization_conservative_state_create_info_EXT{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	VkPipelineRasterizationConservativeStateCreateFlagsEXT flags;
+	E_conservative_rasterization_mode_EXT conservativeRasterizationMode;
+	float extraPrimitiveOverestimationSize;
+};
+/*	VkPhysicalDeviceDescriptorIndexingFeaturesEXT
+ex to: VkPhysicalDeviceFeatures2,VkDeviceCreateInfo
+*/
+struct		S_physical_device_descriptor_indexing_features_EXT{
+private:
+	E_structure_type sType;
+	void * pNext;
+public:
+	VkBool32 shaderInputAttachmentArrayDynamicIndexing;
+	VkBool32 shaderUniformTexelBufferArrayDynamicIndexing;
+	VkBool32 shaderStorageTexelBufferArrayDynamicIndexing;
+	VkBool32 shaderUniformBufferArrayNonUniformIndexing;
+	VkBool32 shaderSampledImageArrayNonUniformIndexing;
+	VkBool32 shaderStorageBufferArrayNonUniformIndexing;
+	VkBool32 shaderStorageImageArrayNonUniformIndexing;
+	VkBool32 shaderInputAttachmentArrayNonUniformIndexing;
+	VkBool32 shaderUniformTexelBufferArrayNonUniformIndexing;
+	VkBool32 shaderStorageTexelBufferArrayNonUniformIndexing;
+	VkBool32 descriptorBindingUniformBufferUpdateAfterBind;
+	VkBool32 descriptorBindingSampledImageUpdateAfterBind;
+	VkBool32 descriptorBindingStorageImageUpdateAfterBind;
+	VkBool32 descriptorBindingStorageBufferUpdateAfterBind;
+	VkBool32 descriptorBindingUniformTexelBufferUpdateAfterBind;
+	VkBool32 descriptorBindingStorageTexelBufferUpdateAfterBind;
+	VkBool32 descriptorBindingUpdateUnusedWhilePending;
+	VkBool32 descriptorBindingPartiallyBound;
+	VkBool32 descriptorBindingVariableDescriptorCount;
+	VkBool32 runtimeDescriptorArray;
+};
+/*	VkPhysicalDeviceDescriptorIndexingPropertiesEXT
+(returnedonly)
+ex to: VkPhysicalDeviceProperties2
+*/
+struct		S_physical_device_descriptor_indexing_properties_EXT{
+private:
+	E_structure_type sType;
+	void * pNext;
+public:
+	uint32_t maxUpdateAfterBindDescriptorsInAllPools;
+	VkBool32 shaderUniformBufferArrayNonUniformIndexingNative;
+	VkBool32 shaderSampledImageArrayNonUniformIndexingNative;
+	VkBool32 shaderStorageBufferArrayNonUniformIndexingNative;
+	VkBool32 shaderStorageImageArrayNonUniformIndexingNative;
+	VkBool32 shaderInputAttachmentArrayNonUniformIndexingNative;
+	VkBool32 robustBufferAccessUpdateAfterBind;
+	VkBool32 quadDivergentImplicitLod;
+	uint32_t maxPerStageDescriptorUpdateAfterBindSamplers;
+	uint32_t maxPerStageDescriptorUpdateAfterBindUniformBuffers;
+	uint32_t maxPerStageDescriptorUpdateAfterBindStorageBuffers;
+	uint32_t maxPerStageDescriptorUpdateAfterBindSampledImages;
+	uint32_t maxPerStageDescriptorUpdateAfterBindStorageImages;
+	uint32_t maxPerStageDescriptorUpdateAfterBindInputAttachments;
+	uint32_t maxPerStageUpdateAfterBindResources;
+	uint32_t maxDescriptorSetUpdateAfterBindSamplers;
+	uint32_t maxDescriptorSetUpdateAfterBindUniformBuffers;
+	uint32_t maxDescriptorSetUpdateAfterBindUniformBuffersDynamic;
+	uint32_t maxDescriptorSetUpdateAfterBindStorageBuffers;
+	uint32_t maxDescriptorSetUpdateAfterBindStorageBuffersDynamic;
+	uint32_t maxDescriptorSetUpdateAfterBindSampledImages;
+	uint32_t maxDescriptorSetUpdateAfterBindStorageImages;
+	uint32_t maxDescriptorSetUpdateAfterBindInputAttachments;
+};
+/*	VkDescriptorSetLayoutBindingFlagsCreateInfoEXT
+ex to: VkDescriptorSetLayoutCreateInfo
+*/
+struct		S_descriptor_set_layout_binding_flags_create_info_EXT{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	uint32_t bindingCount;
+	const F_descriptor_binding_EXT * pBindingFlags;
+};
+/*	VkDescriptorSetVariableDescriptorCountAllocateInfoEXT
+ex to: VkDescriptorSetAllocateInfo
+*/
+struct		S_descriptor_set_variable_descriptor_count_allocate_info_EXT{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	uint32_t descriptorSetCount;
+	const uint32_t * pDescriptorCounts;
+};
+/*	VkDescriptorSetVariableDescriptorCountLayoutSupportEXT
+(returnedonly)
+ex to: VkDescriptorSetLayoutSupport
+*/
+struct		S_descriptor_set_variable_descriptor_count_layout_support_EXT{
+private:
+	E_structure_type sType;
+	void * pNext;
+public:
+	uint32_t maxVariableDescriptorCount;
+};
+/*	VkAttachmentDescription2KHR
+*/
+struct		S_attachment_description2_KHR{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	F_attachment_description flags;
+	E_format format;
+	F_sample_count samples;
+	E_attachment_load_op loadOp;
+	E_attachment_store_op storeOp;
+	E_attachment_load_op stencilLoadOp;
+	E_attachment_store_op stencilStoreOp;
+	E_image_layout initialLayout;
+	E_image_layout finalLayout;
+};
+/*	VkAttachmentReference2KHR
+*/
+struct		S_attachment_reference2_KHR{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	uint32_t attachment;
+	E_image_layout layout;
+	F_image_aspect aspectMask;
+};
+/*	VkSubpassDescription2KHR
+*/
+struct		S_subpass_description2_KHR{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	F_subpass_description flags;
+	E_pipeline_bind_point pipelineBindPoint;
+	uint32_t viewMask;
+	uint32_t inputAttachmentCount;
+	const S_attachment_reference2_KHR * pInputAttachments;
+	uint32_t colorAttachmentCount;
+	const S_attachment_reference2_KHR * pColorAttachments;
+	const S_attachment_reference2_KHR * pResolveAttachments;
+	const S_attachment_reference2_KHR * pDepthStencilAttachment;
+	uint32_t preserveAttachmentCount;
+	const uint32_t * pPreserveAttachments;
+};
+/*	VkSubpassDependency2KHR
+*/
+struct		S_subpass_dependency2_KHR{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	uint32_t srcSubpass;
+	uint32_t dstSubpass;
+	F_pipeline_stage srcStageMask;
+	F_pipeline_stage dstStageMask;
+	F_access srcAccessMask;
+	F_access dstAccessMask;
+	F_dependency dependencyFlags;
+	int32_t viewOffset;
+};
+/*	VkRenderPassCreateInfo2KHR
+*/
+struct		S_render_pass_create_info2_KHR{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	F_render_pass_create flags;
+	uint32_t attachmentCount;
+	const S_attachment_description2_KHR * pAttachments;
+	uint32_t subpassCount;
+	const S_subpass_description2_KHR * pSubpasses;
+	uint32_t dependencyCount;
+	const S_subpass_dependency2_KHR * pDependencies;
+	uint32_t correlatedViewMaskCount;
+	const uint32_t * pCorrelatedViewMasks;
+};
+/*	VkSubpassBeginInfoKHR
+*/
+struct		S_subpass_begin_info_KHR{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	E_subpass_contents contents;
+};
+/*	VkSubpassEndInfoKHR
+*/
+struct		S_subpass_end_info_KHR{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+};
+/*	VkPipelineVertexInputDivisorStateCreateInfoEXT
+ex to: VkPipelineVertexInputStateCreateInfo
+*/
+struct		S_pipeline_vertex_input_divisor_state_create_info_EXT{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	uint32_t vertexBindingDivisorCount;
+	const S_vertex_input_binding_divisor_description_EXT * pVertexBindingDivisors;
+};
+/*	VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT
+ex to: VkPhysicalDeviceProperties2
+*/
+struct		S_physical_device_vertex_attribute_divisor_properties_EXT{
+private:
+	E_structure_type sType;
+	void * pNext;
+public:
+	uint32_t maxVertexAttribDivisor;
+};
+/*	VkImportAndroidHardwareBufferInfoANDROID
+ex to: VkMemoryAllocateInfo
+*/
+struct		S_import_android_hardware_buffer_info_ANDROID{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	struct AHardwareBuffer * buffer;
+};
+#ifdef VK_USE_PLATFORM_MACOS_MVK
+/*	VkAndroidHardwareBufferUsageANDROID
+(returnedonly)
+ex to: VkImageFormatProperties2
+*/
+struct		S_android_hardware_buffer_usage_ANDROID{
+private:
+	E_structure_type sType;
+	void * pNext;
+public:
+	uint64_t androidHardwareBufferUsage;
+};
+#endif
+#ifdef VK_USE_PLATFORM_MACOS_MVK
+/*	VkAndroidHardwareBufferPropertiesANDROID
+(returnedonly)
+ex:
+	VkAndroidHardwareBufferFormatPropertiesANDROID
+*/
+struct		S_android_hardware_buffer_properties_ANDROID{
+private:
+	E_structure_type sType;
+	void * pNext;
+public:
+	VkDeviceSize allocationSize;
+	uint32_t memoryTypeBits;
+};
+#endif
+/*	VkMemoryGetAndroidHardwareBufferInfoANDROID
+*/
+struct		S_memory_get_android_hardware_buffer_info_ANDROID{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	VkDeviceMemory memory;
+};
+#ifdef VK_USE_PLATFORM_MACOS_MVK
+/*	VkAndroidHardwareBufferFormatPropertiesANDROID
+(returnedonly)
+ex to: VkAndroidHardwareBufferPropertiesANDROID
+*/
+struct		S_android_hardware_buffer_format_properties_ANDROID{
+private:
+	E_structure_type sType;
+	void * pNext;
+public:
+	E_format format;
+	uint64_t externalFormat;
+	F_format_feature formatFeatures;
+	S_component_mapping samplerYcbcrConversionComponents;
+	E_sampler_ycbcr_model_conversion suggestedYcbcrModel;
+	E_sampler_ycbcr_range suggestedYcbcrRange;
+	E_chroma_location suggestedXChromaOffset;
+	E_chroma_location suggestedYChromaOffset;
+};
+#endif
+/*	VkCommandBufferInheritanceConditionalRenderingInfoEXT
+ex to: VkCommandBufferInheritanceInfo
+*/
+struct		S_command_buffer_inheritance_conditional_rendering_info_EXT{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	VkBool32 conditionalRenderingEnable;
+};
+/*	VkExternalFormatANDROID
+ex to: VkImageCreateInfo,VkSamplerYcbcrConversionCreateInfo
+*/
+struct		S_external_format_ANDROID{
+private:
+	E_structure_type sType;
+	void * pNext;
+public:
+	uint64_t externalFormat;
+};
+/*	VkPhysicalDevice8BitStorageFeaturesKHR
+ex to: VkPhysicalDeviceFeatures2,VkDeviceCreateInfo
+*/
+struct		S_physical_device_8bit_storage_features_KHR{
+private:
+	E_structure_type sType;
+	void * pNext;
+public:
+	VkBool32 storageBuffer8BitAccess;
+	VkBool32 uniformAndStorageBuffer8BitAccess;
+	VkBool32 storagePushConstant8;
+};
+/*	VkPhysicalDeviceConditionalRenderingFeaturesEXT
+ex to: VkPhysicalDeviceFeatures2,VkDeviceCreateInfo
+*/
+struct		S_physical_device_conditional_rendering_features_EXT{
+private:
+	E_structure_type sType;
+	void * pNext;
+public:
+	VkBool32 conditionalRendering;
+	VkBool32 inheritedConditionalRendering;
+};
+/*	VkPhysicalDeviceVulkanMemoryModelFeaturesKHR
+(returnedonly)
+ex to: VkPhysicalDeviceFeatures2,VkDeviceCreateInfo
+*/
+struct		S_physical_device_vulkan_memory_model_features_KHR{
+private:
+	E_structure_type sType;
+	void * pNext;
+public:
+	VkBool32 vulkanMemoryModel;
+	VkBool32 vulkanMemoryModelDeviceScope;
+};
+/*	VkPhysicalDeviceShaderAtomicInt64FeaturesKHR
+ex to: VkPhysicalDeviceFeatures2,VkDeviceCreateInfo
+*/
+struct		S_physical_device_shader_atomic_int64_features_KHR{
+private:
+	E_structure_type sType;
+	void * pNext;
+public:
+	VkBool32 shaderBufferInt64Atomics;
+	VkBool32 shaderSharedInt64Atomics;
+};
+/*	VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT
+ex to: VkPhysicalDeviceFeatures2,VkDeviceCreateInfo
+*/
+struct		S_physical_device_vertex_attribute_divisor_features_EXT{
+private:
+	E_structure_type sType;
+	void * pNext;
+public:
+	VkBool32 vertexAttributeInstanceRateDivisor;
+	VkBool32 vertexAttributeInstanceRateZeroDivisor;
+};
+/*	VkQueueFamilyCheckpointPropertiesNV
+(returnedonly)
+ex to: VkQueueFamilyProperties2
+*/
+struct		S_queue_family_checkpoint_properties_NV{
+private:
+	E_structure_type sType;
+	void * pNext;
+public:
+	F_pipeline_stage checkpointExecutionStageMask;
+};
+/*	VkCheckpointDataNV
+(returnedonly)
+*/
+struct		S_checkpoint_data_NV{
+private:
+	E_structure_type sType;
+	void * pNext;
+public:
+	F_pipeline_stage stage;
+	void * pCheckpointMarker;
+};
+/*	VkImageViewASTCDecodeModeEXT
+ex to: VkImageViewCreateInfo
+*/
+struct		S_image_view_astc_decode_mode_EXT{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	E_format decodeMode;
+};
+/*	VkPhysicalDeviceASTCDecodeFeaturesEXT
+ex to: VkPhysicalDeviceFeatures2,VkDeviceCreateInfo
+*/
+struct		S_physical_device_astc_decode_features_EXT{
+private:
+	E_structure_type sType;
+	void * pNext;
+public:
+	VkBool32 decodeModeSharedExponent;
+};
+/*	VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV
+ex to: VkPhysicalDeviceFeatures2,VkDeviceCreateInfo
+*/
+struct		S_physical_device_representative_fragment_test_features_NV{
+private:
+	E_structure_type sType;
+	void * pNext;
+public:
+	VkBool32 representativeFragmentTest;
+};
+/*	VkPipelineRepresentativeFragmentTestStateCreateInfoNV
+ex to: VkGraphicsPipelineCreateInfo
+*/
+struct		S_pipeline_representative_fragment_test_state_create_info_NV{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	VkBool32 representativeFragmentTestEnable;
+};
+/*	VkPhysicalDeviceExclusiveScissorFeaturesNV
+ex to: VkPhysicalDeviceFeatures2,VkDeviceCreateInfo
+*/
+struct		S_physical_device_exclusive_scissor_features_NV{
+private:
+	E_structure_type sType;
+	void * pNext;
+public:
+	VkBool32 exclusiveScissor;
+};
+/*	VkPipelineViewportExclusiveScissorStateCreateInfoNV
+ex to: VkPipelineViewportStateCreateInfo
+*/
+struct		S_pipeline_viewport_exclusive_scissor_state_create_info_NV{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	uint32_t exclusiveScissorCount;
+	const S_rect_2d * pExclusiveScissors;
+};
+/*	VkPhysicalDeviceCornerSampledImageFeaturesNV
+ex to: VkPhysicalDeviceFeatures2,VkDeviceCreateInfo
+*/
+struct		S_physical_device_corner_sampled_image_features_NV{
+private:
+	E_structure_type sType;
+	void * pNext;
+public:
+	VkBool32 cornerSampledImage;
+};
+/*	VkPhysicalDeviceComputeShaderDerivativesFeaturesNV
+ex to: VkPhysicalDeviceFeatures2,VkDeviceCreateInfo
+*/
+struct		S_physical_device_compute_shader_derivatives_features_NV{
+private:
+	E_structure_type sType;
+	void * pNext;
+public:
+	VkBool32 computeDerivativeGroupQuads;
+	VkBool32 computeDerivativeGroupLinear;
+};
+/*	VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV
+ex to: VkPhysicalDeviceFeatures2,VkDeviceCreateInfo
+*/
+struct		S_physical_device_fragment_shader_barycentric_features_NV{
+private:
+	E_structure_type sType;
+	void * pNext;
+public:
+	VkBool32 fragmentShaderBarycentric;
+};
+/*	VkPhysicalDeviceShaderImageFootprintFeaturesNV
+ex to: VkPhysicalDeviceFeatures2,VkDeviceCreateInfo
+*/
+struct		S_physical_device_shader_image_footprint_features_NV{
+private:
+	E_structure_type sType;
+	void * pNext;
+public:
+	VkBool32 imageFootprint;
+};
+/*	VkPipelineViewportShadingRateImageStateCreateInfoNV
+ex to: VkPipelineViewportStateCreateInfo
+*/
+struct		S_pipeline_viewport_shading_rate_image_state_create_info_NV{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	VkBool32 shadingRateImageEnable;
+	uint32_t viewportCount;
+	const S_shading_rate_palette_NV * pShadingRatePalettes;
+};
+/*	VkPhysicalDeviceShadingRateImageFeaturesNV
+ex to: VkPhysicalDeviceFeatures2,VkDeviceCreateInfo
+*/
+struct		S_physical_device_shading_rate_image_features_NV{
+private:
+	E_structure_type sType;
+	void * pNext;
+public:
+	VkBool32 shadingRateImage;
+	VkBool32 shadingRateCoarseSampleOrder;
+};
+/*	VkPhysicalDeviceShadingRateImagePropertiesNV
+(returnedonly)
+ex to: VkPhysicalDeviceProperties
+*/
+struct		S_physical_device_shading_rate_image_properties_NV{
+private:
+	E_structure_type sType;
+	void * pNext;
+public:
+	S_extent_2d shadingRateTexelSize;
+	uint32_t shadingRatePaletteSize;
+	uint32_t shadingRateMaxCoarseSamples;
+};
+/*	VkCoarseSampleOrderCustomNV
+*/
+struct		S_coarse_sample_order_custom_NV{
+	E_shading_rate_palette_entry_NV shadingRate;
+	uint32_t sampleCount;
+	uint32_t sampleLocationCount;
+	const S_coarse_sample_location_NV * pSampleLocations;
+};
+/*	VkPipelineViewportCoarseSampleOrderStateCreateInfoNV
+ex to: VkPipelineViewportStateCreateInfo
+*/
+struct		S_pipeline_viewport_coarse_sample_order_state_create_info_NV{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	E_coarse_sample_order_type_NV sampleOrderType;
+	uint32_t customSampleOrderCount;
+	const S_coarse_sample_order_custom_NV * pCustomSampleOrders;
+};
+/*	VkPhysicalDeviceMeshShaderFeaturesNV
+ex to: VkPhysicalDeviceFeatures2,VkDeviceCreateInfo
+*/
+struct		S_physical_device_mesh_shader_features_NV{
+private:
+	E_structure_type sType;
+	void * pNext;
+public:
+	VkBool32 taskShader;
+	VkBool32 meshShader;
+};
+/*	VkPhysicalDeviceMeshShaderPropertiesNV
+ex to: VkPhysicalDeviceProperties2
+*/
+struct		S_physical_device_mesh_shader_properties_NV{
+private:
+	E_structure_type sType;
+	void * pNext;
+public:
+	uint32_t maxDrawMeshTasksCount;
+	uint32_t maxTaskWorkGroupInvocations;
+	uint32_t maxTaskWorkGroupSize[3];
+	uint32_t maxTaskTotalMemorySize;
+	uint32_t maxTaskOutputCount;
+	uint32_t maxMeshWorkGroupInvocations;
+	uint32_t maxMeshWorkGroupSize[3];
+	uint32_t maxMeshTotalMemorySize;
+	uint32_t maxMeshOutputVertices;
+	uint32_t maxMeshOutputPrimitives;
+	uint32_t maxMeshMultiviewViewCount;
+	uint32_t meshOutputPerVertexGranularity;
+	uint32_t meshOutputPerPrimitiveGranularity;
+};
+/*	VkRaytracingPipelineCreateInfoNVX
+*/
+struct		S_raytracing_pipeline_create_info_NVX{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	F_pipeline_create flags;
+	uint32_t stageCount;
+	const S_pipeline_shader_stage_create_info * pStages;
+	const uint32_t * pGroupNumbers;
+	uint32_t maxRecursionDepth;
+	VkPipelineLayout layout;
+	VkPipeline basePipelineHandle;
+	int32_t basePipelineIndex;
+};
+/*	VkGeometryTrianglesNVX
+*/
+struct		S_geometry_triangles_NVX{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	VkBuffer vertexData;
+	VkDeviceSize vertexOffset;
+	uint32_t vertexCount;
+	VkDeviceSize vertexStride;
+	E_format vertexFormat;
+	VkBuffer indexData;
+	VkDeviceSize indexOffset;
+	uint32_t indexCount;
+	E_index_type indexType;
+	VkBuffer transformData;
+	VkDeviceSize transformOffset;
+};
+/*	VkGeometryAABBNVX
+*/
+struct		S_geometry_aabb_NVX{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	VkBuffer aabbData;
+	uint32_t numAABBs;
+	uint32_t stride;
+	VkDeviceSize offset;
+};
+/*	VkGeometryDataNVX
+*/
+struct		S_geometry_data_NVX{
+	S_geometry_triangles_NVX triangles;
+	S_geometry_aabb_NVX aabbs;
+};
+/*	VkGeometryNVX
+*/
+struct		S_geometry_NVX{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	E_geometry_type_NVX geometryType;
+	S_geometry_data_NVX geometry;
+	F_geometry_NVX flags;
+};
+/*	VkAccelerationStructureCreateInfoNVX
+*/
+struct		S_acceleration_structure_create_info_NVX{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	E_acceleration_structure_type_NVX type;
+	F_build_acceleration_structure_NVX flags;
+	VkDeviceSize compactedSize;
+	uint32_t instanceCount;
+	uint32_t geometryCount;
+	const S_geometry_NVX * pGeometries;
+};
+/*	VkBindAccelerationStructureMemoryInfoNVX
+*/
+struct		S_bind_acceleration_structure_memory_info_NVX{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	VkAccelerationStructureNVX accelerationStructure;
+	VkDeviceMemory memory;
+	VkDeviceSize memoryOffset;
+	uint32_t deviceIndexCount;
+	const uint32_t * pDeviceIndices;
+};
+/*	VkDescriptorAccelerationStructureInfoNVX
+ex to: VkWriteDescriptorSet
+*/
+struct		S_descriptor_acceleration_structure_info_NVX{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	uint32_t accelerationStructureCount;
+	const VkAccelerationStructureNVX * pAccelerationStructures;
+};
+/*	VkAccelerationStructureMemoryRequirementsInfoNVX
+*/
+struct		S_acceleration_structure_memory_requirements_info_NVX{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	VkAccelerationStructureNVX accelerationStructure;
+};
+/*	VkPhysicalDeviceRaytracingPropertiesNVX
+ex to: VkPhysicalDeviceProperties2
+*/
+struct		S_physical_device_raytracing_properties_NVX{
+private:
+	E_structure_type sType;
+	void * pNext;
+public:
+	uint32_t shaderHeaderSize;
+	uint32_t maxRecursionDepth;
+	uint32_t maxGeometryCount;
+};
+/*	VkDrmFormatModifierPropertiesListEXT
+ex to: VkFormatProperties2
+*/
+struct		S_drm_format_modifier_properties_list_EXT{
+private:
+	E_structure_type sType;
+	void * pNext;
+public:
+	uint32_t drmFormatModifierCount;
+	S_drm_format_modifier_properties_EXT * pDrmFormatModifierProperties;
+};
+/*	VkPhysicalDeviceImageDrmFormatModifierInfoEXT
+ex to: VkPhysicalDeviceImageFormatInfo2
+*/
+struct		S_physical_device_image_drm_format_modifier_info_EXT{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	uint64_t drmFormatModifier;
+};
+/*	VkImageDrmFormatModifierListCreateInfoEXT
+ex to: VkImageCreateInfo
+*/
+struct		S_image_drm_format_modifier_list_create_info_EXT{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	uint32_t drmFormatModifierCount;
+	const uint64_t * pDrmFormatModifiers;
+};
+/*	VkImageDrmFormatModifierExplicitCreateInfoEXT
+ex to: VkImageCreateInfo
+*/
+struct		S_image_drm_format_modifier_explicit_create_info_EXT{
+private:
+	E_structure_type sType;
+	const void * pNext;
+public:
+	uint64_t drmFormatModifier;
+	uint32_t drmFormatModifierPlaneCount;
+	const S_subresource_layout * pPlaneLayouts;
+};
+/*	VkImageDrmFormatModifierPropertiesEXT
+(returnedonly)
+*/
+struct		S_image_drm_format_modifier_properties_EXT{
+private:
+	E_structure_type sType;
+	void * pNext;
+public:
+	uint64_t drmFormatModifier;
 };
 
 }}
