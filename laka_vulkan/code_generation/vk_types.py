@@ -16,9 +16,9 @@ Permission is granted to anyone to use this software for any purpose, including 
 '''
 那丫太乱 这就重写
 '''
+#todo:平台相关的结构 xml里没找到在哪个宏作用下生效的信息
 #todo:处理struct 成员初始值 包括不限于sType
 #todo:生成pNext struct    并写入注释
-#todo:为存在私有成员的struct 添加方便使用的函数
 #todo:处理数组成员 count+数组 的成员
 #todo:确定struct 的父子关系 写入注释
 #todo:将所有成员函数写在类定义中 若发现复杂的函数还是写在cpp中
@@ -54,6 +54,8 @@ for p_node in wsi_nodes:
     macro = p_node.get('protect')
     wsi_list.append(name)
     wsi_dict[name] = macro
+
+print(wsi_dict)
 
 class MyName:
     my_name = ""
@@ -145,6 +147,7 @@ class Struct:
     returned_only = ""
     struct_extends = []
     struct_extends_to = ""
+    struct_extends_to_array = []
     baba = []
     have_sType = 0
     is_wsi = 0
@@ -168,6 +171,87 @@ class Member:
     noautovalidity = "" #
     o_comment = ""      #
     comment = ""        #
+
+
+def out_struct(s):
+    out = "/*"+s.comment+"*/\n"
+    #平台相关struct用宏包起
+    sub_name_0 = name_dict[s.vk_name].sub_names[0].lower()
+    if sub_name_0 == "mac":
+        sub_name_0 += name_dict[s.vk_name].sub_names[1].lower()
+    is_wsi = 0
+    for wsi_name_temp in wsi_list:
+        if sub_name_0 == wsi_name_temp:
+            is_wsi = 1
+            break
+    if is_wsi == 1:
+        out += "#ifdef "+wsi_dict[sub_name_0]+"\n"
+
+    out += "struct\t\t" + s.my_name + "{\n"
+    count = 0
+    for m in s.members:
+        value = ""
+        if m.default_value != "":
+            value = " = \n\t\t\t" + m.default_value
+        if m.name == "pNext":
+            value = " = nullptr"
+
+        if m.name == "sType":
+            out+="private:\n"
+            m.final_text = m.final_text.replace("E_structure_type","VkStructureType")
+        if m.comment.lstrip().isspace():
+            m.comment+="\t/* "+m.comment.replace("\n","")+" */\n"
+
+        out += "\t"+m.final_text+value+";\n"
+
+        if m.name == "pNext" and (count+1) < len(s.members):
+            out += "public:\n"
+        count+=1
+
+    if s.have_sType == 1:
+        out+= \
+            "{0}( {1} const & rhs )\n"\
+            "\t@\tmemcpy( this, &rhs, sizeof( {0} ) );\t$\n"\
+            "{0}& operator=( {1} const & rhs ) \n"\
+            "\t@\tmemcpy( this, &rhs, sizeof( {0} ) ); return *this;\t$\n"\
+            "operator {1} const&() const \n"\
+            "\t@\treturn *reinterpret_cast<const {1}*>(this);\t$\n"\
+            "operator {1} &() \n"\
+            "\t@\treturn *reinterpret_cast<{1}*>(this);\t$\n\n"\
+        .format(s.my_name,s.vk_name).replace("@","{").replace("$","}")
+
+    # 处理pNext
+    is_ex_to = len(s.struct_extends_to_array) > 0
+    is_ex_base = len(s.struct_extends) > 0
+    is_pNext = is_ex_base or is_ex_to
+
+    ex_to = ""
+    ex_ = ""
+
+
+    out += "};\n"
+    if s.have_sType==1:
+        out += "static_assert(\n\tsizeof(" + s.my_name + ") == sizeof(" + s.vk_name + "),\n\t\"struct and wrapper have different size!\");\n"
+
+    #平台相关struct用宏包起
+    if s.is_wsi == 1:
+        out += "#endif //"+wsi_dict[sub_name_0]+"\n\n"
+    else:
+        out+="\n"
+
+    if is_pNext:
+        print("-------------------------------")
+        print(s.vk_name)
+        print("ex to:")
+        print(s.struct_extends_to_array)
+        print("ex:")
+        print(s.struct_extends)
+        if is_ex_base and is_ex_to:
+            print("=======================is bilateral !========================")
+
+    return out
+
+
 
 all_type_dict = dict([])
 name_dict = dict([])
@@ -322,6 +406,7 @@ for enum in flag_bits_list:
     "{0}(B bits_):flag(static_cast<int>(bits_))@$\n" \
     "{0}({0} const& flag_):flag(flag_.flag)@$\n" \
     "{0}(std::initializer_list<B> bit_list)@for (auto&& bit : bit_list)@flag |= static_cast<int>(bit);$$\n" \
+    "operator {0} const &()@return *this;$\n" \
     "{0}& operator = ({0} flag_)@flag = flag_.flag;return *this;$\n" \
     "{0} operator | (B bit_)@return flag | static_cast<int>(bit_);$\n" \
     "{0}& operator |= (B bit_)@flag |= static_cast<int>(bit_);return *this;$\n" \
@@ -358,7 +443,7 @@ for enum in flag_bits_list:
     flagbits_out+="};\n"
 
 
-    flagbits_out+="{0} inline operator|({0}::B bit1_, {0}::B bit2_)@{0} flags(bit1_);return flags | bit2_;$\n\n"\
+    flagbits_out+="{0} inline operator|({0}::B bit1_, {0}::B bit2_)@{0} flags(bit1_);return flags | bit2_;$\nbool inline operator==({0} f1_, {0} f2_) @ return f1_.flag== f2_.flag; $\n\n"\
         .format(fb_obj.my_name).replace("@","{").replace("$","}")
 
     all_type_dict[fb_obj.vk_name] = fb_obj
@@ -387,6 +472,7 @@ for struct in struct_list:
     s_obj.members = list()
     s_obj.baba = list()
     s_obj.struct_extends = list()
+    s_obj.struct_extends_to_array = list()
 
     alias_temp = struct.get('alias')
     if alias_temp != None:
@@ -483,6 +569,9 @@ for struct in struct_list:
         m.final_text=re.sub(r' [ ]+',' ',m.final_text)
 
     ex_list = s.struct_extends_to.split(",")
+    s.struct_extends_to_array = ex_list[:]
+    if s.struct_extends_to_array[0] == "":
+        s.struct_extends_to_array.pop(0)
     for ex in ex_list:
         if ex == "":
             continue
@@ -509,6 +598,7 @@ for struct in struct_list:
     s_list.append(s)
 
 #最先输出 alias
+struct_out += "/*------------------ alias ----------------*/\n\n"
 i = 0
 while i<len(s_list):
     s = s_list[i]
@@ -524,7 +614,6 @@ while i<len(s_list):
 
 #输出与没有这堆struct作为成员的结构
 struct_out+="\n/*---------------- simple struct ---------------------*/\n\n"
-
 i = 0
 while i < len(s_list):
     s = s_list[i]
@@ -544,17 +633,31 @@ while i < len(s_list):
         i+=1
         continue
 
-    struct_out += "/*"+s.comment+"*/\n"
-    struct_out+="struct\t\t"+s.my_name+"{\n"
-    for m in s.members:
-        struct_out+="\t"+m.final_text+";\n"
-    struct_out += "};\n"
+    struct_out += out_struct(s)
 
     s.g = 1
 
     s_list.pop(i)
 
-struct_out+="\n/*---------------- struct ---------------------*/\n\n"
+#输出成员中仅有sType是依赖成员的
+struct_out+="\n/*------------------ just sType pNext -------------------*/\n\n"
+i = 0
+while i < len(s_list):
+    s = s_list[i]
+    is_ok = 1
+    for m in s.members:
+        if m.name == "sType" or m.name == "pNext" or struct_dict.get(m.type_only) == None:
+            continue
+        else:
+            is_ok = 0
+    if is_ok == 0:
+        i+=1
+        continue
+    struct_out += out_struct(s)
+    s.g = 1
+    s_list.pop(i)
+
+struct_out+="\n/*---------------- other struct ---------------------*/\n\n"
 
 i = 0
 while len(s_list) > 0:
@@ -579,30 +682,14 @@ while len(s_list) > 0:
         i+=1
         continue
 
-
-    #平台相关struct用宏包起
-    if s.is_wsi == 1:
-        struct_out += "#ifdef "+wsi_dict[wsi_name]+"\n"
-
-    struct_out += "/*"+s.comment+"*/\n"
-    struct_out+="struct\t\t"+s.my_name+"{\n"
-    for m in s.members:
-        if m.name == "sType":
-            struct_out+="private:\n"
-        struct_out+="\t"+m.final_text+";\n"
-        if m.name == "pNext":
-            struct_out+="public:\n"
-    struct_out += "};\n"
-
-    if s.is_wsi == 1:
-        struct_out+="#endif\n"
-
-    print struct_out
+    struct_out += out_struct(s)
 
     s.g = 1
     s_list.pop(i)
 
+'''
 
+'''
 
 all_out += enum_out+flagbits_out+struct_out
 all_out += "\n}}\n"

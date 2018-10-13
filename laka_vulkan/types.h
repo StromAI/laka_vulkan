@@ -950,6 +950,7 @@ F_cull_mode():flag(0){}
 F_cull_mode(B bits_):flag(static_cast<int>(bits_)){}
 F_cull_mode(F_cull_mode const& flag_):flag(flag_.flag){}
 F_cull_mode(std::initializer_list<B> bit_list){for (auto&& bit : bit_list){flag |= static_cast<int>(bit);}}
+operator F_cull_mode const &(){return *this;}
 F_cull_mode& operator = (F_cull_mode flag_){flag = flag_.flag;return *this;}
 F_cull_mode operator | (B bit_){return flag | static_cast<int>(bit_);}
 F_cull_mode& operator |= (B bit_){flag |= static_cast<int>(bit_);return *this;}
@@ -981,6 +982,7 @@ F_cull_mode& on_front_and_back(){ flag |= b_front_and_back; return *this; }
 F_cull_mode& off_front_and_back(){ flag &= ~b_front_and_back; return *this; }
 };
 F_cull_mode inline operator|(F_cull_mode::B bit1_, F_cull_mode::B bit2_){F_cull_mode flags(bit1_);return flags | bit2_;}
+bool inline operator==(F_cull_mode f1_, F_cull_mode f2_) { return f1_.flag== f2_.flag; }
 
 /*	VkQueueFlagBits*/
 class F_queue {
@@ -1002,6 +1004,7 @@ F_queue():flag(0){}
 F_queue(B bits_):flag(static_cast<int>(bits_)){}
 F_queue(F_queue const& flag_):flag(flag_.flag){}
 F_queue(std::initializer_list<B> bit_list){for (auto&& bit : bit_list){flag |= static_cast<int>(bit);}}
+operator F_queue const &(){return *this;}
 F_queue& operator = (F_queue flag_){flag = flag_.flag;return *this;}
 F_queue operator | (B bit_){return flag | static_cast<int>(bit_);}
 F_queue& operator |= (B bit_){flag |= static_cast<int>(bit_);return *this;}
@@ -1033,6 +1036,7 @@ F_queue& on_sparse_binding(){ flag |= b_sparse_binding; return *this; }
 F_queue& off_sparse_binding(){ flag &= ~b_sparse_binding; return *this; }
 };
 F_queue inline operator|(F_queue::B bit1_, F_queue::B bit2_){F_queue flags(bit1_);return flags | bit2_;}
+bool inline operator==(F_queue f1_, F_queue f2_) { return f1_.flag== f2_.flag; }
 
 /*	VkRenderPassCreateFlagBits*/
 using F_render_pass_create = 
@@ -1064,6 +1068,7 @@ F_memory_property():flag(0){}
 F_memory_property(B bits_):flag(static_cast<int>(bits_)){}
 F_memory_property(F_memory_property const& flag_):flag(flag_.flag){}
 F_memory_property(std::initializer_list<B> bit_list){for (auto&& bit : bit_list){flag |= static_cast<int>(bit);}}
+operator F_memory_property const &(){return *this;}
 F_memory_property& operator = (F_memory_property flag_){flag = flag_.flag;return *this;}
 F_memory_property operator | (B bit_){return flag | static_cast<int>(bit_);}
 F_memory_property& operator |= (B bit_){flag |= static_cast<int>(bit_);return *this;}
@@ -1097,6 +1102,7 @@ F_memory_property& on_lazily_allocated(){ flag |= b_lazily_allocated; return *th
 F_memory_property& off_lazily_allocated(){ flag &= ~b_lazily_allocated; return *this; }
 };
 F_memory_property inline operator|(F_memory_property::B bit1_, F_memory_property::B bit2_){F_memory_property flags(bit1_);return flags | bit2_;}
+bool inline operator==(F_memory_property f1_, F_memory_property f2_) { return f1_.flag== f2_.flag; }
 
 /*	VkMemoryHeapFlagBits*/
 class F_memory_heap {
@@ -1112,6 +1118,7 @@ F_memory_heap():flag(0){}
 F_memory_heap(B bits_):flag(static_cast<int>(bits_)){}
 F_memory_heap(F_memory_heap const& flag_):flag(flag_.flag){}
 F_memory_heap(std::initializer_list<B> bit_list){for (auto&& bit : bit_list){flag |= static_cast<int>(bit);}}
+operator F_memory_heap const &(){return *this;}
 F_memory_heap& operator = (F_memory_heap flag_){flag = flag_.flag;return *this;}
 F_memory_heap operator | (B bit_){return flag | static_cast<int>(bit_);}
 F_memory_heap& operator |= (B bit_){flag |= static_cast<int>(bit_);return *this;}
@@ -1137,6 +1144,7 @@ F_memory_heap& on_device_local(){ flag |= b_device_local; return *this; }
 F_memory_heap& off_device_local(){ flag &= ~b_device_local; return *this; }
 };
 F_memory_heap inline operator|(F_memory_heap::B bit1_, F_memory_heap::B bit2_){F_memory_heap flags(bit1_);return flags | bit2_;}
+bool inline operator==(F_memory_heap f1_, F_memory_heap f2_) { return f1_.flag== f2_.flag; }
 
 /*	VkAccessFlagBits*/
 class F_access {
@@ -1184,6 +1192,7 @@ F_access():flag(0){}
 F_access(B bits_):flag(static_cast<int>(bits_)){}
 F_access(F_access const& flag_):flag(flag_.flag){}
 F_access(std::initializer_list<B> bit_list){for (auto&& bit : bit_list){flag |= static_cast<int>(bit);}}
+operator F_access const &(){return *this;}
 F_access& operator = (F_access flag_){flag = flag_.flag;return *this;}
 F_access operator | (B bit_){return flag | static_cast<int>(bit_);}
 F_access& operator |= (B bit_){flag |= static_cast<int>(bit_);return *this;}
@@ -1241,6 +1250,7 @@ F_access& on_memory_write(){ flag |= b_memory_write; return *this; }
 F_access& off_memory_write(){ flag &= ~b_memory_write; return *this; }
 };
 F_access inline operator|(F_access::B bit1_, F_access::B bit2_){F_access flags(bit1_);return flags | bit2_;}
+bool inline operator==(F_access f1_, F_access f2_) { return f1_.flag== f2_.flag; }
 
 /*	VkBufferUsageFlagBits*/
 class F_buffer_usage {
@@ -1272,6 +1282,7 @@ F_buffer_usage():flag(0){}
 F_buffer_usage(B bits_):flag(static_cast<int>(bits_)){}
 F_buffer_usage(F_buffer_usage const& flag_):flag(flag_.flag){}
 F_buffer_usage(std::initializer_list<B> bit_list){for (auto&& bit : bit_list){flag |= static_cast<int>(bit);}}
+operator F_buffer_usage const &(){return *this;}
 F_buffer_usage& operator = (F_buffer_usage flag_){flag = flag_.flag;return *this;}
 F_buffer_usage operator | (B bit_){return flag | static_cast<int>(bit_);}
 F_buffer_usage& operator |= (B bit_){flag |= static_cast<int>(bit_);return *this;}
@@ -1313,6 +1324,7 @@ F_buffer_usage& on_indirect_buffer(){ flag |= b_indirect_buffer; return *this; }
 F_buffer_usage& off_indirect_buffer(){ flag &= ~b_indirect_buffer; return *this; }
 };
 F_buffer_usage inline operator|(F_buffer_usage::B bit1_, F_buffer_usage::B bit2_){F_buffer_usage flags(bit1_);return flags | bit2_;}
+bool inline operator==(F_buffer_usage f1_, F_buffer_usage f2_) { return f1_.flag== f2_.flag; }
 
 /*	VkBufferCreateFlagBits*/
 class F_buffer_create {
@@ -1332,6 +1344,7 @@ F_buffer_create():flag(0){}
 F_buffer_create(B bits_):flag(static_cast<int>(bits_)){}
 F_buffer_create(F_buffer_create const& flag_):flag(flag_.flag){}
 F_buffer_create(std::initializer_list<B> bit_list){for (auto&& bit : bit_list){flag |= static_cast<int>(bit);}}
+operator F_buffer_create const &(){return *this;}
 F_buffer_create& operator = (F_buffer_create flag_){flag = flag_.flag;return *this;}
 F_buffer_create operator | (B bit_){return flag | static_cast<int>(bit_);}
 F_buffer_create& operator |= (B bit_){flag |= static_cast<int>(bit_);return *this;}
@@ -1361,6 +1374,7 @@ F_buffer_create& on_sparse_aliased(){ flag |= b_sparse_aliased; return *this; }
 F_buffer_create& off_sparse_aliased(){ flag &= ~b_sparse_aliased; return *this; }
 };
 F_buffer_create inline operator|(F_buffer_create::B bit1_, F_buffer_create::B bit2_){F_buffer_create flags(bit1_);return flags | bit2_;}
+bool inline operator==(F_buffer_create f1_, F_buffer_create f2_) { return f1_.flag== f2_.flag; }
 
 /*	VkShaderStageFlagBits*/
 class F_shader_stage {
@@ -1382,6 +1396,7 @@ F_shader_stage():flag(0){}
 F_shader_stage(B bits_):flag(static_cast<int>(bits_)){}
 F_shader_stage(F_shader_stage const& flag_):flag(flag_.flag){}
 F_shader_stage(std::initializer_list<B> bit_list){for (auto&& bit : bit_list){flag |= static_cast<int>(bit);}}
+operator F_shader_stage const &(){return *this;}
 F_shader_stage& operator = (F_shader_stage flag_){flag = flag_.flag;return *this;}
 F_shader_stage operator | (B bit_){return flag | static_cast<int>(bit_);}
 F_shader_stage& operator |= (B bit_){flag |= static_cast<int>(bit_);return *this;}
@@ -1421,6 +1436,7 @@ F_shader_stage& on_all(){ flag |= b_all; return *this; }
 F_shader_stage& off_all(){ flag &= ~b_all; return *this; }
 };
 F_shader_stage inline operator|(F_shader_stage::B bit1_, F_shader_stage::B bit2_){F_shader_stage flags(bit1_);return flags | bit2_;}
+bool inline operator==(F_shader_stage f1_, F_shader_stage f2_) { return f1_.flag== f2_.flag; }
 
 /*	VkImageUsageFlagBits*/
 class F_image_usage {
@@ -1450,6 +1466,7 @@ F_image_usage():flag(0){}
 F_image_usage(B bits_):flag(static_cast<int>(bits_)){}
 F_image_usage(F_image_usage const& flag_):flag(flag_.flag){}
 F_image_usage(std::initializer_list<B> bit_list){for (auto&& bit : bit_list){flag |= static_cast<int>(bit);}}
+operator F_image_usage const &(){return *this;}
 F_image_usage& operator = (F_image_usage flag_){flag = flag_.flag;return *this;}
 F_image_usage operator | (B bit_){return flag | static_cast<int>(bit_);}
 F_image_usage& operator |= (B bit_){flag |= static_cast<int>(bit_);return *this;}
@@ -1489,6 +1506,7 @@ F_image_usage& on_input_attachment(){ flag |= b_input_attachment; return *this; 
 F_image_usage& off_input_attachment(){ flag &= ~b_input_attachment; return *this; }
 };
 F_image_usage inline operator|(F_image_usage::B bit1_, F_image_usage::B bit2_){F_image_usage flags(bit1_);return flags | bit2_;}
+bool inline operator==(F_image_usage f1_, F_image_usage f2_) { return f1_.flag== f2_.flag; }
 
 /*	VkImageCreateFlagBits*/
 class F_image_create {
@@ -1512,6 +1530,7 @@ F_image_create():flag(0){}
 F_image_create(B bits_):flag(static_cast<int>(bits_)){}
 F_image_create(F_image_create const& flag_):flag(flag_.flag){}
 F_image_create(std::initializer_list<B> bit_list){for (auto&& bit : bit_list){flag |= static_cast<int>(bit);}}
+operator F_image_create const &(){return *this;}
 F_image_create& operator = (F_image_create flag_){flag = flag_.flag;return *this;}
 F_image_create operator | (B bit_){return flag | static_cast<int>(bit_);}
 F_image_create& operator |= (B bit_){flag |= static_cast<int>(bit_);return *this;}
@@ -1545,6 +1564,7 @@ F_image_create& on_cube_compatible(){ flag |= b_cube_compatible; return *this; }
 F_image_create& off_cube_compatible(){ flag &= ~b_cube_compatible; return *this; }
 };
 F_image_create inline operator|(F_image_create::B bit1_, F_image_create::B bit2_){F_image_create flags(bit1_);return flags | bit2_;}
+bool inline operator==(F_image_create f1_, F_image_create f2_) { return f1_.flag== f2_.flag; }
 
 /*	VkPipelineCreateFlagBits*/
 class F_pipeline_create {
@@ -1561,6 +1581,7 @@ F_pipeline_create():flag(0){}
 F_pipeline_create(B bits_):flag(static_cast<int>(bits_)){}
 F_pipeline_create(F_pipeline_create const& flag_):flag(flag_.flag){}
 F_pipeline_create(std::initializer_list<B> bit_list){for (auto&& bit : bit_list){flag |= static_cast<int>(bit);}}
+operator F_pipeline_create const &(){return *this;}
 F_pipeline_create& operator = (F_pipeline_create flag_){flag = flag_.flag;return *this;}
 F_pipeline_create operator | (B bit_){return flag | static_cast<int>(bit_);}
 F_pipeline_create& operator |= (B bit_){flag |= static_cast<int>(bit_);return *this;}
@@ -1590,6 +1611,7 @@ F_pipeline_create& on_derivative(){ flag |= b_derivative; return *this; }
 F_pipeline_create& off_derivative(){ flag &= ~b_derivative; return *this; }
 };
 F_pipeline_create inline operator|(F_pipeline_create::B bit1_, F_pipeline_create::B bit2_){F_pipeline_create flags(bit1_);return flags | bit2_;}
+bool inline operator==(F_pipeline_create f1_, F_pipeline_create f2_) { return f1_.flag== f2_.flag; }
 
 /*	VkColorComponentFlagBits*/
 class F_color_component {
@@ -1607,6 +1629,7 @@ F_color_component():flag(0){}
 F_color_component(B bits_):flag(static_cast<int>(bits_)){}
 F_color_component(F_color_component const& flag_):flag(flag_.flag){}
 F_color_component(std::initializer_list<B> bit_list){for (auto&& bit : bit_list){flag |= static_cast<int>(bit);}}
+operator F_color_component const &(){return *this;}
 F_color_component& operator = (F_color_component flag_){flag = flag_.flag;return *this;}
 F_color_component operator | (B bit_){return flag | static_cast<int>(bit_);}
 F_color_component& operator |= (B bit_){flag |= static_cast<int>(bit_);return *this;}
@@ -1638,6 +1661,7 @@ F_color_component& on_a(){ flag |= b_a; return *this; }
 F_color_component& off_a(){ flag &= ~b_a; return *this; }
 };
 F_color_component inline operator|(F_color_component::B bit1_, F_color_component::B bit2_){F_color_component flags(bit1_);return flags | bit2_;}
+bool inline operator==(F_color_component f1_, F_color_component f2_) { return f1_.flag== f2_.flag; }
 
 /*	VkFenceCreateFlagBits*/
 class F_fence_create {
@@ -1652,6 +1676,7 @@ F_fence_create():flag(0){}
 F_fence_create(B bits_):flag(static_cast<int>(bits_)){}
 F_fence_create(F_fence_create const& flag_):flag(flag_.flag){}
 F_fence_create(std::initializer_list<B> bit_list){for (auto&& bit : bit_list){flag |= static_cast<int>(bit);}}
+operator F_fence_create const &(){return *this;}
 F_fence_create& operator = (F_fence_create flag_){flag = flag_.flag;return *this;}
 F_fence_create operator | (B bit_){return flag | static_cast<int>(bit_);}
 F_fence_create& operator |= (B bit_){flag |= static_cast<int>(bit_);return *this;}
@@ -1677,6 +1702,7 @@ F_fence_create& on_signaled(){ flag |= b_signaled; return *this; }
 F_fence_create& off_signaled(){ flag &= ~b_signaled; return *this; }
 };
 F_fence_create inline operator|(F_fence_create::B bit1_, F_fence_create::B bit2_){F_fence_create flags(bit1_);return flags | bit2_;}
+bool inline operator==(F_fence_create f1_, F_fence_create f2_) { return f1_.flag== f2_.flag; }
 
 /*	VkFormatFeatureFlagBits*/
 class F_format_feature {
@@ -1716,6 +1742,7 @@ F_format_feature():flag(0){}
 F_format_feature(B bits_):flag(static_cast<int>(bits_)){}
 F_format_feature(F_format_feature const& flag_):flag(flag_.flag){}
 F_format_feature(std::initializer_list<B> bit_list){for (auto&& bit : bit_list){flag |= static_cast<int>(bit);}}
+operator F_format_feature const &(){return *this;}
 F_format_feature& operator = (F_format_feature flag_){flag = flag_.flag;return *this;}
 F_format_feature operator | (B bit_){return flag | static_cast<int>(bit_);}
 F_format_feature& operator |= (B bit_){flag |= static_cast<int>(bit_);return *this;}
@@ -1765,6 +1792,7 @@ F_format_feature& on_sampled_image_filter_linear(){ flag |= b_sampled_image_filt
 F_format_feature& off_sampled_image_filter_linear(){ flag &= ~b_sampled_image_filter_linear; return *this; }
 };
 F_format_feature inline operator|(F_format_feature::B bit1_, F_format_feature::B bit2_){F_format_feature flags(bit1_);return flags | bit2_;}
+bool inline operator==(F_format_feature f1_, F_format_feature f2_) { return f1_.flag== f2_.flag; }
 
 /*	VkQueryControlFlagBits*/
 class F_query_control {
@@ -1780,6 +1808,7 @@ F_query_control():flag(0){}
 F_query_control(B bits_):flag(static_cast<int>(bits_)){}
 F_query_control(F_query_control const& flag_):flag(flag_.flag){}
 F_query_control(std::initializer_list<B> bit_list){for (auto&& bit : bit_list){flag |= static_cast<int>(bit);}}
+operator F_query_control const &(){return *this;}
 F_query_control& operator = (F_query_control flag_){flag = flag_.flag;return *this;}
 F_query_control operator | (B bit_){return flag | static_cast<int>(bit_);}
 F_query_control& operator |= (B bit_){flag |= static_cast<int>(bit_);return *this;}
@@ -1805,6 +1834,7 @@ F_query_control& on_precise(){ flag |= b_precise; return *this; }
 F_query_control& off_precise(){ flag &= ~b_precise; return *this; }
 };
 F_query_control inline operator|(F_query_control::B bit1_, F_query_control::B bit2_){F_query_control flags(bit1_);return flags | bit2_;}
+bool inline operator==(F_query_control f1_, F_query_control f2_) { return f1_.flag== f2_.flag; }
 
 /*	VkQueryResultFlagBits*/
 class F_query_result {
@@ -1826,6 +1856,7 @@ F_query_result():flag(0){}
 F_query_result(B bits_):flag(static_cast<int>(bits_)){}
 F_query_result(F_query_result const& flag_):flag(flag_.flag){}
 F_query_result(std::initializer_list<B> bit_list){for (auto&& bit : bit_list){flag |= static_cast<int>(bit);}}
+operator F_query_result const &(){return *this;}
 F_query_result& operator = (F_query_result flag_){flag = flag_.flag;return *this;}
 F_query_result operator | (B bit_){return flag | static_cast<int>(bit_);}
 F_query_result& operator |= (B bit_){flag |= static_cast<int>(bit_);return *this;}
@@ -1857,6 +1888,7 @@ F_query_result& on_partial(){ flag |= b_partial; return *this; }
 F_query_result& off_partial(){ flag &= ~b_partial; return *this; }
 };
 F_query_result inline operator|(F_query_result::B bit1_, F_query_result::B bit2_){F_query_result flags(bit1_);return flags | bit2_;}
+bool inline operator==(F_query_result f1_, F_query_result f2_) { return f1_.flag== f2_.flag; }
 
 /*	VkCommandBufferUsageFlagBits*/
 class F_command_buffer_usage {
@@ -1874,6 +1906,7 @@ F_command_buffer_usage():flag(0){}
 F_command_buffer_usage(B bits_):flag(static_cast<int>(bits_)){}
 F_command_buffer_usage(F_command_buffer_usage const& flag_):flag(flag_.flag){}
 F_command_buffer_usage(std::initializer_list<B> bit_list){for (auto&& bit : bit_list){flag |= static_cast<int>(bit);}}
+operator F_command_buffer_usage const &(){return *this;}
 F_command_buffer_usage& operator = (F_command_buffer_usage flag_){flag = flag_.flag;return *this;}
 F_command_buffer_usage operator | (B bit_){return flag | static_cast<int>(bit_);}
 F_command_buffer_usage& operator |= (B bit_){flag |= static_cast<int>(bit_);return *this;}
@@ -1903,6 +1936,7 @@ F_command_buffer_usage& on_simultaneous_use(){ flag |= b_simultaneous_use; retur
 F_command_buffer_usage& off_simultaneous_use(){ flag &= ~b_simultaneous_use; return *this; }
 };
 F_command_buffer_usage inline operator|(F_command_buffer_usage::B bit1_, F_command_buffer_usage::B bit2_){F_command_buffer_usage flags(bit1_);return flags | bit2_;}
+bool inline operator==(F_command_buffer_usage f1_, F_command_buffer_usage f2_) { return f1_.flag== f2_.flag; }
 
 /*	VkQueryPipelineStatisticFlagBits*/
 class F_query_pipeline_statistic {
@@ -1938,6 +1972,7 @@ F_query_pipeline_statistic():flag(0){}
 F_query_pipeline_statistic(B bits_):flag(static_cast<int>(bits_)){}
 F_query_pipeline_statistic(F_query_pipeline_statistic const& flag_):flag(flag_.flag){}
 F_query_pipeline_statistic(std::initializer_list<B> bit_list){for (auto&& bit : bit_list){flag |= static_cast<int>(bit);}}
+operator F_query_pipeline_statistic const &(){return *this;}
 F_query_pipeline_statistic& operator = (F_query_pipeline_statistic flag_){flag = flag_.flag;return *this;}
 F_query_pipeline_statistic operator | (B bit_){return flag | static_cast<int>(bit_);}
 F_query_pipeline_statistic& operator |= (B bit_){flag |= static_cast<int>(bit_);return *this;}
@@ -1983,6 +2018,7 @@ F_query_pipeline_statistic& on_compute_shader_invocations(){ flag |= b_compute_s
 F_query_pipeline_statistic& off_compute_shader_invocations(){ flag &= ~b_compute_shader_invocations; return *this; }
 };
 F_query_pipeline_statistic inline operator|(F_query_pipeline_statistic::B bit1_, F_query_pipeline_statistic::B bit2_){F_query_pipeline_statistic flags(bit1_);return flags | bit2_;}
+bool inline operator==(F_query_pipeline_statistic f1_, F_query_pipeline_statistic f2_) { return f1_.flag== f2_.flag; }
 
 /*	VkImageAspectFlagBits*/
 class F_image_aspect {
@@ -2000,6 +2036,7 @@ F_image_aspect():flag(0){}
 F_image_aspect(B bits_):flag(static_cast<int>(bits_)){}
 F_image_aspect(F_image_aspect const& flag_):flag(flag_.flag){}
 F_image_aspect(std::initializer_list<B> bit_list){for (auto&& bit : bit_list){flag |= static_cast<int>(bit);}}
+operator F_image_aspect const &(){return *this;}
 F_image_aspect& operator = (F_image_aspect flag_){flag = flag_.flag;return *this;}
 F_image_aspect operator | (B bit_){return flag | static_cast<int>(bit_);}
 F_image_aspect& operator |= (B bit_){flag |= static_cast<int>(bit_);return *this;}
@@ -2031,6 +2068,7 @@ F_image_aspect& on_metadata(){ flag |= b_metadata; return *this; }
 F_image_aspect& off_metadata(){ flag &= ~b_metadata; return *this; }
 };
 F_image_aspect inline operator|(F_image_aspect::B bit1_, F_image_aspect::B bit2_){F_image_aspect flags(bit1_);return flags | bit2_;}
+bool inline operator==(F_image_aspect f1_, F_image_aspect f2_) { return f1_.flag== f2_.flag; }
 
 /*	VkSparseImageFormatFlagBits*/
 class F_sparse_image_format {
@@ -2050,6 +2088,7 @@ F_sparse_image_format():flag(0){}
 F_sparse_image_format(B bits_):flag(static_cast<int>(bits_)){}
 F_sparse_image_format(F_sparse_image_format const& flag_):flag(flag_.flag){}
 F_sparse_image_format(std::initializer_list<B> bit_list){for (auto&& bit : bit_list){flag |= static_cast<int>(bit);}}
+operator F_sparse_image_format const &(){return *this;}
 F_sparse_image_format& operator = (F_sparse_image_format flag_){flag = flag_.flag;return *this;}
 F_sparse_image_format operator | (B bit_){return flag | static_cast<int>(bit_);}
 F_sparse_image_format& operator |= (B bit_){flag |= static_cast<int>(bit_);return *this;}
@@ -2079,6 +2118,7 @@ F_sparse_image_format& on_nonstandard_block_size(){ flag |= b_nonstandard_block_
 F_sparse_image_format& off_nonstandard_block_size(){ flag &= ~b_nonstandard_block_size; return *this; }
 };
 F_sparse_image_format inline operator|(F_sparse_image_format::B bit1_, F_sparse_image_format::B bit2_){F_sparse_image_format flags(bit1_);return flags | bit2_;}
+bool inline operator==(F_sparse_image_format f1_, F_sparse_image_format f2_) { return f1_.flag== f2_.flag; }
 
 /*	VkSparseMemoryBindFlagBits*/
 class F_sparse_memory_bind {
@@ -2094,6 +2134,7 @@ F_sparse_memory_bind():flag(0){}
 F_sparse_memory_bind(B bits_):flag(static_cast<int>(bits_)){}
 F_sparse_memory_bind(F_sparse_memory_bind const& flag_):flag(flag_.flag){}
 F_sparse_memory_bind(std::initializer_list<B> bit_list){for (auto&& bit : bit_list){flag |= static_cast<int>(bit);}}
+operator F_sparse_memory_bind const &(){return *this;}
 F_sparse_memory_bind& operator = (F_sparse_memory_bind flag_){flag = flag_.flag;return *this;}
 F_sparse_memory_bind operator | (B bit_){return flag | static_cast<int>(bit_);}
 F_sparse_memory_bind& operator |= (B bit_){flag |= static_cast<int>(bit_);return *this;}
@@ -2119,6 +2160,7 @@ F_sparse_memory_bind& on_metadata(){ flag |= b_metadata; return *this; }
 F_sparse_memory_bind& off_metadata(){ flag &= ~b_metadata; return *this; }
 };
 F_sparse_memory_bind inline operator|(F_sparse_memory_bind::B bit1_, F_sparse_memory_bind::B bit2_){F_sparse_memory_bind flags(bit1_);return flags | bit2_;}
+bool inline operator==(F_sparse_memory_bind f1_, F_sparse_memory_bind f2_) { return f1_.flag== f2_.flag; }
 
 /*	VkPipelineStageFlagBits*/
 class F_pipeline_stage {
@@ -2166,6 +2208,7 @@ F_pipeline_stage():flag(0){}
 F_pipeline_stage(B bits_):flag(static_cast<int>(bits_)){}
 F_pipeline_stage(F_pipeline_stage const& flag_):flag(flag_.flag){}
 F_pipeline_stage(std::initializer_list<B> bit_list){for (auto&& bit : bit_list){flag |= static_cast<int>(bit);}}
+operator F_pipeline_stage const &(){return *this;}
 F_pipeline_stage& operator = (F_pipeline_stage flag_){flag = flag_.flag;return *this;}
 F_pipeline_stage operator | (B bit_){return flag | static_cast<int>(bit_);}
 F_pipeline_stage& operator |= (B bit_){flag |= static_cast<int>(bit_);return *this;}
@@ -2223,6 +2266,7 @@ F_pipeline_stage& on_all_commands(){ flag |= b_all_commands; return *this; }
 F_pipeline_stage& off_all_commands(){ flag &= ~b_all_commands; return *this; }
 };
 F_pipeline_stage inline operator|(F_pipeline_stage::B bit1_, F_pipeline_stage::B bit2_){F_pipeline_stage flags(bit1_);return flags | bit2_;}
+bool inline operator==(F_pipeline_stage f1_, F_pipeline_stage f2_) { return f1_.flag== f2_.flag; }
 
 /*	VkCommandPoolCreateFlagBits*/
 class F_command_pool_create {
@@ -2240,6 +2284,7 @@ F_command_pool_create():flag(0){}
 F_command_pool_create(B bits_):flag(static_cast<int>(bits_)){}
 F_command_pool_create(F_command_pool_create const& flag_):flag(flag_.flag){}
 F_command_pool_create(std::initializer_list<B> bit_list){for (auto&& bit : bit_list){flag |= static_cast<int>(bit);}}
+operator F_command_pool_create const &(){return *this;}
 F_command_pool_create& operator = (F_command_pool_create flag_){flag = flag_.flag;return *this;}
 F_command_pool_create operator | (B bit_){return flag | static_cast<int>(bit_);}
 F_command_pool_create& operator |= (B bit_){flag |= static_cast<int>(bit_);return *this;}
@@ -2267,6 +2312,7 @@ F_command_pool_create& on_reset_command_buffer(){ flag |= b_reset_command_buffer
 F_command_pool_create& off_reset_command_buffer(){ flag &= ~b_reset_command_buffer; return *this; }
 };
 F_command_pool_create inline operator|(F_command_pool_create::B bit1_, F_command_pool_create::B bit2_){F_command_pool_create flags(bit1_);return flags | bit2_;}
+bool inline operator==(F_command_pool_create f1_, F_command_pool_create f2_) { return f1_.flag== f2_.flag; }
 
 /*	VkCommandPoolResetFlagBits*/
 class F_command_pool_reset {
@@ -2282,6 +2328,7 @@ F_command_pool_reset():flag(0){}
 F_command_pool_reset(B bits_):flag(static_cast<int>(bits_)){}
 F_command_pool_reset(F_command_pool_reset const& flag_):flag(flag_.flag){}
 F_command_pool_reset(std::initializer_list<B> bit_list){for (auto&& bit : bit_list){flag |= static_cast<int>(bit);}}
+operator F_command_pool_reset const &(){return *this;}
 F_command_pool_reset& operator = (F_command_pool_reset flag_){flag = flag_.flag;return *this;}
 F_command_pool_reset operator | (B bit_){return flag | static_cast<int>(bit_);}
 F_command_pool_reset& operator |= (B bit_){flag |= static_cast<int>(bit_);return *this;}
@@ -2307,6 +2354,7 @@ F_command_pool_reset& on_release_resources(){ flag |= b_release_resources; retur
 F_command_pool_reset& off_release_resources(){ flag &= ~b_release_resources; return *this; }
 };
 F_command_pool_reset inline operator|(F_command_pool_reset::B bit1_, F_command_pool_reset::B bit2_){F_command_pool_reset flags(bit1_);return flags | bit2_;}
+bool inline operator==(F_command_pool_reset f1_, F_command_pool_reset f2_) { return f1_.flag== f2_.flag; }
 
 /*	VkCommandBufferResetFlagBits*/
 class F_command_buffer_reset {
@@ -2322,6 +2370,7 @@ F_command_buffer_reset():flag(0){}
 F_command_buffer_reset(B bits_):flag(static_cast<int>(bits_)){}
 F_command_buffer_reset(F_command_buffer_reset const& flag_):flag(flag_.flag){}
 F_command_buffer_reset(std::initializer_list<B> bit_list){for (auto&& bit : bit_list){flag |= static_cast<int>(bit);}}
+operator F_command_buffer_reset const &(){return *this;}
 F_command_buffer_reset& operator = (F_command_buffer_reset flag_){flag = flag_.flag;return *this;}
 F_command_buffer_reset operator | (B bit_){return flag | static_cast<int>(bit_);}
 F_command_buffer_reset& operator |= (B bit_){flag |= static_cast<int>(bit_);return *this;}
@@ -2347,6 +2396,7 @@ F_command_buffer_reset& on_release_resources(){ flag |= b_release_resources; ret
 F_command_buffer_reset& off_release_resources(){ flag &= ~b_release_resources; return *this; }
 };
 F_command_buffer_reset inline operator|(F_command_buffer_reset::B bit1_, F_command_buffer_reset::B bit2_){F_command_buffer_reset flags(bit1_);return flags | bit2_;}
+bool inline operator==(F_command_buffer_reset f1_, F_command_buffer_reset f2_) { return f1_.flag== f2_.flag; }
 
 /*	VkSampleCountFlagBits*/
 class F_sample_count {
@@ -2374,6 +2424,7 @@ F_sample_count():flag(0){}
 F_sample_count(B bits_):flag(static_cast<int>(bits_)){}
 F_sample_count(F_sample_count const& flag_):flag(flag_.flag){}
 F_sample_count(std::initializer_list<B> bit_list){for (auto&& bit : bit_list){flag |= static_cast<int>(bit);}}
+operator F_sample_count const &(){return *this;}
 F_sample_count& operator = (F_sample_count flag_){flag = flag_.flag;return *this;}
 F_sample_count operator | (B bit_){return flag | static_cast<int>(bit_);}
 F_sample_count& operator |= (B bit_){flag |= static_cast<int>(bit_);return *this;}
@@ -2411,6 +2462,7 @@ F_sample_count& on_64(){ flag |= b_64; return *this; }
 F_sample_count& off_64(){ flag &= ~b_64; return *this; }
 };
 F_sample_count inline operator|(F_sample_count::B bit1_, F_sample_count::B bit2_){F_sample_count flags(bit1_);return flags | bit2_;}
+bool inline operator==(F_sample_count f1_, F_sample_count f2_) { return f1_.flag== f2_.flag; }
 
 /*	VkAttachmentDescriptionFlagBits*/
 class F_attachment_description {
@@ -2426,6 +2478,7 @@ F_attachment_description():flag(0){}
 F_attachment_description(B bits_):flag(static_cast<int>(bits_)){}
 F_attachment_description(F_attachment_description const& flag_):flag(flag_.flag){}
 F_attachment_description(std::initializer_list<B> bit_list){for (auto&& bit : bit_list){flag |= static_cast<int>(bit);}}
+operator F_attachment_description const &(){return *this;}
 F_attachment_description& operator = (F_attachment_description flag_){flag = flag_.flag;return *this;}
 F_attachment_description operator | (B bit_){return flag | static_cast<int>(bit_);}
 F_attachment_description& operator |= (B bit_){flag |= static_cast<int>(bit_);return *this;}
@@ -2451,6 +2504,7 @@ F_attachment_description& on_may_alias(){ flag |= b_may_alias; return *this; }
 F_attachment_description& off_may_alias(){ flag &= ~b_may_alias; return *this; }
 };
 F_attachment_description inline operator|(F_attachment_description::B bit1_, F_attachment_description::B bit2_){F_attachment_description flags(bit1_);return flags | bit2_;}
+bool inline operator==(F_attachment_description f1_, F_attachment_description f2_) { return f1_.flag== f2_.flag; }
 
 /*	VkStencilFaceFlagBits*/
 class F_stencil_face {
@@ -2470,6 +2524,7 @@ F_stencil_face():flag(0){}
 F_stencil_face(B bits_):flag(static_cast<int>(bits_)){}
 F_stencil_face(F_stencil_face const& flag_):flag(flag_.flag){}
 F_stencil_face(std::initializer_list<B> bit_list){for (auto&& bit : bit_list){flag |= static_cast<int>(bit);}}
+operator F_stencil_face const &(){return *this;}
 F_stencil_face& operator = (F_stencil_face flag_){flag = flag_.flag;return *this;}
 F_stencil_face operator | (B bit_){return flag | static_cast<int>(bit_);}
 F_stencil_face& operator |= (B bit_){flag |= static_cast<int>(bit_);return *this;}
@@ -2499,6 +2554,7 @@ F_stencil_face& on_vk_stencil_front_and_back(){ flag |= b_vk_stencil_front_and_b
 F_stencil_face& off_vk_stencil_front_and_back(){ flag &= ~b_vk_stencil_front_and_back; return *this; }
 };
 F_stencil_face inline operator|(F_stencil_face::B bit1_, F_stencil_face::B bit2_){F_stencil_face flags(bit1_);return flags | bit2_;}
+bool inline operator==(F_stencil_face f1_, F_stencil_face f2_) { return f1_.flag== f2_.flag; }
 
 /*	VkDescriptorPoolCreateFlagBits*/
 class F_descriptor_pool_create {
@@ -2514,6 +2570,7 @@ F_descriptor_pool_create():flag(0){}
 F_descriptor_pool_create(B bits_):flag(static_cast<int>(bits_)){}
 F_descriptor_pool_create(F_descriptor_pool_create const& flag_):flag(flag_.flag){}
 F_descriptor_pool_create(std::initializer_list<B> bit_list){for (auto&& bit : bit_list){flag |= static_cast<int>(bit);}}
+operator F_descriptor_pool_create const &(){return *this;}
 F_descriptor_pool_create& operator = (F_descriptor_pool_create flag_){flag = flag_.flag;return *this;}
 F_descriptor_pool_create operator | (B bit_){return flag | static_cast<int>(bit_);}
 F_descriptor_pool_create& operator |= (B bit_){flag |= static_cast<int>(bit_);return *this;}
@@ -2539,6 +2596,7 @@ F_descriptor_pool_create& on_free_descriptor_set(){ flag |= b_free_descriptor_se
 F_descriptor_pool_create& off_free_descriptor_set(){ flag &= ~b_free_descriptor_set; return *this; }
 };
 F_descriptor_pool_create inline operator|(F_descriptor_pool_create::B bit1_, F_descriptor_pool_create::B bit2_){F_descriptor_pool_create flags(bit1_);return flags | bit2_;}
+bool inline operator==(F_descriptor_pool_create f1_, F_descriptor_pool_create f2_) { return f1_.flag== f2_.flag; }
 
 /*	VkDependencyFlagBits*/
 class F_dependency {
@@ -2554,6 +2612,7 @@ F_dependency():flag(0){}
 F_dependency(B bits_):flag(static_cast<int>(bits_)){}
 F_dependency(F_dependency const& flag_):flag(flag_.flag){}
 F_dependency(std::initializer_list<B> bit_list){for (auto&& bit : bit_list){flag |= static_cast<int>(bit);}}
+operator F_dependency const &(){return *this;}
 F_dependency& operator = (F_dependency flag_){flag = flag_.flag;return *this;}
 F_dependency operator | (B bit_){return flag | static_cast<int>(bit_);}
 F_dependency& operator |= (B bit_){flag |= static_cast<int>(bit_);return *this;}
@@ -2579,6 +2638,7 @@ F_dependency& on_by_region(){ flag |= b_by_region; return *this; }
 F_dependency& off_by_region(){ flag &= ~b_by_region; return *this; }
 };
 F_dependency inline operator|(F_dependency::B bit1_, F_dependency::B bit2_){F_dependency flags(bit1_);return flags | bit2_;}
+bool inline operator==(F_dependency f1_, F_dependency f2_) { return f1_.flag== f2_.flag; }
 
 /*	VkDisplayPlaneAlphaFlagBitsKHR*/
 class F_display_plane_alpha_KHR {
@@ -2596,6 +2656,7 @@ F_display_plane_alpha_KHR():flag(0){}
 F_display_plane_alpha_KHR(B bits_):flag(static_cast<int>(bits_)){}
 F_display_plane_alpha_KHR(F_display_plane_alpha_KHR const& flag_):flag(flag_.flag){}
 F_display_plane_alpha_KHR(std::initializer_list<B> bit_list){for (auto&& bit : bit_list){flag |= static_cast<int>(bit);}}
+operator F_display_plane_alpha_KHR const &(){return *this;}
 F_display_plane_alpha_KHR& operator = (F_display_plane_alpha_KHR flag_){flag = flag_.flag;return *this;}
 F_display_plane_alpha_KHR operator | (B bit_){return flag | static_cast<int>(bit_);}
 F_display_plane_alpha_KHR& operator |= (B bit_){flag |= static_cast<int>(bit_);return *this;}
@@ -2627,6 +2688,7 @@ F_display_plane_alpha_KHR& on_per_pixel_premultiplied_khr(){ flag |= b_per_pixel
 F_display_plane_alpha_KHR& off_per_pixel_premultiplied_khr(){ flag &= ~b_per_pixel_premultiplied_khr; return *this; }
 };
 F_display_plane_alpha_KHR inline operator|(F_display_plane_alpha_KHR::B bit1_, F_display_plane_alpha_KHR::B bit2_){F_display_plane_alpha_KHR flags(bit1_);return flags | bit2_;}
+bool inline operator==(F_display_plane_alpha_KHR f1_, F_display_plane_alpha_KHR f2_) { return f1_.flag== f2_.flag; }
 
 /*	VkCompositeAlphaFlagBitsKHR*/
 class F_composite_alpha_KHR {
@@ -2644,6 +2706,7 @@ F_composite_alpha_KHR():flag(0){}
 F_composite_alpha_KHR(B bits_):flag(static_cast<int>(bits_)){}
 F_composite_alpha_KHR(F_composite_alpha_KHR const& flag_):flag(flag_.flag){}
 F_composite_alpha_KHR(std::initializer_list<B> bit_list){for (auto&& bit : bit_list){flag |= static_cast<int>(bit);}}
+operator F_composite_alpha_KHR const &(){return *this;}
 F_composite_alpha_KHR& operator = (F_composite_alpha_KHR flag_){flag = flag_.flag;return *this;}
 F_composite_alpha_KHR operator | (B bit_){return flag | static_cast<int>(bit_);}
 F_composite_alpha_KHR& operator |= (B bit_){flag |= static_cast<int>(bit_);return *this;}
@@ -2675,6 +2738,7 @@ F_composite_alpha_KHR& on_inherit_khr(){ flag |= b_inherit_khr; return *this; }
 F_composite_alpha_KHR& off_inherit_khr(){ flag &= ~b_inherit_khr; return *this; }
 };
 F_composite_alpha_KHR inline operator|(F_composite_alpha_KHR::B bit1_, F_composite_alpha_KHR::B bit2_){F_composite_alpha_KHR flags(bit1_);return flags | bit2_;}
+bool inline operator==(F_composite_alpha_KHR f1_, F_composite_alpha_KHR f2_) { return f1_.flag== f2_.flag; }
 
 /*	VkSurfaceTransformFlagBitsKHR*/
 class F_surface_transform_KHR {
@@ -2697,6 +2761,7 @@ F_surface_transform_KHR():flag(0){}
 F_surface_transform_KHR(B bits_):flag(static_cast<int>(bits_)){}
 F_surface_transform_KHR(F_surface_transform_KHR const& flag_):flag(flag_.flag){}
 F_surface_transform_KHR(std::initializer_list<B> bit_list){for (auto&& bit : bit_list){flag |= static_cast<int>(bit);}}
+operator F_surface_transform_KHR const &(){return *this;}
 F_surface_transform_KHR& operator = (F_surface_transform_KHR flag_){flag = flag_.flag;return *this;}
 F_surface_transform_KHR operator | (B bit_){return flag | static_cast<int>(bit_);}
 F_surface_transform_KHR& operator |= (B bit_){flag |= static_cast<int>(bit_);return *this;}
@@ -2738,6 +2803,7 @@ F_surface_transform_KHR& on_inherit_khr(){ flag |= b_inherit_khr; return *this; 
 F_surface_transform_KHR& off_inherit_khr(){ flag &= ~b_inherit_khr; return *this; }
 };
 F_surface_transform_KHR inline operator|(F_surface_transform_KHR::B bit1_, F_surface_transform_KHR::B bit2_){F_surface_transform_KHR flags(bit1_);return flags | bit2_;}
+bool inline operator==(F_surface_transform_KHR f1_, F_surface_transform_KHR f2_) { return f1_.flag== f2_.flag; }
 
 /*	VkDebugReportFlagBitsEXT*/
 class F_debug_report_EXT {
@@ -2756,6 +2822,7 @@ F_debug_report_EXT():flag(0){}
 F_debug_report_EXT(B bits_):flag(static_cast<int>(bits_)){}
 F_debug_report_EXT(F_debug_report_EXT const& flag_):flag(flag_.flag){}
 F_debug_report_EXT(std::initializer_list<B> bit_list){for (auto&& bit : bit_list){flag |= static_cast<int>(bit);}}
+operator F_debug_report_EXT const &(){return *this;}
 F_debug_report_EXT& operator = (F_debug_report_EXT flag_){flag = flag_.flag;return *this;}
 F_debug_report_EXT operator | (B bit_){return flag | static_cast<int>(bit_);}
 F_debug_report_EXT& operator |= (B bit_){flag |= static_cast<int>(bit_);return *this;}
@@ -2789,6 +2856,7 @@ F_debug_report_EXT& on_debug_ext(){ flag |= b_debug_ext; return *this; }
 F_debug_report_EXT& off_debug_ext(){ flag &= ~b_debug_ext; return *this; }
 };
 F_debug_report_EXT inline operator|(F_debug_report_EXT::B bit1_, F_debug_report_EXT::B bit2_){F_debug_report_EXT flags(bit1_);return flags | bit2_;}
+bool inline operator==(F_debug_report_EXT f1_, F_debug_report_EXT f2_) { return f1_.flag== f2_.flag; }
 
 /*	VkExternalMemoryHandleTypeFlagBitsNV*/
 class F_external_memory_handle_type_NV {
@@ -2806,6 +2874,7 @@ F_external_memory_handle_type_NV():flag(0){}
 F_external_memory_handle_type_NV(B bits_):flag(static_cast<int>(bits_)){}
 F_external_memory_handle_type_NV(F_external_memory_handle_type_NV const& flag_):flag(flag_.flag){}
 F_external_memory_handle_type_NV(std::initializer_list<B> bit_list){for (auto&& bit : bit_list){flag |= static_cast<int>(bit);}}
+operator F_external_memory_handle_type_NV const &(){return *this;}
 F_external_memory_handle_type_NV& operator = (F_external_memory_handle_type_NV flag_){flag = flag_.flag;return *this;}
 F_external_memory_handle_type_NV operator | (B bit_){return flag | static_cast<int>(bit_);}
 F_external_memory_handle_type_NV& operator |= (B bit_){flag |= static_cast<int>(bit_);return *this;}
@@ -2837,6 +2906,7 @@ F_external_memory_handle_type_NV& on_d3d11_image_kmt_nv(){ flag |= b_d3d11_image
 F_external_memory_handle_type_NV& off_d3d11_image_kmt_nv(){ flag &= ~b_d3d11_image_kmt_nv; return *this; }
 };
 F_external_memory_handle_type_NV inline operator|(F_external_memory_handle_type_NV::B bit1_, F_external_memory_handle_type_NV::B bit2_){F_external_memory_handle_type_NV flags(bit1_);return flags | bit2_;}
+bool inline operator==(F_external_memory_handle_type_NV f1_, F_external_memory_handle_type_NV f2_) { return f1_.flag== f2_.flag; }
 
 /*	VkExternalMemoryFeatureFlagBitsNV*/
 class F_external_memory_feature_NV {
@@ -2853,6 +2923,7 @@ F_external_memory_feature_NV():flag(0){}
 F_external_memory_feature_NV(B bits_):flag(static_cast<int>(bits_)){}
 F_external_memory_feature_NV(F_external_memory_feature_NV const& flag_):flag(flag_.flag){}
 F_external_memory_feature_NV(std::initializer_list<B> bit_list){for (auto&& bit : bit_list){flag |= static_cast<int>(bit);}}
+operator F_external_memory_feature_NV const &(){return *this;}
 F_external_memory_feature_NV& operator = (F_external_memory_feature_NV flag_){flag = flag_.flag;return *this;}
 F_external_memory_feature_NV operator | (B bit_){return flag | static_cast<int>(bit_);}
 F_external_memory_feature_NV& operator |= (B bit_){flag |= static_cast<int>(bit_);return *this;}
@@ -2882,6 +2953,7 @@ F_external_memory_feature_NV& on_importable_nv(){ flag |= b_importable_nv; retur
 F_external_memory_feature_NV& off_importable_nv(){ flag &= ~b_importable_nv; return *this; }
 };
 F_external_memory_feature_NV inline operator|(F_external_memory_feature_NV::B bit1_, F_external_memory_feature_NV::B bit2_){F_external_memory_feature_NV flags(bit1_);return flags | bit2_;}
+bool inline operator==(F_external_memory_feature_NV f1_, F_external_memory_feature_NV f2_) { return f1_.flag== f2_.flag; }
 
 /*	VkSubgroupFeatureFlagBits*/
 class F_subgroup_feature {
@@ -2911,6 +2983,7 @@ F_subgroup_feature():flag(0){}
 F_subgroup_feature(B bits_):flag(static_cast<int>(bits_)){}
 F_subgroup_feature(F_subgroup_feature const& flag_):flag(flag_.flag){}
 F_subgroup_feature(std::initializer_list<B> bit_list){for (auto&& bit : bit_list){flag |= static_cast<int>(bit);}}
+operator F_subgroup_feature const &(){return *this;}
 F_subgroup_feature& operator = (F_subgroup_feature flag_){flag = flag_.flag;return *this;}
 F_subgroup_feature operator | (B bit_){return flag | static_cast<int>(bit_);}
 F_subgroup_feature& operator |= (B bit_){flag |= static_cast<int>(bit_);return *this;}
@@ -2950,6 +3023,7 @@ F_subgroup_feature& on_quad(){ flag |= b_quad; return *this; }
 F_subgroup_feature& off_quad(){ flag &= ~b_quad; return *this; }
 };
 F_subgroup_feature inline operator|(F_subgroup_feature::B bit1_, F_subgroup_feature::B bit2_){F_subgroup_feature flags(bit1_);return flags | bit2_;}
+bool inline operator==(F_subgroup_feature f1_, F_subgroup_feature f2_) { return f1_.flag== f2_.flag; }
 
 /*	VkIndirectCommandsLayoutUsageFlagBitsNVX*/
 class F_indirect_commands_layout_usage_NVX {
@@ -2967,6 +3041,7 @@ F_indirect_commands_layout_usage_NVX():flag(0){}
 F_indirect_commands_layout_usage_NVX(B bits_):flag(static_cast<int>(bits_)){}
 F_indirect_commands_layout_usage_NVX(F_indirect_commands_layout_usage_NVX const& flag_):flag(flag_.flag){}
 F_indirect_commands_layout_usage_NVX(std::initializer_list<B> bit_list){for (auto&& bit : bit_list){flag |= static_cast<int>(bit);}}
+operator F_indirect_commands_layout_usage_NVX const &(){return *this;}
 F_indirect_commands_layout_usage_NVX& operator = (F_indirect_commands_layout_usage_NVX flag_){flag = flag_.flag;return *this;}
 F_indirect_commands_layout_usage_NVX operator | (B bit_){return flag | static_cast<int>(bit_);}
 F_indirect_commands_layout_usage_NVX& operator |= (B bit_){flag |= static_cast<int>(bit_);return *this;}
@@ -2998,6 +3073,7 @@ F_indirect_commands_layout_usage_NVX& on_indexed_sequences_nvx(){ flag |= b_inde
 F_indirect_commands_layout_usage_NVX& off_indexed_sequences_nvx(){ flag &= ~b_indexed_sequences_nvx; return *this; }
 };
 F_indirect_commands_layout_usage_NVX inline operator|(F_indirect_commands_layout_usage_NVX::B bit1_, F_indirect_commands_layout_usage_NVX::B bit2_){F_indirect_commands_layout_usage_NVX flags(bit1_);return flags | bit2_;}
+bool inline operator==(F_indirect_commands_layout_usage_NVX f1_, F_indirect_commands_layout_usage_NVX f2_) { return f1_.flag== f2_.flag; }
 
 /*	VkObjectEntryUsageFlagBitsNVX*/
 class F_object_entry_usage_NVX {
@@ -3013,6 +3089,7 @@ F_object_entry_usage_NVX():flag(0){}
 F_object_entry_usage_NVX(B bits_):flag(static_cast<int>(bits_)){}
 F_object_entry_usage_NVX(F_object_entry_usage_NVX const& flag_):flag(flag_.flag){}
 F_object_entry_usage_NVX(std::initializer_list<B> bit_list){for (auto&& bit : bit_list){flag |= static_cast<int>(bit);}}
+operator F_object_entry_usage_NVX const &(){return *this;}
 F_object_entry_usage_NVX& operator = (F_object_entry_usage_NVX flag_){flag = flag_.flag;return *this;}
 F_object_entry_usage_NVX operator | (B bit_){return flag | static_cast<int>(bit_);}
 F_object_entry_usage_NVX& operator |= (B bit_){flag |= static_cast<int>(bit_);return *this;}
@@ -3040,6 +3117,7 @@ F_object_entry_usage_NVX& on_compute_nvx(){ flag |= b_compute_nvx; return *this;
 F_object_entry_usage_NVX& off_compute_nvx(){ flag &= ~b_compute_nvx; return *this; }
 };
 F_object_entry_usage_NVX inline operator|(F_object_entry_usage_NVX::B bit1_, F_object_entry_usage_NVX::B bit2_){F_object_entry_usage_NVX flags(bit1_);return flags | bit2_;}
+bool inline operator==(F_object_entry_usage_NVX f1_, F_object_entry_usage_NVX f2_) { return f1_.flag== f2_.flag; }
 
 /*	VkDescriptorSetLayoutCreateFlagBits*/
 using F_descriptor_set_layout_create = 
@@ -3064,6 +3142,7 @@ F_external_memory_handle_type():flag(0){}
 F_external_memory_handle_type(B bits_):flag(static_cast<int>(bits_)){}
 F_external_memory_handle_type(F_external_memory_handle_type const& flag_):flag(flag_.flag){}
 F_external_memory_handle_type(std::initializer_list<B> bit_list){for (auto&& bit : bit_list){flag |= static_cast<int>(bit);}}
+operator F_external_memory_handle_type const &(){return *this;}
 F_external_memory_handle_type& operator = (F_external_memory_handle_type flag_){flag = flag_.flag;return *this;}
 F_external_memory_handle_type operator | (B bit_){return flag | static_cast<int>(bit_);}
 F_external_memory_handle_type& operator |= (B bit_){flag |= static_cast<int>(bit_);return *this;}
@@ -3101,6 +3180,7 @@ F_external_memory_handle_type& on_d3d12_resource(){ flag |= b_d3d12_resource; re
 F_external_memory_handle_type& off_d3d12_resource(){ flag &= ~b_d3d12_resource; return *this; }
 };
 F_external_memory_handle_type inline operator|(F_external_memory_handle_type::B bit1_, F_external_memory_handle_type::B bit2_){F_external_memory_handle_type flags(bit1_);return flags | bit2_;}
+bool inline operator==(F_external_memory_handle_type f1_, F_external_memory_handle_type f2_) { return f1_.flag== f2_.flag; }
 
 /*	VkExternalMemoryFeatureFlagBits*/
 class F_external_memory_feature {
@@ -3117,6 +3197,7 @@ F_external_memory_feature():flag(0){}
 F_external_memory_feature(B bits_):flag(static_cast<int>(bits_)){}
 F_external_memory_feature(F_external_memory_feature const& flag_):flag(flag_.flag){}
 F_external_memory_feature(std::initializer_list<B> bit_list){for (auto&& bit : bit_list){flag |= static_cast<int>(bit);}}
+operator F_external_memory_feature const &(){return *this;}
 F_external_memory_feature& operator = (F_external_memory_feature flag_){flag = flag_.flag;return *this;}
 F_external_memory_feature operator | (B bit_){return flag | static_cast<int>(bit_);}
 F_external_memory_feature& operator |= (B bit_){flag |= static_cast<int>(bit_);return *this;}
@@ -3146,6 +3227,7 @@ F_external_memory_feature& on_importable(){ flag |= b_importable; return *this; 
 F_external_memory_feature& off_importable(){ flag &= ~b_importable; return *this; }
 };
 F_external_memory_feature inline operator|(F_external_memory_feature::B bit1_, F_external_memory_feature::B bit2_){F_external_memory_feature flags(bit1_);return flags | bit2_;}
+bool inline operator==(F_external_memory_feature f1_, F_external_memory_feature f2_) { return f1_.flag== f2_.flag; }
 
 /*	VkExternalSemaphoreHandleTypeFlagBits*/
 class F_external_semaphore_handle_type {
@@ -3164,6 +3246,7 @@ F_external_semaphore_handle_type():flag(0){}
 F_external_semaphore_handle_type(B bits_):flag(static_cast<int>(bits_)){}
 F_external_semaphore_handle_type(F_external_semaphore_handle_type const& flag_):flag(flag_.flag){}
 F_external_semaphore_handle_type(std::initializer_list<B> bit_list){for (auto&& bit : bit_list){flag |= static_cast<int>(bit);}}
+operator F_external_semaphore_handle_type const &(){return *this;}
 F_external_semaphore_handle_type& operator = (F_external_semaphore_handle_type flag_){flag = flag_.flag;return *this;}
 F_external_semaphore_handle_type operator | (B bit_){return flag | static_cast<int>(bit_);}
 F_external_semaphore_handle_type& operator |= (B bit_){flag |= static_cast<int>(bit_);return *this;}
@@ -3197,6 +3280,7 @@ F_external_semaphore_handle_type& on_sync_fd(){ flag |= b_sync_fd; return *this;
 F_external_semaphore_handle_type& off_sync_fd(){ flag &= ~b_sync_fd; return *this; }
 };
 F_external_semaphore_handle_type inline operator|(F_external_semaphore_handle_type::B bit1_, F_external_semaphore_handle_type::B bit2_){F_external_semaphore_handle_type flags(bit1_);return flags | bit2_;}
+bool inline operator==(F_external_semaphore_handle_type f1_, F_external_semaphore_handle_type f2_) { return f1_.flag== f2_.flag; }
 
 /*	VkExternalSemaphoreFeatureFlagBits*/
 class F_external_semaphore_feature {
@@ -3212,6 +3296,7 @@ F_external_semaphore_feature():flag(0){}
 F_external_semaphore_feature(B bits_):flag(static_cast<int>(bits_)){}
 F_external_semaphore_feature(F_external_semaphore_feature const& flag_):flag(flag_.flag){}
 F_external_semaphore_feature(std::initializer_list<B> bit_list){for (auto&& bit : bit_list){flag |= static_cast<int>(bit);}}
+operator F_external_semaphore_feature const &(){return *this;}
 F_external_semaphore_feature& operator = (F_external_semaphore_feature flag_){flag = flag_.flag;return *this;}
 F_external_semaphore_feature operator | (B bit_){return flag | static_cast<int>(bit_);}
 F_external_semaphore_feature& operator |= (B bit_){flag |= static_cast<int>(bit_);return *this;}
@@ -3239,6 +3324,7 @@ F_external_semaphore_feature& on_importable(){ flag |= b_importable; return *thi
 F_external_semaphore_feature& off_importable(){ flag &= ~b_importable; return *this; }
 };
 F_external_semaphore_feature inline operator|(F_external_semaphore_feature::B bit1_, F_external_semaphore_feature::B bit2_){F_external_semaphore_feature flags(bit1_);return flags | bit2_;}
+bool inline operator==(F_external_semaphore_feature f1_, F_external_semaphore_feature f2_) { return f1_.flag== f2_.flag; }
 
 /*	VkSemaphoreImportFlagBits*/
 class F_semaphore_import {
@@ -3253,6 +3339,7 @@ F_semaphore_import():flag(0){}
 F_semaphore_import(B bits_):flag(static_cast<int>(bits_)){}
 F_semaphore_import(F_semaphore_import const& flag_):flag(flag_.flag){}
 F_semaphore_import(std::initializer_list<B> bit_list){for (auto&& bit : bit_list){flag |= static_cast<int>(bit);}}
+operator F_semaphore_import const &(){return *this;}
 F_semaphore_import& operator = (F_semaphore_import flag_){flag = flag_.flag;return *this;}
 F_semaphore_import operator | (B bit_){return flag | static_cast<int>(bit_);}
 F_semaphore_import& operator |= (B bit_){flag |= static_cast<int>(bit_);return *this;}
@@ -3278,6 +3365,7 @@ F_semaphore_import& on_temporary(){ flag |= b_temporary; return *this; }
 F_semaphore_import& off_temporary(){ flag &= ~b_temporary; return *this; }
 };
 F_semaphore_import inline operator|(F_semaphore_import::B bit1_, F_semaphore_import::B bit2_){F_semaphore_import flags(bit1_);return flags | bit2_;}
+bool inline operator==(F_semaphore_import f1_, F_semaphore_import f2_) { return f1_.flag== f2_.flag; }
 
 /*	VkExternalFenceHandleTypeFlagBits*/
 class F_external_fence_handle_type {
@@ -3295,6 +3383,7 @@ F_external_fence_handle_type():flag(0){}
 F_external_fence_handle_type(B bits_):flag(static_cast<int>(bits_)){}
 F_external_fence_handle_type(F_external_fence_handle_type const& flag_):flag(flag_.flag){}
 F_external_fence_handle_type(std::initializer_list<B> bit_list){for (auto&& bit : bit_list){flag |= static_cast<int>(bit);}}
+operator F_external_fence_handle_type const &(){return *this;}
 F_external_fence_handle_type& operator = (F_external_fence_handle_type flag_){flag = flag_.flag;return *this;}
 F_external_fence_handle_type operator | (B bit_){return flag | static_cast<int>(bit_);}
 F_external_fence_handle_type& operator |= (B bit_){flag |= static_cast<int>(bit_);return *this;}
@@ -3326,6 +3415,7 @@ F_external_fence_handle_type& on_sync_fd(){ flag |= b_sync_fd; return *this; }
 F_external_fence_handle_type& off_sync_fd(){ flag &= ~b_sync_fd; return *this; }
 };
 F_external_fence_handle_type inline operator|(F_external_fence_handle_type::B bit1_, F_external_fence_handle_type::B bit2_){F_external_fence_handle_type flags(bit1_);return flags | bit2_;}
+bool inline operator==(F_external_fence_handle_type f1_, F_external_fence_handle_type f2_) { return f1_.flag== f2_.flag; }
 
 /*	VkExternalFenceFeatureFlagBits*/
 class F_external_fence_feature {
@@ -3341,6 +3431,7 @@ F_external_fence_feature():flag(0){}
 F_external_fence_feature(B bits_):flag(static_cast<int>(bits_)){}
 F_external_fence_feature(F_external_fence_feature const& flag_):flag(flag_.flag){}
 F_external_fence_feature(std::initializer_list<B> bit_list){for (auto&& bit : bit_list){flag |= static_cast<int>(bit);}}
+operator F_external_fence_feature const &(){return *this;}
 F_external_fence_feature& operator = (F_external_fence_feature flag_){flag = flag_.flag;return *this;}
 F_external_fence_feature operator | (B bit_){return flag | static_cast<int>(bit_);}
 F_external_fence_feature& operator |= (B bit_){flag |= static_cast<int>(bit_);return *this;}
@@ -3368,6 +3459,7 @@ F_external_fence_feature& on_importable(){ flag |= b_importable; return *this; }
 F_external_fence_feature& off_importable(){ flag &= ~b_importable; return *this; }
 };
 F_external_fence_feature inline operator|(F_external_fence_feature::B bit1_, F_external_fence_feature::B bit2_){F_external_fence_feature flags(bit1_);return flags | bit2_;}
+bool inline operator==(F_external_fence_feature f1_, F_external_fence_feature f2_) { return f1_.flag== f2_.flag; }
 
 /*	VkFenceImportFlagBits*/
 class F_fence_import {
@@ -3382,6 +3474,7 @@ F_fence_import():flag(0){}
 F_fence_import(B bits_):flag(static_cast<int>(bits_)){}
 F_fence_import(F_fence_import const& flag_):flag(flag_.flag){}
 F_fence_import(std::initializer_list<B> bit_list){for (auto&& bit : bit_list){flag |= static_cast<int>(bit);}}
+operator F_fence_import const &(){return *this;}
 F_fence_import& operator = (F_fence_import flag_){flag = flag_.flag;return *this;}
 F_fence_import operator | (B bit_){return flag | static_cast<int>(bit_);}
 F_fence_import& operator |= (B bit_){flag |= static_cast<int>(bit_);return *this;}
@@ -3407,6 +3500,7 @@ F_fence_import& on_temporary(){ flag |= b_temporary; return *this; }
 F_fence_import& off_temporary(){ flag &= ~b_temporary; return *this; }
 };
 F_fence_import inline operator|(F_fence_import::B bit1_, F_fence_import::B bit2_){F_fence_import flags(bit1_);return flags | bit2_;}
+bool inline operator==(F_fence_import f1_, F_fence_import f2_) { return f1_.flag== f2_.flag; }
 
 /*	VkSurfaceCounterFlagBitsEXT*/
 class F_surface_counter_EXT {
@@ -3421,6 +3515,7 @@ F_surface_counter_EXT():flag(0){}
 F_surface_counter_EXT(B bits_):flag(static_cast<int>(bits_)){}
 F_surface_counter_EXT(F_surface_counter_EXT const& flag_):flag(flag_.flag){}
 F_surface_counter_EXT(std::initializer_list<B> bit_list){for (auto&& bit : bit_list){flag |= static_cast<int>(bit);}}
+operator F_surface_counter_EXT const &(){return *this;}
 F_surface_counter_EXT& operator = (F_surface_counter_EXT flag_){flag = flag_.flag;return *this;}
 F_surface_counter_EXT operator | (B bit_){return flag | static_cast<int>(bit_);}
 F_surface_counter_EXT& operator |= (B bit_){flag |= static_cast<int>(bit_);return *this;}
@@ -3446,6 +3541,7 @@ F_surface_counter_EXT& on_vblank_ext(){ flag |= b_vblank_ext; return *this; }
 F_surface_counter_EXT& off_vblank_ext(){ flag &= ~b_vblank_ext; return *this; }
 };
 F_surface_counter_EXT inline operator|(F_surface_counter_EXT::B bit1_, F_surface_counter_EXT::B bit2_){F_surface_counter_EXT flags(bit1_);return flags | bit2_;}
+bool inline operator==(F_surface_counter_EXT f1_, F_surface_counter_EXT f2_) { return f1_.flag== f2_.flag; }
 
 /*	VkPeerMemoryFeatureFlagBits*/
 class F_peer_memory_feature {
@@ -3467,6 +3563,7 @@ F_peer_memory_feature():flag(0){}
 F_peer_memory_feature(B bits_):flag(static_cast<int>(bits_)){}
 F_peer_memory_feature(F_peer_memory_feature const& flag_):flag(flag_.flag){}
 F_peer_memory_feature(std::initializer_list<B> bit_list){for (auto&& bit : bit_list){flag |= static_cast<int>(bit);}}
+operator F_peer_memory_feature const &(){return *this;}
 F_peer_memory_feature& operator = (F_peer_memory_feature flag_){flag = flag_.flag;return *this;}
 F_peer_memory_feature operator | (B bit_){return flag | static_cast<int>(bit_);}
 F_peer_memory_feature& operator |= (B bit_){flag |= static_cast<int>(bit_);return *this;}
@@ -3498,6 +3595,7 @@ F_peer_memory_feature& on_generic_dst(){ flag |= b_generic_dst; return *this; }
 F_peer_memory_feature& off_generic_dst(){ flag &= ~b_generic_dst; return *this; }
 };
 F_peer_memory_feature inline operator|(F_peer_memory_feature::B bit1_, F_peer_memory_feature::B bit2_){F_peer_memory_feature flags(bit1_);return flags | bit2_;}
+bool inline operator==(F_peer_memory_feature f1_, F_peer_memory_feature f2_) { return f1_.flag== f2_.flag; }
 
 /*	VkMemoryAllocateFlagBits*/
 class F_memory_allocate {
@@ -3513,6 +3611,7 @@ F_memory_allocate():flag(0){}
 F_memory_allocate(B bits_):flag(static_cast<int>(bits_)){}
 F_memory_allocate(F_memory_allocate const& flag_):flag(flag_.flag){}
 F_memory_allocate(std::initializer_list<B> bit_list){for (auto&& bit : bit_list){flag |= static_cast<int>(bit);}}
+operator F_memory_allocate const &(){return *this;}
 F_memory_allocate& operator = (F_memory_allocate flag_){flag = flag_.flag;return *this;}
 F_memory_allocate operator | (B bit_){return flag | static_cast<int>(bit_);}
 F_memory_allocate& operator |= (B bit_){flag |= static_cast<int>(bit_);return *this;}
@@ -3538,6 +3637,7 @@ F_memory_allocate& on_device_mask(){ flag |= b_device_mask; return *this; }
 F_memory_allocate& off_device_mask(){ flag &= ~b_device_mask; return *this; }
 };
 F_memory_allocate inline operator|(F_memory_allocate::B bit1_, F_memory_allocate::B bit2_){F_memory_allocate flags(bit1_);return flags | bit2_;}
+bool inline operator==(F_memory_allocate f1_, F_memory_allocate f2_) { return f1_.flag== f2_.flag; }
 
 /*	VkDeviceGroupPresentModeFlagBitsKHR*/
 class F_device_group_present_mode_KHR {
@@ -3559,6 +3659,7 @@ F_device_group_present_mode_KHR():flag(0){}
 F_device_group_present_mode_KHR(B bits_):flag(static_cast<int>(bits_)){}
 F_device_group_present_mode_KHR(F_device_group_present_mode_KHR const& flag_):flag(flag_.flag){}
 F_device_group_present_mode_KHR(std::initializer_list<B> bit_list){for (auto&& bit : bit_list){flag |= static_cast<int>(bit);}}
+operator F_device_group_present_mode_KHR const &(){return *this;}
 F_device_group_present_mode_KHR& operator = (F_device_group_present_mode_KHR flag_){flag = flag_.flag;return *this;}
 F_device_group_present_mode_KHR operator | (B bit_){return flag | static_cast<int>(bit_);}
 F_device_group_present_mode_KHR& operator |= (B bit_){flag |= static_cast<int>(bit_);return *this;}
@@ -3590,6 +3691,7 @@ F_device_group_present_mode_KHR& on_local_multi_device_khr(){ flag |= b_local_mu
 F_device_group_present_mode_KHR& off_local_multi_device_khr(){ flag &= ~b_local_multi_device_khr; return *this; }
 };
 F_device_group_present_mode_KHR inline operator|(F_device_group_present_mode_KHR::B bit1_, F_device_group_present_mode_KHR::B bit2_){F_device_group_present_mode_KHR flags(bit1_);return flags | bit2_;}
+bool inline operator==(F_device_group_present_mode_KHR f1_, F_device_group_present_mode_KHR f2_) { return f1_.flag== f2_.flag; }
 
 /*	VkSwapchainCreateFlagBitsKHR*/
 using F_swapchain_create_KHR = 
@@ -3615,6 +3717,7 @@ F_debug_utils_message_severity_EXT():flag(0){}
 F_debug_utils_message_severity_EXT(B bits_):flag(static_cast<int>(bits_)){}
 F_debug_utils_message_severity_EXT(F_debug_utils_message_severity_EXT const& flag_):flag(flag_.flag){}
 F_debug_utils_message_severity_EXT(std::initializer_list<B> bit_list){for (auto&& bit : bit_list){flag |= static_cast<int>(bit);}}
+operator F_debug_utils_message_severity_EXT const &(){return *this;}
 F_debug_utils_message_severity_EXT& operator = (F_debug_utils_message_severity_EXT flag_){flag = flag_.flag;return *this;}
 F_debug_utils_message_severity_EXT operator | (B bit_){return flag | static_cast<int>(bit_);}
 F_debug_utils_message_severity_EXT& operator |= (B bit_){flag |= static_cast<int>(bit_);return *this;}
@@ -3646,6 +3749,7 @@ F_debug_utils_message_severity_EXT& on_error_ext(){ flag |= b_error_ext; return 
 F_debug_utils_message_severity_EXT& off_error_ext(){ flag &= ~b_error_ext; return *this; }
 };
 F_debug_utils_message_severity_EXT inline operator|(F_debug_utils_message_severity_EXT::B bit1_, F_debug_utils_message_severity_EXT::B bit2_){F_debug_utils_message_severity_EXT flags(bit1_);return flags | bit2_;}
+bool inline operator==(F_debug_utils_message_severity_EXT f1_, F_debug_utils_message_severity_EXT f2_) { return f1_.flag== f2_.flag; }
 
 /*	VkDebugUtilsMessageTypeFlagBitsEXT*/
 class F_debug_utils_message_type_EXT {
@@ -3662,6 +3766,7 @@ F_debug_utils_message_type_EXT():flag(0){}
 F_debug_utils_message_type_EXT(B bits_):flag(static_cast<int>(bits_)){}
 F_debug_utils_message_type_EXT(F_debug_utils_message_type_EXT const& flag_):flag(flag_.flag){}
 F_debug_utils_message_type_EXT(std::initializer_list<B> bit_list){for (auto&& bit : bit_list){flag |= static_cast<int>(bit);}}
+operator F_debug_utils_message_type_EXT const &(){return *this;}
 F_debug_utils_message_type_EXT& operator = (F_debug_utils_message_type_EXT flag_){flag = flag_.flag;return *this;}
 F_debug_utils_message_type_EXT operator | (B bit_){return flag | static_cast<int>(bit_);}
 F_debug_utils_message_type_EXT& operator |= (B bit_){flag |= static_cast<int>(bit_);return *this;}
@@ -3691,6 +3796,7 @@ F_debug_utils_message_type_EXT& on_performance_ext(){ flag |= b_performance_ext;
 F_debug_utils_message_type_EXT& off_performance_ext(){ flag &= ~b_performance_ext; return *this; }
 };
 F_debug_utils_message_type_EXT inline operator|(F_debug_utils_message_type_EXT::B bit1_, F_debug_utils_message_type_EXT::B bit2_){F_debug_utils_message_type_EXT flags(bit1_);return flags | bit2_;}
+bool inline operator==(F_debug_utils_message_type_EXT f1_, F_debug_utils_message_type_EXT f2_) { return f1_.flag== f2_.flag; }
 
 /*	VkDescriptorBindingFlagBitsEXT*/
 class F_descriptor_binding_EXT {
@@ -3708,6 +3814,7 @@ F_descriptor_binding_EXT():flag(0){}
 F_descriptor_binding_EXT(B bits_):flag(static_cast<int>(bits_)){}
 F_descriptor_binding_EXT(F_descriptor_binding_EXT const& flag_):flag(flag_.flag){}
 F_descriptor_binding_EXT(std::initializer_list<B> bit_list){for (auto&& bit : bit_list){flag |= static_cast<int>(bit);}}
+operator F_descriptor_binding_EXT const &(){return *this;}
 F_descriptor_binding_EXT& operator = (F_descriptor_binding_EXT flag_){flag = flag_.flag;return *this;}
 F_descriptor_binding_EXT operator | (B bit_){return flag | static_cast<int>(bit_);}
 F_descriptor_binding_EXT& operator |= (B bit_){flag |= static_cast<int>(bit_);return *this;}
@@ -3739,6 +3846,7 @@ F_descriptor_binding_EXT& on_variable_descriptor_count_ext(){ flag |= b_variable
 F_descriptor_binding_EXT& off_variable_descriptor_count_ext(){ flag &= ~b_variable_descriptor_count_ext; return *this; }
 };
 F_descriptor_binding_EXT inline operator|(F_descriptor_binding_EXT::B bit1_, F_descriptor_binding_EXT::B bit2_){F_descriptor_binding_EXT flags(bit1_);return flags | bit2_;}
+bool inline operator==(F_descriptor_binding_EXT f1_, F_descriptor_binding_EXT f2_) { return f1_.flag== f2_.flag; }
 
 /*	VkConditionalRenderingFlagBitsEXT*/
 class F_conditional_rendering_EXT {
@@ -3753,6 +3861,7 @@ F_conditional_rendering_EXT():flag(0){}
 F_conditional_rendering_EXT(B bits_):flag(static_cast<int>(bits_)){}
 F_conditional_rendering_EXT(F_conditional_rendering_EXT const& flag_):flag(flag_.flag){}
 F_conditional_rendering_EXT(std::initializer_list<B> bit_list){for (auto&& bit : bit_list){flag |= static_cast<int>(bit);}}
+operator F_conditional_rendering_EXT const &(){return *this;}
 F_conditional_rendering_EXT& operator = (F_conditional_rendering_EXT flag_){flag = flag_.flag;return *this;}
 F_conditional_rendering_EXT operator | (B bit_){return flag | static_cast<int>(bit_);}
 F_conditional_rendering_EXT& operator |= (B bit_){flag |= static_cast<int>(bit_);return *this;}
@@ -3778,6 +3887,7 @@ F_conditional_rendering_EXT& on_inverted_ext(){ flag |= b_inverted_ext; return *
 F_conditional_rendering_EXT& off_inverted_ext(){ flag &= ~b_inverted_ext; return *this; }
 };
 F_conditional_rendering_EXT inline operator|(F_conditional_rendering_EXT::B bit1_, F_conditional_rendering_EXT::B bit2_){F_conditional_rendering_EXT flags(bit1_);return flags | bit2_;}
+bool inline operator==(F_conditional_rendering_EXT f1_, F_conditional_rendering_EXT f2_) { return f1_.flag== f2_.flag; }
 
 /*	VkGeometryInstanceFlagBitsNVX*/
 class F_geometry_instance_NVX {
@@ -3795,6 +3905,7 @@ F_geometry_instance_NVX():flag(0){}
 F_geometry_instance_NVX(B bits_):flag(static_cast<int>(bits_)){}
 F_geometry_instance_NVX(F_geometry_instance_NVX const& flag_):flag(flag_.flag){}
 F_geometry_instance_NVX(std::initializer_list<B> bit_list){for (auto&& bit : bit_list){flag |= static_cast<int>(bit);}}
+operator F_geometry_instance_NVX const &(){return *this;}
 F_geometry_instance_NVX& operator = (F_geometry_instance_NVX flag_){flag = flag_.flag;return *this;}
 F_geometry_instance_NVX operator | (B bit_){return flag | static_cast<int>(bit_);}
 F_geometry_instance_NVX& operator |= (B bit_){flag |= static_cast<int>(bit_);return *this;}
@@ -3826,6 +3937,7 @@ F_geometry_instance_NVX& on_force_no_opaque_nvx(){ flag |= b_force_no_opaque_nvx
 F_geometry_instance_NVX& off_force_no_opaque_nvx(){ flag &= ~b_force_no_opaque_nvx; return *this; }
 };
 F_geometry_instance_NVX inline operator|(F_geometry_instance_NVX::B bit1_, F_geometry_instance_NVX::B bit2_){F_geometry_instance_NVX flags(bit1_);return flags | bit2_;}
+bool inline operator==(F_geometry_instance_NVX f1_, F_geometry_instance_NVX f2_) { return f1_.flag== f2_.flag; }
 
 /*	VkGeometryFlagBitsNVX*/
 class F_geometry_NVX {
@@ -3841,6 +3953,7 @@ F_geometry_NVX():flag(0){}
 F_geometry_NVX(B bits_):flag(static_cast<int>(bits_)){}
 F_geometry_NVX(F_geometry_NVX const& flag_):flag(flag_.flag){}
 F_geometry_NVX(std::initializer_list<B> bit_list){for (auto&& bit : bit_list){flag |= static_cast<int>(bit);}}
+operator F_geometry_NVX const &(){return *this;}
 F_geometry_NVX& operator = (F_geometry_NVX flag_){flag = flag_.flag;return *this;}
 F_geometry_NVX operator | (B bit_){return flag | static_cast<int>(bit_);}
 F_geometry_NVX& operator |= (B bit_){flag |= static_cast<int>(bit_);return *this;}
@@ -3868,6 +3981,7 @@ F_geometry_NVX& on_no_duplicate_any_hit_invocation_nvx(){ flag |= b_no_duplicate
 F_geometry_NVX& off_no_duplicate_any_hit_invocation_nvx(){ flag &= ~b_no_duplicate_any_hit_invocation_nvx; return *this; }
 };
 F_geometry_NVX inline operator|(F_geometry_NVX::B bit1_, F_geometry_NVX::B bit2_){F_geometry_NVX flags(bit1_);return flags | bit2_;}
+bool inline operator==(F_geometry_NVX f1_, F_geometry_NVX f2_) { return f1_.flag== f2_.flag; }
 
 /*	VkBuildAccelerationStructureFlagBitsNVX*/
 class F_build_acceleration_structure_NVX {
@@ -3886,6 +4000,7 @@ F_build_acceleration_structure_NVX():flag(0){}
 F_build_acceleration_structure_NVX(B bits_):flag(static_cast<int>(bits_)){}
 F_build_acceleration_structure_NVX(F_build_acceleration_structure_NVX const& flag_):flag(flag_.flag){}
 F_build_acceleration_structure_NVX(std::initializer_list<B> bit_list){for (auto&& bit : bit_list){flag |= static_cast<int>(bit);}}
+operator F_build_acceleration_structure_NVX const &(){return *this;}
 F_build_acceleration_structure_NVX& operator = (F_build_acceleration_structure_NVX flag_){flag = flag_.flag;return *this;}
 F_build_acceleration_structure_NVX operator | (B bit_){return flag | static_cast<int>(bit_);}
 F_build_acceleration_structure_NVX& operator |= (B bit_){flag |= static_cast<int>(bit_);return *this;}
@@ -3919,6 +4034,9 @@ F_build_acceleration_structure_NVX& on_low_memory_nvx(){ flag |= b_low_memory_nv
 F_build_acceleration_structure_NVX& off_low_memory_nvx(){ flag &= ~b_low_memory_nvx; return *this; }
 };
 F_build_acceleration_structure_NVX inline operator|(F_build_acceleration_structure_NVX::B bit1_, F_build_acceleration_structure_NVX::B bit2_){F_build_acceleration_structure_NVX flags(bit1_);return flags | bit2_;}
+bool inline operator==(F_build_acceleration_structure_NVX f1_, F_build_acceleration_structure_NVX f2_) { return f1_.flag== f2_.flag; }
+
+/*------------------ alias ----------------*/
 
 /*	VkPhysicalDeviceFeatures2KHR
 */
@@ -4239,6 +4357,7 @@ struct		S_offset_2d{
 	int32_t x;
 	int32_t y;
 };
+
 /*	VkOffset3D
 */
 struct		S_offset_3d{
@@ -4246,12 +4365,14 @@ struct		S_offset_3d{
 	int32_t y;
 	int32_t z;
 };
+
 /*	VkExtent2D
 */
 struct		S_extent_2d{
 	uint32_t width;
 	uint32_t height;
 };
+
 /*	VkExtent3D
 */
 struct		S_extent_3d{
@@ -4259,6 +4380,7 @@ struct		S_extent_3d{
 	uint32_t height;
 	uint32_t depth;
 };
+
 /*	VkViewport
 */
 struct		S_viewport{
@@ -4269,6 +4391,7 @@ struct		S_viewport{
 	float minDepth;
 	float maxDepth;
 };
+
 /*	VkComponentMapping
 */
 struct		S_component_mapping{
@@ -4277,6 +4400,7 @@ struct		S_component_mapping{
 	E_component_swizzle b;
 	E_component_swizzle a;
 };
+
 /*	VkExtensionProperties
 (returnedonly)
 */
@@ -4284,6 +4408,7 @@ struct		S_extension_properties{
 	char extensionName[VK_MAX_EXTENSION_NAME_SIZE];
 	uint32_t specVersion;
 };
+
 /*	VkLayerProperties
 (returnedonly)
 */
@@ -4293,6 +4418,7 @@ struct		S_layer_properties{
 	uint32_t implementationVersion;
 	char description[VK_MAX_DESCRIPTION_SIZE];
 };
+
 /*	VkAllocationCallbacks
 */
 struct		S_allocation_callbacks{
@@ -4303,6 +4429,7 @@ struct		S_allocation_callbacks{
 	PFN_vkInternalAllocationNotification pfnInternalAllocation;
 	PFN_vkInternalFreeNotification pfnInternalFree;
 };
+
 /*	VkMemoryRequirements
 (returnedonly)
 */
@@ -4311,6 +4438,7 @@ struct		S_memory_requirements{
 	VkDeviceSize alignment;
 	uint32_t memoryTypeBits;
 };
+
 /*	VkMemoryType
 (returnedonly)
 */
@@ -4318,6 +4446,7 @@ struct		S_memory_type{
 	F_memory_property propertyFlags;
 	uint32_t heapIndex;
 };
+
 /*	VkMemoryHeap
 (returnedonly)
 */
@@ -4325,6 +4454,7 @@ struct		S_memory_heap{
 	VkDeviceSize size;
 	F_memory_heap flags;
 };
+
 /*	VkFormatProperties
 (returnedonly)
 */
@@ -4333,6 +4463,7 @@ struct		S_format_properties{
 	F_format_feature optimalTilingFeatures;
 	F_format_feature bufferFeatures;
 };
+
 /*	VkDescriptorBufferInfo
 */
 struct		S_descriptor_buffer_info{
@@ -4340,6 +4471,7 @@ struct		S_descriptor_buffer_info{
 	VkDeviceSize offset;
 	VkDeviceSize range;
 };
+
 /*	VkDescriptorImageInfo
 */
 struct		S_descriptor_image_info{
@@ -4347,6 +4479,7 @@ struct		S_descriptor_image_info{
 	VkImageView imageView;
 	E_image_layout imageLayout;
 };
+
 /*	VkImageSubresource
 */
 struct		S_image_subresource{
@@ -4354,6 +4487,7 @@ struct		S_image_subresource{
 	uint32_t mipLevel;
 	uint32_t arrayLayer;
 };
+
 /*	VkImageSubresourceLayers
 */
 struct		S_image_subresource_layers{
@@ -4362,6 +4496,7 @@ struct		S_image_subresource_layers{
 	uint32_t baseArrayLayer;
 	uint32_t layerCount;
 };
+
 /*	VkImageSubresourceRange
 */
 struct		S_image_subresource_range{
@@ -4371,6 +4506,7 @@ struct		S_image_subresource_range{
 	uint32_t baseArrayLayer;
 	uint32_t layerCount;
 };
+
 /*	VkSubresourceLayout
 (returnedonly)
 */
@@ -4381,6 +4517,7 @@ struct		S_subresource_layout{
 	VkDeviceSize arrayPitch;
 	VkDeviceSize depthPitch;
 };
+
 /*	VkBufferCopy
 */
 struct		S_buffer_copy{
@@ -4388,6 +4525,7 @@ struct		S_buffer_copy{
 	VkDeviceSize dstOffset;
 	VkDeviceSize size;
 };
+
 /*	VkSparseMemoryBind
 */
 struct		S_sparse_memory_bind{
@@ -4397,6 +4535,7 @@ struct		S_sparse_memory_bind{
 	VkDeviceSize memoryOffset;
 	F_sparse_memory_bind flags;
 };
+
 /*	VkDescriptorSetLayoutBinding
 */
 struct		S_descriptor_set_layout_binding{
@@ -4406,12 +4545,14 @@ struct		S_descriptor_set_layout_binding{
 	F_shader_stage stageFlags;
 	const VkSampler * pImmutableSamplers;
 };
+
 /*	VkDescriptorPoolSize
 */
 struct		S_descriptor_pool_size{
 	E_descriptor_type type;
 	uint32_t descriptorCount;
 };
+
 /*	VkSpecializationMapEntry
 */
 struct		S_specialization_map_entry{
@@ -4419,6 +4560,7 @@ struct		S_specialization_map_entry{
 	uint32_t offset;
 	size_t size;
 };
+
 /*	VkVertexInputBindingDescription
 */
 struct		S_vertex_input_binding_description{
@@ -4426,6 +4568,7 @@ struct		S_vertex_input_binding_description{
 	uint32_t stride;
 	E_vertex_input_rate inputRate;
 };
+
 /*	VkVertexInputAttributeDescription
 */
 struct		S_vertex_input_attribute_description{
@@ -4434,6 +4577,7 @@ struct		S_vertex_input_attribute_description{
 	E_format format;
 	uint32_t offset;
 };
+
 /*	VkPipelineColorBlendAttachmentState
 */
 struct		S_pipeline_color_blend_attachment_state{
@@ -4446,6 +4590,7 @@ struct		S_pipeline_color_blend_attachment_state{
 	E_blend_op alphaBlendOp;
 	F_color_component colorWriteMask;
 };
+
 /*	VkStencilOpState
 */
 struct		S_stencil_op_state{
@@ -4457,6 +4602,7 @@ struct		S_stencil_op_state{
 	uint32_t writeMask;
 	uint32_t reference;
 };
+
 /*	VkPushConstantRange
 */
 struct		S_push_constant_range{
@@ -4464,12 +4610,14 @@ struct		S_push_constant_range{
 	uint32_t offset;
 	uint32_t size;
 };
+
 /*	VkClearDepthStencilValue
 */
 struct		S_clear_depth_stencil_value{
 	float depth;
 	uint32_t stencil;
 };
+
 /*	VkClearAttachment
 */
 struct		S_clear_attachment{
@@ -4477,6 +4625,7 @@ struct		S_clear_attachment{
 	uint32_t colorAttachment;
 	VkClearValue clearValue;
 };
+
 /*	VkAttachmentDescription
 */
 struct		S_attachment_description{
@@ -4490,12 +4639,14 @@ struct		S_attachment_description{
 	E_image_layout initialLayout;
 	E_image_layout finalLayout;
 };
+
 /*	VkAttachmentReference
 */
 struct		S_attachment_reference{
 	uint32_t attachment;
 	E_image_layout layout;
 };
+
 /*	VkSubpassDependency
 */
 struct		S_subpass_dependency{
@@ -4507,6 +4658,7 @@ struct		S_subpass_dependency{
 	F_access dstAccessMask;
 	F_dependency dependencyFlags;
 };
+
 /*	VkPhysicalDeviceFeatures
 */
 struct		S_physical_device_features{
@@ -4566,6 +4718,7 @@ struct		S_physical_device_features{
 	VkBool32 variableMultisampleRate;
 	VkBool32 inheritedQueries;
 };
+
 /*	VkPhysicalDeviceSparseProperties
 (returnedonly)
 */
@@ -4576,6 +4729,7 @@ struct		S_physical_device_sparse_properties{
 	VkBool32 residencyAlignedMipSize;
 	VkBool32 residencyNonResidentStrict;
 };
+
 /*	VkPhysicalDeviceLimits
 (returnedonly)
 */
@@ -4687,6 +4841,7 @@ struct		S_physical_device_limits{
 	VkDeviceSize optimalBufferCopyRowPitchAlignment;
 	VkDeviceSize nonCoherentAtomSize;
 };
+
 /*	VkDrawIndirectCommand
 */
 struct		S_draw_indirect_command{
@@ -4695,6 +4850,7 @@ struct		S_draw_indirect_command{
 	uint32_t firstVertex;
 	uint32_t firstInstance;
 };
+
 /*	VkDrawIndexedIndirectCommand
 */
 struct		S_draw_indexed_indirect_command{
@@ -4704,6 +4860,7 @@ struct		S_draw_indexed_indirect_command{
 	int32_t vertexOffset;
 	uint32_t firstInstance;
 };
+
 /*	VkDispatchIndirectCommand
 */
 struct		S_dispatch_indirect_command{
@@ -4711,6 +4868,7 @@ struct		S_dispatch_indirect_command{
 	uint32_t y;
 	uint32_t z;
 };
+
 /*	VkDisplayPlanePropertiesKHR
 (returnedonly)
 */
@@ -4718,6 +4876,7 @@ struct		S_display_plane_properties_KHR{
 	VkDisplayKHR currentDisplay;
 	uint32_t currentStackIndex;
 };
+
 /*	VkSurfaceFormatKHR
 (returnedonly)
 */
@@ -4725,6 +4884,7 @@ struct		S_surface_format_KHR{
 	E_format format;
 	E_color_space_KHR colorSpace;
 };
+
 /*	VkIndirectCommandsTokenNVX
 */
 struct		S_indirect_commands_token_NVX{
@@ -4732,6 +4892,7 @@ struct		S_indirect_commands_token_NVX{
 	VkBuffer buffer;
 	VkDeviceSize offset;
 };
+
 /*	VkIndirectCommandsLayoutTokenNVX
 */
 struct		S_indirect_commands_layout_token_NVX{
@@ -4740,12 +4901,14 @@ struct		S_indirect_commands_layout_token_NVX{
 	uint32_t dynamicCount;
 	uint32_t divisor;
 };
+
 /*	VkObjectTableEntryNVX
 */
 struct		S_object_table_entry_NVX{
 	E_object_entry_type_NVX type;
 	F_object_entry_usage_NVX flags;
 };
+
 /*	VkObjectTablePipelineEntryNVX
 */
 struct		S_object_table_pipeline_entry_NVX{
@@ -4753,6 +4916,7 @@ struct		S_object_table_pipeline_entry_NVX{
 	F_object_entry_usage_NVX flags;
 	VkPipeline pipeline;
 };
+
 /*	VkObjectTableDescriptorSetEntryNVX
 */
 struct		S_object_table_descriptor_set_entry_NVX{
@@ -4761,6 +4925,7 @@ struct		S_object_table_descriptor_set_entry_NVX{
 	VkPipelineLayout pipelineLayout;
 	VkDescriptorSet descriptorSet;
 };
+
 /*	VkObjectTableVertexBufferEntryNVX
 */
 struct		S_object_table_vertex_buffer_entry_NVX{
@@ -4768,6 +4933,7 @@ struct		S_object_table_vertex_buffer_entry_NVX{
 	F_object_entry_usage_NVX flags;
 	VkBuffer buffer;
 };
+
 /*	VkObjectTableIndexBufferEntryNVX
 */
 struct		S_object_table_index_buffer_entry_NVX{
@@ -4776,6 +4942,7 @@ struct		S_object_table_index_buffer_entry_NVX{
 	VkBuffer buffer;
 	E_index_type indexType;
 };
+
 /*	VkObjectTablePushConstantEntryNVX
 */
 struct		S_object_table_push_constant_entry_NVX{
@@ -4784,6 +4951,7 @@ struct		S_object_table_push_constant_entry_NVX{
 	VkPipelineLayout pipelineLayout;
 	F_shader_stage stageFlags;
 };
+
 /*	VkConformanceVersionKHR
 */
 struct		S_conformance_version_KHR{
@@ -4792,6 +4960,7 @@ struct		S_conformance_version_KHR{
 	uint8_t subminor;
 	uint8_t patch;
 };
+
 /*	VkExternalMemoryProperties
 (returnedonly)
 */
@@ -4800,6 +4969,7 @@ struct		S_external_memory_properties{
 	F_external_memory_handle_type exportFromImportedHandleTypes;
 	F_external_memory_handle_type compatibleHandleTypes;
 };
+
 /*	VkDescriptorUpdateTemplateEntry
 */
 struct		S_descriptor_update_template_entry{
@@ -4810,18 +4980,21 @@ struct		S_descriptor_update_template_entry{
 	size_t offset;
 	size_t stride;
 };
+
 /*	VkXYColorEXT
 Chromaticity coordinate*/
 struct		S_xy_color_EXT{
 	float x;
 	float y;
 };
+
 /*	VkRefreshCycleDurationGOOGLE
 (returnedonly)
 */
 struct		S_refresh_cycle_duration_GOOGLE{
 	uint64_t refreshDuration;
 };
+
 /*	VkPastPresentationTimingGOOGLE
 (returnedonly)
 */
@@ -4832,18 +5005,21 @@ struct		S_past_presentation_timing_GOOGLE{
 	uint64_t earliestPresentTime;
 	uint64_t presentMargin;
 };
+
 /*	VkPresentTimeGOOGLE
 */
 struct		S_present_time_GOOGLE{
 	uint32_t presentID;
 	uint64_t desiredPresentTime;
 };
+
 /*	VkViewportWScalingNV
 */
 struct		S_viewport_w_scaling_NV{
 	float xcoeff;
 	float ycoeff;
 };
+
 /*	VkViewportSwizzleNV
 */
 struct		S_viewport_swizzle_NV{
@@ -4852,6 +5028,7 @@ struct		S_viewport_swizzle_NV{
 	E_viewport_coordinate_swizzle_NV z;
 	E_viewport_coordinate_swizzle_NV w;
 };
+
 /*	VkInputAttachmentAspectReference
 */
 struct		S_input_attachment_aspect_reference{
@@ -4859,12 +5036,14 @@ struct		S_input_attachment_aspect_reference{
 	uint32_t inputAttachmentIndex;
 	F_image_aspect aspectMask;
 };
+
 /*	VkSampleLocationEXT
 */
 struct		S_sample_location_EXT{
 	float x;
 	float y;
 };
+
 /*	VkShaderResourceUsageAMD
 (returnedonly)
 */
@@ -4875,18 +5054,21 @@ struct		S_shader_resource_usage_AMD{
 	size_t ldsUsageSizeInBytes;
 	size_t scratchMemUsageInBytes;
 };
+
 /*	VkVertexInputBindingDivisorDescriptionEXT
 */
 struct		S_vertex_input_binding_divisor_description_EXT{
 	uint32_t binding;
 	uint32_t divisor;
 };
+
 /*	VkShadingRatePaletteNV
 */
 struct		S_shading_rate_palette_NV{
 	uint32_t shadingRatePaletteEntryCount;
 	const E_shading_rate_palette_entry_NV * pShadingRatePaletteEntries;
 };
+
 /*	VkCoarseSampleLocationNV
 */
 struct		S_coarse_sample_location_NV{
@@ -4894,12 +5076,14 @@ struct		S_coarse_sample_location_NV{
 	uint32_t pixelY;
 	uint32_t sample;
 };
+
 /*	VkDrawMeshTasksIndirectCommandNV
 */
 struct		S_draw_mesh_tasks_indirect_command_NV{
 	uint32_t taskCount;
 	uint32_t firstTask;
 };
+
 /*	VkDrmFormatModifierPropertiesEXT
 (returnedonly)
 */
@@ -4909,30 +5093,5587 @@ struct		S_drm_format_modifier_properties_EXT{
 	F_format_feature drmFormatModifierTilingFeatures;
 };
 
-/*---------------- struct ---------------------*/
+
+/*------------------ just sType pNext -------------------*/
 
 /*	VkBaseOutStructure
 */
 struct		S_base_out_structure{
 private:
-	E_structure_type sType;
-	struct S_base_out_structure * pNext;
-public:
+	VkStructureType sType;
+	struct S_base_out_structure * pNext = nullptr;
+S_base_out_structure( VkBaseOutStructure const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_base_out_structure ) );	}
+S_base_out_structure& operator=( VkBaseOutStructure const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_base_out_structure ) ); return *this;	}
+operator VkBaseOutStructure const&() const 
+	{	return *reinterpret_cast<const VkBaseOutStructure*>(this);	}
+operator VkBaseOutStructure &() 
+	{	return *reinterpret_cast<VkBaseOutStructure*>(this);	}
+
 };
+static_assert(
+	sizeof(S_base_out_structure) == sizeof(VkBaseOutStructure),
+	"struct and wrapper have different size!");
+
 /*	VkBaseInStructure
 */
 struct		S_base_in_structure{
 private:
-	E_structure_type sType;
-	const struct S_base_in_structure * pNext;
-public:
+	VkStructureType sType;
+	const struct S_base_in_structure * pNext = nullptr;
+S_base_in_structure( VkBaseInStructure const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_base_in_structure ) );	}
+S_base_in_structure& operator=( VkBaseInStructure const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_base_in_structure ) ); return *this;	}
+operator VkBaseInStructure const&() const 
+	{	return *reinterpret_cast<const VkBaseInStructure*>(this);	}
+operator VkBaseInStructure &() 
+	{	return *reinterpret_cast<VkBaseInStructure*>(this);	}
+
 };
+static_assert(
+	sizeof(S_base_in_structure) == sizeof(VkBaseInStructure),
+	"struct and wrapper have different size!");
+
+/*	VkApplicationInfo
+*/
+struct		S_application_info{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_APPLICATION_INFO;
+	const void * pNext = nullptr;
+public:
+	const char * pApplicationName;
+	uint32_t applicationVersion;
+	const char * pEngineName;
+	uint32_t engineVersion;
+	uint32_t apiVersion;
+S_application_info( VkApplicationInfo const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_application_info ) );	}
+S_application_info& operator=( VkApplicationInfo const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_application_info ) ); return *this;	}
+operator VkApplicationInfo const&() const 
+	{	return *reinterpret_cast<const VkApplicationInfo*>(this);	}
+operator VkApplicationInfo &() 
+	{	return *reinterpret_cast<VkApplicationInfo*>(this);	}
+
+};
+static_assert(
+	sizeof(S_application_info) == sizeof(VkApplicationInfo),
+	"struct and wrapper have different size!");
+
+/*	VkDeviceQueueCreateInfo
+ex:
+	VkDeviceQueueGlobalPriorityCreateInfoEXT
+*/
+struct		S_device_queue_create_info{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_DEVICE_QUEUE_CREATE_INFO;
+	const void * pNext = nullptr;
+public:
+	F_device_queue_create flags;
+	uint32_t queueFamilyIndex;
+	uint32_t queueCount;
+	const float * pQueuePriorities;
+S_device_queue_create_info( VkDeviceQueueCreateInfo const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_device_queue_create_info ) );	}
+S_device_queue_create_info& operator=( VkDeviceQueueCreateInfo const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_device_queue_create_info ) ); return *this;	}
+operator VkDeviceQueueCreateInfo const&() const 
+	{	return *reinterpret_cast<const VkDeviceQueueCreateInfo*>(this);	}
+operator VkDeviceQueueCreateInfo &() 
+	{	return *reinterpret_cast<VkDeviceQueueCreateInfo*>(this);	}
+
+};
+static_assert(
+	sizeof(S_device_queue_create_info) == sizeof(VkDeviceQueueCreateInfo),
+	"struct and wrapper have different size!");
+
+/*	VkMemoryAllocateInfo
+ex:
+	VkDedicatedAllocationMemoryAllocateInfoNV
+	VkExportMemoryAllocateInfoNV
+	VkImportMemoryWin32HandleInfoNV
+	VkExportMemoryWin32HandleInfoNV
+	VkExportMemoryAllocateInfo
+	VkImportMemoryWin32HandleInfoKHR
+	VkExportMemoryWin32HandleInfoKHR
+	VkImportMemoryFdInfoKHR
+	VkMemoryAllocateFlagsInfo
+	VkMemoryDedicatedAllocateInfo
+	VkImportMemoryHostPointerInfoEXT
+	VkImportAndroidHardwareBufferInfoANDROID
+*/
+struct		S_memory_allocate_info{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO;
+	const void * pNext = nullptr;
+public:
+	VkDeviceSize allocationSize;
+	uint32_t memoryTypeIndex;
+S_memory_allocate_info( VkMemoryAllocateInfo const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_memory_allocate_info ) );	}
+S_memory_allocate_info& operator=( VkMemoryAllocateInfo const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_memory_allocate_info ) ); return *this;	}
+operator VkMemoryAllocateInfo const&() const 
+	{	return *reinterpret_cast<const VkMemoryAllocateInfo*>(this);	}
+operator VkMemoryAllocateInfo &() 
+	{	return *reinterpret_cast<VkMemoryAllocateInfo*>(this);	}
+
+};
+static_assert(
+	sizeof(S_memory_allocate_info) == sizeof(VkMemoryAllocateInfo),
+	"struct and wrapper have different size!");
+
+/*	VkMappedMemoryRange
+*/
+struct		S_mapped_memory_range{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_MAPPED_MEMORY_RANGE;
+	const void * pNext = nullptr;
+public:
+	VkDeviceMemory memory;
+	VkDeviceSize offset;
+	VkDeviceSize size;
+S_mapped_memory_range( VkMappedMemoryRange const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_mapped_memory_range ) );	}
+S_mapped_memory_range& operator=( VkMappedMemoryRange const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_mapped_memory_range ) ); return *this;	}
+operator VkMappedMemoryRange const&() const 
+	{	return *reinterpret_cast<const VkMappedMemoryRange*>(this);	}
+operator VkMappedMemoryRange &() 
+	{	return *reinterpret_cast<VkMappedMemoryRange*>(this);	}
+
+};
+static_assert(
+	sizeof(S_mapped_memory_range) == sizeof(VkMappedMemoryRange),
+	"struct and wrapper have different size!");
+
+/*	VkCopyDescriptorSet
+*/
+struct		S_copy_descriptor_set{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_COPY_DESCRIPTOR_SET;
+	const void * pNext = nullptr;
+public:
+	VkDescriptorSet srcSet;
+	uint32_t srcBinding;
+	uint32_t srcArrayElement;
+	VkDescriptorSet dstSet;
+	uint32_t dstBinding;
+	uint32_t dstArrayElement;
+	uint32_t descriptorCount;
+S_copy_descriptor_set( VkCopyDescriptorSet const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_copy_descriptor_set ) );	}
+S_copy_descriptor_set& operator=( VkCopyDescriptorSet const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_copy_descriptor_set ) ); return *this;	}
+operator VkCopyDescriptorSet const&() const 
+	{	return *reinterpret_cast<const VkCopyDescriptorSet*>(this);	}
+operator VkCopyDescriptorSet &() 
+	{	return *reinterpret_cast<VkCopyDescriptorSet*>(this);	}
+
+};
+static_assert(
+	sizeof(S_copy_descriptor_set) == sizeof(VkCopyDescriptorSet),
+	"struct and wrapper have different size!");
+
+/*	VkBufferCreateInfo
+ex:
+	VkDedicatedAllocationBufferCreateInfoNV
+	VkExternalMemoryBufferCreateInfo
+*/
+struct		S_buffer_create_info{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO;
+	const void * pNext = nullptr;
+public:
+	F_buffer_create flags;
+	VkDeviceSize size;
+	F_buffer_usage usage;
+	E_sharing_mode sharingMode;
+	uint32_t queueFamilyIndexCount;
+	const uint32_t * pQueueFamilyIndices;
+S_buffer_create_info( VkBufferCreateInfo const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_buffer_create_info ) );	}
+S_buffer_create_info& operator=( VkBufferCreateInfo const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_buffer_create_info ) ); return *this;	}
+operator VkBufferCreateInfo const&() const 
+	{	return *reinterpret_cast<const VkBufferCreateInfo*>(this);	}
+operator VkBufferCreateInfo &() 
+	{	return *reinterpret_cast<VkBufferCreateInfo*>(this);	}
+
+};
+static_assert(
+	sizeof(S_buffer_create_info) == sizeof(VkBufferCreateInfo),
+	"struct and wrapper have different size!");
+
+/*	VkBufferViewCreateInfo
+*/
+struct		S_buffer_view_create_info{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_BUFFER_VIEW_CREATE_INFO;
+	const void * pNext = nullptr;
+public:
+	VkBufferViewCreateFlags flags;
+	VkBuffer buffer;
+	E_format format;
+	VkDeviceSize offset;
+	VkDeviceSize range;
+S_buffer_view_create_info( VkBufferViewCreateInfo const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_buffer_view_create_info ) );	}
+S_buffer_view_create_info& operator=( VkBufferViewCreateInfo const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_buffer_view_create_info ) ); return *this;	}
+operator VkBufferViewCreateInfo const&() const 
+	{	return *reinterpret_cast<const VkBufferViewCreateInfo*>(this);	}
+operator VkBufferViewCreateInfo &() 
+	{	return *reinterpret_cast<VkBufferViewCreateInfo*>(this);	}
+
+};
+static_assert(
+	sizeof(S_buffer_view_create_info) == sizeof(VkBufferViewCreateInfo),
+	"struct and wrapper have different size!");
+
+/*	VkMemoryBarrier
+*/
+struct		S_memory_barrier{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_MEMORY_BARRIER;
+	const void * pNext = nullptr;
+public:
+	F_access srcAccessMask;
+	F_access dstAccessMask;
+S_memory_barrier( VkMemoryBarrier const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_memory_barrier ) );	}
+S_memory_barrier& operator=( VkMemoryBarrier const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_memory_barrier ) ); return *this;	}
+operator VkMemoryBarrier const&() const 
+	{	return *reinterpret_cast<const VkMemoryBarrier*>(this);	}
+operator VkMemoryBarrier &() 
+	{	return *reinterpret_cast<VkMemoryBarrier*>(this);	}
+
+};
+static_assert(
+	sizeof(S_memory_barrier) == sizeof(VkMemoryBarrier),
+	"struct and wrapper have different size!");
+
+/*	VkBufferMemoryBarrier
+*/
+struct		S_buffer_memory_barrier{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_BUFFER_MEMORY_BARRIER;
+	const void * pNext = nullptr;
+public:
+	F_access srcAccessMask;
+	F_access dstAccessMask;
+	uint32_t srcQueueFamilyIndex;
+	uint32_t dstQueueFamilyIndex;
+	VkBuffer buffer;
+	VkDeviceSize offset;
+	VkDeviceSize size;
+S_buffer_memory_barrier( VkBufferMemoryBarrier const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_buffer_memory_barrier ) );	}
+S_buffer_memory_barrier& operator=( VkBufferMemoryBarrier const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_buffer_memory_barrier ) ); return *this;	}
+operator VkBufferMemoryBarrier const&() const 
+	{	return *reinterpret_cast<const VkBufferMemoryBarrier*>(this);	}
+operator VkBufferMemoryBarrier &() 
+	{	return *reinterpret_cast<VkBufferMemoryBarrier*>(this);	}
+
+};
+static_assert(
+	sizeof(S_buffer_memory_barrier) == sizeof(VkBufferMemoryBarrier),
+	"struct and wrapper have different size!");
+
+/*	VkShaderModuleCreateInfo
+ex:
+	VkShaderModuleValidationCacheCreateInfoEXT
+*/
+struct		S_shader_module_create_info{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO;
+	const void * pNext = nullptr;
+public:
+	VkShaderModuleCreateFlags flags;
+	size_t codeSize;
+	const uint32_t * pCode;
+S_shader_module_create_info( VkShaderModuleCreateInfo const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_shader_module_create_info ) );	}
+S_shader_module_create_info& operator=( VkShaderModuleCreateInfo const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_shader_module_create_info ) ); return *this;	}
+operator VkShaderModuleCreateInfo const&() const 
+	{	return *reinterpret_cast<const VkShaderModuleCreateInfo*>(this);	}
+operator VkShaderModuleCreateInfo &() 
+	{	return *reinterpret_cast<VkShaderModuleCreateInfo*>(this);	}
+
+};
+static_assert(
+	sizeof(S_shader_module_create_info) == sizeof(VkShaderModuleCreateInfo),
+	"struct and wrapper have different size!");
+
+/*	VkDescriptorSetAllocateInfo
+ex:
+	VkDescriptorSetVariableDescriptorCountAllocateInfoEXT
+*/
+struct		S_descriptor_set_allocate_info{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_DESCRIPTOR_SET_ALLOCATE_INFO;
+	const void * pNext = nullptr;
+public:
+	VkDescriptorPool descriptorPool;
+	uint32_t descriptorSetCount;
+	const VkDescriptorSetLayout * pSetLayouts;
+S_descriptor_set_allocate_info( VkDescriptorSetAllocateInfo const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_descriptor_set_allocate_info ) );	}
+S_descriptor_set_allocate_info& operator=( VkDescriptorSetAllocateInfo const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_descriptor_set_allocate_info ) ); return *this;	}
+operator VkDescriptorSetAllocateInfo const&() const 
+	{	return *reinterpret_cast<const VkDescriptorSetAllocateInfo*>(this);	}
+operator VkDescriptorSetAllocateInfo &() 
+	{	return *reinterpret_cast<VkDescriptorSetAllocateInfo*>(this);	}
+
+};
+static_assert(
+	sizeof(S_descriptor_set_allocate_info) == sizeof(VkDescriptorSetAllocateInfo),
+	"struct and wrapper have different size!");
+
+/*	VkPipelineInputAssemblyStateCreateInfo
+*/
+struct		S_pipeline_input_assembly_state_create_info{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_PIPELINE_INPUT_ASSEMBLY_STATE_CREATE_INFO;
+	const void * pNext = nullptr;
+public:
+	VkPipelineInputAssemblyStateCreateFlags flags;
+	E_primitive_topology topology;
+	VkBool32 primitiveRestartEnable;
+S_pipeline_input_assembly_state_create_info( VkPipelineInputAssemblyStateCreateInfo const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_pipeline_input_assembly_state_create_info ) );	}
+S_pipeline_input_assembly_state_create_info& operator=( VkPipelineInputAssemblyStateCreateInfo const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_pipeline_input_assembly_state_create_info ) ); return *this;	}
+operator VkPipelineInputAssemblyStateCreateInfo const&() const 
+	{	return *reinterpret_cast<const VkPipelineInputAssemblyStateCreateInfo*>(this);	}
+operator VkPipelineInputAssemblyStateCreateInfo &() 
+	{	return *reinterpret_cast<VkPipelineInputAssemblyStateCreateInfo*>(this);	}
+
+};
+static_assert(
+	sizeof(S_pipeline_input_assembly_state_create_info) == sizeof(VkPipelineInputAssemblyStateCreateInfo),
+	"struct and wrapper have different size!");
+
+/*	VkPipelineTessellationStateCreateInfo
+ex:
+	VkPipelineTessellationDomainOriginStateCreateInfo
+*/
+struct		S_pipeline_tessellation_state_create_info{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_PIPELINE_TESSELLATION_STATE_CREATE_INFO;
+	const void * pNext = nullptr;
+public:
+	VkPipelineTessellationStateCreateFlags flags;
+	uint32_t patchControlPoints;
+S_pipeline_tessellation_state_create_info( VkPipelineTessellationStateCreateInfo const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_pipeline_tessellation_state_create_info ) );	}
+S_pipeline_tessellation_state_create_info& operator=( VkPipelineTessellationStateCreateInfo const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_pipeline_tessellation_state_create_info ) ); return *this;	}
+operator VkPipelineTessellationStateCreateInfo const&() const 
+	{	return *reinterpret_cast<const VkPipelineTessellationStateCreateInfo*>(this);	}
+operator VkPipelineTessellationStateCreateInfo &() 
+	{	return *reinterpret_cast<VkPipelineTessellationStateCreateInfo*>(this);	}
+
+};
+static_assert(
+	sizeof(S_pipeline_tessellation_state_create_info) == sizeof(VkPipelineTessellationStateCreateInfo),
+	"struct and wrapper have different size!");
+
+/*	VkPipelineRasterizationStateCreateInfo
+ex:
+	VkPipelineRasterizationStateRasterizationOrderAMD
+	VkPipelineRasterizationConservativeStateCreateInfoEXT
+*/
+struct		S_pipeline_rasterization_state_create_info{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_STATE_CREATE_INFO;
+	const void * pNext = nullptr;
+public:
+	VkPipelineRasterizationStateCreateFlags flags;
+	VkBool32 depthClampEnable;
+	VkBool32 rasterizerDiscardEnable;
+	E_polygon_mode polygonMode;
+	F_cull_mode cullMode;
+	E_front_face frontFace;
+	VkBool32 depthBiasEnable;
+	float depthBiasConstantFactor;
+	float depthBiasClamp;
+	float depthBiasSlopeFactor;
+	float lineWidth;
+S_pipeline_rasterization_state_create_info( VkPipelineRasterizationStateCreateInfo const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_pipeline_rasterization_state_create_info ) );	}
+S_pipeline_rasterization_state_create_info& operator=( VkPipelineRasterizationStateCreateInfo const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_pipeline_rasterization_state_create_info ) ); return *this;	}
+operator VkPipelineRasterizationStateCreateInfo const&() const 
+	{	return *reinterpret_cast<const VkPipelineRasterizationStateCreateInfo*>(this);	}
+operator VkPipelineRasterizationStateCreateInfo &() 
+	{	return *reinterpret_cast<VkPipelineRasterizationStateCreateInfo*>(this);	}
+
+};
+static_assert(
+	sizeof(S_pipeline_rasterization_state_create_info) == sizeof(VkPipelineRasterizationStateCreateInfo),
+	"struct and wrapper have different size!");
+
+/*	VkPipelineMultisampleStateCreateInfo
+ex:
+	VkPipelineCoverageToColorStateCreateInfoNV
+	VkPipelineSampleLocationsStateCreateInfoEXT
+	VkPipelineCoverageModulationStateCreateInfoNV
+*/
+struct		S_pipeline_multisample_state_create_info{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_PIPELINE_MULTISAMPLE_STATE_CREATE_INFO;
+	const void * pNext = nullptr;
+public:
+	VkPipelineMultisampleStateCreateFlags flags;
+	F_sample_count rasterizationSamples;
+	VkBool32 sampleShadingEnable;
+	float minSampleShading;
+	const VkSampleMask * pSampleMask;
+	VkBool32 alphaToCoverageEnable;
+	VkBool32 alphaToOneEnable;
+S_pipeline_multisample_state_create_info( VkPipelineMultisampleStateCreateInfo const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_pipeline_multisample_state_create_info ) );	}
+S_pipeline_multisample_state_create_info& operator=( VkPipelineMultisampleStateCreateInfo const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_pipeline_multisample_state_create_info ) ); return *this;	}
+operator VkPipelineMultisampleStateCreateInfo const&() const 
+	{	return *reinterpret_cast<const VkPipelineMultisampleStateCreateInfo*>(this);	}
+operator VkPipelineMultisampleStateCreateInfo &() 
+	{	return *reinterpret_cast<VkPipelineMultisampleStateCreateInfo*>(this);	}
+
+};
+static_assert(
+	sizeof(S_pipeline_multisample_state_create_info) == sizeof(VkPipelineMultisampleStateCreateInfo),
+	"struct and wrapper have different size!");
+
+/*	VkPipelineDynamicStateCreateInfo
+*/
+struct		S_pipeline_dynamic_state_create_info{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_PIPELINE_DYNAMIC_STATE_CREATE_INFO;
+	const void * pNext = nullptr;
+public:
+	VkPipelineDynamicStateCreateFlags flags;
+	uint32_t dynamicStateCount;
+	const E_dynamic_state * pDynamicStates;
+S_pipeline_dynamic_state_create_info( VkPipelineDynamicStateCreateInfo const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_pipeline_dynamic_state_create_info ) );	}
+S_pipeline_dynamic_state_create_info& operator=( VkPipelineDynamicStateCreateInfo const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_pipeline_dynamic_state_create_info ) ); return *this;	}
+operator VkPipelineDynamicStateCreateInfo const&() const 
+	{	return *reinterpret_cast<const VkPipelineDynamicStateCreateInfo*>(this);	}
+operator VkPipelineDynamicStateCreateInfo &() 
+	{	return *reinterpret_cast<VkPipelineDynamicStateCreateInfo*>(this);	}
+
+};
+static_assert(
+	sizeof(S_pipeline_dynamic_state_create_info) == sizeof(VkPipelineDynamicStateCreateInfo),
+	"struct and wrapper have different size!");
+
+/*	VkPipelineCacheCreateInfo
+*/
+struct		S_pipeline_cache_create_info{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_PIPELINE_CACHE_CREATE_INFO;
+	const void * pNext = nullptr;
+public:
+	VkPipelineCacheCreateFlags flags;
+	size_t initialDataSize;
+	const void * pInitialData;
+S_pipeline_cache_create_info( VkPipelineCacheCreateInfo const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_pipeline_cache_create_info ) );	}
+S_pipeline_cache_create_info& operator=( VkPipelineCacheCreateInfo const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_pipeline_cache_create_info ) ); return *this;	}
+operator VkPipelineCacheCreateInfo const&() const 
+	{	return *reinterpret_cast<const VkPipelineCacheCreateInfo*>(this);	}
+operator VkPipelineCacheCreateInfo &() 
+	{	return *reinterpret_cast<VkPipelineCacheCreateInfo*>(this);	}
+
+};
+static_assert(
+	sizeof(S_pipeline_cache_create_info) == sizeof(VkPipelineCacheCreateInfo),
+	"struct and wrapper have different size!");
+
+/*	VkSamplerCreateInfo
+ex:
+	VkSamplerYcbcrConversionInfo
+	VkSamplerReductionModeCreateInfoEXT
+*/
+struct		S_sampler_create_info{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_SAMPLER_CREATE_INFO;
+	const void * pNext = nullptr;
+public:
+	VkSamplerCreateFlags flags;
+	E_filter magFilter;
+	E_filter minFilter;
+	E_sampler_mipmap_mode mipmapMode;
+	E_sampler_address_mode addressModeU;
+	E_sampler_address_mode addressModeV;
+	E_sampler_address_mode addressModeW;
+	float mipLodBias;
+	VkBool32 anisotropyEnable;
+	float maxAnisotropy;
+	VkBool32 compareEnable;
+	E_compare_op compareOp;
+	float minLod;
+	float maxLod;
+	E_border_color borderColor;
+	VkBool32 unnormalizedCoordinates;
+S_sampler_create_info( VkSamplerCreateInfo const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_sampler_create_info ) );	}
+S_sampler_create_info& operator=( VkSamplerCreateInfo const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_sampler_create_info ) ); return *this;	}
+operator VkSamplerCreateInfo const&() const 
+	{	return *reinterpret_cast<const VkSamplerCreateInfo*>(this);	}
+operator VkSamplerCreateInfo &() 
+	{	return *reinterpret_cast<VkSamplerCreateInfo*>(this);	}
+
+};
+static_assert(
+	sizeof(S_sampler_create_info) == sizeof(VkSamplerCreateInfo),
+	"struct and wrapper have different size!");
+
+/*	VkCommandPoolCreateInfo
+*/
+struct		S_command_pool_create_info{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_COMMAND_POOL_CREATE_INFO;
+	const void * pNext = nullptr;
+public:
+	F_command_pool_create flags;
+	uint32_t queueFamilyIndex;
+S_command_pool_create_info( VkCommandPoolCreateInfo const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_command_pool_create_info ) );	}
+S_command_pool_create_info& operator=( VkCommandPoolCreateInfo const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_command_pool_create_info ) ); return *this;	}
+operator VkCommandPoolCreateInfo const&() const 
+	{	return *reinterpret_cast<const VkCommandPoolCreateInfo*>(this);	}
+operator VkCommandPoolCreateInfo &() 
+	{	return *reinterpret_cast<VkCommandPoolCreateInfo*>(this);	}
+
+};
+static_assert(
+	sizeof(S_command_pool_create_info) == sizeof(VkCommandPoolCreateInfo),
+	"struct and wrapper have different size!");
+
+/*	VkCommandBufferAllocateInfo
+*/
+struct		S_command_buffer_allocate_info{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO;
+	const void * pNext = nullptr;
+public:
+	VkCommandPool commandPool;
+	E_command_buffer_level level;
+	uint32_t commandBufferCount;
+S_command_buffer_allocate_info( VkCommandBufferAllocateInfo const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_command_buffer_allocate_info ) );	}
+S_command_buffer_allocate_info& operator=( VkCommandBufferAllocateInfo const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_command_buffer_allocate_info ) ); return *this;	}
+operator VkCommandBufferAllocateInfo const&() const 
+	{	return *reinterpret_cast<const VkCommandBufferAllocateInfo*>(this);	}
+operator VkCommandBufferAllocateInfo &() 
+	{	return *reinterpret_cast<VkCommandBufferAllocateInfo*>(this);	}
+
+};
+static_assert(
+	sizeof(S_command_buffer_allocate_info) == sizeof(VkCommandBufferAllocateInfo),
+	"struct and wrapper have different size!");
+
+/*	VkCommandBufferInheritanceInfo
+ex:
+	VkCommandBufferInheritanceConditionalRenderingInfoEXT
+*/
+struct		S_command_buffer_inheritance_info{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_INFO;
+	const void * pNext = nullptr;
+public:
+	VkRenderPass renderPass;
+	uint32_t subpass;
+	VkFramebuffer framebuffer;
+	VkBool32 occlusionQueryEnable;
+	F_query_control queryFlags;
+	F_query_pipeline_statistic pipelineStatistics;
+S_command_buffer_inheritance_info( VkCommandBufferInheritanceInfo const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_command_buffer_inheritance_info ) );	}
+S_command_buffer_inheritance_info& operator=( VkCommandBufferInheritanceInfo const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_command_buffer_inheritance_info ) ); return *this;	}
+operator VkCommandBufferInheritanceInfo const&() const 
+	{	return *reinterpret_cast<const VkCommandBufferInheritanceInfo*>(this);	}
+operator VkCommandBufferInheritanceInfo &() 
+	{	return *reinterpret_cast<VkCommandBufferInheritanceInfo*>(this);	}
+
+};
+static_assert(
+	sizeof(S_command_buffer_inheritance_info) == sizeof(VkCommandBufferInheritanceInfo),
+	"struct and wrapper have different size!");
+
+/*	VkEventCreateInfo
+*/
+struct		S_event_create_info{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_EVENT_CREATE_INFO;
+	const void * pNext = nullptr;
+public:
+	VkEventCreateFlags flags;
+S_event_create_info( VkEventCreateInfo const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_event_create_info ) );	}
+S_event_create_info& operator=( VkEventCreateInfo const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_event_create_info ) ); return *this;	}
+operator VkEventCreateInfo const&() const 
+	{	return *reinterpret_cast<const VkEventCreateInfo*>(this);	}
+operator VkEventCreateInfo &() 
+	{	return *reinterpret_cast<VkEventCreateInfo*>(this);	}
+
+};
+static_assert(
+	sizeof(S_event_create_info) == sizeof(VkEventCreateInfo),
+	"struct and wrapper have different size!");
+
+/*	VkFenceCreateInfo
+ex:
+	VkExportFenceCreateInfo
+	VkExportFenceWin32HandleInfoKHR
+*/
+struct		S_fence_create_info{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_FENCE_CREATE_INFO;
+	const void * pNext = nullptr;
+public:
+	F_fence_create flags;
+S_fence_create_info( VkFenceCreateInfo const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_fence_create_info ) );	}
+S_fence_create_info& operator=( VkFenceCreateInfo const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_fence_create_info ) ); return *this;	}
+operator VkFenceCreateInfo const&() const 
+	{	return *reinterpret_cast<const VkFenceCreateInfo*>(this);	}
+operator VkFenceCreateInfo &() 
+	{	return *reinterpret_cast<VkFenceCreateInfo*>(this);	}
+
+};
+static_assert(
+	sizeof(S_fence_create_info) == sizeof(VkFenceCreateInfo),
+	"struct and wrapper have different size!");
+
+/*	VkSemaphoreCreateInfo
+ex:
+	VkExportSemaphoreCreateInfo
+	VkExportSemaphoreWin32HandleInfoKHR
+*/
+struct		S_semaphore_create_info{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_SEMAPHORE_CREATE_INFO;
+	const void * pNext = nullptr;
+public:
+	VkSemaphoreCreateFlags flags;
+S_semaphore_create_info( VkSemaphoreCreateInfo const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_semaphore_create_info ) );	}
+S_semaphore_create_info& operator=( VkSemaphoreCreateInfo const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_semaphore_create_info ) ); return *this;	}
+operator VkSemaphoreCreateInfo const&() const 
+	{	return *reinterpret_cast<const VkSemaphoreCreateInfo*>(this);	}
+operator VkSemaphoreCreateInfo &() 
+	{	return *reinterpret_cast<VkSemaphoreCreateInfo*>(this);	}
+
+};
+static_assert(
+	sizeof(S_semaphore_create_info) == sizeof(VkSemaphoreCreateInfo),
+	"struct and wrapper have different size!");
+
+/*	VkQueryPoolCreateInfo
+*/
+struct		S_query_pool_create_info{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_QUERY_POOL_CREATE_INFO;
+	const void * pNext = nullptr;
+public:
+	VkQueryPoolCreateFlags flags;
+	E_query_type queryType;
+	uint32_t queryCount;
+	F_query_pipeline_statistic pipelineStatistics;
+S_query_pool_create_info( VkQueryPoolCreateInfo const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_query_pool_create_info ) );	}
+S_query_pool_create_info& operator=( VkQueryPoolCreateInfo const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_query_pool_create_info ) ); return *this;	}
+operator VkQueryPoolCreateInfo const&() const 
+	{	return *reinterpret_cast<const VkQueryPoolCreateInfo*>(this);	}
+operator VkQueryPoolCreateInfo &() 
+	{	return *reinterpret_cast<VkQueryPoolCreateInfo*>(this);	}
+
+};
+static_assert(
+	sizeof(S_query_pool_create_info) == sizeof(VkQueryPoolCreateInfo),
+	"struct and wrapper have different size!");
+
+/*	VkFramebufferCreateInfo
+*/
+struct		S_framebuffer_create_info{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_FRAMEBUFFER_CREATE_INFO;
+	const void * pNext = nullptr;
+public:
+	VkFramebufferCreateFlags flags;
+	VkRenderPass renderPass;
+	uint32_t attachmentCount;
+	const VkImageView * pAttachments;
+	uint32_t width;
+	uint32_t height;
+	uint32_t layers;
+S_framebuffer_create_info( VkFramebufferCreateInfo const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_framebuffer_create_info ) );	}
+S_framebuffer_create_info& operator=( VkFramebufferCreateInfo const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_framebuffer_create_info ) ); return *this;	}
+operator VkFramebufferCreateInfo const&() const 
+	{	return *reinterpret_cast<const VkFramebufferCreateInfo*>(this);	}
+operator VkFramebufferCreateInfo &() 
+	{	return *reinterpret_cast<VkFramebufferCreateInfo*>(this);	}
+
+};
+static_assert(
+	sizeof(S_framebuffer_create_info) == sizeof(VkFramebufferCreateInfo),
+	"struct and wrapper have different size!");
+
+/*	VkSubmitInfo
+ex:
+	VkWin32KeyedMutexAcquireReleaseInfoNV
+	VkWin32KeyedMutexAcquireReleaseInfoKHR
+	VkD3D12FenceSubmitInfoKHR
+	VkDeviceGroupSubmitInfo
+	VkProtectedSubmitInfo
+*/
+struct		S_submit_info{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_SUBMIT_INFO;
+	const void * pNext = nullptr;
+public:
+	uint32_t waitSemaphoreCount;
+	const VkSemaphore * pWaitSemaphores;
+	const F_pipeline_stage * pWaitDstStageMask;
+	uint32_t commandBufferCount;
+	const VkCommandBuffer * pCommandBuffers;
+	uint32_t signalSemaphoreCount;
+	const VkSemaphore * pSignalSemaphores;
+S_submit_info( VkSubmitInfo const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_submit_info ) );	}
+S_submit_info& operator=( VkSubmitInfo const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_submit_info ) ); return *this;	}
+operator VkSubmitInfo const&() const 
+	{	return *reinterpret_cast<const VkSubmitInfo*>(this);	}
+operator VkSubmitInfo &() 
+	{	return *reinterpret_cast<VkSubmitInfo*>(this);	}
+
+};
+static_assert(
+	sizeof(S_submit_info) == sizeof(VkSubmitInfo),
+	"struct and wrapper have different size!");
+
+/*	VkAndroidSurfaceCreateInfoKHR
+*/
+#ifdef VK_USE_PLATFORM_ANDROID_KHR
+struct		S_android_surface_create_info_KHR{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_ANDROID_SURFACE_CREATE_INFO_KHR;
+	const void * pNext = nullptr;
+public:
+	VkAndroidSurfaceCreateFlagsKHR flags;
+	struct ANativeWindow * window;
+S_android_surface_create_info_KHR( VkAndroidSurfaceCreateInfoKHR const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_android_surface_create_info_KHR ) );	}
+S_android_surface_create_info_KHR& operator=( VkAndroidSurfaceCreateInfoKHR const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_android_surface_create_info_KHR ) ); return *this;	}
+operator VkAndroidSurfaceCreateInfoKHR const&() const 
+	{	return *reinterpret_cast<const VkAndroidSurfaceCreateInfoKHR*>(this);	}
+operator VkAndroidSurfaceCreateInfoKHR &() 
+	{	return *reinterpret_cast<VkAndroidSurfaceCreateInfoKHR*>(this);	}
+
+};
+static_assert(
+	sizeof(S_android_surface_create_info_KHR) == sizeof(VkAndroidSurfaceCreateInfoKHR),
+	"struct and wrapper have different size!");
+#endif //VK_USE_PLATFORM_ANDROID_KHR
+
+/*	VkMirSurfaceCreateInfoKHR
+*/
+#ifdef VK_USE_PLATFORM_MIR_KHR
+struct		S_mir_surface_create_info_KHR{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_MIR_SURFACE_CREATE_INFO_KHR;
+	const void * pNext = nullptr;
+public:
+	VkMirSurfaceCreateFlagsKHR flags;
+	MirConnection * connection;
+	MirSurface * mirSurface;
+S_mir_surface_create_info_KHR( VkMirSurfaceCreateInfoKHR const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_mir_surface_create_info_KHR ) );	}
+S_mir_surface_create_info_KHR& operator=( VkMirSurfaceCreateInfoKHR const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_mir_surface_create_info_KHR ) ); return *this;	}
+operator VkMirSurfaceCreateInfoKHR const&() const 
+	{	return *reinterpret_cast<const VkMirSurfaceCreateInfoKHR*>(this);	}
+operator VkMirSurfaceCreateInfoKHR &() 
+	{	return *reinterpret_cast<VkMirSurfaceCreateInfoKHR*>(this);	}
+
+};
+static_assert(
+	sizeof(S_mir_surface_create_info_KHR) == sizeof(VkMirSurfaceCreateInfoKHR),
+	"struct and wrapper have different size!");
+#endif //VK_USE_PLATFORM_MIR_KHR
+
+/*	VkViSurfaceCreateInfoNN
+*/
+#ifdef VK_USE_PLATFORM_VI_NN
+struct		S_vi_surface_create_info_NN{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_VI_SURFACE_CREATE_INFO_NN;
+	const void * pNext = nullptr;
+public:
+	VkViSurfaceCreateFlagsNN flags;
+	void * window;
+S_vi_surface_create_info_NN( VkViSurfaceCreateInfoNN const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_vi_surface_create_info_NN ) );	}
+S_vi_surface_create_info_NN& operator=( VkViSurfaceCreateInfoNN const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_vi_surface_create_info_NN ) ); return *this;	}
+operator VkViSurfaceCreateInfoNN const&() const 
+	{	return *reinterpret_cast<const VkViSurfaceCreateInfoNN*>(this);	}
+operator VkViSurfaceCreateInfoNN &() 
+	{	return *reinterpret_cast<VkViSurfaceCreateInfoNN*>(this);	}
+
+};
+static_assert(
+	sizeof(S_vi_surface_create_info_NN) == sizeof(VkViSurfaceCreateInfoNN),
+	"struct and wrapper have different size!");
+#endif //VK_USE_PLATFORM_VI_NN
+
+/*	VkWaylandSurfaceCreateInfoKHR
+*/
+#ifdef VK_USE_PLATFORM_WAYLAND_KHR
+struct		S_wayland_surface_create_info_KHR{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_WAYLAND_SURFACE_CREATE_INFO_KHR;
+	const void * pNext = nullptr;
+public:
+	VkWaylandSurfaceCreateFlagsKHR flags;
+	struct wl_display * display;
+	struct wl_surface * surface;
+S_wayland_surface_create_info_KHR( VkWaylandSurfaceCreateInfoKHR const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_wayland_surface_create_info_KHR ) );	}
+S_wayland_surface_create_info_KHR& operator=( VkWaylandSurfaceCreateInfoKHR const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_wayland_surface_create_info_KHR ) ); return *this;	}
+operator VkWaylandSurfaceCreateInfoKHR const&() const 
+	{	return *reinterpret_cast<const VkWaylandSurfaceCreateInfoKHR*>(this);	}
+operator VkWaylandSurfaceCreateInfoKHR &() 
+	{	return *reinterpret_cast<VkWaylandSurfaceCreateInfoKHR*>(this);	}
+
+};
+static_assert(
+	sizeof(S_wayland_surface_create_info_KHR) == sizeof(VkWaylandSurfaceCreateInfoKHR),
+	"struct and wrapper have different size!");
+#endif //VK_USE_PLATFORM_WAYLAND_KHR
+
+/*	VkWin32SurfaceCreateInfoKHR
+*/
+#ifdef VK_USE_PLATFORM_WIN32_KHR
+struct		S_win32_surface_create_info_KHR{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_WIN32_SURFACE_CREATE_INFO_KHR;
+	const void * pNext = nullptr;
+public:
+	VkWin32SurfaceCreateFlagsKHR flags;
+	HINSTANCE hinstance;
+	HWND hwnd;
+S_win32_surface_create_info_KHR( VkWin32SurfaceCreateInfoKHR const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_win32_surface_create_info_KHR ) );	}
+S_win32_surface_create_info_KHR& operator=( VkWin32SurfaceCreateInfoKHR const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_win32_surface_create_info_KHR ) ); return *this;	}
+operator VkWin32SurfaceCreateInfoKHR const&() const 
+	{	return *reinterpret_cast<const VkWin32SurfaceCreateInfoKHR*>(this);	}
+operator VkWin32SurfaceCreateInfoKHR &() 
+	{	return *reinterpret_cast<VkWin32SurfaceCreateInfoKHR*>(this);	}
+
+};
+static_assert(
+	sizeof(S_win32_surface_create_info_KHR) == sizeof(VkWin32SurfaceCreateInfoKHR),
+	"struct and wrapper have different size!");
+#endif //VK_USE_PLATFORM_WIN32_KHR
+
+/*	VkXlibSurfaceCreateInfoKHR
+*/
+#ifdef VK_USE_PLATFORM_XLIB_KHR
+struct		S_xlib_surface_create_info_KHR{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_XLIB_SURFACE_CREATE_INFO_KHR;
+	const void * pNext = nullptr;
+public:
+	VkXlibSurfaceCreateFlagsKHR flags;
+	Display * dpy;
+	Window window;
+S_xlib_surface_create_info_KHR( VkXlibSurfaceCreateInfoKHR const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_xlib_surface_create_info_KHR ) );	}
+S_xlib_surface_create_info_KHR& operator=( VkXlibSurfaceCreateInfoKHR const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_xlib_surface_create_info_KHR ) ); return *this;	}
+operator VkXlibSurfaceCreateInfoKHR const&() const 
+	{	return *reinterpret_cast<const VkXlibSurfaceCreateInfoKHR*>(this);	}
+operator VkXlibSurfaceCreateInfoKHR &() 
+	{	return *reinterpret_cast<VkXlibSurfaceCreateInfoKHR*>(this);	}
+
+};
+static_assert(
+	sizeof(S_xlib_surface_create_info_KHR) == sizeof(VkXlibSurfaceCreateInfoKHR),
+	"struct and wrapper have different size!");
+#endif //VK_USE_PLATFORM_XLIB_KHR
+
+/*	VkXcbSurfaceCreateInfoKHR
+*/
+#ifdef VK_USE_PLATFORM_XCB_KHR
+struct		S_xcb_surface_create_info_KHR{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_XCB_SURFACE_CREATE_INFO_KHR;
+	const void * pNext = nullptr;
+public:
+	VkXcbSurfaceCreateFlagsKHR flags;
+	xcb_connection_t * connection;
+	xcb_window_t window;
+S_xcb_surface_create_info_KHR( VkXcbSurfaceCreateInfoKHR const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_xcb_surface_create_info_KHR ) );	}
+S_xcb_surface_create_info_KHR& operator=( VkXcbSurfaceCreateInfoKHR const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_xcb_surface_create_info_KHR ) ); return *this;	}
+operator VkXcbSurfaceCreateInfoKHR const&() const 
+	{	return *reinterpret_cast<const VkXcbSurfaceCreateInfoKHR*>(this);	}
+operator VkXcbSurfaceCreateInfoKHR &() 
+	{	return *reinterpret_cast<VkXcbSurfaceCreateInfoKHR*>(this);	}
+
+};
+static_assert(
+	sizeof(S_xcb_surface_create_info_KHR) == sizeof(VkXcbSurfaceCreateInfoKHR),
+	"struct and wrapper have different size!");
+#endif //VK_USE_PLATFORM_XCB_KHR
+
+/*	VkPresentInfoKHR
+ex:
+	VkDisplayPresentInfoKHR
+	VkPresentRegionsKHR
+	VkDeviceGroupPresentInfoKHR
+	VkPresentTimesInfoGOOGLE
+*/
+struct		S_present_info_KHR{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_PRESENT_INFO_KHR;
+	const void * pNext = nullptr;
+public:
+	uint32_t waitSemaphoreCount;
+	const VkSemaphore * pWaitSemaphores;
+	uint32_t swapchainCount;
+	const VkSwapchainKHR * pSwapchains;
+	const uint32_t * pImageIndices;
+	E_result * pResults;
+S_present_info_KHR( VkPresentInfoKHR const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_present_info_KHR ) );	}
+S_present_info_KHR& operator=( VkPresentInfoKHR const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_present_info_KHR ) ); return *this;	}
+operator VkPresentInfoKHR const&() const 
+	{	return *reinterpret_cast<const VkPresentInfoKHR*>(this);	}
+operator VkPresentInfoKHR &() 
+	{	return *reinterpret_cast<VkPresentInfoKHR*>(this);	}
+
+};
+static_assert(
+	sizeof(S_present_info_KHR) == sizeof(VkPresentInfoKHR),
+	"struct and wrapper have different size!");
+
+/*	VkDebugReportCallbackCreateInfoEXT
+ex to: VkInstanceCreateInfo
+*/
+struct		S_debug_report_callback_create_info_EXT{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_DEBUG_REPORT_CALLBACK_CREATE_INFO_EXT;
+	const void * pNext = nullptr;
+public:
+	F_debug_report_EXT flags;
+	PFN_vkDebugReportCallbackEXT pfnCallback;
+	void * pUserData;
+S_debug_report_callback_create_info_EXT( VkDebugReportCallbackCreateInfoEXT const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_debug_report_callback_create_info_EXT ) );	}
+S_debug_report_callback_create_info_EXT& operator=( VkDebugReportCallbackCreateInfoEXT const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_debug_report_callback_create_info_EXT ) ); return *this;	}
+operator VkDebugReportCallbackCreateInfoEXT const&() const 
+	{	return *reinterpret_cast<const VkDebugReportCallbackCreateInfoEXT*>(this);	}
+operator VkDebugReportCallbackCreateInfoEXT &() 
+	{	return *reinterpret_cast<VkDebugReportCallbackCreateInfoEXT*>(this);	}
+
+};
+static_assert(
+	sizeof(S_debug_report_callback_create_info_EXT) == sizeof(VkDebugReportCallbackCreateInfoEXT),
+	"struct and wrapper have different size!");
+
+/*	VkValidationFlagsEXT
+ex to: VkInstanceCreateInfo
+*/
+struct		S_validation_flags_EXT{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_VALIDATION_FLAGS_EXT;
+	const void * pNext = nullptr;
+public:
+	uint32_t disabledValidationCheckCount;
+	const E_validation_check_EXT * pDisabledValidationChecks;
+S_validation_flags_EXT( VkValidationFlagsEXT const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_validation_flags_EXT ) );	}
+S_validation_flags_EXT& operator=( VkValidationFlagsEXT const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_validation_flags_EXT ) ); return *this;	}
+operator VkValidationFlagsEXT const&() const 
+	{	return *reinterpret_cast<const VkValidationFlagsEXT*>(this);	}
+operator VkValidationFlagsEXT &() 
+	{	return *reinterpret_cast<VkValidationFlagsEXT*>(this);	}
+
+};
+static_assert(
+	sizeof(S_validation_flags_EXT) == sizeof(VkValidationFlagsEXT),
+	"struct and wrapper have different size!");
+
+/*	VkPipelineRasterizationStateRasterizationOrderAMD
+ex to: VkPipelineRasterizationStateCreateInfo
+*/
+struct		S_pipeline_rasterization_state_rasterization_order_AMD{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_STATE_RASTERIZATION_ORDER_AMD;
+	const void * pNext = nullptr;
+public:
+	E_rasterization_order_AMD rasterizationOrder;
+S_pipeline_rasterization_state_rasterization_order_AMD( VkPipelineRasterizationStateRasterizationOrderAMD const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_pipeline_rasterization_state_rasterization_order_AMD ) );	}
+S_pipeline_rasterization_state_rasterization_order_AMD& operator=( VkPipelineRasterizationStateRasterizationOrderAMD const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_pipeline_rasterization_state_rasterization_order_AMD ) ); return *this;	}
+operator VkPipelineRasterizationStateRasterizationOrderAMD const&() const 
+	{	return *reinterpret_cast<const VkPipelineRasterizationStateRasterizationOrderAMD*>(this);	}
+operator VkPipelineRasterizationStateRasterizationOrderAMD &() 
+	{	return *reinterpret_cast<VkPipelineRasterizationStateRasterizationOrderAMD*>(this);	}
+
+};
+static_assert(
+	sizeof(S_pipeline_rasterization_state_rasterization_order_AMD) == sizeof(VkPipelineRasterizationStateRasterizationOrderAMD),
+	"struct and wrapper have different size!");
+
+/*	VkDebugMarkerObjectNameInfoEXT
+*/
+struct		S_debug_marker_object_name_info_EXT{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_DEBUG_MARKER_OBJECT_NAME_INFO_EXT;
+	const void * pNext = nullptr;
+public:
+	E_debug_report_object_type_EXT objectType;
+	uint64_t object;
+	const char * pObjectName;
+S_debug_marker_object_name_info_EXT( VkDebugMarkerObjectNameInfoEXT const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_debug_marker_object_name_info_EXT ) );	}
+S_debug_marker_object_name_info_EXT& operator=( VkDebugMarkerObjectNameInfoEXT const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_debug_marker_object_name_info_EXT ) ); return *this;	}
+operator VkDebugMarkerObjectNameInfoEXT const&() const 
+	{	return *reinterpret_cast<const VkDebugMarkerObjectNameInfoEXT*>(this);	}
+operator VkDebugMarkerObjectNameInfoEXT &() 
+	{	return *reinterpret_cast<VkDebugMarkerObjectNameInfoEXT*>(this);	}
+
+};
+static_assert(
+	sizeof(S_debug_marker_object_name_info_EXT) == sizeof(VkDebugMarkerObjectNameInfoEXT),
+	"struct and wrapper have different size!");
+
+/*	VkDebugMarkerObjectTagInfoEXT
+*/
+struct		S_debug_marker_object_tag_info_EXT{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_DEBUG_MARKER_OBJECT_TAG_INFO_EXT;
+	const void * pNext = nullptr;
+public:
+	E_debug_report_object_type_EXT objectType;
+	uint64_t object;
+	uint64_t tagName;
+	size_t tagSize;
+	const void * pTag;
+S_debug_marker_object_tag_info_EXT( VkDebugMarkerObjectTagInfoEXT const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_debug_marker_object_tag_info_EXT ) );	}
+S_debug_marker_object_tag_info_EXT& operator=( VkDebugMarkerObjectTagInfoEXT const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_debug_marker_object_tag_info_EXT ) ); return *this;	}
+operator VkDebugMarkerObjectTagInfoEXT const&() const 
+	{	return *reinterpret_cast<const VkDebugMarkerObjectTagInfoEXT*>(this);	}
+operator VkDebugMarkerObjectTagInfoEXT &() 
+	{	return *reinterpret_cast<VkDebugMarkerObjectTagInfoEXT*>(this);	}
+
+};
+static_assert(
+	sizeof(S_debug_marker_object_tag_info_EXT) == sizeof(VkDebugMarkerObjectTagInfoEXT),
+	"struct and wrapper have different size!");
+
+/*	VkDebugMarkerMarkerInfoEXT
+*/
+struct		S_debug_marker_marker_info_EXT{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_DEBUG_MARKER_MARKER_INFO_EXT;
+	const void * pNext = nullptr;
+public:
+	const char * pMarkerName;
+	float color[4];
+S_debug_marker_marker_info_EXT( VkDebugMarkerMarkerInfoEXT const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_debug_marker_marker_info_EXT ) );	}
+S_debug_marker_marker_info_EXT& operator=( VkDebugMarkerMarkerInfoEXT const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_debug_marker_marker_info_EXT ) ); return *this;	}
+operator VkDebugMarkerMarkerInfoEXT const&() const 
+	{	return *reinterpret_cast<const VkDebugMarkerMarkerInfoEXT*>(this);	}
+operator VkDebugMarkerMarkerInfoEXT &() 
+	{	return *reinterpret_cast<VkDebugMarkerMarkerInfoEXT*>(this);	}
+
+};
+static_assert(
+	sizeof(S_debug_marker_marker_info_EXT) == sizeof(VkDebugMarkerMarkerInfoEXT),
+	"struct and wrapper have different size!");
+
+/*	VkDedicatedAllocationImageCreateInfoNV
+ex to: VkImageCreateInfo
+*/
+struct		S_dedicated_allocation_image_create_info_NV{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_DEDICATED_ALLOCATION_IMAGE_CREATE_INFO_NV;
+	const void * pNext = nullptr;
+public:
+	VkBool32 dedicatedAllocation;
+S_dedicated_allocation_image_create_info_NV( VkDedicatedAllocationImageCreateInfoNV const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_dedicated_allocation_image_create_info_NV ) );	}
+S_dedicated_allocation_image_create_info_NV& operator=( VkDedicatedAllocationImageCreateInfoNV const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_dedicated_allocation_image_create_info_NV ) ); return *this;	}
+operator VkDedicatedAllocationImageCreateInfoNV const&() const 
+	{	return *reinterpret_cast<const VkDedicatedAllocationImageCreateInfoNV*>(this);	}
+operator VkDedicatedAllocationImageCreateInfoNV &() 
+	{	return *reinterpret_cast<VkDedicatedAllocationImageCreateInfoNV*>(this);	}
+
+};
+static_assert(
+	sizeof(S_dedicated_allocation_image_create_info_NV) == sizeof(VkDedicatedAllocationImageCreateInfoNV),
+	"struct and wrapper have different size!");
+
+/*	VkDedicatedAllocationBufferCreateInfoNV
+ex to: VkBufferCreateInfo
+*/
+struct		S_dedicated_allocation_buffer_create_info_NV{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_DEDICATED_ALLOCATION_BUFFER_CREATE_INFO_NV;
+	const void * pNext = nullptr;
+public:
+	VkBool32 dedicatedAllocation;
+S_dedicated_allocation_buffer_create_info_NV( VkDedicatedAllocationBufferCreateInfoNV const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_dedicated_allocation_buffer_create_info_NV ) );	}
+S_dedicated_allocation_buffer_create_info_NV& operator=( VkDedicatedAllocationBufferCreateInfoNV const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_dedicated_allocation_buffer_create_info_NV ) ); return *this;	}
+operator VkDedicatedAllocationBufferCreateInfoNV const&() const 
+	{	return *reinterpret_cast<const VkDedicatedAllocationBufferCreateInfoNV*>(this);	}
+operator VkDedicatedAllocationBufferCreateInfoNV &() 
+	{	return *reinterpret_cast<VkDedicatedAllocationBufferCreateInfoNV*>(this);	}
+
+};
+static_assert(
+	sizeof(S_dedicated_allocation_buffer_create_info_NV) == sizeof(VkDedicatedAllocationBufferCreateInfoNV),
+	"struct and wrapper have different size!");
+
+/*	VkDedicatedAllocationMemoryAllocateInfoNV
+ex to: VkMemoryAllocateInfo
+*/
+struct		S_dedicated_allocation_memory_allocate_info_NV{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_DEDICATED_ALLOCATION_MEMORY_ALLOCATE_INFO_NV;
+	const void * pNext = nullptr;
+public:
+	VkImage image;
+	VkBuffer buffer;
+S_dedicated_allocation_memory_allocate_info_NV( VkDedicatedAllocationMemoryAllocateInfoNV const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_dedicated_allocation_memory_allocate_info_NV ) );	}
+S_dedicated_allocation_memory_allocate_info_NV& operator=( VkDedicatedAllocationMemoryAllocateInfoNV const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_dedicated_allocation_memory_allocate_info_NV ) ); return *this;	}
+operator VkDedicatedAllocationMemoryAllocateInfoNV const&() const 
+	{	return *reinterpret_cast<const VkDedicatedAllocationMemoryAllocateInfoNV*>(this);	}
+operator VkDedicatedAllocationMemoryAllocateInfoNV &() 
+	{	return *reinterpret_cast<VkDedicatedAllocationMemoryAllocateInfoNV*>(this);	}
+
+};
+static_assert(
+	sizeof(S_dedicated_allocation_memory_allocate_info_NV) == sizeof(VkDedicatedAllocationMemoryAllocateInfoNV),
+	"struct and wrapper have different size!");
+
+/*	VkExternalMemoryImageCreateInfoNV
+ex to: VkImageCreateInfo
+*/
+struct		S_external_memory_image_create_info_NV{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_EXTERNAL_MEMORY_IMAGE_CREATE_INFO_NV;
+	const void * pNext = nullptr;
+public:
+	F_external_memory_handle_type_NV handleTypes;
+S_external_memory_image_create_info_NV( VkExternalMemoryImageCreateInfoNV const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_external_memory_image_create_info_NV ) );	}
+S_external_memory_image_create_info_NV& operator=( VkExternalMemoryImageCreateInfoNV const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_external_memory_image_create_info_NV ) ); return *this;	}
+operator VkExternalMemoryImageCreateInfoNV const&() const 
+	{	return *reinterpret_cast<const VkExternalMemoryImageCreateInfoNV*>(this);	}
+operator VkExternalMemoryImageCreateInfoNV &() 
+	{	return *reinterpret_cast<VkExternalMemoryImageCreateInfoNV*>(this);	}
+
+};
+static_assert(
+	sizeof(S_external_memory_image_create_info_NV) == sizeof(VkExternalMemoryImageCreateInfoNV),
+	"struct and wrapper have different size!");
+
+/*	VkExportMemoryAllocateInfoNV
+ex to: VkMemoryAllocateInfo
+*/
+struct		S_export_memory_allocate_info_NV{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_EXPORT_MEMORY_ALLOCATE_INFO_NV;
+	const void * pNext = nullptr;
+public:
+	F_external_memory_handle_type_NV handleTypes;
+S_export_memory_allocate_info_NV( VkExportMemoryAllocateInfoNV const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_export_memory_allocate_info_NV ) );	}
+S_export_memory_allocate_info_NV& operator=( VkExportMemoryAllocateInfoNV const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_export_memory_allocate_info_NV ) ); return *this;	}
+operator VkExportMemoryAllocateInfoNV const&() const 
+	{	return *reinterpret_cast<const VkExportMemoryAllocateInfoNV*>(this);	}
+operator VkExportMemoryAllocateInfoNV &() 
+	{	return *reinterpret_cast<VkExportMemoryAllocateInfoNV*>(this);	}
+
+};
+static_assert(
+	sizeof(S_export_memory_allocate_info_NV) == sizeof(VkExportMemoryAllocateInfoNV),
+	"struct and wrapper have different size!");
+
+/*	VkImportMemoryWin32HandleInfoNV
+ex to: VkMemoryAllocateInfo
+*/
+struct		S_import_memory_win32_handle_info_NV{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_IMPORT_MEMORY_WIN32_HANDLE_INFO_NV;
+	const void * pNext = nullptr;
+public:
+	F_external_memory_handle_type_NV handleType;
+	HANDLE handle;
+S_import_memory_win32_handle_info_NV( VkImportMemoryWin32HandleInfoNV const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_import_memory_win32_handle_info_NV ) );	}
+S_import_memory_win32_handle_info_NV& operator=( VkImportMemoryWin32HandleInfoNV const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_import_memory_win32_handle_info_NV ) ); return *this;	}
+operator VkImportMemoryWin32HandleInfoNV const&() const 
+	{	return *reinterpret_cast<const VkImportMemoryWin32HandleInfoNV*>(this);	}
+operator VkImportMemoryWin32HandleInfoNV &() 
+	{	return *reinterpret_cast<VkImportMemoryWin32HandleInfoNV*>(this);	}
+
+};
+static_assert(
+	sizeof(S_import_memory_win32_handle_info_NV) == sizeof(VkImportMemoryWin32HandleInfoNV),
+	"struct and wrapper have different size!");
+
+/*	VkExportMemoryWin32HandleInfoNV
+ex to: VkMemoryAllocateInfo
+*/
+struct		S_export_memory_win32_handle_info_NV{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_EXPORT_MEMORY_WIN32_HANDLE_INFO_NV;
+	const void * pNext = nullptr;
+public:
+	const SECURITY_ATTRIBUTES * pAttributes;
+	DWORD dwAccess;
+S_export_memory_win32_handle_info_NV( VkExportMemoryWin32HandleInfoNV const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_export_memory_win32_handle_info_NV ) );	}
+S_export_memory_win32_handle_info_NV& operator=( VkExportMemoryWin32HandleInfoNV const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_export_memory_win32_handle_info_NV ) ); return *this;	}
+operator VkExportMemoryWin32HandleInfoNV const&() const 
+	{	return *reinterpret_cast<const VkExportMemoryWin32HandleInfoNV*>(this);	}
+operator VkExportMemoryWin32HandleInfoNV &() 
+	{	return *reinterpret_cast<VkExportMemoryWin32HandleInfoNV*>(this);	}
+
+};
+static_assert(
+	sizeof(S_export_memory_win32_handle_info_NV) == sizeof(VkExportMemoryWin32HandleInfoNV),
+	"struct and wrapper have different size!");
+
+/*	VkWin32KeyedMutexAcquireReleaseInfoNV
+ex to: VkSubmitInfo
+*/
+#ifdef VK_USE_PLATFORM_WIN32_KHR
+struct		S_win32_keyed_mutex_acquire_release_info_NV{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_WIN32_KEYED_MUTEX_ACQUIRE_RELEASE_INFO_NV;
+	const void * pNext = nullptr;
+public:
+	uint32_t acquireCount;
+	const VkDeviceMemory * pAcquireSyncs;
+	const uint64_t * pAcquireKeys;
+	const uint32_t * pAcquireTimeoutMilliseconds;
+	uint32_t releaseCount;
+	const VkDeviceMemory * pReleaseSyncs;
+	const uint64_t * pReleaseKeys;
+S_win32_keyed_mutex_acquire_release_info_NV( VkWin32KeyedMutexAcquireReleaseInfoNV const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_win32_keyed_mutex_acquire_release_info_NV ) );	}
+S_win32_keyed_mutex_acquire_release_info_NV& operator=( VkWin32KeyedMutexAcquireReleaseInfoNV const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_win32_keyed_mutex_acquire_release_info_NV ) ); return *this;	}
+operator VkWin32KeyedMutexAcquireReleaseInfoNV const&() const 
+	{	return *reinterpret_cast<const VkWin32KeyedMutexAcquireReleaseInfoNV*>(this);	}
+operator VkWin32KeyedMutexAcquireReleaseInfoNV &() 
+	{	return *reinterpret_cast<VkWin32KeyedMutexAcquireReleaseInfoNV*>(this);	}
+
+};
+static_assert(
+	sizeof(S_win32_keyed_mutex_acquire_release_info_NV) == sizeof(VkWin32KeyedMutexAcquireReleaseInfoNV),
+	"struct and wrapper have different size!");
+#endif //VK_USE_PLATFORM_WIN32_KHR
+
+/*	VkDeviceGeneratedCommandsFeaturesNVX
+*/
+struct		S_device_generated_commands_features_NVX{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_DEVICE_GENERATED_COMMANDS_FEATURES_NVX;
+	const void * pNext = nullptr;
+public:
+	VkBool32 computeBindingPointSupport;
+S_device_generated_commands_features_NVX( VkDeviceGeneratedCommandsFeaturesNVX const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_device_generated_commands_features_NVX ) );	}
+S_device_generated_commands_features_NVX& operator=( VkDeviceGeneratedCommandsFeaturesNVX const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_device_generated_commands_features_NVX ) ); return *this;	}
+operator VkDeviceGeneratedCommandsFeaturesNVX const&() const 
+	{	return *reinterpret_cast<const VkDeviceGeneratedCommandsFeaturesNVX*>(this);	}
+operator VkDeviceGeneratedCommandsFeaturesNVX &() 
+	{	return *reinterpret_cast<VkDeviceGeneratedCommandsFeaturesNVX*>(this);	}
+
+};
+static_assert(
+	sizeof(S_device_generated_commands_features_NVX) == sizeof(VkDeviceGeneratedCommandsFeaturesNVX),
+	"struct and wrapper have different size!");
+
+/*	VkDeviceGeneratedCommandsLimitsNVX
+*/
+struct		S_device_generated_commands_limits_NVX{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_DEVICE_GENERATED_COMMANDS_LIMITS_NVX;
+	const void * pNext = nullptr;
+public:
+	uint32_t maxIndirectCommandsLayoutTokenCount;
+	uint32_t maxObjectEntryCounts;
+	uint32_t minSequenceCountBufferOffsetAlignment;
+	uint32_t minSequenceIndexBufferOffsetAlignment;
+	uint32_t minCommandsTokenBufferOffsetAlignment;
+S_device_generated_commands_limits_NVX( VkDeviceGeneratedCommandsLimitsNVX const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_device_generated_commands_limits_NVX ) );	}
+S_device_generated_commands_limits_NVX& operator=( VkDeviceGeneratedCommandsLimitsNVX const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_device_generated_commands_limits_NVX ) ); return *this;	}
+operator VkDeviceGeneratedCommandsLimitsNVX const&() const 
+	{	return *reinterpret_cast<const VkDeviceGeneratedCommandsLimitsNVX*>(this);	}
+operator VkDeviceGeneratedCommandsLimitsNVX &() 
+	{	return *reinterpret_cast<VkDeviceGeneratedCommandsLimitsNVX*>(this);	}
+
+};
+static_assert(
+	sizeof(S_device_generated_commands_limits_NVX) == sizeof(VkDeviceGeneratedCommandsLimitsNVX),
+	"struct and wrapper have different size!");
+
+/*	VkCmdReserveSpaceForCommandsInfoNVX
+*/
+struct		S_cmd_reserve_space_for_commands_info_NVX{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_CMD_RESERVE_SPACE_FOR_COMMANDS_INFO_NVX;
+	const void * pNext = nullptr;
+public:
+	VkObjectTableNVX objectTable;
+	VkIndirectCommandsLayoutNVX indirectCommandsLayout;
+	uint32_t maxSequencesCount;
+S_cmd_reserve_space_for_commands_info_NVX( VkCmdReserveSpaceForCommandsInfoNVX const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_cmd_reserve_space_for_commands_info_NVX ) );	}
+S_cmd_reserve_space_for_commands_info_NVX& operator=( VkCmdReserveSpaceForCommandsInfoNVX const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_cmd_reserve_space_for_commands_info_NVX ) ); return *this;	}
+operator VkCmdReserveSpaceForCommandsInfoNVX const&() const 
+	{	return *reinterpret_cast<const VkCmdReserveSpaceForCommandsInfoNVX*>(this);	}
+operator VkCmdReserveSpaceForCommandsInfoNVX &() 
+	{	return *reinterpret_cast<VkCmdReserveSpaceForCommandsInfoNVX*>(this);	}
+
+};
+static_assert(
+	sizeof(S_cmd_reserve_space_for_commands_info_NVX) == sizeof(VkCmdReserveSpaceForCommandsInfoNVX),
+	"struct and wrapper have different size!");
+
+/*	VkObjectTableCreateInfoNVX
+*/
+struct		S_object_table_create_info_NVX{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_OBJECT_TABLE_CREATE_INFO_NVX;
+	const void * pNext = nullptr;
+public:
+	uint32_t objectCount;
+	const E_object_entry_type_NVX * pObjectEntryTypes;
+	const uint32_t * pObjectEntryCounts;
+	const F_object_entry_usage_NVX * pObjectEntryUsageFlags;
+	uint32_t maxUniformBuffersPerDescriptor;
+	uint32_t maxStorageBuffersPerDescriptor;
+	uint32_t maxStorageImagesPerDescriptor;
+	uint32_t maxSampledImagesPerDescriptor;
+	uint32_t maxPipelineLayouts;
+S_object_table_create_info_NVX( VkObjectTableCreateInfoNVX const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_object_table_create_info_NVX ) );	}
+S_object_table_create_info_NVX& operator=( VkObjectTableCreateInfoNVX const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_object_table_create_info_NVX ) ); return *this;	}
+operator VkObjectTableCreateInfoNVX const&() const 
+	{	return *reinterpret_cast<const VkObjectTableCreateInfoNVX*>(this);	}
+operator VkObjectTableCreateInfoNVX &() 
+	{	return *reinterpret_cast<VkObjectTableCreateInfoNVX*>(this);	}
+
+};
+static_assert(
+	sizeof(S_object_table_create_info_NVX) == sizeof(VkObjectTableCreateInfoNVX),
+	"struct and wrapper have different size!");
+
+/*	VkPhysicalDeviceImageFormatInfo2
+ex:
+	VkPhysicalDeviceExternalImageFormatInfo
+	VkPhysicalDeviceImageDrmFormatModifierInfoEXT
+*/
+struct		S_physical_device_image_format_info2{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_FORMAT_INFO_2;
+	const void * pNext = nullptr;
+public:
+	E_format format;
+	E_image_type type;
+	E_image_tiling tiling;
+	F_image_usage usage;
+	F_image_create flags;
+S_physical_device_image_format_info2( VkPhysicalDeviceImageFormatInfo2 const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_physical_device_image_format_info2 ) );	}
+S_physical_device_image_format_info2& operator=( VkPhysicalDeviceImageFormatInfo2 const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_physical_device_image_format_info2 ) ); return *this;	}
+operator VkPhysicalDeviceImageFormatInfo2 const&() const 
+	{	return *reinterpret_cast<const VkPhysicalDeviceImageFormatInfo2*>(this);	}
+operator VkPhysicalDeviceImageFormatInfo2 &() 
+	{	return *reinterpret_cast<VkPhysicalDeviceImageFormatInfo2*>(this);	}
+
+};
+static_assert(
+	sizeof(S_physical_device_image_format_info2) == sizeof(VkPhysicalDeviceImageFormatInfo2),
+	"struct and wrapper have different size!");
+
+/*	VkPhysicalDeviceSparseImageFormatInfo2
+*/
+struct		S_physical_device_sparse_image_format_info2{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SPARSE_IMAGE_FORMAT_INFO_2;
+	const void * pNext = nullptr;
+public:
+	E_format format;
+	E_image_type type;
+	F_sample_count samples;
+	F_image_usage usage;
+	E_image_tiling tiling;
+S_physical_device_sparse_image_format_info2( VkPhysicalDeviceSparseImageFormatInfo2 const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_physical_device_sparse_image_format_info2 ) );	}
+S_physical_device_sparse_image_format_info2& operator=( VkPhysicalDeviceSparseImageFormatInfo2 const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_physical_device_sparse_image_format_info2 ) ); return *this;	}
+operator VkPhysicalDeviceSparseImageFormatInfo2 const&() const 
+	{	return *reinterpret_cast<const VkPhysicalDeviceSparseImageFormatInfo2*>(this);	}
+operator VkPhysicalDeviceSparseImageFormatInfo2 &() 
+	{	return *reinterpret_cast<VkPhysicalDeviceSparseImageFormatInfo2*>(this);	}
+
+};
+static_assert(
+	sizeof(S_physical_device_sparse_image_format_info2) == sizeof(VkPhysicalDeviceSparseImageFormatInfo2),
+	"struct and wrapper have different size!");
+
+/*	VkPhysicalDevicePushDescriptorPropertiesKHR
+ex to: VkPhysicalDeviceProperties2
+*/
+struct		S_physical_device_push_descriptor_properties_KHR{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PUSH_DESCRIPTOR_PROPERTIES_KHR;
+	void * pNext = nullptr;
+public:
+	uint32_t maxPushDescriptors;
+S_physical_device_push_descriptor_properties_KHR( VkPhysicalDevicePushDescriptorPropertiesKHR const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_physical_device_push_descriptor_properties_KHR ) );	}
+S_physical_device_push_descriptor_properties_KHR& operator=( VkPhysicalDevicePushDescriptorPropertiesKHR const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_physical_device_push_descriptor_properties_KHR ) ); return *this;	}
+operator VkPhysicalDevicePushDescriptorPropertiesKHR const&() const 
+	{	return *reinterpret_cast<const VkPhysicalDevicePushDescriptorPropertiesKHR*>(this);	}
+operator VkPhysicalDevicePushDescriptorPropertiesKHR &() 
+	{	return *reinterpret_cast<VkPhysicalDevicePushDescriptorPropertiesKHR*>(this);	}
+
+};
+static_assert(
+	sizeof(S_physical_device_push_descriptor_properties_KHR) == sizeof(VkPhysicalDevicePushDescriptorPropertiesKHR),
+	"struct and wrapper have different size!");
+
+/*	VkPhysicalDeviceVariablePointerFeatures
+ex to: VkPhysicalDeviceFeatures2,VkDeviceCreateInfo
+*/
+struct		S_physical_device_variable_pointer_features{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VARIABLE_POINTER_FEATURES;
+	void * pNext = nullptr;
+public:
+	VkBool32 variablePointersStorageBuffer;
+	VkBool32 variablePointers;
+S_physical_device_variable_pointer_features( VkPhysicalDeviceVariablePointerFeatures const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_physical_device_variable_pointer_features ) );	}
+S_physical_device_variable_pointer_features& operator=( VkPhysicalDeviceVariablePointerFeatures const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_physical_device_variable_pointer_features ) ); return *this;	}
+operator VkPhysicalDeviceVariablePointerFeatures const&() const 
+	{	return *reinterpret_cast<const VkPhysicalDeviceVariablePointerFeatures*>(this);	}
+operator VkPhysicalDeviceVariablePointerFeatures &() 
+	{	return *reinterpret_cast<VkPhysicalDeviceVariablePointerFeatures*>(this);	}
+
+};
+static_assert(
+	sizeof(S_physical_device_variable_pointer_features) == sizeof(VkPhysicalDeviceVariablePointerFeatures),
+	"struct and wrapper have different size!");
+
+/*	VkPhysicalDeviceExternalImageFormatInfo
+ex to: VkPhysicalDeviceImageFormatInfo2
+*/
+struct		S_physical_device_external_image_format_info{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_IMAGE_FORMAT_INFO;
+	const void * pNext = nullptr;
+public:
+	F_external_memory_handle_type handleType;
+S_physical_device_external_image_format_info( VkPhysicalDeviceExternalImageFormatInfo const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_physical_device_external_image_format_info ) );	}
+S_physical_device_external_image_format_info& operator=( VkPhysicalDeviceExternalImageFormatInfo const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_physical_device_external_image_format_info ) ); return *this;	}
+operator VkPhysicalDeviceExternalImageFormatInfo const&() const 
+	{	return *reinterpret_cast<const VkPhysicalDeviceExternalImageFormatInfo*>(this);	}
+operator VkPhysicalDeviceExternalImageFormatInfo &() 
+	{	return *reinterpret_cast<VkPhysicalDeviceExternalImageFormatInfo*>(this);	}
+
+};
+static_assert(
+	sizeof(S_physical_device_external_image_format_info) == sizeof(VkPhysicalDeviceExternalImageFormatInfo),
+	"struct and wrapper have different size!");
+
+/*	VkPhysicalDeviceExternalBufferInfo
+*/
+struct		S_physical_device_external_buffer_info{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_BUFFER_INFO;
+	const void * pNext = nullptr;
+public:
+	F_buffer_create flags;
+	F_buffer_usage usage;
+	F_external_memory_handle_type handleType;
+S_physical_device_external_buffer_info( VkPhysicalDeviceExternalBufferInfo const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_physical_device_external_buffer_info ) );	}
+S_physical_device_external_buffer_info& operator=( VkPhysicalDeviceExternalBufferInfo const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_physical_device_external_buffer_info ) ); return *this;	}
+operator VkPhysicalDeviceExternalBufferInfo const&() const 
+	{	return *reinterpret_cast<const VkPhysicalDeviceExternalBufferInfo*>(this);	}
+operator VkPhysicalDeviceExternalBufferInfo &() 
+	{	return *reinterpret_cast<VkPhysicalDeviceExternalBufferInfo*>(this);	}
+
+};
+static_assert(
+	sizeof(S_physical_device_external_buffer_info) == sizeof(VkPhysicalDeviceExternalBufferInfo),
+	"struct and wrapper have different size!");
+
+/*	VkPhysicalDeviceIDProperties
+(returnedonly)
+ex to: VkPhysicalDeviceProperties2
+*/
+struct		S_physical_device_id_properties{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ID_PROPERTIES;
+	void * pNext = nullptr;
+public:
+	uint8_t deviceUUID[VK_UUID_SIZE];
+	uint8_t driverUUID[VK_UUID_SIZE];
+	uint8_t deviceLUID[VK_LUID_SIZE];
+	uint32_t deviceNodeMask;
+	VkBool32 deviceLUIDValid;
+S_physical_device_id_properties( VkPhysicalDeviceIDProperties const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_physical_device_id_properties ) );	}
+S_physical_device_id_properties& operator=( VkPhysicalDeviceIDProperties const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_physical_device_id_properties ) ); return *this;	}
+operator VkPhysicalDeviceIDProperties const&() const 
+	{	return *reinterpret_cast<const VkPhysicalDeviceIDProperties*>(this);	}
+operator VkPhysicalDeviceIDProperties &() 
+	{	return *reinterpret_cast<VkPhysicalDeviceIDProperties*>(this);	}
+
+};
+static_assert(
+	sizeof(S_physical_device_id_properties) == sizeof(VkPhysicalDeviceIDProperties),
+	"struct and wrapper have different size!");
+
+/*	VkExternalMemoryImageCreateInfo
+ex to: VkImageCreateInfo
+*/
+struct		S_external_memory_image_create_info{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_EXTERNAL_MEMORY_IMAGE_CREATE_INFO;
+	const void * pNext = nullptr;
+public:
+	F_external_memory_handle_type handleTypes;
+S_external_memory_image_create_info( VkExternalMemoryImageCreateInfo const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_external_memory_image_create_info ) );	}
+S_external_memory_image_create_info& operator=( VkExternalMemoryImageCreateInfo const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_external_memory_image_create_info ) ); return *this;	}
+operator VkExternalMemoryImageCreateInfo const&() const 
+	{	return *reinterpret_cast<const VkExternalMemoryImageCreateInfo*>(this);	}
+operator VkExternalMemoryImageCreateInfo &() 
+	{	return *reinterpret_cast<VkExternalMemoryImageCreateInfo*>(this);	}
+
+};
+static_assert(
+	sizeof(S_external_memory_image_create_info) == sizeof(VkExternalMemoryImageCreateInfo),
+	"struct and wrapper have different size!");
+
+/*	VkExternalMemoryBufferCreateInfo
+ex to: VkBufferCreateInfo
+*/
+struct		S_external_memory_buffer_create_info{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_EXTERNAL_MEMORY_BUFFER_CREATE_INFO;
+	const void * pNext = nullptr;
+public:
+	F_external_memory_handle_type handleTypes;
+S_external_memory_buffer_create_info( VkExternalMemoryBufferCreateInfo const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_external_memory_buffer_create_info ) );	}
+S_external_memory_buffer_create_info& operator=( VkExternalMemoryBufferCreateInfo const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_external_memory_buffer_create_info ) ); return *this;	}
+operator VkExternalMemoryBufferCreateInfo const&() const 
+	{	return *reinterpret_cast<const VkExternalMemoryBufferCreateInfo*>(this);	}
+operator VkExternalMemoryBufferCreateInfo &() 
+	{	return *reinterpret_cast<VkExternalMemoryBufferCreateInfo*>(this);	}
+
+};
+static_assert(
+	sizeof(S_external_memory_buffer_create_info) == sizeof(VkExternalMemoryBufferCreateInfo),
+	"struct and wrapper have different size!");
+
+/*	VkExportMemoryAllocateInfo
+ex to: VkMemoryAllocateInfo
+*/
+struct		S_export_memory_allocate_info{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_EXPORT_MEMORY_ALLOCATE_INFO;
+	const void * pNext = nullptr;
+public:
+	F_external_memory_handle_type handleTypes;
+S_export_memory_allocate_info( VkExportMemoryAllocateInfo const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_export_memory_allocate_info ) );	}
+S_export_memory_allocate_info& operator=( VkExportMemoryAllocateInfo const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_export_memory_allocate_info ) ); return *this;	}
+operator VkExportMemoryAllocateInfo const&() const 
+	{	return *reinterpret_cast<const VkExportMemoryAllocateInfo*>(this);	}
+operator VkExportMemoryAllocateInfo &() 
+	{	return *reinterpret_cast<VkExportMemoryAllocateInfo*>(this);	}
+
+};
+static_assert(
+	sizeof(S_export_memory_allocate_info) == sizeof(VkExportMemoryAllocateInfo),
+	"struct and wrapper have different size!");
+
+/*	VkImportMemoryWin32HandleInfoKHR
+ex to: VkMemoryAllocateInfo
+*/
+struct		S_import_memory_win32_handle_info_KHR{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_IMPORT_MEMORY_WIN32_HANDLE_INFO_KHR;
+	const void * pNext = nullptr;
+public:
+	F_external_memory_handle_type handleType;
+	HANDLE handle;
+	LPCWSTR name;
+S_import_memory_win32_handle_info_KHR( VkImportMemoryWin32HandleInfoKHR const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_import_memory_win32_handle_info_KHR ) );	}
+S_import_memory_win32_handle_info_KHR& operator=( VkImportMemoryWin32HandleInfoKHR const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_import_memory_win32_handle_info_KHR ) ); return *this;	}
+operator VkImportMemoryWin32HandleInfoKHR const&() const 
+	{	return *reinterpret_cast<const VkImportMemoryWin32HandleInfoKHR*>(this);	}
+operator VkImportMemoryWin32HandleInfoKHR &() 
+	{	return *reinterpret_cast<VkImportMemoryWin32HandleInfoKHR*>(this);	}
+
+};
+static_assert(
+	sizeof(S_import_memory_win32_handle_info_KHR) == sizeof(VkImportMemoryWin32HandleInfoKHR),
+	"struct and wrapper have different size!");
+
+/*	VkExportMemoryWin32HandleInfoKHR
+ex to: VkMemoryAllocateInfo
+*/
+struct		S_export_memory_win32_handle_info_KHR{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_EXPORT_MEMORY_WIN32_HANDLE_INFO_KHR;
+	const void * pNext = nullptr;
+public:
+	const SECURITY_ATTRIBUTES * pAttributes;
+	DWORD dwAccess;
+	LPCWSTR name;
+S_export_memory_win32_handle_info_KHR( VkExportMemoryWin32HandleInfoKHR const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_export_memory_win32_handle_info_KHR ) );	}
+S_export_memory_win32_handle_info_KHR& operator=( VkExportMemoryWin32HandleInfoKHR const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_export_memory_win32_handle_info_KHR ) ); return *this;	}
+operator VkExportMemoryWin32HandleInfoKHR const&() const 
+	{	return *reinterpret_cast<const VkExportMemoryWin32HandleInfoKHR*>(this);	}
+operator VkExportMemoryWin32HandleInfoKHR &() 
+	{	return *reinterpret_cast<VkExportMemoryWin32HandleInfoKHR*>(this);	}
+
+};
+static_assert(
+	sizeof(S_export_memory_win32_handle_info_KHR) == sizeof(VkExportMemoryWin32HandleInfoKHR),
+	"struct and wrapper have different size!");
+
+/*	VkMemoryWin32HandlePropertiesKHR
+(returnedonly)
+*/
+struct		S_memory_win32_handle_properties_KHR{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_MEMORY_WIN32_HANDLE_PROPERTIES_KHR;
+	void * pNext = nullptr;
+public:
+	uint32_t memoryTypeBits;
+S_memory_win32_handle_properties_KHR( VkMemoryWin32HandlePropertiesKHR const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_memory_win32_handle_properties_KHR ) );	}
+S_memory_win32_handle_properties_KHR& operator=( VkMemoryWin32HandlePropertiesKHR const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_memory_win32_handle_properties_KHR ) ); return *this;	}
+operator VkMemoryWin32HandlePropertiesKHR const&() const 
+	{	return *reinterpret_cast<const VkMemoryWin32HandlePropertiesKHR*>(this);	}
+operator VkMemoryWin32HandlePropertiesKHR &() 
+	{	return *reinterpret_cast<VkMemoryWin32HandlePropertiesKHR*>(this);	}
+
+};
+static_assert(
+	sizeof(S_memory_win32_handle_properties_KHR) == sizeof(VkMemoryWin32HandlePropertiesKHR),
+	"struct and wrapper have different size!");
+
+/*	VkMemoryGetWin32HandleInfoKHR
+*/
+struct		S_memory_get_win32_handle_info_KHR{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_MEMORY_GET_WIN32_HANDLE_INFO_KHR;
+	const void * pNext = nullptr;
+public:
+	VkDeviceMemory memory;
+	F_external_memory_handle_type handleType;
+S_memory_get_win32_handle_info_KHR( VkMemoryGetWin32HandleInfoKHR const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_memory_get_win32_handle_info_KHR ) );	}
+S_memory_get_win32_handle_info_KHR& operator=( VkMemoryGetWin32HandleInfoKHR const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_memory_get_win32_handle_info_KHR ) ); return *this;	}
+operator VkMemoryGetWin32HandleInfoKHR const&() const 
+	{	return *reinterpret_cast<const VkMemoryGetWin32HandleInfoKHR*>(this);	}
+operator VkMemoryGetWin32HandleInfoKHR &() 
+	{	return *reinterpret_cast<VkMemoryGetWin32HandleInfoKHR*>(this);	}
+
+};
+static_assert(
+	sizeof(S_memory_get_win32_handle_info_KHR) == sizeof(VkMemoryGetWin32HandleInfoKHR),
+	"struct and wrapper have different size!");
+
+/*	VkImportMemoryFdInfoKHR
+ex to: VkMemoryAllocateInfo
+*/
+struct		S_import_memory_fd_info_KHR{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_IMPORT_MEMORY_FD_INFO_KHR;
+	const void * pNext = nullptr;
+public:
+	F_external_memory_handle_type handleType;
+	int fd;
+S_import_memory_fd_info_KHR( VkImportMemoryFdInfoKHR const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_import_memory_fd_info_KHR ) );	}
+S_import_memory_fd_info_KHR& operator=( VkImportMemoryFdInfoKHR const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_import_memory_fd_info_KHR ) ); return *this;	}
+operator VkImportMemoryFdInfoKHR const&() const 
+	{	return *reinterpret_cast<const VkImportMemoryFdInfoKHR*>(this);	}
+operator VkImportMemoryFdInfoKHR &() 
+	{	return *reinterpret_cast<VkImportMemoryFdInfoKHR*>(this);	}
+
+};
+static_assert(
+	sizeof(S_import_memory_fd_info_KHR) == sizeof(VkImportMemoryFdInfoKHR),
+	"struct and wrapper have different size!");
+
+/*	VkMemoryFdPropertiesKHR
+(returnedonly)
+*/
+struct		S_memory_fd_properties_KHR{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_MEMORY_FD_PROPERTIES_KHR;
+	void * pNext = nullptr;
+public:
+	uint32_t memoryTypeBits;
+S_memory_fd_properties_KHR( VkMemoryFdPropertiesKHR const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_memory_fd_properties_KHR ) );	}
+S_memory_fd_properties_KHR& operator=( VkMemoryFdPropertiesKHR const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_memory_fd_properties_KHR ) ); return *this;	}
+operator VkMemoryFdPropertiesKHR const&() const 
+	{	return *reinterpret_cast<const VkMemoryFdPropertiesKHR*>(this);	}
+operator VkMemoryFdPropertiesKHR &() 
+	{	return *reinterpret_cast<VkMemoryFdPropertiesKHR*>(this);	}
+
+};
+static_assert(
+	sizeof(S_memory_fd_properties_KHR) == sizeof(VkMemoryFdPropertiesKHR),
+	"struct and wrapper have different size!");
+
+/*	VkMemoryGetFdInfoKHR
+*/
+struct		S_memory_get_fd_info_KHR{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_MEMORY_GET_FD_INFO_KHR;
+	const void * pNext = nullptr;
+public:
+	VkDeviceMemory memory;
+	F_external_memory_handle_type handleType;
+S_memory_get_fd_info_KHR( VkMemoryGetFdInfoKHR const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_memory_get_fd_info_KHR ) );	}
+S_memory_get_fd_info_KHR& operator=( VkMemoryGetFdInfoKHR const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_memory_get_fd_info_KHR ) ); return *this;	}
+operator VkMemoryGetFdInfoKHR const&() const 
+	{	return *reinterpret_cast<const VkMemoryGetFdInfoKHR*>(this);	}
+operator VkMemoryGetFdInfoKHR &() 
+	{	return *reinterpret_cast<VkMemoryGetFdInfoKHR*>(this);	}
+
+};
+static_assert(
+	sizeof(S_memory_get_fd_info_KHR) == sizeof(VkMemoryGetFdInfoKHR),
+	"struct and wrapper have different size!");
+
+/*	VkWin32KeyedMutexAcquireReleaseInfoKHR
+ex to: VkSubmitInfo
+*/
+#ifdef VK_USE_PLATFORM_WIN32_KHR
+struct		S_win32_keyed_mutex_acquire_release_info_KHR{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_WIN32_KEYED_MUTEX_ACQUIRE_RELEASE_INFO_KHR;
+	const void * pNext = nullptr;
+public:
+	uint32_t acquireCount;
+	const VkDeviceMemory * pAcquireSyncs;
+	const uint64_t * pAcquireKeys;
+	const uint32_t * pAcquireTimeouts;
+	uint32_t releaseCount;
+	const VkDeviceMemory * pReleaseSyncs;
+	const uint64_t * pReleaseKeys;
+S_win32_keyed_mutex_acquire_release_info_KHR( VkWin32KeyedMutexAcquireReleaseInfoKHR const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_win32_keyed_mutex_acquire_release_info_KHR ) );	}
+S_win32_keyed_mutex_acquire_release_info_KHR& operator=( VkWin32KeyedMutexAcquireReleaseInfoKHR const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_win32_keyed_mutex_acquire_release_info_KHR ) ); return *this;	}
+operator VkWin32KeyedMutexAcquireReleaseInfoKHR const&() const 
+	{	return *reinterpret_cast<const VkWin32KeyedMutexAcquireReleaseInfoKHR*>(this);	}
+operator VkWin32KeyedMutexAcquireReleaseInfoKHR &() 
+	{	return *reinterpret_cast<VkWin32KeyedMutexAcquireReleaseInfoKHR*>(this);	}
+
+};
+static_assert(
+	sizeof(S_win32_keyed_mutex_acquire_release_info_KHR) == sizeof(VkWin32KeyedMutexAcquireReleaseInfoKHR),
+	"struct and wrapper have different size!");
+#endif //VK_USE_PLATFORM_WIN32_KHR
+
+/*	VkPhysicalDeviceExternalSemaphoreInfo
+*/
+struct		S_physical_device_external_semaphore_info{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_SEMAPHORE_INFO;
+	const void * pNext = nullptr;
+public:
+	F_external_semaphore_handle_type handleType;
+S_physical_device_external_semaphore_info( VkPhysicalDeviceExternalSemaphoreInfo const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_physical_device_external_semaphore_info ) );	}
+S_physical_device_external_semaphore_info& operator=( VkPhysicalDeviceExternalSemaphoreInfo const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_physical_device_external_semaphore_info ) ); return *this;	}
+operator VkPhysicalDeviceExternalSemaphoreInfo const&() const 
+	{	return *reinterpret_cast<const VkPhysicalDeviceExternalSemaphoreInfo*>(this);	}
+operator VkPhysicalDeviceExternalSemaphoreInfo &() 
+	{	return *reinterpret_cast<VkPhysicalDeviceExternalSemaphoreInfo*>(this);	}
+
+};
+static_assert(
+	sizeof(S_physical_device_external_semaphore_info) == sizeof(VkPhysicalDeviceExternalSemaphoreInfo),
+	"struct and wrapper have different size!");
+
+/*	VkExternalSemaphoreProperties
+(returnedonly)
+*/
+struct		S_external_semaphore_properties{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_EXTERNAL_SEMAPHORE_PROPERTIES;
+	void * pNext = nullptr;
+public:
+	F_external_semaphore_handle_type exportFromImportedHandleTypes;
+	F_external_semaphore_handle_type compatibleHandleTypes;
+	F_external_semaphore_feature externalSemaphoreFeatures;
+S_external_semaphore_properties( VkExternalSemaphoreProperties const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_external_semaphore_properties ) );	}
+S_external_semaphore_properties& operator=( VkExternalSemaphoreProperties const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_external_semaphore_properties ) ); return *this;	}
+operator VkExternalSemaphoreProperties const&() const 
+	{	return *reinterpret_cast<const VkExternalSemaphoreProperties*>(this);	}
+operator VkExternalSemaphoreProperties &() 
+	{	return *reinterpret_cast<VkExternalSemaphoreProperties*>(this);	}
+
+};
+static_assert(
+	sizeof(S_external_semaphore_properties) == sizeof(VkExternalSemaphoreProperties),
+	"struct and wrapper have different size!");
+
+/*	VkExportSemaphoreCreateInfo
+ex to: VkSemaphoreCreateInfo
+*/
+struct		S_export_semaphore_create_info{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_EXPORT_SEMAPHORE_CREATE_INFO;
+	const void * pNext = nullptr;
+public:
+	F_external_semaphore_handle_type handleTypes;
+S_export_semaphore_create_info( VkExportSemaphoreCreateInfo const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_export_semaphore_create_info ) );	}
+S_export_semaphore_create_info& operator=( VkExportSemaphoreCreateInfo const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_export_semaphore_create_info ) ); return *this;	}
+operator VkExportSemaphoreCreateInfo const&() const 
+	{	return *reinterpret_cast<const VkExportSemaphoreCreateInfo*>(this);	}
+operator VkExportSemaphoreCreateInfo &() 
+	{	return *reinterpret_cast<VkExportSemaphoreCreateInfo*>(this);	}
+
+};
+static_assert(
+	sizeof(S_export_semaphore_create_info) == sizeof(VkExportSemaphoreCreateInfo),
+	"struct and wrapper have different size!");
+
+/*	VkImportSemaphoreWin32HandleInfoKHR
+*/
+struct		S_import_semaphore_win32_handle_info_KHR{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_IMPORT_SEMAPHORE_WIN32_HANDLE_INFO_KHR;
+	const void * pNext = nullptr;
+public:
+	VkSemaphore semaphore;
+	F_semaphore_import flags;
+	F_external_semaphore_handle_type handleType;
+	HANDLE handle;
+	LPCWSTR name;
+S_import_semaphore_win32_handle_info_KHR( VkImportSemaphoreWin32HandleInfoKHR const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_import_semaphore_win32_handle_info_KHR ) );	}
+S_import_semaphore_win32_handle_info_KHR& operator=( VkImportSemaphoreWin32HandleInfoKHR const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_import_semaphore_win32_handle_info_KHR ) ); return *this;	}
+operator VkImportSemaphoreWin32HandleInfoKHR const&() const 
+	{	return *reinterpret_cast<const VkImportSemaphoreWin32HandleInfoKHR*>(this);	}
+operator VkImportSemaphoreWin32HandleInfoKHR &() 
+	{	return *reinterpret_cast<VkImportSemaphoreWin32HandleInfoKHR*>(this);	}
+
+};
+static_assert(
+	sizeof(S_import_semaphore_win32_handle_info_KHR) == sizeof(VkImportSemaphoreWin32HandleInfoKHR),
+	"struct and wrapper have different size!");
+
+/*	VkExportSemaphoreWin32HandleInfoKHR
+ex to: VkSemaphoreCreateInfo
+*/
+struct		S_export_semaphore_win32_handle_info_KHR{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_EXPORT_SEMAPHORE_WIN32_HANDLE_INFO_KHR;
+	const void * pNext = nullptr;
+public:
+	const SECURITY_ATTRIBUTES * pAttributes;
+	DWORD dwAccess;
+	LPCWSTR name;
+S_export_semaphore_win32_handle_info_KHR( VkExportSemaphoreWin32HandleInfoKHR const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_export_semaphore_win32_handle_info_KHR ) );	}
+S_export_semaphore_win32_handle_info_KHR& operator=( VkExportSemaphoreWin32HandleInfoKHR const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_export_semaphore_win32_handle_info_KHR ) ); return *this;	}
+operator VkExportSemaphoreWin32HandleInfoKHR const&() const 
+	{	return *reinterpret_cast<const VkExportSemaphoreWin32HandleInfoKHR*>(this);	}
+operator VkExportSemaphoreWin32HandleInfoKHR &() 
+	{	return *reinterpret_cast<VkExportSemaphoreWin32HandleInfoKHR*>(this);	}
+
+};
+static_assert(
+	sizeof(S_export_semaphore_win32_handle_info_KHR) == sizeof(VkExportSemaphoreWin32HandleInfoKHR),
+	"struct and wrapper have different size!");
+
+/*	VkD3D12FenceSubmitInfoKHR
+ex to: VkSubmitInfo
+*/
+struct		S_d_3d12_fence_submit_info_KHR{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_D3D12_FENCE_SUBMIT_INFO_KHR;
+	const void * pNext = nullptr;
+public:
+	uint32_t waitSemaphoreValuesCount;
+	const uint64_t * pWaitSemaphoreValues;
+	uint32_t signalSemaphoreValuesCount;
+	const uint64_t * pSignalSemaphoreValues;
+S_d_3d12_fence_submit_info_KHR( VkD3D12FenceSubmitInfoKHR const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_d_3d12_fence_submit_info_KHR ) );	}
+S_d_3d12_fence_submit_info_KHR& operator=( VkD3D12FenceSubmitInfoKHR const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_d_3d12_fence_submit_info_KHR ) ); return *this;	}
+operator VkD3D12FenceSubmitInfoKHR const&() const 
+	{	return *reinterpret_cast<const VkD3D12FenceSubmitInfoKHR*>(this);	}
+operator VkD3D12FenceSubmitInfoKHR &() 
+	{	return *reinterpret_cast<VkD3D12FenceSubmitInfoKHR*>(this);	}
+
+};
+static_assert(
+	sizeof(S_d_3d12_fence_submit_info_KHR) == sizeof(VkD3D12FenceSubmitInfoKHR),
+	"struct and wrapper have different size!");
+
+/*	VkSemaphoreGetWin32HandleInfoKHR
+*/
+struct		S_semaphore_get_win32_handle_info_KHR{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_SEMAPHORE_GET_WIN32_HANDLE_INFO_KHR;
+	const void * pNext = nullptr;
+public:
+	VkSemaphore semaphore;
+	F_external_semaphore_handle_type handleType;
+S_semaphore_get_win32_handle_info_KHR( VkSemaphoreGetWin32HandleInfoKHR const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_semaphore_get_win32_handle_info_KHR ) );	}
+S_semaphore_get_win32_handle_info_KHR& operator=( VkSemaphoreGetWin32HandleInfoKHR const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_semaphore_get_win32_handle_info_KHR ) ); return *this;	}
+operator VkSemaphoreGetWin32HandleInfoKHR const&() const 
+	{	return *reinterpret_cast<const VkSemaphoreGetWin32HandleInfoKHR*>(this);	}
+operator VkSemaphoreGetWin32HandleInfoKHR &() 
+	{	return *reinterpret_cast<VkSemaphoreGetWin32HandleInfoKHR*>(this);	}
+
+};
+static_assert(
+	sizeof(S_semaphore_get_win32_handle_info_KHR) == sizeof(VkSemaphoreGetWin32HandleInfoKHR),
+	"struct and wrapper have different size!");
+
+/*	VkImportSemaphoreFdInfoKHR
+*/
+struct		S_import_semaphore_fd_info_KHR{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_IMPORT_SEMAPHORE_FD_INFO_KHR;
+	const void * pNext = nullptr;
+public:
+	VkSemaphore semaphore;
+	F_semaphore_import flags;
+	F_external_semaphore_handle_type handleType;
+	int fd;
+S_import_semaphore_fd_info_KHR( VkImportSemaphoreFdInfoKHR const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_import_semaphore_fd_info_KHR ) );	}
+S_import_semaphore_fd_info_KHR& operator=( VkImportSemaphoreFdInfoKHR const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_import_semaphore_fd_info_KHR ) ); return *this;	}
+operator VkImportSemaphoreFdInfoKHR const&() const 
+	{	return *reinterpret_cast<const VkImportSemaphoreFdInfoKHR*>(this);	}
+operator VkImportSemaphoreFdInfoKHR &() 
+	{	return *reinterpret_cast<VkImportSemaphoreFdInfoKHR*>(this);	}
+
+};
+static_assert(
+	sizeof(S_import_semaphore_fd_info_KHR) == sizeof(VkImportSemaphoreFdInfoKHR),
+	"struct and wrapper have different size!");
+
+/*	VkSemaphoreGetFdInfoKHR
+*/
+struct		S_semaphore_get_fd_info_KHR{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_SEMAPHORE_GET_FD_INFO_KHR;
+	const void * pNext = nullptr;
+public:
+	VkSemaphore semaphore;
+	F_external_semaphore_handle_type handleType;
+S_semaphore_get_fd_info_KHR( VkSemaphoreGetFdInfoKHR const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_semaphore_get_fd_info_KHR ) );	}
+S_semaphore_get_fd_info_KHR& operator=( VkSemaphoreGetFdInfoKHR const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_semaphore_get_fd_info_KHR ) ); return *this;	}
+operator VkSemaphoreGetFdInfoKHR const&() const 
+	{	return *reinterpret_cast<const VkSemaphoreGetFdInfoKHR*>(this);	}
+operator VkSemaphoreGetFdInfoKHR &() 
+	{	return *reinterpret_cast<VkSemaphoreGetFdInfoKHR*>(this);	}
+
+};
+static_assert(
+	sizeof(S_semaphore_get_fd_info_KHR) == sizeof(VkSemaphoreGetFdInfoKHR),
+	"struct and wrapper have different size!");
+
+/*	VkPhysicalDeviceExternalFenceInfo
+*/
+struct		S_physical_device_external_fence_info{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_FENCE_INFO;
+	const void * pNext = nullptr;
+public:
+	F_external_fence_handle_type handleType;
+S_physical_device_external_fence_info( VkPhysicalDeviceExternalFenceInfo const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_physical_device_external_fence_info ) );	}
+S_physical_device_external_fence_info& operator=( VkPhysicalDeviceExternalFenceInfo const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_physical_device_external_fence_info ) ); return *this;	}
+operator VkPhysicalDeviceExternalFenceInfo const&() const 
+	{	return *reinterpret_cast<const VkPhysicalDeviceExternalFenceInfo*>(this);	}
+operator VkPhysicalDeviceExternalFenceInfo &() 
+	{	return *reinterpret_cast<VkPhysicalDeviceExternalFenceInfo*>(this);	}
+
+};
+static_assert(
+	sizeof(S_physical_device_external_fence_info) == sizeof(VkPhysicalDeviceExternalFenceInfo),
+	"struct and wrapper have different size!");
+
+/*	VkExternalFenceProperties
+(returnedonly)
+*/
+struct		S_external_fence_properties{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_EXTERNAL_FENCE_PROPERTIES;
+	void * pNext = nullptr;
+public:
+	F_external_fence_handle_type exportFromImportedHandleTypes;
+	F_external_fence_handle_type compatibleHandleTypes;
+	F_external_fence_feature externalFenceFeatures;
+S_external_fence_properties( VkExternalFenceProperties const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_external_fence_properties ) );	}
+S_external_fence_properties& operator=( VkExternalFenceProperties const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_external_fence_properties ) ); return *this;	}
+operator VkExternalFenceProperties const&() const 
+	{	return *reinterpret_cast<const VkExternalFenceProperties*>(this);	}
+operator VkExternalFenceProperties &() 
+	{	return *reinterpret_cast<VkExternalFenceProperties*>(this);	}
+
+};
+static_assert(
+	sizeof(S_external_fence_properties) == sizeof(VkExternalFenceProperties),
+	"struct and wrapper have different size!");
+
+/*	VkExportFenceCreateInfo
+ex to: VkFenceCreateInfo
+*/
+struct		S_export_fence_create_info{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_EXPORT_FENCE_CREATE_INFO;
+	const void * pNext = nullptr;
+public:
+	F_external_fence_handle_type handleTypes;
+S_export_fence_create_info( VkExportFenceCreateInfo const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_export_fence_create_info ) );	}
+S_export_fence_create_info& operator=( VkExportFenceCreateInfo const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_export_fence_create_info ) ); return *this;	}
+operator VkExportFenceCreateInfo const&() const 
+	{	return *reinterpret_cast<const VkExportFenceCreateInfo*>(this);	}
+operator VkExportFenceCreateInfo &() 
+	{	return *reinterpret_cast<VkExportFenceCreateInfo*>(this);	}
+
+};
+static_assert(
+	sizeof(S_export_fence_create_info) == sizeof(VkExportFenceCreateInfo),
+	"struct and wrapper have different size!");
+
+/*	VkImportFenceWin32HandleInfoKHR
+*/
+struct		S_import_fence_win32_handle_info_KHR{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_IMPORT_FENCE_WIN32_HANDLE_INFO_KHR;
+	const void * pNext = nullptr;
+public:
+	VkFence fence;
+	F_fence_import flags;
+	F_external_fence_handle_type handleType;
+	HANDLE handle;
+	LPCWSTR name;
+S_import_fence_win32_handle_info_KHR( VkImportFenceWin32HandleInfoKHR const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_import_fence_win32_handle_info_KHR ) );	}
+S_import_fence_win32_handle_info_KHR& operator=( VkImportFenceWin32HandleInfoKHR const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_import_fence_win32_handle_info_KHR ) ); return *this;	}
+operator VkImportFenceWin32HandleInfoKHR const&() const 
+	{	return *reinterpret_cast<const VkImportFenceWin32HandleInfoKHR*>(this);	}
+operator VkImportFenceWin32HandleInfoKHR &() 
+	{	return *reinterpret_cast<VkImportFenceWin32HandleInfoKHR*>(this);	}
+
+};
+static_assert(
+	sizeof(S_import_fence_win32_handle_info_KHR) == sizeof(VkImportFenceWin32HandleInfoKHR),
+	"struct and wrapper have different size!");
+
+/*	VkExportFenceWin32HandleInfoKHR
+ex to: VkFenceCreateInfo
+*/
+struct		S_export_fence_win32_handle_info_KHR{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_EXPORT_FENCE_WIN32_HANDLE_INFO_KHR;
+	const void * pNext = nullptr;
+public:
+	const SECURITY_ATTRIBUTES * pAttributes;
+	DWORD dwAccess;
+	LPCWSTR name;
+S_export_fence_win32_handle_info_KHR( VkExportFenceWin32HandleInfoKHR const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_export_fence_win32_handle_info_KHR ) );	}
+S_export_fence_win32_handle_info_KHR& operator=( VkExportFenceWin32HandleInfoKHR const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_export_fence_win32_handle_info_KHR ) ); return *this;	}
+operator VkExportFenceWin32HandleInfoKHR const&() const 
+	{	return *reinterpret_cast<const VkExportFenceWin32HandleInfoKHR*>(this);	}
+operator VkExportFenceWin32HandleInfoKHR &() 
+	{	return *reinterpret_cast<VkExportFenceWin32HandleInfoKHR*>(this);	}
+
+};
+static_assert(
+	sizeof(S_export_fence_win32_handle_info_KHR) == sizeof(VkExportFenceWin32HandleInfoKHR),
+	"struct and wrapper have different size!");
+
+/*	VkFenceGetWin32HandleInfoKHR
+*/
+struct		S_fence_get_win32_handle_info_KHR{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_FENCE_GET_WIN32_HANDLE_INFO_KHR;
+	const void * pNext = nullptr;
+public:
+	VkFence fence;
+	F_external_fence_handle_type handleType;
+S_fence_get_win32_handle_info_KHR( VkFenceGetWin32HandleInfoKHR const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_fence_get_win32_handle_info_KHR ) );	}
+S_fence_get_win32_handle_info_KHR& operator=( VkFenceGetWin32HandleInfoKHR const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_fence_get_win32_handle_info_KHR ) ); return *this;	}
+operator VkFenceGetWin32HandleInfoKHR const&() const 
+	{	return *reinterpret_cast<const VkFenceGetWin32HandleInfoKHR*>(this);	}
+operator VkFenceGetWin32HandleInfoKHR &() 
+	{	return *reinterpret_cast<VkFenceGetWin32HandleInfoKHR*>(this);	}
+
+};
+static_assert(
+	sizeof(S_fence_get_win32_handle_info_KHR) == sizeof(VkFenceGetWin32HandleInfoKHR),
+	"struct and wrapper have different size!");
+
+/*	VkImportFenceFdInfoKHR
+*/
+struct		S_import_fence_fd_info_KHR{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_IMPORT_FENCE_FD_INFO_KHR;
+	const void * pNext = nullptr;
+public:
+	VkFence fence;
+	F_fence_import flags;
+	F_external_fence_handle_type handleType;
+	int fd;
+S_import_fence_fd_info_KHR( VkImportFenceFdInfoKHR const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_import_fence_fd_info_KHR ) );	}
+S_import_fence_fd_info_KHR& operator=( VkImportFenceFdInfoKHR const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_import_fence_fd_info_KHR ) ); return *this;	}
+operator VkImportFenceFdInfoKHR const&() const 
+	{	return *reinterpret_cast<const VkImportFenceFdInfoKHR*>(this);	}
+operator VkImportFenceFdInfoKHR &() 
+	{	return *reinterpret_cast<VkImportFenceFdInfoKHR*>(this);	}
+
+};
+static_assert(
+	sizeof(S_import_fence_fd_info_KHR) == sizeof(VkImportFenceFdInfoKHR),
+	"struct and wrapper have different size!");
+
+/*	VkFenceGetFdInfoKHR
+*/
+struct		S_fence_get_fd_info_KHR{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_FENCE_GET_FD_INFO_KHR;
+	const void * pNext = nullptr;
+public:
+	VkFence fence;
+	F_external_fence_handle_type handleType;
+S_fence_get_fd_info_KHR( VkFenceGetFdInfoKHR const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_fence_get_fd_info_KHR ) );	}
+S_fence_get_fd_info_KHR& operator=( VkFenceGetFdInfoKHR const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_fence_get_fd_info_KHR ) ); return *this;	}
+operator VkFenceGetFdInfoKHR const&() const 
+	{	return *reinterpret_cast<const VkFenceGetFdInfoKHR*>(this);	}
+operator VkFenceGetFdInfoKHR &() 
+	{	return *reinterpret_cast<VkFenceGetFdInfoKHR*>(this);	}
+
+};
+static_assert(
+	sizeof(S_fence_get_fd_info_KHR) == sizeof(VkFenceGetFdInfoKHR),
+	"struct and wrapper have different size!");
+
+/*	VkPhysicalDeviceMultiviewFeatures
+ex to: VkPhysicalDeviceFeatures2,VkDeviceCreateInfo
+*/
+struct		S_physical_device_multiview_features{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTIVIEW_FEATURES;
+	void * pNext = nullptr;
+public:
+	VkBool32 multiview;
+	VkBool32 multiviewGeometryShader;
+	VkBool32 multiviewTessellationShader;
+S_physical_device_multiview_features( VkPhysicalDeviceMultiviewFeatures const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_physical_device_multiview_features ) );	}
+S_physical_device_multiview_features& operator=( VkPhysicalDeviceMultiviewFeatures const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_physical_device_multiview_features ) ); return *this;	}
+operator VkPhysicalDeviceMultiviewFeatures const&() const 
+	{	return *reinterpret_cast<const VkPhysicalDeviceMultiviewFeatures*>(this);	}
+operator VkPhysicalDeviceMultiviewFeatures &() 
+	{	return *reinterpret_cast<VkPhysicalDeviceMultiviewFeatures*>(this);	}
+
+};
+static_assert(
+	sizeof(S_physical_device_multiview_features) == sizeof(VkPhysicalDeviceMultiviewFeatures),
+	"struct and wrapper have different size!");
+
+/*	VkPhysicalDeviceMultiviewProperties
+(returnedonly)
+ex to: VkPhysicalDeviceProperties2
+*/
+struct		S_physical_device_multiview_properties{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTIVIEW_PROPERTIES;
+	void * pNext = nullptr;
+public:
+	uint32_t maxMultiviewViewCount;
+	uint32_t maxMultiviewInstanceIndex;
+S_physical_device_multiview_properties( VkPhysicalDeviceMultiviewProperties const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_physical_device_multiview_properties ) );	}
+S_physical_device_multiview_properties& operator=( VkPhysicalDeviceMultiviewProperties const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_physical_device_multiview_properties ) ); return *this;	}
+operator VkPhysicalDeviceMultiviewProperties const&() const 
+	{	return *reinterpret_cast<const VkPhysicalDeviceMultiviewProperties*>(this);	}
+operator VkPhysicalDeviceMultiviewProperties &() 
+	{	return *reinterpret_cast<VkPhysicalDeviceMultiviewProperties*>(this);	}
+
+};
+static_assert(
+	sizeof(S_physical_device_multiview_properties) == sizeof(VkPhysicalDeviceMultiviewProperties),
+	"struct and wrapper have different size!");
+
+/*	VkRenderPassMultiviewCreateInfo
+ex to: VkRenderPassCreateInfo
+*/
+struct		S_render_pass_multiview_create_info{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_RENDER_PASS_MULTIVIEW_CREATE_INFO;
+	const void * pNext = nullptr;
+public:
+	uint32_t subpassCount;
+	const uint32_t * pViewMasks;
+	uint32_t dependencyCount;
+	const int32_t * pViewOffsets;
+	uint32_t correlationMaskCount;
+	const uint32_t * pCorrelationMasks;
+S_render_pass_multiview_create_info( VkRenderPassMultiviewCreateInfo const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_render_pass_multiview_create_info ) );	}
+S_render_pass_multiview_create_info& operator=( VkRenderPassMultiviewCreateInfo const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_render_pass_multiview_create_info ) ); return *this;	}
+operator VkRenderPassMultiviewCreateInfo const&() const 
+	{	return *reinterpret_cast<const VkRenderPassMultiviewCreateInfo*>(this);	}
+operator VkRenderPassMultiviewCreateInfo &() 
+	{	return *reinterpret_cast<VkRenderPassMultiviewCreateInfo*>(this);	}
+
+};
+static_assert(
+	sizeof(S_render_pass_multiview_create_info) == sizeof(VkRenderPassMultiviewCreateInfo),
+	"struct and wrapper have different size!");
+
+/*	VkDisplayPowerInfoEXT
+*/
+struct		S_display_power_info_EXT{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_DISPLAY_POWER_INFO_EXT;
+	const void * pNext = nullptr;
+public:
+	E_display_power_state_EXT powerState;
+S_display_power_info_EXT( VkDisplayPowerInfoEXT const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_display_power_info_EXT ) );	}
+S_display_power_info_EXT& operator=( VkDisplayPowerInfoEXT const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_display_power_info_EXT ) ); return *this;	}
+operator VkDisplayPowerInfoEXT const&() const 
+	{	return *reinterpret_cast<const VkDisplayPowerInfoEXT*>(this);	}
+operator VkDisplayPowerInfoEXT &() 
+	{	return *reinterpret_cast<VkDisplayPowerInfoEXT*>(this);	}
+
+};
+static_assert(
+	sizeof(S_display_power_info_EXT) == sizeof(VkDisplayPowerInfoEXT),
+	"struct and wrapper have different size!");
+
+/*	VkDeviceEventInfoEXT
+*/
+struct		S_device_event_info_EXT{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_DEVICE_EVENT_INFO_EXT;
+	const void * pNext = nullptr;
+public:
+	E_device_event_type_EXT deviceEvent;
+S_device_event_info_EXT( VkDeviceEventInfoEXT const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_device_event_info_EXT ) );	}
+S_device_event_info_EXT& operator=( VkDeviceEventInfoEXT const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_device_event_info_EXT ) ); return *this;	}
+operator VkDeviceEventInfoEXT const&() const 
+	{	return *reinterpret_cast<const VkDeviceEventInfoEXT*>(this);	}
+operator VkDeviceEventInfoEXT &() 
+	{	return *reinterpret_cast<VkDeviceEventInfoEXT*>(this);	}
+
+};
+static_assert(
+	sizeof(S_device_event_info_EXT) == sizeof(VkDeviceEventInfoEXT),
+	"struct and wrapper have different size!");
+
+/*	VkDisplayEventInfoEXT
+*/
+struct		S_display_event_info_EXT{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_DISPLAY_EVENT_INFO_EXT;
+	const void * pNext = nullptr;
+public:
+	E_display_event_type_EXT displayEvent;
+S_display_event_info_EXT( VkDisplayEventInfoEXT const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_display_event_info_EXT ) );	}
+S_display_event_info_EXT& operator=( VkDisplayEventInfoEXT const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_display_event_info_EXT ) ); return *this;	}
+operator VkDisplayEventInfoEXT const&() const 
+	{	return *reinterpret_cast<const VkDisplayEventInfoEXT*>(this);	}
+operator VkDisplayEventInfoEXT &() 
+	{	return *reinterpret_cast<VkDisplayEventInfoEXT*>(this);	}
+
+};
+static_assert(
+	sizeof(S_display_event_info_EXT) == sizeof(VkDisplayEventInfoEXT),
+	"struct and wrapper have different size!");
+
+/*	VkSwapchainCounterCreateInfoEXT
+ex to: VkSwapchainCreateInfoKHR
+*/
+struct		S_swapchain_counter_create_info_EXT{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_SWAPCHAIN_COUNTER_CREATE_INFO_EXT;
+	const void * pNext = nullptr;
+public:
+	F_surface_counter_EXT surfaceCounters;
+S_swapchain_counter_create_info_EXT( VkSwapchainCounterCreateInfoEXT const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_swapchain_counter_create_info_EXT ) );	}
+S_swapchain_counter_create_info_EXT& operator=( VkSwapchainCounterCreateInfoEXT const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_swapchain_counter_create_info_EXT ) ); return *this;	}
+operator VkSwapchainCounterCreateInfoEXT const&() const 
+	{	return *reinterpret_cast<const VkSwapchainCounterCreateInfoEXT*>(this);	}
+operator VkSwapchainCounterCreateInfoEXT &() 
+	{	return *reinterpret_cast<VkSwapchainCounterCreateInfoEXT*>(this);	}
+
+};
+static_assert(
+	sizeof(S_swapchain_counter_create_info_EXT) == sizeof(VkSwapchainCounterCreateInfoEXT),
+	"struct and wrapper have different size!");
+
+/*	VkPhysicalDeviceGroupProperties
+(returnedonly)
+*/
+struct		S_physical_device_group_properties{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_GROUP_PROPERTIES;
+	void * pNext = nullptr;
+public:
+	uint32_t physicalDeviceCount;
+	VkPhysicalDevice physicalDevices[VK_MAX_DEVICE_GROUP_SIZE];
+	VkBool32 subsetAllocation;
+S_physical_device_group_properties( VkPhysicalDeviceGroupProperties const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_physical_device_group_properties ) );	}
+S_physical_device_group_properties& operator=( VkPhysicalDeviceGroupProperties const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_physical_device_group_properties ) ); return *this;	}
+operator VkPhysicalDeviceGroupProperties const&() const 
+	{	return *reinterpret_cast<const VkPhysicalDeviceGroupProperties*>(this);	}
+operator VkPhysicalDeviceGroupProperties &() 
+	{	return *reinterpret_cast<VkPhysicalDeviceGroupProperties*>(this);	}
+
+};
+static_assert(
+	sizeof(S_physical_device_group_properties) == sizeof(VkPhysicalDeviceGroupProperties),
+	"struct and wrapper have different size!");
+
+/*	VkMemoryAllocateFlagsInfo
+ex to: VkMemoryAllocateInfo
+*/
+struct		S_memory_allocate_flags_info{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_FLAGS_INFO;
+	const void * pNext = nullptr;
+public:
+	F_memory_allocate flags;
+	uint32_t deviceMask;
+S_memory_allocate_flags_info( VkMemoryAllocateFlagsInfo const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_memory_allocate_flags_info ) );	}
+S_memory_allocate_flags_info& operator=( VkMemoryAllocateFlagsInfo const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_memory_allocate_flags_info ) ); return *this;	}
+operator VkMemoryAllocateFlagsInfo const&() const 
+	{	return *reinterpret_cast<const VkMemoryAllocateFlagsInfo*>(this);	}
+operator VkMemoryAllocateFlagsInfo &() 
+	{	return *reinterpret_cast<VkMemoryAllocateFlagsInfo*>(this);	}
+
+};
+static_assert(
+	sizeof(S_memory_allocate_flags_info) == sizeof(VkMemoryAllocateFlagsInfo),
+	"struct and wrapper have different size!");
+
+/*	VkBindBufferMemoryInfo
+ex:
+	VkBindBufferMemoryDeviceGroupInfo
+*/
+struct		S_bind_buffer_memory_info{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_BIND_BUFFER_MEMORY_INFO;
+	const void * pNext = nullptr;
+public:
+	VkBuffer buffer;
+	VkDeviceMemory memory;
+	VkDeviceSize memoryOffset;
+S_bind_buffer_memory_info( VkBindBufferMemoryInfo const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_bind_buffer_memory_info ) );	}
+S_bind_buffer_memory_info& operator=( VkBindBufferMemoryInfo const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_bind_buffer_memory_info ) ); return *this;	}
+operator VkBindBufferMemoryInfo const&() const 
+	{	return *reinterpret_cast<const VkBindBufferMemoryInfo*>(this);	}
+operator VkBindBufferMemoryInfo &() 
+	{	return *reinterpret_cast<VkBindBufferMemoryInfo*>(this);	}
+
+};
+static_assert(
+	sizeof(S_bind_buffer_memory_info) == sizeof(VkBindBufferMemoryInfo),
+	"struct and wrapper have different size!");
+
+/*	VkBindBufferMemoryDeviceGroupInfo
+ex to: VkBindBufferMemoryInfo
+*/
+struct		S_bind_buffer_memory_device_group_info{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_BIND_BUFFER_MEMORY_DEVICE_GROUP_INFO;
+	const void * pNext = nullptr;
+public:
+	uint32_t deviceIndexCount;
+	const uint32_t * pDeviceIndices;
+S_bind_buffer_memory_device_group_info( VkBindBufferMemoryDeviceGroupInfo const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_bind_buffer_memory_device_group_info ) );	}
+S_bind_buffer_memory_device_group_info& operator=( VkBindBufferMemoryDeviceGroupInfo const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_bind_buffer_memory_device_group_info ) ); return *this;	}
+operator VkBindBufferMemoryDeviceGroupInfo const&() const 
+	{	return *reinterpret_cast<const VkBindBufferMemoryDeviceGroupInfo*>(this);	}
+operator VkBindBufferMemoryDeviceGroupInfo &() 
+	{	return *reinterpret_cast<VkBindBufferMemoryDeviceGroupInfo*>(this);	}
+
+};
+static_assert(
+	sizeof(S_bind_buffer_memory_device_group_info) == sizeof(VkBindBufferMemoryDeviceGroupInfo),
+	"struct and wrapper have different size!");
+
+/*	VkBindImageMemoryInfo
+ex:
+	VkBindImageMemoryDeviceGroupInfo
+	VkBindImageMemorySwapchainInfoKHR
+	VkBindImagePlaneMemoryInfo
+*/
+struct		S_bind_image_memory_info{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_BIND_IMAGE_MEMORY_INFO;
+	const void * pNext = nullptr;
+public:
+	VkImage image;
+	VkDeviceMemory memory;
+	VkDeviceSize memoryOffset;
+S_bind_image_memory_info( VkBindImageMemoryInfo const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_bind_image_memory_info ) );	}
+S_bind_image_memory_info& operator=( VkBindImageMemoryInfo const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_bind_image_memory_info ) ); return *this;	}
+operator VkBindImageMemoryInfo const&() const 
+	{	return *reinterpret_cast<const VkBindImageMemoryInfo*>(this);	}
+operator VkBindImageMemoryInfo &() 
+	{	return *reinterpret_cast<VkBindImageMemoryInfo*>(this);	}
+
+};
+static_assert(
+	sizeof(S_bind_image_memory_info) == sizeof(VkBindImageMemoryInfo),
+	"struct and wrapper have different size!");
+
+/*	VkDeviceGroupCommandBufferBeginInfo
+ex to: VkCommandBufferBeginInfo
+*/
+struct		S_device_group_command_buffer_begin_info{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_DEVICE_GROUP_COMMAND_BUFFER_BEGIN_INFO;
+	const void * pNext = nullptr;
+public:
+	uint32_t deviceMask;
+S_device_group_command_buffer_begin_info( VkDeviceGroupCommandBufferBeginInfo const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_device_group_command_buffer_begin_info ) );	}
+S_device_group_command_buffer_begin_info& operator=( VkDeviceGroupCommandBufferBeginInfo const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_device_group_command_buffer_begin_info ) ); return *this;	}
+operator VkDeviceGroupCommandBufferBeginInfo const&() const 
+	{	return *reinterpret_cast<const VkDeviceGroupCommandBufferBeginInfo*>(this);	}
+operator VkDeviceGroupCommandBufferBeginInfo &() 
+	{	return *reinterpret_cast<VkDeviceGroupCommandBufferBeginInfo*>(this);	}
+
+};
+static_assert(
+	sizeof(S_device_group_command_buffer_begin_info) == sizeof(VkDeviceGroupCommandBufferBeginInfo),
+	"struct and wrapper have different size!");
+
+/*	VkDeviceGroupSubmitInfo
+ex to: VkSubmitInfo
+*/
+struct		S_device_group_submit_info{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_DEVICE_GROUP_SUBMIT_INFO;
+	const void * pNext = nullptr;
+public:
+	uint32_t waitSemaphoreCount;
+	const uint32_t * pWaitSemaphoreDeviceIndices;
+	uint32_t commandBufferCount;
+	const uint32_t * pCommandBufferDeviceMasks;
+	uint32_t signalSemaphoreCount;
+	const uint32_t * pSignalSemaphoreDeviceIndices;
+S_device_group_submit_info( VkDeviceGroupSubmitInfo const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_device_group_submit_info ) );	}
+S_device_group_submit_info& operator=( VkDeviceGroupSubmitInfo const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_device_group_submit_info ) ); return *this;	}
+operator VkDeviceGroupSubmitInfo const&() const 
+	{	return *reinterpret_cast<const VkDeviceGroupSubmitInfo*>(this);	}
+operator VkDeviceGroupSubmitInfo &() 
+	{	return *reinterpret_cast<VkDeviceGroupSubmitInfo*>(this);	}
+
+};
+static_assert(
+	sizeof(S_device_group_submit_info) == sizeof(VkDeviceGroupSubmitInfo),
+	"struct and wrapper have different size!");
+
+/*	VkDeviceGroupBindSparseInfo
+ex to: VkBindSparseInfo
+*/
+struct		S_device_group_bind_sparse_info{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_DEVICE_GROUP_BIND_SPARSE_INFO;
+	const void * pNext = nullptr;
+public:
+	uint32_t resourceDeviceIndex;
+	uint32_t memoryDeviceIndex;
+S_device_group_bind_sparse_info( VkDeviceGroupBindSparseInfo const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_device_group_bind_sparse_info ) );	}
+S_device_group_bind_sparse_info& operator=( VkDeviceGroupBindSparseInfo const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_device_group_bind_sparse_info ) ); return *this;	}
+operator VkDeviceGroupBindSparseInfo const&() const 
+	{	return *reinterpret_cast<const VkDeviceGroupBindSparseInfo*>(this);	}
+operator VkDeviceGroupBindSparseInfo &() 
+	{	return *reinterpret_cast<VkDeviceGroupBindSparseInfo*>(this);	}
+
+};
+static_assert(
+	sizeof(S_device_group_bind_sparse_info) == sizeof(VkDeviceGroupBindSparseInfo),
+	"struct and wrapper have different size!");
+
+/*	VkDeviceGroupPresentCapabilitiesKHR
+(returnedonly)
+*/
+struct		S_device_group_present_capabilities_KHR{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_DEVICE_GROUP_PRESENT_CAPABILITIES_KHR;
+	const void * pNext = nullptr;
+public:
+	uint32_t presentMask[VK_MAX_DEVICE_GROUP_SIZE];
+	F_device_group_present_mode_KHR modes;
+S_device_group_present_capabilities_KHR( VkDeviceGroupPresentCapabilitiesKHR const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_device_group_present_capabilities_KHR ) );	}
+S_device_group_present_capabilities_KHR& operator=( VkDeviceGroupPresentCapabilitiesKHR const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_device_group_present_capabilities_KHR ) ); return *this;	}
+operator VkDeviceGroupPresentCapabilitiesKHR const&() const 
+	{	return *reinterpret_cast<const VkDeviceGroupPresentCapabilitiesKHR*>(this);	}
+operator VkDeviceGroupPresentCapabilitiesKHR &() 
+	{	return *reinterpret_cast<VkDeviceGroupPresentCapabilitiesKHR*>(this);	}
+
+};
+static_assert(
+	sizeof(S_device_group_present_capabilities_KHR) == sizeof(VkDeviceGroupPresentCapabilitiesKHR),
+	"struct and wrapper have different size!");
+
+/*	VkImageSwapchainCreateInfoKHR
+ex to: VkImageCreateInfo
+*/
+struct		S_image_swapchain_create_info_KHR{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_IMAGE_SWAPCHAIN_CREATE_INFO_KHR;
+	const void * pNext = nullptr;
+public:
+	VkSwapchainKHR swapchain;
+S_image_swapchain_create_info_KHR( VkImageSwapchainCreateInfoKHR const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_image_swapchain_create_info_KHR ) );	}
+S_image_swapchain_create_info_KHR& operator=( VkImageSwapchainCreateInfoKHR const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_image_swapchain_create_info_KHR ) ); return *this;	}
+operator VkImageSwapchainCreateInfoKHR const&() const 
+	{	return *reinterpret_cast<const VkImageSwapchainCreateInfoKHR*>(this);	}
+operator VkImageSwapchainCreateInfoKHR &() 
+	{	return *reinterpret_cast<VkImageSwapchainCreateInfoKHR*>(this);	}
+
+};
+static_assert(
+	sizeof(S_image_swapchain_create_info_KHR) == sizeof(VkImageSwapchainCreateInfoKHR),
+	"struct and wrapper have different size!");
+
+/*	VkBindImageMemorySwapchainInfoKHR
+ex to: VkBindImageMemoryInfo
+*/
+struct		S_bind_image_memory_swapchain_info_KHR{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_BIND_IMAGE_MEMORY_SWAPCHAIN_INFO_KHR;
+	const void * pNext = nullptr;
+public:
+	VkSwapchainKHR swapchain;
+	uint32_t imageIndex;
+S_bind_image_memory_swapchain_info_KHR( VkBindImageMemorySwapchainInfoKHR const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_bind_image_memory_swapchain_info_KHR ) );	}
+S_bind_image_memory_swapchain_info_KHR& operator=( VkBindImageMemorySwapchainInfoKHR const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_bind_image_memory_swapchain_info_KHR ) ); return *this;	}
+operator VkBindImageMemorySwapchainInfoKHR const&() const 
+	{	return *reinterpret_cast<const VkBindImageMemorySwapchainInfoKHR*>(this);	}
+operator VkBindImageMemorySwapchainInfoKHR &() 
+	{	return *reinterpret_cast<VkBindImageMemorySwapchainInfoKHR*>(this);	}
+
+};
+static_assert(
+	sizeof(S_bind_image_memory_swapchain_info_KHR) == sizeof(VkBindImageMemorySwapchainInfoKHR),
+	"struct and wrapper have different size!");
+
+/*	VkAcquireNextImageInfoKHR
+*/
+struct		S_acquire_next_image_info_KHR{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_ACQUIRE_NEXT_IMAGE_INFO_KHR;
+	const void * pNext = nullptr;
+public:
+	VkSwapchainKHR swapchain;
+	uint64_t timeout;
+	VkSemaphore semaphore;
+	VkFence fence;
+	uint32_t deviceMask;
+S_acquire_next_image_info_KHR( VkAcquireNextImageInfoKHR const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_acquire_next_image_info_KHR ) );	}
+S_acquire_next_image_info_KHR& operator=( VkAcquireNextImageInfoKHR const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_acquire_next_image_info_KHR ) ); return *this;	}
+operator VkAcquireNextImageInfoKHR const&() const 
+	{	return *reinterpret_cast<const VkAcquireNextImageInfoKHR*>(this);	}
+operator VkAcquireNextImageInfoKHR &() 
+	{	return *reinterpret_cast<VkAcquireNextImageInfoKHR*>(this);	}
+
+};
+static_assert(
+	sizeof(S_acquire_next_image_info_KHR) == sizeof(VkAcquireNextImageInfoKHR),
+	"struct and wrapper have different size!");
+
+/*	VkDeviceGroupPresentInfoKHR
+ex to: VkPresentInfoKHR
+*/
+struct		S_device_group_present_info_KHR{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_DEVICE_GROUP_PRESENT_INFO_KHR;
+	const void * pNext = nullptr;
+public:
+	uint32_t swapchainCount;
+	const uint32_t * pDeviceMasks;
+	F_device_group_present_mode_KHR mode;
+S_device_group_present_info_KHR( VkDeviceGroupPresentInfoKHR const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_device_group_present_info_KHR ) );	}
+S_device_group_present_info_KHR& operator=( VkDeviceGroupPresentInfoKHR const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_device_group_present_info_KHR ) ); return *this;	}
+operator VkDeviceGroupPresentInfoKHR const&() const 
+	{	return *reinterpret_cast<const VkDeviceGroupPresentInfoKHR*>(this);	}
+operator VkDeviceGroupPresentInfoKHR &() 
+	{	return *reinterpret_cast<VkDeviceGroupPresentInfoKHR*>(this);	}
+
+};
+static_assert(
+	sizeof(S_device_group_present_info_KHR) == sizeof(VkDeviceGroupPresentInfoKHR),
+	"struct and wrapper have different size!");
+
+/*	VkDeviceGroupDeviceCreateInfo
+ex to: VkDeviceCreateInfo
+*/
+struct		S_device_group_device_create_info{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_DEVICE_GROUP_DEVICE_CREATE_INFO;
+	const void * pNext = nullptr;
+public:
+	uint32_t physicalDeviceCount;
+	const VkPhysicalDevice * pPhysicalDevices;
+S_device_group_device_create_info( VkDeviceGroupDeviceCreateInfo const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_device_group_device_create_info ) );	}
+S_device_group_device_create_info& operator=( VkDeviceGroupDeviceCreateInfo const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_device_group_device_create_info ) ); return *this;	}
+operator VkDeviceGroupDeviceCreateInfo const&() const 
+	{	return *reinterpret_cast<const VkDeviceGroupDeviceCreateInfo*>(this);	}
+operator VkDeviceGroupDeviceCreateInfo &() 
+	{	return *reinterpret_cast<VkDeviceGroupDeviceCreateInfo*>(this);	}
+
+};
+static_assert(
+	sizeof(S_device_group_device_create_info) == sizeof(VkDeviceGroupDeviceCreateInfo),
+	"struct and wrapper have different size!");
+
+/*	VkDeviceGroupSwapchainCreateInfoKHR
+ex to: VkSwapchainCreateInfoKHR
+*/
+struct		S_device_group_swapchain_create_info_KHR{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_DEVICE_GROUP_SWAPCHAIN_CREATE_INFO_KHR;
+	const void * pNext = nullptr;
+public:
+	F_device_group_present_mode_KHR modes;
+S_device_group_swapchain_create_info_KHR( VkDeviceGroupSwapchainCreateInfoKHR const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_device_group_swapchain_create_info_KHR ) );	}
+S_device_group_swapchain_create_info_KHR& operator=( VkDeviceGroupSwapchainCreateInfoKHR const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_device_group_swapchain_create_info_KHR ) ); return *this;	}
+operator VkDeviceGroupSwapchainCreateInfoKHR const&() const 
+	{	return *reinterpret_cast<const VkDeviceGroupSwapchainCreateInfoKHR*>(this);	}
+operator VkDeviceGroupSwapchainCreateInfoKHR &() 
+	{	return *reinterpret_cast<VkDeviceGroupSwapchainCreateInfoKHR*>(this);	}
+
+};
+static_assert(
+	sizeof(S_device_group_swapchain_create_info_KHR) == sizeof(VkDeviceGroupSwapchainCreateInfoKHR),
+	"struct and wrapper have different size!");
+
+/*	VkIOSSurfaceCreateInfoMVK
+*/
+#ifdef VK_USE_PLATFORM_IOS_MVK
+struct		S_ios_surface_create_info_MVK{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_IOS_SURFACE_CREATE_INFO_MVK;
+	const void * pNext = nullptr;
+public:
+	VkIOSSurfaceCreateFlagsMVK flags;
+	const void * pView;
+S_ios_surface_create_info_MVK( VkIOSSurfaceCreateInfoMVK const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_ios_surface_create_info_MVK ) );	}
+S_ios_surface_create_info_MVK& operator=( VkIOSSurfaceCreateInfoMVK const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_ios_surface_create_info_MVK ) ); return *this;	}
+operator VkIOSSurfaceCreateInfoMVK const&() const 
+	{	return *reinterpret_cast<const VkIOSSurfaceCreateInfoMVK*>(this);	}
+operator VkIOSSurfaceCreateInfoMVK &() 
+	{	return *reinterpret_cast<VkIOSSurfaceCreateInfoMVK*>(this);	}
+
+};
+static_assert(
+	sizeof(S_ios_surface_create_info_MVK) == sizeof(VkIOSSurfaceCreateInfoMVK),
+	"struct and wrapper have different size!");
+#endif //VK_USE_PLATFORM_IOS_MVK
+
+/*	VkMacOSSurfaceCreateInfoMVK
+*/
+#ifdef VK_USE_PLATFORM_MACOS_MVK
+struct		S_mac_os_surface_create_info_MVK{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_MACOS_SURFACE_CREATE_INFO_MVK;
+	const void * pNext = nullptr;
+public:
+	VkMacOSSurfaceCreateFlagsMVK flags;
+	const void * pView;
+S_mac_os_surface_create_info_MVK( VkMacOSSurfaceCreateInfoMVK const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_mac_os_surface_create_info_MVK ) );	}
+S_mac_os_surface_create_info_MVK& operator=( VkMacOSSurfaceCreateInfoMVK const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_mac_os_surface_create_info_MVK ) ); return *this;	}
+operator VkMacOSSurfaceCreateInfoMVK const&() const 
+	{	return *reinterpret_cast<const VkMacOSSurfaceCreateInfoMVK*>(this);	}
+operator VkMacOSSurfaceCreateInfoMVK &() 
+	{	return *reinterpret_cast<VkMacOSSurfaceCreateInfoMVK*>(this);	}
+
+};
+static_assert(
+	sizeof(S_mac_os_surface_create_info_MVK) == sizeof(VkMacOSSurfaceCreateInfoMVK),
+	"struct and wrapper have different size!");
+#endif //VK_USE_PLATFORM_MACOS_MVK
+
+/*	VkPhysicalDeviceDiscardRectanglePropertiesEXT
+ex to: VkPhysicalDeviceProperties2
+*/
+struct		S_physical_device_discard_rectangle_properties_EXT{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DISCARD_RECTANGLE_PROPERTIES_EXT;
+	void * pNext = nullptr;
+public:
+	uint32_t maxDiscardRectangles;
+S_physical_device_discard_rectangle_properties_EXT( VkPhysicalDeviceDiscardRectanglePropertiesEXT const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_physical_device_discard_rectangle_properties_EXT ) );	}
+S_physical_device_discard_rectangle_properties_EXT& operator=( VkPhysicalDeviceDiscardRectanglePropertiesEXT const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_physical_device_discard_rectangle_properties_EXT ) ); return *this;	}
+operator VkPhysicalDeviceDiscardRectanglePropertiesEXT const&() const 
+	{	return *reinterpret_cast<const VkPhysicalDeviceDiscardRectanglePropertiesEXT*>(this);	}
+operator VkPhysicalDeviceDiscardRectanglePropertiesEXT &() 
+	{	return *reinterpret_cast<VkPhysicalDeviceDiscardRectanglePropertiesEXT*>(this);	}
+
+};
+static_assert(
+	sizeof(S_physical_device_discard_rectangle_properties_EXT) == sizeof(VkPhysicalDeviceDiscardRectanglePropertiesEXT),
+	"struct and wrapper have different size!");
+
+/*	VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX
+(returnedonly)
+ex to: VkPhysicalDeviceProperties2
+*/
+struct		S_physical_device_multiview_per_view_attributes_properties_NVX{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTIVIEW_PER_VIEW_ATTRIBUTES_PROPERTIES_NVX;
+	void * pNext = nullptr;
+public:
+	VkBool32 perViewPositionAllComponents;
+S_physical_device_multiview_per_view_attributes_properties_NVX( VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_physical_device_multiview_per_view_attributes_properties_NVX ) );	}
+S_physical_device_multiview_per_view_attributes_properties_NVX& operator=( VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_physical_device_multiview_per_view_attributes_properties_NVX ) ); return *this;	}
+operator VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX const&() const 
+	{	return *reinterpret_cast<const VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX*>(this);	}
+operator VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX &() 
+	{	return *reinterpret_cast<VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX*>(this);	}
+
+};
+static_assert(
+	sizeof(S_physical_device_multiview_per_view_attributes_properties_NVX) == sizeof(VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX),
+	"struct and wrapper have different size!");
+
+/*	VkPhysicalDeviceSurfaceInfo2KHR
+*/
+struct		S_physical_device_surface_info2_KHR{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SURFACE_INFO_2_KHR;
+	const void * pNext = nullptr;
+public:
+	VkSurfaceKHR surface;
+S_physical_device_surface_info2_KHR( VkPhysicalDeviceSurfaceInfo2KHR const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_physical_device_surface_info2_KHR ) );	}
+S_physical_device_surface_info2_KHR& operator=( VkPhysicalDeviceSurfaceInfo2KHR const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_physical_device_surface_info2_KHR ) ); return *this;	}
+operator VkPhysicalDeviceSurfaceInfo2KHR const&() const 
+	{	return *reinterpret_cast<const VkPhysicalDeviceSurfaceInfo2KHR*>(this);	}
+operator VkPhysicalDeviceSurfaceInfo2KHR &() 
+	{	return *reinterpret_cast<VkPhysicalDeviceSurfaceInfo2KHR*>(this);	}
+
+};
+static_assert(
+	sizeof(S_physical_device_surface_info2_KHR) == sizeof(VkPhysicalDeviceSurfaceInfo2KHR),
+	"struct and wrapper have different size!");
+
+/*	VkDisplayPlaneInfo2KHR
+*/
+struct		S_display_plane_info2_KHR{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_DISPLAY_PLANE_INFO_2_KHR;
+	const void * pNext = nullptr;
+public:
+	VkDisplayModeKHR mode;
+	uint32_t planeIndex;
+S_display_plane_info2_KHR( VkDisplayPlaneInfo2KHR const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_display_plane_info2_KHR ) );	}
+S_display_plane_info2_KHR& operator=( VkDisplayPlaneInfo2KHR const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_display_plane_info2_KHR ) ); return *this;	}
+operator VkDisplayPlaneInfo2KHR const&() const 
+	{	return *reinterpret_cast<const VkDisplayPlaneInfo2KHR*>(this);	}
+operator VkDisplayPlaneInfo2KHR &() 
+	{	return *reinterpret_cast<VkDisplayPlaneInfo2KHR*>(this);	}
+
+};
+static_assert(
+	sizeof(S_display_plane_info2_KHR) == sizeof(VkDisplayPlaneInfo2KHR),
+	"struct and wrapper have different size!");
+
+/*	VkSharedPresentSurfaceCapabilitiesKHR
+(returnedonly)
+ex to: VkSurfaceCapabilities2KHR
+*/
+struct		S_shared_present_surface_capabilities_KHR{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_SHARED_PRESENT_SURFACE_CAPABILITIES_KHR;
+	void * pNext = nullptr;
+public:
+	F_image_usage sharedPresentSupportedUsageFlags;
+S_shared_present_surface_capabilities_KHR( VkSharedPresentSurfaceCapabilitiesKHR const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_shared_present_surface_capabilities_KHR ) );	}
+S_shared_present_surface_capabilities_KHR& operator=( VkSharedPresentSurfaceCapabilitiesKHR const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_shared_present_surface_capabilities_KHR ) ); return *this;	}
+operator VkSharedPresentSurfaceCapabilitiesKHR const&() const 
+	{	return *reinterpret_cast<const VkSharedPresentSurfaceCapabilitiesKHR*>(this);	}
+operator VkSharedPresentSurfaceCapabilitiesKHR &() 
+	{	return *reinterpret_cast<VkSharedPresentSurfaceCapabilitiesKHR*>(this);	}
+
+};
+static_assert(
+	sizeof(S_shared_present_surface_capabilities_KHR) == sizeof(VkSharedPresentSurfaceCapabilitiesKHR),
+	"struct and wrapper have different size!");
+
+/*	VkPhysicalDevice16BitStorageFeatures
+ex to: VkPhysicalDeviceFeatures2,VkDeviceCreateInfo
+*/
+struct		S_physical_device_16bit_storage_features{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_16BIT_STORAGE_FEATURES;
+	void * pNext = nullptr;
+public:
+	VkBool32 storageBuffer16BitAccess;
+	VkBool32 uniformAndStorageBuffer16BitAccess;
+	VkBool32 storagePushConstant16;
+	VkBool32 storageInputOutput16;
+S_physical_device_16bit_storage_features( VkPhysicalDevice16BitStorageFeatures const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_physical_device_16bit_storage_features ) );	}
+S_physical_device_16bit_storage_features& operator=( VkPhysicalDevice16BitStorageFeatures const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_physical_device_16bit_storage_features ) ); return *this;	}
+operator VkPhysicalDevice16BitStorageFeatures const&() const 
+	{	return *reinterpret_cast<const VkPhysicalDevice16BitStorageFeatures*>(this);	}
+operator VkPhysicalDevice16BitStorageFeatures &() 
+	{	return *reinterpret_cast<VkPhysicalDevice16BitStorageFeatures*>(this);	}
+
+};
+static_assert(
+	sizeof(S_physical_device_16bit_storage_features) == sizeof(VkPhysicalDevice16BitStorageFeatures),
+	"struct and wrapper have different size!");
+
+/*	VkPhysicalDeviceSubgroupProperties
+(returnedonly)
+ex to: VkPhysicalDeviceProperties2
+*/
+struct		S_physical_device_subgroup_properties{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBGROUP_PROPERTIES;
+	void * pNext = nullptr;
+public:
+	uint32_t subgroupSize;
+	F_shader_stage supportedStages;
+	F_subgroup_feature supportedOperations;
+	VkBool32 quadOperationsInAllStages;
+S_physical_device_subgroup_properties( VkPhysicalDeviceSubgroupProperties const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_physical_device_subgroup_properties ) );	}
+S_physical_device_subgroup_properties& operator=( VkPhysicalDeviceSubgroupProperties const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_physical_device_subgroup_properties ) ); return *this;	}
+operator VkPhysicalDeviceSubgroupProperties const&() const 
+	{	return *reinterpret_cast<const VkPhysicalDeviceSubgroupProperties*>(this);	}
+operator VkPhysicalDeviceSubgroupProperties &() 
+	{	return *reinterpret_cast<VkPhysicalDeviceSubgroupProperties*>(this);	}
+
+};
+static_assert(
+	sizeof(S_physical_device_subgroup_properties) == sizeof(VkPhysicalDeviceSubgroupProperties),
+	"struct and wrapper have different size!");
+
+/*	VkBufferMemoryRequirementsInfo2
+*/
+struct		S_buffer_memory_requirements_info2{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_BUFFER_MEMORY_REQUIREMENTS_INFO_2;
+	const void * pNext = nullptr;
+public:
+	VkBuffer buffer;
+S_buffer_memory_requirements_info2( VkBufferMemoryRequirementsInfo2 const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_buffer_memory_requirements_info2 ) );	}
+S_buffer_memory_requirements_info2& operator=( VkBufferMemoryRequirementsInfo2 const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_buffer_memory_requirements_info2 ) ); return *this;	}
+operator VkBufferMemoryRequirementsInfo2 const&() const 
+	{	return *reinterpret_cast<const VkBufferMemoryRequirementsInfo2*>(this);	}
+operator VkBufferMemoryRequirementsInfo2 &() 
+	{	return *reinterpret_cast<VkBufferMemoryRequirementsInfo2*>(this);	}
+
+};
+static_assert(
+	sizeof(S_buffer_memory_requirements_info2) == sizeof(VkBufferMemoryRequirementsInfo2),
+	"struct and wrapper have different size!");
+
+/*	VkImageMemoryRequirementsInfo2
+ex:
+	VkImagePlaneMemoryRequirementsInfo
+*/
+struct		S_image_memory_requirements_info2{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_IMAGE_MEMORY_REQUIREMENTS_INFO_2;
+	const void * pNext = nullptr;
+public:
+	VkImage image;
+S_image_memory_requirements_info2( VkImageMemoryRequirementsInfo2 const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_image_memory_requirements_info2 ) );	}
+S_image_memory_requirements_info2& operator=( VkImageMemoryRequirementsInfo2 const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_image_memory_requirements_info2 ) ); return *this;	}
+operator VkImageMemoryRequirementsInfo2 const&() const 
+	{	return *reinterpret_cast<const VkImageMemoryRequirementsInfo2*>(this);	}
+operator VkImageMemoryRequirementsInfo2 &() 
+	{	return *reinterpret_cast<VkImageMemoryRequirementsInfo2*>(this);	}
+
+};
+static_assert(
+	sizeof(S_image_memory_requirements_info2) == sizeof(VkImageMemoryRequirementsInfo2),
+	"struct and wrapper have different size!");
+
+/*	VkImageSparseMemoryRequirementsInfo2
+*/
+struct		S_image_sparse_memory_requirements_info2{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_IMAGE_SPARSE_MEMORY_REQUIREMENTS_INFO_2;
+	const void * pNext = nullptr;
+public:
+	VkImage image;
+S_image_sparse_memory_requirements_info2( VkImageSparseMemoryRequirementsInfo2 const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_image_sparse_memory_requirements_info2 ) );	}
+S_image_sparse_memory_requirements_info2& operator=( VkImageSparseMemoryRequirementsInfo2 const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_image_sparse_memory_requirements_info2 ) ); return *this;	}
+operator VkImageSparseMemoryRequirementsInfo2 const&() const 
+	{	return *reinterpret_cast<const VkImageSparseMemoryRequirementsInfo2*>(this);	}
+operator VkImageSparseMemoryRequirementsInfo2 &() 
+	{	return *reinterpret_cast<VkImageSparseMemoryRequirementsInfo2*>(this);	}
+
+};
+static_assert(
+	sizeof(S_image_sparse_memory_requirements_info2) == sizeof(VkImageSparseMemoryRequirementsInfo2),
+	"struct and wrapper have different size!");
+
+/*	VkPhysicalDevicePointClippingProperties
+(returnedonly)
+ex to: VkPhysicalDeviceProperties2
+*/
+struct		S_physical_device_point_clipping_properties{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_POINT_CLIPPING_PROPERTIES;
+	void * pNext = nullptr;
+public:
+	E_point_clipping_behavior pointClippingBehavior;
+S_physical_device_point_clipping_properties( VkPhysicalDevicePointClippingProperties const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_physical_device_point_clipping_properties ) );	}
+S_physical_device_point_clipping_properties& operator=( VkPhysicalDevicePointClippingProperties const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_physical_device_point_clipping_properties ) ); return *this;	}
+operator VkPhysicalDevicePointClippingProperties const&() const 
+	{	return *reinterpret_cast<const VkPhysicalDevicePointClippingProperties*>(this);	}
+operator VkPhysicalDevicePointClippingProperties &() 
+	{	return *reinterpret_cast<VkPhysicalDevicePointClippingProperties*>(this);	}
+
+};
+static_assert(
+	sizeof(S_physical_device_point_clipping_properties) == sizeof(VkPhysicalDevicePointClippingProperties),
+	"struct and wrapper have different size!");
+
+/*	VkMemoryDedicatedRequirements
+(returnedonly)
+ex to: VkMemoryRequirements2
+*/
+struct		S_memory_dedicated_requirements{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_MEMORY_DEDICATED_REQUIREMENTS;
+	void * pNext = nullptr;
+public:
+	VkBool32 prefersDedicatedAllocation;
+	VkBool32 requiresDedicatedAllocation;
+S_memory_dedicated_requirements( VkMemoryDedicatedRequirements const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_memory_dedicated_requirements ) );	}
+S_memory_dedicated_requirements& operator=( VkMemoryDedicatedRequirements const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_memory_dedicated_requirements ) ); return *this;	}
+operator VkMemoryDedicatedRequirements const&() const 
+	{	return *reinterpret_cast<const VkMemoryDedicatedRequirements*>(this);	}
+operator VkMemoryDedicatedRequirements &() 
+	{	return *reinterpret_cast<VkMemoryDedicatedRequirements*>(this);	}
+
+};
+static_assert(
+	sizeof(S_memory_dedicated_requirements) == sizeof(VkMemoryDedicatedRequirements),
+	"struct and wrapper have different size!");
+
+/*	VkMemoryDedicatedAllocateInfo
+ex to: VkMemoryAllocateInfo
+*/
+struct		S_memory_dedicated_allocate_info{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_MEMORY_DEDICATED_ALLOCATE_INFO;
+	const void * pNext = nullptr;
+public:
+	VkImage image;
+	VkBuffer buffer;
+S_memory_dedicated_allocate_info( VkMemoryDedicatedAllocateInfo const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_memory_dedicated_allocate_info ) );	}
+S_memory_dedicated_allocate_info& operator=( VkMemoryDedicatedAllocateInfo const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_memory_dedicated_allocate_info ) ); return *this;	}
+operator VkMemoryDedicatedAllocateInfo const&() const 
+	{	return *reinterpret_cast<const VkMemoryDedicatedAllocateInfo*>(this);	}
+operator VkMemoryDedicatedAllocateInfo &() 
+	{	return *reinterpret_cast<VkMemoryDedicatedAllocateInfo*>(this);	}
+
+};
+static_assert(
+	sizeof(S_memory_dedicated_allocate_info) == sizeof(VkMemoryDedicatedAllocateInfo),
+	"struct and wrapper have different size!");
+
+/*	VkImageViewUsageCreateInfo
+ex to: VkImageViewCreateInfo
+*/
+struct		S_image_view_usage_create_info{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_IMAGE_VIEW_USAGE_CREATE_INFO;
+	const void * pNext = nullptr;
+public:
+	F_image_usage usage;
+S_image_view_usage_create_info( VkImageViewUsageCreateInfo const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_image_view_usage_create_info ) );	}
+S_image_view_usage_create_info& operator=( VkImageViewUsageCreateInfo const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_image_view_usage_create_info ) ); return *this;	}
+operator VkImageViewUsageCreateInfo const&() const 
+	{	return *reinterpret_cast<const VkImageViewUsageCreateInfo*>(this);	}
+operator VkImageViewUsageCreateInfo &() 
+	{	return *reinterpret_cast<VkImageViewUsageCreateInfo*>(this);	}
+
+};
+static_assert(
+	sizeof(S_image_view_usage_create_info) == sizeof(VkImageViewUsageCreateInfo),
+	"struct and wrapper have different size!");
+
+/*	VkPipelineTessellationDomainOriginStateCreateInfo
+ex to: VkPipelineTessellationStateCreateInfo
+*/
+struct		S_pipeline_tessellation_domain_origin_state_create_info{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_PIPELINE_TESSELLATION_DOMAIN_ORIGIN_STATE_CREATE_INFO;
+	const void * pNext = nullptr;
+public:
+	E_tessellation_domain_origin domainOrigin;
+S_pipeline_tessellation_domain_origin_state_create_info( VkPipelineTessellationDomainOriginStateCreateInfo const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_pipeline_tessellation_domain_origin_state_create_info ) );	}
+S_pipeline_tessellation_domain_origin_state_create_info& operator=( VkPipelineTessellationDomainOriginStateCreateInfo const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_pipeline_tessellation_domain_origin_state_create_info ) ); return *this;	}
+operator VkPipelineTessellationDomainOriginStateCreateInfo const&() const 
+	{	return *reinterpret_cast<const VkPipelineTessellationDomainOriginStateCreateInfo*>(this);	}
+operator VkPipelineTessellationDomainOriginStateCreateInfo &() 
+	{	return *reinterpret_cast<VkPipelineTessellationDomainOriginStateCreateInfo*>(this);	}
+
+};
+static_assert(
+	sizeof(S_pipeline_tessellation_domain_origin_state_create_info) == sizeof(VkPipelineTessellationDomainOriginStateCreateInfo),
+	"struct and wrapper have different size!");
+
+/*	VkSamplerYcbcrConversionInfo
+ex to: VkSamplerCreateInfo,VkImageViewCreateInfo
+*/
+struct		S_sampler_ycbcr_conversion_info{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_INFO;
+	const void * pNext = nullptr;
+public:
+	VkSamplerYcbcrConversion conversion;
+S_sampler_ycbcr_conversion_info( VkSamplerYcbcrConversionInfo const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_sampler_ycbcr_conversion_info ) );	}
+S_sampler_ycbcr_conversion_info& operator=( VkSamplerYcbcrConversionInfo const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_sampler_ycbcr_conversion_info ) ); return *this;	}
+operator VkSamplerYcbcrConversionInfo const&() const 
+	{	return *reinterpret_cast<const VkSamplerYcbcrConversionInfo*>(this);	}
+operator VkSamplerYcbcrConversionInfo &() 
+	{	return *reinterpret_cast<VkSamplerYcbcrConversionInfo*>(this);	}
+
+};
+static_assert(
+	sizeof(S_sampler_ycbcr_conversion_info) == sizeof(VkSamplerYcbcrConversionInfo),
+	"struct and wrapper have different size!");
+
+/*	VkBindImagePlaneMemoryInfo
+ex to: VkBindImageMemoryInfo
+*/
+struct		S_bind_image_plane_memory_info{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_BIND_IMAGE_PLANE_MEMORY_INFO;
+	const void * pNext = nullptr;
+public:
+	F_image_aspect planeAspect;
+S_bind_image_plane_memory_info( VkBindImagePlaneMemoryInfo const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_bind_image_plane_memory_info ) );	}
+S_bind_image_plane_memory_info& operator=( VkBindImagePlaneMemoryInfo const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_bind_image_plane_memory_info ) ); return *this;	}
+operator VkBindImagePlaneMemoryInfo const&() const 
+	{	return *reinterpret_cast<const VkBindImagePlaneMemoryInfo*>(this);	}
+operator VkBindImagePlaneMemoryInfo &() 
+	{	return *reinterpret_cast<VkBindImagePlaneMemoryInfo*>(this);	}
+
+};
+static_assert(
+	sizeof(S_bind_image_plane_memory_info) == sizeof(VkBindImagePlaneMemoryInfo),
+	"struct and wrapper have different size!");
+
+/*	VkImagePlaneMemoryRequirementsInfo
+ex to: VkImageMemoryRequirementsInfo2
+*/
+struct		S_image_plane_memory_requirements_info{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_IMAGE_PLANE_MEMORY_REQUIREMENTS_INFO;
+	const void * pNext = nullptr;
+public:
+	F_image_aspect planeAspect;
+S_image_plane_memory_requirements_info( VkImagePlaneMemoryRequirementsInfo const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_image_plane_memory_requirements_info ) );	}
+S_image_plane_memory_requirements_info& operator=( VkImagePlaneMemoryRequirementsInfo const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_image_plane_memory_requirements_info ) ); return *this;	}
+operator VkImagePlaneMemoryRequirementsInfo const&() const 
+	{	return *reinterpret_cast<const VkImagePlaneMemoryRequirementsInfo*>(this);	}
+operator VkImagePlaneMemoryRequirementsInfo &() 
+	{	return *reinterpret_cast<VkImagePlaneMemoryRequirementsInfo*>(this);	}
+
+};
+static_assert(
+	sizeof(S_image_plane_memory_requirements_info) == sizeof(VkImagePlaneMemoryRequirementsInfo),
+	"struct and wrapper have different size!");
+
+/*	VkPhysicalDeviceSamplerYcbcrConversionFeatures
+ex to: VkPhysicalDeviceFeatures2,VkDeviceCreateInfo
+*/
+struct		S_physical_device_sampler_ycbcr_conversion_features{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SAMPLER_YCBCR_CONVERSION_FEATURES;
+	void * pNext = nullptr;
+public:
+	VkBool32 samplerYcbcrConversion;
+S_physical_device_sampler_ycbcr_conversion_features( VkPhysicalDeviceSamplerYcbcrConversionFeatures const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_physical_device_sampler_ycbcr_conversion_features ) );	}
+S_physical_device_sampler_ycbcr_conversion_features& operator=( VkPhysicalDeviceSamplerYcbcrConversionFeatures const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_physical_device_sampler_ycbcr_conversion_features ) ); return *this;	}
+operator VkPhysicalDeviceSamplerYcbcrConversionFeatures const&() const 
+	{	return *reinterpret_cast<const VkPhysicalDeviceSamplerYcbcrConversionFeatures*>(this);	}
+operator VkPhysicalDeviceSamplerYcbcrConversionFeatures &() 
+	{	return *reinterpret_cast<VkPhysicalDeviceSamplerYcbcrConversionFeatures*>(this);	}
+
+};
+static_assert(
+	sizeof(S_physical_device_sampler_ycbcr_conversion_features) == sizeof(VkPhysicalDeviceSamplerYcbcrConversionFeatures),
+	"struct and wrapper have different size!");
+
+/*	VkSamplerYcbcrConversionImageFormatProperties
+(returnedonly)
+ex to: VkImageFormatProperties2
+*/
+struct		S_sampler_ycbcr_conversion_image_format_properties{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_IMAGE_FORMAT_PROPERTIES;
+	void * pNext = nullptr;
+public:
+	uint32_t combinedImageSamplerDescriptorCount;
+S_sampler_ycbcr_conversion_image_format_properties( VkSamplerYcbcrConversionImageFormatProperties const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_sampler_ycbcr_conversion_image_format_properties ) );	}
+S_sampler_ycbcr_conversion_image_format_properties& operator=( VkSamplerYcbcrConversionImageFormatProperties const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_sampler_ycbcr_conversion_image_format_properties ) ); return *this;	}
+operator VkSamplerYcbcrConversionImageFormatProperties const&() const 
+	{	return *reinterpret_cast<const VkSamplerYcbcrConversionImageFormatProperties*>(this);	}
+operator VkSamplerYcbcrConversionImageFormatProperties &() 
+	{	return *reinterpret_cast<VkSamplerYcbcrConversionImageFormatProperties*>(this);	}
+
+};
+static_assert(
+	sizeof(S_sampler_ycbcr_conversion_image_format_properties) == sizeof(VkSamplerYcbcrConversionImageFormatProperties),
+	"struct and wrapper have different size!");
+
+/*	VkTextureLODGatherFormatPropertiesAMD
+(returnedonly)
+ex to: VkImageFormatProperties2
+*/
+struct		S_texture_lod_gather_format_properties_AMD{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_TEXTURE_LOD_GATHER_FORMAT_PROPERTIES_AMD;
+	void * pNext = nullptr;
+public:
+	VkBool32 supportsTextureGatherLODBiasAMD;
+S_texture_lod_gather_format_properties_AMD( VkTextureLODGatherFormatPropertiesAMD const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_texture_lod_gather_format_properties_AMD ) );	}
+S_texture_lod_gather_format_properties_AMD& operator=( VkTextureLODGatherFormatPropertiesAMD const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_texture_lod_gather_format_properties_AMD ) ); return *this;	}
+operator VkTextureLODGatherFormatPropertiesAMD const&() const 
+	{	return *reinterpret_cast<const VkTextureLODGatherFormatPropertiesAMD*>(this);	}
+operator VkTextureLODGatherFormatPropertiesAMD &() 
+	{	return *reinterpret_cast<VkTextureLODGatherFormatPropertiesAMD*>(this);	}
+
+};
+static_assert(
+	sizeof(S_texture_lod_gather_format_properties_AMD) == sizeof(VkTextureLODGatherFormatPropertiesAMD),
+	"struct and wrapper have different size!");
+
+/*	VkConditionalRenderingBeginInfoEXT
+*/
+struct		S_conditional_rendering_begin_info_EXT{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_CONDITIONAL_RENDERING_BEGIN_INFO_EXT;
+	const void * pNext = nullptr;
+public:
+	VkBuffer buffer;
+	VkDeviceSize offset;
+	F_conditional_rendering_EXT flags;
+S_conditional_rendering_begin_info_EXT( VkConditionalRenderingBeginInfoEXT const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_conditional_rendering_begin_info_EXT ) );	}
+S_conditional_rendering_begin_info_EXT& operator=( VkConditionalRenderingBeginInfoEXT const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_conditional_rendering_begin_info_EXT ) ); return *this;	}
+operator VkConditionalRenderingBeginInfoEXT const&() const 
+	{	return *reinterpret_cast<const VkConditionalRenderingBeginInfoEXT*>(this);	}
+operator VkConditionalRenderingBeginInfoEXT &() 
+	{	return *reinterpret_cast<VkConditionalRenderingBeginInfoEXT*>(this);	}
+
+};
+static_assert(
+	sizeof(S_conditional_rendering_begin_info_EXT) == sizeof(VkConditionalRenderingBeginInfoEXT),
+	"struct and wrapper have different size!");
+
+/*	VkProtectedSubmitInfo
+ex to: VkSubmitInfo
+*/
+struct		S_protected_submit_info{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_PROTECTED_SUBMIT_INFO;
+	const void * pNext = nullptr;
+public:
+	VkBool32 protectedSubmit;
+S_protected_submit_info( VkProtectedSubmitInfo const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_protected_submit_info ) );	}
+S_protected_submit_info& operator=( VkProtectedSubmitInfo const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_protected_submit_info ) ); return *this;	}
+operator VkProtectedSubmitInfo const&() const 
+	{	return *reinterpret_cast<const VkProtectedSubmitInfo*>(this);	}
+operator VkProtectedSubmitInfo &() 
+	{	return *reinterpret_cast<VkProtectedSubmitInfo*>(this);	}
+
+};
+static_assert(
+	sizeof(S_protected_submit_info) == sizeof(VkProtectedSubmitInfo),
+	"struct and wrapper have different size!");
+
+/*	VkPhysicalDeviceProtectedMemoryFeatures
+ex to: VkPhysicalDeviceFeatures2,VkDeviceCreateInfo
+*/
+struct		S_physical_device_protected_memory_features{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROTECTED_MEMORY_FEATURES;
+	void * pNext = nullptr;
+public:
+	VkBool32 protectedMemory;
+S_physical_device_protected_memory_features( VkPhysicalDeviceProtectedMemoryFeatures const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_physical_device_protected_memory_features ) );	}
+S_physical_device_protected_memory_features& operator=( VkPhysicalDeviceProtectedMemoryFeatures const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_physical_device_protected_memory_features ) ); return *this;	}
+operator VkPhysicalDeviceProtectedMemoryFeatures const&() const 
+	{	return *reinterpret_cast<const VkPhysicalDeviceProtectedMemoryFeatures*>(this);	}
+operator VkPhysicalDeviceProtectedMemoryFeatures &() 
+	{	return *reinterpret_cast<VkPhysicalDeviceProtectedMemoryFeatures*>(this);	}
+
+};
+static_assert(
+	sizeof(S_physical_device_protected_memory_features) == sizeof(VkPhysicalDeviceProtectedMemoryFeatures),
+	"struct and wrapper have different size!");
+
+/*	VkPhysicalDeviceProtectedMemoryProperties
+ex to: VkPhysicalDeviceProperties2
+*/
+struct		S_physical_device_protected_memory_properties{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROTECTED_MEMORY_PROPERTIES;
+	void * pNext = nullptr;
+public:
+	VkBool32 protectedNoFault;
+S_physical_device_protected_memory_properties( VkPhysicalDeviceProtectedMemoryProperties const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_physical_device_protected_memory_properties ) );	}
+S_physical_device_protected_memory_properties& operator=( VkPhysicalDeviceProtectedMemoryProperties const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_physical_device_protected_memory_properties ) ); return *this;	}
+operator VkPhysicalDeviceProtectedMemoryProperties const&() const 
+	{	return *reinterpret_cast<const VkPhysicalDeviceProtectedMemoryProperties*>(this);	}
+operator VkPhysicalDeviceProtectedMemoryProperties &() 
+	{	return *reinterpret_cast<VkPhysicalDeviceProtectedMemoryProperties*>(this);	}
+
+};
+static_assert(
+	sizeof(S_physical_device_protected_memory_properties) == sizeof(VkPhysicalDeviceProtectedMemoryProperties),
+	"struct and wrapper have different size!");
+
+/*	VkDeviceQueueInfo2
+*/
+struct		S_device_queue_info2{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_DEVICE_QUEUE_INFO_2;
+	const void * pNext = nullptr;
+public:
+	F_device_queue_create flags;
+	uint32_t queueFamilyIndex;
+	uint32_t queueIndex;
+S_device_queue_info2( VkDeviceQueueInfo2 const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_device_queue_info2 ) );	}
+S_device_queue_info2& operator=( VkDeviceQueueInfo2 const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_device_queue_info2 ) ); return *this;	}
+operator VkDeviceQueueInfo2 const&() const 
+	{	return *reinterpret_cast<const VkDeviceQueueInfo2*>(this);	}
+operator VkDeviceQueueInfo2 &() 
+	{	return *reinterpret_cast<VkDeviceQueueInfo2*>(this);	}
+
+};
+static_assert(
+	sizeof(S_device_queue_info2) == sizeof(VkDeviceQueueInfo2),
+	"struct and wrapper have different size!");
+
+/*	VkPipelineCoverageToColorStateCreateInfoNV
+ex to: VkPipelineMultisampleStateCreateInfo
+*/
+struct		S_pipeline_coverage_to_color_state_create_info_NV{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_PIPELINE_COVERAGE_TO_COLOR_STATE_CREATE_INFO_NV;
+	const void * pNext = nullptr;
+public:
+	VkPipelineCoverageToColorStateCreateFlagsNV flags;
+	VkBool32 coverageToColorEnable;
+	uint32_t coverageToColorLocation;
+S_pipeline_coverage_to_color_state_create_info_NV( VkPipelineCoverageToColorStateCreateInfoNV const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_pipeline_coverage_to_color_state_create_info_NV ) );	}
+S_pipeline_coverage_to_color_state_create_info_NV& operator=( VkPipelineCoverageToColorStateCreateInfoNV const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_pipeline_coverage_to_color_state_create_info_NV ) ); return *this;	}
+operator VkPipelineCoverageToColorStateCreateInfoNV const&() const 
+	{	return *reinterpret_cast<const VkPipelineCoverageToColorStateCreateInfoNV*>(this);	}
+operator VkPipelineCoverageToColorStateCreateInfoNV &() 
+	{	return *reinterpret_cast<VkPipelineCoverageToColorStateCreateInfoNV*>(this);	}
+
+};
+static_assert(
+	sizeof(S_pipeline_coverage_to_color_state_create_info_NV) == sizeof(VkPipelineCoverageToColorStateCreateInfoNV),
+	"struct and wrapper have different size!");
+
+/*	VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT
+(returnedonly)
+ex to: VkPhysicalDeviceProperties2
+*/
+struct		S_physical_device_sampler_filter_minmax_properties_EXT{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SAMPLER_FILTER_MINMAX_PROPERTIES_EXT;
+	void * pNext = nullptr;
+public:
+	VkBool32 filterMinmaxSingleComponentFormats;
+	VkBool32 filterMinmaxImageComponentMapping;
+S_physical_device_sampler_filter_minmax_properties_EXT( VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_physical_device_sampler_filter_minmax_properties_EXT ) );	}
+S_physical_device_sampler_filter_minmax_properties_EXT& operator=( VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_physical_device_sampler_filter_minmax_properties_EXT ) ); return *this;	}
+operator VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT const&() const 
+	{	return *reinterpret_cast<const VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT*>(this);	}
+operator VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT &() 
+	{	return *reinterpret_cast<VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT*>(this);	}
+
+};
+static_assert(
+	sizeof(S_physical_device_sampler_filter_minmax_properties_EXT) == sizeof(VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT),
+	"struct and wrapper have different size!");
+
+/*	VkSamplerReductionModeCreateInfoEXT
+ex to: VkSamplerCreateInfo
+*/
+struct		S_sampler_reduction_mode_create_info_EXT{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_SAMPLER_REDUCTION_MODE_CREATE_INFO_EXT;
+	const void * pNext = nullptr;
+public:
+	E_sampler_reduction_mode_EXT reductionMode;
+S_sampler_reduction_mode_create_info_EXT( VkSamplerReductionModeCreateInfoEXT const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_sampler_reduction_mode_create_info_EXT ) );	}
+S_sampler_reduction_mode_create_info_EXT& operator=( VkSamplerReductionModeCreateInfoEXT const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_sampler_reduction_mode_create_info_EXT ) ); return *this;	}
+operator VkSamplerReductionModeCreateInfoEXT const&() const 
+	{	return *reinterpret_cast<const VkSamplerReductionModeCreateInfoEXT*>(this);	}
+operator VkSamplerReductionModeCreateInfoEXT &() 
+	{	return *reinterpret_cast<VkSamplerReductionModeCreateInfoEXT*>(this);	}
+
+};
+static_assert(
+	sizeof(S_sampler_reduction_mode_create_info_EXT) == sizeof(VkSamplerReductionModeCreateInfoEXT),
+	"struct and wrapper have different size!");
+
+/*	VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT
+ex to: VkPhysicalDeviceFeatures2,VkDeviceCreateInfo
+*/
+struct		S_physical_device_blend_operation_advanced_features_EXT{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_BLEND_OPERATION_ADVANCED_FEATURES_EXT;
+	void * pNext = nullptr;
+public:
+	VkBool32 advancedBlendCoherentOperations;
+S_physical_device_blend_operation_advanced_features_EXT( VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_physical_device_blend_operation_advanced_features_EXT ) );	}
+S_physical_device_blend_operation_advanced_features_EXT& operator=( VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_physical_device_blend_operation_advanced_features_EXT ) ); return *this;	}
+operator VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT const&() const 
+	{	return *reinterpret_cast<const VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT*>(this);	}
+operator VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT &() 
+	{	return *reinterpret_cast<VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT*>(this);	}
+
+};
+static_assert(
+	sizeof(S_physical_device_blend_operation_advanced_features_EXT) == sizeof(VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT),
+	"struct and wrapper have different size!");
+
+/*	VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT
+(returnedonly)
+ex to: VkPhysicalDeviceProperties2
+*/
+struct		S_physical_device_blend_operation_advanced_properties_EXT{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_BLEND_OPERATION_ADVANCED_PROPERTIES_EXT;
+	void * pNext = nullptr;
+public:
+	uint32_t advancedBlendMaxColorAttachments;
+	VkBool32 advancedBlendIndependentBlend;
+	VkBool32 advancedBlendNonPremultipliedSrcColor;
+	VkBool32 advancedBlendNonPremultipliedDstColor;
+	VkBool32 advancedBlendCorrelatedOverlap;
+	VkBool32 advancedBlendAllOperations;
+S_physical_device_blend_operation_advanced_properties_EXT( VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_physical_device_blend_operation_advanced_properties_EXT ) );	}
+S_physical_device_blend_operation_advanced_properties_EXT& operator=( VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_physical_device_blend_operation_advanced_properties_EXT ) ); return *this;	}
+operator VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT const&() const 
+	{	return *reinterpret_cast<const VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT*>(this);	}
+operator VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT &() 
+	{	return *reinterpret_cast<VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT*>(this);	}
+
+};
+static_assert(
+	sizeof(S_physical_device_blend_operation_advanced_properties_EXT) == sizeof(VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT),
+	"struct and wrapper have different size!");
+
+/*	VkPipelineColorBlendAdvancedStateCreateInfoEXT
+ex to: VkPipelineColorBlendStateCreateInfo
+*/
+struct		S_pipeline_color_blend_advanced_state_create_info_EXT{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_PIPELINE_COLOR_BLEND_ADVANCED_STATE_CREATE_INFO_EXT;
+	const void * pNext = nullptr;
+public:
+	VkBool32 srcPremultiplied;
+	VkBool32 dstPremultiplied;
+	E_blend_overlap_EXT blendOverlap;
+S_pipeline_color_blend_advanced_state_create_info_EXT( VkPipelineColorBlendAdvancedStateCreateInfoEXT const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_pipeline_color_blend_advanced_state_create_info_EXT ) );	}
+S_pipeline_color_blend_advanced_state_create_info_EXT& operator=( VkPipelineColorBlendAdvancedStateCreateInfoEXT const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_pipeline_color_blend_advanced_state_create_info_EXT ) ); return *this;	}
+operator VkPipelineColorBlendAdvancedStateCreateInfoEXT const&() const 
+	{	return *reinterpret_cast<const VkPipelineColorBlendAdvancedStateCreateInfoEXT*>(this);	}
+operator VkPipelineColorBlendAdvancedStateCreateInfoEXT &() 
+	{	return *reinterpret_cast<VkPipelineColorBlendAdvancedStateCreateInfoEXT*>(this);	}
+
+};
+static_assert(
+	sizeof(S_pipeline_color_blend_advanced_state_create_info_EXT) == sizeof(VkPipelineColorBlendAdvancedStateCreateInfoEXT),
+	"struct and wrapper have different size!");
+
+/*	VkPhysicalDeviceInlineUniformBlockFeaturesEXT
+(returnedonly)
+ex to: VkPhysicalDeviceFeatures2,VkDeviceCreateInfo
+*/
+struct		S_physical_device_inline_uniform_block_features_EXT{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_INLINE_UNIFORM_BLOCK_FEATURES_EXT;
+	void * pNext = nullptr;
+public:
+	VkBool32 inlineUniformBlock;
+	VkBool32 descriptorBindingInlineUniformBlockUpdateAfterBind;
+S_physical_device_inline_uniform_block_features_EXT( VkPhysicalDeviceInlineUniformBlockFeaturesEXT const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_physical_device_inline_uniform_block_features_EXT ) );	}
+S_physical_device_inline_uniform_block_features_EXT& operator=( VkPhysicalDeviceInlineUniformBlockFeaturesEXT const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_physical_device_inline_uniform_block_features_EXT ) ); return *this;	}
+operator VkPhysicalDeviceInlineUniformBlockFeaturesEXT const&() const 
+	{	return *reinterpret_cast<const VkPhysicalDeviceInlineUniformBlockFeaturesEXT*>(this);	}
+operator VkPhysicalDeviceInlineUniformBlockFeaturesEXT &() 
+	{	return *reinterpret_cast<VkPhysicalDeviceInlineUniformBlockFeaturesEXT*>(this);	}
+
+};
+static_assert(
+	sizeof(S_physical_device_inline_uniform_block_features_EXT) == sizeof(VkPhysicalDeviceInlineUniformBlockFeaturesEXT),
+	"struct and wrapper have different size!");
+
+/*	VkPhysicalDeviceInlineUniformBlockPropertiesEXT
+(returnedonly)
+ex to: VkPhysicalDeviceProperties2
+*/
+struct		S_physical_device_inline_uniform_block_properties_EXT{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_INLINE_UNIFORM_BLOCK_PROPERTIES_EXT;
+	void * pNext = nullptr;
+public:
+	uint32_t maxInlineUniformBlockSize;
+	uint32_t maxPerStageDescriptorInlineUniformBlocks;
+	uint32_t maxPerStageDescriptorUpdateAfterBindInlineUniformBlocks;
+	uint32_t maxDescriptorSetInlineUniformBlocks;
+	uint32_t maxDescriptorSetUpdateAfterBindInlineUniformBlocks;
+S_physical_device_inline_uniform_block_properties_EXT( VkPhysicalDeviceInlineUniformBlockPropertiesEXT const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_physical_device_inline_uniform_block_properties_EXT ) );	}
+S_physical_device_inline_uniform_block_properties_EXT& operator=( VkPhysicalDeviceInlineUniformBlockPropertiesEXT const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_physical_device_inline_uniform_block_properties_EXT ) ); return *this;	}
+operator VkPhysicalDeviceInlineUniformBlockPropertiesEXT const&() const 
+	{	return *reinterpret_cast<const VkPhysicalDeviceInlineUniformBlockPropertiesEXT*>(this);	}
+operator VkPhysicalDeviceInlineUniformBlockPropertiesEXT &() 
+	{	return *reinterpret_cast<VkPhysicalDeviceInlineUniformBlockPropertiesEXT*>(this);	}
+
+};
+static_assert(
+	sizeof(S_physical_device_inline_uniform_block_properties_EXT) == sizeof(VkPhysicalDeviceInlineUniformBlockPropertiesEXT),
+	"struct and wrapper have different size!");
+
+/*	VkWriteDescriptorSetInlineUniformBlockEXT
+ex to: VkWriteDescriptorSet
+*/
+struct		S_write_descriptor_set_inline_uniform_block_EXT{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET_INLINE_UNIFORM_BLOCK_EXT;
+	const void * pNext = nullptr;
+public:
+	uint32_t dataSize;
+	const void * pData;
+S_write_descriptor_set_inline_uniform_block_EXT( VkWriteDescriptorSetInlineUniformBlockEXT const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_write_descriptor_set_inline_uniform_block_EXT ) );	}
+S_write_descriptor_set_inline_uniform_block_EXT& operator=( VkWriteDescriptorSetInlineUniformBlockEXT const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_write_descriptor_set_inline_uniform_block_EXT ) ); return *this;	}
+operator VkWriteDescriptorSetInlineUniformBlockEXT const&() const 
+	{	return *reinterpret_cast<const VkWriteDescriptorSetInlineUniformBlockEXT*>(this);	}
+operator VkWriteDescriptorSetInlineUniformBlockEXT &() 
+	{	return *reinterpret_cast<VkWriteDescriptorSetInlineUniformBlockEXT*>(this);	}
+
+};
+static_assert(
+	sizeof(S_write_descriptor_set_inline_uniform_block_EXT) == sizeof(VkWriteDescriptorSetInlineUniformBlockEXT),
+	"struct and wrapper have different size!");
+
+/*	VkDescriptorPoolInlineUniformBlockCreateInfoEXT
+ex to: VkDescriptorPoolCreateInfo
+*/
+struct		S_descriptor_pool_inline_uniform_block_create_info_EXT{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_INLINE_UNIFORM_BLOCK_CREATE_INFO_EXT;
+	const void * pNext = nullptr;
+public:
+	uint32_t maxInlineUniformBlockBindings;
+S_descriptor_pool_inline_uniform_block_create_info_EXT( VkDescriptorPoolInlineUniformBlockCreateInfoEXT const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_descriptor_pool_inline_uniform_block_create_info_EXT ) );	}
+S_descriptor_pool_inline_uniform_block_create_info_EXT& operator=( VkDescriptorPoolInlineUniformBlockCreateInfoEXT const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_descriptor_pool_inline_uniform_block_create_info_EXT ) ); return *this;	}
+operator VkDescriptorPoolInlineUniformBlockCreateInfoEXT const&() const 
+	{	return *reinterpret_cast<const VkDescriptorPoolInlineUniformBlockCreateInfoEXT*>(this);	}
+operator VkDescriptorPoolInlineUniformBlockCreateInfoEXT &() 
+	{	return *reinterpret_cast<VkDescriptorPoolInlineUniformBlockCreateInfoEXT*>(this);	}
+
+};
+static_assert(
+	sizeof(S_descriptor_pool_inline_uniform_block_create_info_EXT) == sizeof(VkDescriptorPoolInlineUniformBlockCreateInfoEXT),
+	"struct and wrapper have different size!");
+
+/*	VkPipelineCoverageModulationStateCreateInfoNV
+ex to: VkPipelineMultisampleStateCreateInfo
+*/
+struct		S_pipeline_coverage_modulation_state_create_info_NV{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_PIPELINE_COVERAGE_MODULATION_STATE_CREATE_INFO_NV;
+	const void * pNext = nullptr;
+public:
+	VkPipelineCoverageModulationStateCreateFlagsNV flags;
+	E_coverage_modulation_mode_NV coverageModulationMode;
+	VkBool32 coverageModulationTableEnable;
+	uint32_t coverageModulationTableCount;
+	const float * pCoverageModulationTable;
+S_pipeline_coverage_modulation_state_create_info_NV( VkPipelineCoverageModulationStateCreateInfoNV const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_pipeline_coverage_modulation_state_create_info_NV ) );	}
+S_pipeline_coverage_modulation_state_create_info_NV& operator=( VkPipelineCoverageModulationStateCreateInfoNV const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_pipeline_coverage_modulation_state_create_info_NV ) ); return *this;	}
+operator VkPipelineCoverageModulationStateCreateInfoNV const&() const 
+	{	return *reinterpret_cast<const VkPipelineCoverageModulationStateCreateInfoNV*>(this);	}
+operator VkPipelineCoverageModulationStateCreateInfoNV &() 
+	{	return *reinterpret_cast<VkPipelineCoverageModulationStateCreateInfoNV*>(this);	}
+
+};
+static_assert(
+	sizeof(S_pipeline_coverage_modulation_state_create_info_NV) == sizeof(VkPipelineCoverageModulationStateCreateInfoNV),
+	"struct and wrapper have different size!");
+
+/*	VkImageFormatListCreateInfoKHR
+ex to: VkImageCreateInfo
+*/
+struct		S_image_format_list_create_info_KHR{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_IMAGE_FORMAT_LIST_CREATE_INFO_KHR;
+	const void * pNext = nullptr;
+public:
+	uint32_t viewFormatCount;
+	const E_format * pViewFormats;
+S_image_format_list_create_info_KHR( VkImageFormatListCreateInfoKHR const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_image_format_list_create_info_KHR ) );	}
+S_image_format_list_create_info_KHR& operator=( VkImageFormatListCreateInfoKHR const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_image_format_list_create_info_KHR ) ); return *this;	}
+operator VkImageFormatListCreateInfoKHR const&() const 
+	{	return *reinterpret_cast<const VkImageFormatListCreateInfoKHR*>(this);	}
+operator VkImageFormatListCreateInfoKHR &() 
+	{	return *reinterpret_cast<VkImageFormatListCreateInfoKHR*>(this);	}
+
+};
+static_assert(
+	sizeof(S_image_format_list_create_info_KHR) == sizeof(VkImageFormatListCreateInfoKHR),
+	"struct and wrapper have different size!");
+
+/*	VkValidationCacheCreateInfoEXT
+*/
+struct		S_validation_cache_create_info_EXT{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_VALIDATION_CACHE_CREATE_INFO_EXT;
+	const void * pNext = nullptr;
+public:
+	VkValidationCacheCreateFlagsEXT flags;
+	size_t initialDataSize;
+	const void * pInitialData;
+S_validation_cache_create_info_EXT( VkValidationCacheCreateInfoEXT const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_validation_cache_create_info_EXT ) );	}
+S_validation_cache_create_info_EXT& operator=( VkValidationCacheCreateInfoEXT const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_validation_cache_create_info_EXT ) ); return *this;	}
+operator VkValidationCacheCreateInfoEXT const&() const 
+	{	return *reinterpret_cast<const VkValidationCacheCreateInfoEXT*>(this);	}
+operator VkValidationCacheCreateInfoEXT &() 
+	{	return *reinterpret_cast<VkValidationCacheCreateInfoEXT*>(this);	}
+
+};
+static_assert(
+	sizeof(S_validation_cache_create_info_EXT) == sizeof(VkValidationCacheCreateInfoEXT),
+	"struct and wrapper have different size!");
+
+/*	VkShaderModuleValidationCacheCreateInfoEXT
+ex to: VkShaderModuleCreateInfo
+*/
+struct		S_shader_module_validation_cache_create_info_EXT{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_SHADER_MODULE_VALIDATION_CACHE_CREATE_INFO_EXT;
+	const void * pNext = nullptr;
+public:
+	VkValidationCacheEXT validationCache;
+S_shader_module_validation_cache_create_info_EXT( VkShaderModuleValidationCacheCreateInfoEXT const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_shader_module_validation_cache_create_info_EXT ) );	}
+S_shader_module_validation_cache_create_info_EXT& operator=( VkShaderModuleValidationCacheCreateInfoEXT const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_shader_module_validation_cache_create_info_EXT ) ); return *this;	}
+operator VkShaderModuleValidationCacheCreateInfoEXT const&() const 
+	{	return *reinterpret_cast<const VkShaderModuleValidationCacheCreateInfoEXT*>(this);	}
+operator VkShaderModuleValidationCacheCreateInfoEXT &() 
+	{	return *reinterpret_cast<VkShaderModuleValidationCacheCreateInfoEXT*>(this);	}
+
+};
+static_assert(
+	sizeof(S_shader_module_validation_cache_create_info_EXT) == sizeof(VkShaderModuleValidationCacheCreateInfoEXT),
+	"struct and wrapper have different size!");
+
+/*	VkPhysicalDeviceMaintenance3Properties
+(returnedonly)
+ex to: VkPhysicalDeviceProperties2
+*/
+struct		S_physical_device_maintenance3_properties{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_3_PROPERTIES;
+	void * pNext = nullptr;
+public:
+	uint32_t maxPerSetDescriptors;
+	VkDeviceSize maxMemoryAllocationSize;
+S_physical_device_maintenance3_properties( VkPhysicalDeviceMaintenance3Properties const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_physical_device_maintenance3_properties ) );	}
+S_physical_device_maintenance3_properties& operator=( VkPhysicalDeviceMaintenance3Properties const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_physical_device_maintenance3_properties ) ); return *this;	}
+operator VkPhysicalDeviceMaintenance3Properties const&() const 
+	{	return *reinterpret_cast<const VkPhysicalDeviceMaintenance3Properties*>(this);	}
+operator VkPhysicalDeviceMaintenance3Properties &() 
+	{	return *reinterpret_cast<VkPhysicalDeviceMaintenance3Properties*>(this);	}
+
+};
+static_assert(
+	sizeof(S_physical_device_maintenance3_properties) == sizeof(VkPhysicalDeviceMaintenance3Properties),
+	"struct and wrapper have different size!");
+
+/*	VkDescriptorSetLayoutSupport
+(returnedonly)
+ex:
+	VkDescriptorSetVariableDescriptorCountLayoutSupportEXT
+*/
+struct		S_descriptor_set_layout_support{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_SUPPORT;
+	void * pNext = nullptr;
+public:
+	VkBool32 supported;
+S_descriptor_set_layout_support( VkDescriptorSetLayoutSupport const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_descriptor_set_layout_support ) );	}
+S_descriptor_set_layout_support& operator=( VkDescriptorSetLayoutSupport const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_descriptor_set_layout_support ) ); return *this;	}
+operator VkDescriptorSetLayoutSupport const&() const 
+	{	return *reinterpret_cast<const VkDescriptorSetLayoutSupport*>(this);	}
+operator VkDescriptorSetLayoutSupport &() 
+	{	return *reinterpret_cast<VkDescriptorSetLayoutSupport*>(this);	}
+
+};
+static_assert(
+	sizeof(S_descriptor_set_layout_support) == sizeof(VkDescriptorSetLayoutSupport),
+	"struct and wrapper have different size!");
+
+/*	VkPhysicalDeviceShaderDrawParameterFeatures
+ex to: VkPhysicalDeviceFeatures2,VkDeviceCreateInfo
+*/
+struct		S_physical_device_shader_draw_parameter_features{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_DRAW_PARAMETER_FEATURES;
+	void * pNext = nullptr;
+public:
+	VkBool32 shaderDrawParameters;
+S_physical_device_shader_draw_parameter_features( VkPhysicalDeviceShaderDrawParameterFeatures const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_physical_device_shader_draw_parameter_features ) );	}
+S_physical_device_shader_draw_parameter_features& operator=( VkPhysicalDeviceShaderDrawParameterFeatures const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_physical_device_shader_draw_parameter_features ) ); return *this;	}
+operator VkPhysicalDeviceShaderDrawParameterFeatures const&() const 
+	{	return *reinterpret_cast<const VkPhysicalDeviceShaderDrawParameterFeatures*>(this);	}
+operator VkPhysicalDeviceShaderDrawParameterFeatures &() 
+	{	return *reinterpret_cast<VkPhysicalDeviceShaderDrawParameterFeatures*>(this);	}
+
+};
+static_assert(
+	sizeof(S_physical_device_shader_draw_parameter_features) == sizeof(VkPhysicalDeviceShaderDrawParameterFeatures),
+	"struct and wrapper have different size!");
+
+/*	VkNativeBufferANDROID
+*/
+struct		S_native_buffer_ANDROID{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_NATIVE_BUFFER_ANDROID;
+	const void * pNext = nullptr;
+public:
+	const void * handle;
+	int stride;
+	int format;
+	int usage;
+S_native_buffer_ANDROID( VkNativeBufferANDROID const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_native_buffer_ANDROID ) );	}
+S_native_buffer_ANDROID& operator=( VkNativeBufferANDROID const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_native_buffer_ANDROID ) ); return *this;	}
+operator VkNativeBufferANDROID const&() const 
+	{	return *reinterpret_cast<const VkNativeBufferANDROID*>(this);	}
+operator VkNativeBufferANDROID &() 
+	{	return *reinterpret_cast<VkNativeBufferANDROID*>(this);	}
+
+};
+static_assert(
+	sizeof(S_native_buffer_ANDROID) == sizeof(VkNativeBufferANDROID),
+	"struct and wrapper have different size!");
+
+/*	VkDeviceQueueGlobalPriorityCreateInfoEXT
+ex to: VkDeviceQueueCreateInfo
+*/
+struct		S_device_queue_global_priority_create_info_EXT{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_DEVICE_QUEUE_GLOBAL_PRIORITY_CREATE_INFO_EXT;
+	const void * pNext = nullptr;
+public:
+	E_queue_global_priority_EXT globalPriority;
+S_device_queue_global_priority_create_info_EXT( VkDeviceQueueGlobalPriorityCreateInfoEXT const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_device_queue_global_priority_create_info_EXT ) );	}
+S_device_queue_global_priority_create_info_EXT& operator=( VkDeviceQueueGlobalPriorityCreateInfoEXT const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_device_queue_global_priority_create_info_EXT ) ); return *this;	}
+operator VkDeviceQueueGlobalPriorityCreateInfoEXT const&() const 
+	{	return *reinterpret_cast<const VkDeviceQueueGlobalPriorityCreateInfoEXT*>(this);	}
+operator VkDeviceQueueGlobalPriorityCreateInfoEXT &() 
+	{	return *reinterpret_cast<VkDeviceQueueGlobalPriorityCreateInfoEXT*>(this);	}
+
+};
+static_assert(
+	sizeof(S_device_queue_global_priority_create_info_EXT) == sizeof(VkDeviceQueueGlobalPriorityCreateInfoEXT),
+	"struct and wrapper have different size!");
+
+/*	VkDebugUtilsObjectNameInfoEXT
+*/
+struct		S_debug_utils_object_name_info_EXT{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_DEBUG_UTILS_OBJECT_NAME_INFO_EXT;
+	const void * pNext = nullptr;
+public:
+	E_object_type objectType;
+	uint64_t objectHandle;
+	const char * pObjectName;
+S_debug_utils_object_name_info_EXT( VkDebugUtilsObjectNameInfoEXT const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_debug_utils_object_name_info_EXT ) );	}
+S_debug_utils_object_name_info_EXT& operator=( VkDebugUtilsObjectNameInfoEXT const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_debug_utils_object_name_info_EXT ) ); return *this;	}
+operator VkDebugUtilsObjectNameInfoEXT const&() const 
+	{	return *reinterpret_cast<const VkDebugUtilsObjectNameInfoEXT*>(this);	}
+operator VkDebugUtilsObjectNameInfoEXT &() 
+	{	return *reinterpret_cast<VkDebugUtilsObjectNameInfoEXT*>(this);	}
+
+};
+static_assert(
+	sizeof(S_debug_utils_object_name_info_EXT) == sizeof(VkDebugUtilsObjectNameInfoEXT),
+	"struct and wrapper have different size!");
+
+/*	VkDebugUtilsObjectTagInfoEXT
+*/
+struct		S_debug_utils_object_tag_info_EXT{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_DEBUG_UTILS_OBJECT_TAG_INFO_EXT;
+	const void * pNext = nullptr;
+public:
+	E_object_type objectType;
+	uint64_t objectHandle;
+	uint64_t tagName;
+	size_t tagSize;
+	const void * pTag;
+S_debug_utils_object_tag_info_EXT( VkDebugUtilsObjectTagInfoEXT const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_debug_utils_object_tag_info_EXT ) );	}
+S_debug_utils_object_tag_info_EXT& operator=( VkDebugUtilsObjectTagInfoEXT const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_debug_utils_object_tag_info_EXT ) ); return *this;	}
+operator VkDebugUtilsObjectTagInfoEXT const&() const 
+	{	return *reinterpret_cast<const VkDebugUtilsObjectTagInfoEXT*>(this);	}
+operator VkDebugUtilsObjectTagInfoEXT &() 
+	{	return *reinterpret_cast<VkDebugUtilsObjectTagInfoEXT*>(this);	}
+
+};
+static_assert(
+	sizeof(S_debug_utils_object_tag_info_EXT) == sizeof(VkDebugUtilsObjectTagInfoEXT),
+	"struct and wrapper have different size!");
+
+/*	VkDebugUtilsLabelEXT
+*/
+struct		S_debug_utils_label_EXT{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_DEBUG_UTILS_LABEL_EXT;
+	const void * pNext = nullptr;
+public:
+	const char * pLabelName;
+	float color[4];
+S_debug_utils_label_EXT( VkDebugUtilsLabelEXT const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_debug_utils_label_EXT ) );	}
+S_debug_utils_label_EXT& operator=( VkDebugUtilsLabelEXT const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_debug_utils_label_EXT ) ); return *this;	}
+operator VkDebugUtilsLabelEXT const&() const 
+	{	return *reinterpret_cast<const VkDebugUtilsLabelEXT*>(this);	}
+operator VkDebugUtilsLabelEXT &() 
+	{	return *reinterpret_cast<VkDebugUtilsLabelEXT*>(this);	}
+
+};
+static_assert(
+	sizeof(S_debug_utils_label_EXT) == sizeof(VkDebugUtilsLabelEXT),
+	"struct and wrapper have different size!");
+
+/*	VkDebugUtilsMessengerCreateInfoEXT
+ex to: VkInstanceCreateInfo
+*/
+struct		S_debug_utils_messenger_create_info_EXT{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CREATE_INFO_EXT;
+	const void * pNext = nullptr;
+public:
+	VkDebugUtilsMessengerCreateFlagsEXT flags;
+	F_debug_utils_message_severity_EXT messageSeverity;
+	F_debug_utils_message_type_EXT messageType;
+	PFN_vkDebugUtilsMessengerCallbackEXT pfnUserCallback;
+	void * pUserData;
+S_debug_utils_messenger_create_info_EXT( VkDebugUtilsMessengerCreateInfoEXT const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_debug_utils_messenger_create_info_EXT ) );	}
+S_debug_utils_messenger_create_info_EXT& operator=( VkDebugUtilsMessengerCreateInfoEXT const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_debug_utils_messenger_create_info_EXT ) ); return *this;	}
+operator VkDebugUtilsMessengerCreateInfoEXT const&() const 
+	{	return *reinterpret_cast<const VkDebugUtilsMessengerCreateInfoEXT*>(this);	}
+operator VkDebugUtilsMessengerCreateInfoEXT &() 
+	{	return *reinterpret_cast<VkDebugUtilsMessengerCreateInfoEXT*>(this);	}
+
+};
+static_assert(
+	sizeof(S_debug_utils_messenger_create_info_EXT) == sizeof(VkDebugUtilsMessengerCreateInfoEXT),
+	"struct and wrapper have different size!");
+
+/*	VkImportMemoryHostPointerInfoEXT
+ex to: VkMemoryAllocateInfo
+*/
+struct		S_import_memory_host_pointer_info_EXT{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_IMPORT_MEMORY_HOST_POINTER_INFO_EXT;
+	const void * pNext = nullptr;
+public:
+	F_external_memory_handle_type handleType;
+	void * pHostPointer;
+S_import_memory_host_pointer_info_EXT( VkImportMemoryHostPointerInfoEXT const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_import_memory_host_pointer_info_EXT ) );	}
+S_import_memory_host_pointer_info_EXT& operator=( VkImportMemoryHostPointerInfoEXT const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_import_memory_host_pointer_info_EXT ) ); return *this;	}
+operator VkImportMemoryHostPointerInfoEXT const&() const 
+	{	return *reinterpret_cast<const VkImportMemoryHostPointerInfoEXT*>(this);	}
+operator VkImportMemoryHostPointerInfoEXT &() 
+	{	return *reinterpret_cast<VkImportMemoryHostPointerInfoEXT*>(this);	}
+
+};
+static_assert(
+	sizeof(S_import_memory_host_pointer_info_EXT) == sizeof(VkImportMemoryHostPointerInfoEXT),
+	"struct and wrapper have different size!");
+
+/*	VkMemoryHostPointerPropertiesEXT
+*/
+struct		S_memory_host_pointer_properties_EXT{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_MEMORY_HOST_POINTER_PROPERTIES_EXT;
+	void * pNext = nullptr;
+public:
+	uint32_t memoryTypeBits;
+S_memory_host_pointer_properties_EXT( VkMemoryHostPointerPropertiesEXT const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_memory_host_pointer_properties_EXT ) );	}
+S_memory_host_pointer_properties_EXT& operator=( VkMemoryHostPointerPropertiesEXT const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_memory_host_pointer_properties_EXT ) ); return *this;	}
+operator VkMemoryHostPointerPropertiesEXT const&() const 
+	{	return *reinterpret_cast<const VkMemoryHostPointerPropertiesEXT*>(this);	}
+operator VkMemoryHostPointerPropertiesEXT &() 
+	{	return *reinterpret_cast<VkMemoryHostPointerPropertiesEXT*>(this);	}
+
+};
+static_assert(
+	sizeof(S_memory_host_pointer_properties_EXT) == sizeof(VkMemoryHostPointerPropertiesEXT),
+	"struct and wrapper have different size!");
+
+/*	VkPhysicalDeviceExternalMemoryHostPropertiesEXT
+ex to: VkPhysicalDeviceProperties2
+*/
+struct		S_physical_device_external_memory_host_properties_EXT{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_MEMORY_HOST_PROPERTIES_EXT;
+	void * pNext = nullptr;
+public:
+	VkDeviceSize minImportedHostPointerAlignment;
+S_physical_device_external_memory_host_properties_EXT( VkPhysicalDeviceExternalMemoryHostPropertiesEXT const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_physical_device_external_memory_host_properties_EXT ) );	}
+S_physical_device_external_memory_host_properties_EXT& operator=( VkPhysicalDeviceExternalMemoryHostPropertiesEXT const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_physical_device_external_memory_host_properties_EXT ) ); return *this;	}
+operator VkPhysicalDeviceExternalMemoryHostPropertiesEXT const&() const 
+	{	return *reinterpret_cast<const VkPhysicalDeviceExternalMemoryHostPropertiesEXT*>(this);	}
+operator VkPhysicalDeviceExternalMemoryHostPropertiesEXT &() 
+	{	return *reinterpret_cast<VkPhysicalDeviceExternalMemoryHostPropertiesEXT*>(this);	}
+
+};
+static_assert(
+	sizeof(S_physical_device_external_memory_host_properties_EXT) == sizeof(VkPhysicalDeviceExternalMemoryHostPropertiesEXT),
+	"struct and wrapper have different size!");
+
+/*	VkPhysicalDeviceConservativeRasterizationPropertiesEXT
+ex to: VkPhysicalDeviceProperties2
+*/
+struct		S_physical_device_conservative_rasterization_properties_EXT{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CONSERVATIVE_RASTERIZATION_PROPERTIES_EXT;
+	void * pNext = nullptr;
+public:
+	float primitiveOverestimationSize;
+	float maxExtraPrimitiveOverestimationSize;
+	float extraPrimitiveOverestimationSizeGranularity;
+	VkBool32 primitiveUnderestimation;
+	VkBool32 conservativePointAndLineRasterization;
+	VkBool32 degenerateTrianglesRasterized;
+	VkBool32 degenerateLinesRasterized;
+	VkBool32 fullyCoveredFragmentShaderInputVariable;
+	VkBool32 conservativeRasterizationPostDepthCoverage;
+S_physical_device_conservative_rasterization_properties_EXT( VkPhysicalDeviceConservativeRasterizationPropertiesEXT const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_physical_device_conservative_rasterization_properties_EXT ) );	}
+S_physical_device_conservative_rasterization_properties_EXT& operator=( VkPhysicalDeviceConservativeRasterizationPropertiesEXT const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_physical_device_conservative_rasterization_properties_EXT ) ); return *this;	}
+operator VkPhysicalDeviceConservativeRasterizationPropertiesEXT const&() const 
+	{	return *reinterpret_cast<const VkPhysicalDeviceConservativeRasterizationPropertiesEXT*>(this);	}
+operator VkPhysicalDeviceConservativeRasterizationPropertiesEXT &() 
+	{	return *reinterpret_cast<VkPhysicalDeviceConservativeRasterizationPropertiesEXT*>(this);	}
+
+};
+static_assert(
+	sizeof(S_physical_device_conservative_rasterization_properties_EXT) == sizeof(VkPhysicalDeviceConservativeRasterizationPropertiesEXT),
+	"struct and wrapper have different size!");
+
+/*	VkPhysicalDeviceShaderCorePropertiesAMD
+(returnedonly)
+ex to: VkPhysicalDeviceProperties2
+*/
+struct		S_physical_device_shader_core_properties_AMD{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_CORE_PROPERTIES_AMD;
+	void * pNext = nullptr;
+public:
+	uint32_t shaderEngineCount;
+	uint32_t shaderArraysPerEngineCount;
+	uint32_t computeUnitsPerShaderArray;
+	uint32_t simdPerComputeUnit;
+	uint32_t wavefrontsPerSimd;
+	uint32_t wavefrontSize;
+	uint32_t sgprsPerSimd;
+	uint32_t minSgprAllocation;
+	uint32_t maxSgprAllocation;
+	uint32_t sgprAllocationGranularity;
+	uint32_t vgprsPerSimd;
+	uint32_t minVgprAllocation;
+	uint32_t maxVgprAllocation;
+	uint32_t vgprAllocationGranularity;
+S_physical_device_shader_core_properties_AMD( VkPhysicalDeviceShaderCorePropertiesAMD const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_physical_device_shader_core_properties_AMD ) );	}
+S_physical_device_shader_core_properties_AMD& operator=( VkPhysicalDeviceShaderCorePropertiesAMD const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_physical_device_shader_core_properties_AMD ) ); return *this;	}
+operator VkPhysicalDeviceShaderCorePropertiesAMD const&() const 
+	{	return *reinterpret_cast<const VkPhysicalDeviceShaderCorePropertiesAMD*>(this);	}
+operator VkPhysicalDeviceShaderCorePropertiesAMD &() 
+	{	return *reinterpret_cast<VkPhysicalDeviceShaderCorePropertiesAMD*>(this);	}
+
+};
+static_assert(
+	sizeof(S_physical_device_shader_core_properties_AMD) == sizeof(VkPhysicalDeviceShaderCorePropertiesAMD),
+	"struct and wrapper have different size!");
+
+/*	VkPipelineRasterizationConservativeStateCreateInfoEXT
+ex to: VkPipelineRasterizationStateCreateInfo
+*/
+struct		S_pipeline_rasterization_conservative_state_create_info_EXT{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_CONSERVATIVE_STATE_CREATE_INFO_EXT;
+	const void * pNext = nullptr;
+public:
+	VkPipelineRasterizationConservativeStateCreateFlagsEXT flags;
+	E_conservative_rasterization_mode_EXT conservativeRasterizationMode;
+	float extraPrimitiveOverestimationSize;
+S_pipeline_rasterization_conservative_state_create_info_EXT( VkPipelineRasterizationConservativeStateCreateInfoEXT const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_pipeline_rasterization_conservative_state_create_info_EXT ) );	}
+S_pipeline_rasterization_conservative_state_create_info_EXT& operator=( VkPipelineRasterizationConservativeStateCreateInfoEXT const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_pipeline_rasterization_conservative_state_create_info_EXT ) ); return *this;	}
+operator VkPipelineRasterizationConservativeStateCreateInfoEXT const&() const 
+	{	return *reinterpret_cast<const VkPipelineRasterizationConservativeStateCreateInfoEXT*>(this);	}
+operator VkPipelineRasterizationConservativeStateCreateInfoEXT &() 
+	{	return *reinterpret_cast<VkPipelineRasterizationConservativeStateCreateInfoEXT*>(this);	}
+
+};
+static_assert(
+	sizeof(S_pipeline_rasterization_conservative_state_create_info_EXT) == sizeof(VkPipelineRasterizationConservativeStateCreateInfoEXT),
+	"struct and wrapper have different size!");
+
+/*	VkPhysicalDeviceDescriptorIndexingFeaturesEXT
+ex to: VkPhysicalDeviceFeatures2,VkDeviceCreateInfo
+*/
+struct		S_physical_device_descriptor_indexing_features_EXT{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_INDEXING_FEATURES_EXT;
+	void * pNext = nullptr;
+public:
+	VkBool32 shaderInputAttachmentArrayDynamicIndexing;
+	VkBool32 shaderUniformTexelBufferArrayDynamicIndexing;
+	VkBool32 shaderStorageTexelBufferArrayDynamicIndexing;
+	VkBool32 shaderUniformBufferArrayNonUniformIndexing;
+	VkBool32 shaderSampledImageArrayNonUniformIndexing;
+	VkBool32 shaderStorageBufferArrayNonUniformIndexing;
+	VkBool32 shaderStorageImageArrayNonUniformIndexing;
+	VkBool32 shaderInputAttachmentArrayNonUniformIndexing;
+	VkBool32 shaderUniformTexelBufferArrayNonUniformIndexing;
+	VkBool32 shaderStorageTexelBufferArrayNonUniformIndexing;
+	VkBool32 descriptorBindingUniformBufferUpdateAfterBind;
+	VkBool32 descriptorBindingSampledImageUpdateAfterBind;
+	VkBool32 descriptorBindingStorageImageUpdateAfterBind;
+	VkBool32 descriptorBindingStorageBufferUpdateAfterBind;
+	VkBool32 descriptorBindingUniformTexelBufferUpdateAfterBind;
+	VkBool32 descriptorBindingStorageTexelBufferUpdateAfterBind;
+	VkBool32 descriptorBindingUpdateUnusedWhilePending;
+	VkBool32 descriptorBindingPartiallyBound;
+	VkBool32 descriptorBindingVariableDescriptorCount;
+	VkBool32 runtimeDescriptorArray;
+S_physical_device_descriptor_indexing_features_EXT( VkPhysicalDeviceDescriptorIndexingFeaturesEXT const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_physical_device_descriptor_indexing_features_EXT ) );	}
+S_physical_device_descriptor_indexing_features_EXT& operator=( VkPhysicalDeviceDescriptorIndexingFeaturesEXT const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_physical_device_descriptor_indexing_features_EXT ) ); return *this;	}
+operator VkPhysicalDeviceDescriptorIndexingFeaturesEXT const&() const 
+	{	return *reinterpret_cast<const VkPhysicalDeviceDescriptorIndexingFeaturesEXT*>(this);	}
+operator VkPhysicalDeviceDescriptorIndexingFeaturesEXT &() 
+	{	return *reinterpret_cast<VkPhysicalDeviceDescriptorIndexingFeaturesEXT*>(this);	}
+
+};
+static_assert(
+	sizeof(S_physical_device_descriptor_indexing_features_EXT) == sizeof(VkPhysicalDeviceDescriptorIndexingFeaturesEXT),
+	"struct and wrapper have different size!");
+
+/*	VkPhysicalDeviceDescriptorIndexingPropertiesEXT
+(returnedonly)
+ex to: VkPhysicalDeviceProperties2
+*/
+struct		S_physical_device_descriptor_indexing_properties_EXT{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_INDEXING_PROPERTIES_EXT;
+	void * pNext = nullptr;
+public:
+	uint32_t maxUpdateAfterBindDescriptorsInAllPools;
+	VkBool32 shaderUniformBufferArrayNonUniformIndexingNative;
+	VkBool32 shaderSampledImageArrayNonUniformIndexingNative;
+	VkBool32 shaderStorageBufferArrayNonUniformIndexingNative;
+	VkBool32 shaderStorageImageArrayNonUniformIndexingNative;
+	VkBool32 shaderInputAttachmentArrayNonUniformIndexingNative;
+	VkBool32 robustBufferAccessUpdateAfterBind;
+	VkBool32 quadDivergentImplicitLod;
+	uint32_t maxPerStageDescriptorUpdateAfterBindSamplers;
+	uint32_t maxPerStageDescriptorUpdateAfterBindUniformBuffers;
+	uint32_t maxPerStageDescriptorUpdateAfterBindStorageBuffers;
+	uint32_t maxPerStageDescriptorUpdateAfterBindSampledImages;
+	uint32_t maxPerStageDescriptorUpdateAfterBindStorageImages;
+	uint32_t maxPerStageDescriptorUpdateAfterBindInputAttachments;
+	uint32_t maxPerStageUpdateAfterBindResources;
+	uint32_t maxDescriptorSetUpdateAfterBindSamplers;
+	uint32_t maxDescriptorSetUpdateAfterBindUniformBuffers;
+	uint32_t maxDescriptorSetUpdateAfterBindUniformBuffersDynamic;
+	uint32_t maxDescriptorSetUpdateAfterBindStorageBuffers;
+	uint32_t maxDescriptorSetUpdateAfterBindStorageBuffersDynamic;
+	uint32_t maxDescriptorSetUpdateAfterBindSampledImages;
+	uint32_t maxDescriptorSetUpdateAfterBindStorageImages;
+	uint32_t maxDescriptorSetUpdateAfterBindInputAttachments;
+S_physical_device_descriptor_indexing_properties_EXT( VkPhysicalDeviceDescriptorIndexingPropertiesEXT const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_physical_device_descriptor_indexing_properties_EXT ) );	}
+S_physical_device_descriptor_indexing_properties_EXT& operator=( VkPhysicalDeviceDescriptorIndexingPropertiesEXT const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_physical_device_descriptor_indexing_properties_EXT ) ); return *this;	}
+operator VkPhysicalDeviceDescriptorIndexingPropertiesEXT const&() const 
+	{	return *reinterpret_cast<const VkPhysicalDeviceDescriptorIndexingPropertiesEXT*>(this);	}
+operator VkPhysicalDeviceDescriptorIndexingPropertiesEXT &() 
+	{	return *reinterpret_cast<VkPhysicalDeviceDescriptorIndexingPropertiesEXT*>(this);	}
+
+};
+static_assert(
+	sizeof(S_physical_device_descriptor_indexing_properties_EXT) == sizeof(VkPhysicalDeviceDescriptorIndexingPropertiesEXT),
+	"struct and wrapper have different size!");
+
+/*	VkDescriptorSetLayoutBindingFlagsCreateInfoEXT
+ex to: VkDescriptorSetLayoutCreateInfo
+*/
+struct		S_descriptor_set_layout_binding_flags_create_info_EXT{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_BINDING_FLAGS_CREATE_INFO_EXT;
+	const void * pNext = nullptr;
+public:
+	uint32_t bindingCount;
+	const F_descriptor_binding_EXT * pBindingFlags;
+S_descriptor_set_layout_binding_flags_create_info_EXT( VkDescriptorSetLayoutBindingFlagsCreateInfoEXT const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_descriptor_set_layout_binding_flags_create_info_EXT ) );	}
+S_descriptor_set_layout_binding_flags_create_info_EXT& operator=( VkDescriptorSetLayoutBindingFlagsCreateInfoEXT const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_descriptor_set_layout_binding_flags_create_info_EXT ) ); return *this;	}
+operator VkDescriptorSetLayoutBindingFlagsCreateInfoEXT const&() const 
+	{	return *reinterpret_cast<const VkDescriptorSetLayoutBindingFlagsCreateInfoEXT*>(this);	}
+operator VkDescriptorSetLayoutBindingFlagsCreateInfoEXT &() 
+	{	return *reinterpret_cast<VkDescriptorSetLayoutBindingFlagsCreateInfoEXT*>(this);	}
+
+};
+static_assert(
+	sizeof(S_descriptor_set_layout_binding_flags_create_info_EXT) == sizeof(VkDescriptorSetLayoutBindingFlagsCreateInfoEXT),
+	"struct and wrapper have different size!");
+
+/*	VkDescriptorSetVariableDescriptorCountAllocateInfoEXT
+ex to: VkDescriptorSetAllocateInfo
+*/
+struct		S_descriptor_set_variable_descriptor_count_allocate_info_EXT{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_DESCRIPTOR_SET_VARIABLE_DESCRIPTOR_COUNT_ALLOCATE_INFO_EXT;
+	const void * pNext = nullptr;
+public:
+	uint32_t descriptorSetCount;
+	const uint32_t * pDescriptorCounts;
+S_descriptor_set_variable_descriptor_count_allocate_info_EXT( VkDescriptorSetVariableDescriptorCountAllocateInfoEXT const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_descriptor_set_variable_descriptor_count_allocate_info_EXT ) );	}
+S_descriptor_set_variable_descriptor_count_allocate_info_EXT& operator=( VkDescriptorSetVariableDescriptorCountAllocateInfoEXT const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_descriptor_set_variable_descriptor_count_allocate_info_EXT ) ); return *this;	}
+operator VkDescriptorSetVariableDescriptorCountAllocateInfoEXT const&() const 
+	{	return *reinterpret_cast<const VkDescriptorSetVariableDescriptorCountAllocateInfoEXT*>(this);	}
+operator VkDescriptorSetVariableDescriptorCountAllocateInfoEXT &() 
+	{	return *reinterpret_cast<VkDescriptorSetVariableDescriptorCountAllocateInfoEXT*>(this);	}
+
+};
+static_assert(
+	sizeof(S_descriptor_set_variable_descriptor_count_allocate_info_EXT) == sizeof(VkDescriptorSetVariableDescriptorCountAllocateInfoEXT),
+	"struct and wrapper have different size!");
+
+/*	VkDescriptorSetVariableDescriptorCountLayoutSupportEXT
+(returnedonly)
+ex to: VkDescriptorSetLayoutSupport
+*/
+struct		S_descriptor_set_variable_descriptor_count_layout_support_EXT{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_DESCRIPTOR_SET_VARIABLE_DESCRIPTOR_COUNT_LAYOUT_SUPPORT_EXT;
+	void * pNext = nullptr;
+public:
+	uint32_t maxVariableDescriptorCount;
+S_descriptor_set_variable_descriptor_count_layout_support_EXT( VkDescriptorSetVariableDescriptorCountLayoutSupportEXT const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_descriptor_set_variable_descriptor_count_layout_support_EXT ) );	}
+S_descriptor_set_variable_descriptor_count_layout_support_EXT& operator=( VkDescriptorSetVariableDescriptorCountLayoutSupportEXT const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_descriptor_set_variable_descriptor_count_layout_support_EXT ) ); return *this;	}
+operator VkDescriptorSetVariableDescriptorCountLayoutSupportEXT const&() const 
+	{	return *reinterpret_cast<const VkDescriptorSetVariableDescriptorCountLayoutSupportEXT*>(this);	}
+operator VkDescriptorSetVariableDescriptorCountLayoutSupportEXT &() 
+	{	return *reinterpret_cast<VkDescriptorSetVariableDescriptorCountLayoutSupportEXT*>(this);	}
+
+};
+static_assert(
+	sizeof(S_descriptor_set_variable_descriptor_count_layout_support_EXT) == sizeof(VkDescriptorSetVariableDescriptorCountLayoutSupportEXT),
+	"struct and wrapper have different size!");
+
+/*	VkAttachmentDescription2KHR
+*/
+struct		S_attachment_description2_KHR{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_ATTACHMENT_DESCRIPTION_2_KHR;
+	const void * pNext = nullptr;
+public:
+	F_attachment_description flags;
+	E_format format;
+	F_sample_count samples;
+	E_attachment_load_op loadOp;
+	E_attachment_store_op storeOp;
+	E_attachment_load_op stencilLoadOp;
+	E_attachment_store_op stencilStoreOp;
+	E_image_layout initialLayout;
+	E_image_layout finalLayout;
+S_attachment_description2_KHR( VkAttachmentDescription2KHR const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_attachment_description2_KHR ) );	}
+S_attachment_description2_KHR& operator=( VkAttachmentDescription2KHR const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_attachment_description2_KHR ) ); return *this;	}
+operator VkAttachmentDescription2KHR const&() const 
+	{	return *reinterpret_cast<const VkAttachmentDescription2KHR*>(this);	}
+operator VkAttachmentDescription2KHR &() 
+	{	return *reinterpret_cast<VkAttachmentDescription2KHR*>(this);	}
+
+};
+static_assert(
+	sizeof(S_attachment_description2_KHR) == sizeof(VkAttachmentDescription2KHR),
+	"struct and wrapper have different size!");
+
+/*	VkAttachmentReference2KHR
+*/
+struct		S_attachment_reference2_KHR{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_ATTACHMENT_REFERENCE_2_KHR;
+	const void * pNext = nullptr;
+public:
+	uint32_t attachment;
+	E_image_layout layout;
+	F_image_aspect aspectMask;
+S_attachment_reference2_KHR( VkAttachmentReference2KHR const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_attachment_reference2_KHR ) );	}
+S_attachment_reference2_KHR& operator=( VkAttachmentReference2KHR const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_attachment_reference2_KHR ) ); return *this;	}
+operator VkAttachmentReference2KHR const&() const 
+	{	return *reinterpret_cast<const VkAttachmentReference2KHR*>(this);	}
+operator VkAttachmentReference2KHR &() 
+	{	return *reinterpret_cast<VkAttachmentReference2KHR*>(this);	}
+
+};
+static_assert(
+	sizeof(S_attachment_reference2_KHR) == sizeof(VkAttachmentReference2KHR),
+	"struct and wrapper have different size!");
+
+/*	VkSubpassDependency2KHR
+*/
+struct		S_subpass_dependency2_KHR{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_SUBPASS_DEPENDENCY_2_KHR;
+	const void * pNext = nullptr;
+public:
+	uint32_t srcSubpass;
+	uint32_t dstSubpass;
+	F_pipeline_stage srcStageMask;
+	F_pipeline_stage dstStageMask;
+	F_access srcAccessMask;
+	F_access dstAccessMask;
+	F_dependency dependencyFlags;
+	int32_t viewOffset;
+S_subpass_dependency2_KHR( VkSubpassDependency2KHR const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_subpass_dependency2_KHR ) );	}
+S_subpass_dependency2_KHR& operator=( VkSubpassDependency2KHR const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_subpass_dependency2_KHR ) ); return *this;	}
+operator VkSubpassDependency2KHR const&() const 
+	{	return *reinterpret_cast<const VkSubpassDependency2KHR*>(this);	}
+operator VkSubpassDependency2KHR &() 
+	{	return *reinterpret_cast<VkSubpassDependency2KHR*>(this);	}
+
+};
+static_assert(
+	sizeof(S_subpass_dependency2_KHR) == sizeof(VkSubpassDependency2KHR),
+	"struct and wrapper have different size!");
+
+/*	VkSubpassBeginInfoKHR
+*/
+struct		S_subpass_begin_info_KHR{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_SUBPASS_BEGIN_INFO_KHR;
+	const void * pNext = nullptr;
+public:
+	E_subpass_contents contents;
+S_subpass_begin_info_KHR( VkSubpassBeginInfoKHR const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_subpass_begin_info_KHR ) );	}
+S_subpass_begin_info_KHR& operator=( VkSubpassBeginInfoKHR const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_subpass_begin_info_KHR ) ); return *this;	}
+operator VkSubpassBeginInfoKHR const&() const 
+	{	return *reinterpret_cast<const VkSubpassBeginInfoKHR*>(this);	}
+operator VkSubpassBeginInfoKHR &() 
+	{	return *reinterpret_cast<VkSubpassBeginInfoKHR*>(this);	}
+
+};
+static_assert(
+	sizeof(S_subpass_begin_info_KHR) == sizeof(VkSubpassBeginInfoKHR),
+	"struct and wrapper have different size!");
+
+/*	VkSubpassEndInfoKHR
+*/
+struct		S_subpass_end_info_KHR{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_SUBPASS_END_INFO_KHR;
+	const void * pNext = nullptr;
+S_subpass_end_info_KHR( VkSubpassEndInfoKHR const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_subpass_end_info_KHR ) );	}
+S_subpass_end_info_KHR& operator=( VkSubpassEndInfoKHR const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_subpass_end_info_KHR ) ); return *this;	}
+operator VkSubpassEndInfoKHR const&() const 
+	{	return *reinterpret_cast<const VkSubpassEndInfoKHR*>(this);	}
+operator VkSubpassEndInfoKHR &() 
+	{	return *reinterpret_cast<VkSubpassEndInfoKHR*>(this);	}
+
+};
+static_assert(
+	sizeof(S_subpass_end_info_KHR) == sizeof(VkSubpassEndInfoKHR),
+	"struct and wrapper have different size!");
+
+/*	VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT
+ex to: VkPhysicalDeviceProperties2
+*/
+struct		S_physical_device_vertex_attribute_divisor_properties_EXT{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_DIVISOR_PROPERTIES_EXT;
+	void * pNext = nullptr;
+public:
+	uint32_t maxVertexAttribDivisor;
+S_physical_device_vertex_attribute_divisor_properties_EXT( VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_physical_device_vertex_attribute_divisor_properties_EXT ) );	}
+S_physical_device_vertex_attribute_divisor_properties_EXT& operator=( VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_physical_device_vertex_attribute_divisor_properties_EXT ) ); return *this;	}
+operator VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT const&() const 
+	{	return *reinterpret_cast<const VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT*>(this);	}
+operator VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT &() 
+	{	return *reinterpret_cast<VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT*>(this);	}
+
+};
+static_assert(
+	sizeof(S_physical_device_vertex_attribute_divisor_properties_EXT) == sizeof(VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT),
+	"struct and wrapper have different size!");
+
+/*	VkImportAndroidHardwareBufferInfoANDROID
+ex to: VkMemoryAllocateInfo
+*/
+struct		S_import_android_hardware_buffer_info_ANDROID{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_IMPORT_ANDROID_HARDWARE_BUFFER_INFO_ANDROID;
+	const void * pNext = nullptr;
+public:
+	struct AHardwareBuffer * buffer;
+S_import_android_hardware_buffer_info_ANDROID( VkImportAndroidHardwareBufferInfoANDROID const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_import_android_hardware_buffer_info_ANDROID ) );	}
+S_import_android_hardware_buffer_info_ANDROID& operator=( VkImportAndroidHardwareBufferInfoANDROID const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_import_android_hardware_buffer_info_ANDROID ) ); return *this;	}
+operator VkImportAndroidHardwareBufferInfoANDROID const&() const 
+	{	return *reinterpret_cast<const VkImportAndroidHardwareBufferInfoANDROID*>(this);	}
+operator VkImportAndroidHardwareBufferInfoANDROID &() 
+	{	return *reinterpret_cast<VkImportAndroidHardwareBufferInfoANDROID*>(this);	}
+
+};
+static_assert(
+	sizeof(S_import_android_hardware_buffer_info_ANDROID) == sizeof(VkImportAndroidHardwareBufferInfoANDROID),
+	"struct and wrapper have different size!");
+
+/*	VkAndroidHardwareBufferUsageANDROID
+(returnedonly)
+ex to: VkImageFormatProperties2
+*/
+#ifdef VK_USE_PLATFORM_ANDROID_KHR
+struct		S_android_hardware_buffer_usage_ANDROID{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_ANDROID_HARDWARE_BUFFER_USAGE_ANDROID;
+	void * pNext = nullptr;
+public:
+	uint64_t androidHardwareBufferUsage;
+S_android_hardware_buffer_usage_ANDROID( VkAndroidHardwareBufferUsageANDROID const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_android_hardware_buffer_usage_ANDROID ) );	}
+S_android_hardware_buffer_usage_ANDROID& operator=( VkAndroidHardwareBufferUsageANDROID const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_android_hardware_buffer_usage_ANDROID ) ); return *this;	}
+operator VkAndroidHardwareBufferUsageANDROID const&() const 
+	{	return *reinterpret_cast<const VkAndroidHardwareBufferUsageANDROID*>(this);	}
+operator VkAndroidHardwareBufferUsageANDROID &() 
+	{	return *reinterpret_cast<VkAndroidHardwareBufferUsageANDROID*>(this);	}
+
+};
+static_assert(
+	sizeof(S_android_hardware_buffer_usage_ANDROID) == sizeof(VkAndroidHardwareBufferUsageANDROID),
+	"struct and wrapper have different size!");
+#endif //VK_USE_PLATFORM_ANDROID_KHR
+
+/*	VkAndroidHardwareBufferPropertiesANDROID
+(returnedonly)
+ex:
+	VkAndroidHardwareBufferFormatPropertiesANDROID
+*/
+#ifdef VK_USE_PLATFORM_ANDROID_KHR
+struct		S_android_hardware_buffer_properties_ANDROID{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_ANDROID_HARDWARE_BUFFER_PROPERTIES_ANDROID;
+	void * pNext = nullptr;
+public:
+	VkDeviceSize allocationSize;
+	uint32_t memoryTypeBits;
+S_android_hardware_buffer_properties_ANDROID( VkAndroidHardwareBufferPropertiesANDROID const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_android_hardware_buffer_properties_ANDROID ) );	}
+S_android_hardware_buffer_properties_ANDROID& operator=( VkAndroidHardwareBufferPropertiesANDROID const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_android_hardware_buffer_properties_ANDROID ) ); return *this;	}
+operator VkAndroidHardwareBufferPropertiesANDROID const&() const 
+	{	return *reinterpret_cast<const VkAndroidHardwareBufferPropertiesANDROID*>(this);	}
+operator VkAndroidHardwareBufferPropertiesANDROID &() 
+	{	return *reinterpret_cast<VkAndroidHardwareBufferPropertiesANDROID*>(this);	}
+
+};
+static_assert(
+	sizeof(S_android_hardware_buffer_properties_ANDROID) == sizeof(VkAndroidHardwareBufferPropertiesANDROID),
+	"struct and wrapper have different size!");
+#endif //VK_USE_PLATFORM_ANDROID_KHR
+
+/*	VkMemoryGetAndroidHardwareBufferInfoANDROID
+*/
+struct		S_memory_get_android_hardware_buffer_info_ANDROID{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_MEMORY_GET_ANDROID_HARDWARE_BUFFER_INFO_ANDROID;
+	const void * pNext = nullptr;
+public:
+	VkDeviceMemory memory;
+S_memory_get_android_hardware_buffer_info_ANDROID( VkMemoryGetAndroidHardwareBufferInfoANDROID const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_memory_get_android_hardware_buffer_info_ANDROID ) );	}
+S_memory_get_android_hardware_buffer_info_ANDROID& operator=( VkMemoryGetAndroidHardwareBufferInfoANDROID const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_memory_get_android_hardware_buffer_info_ANDROID ) ); return *this;	}
+operator VkMemoryGetAndroidHardwareBufferInfoANDROID const&() const 
+	{	return *reinterpret_cast<const VkMemoryGetAndroidHardwareBufferInfoANDROID*>(this);	}
+operator VkMemoryGetAndroidHardwareBufferInfoANDROID &() 
+	{	return *reinterpret_cast<VkMemoryGetAndroidHardwareBufferInfoANDROID*>(this);	}
+
+};
+static_assert(
+	sizeof(S_memory_get_android_hardware_buffer_info_ANDROID) == sizeof(VkMemoryGetAndroidHardwareBufferInfoANDROID),
+	"struct and wrapper have different size!");
+
+/*	VkCommandBufferInheritanceConditionalRenderingInfoEXT
+ex to: VkCommandBufferInheritanceInfo
+*/
+struct		S_command_buffer_inheritance_conditional_rendering_info_EXT{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_CONDITIONAL_RENDERING_INFO_EXT;
+	const void * pNext = nullptr;
+public:
+	VkBool32 conditionalRenderingEnable;
+S_command_buffer_inheritance_conditional_rendering_info_EXT( VkCommandBufferInheritanceConditionalRenderingInfoEXT const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_command_buffer_inheritance_conditional_rendering_info_EXT ) );	}
+S_command_buffer_inheritance_conditional_rendering_info_EXT& operator=( VkCommandBufferInheritanceConditionalRenderingInfoEXT const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_command_buffer_inheritance_conditional_rendering_info_EXT ) ); return *this;	}
+operator VkCommandBufferInheritanceConditionalRenderingInfoEXT const&() const 
+	{	return *reinterpret_cast<const VkCommandBufferInheritanceConditionalRenderingInfoEXT*>(this);	}
+operator VkCommandBufferInheritanceConditionalRenderingInfoEXT &() 
+	{	return *reinterpret_cast<VkCommandBufferInheritanceConditionalRenderingInfoEXT*>(this);	}
+
+};
+static_assert(
+	sizeof(S_command_buffer_inheritance_conditional_rendering_info_EXT) == sizeof(VkCommandBufferInheritanceConditionalRenderingInfoEXT),
+	"struct and wrapper have different size!");
+
+/*	VkExternalFormatANDROID
+ex to: VkImageCreateInfo,VkSamplerYcbcrConversionCreateInfo
+*/
+struct		S_external_format_ANDROID{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_EXTERNAL_FORMAT_ANDROID;
+	void * pNext = nullptr;
+public:
+	uint64_t externalFormat;
+S_external_format_ANDROID( VkExternalFormatANDROID const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_external_format_ANDROID ) );	}
+S_external_format_ANDROID& operator=( VkExternalFormatANDROID const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_external_format_ANDROID ) ); return *this;	}
+operator VkExternalFormatANDROID const&() const 
+	{	return *reinterpret_cast<const VkExternalFormatANDROID*>(this);	}
+operator VkExternalFormatANDROID &() 
+	{	return *reinterpret_cast<VkExternalFormatANDROID*>(this);	}
+
+};
+static_assert(
+	sizeof(S_external_format_ANDROID) == sizeof(VkExternalFormatANDROID),
+	"struct and wrapper have different size!");
+
+/*	VkPhysicalDevice8BitStorageFeaturesKHR
+ex to: VkPhysicalDeviceFeatures2,VkDeviceCreateInfo
+*/
+struct		S_physical_device_8bit_storage_features_KHR{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_8BIT_STORAGE_FEATURES_KHR;
+	void * pNext = nullptr;
+public:
+	VkBool32 storageBuffer8BitAccess;
+	VkBool32 uniformAndStorageBuffer8BitAccess;
+	VkBool32 storagePushConstant8;
+S_physical_device_8bit_storage_features_KHR( VkPhysicalDevice8BitStorageFeaturesKHR const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_physical_device_8bit_storage_features_KHR ) );	}
+S_physical_device_8bit_storage_features_KHR& operator=( VkPhysicalDevice8BitStorageFeaturesKHR const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_physical_device_8bit_storage_features_KHR ) ); return *this;	}
+operator VkPhysicalDevice8BitStorageFeaturesKHR const&() const 
+	{	return *reinterpret_cast<const VkPhysicalDevice8BitStorageFeaturesKHR*>(this);	}
+operator VkPhysicalDevice8BitStorageFeaturesKHR &() 
+	{	return *reinterpret_cast<VkPhysicalDevice8BitStorageFeaturesKHR*>(this);	}
+
+};
+static_assert(
+	sizeof(S_physical_device_8bit_storage_features_KHR) == sizeof(VkPhysicalDevice8BitStorageFeaturesKHR),
+	"struct and wrapper have different size!");
+
+/*	VkPhysicalDeviceConditionalRenderingFeaturesEXT
+ex to: VkPhysicalDeviceFeatures2,VkDeviceCreateInfo
+*/
+struct		S_physical_device_conditional_rendering_features_EXT{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CONDITIONAL_RENDERING_FEATURES_EXT;
+	void * pNext = nullptr;
+public:
+	VkBool32 conditionalRendering;
+	VkBool32 inheritedConditionalRendering;
+S_physical_device_conditional_rendering_features_EXT( VkPhysicalDeviceConditionalRenderingFeaturesEXT const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_physical_device_conditional_rendering_features_EXT ) );	}
+S_physical_device_conditional_rendering_features_EXT& operator=( VkPhysicalDeviceConditionalRenderingFeaturesEXT const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_physical_device_conditional_rendering_features_EXT ) ); return *this;	}
+operator VkPhysicalDeviceConditionalRenderingFeaturesEXT const&() const 
+	{	return *reinterpret_cast<const VkPhysicalDeviceConditionalRenderingFeaturesEXT*>(this);	}
+operator VkPhysicalDeviceConditionalRenderingFeaturesEXT &() 
+	{	return *reinterpret_cast<VkPhysicalDeviceConditionalRenderingFeaturesEXT*>(this);	}
+
+};
+static_assert(
+	sizeof(S_physical_device_conditional_rendering_features_EXT) == sizeof(VkPhysicalDeviceConditionalRenderingFeaturesEXT),
+	"struct and wrapper have different size!");
+
+/*	VkPhysicalDeviceVulkanMemoryModelFeaturesKHR
+(returnedonly)
+ex to: VkPhysicalDeviceFeatures2,VkDeviceCreateInfo
+*/
+struct		S_physical_device_vulkan_memory_model_features_KHR{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_MEMORY_MODEL_FEATURES_KHR;
+	void * pNext = nullptr;
+public:
+	VkBool32 vulkanMemoryModel;
+	VkBool32 vulkanMemoryModelDeviceScope;
+S_physical_device_vulkan_memory_model_features_KHR( VkPhysicalDeviceVulkanMemoryModelFeaturesKHR const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_physical_device_vulkan_memory_model_features_KHR ) );	}
+S_physical_device_vulkan_memory_model_features_KHR& operator=( VkPhysicalDeviceVulkanMemoryModelFeaturesKHR const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_physical_device_vulkan_memory_model_features_KHR ) ); return *this;	}
+operator VkPhysicalDeviceVulkanMemoryModelFeaturesKHR const&() const 
+	{	return *reinterpret_cast<const VkPhysicalDeviceVulkanMemoryModelFeaturesKHR*>(this);	}
+operator VkPhysicalDeviceVulkanMemoryModelFeaturesKHR &() 
+	{	return *reinterpret_cast<VkPhysicalDeviceVulkanMemoryModelFeaturesKHR*>(this);	}
+
+};
+static_assert(
+	sizeof(S_physical_device_vulkan_memory_model_features_KHR) == sizeof(VkPhysicalDeviceVulkanMemoryModelFeaturesKHR),
+	"struct and wrapper have different size!");
+
+/*	VkPhysicalDeviceShaderAtomicInt64FeaturesKHR
+ex to: VkPhysicalDeviceFeatures2,VkDeviceCreateInfo
+*/
+struct		S_physical_device_shader_atomic_int64_features_KHR{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_ATOMIC_INT64_FEATURES_KHR;
+	void * pNext = nullptr;
+public:
+	VkBool32 shaderBufferInt64Atomics;
+	VkBool32 shaderSharedInt64Atomics;
+S_physical_device_shader_atomic_int64_features_KHR( VkPhysicalDeviceShaderAtomicInt64FeaturesKHR const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_physical_device_shader_atomic_int64_features_KHR ) );	}
+S_physical_device_shader_atomic_int64_features_KHR& operator=( VkPhysicalDeviceShaderAtomicInt64FeaturesKHR const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_physical_device_shader_atomic_int64_features_KHR ) ); return *this;	}
+operator VkPhysicalDeviceShaderAtomicInt64FeaturesKHR const&() const 
+	{	return *reinterpret_cast<const VkPhysicalDeviceShaderAtomicInt64FeaturesKHR*>(this);	}
+operator VkPhysicalDeviceShaderAtomicInt64FeaturesKHR &() 
+	{	return *reinterpret_cast<VkPhysicalDeviceShaderAtomicInt64FeaturesKHR*>(this);	}
+
+};
+static_assert(
+	sizeof(S_physical_device_shader_atomic_int64_features_KHR) == sizeof(VkPhysicalDeviceShaderAtomicInt64FeaturesKHR),
+	"struct and wrapper have different size!");
+
+/*	VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT
+ex to: VkPhysicalDeviceFeatures2,VkDeviceCreateInfo
+*/
+struct		S_physical_device_vertex_attribute_divisor_features_EXT{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_DIVISOR_FEATURES_EXT;
+	void * pNext = nullptr;
+public:
+	VkBool32 vertexAttributeInstanceRateDivisor;
+	VkBool32 vertexAttributeInstanceRateZeroDivisor;
+S_physical_device_vertex_attribute_divisor_features_EXT( VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_physical_device_vertex_attribute_divisor_features_EXT ) );	}
+S_physical_device_vertex_attribute_divisor_features_EXT& operator=( VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_physical_device_vertex_attribute_divisor_features_EXT ) ); return *this;	}
+operator VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT const&() const 
+	{	return *reinterpret_cast<const VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT*>(this);	}
+operator VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT &() 
+	{	return *reinterpret_cast<VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT*>(this);	}
+
+};
+static_assert(
+	sizeof(S_physical_device_vertex_attribute_divisor_features_EXT) == sizeof(VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT),
+	"struct and wrapper have different size!");
+
+/*	VkQueueFamilyCheckpointPropertiesNV
+(returnedonly)
+ex to: VkQueueFamilyProperties2
+*/
+struct		S_queue_family_checkpoint_properties_NV{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_QUEUE_FAMILY_CHECKPOINT_PROPERTIES_NV;
+	void * pNext = nullptr;
+public:
+	F_pipeline_stage checkpointExecutionStageMask;
+S_queue_family_checkpoint_properties_NV( VkQueueFamilyCheckpointPropertiesNV const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_queue_family_checkpoint_properties_NV ) );	}
+S_queue_family_checkpoint_properties_NV& operator=( VkQueueFamilyCheckpointPropertiesNV const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_queue_family_checkpoint_properties_NV ) ); return *this;	}
+operator VkQueueFamilyCheckpointPropertiesNV const&() const 
+	{	return *reinterpret_cast<const VkQueueFamilyCheckpointPropertiesNV*>(this);	}
+operator VkQueueFamilyCheckpointPropertiesNV &() 
+	{	return *reinterpret_cast<VkQueueFamilyCheckpointPropertiesNV*>(this);	}
+
+};
+static_assert(
+	sizeof(S_queue_family_checkpoint_properties_NV) == sizeof(VkQueueFamilyCheckpointPropertiesNV),
+	"struct and wrapper have different size!");
+
+/*	VkCheckpointDataNV
+(returnedonly)
+*/
+struct		S_checkpoint_data_NV{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_CHECKPOINT_DATA_NV;
+	void * pNext = nullptr;
+public:
+	F_pipeline_stage stage;
+	void * pCheckpointMarker;
+S_checkpoint_data_NV( VkCheckpointDataNV const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_checkpoint_data_NV ) );	}
+S_checkpoint_data_NV& operator=( VkCheckpointDataNV const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_checkpoint_data_NV ) ); return *this;	}
+operator VkCheckpointDataNV const&() const 
+	{	return *reinterpret_cast<const VkCheckpointDataNV*>(this);	}
+operator VkCheckpointDataNV &() 
+	{	return *reinterpret_cast<VkCheckpointDataNV*>(this);	}
+
+};
+static_assert(
+	sizeof(S_checkpoint_data_NV) == sizeof(VkCheckpointDataNV),
+	"struct and wrapper have different size!");
+
+/*	VkImageViewASTCDecodeModeEXT
+ex to: VkImageViewCreateInfo
+*/
+struct		S_image_view_astc_decode_mode_EXT{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_IMAGE_VIEW_ASTC_DECODE_MODE_EXT;
+	const void * pNext = nullptr;
+public:
+	E_format decodeMode;
+S_image_view_astc_decode_mode_EXT( VkImageViewASTCDecodeModeEXT const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_image_view_astc_decode_mode_EXT ) );	}
+S_image_view_astc_decode_mode_EXT& operator=( VkImageViewASTCDecodeModeEXT const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_image_view_astc_decode_mode_EXT ) ); return *this;	}
+operator VkImageViewASTCDecodeModeEXT const&() const 
+	{	return *reinterpret_cast<const VkImageViewASTCDecodeModeEXT*>(this);	}
+operator VkImageViewASTCDecodeModeEXT &() 
+	{	return *reinterpret_cast<VkImageViewASTCDecodeModeEXT*>(this);	}
+
+};
+static_assert(
+	sizeof(S_image_view_astc_decode_mode_EXT) == sizeof(VkImageViewASTCDecodeModeEXT),
+	"struct and wrapper have different size!");
+
+/*	VkPhysicalDeviceASTCDecodeFeaturesEXT
+ex to: VkPhysicalDeviceFeatures2,VkDeviceCreateInfo
+*/
+struct		S_physical_device_astc_decode_features_EXT{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ASTC_DECODE_FEATURES_EXT;
+	void * pNext = nullptr;
+public:
+	VkBool32 decodeModeSharedExponent;
+S_physical_device_astc_decode_features_EXT( VkPhysicalDeviceASTCDecodeFeaturesEXT const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_physical_device_astc_decode_features_EXT ) );	}
+S_physical_device_astc_decode_features_EXT& operator=( VkPhysicalDeviceASTCDecodeFeaturesEXT const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_physical_device_astc_decode_features_EXT ) ); return *this;	}
+operator VkPhysicalDeviceASTCDecodeFeaturesEXT const&() const 
+	{	return *reinterpret_cast<const VkPhysicalDeviceASTCDecodeFeaturesEXT*>(this);	}
+operator VkPhysicalDeviceASTCDecodeFeaturesEXT &() 
+	{	return *reinterpret_cast<VkPhysicalDeviceASTCDecodeFeaturesEXT*>(this);	}
+
+};
+static_assert(
+	sizeof(S_physical_device_astc_decode_features_EXT) == sizeof(VkPhysicalDeviceASTCDecodeFeaturesEXT),
+	"struct and wrapper have different size!");
+
+/*	VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV
+ex to: VkPhysicalDeviceFeatures2,VkDeviceCreateInfo
+*/
+struct		S_physical_device_representative_fragment_test_features_NV{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_REPRESENTATIVE_FRAGMENT_TEST_FEATURES_NV;
+	void * pNext = nullptr;
+public:
+	VkBool32 representativeFragmentTest;
+S_physical_device_representative_fragment_test_features_NV( VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_physical_device_representative_fragment_test_features_NV ) );	}
+S_physical_device_representative_fragment_test_features_NV& operator=( VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_physical_device_representative_fragment_test_features_NV ) ); return *this;	}
+operator VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV const&() const 
+	{	return *reinterpret_cast<const VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV*>(this);	}
+operator VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV &() 
+	{	return *reinterpret_cast<VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV*>(this);	}
+
+};
+static_assert(
+	sizeof(S_physical_device_representative_fragment_test_features_NV) == sizeof(VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV),
+	"struct and wrapper have different size!");
+
+/*	VkPipelineRepresentativeFragmentTestStateCreateInfoNV
+ex to: VkGraphicsPipelineCreateInfo
+*/
+struct		S_pipeline_representative_fragment_test_state_create_info_NV{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_PIPELINE_REPRESENTATIVE_FRAGMENT_TEST_STATE_CREATE_INFO_NV;
+	const void * pNext = nullptr;
+public:
+	VkBool32 representativeFragmentTestEnable;
+S_pipeline_representative_fragment_test_state_create_info_NV( VkPipelineRepresentativeFragmentTestStateCreateInfoNV const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_pipeline_representative_fragment_test_state_create_info_NV ) );	}
+S_pipeline_representative_fragment_test_state_create_info_NV& operator=( VkPipelineRepresentativeFragmentTestStateCreateInfoNV const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_pipeline_representative_fragment_test_state_create_info_NV ) ); return *this;	}
+operator VkPipelineRepresentativeFragmentTestStateCreateInfoNV const&() const 
+	{	return *reinterpret_cast<const VkPipelineRepresentativeFragmentTestStateCreateInfoNV*>(this);	}
+operator VkPipelineRepresentativeFragmentTestStateCreateInfoNV &() 
+	{	return *reinterpret_cast<VkPipelineRepresentativeFragmentTestStateCreateInfoNV*>(this);	}
+
+};
+static_assert(
+	sizeof(S_pipeline_representative_fragment_test_state_create_info_NV) == sizeof(VkPipelineRepresentativeFragmentTestStateCreateInfoNV),
+	"struct and wrapper have different size!");
+
+/*	VkPhysicalDeviceExclusiveScissorFeaturesNV
+ex to: VkPhysicalDeviceFeatures2,VkDeviceCreateInfo
+*/
+struct		S_physical_device_exclusive_scissor_features_NV{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXCLUSIVE_SCISSOR_FEATURES_NV;
+	void * pNext = nullptr;
+public:
+	VkBool32 exclusiveScissor;
+S_physical_device_exclusive_scissor_features_NV( VkPhysicalDeviceExclusiveScissorFeaturesNV const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_physical_device_exclusive_scissor_features_NV ) );	}
+S_physical_device_exclusive_scissor_features_NV& operator=( VkPhysicalDeviceExclusiveScissorFeaturesNV const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_physical_device_exclusive_scissor_features_NV ) ); return *this;	}
+operator VkPhysicalDeviceExclusiveScissorFeaturesNV const&() const 
+	{	return *reinterpret_cast<const VkPhysicalDeviceExclusiveScissorFeaturesNV*>(this);	}
+operator VkPhysicalDeviceExclusiveScissorFeaturesNV &() 
+	{	return *reinterpret_cast<VkPhysicalDeviceExclusiveScissorFeaturesNV*>(this);	}
+
+};
+static_assert(
+	sizeof(S_physical_device_exclusive_scissor_features_NV) == sizeof(VkPhysicalDeviceExclusiveScissorFeaturesNV),
+	"struct and wrapper have different size!");
+
+/*	VkPhysicalDeviceCornerSampledImageFeaturesNV
+ex to: VkPhysicalDeviceFeatures2,VkDeviceCreateInfo
+*/
+struct		S_physical_device_corner_sampled_image_features_NV{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CORNER_SAMPLED_IMAGE_FEATURES_NV;
+	void * pNext = nullptr;
+public:
+	VkBool32 cornerSampledImage;
+S_physical_device_corner_sampled_image_features_NV( VkPhysicalDeviceCornerSampledImageFeaturesNV const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_physical_device_corner_sampled_image_features_NV ) );	}
+S_physical_device_corner_sampled_image_features_NV& operator=( VkPhysicalDeviceCornerSampledImageFeaturesNV const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_physical_device_corner_sampled_image_features_NV ) ); return *this;	}
+operator VkPhysicalDeviceCornerSampledImageFeaturesNV const&() const 
+	{	return *reinterpret_cast<const VkPhysicalDeviceCornerSampledImageFeaturesNV*>(this);	}
+operator VkPhysicalDeviceCornerSampledImageFeaturesNV &() 
+	{	return *reinterpret_cast<VkPhysicalDeviceCornerSampledImageFeaturesNV*>(this);	}
+
+};
+static_assert(
+	sizeof(S_physical_device_corner_sampled_image_features_NV) == sizeof(VkPhysicalDeviceCornerSampledImageFeaturesNV),
+	"struct and wrapper have different size!");
+
+/*	VkPhysicalDeviceComputeShaderDerivativesFeaturesNV
+ex to: VkPhysicalDeviceFeatures2,VkDeviceCreateInfo
+*/
+struct		S_physical_device_compute_shader_derivatives_features_NV{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COMPUTE_SHADER_DERIVATIVES_FEATURES_NV;
+	void * pNext = nullptr;
+public:
+	VkBool32 computeDerivativeGroupQuads;
+	VkBool32 computeDerivativeGroupLinear;
+S_physical_device_compute_shader_derivatives_features_NV( VkPhysicalDeviceComputeShaderDerivativesFeaturesNV const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_physical_device_compute_shader_derivatives_features_NV ) );	}
+S_physical_device_compute_shader_derivatives_features_NV& operator=( VkPhysicalDeviceComputeShaderDerivativesFeaturesNV const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_physical_device_compute_shader_derivatives_features_NV ) ); return *this;	}
+operator VkPhysicalDeviceComputeShaderDerivativesFeaturesNV const&() const 
+	{	return *reinterpret_cast<const VkPhysicalDeviceComputeShaderDerivativesFeaturesNV*>(this);	}
+operator VkPhysicalDeviceComputeShaderDerivativesFeaturesNV &() 
+	{	return *reinterpret_cast<VkPhysicalDeviceComputeShaderDerivativesFeaturesNV*>(this);	}
+
+};
+static_assert(
+	sizeof(S_physical_device_compute_shader_derivatives_features_NV) == sizeof(VkPhysicalDeviceComputeShaderDerivativesFeaturesNV),
+	"struct and wrapper have different size!");
+
+/*	VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV
+ex to: VkPhysicalDeviceFeatures2,VkDeviceCreateInfo
+*/
+struct		S_physical_device_fragment_shader_barycentric_features_NV{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_SHADER_BARYCENTRIC_FEATURES_NV;
+	void * pNext = nullptr;
+public:
+	VkBool32 fragmentShaderBarycentric;
+S_physical_device_fragment_shader_barycentric_features_NV( VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_physical_device_fragment_shader_barycentric_features_NV ) );	}
+S_physical_device_fragment_shader_barycentric_features_NV& operator=( VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_physical_device_fragment_shader_barycentric_features_NV ) ); return *this;	}
+operator VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV const&() const 
+	{	return *reinterpret_cast<const VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV*>(this);	}
+operator VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV &() 
+	{	return *reinterpret_cast<VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV*>(this);	}
+
+};
+static_assert(
+	sizeof(S_physical_device_fragment_shader_barycentric_features_NV) == sizeof(VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV),
+	"struct and wrapper have different size!");
+
+/*	VkPhysicalDeviceShaderImageFootprintFeaturesNV
+ex to: VkPhysicalDeviceFeatures2,VkDeviceCreateInfo
+*/
+struct		S_physical_device_shader_image_footprint_features_NV{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_IMAGE_FOOTPRINT_FEATURES_NV;
+	void * pNext = nullptr;
+public:
+	VkBool32 imageFootprint;
+S_physical_device_shader_image_footprint_features_NV( VkPhysicalDeviceShaderImageFootprintFeaturesNV const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_physical_device_shader_image_footprint_features_NV ) );	}
+S_physical_device_shader_image_footprint_features_NV& operator=( VkPhysicalDeviceShaderImageFootprintFeaturesNV const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_physical_device_shader_image_footprint_features_NV ) ); return *this;	}
+operator VkPhysicalDeviceShaderImageFootprintFeaturesNV const&() const 
+	{	return *reinterpret_cast<const VkPhysicalDeviceShaderImageFootprintFeaturesNV*>(this);	}
+operator VkPhysicalDeviceShaderImageFootprintFeaturesNV &() 
+	{	return *reinterpret_cast<VkPhysicalDeviceShaderImageFootprintFeaturesNV*>(this);	}
+
+};
+static_assert(
+	sizeof(S_physical_device_shader_image_footprint_features_NV) == sizeof(VkPhysicalDeviceShaderImageFootprintFeaturesNV),
+	"struct and wrapper have different size!");
+
+/*	VkPhysicalDeviceShadingRateImageFeaturesNV
+ex to: VkPhysicalDeviceFeatures2,VkDeviceCreateInfo
+*/
+struct		S_physical_device_shading_rate_image_features_NV{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADING_RATE_IMAGE_FEATURES_NV;
+	void * pNext = nullptr;
+public:
+	VkBool32 shadingRateImage;
+	VkBool32 shadingRateCoarseSampleOrder;
+S_physical_device_shading_rate_image_features_NV( VkPhysicalDeviceShadingRateImageFeaturesNV const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_physical_device_shading_rate_image_features_NV ) );	}
+S_physical_device_shading_rate_image_features_NV& operator=( VkPhysicalDeviceShadingRateImageFeaturesNV const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_physical_device_shading_rate_image_features_NV ) ); return *this;	}
+operator VkPhysicalDeviceShadingRateImageFeaturesNV const&() const 
+	{	return *reinterpret_cast<const VkPhysicalDeviceShadingRateImageFeaturesNV*>(this);	}
+operator VkPhysicalDeviceShadingRateImageFeaturesNV &() 
+	{	return *reinterpret_cast<VkPhysicalDeviceShadingRateImageFeaturesNV*>(this);	}
+
+};
+static_assert(
+	sizeof(S_physical_device_shading_rate_image_features_NV) == sizeof(VkPhysicalDeviceShadingRateImageFeaturesNV),
+	"struct and wrapper have different size!");
+
+/*	VkPhysicalDeviceMeshShaderFeaturesNV
+ex to: VkPhysicalDeviceFeatures2,VkDeviceCreateInfo
+*/
+struct		S_physical_device_mesh_shader_features_NV{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MESH_SHADER_FEATURES_NV;
+	void * pNext = nullptr;
+public:
+	VkBool32 taskShader;
+	VkBool32 meshShader;
+S_physical_device_mesh_shader_features_NV( VkPhysicalDeviceMeshShaderFeaturesNV const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_physical_device_mesh_shader_features_NV ) );	}
+S_physical_device_mesh_shader_features_NV& operator=( VkPhysicalDeviceMeshShaderFeaturesNV const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_physical_device_mesh_shader_features_NV ) ); return *this;	}
+operator VkPhysicalDeviceMeshShaderFeaturesNV const&() const 
+	{	return *reinterpret_cast<const VkPhysicalDeviceMeshShaderFeaturesNV*>(this);	}
+operator VkPhysicalDeviceMeshShaderFeaturesNV &() 
+	{	return *reinterpret_cast<VkPhysicalDeviceMeshShaderFeaturesNV*>(this);	}
+
+};
+static_assert(
+	sizeof(S_physical_device_mesh_shader_features_NV) == sizeof(VkPhysicalDeviceMeshShaderFeaturesNV),
+	"struct and wrapper have different size!");
+
+/*	VkPhysicalDeviceMeshShaderPropertiesNV
+ex to: VkPhysicalDeviceProperties2
+*/
+struct		S_physical_device_mesh_shader_properties_NV{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MESH_SHADER_PROPERTIES_NV;
+	void * pNext = nullptr;
+public:
+	uint32_t maxDrawMeshTasksCount;
+	uint32_t maxTaskWorkGroupInvocations;
+	uint32_t maxTaskWorkGroupSize[3];
+	uint32_t maxTaskTotalMemorySize;
+	uint32_t maxTaskOutputCount;
+	uint32_t maxMeshWorkGroupInvocations;
+	uint32_t maxMeshWorkGroupSize[3];
+	uint32_t maxMeshTotalMemorySize;
+	uint32_t maxMeshOutputVertices;
+	uint32_t maxMeshOutputPrimitives;
+	uint32_t maxMeshMultiviewViewCount;
+	uint32_t meshOutputPerVertexGranularity;
+	uint32_t meshOutputPerPrimitiveGranularity;
+S_physical_device_mesh_shader_properties_NV( VkPhysicalDeviceMeshShaderPropertiesNV const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_physical_device_mesh_shader_properties_NV ) );	}
+S_physical_device_mesh_shader_properties_NV& operator=( VkPhysicalDeviceMeshShaderPropertiesNV const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_physical_device_mesh_shader_properties_NV ) ); return *this;	}
+operator VkPhysicalDeviceMeshShaderPropertiesNV const&() const 
+	{	return *reinterpret_cast<const VkPhysicalDeviceMeshShaderPropertiesNV*>(this);	}
+operator VkPhysicalDeviceMeshShaderPropertiesNV &() 
+	{	return *reinterpret_cast<VkPhysicalDeviceMeshShaderPropertiesNV*>(this);	}
+
+};
+static_assert(
+	sizeof(S_physical_device_mesh_shader_properties_NV) == sizeof(VkPhysicalDeviceMeshShaderPropertiesNV),
+	"struct and wrapper have different size!");
+
+/*	VkGeometryTrianglesNVX
+*/
+struct		S_geometry_triangles_NVX{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_GEOMETRY_TRIANGLES_NVX;
+	const void * pNext = nullptr;
+public:
+	VkBuffer vertexData;
+	VkDeviceSize vertexOffset;
+	uint32_t vertexCount;
+	VkDeviceSize vertexStride;
+	E_format vertexFormat;
+	VkBuffer indexData;
+	VkDeviceSize indexOffset;
+	uint32_t indexCount;
+	E_index_type indexType;
+	VkBuffer transformData;
+	VkDeviceSize transformOffset;
+S_geometry_triangles_NVX( VkGeometryTrianglesNVX const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_geometry_triangles_NVX ) );	}
+S_geometry_triangles_NVX& operator=( VkGeometryTrianglesNVX const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_geometry_triangles_NVX ) ); return *this;	}
+operator VkGeometryTrianglesNVX const&() const 
+	{	return *reinterpret_cast<const VkGeometryTrianglesNVX*>(this);	}
+operator VkGeometryTrianglesNVX &() 
+	{	return *reinterpret_cast<VkGeometryTrianglesNVX*>(this);	}
+
+};
+static_assert(
+	sizeof(S_geometry_triangles_NVX) == sizeof(VkGeometryTrianglesNVX),
+	"struct and wrapper have different size!");
+
+/*	VkGeometryAABBNVX
+*/
+struct		S_geometry_aabb_NVX{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_GEOMETRY_AABB_NVX;
+	const void * pNext = nullptr;
+public:
+	VkBuffer aabbData;
+	uint32_t numAABBs;
+	uint32_t stride;
+	VkDeviceSize offset;
+S_geometry_aabb_NVX( VkGeometryAABBNVX const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_geometry_aabb_NVX ) );	}
+S_geometry_aabb_NVX& operator=( VkGeometryAABBNVX const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_geometry_aabb_NVX ) ); return *this;	}
+operator VkGeometryAABBNVX const&() const 
+	{	return *reinterpret_cast<const VkGeometryAABBNVX*>(this);	}
+operator VkGeometryAABBNVX &() 
+	{	return *reinterpret_cast<VkGeometryAABBNVX*>(this);	}
+
+};
+static_assert(
+	sizeof(S_geometry_aabb_NVX) == sizeof(VkGeometryAABBNVX),
+	"struct and wrapper have different size!");
+
+/*	VkBindAccelerationStructureMemoryInfoNVX
+*/
+struct		S_bind_acceleration_structure_memory_info_NVX{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_BIND_ACCELERATION_STRUCTURE_MEMORY_INFO_NVX;
+	const void * pNext = nullptr;
+public:
+	VkAccelerationStructureNVX accelerationStructure;
+	VkDeviceMemory memory;
+	VkDeviceSize memoryOffset;
+	uint32_t deviceIndexCount;
+	const uint32_t * pDeviceIndices;
+S_bind_acceleration_structure_memory_info_NVX( VkBindAccelerationStructureMemoryInfoNVX const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_bind_acceleration_structure_memory_info_NVX ) );	}
+S_bind_acceleration_structure_memory_info_NVX& operator=( VkBindAccelerationStructureMemoryInfoNVX const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_bind_acceleration_structure_memory_info_NVX ) ); return *this;	}
+operator VkBindAccelerationStructureMemoryInfoNVX const&() const 
+	{	return *reinterpret_cast<const VkBindAccelerationStructureMemoryInfoNVX*>(this);	}
+operator VkBindAccelerationStructureMemoryInfoNVX &() 
+	{	return *reinterpret_cast<VkBindAccelerationStructureMemoryInfoNVX*>(this);	}
+
+};
+static_assert(
+	sizeof(S_bind_acceleration_structure_memory_info_NVX) == sizeof(VkBindAccelerationStructureMemoryInfoNVX),
+	"struct and wrapper have different size!");
+
+/*	VkDescriptorAccelerationStructureInfoNVX
+ex to: VkWriteDescriptorSet
+*/
+struct		S_descriptor_acceleration_structure_info_NVX{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_DESCRIPTOR_ACCELERATION_STRUCTURE_INFO_NVX;
+	const void * pNext = nullptr;
+public:
+	uint32_t accelerationStructureCount;
+	const VkAccelerationStructureNVX * pAccelerationStructures;
+S_descriptor_acceleration_structure_info_NVX( VkDescriptorAccelerationStructureInfoNVX const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_descriptor_acceleration_structure_info_NVX ) );	}
+S_descriptor_acceleration_structure_info_NVX& operator=( VkDescriptorAccelerationStructureInfoNVX const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_descriptor_acceleration_structure_info_NVX ) ); return *this;	}
+operator VkDescriptorAccelerationStructureInfoNVX const&() const 
+	{	return *reinterpret_cast<const VkDescriptorAccelerationStructureInfoNVX*>(this);	}
+operator VkDescriptorAccelerationStructureInfoNVX &() 
+	{	return *reinterpret_cast<VkDescriptorAccelerationStructureInfoNVX*>(this);	}
+
+};
+static_assert(
+	sizeof(S_descriptor_acceleration_structure_info_NVX) == sizeof(VkDescriptorAccelerationStructureInfoNVX),
+	"struct and wrapper have different size!");
+
+/*	VkAccelerationStructureMemoryRequirementsInfoNVX
+*/
+struct		S_acceleration_structure_memory_requirements_info_NVX{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_MEMORY_REQUIREMENTS_INFO_NVX;
+	const void * pNext = nullptr;
+public:
+	VkAccelerationStructureNVX accelerationStructure;
+S_acceleration_structure_memory_requirements_info_NVX( VkAccelerationStructureMemoryRequirementsInfoNVX const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_acceleration_structure_memory_requirements_info_NVX ) );	}
+S_acceleration_structure_memory_requirements_info_NVX& operator=( VkAccelerationStructureMemoryRequirementsInfoNVX const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_acceleration_structure_memory_requirements_info_NVX ) ); return *this;	}
+operator VkAccelerationStructureMemoryRequirementsInfoNVX const&() const 
+	{	return *reinterpret_cast<const VkAccelerationStructureMemoryRequirementsInfoNVX*>(this);	}
+operator VkAccelerationStructureMemoryRequirementsInfoNVX &() 
+	{	return *reinterpret_cast<VkAccelerationStructureMemoryRequirementsInfoNVX*>(this);	}
+
+};
+static_assert(
+	sizeof(S_acceleration_structure_memory_requirements_info_NVX) == sizeof(VkAccelerationStructureMemoryRequirementsInfoNVX),
+	"struct and wrapper have different size!");
+
+/*	VkPhysicalDeviceRaytracingPropertiesNVX
+ex to: VkPhysicalDeviceProperties2
+*/
+struct		S_physical_device_raytracing_properties_NVX{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RAYTRACING_PROPERTIES_NVX;
+	void * pNext = nullptr;
+public:
+	uint32_t shaderHeaderSize;
+	uint32_t maxRecursionDepth;
+	uint32_t maxGeometryCount;
+S_physical_device_raytracing_properties_NVX( VkPhysicalDeviceRaytracingPropertiesNVX const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_physical_device_raytracing_properties_NVX ) );	}
+S_physical_device_raytracing_properties_NVX& operator=( VkPhysicalDeviceRaytracingPropertiesNVX const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_physical_device_raytracing_properties_NVX ) ); return *this;	}
+operator VkPhysicalDeviceRaytracingPropertiesNVX const&() const 
+	{	return *reinterpret_cast<const VkPhysicalDeviceRaytracingPropertiesNVX*>(this);	}
+operator VkPhysicalDeviceRaytracingPropertiesNVX &() 
+	{	return *reinterpret_cast<VkPhysicalDeviceRaytracingPropertiesNVX*>(this);	}
+
+};
+static_assert(
+	sizeof(S_physical_device_raytracing_properties_NVX) == sizeof(VkPhysicalDeviceRaytracingPropertiesNVX),
+	"struct and wrapper have different size!");
+
+/*	VkPhysicalDeviceImageDrmFormatModifierInfoEXT
+ex to: VkPhysicalDeviceImageFormatInfo2
+*/
+struct		S_physical_device_image_drm_format_modifier_info_EXT{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_DRM_FORMAT_MODIFIER_INFO_EXT;
+	const void * pNext = nullptr;
+public:
+	uint64_t drmFormatModifier;
+S_physical_device_image_drm_format_modifier_info_EXT( VkPhysicalDeviceImageDrmFormatModifierInfoEXT const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_physical_device_image_drm_format_modifier_info_EXT ) );	}
+S_physical_device_image_drm_format_modifier_info_EXT& operator=( VkPhysicalDeviceImageDrmFormatModifierInfoEXT const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_physical_device_image_drm_format_modifier_info_EXT ) ); return *this;	}
+operator VkPhysicalDeviceImageDrmFormatModifierInfoEXT const&() const 
+	{	return *reinterpret_cast<const VkPhysicalDeviceImageDrmFormatModifierInfoEXT*>(this);	}
+operator VkPhysicalDeviceImageDrmFormatModifierInfoEXT &() 
+	{	return *reinterpret_cast<VkPhysicalDeviceImageDrmFormatModifierInfoEXT*>(this);	}
+
+};
+static_assert(
+	sizeof(S_physical_device_image_drm_format_modifier_info_EXT) == sizeof(VkPhysicalDeviceImageDrmFormatModifierInfoEXT),
+	"struct and wrapper have different size!");
+
+/*	VkImageDrmFormatModifierListCreateInfoEXT
+ex to: VkImageCreateInfo
+*/
+struct		S_image_drm_format_modifier_list_create_info_EXT{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_IMAGE_DRM_FORMAT_MODIFIER_LIST_CREATE_INFO_EXT;
+	const void * pNext = nullptr;
+public:
+	uint32_t drmFormatModifierCount;
+	const uint64_t * pDrmFormatModifiers;
+S_image_drm_format_modifier_list_create_info_EXT( VkImageDrmFormatModifierListCreateInfoEXT const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_image_drm_format_modifier_list_create_info_EXT ) );	}
+S_image_drm_format_modifier_list_create_info_EXT& operator=( VkImageDrmFormatModifierListCreateInfoEXT const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_image_drm_format_modifier_list_create_info_EXT ) ); return *this;	}
+operator VkImageDrmFormatModifierListCreateInfoEXT const&() const 
+	{	return *reinterpret_cast<const VkImageDrmFormatModifierListCreateInfoEXT*>(this);	}
+operator VkImageDrmFormatModifierListCreateInfoEXT &() 
+	{	return *reinterpret_cast<VkImageDrmFormatModifierListCreateInfoEXT*>(this);	}
+
+};
+static_assert(
+	sizeof(S_image_drm_format_modifier_list_create_info_EXT) == sizeof(VkImageDrmFormatModifierListCreateInfoEXT),
+	"struct and wrapper have different size!");
+
+/*	VkImageDrmFormatModifierPropertiesEXT
+(returnedonly)
+*/
+struct		S_image_drm_format_modifier_properties_EXT{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_IMAGE_DRM_FORMAT_MODIFIER_PROPERTIES_EXT;
+	void * pNext = nullptr;
+public:
+	uint64_t drmFormatModifier;
+S_image_drm_format_modifier_properties_EXT( VkImageDrmFormatModifierPropertiesEXT const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_image_drm_format_modifier_properties_EXT ) );	}
+S_image_drm_format_modifier_properties_EXT& operator=( VkImageDrmFormatModifierPropertiesEXT const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_image_drm_format_modifier_properties_EXT ) ); return *this;	}
+operator VkImageDrmFormatModifierPropertiesEXT const&() const 
+	{	return *reinterpret_cast<const VkImageDrmFormatModifierPropertiesEXT*>(this);	}
+operator VkImageDrmFormatModifierPropertiesEXT &() 
+	{	return *reinterpret_cast<VkImageDrmFormatModifierPropertiesEXT*>(this);	}
+
+};
+static_assert(
+	sizeof(S_image_drm_format_modifier_properties_EXT) == sizeof(VkImageDrmFormatModifierPropertiesEXT),
+	"struct and wrapper have different size!");
+
+
+/*---------------- other struct ---------------------*/
+
 /*	VkRect2D
 */
 struct		S_rect_2d{
 	S_offset_2d offset;
 	S_extent_2d extent;
 };
+
 /*	VkClearRect
 */
 struct		S_clear_rect{
@@ -4940,6 +10681,7 @@ struct		S_clear_rect{
 	uint32_t baseArrayLayer;
 	uint32_t layerCount;
 };
+
 /*	VkPhysicalDeviceProperties
 (returnedonly)
 ex:
@@ -4956,33 +10698,7 @@ struct		S_physical_device_properties{
 	S_physical_device_limits limits;
 	S_physical_device_sparse_properties sparseProperties;
 };
-/*	VkApplicationInfo
-*/
-struct		S_application_info{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	const char * pApplicationName;
-	uint32_t applicationVersion;
-	const char * pEngineName;
-	uint32_t engineVersion;
-	uint32_t apiVersion;
-};
-/*	VkDeviceQueueCreateInfo
-ex:
-	VkDeviceQueueGlobalPriorityCreateInfoEXT
-*/
-struct		S_device_queue_create_info{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	F_device_queue_create flags;
-	uint32_t queueFamilyIndex;
-	uint32_t queueCount;
-	const float * pQueuePriorities;
-};
+
 /*	VkDeviceCreateInfo
 ex:
 	VkPhysicalDeviceFeatures2
@@ -5013,8 +10729,9 @@ ex:
 */
 struct		S_device_create_info{
 private:
-	E_structure_type sType;
-	const void * pNext;
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO;
+	const void * pNext = nullptr;
 public:
 	VkDeviceCreateFlags flags;
 	uint32_t queueCreateInfoCount;
@@ -5024,7 +10741,20 @@ public:
 	uint32_t enabledExtensionCount;
 	const char * const* ppEnabledExtensionNames;
 	const S_physical_device_features * pEnabledFeatures;
+S_device_create_info( VkDeviceCreateInfo const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_device_create_info ) );	}
+S_device_create_info& operator=( VkDeviceCreateInfo const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_device_create_info ) ); return *this;	}
+operator VkDeviceCreateInfo const&() const 
+	{	return *reinterpret_cast<const VkDeviceCreateInfo*>(this);	}
+operator VkDeviceCreateInfo &() 
+	{	return *reinterpret_cast<VkDeviceCreateInfo*>(this);	}
+
 };
+static_assert(
+	sizeof(S_device_create_info) == sizeof(VkDeviceCreateInfo),
+	"struct and wrapper have different size!");
+
 /*	VkInstanceCreateInfo
 ex:
 	VkDebugReportCallbackCreateInfoEXT
@@ -5033,8 +10763,9 @@ ex:
 */
 struct		S_instance_create_info{
 private:
-	E_structure_type sType;
-	const void * pNext;
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO;
+	const void * pNext = nullptr;
 public:
 	VkInstanceCreateFlags flags;
 	const S_application_info * pApplicationInfo;
@@ -5042,7 +10773,20 @@ public:
 	const char * const* ppEnabledLayerNames;
 	uint32_t enabledExtensionCount;
 	const char * const* ppEnabledExtensionNames;
+S_instance_create_info( VkInstanceCreateInfo const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_instance_create_info ) );	}
+S_instance_create_info& operator=( VkInstanceCreateInfo const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_instance_create_info ) ); return *this;	}
+operator VkInstanceCreateInfo const&() const 
+	{	return *reinterpret_cast<const VkInstanceCreateInfo*>(this);	}
+operator VkInstanceCreateInfo &() 
+	{	return *reinterpret_cast<VkInstanceCreateInfo*>(this);	}
+
 };
+static_assert(
+	sizeof(S_instance_create_info) == sizeof(VkInstanceCreateInfo),
+	"struct and wrapper have different size!");
+
 /*	VkQueueFamilyProperties
 (returnedonly)
 */
@@ -5052,6 +10796,7 @@ struct		S_queue_family_properties{
 	uint32_t timestampValidBits;
 	S_extent_3d minImageTransferGranularity;
 };
+
 /*	VkPhysicalDeviceMemoryProperties
 (returnedonly)
 */
@@ -5061,29 +10806,7 @@ struct		S_physical_device_memory_properties{
 	uint32_t memoryHeapCount;
 	S_memory_heap memoryHeaps[VK_MAX_MEMORY_HEAPS];
 };
-/*	VkMemoryAllocateInfo
-ex:
-	VkDedicatedAllocationMemoryAllocateInfoNV
-	VkExportMemoryAllocateInfoNV
-	VkImportMemoryWin32HandleInfoNV
-	VkExportMemoryWin32HandleInfoNV
-	VkExportMemoryAllocateInfo
-	VkImportMemoryWin32HandleInfoKHR
-	VkExportMemoryWin32HandleInfoKHR
-	VkImportMemoryFdInfoKHR
-	VkMemoryAllocateFlagsInfo
-	VkMemoryDedicatedAllocateInfo
-	VkImportMemoryHostPointerInfoEXT
-	VkImportAndroidHardwareBufferInfoANDROID
-*/
-struct		S_memory_allocate_info{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	VkDeviceSize allocationSize;
-	uint32_t memoryTypeIndex;
-};
+
 /*	VkSparseImageFormatProperties
 (returnedonly)
 */
@@ -5092,6 +10815,7 @@ struct		S_sparse_image_format_properties{
 	S_extent_3d imageGranularity;
 	F_sparse_image_format flags;
 };
+
 /*	VkSparseImageMemoryRequirements
 (returnedonly)
 */
@@ -5102,17 +10826,7 @@ struct		S_sparse_image_memory_requirements{
 	VkDeviceSize imageMipTailOffset;
 	VkDeviceSize imageMipTailStride;
 };
-/*	VkMappedMemoryRange
-*/
-struct		S_mapped_memory_range{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	VkDeviceMemory memory;
-	VkDeviceSize offset;
-	VkDeviceSize size;
-};
+
 /*	VkImageFormatProperties
 (returnedonly)
 */
@@ -5123,6 +10837,7 @@ struct		S_image_format_properties{
 	F_sample_count sampleCounts;
 	VkDeviceSize maxResourceSize;
 };
+
 /*	VkWriteDescriptorSet
 ex:
 	VkWriteDescriptorSetInlineUniformBlockEXT
@@ -5130,8 +10845,9 @@ ex:
 */
 struct		S_write_descriptor_set{
 private:
-	E_structure_type sType;
-	const void * pNext;
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET;
+	const void * pNext = nullptr;
 public:
 	VkDescriptorSet dstSet;
 	uint32_t dstBinding;
@@ -5141,85 +10857,29 @@ public:
 	const S_descriptor_image_info * pImageInfo;
 	const S_descriptor_buffer_info * pBufferInfo;
 	const VkBufferView * pTexelBufferView;
+S_write_descriptor_set( VkWriteDescriptorSet const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_write_descriptor_set ) );	}
+S_write_descriptor_set& operator=( VkWriteDescriptorSet const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_write_descriptor_set ) ); return *this;	}
+operator VkWriteDescriptorSet const&() const 
+	{	return *reinterpret_cast<const VkWriteDescriptorSet*>(this);	}
+operator VkWriteDescriptorSet &() 
+	{	return *reinterpret_cast<VkWriteDescriptorSet*>(this);	}
+
 };
-/*	VkCopyDescriptorSet
-*/
-struct		S_copy_descriptor_set{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	VkDescriptorSet srcSet;
-	uint32_t srcBinding;
-	uint32_t srcArrayElement;
-	VkDescriptorSet dstSet;
-	uint32_t dstBinding;
-	uint32_t dstArrayElement;
-	uint32_t descriptorCount;
-};
-/*	VkBufferCreateInfo
-ex:
-	VkDedicatedAllocationBufferCreateInfoNV
-	VkExternalMemoryBufferCreateInfo
-*/
-struct		S_buffer_create_info{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	F_buffer_create flags;
-	VkDeviceSize size;
-	F_buffer_usage usage;
-	E_sharing_mode sharingMode;
-	uint32_t queueFamilyIndexCount;
-	const uint32_t * pQueueFamilyIndices;
-};
-/*	VkBufferViewCreateInfo
-*/
-struct		S_buffer_view_create_info{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	VkBufferViewCreateFlags flags;
-	VkBuffer buffer;
-	E_format format;
-	VkDeviceSize offset;
-	VkDeviceSize range;
-};
-/*	VkMemoryBarrier
-*/
-struct		S_memory_barrier{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	F_access srcAccessMask;
-	F_access dstAccessMask;
-};
-/*	VkBufferMemoryBarrier
-*/
-struct		S_buffer_memory_barrier{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	F_access srcAccessMask;
-	F_access dstAccessMask;
-	uint32_t srcQueueFamilyIndex;
-	uint32_t dstQueueFamilyIndex;
-	VkBuffer buffer;
-	VkDeviceSize offset;
-	VkDeviceSize size;
-};
+static_assert(
+	sizeof(S_write_descriptor_set) == sizeof(VkWriteDescriptorSet),
+	"struct and wrapper have different size!");
+
 /*	VkImageMemoryBarrier
 ex:
 	VkSampleLocationsInfoEXT
 */
 struct		S_image_memory_barrier{
 private:
-	E_structure_type sType;
-	const void * pNext;
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER;
+	const void * pNext = nullptr;
 public:
 	F_access srcAccessMask;
 	F_access dstAccessMask;
@@ -5229,7 +10889,20 @@ public:
 	uint32_t dstQueueFamilyIndex;
 	VkImage image;
 	S_image_subresource_range subresourceRange;
+S_image_memory_barrier( VkImageMemoryBarrier const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_image_memory_barrier ) );	}
+S_image_memory_barrier& operator=( VkImageMemoryBarrier const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_image_memory_barrier ) ); return *this;	}
+operator VkImageMemoryBarrier const&() const 
+	{	return *reinterpret_cast<const VkImageMemoryBarrier*>(this);	}
+operator VkImageMemoryBarrier &() 
+	{	return *reinterpret_cast<VkImageMemoryBarrier*>(this);	}
+
 };
+static_assert(
+	sizeof(S_image_memory_barrier) == sizeof(VkImageMemoryBarrier),
+	"struct and wrapper have different size!");
+
 /*	VkImageCreateInfo
 ex:
 	VkDedicatedAllocationImageCreateInfoNV
@@ -5243,8 +10916,9 @@ ex:
 */
 struct		S_image_create_info{
 private:
-	E_structure_type sType;
-	const void * pNext;
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO;
+	const void * pNext = nullptr;
 public:
 	F_image_create flags;
 	E_image_type imageType;
@@ -5259,7 +10933,20 @@ public:
 	uint32_t queueFamilyIndexCount;
 	const uint32_t * pQueueFamilyIndices;
 	E_image_layout initialLayout;
+S_image_create_info( VkImageCreateInfo const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_image_create_info ) );	}
+S_image_create_info& operator=( VkImageCreateInfo const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_image_create_info ) ); return *this;	}
+operator VkImageCreateInfo const&() const 
+	{	return *reinterpret_cast<const VkImageCreateInfo*>(this);	}
+operator VkImageCreateInfo &() 
+	{	return *reinterpret_cast<VkImageCreateInfo*>(this);	}
+
 };
+static_assert(
+	sizeof(S_image_create_info) == sizeof(VkImageCreateInfo),
+	"struct and wrapper have different size!");
+
 /*	VkImageViewCreateInfo
 ex:
 	VkImageViewUsageCreateInfo
@@ -5268,8 +10955,9 @@ ex:
 */
 struct		S_image_view_create_info{
 private:
-	E_structure_type sType;
-	const void * pNext;
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO;
+	const void * pNext = nullptr;
 public:
 	VkImageViewCreateFlags flags;
 	VkImage image;
@@ -5277,7 +10965,20 @@ public:
 	E_format format;
 	S_component_mapping components;
 	S_image_subresource_range subresourceRange;
+S_image_view_create_info( VkImageViewCreateInfo const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_image_view_create_info ) );	}
+S_image_view_create_info& operator=( VkImageViewCreateInfo const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_image_view_create_info ) ); return *this;	}
+operator VkImageViewCreateInfo const&() const 
+	{	return *reinterpret_cast<const VkImageViewCreateInfo*>(this);	}
+operator VkImageViewCreateInfo &() 
+	{	return *reinterpret_cast<VkImageViewCreateInfo*>(this);	}
+
 };
+static_assert(
+	sizeof(S_image_view_create_info) == sizeof(VkImageViewCreateInfo),
+	"struct and wrapper have different size!");
+
 /*	VkSparseImageMemoryBind
 */
 struct		S_sparse_image_memory_bind{
@@ -5288,6 +10989,7 @@ struct		S_sparse_image_memory_bind{
 	VkDeviceSize memoryOffset;
 	F_sparse_memory_bind flags;
 };
+
 /*	VkSparseBufferMemoryBindInfo
 */
 struct		S_sparse_buffer_memory_bind_info{
@@ -5295,6 +10997,7 @@ struct		S_sparse_buffer_memory_bind_info{
 	uint32_t bindCount;
 	const S_sparse_memory_bind * pBinds;
 };
+
 /*	VkSparseImageOpaqueMemoryBindInfo
 */
 struct		S_sparse_image_opaque_memory_bind_info{
@@ -5302,6 +11005,7 @@ struct		S_sparse_image_opaque_memory_bind_info{
 	uint32_t bindCount;
 	const S_sparse_memory_bind * pBinds;
 };
+
 /*	VkSparseImageMemoryBindInfo
 */
 struct		S_sparse_image_memory_bind_info{
@@ -5309,14 +11013,16 @@ struct		S_sparse_image_memory_bind_info{
 	uint32_t bindCount;
 	const S_sparse_image_memory_bind * pBinds;
 };
+
 /*	VkBindSparseInfo
 ex:
 	VkDeviceGroupBindSparseInfo
 */
 struct		S_bind_sparse_info{
 private:
-	E_structure_type sType;
-	const void * pNext;
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_BIND_SPARSE_INFO;
+	const void * pNext = nullptr;
 public:
 	uint32_t waitSemaphoreCount;
 	const VkSemaphore * pWaitSemaphores;
@@ -5328,7 +11034,20 @@ public:
 	const S_sparse_image_memory_bind_info * pImageBinds;
 	uint32_t signalSemaphoreCount;
 	const VkSemaphore * pSignalSemaphores;
+S_bind_sparse_info( VkBindSparseInfo const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_bind_sparse_info ) );	}
+S_bind_sparse_info& operator=( VkBindSparseInfo const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_bind_sparse_info ) ); return *this;	}
+operator VkBindSparseInfo const&() const 
+	{	return *reinterpret_cast<const VkBindSparseInfo*>(this);	}
+operator VkBindSparseInfo &() 
+	{	return *reinterpret_cast<VkBindSparseInfo*>(this);	}
+
 };
+static_assert(
+	sizeof(S_bind_sparse_info) == sizeof(VkBindSparseInfo),
+	"struct and wrapper have different size!");
+
 /*	VkImageCopy
 */
 struct		S_image_copy{
@@ -5338,6 +11057,7 @@ struct		S_image_copy{
 	S_offset_3d dstOffset;
 	S_extent_3d extent;
 };
+
 /*	VkImageBlit
 */
 struct		S_image_blit{
@@ -5346,6 +11066,7 @@ struct		S_image_blit{
 	S_image_subresource_layers dstSubresource;
 	S_offset_3d dstOffsets[2];
 };
+
 /*	VkBufferImageCopy
 */
 struct		S_buffer_image_copy{
@@ -5356,6 +11077,7 @@ struct		S_buffer_image_copy{
 	S_offset_3d imageOffset;
 	S_extent_3d imageExtent;
 };
+
 /*	VkImageResolve
 */
 struct		S_image_resolve{
@@ -5365,59 +11087,62 @@ struct		S_image_resolve{
 	S_offset_3d dstOffset;
 	S_extent_3d extent;
 };
-/*	VkShaderModuleCreateInfo
-ex:
-	VkShaderModuleValidationCacheCreateInfoEXT
-*/
-struct		S_shader_module_create_info{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	VkShaderModuleCreateFlags flags;
-	size_t codeSize;
-	const uint32_t * pCode;
-};
+
 /*	VkDescriptorSetLayoutCreateInfo
 ex:
 	VkDescriptorSetLayoutBindingFlagsCreateInfoEXT
 */
 struct		S_descriptor_set_layout_create_info{
 private:
-	E_structure_type sType;
-	const void * pNext;
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_CREATE_INFO;
+	const void * pNext = nullptr;
 public:
 	F_descriptor_set_layout_create flags;
 	uint32_t bindingCount;
 	const S_descriptor_set_layout_binding * pBindings;
+S_descriptor_set_layout_create_info( VkDescriptorSetLayoutCreateInfo const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_descriptor_set_layout_create_info ) );	}
+S_descriptor_set_layout_create_info& operator=( VkDescriptorSetLayoutCreateInfo const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_descriptor_set_layout_create_info ) ); return *this;	}
+operator VkDescriptorSetLayoutCreateInfo const&() const 
+	{	return *reinterpret_cast<const VkDescriptorSetLayoutCreateInfo*>(this);	}
+operator VkDescriptorSetLayoutCreateInfo &() 
+	{	return *reinterpret_cast<VkDescriptorSetLayoutCreateInfo*>(this);	}
+
 };
+static_assert(
+	sizeof(S_descriptor_set_layout_create_info) == sizeof(VkDescriptorSetLayoutCreateInfo),
+	"struct and wrapper have different size!");
+
 /*	VkDescriptorPoolCreateInfo
 ex:
 	VkDescriptorPoolInlineUniformBlockCreateInfoEXT
 */
 struct		S_descriptor_pool_create_info{
 private:
-	E_structure_type sType;
-	const void * pNext;
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO;
+	const void * pNext = nullptr;
 public:
 	F_descriptor_pool_create flags;
 	uint32_t maxSets;
 	uint32_t poolSizeCount;
 	const S_descriptor_pool_size * pPoolSizes;
+S_descriptor_pool_create_info( VkDescriptorPoolCreateInfo const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_descriptor_pool_create_info ) );	}
+S_descriptor_pool_create_info& operator=( VkDescriptorPoolCreateInfo const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_descriptor_pool_create_info ) ); return *this;	}
+operator VkDescriptorPoolCreateInfo const&() const 
+	{	return *reinterpret_cast<const VkDescriptorPoolCreateInfo*>(this);	}
+operator VkDescriptorPoolCreateInfo &() 
+	{	return *reinterpret_cast<VkDescriptorPoolCreateInfo*>(this);	}
+
 };
-/*	VkDescriptorSetAllocateInfo
-ex:
-	VkDescriptorSetVariableDescriptorCountAllocateInfoEXT
-*/
-struct		S_descriptor_set_allocate_info{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	VkDescriptorPool descriptorPool;
-	uint32_t descriptorSetCount;
-	const VkDescriptorSetLayout * pSetLayouts;
-};
+static_assert(
+	sizeof(S_descriptor_pool_create_info) == sizeof(VkDescriptorPoolCreateInfo),
+	"struct and wrapper have different size!");
+
 /*	VkSpecializationInfo
 */
 struct		S_specialization_info{
@@ -5426,70 +11151,90 @@ struct		S_specialization_info{
 	size_t dataSize;
 	const void * pData;
 };
+
 /*	VkPipelineShaderStageCreateInfo
 */
 struct		S_pipeline_shader_stage_create_info{
 private:
-	E_structure_type sType;
-	const void * pNext;
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO;
+	const void * pNext = nullptr;
 public:
 	VkPipelineShaderStageCreateFlags flags;
 	F_shader_stage stage;
 	VkShaderModule module;
 	const char * pName;
 	const S_specialization_info * pSpecializationInfo;
+S_pipeline_shader_stage_create_info( VkPipelineShaderStageCreateInfo const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_pipeline_shader_stage_create_info ) );	}
+S_pipeline_shader_stage_create_info& operator=( VkPipelineShaderStageCreateInfo const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_pipeline_shader_stage_create_info ) ); return *this;	}
+operator VkPipelineShaderStageCreateInfo const&() const 
+	{	return *reinterpret_cast<const VkPipelineShaderStageCreateInfo*>(this);	}
+operator VkPipelineShaderStageCreateInfo &() 
+	{	return *reinterpret_cast<VkPipelineShaderStageCreateInfo*>(this);	}
+
 };
+static_assert(
+	sizeof(S_pipeline_shader_stage_create_info) == sizeof(VkPipelineShaderStageCreateInfo),
+	"struct and wrapper have different size!");
+
 /*	VkComputePipelineCreateInfo
 */
 struct		S_compute_pipeline_create_info{
 private:
-	E_structure_type sType;
-	const void * pNext;
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_COMPUTE_PIPELINE_CREATE_INFO;
+	const void * pNext = nullptr;
 public:
 	F_pipeline_create flags;
 	S_pipeline_shader_stage_create_info stage;
 	VkPipelineLayout layout;
 	VkPipeline basePipelineHandle;
 	int32_t basePipelineIndex;
+S_compute_pipeline_create_info( VkComputePipelineCreateInfo const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_compute_pipeline_create_info ) );	}
+S_compute_pipeline_create_info& operator=( VkComputePipelineCreateInfo const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_compute_pipeline_create_info ) ); return *this;	}
+operator VkComputePipelineCreateInfo const&() const 
+	{	return *reinterpret_cast<const VkComputePipelineCreateInfo*>(this);	}
+operator VkComputePipelineCreateInfo &() 
+	{	return *reinterpret_cast<VkComputePipelineCreateInfo*>(this);	}
+
 };
+static_assert(
+	sizeof(S_compute_pipeline_create_info) == sizeof(VkComputePipelineCreateInfo),
+	"struct and wrapper have different size!");
+
 /*	VkPipelineVertexInputStateCreateInfo
 ex:
 	VkPipelineVertexInputDivisorStateCreateInfoEXT
 */
 struct		S_pipeline_vertex_input_state_create_info{
 private:
-	E_structure_type sType;
-	const void * pNext;
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO;
+	const void * pNext = nullptr;
 public:
 	VkPipelineVertexInputStateCreateFlags flags;
 	uint32_t vertexBindingDescriptionCount;
 	const S_vertex_input_binding_description * pVertexBindingDescriptions;
 	uint32_t vertexAttributeDescriptionCount;
 	const S_vertex_input_attribute_description * pVertexAttributeDescriptions;
+S_pipeline_vertex_input_state_create_info( VkPipelineVertexInputStateCreateInfo const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_pipeline_vertex_input_state_create_info ) );	}
+S_pipeline_vertex_input_state_create_info& operator=( VkPipelineVertexInputStateCreateInfo const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_pipeline_vertex_input_state_create_info ) ); return *this;	}
+operator VkPipelineVertexInputStateCreateInfo const&() const 
+	{	return *reinterpret_cast<const VkPipelineVertexInputStateCreateInfo*>(this);	}
+operator VkPipelineVertexInputStateCreateInfo &() 
+	{	return *reinterpret_cast<VkPipelineVertexInputStateCreateInfo*>(this);	}
+
 };
-/*	VkPipelineInputAssemblyStateCreateInfo
-*/
-struct		S_pipeline_input_assembly_state_create_info{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	VkPipelineInputAssemblyStateCreateFlags flags;
-	E_primitive_topology topology;
-	VkBool32 primitiveRestartEnable;
-};
-/*	VkPipelineTessellationStateCreateInfo
-ex:
-	VkPipelineTessellationDomainOriginStateCreateInfo
-*/
-struct		S_pipeline_tessellation_state_create_info{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	VkPipelineTessellationStateCreateFlags flags;
-	uint32_t patchControlPoints;
-};
+static_assert(
+	sizeof(S_pipeline_vertex_input_state_create_info) == sizeof(VkPipelineVertexInputStateCreateInfo),
+	"struct and wrapper have different size!");
+
 /*	VkPipelineViewportStateCreateInfo
 ex:
 	VkPipelineViewportWScalingStateCreateInfoNV
@@ -5500,64 +11245,38 @@ ex:
 */
 struct		S_pipeline_viewport_state_create_info{
 private:
-	E_structure_type sType;
-	const void * pNext;
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_STATE_CREATE_INFO;
+	const void * pNext = nullptr;
 public:
 	VkPipelineViewportStateCreateFlags flags;
 	uint32_t viewportCount;
 	const S_viewport * pViewports;
 	uint32_t scissorCount;
 	const S_rect_2d * pScissors;
+S_pipeline_viewport_state_create_info( VkPipelineViewportStateCreateInfo const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_pipeline_viewport_state_create_info ) );	}
+S_pipeline_viewport_state_create_info& operator=( VkPipelineViewportStateCreateInfo const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_pipeline_viewport_state_create_info ) ); return *this;	}
+operator VkPipelineViewportStateCreateInfo const&() const 
+	{	return *reinterpret_cast<const VkPipelineViewportStateCreateInfo*>(this);	}
+operator VkPipelineViewportStateCreateInfo &() 
+	{	return *reinterpret_cast<VkPipelineViewportStateCreateInfo*>(this);	}
+
 };
-/*	VkPipelineRasterizationStateCreateInfo
-ex:
-	VkPipelineRasterizationStateRasterizationOrderAMD
-	VkPipelineRasterizationConservativeStateCreateInfoEXT
-*/
-struct		S_pipeline_rasterization_state_create_info{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	VkPipelineRasterizationStateCreateFlags flags;
-	VkBool32 depthClampEnable;
-	VkBool32 rasterizerDiscardEnable;
-	E_polygon_mode polygonMode;
-	F_cull_mode cullMode;
-	E_front_face frontFace;
-	VkBool32 depthBiasEnable;
-	float depthBiasConstantFactor;
-	float depthBiasClamp;
-	float depthBiasSlopeFactor;
-	float lineWidth;
-};
-/*	VkPipelineMultisampleStateCreateInfo
-ex:
-	VkPipelineCoverageToColorStateCreateInfoNV
-	VkPipelineSampleLocationsStateCreateInfoEXT
-	VkPipelineCoverageModulationStateCreateInfoNV
-*/
-struct		S_pipeline_multisample_state_create_info{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	VkPipelineMultisampleStateCreateFlags flags;
-	F_sample_count rasterizationSamples;
-	VkBool32 sampleShadingEnable;
-	float minSampleShading;
-	const VkSampleMask * pSampleMask;
-	VkBool32 alphaToCoverageEnable;
-	VkBool32 alphaToOneEnable;
-};
+static_assert(
+	sizeof(S_pipeline_viewport_state_create_info) == sizeof(VkPipelineViewportStateCreateInfo),
+	"struct and wrapper have different size!");
+
 /*	VkPipelineColorBlendStateCreateInfo
 ex:
 	VkPipelineColorBlendAdvancedStateCreateInfoEXT
 */
 struct		S_pipeline_color_blend_state_create_info{
 private:
-	E_structure_type sType;
-	const void * pNext;
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_PIPELINE_COLOR_BLEND_STATE_CREATE_INFO;
+	const void * pNext = nullptr;
 public:
 	VkPipelineColorBlendStateCreateFlags flags;
 	VkBool32 logicOpEnable;
@@ -5565,24 +11284,27 @@ public:
 	uint32_t attachmentCount;
 	const S_pipeline_color_blend_attachment_state * pAttachments;
 	float blendConstants[4];
+S_pipeline_color_blend_state_create_info( VkPipelineColorBlendStateCreateInfo const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_pipeline_color_blend_state_create_info ) );	}
+S_pipeline_color_blend_state_create_info& operator=( VkPipelineColorBlendStateCreateInfo const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_pipeline_color_blend_state_create_info ) ); return *this;	}
+operator VkPipelineColorBlendStateCreateInfo const&() const 
+	{	return *reinterpret_cast<const VkPipelineColorBlendStateCreateInfo*>(this);	}
+operator VkPipelineColorBlendStateCreateInfo &() 
+	{	return *reinterpret_cast<VkPipelineColorBlendStateCreateInfo*>(this);	}
+
 };
-/*	VkPipelineDynamicStateCreateInfo
-*/
-struct		S_pipeline_dynamic_state_create_info{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	VkPipelineDynamicStateCreateFlags flags;
-	uint32_t dynamicStateCount;
-	const E_dynamic_state * pDynamicStates;
-};
+static_assert(
+	sizeof(S_pipeline_color_blend_state_create_info) == sizeof(VkPipelineColorBlendStateCreateInfo),
+	"struct and wrapper have different size!");
+
 /*	VkPipelineDepthStencilStateCreateInfo
 */
 struct		S_pipeline_depth_stencil_state_create_info{
 private:
-	E_structure_type sType;
-	const void * pNext;
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_PIPELINE_DEPTH_STENCIL_STATE_CREATE_INFO;
+	const void * pNext = nullptr;
 public:
 	VkPipelineDepthStencilStateCreateFlags flags;
 	VkBool32 depthTestEnable;
@@ -5594,7 +11316,20 @@ public:
 	S_stencil_op_state back;
 	float minDepthBounds;
 	float maxDepthBounds;
+S_pipeline_depth_stencil_state_create_info( VkPipelineDepthStencilStateCreateInfo const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_pipeline_depth_stencil_state_create_info ) );	}
+S_pipeline_depth_stencil_state_create_info& operator=( VkPipelineDepthStencilStateCreateInfo const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_pipeline_depth_stencil_state_create_info ) ); return *this;	}
+operator VkPipelineDepthStencilStateCreateInfo const&() const 
+	{	return *reinterpret_cast<const VkPipelineDepthStencilStateCreateInfo*>(this);	}
+operator VkPipelineDepthStencilStateCreateInfo &() 
+	{	return *reinterpret_cast<VkPipelineDepthStencilStateCreateInfo*>(this);	}
+
 };
+static_assert(
+	sizeof(S_pipeline_depth_stencil_state_create_info) == sizeof(VkPipelineDepthStencilStateCreateInfo),
+	"struct and wrapper have different size!");
+
 /*	VkGraphicsPipelineCreateInfo
 ex:
 	VkPipelineDiscardRectangleStateCreateInfoEXT
@@ -5602,8 +11337,9 @@ ex:
 */
 struct		S_graphics_pipeline_create_info{
 private:
-	E_structure_type sType;
-	const void * pNext;
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_GRAPHICS_PIPELINE_CREATE_INFO;
+	const void * pNext = nullptr;
 public:
 	F_pipeline_create flags;
 	uint32_t stageCount;
@@ -5622,107 +11358,73 @@ public:
 	uint32_t subpass;
 	VkPipeline basePipelineHandle;
 	int32_t basePipelineIndex;
+S_graphics_pipeline_create_info( VkGraphicsPipelineCreateInfo const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_graphics_pipeline_create_info ) );	}
+S_graphics_pipeline_create_info& operator=( VkGraphicsPipelineCreateInfo const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_graphics_pipeline_create_info ) ); return *this;	}
+operator VkGraphicsPipelineCreateInfo const&() const 
+	{	return *reinterpret_cast<const VkGraphicsPipelineCreateInfo*>(this);	}
+operator VkGraphicsPipelineCreateInfo &() 
+	{	return *reinterpret_cast<VkGraphicsPipelineCreateInfo*>(this);	}
+
 };
-/*	VkPipelineCacheCreateInfo
-*/
-struct		S_pipeline_cache_create_info{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	VkPipelineCacheCreateFlags flags;
-	size_t initialDataSize;
-	const void * pInitialData;
-};
+static_assert(
+	sizeof(S_graphics_pipeline_create_info) == sizeof(VkGraphicsPipelineCreateInfo),
+	"struct and wrapper have different size!");
+
 /*	VkPipelineLayoutCreateInfo
 */
 struct		S_pipeline_layout_create_info{
 private:
-	E_structure_type sType;
-	const void * pNext;
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_PIPELINE_LAYOUT_CREATE_INFO;
+	const void * pNext = nullptr;
 public:
 	VkPipelineLayoutCreateFlags flags;
 	uint32_t setLayoutCount;
 	const VkDescriptorSetLayout * pSetLayouts;
 	uint32_t pushConstantRangeCount;
 	const S_push_constant_range * pPushConstantRanges;
+S_pipeline_layout_create_info( VkPipelineLayoutCreateInfo const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_pipeline_layout_create_info ) );	}
+S_pipeline_layout_create_info& operator=( VkPipelineLayoutCreateInfo const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_pipeline_layout_create_info ) ); return *this;	}
+operator VkPipelineLayoutCreateInfo const&() const 
+	{	return *reinterpret_cast<const VkPipelineLayoutCreateInfo*>(this);	}
+operator VkPipelineLayoutCreateInfo &() 
+	{	return *reinterpret_cast<VkPipelineLayoutCreateInfo*>(this);	}
+
 };
-/*	VkSamplerCreateInfo
-ex:
-	VkSamplerYcbcrConversionInfo
-	VkSamplerReductionModeCreateInfoEXT
-*/
-struct		S_sampler_create_info{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	VkSamplerCreateFlags flags;
-	E_filter magFilter;
-	E_filter minFilter;
-	E_sampler_mipmap_mode mipmapMode;
-	E_sampler_address_mode addressModeU;
-	E_sampler_address_mode addressModeV;
-	E_sampler_address_mode addressModeW;
-	float mipLodBias;
-	VkBool32 anisotropyEnable;
-	float maxAnisotropy;
-	VkBool32 compareEnable;
-	E_compare_op compareOp;
-	float minLod;
-	float maxLod;
-	E_border_color borderColor;
-	VkBool32 unnormalizedCoordinates;
-};
-/*	VkCommandPoolCreateInfo
-*/
-struct		S_command_pool_create_info{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	F_command_pool_create flags;
-	uint32_t queueFamilyIndex;
-};
-/*	VkCommandBufferAllocateInfo
-*/
-struct		S_command_buffer_allocate_info{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	VkCommandPool commandPool;
-	E_command_buffer_level level;
-	uint32_t commandBufferCount;
-};
-/*	VkCommandBufferInheritanceInfo
-ex:
-	VkCommandBufferInheritanceConditionalRenderingInfoEXT
-*/
-struct		S_command_buffer_inheritance_info{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	VkRenderPass renderPass;
-	uint32_t subpass;
-	VkFramebuffer framebuffer;
-	VkBool32 occlusionQueryEnable;
-	F_query_control queryFlags;
-	F_query_pipeline_statistic pipelineStatistics;
-};
+static_assert(
+	sizeof(S_pipeline_layout_create_info) == sizeof(VkPipelineLayoutCreateInfo),
+	"struct and wrapper have different size!");
+
 /*	VkCommandBufferBeginInfo
 ex:
 	VkDeviceGroupCommandBufferBeginInfo
 */
 struct		S_command_buffer_begin_info{
 private:
-	E_structure_type sType;
-	const void * pNext;
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO;
+	const void * pNext = nullptr;
 public:
 	F_command_buffer_usage flags;
 	const S_command_buffer_inheritance_info * pInheritanceInfo;
+S_command_buffer_begin_info( VkCommandBufferBeginInfo const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_command_buffer_begin_info ) );	}
+S_command_buffer_begin_info& operator=( VkCommandBufferBeginInfo const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_command_buffer_begin_info ) ); return *this;	}
+operator VkCommandBufferBeginInfo const&() const 
+	{	return *reinterpret_cast<const VkCommandBufferBeginInfo*>(this);	}
+operator VkCommandBufferBeginInfo &() 
+	{	return *reinterpret_cast<VkCommandBufferBeginInfo*>(this);	}
+
 };
+static_assert(
+	sizeof(S_command_buffer_begin_info) == sizeof(VkCommandBufferBeginInfo),
+	"struct and wrapper have different size!");
+
 /*	VkRenderPassBeginInfo
 ex:
 	VkDeviceGroupRenderPassBeginInfo
@@ -5730,15 +11432,29 @@ ex:
 */
 struct		S_render_pass_begin_info{
 private:
-	E_structure_type sType;
-	const void * pNext;
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO;
+	const void * pNext = nullptr;
 public:
 	VkRenderPass renderPass;
 	VkFramebuffer framebuffer;
 	S_rect_2d renderArea;
 	uint32_t clearValueCount;
 	const VkClearValue * pClearValues;
+S_render_pass_begin_info( VkRenderPassBeginInfo const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_render_pass_begin_info ) );	}
+S_render_pass_begin_info& operator=( VkRenderPassBeginInfo const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_render_pass_begin_info ) ); return *this;	}
+operator VkRenderPassBeginInfo const&() const 
+	{	return *reinterpret_cast<const VkRenderPassBeginInfo*>(this);	}
+operator VkRenderPassBeginInfo &() 
+	{	return *reinterpret_cast<VkRenderPassBeginInfo*>(this);	}
+
 };
+static_assert(
+	sizeof(S_render_pass_begin_info) == sizeof(VkRenderPassBeginInfo),
+	"struct and wrapper have different size!");
+
 /*	VkSubpassDescription
 */
 struct		S_subpass_description{
@@ -5753,6 +11469,7 @@ struct		S_subpass_description{
 	uint32_t preserveAttachmentCount;
 	const uint32_t * pPreserveAttachments;
 };
+
 /*	VkRenderPassCreateInfo
 ex:
 	VkRenderPassMultiviewCreateInfo
@@ -5760,8 +11477,9 @@ ex:
 */
 struct		S_render_pass_create_info{
 private:
-	E_structure_type sType;
-	const void * pNext;
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_RENDER_PASS_CREATE_INFO;
+	const void * pNext = nullptr;
 public:
 	F_render_pass_create flags;
 	uint32_t attachmentCount;
@@ -5770,88 +11488,20 @@ public:
 	const S_subpass_description * pSubpasses;
 	uint32_t dependencyCount;
 	const S_subpass_dependency * pDependencies;
+S_render_pass_create_info( VkRenderPassCreateInfo const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_render_pass_create_info ) );	}
+S_render_pass_create_info& operator=( VkRenderPassCreateInfo const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_render_pass_create_info ) ); return *this;	}
+operator VkRenderPassCreateInfo const&() const 
+	{	return *reinterpret_cast<const VkRenderPassCreateInfo*>(this);	}
+operator VkRenderPassCreateInfo &() 
+	{	return *reinterpret_cast<VkRenderPassCreateInfo*>(this);	}
+
 };
-/*	VkEventCreateInfo
-*/
-struct		S_event_create_info{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	VkEventCreateFlags flags;
-};
-/*	VkFenceCreateInfo
-ex:
-	VkExportFenceCreateInfo
-	VkExportFenceWin32HandleInfoKHR
-*/
-struct		S_fence_create_info{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	F_fence_create flags;
-};
-/*	VkSemaphoreCreateInfo
-ex:
-	VkExportSemaphoreCreateInfo
-	VkExportSemaphoreWin32HandleInfoKHR
-*/
-struct		S_semaphore_create_info{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	VkSemaphoreCreateFlags flags;
-};
-/*	VkQueryPoolCreateInfo
-*/
-struct		S_query_pool_create_info{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	VkQueryPoolCreateFlags flags;
-	E_query_type queryType;
-	uint32_t queryCount;
-	F_query_pipeline_statistic pipelineStatistics;
-};
-/*	VkFramebufferCreateInfo
-*/
-struct		S_framebuffer_create_info{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	VkFramebufferCreateFlags flags;
-	VkRenderPass renderPass;
-	uint32_t attachmentCount;
-	const VkImageView * pAttachments;
-	uint32_t width;
-	uint32_t height;
-	uint32_t layers;
-};
-/*	VkSubmitInfo
-ex:
-	VkWin32KeyedMutexAcquireReleaseInfoNV
-	VkWin32KeyedMutexAcquireReleaseInfoKHR
-	VkD3D12FenceSubmitInfoKHR
-	VkDeviceGroupSubmitInfo
-	VkProtectedSubmitInfo
-*/
-struct		S_submit_info{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	uint32_t waitSemaphoreCount;
-	const VkSemaphore * pWaitSemaphores;
-	const F_pipeline_stage * pWaitDstStageMask;
-	uint32_t commandBufferCount;
-	const VkCommandBuffer * pCommandBuffers;
-	uint32_t signalSemaphoreCount;
-	const VkSemaphore * pSignalSemaphores;
-};
+static_assert(
+	sizeof(S_render_pass_create_info) == sizeof(VkRenderPassCreateInfo),
+	"struct and wrapper have different size!");
+
 /*	VkDisplayPropertiesKHR
 (returnedonly)
 */
@@ -5864,12 +11514,14 @@ struct		S_display_properties_KHR{
 	VkBool32 planeReorderPossible;
 	VkBool32 persistentContent;
 };
+
 /*	VkDisplayModeParametersKHR
 */
 struct		S_display_mode_parameters_KHR{
 	S_extent_2d visibleRegion;
 	uint32_t refreshRate;
 };
+
 /*	VkDisplayModePropertiesKHR
 (returnedonly)
 */
@@ -5877,16 +11529,31 @@ struct		S_display_mode_properties_KHR{
 	VkDisplayModeKHR displayMode;
 	S_display_mode_parameters_KHR parameters;
 };
+
 /*	VkDisplayModeCreateInfoKHR
 */
 struct		S_display_mode_create_info_KHR{
 private:
-	E_structure_type sType;
-	const void * pNext;
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_DISPLAY_MODE_CREATE_INFO_KHR;
+	const void * pNext = nullptr;
 public:
 	VkDisplayModeCreateFlagsKHR flags;
 	S_display_mode_parameters_KHR parameters;
+S_display_mode_create_info_KHR( VkDisplayModeCreateInfoKHR const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_display_mode_create_info_KHR ) );	}
+S_display_mode_create_info_KHR& operator=( VkDisplayModeCreateInfoKHR const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_display_mode_create_info_KHR ) ); return *this;	}
+operator VkDisplayModeCreateInfoKHR const&() const 
+	{	return *reinterpret_cast<const VkDisplayModeCreateInfoKHR*>(this);	}
+operator VkDisplayModeCreateInfoKHR &() 
+	{	return *reinterpret_cast<VkDisplayModeCreateInfoKHR*>(this);	}
+
 };
+static_assert(
+	sizeof(S_display_mode_create_info_KHR) == sizeof(VkDisplayModeCreateInfoKHR),
+	"struct and wrapper have different size!");
+
 /*	VkDisplayPlaneCapabilitiesKHR
 (returnedonly)
 */
@@ -5901,12 +11568,14 @@ struct		S_display_plane_capabilities_KHR{
 	S_extent_2d minDstExtent;
 	S_extent_2d maxDstExtent;
 };
+
 /*	VkDisplaySurfaceCreateInfoKHR
 */
 struct		S_display_surface_create_info_KHR{
 private:
-	E_structure_type sType;
-	const void * pNext;
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_DISPLAY_SURFACE_CREATE_INFO_KHR;
+	const void * pNext = nullptr;
 public:
 	VkDisplaySurfaceCreateFlagsKHR flags;
 	VkDisplayModeKHR displayMode;
@@ -5916,19 +11585,46 @@ public:
 	float globalAlpha;
 	F_display_plane_alpha_KHR alphaMode;
 	S_extent_2d imageExtent;
+S_display_surface_create_info_KHR( VkDisplaySurfaceCreateInfoKHR const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_display_surface_create_info_KHR ) );	}
+S_display_surface_create_info_KHR& operator=( VkDisplaySurfaceCreateInfoKHR const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_display_surface_create_info_KHR ) ); return *this;	}
+operator VkDisplaySurfaceCreateInfoKHR const&() const 
+	{	return *reinterpret_cast<const VkDisplaySurfaceCreateInfoKHR*>(this);	}
+operator VkDisplaySurfaceCreateInfoKHR &() 
+	{	return *reinterpret_cast<VkDisplaySurfaceCreateInfoKHR*>(this);	}
+
 };
+static_assert(
+	sizeof(S_display_surface_create_info_KHR) == sizeof(VkDisplaySurfaceCreateInfoKHR),
+	"struct and wrapper have different size!");
+
 /*	VkDisplayPresentInfoKHR
 ex to: VkPresentInfoKHR
 */
 struct		S_display_present_info_KHR{
 private:
-	E_structure_type sType;
-	const void * pNext;
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_DISPLAY_PRESENT_INFO_KHR;
+	const void * pNext = nullptr;
 public:
 	S_rect_2d srcRect;
 	S_rect_2d dstRect;
 	VkBool32 persistent;
+S_display_present_info_KHR( VkDisplayPresentInfoKHR const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_display_present_info_KHR ) );	}
+S_display_present_info_KHR& operator=( VkDisplayPresentInfoKHR const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_display_present_info_KHR ) ); return *this;	}
+operator VkDisplayPresentInfoKHR const&() const 
+	{	return *reinterpret_cast<const VkDisplayPresentInfoKHR*>(this);	}
+operator VkDisplayPresentInfoKHR &() 
+	{	return *reinterpret_cast<VkDisplayPresentInfoKHR*>(this);	}
+
 };
+static_assert(
+	sizeof(S_display_present_info_KHR) == sizeof(VkDisplayPresentInfoKHR),
+	"struct and wrapper have different size!");
+
 /*	VkSurfaceCapabilitiesKHR
 (returnedonly)
 */
@@ -5944,95 +11640,7 @@ struct		S_surface_capabilities_KHR{
 	F_composite_alpha_KHR supportedCompositeAlpha;
 	F_image_usage supportedUsageFlags;
 };
-#ifdef VK_USE_PLATFORM_MACOS_MVK
-/*	VkAndroidSurfaceCreateInfoKHR
-*/
-struct		S_android_surface_create_info_KHR{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	VkAndroidSurfaceCreateFlagsKHR flags;
-	struct ANativeWindow * window;
-};
-#endif
-#ifdef VK_USE_PLATFORM_MACOS_MVK
-/*	VkMirSurfaceCreateInfoKHR
-*/
-struct		S_mir_surface_create_info_KHR{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	VkMirSurfaceCreateFlagsKHR flags;
-	MirConnection * connection;
-	MirSurface * mirSurface;
-};
-#endif
-#ifdef VK_USE_PLATFORM_MACOS_MVK
-/*	VkViSurfaceCreateInfoNN
-*/
-struct		S_vi_surface_create_info_NN{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	VkViSurfaceCreateFlagsNN flags;
-	void * window;
-};
-#endif
-#ifdef VK_USE_PLATFORM_MACOS_MVK
-/*	VkWaylandSurfaceCreateInfoKHR
-*/
-struct		S_wayland_surface_create_info_KHR{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	VkWaylandSurfaceCreateFlagsKHR flags;
-	struct wl_display * display;
-	struct wl_surface * surface;
-};
-#endif
-#ifdef VK_USE_PLATFORM_MACOS_MVK
-/*	VkWin32SurfaceCreateInfoKHR
-*/
-struct		S_win32_surface_create_info_KHR{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	VkWin32SurfaceCreateFlagsKHR flags;
-	HINSTANCE hinstance;
-	HWND hwnd;
-};
-#endif
-#ifdef VK_USE_PLATFORM_MACOS_MVK
-/*	VkXlibSurfaceCreateInfoKHR
-*/
-struct		S_xlib_surface_create_info_KHR{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	VkXlibSurfaceCreateFlagsKHR flags;
-	Display * dpy;
-	Window window;
-};
-#endif
-#ifdef VK_USE_PLATFORM_MACOS_MVK
-/*	VkXcbSurfaceCreateInfoKHR
-*/
-struct		S_xcb_surface_create_info_KHR{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	VkXcbSurfaceCreateFlagsKHR flags;
-	xcb_connection_t * connection;
-	xcb_window_t window;
-};
-#endif
+
 /*	VkSwapchainCreateInfoKHR
 ex:
 	VkSwapchainCounterCreateInfoEXT
@@ -6040,8 +11648,9 @@ ex:
 */
 struct		S_swapchain_create_info_KHR{
 private:
-	E_structure_type sType;
-	const void * pNext;
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_SWAPCHAIN_CREATE_INFO_KHR;
+	const void * pNext = nullptr;
 public:
 	F_swapchain_create_KHR flags;
 	VkSurfaceKHR surface;
@@ -6059,124 +11668,20 @@ public:
 	E_present_mode_KHR presentMode;
 	VkBool32 clipped;
 	VkSwapchainKHR oldSwapchain;
+S_swapchain_create_info_KHR( VkSwapchainCreateInfoKHR const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_swapchain_create_info_KHR ) );	}
+S_swapchain_create_info_KHR& operator=( VkSwapchainCreateInfoKHR const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_swapchain_create_info_KHR ) ); return *this;	}
+operator VkSwapchainCreateInfoKHR const&() const 
+	{	return *reinterpret_cast<const VkSwapchainCreateInfoKHR*>(this);	}
+operator VkSwapchainCreateInfoKHR &() 
+	{	return *reinterpret_cast<VkSwapchainCreateInfoKHR*>(this);	}
+
 };
-/*	VkPresentInfoKHR
-ex:
-	VkDisplayPresentInfoKHR
-	VkPresentRegionsKHR
-	VkDeviceGroupPresentInfoKHR
-	VkPresentTimesInfoGOOGLE
-*/
-struct		S_present_info_KHR{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	uint32_t waitSemaphoreCount;
-	const VkSemaphore * pWaitSemaphores;
-	uint32_t swapchainCount;
-	const VkSwapchainKHR * pSwapchains;
-	const uint32_t * pImageIndices;
-	E_result * pResults;
-};
-/*	VkDebugReportCallbackCreateInfoEXT
-ex to: VkInstanceCreateInfo
-*/
-struct		S_debug_report_callback_create_info_EXT{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	F_debug_report_EXT flags;
-	PFN_vkDebugReportCallbackEXT pfnCallback;
-	void * pUserData;
-};
-/*	VkValidationFlagsEXT
-ex to: VkInstanceCreateInfo
-*/
-struct		S_validation_flags_EXT{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	uint32_t disabledValidationCheckCount;
-	const E_validation_check_EXT * pDisabledValidationChecks;
-};
-/*	VkPipelineRasterizationStateRasterizationOrderAMD
-ex to: VkPipelineRasterizationStateCreateInfo
-*/
-struct		S_pipeline_rasterization_state_rasterization_order_AMD{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	E_rasterization_order_AMD rasterizationOrder;
-};
-/*	VkDebugMarkerObjectNameInfoEXT
-*/
-struct		S_debug_marker_object_name_info_EXT{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	E_debug_report_object_type_EXT objectType;
-	uint64_t object;
-	const char * pObjectName;
-};
-/*	VkDebugMarkerObjectTagInfoEXT
-*/
-struct		S_debug_marker_object_tag_info_EXT{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	E_debug_report_object_type_EXT objectType;
-	uint64_t object;
-	uint64_t tagName;
-	size_t tagSize;
-	const void * pTag;
-};
-/*	VkDebugMarkerMarkerInfoEXT
-*/
-struct		S_debug_marker_marker_info_EXT{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	const char * pMarkerName;
-	float color[4];
-};
-/*	VkDedicatedAllocationImageCreateInfoNV
-ex to: VkImageCreateInfo
-*/
-struct		S_dedicated_allocation_image_create_info_NV{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	VkBool32 dedicatedAllocation;
-};
-/*	VkDedicatedAllocationBufferCreateInfoNV
-ex to: VkBufferCreateInfo
-*/
-struct		S_dedicated_allocation_buffer_create_info_NV{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	VkBool32 dedicatedAllocation;
-};
-/*	VkDedicatedAllocationMemoryAllocateInfoNV
-ex to: VkMemoryAllocateInfo
-*/
-struct		S_dedicated_allocation_memory_allocate_info_NV{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	VkImage image;
-	VkBuffer buffer;
-};
+static_assert(
+	sizeof(S_swapchain_create_info_KHR) == sizeof(VkSwapchainCreateInfoKHR),
+	"struct and wrapper have different size!");
+
 /*	VkExternalImageFormatPropertiesNV
 (returnedonly)
 */
@@ -6186,106 +11691,40 @@ struct		S_external_image_format_properties_NV{
 	F_external_memory_handle_type_NV exportFromImportedHandleTypes;
 	F_external_memory_handle_type_NV compatibleHandleTypes;
 };
-/*	VkExternalMemoryImageCreateInfoNV
-ex to: VkImageCreateInfo
-*/
-struct		S_external_memory_image_create_info_NV{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	F_external_memory_handle_type_NV handleTypes;
-};
-/*	VkExportMemoryAllocateInfoNV
-ex to: VkMemoryAllocateInfo
-*/
-struct		S_export_memory_allocate_info_NV{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	F_external_memory_handle_type_NV handleTypes;
-};
-/*	VkImportMemoryWin32HandleInfoNV
-ex to: VkMemoryAllocateInfo
-*/
-struct		S_import_memory_win32_handle_info_NV{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	F_external_memory_handle_type_NV handleType;
-	HANDLE handle;
-};
-/*	VkExportMemoryWin32HandleInfoNV
-ex to: VkMemoryAllocateInfo
-*/
-struct		S_export_memory_win32_handle_info_NV{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	const SECURITY_ATTRIBUTES * pAttributes;
-	DWORD dwAccess;
-};
-#ifdef VK_USE_PLATFORM_MACOS_MVK
-/*	VkWin32KeyedMutexAcquireReleaseInfoNV
-ex to: VkSubmitInfo
-*/
-struct		S_win32_keyed_mutex_acquire_release_info_NV{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	uint32_t acquireCount;
-	const VkDeviceMemory * pAcquireSyncs;
-	const uint64_t * pAcquireKeys;
-	const uint32_t * pAcquireTimeoutMilliseconds;
-	uint32_t releaseCount;
-	const VkDeviceMemory * pReleaseSyncs;
-	const uint64_t * pReleaseKeys;
-};
-#endif
-/*	VkDeviceGeneratedCommandsFeaturesNVX
-*/
-struct		S_device_generated_commands_features_NVX{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	VkBool32 computeBindingPointSupport;
-};
-/*	VkDeviceGeneratedCommandsLimitsNVX
-*/
-struct		S_device_generated_commands_limits_NVX{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	uint32_t maxIndirectCommandsLayoutTokenCount;
-	uint32_t maxObjectEntryCounts;
-	uint32_t minSequenceCountBufferOffsetAlignment;
-	uint32_t minSequenceIndexBufferOffsetAlignment;
-	uint32_t minCommandsTokenBufferOffsetAlignment;
-};
+
 /*	VkIndirectCommandsLayoutCreateInfoNVX
 */
 struct		S_indirect_commands_layout_create_info_NVX{
 private:
-	E_structure_type sType;
-	const void * pNext;
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_INDIRECT_COMMANDS_LAYOUT_CREATE_INFO_NVX;
+	const void * pNext = nullptr;
 public:
 	E_pipeline_bind_point pipelineBindPoint;
 	F_indirect_commands_layout_usage_NVX flags;
 	uint32_t tokenCount;
 	const S_indirect_commands_layout_token_NVX * pTokens;
+S_indirect_commands_layout_create_info_NVX( VkIndirectCommandsLayoutCreateInfoNVX const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_indirect_commands_layout_create_info_NVX ) );	}
+S_indirect_commands_layout_create_info_NVX& operator=( VkIndirectCommandsLayoutCreateInfoNVX const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_indirect_commands_layout_create_info_NVX ) ); return *this;	}
+operator VkIndirectCommandsLayoutCreateInfoNVX const&() const 
+	{	return *reinterpret_cast<const VkIndirectCommandsLayoutCreateInfoNVX*>(this);	}
+operator VkIndirectCommandsLayoutCreateInfoNVX &() 
+	{	return *reinterpret_cast<VkIndirectCommandsLayoutCreateInfoNVX*>(this);	}
+
 };
+static_assert(
+	sizeof(S_indirect_commands_layout_create_info_NVX) == sizeof(VkIndirectCommandsLayoutCreateInfoNVX),
+	"struct and wrapper have different size!");
+
 /*	VkCmdProcessCommandsInfoNVX
 */
 struct		S_cmd_process_commands_info_NVX{
 private:
-	E_structure_type sType;
-	const void * pNext;
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_CMD_PROCESS_COMMANDS_INFO_NVX;
+	const void * pNext = nullptr;
 public:
 	VkObjectTableNVX objectTable;
 	VkIndirectCommandsLayoutNVX indirectCommandsLayout;
@@ -6297,35 +11736,20 @@ public:
 	VkDeviceSize sequencesCountOffset;
 	VkBuffer sequencesIndexBuffer;
 	VkDeviceSize sequencesIndexOffset;
+S_cmd_process_commands_info_NVX( VkCmdProcessCommandsInfoNVX const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_cmd_process_commands_info_NVX ) );	}
+S_cmd_process_commands_info_NVX& operator=( VkCmdProcessCommandsInfoNVX const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_cmd_process_commands_info_NVX ) ); return *this;	}
+operator VkCmdProcessCommandsInfoNVX const&() const 
+	{	return *reinterpret_cast<const VkCmdProcessCommandsInfoNVX*>(this);	}
+operator VkCmdProcessCommandsInfoNVX &() 
+	{	return *reinterpret_cast<VkCmdProcessCommandsInfoNVX*>(this);	}
+
 };
-/*	VkCmdReserveSpaceForCommandsInfoNVX
-*/
-struct		S_cmd_reserve_space_for_commands_info_NVX{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	VkObjectTableNVX objectTable;
-	VkIndirectCommandsLayoutNVX indirectCommandsLayout;
-	uint32_t maxSequencesCount;
-};
-/*	VkObjectTableCreateInfoNVX
-*/
-struct		S_object_table_create_info_NVX{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	uint32_t objectCount;
-	const E_object_entry_type_NVX * pObjectEntryTypes;
-	const uint32_t * pObjectEntryCounts;
-	const F_object_entry_usage_NVX * pObjectEntryUsageFlags;
-	uint32_t maxUniformBuffersPerDescriptor;
-	uint32_t maxStorageBuffersPerDescriptor;
-	uint32_t maxStorageImagesPerDescriptor;
-	uint32_t maxSampledImagesPerDescriptor;
-	uint32_t maxPipelineLayouts;
-};
+static_assert(
+	sizeof(S_cmd_process_commands_info_NVX) == sizeof(VkCmdProcessCommandsInfoNVX),
+	"struct and wrapper have different size!");
+
 /*	VkPhysicalDeviceFeatures2
 ex to: VkDeviceCreateInfo
 ex:
@@ -6355,11 +11779,25 @@ ex:
 */
 struct		S_physical_device_features2{
 private:
-	E_structure_type sType;
-	void * pNext;
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FEATURES_2;
+	void * pNext = nullptr;
 public:
 	S_physical_device_features features;
+S_physical_device_features2( VkPhysicalDeviceFeatures2 const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_physical_device_features2 ) );	}
+S_physical_device_features2& operator=( VkPhysicalDeviceFeatures2 const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_physical_device_features2 ) ); return *this;	}
+operator VkPhysicalDeviceFeatures2 const&() const 
+	{	return *reinterpret_cast<const VkPhysicalDeviceFeatures2*>(this);	}
+operator VkPhysicalDeviceFeatures2 &() 
+	{	return *reinterpret_cast<VkPhysicalDeviceFeatures2*>(this);	}
+
 };
+static_assert(
+	sizeof(S_physical_device_features2) == sizeof(VkPhysicalDeviceFeatures2),
+	"struct and wrapper have different size!");
+
 /*	VkPhysicalDeviceProperties2
 (returnedonly)
 ex:
@@ -6387,11 +11825,25 @@ ex:
 */
 struct		S_physical_device_properties2{
 private:
-	E_structure_type sType;
-	void * pNext;
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROPERTIES_2;
+	void * pNext = nullptr;
 public:
 	S_physical_device_properties properties;
+S_physical_device_properties2( VkPhysicalDeviceProperties2 const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_physical_device_properties2 ) );	}
+S_physical_device_properties2& operator=( VkPhysicalDeviceProperties2 const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_physical_device_properties2 ) ); return *this;	}
+operator VkPhysicalDeviceProperties2 const&() const 
+	{	return *reinterpret_cast<const VkPhysicalDeviceProperties2*>(this);	}
+operator VkPhysicalDeviceProperties2 &() 
+	{	return *reinterpret_cast<VkPhysicalDeviceProperties2*>(this);	}
+
 };
+static_assert(
+	sizeof(S_physical_device_properties2) == sizeof(VkPhysicalDeviceProperties2),
+	"struct and wrapper have different size!");
+
 /*	VkFormatProperties2
 (returnedonly)
 ex:
@@ -6399,11 +11851,25 @@ ex:
 */
 struct		S_format_properties2{
 private:
-	E_structure_type sType;
-	void * pNext;
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_FORMAT_PROPERTIES_2;
+	void * pNext = nullptr;
 public:
 	S_format_properties formatProperties;
+S_format_properties2( VkFormatProperties2 const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_format_properties2 ) );	}
+S_format_properties2& operator=( VkFormatProperties2 const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_format_properties2 ) ); return *this;	}
+operator VkFormatProperties2 const&() const 
+	{	return *reinterpret_cast<const VkFormatProperties2*>(this);	}
+operator VkFormatProperties2 &() 
+	{	return *reinterpret_cast<VkFormatProperties2*>(this);	}
+
 };
+static_assert(
+	sizeof(S_format_properties2) == sizeof(VkFormatProperties2),
+	"struct and wrapper have different size!");
+
 /*	VkImageFormatProperties2
 (returnedonly)
 ex:
@@ -6414,27 +11880,25 @@ ex:
 */
 struct		S_image_format_properties2{
 private:
-	E_structure_type sType;
-	void * pNext;
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_IMAGE_FORMAT_PROPERTIES_2;
+	void * pNext = nullptr;
 public:
 	S_image_format_properties imageFormatProperties;
+S_image_format_properties2( VkImageFormatProperties2 const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_image_format_properties2 ) );	}
+S_image_format_properties2& operator=( VkImageFormatProperties2 const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_image_format_properties2 ) ); return *this;	}
+operator VkImageFormatProperties2 const&() const 
+	{	return *reinterpret_cast<const VkImageFormatProperties2*>(this);	}
+operator VkImageFormatProperties2 &() 
+	{	return *reinterpret_cast<VkImageFormatProperties2*>(this);	}
+
 };
-/*	VkPhysicalDeviceImageFormatInfo2
-ex:
-	VkPhysicalDeviceExternalImageFormatInfo
-	VkPhysicalDeviceImageDrmFormatModifierInfoEXT
-*/
-struct		S_physical_device_image_format_info2{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	E_format format;
-	E_image_type type;
-	E_image_tiling tiling;
-	F_image_usage usage;
-	F_image_create flags;
-};
+static_assert(
+	sizeof(S_image_format_properties2) == sizeof(VkImageFormatProperties2),
+	"struct and wrapper have different size!");
+
 /*	VkQueueFamilyProperties2
 (returnedonly)
 ex:
@@ -6442,85 +11906,133 @@ ex:
 */
 struct		S_queue_family_properties2{
 private:
-	E_structure_type sType;
-	void * pNext;
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_QUEUE_FAMILY_PROPERTIES_2;
+	void * pNext = nullptr;
 public:
 	S_queue_family_properties queueFamilyProperties;
+S_queue_family_properties2( VkQueueFamilyProperties2 const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_queue_family_properties2 ) );	}
+S_queue_family_properties2& operator=( VkQueueFamilyProperties2 const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_queue_family_properties2 ) ); return *this;	}
+operator VkQueueFamilyProperties2 const&() const 
+	{	return *reinterpret_cast<const VkQueueFamilyProperties2*>(this);	}
+operator VkQueueFamilyProperties2 &() 
+	{	return *reinterpret_cast<VkQueueFamilyProperties2*>(this);	}
+
 };
+static_assert(
+	sizeof(S_queue_family_properties2) == sizeof(VkQueueFamilyProperties2),
+	"struct and wrapper have different size!");
+
 /*	VkPhysicalDeviceMemoryProperties2
 (returnedonly)
 */
 struct		S_physical_device_memory_properties2{
 private:
-	E_structure_type sType;
-	void * pNext;
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MEMORY_PROPERTIES_2;
+	void * pNext = nullptr;
 public:
 	S_physical_device_memory_properties memoryProperties;
+S_physical_device_memory_properties2( VkPhysicalDeviceMemoryProperties2 const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_physical_device_memory_properties2 ) );	}
+S_physical_device_memory_properties2& operator=( VkPhysicalDeviceMemoryProperties2 const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_physical_device_memory_properties2 ) ); return *this;	}
+operator VkPhysicalDeviceMemoryProperties2 const&() const 
+	{	return *reinterpret_cast<const VkPhysicalDeviceMemoryProperties2*>(this);	}
+operator VkPhysicalDeviceMemoryProperties2 &() 
+	{	return *reinterpret_cast<VkPhysicalDeviceMemoryProperties2*>(this);	}
+
 };
+static_assert(
+	sizeof(S_physical_device_memory_properties2) == sizeof(VkPhysicalDeviceMemoryProperties2),
+	"struct and wrapper have different size!");
+
 /*	VkSparseImageFormatProperties2
 (returnedonly)
 */
 struct		S_sparse_image_format_properties2{
 private:
-	E_structure_type sType;
-	void * pNext;
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_SPARSE_IMAGE_FORMAT_PROPERTIES_2;
+	void * pNext = nullptr;
 public:
 	S_sparse_image_format_properties properties;
+S_sparse_image_format_properties2( VkSparseImageFormatProperties2 const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_sparse_image_format_properties2 ) );	}
+S_sparse_image_format_properties2& operator=( VkSparseImageFormatProperties2 const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_sparse_image_format_properties2 ) ); return *this;	}
+operator VkSparseImageFormatProperties2 const&() const 
+	{	return *reinterpret_cast<const VkSparseImageFormatProperties2*>(this);	}
+operator VkSparseImageFormatProperties2 &() 
+	{	return *reinterpret_cast<VkSparseImageFormatProperties2*>(this);	}
+
 };
-/*	VkPhysicalDeviceSparseImageFormatInfo2
-*/
-struct		S_physical_device_sparse_image_format_info2{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	E_format format;
-	E_image_type type;
-	F_sample_count samples;
-	F_image_usage usage;
-	E_image_tiling tiling;
-};
-/*	VkPhysicalDevicePushDescriptorPropertiesKHR
-ex to: VkPhysicalDeviceProperties2
-*/
-struct		S_physical_device_push_descriptor_properties_KHR{
-private:
-	E_structure_type sType;
-	void * pNext;
-public:
-	uint32_t maxPushDescriptors;
-};
+static_assert(
+	sizeof(S_sparse_image_format_properties2) == sizeof(VkSparseImageFormatProperties2),
+	"struct and wrapper have different size!");
+
 /*	VkPhysicalDeviceDriverPropertiesKHR
 (returnedonly)
 ex to: VkPhysicalDeviceProperties2
 */
 struct		S_physical_device_driver_properties_KHR{
 private:
-	E_structure_type sType;
-	void * pNext;
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DRIVER_PROPERTIES_KHR;
+	void * pNext = nullptr;
 public:
 	uint32_t driverID;
 	char driverName[VK_MAX_DRIVER_NAME_SIZE_KHR];
 	char driverInfo[VK_MAX_DRIVER_INFO_SIZE_KHR];
 	S_conformance_version_KHR conformanceVersion;
+S_physical_device_driver_properties_KHR( VkPhysicalDeviceDriverPropertiesKHR const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_physical_device_driver_properties_KHR ) );	}
+S_physical_device_driver_properties_KHR& operator=( VkPhysicalDeviceDriverPropertiesKHR const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_physical_device_driver_properties_KHR ) ); return *this;	}
+operator VkPhysicalDeviceDriverPropertiesKHR const&() const 
+	{	return *reinterpret_cast<const VkPhysicalDeviceDriverPropertiesKHR*>(this);	}
+operator VkPhysicalDeviceDriverPropertiesKHR &() 
+	{	return *reinterpret_cast<VkPhysicalDeviceDriverPropertiesKHR*>(this);	}
+
 };
+static_assert(
+	sizeof(S_physical_device_driver_properties_KHR) == sizeof(VkPhysicalDeviceDriverPropertiesKHR),
+	"struct and wrapper have different size!");
+
 /*	VkPresentRegionsKHR
 ex to: VkPresentInfoKHR
 */
 struct		S_present_regions_KHR{
 private:
-	E_structure_type sType;
-	const void * pNext;
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_PRESENT_REGIONS_KHR;
+	const void * pNext = nullptr;
 public:
 	uint32_t swapchainCount;
 	const S_present_region_KHR * pRegions;
+S_present_regions_KHR( VkPresentRegionsKHR const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_present_regions_KHR ) );	}
+S_present_regions_KHR& operator=( VkPresentRegionsKHR const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_present_regions_KHR ) ); return *this;	}
+operator VkPresentRegionsKHR const&() const 
+	{	return *reinterpret_cast<const VkPresentRegionsKHR*>(this);	}
+operator VkPresentRegionsKHR &() 
+	{	return *reinterpret_cast<VkPresentRegionsKHR*>(this);	}
+
 };
+static_assert(
+	sizeof(S_present_regions_KHR) == sizeof(VkPresentRegionsKHR),
+	"struct and wrapper have different size!");
+
 /*	VkPresentRegionKHR
 */
 struct		S_present_region_KHR{
 	uint32_t rectangleCount;
 	const S_rect_layer_KHR * pRectangles;
 };
+
 /*	VkRectLayerKHR
 */
 struct		S_rect_layer_KHR{
@@ -6528,432 +12040,64 @@ struct		S_rect_layer_KHR{
 	S_extent_2d extent;
 	uint32_t layer;
 };
-/*	VkPhysicalDeviceVariablePointerFeatures
-ex to: VkPhysicalDeviceFeatures2,VkDeviceCreateInfo
-*/
-struct		S_physical_device_variable_pointer_features{
-private:
-	E_structure_type sType;
-	void * pNext;
-public:
-	VkBool32 variablePointersStorageBuffer;
-	VkBool32 variablePointers;
-};
-/*	VkPhysicalDeviceExternalImageFormatInfo
-ex to: VkPhysicalDeviceImageFormatInfo2
-*/
-struct		S_physical_device_external_image_format_info{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	F_external_memory_handle_type handleType;
-};
+
 /*	VkExternalImageFormatProperties
 (returnedonly)
 ex to: VkImageFormatProperties2
 */
 struct		S_external_image_format_properties{
 private:
-	E_structure_type sType;
-	void * pNext;
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_EXTERNAL_IMAGE_FORMAT_PROPERTIES;
+	void * pNext = nullptr;
 public:
 	S_external_memory_properties externalMemoryProperties;
+S_external_image_format_properties( VkExternalImageFormatProperties const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_external_image_format_properties ) );	}
+S_external_image_format_properties& operator=( VkExternalImageFormatProperties const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_external_image_format_properties ) ); return *this;	}
+operator VkExternalImageFormatProperties const&() const 
+	{	return *reinterpret_cast<const VkExternalImageFormatProperties*>(this);	}
+operator VkExternalImageFormatProperties &() 
+	{	return *reinterpret_cast<VkExternalImageFormatProperties*>(this);	}
+
 };
-/*	VkPhysicalDeviceExternalBufferInfo
-*/
-struct		S_physical_device_external_buffer_info{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	F_buffer_create flags;
-	F_buffer_usage usage;
-	F_external_memory_handle_type handleType;
-};
+static_assert(
+	sizeof(S_external_image_format_properties) == sizeof(VkExternalImageFormatProperties),
+	"struct and wrapper have different size!");
+
 /*	VkExternalBufferProperties
 (returnedonly)
 */
 struct		S_external_buffer_properties{
 private:
-	E_structure_type sType;
-	void * pNext;
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_EXTERNAL_BUFFER_PROPERTIES;
+	void * pNext = nullptr;
 public:
 	S_external_memory_properties externalMemoryProperties;
+S_external_buffer_properties( VkExternalBufferProperties const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_external_buffer_properties ) );	}
+S_external_buffer_properties& operator=( VkExternalBufferProperties const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_external_buffer_properties ) ); return *this;	}
+operator VkExternalBufferProperties const&() const 
+	{	return *reinterpret_cast<const VkExternalBufferProperties*>(this);	}
+operator VkExternalBufferProperties &() 
+	{	return *reinterpret_cast<VkExternalBufferProperties*>(this);	}
+
 };
-/*	VkPhysicalDeviceIDProperties
-(returnedonly)
-ex to: VkPhysicalDeviceProperties2
-*/
-struct		S_physical_device_id_properties{
-private:
-	E_structure_type sType;
-	void * pNext;
-public:
-	uint8_t deviceUUID[VK_UUID_SIZE];
-	uint8_t driverUUID[VK_UUID_SIZE];
-	uint8_t deviceLUID[VK_LUID_SIZE];
-	uint32_t deviceNodeMask;
-	VkBool32 deviceLUIDValid;
-};
-/*	VkExternalMemoryImageCreateInfo
-ex to: VkImageCreateInfo
-*/
-struct		S_external_memory_image_create_info{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	F_external_memory_handle_type handleTypes;
-};
-/*	VkExternalMemoryBufferCreateInfo
-ex to: VkBufferCreateInfo
-*/
-struct		S_external_memory_buffer_create_info{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	F_external_memory_handle_type handleTypes;
-};
-/*	VkExportMemoryAllocateInfo
-ex to: VkMemoryAllocateInfo
-*/
-struct		S_export_memory_allocate_info{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	F_external_memory_handle_type handleTypes;
-};
-/*	VkImportMemoryWin32HandleInfoKHR
-ex to: VkMemoryAllocateInfo
-*/
-struct		S_import_memory_win32_handle_info_KHR{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	F_external_memory_handle_type handleType;
-	HANDLE handle;
-	LPCWSTR name;
-};
-/*	VkExportMemoryWin32HandleInfoKHR
-ex to: VkMemoryAllocateInfo
-*/
-struct		S_export_memory_win32_handle_info_KHR{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	const SECURITY_ATTRIBUTES * pAttributes;
-	DWORD dwAccess;
-	LPCWSTR name;
-};
-/*	VkMemoryWin32HandlePropertiesKHR
-(returnedonly)
-*/
-struct		S_memory_win32_handle_properties_KHR{
-private:
-	E_structure_type sType;
-	void * pNext;
-public:
-	uint32_t memoryTypeBits;
-};
-/*	VkMemoryGetWin32HandleInfoKHR
-*/
-struct		S_memory_get_win32_handle_info_KHR{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	VkDeviceMemory memory;
-	F_external_memory_handle_type handleType;
-};
-/*	VkImportMemoryFdInfoKHR
-ex to: VkMemoryAllocateInfo
-*/
-struct		S_import_memory_fd_info_KHR{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	F_external_memory_handle_type handleType;
-	int fd;
-};
-/*	VkMemoryFdPropertiesKHR
-(returnedonly)
-*/
-struct		S_memory_fd_properties_KHR{
-private:
-	E_structure_type sType;
-	void * pNext;
-public:
-	uint32_t memoryTypeBits;
-};
-/*	VkMemoryGetFdInfoKHR
-*/
-struct		S_memory_get_fd_info_KHR{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	VkDeviceMemory memory;
-	F_external_memory_handle_type handleType;
-};
-#ifdef VK_USE_PLATFORM_MACOS_MVK
-/*	VkWin32KeyedMutexAcquireReleaseInfoKHR
-ex to: VkSubmitInfo
-*/
-struct		S_win32_keyed_mutex_acquire_release_info_KHR{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	uint32_t acquireCount;
-	const VkDeviceMemory * pAcquireSyncs;
-	const uint64_t * pAcquireKeys;
-	const uint32_t * pAcquireTimeouts;
-	uint32_t releaseCount;
-	const VkDeviceMemory * pReleaseSyncs;
-	const uint64_t * pReleaseKeys;
-};
-#endif
-/*	VkPhysicalDeviceExternalSemaphoreInfo
-*/
-struct		S_physical_device_external_semaphore_info{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	F_external_semaphore_handle_type handleType;
-};
-/*	VkExternalSemaphoreProperties
-(returnedonly)
-*/
-struct		S_external_semaphore_properties{
-private:
-	E_structure_type sType;
-	void * pNext;
-public:
-	F_external_semaphore_handle_type exportFromImportedHandleTypes;
-	F_external_semaphore_handle_type compatibleHandleTypes;
-	F_external_semaphore_feature externalSemaphoreFeatures;
-};
-/*	VkExportSemaphoreCreateInfo
-ex to: VkSemaphoreCreateInfo
-*/
-struct		S_export_semaphore_create_info{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	F_external_semaphore_handle_type handleTypes;
-};
-/*	VkImportSemaphoreWin32HandleInfoKHR
-*/
-struct		S_import_semaphore_win32_handle_info_KHR{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	VkSemaphore semaphore;
-	F_semaphore_import flags;
-	F_external_semaphore_handle_type handleType;
-	HANDLE handle;
-	LPCWSTR name;
-};
-/*	VkExportSemaphoreWin32HandleInfoKHR
-ex to: VkSemaphoreCreateInfo
-*/
-struct		S_export_semaphore_win32_handle_info_KHR{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	const SECURITY_ATTRIBUTES * pAttributes;
-	DWORD dwAccess;
-	LPCWSTR name;
-};
-/*	VkD3D12FenceSubmitInfoKHR
-ex to: VkSubmitInfo
-*/
-struct		S_d_3d12_fence_submit_info_KHR{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	uint32_t waitSemaphoreValuesCount;
-	const uint64_t * pWaitSemaphoreValues;
-	uint32_t signalSemaphoreValuesCount;
-	const uint64_t * pSignalSemaphoreValues;
-};
-/*	VkSemaphoreGetWin32HandleInfoKHR
-*/
-struct		S_semaphore_get_win32_handle_info_KHR{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	VkSemaphore semaphore;
-	F_external_semaphore_handle_type handleType;
-};
-/*	VkImportSemaphoreFdInfoKHR
-*/
-struct		S_import_semaphore_fd_info_KHR{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	VkSemaphore semaphore;
-	F_semaphore_import flags;
-	F_external_semaphore_handle_type handleType;
-	int fd;
-};
-/*	VkSemaphoreGetFdInfoKHR
-*/
-struct		S_semaphore_get_fd_info_KHR{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	VkSemaphore semaphore;
-	F_external_semaphore_handle_type handleType;
-};
-/*	VkPhysicalDeviceExternalFenceInfo
-*/
-struct		S_physical_device_external_fence_info{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	F_external_fence_handle_type handleType;
-};
-/*	VkExternalFenceProperties
-(returnedonly)
-*/
-struct		S_external_fence_properties{
-private:
-	E_structure_type sType;
-	void * pNext;
-public:
-	F_external_fence_handle_type exportFromImportedHandleTypes;
-	F_external_fence_handle_type compatibleHandleTypes;
-	F_external_fence_feature externalFenceFeatures;
-};
-/*	VkExportFenceCreateInfo
-ex to: VkFenceCreateInfo
-*/
-struct		S_export_fence_create_info{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	F_external_fence_handle_type handleTypes;
-};
-/*	VkImportFenceWin32HandleInfoKHR
-*/
-struct		S_import_fence_win32_handle_info_KHR{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	VkFence fence;
-	F_fence_import flags;
-	F_external_fence_handle_type handleType;
-	HANDLE handle;
-	LPCWSTR name;
-};
-/*	VkExportFenceWin32HandleInfoKHR
-ex to: VkFenceCreateInfo
-*/
-struct		S_export_fence_win32_handle_info_KHR{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	const SECURITY_ATTRIBUTES * pAttributes;
-	DWORD dwAccess;
-	LPCWSTR name;
-};
-/*	VkFenceGetWin32HandleInfoKHR
-*/
-struct		S_fence_get_win32_handle_info_KHR{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	VkFence fence;
-	F_external_fence_handle_type handleType;
-};
-/*	VkImportFenceFdInfoKHR
-*/
-struct		S_import_fence_fd_info_KHR{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	VkFence fence;
-	F_fence_import flags;
-	F_external_fence_handle_type handleType;
-	int fd;
-};
-/*	VkFenceGetFdInfoKHR
-*/
-struct		S_fence_get_fd_info_KHR{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	VkFence fence;
-	F_external_fence_handle_type handleType;
-};
-/*	VkPhysicalDeviceMultiviewFeatures
-ex to: VkPhysicalDeviceFeatures2,VkDeviceCreateInfo
-*/
-struct		S_physical_device_multiview_features{
-private:
-	E_structure_type sType;
-	void * pNext;
-public:
-	VkBool32 multiview;
-	VkBool32 multiviewGeometryShader;
-	VkBool32 multiviewTessellationShader;
-};
-/*	VkPhysicalDeviceMultiviewProperties
-(returnedonly)
-ex to: VkPhysicalDeviceProperties2
-*/
-struct		S_physical_device_multiview_properties{
-private:
-	E_structure_type sType;
-	void * pNext;
-public:
-	uint32_t maxMultiviewViewCount;
-	uint32_t maxMultiviewInstanceIndex;
-};
-/*	VkRenderPassMultiviewCreateInfo
-ex to: VkRenderPassCreateInfo
-*/
-struct		S_render_pass_multiview_create_info{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	uint32_t subpassCount;
-	const uint32_t * pViewMasks;
-	uint32_t dependencyCount;
-	const int32_t * pViewOffsets;
-	uint32_t correlationMaskCount;
-	const uint32_t * pCorrelationMasks;
-};
+static_assert(
+	sizeof(S_external_buffer_properties) == sizeof(VkExternalBufferProperties),
+	"struct and wrapper have different size!");
+
 /*	VkSurfaceCapabilities2EXT
 (returnedonly)
 */
 struct		S_surface_capabilities2_EXT{
 private:
-	E_structure_type sType;
-	void * pNext;
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_SURFACE_CAPABILITIES_2_EXT;
+	void * pNext = nullptr;
 public:
 	uint32_t minImageCount;
 	uint32_t maxImageCount;
@@ -6966,251 +12110,80 @@ public:
 	F_composite_alpha_KHR supportedCompositeAlpha;
 	F_image_usage supportedUsageFlags;
 	F_surface_counter_EXT supportedSurfaceCounters;
+S_surface_capabilities2_EXT( VkSurfaceCapabilities2EXT const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_surface_capabilities2_EXT ) );	}
+S_surface_capabilities2_EXT& operator=( VkSurfaceCapabilities2EXT const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_surface_capabilities2_EXT ) ); return *this;	}
+operator VkSurfaceCapabilities2EXT const&() const 
+	{	return *reinterpret_cast<const VkSurfaceCapabilities2EXT*>(this);	}
+operator VkSurfaceCapabilities2EXT &() 
+	{	return *reinterpret_cast<VkSurfaceCapabilities2EXT*>(this);	}
+
 };
-/*	VkDisplayPowerInfoEXT
-*/
-struct		S_display_power_info_EXT{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	E_display_power_state_EXT powerState;
-};
-/*	VkDeviceEventInfoEXT
-*/
-struct		S_device_event_info_EXT{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	E_device_event_type_EXT deviceEvent;
-};
-/*	VkDisplayEventInfoEXT
-*/
-struct		S_display_event_info_EXT{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	E_display_event_type_EXT displayEvent;
-};
-/*	VkSwapchainCounterCreateInfoEXT
-ex to: VkSwapchainCreateInfoKHR
-*/
-struct		S_swapchain_counter_create_info_EXT{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	F_surface_counter_EXT surfaceCounters;
-};
-/*	VkPhysicalDeviceGroupProperties
-(returnedonly)
-*/
-struct		S_physical_device_group_properties{
-private:
-	E_structure_type sType;
-	void * pNext;
-public:
-	uint32_t physicalDeviceCount;
-	VkPhysicalDevice physicalDevices[VK_MAX_DEVICE_GROUP_SIZE];
-	VkBool32 subsetAllocation;
-};
-/*	VkMemoryAllocateFlagsInfo
-ex to: VkMemoryAllocateInfo
-*/
-struct		S_memory_allocate_flags_info{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	F_memory_allocate flags;
-	uint32_t deviceMask;
-};
-/*	VkBindBufferMemoryInfo
-ex:
-	VkBindBufferMemoryDeviceGroupInfo
-*/
-struct		S_bind_buffer_memory_info{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	VkBuffer buffer;
-	VkDeviceMemory memory;
-	VkDeviceSize memoryOffset;
-};
-/*	VkBindBufferMemoryDeviceGroupInfo
-ex to: VkBindBufferMemoryInfo
-*/
-struct		S_bind_buffer_memory_device_group_info{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	uint32_t deviceIndexCount;
-	const uint32_t * pDeviceIndices;
-};
-/*	VkBindImageMemoryInfo
-ex:
-	VkBindImageMemoryDeviceGroupInfo
-	VkBindImageMemorySwapchainInfoKHR
-	VkBindImagePlaneMemoryInfo
-*/
-struct		S_bind_image_memory_info{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	VkImage image;
-	VkDeviceMemory memory;
-	VkDeviceSize memoryOffset;
-};
+static_assert(
+	sizeof(S_surface_capabilities2_EXT) == sizeof(VkSurfaceCapabilities2EXT),
+	"struct and wrapper have different size!");
+
 /*	VkBindImageMemoryDeviceGroupInfo
 ex to: VkBindImageMemoryInfo
 */
 struct		S_bind_image_memory_device_group_info{
 private:
-	E_structure_type sType;
-	const void * pNext;
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_BIND_IMAGE_MEMORY_DEVICE_GROUP_INFO;
+	const void * pNext = nullptr;
 public:
 	uint32_t deviceIndexCount;
 	const uint32_t * pDeviceIndices;
 	uint32_t splitInstanceBindRegionCount;
 	const S_rect_2d * pSplitInstanceBindRegions;
+S_bind_image_memory_device_group_info( VkBindImageMemoryDeviceGroupInfo const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_bind_image_memory_device_group_info ) );	}
+S_bind_image_memory_device_group_info& operator=( VkBindImageMemoryDeviceGroupInfo const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_bind_image_memory_device_group_info ) ); return *this;	}
+operator VkBindImageMemoryDeviceGroupInfo const&() const 
+	{	return *reinterpret_cast<const VkBindImageMemoryDeviceGroupInfo*>(this);	}
+operator VkBindImageMemoryDeviceGroupInfo &() 
+	{	return *reinterpret_cast<VkBindImageMemoryDeviceGroupInfo*>(this);	}
+
 };
+static_assert(
+	sizeof(S_bind_image_memory_device_group_info) == sizeof(VkBindImageMemoryDeviceGroupInfo),
+	"struct and wrapper have different size!");
+
 /*	VkDeviceGroupRenderPassBeginInfo
 ex to: VkRenderPassBeginInfo
 */
 struct		S_device_group_render_pass_begin_info{
 private:
-	E_structure_type sType;
-	const void * pNext;
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_DEVICE_GROUP_RENDER_PASS_BEGIN_INFO;
+	const void * pNext = nullptr;
 public:
 	uint32_t deviceMask;
 	uint32_t deviceRenderAreaCount;
 	const S_rect_2d * pDeviceRenderAreas;
+S_device_group_render_pass_begin_info( VkDeviceGroupRenderPassBeginInfo const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_device_group_render_pass_begin_info ) );	}
+S_device_group_render_pass_begin_info& operator=( VkDeviceGroupRenderPassBeginInfo const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_device_group_render_pass_begin_info ) ); return *this;	}
+operator VkDeviceGroupRenderPassBeginInfo const&() const 
+	{	return *reinterpret_cast<const VkDeviceGroupRenderPassBeginInfo*>(this);	}
+operator VkDeviceGroupRenderPassBeginInfo &() 
+	{	return *reinterpret_cast<VkDeviceGroupRenderPassBeginInfo*>(this);	}
+
 };
-/*	VkDeviceGroupCommandBufferBeginInfo
-ex to: VkCommandBufferBeginInfo
-*/
-struct		S_device_group_command_buffer_begin_info{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	uint32_t deviceMask;
-};
-/*	VkDeviceGroupSubmitInfo
-ex to: VkSubmitInfo
-*/
-struct		S_device_group_submit_info{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	uint32_t waitSemaphoreCount;
-	const uint32_t * pWaitSemaphoreDeviceIndices;
-	uint32_t commandBufferCount;
-	const uint32_t * pCommandBufferDeviceMasks;
-	uint32_t signalSemaphoreCount;
-	const uint32_t * pSignalSemaphoreDeviceIndices;
-};
-/*	VkDeviceGroupBindSparseInfo
-ex to: VkBindSparseInfo
-*/
-struct		S_device_group_bind_sparse_info{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	uint32_t resourceDeviceIndex;
-	uint32_t memoryDeviceIndex;
-};
-/*	VkDeviceGroupPresentCapabilitiesKHR
-(returnedonly)
-*/
-struct		S_device_group_present_capabilities_KHR{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	uint32_t presentMask[VK_MAX_DEVICE_GROUP_SIZE];
-	F_device_group_present_mode_KHR modes;
-};
-/*	VkImageSwapchainCreateInfoKHR
-ex to: VkImageCreateInfo
-*/
-struct		S_image_swapchain_create_info_KHR{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	VkSwapchainKHR swapchain;
-};
-/*	VkBindImageMemorySwapchainInfoKHR
-ex to: VkBindImageMemoryInfo
-*/
-struct		S_bind_image_memory_swapchain_info_KHR{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	VkSwapchainKHR swapchain;
-	uint32_t imageIndex;
-};
-/*	VkAcquireNextImageInfoKHR
-*/
-struct		S_acquire_next_image_info_KHR{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	VkSwapchainKHR swapchain;
-	uint64_t timeout;
-	VkSemaphore semaphore;
-	VkFence fence;
-	uint32_t deviceMask;
-};
-/*	VkDeviceGroupPresentInfoKHR
-ex to: VkPresentInfoKHR
-*/
-struct		S_device_group_present_info_KHR{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	uint32_t swapchainCount;
-	const uint32_t * pDeviceMasks;
-	F_device_group_present_mode_KHR mode;
-};
-/*	VkDeviceGroupDeviceCreateInfo
-ex to: VkDeviceCreateInfo
-*/
-struct		S_device_group_device_create_info{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	uint32_t physicalDeviceCount;
-	const VkPhysicalDevice * pPhysicalDevices;
-};
-/*	VkDeviceGroupSwapchainCreateInfoKHR
-ex to: VkSwapchainCreateInfoKHR
-*/
-struct		S_device_group_swapchain_create_info_KHR{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	F_device_group_present_mode_KHR modes;
-};
+static_assert(
+	sizeof(S_device_group_render_pass_begin_info) == sizeof(VkDeviceGroupRenderPassBeginInfo),
+	"struct and wrapper have different size!");
+
 /*	VkDescriptorUpdateTemplateCreateInfo
 */
 struct		S_descriptor_update_template_create_info{
 private:
-	E_structure_type sType;
-	void * pNext;
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_DESCRIPTOR_UPDATE_TEMPLATE_CREATE_INFO;
+	void * pNext = nullptr;
 public:
 	VkDescriptorUpdateTemplateCreateFlags flags;
 	uint32_t descriptorUpdateEntryCount;
@@ -7220,13 +12193,27 @@ public:
 	E_pipeline_bind_point pipelineBindPoint;
 	VkPipelineLayout pipelineLayout;
 	uint32_t set;
+S_descriptor_update_template_create_info( VkDescriptorUpdateTemplateCreateInfo const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_descriptor_update_template_create_info ) );	}
+S_descriptor_update_template_create_info& operator=( VkDescriptorUpdateTemplateCreateInfo const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_descriptor_update_template_create_info ) ); return *this;	}
+operator VkDescriptorUpdateTemplateCreateInfo const&() const 
+	{	return *reinterpret_cast<const VkDescriptorUpdateTemplateCreateInfo*>(this);	}
+operator VkDescriptorUpdateTemplateCreateInfo &() 
+	{	return *reinterpret_cast<VkDescriptorUpdateTemplateCreateInfo*>(this);	}
+
 };
+static_assert(
+	sizeof(S_descriptor_update_template_create_info) == sizeof(VkDescriptorUpdateTemplateCreateInfo),
+	"struct and wrapper have different size!");
+
 /*	VkHdrMetadataEXT
 */
 struct		S_hdr_metadata_EXT{
 private:
-	E_structure_type sType;
-	const void * pNext;
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_HDR_METADATA_EXT;
+	const void * pNext = nullptr;
 public:
 	S_xy_color_EXT displayPrimaryRed;
 	S_xy_color_EXT displayPrimaryGreen;
@@ -7236,120 +12223,149 @@ public:
 	float minLuminance;
 	float maxContentLightLevel;
 	float maxFrameAverageLightLevel;
+S_hdr_metadata_EXT( VkHdrMetadataEXT const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_hdr_metadata_EXT ) );	}
+S_hdr_metadata_EXT& operator=( VkHdrMetadataEXT const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_hdr_metadata_EXT ) ); return *this;	}
+operator VkHdrMetadataEXT const&() const 
+	{	return *reinterpret_cast<const VkHdrMetadataEXT*>(this);	}
+operator VkHdrMetadataEXT &() 
+	{	return *reinterpret_cast<VkHdrMetadataEXT*>(this);	}
+
 };
+static_assert(
+	sizeof(S_hdr_metadata_EXT) == sizeof(VkHdrMetadataEXT),
+	"struct and wrapper have different size!");
+
 /*	VkPresentTimesInfoGOOGLE
 ex to: VkPresentInfoKHR
 */
 struct		S_present_times_info_GOOGLE{
 private:
-	E_structure_type sType;
-	const void * pNext;
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_PRESENT_TIMES_INFO_GOOGLE;
+	const void * pNext = nullptr;
 public:
 	uint32_t swapchainCount;
 	const S_present_time_GOOGLE * pTimes;
+S_present_times_info_GOOGLE( VkPresentTimesInfoGOOGLE const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_present_times_info_GOOGLE ) );	}
+S_present_times_info_GOOGLE& operator=( VkPresentTimesInfoGOOGLE const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_present_times_info_GOOGLE ) ); return *this;	}
+operator VkPresentTimesInfoGOOGLE const&() const 
+	{	return *reinterpret_cast<const VkPresentTimesInfoGOOGLE*>(this);	}
+operator VkPresentTimesInfoGOOGLE &() 
+	{	return *reinterpret_cast<VkPresentTimesInfoGOOGLE*>(this);	}
+
 };
-#ifdef VK_USE_PLATFORM_MACOS_MVK
-/*	VkIOSSurfaceCreateInfoMVK
-*/
-struct		S_ios_surface_create_info_MVK{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	VkIOSSurfaceCreateFlagsMVK flags;
-	const void * pView;
-};
-#endif
-#ifdef VK_USE_PLATFORM_MACOS_MVK
-/*	VkMacOSSurfaceCreateInfoMVK
-*/
-struct		S_mac_os_surface_create_info_MVK{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	VkMacOSSurfaceCreateFlagsMVK flags;
-	const void * pView;
-};
-#endif
+static_assert(
+	sizeof(S_present_times_info_GOOGLE) == sizeof(VkPresentTimesInfoGOOGLE),
+	"struct and wrapper have different size!");
+
 /*	VkPipelineViewportWScalingStateCreateInfoNV
 ex to: VkPipelineViewportStateCreateInfo
 */
 struct		S_pipeline_viewport_w_scaling_state_create_info_NV{
 private:
-	E_structure_type sType;
-	const void * pNext;
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_W_SCALING_STATE_CREATE_INFO_NV;
+	const void * pNext = nullptr;
 public:
 	VkBool32 viewportWScalingEnable;
 	uint32_t viewportCount;
 	const S_viewport_w_scaling_NV * pViewportWScalings;
+S_pipeline_viewport_w_scaling_state_create_info_NV( VkPipelineViewportWScalingStateCreateInfoNV const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_pipeline_viewport_w_scaling_state_create_info_NV ) );	}
+S_pipeline_viewport_w_scaling_state_create_info_NV& operator=( VkPipelineViewportWScalingStateCreateInfoNV const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_pipeline_viewport_w_scaling_state_create_info_NV ) ); return *this;	}
+operator VkPipelineViewportWScalingStateCreateInfoNV const&() const 
+	{	return *reinterpret_cast<const VkPipelineViewportWScalingStateCreateInfoNV*>(this);	}
+operator VkPipelineViewportWScalingStateCreateInfoNV &() 
+	{	return *reinterpret_cast<VkPipelineViewportWScalingStateCreateInfoNV*>(this);	}
+
 };
+static_assert(
+	sizeof(S_pipeline_viewport_w_scaling_state_create_info_NV) == sizeof(VkPipelineViewportWScalingStateCreateInfoNV),
+	"struct and wrapper have different size!");
+
 /*	VkPipelineViewportSwizzleStateCreateInfoNV
 ex to: VkPipelineViewportStateCreateInfo
 */
 struct		S_pipeline_viewport_swizzle_state_create_info_NV{
 private:
-	E_structure_type sType;
-	const void * pNext;
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_SWIZZLE_STATE_CREATE_INFO_NV;
+	const void * pNext = nullptr;
 public:
 	VkPipelineViewportSwizzleStateCreateFlagsNV flags;
 	uint32_t viewportCount;
 	const S_viewport_swizzle_NV * pViewportSwizzles;
+S_pipeline_viewport_swizzle_state_create_info_NV( VkPipelineViewportSwizzleStateCreateInfoNV const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_pipeline_viewport_swizzle_state_create_info_NV ) );	}
+S_pipeline_viewport_swizzle_state_create_info_NV& operator=( VkPipelineViewportSwizzleStateCreateInfoNV const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_pipeline_viewport_swizzle_state_create_info_NV ) ); return *this;	}
+operator VkPipelineViewportSwizzleStateCreateInfoNV const&() const 
+	{	return *reinterpret_cast<const VkPipelineViewportSwizzleStateCreateInfoNV*>(this);	}
+operator VkPipelineViewportSwizzleStateCreateInfoNV &() 
+	{	return *reinterpret_cast<VkPipelineViewportSwizzleStateCreateInfoNV*>(this);	}
+
 };
-/*	VkPhysicalDeviceDiscardRectanglePropertiesEXT
-ex to: VkPhysicalDeviceProperties2
-*/
-struct		S_physical_device_discard_rectangle_properties_EXT{
-private:
-	E_structure_type sType;
-	void * pNext;
-public:
-	uint32_t maxDiscardRectangles;
-};
+static_assert(
+	sizeof(S_pipeline_viewport_swizzle_state_create_info_NV) == sizeof(VkPipelineViewportSwizzleStateCreateInfoNV),
+	"struct and wrapper have different size!");
+
 /*	VkPipelineDiscardRectangleStateCreateInfoEXT
 ex to: VkGraphicsPipelineCreateInfo
 */
 struct		S_pipeline_discard_rectangle_state_create_info_EXT{
 private:
-	E_structure_type sType;
-	const void * pNext;
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_PIPELINE_DISCARD_RECTANGLE_STATE_CREATE_INFO_EXT;
+	const void * pNext = nullptr;
 public:
 	VkPipelineDiscardRectangleStateCreateFlagsEXT flags;
 	E_discard_rectangle_mode_EXT discardRectangleMode;
 	uint32_t discardRectangleCount;
 	const S_rect_2d * pDiscardRectangles;
+S_pipeline_discard_rectangle_state_create_info_EXT( VkPipelineDiscardRectangleStateCreateInfoEXT const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_pipeline_discard_rectangle_state_create_info_EXT ) );	}
+S_pipeline_discard_rectangle_state_create_info_EXT& operator=( VkPipelineDiscardRectangleStateCreateInfoEXT const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_pipeline_discard_rectangle_state_create_info_EXT ) ); return *this;	}
+operator VkPipelineDiscardRectangleStateCreateInfoEXT const&() const 
+	{	return *reinterpret_cast<const VkPipelineDiscardRectangleStateCreateInfoEXT*>(this);	}
+operator VkPipelineDiscardRectangleStateCreateInfoEXT &() 
+	{	return *reinterpret_cast<VkPipelineDiscardRectangleStateCreateInfoEXT*>(this);	}
+
 };
-/*	VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX
-(returnedonly)
-ex to: VkPhysicalDeviceProperties2
-*/
-struct		S_physical_device_multiview_per_view_attributes_properties_NVX{
-private:
-	E_structure_type sType;
-	void * pNext;
-public:
-	VkBool32 perViewPositionAllComponents;
-};
+static_assert(
+	sizeof(S_pipeline_discard_rectangle_state_create_info_EXT) == sizeof(VkPipelineDiscardRectangleStateCreateInfoEXT),
+	"struct and wrapper have different size!");
+
 /*	VkRenderPassInputAttachmentAspectCreateInfo
 ex to: VkRenderPassCreateInfo
 */
 struct		S_render_pass_input_attachment_aspect_create_info{
 private:
-	E_structure_type sType;
-	const void * pNext;
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_RENDER_PASS_INPUT_ATTACHMENT_ASPECT_CREATE_INFO;
+	const void * pNext = nullptr;
 public:
 	uint32_t aspectReferenceCount;
 	const S_input_attachment_aspect_reference * pAspectReferences;
+S_render_pass_input_attachment_aspect_create_info( VkRenderPassInputAttachmentAspectCreateInfo const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_render_pass_input_attachment_aspect_create_info ) );	}
+S_render_pass_input_attachment_aspect_create_info& operator=( VkRenderPassInputAttachmentAspectCreateInfo const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_render_pass_input_attachment_aspect_create_info ) ); return *this;	}
+operator VkRenderPassInputAttachmentAspectCreateInfo const&() const 
+	{	return *reinterpret_cast<const VkRenderPassInputAttachmentAspectCreateInfo*>(this);	}
+operator VkRenderPassInputAttachmentAspectCreateInfo &() 
+	{	return *reinterpret_cast<VkRenderPassInputAttachmentAspectCreateInfo*>(this);	}
+
 };
-/*	VkPhysicalDeviceSurfaceInfo2KHR
-*/
-struct		S_physical_device_surface_info2_KHR{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	VkSurfaceKHR surface;
-};
+static_assert(
+	sizeof(S_render_pass_input_attachment_aspect_create_info) == sizeof(VkRenderPassInputAttachmentAspectCreateInfo),
+	"struct and wrapper have different size!");
+
 /*	VkSurfaceCapabilities2KHR
 (returnedonly)
 ex:
@@ -7357,138 +12373,145 @@ ex:
 */
 struct		S_surface_capabilities2_KHR{
 private:
-	E_structure_type sType;
-	void * pNext;
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_SURFACE_CAPABILITIES_2_KHR;
+	void * pNext = nullptr;
 public:
 	S_surface_capabilities_KHR surfaceCapabilities;
+S_surface_capabilities2_KHR( VkSurfaceCapabilities2KHR const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_surface_capabilities2_KHR ) );	}
+S_surface_capabilities2_KHR& operator=( VkSurfaceCapabilities2KHR const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_surface_capabilities2_KHR ) ); return *this;	}
+operator VkSurfaceCapabilities2KHR const&() const 
+	{	return *reinterpret_cast<const VkSurfaceCapabilities2KHR*>(this);	}
+operator VkSurfaceCapabilities2KHR &() 
+	{	return *reinterpret_cast<VkSurfaceCapabilities2KHR*>(this);	}
+
 };
+static_assert(
+	sizeof(S_surface_capabilities2_KHR) == sizeof(VkSurfaceCapabilities2KHR),
+	"struct and wrapper have different size!");
+
 /*	VkSurfaceFormat2KHR
 (returnedonly)
 */
 struct		S_surface_format2_KHR{
 private:
-	E_structure_type sType;
-	void * pNext;
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_SURFACE_FORMAT_2_KHR;
+	void * pNext = nullptr;
 public:
 	S_surface_format_KHR surfaceFormat;
+S_surface_format2_KHR( VkSurfaceFormat2KHR const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_surface_format2_KHR ) );	}
+S_surface_format2_KHR& operator=( VkSurfaceFormat2KHR const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_surface_format2_KHR ) ); return *this;	}
+operator VkSurfaceFormat2KHR const&() const 
+	{	return *reinterpret_cast<const VkSurfaceFormat2KHR*>(this);	}
+operator VkSurfaceFormat2KHR &() 
+	{	return *reinterpret_cast<VkSurfaceFormat2KHR*>(this);	}
+
 };
+static_assert(
+	sizeof(S_surface_format2_KHR) == sizeof(VkSurfaceFormat2KHR),
+	"struct and wrapper have different size!");
+
 /*	VkDisplayProperties2KHR
 (returnedonly)
 */
 struct		S_display_properties2_KHR{
 private:
-	E_structure_type sType;
-	void * pNext;
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_DISPLAY_PROPERTIES_2_KHR;
+	void * pNext = nullptr;
 public:
 	S_display_properties_KHR displayProperties;
+S_display_properties2_KHR( VkDisplayProperties2KHR const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_display_properties2_KHR ) );	}
+S_display_properties2_KHR& operator=( VkDisplayProperties2KHR const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_display_properties2_KHR ) ); return *this;	}
+operator VkDisplayProperties2KHR const&() const 
+	{	return *reinterpret_cast<const VkDisplayProperties2KHR*>(this);	}
+operator VkDisplayProperties2KHR &() 
+	{	return *reinterpret_cast<VkDisplayProperties2KHR*>(this);	}
+
 };
+static_assert(
+	sizeof(S_display_properties2_KHR) == sizeof(VkDisplayProperties2KHR),
+	"struct and wrapper have different size!");
+
 /*	VkDisplayPlaneProperties2KHR
 (returnedonly)
 */
 struct		S_display_plane_properties2_KHR{
 private:
-	E_structure_type sType;
-	void * pNext;
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_DISPLAY_PLANE_PROPERTIES_2_KHR;
+	void * pNext = nullptr;
 public:
 	S_display_plane_properties_KHR displayPlaneProperties;
+S_display_plane_properties2_KHR( VkDisplayPlaneProperties2KHR const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_display_plane_properties2_KHR ) );	}
+S_display_plane_properties2_KHR& operator=( VkDisplayPlaneProperties2KHR const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_display_plane_properties2_KHR ) ); return *this;	}
+operator VkDisplayPlaneProperties2KHR const&() const 
+	{	return *reinterpret_cast<const VkDisplayPlaneProperties2KHR*>(this);	}
+operator VkDisplayPlaneProperties2KHR &() 
+	{	return *reinterpret_cast<VkDisplayPlaneProperties2KHR*>(this);	}
+
 };
+static_assert(
+	sizeof(S_display_plane_properties2_KHR) == sizeof(VkDisplayPlaneProperties2KHR),
+	"struct and wrapper have different size!");
+
 /*	VkDisplayModeProperties2KHR
 (returnedonly)
 */
 struct		S_display_mode_properties2_KHR{
 private:
-	E_structure_type sType;
-	void * pNext;
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_DISPLAY_MODE_PROPERTIES_2_KHR;
+	void * pNext = nullptr;
 public:
 	S_display_mode_properties_KHR displayModeProperties;
+S_display_mode_properties2_KHR( VkDisplayModeProperties2KHR const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_display_mode_properties2_KHR ) );	}
+S_display_mode_properties2_KHR& operator=( VkDisplayModeProperties2KHR const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_display_mode_properties2_KHR ) ); return *this;	}
+operator VkDisplayModeProperties2KHR const&() const 
+	{	return *reinterpret_cast<const VkDisplayModeProperties2KHR*>(this);	}
+operator VkDisplayModeProperties2KHR &() 
+	{	return *reinterpret_cast<VkDisplayModeProperties2KHR*>(this);	}
+
 };
-/*	VkDisplayPlaneInfo2KHR
-*/
-struct		S_display_plane_info2_KHR{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	VkDisplayModeKHR mode;
-	uint32_t planeIndex;
-};
+static_assert(
+	sizeof(S_display_mode_properties2_KHR) == sizeof(VkDisplayModeProperties2KHR),
+	"struct and wrapper have different size!");
+
 /*	VkDisplayPlaneCapabilities2KHR
 (returnedonly)
 */
 struct		S_display_plane_capabilities2_KHR{
 private:
-	E_structure_type sType;
-	void * pNext;
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_DISPLAY_PLANE_CAPABILITIES_2_KHR;
+	void * pNext = nullptr;
 public:
 	S_display_plane_capabilities_KHR capabilities;
+S_display_plane_capabilities2_KHR( VkDisplayPlaneCapabilities2KHR const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_display_plane_capabilities2_KHR ) );	}
+S_display_plane_capabilities2_KHR& operator=( VkDisplayPlaneCapabilities2KHR const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_display_plane_capabilities2_KHR ) ); return *this;	}
+operator VkDisplayPlaneCapabilities2KHR const&() const 
+	{	return *reinterpret_cast<const VkDisplayPlaneCapabilities2KHR*>(this);	}
+operator VkDisplayPlaneCapabilities2KHR &() 
+	{	return *reinterpret_cast<VkDisplayPlaneCapabilities2KHR*>(this);	}
+
 };
-/*	VkSharedPresentSurfaceCapabilitiesKHR
-(returnedonly)
-ex to: VkSurfaceCapabilities2KHR
-*/
-struct		S_shared_present_surface_capabilities_KHR{
-private:
-	E_structure_type sType;
-	void * pNext;
-public:
-	F_image_usage sharedPresentSupportedUsageFlags;
-};
-/*	VkPhysicalDevice16BitStorageFeatures
-ex to: VkPhysicalDeviceFeatures2,VkDeviceCreateInfo
-*/
-struct		S_physical_device_16bit_storage_features{
-private:
-	E_structure_type sType;
-	void * pNext;
-public:
-	VkBool32 storageBuffer16BitAccess;
-	VkBool32 uniformAndStorageBuffer16BitAccess;
-	VkBool32 storagePushConstant16;
-	VkBool32 storageInputOutput16;
-};
-/*	VkPhysicalDeviceSubgroupProperties
-(returnedonly)
-ex to: VkPhysicalDeviceProperties2
-*/
-struct		S_physical_device_subgroup_properties{
-private:
-	E_structure_type sType;
-	void * pNext;
-public:
-	uint32_t subgroupSize;
-	F_shader_stage supportedStages;
-	F_subgroup_feature supportedOperations;
-	VkBool32 quadOperationsInAllStages;
-};
-/*	VkBufferMemoryRequirementsInfo2
-*/
-struct		S_buffer_memory_requirements_info2{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	VkBuffer buffer;
-};
-/*	VkImageMemoryRequirementsInfo2
-ex:
-	VkImagePlaneMemoryRequirementsInfo
-*/
-struct		S_image_memory_requirements_info2{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	VkImage image;
-};
-/*	VkImageSparseMemoryRequirementsInfo2
-*/
-struct		S_image_sparse_memory_requirements_info2{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	VkImage image;
-};
+static_assert(
+	sizeof(S_display_plane_capabilities2_KHR) == sizeof(VkDisplayPlaneCapabilities2KHR),
+	"struct and wrapper have different size!");
+
 /*	VkMemoryRequirements2
 (returnedonly)
 ex:
@@ -7496,93 +12519,58 @@ ex:
 */
 struct		S_memory_requirements2{
 private:
-	E_structure_type sType;
-	void * pNext;
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_MEMORY_REQUIREMENTS_2;
+	void * pNext = nullptr;
 public:
 	S_memory_requirements memoryRequirements;
+S_memory_requirements2( VkMemoryRequirements2 const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_memory_requirements2 ) );	}
+S_memory_requirements2& operator=( VkMemoryRequirements2 const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_memory_requirements2 ) ); return *this;	}
+operator VkMemoryRequirements2 const&() const 
+	{	return *reinterpret_cast<const VkMemoryRequirements2*>(this);	}
+operator VkMemoryRequirements2 &() 
+	{	return *reinterpret_cast<VkMemoryRequirements2*>(this);	}
+
 };
+static_assert(
+	sizeof(S_memory_requirements2) == sizeof(VkMemoryRequirements2),
+	"struct and wrapper have different size!");
+
 /*	VkSparseImageMemoryRequirements2
 (returnedonly)
 */
 struct		S_sparse_image_memory_requirements2{
 private:
-	E_structure_type sType;
-	void * pNext;
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_SPARSE_IMAGE_MEMORY_REQUIREMENTS_2;
+	void * pNext = nullptr;
 public:
 	S_sparse_image_memory_requirements memoryRequirements;
+S_sparse_image_memory_requirements2( VkSparseImageMemoryRequirements2 const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_sparse_image_memory_requirements2 ) );	}
+S_sparse_image_memory_requirements2& operator=( VkSparseImageMemoryRequirements2 const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_sparse_image_memory_requirements2 ) ); return *this;	}
+operator VkSparseImageMemoryRequirements2 const&() const 
+	{	return *reinterpret_cast<const VkSparseImageMemoryRequirements2*>(this);	}
+operator VkSparseImageMemoryRequirements2 &() 
+	{	return *reinterpret_cast<VkSparseImageMemoryRequirements2*>(this);	}
+
 };
-/*	VkPhysicalDevicePointClippingProperties
-(returnedonly)
-ex to: VkPhysicalDeviceProperties2
-*/
-struct		S_physical_device_point_clipping_properties{
-private:
-	E_structure_type sType;
-	void * pNext;
-public:
-	E_point_clipping_behavior pointClippingBehavior;
-};
-/*	VkMemoryDedicatedRequirements
-(returnedonly)
-ex to: VkMemoryRequirements2
-*/
-struct		S_memory_dedicated_requirements{
-private:
-	E_structure_type sType;
-	void * pNext;
-public:
-	VkBool32 prefersDedicatedAllocation;
-	VkBool32 requiresDedicatedAllocation;
-};
-/*	VkMemoryDedicatedAllocateInfo
-ex to: VkMemoryAllocateInfo
-*/
-struct		S_memory_dedicated_allocate_info{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	VkImage image;
-	VkBuffer buffer;
-};
-/*	VkImageViewUsageCreateInfo
-ex to: VkImageViewCreateInfo
-*/
-struct		S_image_view_usage_create_info{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	F_image_usage usage;
-};
-/*	VkPipelineTessellationDomainOriginStateCreateInfo
-ex to: VkPipelineTessellationStateCreateInfo
-*/
-struct		S_pipeline_tessellation_domain_origin_state_create_info{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	E_tessellation_domain_origin domainOrigin;
-};
-/*	VkSamplerYcbcrConversionInfo
-ex to: VkSamplerCreateInfo,VkImageViewCreateInfo
-*/
-struct		S_sampler_ycbcr_conversion_info{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	VkSamplerYcbcrConversion conversion;
-};
+static_assert(
+	sizeof(S_sparse_image_memory_requirements2) == sizeof(VkSparseImageMemoryRequirements2),
+	"struct and wrapper have different size!");
+
 /*	VkSamplerYcbcrConversionCreateInfo
 ex:
 	VkExternalFormatANDROID
 */
 struct		S_sampler_ycbcr_conversion_create_info{
 private:
-	E_structure_type sType;
-	const void * pNext;
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_CREATE_INFO;
+	const void * pNext = nullptr;
 public:
 	E_format format;
 	E_sampler_ycbcr_model_conversion ycbcrModel;
@@ -7592,397 +12580,166 @@ public:
 	E_chroma_location yChromaOffset;
 	E_filter chromaFilter;
 	VkBool32 forceExplicitReconstruction;
+S_sampler_ycbcr_conversion_create_info( VkSamplerYcbcrConversionCreateInfo const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_sampler_ycbcr_conversion_create_info ) );	}
+S_sampler_ycbcr_conversion_create_info& operator=( VkSamplerYcbcrConversionCreateInfo const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_sampler_ycbcr_conversion_create_info ) ); return *this;	}
+operator VkSamplerYcbcrConversionCreateInfo const&() const 
+	{	return *reinterpret_cast<const VkSamplerYcbcrConversionCreateInfo*>(this);	}
+operator VkSamplerYcbcrConversionCreateInfo &() 
+	{	return *reinterpret_cast<VkSamplerYcbcrConversionCreateInfo*>(this);	}
+
 };
-/*	VkBindImagePlaneMemoryInfo
-ex to: VkBindImageMemoryInfo
-*/
-struct		S_bind_image_plane_memory_info{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	F_image_aspect planeAspect;
-};
-/*	VkImagePlaneMemoryRequirementsInfo
-ex to: VkImageMemoryRequirementsInfo2
-*/
-struct		S_image_plane_memory_requirements_info{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	F_image_aspect planeAspect;
-};
-/*	VkPhysicalDeviceSamplerYcbcrConversionFeatures
-ex to: VkPhysicalDeviceFeatures2,VkDeviceCreateInfo
-*/
-struct		S_physical_device_sampler_ycbcr_conversion_features{
-private:
-	E_structure_type sType;
-	void * pNext;
-public:
-	VkBool32 samplerYcbcrConversion;
-};
-/*	VkSamplerYcbcrConversionImageFormatProperties
-(returnedonly)
-ex to: VkImageFormatProperties2
-*/
-struct		S_sampler_ycbcr_conversion_image_format_properties{
-private:
-	E_structure_type sType;
-	void * pNext;
-public:
-	uint32_t combinedImageSamplerDescriptorCount;
-};
-/*	VkTextureLODGatherFormatPropertiesAMD
-(returnedonly)
-ex to: VkImageFormatProperties2
-*/
-struct		S_texture_lod_gather_format_properties_AMD{
-private:
-	E_structure_type sType;
-	void * pNext;
-public:
-	VkBool32 supportsTextureGatherLODBiasAMD;
-};
-/*	VkConditionalRenderingBeginInfoEXT
-*/
-struct		S_conditional_rendering_begin_info_EXT{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	VkBuffer buffer;
-	VkDeviceSize offset;
-	F_conditional_rendering_EXT flags;
-};
-/*	VkProtectedSubmitInfo
-ex to: VkSubmitInfo
-*/
-struct		S_protected_submit_info{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	VkBool32 protectedSubmit;
-};
-/*	VkPhysicalDeviceProtectedMemoryFeatures
-ex to: VkPhysicalDeviceFeatures2,VkDeviceCreateInfo
-*/
-struct		S_physical_device_protected_memory_features{
-private:
-	E_structure_type sType;
-	void * pNext;
-public:
-	VkBool32 protectedMemory;
-};
-/*	VkPhysicalDeviceProtectedMemoryProperties
-ex to: VkPhysicalDeviceProperties2
-*/
-struct		S_physical_device_protected_memory_properties{
-private:
-	E_structure_type sType;
-	void * pNext;
-public:
-	VkBool32 protectedNoFault;
-};
-/*	VkDeviceQueueInfo2
-*/
-struct		S_device_queue_info2{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	F_device_queue_create flags;
-	uint32_t queueFamilyIndex;
-	uint32_t queueIndex;
-};
-/*	VkPipelineCoverageToColorStateCreateInfoNV
-ex to: VkPipelineMultisampleStateCreateInfo
-*/
-struct		S_pipeline_coverage_to_color_state_create_info_NV{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	VkPipelineCoverageToColorStateCreateFlagsNV flags;
-	VkBool32 coverageToColorEnable;
-	uint32_t coverageToColorLocation;
-};
-/*	VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT
-(returnedonly)
-ex to: VkPhysicalDeviceProperties2
-*/
-struct		S_physical_device_sampler_filter_minmax_properties_EXT{
-private:
-	E_structure_type sType;
-	void * pNext;
-public:
-	VkBool32 filterMinmaxSingleComponentFormats;
-	VkBool32 filterMinmaxImageComponentMapping;
-};
+static_assert(
+	sizeof(S_sampler_ycbcr_conversion_create_info) == sizeof(VkSamplerYcbcrConversionCreateInfo),
+	"struct and wrapper have different size!");
+
 /*	VkSampleLocationsInfoEXT
 ex to: VkImageMemoryBarrier
 */
 struct		S_sample_locations_info_EXT{
 private:
-	E_structure_type sType;
-	const void * pNext;
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_SAMPLE_LOCATIONS_INFO_EXT;
+	const void * pNext = nullptr;
 public:
 	F_sample_count sampleLocationsPerPixel;
 	S_extent_2d sampleLocationGridSize;
 	uint32_t sampleLocationsCount;
 	const S_sample_location_EXT * pSampleLocations;
+S_sample_locations_info_EXT( VkSampleLocationsInfoEXT const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_sample_locations_info_EXT ) );	}
+S_sample_locations_info_EXT& operator=( VkSampleLocationsInfoEXT const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_sample_locations_info_EXT ) ); return *this;	}
+operator VkSampleLocationsInfoEXT const&() const 
+	{	return *reinterpret_cast<const VkSampleLocationsInfoEXT*>(this);	}
+operator VkSampleLocationsInfoEXT &() 
+	{	return *reinterpret_cast<VkSampleLocationsInfoEXT*>(this);	}
+
 };
+static_assert(
+	sizeof(S_sample_locations_info_EXT) == sizeof(VkSampleLocationsInfoEXT),
+	"struct and wrapper have different size!");
+
 /*	VkAttachmentSampleLocationsEXT
 */
 struct		S_attachment_sample_locations_EXT{
 	uint32_t attachmentIndex;
 	S_sample_locations_info_EXT sampleLocationsInfo;
 };
+
 /*	VkSubpassSampleLocationsEXT
 */
 struct		S_subpass_sample_locations_EXT{
 	uint32_t subpassIndex;
 	S_sample_locations_info_EXT sampleLocationsInfo;
 };
+
 /*	VkRenderPassSampleLocationsBeginInfoEXT
 ex to: VkRenderPassBeginInfo
 */
 struct		S_render_pass_sample_locations_begin_info_EXT{
 private:
-	E_structure_type sType;
-	const void * pNext;
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_RENDER_PASS_SAMPLE_LOCATIONS_BEGIN_INFO_EXT;
+	const void * pNext = nullptr;
 public:
 	uint32_t attachmentInitialSampleLocationsCount;
 	const S_attachment_sample_locations_EXT * pAttachmentInitialSampleLocations;
 	uint32_t postSubpassSampleLocationsCount;
 	const S_subpass_sample_locations_EXT * pPostSubpassSampleLocations;
+S_render_pass_sample_locations_begin_info_EXT( VkRenderPassSampleLocationsBeginInfoEXT const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_render_pass_sample_locations_begin_info_EXT ) );	}
+S_render_pass_sample_locations_begin_info_EXT& operator=( VkRenderPassSampleLocationsBeginInfoEXT const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_render_pass_sample_locations_begin_info_EXT ) ); return *this;	}
+operator VkRenderPassSampleLocationsBeginInfoEXT const&() const 
+	{	return *reinterpret_cast<const VkRenderPassSampleLocationsBeginInfoEXT*>(this);	}
+operator VkRenderPassSampleLocationsBeginInfoEXT &() 
+	{	return *reinterpret_cast<VkRenderPassSampleLocationsBeginInfoEXT*>(this);	}
+
 };
+static_assert(
+	sizeof(S_render_pass_sample_locations_begin_info_EXT) == sizeof(VkRenderPassSampleLocationsBeginInfoEXT),
+	"struct and wrapper have different size!");
+
 /*	VkPipelineSampleLocationsStateCreateInfoEXT
 ex to: VkPipelineMultisampleStateCreateInfo
 */
 struct		S_pipeline_sample_locations_state_create_info_EXT{
 private:
-	E_structure_type sType;
-	const void * pNext;
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_PIPELINE_SAMPLE_LOCATIONS_STATE_CREATE_INFO_EXT;
+	const void * pNext = nullptr;
 public:
 	VkBool32 sampleLocationsEnable;
 	S_sample_locations_info_EXT sampleLocationsInfo;
+S_pipeline_sample_locations_state_create_info_EXT( VkPipelineSampleLocationsStateCreateInfoEXT const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_pipeline_sample_locations_state_create_info_EXT ) );	}
+S_pipeline_sample_locations_state_create_info_EXT& operator=( VkPipelineSampleLocationsStateCreateInfoEXT const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_pipeline_sample_locations_state_create_info_EXT ) ); return *this;	}
+operator VkPipelineSampleLocationsStateCreateInfoEXT const&() const 
+	{	return *reinterpret_cast<const VkPipelineSampleLocationsStateCreateInfoEXT*>(this);	}
+operator VkPipelineSampleLocationsStateCreateInfoEXT &() 
+	{	return *reinterpret_cast<VkPipelineSampleLocationsStateCreateInfoEXT*>(this);	}
+
 };
+static_assert(
+	sizeof(S_pipeline_sample_locations_state_create_info_EXT) == sizeof(VkPipelineSampleLocationsStateCreateInfoEXT),
+	"struct and wrapper have different size!");
+
 /*	VkPhysicalDeviceSampleLocationsPropertiesEXT
 (returnedonly)
 ex to: VkPhysicalDeviceProperties2
 */
 struct		S_physical_device_sample_locations_properties_EXT{
 private:
-	E_structure_type sType;
-	void * pNext;
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SAMPLE_LOCATIONS_PROPERTIES_EXT;
+	void * pNext = nullptr;
 public:
 	F_sample_count sampleLocationSampleCounts;
 	S_extent_2d maxSampleLocationGridSize;
 	float sampleLocationCoordinateRange[2];
 	uint32_t sampleLocationSubPixelBits;
 	VkBool32 variableSampleLocations;
+S_physical_device_sample_locations_properties_EXT( VkPhysicalDeviceSampleLocationsPropertiesEXT const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_physical_device_sample_locations_properties_EXT ) );	}
+S_physical_device_sample_locations_properties_EXT& operator=( VkPhysicalDeviceSampleLocationsPropertiesEXT const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_physical_device_sample_locations_properties_EXT ) ); return *this;	}
+operator VkPhysicalDeviceSampleLocationsPropertiesEXT const&() const 
+	{	return *reinterpret_cast<const VkPhysicalDeviceSampleLocationsPropertiesEXT*>(this);	}
+operator VkPhysicalDeviceSampleLocationsPropertiesEXT &() 
+	{	return *reinterpret_cast<VkPhysicalDeviceSampleLocationsPropertiesEXT*>(this);	}
+
 };
+static_assert(
+	sizeof(S_physical_device_sample_locations_properties_EXT) == sizeof(VkPhysicalDeviceSampleLocationsPropertiesEXT),
+	"struct and wrapper have different size!");
+
 /*	VkMultisamplePropertiesEXT
 (returnedonly)
 */
 struct		S_multisample_properties_EXT{
 private:
-	E_structure_type sType;
-	void * pNext;
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_MULTISAMPLE_PROPERTIES_EXT;
+	void * pNext = nullptr;
 public:
 	S_extent_2d maxSampleLocationGridSize;
+S_multisample_properties_EXT( VkMultisamplePropertiesEXT const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_multisample_properties_EXT ) );	}
+S_multisample_properties_EXT& operator=( VkMultisamplePropertiesEXT const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_multisample_properties_EXT ) ); return *this;	}
+operator VkMultisamplePropertiesEXT const&() const 
+	{	return *reinterpret_cast<const VkMultisamplePropertiesEXT*>(this);	}
+operator VkMultisamplePropertiesEXT &() 
+	{	return *reinterpret_cast<VkMultisamplePropertiesEXT*>(this);	}
+
 };
-/*	VkSamplerReductionModeCreateInfoEXT
-ex to: VkSamplerCreateInfo
-*/
-struct		S_sampler_reduction_mode_create_info_EXT{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	E_sampler_reduction_mode_EXT reductionMode;
-};
-/*	VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT
-ex to: VkPhysicalDeviceFeatures2,VkDeviceCreateInfo
-*/
-struct		S_physical_device_blend_operation_advanced_features_EXT{
-private:
-	E_structure_type sType;
-	void * pNext;
-public:
-	VkBool32 advancedBlendCoherentOperations;
-};
-/*	VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT
-(returnedonly)
-ex to: VkPhysicalDeviceProperties2
-*/
-struct		S_physical_device_blend_operation_advanced_properties_EXT{
-private:
-	E_structure_type sType;
-	void * pNext;
-public:
-	uint32_t advancedBlendMaxColorAttachments;
-	VkBool32 advancedBlendIndependentBlend;
-	VkBool32 advancedBlendNonPremultipliedSrcColor;
-	VkBool32 advancedBlendNonPremultipliedDstColor;
-	VkBool32 advancedBlendCorrelatedOverlap;
-	VkBool32 advancedBlendAllOperations;
-};
-/*	VkPipelineColorBlendAdvancedStateCreateInfoEXT
-ex to: VkPipelineColorBlendStateCreateInfo
-*/
-struct		S_pipeline_color_blend_advanced_state_create_info_EXT{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	VkBool32 srcPremultiplied;
-	VkBool32 dstPremultiplied;
-	E_blend_overlap_EXT blendOverlap;
-};
-/*	VkPhysicalDeviceInlineUniformBlockFeaturesEXT
-(returnedonly)
-ex to: VkPhysicalDeviceFeatures2,VkDeviceCreateInfo
-*/
-struct		S_physical_device_inline_uniform_block_features_EXT{
-private:
-	E_structure_type sType;
-	void * pNext;
-public:
-	VkBool32 inlineUniformBlock;
-	VkBool32 descriptorBindingInlineUniformBlockUpdateAfterBind;
-};
-/*	VkPhysicalDeviceInlineUniformBlockPropertiesEXT
-(returnedonly)
-ex to: VkPhysicalDeviceProperties2
-*/
-struct		S_physical_device_inline_uniform_block_properties_EXT{
-private:
-	E_structure_type sType;
-	void * pNext;
-public:
-	uint32_t maxInlineUniformBlockSize;
-	uint32_t maxPerStageDescriptorInlineUniformBlocks;
-	uint32_t maxPerStageDescriptorUpdateAfterBindInlineUniformBlocks;
-	uint32_t maxDescriptorSetInlineUniformBlocks;
-	uint32_t maxDescriptorSetUpdateAfterBindInlineUniformBlocks;
-};
-/*	VkWriteDescriptorSetInlineUniformBlockEXT
-ex to: VkWriteDescriptorSet
-*/
-struct		S_write_descriptor_set_inline_uniform_block_EXT{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	uint32_t dataSize;
-	const void * pData;
-};
-/*	VkDescriptorPoolInlineUniformBlockCreateInfoEXT
-ex to: VkDescriptorPoolCreateInfo
-*/
-struct		S_descriptor_pool_inline_uniform_block_create_info_EXT{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	uint32_t maxInlineUniformBlockBindings;
-};
-/*	VkPipelineCoverageModulationStateCreateInfoNV
-ex to: VkPipelineMultisampleStateCreateInfo
-*/
-struct		S_pipeline_coverage_modulation_state_create_info_NV{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	VkPipelineCoverageModulationStateCreateFlagsNV flags;
-	E_coverage_modulation_mode_NV coverageModulationMode;
-	VkBool32 coverageModulationTableEnable;
-	uint32_t coverageModulationTableCount;
-	const float * pCoverageModulationTable;
-};
-/*	VkImageFormatListCreateInfoKHR
-ex to: VkImageCreateInfo
-*/
-struct		S_image_format_list_create_info_KHR{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	uint32_t viewFormatCount;
-	const E_format * pViewFormats;
-};
-/*	VkValidationCacheCreateInfoEXT
-*/
-struct		S_validation_cache_create_info_EXT{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	VkValidationCacheCreateFlagsEXT flags;
-	size_t initialDataSize;
-	const void * pInitialData;
-};
-/*	VkShaderModuleValidationCacheCreateInfoEXT
-ex to: VkShaderModuleCreateInfo
-*/
-struct		S_shader_module_validation_cache_create_info_EXT{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	VkValidationCacheEXT validationCache;
-};
-/*	VkPhysicalDeviceMaintenance3Properties
-(returnedonly)
-ex to: VkPhysicalDeviceProperties2
-*/
-struct		S_physical_device_maintenance3_properties{
-private:
-	E_structure_type sType;
-	void * pNext;
-public:
-	uint32_t maxPerSetDescriptors;
-	VkDeviceSize maxMemoryAllocationSize;
-};
-/*	VkDescriptorSetLayoutSupport
-(returnedonly)
-ex:
-	VkDescriptorSetVariableDescriptorCountLayoutSupportEXT
-*/
-struct		S_descriptor_set_layout_support{
-private:
-	E_structure_type sType;
-	void * pNext;
-public:
-	VkBool32 supported;
-};
-/*	VkPhysicalDeviceShaderDrawParameterFeatures
-ex to: VkPhysicalDeviceFeatures2,VkDeviceCreateInfo
-*/
-struct		S_physical_device_shader_draw_parameter_features{
-private:
-	E_structure_type sType;
-	void * pNext;
-public:
-	VkBool32 shaderDrawParameters;
-};
-/*	VkNativeBufferANDROID
-*/
-struct		S_native_buffer_ANDROID{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	const void * handle;
-	int stride;
-	int format;
-	int usage;
-};
+static_assert(
+	sizeof(S_multisample_properties_EXT) == sizeof(VkMultisamplePropertiesEXT),
+	"struct and wrapper have different size!");
+
 /*	VkShaderStatisticsInfoAMD
 (returnedonly)
 */
@@ -7995,70 +12752,14 @@ struct		S_shader_statistics_info_AMD{
 	uint32_t numAvailableSgprs;
 	uint32_t computeWorkGroupSize[3];
 };
-/*	VkDeviceQueueGlobalPriorityCreateInfoEXT
-ex to: VkDeviceQueueCreateInfo
-*/
-struct		S_device_queue_global_priority_create_info_EXT{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	E_queue_global_priority_EXT globalPriority;
-};
-/*	VkDebugUtilsObjectNameInfoEXT
-*/
-struct		S_debug_utils_object_name_info_EXT{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	E_object_type objectType;
-	uint64_t objectHandle;
-	const char * pObjectName;
-};
-/*	VkDebugUtilsObjectTagInfoEXT
-*/
-struct		S_debug_utils_object_tag_info_EXT{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	E_object_type objectType;
-	uint64_t objectHandle;
-	uint64_t tagName;
-	size_t tagSize;
-	const void * pTag;
-};
-/*	VkDebugUtilsLabelEXT
-*/
-struct		S_debug_utils_label_EXT{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	const char * pLabelName;
-	float color[4];
-};
-/*	VkDebugUtilsMessengerCreateInfoEXT
-ex to: VkInstanceCreateInfo
-*/
-struct		S_debug_utils_messenger_create_info_EXT{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	VkDebugUtilsMessengerCreateFlagsEXT flags;
-	F_debug_utils_message_severity_EXT messageSeverity;
-	F_debug_utils_message_type_EXT messageType;
-	PFN_vkDebugUtilsMessengerCallbackEXT pfnUserCallback;
-	void * pUserData;
-};
+
 /*	VkDebugUtilsMessengerCallbackDataEXT
 */
 struct		S_debug_utils_messenger_callback_data_EXT{
 private:
-	E_structure_type sType;
-	const void * pNext;
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CALLBACK_DATA_EXT;
+	const void * pNext = nullptr;
 public:
 	VkDebugUtilsMessengerCallbackDataFlagsEXT flags;
 	const char * pMessageIdName;
@@ -8070,220 +12771,27 @@ public:
 	S_debug_utils_label_EXT * pCmdBufLabels;
 	uint32_t objectCount;
 	S_debug_utils_object_name_info_EXT * pObjects;
+S_debug_utils_messenger_callback_data_EXT( VkDebugUtilsMessengerCallbackDataEXT const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_debug_utils_messenger_callback_data_EXT ) );	}
+S_debug_utils_messenger_callback_data_EXT& operator=( VkDebugUtilsMessengerCallbackDataEXT const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_debug_utils_messenger_callback_data_EXT ) ); return *this;	}
+operator VkDebugUtilsMessengerCallbackDataEXT const&() const 
+	{	return *reinterpret_cast<const VkDebugUtilsMessengerCallbackDataEXT*>(this);	}
+operator VkDebugUtilsMessengerCallbackDataEXT &() 
+	{	return *reinterpret_cast<VkDebugUtilsMessengerCallbackDataEXT*>(this);	}
+
 };
-/*	VkImportMemoryHostPointerInfoEXT
-ex to: VkMemoryAllocateInfo
-*/
-struct		S_import_memory_host_pointer_info_EXT{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	F_external_memory_handle_type handleType;
-	void * pHostPointer;
-};
-/*	VkMemoryHostPointerPropertiesEXT
-*/
-struct		S_memory_host_pointer_properties_EXT{
-private:
-	E_structure_type sType;
-	void * pNext;
-public:
-	uint32_t memoryTypeBits;
-};
-/*	VkPhysicalDeviceExternalMemoryHostPropertiesEXT
-ex to: VkPhysicalDeviceProperties2
-*/
-struct		S_physical_device_external_memory_host_properties_EXT{
-private:
-	E_structure_type sType;
-	void * pNext;
-public:
-	VkDeviceSize minImportedHostPointerAlignment;
-};
-/*	VkPhysicalDeviceConservativeRasterizationPropertiesEXT
-ex to: VkPhysicalDeviceProperties2
-*/
-struct		S_physical_device_conservative_rasterization_properties_EXT{
-private:
-	E_structure_type sType;
-	void * pNext;
-public:
-	float primitiveOverestimationSize;
-	float maxExtraPrimitiveOverestimationSize;
-	float extraPrimitiveOverestimationSizeGranularity;
-	VkBool32 primitiveUnderestimation;
-	VkBool32 conservativePointAndLineRasterization;
-	VkBool32 degenerateTrianglesRasterized;
-	VkBool32 degenerateLinesRasterized;
-	VkBool32 fullyCoveredFragmentShaderInputVariable;
-	VkBool32 conservativeRasterizationPostDepthCoverage;
-};
-/*	VkPhysicalDeviceShaderCorePropertiesAMD
-(returnedonly)
-ex to: VkPhysicalDeviceProperties2
-*/
-struct		S_physical_device_shader_core_properties_AMD{
-private:
-	E_structure_type sType;
-	void * pNext;
-public:
-	uint32_t shaderEngineCount;
-	uint32_t shaderArraysPerEngineCount;
-	uint32_t computeUnitsPerShaderArray;
-	uint32_t simdPerComputeUnit;
-	uint32_t wavefrontsPerSimd;
-	uint32_t wavefrontSize;
-	uint32_t sgprsPerSimd;
-	uint32_t minSgprAllocation;
-	uint32_t maxSgprAllocation;
-	uint32_t sgprAllocationGranularity;
-	uint32_t vgprsPerSimd;
-	uint32_t minVgprAllocation;
-	uint32_t maxVgprAllocation;
-	uint32_t vgprAllocationGranularity;
-};
-/*	VkPipelineRasterizationConservativeStateCreateInfoEXT
-ex to: VkPipelineRasterizationStateCreateInfo
-*/
-struct		S_pipeline_rasterization_conservative_state_create_info_EXT{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	VkPipelineRasterizationConservativeStateCreateFlagsEXT flags;
-	E_conservative_rasterization_mode_EXT conservativeRasterizationMode;
-	float extraPrimitiveOverestimationSize;
-};
-/*	VkPhysicalDeviceDescriptorIndexingFeaturesEXT
-ex to: VkPhysicalDeviceFeatures2,VkDeviceCreateInfo
-*/
-struct		S_physical_device_descriptor_indexing_features_EXT{
-private:
-	E_structure_type sType;
-	void * pNext;
-public:
-	VkBool32 shaderInputAttachmentArrayDynamicIndexing;
-	VkBool32 shaderUniformTexelBufferArrayDynamicIndexing;
-	VkBool32 shaderStorageTexelBufferArrayDynamicIndexing;
-	VkBool32 shaderUniformBufferArrayNonUniformIndexing;
-	VkBool32 shaderSampledImageArrayNonUniformIndexing;
-	VkBool32 shaderStorageBufferArrayNonUniformIndexing;
-	VkBool32 shaderStorageImageArrayNonUniformIndexing;
-	VkBool32 shaderInputAttachmentArrayNonUniformIndexing;
-	VkBool32 shaderUniformTexelBufferArrayNonUniformIndexing;
-	VkBool32 shaderStorageTexelBufferArrayNonUniformIndexing;
-	VkBool32 descriptorBindingUniformBufferUpdateAfterBind;
-	VkBool32 descriptorBindingSampledImageUpdateAfterBind;
-	VkBool32 descriptorBindingStorageImageUpdateAfterBind;
-	VkBool32 descriptorBindingStorageBufferUpdateAfterBind;
-	VkBool32 descriptorBindingUniformTexelBufferUpdateAfterBind;
-	VkBool32 descriptorBindingStorageTexelBufferUpdateAfterBind;
-	VkBool32 descriptorBindingUpdateUnusedWhilePending;
-	VkBool32 descriptorBindingPartiallyBound;
-	VkBool32 descriptorBindingVariableDescriptorCount;
-	VkBool32 runtimeDescriptorArray;
-};
-/*	VkPhysicalDeviceDescriptorIndexingPropertiesEXT
-(returnedonly)
-ex to: VkPhysicalDeviceProperties2
-*/
-struct		S_physical_device_descriptor_indexing_properties_EXT{
-private:
-	E_structure_type sType;
-	void * pNext;
-public:
-	uint32_t maxUpdateAfterBindDescriptorsInAllPools;
-	VkBool32 shaderUniformBufferArrayNonUniformIndexingNative;
-	VkBool32 shaderSampledImageArrayNonUniformIndexingNative;
-	VkBool32 shaderStorageBufferArrayNonUniformIndexingNative;
-	VkBool32 shaderStorageImageArrayNonUniformIndexingNative;
-	VkBool32 shaderInputAttachmentArrayNonUniformIndexingNative;
-	VkBool32 robustBufferAccessUpdateAfterBind;
-	VkBool32 quadDivergentImplicitLod;
-	uint32_t maxPerStageDescriptorUpdateAfterBindSamplers;
-	uint32_t maxPerStageDescriptorUpdateAfterBindUniformBuffers;
-	uint32_t maxPerStageDescriptorUpdateAfterBindStorageBuffers;
-	uint32_t maxPerStageDescriptorUpdateAfterBindSampledImages;
-	uint32_t maxPerStageDescriptorUpdateAfterBindStorageImages;
-	uint32_t maxPerStageDescriptorUpdateAfterBindInputAttachments;
-	uint32_t maxPerStageUpdateAfterBindResources;
-	uint32_t maxDescriptorSetUpdateAfterBindSamplers;
-	uint32_t maxDescriptorSetUpdateAfterBindUniformBuffers;
-	uint32_t maxDescriptorSetUpdateAfterBindUniformBuffersDynamic;
-	uint32_t maxDescriptorSetUpdateAfterBindStorageBuffers;
-	uint32_t maxDescriptorSetUpdateAfterBindStorageBuffersDynamic;
-	uint32_t maxDescriptorSetUpdateAfterBindSampledImages;
-	uint32_t maxDescriptorSetUpdateAfterBindStorageImages;
-	uint32_t maxDescriptorSetUpdateAfterBindInputAttachments;
-};
-/*	VkDescriptorSetLayoutBindingFlagsCreateInfoEXT
-ex to: VkDescriptorSetLayoutCreateInfo
-*/
-struct		S_descriptor_set_layout_binding_flags_create_info_EXT{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	uint32_t bindingCount;
-	const F_descriptor_binding_EXT * pBindingFlags;
-};
-/*	VkDescriptorSetVariableDescriptorCountAllocateInfoEXT
-ex to: VkDescriptorSetAllocateInfo
-*/
-struct		S_descriptor_set_variable_descriptor_count_allocate_info_EXT{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	uint32_t descriptorSetCount;
-	const uint32_t * pDescriptorCounts;
-};
-/*	VkDescriptorSetVariableDescriptorCountLayoutSupportEXT
-(returnedonly)
-ex to: VkDescriptorSetLayoutSupport
-*/
-struct		S_descriptor_set_variable_descriptor_count_layout_support_EXT{
-private:
-	E_structure_type sType;
-	void * pNext;
-public:
-	uint32_t maxVariableDescriptorCount;
-};
-/*	VkAttachmentDescription2KHR
-*/
-struct		S_attachment_description2_KHR{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	F_attachment_description flags;
-	E_format format;
-	F_sample_count samples;
-	E_attachment_load_op loadOp;
-	E_attachment_store_op storeOp;
-	E_attachment_load_op stencilLoadOp;
-	E_attachment_store_op stencilStoreOp;
-	E_image_layout initialLayout;
-	E_image_layout finalLayout;
-};
-/*	VkAttachmentReference2KHR
-*/
-struct		S_attachment_reference2_KHR{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	uint32_t attachment;
-	E_image_layout layout;
-	F_image_aspect aspectMask;
-};
+static_assert(
+	sizeof(S_debug_utils_messenger_callback_data_EXT) == sizeof(VkDebugUtilsMessengerCallbackDataEXT),
+	"struct and wrapper have different size!");
+
 /*	VkSubpassDescription2KHR
 */
 struct		S_subpass_description2_KHR{
 private:
-	E_structure_type sType;
-	const void * pNext;
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_SUBPASS_DESCRIPTION_2_KHR;
+	const void * pNext = nullptr;
 public:
 	F_subpass_description flags;
 	E_pipeline_bind_point pipelineBindPoint;
@@ -8296,29 +12804,27 @@ public:
 	const S_attachment_reference2_KHR * pDepthStencilAttachment;
 	uint32_t preserveAttachmentCount;
 	const uint32_t * pPreserveAttachments;
+S_subpass_description2_KHR( VkSubpassDescription2KHR const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_subpass_description2_KHR ) );	}
+S_subpass_description2_KHR& operator=( VkSubpassDescription2KHR const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_subpass_description2_KHR ) ); return *this;	}
+operator VkSubpassDescription2KHR const&() const 
+	{	return *reinterpret_cast<const VkSubpassDescription2KHR*>(this);	}
+operator VkSubpassDescription2KHR &() 
+	{	return *reinterpret_cast<VkSubpassDescription2KHR*>(this);	}
+
 };
-/*	VkSubpassDependency2KHR
-*/
-struct		S_subpass_dependency2_KHR{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	uint32_t srcSubpass;
-	uint32_t dstSubpass;
-	F_pipeline_stage srcStageMask;
-	F_pipeline_stage dstStageMask;
-	F_access srcAccessMask;
-	F_access dstAccessMask;
-	F_dependency dependencyFlags;
-	int32_t viewOffset;
-};
+static_assert(
+	sizeof(S_subpass_description2_KHR) == sizeof(VkSubpassDescription2KHR),
+	"struct and wrapper have different size!");
+
 /*	VkRenderPassCreateInfo2KHR
 */
 struct		S_render_pass_create_info2_KHR{
 private:
-	E_structure_type sType;
-	const void * pNext;
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_RENDER_PASS_CREATE_INFO_2_KHR;
+	const void * pNext = nullptr;
 public:
 	F_render_pass_create flags;
 	uint32_t attachmentCount;
@@ -8329,101 +12835,55 @@ public:
 	const S_subpass_dependency2_KHR * pDependencies;
 	uint32_t correlatedViewMaskCount;
 	const uint32_t * pCorrelatedViewMasks;
+S_render_pass_create_info2_KHR( VkRenderPassCreateInfo2KHR const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_render_pass_create_info2_KHR ) );	}
+S_render_pass_create_info2_KHR& operator=( VkRenderPassCreateInfo2KHR const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_render_pass_create_info2_KHR ) ); return *this;	}
+operator VkRenderPassCreateInfo2KHR const&() const 
+	{	return *reinterpret_cast<const VkRenderPassCreateInfo2KHR*>(this);	}
+operator VkRenderPassCreateInfo2KHR &() 
+	{	return *reinterpret_cast<VkRenderPassCreateInfo2KHR*>(this);	}
+
 };
-/*	VkSubpassBeginInfoKHR
-*/
-struct		S_subpass_begin_info_KHR{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	E_subpass_contents contents;
-};
-/*	VkSubpassEndInfoKHR
-*/
-struct		S_subpass_end_info_KHR{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-};
+static_assert(
+	sizeof(S_render_pass_create_info2_KHR) == sizeof(VkRenderPassCreateInfo2KHR),
+	"struct and wrapper have different size!");
+
 /*	VkPipelineVertexInputDivisorStateCreateInfoEXT
 ex to: VkPipelineVertexInputStateCreateInfo
 */
 struct		S_pipeline_vertex_input_divisor_state_create_info_EXT{
 private:
-	E_structure_type sType;
-	const void * pNext;
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_DIVISOR_STATE_CREATE_INFO_EXT;
+	const void * pNext = nullptr;
 public:
 	uint32_t vertexBindingDivisorCount;
 	const S_vertex_input_binding_divisor_description_EXT * pVertexBindingDivisors;
+S_pipeline_vertex_input_divisor_state_create_info_EXT( VkPipelineVertexInputDivisorStateCreateInfoEXT const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_pipeline_vertex_input_divisor_state_create_info_EXT ) );	}
+S_pipeline_vertex_input_divisor_state_create_info_EXT& operator=( VkPipelineVertexInputDivisorStateCreateInfoEXT const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_pipeline_vertex_input_divisor_state_create_info_EXT ) ); return *this;	}
+operator VkPipelineVertexInputDivisorStateCreateInfoEXT const&() const 
+	{	return *reinterpret_cast<const VkPipelineVertexInputDivisorStateCreateInfoEXT*>(this);	}
+operator VkPipelineVertexInputDivisorStateCreateInfoEXT &() 
+	{	return *reinterpret_cast<VkPipelineVertexInputDivisorStateCreateInfoEXT*>(this);	}
+
 };
-/*	VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT
-ex to: VkPhysicalDeviceProperties2
-*/
-struct		S_physical_device_vertex_attribute_divisor_properties_EXT{
-private:
-	E_structure_type sType;
-	void * pNext;
-public:
-	uint32_t maxVertexAttribDivisor;
-};
-/*	VkImportAndroidHardwareBufferInfoANDROID
-ex to: VkMemoryAllocateInfo
-*/
-struct		S_import_android_hardware_buffer_info_ANDROID{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	struct AHardwareBuffer * buffer;
-};
-#ifdef VK_USE_PLATFORM_MACOS_MVK
-/*	VkAndroidHardwareBufferUsageANDROID
-(returnedonly)
-ex to: VkImageFormatProperties2
-*/
-struct		S_android_hardware_buffer_usage_ANDROID{
-private:
-	E_structure_type sType;
-	void * pNext;
-public:
-	uint64_t androidHardwareBufferUsage;
-};
-#endif
-#ifdef VK_USE_PLATFORM_MACOS_MVK
-/*	VkAndroidHardwareBufferPropertiesANDROID
-(returnedonly)
-ex:
-	VkAndroidHardwareBufferFormatPropertiesANDROID
-*/
-struct		S_android_hardware_buffer_properties_ANDROID{
-private:
-	E_structure_type sType;
-	void * pNext;
-public:
-	VkDeviceSize allocationSize;
-	uint32_t memoryTypeBits;
-};
-#endif
-/*	VkMemoryGetAndroidHardwareBufferInfoANDROID
-*/
-struct		S_memory_get_android_hardware_buffer_info_ANDROID{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	VkDeviceMemory memory;
-};
-#ifdef VK_USE_PLATFORM_MACOS_MVK
+static_assert(
+	sizeof(S_pipeline_vertex_input_divisor_state_create_info_EXT) == sizeof(VkPipelineVertexInputDivisorStateCreateInfoEXT),
+	"struct and wrapper have different size!");
+
 /*	VkAndroidHardwareBufferFormatPropertiesANDROID
 (returnedonly)
 ex to: VkAndroidHardwareBufferPropertiesANDROID
 */
+#ifdef VK_USE_PLATFORM_ANDROID_KHR
 struct		S_android_hardware_buffer_format_properties_ANDROID{
 private:
-	E_structure_type sType;
-	void * pNext;
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_ANDROID_HARDWARE_BUFFER_FORMAT_PROPERTIES_ANDROID;
+	void * pNext = nullptr;
 public:
 	E_format format;
 	uint64_t externalFormat;
@@ -8433,245 +12893,99 @@ public:
 	E_sampler_ycbcr_range suggestedYcbcrRange;
 	E_chroma_location suggestedXChromaOffset;
 	E_chroma_location suggestedYChromaOffset;
+S_android_hardware_buffer_format_properties_ANDROID( VkAndroidHardwareBufferFormatPropertiesANDROID const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_android_hardware_buffer_format_properties_ANDROID ) );	}
+S_android_hardware_buffer_format_properties_ANDROID& operator=( VkAndroidHardwareBufferFormatPropertiesANDROID const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_android_hardware_buffer_format_properties_ANDROID ) ); return *this;	}
+operator VkAndroidHardwareBufferFormatPropertiesANDROID const&() const 
+	{	return *reinterpret_cast<const VkAndroidHardwareBufferFormatPropertiesANDROID*>(this);	}
+operator VkAndroidHardwareBufferFormatPropertiesANDROID &() 
+	{	return *reinterpret_cast<VkAndroidHardwareBufferFormatPropertiesANDROID*>(this);	}
+
 };
-#endif
-/*	VkCommandBufferInheritanceConditionalRenderingInfoEXT
-ex to: VkCommandBufferInheritanceInfo
-*/
-struct		S_command_buffer_inheritance_conditional_rendering_info_EXT{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	VkBool32 conditionalRenderingEnable;
-};
-/*	VkExternalFormatANDROID
-ex to: VkImageCreateInfo,VkSamplerYcbcrConversionCreateInfo
-*/
-struct		S_external_format_ANDROID{
-private:
-	E_structure_type sType;
-	void * pNext;
-public:
-	uint64_t externalFormat;
-};
-/*	VkPhysicalDevice8BitStorageFeaturesKHR
-ex to: VkPhysicalDeviceFeatures2,VkDeviceCreateInfo
-*/
-struct		S_physical_device_8bit_storage_features_KHR{
-private:
-	E_structure_type sType;
-	void * pNext;
-public:
-	VkBool32 storageBuffer8BitAccess;
-	VkBool32 uniformAndStorageBuffer8BitAccess;
-	VkBool32 storagePushConstant8;
-};
-/*	VkPhysicalDeviceConditionalRenderingFeaturesEXT
-ex to: VkPhysicalDeviceFeatures2,VkDeviceCreateInfo
-*/
-struct		S_physical_device_conditional_rendering_features_EXT{
-private:
-	E_structure_type sType;
-	void * pNext;
-public:
-	VkBool32 conditionalRendering;
-	VkBool32 inheritedConditionalRendering;
-};
-/*	VkPhysicalDeviceVulkanMemoryModelFeaturesKHR
-(returnedonly)
-ex to: VkPhysicalDeviceFeatures2,VkDeviceCreateInfo
-*/
-struct		S_physical_device_vulkan_memory_model_features_KHR{
-private:
-	E_structure_type sType;
-	void * pNext;
-public:
-	VkBool32 vulkanMemoryModel;
-	VkBool32 vulkanMemoryModelDeviceScope;
-};
-/*	VkPhysicalDeviceShaderAtomicInt64FeaturesKHR
-ex to: VkPhysicalDeviceFeatures2,VkDeviceCreateInfo
-*/
-struct		S_physical_device_shader_atomic_int64_features_KHR{
-private:
-	E_structure_type sType;
-	void * pNext;
-public:
-	VkBool32 shaderBufferInt64Atomics;
-	VkBool32 shaderSharedInt64Atomics;
-};
-/*	VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT
-ex to: VkPhysicalDeviceFeatures2,VkDeviceCreateInfo
-*/
-struct		S_physical_device_vertex_attribute_divisor_features_EXT{
-private:
-	E_structure_type sType;
-	void * pNext;
-public:
-	VkBool32 vertexAttributeInstanceRateDivisor;
-	VkBool32 vertexAttributeInstanceRateZeroDivisor;
-};
-/*	VkQueueFamilyCheckpointPropertiesNV
-(returnedonly)
-ex to: VkQueueFamilyProperties2
-*/
-struct		S_queue_family_checkpoint_properties_NV{
-private:
-	E_structure_type sType;
-	void * pNext;
-public:
-	F_pipeline_stage checkpointExecutionStageMask;
-};
-/*	VkCheckpointDataNV
-(returnedonly)
-*/
-struct		S_checkpoint_data_NV{
-private:
-	E_structure_type sType;
-	void * pNext;
-public:
-	F_pipeline_stage stage;
-	void * pCheckpointMarker;
-};
-/*	VkImageViewASTCDecodeModeEXT
-ex to: VkImageViewCreateInfo
-*/
-struct		S_image_view_astc_decode_mode_EXT{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	E_format decodeMode;
-};
-/*	VkPhysicalDeviceASTCDecodeFeaturesEXT
-ex to: VkPhysicalDeviceFeatures2,VkDeviceCreateInfo
-*/
-struct		S_physical_device_astc_decode_features_EXT{
-private:
-	E_structure_type sType;
-	void * pNext;
-public:
-	VkBool32 decodeModeSharedExponent;
-};
-/*	VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV
-ex to: VkPhysicalDeviceFeatures2,VkDeviceCreateInfo
-*/
-struct		S_physical_device_representative_fragment_test_features_NV{
-private:
-	E_structure_type sType;
-	void * pNext;
-public:
-	VkBool32 representativeFragmentTest;
-};
-/*	VkPipelineRepresentativeFragmentTestStateCreateInfoNV
-ex to: VkGraphicsPipelineCreateInfo
-*/
-struct		S_pipeline_representative_fragment_test_state_create_info_NV{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	VkBool32 representativeFragmentTestEnable;
-};
-/*	VkPhysicalDeviceExclusiveScissorFeaturesNV
-ex to: VkPhysicalDeviceFeatures2,VkDeviceCreateInfo
-*/
-struct		S_physical_device_exclusive_scissor_features_NV{
-private:
-	E_structure_type sType;
-	void * pNext;
-public:
-	VkBool32 exclusiveScissor;
-};
+static_assert(
+	sizeof(S_android_hardware_buffer_format_properties_ANDROID) == sizeof(VkAndroidHardwareBufferFormatPropertiesANDROID),
+	"struct and wrapper have different size!");
+#endif //VK_USE_PLATFORM_ANDROID_KHR
+
 /*	VkPipelineViewportExclusiveScissorStateCreateInfoNV
 ex to: VkPipelineViewportStateCreateInfo
 */
 struct		S_pipeline_viewport_exclusive_scissor_state_create_info_NV{
 private:
-	E_structure_type sType;
-	const void * pNext;
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_EXCLUSIVE_SCISSOR_STATE_CREATE_INFO_NV;
+	const void * pNext = nullptr;
 public:
 	uint32_t exclusiveScissorCount;
 	const S_rect_2d * pExclusiveScissors;
+S_pipeline_viewport_exclusive_scissor_state_create_info_NV( VkPipelineViewportExclusiveScissorStateCreateInfoNV const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_pipeline_viewport_exclusive_scissor_state_create_info_NV ) );	}
+S_pipeline_viewport_exclusive_scissor_state_create_info_NV& operator=( VkPipelineViewportExclusiveScissorStateCreateInfoNV const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_pipeline_viewport_exclusive_scissor_state_create_info_NV ) ); return *this;	}
+operator VkPipelineViewportExclusiveScissorStateCreateInfoNV const&() const 
+	{	return *reinterpret_cast<const VkPipelineViewportExclusiveScissorStateCreateInfoNV*>(this);	}
+operator VkPipelineViewportExclusiveScissorStateCreateInfoNV &() 
+	{	return *reinterpret_cast<VkPipelineViewportExclusiveScissorStateCreateInfoNV*>(this);	}
+
 };
-/*	VkPhysicalDeviceCornerSampledImageFeaturesNV
-ex to: VkPhysicalDeviceFeatures2,VkDeviceCreateInfo
-*/
-struct		S_physical_device_corner_sampled_image_features_NV{
-private:
-	E_structure_type sType;
-	void * pNext;
-public:
-	VkBool32 cornerSampledImage;
-};
-/*	VkPhysicalDeviceComputeShaderDerivativesFeaturesNV
-ex to: VkPhysicalDeviceFeatures2,VkDeviceCreateInfo
-*/
-struct		S_physical_device_compute_shader_derivatives_features_NV{
-private:
-	E_structure_type sType;
-	void * pNext;
-public:
-	VkBool32 computeDerivativeGroupQuads;
-	VkBool32 computeDerivativeGroupLinear;
-};
-/*	VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV
-ex to: VkPhysicalDeviceFeatures2,VkDeviceCreateInfo
-*/
-struct		S_physical_device_fragment_shader_barycentric_features_NV{
-private:
-	E_structure_type sType;
-	void * pNext;
-public:
-	VkBool32 fragmentShaderBarycentric;
-};
-/*	VkPhysicalDeviceShaderImageFootprintFeaturesNV
-ex to: VkPhysicalDeviceFeatures2,VkDeviceCreateInfo
-*/
-struct		S_physical_device_shader_image_footprint_features_NV{
-private:
-	E_structure_type sType;
-	void * pNext;
-public:
-	VkBool32 imageFootprint;
-};
+static_assert(
+	sizeof(S_pipeline_viewport_exclusive_scissor_state_create_info_NV) == sizeof(VkPipelineViewportExclusiveScissorStateCreateInfoNV),
+	"struct and wrapper have different size!");
+
 /*	VkPipelineViewportShadingRateImageStateCreateInfoNV
 ex to: VkPipelineViewportStateCreateInfo
 */
 struct		S_pipeline_viewport_shading_rate_image_state_create_info_NV{
 private:
-	E_structure_type sType;
-	const void * pNext;
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_SHADING_RATE_IMAGE_STATE_CREATE_INFO_NV;
+	const void * pNext = nullptr;
 public:
 	VkBool32 shadingRateImageEnable;
 	uint32_t viewportCount;
 	const S_shading_rate_palette_NV * pShadingRatePalettes;
+S_pipeline_viewport_shading_rate_image_state_create_info_NV( VkPipelineViewportShadingRateImageStateCreateInfoNV const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_pipeline_viewport_shading_rate_image_state_create_info_NV ) );	}
+S_pipeline_viewport_shading_rate_image_state_create_info_NV& operator=( VkPipelineViewportShadingRateImageStateCreateInfoNV const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_pipeline_viewport_shading_rate_image_state_create_info_NV ) ); return *this;	}
+operator VkPipelineViewportShadingRateImageStateCreateInfoNV const&() const 
+	{	return *reinterpret_cast<const VkPipelineViewportShadingRateImageStateCreateInfoNV*>(this);	}
+operator VkPipelineViewportShadingRateImageStateCreateInfoNV &() 
+	{	return *reinterpret_cast<VkPipelineViewportShadingRateImageStateCreateInfoNV*>(this);	}
+
 };
-/*	VkPhysicalDeviceShadingRateImageFeaturesNV
-ex to: VkPhysicalDeviceFeatures2,VkDeviceCreateInfo
-*/
-struct		S_physical_device_shading_rate_image_features_NV{
-private:
-	E_structure_type sType;
-	void * pNext;
-public:
-	VkBool32 shadingRateImage;
-	VkBool32 shadingRateCoarseSampleOrder;
-};
+static_assert(
+	sizeof(S_pipeline_viewport_shading_rate_image_state_create_info_NV) == sizeof(VkPipelineViewportShadingRateImageStateCreateInfoNV),
+	"struct and wrapper have different size!");
+
 /*	VkPhysicalDeviceShadingRateImagePropertiesNV
 (returnedonly)
 ex to: VkPhysicalDeviceProperties
 */
 struct		S_physical_device_shading_rate_image_properties_NV{
 private:
-	E_structure_type sType;
-	void * pNext;
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADING_RATE_IMAGE_PROPERTIES_NV;
+	void * pNext = nullptr;
 public:
 	S_extent_2d shadingRateTexelSize;
 	uint32_t shadingRatePaletteSize;
 	uint32_t shadingRateMaxCoarseSamples;
+S_physical_device_shading_rate_image_properties_NV( VkPhysicalDeviceShadingRateImagePropertiesNV const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_physical_device_shading_rate_image_properties_NV ) );	}
+S_physical_device_shading_rate_image_properties_NV& operator=( VkPhysicalDeviceShadingRateImagePropertiesNV const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_physical_device_shading_rate_image_properties_NV ) ); return *this;	}
+operator VkPhysicalDeviceShadingRateImagePropertiesNV const&() const 
+	{	return *reinterpret_cast<const VkPhysicalDeviceShadingRateImagePropertiesNV*>(this);	}
+operator VkPhysicalDeviceShadingRateImagePropertiesNV &() 
+	{	return *reinterpret_cast<VkPhysicalDeviceShadingRateImagePropertiesNV*>(this);	}
+
 };
+static_assert(
+	sizeof(S_physical_device_shading_rate_image_properties_NV) == sizeof(VkPhysicalDeviceShadingRateImagePropertiesNV),
+	"struct and wrapper have different size!");
+
 /*	VkCoarseSampleOrderCustomNV
 */
 struct		S_coarse_sample_order_custom_NV{
@@ -8680,57 +12994,40 @@ struct		S_coarse_sample_order_custom_NV{
 	uint32_t sampleLocationCount;
 	const S_coarse_sample_location_NV * pSampleLocations;
 };
+
 /*	VkPipelineViewportCoarseSampleOrderStateCreateInfoNV
 ex to: VkPipelineViewportStateCreateInfo
 */
 struct		S_pipeline_viewport_coarse_sample_order_state_create_info_NV{
 private:
-	E_structure_type sType;
-	const void * pNext;
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_COARSE_SAMPLE_ORDER_STATE_CREATE_INFO_NV;
+	const void * pNext = nullptr;
 public:
 	E_coarse_sample_order_type_NV sampleOrderType;
 	uint32_t customSampleOrderCount;
 	const S_coarse_sample_order_custom_NV * pCustomSampleOrders;
+S_pipeline_viewport_coarse_sample_order_state_create_info_NV( VkPipelineViewportCoarseSampleOrderStateCreateInfoNV const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_pipeline_viewport_coarse_sample_order_state_create_info_NV ) );	}
+S_pipeline_viewport_coarse_sample_order_state_create_info_NV& operator=( VkPipelineViewportCoarseSampleOrderStateCreateInfoNV const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_pipeline_viewport_coarse_sample_order_state_create_info_NV ) ); return *this;	}
+operator VkPipelineViewportCoarseSampleOrderStateCreateInfoNV const&() const 
+	{	return *reinterpret_cast<const VkPipelineViewportCoarseSampleOrderStateCreateInfoNV*>(this);	}
+operator VkPipelineViewportCoarseSampleOrderStateCreateInfoNV &() 
+	{	return *reinterpret_cast<VkPipelineViewportCoarseSampleOrderStateCreateInfoNV*>(this);	}
+
 };
-/*	VkPhysicalDeviceMeshShaderFeaturesNV
-ex to: VkPhysicalDeviceFeatures2,VkDeviceCreateInfo
-*/
-struct		S_physical_device_mesh_shader_features_NV{
-private:
-	E_structure_type sType;
-	void * pNext;
-public:
-	VkBool32 taskShader;
-	VkBool32 meshShader;
-};
-/*	VkPhysicalDeviceMeshShaderPropertiesNV
-ex to: VkPhysicalDeviceProperties2
-*/
-struct		S_physical_device_mesh_shader_properties_NV{
-private:
-	E_structure_type sType;
-	void * pNext;
-public:
-	uint32_t maxDrawMeshTasksCount;
-	uint32_t maxTaskWorkGroupInvocations;
-	uint32_t maxTaskWorkGroupSize[3];
-	uint32_t maxTaskTotalMemorySize;
-	uint32_t maxTaskOutputCount;
-	uint32_t maxMeshWorkGroupInvocations;
-	uint32_t maxMeshWorkGroupSize[3];
-	uint32_t maxMeshTotalMemorySize;
-	uint32_t maxMeshOutputVertices;
-	uint32_t maxMeshOutputPrimitives;
-	uint32_t maxMeshMultiviewViewCount;
-	uint32_t meshOutputPerVertexGranularity;
-	uint32_t meshOutputPerPrimitiveGranularity;
-};
+static_assert(
+	sizeof(S_pipeline_viewport_coarse_sample_order_state_create_info_NV) == sizeof(VkPipelineViewportCoarseSampleOrderStateCreateInfoNV),
+	"struct and wrapper have different size!");
+
 /*	VkRaytracingPipelineCreateInfoNVX
 */
 struct		S_raytracing_pipeline_create_info_NVX{
 private:
-	E_structure_type sType;
-	const void * pNext;
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_RAYTRACING_PIPELINE_CREATE_INFO_NVX;
+	const void * pNext = nullptr;
 public:
 	F_pipeline_create flags;
 	uint32_t stageCount;
@@ -8740,61 +13037,59 @@ public:
 	VkPipelineLayout layout;
 	VkPipeline basePipelineHandle;
 	int32_t basePipelineIndex;
+S_raytracing_pipeline_create_info_NVX( VkRaytracingPipelineCreateInfoNVX const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_raytracing_pipeline_create_info_NVX ) );	}
+S_raytracing_pipeline_create_info_NVX& operator=( VkRaytracingPipelineCreateInfoNVX const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_raytracing_pipeline_create_info_NVX ) ); return *this;	}
+operator VkRaytracingPipelineCreateInfoNVX const&() const 
+	{	return *reinterpret_cast<const VkRaytracingPipelineCreateInfoNVX*>(this);	}
+operator VkRaytracingPipelineCreateInfoNVX &() 
+	{	return *reinterpret_cast<VkRaytracingPipelineCreateInfoNVX*>(this);	}
+
 };
-/*	VkGeometryTrianglesNVX
-*/
-struct		S_geometry_triangles_NVX{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	VkBuffer vertexData;
-	VkDeviceSize vertexOffset;
-	uint32_t vertexCount;
-	VkDeviceSize vertexStride;
-	E_format vertexFormat;
-	VkBuffer indexData;
-	VkDeviceSize indexOffset;
-	uint32_t indexCount;
-	E_index_type indexType;
-	VkBuffer transformData;
-	VkDeviceSize transformOffset;
-};
-/*	VkGeometryAABBNVX
-*/
-struct		S_geometry_aabb_NVX{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	VkBuffer aabbData;
-	uint32_t numAABBs;
-	uint32_t stride;
-	VkDeviceSize offset;
-};
+static_assert(
+	sizeof(S_raytracing_pipeline_create_info_NVX) == sizeof(VkRaytracingPipelineCreateInfoNVX),
+	"struct and wrapper have different size!");
+
 /*	VkGeometryDataNVX
 */
 struct		S_geometry_data_NVX{
 	S_geometry_triangles_NVX triangles;
 	S_geometry_aabb_NVX aabbs;
 };
+
 /*	VkGeometryNVX
 */
 struct		S_geometry_NVX{
 private:
-	E_structure_type sType;
-	const void * pNext;
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_GEOMETRY_NVX;
+	const void * pNext = nullptr;
 public:
 	E_geometry_type_NVX geometryType;
 	S_geometry_data_NVX geometry;
 	F_geometry_NVX flags;
+S_geometry_NVX( VkGeometryNVX const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_geometry_NVX ) );	}
+S_geometry_NVX& operator=( VkGeometryNVX const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_geometry_NVX ) ); return *this;	}
+operator VkGeometryNVX const&() const 
+	{	return *reinterpret_cast<const VkGeometryNVX*>(this);	}
+operator VkGeometryNVX &() 
+	{	return *reinterpret_cast<VkGeometryNVX*>(this);	}
+
 };
+static_assert(
+	sizeof(S_geometry_NVX) == sizeof(VkGeometryNVX),
+	"struct and wrapper have different size!");
+
 /*	VkAccelerationStructureCreateInfoNVX
 */
 struct		S_acceleration_structure_create_info_NVX{
 private:
-	E_structure_type sType;
-	const void * pNext;
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_CREATE_INFO_NVX;
+	const void * pNext = nullptr;
 public:
 	E_acceleration_structure_type_NVX type;
 	F_build_acceleration_structure_NVX flags;
@@ -8802,105 +13097,70 @@ public:
 	uint32_t instanceCount;
 	uint32_t geometryCount;
 	const S_geometry_NVX * pGeometries;
+S_acceleration_structure_create_info_NVX( VkAccelerationStructureCreateInfoNVX const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_acceleration_structure_create_info_NVX ) );	}
+S_acceleration_structure_create_info_NVX& operator=( VkAccelerationStructureCreateInfoNVX const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_acceleration_structure_create_info_NVX ) ); return *this;	}
+operator VkAccelerationStructureCreateInfoNVX const&() const 
+	{	return *reinterpret_cast<const VkAccelerationStructureCreateInfoNVX*>(this);	}
+operator VkAccelerationStructureCreateInfoNVX &() 
+	{	return *reinterpret_cast<VkAccelerationStructureCreateInfoNVX*>(this);	}
+
 };
-/*	VkBindAccelerationStructureMemoryInfoNVX
-*/
-struct		S_bind_acceleration_structure_memory_info_NVX{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	VkAccelerationStructureNVX accelerationStructure;
-	VkDeviceMemory memory;
-	VkDeviceSize memoryOffset;
-	uint32_t deviceIndexCount;
-	const uint32_t * pDeviceIndices;
-};
-/*	VkDescriptorAccelerationStructureInfoNVX
-ex to: VkWriteDescriptorSet
-*/
-struct		S_descriptor_acceleration_structure_info_NVX{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	uint32_t accelerationStructureCount;
-	const VkAccelerationStructureNVX * pAccelerationStructures;
-};
-/*	VkAccelerationStructureMemoryRequirementsInfoNVX
-*/
-struct		S_acceleration_structure_memory_requirements_info_NVX{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	VkAccelerationStructureNVX accelerationStructure;
-};
-/*	VkPhysicalDeviceRaytracingPropertiesNVX
-ex to: VkPhysicalDeviceProperties2
-*/
-struct		S_physical_device_raytracing_properties_NVX{
-private:
-	E_structure_type sType;
-	void * pNext;
-public:
-	uint32_t shaderHeaderSize;
-	uint32_t maxRecursionDepth;
-	uint32_t maxGeometryCount;
-};
+static_assert(
+	sizeof(S_acceleration_structure_create_info_NVX) == sizeof(VkAccelerationStructureCreateInfoNVX),
+	"struct and wrapper have different size!");
+
 /*	VkDrmFormatModifierPropertiesListEXT
 ex to: VkFormatProperties2
 */
 struct		S_drm_format_modifier_properties_list_EXT{
 private:
-	E_structure_type sType;
-	void * pNext;
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_DRM_FORMAT_MODIFIER_PROPERTIES_LIST_EXT;
+	void * pNext = nullptr;
 public:
 	uint32_t drmFormatModifierCount;
 	S_drm_format_modifier_properties_EXT * pDrmFormatModifierProperties;
+S_drm_format_modifier_properties_list_EXT( VkDrmFormatModifierPropertiesListEXT const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_drm_format_modifier_properties_list_EXT ) );	}
+S_drm_format_modifier_properties_list_EXT& operator=( VkDrmFormatModifierPropertiesListEXT const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_drm_format_modifier_properties_list_EXT ) ); return *this;	}
+operator VkDrmFormatModifierPropertiesListEXT const&() const 
+	{	return *reinterpret_cast<const VkDrmFormatModifierPropertiesListEXT*>(this);	}
+operator VkDrmFormatModifierPropertiesListEXT &() 
+	{	return *reinterpret_cast<VkDrmFormatModifierPropertiesListEXT*>(this);	}
+
 };
-/*	VkPhysicalDeviceImageDrmFormatModifierInfoEXT
-ex to: VkPhysicalDeviceImageFormatInfo2
-*/
-struct		S_physical_device_image_drm_format_modifier_info_EXT{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	uint64_t drmFormatModifier;
-};
-/*	VkImageDrmFormatModifierListCreateInfoEXT
-ex to: VkImageCreateInfo
-*/
-struct		S_image_drm_format_modifier_list_create_info_EXT{
-private:
-	E_structure_type sType;
-	const void * pNext;
-public:
-	uint32_t drmFormatModifierCount;
-	const uint64_t * pDrmFormatModifiers;
-};
+static_assert(
+	sizeof(S_drm_format_modifier_properties_list_EXT) == sizeof(VkDrmFormatModifierPropertiesListEXT),
+	"struct and wrapper have different size!");
+
 /*	VkImageDrmFormatModifierExplicitCreateInfoEXT
 ex to: VkImageCreateInfo
 */
 struct		S_image_drm_format_modifier_explicit_create_info_EXT{
 private:
-	E_structure_type sType;
-	const void * pNext;
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_IMAGE_EXCPLICIT_DRM_FORMAT_MODIFIER_CREATE_INFO_EXT;
+	const void * pNext = nullptr;
 public:
 	uint64_t drmFormatModifier;
 	uint32_t drmFormatModifierPlaneCount;
 	const S_subresource_layout * pPlaneLayouts;
+S_image_drm_format_modifier_explicit_create_info_EXT( VkImageDrmFormatModifierExplicitCreateInfoEXT const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_image_drm_format_modifier_explicit_create_info_EXT ) );	}
+S_image_drm_format_modifier_explicit_create_info_EXT& operator=( VkImageDrmFormatModifierExplicitCreateInfoEXT const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_image_drm_format_modifier_explicit_create_info_EXT ) ); return *this;	}
+operator VkImageDrmFormatModifierExplicitCreateInfoEXT const&() const 
+	{	return *reinterpret_cast<const VkImageDrmFormatModifierExplicitCreateInfoEXT*>(this);	}
+operator VkImageDrmFormatModifierExplicitCreateInfoEXT &() 
+	{	return *reinterpret_cast<VkImageDrmFormatModifierExplicitCreateInfoEXT*>(this);	}
+
 };
-/*	VkImageDrmFormatModifierPropertiesEXT
-(returnedonly)
-*/
-struct		S_image_drm_format_modifier_properties_EXT{
-private:
-	E_structure_type sType;
-	void * pNext;
-public:
-	uint64_t drmFormatModifier;
-};
+static_assert(
+	sizeof(S_image_drm_format_modifier_explicit_create_info_EXT) == sizeof(VkImageDrmFormatModifierExplicitCreateInfoEXT),
+	"struct and wrapper have different size!");
+
 
 }}

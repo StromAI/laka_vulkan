@@ -19,15 +19,11 @@ Permission is granted to anyone to use this software for any purpose, including 
 #pragma once
 #include <memory>
 #include <array>
-#include <vector>
-#include <initializer_list>
 #include <type_traits>
 
+#include "common.h"
 #include "laka_vk_define.h"
-#include "vk_enums.h"
-#include "vk_bits.h"
-#include "vk_pNext.h"
-#include "vk_structs.h"
+#include "types.h"
 
 table_vk_flag(std::shared_ptr<std::string> mean ZK, , s, YK FH);
 table_vk_flag(std::shared_ptr<std::string> mean ZK, , Bits, YK FH);

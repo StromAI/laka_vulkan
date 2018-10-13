@@ -45,13 +45,13 @@
     <ClCompile Include="test_all.cpp">
       <Filter>测试</Filter>
     </ClCompile>
-    <ClCompile Include="vk_bits.cpp">
-      <Filter>基础\提取和生成代码</Filter>
+    <ClCompile Include="vk_pNext.cpp">
+      <Filter>资源文件\不再使用</Filter>
     </ClCompile>
     <ClCompile Include="vk_structs.cpp">
-      <Filter>基础\提取和生成代码</Filter>
+      <Filter>资源文件\不再使用</Filter>
     </ClCompile>
-    <ClCompile Include="vk_pNext.cpp">
+    <ClCompile Include="vk_bits.cpp">
       <Filter>资源文件\不再使用</Filter>
     </ClCompile>
   </ItemGroup>
@@ -74,20 +74,20 @@
     <ClInclude Include="test.h">
       <Filter>测试</Filter>
     </ClInclude>
-    <ClInclude Include="vk_bits.h">
-      <Filter>基础\提取和生成代码</Filter>
-    </ClInclude>
-    <ClInclude Include="vk_enums.h">
-      <Filter>基础\提取和生成代码</Filter>
-    </ClInclude>
-    <ClInclude Include="vk_structs.h">
-      <Filter>基础\提取和生成代码</Filter>
-    </ClInclude>
     <ClInclude Include="vk_pNext.h">
       <Filter>资源文件\不再使用</Filter>
     </ClInclude>
     <ClInclude Include="types.h">
       <Filter>基础\提取和生成代码</Filter>
+    </ClInclude>
+    <ClInclude Include="vk_structs.h">
+      <Filter>资源文件\不再使用</Filter>
+    </ClInclude>
+    <ClInclude Include="vk_enums.h">
+      <Filter>资源文件\不再使用</Filter>
+    </ClInclude>
+    <ClInclude Include="vk_bits.h">
+      <Filter>资源文件\不再使用</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
