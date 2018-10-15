@@ -119,42 +119,25 @@
   <ItemGroup>
     <ClCompile Include="common.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="vk_pNext.cpp" />
+    <ClCompile Include="types.cpp" />
     <ClCompile Include="test_all.cpp" />
     <ClCompile Include="vk.cpp" />
-    <ClCompile Include="vk_bits.cpp" />
     <ClCompile Include="vk_mean.cpp" />
     <ClCompile Include="vk_shortcut.cpp" />
-    <ClCompile Include="vk_structs.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="classes.h" />
     <ClInclude Include="common.h" />
     <ClInclude Include="laka_vk_define.h" />
     <ClInclude Include="types.h" />
-    <ClInclude Include="vk_pNext.h" />
     <ClInclude Include="test.h" />
     <ClInclude Include="vk.h" />
-    <ClInclude Include="vk_bits.h" />
-    <ClInclude Include="vk_enums.h" />
     <ClInclude Include="vk_mean.h" />
-    <ClInclude Include="vk_structs.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="code_generation\.idea\code_generation.iml" />
     <None Include="code_generation\types.py" />
-    <None Include="code_generation\vk_bits.py" />
-    <None Include="code_generation\vk_enums.py" />
-    <None Include="code_generation\vk_pNext.py" />
-    <None Include="code_generation\vk_structs.py" />
     <None Include="code_generation\vk_types.py" />
-    <None Include="old_file\find_bits2my_bits.py" />
-    <None Include="old_file\find_enum2my_enum.py" />
-    <None Include="old_file\find_struct_2_my_struct.py" />
-    <None Include="old_file\validusage.json" />
-    <None Include="old_file\valid_usage_json2sqlite3.py" />
-    <None Include="old_file\vk1.1.82.fuckhtml" />
-    <None Include="old_file\vk_1.1.85.db" />
     <None Include="vk.xlsx" />
   </ItemGroup>
   <ItemGroup>
@@ -163,9 +146,6 @@
     <Xml Include="code_generation\.idea\vcs.xml" />
     <Xml Include="code_generation\.idea\workspace.xml" />
     <Xml Include="vk.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="old_file\vk1.1.82.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

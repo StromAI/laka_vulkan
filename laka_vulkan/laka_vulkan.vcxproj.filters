@@ -45,14 +45,8 @@
     <ClCompile Include="test_all.cpp">
       <Filter>测试</Filter>
     </ClCompile>
-    <ClCompile Include="vk_pNext.cpp">
-      <Filter>资源文件\不再使用</Filter>
-    </ClCompile>
-    <ClCompile Include="vk_structs.cpp">
-      <Filter>资源文件\不再使用</Filter>
-    </ClCompile>
-    <ClCompile Include="vk_bits.cpp">
-      <Filter>资源文件\不再使用</Filter>
+    <ClCompile Include="types.cpp">
+      <Filter>基础\提取和生成代码</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -74,20 +68,8 @@
     <ClInclude Include="test.h">
       <Filter>测试</Filter>
     </ClInclude>
-    <ClInclude Include="vk_pNext.h">
-      <Filter>资源文件\不再使用</Filter>
-    </ClInclude>
     <ClInclude Include="types.h">
       <Filter>基础\提取和生成代码</Filter>
-    </ClInclude>
-    <ClInclude Include="vk_structs.h">
-      <Filter>资源文件\不再使用</Filter>
-    </ClInclude>
-    <ClInclude Include="vk_enums.h">
-      <Filter>资源文件\不再使用</Filter>
-    </ClInclude>
-    <ClInclude Include="vk_bits.h">
-      <Filter>资源文件\不再使用</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -97,41 +79,8 @@
     <None Include="code_generation\.idea\code_generation.iml">
       <Filter>资源文件\pyCharm项目</Filter>
     </None>
-    <None Include="code_generation\vk_bits.py">
-      <Filter>资源文件\不再使用</Filter>
-    </None>
-    <None Include="code_generation\vk_enums.py">
-      <Filter>资源文件\不再使用</Filter>
-    </None>
-    <None Include="code_generation\vk_pNext.py">
-      <Filter>资源文件\不再使用</Filter>
-    </None>
-    <None Include="old_file\find_bits2my_bits.py">
-      <Filter>资源文件\不再使用</Filter>
-    </None>
-    <None Include="old_file\find_enum2my_enum.py">
-      <Filter>资源文件\不再使用</Filter>
-    </None>
-    <None Include="old_file\find_struct_2_my_struct.py">
-      <Filter>资源文件\不再使用</Filter>
-    </None>
-    <None Include="old_file\valid_usage_json2sqlite3.py">
-      <Filter>资源文件\不再使用</Filter>
-    </None>
-    <None Include="old_file\validusage.json">
-      <Filter>资源文件\不再使用</Filter>
-    </None>
-    <None Include="old_file\vk_1.1.85.db">
-      <Filter>资源文件\不再使用</Filter>
-    </None>
-    <None Include="old_file\vk1.1.82.fuckhtml">
-      <Filter>资源文件\不再使用</Filter>
-    </None>
     <None Include="code_generation\types.py">
       <Filter>基础\提取和生成代码</Filter>
-    </None>
-    <None Include="code_generation\vk_structs.py">
-      <Filter>资源文件\不再使用</Filter>
     </None>
     <None Include="code_generation\vk_types.py">
       <Filter>基础\提取和生成代码</Filter>
@@ -153,10 +102,5 @@
     <Xml Include="vk.xml">
       <Filter>资源文件</Filter>
     </Xml>
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="old_file\vk1.1.82.txt">
-      <Filter>资源文件\不再使用</Filter>
-    </Text>
   </ItemGroup>
 </Project>

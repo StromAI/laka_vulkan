@@ -4350,12 +4350,15 @@ using S_descriptor_set_layout_support_KHR =
 
 
 /*---------------- simple struct ---------------------*/
+struct S_base_structure
+{VkStructureType sType; void * pNext = nullptr;};
 
 /*	VkOffset2D
 */
 struct		S_offset_2d{
 	int32_t x;
 	int32_t y;
+
 };
 
 /*	VkOffset3D
@@ -4364,6 +4367,7 @@ struct		S_offset_3d{
 	int32_t x;
 	int32_t y;
 	int32_t z;
+
 };
 
 /*	VkExtent2D
@@ -4371,6 +4375,7 @@ struct		S_offset_3d{
 struct		S_extent_2d{
 	uint32_t width;
 	uint32_t height;
+
 };
 
 /*	VkExtent3D
@@ -4379,6 +4384,7 @@ struct		S_extent_3d{
 	uint32_t width;
 	uint32_t height;
 	uint32_t depth;
+
 };
 
 /*	VkViewport
@@ -4390,6 +4396,7 @@ struct		S_viewport{
 	float height;
 	float minDepth;
 	float maxDepth;
+
 };
 
 /*	VkComponentMapping
@@ -4399,6 +4406,7 @@ struct		S_component_mapping{
 	E_component_swizzle g;
 	E_component_swizzle b;
 	E_component_swizzle a;
+
 };
 
 /*	VkExtensionProperties
@@ -4407,6 +4415,7 @@ struct		S_component_mapping{
 struct		S_extension_properties{
 	char extensionName[VK_MAX_EXTENSION_NAME_SIZE];
 	uint32_t specVersion;
+
 };
 
 /*	VkLayerProperties
@@ -4417,6 +4426,7 @@ struct		S_layer_properties{
 	uint32_t specVersion;
 	uint32_t implementationVersion;
 	char description[VK_MAX_DESCRIPTION_SIZE];
+
 };
 
 /*	VkAllocationCallbacks
@@ -4428,6 +4438,7 @@ struct		S_allocation_callbacks{
 	PFN_vkFreeFunction pfnFree;
 	PFN_vkInternalAllocationNotification pfnInternalAllocation;
 	PFN_vkInternalFreeNotification pfnInternalFree;
+
 };
 
 /*	VkMemoryRequirements
@@ -4437,6 +4448,7 @@ struct		S_memory_requirements{
 	VkDeviceSize size;
 	VkDeviceSize alignment;
 	uint32_t memoryTypeBits;
+
 };
 
 /*	VkMemoryType
@@ -4445,6 +4457,7 @@ struct		S_memory_requirements{
 struct		S_memory_type{
 	F_memory_property propertyFlags;
 	uint32_t heapIndex;
+
 };
 
 /*	VkMemoryHeap
@@ -4453,6 +4466,7 @@ struct		S_memory_type{
 struct		S_memory_heap{
 	VkDeviceSize size;
 	F_memory_heap flags;
+
 };
 
 /*	VkFormatProperties
@@ -4462,6 +4476,7 @@ struct		S_format_properties{
 	F_format_feature linearTilingFeatures;
 	F_format_feature optimalTilingFeatures;
 	F_format_feature bufferFeatures;
+
 };
 
 /*	VkDescriptorBufferInfo
@@ -4470,6 +4485,7 @@ struct		S_descriptor_buffer_info{
 	VkBuffer buffer;
 	VkDeviceSize offset;
 	VkDeviceSize range;
+
 };
 
 /*	VkDescriptorImageInfo
@@ -4478,6 +4494,7 @@ struct		S_descriptor_image_info{
 	VkSampler sampler;
 	VkImageView imageView;
 	E_image_layout imageLayout;
+
 };
 
 /*	VkImageSubresource
@@ -4486,6 +4503,7 @@ struct		S_image_subresource{
 	F_image_aspect aspectMask;
 	uint32_t mipLevel;
 	uint32_t arrayLayer;
+
 };
 
 /*	VkImageSubresourceLayers
@@ -4495,6 +4513,7 @@ struct		S_image_subresource_layers{
 	uint32_t mipLevel;
 	uint32_t baseArrayLayer;
 	uint32_t layerCount;
+
 };
 
 /*	VkImageSubresourceRange
@@ -4505,6 +4524,7 @@ struct		S_image_subresource_range{
 	uint32_t levelCount;
 	uint32_t baseArrayLayer;
 	uint32_t layerCount;
+
 };
 
 /*	VkSubresourceLayout
@@ -4516,6 +4536,7 @@ struct		S_subresource_layout{
 	VkDeviceSize rowPitch;
 	VkDeviceSize arrayPitch;
 	VkDeviceSize depthPitch;
+
 };
 
 /*	VkBufferCopy
@@ -4524,6 +4545,7 @@ struct		S_buffer_copy{
 	VkDeviceSize srcOffset;
 	VkDeviceSize dstOffset;
 	VkDeviceSize size;
+
 };
 
 /*	VkSparseMemoryBind
@@ -4534,6 +4556,7 @@ struct		S_sparse_memory_bind{
 	VkDeviceMemory memory;
 	VkDeviceSize memoryOffset;
 	F_sparse_memory_bind flags;
+
 };
 
 /*	VkDescriptorSetLayoutBinding
@@ -4544,6 +4567,7 @@ struct		S_descriptor_set_layout_binding{
 	uint32_t descriptorCount;
 	F_shader_stage stageFlags;
 	const VkSampler * pImmutableSamplers;
+
 };
 
 /*	VkDescriptorPoolSize
@@ -4551,6 +4575,7 @@ struct		S_descriptor_set_layout_binding{
 struct		S_descriptor_pool_size{
 	E_descriptor_type type;
 	uint32_t descriptorCount;
+
 };
 
 /*	VkSpecializationMapEntry
@@ -4559,6 +4584,7 @@ struct		S_specialization_map_entry{
 	uint32_t constantID;
 	uint32_t offset;
 	size_t size;
+
 };
 
 /*	VkVertexInputBindingDescription
@@ -4567,6 +4593,7 @@ struct		S_vertex_input_binding_description{
 	uint32_t binding;
 	uint32_t stride;
 	E_vertex_input_rate inputRate;
+
 };
 
 /*	VkVertexInputAttributeDescription
@@ -4576,6 +4603,7 @@ struct		S_vertex_input_attribute_description{
 	uint32_t binding;
 	E_format format;
 	uint32_t offset;
+
 };
 
 /*	VkPipelineColorBlendAttachmentState
@@ -4589,6 +4617,7 @@ struct		S_pipeline_color_blend_attachment_state{
 	E_blend_factor dstAlphaBlendFactor;
 	E_blend_op alphaBlendOp;
 	F_color_component colorWriteMask;
+
 };
 
 /*	VkStencilOpState
@@ -4601,6 +4630,7 @@ struct		S_stencil_op_state{
 	uint32_t compareMask;
 	uint32_t writeMask;
 	uint32_t reference;
+
 };
 
 /*	VkPushConstantRange
@@ -4609,6 +4639,7 @@ struct		S_push_constant_range{
 	F_shader_stage stageFlags;
 	uint32_t offset;
 	uint32_t size;
+
 };
 
 /*	VkClearDepthStencilValue
@@ -4616,6 +4647,7 @@ struct		S_push_constant_range{
 struct		S_clear_depth_stencil_value{
 	float depth;
 	uint32_t stencil;
+
 };
 
 /*	VkClearAttachment
@@ -4624,6 +4656,7 @@ struct		S_clear_attachment{
 	F_image_aspect aspectMask;
 	uint32_t colorAttachment;
 	VkClearValue clearValue;
+
 };
 
 /*	VkAttachmentDescription
@@ -4638,6 +4671,7 @@ struct		S_attachment_description{
 	E_attachment_store_op stencilStoreOp;
 	E_image_layout initialLayout;
 	E_image_layout finalLayout;
+
 };
 
 /*	VkAttachmentReference
@@ -4645,6 +4679,7 @@ struct		S_attachment_description{
 struct		S_attachment_reference{
 	uint32_t attachment;
 	E_image_layout layout;
+
 };
 
 /*	VkSubpassDependency
@@ -4657,6 +4692,7 @@ struct		S_subpass_dependency{
 	F_access srcAccessMask;
 	F_access dstAccessMask;
 	F_dependency dependencyFlags;
+
 };
 
 /*	VkPhysicalDeviceFeatures
@@ -4717,6 +4753,7 @@ struct		S_physical_device_features{
 	VkBool32 sparseResidencyAliased;
 	VkBool32 variableMultisampleRate;
 	VkBool32 inheritedQueries;
+
 };
 
 /*	VkPhysicalDeviceSparseProperties
@@ -4728,6 +4765,7 @@ struct		S_physical_device_sparse_properties{
 	VkBool32 residencyStandard3DBlockShape;
 	VkBool32 residencyAlignedMipSize;
 	VkBool32 residencyNonResidentStrict;
+
 };
 
 /*	VkPhysicalDeviceLimits
@@ -4840,6 +4878,7 @@ struct		S_physical_device_limits{
 	VkDeviceSize optimalBufferCopyOffsetAlignment;
 	VkDeviceSize optimalBufferCopyRowPitchAlignment;
 	VkDeviceSize nonCoherentAtomSize;
+
 };
 
 /*	VkDrawIndirectCommand
@@ -4849,6 +4888,7 @@ struct		S_draw_indirect_command{
 	uint32_t instanceCount;
 	uint32_t firstVertex;
 	uint32_t firstInstance;
+
 };
 
 /*	VkDrawIndexedIndirectCommand
@@ -4859,6 +4899,7 @@ struct		S_draw_indexed_indirect_command{
 	uint32_t firstIndex;
 	int32_t vertexOffset;
 	uint32_t firstInstance;
+
 };
 
 /*	VkDispatchIndirectCommand
@@ -4867,6 +4908,7 @@ struct		S_dispatch_indirect_command{
 	uint32_t x;
 	uint32_t y;
 	uint32_t z;
+
 };
 
 /*	VkDisplayPlanePropertiesKHR
@@ -4875,6 +4917,7 @@ struct		S_dispatch_indirect_command{
 struct		S_display_plane_properties_KHR{
 	VkDisplayKHR currentDisplay;
 	uint32_t currentStackIndex;
+
 };
 
 /*	VkSurfaceFormatKHR
@@ -4883,6 +4926,7 @@ struct		S_display_plane_properties_KHR{
 struct		S_surface_format_KHR{
 	E_format format;
 	E_color_space_KHR colorSpace;
+
 };
 
 /*	VkIndirectCommandsTokenNVX
@@ -4891,6 +4935,7 @@ struct		S_indirect_commands_token_NVX{
 	E_indirect_commands_token_type_NVX tokenType;
 	VkBuffer buffer;
 	VkDeviceSize offset;
+
 };
 
 /*	VkIndirectCommandsLayoutTokenNVX
@@ -4900,6 +4945,7 @@ struct		S_indirect_commands_layout_token_NVX{
 	uint32_t bindingUnit;
 	uint32_t dynamicCount;
 	uint32_t divisor;
+
 };
 
 /*	VkObjectTableEntryNVX
@@ -4907,6 +4953,7 @@ struct		S_indirect_commands_layout_token_NVX{
 struct		S_object_table_entry_NVX{
 	E_object_entry_type_NVX type;
 	F_object_entry_usage_NVX flags;
+
 };
 
 /*	VkObjectTablePipelineEntryNVX
@@ -4915,6 +4962,7 @@ struct		S_object_table_pipeline_entry_NVX{
 	E_object_entry_type_NVX type;
 	F_object_entry_usage_NVX flags;
 	VkPipeline pipeline;
+
 };
 
 /*	VkObjectTableDescriptorSetEntryNVX
@@ -4924,6 +4972,7 @@ struct		S_object_table_descriptor_set_entry_NVX{
 	F_object_entry_usage_NVX flags;
 	VkPipelineLayout pipelineLayout;
 	VkDescriptorSet descriptorSet;
+
 };
 
 /*	VkObjectTableVertexBufferEntryNVX
@@ -4932,6 +4981,7 @@ struct		S_object_table_vertex_buffer_entry_NVX{
 	E_object_entry_type_NVX type;
 	F_object_entry_usage_NVX flags;
 	VkBuffer buffer;
+
 };
 
 /*	VkObjectTableIndexBufferEntryNVX
@@ -4941,6 +4991,7 @@ struct		S_object_table_index_buffer_entry_NVX{
 	F_object_entry_usage_NVX flags;
 	VkBuffer buffer;
 	E_index_type indexType;
+
 };
 
 /*	VkObjectTablePushConstantEntryNVX
@@ -4950,6 +5001,7 @@ struct		S_object_table_push_constant_entry_NVX{
 	F_object_entry_usage_NVX flags;
 	VkPipelineLayout pipelineLayout;
 	F_shader_stage stageFlags;
+
 };
 
 /*	VkConformanceVersionKHR
@@ -4959,6 +5011,7 @@ struct		S_conformance_version_KHR{
 	uint8_t minor;
 	uint8_t subminor;
 	uint8_t patch;
+
 };
 
 /*	VkExternalMemoryProperties
@@ -4968,6 +5021,7 @@ struct		S_external_memory_properties{
 	F_external_memory_feature externalMemoryFeatures;
 	F_external_memory_handle_type exportFromImportedHandleTypes;
 	F_external_memory_handle_type compatibleHandleTypes;
+
 };
 
 /*	VkDescriptorUpdateTemplateEntry
@@ -4979,6 +5033,7 @@ struct		S_descriptor_update_template_entry{
 	E_descriptor_type descriptorType;
 	size_t offset;
 	size_t stride;
+
 };
 
 /*	VkXYColorEXT
@@ -4986,6 +5041,7 @@ Chromaticity coordinate*/
 struct		S_xy_color_EXT{
 	float x;
 	float y;
+
 };
 
 /*	VkRefreshCycleDurationGOOGLE
@@ -4993,6 +5049,7 @@ struct		S_xy_color_EXT{
 */
 struct		S_refresh_cycle_duration_GOOGLE{
 	uint64_t refreshDuration;
+
 };
 
 /*	VkPastPresentationTimingGOOGLE
@@ -5004,6 +5061,7 @@ struct		S_past_presentation_timing_GOOGLE{
 	uint64_t actualPresentTime;
 	uint64_t earliestPresentTime;
 	uint64_t presentMargin;
+
 };
 
 /*	VkPresentTimeGOOGLE
@@ -5011,6 +5069,7 @@ struct		S_past_presentation_timing_GOOGLE{
 struct		S_present_time_GOOGLE{
 	uint32_t presentID;
 	uint64_t desiredPresentTime;
+
 };
 
 /*	VkViewportWScalingNV
@@ -5018,6 +5077,7 @@ struct		S_present_time_GOOGLE{
 struct		S_viewport_w_scaling_NV{
 	float xcoeff;
 	float ycoeff;
+
 };
 
 /*	VkViewportSwizzleNV
@@ -5027,6 +5087,7 @@ struct		S_viewport_swizzle_NV{
 	E_viewport_coordinate_swizzle_NV y;
 	E_viewport_coordinate_swizzle_NV z;
 	E_viewport_coordinate_swizzle_NV w;
+
 };
 
 /*	VkInputAttachmentAspectReference
@@ -5035,6 +5096,7 @@ struct		S_input_attachment_aspect_reference{
 	uint32_t subpass;
 	uint32_t inputAttachmentIndex;
 	F_image_aspect aspectMask;
+
 };
 
 /*	VkSampleLocationEXT
@@ -5042,6 +5104,7 @@ struct		S_input_attachment_aspect_reference{
 struct		S_sample_location_EXT{
 	float x;
 	float y;
+
 };
 
 /*	VkShaderResourceUsageAMD
@@ -5053,6 +5116,7 @@ struct		S_shader_resource_usage_AMD{
 	uint32_t ldsSizePerLocalWorkGroup;
 	size_t ldsUsageSizeInBytes;
 	size_t scratchMemUsageInBytes;
+
 };
 
 /*	VkVertexInputBindingDivisorDescriptionEXT
@@ -5060,6 +5124,7 @@ struct		S_shader_resource_usage_AMD{
 struct		S_vertex_input_binding_divisor_description_EXT{
 	uint32_t binding;
 	uint32_t divisor;
+
 };
 
 /*	VkShadingRatePaletteNV
@@ -5067,6 +5132,7 @@ struct		S_vertex_input_binding_divisor_description_EXT{
 struct		S_shading_rate_palette_NV{
 	uint32_t shadingRatePaletteEntryCount;
 	const E_shading_rate_palette_entry_NV * pShadingRatePaletteEntries;
+
 };
 
 /*	VkCoarseSampleLocationNV
@@ -5075,6 +5141,7 @@ struct		S_coarse_sample_location_NV{
 	uint32_t pixelX;
 	uint32_t pixelY;
 	uint32_t sample;
+
 };
 
 /*	VkDrawMeshTasksIndirectCommandNV
@@ -5082,6 +5149,7 @@ struct		S_coarse_sample_location_NV{
 struct		S_draw_mesh_tasks_indirect_command_NV{
 	uint32_t taskCount;
 	uint32_t firstTask;
+
 };
 
 /*	VkDrmFormatModifierPropertiesEXT
@@ -5091,50 +5159,11 @@ struct		S_drm_format_modifier_properties_EXT{
 	uint64_t drmFormatModifier;
 	uint32_t drmFormatModifierPlaneCount;
 	F_format_feature drmFormatModifierTilingFeatures;
+
 };
 
 
 /*------------------ just sType pNext -------------------*/
-
-/*	VkBaseOutStructure
-*/
-struct		S_base_out_structure{
-private:
-	VkStructureType sType;
-	struct S_base_out_structure * pNext = nullptr;
-S_base_out_structure( VkBaseOutStructure const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_base_out_structure ) );	}
-S_base_out_structure& operator=( VkBaseOutStructure const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_base_out_structure ) ); return *this;	}
-operator VkBaseOutStructure const&() const 
-	{	return *reinterpret_cast<const VkBaseOutStructure*>(this);	}
-operator VkBaseOutStructure &() 
-	{	return *reinterpret_cast<VkBaseOutStructure*>(this);	}
-
-};
-static_assert(
-	sizeof(S_base_out_structure) == sizeof(VkBaseOutStructure),
-	"struct and wrapper have different size!");
-
-/*	VkBaseInStructure
-*/
-struct		S_base_in_structure{
-private:
-	VkStructureType sType;
-	const struct S_base_in_structure * pNext = nullptr;
-S_base_in_structure( VkBaseInStructure const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_base_in_structure ) );	}
-S_base_in_structure& operator=( VkBaseInStructure const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_base_in_structure ) ); return *this;	}
-operator VkBaseInStructure const&() const 
-	{	return *reinterpret_cast<const VkBaseInStructure*>(this);	}
-operator VkBaseInStructure &() 
-	{	return *reinterpret_cast<VkBaseInStructure*>(this);	}
-
-};
-static_assert(
-	sizeof(S_base_in_structure) == sizeof(VkBaseInStructure),
-	"struct and wrapper have different size!");
 
 /*	VkApplicationInfo
 */
@@ -5149,6 +5178,7 @@ public:
 	const char * pEngineName;
 	uint32_t engineVersion;
 	uint32_t apiVersion;
+
 S_application_info( VkApplicationInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_application_info ) );	}
 S_application_info& operator=( VkApplicationInfo const & rhs ) 
@@ -5177,6 +5207,7 @@ public:
 	uint32_t queueFamilyIndex;
 	uint32_t queueCount;
 	const float * pQueuePriorities;
+
 S_device_queue_create_info( VkDeviceQueueCreateInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_device_queue_create_info ) );	}
 S_device_queue_create_info& operator=( VkDeviceQueueCreateInfo const & rhs ) 
@@ -5185,6 +5216,8 @@ operator VkDeviceQueueCreateInfo const&() const
 	{	return *reinterpret_cast<const VkDeviceQueueCreateInfo*>(this);	}
 operator VkDeviceQueueCreateInfo &() 
 	{	return *reinterpret_cast<VkDeviceQueueCreateInfo*>(this);	}
+
+S_device_queue_create_info& n_device_queue_global_priority_create_info_EXT(S_device_queue_global_priority_create_info_EXT const& next_);
 
 };
 static_assert(
@@ -5214,6 +5247,7 @@ private:
 public:
 	VkDeviceSize allocationSize;
 	uint32_t memoryTypeIndex;
+
 S_memory_allocate_info( VkMemoryAllocateInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_memory_allocate_info ) );	}
 S_memory_allocate_info& operator=( VkMemoryAllocateInfo const & rhs ) 
@@ -5222,6 +5256,19 @@ operator VkMemoryAllocateInfo const&() const
 	{	return *reinterpret_cast<const VkMemoryAllocateInfo*>(this);	}
 operator VkMemoryAllocateInfo &() 
 	{	return *reinterpret_cast<VkMemoryAllocateInfo*>(this);	}
+
+S_memory_allocate_info& n_dedicated_allocation_memory_allocate_info_NV(S_dedicated_allocation_memory_allocate_info_NV const& next_);
+S_memory_allocate_info& n_export_memory_allocate_info_NV(S_export_memory_allocate_info_NV const& next_);
+S_memory_allocate_info& n_import_memory_win32_handle_info_NV(S_import_memory_win32_handle_info_NV const& next_);
+S_memory_allocate_info& n_export_memory_win32_handle_info_NV(S_export_memory_win32_handle_info_NV const& next_);
+S_memory_allocate_info& n_export_memory_allocate_info(S_export_memory_allocate_info const& next_);
+S_memory_allocate_info& n_import_memory_win32_handle_info_KHR(S_import_memory_win32_handle_info_KHR const& next_);
+S_memory_allocate_info& n_export_memory_win32_handle_info_KHR(S_export_memory_win32_handle_info_KHR const& next_);
+S_memory_allocate_info& n_import_memory_fd_info_KHR(S_import_memory_fd_info_KHR const& next_);
+S_memory_allocate_info& n_memory_allocate_flags_info(S_memory_allocate_flags_info const& next_);
+S_memory_allocate_info& n_memory_dedicated_allocate_info(S_memory_dedicated_allocate_info const& next_);
+S_memory_allocate_info& n_import_memory_host_pointer_info_EXT(S_import_memory_host_pointer_info_EXT const& next_);
+S_memory_allocate_info& n_import_android_hardware_buffer_info_ANDROID(S_import_android_hardware_buffer_info_ANDROID const& next_);
 
 };
 static_assert(
@@ -5239,6 +5286,7 @@ public:
 	VkDeviceMemory memory;
 	VkDeviceSize offset;
 	VkDeviceSize size;
+
 S_mapped_memory_range( VkMappedMemoryRange const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_mapped_memory_range ) );	}
 S_mapped_memory_range& operator=( VkMappedMemoryRange const & rhs ) 
@@ -5268,6 +5316,7 @@ public:
 	uint32_t dstBinding;
 	uint32_t dstArrayElement;
 	uint32_t descriptorCount;
+
 S_copy_descriptor_set( VkCopyDescriptorSet const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_copy_descriptor_set ) );	}
 S_copy_descriptor_set& operator=( VkCopyDescriptorSet const & rhs ) 
@@ -5299,6 +5348,7 @@ public:
 	E_sharing_mode sharingMode;
 	uint32_t queueFamilyIndexCount;
 	const uint32_t * pQueueFamilyIndices;
+
 S_buffer_create_info( VkBufferCreateInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_buffer_create_info ) );	}
 S_buffer_create_info& operator=( VkBufferCreateInfo const & rhs ) 
@@ -5307,6 +5357,9 @@ operator VkBufferCreateInfo const&() const
 	{	return *reinterpret_cast<const VkBufferCreateInfo*>(this);	}
 operator VkBufferCreateInfo &() 
 	{	return *reinterpret_cast<VkBufferCreateInfo*>(this);	}
+
+S_buffer_create_info& n_dedicated_allocation_buffer_create_info_NV(S_dedicated_allocation_buffer_create_info_NV const& next_);
+S_buffer_create_info& n_external_memory_buffer_create_info(S_external_memory_buffer_create_info const& next_);
 
 };
 static_assert(
@@ -5326,6 +5379,7 @@ public:
 	E_format format;
 	VkDeviceSize offset;
 	VkDeviceSize range;
+
 S_buffer_view_create_info( VkBufferViewCreateInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_buffer_view_create_info ) );	}
 S_buffer_view_create_info& operator=( VkBufferViewCreateInfo const & rhs ) 
@@ -5350,6 +5404,7 @@ private:
 public:
 	F_access srcAccessMask;
 	F_access dstAccessMask;
+
 S_memory_barrier( VkMemoryBarrier const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_memory_barrier ) );	}
 S_memory_barrier& operator=( VkMemoryBarrier const & rhs ) 
@@ -5379,6 +5434,7 @@ public:
 	VkBuffer buffer;
 	VkDeviceSize offset;
 	VkDeviceSize size;
+
 S_buffer_memory_barrier( VkBufferMemoryBarrier const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_buffer_memory_barrier ) );	}
 S_buffer_memory_barrier& operator=( VkBufferMemoryBarrier const & rhs ) 
@@ -5406,6 +5462,7 @@ public:
 	VkShaderModuleCreateFlags flags;
 	size_t codeSize;
 	const uint32_t * pCode;
+
 S_shader_module_create_info( VkShaderModuleCreateInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_shader_module_create_info ) );	}
 S_shader_module_create_info& operator=( VkShaderModuleCreateInfo const & rhs ) 
@@ -5414,6 +5471,8 @@ operator VkShaderModuleCreateInfo const&() const
 	{	return *reinterpret_cast<const VkShaderModuleCreateInfo*>(this);	}
 operator VkShaderModuleCreateInfo &() 
 	{	return *reinterpret_cast<VkShaderModuleCreateInfo*>(this);	}
+
+S_shader_module_create_info& n_shader_module_validation_cache_create_info_EXT(S_shader_module_validation_cache_create_info_EXT const& next_);
 
 };
 static_assert(
@@ -5433,6 +5492,7 @@ public:
 	VkDescriptorPool descriptorPool;
 	uint32_t descriptorSetCount;
 	const VkDescriptorSetLayout * pSetLayouts;
+
 S_descriptor_set_allocate_info( VkDescriptorSetAllocateInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_descriptor_set_allocate_info ) );	}
 S_descriptor_set_allocate_info& operator=( VkDescriptorSetAllocateInfo const & rhs ) 
@@ -5441,6 +5501,8 @@ operator VkDescriptorSetAllocateInfo const&() const
 	{	return *reinterpret_cast<const VkDescriptorSetAllocateInfo*>(this);	}
 operator VkDescriptorSetAllocateInfo &() 
 	{	return *reinterpret_cast<VkDescriptorSetAllocateInfo*>(this);	}
+
+S_descriptor_set_allocate_info& n_descriptor_set_variable_descriptor_count_allocate_info_EXT(S_descriptor_set_variable_descriptor_count_allocate_info_EXT const& next_);
 
 };
 static_assert(
@@ -5458,6 +5520,7 @@ public:
 	VkPipelineInputAssemblyStateCreateFlags flags;
 	E_primitive_topology topology;
 	VkBool32 primitiveRestartEnable;
+
 S_pipeline_input_assembly_state_create_info( VkPipelineInputAssemblyStateCreateInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_pipeline_input_assembly_state_create_info ) );	}
 S_pipeline_input_assembly_state_create_info& operator=( VkPipelineInputAssemblyStateCreateInfo const & rhs ) 
@@ -5484,6 +5547,7 @@ private:
 public:
 	VkPipelineTessellationStateCreateFlags flags;
 	uint32_t patchControlPoints;
+
 S_pipeline_tessellation_state_create_info( VkPipelineTessellationStateCreateInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_pipeline_tessellation_state_create_info ) );	}
 S_pipeline_tessellation_state_create_info& operator=( VkPipelineTessellationStateCreateInfo const & rhs ) 
@@ -5492,6 +5556,8 @@ operator VkPipelineTessellationStateCreateInfo const&() const
 	{	return *reinterpret_cast<const VkPipelineTessellationStateCreateInfo*>(this);	}
 operator VkPipelineTessellationStateCreateInfo &() 
 	{	return *reinterpret_cast<VkPipelineTessellationStateCreateInfo*>(this);	}
+
+S_pipeline_tessellation_state_create_info& n_pipeline_tessellation_domain_origin_state_create_info(S_pipeline_tessellation_domain_origin_state_create_info const& next_);
 
 };
 static_assert(
@@ -5520,6 +5586,7 @@ public:
 	float depthBiasClamp;
 	float depthBiasSlopeFactor;
 	float lineWidth;
+
 S_pipeline_rasterization_state_create_info( VkPipelineRasterizationStateCreateInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_pipeline_rasterization_state_create_info ) );	}
 S_pipeline_rasterization_state_create_info& operator=( VkPipelineRasterizationStateCreateInfo const & rhs ) 
@@ -5528,6 +5595,9 @@ operator VkPipelineRasterizationStateCreateInfo const&() const
 	{	return *reinterpret_cast<const VkPipelineRasterizationStateCreateInfo*>(this);	}
 operator VkPipelineRasterizationStateCreateInfo &() 
 	{	return *reinterpret_cast<VkPipelineRasterizationStateCreateInfo*>(this);	}
+
+S_pipeline_rasterization_state_create_info& n_pipeline_rasterization_state_rasterization_order_AMD(S_pipeline_rasterization_state_rasterization_order_AMD const& next_);
+S_pipeline_rasterization_state_create_info& n_pipeline_rasterization_conservative_state_create_info_EXT(S_pipeline_rasterization_conservative_state_create_info_EXT const& next_);
 
 };
 static_assert(
@@ -5553,6 +5623,7 @@ public:
 	const VkSampleMask * pSampleMask;
 	VkBool32 alphaToCoverageEnable;
 	VkBool32 alphaToOneEnable;
+
 S_pipeline_multisample_state_create_info( VkPipelineMultisampleStateCreateInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_pipeline_multisample_state_create_info ) );	}
 S_pipeline_multisample_state_create_info& operator=( VkPipelineMultisampleStateCreateInfo const & rhs ) 
@@ -5561,6 +5632,10 @@ operator VkPipelineMultisampleStateCreateInfo const&() const
 	{	return *reinterpret_cast<const VkPipelineMultisampleStateCreateInfo*>(this);	}
 operator VkPipelineMultisampleStateCreateInfo &() 
 	{	return *reinterpret_cast<VkPipelineMultisampleStateCreateInfo*>(this);	}
+
+S_pipeline_multisample_state_create_info& n_pipeline_coverage_to_color_state_create_info_NV(S_pipeline_coverage_to_color_state_create_info_NV const& next_);
+S_pipeline_multisample_state_create_info& n_pipeline_sample_locations_state_create_info_EXT(S_pipeline_sample_locations_state_create_info_EXT const& next_);
+S_pipeline_multisample_state_create_info& n_pipeline_coverage_modulation_state_create_info_NV(S_pipeline_coverage_modulation_state_create_info_NV const& next_);
 
 };
 static_assert(
@@ -5578,6 +5653,7 @@ public:
 	VkPipelineDynamicStateCreateFlags flags;
 	uint32_t dynamicStateCount;
 	const E_dynamic_state * pDynamicStates;
+
 S_pipeline_dynamic_state_create_info( VkPipelineDynamicStateCreateInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_pipeline_dynamic_state_create_info ) );	}
 S_pipeline_dynamic_state_create_info& operator=( VkPipelineDynamicStateCreateInfo const & rhs ) 
@@ -5603,6 +5679,7 @@ public:
 	VkPipelineCacheCreateFlags flags;
 	size_t initialDataSize;
 	const void * pInitialData;
+
 S_pipeline_cache_create_info( VkPipelineCacheCreateInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_pipeline_cache_create_info ) );	}
 S_pipeline_cache_create_info& operator=( VkPipelineCacheCreateInfo const & rhs ) 
@@ -5644,6 +5721,7 @@ public:
 	float maxLod;
 	E_border_color borderColor;
 	VkBool32 unnormalizedCoordinates;
+
 S_sampler_create_info( VkSamplerCreateInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_sampler_create_info ) );	}
 S_sampler_create_info& operator=( VkSamplerCreateInfo const & rhs ) 
@@ -5652,6 +5730,9 @@ operator VkSamplerCreateInfo const&() const
 	{	return *reinterpret_cast<const VkSamplerCreateInfo*>(this);	}
 operator VkSamplerCreateInfo &() 
 	{	return *reinterpret_cast<VkSamplerCreateInfo*>(this);	}
+
+S_sampler_create_info& n_sampler_ycbcr_conversion_info(S_sampler_ycbcr_conversion_info const& next_);
+S_sampler_create_info& n_sampler_reduction_mode_create_info_EXT(S_sampler_reduction_mode_create_info_EXT const& next_);
 
 };
 static_assert(
@@ -5668,6 +5749,7 @@ private:
 public:
 	F_command_pool_create flags;
 	uint32_t queueFamilyIndex;
+
 S_command_pool_create_info( VkCommandPoolCreateInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_command_pool_create_info ) );	}
 S_command_pool_create_info& operator=( VkCommandPoolCreateInfo const & rhs ) 
@@ -5693,6 +5775,7 @@ public:
 	VkCommandPool commandPool;
 	E_command_buffer_level level;
 	uint32_t commandBufferCount;
+
 S_command_buffer_allocate_info( VkCommandBufferAllocateInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_command_buffer_allocate_info ) );	}
 S_command_buffer_allocate_info& operator=( VkCommandBufferAllocateInfo const & rhs ) 
@@ -5723,6 +5806,7 @@ public:
 	VkBool32 occlusionQueryEnable;
 	F_query_control queryFlags;
 	F_query_pipeline_statistic pipelineStatistics;
+
 S_command_buffer_inheritance_info( VkCommandBufferInheritanceInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_command_buffer_inheritance_info ) );	}
 S_command_buffer_inheritance_info& operator=( VkCommandBufferInheritanceInfo const & rhs ) 
@@ -5731,6 +5815,8 @@ operator VkCommandBufferInheritanceInfo const&() const
 	{	return *reinterpret_cast<const VkCommandBufferInheritanceInfo*>(this);	}
 operator VkCommandBufferInheritanceInfo &() 
 	{	return *reinterpret_cast<VkCommandBufferInheritanceInfo*>(this);	}
+
+S_command_buffer_inheritance_info& n_command_buffer_inheritance_conditional_rendering_info_EXT(S_command_buffer_inheritance_conditional_rendering_info_EXT const& next_);
 
 };
 static_assert(
@@ -5746,6 +5832,7 @@ private:
 	const void * pNext = nullptr;
 public:
 	VkEventCreateFlags flags;
+
 S_event_create_info( VkEventCreateInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_event_create_info ) );	}
 S_event_create_info& operator=( VkEventCreateInfo const & rhs ) 
@@ -5772,6 +5859,7 @@ private:
 	const void * pNext = nullptr;
 public:
 	F_fence_create flags;
+
 S_fence_create_info( VkFenceCreateInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_fence_create_info ) );	}
 S_fence_create_info& operator=( VkFenceCreateInfo const & rhs ) 
@@ -5780,6 +5868,9 @@ operator VkFenceCreateInfo const&() const
 	{	return *reinterpret_cast<const VkFenceCreateInfo*>(this);	}
 operator VkFenceCreateInfo &() 
 	{	return *reinterpret_cast<VkFenceCreateInfo*>(this);	}
+
+S_fence_create_info& n_export_fence_create_info(S_export_fence_create_info const& next_);
+S_fence_create_info& n_export_fence_win32_handle_info_KHR(S_export_fence_win32_handle_info_KHR const& next_);
 
 };
 static_assert(
@@ -5798,6 +5889,7 @@ private:
 	const void * pNext = nullptr;
 public:
 	VkSemaphoreCreateFlags flags;
+
 S_semaphore_create_info( VkSemaphoreCreateInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_semaphore_create_info ) );	}
 S_semaphore_create_info& operator=( VkSemaphoreCreateInfo const & rhs ) 
@@ -5806,6 +5898,9 @@ operator VkSemaphoreCreateInfo const&() const
 	{	return *reinterpret_cast<const VkSemaphoreCreateInfo*>(this);	}
 operator VkSemaphoreCreateInfo &() 
 	{	return *reinterpret_cast<VkSemaphoreCreateInfo*>(this);	}
+
+S_semaphore_create_info& n_export_semaphore_create_info(S_export_semaphore_create_info const& next_);
+S_semaphore_create_info& n_export_semaphore_win32_handle_info_KHR(S_export_semaphore_win32_handle_info_KHR const& next_);
 
 };
 static_assert(
@@ -5824,6 +5919,7 @@ public:
 	E_query_type queryType;
 	uint32_t queryCount;
 	F_query_pipeline_statistic pipelineStatistics;
+
 S_query_pool_create_info( VkQueryPoolCreateInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_query_pool_create_info ) );	}
 S_query_pool_create_info& operator=( VkQueryPoolCreateInfo const & rhs ) 
@@ -5853,6 +5949,7 @@ public:
 	uint32_t width;
 	uint32_t height;
 	uint32_t layers;
+
 S_framebuffer_create_info( VkFramebufferCreateInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_framebuffer_create_info ) );	}
 S_framebuffer_create_info& operator=( VkFramebufferCreateInfo const & rhs ) 
@@ -5888,6 +5985,7 @@ public:
 	const VkCommandBuffer * pCommandBuffers;
 	uint32_t signalSemaphoreCount;
 	const VkSemaphore * pSignalSemaphores;
+
 S_submit_info( VkSubmitInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_submit_info ) );	}
 S_submit_info& operator=( VkSubmitInfo const & rhs ) 
@@ -5896,6 +5994,12 @@ operator VkSubmitInfo const&() const
 	{	return *reinterpret_cast<const VkSubmitInfo*>(this);	}
 operator VkSubmitInfo &() 
 	{	return *reinterpret_cast<VkSubmitInfo*>(this);	}
+
+S_submit_info& n_win32_keyed_mutex_acquire_release_info_NV(S_win32_keyed_mutex_acquire_release_info_NV const& next_);
+S_submit_info& n_win32_keyed_mutex_acquire_release_info_KHR(S_win32_keyed_mutex_acquire_release_info_KHR const& next_);
+S_submit_info& n_d_3d12_fence_submit_info_KHR(S_d_3d12_fence_submit_info_KHR const& next_);
+S_submit_info& n_device_group_submit_info(S_device_group_submit_info const& next_);
+S_submit_info& n_protected_submit_info(S_protected_submit_info const& next_);
 
 };
 static_assert(
@@ -5913,6 +6017,7 @@ private:
 public:
 	VkAndroidSurfaceCreateFlagsKHR flags;
 	struct ANativeWindow * window;
+
 S_android_surface_create_info_KHR( VkAndroidSurfaceCreateInfoKHR const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_android_surface_create_info_KHR ) );	}
 S_android_surface_create_info_KHR& operator=( VkAndroidSurfaceCreateInfoKHR const & rhs ) 
@@ -5940,6 +6045,7 @@ public:
 	VkMirSurfaceCreateFlagsKHR flags;
 	MirConnection * connection;
 	MirSurface * mirSurface;
+
 S_mir_surface_create_info_KHR( VkMirSurfaceCreateInfoKHR const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_mir_surface_create_info_KHR ) );	}
 S_mir_surface_create_info_KHR& operator=( VkMirSurfaceCreateInfoKHR const & rhs ) 
@@ -5966,6 +6072,7 @@ private:
 public:
 	VkViSurfaceCreateFlagsNN flags;
 	void * window;
+
 S_vi_surface_create_info_NN( VkViSurfaceCreateInfoNN const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_vi_surface_create_info_NN ) );	}
 S_vi_surface_create_info_NN& operator=( VkViSurfaceCreateInfoNN const & rhs ) 
@@ -5993,6 +6100,7 @@ public:
 	VkWaylandSurfaceCreateFlagsKHR flags;
 	struct wl_display * display;
 	struct wl_surface * surface;
+
 S_wayland_surface_create_info_KHR( VkWaylandSurfaceCreateInfoKHR const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_wayland_surface_create_info_KHR ) );	}
 S_wayland_surface_create_info_KHR& operator=( VkWaylandSurfaceCreateInfoKHR const & rhs ) 
@@ -6020,6 +6128,7 @@ public:
 	VkWin32SurfaceCreateFlagsKHR flags;
 	HINSTANCE hinstance;
 	HWND hwnd;
+
 S_win32_surface_create_info_KHR( VkWin32SurfaceCreateInfoKHR const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_win32_surface_create_info_KHR ) );	}
 S_win32_surface_create_info_KHR& operator=( VkWin32SurfaceCreateInfoKHR const & rhs ) 
@@ -6047,6 +6156,7 @@ public:
 	VkXlibSurfaceCreateFlagsKHR flags;
 	Display * dpy;
 	Window window;
+
 S_xlib_surface_create_info_KHR( VkXlibSurfaceCreateInfoKHR const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_xlib_surface_create_info_KHR ) );	}
 S_xlib_surface_create_info_KHR& operator=( VkXlibSurfaceCreateInfoKHR const & rhs ) 
@@ -6074,6 +6184,7 @@ public:
 	VkXcbSurfaceCreateFlagsKHR flags;
 	xcb_connection_t * connection;
 	xcb_window_t window;
+
 S_xcb_surface_create_info_KHR( VkXcbSurfaceCreateInfoKHR const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_xcb_surface_create_info_KHR ) );	}
 S_xcb_surface_create_info_KHR& operator=( VkXcbSurfaceCreateInfoKHR const & rhs ) 
@@ -6108,6 +6219,7 @@ public:
 	const VkSwapchainKHR * pSwapchains;
 	const uint32_t * pImageIndices;
 	E_result * pResults;
+
 S_present_info_KHR( VkPresentInfoKHR const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_present_info_KHR ) );	}
 S_present_info_KHR& operator=( VkPresentInfoKHR const & rhs ) 
@@ -6116,6 +6228,11 @@ operator VkPresentInfoKHR const&() const
 	{	return *reinterpret_cast<const VkPresentInfoKHR*>(this);	}
 operator VkPresentInfoKHR &() 
 	{	return *reinterpret_cast<VkPresentInfoKHR*>(this);	}
+
+S_present_info_KHR& n_display_present_info_KHR(S_display_present_info_KHR const& next_);
+S_present_info_KHR& n_present_regions_KHR(S_present_regions_KHR const& next_);
+S_present_info_KHR& n_device_group_present_info_KHR(S_device_group_present_info_KHR const& next_);
+S_present_info_KHR& n_present_times_info_GOOGLE(S_present_times_info_GOOGLE const& next_);
 
 };
 static_assert(
@@ -6134,6 +6251,7 @@ public:
 	F_debug_report_EXT flags;
 	PFN_vkDebugReportCallbackEXT pfnCallback;
 	void * pUserData;
+
 S_debug_report_callback_create_info_EXT( VkDebugReportCallbackCreateInfoEXT const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_debug_report_callback_create_info_EXT ) );	}
 S_debug_report_callback_create_info_EXT& operator=( VkDebugReportCallbackCreateInfoEXT const & rhs ) 
@@ -6142,6 +6260,8 @@ operator VkDebugReportCallbackCreateInfoEXT const&() const
 	{	return *reinterpret_cast<const VkDebugReportCallbackCreateInfoEXT*>(this);	}
 operator VkDebugReportCallbackCreateInfoEXT &() 
 	{	return *reinterpret_cast<VkDebugReportCallbackCreateInfoEXT*>(this);	}
+
+friend S_instance_create_info;
 
 };
 static_assert(
@@ -6159,6 +6279,7 @@ private:
 public:
 	uint32_t disabledValidationCheckCount;
 	const E_validation_check_EXT * pDisabledValidationChecks;
+
 S_validation_flags_EXT( VkValidationFlagsEXT const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_validation_flags_EXT ) );	}
 S_validation_flags_EXT& operator=( VkValidationFlagsEXT const & rhs ) 
@@ -6167,6 +6288,8 @@ operator VkValidationFlagsEXT const&() const
 	{	return *reinterpret_cast<const VkValidationFlagsEXT*>(this);	}
 operator VkValidationFlagsEXT &() 
 	{	return *reinterpret_cast<VkValidationFlagsEXT*>(this);	}
+
+friend S_instance_create_info;
 
 };
 static_assert(
@@ -6183,6 +6306,7 @@ private:
 	const void * pNext = nullptr;
 public:
 	E_rasterization_order_AMD rasterizationOrder;
+
 S_pipeline_rasterization_state_rasterization_order_AMD( VkPipelineRasterizationStateRasterizationOrderAMD const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_pipeline_rasterization_state_rasterization_order_AMD ) );	}
 S_pipeline_rasterization_state_rasterization_order_AMD& operator=( VkPipelineRasterizationStateRasterizationOrderAMD const & rhs ) 
@@ -6191,6 +6315,8 @@ operator VkPipelineRasterizationStateRasterizationOrderAMD const&() const
 	{	return *reinterpret_cast<const VkPipelineRasterizationStateRasterizationOrderAMD*>(this);	}
 operator VkPipelineRasterizationStateRasterizationOrderAMD &() 
 	{	return *reinterpret_cast<VkPipelineRasterizationStateRasterizationOrderAMD*>(this);	}
+
+friend S_pipeline_rasterization_state_create_info;
 
 };
 static_assert(
@@ -6208,6 +6334,7 @@ public:
 	E_debug_report_object_type_EXT objectType;
 	uint64_t object;
 	const char * pObjectName;
+
 S_debug_marker_object_name_info_EXT( VkDebugMarkerObjectNameInfoEXT const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_debug_marker_object_name_info_EXT ) );	}
 S_debug_marker_object_name_info_EXT& operator=( VkDebugMarkerObjectNameInfoEXT const & rhs ) 
@@ -6235,6 +6362,7 @@ public:
 	uint64_t tagName;
 	size_t tagSize;
 	const void * pTag;
+
 S_debug_marker_object_tag_info_EXT( VkDebugMarkerObjectTagInfoEXT const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_debug_marker_object_tag_info_EXT ) );	}
 S_debug_marker_object_tag_info_EXT& operator=( VkDebugMarkerObjectTagInfoEXT const & rhs ) 
@@ -6259,6 +6387,7 @@ private:
 public:
 	const char * pMarkerName;
 	float color[4];
+
 S_debug_marker_marker_info_EXT( VkDebugMarkerMarkerInfoEXT const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_debug_marker_marker_info_EXT ) );	}
 S_debug_marker_marker_info_EXT& operator=( VkDebugMarkerMarkerInfoEXT const & rhs ) 
@@ -6283,6 +6412,7 @@ private:
 	const void * pNext = nullptr;
 public:
 	VkBool32 dedicatedAllocation;
+
 S_dedicated_allocation_image_create_info_NV( VkDedicatedAllocationImageCreateInfoNV const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_dedicated_allocation_image_create_info_NV ) );	}
 S_dedicated_allocation_image_create_info_NV& operator=( VkDedicatedAllocationImageCreateInfoNV const & rhs ) 
@@ -6291,6 +6421,8 @@ operator VkDedicatedAllocationImageCreateInfoNV const&() const
 	{	return *reinterpret_cast<const VkDedicatedAllocationImageCreateInfoNV*>(this);	}
 operator VkDedicatedAllocationImageCreateInfoNV &() 
 	{	return *reinterpret_cast<VkDedicatedAllocationImageCreateInfoNV*>(this);	}
+
+friend S_image_create_info;
 
 };
 static_assert(
@@ -6307,6 +6439,7 @@ private:
 	const void * pNext = nullptr;
 public:
 	VkBool32 dedicatedAllocation;
+
 S_dedicated_allocation_buffer_create_info_NV( VkDedicatedAllocationBufferCreateInfoNV const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_dedicated_allocation_buffer_create_info_NV ) );	}
 S_dedicated_allocation_buffer_create_info_NV& operator=( VkDedicatedAllocationBufferCreateInfoNV const & rhs ) 
@@ -6315,6 +6448,8 @@ operator VkDedicatedAllocationBufferCreateInfoNV const&() const
 	{	return *reinterpret_cast<const VkDedicatedAllocationBufferCreateInfoNV*>(this);	}
 operator VkDedicatedAllocationBufferCreateInfoNV &() 
 	{	return *reinterpret_cast<VkDedicatedAllocationBufferCreateInfoNV*>(this);	}
+
+friend S_buffer_create_info;
 
 };
 static_assert(
@@ -6332,6 +6467,7 @@ private:
 public:
 	VkImage image;
 	VkBuffer buffer;
+
 S_dedicated_allocation_memory_allocate_info_NV( VkDedicatedAllocationMemoryAllocateInfoNV const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_dedicated_allocation_memory_allocate_info_NV ) );	}
 S_dedicated_allocation_memory_allocate_info_NV& operator=( VkDedicatedAllocationMemoryAllocateInfoNV const & rhs ) 
@@ -6340,6 +6476,8 @@ operator VkDedicatedAllocationMemoryAllocateInfoNV const&() const
 	{	return *reinterpret_cast<const VkDedicatedAllocationMemoryAllocateInfoNV*>(this);	}
 operator VkDedicatedAllocationMemoryAllocateInfoNV &() 
 	{	return *reinterpret_cast<VkDedicatedAllocationMemoryAllocateInfoNV*>(this);	}
+
+friend S_memory_allocate_info;
 
 };
 static_assert(
@@ -6356,6 +6494,7 @@ private:
 	const void * pNext = nullptr;
 public:
 	F_external_memory_handle_type_NV handleTypes;
+
 S_external_memory_image_create_info_NV( VkExternalMemoryImageCreateInfoNV const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_external_memory_image_create_info_NV ) );	}
 S_external_memory_image_create_info_NV& operator=( VkExternalMemoryImageCreateInfoNV const & rhs ) 
@@ -6364,6 +6503,8 @@ operator VkExternalMemoryImageCreateInfoNV const&() const
 	{	return *reinterpret_cast<const VkExternalMemoryImageCreateInfoNV*>(this);	}
 operator VkExternalMemoryImageCreateInfoNV &() 
 	{	return *reinterpret_cast<VkExternalMemoryImageCreateInfoNV*>(this);	}
+
+friend S_image_create_info;
 
 };
 static_assert(
@@ -6380,6 +6521,7 @@ private:
 	const void * pNext = nullptr;
 public:
 	F_external_memory_handle_type_NV handleTypes;
+
 S_export_memory_allocate_info_NV( VkExportMemoryAllocateInfoNV const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_export_memory_allocate_info_NV ) );	}
 S_export_memory_allocate_info_NV& operator=( VkExportMemoryAllocateInfoNV const & rhs ) 
@@ -6388,6 +6530,8 @@ operator VkExportMemoryAllocateInfoNV const&() const
 	{	return *reinterpret_cast<const VkExportMemoryAllocateInfoNV*>(this);	}
 operator VkExportMemoryAllocateInfoNV &() 
 	{	return *reinterpret_cast<VkExportMemoryAllocateInfoNV*>(this);	}
+
+friend S_memory_allocate_info;
 
 };
 static_assert(
@@ -6405,6 +6549,7 @@ private:
 public:
 	F_external_memory_handle_type_NV handleType;
 	HANDLE handle;
+
 S_import_memory_win32_handle_info_NV( VkImportMemoryWin32HandleInfoNV const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_import_memory_win32_handle_info_NV ) );	}
 S_import_memory_win32_handle_info_NV& operator=( VkImportMemoryWin32HandleInfoNV const & rhs ) 
@@ -6413,6 +6558,8 @@ operator VkImportMemoryWin32HandleInfoNV const&() const
 	{	return *reinterpret_cast<const VkImportMemoryWin32HandleInfoNV*>(this);	}
 operator VkImportMemoryWin32HandleInfoNV &() 
 	{	return *reinterpret_cast<VkImportMemoryWin32HandleInfoNV*>(this);	}
+
+friend S_memory_allocate_info;
 
 };
 static_assert(
@@ -6430,6 +6577,7 @@ private:
 public:
 	const SECURITY_ATTRIBUTES * pAttributes;
 	DWORD dwAccess;
+
 S_export_memory_win32_handle_info_NV( VkExportMemoryWin32HandleInfoNV const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_export_memory_win32_handle_info_NV ) );	}
 S_export_memory_win32_handle_info_NV& operator=( VkExportMemoryWin32HandleInfoNV const & rhs ) 
@@ -6438,6 +6586,8 @@ operator VkExportMemoryWin32HandleInfoNV const&() const
 	{	return *reinterpret_cast<const VkExportMemoryWin32HandleInfoNV*>(this);	}
 operator VkExportMemoryWin32HandleInfoNV &() 
 	{	return *reinterpret_cast<VkExportMemoryWin32HandleInfoNV*>(this);	}
+
+friend S_memory_allocate_info;
 
 };
 static_assert(
@@ -6461,6 +6611,7 @@ public:
 	uint32_t releaseCount;
 	const VkDeviceMemory * pReleaseSyncs;
 	const uint64_t * pReleaseKeys;
+
 S_win32_keyed_mutex_acquire_release_info_NV( VkWin32KeyedMutexAcquireReleaseInfoNV const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_win32_keyed_mutex_acquire_release_info_NV ) );	}
 S_win32_keyed_mutex_acquire_release_info_NV& operator=( VkWin32KeyedMutexAcquireReleaseInfoNV const & rhs ) 
@@ -6469,6 +6620,8 @@ operator VkWin32KeyedMutexAcquireReleaseInfoNV const&() const
 	{	return *reinterpret_cast<const VkWin32KeyedMutexAcquireReleaseInfoNV*>(this);	}
 operator VkWin32KeyedMutexAcquireReleaseInfoNV &() 
 	{	return *reinterpret_cast<VkWin32KeyedMutexAcquireReleaseInfoNV*>(this);	}
+
+friend S_submit_info;
 
 };
 static_assert(
@@ -6485,6 +6638,7 @@ private:
 	const void * pNext = nullptr;
 public:
 	VkBool32 computeBindingPointSupport;
+
 S_device_generated_commands_features_NVX( VkDeviceGeneratedCommandsFeaturesNVX const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_device_generated_commands_features_NVX ) );	}
 S_device_generated_commands_features_NVX& operator=( VkDeviceGeneratedCommandsFeaturesNVX const & rhs ) 
@@ -6512,6 +6666,7 @@ public:
 	uint32_t minSequenceCountBufferOffsetAlignment;
 	uint32_t minSequenceIndexBufferOffsetAlignment;
 	uint32_t minCommandsTokenBufferOffsetAlignment;
+
 S_device_generated_commands_limits_NVX( VkDeviceGeneratedCommandsLimitsNVX const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_device_generated_commands_limits_NVX ) );	}
 S_device_generated_commands_limits_NVX& operator=( VkDeviceGeneratedCommandsLimitsNVX const & rhs ) 
@@ -6537,6 +6692,7 @@ public:
 	VkObjectTableNVX objectTable;
 	VkIndirectCommandsLayoutNVX indirectCommandsLayout;
 	uint32_t maxSequencesCount;
+
 S_cmd_reserve_space_for_commands_info_NVX( VkCmdReserveSpaceForCommandsInfoNVX const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_cmd_reserve_space_for_commands_info_NVX ) );	}
 S_cmd_reserve_space_for_commands_info_NVX& operator=( VkCmdReserveSpaceForCommandsInfoNVX const & rhs ) 
@@ -6568,6 +6724,7 @@ public:
 	uint32_t maxStorageImagesPerDescriptor;
 	uint32_t maxSampledImagesPerDescriptor;
 	uint32_t maxPipelineLayouts;
+
 S_object_table_create_info_NVX( VkObjectTableCreateInfoNVX const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_object_table_create_info_NVX ) );	}
 S_object_table_create_info_NVX& operator=( VkObjectTableCreateInfoNVX const & rhs ) 
@@ -6598,6 +6755,7 @@ public:
 	E_image_tiling tiling;
 	F_image_usage usage;
 	F_image_create flags;
+
 S_physical_device_image_format_info2( VkPhysicalDeviceImageFormatInfo2 const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_physical_device_image_format_info2 ) );	}
 S_physical_device_image_format_info2& operator=( VkPhysicalDeviceImageFormatInfo2 const & rhs ) 
@@ -6606,6 +6764,9 @@ operator VkPhysicalDeviceImageFormatInfo2 const&() const
 	{	return *reinterpret_cast<const VkPhysicalDeviceImageFormatInfo2*>(this);	}
 operator VkPhysicalDeviceImageFormatInfo2 &() 
 	{	return *reinterpret_cast<VkPhysicalDeviceImageFormatInfo2*>(this);	}
+
+S_physical_device_image_format_info2& n_physical_device_external_image_format_info(S_physical_device_external_image_format_info const& next_);
+S_physical_device_image_format_info2& n_physical_device_image_drm_format_modifier_info_EXT(S_physical_device_image_drm_format_modifier_info_EXT const& next_);
 
 };
 static_assert(
@@ -6625,6 +6786,7 @@ public:
 	F_sample_count samples;
 	F_image_usage usage;
 	E_image_tiling tiling;
+
 S_physical_device_sparse_image_format_info2( VkPhysicalDeviceSparseImageFormatInfo2 const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_physical_device_sparse_image_format_info2 ) );	}
 S_physical_device_sparse_image_format_info2& operator=( VkPhysicalDeviceSparseImageFormatInfo2 const & rhs ) 
@@ -6649,6 +6811,7 @@ private:
 	void * pNext = nullptr;
 public:
 	uint32_t maxPushDescriptors;
+
 S_physical_device_push_descriptor_properties_KHR( VkPhysicalDevicePushDescriptorPropertiesKHR const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_physical_device_push_descriptor_properties_KHR ) );	}
 S_physical_device_push_descriptor_properties_KHR& operator=( VkPhysicalDevicePushDescriptorPropertiesKHR const & rhs ) 
@@ -6657,6 +6820,8 @@ operator VkPhysicalDevicePushDescriptorPropertiesKHR const&() const
 	{	return *reinterpret_cast<const VkPhysicalDevicePushDescriptorPropertiesKHR*>(this);	}
 operator VkPhysicalDevicePushDescriptorPropertiesKHR &() 
 	{	return *reinterpret_cast<VkPhysicalDevicePushDescriptorPropertiesKHR*>(this);	}
+
+friend S_physical_device_properties2;
 
 };
 static_assert(
@@ -6674,6 +6839,7 @@ private:
 public:
 	VkBool32 variablePointersStorageBuffer;
 	VkBool32 variablePointers;
+
 S_physical_device_variable_pointer_features( VkPhysicalDeviceVariablePointerFeatures const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_physical_device_variable_pointer_features ) );	}
 S_physical_device_variable_pointer_features& operator=( VkPhysicalDeviceVariablePointerFeatures const & rhs ) 
@@ -6682,6 +6848,9 @@ operator VkPhysicalDeviceVariablePointerFeatures const&() const
 	{	return *reinterpret_cast<const VkPhysicalDeviceVariablePointerFeatures*>(this);	}
 operator VkPhysicalDeviceVariablePointerFeatures &() 
 	{	return *reinterpret_cast<VkPhysicalDeviceVariablePointerFeatures*>(this);	}
+
+friend S_physical_device_features2;
+friend S_device_create_info;
 
 };
 static_assert(
@@ -6698,6 +6867,7 @@ private:
 	const void * pNext = nullptr;
 public:
 	F_external_memory_handle_type handleType;
+
 S_physical_device_external_image_format_info( VkPhysicalDeviceExternalImageFormatInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_physical_device_external_image_format_info ) );	}
 S_physical_device_external_image_format_info& operator=( VkPhysicalDeviceExternalImageFormatInfo const & rhs ) 
@@ -6706,6 +6876,8 @@ operator VkPhysicalDeviceExternalImageFormatInfo const&() const
 	{	return *reinterpret_cast<const VkPhysicalDeviceExternalImageFormatInfo*>(this);	}
 operator VkPhysicalDeviceExternalImageFormatInfo &() 
 	{	return *reinterpret_cast<VkPhysicalDeviceExternalImageFormatInfo*>(this);	}
+
+friend S_physical_device_image_format_info2;
 
 };
 static_assert(
@@ -6723,6 +6895,7 @@ public:
 	F_buffer_create flags;
 	F_buffer_usage usage;
 	F_external_memory_handle_type handleType;
+
 S_physical_device_external_buffer_info( VkPhysicalDeviceExternalBufferInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_physical_device_external_buffer_info ) );	}
 S_physical_device_external_buffer_info& operator=( VkPhysicalDeviceExternalBufferInfo const & rhs ) 
@@ -6752,6 +6925,7 @@ public:
 	uint8_t deviceLUID[VK_LUID_SIZE];
 	uint32_t deviceNodeMask;
 	VkBool32 deviceLUIDValid;
+
 S_physical_device_id_properties( VkPhysicalDeviceIDProperties const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_physical_device_id_properties ) );	}
 S_physical_device_id_properties& operator=( VkPhysicalDeviceIDProperties const & rhs ) 
@@ -6760,6 +6934,8 @@ operator VkPhysicalDeviceIDProperties const&() const
 	{	return *reinterpret_cast<const VkPhysicalDeviceIDProperties*>(this);	}
 operator VkPhysicalDeviceIDProperties &() 
 	{	return *reinterpret_cast<VkPhysicalDeviceIDProperties*>(this);	}
+
+friend S_physical_device_properties2;
 
 };
 static_assert(
@@ -6776,6 +6952,7 @@ private:
 	const void * pNext = nullptr;
 public:
 	F_external_memory_handle_type handleTypes;
+
 S_external_memory_image_create_info( VkExternalMemoryImageCreateInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_external_memory_image_create_info ) );	}
 S_external_memory_image_create_info& operator=( VkExternalMemoryImageCreateInfo const & rhs ) 
@@ -6784,6 +6961,8 @@ operator VkExternalMemoryImageCreateInfo const&() const
 	{	return *reinterpret_cast<const VkExternalMemoryImageCreateInfo*>(this);	}
 operator VkExternalMemoryImageCreateInfo &() 
 	{	return *reinterpret_cast<VkExternalMemoryImageCreateInfo*>(this);	}
+
+friend S_image_create_info;
 
 };
 static_assert(
@@ -6800,6 +6979,7 @@ private:
 	const void * pNext = nullptr;
 public:
 	F_external_memory_handle_type handleTypes;
+
 S_external_memory_buffer_create_info( VkExternalMemoryBufferCreateInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_external_memory_buffer_create_info ) );	}
 S_external_memory_buffer_create_info& operator=( VkExternalMemoryBufferCreateInfo const & rhs ) 
@@ -6808,6 +6988,8 @@ operator VkExternalMemoryBufferCreateInfo const&() const
 	{	return *reinterpret_cast<const VkExternalMemoryBufferCreateInfo*>(this);	}
 operator VkExternalMemoryBufferCreateInfo &() 
 	{	return *reinterpret_cast<VkExternalMemoryBufferCreateInfo*>(this);	}
+
+friend S_buffer_create_info;
 
 };
 static_assert(
@@ -6824,6 +7006,7 @@ private:
 	const void * pNext = nullptr;
 public:
 	F_external_memory_handle_type handleTypes;
+
 S_export_memory_allocate_info( VkExportMemoryAllocateInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_export_memory_allocate_info ) );	}
 S_export_memory_allocate_info& operator=( VkExportMemoryAllocateInfo const & rhs ) 
@@ -6832,6 +7015,8 @@ operator VkExportMemoryAllocateInfo const&() const
 	{	return *reinterpret_cast<const VkExportMemoryAllocateInfo*>(this);	}
 operator VkExportMemoryAllocateInfo &() 
 	{	return *reinterpret_cast<VkExportMemoryAllocateInfo*>(this);	}
+
+friend S_memory_allocate_info;
 
 };
 static_assert(
@@ -6850,6 +7035,7 @@ public:
 	F_external_memory_handle_type handleType;
 	HANDLE handle;
 	LPCWSTR name;
+
 S_import_memory_win32_handle_info_KHR( VkImportMemoryWin32HandleInfoKHR const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_import_memory_win32_handle_info_KHR ) );	}
 S_import_memory_win32_handle_info_KHR& operator=( VkImportMemoryWin32HandleInfoKHR const & rhs ) 
@@ -6858,6 +7044,8 @@ operator VkImportMemoryWin32HandleInfoKHR const&() const
 	{	return *reinterpret_cast<const VkImportMemoryWin32HandleInfoKHR*>(this);	}
 operator VkImportMemoryWin32HandleInfoKHR &() 
 	{	return *reinterpret_cast<VkImportMemoryWin32HandleInfoKHR*>(this);	}
+
+friend S_memory_allocate_info;
 
 };
 static_assert(
@@ -6876,6 +7064,7 @@ public:
 	const SECURITY_ATTRIBUTES * pAttributes;
 	DWORD dwAccess;
 	LPCWSTR name;
+
 S_export_memory_win32_handle_info_KHR( VkExportMemoryWin32HandleInfoKHR const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_export_memory_win32_handle_info_KHR ) );	}
 S_export_memory_win32_handle_info_KHR& operator=( VkExportMemoryWin32HandleInfoKHR const & rhs ) 
@@ -6884,6 +7073,8 @@ operator VkExportMemoryWin32HandleInfoKHR const&() const
 	{	return *reinterpret_cast<const VkExportMemoryWin32HandleInfoKHR*>(this);	}
 operator VkExportMemoryWin32HandleInfoKHR &() 
 	{	return *reinterpret_cast<VkExportMemoryWin32HandleInfoKHR*>(this);	}
+
+friend S_memory_allocate_info;
 
 };
 static_assert(
@@ -6900,6 +7091,7 @@ private:
 	void * pNext = nullptr;
 public:
 	uint32_t memoryTypeBits;
+
 S_memory_win32_handle_properties_KHR( VkMemoryWin32HandlePropertiesKHR const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_memory_win32_handle_properties_KHR ) );	}
 S_memory_win32_handle_properties_KHR& operator=( VkMemoryWin32HandlePropertiesKHR const & rhs ) 
@@ -6924,6 +7116,7 @@ private:
 public:
 	VkDeviceMemory memory;
 	F_external_memory_handle_type handleType;
+
 S_memory_get_win32_handle_info_KHR( VkMemoryGetWin32HandleInfoKHR const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_memory_get_win32_handle_info_KHR ) );	}
 S_memory_get_win32_handle_info_KHR& operator=( VkMemoryGetWin32HandleInfoKHR const & rhs ) 
@@ -6949,6 +7142,7 @@ private:
 public:
 	F_external_memory_handle_type handleType;
 	int fd;
+
 S_import_memory_fd_info_KHR( VkImportMemoryFdInfoKHR const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_import_memory_fd_info_KHR ) );	}
 S_import_memory_fd_info_KHR& operator=( VkImportMemoryFdInfoKHR const & rhs ) 
@@ -6957,6 +7151,8 @@ operator VkImportMemoryFdInfoKHR const&() const
 	{	return *reinterpret_cast<const VkImportMemoryFdInfoKHR*>(this);	}
 operator VkImportMemoryFdInfoKHR &() 
 	{	return *reinterpret_cast<VkImportMemoryFdInfoKHR*>(this);	}
+
+friend S_memory_allocate_info;
 
 };
 static_assert(
@@ -6973,6 +7169,7 @@ private:
 	void * pNext = nullptr;
 public:
 	uint32_t memoryTypeBits;
+
 S_memory_fd_properties_KHR( VkMemoryFdPropertiesKHR const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_memory_fd_properties_KHR ) );	}
 S_memory_fd_properties_KHR& operator=( VkMemoryFdPropertiesKHR const & rhs ) 
@@ -6997,6 +7194,7 @@ private:
 public:
 	VkDeviceMemory memory;
 	F_external_memory_handle_type handleType;
+
 S_memory_get_fd_info_KHR( VkMemoryGetFdInfoKHR const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_memory_get_fd_info_KHR ) );	}
 S_memory_get_fd_info_KHR& operator=( VkMemoryGetFdInfoKHR const & rhs ) 
@@ -7028,6 +7226,7 @@ public:
 	uint32_t releaseCount;
 	const VkDeviceMemory * pReleaseSyncs;
 	const uint64_t * pReleaseKeys;
+
 S_win32_keyed_mutex_acquire_release_info_KHR( VkWin32KeyedMutexAcquireReleaseInfoKHR const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_win32_keyed_mutex_acquire_release_info_KHR ) );	}
 S_win32_keyed_mutex_acquire_release_info_KHR& operator=( VkWin32KeyedMutexAcquireReleaseInfoKHR const & rhs ) 
@@ -7036,6 +7235,8 @@ operator VkWin32KeyedMutexAcquireReleaseInfoKHR const&() const
 	{	return *reinterpret_cast<const VkWin32KeyedMutexAcquireReleaseInfoKHR*>(this);	}
 operator VkWin32KeyedMutexAcquireReleaseInfoKHR &() 
 	{	return *reinterpret_cast<VkWin32KeyedMutexAcquireReleaseInfoKHR*>(this);	}
+
+friend S_submit_info;
 
 };
 static_assert(
@@ -7052,6 +7253,7 @@ private:
 	const void * pNext = nullptr;
 public:
 	F_external_semaphore_handle_type handleType;
+
 S_physical_device_external_semaphore_info( VkPhysicalDeviceExternalSemaphoreInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_physical_device_external_semaphore_info ) );	}
 S_physical_device_external_semaphore_info& operator=( VkPhysicalDeviceExternalSemaphoreInfo const & rhs ) 
@@ -7078,6 +7280,7 @@ public:
 	F_external_semaphore_handle_type exportFromImportedHandleTypes;
 	F_external_semaphore_handle_type compatibleHandleTypes;
 	F_external_semaphore_feature externalSemaphoreFeatures;
+
 S_external_semaphore_properties( VkExternalSemaphoreProperties const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_external_semaphore_properties ) );	}
 S_external_semaphore_properties& operator=( VkExternalSemaphoreProperties const & rhs ) 
@@ -7102,6 +7305,7 @@ private:
 	const void * pNext = nullptr;
 public:
 	F_external_semaphore_handle_type handleTypes;
+
 S_export_semaphore_create_info( VkExportSemaphoreCreateInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_export_semaphore_create_info ) );	}
 S_export_semaphore_create_info& operator=( VkExportSemaphoreCreateInfo const & rhs ) 
@@ -7110,6 +7314,8 @@ operator VkExportSemaphoreCreateInfo const&() const
 	{	return *reinterpret_cast<const VkExportSemaphoreCreateInfo*>(this);	}
 operator VkExportSemaphoreCreateInfo &() 
 	{	return *reinterpret_cast<VkExportSemaphoreCreateInfo*>(this);	}
+
+friend S_semaphore_create_info;
 
 };
 static_assert(
@@ -7129,6 +7335,7 @@ public:
 	F_external_semaphore_handle_type handleType;
 	HANDLE handle;
 	LPCWSTR name;
+
 S_import_semaphore_win32_handle_info_KHR( VkImportSemaphoreWin32HandleInfoKHR const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_import_semaphore_win32_handle_info_KHR ) );	}
 S_import_semaphore_win32_handle_info_KHR& operator=( VkImportSemaphoreWin32HandleInfoKHR const & rhs ) 
@@ -7155,6 +7362,7 @@ public:
 	const SECURITY_ATTRIBUTES * pAttributes;
 	DWORD dwAccess;
 	LPCWSTR name;
+
 S_export_semaphore_win32_handle_info_KHR( VkExportSemaphoreWin32HandleInfoKHR const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_export_semaphore_win32_handle_info_KHR ) );	}
 S_export_semaphore_win32_handle_info_KHR& operator=( VkExportSemaphoreWin32HandleInfoKHR const & rhs ) 
@@ -7163,6 +7371,8 @@ operator VkExportSemaphoreWin32HandleInfoKHR const&() const
 	{	return *reinterpret_cast<const VkExportSemaphoreWin32HandleInfoKHR*>(this);	}
 operator VkExportSemaphoreWin32HandleInfoKHR &() 
 	{	return *reinterpret_cast<VkExportSemaphoreWin32HandleInfoKHR*>(this);	}
+
+friend S_semaphore_create_info;
 
 };
 static_assert(
@@ -7182,6 +7392,7 @@ public:
 	const uint64_t * pWaitSemaphoreValues;
 	uint32_t signalSemaphoreValuesCount;
 	const uint64_t * pSignalSemaphoreValues;
+
 S_d_3d12_fence_submit_info_KHR( VkD3D12FenceSubmitInfoKHR const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_d_3d12_fence_submit_info_KHR ) );	}
 S_d_3d12_fence_submit_info_KHR& operator=( VkD3D12FenceSubmitInfoKHR const & rhs ) 
@@ -7190,6 +7401,8 @@ operator VkD3D12FenceSubmitInfoKHR const&() const
 	{	return *reinterpret_cast<const VkD3D12FenceSubmitInfoKHR*>(this);	}
 operator VkD3D12FenceSubmitInfoKHR &() 
 	{	return *reinterpret_cast<VkD3D12FenceSubmitInfoKHR*>(this);	}
+
+friend S_submit_info;
 
 };
 static_assert(
@@ -7206,6 +7419,7 @@ private:
 public:
 	VkSemaphore semaphore;
 	F_external_semaphore_handle_type handleType;
+
 S_semaphore_get_win32_handle_info_KHR( VkSemaphoreGetWin32HandleInfoKHR const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_semaphore_get_win32_handle_info_KHR ) );	}
 S_semaphore_get_win32_handle_info_KHR& operator=( VkSemaphoreGetWin32HandleInfoKHR const & rhs ) 
@@ -7232,6 +7446,7 @@ public:
 	F_semaphore_import flags;
 	F_external_semaphore_handle_type handleType;
 	int fd;
+
 S_import_semaphore_fd_info_KHR( VkImportSemaphoreFdInfoKHR const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_import_semaphore_fd_info_KHR ) );	}
 S_import_semaphore_fd_info_KHR& operator=( VkImportSemaphoreFdInfoKHR const & rhs ) 
@@ -7256,6 +7471,7 @@ private:
 public:
 	VkSemaphore semaphore;
 	F_external_semaphore_handle_type handleType;
+
 S_semaphore_get_fd_info_KHR( VkSemaphoreGetFdInfoKHR const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_semaphore_get_fd_info_KHR ) );	}
 S_semaphore_get_fd_info_KHR& operator=( VkSemaphoreGetFdInfoKHR const & rhs ) 
@@ -7279,6 +7495,7 @@ private:
 	const void * pNext = nullptr;
 public:
 	F_external_fence_handle_type handleType;
+
 S_physical_device_external_fence_info( VkPhysicalDeviceExternalFenceInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_physical_device_external_fence_info ) );	}
 S_physical_device_external_fence_info& operator=( VkPhysicalDeviceExternalFenceInfo const & rhs ) 
@@ -7305,6 +7522,7 @@ public:
 	F_external_fence_handle_type exportFromImportedHandleTypes;
 	F_external_fence_handle_type compatibleHandleTypes;
 	F_external_fence_feature externalFenceFeatures;
+
 S_external_fence_properties( VkExternalFenceProperties const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_external_fence_properties ) );	}
 S_external_fence_properties& operator=( VkExternalFenceProperties const & rhs ) 
@@ -7329,6 +7547,7 @@ private:
 	const void * pNext = nullptr;
 public:
 	F_external_fence_handle_type handleTypes;
+
 S_export_fence_create_info( VkExportFenceCreateInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_export_fence_create_info ) );	}
 S_export_fence_create_info& operator=( VkExportFenceCreateInfo const & rhs ) 
@@ -7337,6 +7556,8 @@ operator VkExportFenceCreateInfo const&() const
 	{	return *reinterpret_cast<const VkExportFenceCreateInfo*>(this);	}
 operator VkExportFenceCreateInfo &() 
 	{	return *reinterpret_cast<VkExportFenceCreateInfo*>(this);	}
+
+friend S_fence_create_info;
 
 };
 static_assert(
@@ -7356,6 +7577,7 @@ public:
 	F_external_fence_handle_type handleType;
 	HANDLE handle;
 	LPCWSTR name;
+
 S_import_fence_win32_handle_info_KHR( VkImportFenceWin32HandleInfoKHR const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_import_fence_win32_handle_info_KHR ) );	}
 S_import_fence_win32_handle_info_KHR& operator=( VkImportFenceWin32HandleInfoKHR const & rhs ) 
@@ -7382,6 +7604,7 @@ public:
 	const SECURITY_ATTRIBUTES * pAttributes;
 	DWORD dwAccess;
 	LPCWSTR name;
+
 S_export_fence_win32_handle_info_KHR( VkExportFenceWin32HandleInfoKHR const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_export_fence_win32_handle_info_KHR ) );	}
 S_export_fence_win32_handle_info_KHR& operator=( VkExportFenceWin32HandleInfoKHR const & rhs ) 
@@ -7390,6 +7613,8 @@ operator VkExportFenceWin32HandleInfoKHR const&() const
 	{	return *reinterpret_cast<const VkExportFenceWin32HandleInfoKHR*>(this);	}
 operator VkExportFenceWin32HandleInfoKHR &() 
 	{	return *reinterpret_cast<VkExportFenceWin32HandleInfoKHR*>(this);	}
+
+friend S_fence_create_info;
 
 };
 static_assert(
@@ -7406,6 +7631,7 @@ private:
 public:
 	VkFence fence;
 	F_external_fence_handle_type handleType;
+
 S_fence_get_win32_handle_info_KHR( VkFenceGetWin32HandleInfoKHR const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_fence_get_win32_handle_info_KHR ) );	}
 S_fence_get_win32_handle_info_KHR& operator=( VkFenceGetWin32HandleInfoKHR const & rhs ) 
@@ -7432,6 +7658,7 @@ public:
 	F_fence_import flags;
 	F_external_fence_handle_type handleType;
 	int fd;
+
 S_import_fence_fd_info_KHR( VkImportFenceFdInfoKHR const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_import_fence_fd_info_KHR ) );	}
 S_import_fence_fd_info_KHR& operator=( VkImportFenceFdInfoKHR const & rhs ) 
@@ -7456,6 +7683,7 @@ private:
 public:
 	VkFence fence;
 	F_external_fence_handle_type handleType;
+
 S_fence_get_fd_info_KHR( VkFenceGetFdInfoKHR const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_fence_get_fd_info_KHR ) );	}
 S_fence_get_fd_info_KHR& operator=( VkFenceGetFdInfoKHR const & rhs ) 
@@ -7482,6 +7710,7 @@ public:
 	VkBool32 multiview;
 	VkBool32 multiviewGeometryShader;
 	VkBool32 multiviewTessellationShader;
+
 S_physical_device_multiview_features( VkPhysicalDeviceMultiviewFeatures const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_physical_device_multiview_features ) );	}
 S_physical_device_multiview_features& operator=( VkPhysicalDeviceMultiviewFeatures const & rhs ) 
@@ -7490,6 +7719,9 @@ operator VkPhysicalDeviceMultiviewFeatures const&() const
 	{	return *reinterpret_cast<const VkPhysicalDeviceMultiviewFeatures*>(this);	}
 operator VkPhysicalDeviceMultiviewFeatures &() 
 	{	return *reinterpret_cast<VkPhysicalDeviceMultiviewFeatures*>(this);	}
+
+friend S_physical_device_features2;
+friend S_device_create_info;
 
 };
 static_assert(
@@ -7508,6 +7740,7 @@ private:
 public:
 	uint32_t maxMultiviewViewCount;
 	uint32_t maxMultiviewInstanceIndex;
+
 S_physical_device_multiview_properties( VkPhysicalDeviceMultiviewProperties const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_physical_device_multiview_properties ) );	}
 S_physical_device_multiview_properties& operator=( VkPhysicalDeviceMultiviewProperties const & rhs ) 
@@ -7516,6 +7749,8 @@ operator VkPhysicalDeviceMultiviewProperties const&() const
 	{	return *reinterpret_cast<const VkPhysicalDeviceMultiviewProperties*>(this);	}
 operator VkPhysicalDeviceMultiviewProperties &() 
 	{	return *reinterpret_cast<VkPhysicalDeviceMultiviewProperties*>(this);	}
+
+friend S_physical_device_properties2;
 
 };
 static_assert(
@@ -7537,6 +7772,7 @@ public:
 	const int32_t * pViewOffsets;
 	uint32_t correlationMaskCount;
 	const uint32_t * pCorrelationMasks;
+
 S_render_pass_multiview_create_info( VkRenderPassMultiviewCreateInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_render_pass_multiview_create_info ) );	}
 S_render_pass_multiview_create_info& operator=( VkRenderPassMultiviewCreateInfo const & rhs ) 
@@ -7545,6 +7781,8 @@ operator VkRenderPassMultiviewCreateInfo const&() const
 	{	return *reinterpret_cast<const VkRenderPassMultiviewCreateInfo*>(this);	}
 operator VkRenderPassMultiviewCreateInfo &() 
 	{	return *reinterpret_cast<VkRenderPassMultiviewCreateInfo*>(this);	}
+
+friend S_render_pass_create_info;
 
 };
 static_assert(
@@ -7560,6 +7798,7 @@ private:
 	const void * pNext = nullptr;
 public:
 	E_display_power_state_EXT powerState;
+
 S_display_power_info_EXT( VkDisplayPowerInfoEXT const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_display_power_info_EXT ) );	}
 S_display_power_info_EXT& operator=( VkDisplayPowerInfoEXT const & rhs ) 
@@ -7583,6 +7822,7 @@ private:
 	const void * pNext = nullptr;
 public:
 	E_device_event_type_EXT deviceEvent;
+
 S_device_event_info_EXT( VkDeviceEventInfoEXT const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_device_event_info_EXT ) );	}
 S_device_event_info_EXT& operator=( VkDeviceEventInfoEXT const & rhs ) 
@@ -7606,6 +7846,7 @@ private:
 	const void * pNext = nullptr;
 public:
 	E_display_event_type_EXT displayEvent;
+
 S_display_event_info_EXT( VkDisplayEventInfoEXT const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_display_event_info_EXT ) );	}
 S_display_event_info_EXT& operator=( VkDisplayEventInfoEXT const & rhs ) 
@@ -7630,6 +7871,7 @@ private:
 	const void * pNext = nullptr;
 public:
 	F_surface_counter_EXT surfaceCounters;
+
 S_swapchain_counter_create_info_EXT( VkSwapchainCounterCreateInfoEXT const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_swapchain_counter_create_info_EXT ) );	}
 S_swapchain_counter_create_info_EXT& operator=( VkSwapchainCounterCreateInfoEXT const & rhs ) 
@@ -7638,6 +7880,8 @@ operator VkSwapchainCounterCreateInfoEXT const&() const
 	{	return *reinterpret_cast<const VkSwapchainCounterCreateInfoEXT*>(this);	}
 operator VkSwapchainCounterCreateInfoEXT &() 
 	{	return *reinterpret_cast<VkSwapchainCounterCreateInfoEXT*>(this);	}
+
+friend S_swapchain_create_info_KHR;
 
 };
 static_assert(
@@ -7656,6 +7900,7 @@ public:
 	uint32_t physicalDeviceCount;
 	VkPhysicalDevice physicalDevices[VK_MAX_DEVICE_GROUP_SIZE];
 	VkBool32 subsetAllocation;
+
 S_physical_device_group_properties( VkPhysicalDeviceGroupProperties const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_physical_device_group_properties ) );	}
 S_physical_device_group_properties& operator=( VkPhysicalDeviceGroupProperties const & rhs ) 
@@ -7681,6 +7926,7 @@ private:
 public:
 	F_memory_allocate flags;
 	uint32_t deviceMask;
+
 S_memory_allocate_flags_info( VkMemoryAllocateFlagsInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_memory_allocate_flags_info ) );	}
 S_memory_allocate_flags_info& operator=( VkMemoryAllocateFlagsInfo const & rhs ) 
@@ -7689,6 +7935,8 @@ operator VkMemoryAllocateFlagsInfo const&() const
 	{	return *reinterpret_cast<const VkMemoryAllocateFlagsInfo*>(this);	}
 operator VkMemoryAllocateFlagsInfo &() 
 	{	return *reinterpret_cast<VkMemoryAllocateFlagsInfo*>(this);	}
+
+friend S_memory_allocate_info;
 
 };
 static_assert(
@@ -7708,6 +7956,7 @@ public:
 	VkBuffer buffer;
 	VkDeviceMemory memory;
 	VkDeviceSize memoryOffset;
+
 S_bind_buffer_memory_info( VkBindBufferMemoryInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_bind_buffer_memory_info ) );	}
 S_bind_buffer_memory_info& operator=( VkBindBufferMemoryInfo const & rhs ) 
@@ -7716,6 +7965,8 @@ operator VkBindBufferMemoryInfo const&() const
 	{	return *reinterpret_cast<const VkBindBufferMemoryInfo*>(this);	}
 operator VkBindBufferMemoryInfo &() 
 	{	return *reinterpret_cast<VkBindBufferMemoryInfo*>(this);	}
+
+S_bind_buffer_memory_info& n_bind_buffer_memory_device_group_info(S_bind_buffer_memory_device_group_info const& next_);
 
 };
 static_assert(
@@ -7733,6 +7984,7 @@ private:
 public:
 	uint32_t deviceIndexCount;
 	const uint32_t * pDeviceIndices;
+
 S_bind_buffer_memory_device_group_info( VkBindBufferMemoryDeviceGroupInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_bind_buffer_memory_device_group_info ) );	}
 S_bind_buffer_memory_device_group_info& operator=( VkBindBufferMemoryDeviceGroupInfo const & rhs ) 
@@ -7741,6 +7993,8 @@ operator VkBindBufferMemoryDeviceGroupInfo const&() const
 	{	return *reinterpret_cast<const VkBindBufferMemoryDeviceGroupInfo*>(this);	}
 operator VkBindBufferMemoryDeviceGroupInfo &() 
 	{	return *reinterpret_cast<VkBindBufferMemoryDeviceGroupInfo*>(this);	}
+
+friend S_bind_buffer_memory_info;
 
 };
 static_assert(
@@ -7762,6 +8016,7 @@ public:
 	VkImage image;
 	VkDeviceMemory memory;
 	VkDeviceSize memoryOffset;
+
 S_bind_image_memory_info( VkBindImageMemoryInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_bind_image_memory_info ) );	}
 S_bind_image_memory_info& operator=( VkBindImageMemoryInfo const & rhs ) 
@@ -7770,6 +8025,10 @@ operator VkBindImageMemoryInfo const&() const
 	{	return *reinterpret_cast<const VkBindImageMemoryInfo*>(this);	}
 operator VkBindImageMemoryInfo &() 
 	{	return *reinterpret_cast<VkBindImageMemoryInfo*>(this);	}
+
+S_bind_image_memory_info& n_bind_image_memory_device_group_info(S_bind_image_memory_device_group_info const& next_);
+S_bind_image_memory_info& n_bind_image_memory_swapchain_info_KHR(S_bind_image_memory_swapchain_info_KHR const& next_);
+S_bind_image_memory_info& n_bind_image_plane_memory_info(S_bind_image_plane_memory_info const& next_);
 
 };
 static_assert(
@@ -7786,6 +8045,7 @@ private:
 	const void * pNext = nullptr;
 public:
 	uint32_t deviceMask;
+
 S_device_group_command_buffer_begin_info( VkDeviceGroupCommandBufferBeginInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_device_group_command_buffer_begin_info ) );	}
 S_device_group_command_buffer_begin_info& operator=( VkDeviceGroupCommandBufferBeginInfo const & rhs ) 
@@ -7794,6 +8054,8 @@ operator VkDeviceGroupCommandBufferBeginInfo const&() const
 	{	return *reinterpret_cast<const VkDeviceGroupCommandBufferBeginInfo*>(this);	}
 operator VkDeviceGroupCommandBufferBeginInfo &() 
 	{	return *reinterpret_cast<VkDeviceGroupCommandBufferBeginInfo*>(this);	}
+
+friend S_command_buffer_begin_info;
 
 };
 static_assert(
@@ -7815,6 +8077,7 @@ public:
 	const uint32_t * pCommandBufferDeviceMasks;
 	uint32_t signalSemaphoreCount;
 	const uint32_t * pSignalSemaphoreDeviceIndices;
+
 S_device_group_submit_info( VkDeviceGroupSubmitInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_device_group_submit_info ) );	}
 S_device_group_submit_info& operator=( VkDeviceGroupSubmitInfo const & rhs ) 
@@ -7823,6 +8086,8 @@ operator VkDeviceGroupSubmitInfo const&() const
 	{	return *reinterpret_cast<const VkDeviceGroupSubmitInfo*>(this);	}
 operator VkDeviceGroupSubmitInfo &() 
 	{	return *reinterpret_cast<VkDeviceGroupSubmitInfo*>(this);	}
+
+friend S_submit_info;
 
 };
 static_assert(
@@ -7840,6 +8105,7 @@ private:
 public:
 	uint32_t resourceDeviceIndex;
 	uint32_t memoryDeviceIndex;
+
 S_device_group_bind_sparse_info( VkDeviceGroupBindSparseInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_device_group_bind_sparse_info ) );	}
 S_device_group_bind_sparse_info& operator=( VkDeviceGroupBindSparseInfo const & rhs ) 
@@ -7848,6 +8114,8 @@ operator VkDeviceGroupBindSparseInfo const&() const
 	{	return *reinterpret_cast<const VkDeviceGroupBindSparseInfo*>(this);	}
 operator VkDeviceGroupBindSparseInfo &() 
 	{	return *reinterpret_cast<VkDeviceGroupBindSparseInfo*>(this);	}
+
+friend S_bind_sparse_info;
 
 };
 static_assert(
@@ -7865,6 +8133,7 @@ private:
 public:
 	uint32_t presentMask[VK_MAX_DEVICE_GROUP_SIZE];
 	F_device_group_present_mode_KHR modes;
+
 S_device_group_present_capabilities_KHR( VkDeviceGroupPresentCapabilitiesKHR const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_device_group_present_capabilities_KHR ) );	}
 S_device_group_present_capabilities_KHR& operator=( VkDeviceGroupPresentCapabilitiesKHR const & rhs ) 
@@ -7889,6 +8158,7 @@ private:
 	const void * pNext = nullptr;
 public:
 	VkSwapchainKHR swapchain;
+
 S_image_swapchain_create_info_KHR( VkImageSwapchainCreateInfoKHR const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_image_swapchain_create_info_KHR ) );	}
 S_image_swapchain_create_info_KHR& operator=( VkImageSwapchainCreateInfoKHR const & rhs ) 
@@ -7897,6 +8167,8 @@ operator VkImageSwapchainCreateInfoKHR const&() const
 	{	return *reinterpret_cast<const VkImageSwapchainCreateInfoKHR*>(this);	}
 operator VkImageSwapchainCreateInfoKHR &() 
 	{	return *reinterpret_cast<VkImageSwapchainCreateInfoKHR*>(this);	}
+
+friend S_image_create_info;
 
 };
 static_assert(
@@ -7914,6 +8186,7 @@ private:
 public:
 	VkSwapchainKHR swapchain;
 	uint32_t imageIndex;
+
 S_bind_image_memory_swapchain_info_KHR( VkBindImageMemorySwapchainInfoKHR const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_bind_image_memory_swapchain_info_KHR ) );	}
 S_bind_image_memory_swapchain_info_KHR& operator=( VkBindImageMemorySwapchainInfoKHR const & rhs ) 
@@ -7922,6 +8195,8 @@ operator VkBindImageMemorySwapchainInfoKHR const&() const
 	{	return *reinterpret_cast<const VkBindImageMemorySwapchainInfoKHR*>(this);	}
 operator VkBindImageMemorySwapchainInfoKHR &() 
 	{	return *reinterpret_cast<VkBindImageMemorySwapchainInfoKHR*>(this);	}
+
+friend S_bind_image_memory_info;
 
 };
 static_assert(
@@ -7941,6 +8216,7 @@ public:
 	VkSemaphore semaphore;
 	VkFence fence;
 	uint32_t deviceMask;
+
 S_acquire_next_image_info_KHR( VkAcquireNextImageInfoKHR const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_acquire_next_image_info_KHR ) );	}
 S_acquire_next_image_info_KHR& operator=( VkAcquireNextImageInfoKHR const & rhs ) 
@@ -7967,6 +8243,7 @@ public:
 	uint32_t swapchainCount;
 	const uint32_t * pDeviceMasks;
 	F_device_group_present_mode_KHR mode;
+
 S_device_group_present_info_KHR( VkDeviceGroupPresentInfoKHR const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_device_group_present_info_KHR ) );	}
 S_device_group_present_info_KHR& operator=( VkDeviceGroupPresentInfoKHR const & rhs ) 
@@ -7975,6 +8252,8 @@ operator VkDeviceGroupPresentInfoKHR const&() const
 	{	return *reinterpret_cast<const VkDeviceGroupPresentInfoKHR*>(this);	}
 operator VkDeviceGroupPresentInfoKHR &() 
 	{	return *reinterpret_cast<VkDeviceGroupPresentInfoKHR*>(this);	}
+
+friend S_present_info_KHR;
 
 };
 static_assert(
@@ -7992,6 +8271,7 @@ private:
 public:
 	uint32_t physicalDeviceCount;
 	const VkPhysicalDevice * pPhysicalDevices;
+
 S_device_group_device_create_info( VkDeviceGroupDeviceCreateInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_device_group_device_create_info ) );	}
 S_device_group_device_create_info& operator=( VkDeviceGroupDeviceCreateInfo const & rhs ) 
@@ -8000,6 +8280,8 @@ operator VkDeviceGroupDeviceCreateInfo const&() const
 	{	return *reinterpret_cast<const VkDeviceGroupDeviceCreateInfo*>(this);	}
 operator VkDeviceGroupDeviceCreateInfo &() 
 	{	return *reinterpret_cast<VkDeviceGroupDeviceCreateInfo*>(this);	}
+
+friend S_device_create_info;
 
 };
 static_assert(
@@ -8016,6 +8298,7 @@ private:
 	const void * pNext = nullptr;
 public:
 	F_device_group_present_mode_KHR modes;
+
 S_device_group_swapchain_create_info_KHR( VkDeviceGroupSwapchainCreateInfoKHR const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_device_group_swapchain_create_info_KHR ) );	}
 S_device_group_swapchain_create_info_KHR& operator=( VkDeviceGroupSwapchainCreateInfoKHR const & rhs ) 
@@ -8024,6 +8307,8 @@ operator VkDeviceGroupSwapchainCreateInfoKHR const&() const
 	{	return *reinterpret_cast<const VkDeviceGroupSwapchainCreateInfoKHR*>(this);	}
 operator VkDeviceGroupSwapchainCreateInfoKHR &() 
 	{	return *reinterpret_cast<VkDeviceGroupSwapchainCreateInfoKHR*>(this);	}
+
+friend S_swapchain_create_info_KHR;
 
 };
 static_assert(
@@ -8041,6 +8326,7 @@ private:
 public:
 	VkIOSSurfaceCreateFlagsMVK flags;
 	const void * pView;
+
 S_ios_surface_create_info_MVK( VkIOSSurfaceCreateInfoMVK const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_ios_surface_create_info_MVK ) );	}
 S_ios_surface_create_info_MVK& operator=( VkIOSSurfaceCreateInfoMVK const & rhs ) 
@@ -8067,6 +8353,7 @@ private:
 public:
 	VkMacOSSurfaceCreateFlagsMVK flags;
 	const void * pView;
+
 S_mac_os_surface_create_info_MVK( VkMacOSSurfaceCreateInfoMVK const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_mac_os_surface_create_info_MVK ) );	}
 S_mac_os_surface_create_info_MVK& operator=( VkMacOSSurfaceCreateInfoMVK const & rhs ) 
@@ -8092,6 +8379,7 @@ private:
 	void * pNext = nullptr;
 public:
 	uint32_t maxDiscardRectangles;
+
 S_physical_device_discard_rectangle_properties_EXT( VkPhysicalDeviceDiscardRectanglePropertiesEXT const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_physical_device_discard_rectangle_properties_EXT ) );	}
 S_physical_device_discard_rectangle_properties_EXT& operator=( VkPhysicalDeviceDiscardRectanglePropertiesEXT const & rhs ) 
@@ -8100,6 +8388,8 @@ operator VkPhysicalDeviceDiscardRectanglePropertiesEXT const&() const
 	{	return *reinterpret_cast<const VkPhysicalDeviceDiscardRectanglePropertiesEXT*>(this);	}
 operator VkPhysicalDeviceDiscardRectanglePropertiesEXT &() 
 	{	return *reinterpret_cast<VkPhysicalDeviceDiscardRectanglePropertiesEXT*>(this);	}
+
+friend S_physical_device_properties2;
 
 };
 static_assert(
@@ -8117,6 +8407,7 @@ private:
 	void * pNext = nullptr;
 public:
 	VkBool32 perViewPositionAllComponents;
+
 S_physical_device_multiview_per_view_attributes_properties_NVX( VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_physical_device_multiview_per_view_attributes_properties_NVX ) );	}
 S_physical_device_multiview_per_view_attributes_properties_NVX& operator=( VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX const & rhs ) 
@@ -8125,6 +8416,8 @@ operator VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX const&() const
 	{	return *reinterpret_cast<const VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX*>(this);	}
 operator VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX &() 
 	{	return *reinterpret_cast<VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX*>(this);	}
+
+friend S_physical_device_properties2;
 
 };
 static_assert(
@@ -8140,6 +8433,7 @@ private:
 	const void * pNext = nullptr;
 public:
 	VkSurfaceKHR surface;
+
 S_physical_device_surface_info2_KHR( VkPhysicalDeviceSurfaceInfo2KHR const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_physical_device_surface_info2_KHR ) );	}
 S_physical_device_surface_info2_KHR& operator=( VkPhysicalDeviceSurfaceInfo2KHR const & rhs ) 
@@ -8164,6 +8458,7 @@ private:
 public:
 	VkDisplayModeKHR mode;
 	uint32_t planeIndex;
+
 S_display_plane_info2_KHR( VkDisplayPlaneInfo2KHR const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_display_plane_info2_KHR ) );	}
 S_display_plane_info2_KHR& operator=( VkDisplayPlaneInfo2KHR const & rhs ) 
@@ -8189,6 +8484,7 @@ private:
 	void * pNext = nullptr;
 public:
 	F_image_usage sharedPresentSupportedUsageFlags;
+
 S_shared_present_surface_capabilities_KHR( VkSharedPresentSurfaceCapabilitiesKHR const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_shared_present_surface_capabilities_KHR ) );	}
 S_shared_present_surface_capabilities_KHR& operator=( VkSharedPresentSurfaceCapabilitiesKHR const & rhs ) 
@@ -8197,6 +8493,8 @@ operator VkSharedPresentSurfaceCapabilitiesKHR const&() const
 	{	return *reinterpret_cast<const VkSharedPresentSurfaceCapabilitiesKHR*>(this);	}
 operator VkSharedPresentSurfaceCapabilitiesKHR &() 
 	{	return *reinterpret_cast<VkSharedPresentSurfaceCapabilitiesKHR*>(this);	}
+
+friend S_surface_capabilities2_KHR;
 
 };
 static_assert(
@@ -8216,6 +8514,7 @@ public:
 	VkBool32 uniformAndStorageBuffer16BitAccess;
 	VkBool32 storagePushConstant16;
 	VkBool32 storageInputOutput16;
+
 S_physical_device_16bit_storage_features( VkPhysicalDevice16BitStorageFeatures const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_physical_device_16bit_storage_features ) );	}
 S_physical_device_16bit_storage_features& operator=( VkPhysicalDevice16BitStorageFeatures const & rhs ) 
@@ -8224,6 +8523,9 @@ operator VkPhysicalDevice16BitStorageFeatures const&() const
 	{	return *reinterpret_cast<const VkPhysicalDevice16BitStorageFeatures*>(this);	}
 operator VkPhysicalDevice16BitStorageFeatures &() 
 	{	return *reinterpret_cast<VkPhysicalDevice16BitStorageFeatures*>(this);	}
+
+friend S_physical_device_features2;
+friend S_device_create_info;
 
 };
 static_assert(
@@ -8244,6 +8546,7 @@ public:
 	F_shader_stage supportedStages;
 	F_subgroup_feature supportedOperations;
 	VkBool32 quadOperationsInAllStages;
+
 S_physical_device_subgroup_properties( VkPhysicalDeviceSubgroupProperties const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_physical_device_subgroup_properties ) );	}
 S_physical_device_subgroup_properties& operator=( VkPhysicalDeviceSubgroupProperties const & rhs ) 
@@ -8252,6 +8555,8 @@ operator VkPhysicalDeviceSubgroupProperties const&() const
 	{	return *reinterpret_cast<const VkPhysicalDeviceSubgroupProperties*>(this);	}
 operator VkPhysicalDeviceSubgroupProperties &() 
 	{	return *reinterpret_cast<VkPhysicalDeviceSubgroupProperties*>(this);	}
+
+friend S_physical_device_properties2;
 
 };
 static_assert(
@@ -8267,6 +8572,7 @@ private:
 	const void * pNext = nullptr;
 public:
 	VkBuffer buffer;
+
 S_buffer_memory_requirements_info2( VkBufferMemoryRequirementsInfo2 const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_buffer_memory_requirements_info2 ) );	}
 S_buffer_memory_requirements_info2& operator=( VkBufferMemoryRequirementsInfo2 const & rhs ) 
@@ -8292,6 +8598,7 @@ private:
 	const void * pNext = nullptr;
 public:
 	VkImage image;
+
 S_image_memory_requirements_info2( VkImageMemoryRequirementsInfo2 const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_image_memory_requirements_info2 ) );	}
 S_image_memory_requirements_info2& operator=( VkImageMemoryRequirementsInfo2 const & rhs ) 
@@ -8300,6 +8607,8 @@ operator VkImageMemoryRequirementsInfo2 const&() const
 	{	return *reinterpret_cast<const VkImageMemoryRequirementsInfo2*>(this);	}
 operator VkImageMemoryRequirementsInfo2 &() 
 	{	return *reinterpret_cast<VkImageMemoryRequirementsInfo2*>(this);	}
+
+S_image_memory_requirements_info2& n_image_plane_memory_requirements_info(S_image_plane_memory_requirements_info const& next_);
 
 };
 static_assert(
@@ -8315,6 +8624,7 @@ private:
 	const void * pNext = nullptr;
 public:
 	VkImage image;
+
 S_image_sparse_memory_requirements_info2( VkImageSparseMemoryRequirementsInfo2 const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_image_sparse_memory_requirements_info2 ) );	}
 S_image_sparse_memory_requirements_info2& operator=( VkImageSparseMemoryRequirementsInfo2 const & rhs ) 
@@ -8340,6 +8650,7 @@ private:
 	void * pNext = nullptr;
 public:
 	E_point_clipping_behavior pointClippingBehavior;
+
 S_physical_device_point_clipping_properties( VkPhysicalDevicePointClippingProperties const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_physical_device_point_clipping_properties ) );	}
 S_physical_device_point_clipping_properties& operator=( VkPhysicalDevicePointClippingProperties const & rhs ) 
@@ -8348,6 +8659,8 @@ operator VkPhysicalDevicePointClippingProperties const&() const
 	{	return *reinterpret_cast<const VkPhysicalDevicePointClippingProperties*>(this);	}
 operator VkPhysicalDevicePointClippingProperties &() 
 	{	return *reinterpret_cast<VkPhysicalDevicePointClippingProperties*>(this);	}
+
+friend S_physical_device_properties2;
 
 };
 static_assert(
@@ -8366,6 +8679,7 @@ private:
 public:
 	VkBool32 prefersDedicatedAllocation;
 	VkBool32 requiresDedicatedAllocation;
+
 S_memory_dedicated_requirements( VkMemoryDedicatedRequirements const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_memory_dedicated_requirements ) );	}
 S_memory_dedicated_requirements& operator=( VkMemoryDedicatedRequirements const & rhs ) 
@@ -8374,6 +8688,8 @@ operator VkMemoryDedicatedRequirements const&() const
 	{	return *reinterpret_cast<const VkMemoryDedicatedRequirements*>(this);	}
 operator VkMemoryDedicatedRequirements &() 
 	{	return *reinterpret_cast<VkMemoryDedicatedRequirements*>(this);	}
+
+friend S_memory_requirements2;
 
 };
 static_assert(
@@ -8391,6 +8707,7 @@ private:
 public:
 	VkImage image;
 	VkBuffer buffer;
+
 S_memory_dedicated_allocate_info( VkMemoryDedicatedAllocateInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_memory_dedicated_allocate_info ) );	}
 S_memory_dedicated_allocate_info& operator=( VkMemoryDedicatedAllocateInfo const & rhs ) 
@@ -8399,6 +8716,8 @@ operator VkMemoryDedicatedAllocateInfo const&() const
 	{	return *reinterpret_cast<const VkMemoryDedicatedAllocateInfo*>(this);	}
 operator VkMemoryDedicatedAllocateInfo &() 
 	{	return *reinterpret_cast<VkMemoryDedicatedAllocateInfo*>(this);	}
+
+friend S_memory_allocate_info;
 
 };
 static_assert(
@@ -8415,6 +8734,7 @@ private:
 	const void * pNext = nullptr;
 public:
 	F_image_usage usage;
+
 S_image_view_usage_create_info( VkImageViewUsageCreateInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_image_view_usage_create_info ) );	}
 S_image_view_usage_create_info& operator=( VkImageViewUsageCreateInfo const & rhs ) 
@@ -8423,6 +8743,8 @@ operator VkImageViewUsageCreateInfo const&() const
 	{	return *reinterpret_cast<const VkImageViewUsageCreateInfo*>(this);	}
 operator VkImageViewUsageCreateInfo &() 
 	{	return *reinterpret_cast<VkImageViewUsageCreateInfo*>(this);	}
+
+friend S_image_view_create_info;
 
 };
 static_assert(
@@ -8439,6 +8761,7 @@ private:
 	const void * pNext = nullptr;
 public:
 	E_tessellation_domain_origin domainOrigin;
+
 S_pipeline_tessellation_domain_origin_state_create_info( VkPipelineTessellationDomainOriginStateCreateInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_pipeline_tessellation_domain_origin_state_create_info ) );	}
 S_pipeline_tessellation_domain_origin_state_create_info& operator=( VkPipelineTessellationDomainOriginStateCreateInfo const & rhs ) 
@@ -8447,6 +8770,8 @@ operator VkPipelineTessellationDomainOriginStateCreateInfo const&() const
 	{	return *reinterpret_cast<const VkPipelineTessellationDomainOriginStateCreateInfo*>(this);	}
 operator VkPipelineTessellationDomainOriginStateCreateInfo &() 
 	{	return *reinterpret_cast<VkPipelineTessellationDomainOriginStateCreateInfo*>(this);	}
+
+friend S_pipeline_tessellation_state_create_info;
 
 };
 static_assert(
@@ -8463,6 +8788,7 @@ private:
 	const void * pNext = nullptr;
 public:
 	VkSamplerYcbcrConversion conversion;
+
 S_sampler_ycbcr_conversion_info( VkSamplerYcbcrConversionInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_sampler_ycbcr_conversion_info ) );	}
 S_sampler_ycbcr_conversion_info& operator=( VkSamplerYcbcrConversionInfo const & rhs ) 
@@ -8471,6 +8797,9 @@ operator VkSamplerYcbcrConversionInfo const&() const
 	{	return *reinterpret_cast<const VkSamplerYcbcrConversionInfo*>(this);	}
 operator VkSamplerYcbcrConversionInfo &() 
 	{	return *reinterpret_cast<VkSamplerYcbcrConversionInfo*>(this);	}
+
+friend S_sampler_create_info;
+friend S_image_view_create_info;
 
 };
 static_assert(
@@ -8487,6 +8816,7 @@ private:
 	const void * pNext = nullptr;
 public:
 	F_image_aspect planeAspect;
+
 S_bind_image_plane_memory_info( VkBindImagePlaneMemoryInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_bind_image_plane_memory_info ) );	}
 S_bind_image_plane_memory_info& operator=( VkBindImagePlaneMemoryInfo const & rhs ) 
@@ -8495,6 +8825,8 @@ operator VkBindImagePlaneMemoryInfo const&() const
 	{	return *reinterpret_cast<const VkBindImagePlaneMemoryInfo*>(this);	}
 operator VkBindImagePlaneMemoryInfo &() 
 	{	return *reinterpret_cast<VkBindImagePlaneMemoryInfo*>(this);	}
+
+friend S_bind_image_memory_info;
 
 };
 static_assert(
@@ -8511,6 +8843,7 @@ private:
 	const void * pNext = nullptr;
 public:
 	F_image_aspect planeAspect;
+
 S_image_plane_memory_requirements_info( VkImagePlaneMemoryRequirementsInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_image_plane_memory_requirements_info ) );	}
 S_image_plane_memory_requirements_info& operator=( VkImagePlaneMemoryRequirementsInfo const & rhs ) 
@@ -8519,6 +8852,8 @@ operator VkImagePlaneMemoryRequirementsInfo const&() const
 	{	return *reinterpret_cast<const VkImagePlaneMemoryRequirementsInfo*>(this);	}
 operator VkImagePlaneMemoryRequirementsInfo &() 
 	{	return *reinterpret_cast<VkImagePlaneMemoryRequirementsInfo*>(this);	}
+
+friend S_image_memory_requirements_info2;
 
 };
 static_assert(
@@ -8535,6 +8870,7 @@ private:
 	void * pNext = nullptr;
 public:
 	VkBool32 samplerYcbcrConversion;
+
 S_physical_device_sampler_ycbcr_conversion_features( VkPhysicalDeviceSamplerYcbcrConversionFeatures const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_physical_device_sampler_ycbcr_conversion_features ) );	}
 S_physical_device_sampler_ycbcr_conversion_features& operator=( VkPhysicalDeviceSamplerYcbcrConversionFeatures const & rhs ) 
@@ -8543,6 +8879,9 @@ operator VkPhysicalDeviceSamplerYcbcrConversionFeatures const&() const
 	{	return *reinterpret_cast<const VkPhysicalDeviceSamplerYcbcrConversionFeatures*>(this);	}
 operator VkPhysicalDeviceSamplerYcbcrConversionFeatures &() 
 	{	return *reinterpret_cast<VkPhysicalDeviceSamplerYcbcrConversionFeatures*>(this);	}
+
+friend S_physical_device_features2;
+friend S_device_create_info;
 
 };
 static_assert(
@@ -8560,6 +8899,7 @@ private:
 	void * pNext = nullptr;
 public:
 	uint32_t combinedImageSamplerDescriptorCount;
+
 S_sampler_ycbcr_conversion_image_format_properties( VkSamplerYcbcrConversionImageFormatProperties const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_sampler_ycbcr_conversion_image_format_properties ) );	}
 S_sampler_ycbcr_conversion_image_format_properties& operator=( VkSamplerYcbcrConversionImageFormatProperties const & rhs ) 
@@ -8568,6 +8908,8 @@ operator VkSamplerYcbcrConversionImageFormatProperties const&() const
 	{	return *reinterpret_cast<const VkSamplerYcbcrConversionImageFormatProperties*>(this);	}
 operator VkSamplerYcbcrConversionImageFormatProperties &() 
 	{	return *reinterpret_cast<VkSamplerYcbcrConversionImageFormatProperties*>(this);	}
+
+friend S_image_format_properties2;
 
 };
 static_assert(
@@ -8585,6 +8927,7 @@ private:
 	void * pNext = nullptr;
 public:
 	VkBool32 supportsTextureGatherLODBiasAMD;
+
 S_texture_lod_gather_format_properties_AMD( VkTextureLODGatherFormatPropertiesAMD const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_texture_lod_gather_format_properties_AMD ) );	}
 S_texture_lod_gather_format_properties_AMD& operator=( VkTextureLODGatherFormatPropertiesAMD const & rhs ) 
@@ -8593,6 +8936,8 @@ operator VkTextureLODGatherFormatPropertiesAMD const&() const
 	{	return *reinterpret_cast<const VkTextureLODGatherFormatPropertiesAMD*>(this);	}
 operator VkTextureLODGatherFormatPropertiesAMD &() 
 	{	return *reinterpret_cast<VkTextureLODGatherFormatPropertiesAMD*>(this);	}
+
+friend S_image_format_properties2;
 
 };
 static_assert(
@@ -8610,6 +8955,7 @@ public:
 	VkBuffer buffer;
 	VkDeviceSize offset;
 	F_conditional_rendering_EXT flags;
+
 S_conditional_rendering_begin_info_EXT( VkConditionalRenderingBeginInfoEXT const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_conditional_rendering_begin_info_EXT ) );	}
 S_conditional_rendering_begin_info_EXT& operator=( VkConditionalRenderingBeginInfoEXT const & rhs ) 
@@ -8634,6 +8980,7 @@ private:
 	const void * pNext = nullptr;
 public:
 	VkBool32 protectedSubmit;
+
 S_protected_submit_info( VkProtectedSubmitInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_protected_submit_info ) );	}
 S_protected_submit_info& operator=( VkProtectedSubmitInfo const & rhs ) 
@@ -8642,6 +8989,8 @@ operator VkProtectedSubmitInfo const&() const
 	{	return *reinterpret_cast<const VkProtectedSubmitInfo*>(this);	}
 operator VkProtectedSubmitInfo &() 
 	{	return *reinterpret_cast<VkProtectedSubmitInfo*>(this);	}
+
+friend S_submit_info;
 
 };
 static_assert(
@@ -8658,6 +9007,7 @@ private:
 	void * pNext = nullptr;
 public:
 	VkBool32 protectedMemory;
+
 S_physical_device_protected_memory_features( VkPhysicalDeviceProtectedMemoryFeatures const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_physical_device_protected_memory_features ) );	}
 S_physical_device_protected_memory_features& operator=( VkPhysicalDeviceProtectedMemoryFeatures const & rhs ) 
@@ -8666,6 +9016,9 @@ operator VkPhysicalDeviceProtectedMemoryFeatures const&() const
 	{	return *reinterpret_cast<const VkPhysicalDeviceProtectedMemoryFeatures*>(this);	}
 operator VkPhysicalDeviceProtectedMemoryFeatures &() 
 	{	return *reinterpret_cast<VkPhysicalDeviceProtectedMemoryFeatures*>(this);	}
+
+friend S_physical_device_features2;
+friend S_device_create_info;
 
 };
 static_assert(
@@ -8682,6 +9035,7 @@ private:
 	void * pNext = nullptr;
 public:
 	VkBool32 protectedNoFault;
+
 S_physical_device_protected_memory_properties( VkPhysicalDeviceProtectedMemoryProperties const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_physical_device_protected_memory_properties ) );	}
 S_physical_device_protected_memory_properties& operator=( VkPhysicalDeviceProtectedMemoryProperties const & rhs ) 
@@ -8690,6 +9044,8 @@ operator VkPhysicalDeviceProtectedMemoryProperties const&() const
 	{	return *reinterpret_cast<const VkPhysicalDeviceProtectedMemoryProperties*>(this);	}
 operator VkPhysicalDeviceProtectedMemoryProperties &() 
 	{	return *reinterpret_cast<VkPhysicalDeviceProtectedMemoryProperties*>(this);	}
+
+friend S_physical_device_properties2;
 
 };
 static_assert(
@@ -8707,6 +9063,7 @@ public:
 	F_device_queue_create flags;
 	uint32_t queueFamilyIndex;
 	uint32_t queueIndex;
+
 S_device_queue_info2( VkDeviceQueueInfo2 const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_device_queue_info2 ) );	}
 S_device_queue_info2& operator=( VkDeviceQueueInfo2 const & rhs ) 
@@ -8733,6 +9090,7 @@ public:
 	VkPipelineCoverageToColorStateCreateFlagsNV flags;
 	VkBool32 coverageToColorEnable;
 	uint32_t coverageToColorLocation;
+
 S_pipeline_coverage_to_color_state_create_info_NV( VkPipelineCoverageToColorStateCreateInfoNV const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_pipeline_coverage_to_color_state_create_info_NV ) );	}
 S_pipeline_coverage_to_color_state_create_info_NV& operator=( VkPipelineCoverageToColorStateCreateInfoNV const & rhs ) 
@@ -8741,6 +9099,8 @@ operator VkPipelineCoverageToColorStateCreateInfoNV const&() const
 	{	return *reinterpret_cast<const VkPipelineCoverageToColorStateCreateInfoNV*>(this);	}
 operator VkPipelineCoverageToColorStateCreateInfoNV &() 
 	{	return *reinterpret_cast<VkPipelineCoverageToColorStateCreateInfoNV*>(this);	}
+
+friend S_pipeline_multisample_state_create_info;
 
 };
 static_assert(
@@ -8759,6 +9119,7 @@ private:
 public:
 	VkBool32 filterMinmaxSingleComponentFormats;
 	VkBool32 filterMinmaxImageComponentMapping;
+
 S_physical_device_sampler_filter_minmax_properties_EXT( VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_physical_device_sampler_filter_minmax_properties_EXT ) );	}
 S_physical_device_sampler_filter_minmax_properties_EXT& operator=( VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT const & rhs ) 
@@ -8767,6 +9128,8 @@ operator VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT const&() const
 	{	return *reinterpret_cast<const VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT*>(this);	}
 operator VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT &() 
 	{	return *reinterpret_cast<VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT*>(this);	}
+
+friend S_physical_device_properties2;
 
 };
 static_assert(
@@ -8783,6 +9146,7 @@ private:
 	const void * pNext = nullptr;
 public:
 	E_sampler_reduction_mode_EXT reductionMode;
+
 S_sampler_reduction_mode_create_info_EXT( VkSamplerReductionModeCreateInfoEXT const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_sampler_reduction_mode_create_info_EXT ) );	}
 S_sampler_reduction_mode_create_info_EXT& operator=( VkSamplerReductionModeCreateInfoEXT const & rhs ) 
@@ -8791,6 +9155,8 @@ operator VkSamplerReductionModeCreateInfoEXT const&() const
 	{	return *reinterpret_cast<const VkSamplerReductionModeCreateInfoEXT*>(this);	}
 operator VkSamplerReductionModeCreateInfoEXT &() 
 	{	return *reinterpret_cast<VkSamplerReductionModeCreateInfoEXT*>(this);	}
+
+friend S_sampler_create_info;
 
 };
 static_assert(
@@ -8807,6 +9173,7 @@ private:
 	void * pNext = nullptr;
 public:
 	VkBool32 advancedBlendCoherentOperations;
+
 S_physical_device_blend_operation_advanced_features_EXT( VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_physical_device_blend_operation_advanced_features_EXT ) );	}
 S_physical_device_blend_operation_advanced_features_EXT& operator=( VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT const & rhs ) 
@@ -8815,6 +9182,9 @@ operator VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT const&() const
 	{	return *reinterpret_cast<const VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT*>(this);	}
 operator VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT &() 
 	{	return *reinterpret_cast<VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT*>(this);	}
+
+friend S_physical_device_features2;
+friend S_device_create_info;
 
 };
 static_assert(
@@ -8837,6 +9207,7 @@ public:
 	VkBool32 advancedBlendNonPremultipliedDstColor;
 	VkBool32 advancedBlendCorrelatedOverlap;
 	VkBool32 advancedBlendAllOperations;
+
 S_physical_device_blend_operation_advanced_properties_EXT( VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_physical_device_blend_operation_advanced_properties_EXT ) );	}
 S_physical_device_blend_operation_advanced_properties_EXT& operator=( VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT const & rhs ) 
@@ -8845,6 +9216,8 @@ operator VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT const&() const
 	{	return *reinterpret_cast<const VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT*>(this);	}
 operator VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT &() 
 	{	return *reinterpret_cast<VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT*>(this);	}
+
+friend S_physical_device_properties2;
 
 };
 static_assert(
@@ -8863,6 +9236,7 @@ public:
 	VkBool32 srcPremultiplied;
 	VkBool32 dstPremultiplied;
 	E_blend_overlap_EXT blendOverlap;
+
 S_pipeline_color_blend_advanced_state_create_info_EXT( VkPipelineColorBlendAdvancedStateCreateInfoEXT const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_pipeline_color_blend_advanced_state_create_info_EXT ) );	}
 S_pipeline_color_blend_advanced_state_create_info_EXT& operator=( VkPipelineColorBlendAdvancedStateCreateInfoEXT const & rhs ) 
@@ -8871,6 +9245,8 @@ operator VkPipelineColorBlendAdvancedStateCreateInfoEXT const&() const
 	{	return *reinterpret_cast<const VkPipelineColorBlendAdvancedStateCreateInfoEXT*>(this);	}
 operator VkPipelineColorBlendAdvancedStateCreateInfoEXT &() 
 	{	return *reinterpret_cast<VkPipelineColorBlendAdvancedStateCreateInfoEXT*>(this);	}
+
+friend S_pipeline_color_blend_state_create_info;
 
 };
 static_assert(
@@ -8889,6 +9265,7 @@ private:
 public:
 	VkBool32 inlineUniformBlock;
 	VkBool32 descriptorBindingInlineUniformBlockUpdateAfterBind;
+
 S_physical_device_inline_uniform_block_features_EXT( VkPhysicalDeviceInlineUniformBlockFeaturesEXT const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_physical_device_inline_uniform_block_features_EXT ) );	}
 S_physical_device_inline_uniform_block_features_EXT& operator=( VkPhysicalDeviceInlineUniformBlockFeaturesEXT const & rhs ) 
@@ -8897,6 +9274,9 @@ operator VkPhysicalDeviceInlineUniformBlockFeaturesEXT const&() const
 	{	return *reinterpret_cast<const VkPhysicalDeviceInlineUniformBlockFeaturesEXT*>(this);	}
 operator VkPhysicalDeviceInlineUniformBlockFeaturesEXT &() 
 	{	return *reinterpret_cast<VkPhysicalDeviceInlineUniformBlockFeaturesEXT*>(this);	}
+
+friend S_physical_device_features2;
+friend S_device_create_info;
 
 };
 static_assert(
@@ -8918,6 +9298,7 @@ public:
 	uint32_t maxPerStageDescriptorUpdateAfterBindInlineUniformBlocks;
 	uint32_t maxDescriptorSetInlineUniformBlocks;
 	uint32_t maxDescriptorSetUpdateAfterBindInlineUniformBlocks;
+
 S_physical_device_inline_uniform_block_properties_EXT( VkPhysicalDeviceInlineUniformBlockPropertiesEXT const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_physical_device_inline_uniform_block_properties_EXT ) );	}
 S_physical_device_inline_uniform_block_properties_EXT& operator=( VkPhysicalDeviceInlineUniformBlockPropertiesEXT const & rhs ) 
@@ -8926,6 +9307,8 @@ operator VkPhysicalDeviceInlineUniformBlockPropertiesEXT const&() const
 	{	return *reinterpret_cast<const VkPhysicalDeviceInlineUniformBlockPropertiesEXT*>(this);	}
 operator VkPhysicalDeviceInlineUniformBlockPropertiesEXT &() 
 	{	return *reinterpret_cast<VkPhysicalDeviceInlineUniformBlockPropertiesEXT*>(this);	}
+
+friend S_physical_device_properties2;
 
 };
 static_assert(
@@ -8943,6 +9326,7 @@ private:
 public:
 	uint32_t dataSize;
 	const void * pData;
+
 S_write_descriptor_set_inline_uniform_block_EXT( VkWriteDescriptorSetInlineUniformBlockEXT const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_write_descriptor_set_inline_uniform_block_EXT ) );	}
 S_write_descriptor_set_inline_uniform_block_EXT& operator=( VkWriteDescriptorSetInlineUniformBlockEXT const & rhs ) 
@@ -8951,6 +9335,8 @@ operator VkWriteDescriptorSetInlineUniformBlockEXT const&() const
 	{	return *reinterpret_cast<const VkWriteDescriptorSetInlineUniformBlockEXT*>(this);	}
 operator VkWriteDescriptorSetInlineUniformBlockEXT &() 
 	{	return *reinterpret_cast<VkWriteDescriptorSetInlineUniformBlockEXT*>(this);	}
+
+friend S_write_descriptor_set;
 
 };
 static_assert(
@@ -8967,6 +9353,7 @@ private:
 	const void * pNext = nullptr;
 public:
 	uint32_t maxInlineUniformBlockBindings;
+
 S_descriptor_pool_inline_uniform_block_create_info_EXT( VkDescriptorPoolInlineUniformBlockCreateInfoEXT const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_descriptor_pool_inline_uniform_block_create_info_EXT ) );	}
 S_descriptor_pool_inline_uniform_block_create_info_EXT& operator=( VkDescriptorPoolInlineUniformBlockCreateInfoEXT const & rhs ) 
@@ -8975,6 +9362,8 @@ operator VkDescriptorPoolInlineUniformBlockCreateInfoEXT const&() const
 	{	return *reinterpret_cast<const VkDescriptorPoolInlineUniformBlockCreateInfoEXT*>(this);	}
 operator VkDescriptorPoolInlineUniformBlockCreateInfoEXT &() 
 	{	return *reinterpret_cast<VkDescriptorPoolInlineUniformBlockCreateInfoEXT*>(this);	}
+
+friend S_descriptor_pool_create_info;
 
 };
 static_assert(
@@ -8995,6 +9384,7 @@ public:
 	VkBool32 coverageModulationTableEnable;
 	uint32_t coverageModulationTableCount;
 	const float * pCoverageModulationTable;
+
 S_pipeline_coverage_modulation_state_create_info_NV( VkPipelineCoverageModulationStateCreateInfoNV const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_pipeline_coverage_modulation_state_create_info_NV ) );	}
 S_pipeline_coverage_modulation_state_create_info_NV& operator=( VkPipelineCoverageModulationStateCreateInfoNV const & rhs ) 
@@ -9003,6 +9393,8 @@ operator VkPipelineCoverageModulationStateCreateInfoNV const&() const
 	{	return *reinterpret_cast<const VkPipelineCoverageModulationStateCreateInfoNV*>(this);	}
 operator VkPipelineCoverageModulationStateCreateInfoNV &() 
 	{	return *reinterpret_cast<VkPipelineCoverageModulationStateCreateInfoNV*>(this);	}
+
+friend S_pipeline_multisample_state_create_info;
 
 };
 static_assert(
@@ -9020,6 +9412,7 @@ private:
 public:
 	uint32_t viewFormatCount;
 	const E_format * pViewFormats;
+
 S_image_format_list_create_info_KHR( VkImageFormatListCreateInfoKHR const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_image_format_list_create_info_KHR ) );	}
 S_image_format_list_create_info_KHR& operator=( VkImageFormatListCreateInfoKHR const & rhs ) 
@@ -9028,6 +9421,8 @@ operator VkImageFormatListCreateInfoKHR const&() const
 	{	return *reinterpret_cast<const VkImageFormatListCreateInfoKHR*>(this);	}
 operator VkImageFormatListCreateInfoKHR &() 
 	{	return *reinterpret_cast<VkImageFormatListCreateInfoKHR*>(this);	}
+
+friend S_image_create_info;
 
 };
 static_assert(
@@ -9045,6 +9440,7 @@ public:
 	VkValidationCacheCreateFlagsEXT flags;
 	size_t initialDataSize;
 	const void * pInitialData;
+
 S_validation_cache_create_info_EXT( VkValidationCacheCreateInfoEXT const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_validation_cache_create_info_EXT ) );	}
 S_validation_cache_create_info_EXT& operator=( VkValidationCacheCreateInfoEXT const & rhs ) 
@@ -9069,6 +9465,7 @@ private:
 	const void * pNext = nullptr;
 public:
 	VkValidationCacheEXT validationCache;
+
 S_shader_module_validation_cache_create_info_EXT( VkShaderModuleValidationCacheCreateInfoEXT const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_shader_module_validation_cache_create_info_EXT ) );	}
 S_shader_module_validation_cache_create_info_EXT& operator=( VkShaderModuleValidationCacheCreateInfoEXT const & rhs ) 
@@ -9077,6 +9474,8 @@ operator VkShaderModuleValidationCacheCreateInfoEXT const&() const
 	{	return *reinterpret_cast<const VkShaderModuleValidationCacheCreateInfoEXT*>(this);	}
 operator VkShaderModuleValidationCacheCreateInfoEXT &() 
 	{	return *reinterpret_cast<VkShaderModuleValidationCacheCreateInfoEXT*>(this);	}
+
+friend S_shader_module_create_info;
 
 };
 static_assert(
@@ -9095,6 +9494,7 @@ private:
 public:
 	uint32_t maxPerSetDescriptors;
 	VkDeviceSize maxMemoryAllocationSize;
+
 S_physical_device_maintenance3_properties( VkPhysicalDeviceMaintenance3Properties const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_physical_device_maintenance3_properties ) );	}
 S_physical_device_maintenance3_properties& operator=( VkPhysicalDeviceMaintenance3Properties const & rhs ) 
@@ -9103,6 +9503,8 @@ operator VkPhysicalDeviceMaintenance3Properties const&() const
 	{	return *reinterpret_cast<const VkPhysicalDeviceMaintenance3Properties*>(this);	}
 operator VkPhysicalDeviceMaintenance3Properties &() 
 	{	return *reinterpret_cast<VkPhysicalDeviceMaintenance3Properties*>(this);	}
+
+friend S_physical_device_properties2;
 
 };
 static_assert(
@@ -9121,6 +9523,7 @@ private:
 	void * pNext = nullptr;
 public:
 	VkBool32 supported;
+
 S_descriptor_set_layout_support( VkDescriptorSetLayoutSupport const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_descriptor_set_layout_support ) );	}
 S_descriptor_set_layout_support& operator=( VkDescriptorSetLayoutSupport const & rhs ) 
@@ -9129,6 +9532,8 @@ operator VkDescriptorSetLayoutSupport const&() const
 	{	return *reinterpret_cast<const VkDescriptorSetLayoutSupport*>(this);	}
 operator VkDescriptorSetLayoutSupport &() 
 	{	return *reinterpret_cast<VkDescriptorSetLayoutSupport*>(this);	}
+
+S_descriptor_set_layout_support& n_descriptor_set_variable_descriptor_count_layout_support_EXT(S_descriptor_set_variable_descriptor_count_layout_support_EXT const& next_);
 
 };
 static_assert(
@@ -9145,6 +9550,7 @@ private:
 	void * pNext = nullptr;
 public:
 	VkBool32 shaderDrawParameters;
+
 S_physical_device_shader_draw_parameter_features( VkPhysicalDeviceShaderDrawParameterFeatures const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_physical_device_shader_draw_parameter_features ) );	}
 S_physical_device_shader_draw_parameter_features& operator=( VkPhysicalDeviceShaderDrawParameterFeatures const & rhs ) 
@@ -9153,6 +9559,9 @@ operator VkPhysicalDeviceShaderDrawParameterFeatures const&() const
 	{	return *reinterpret_cast<const VkPhysicalDeviceShaderDrawParameterFeatures*>(this);	}
 operator VkPhysicalDeviceShaderDrawParameterFeatures &() 
 	{	return *reinterpret_cast<VkPhysicalDeviceShaderDrawParameterFeatures*>(this);	}
+
+friend S_physical_device_features2;
+friend S_device_create_info;
 
 };
 static_assert(
@@ -9171,6 +9580,7 @@ public:
 	int stride;
 	int format;
 	int usage;
+
 S_native_buffer_ANDROID( VkNativeBufferANDROID const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_native_buffer_ANDROID ) );	}
 S_native_buffer_ANDROID& operator=( VkNativeBufferANDROID const & rhs ) 
@@ -9195,6 +9605,7 @@ private:
 	const void * pNext = nullptr;
 public:
 	E_queue_global_priority_EXT globalPriority;
+
 S_device_queue_global_priority_create_info_EXT( VkDeviceQueueGlobalPriorityCreateInfoEXT const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_device_queue_global_priority_create_info_EXT ) );	}
 S_device_queue_global_priority_create_info_EXT& operator=( VkDeviceQueueGlobalPriorityCreateInfoEXT const & rhs ) 
@@ -9203,6 +9614,8 @@ operator VkDeviceQueueGlobalPriorityCreateInfoEXT const&() const
 	{	return *reinterpret_cast<const VkDeviceQueueGlobalPriorityCreateInfoEXT*>(this);	}
 operator VkDeviceQueueGlobalPriorityCreateInfoEXT &() 
 	{	return *reinterpret_cast<VkDeviceQueueGlobalPriorityCreateInfoEXT*>(this);	}
+
+friend S_device_queue_create_info;
 
 };
 static_assert(
@@ -9220,6 +9633,7 @@ public:
 	E_object_type objectType;
 	uint64_t objectHandle;
 	const char * pObjectName;
+
 S_debug_utils_object_name_info_EXT( VkDebugUtilsObjectNameInfoEXT const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_debug_utils_object_name_info_EXT ) );	}
 S_debug_utils_object_name_info_EXT& operator=( VkDebugUtilsObjectNameInfoEXT const & rhs ) 
@@ -9247,6 +9661,7 @@ public:
 	uint64_t tagName;
 	size_t tagSize;
 	const void * pTag;
+
 S_debug_utils_object_tag_info_EXT( VkDebugUtilsObjectTagInfoEXT const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_debug_utils_object_tag_info_EXT ) );	}
 S_debug_utils_object_tag_info_EXT& operator=( VkDebugUtilsObjectTagInfoEXT const & rhs ) 
@@ -9271,6 +9686,7 @@ private:
 public:
 	const char * pLabelName;
 	float color[4];
+
 S_debug_utils_label_EXT( VkDebugUtilsLabelEXT const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_debug_utils_label_EXT ) );	}
 S_debug_utils_label_EXT& operator=( VkDebugUtilsLabelEXT const & rhs ) 
@@ -9299,6 +9715,7 @@ public:
 	F_debug_utils_message_type_EXT messageType;
 	PFN_vkDebugUtilsMessengerCallbackEXT pfnUserCallback;
 	void * pUserData;
+
 S_debug_utils_messenger_create_info_EXT( VkDebugUtilsMessengerCreateInfoEXT const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_debug_utils_messenger_create_info_EXT ) );	}
 S_debug_utils_messenger_create_info_EXT& operator=( VkDebugUtilsMessengerCreateInfoEXT const & rhs ) 
@@ -9307,6 +9724,8 @@ operator VkDebugUtilsMessengerCreateInfoEXT const&() const
 	{	return *reinterpret_cast<const VkDebugUtilsMessengerCreateInfoEXT*>(this);	}
 operator VkDebugUtilsMessengerCreateInfoEXT &() 
 	{	return *reinterpret_cast<VkDebugUtilsMessengerCreateInfoEXT*>(this);	}
+
+friend S_instance_create_info;
 
 };
 static_assert(
@@ -9324,6 +9743,7 @@ private:
 public:
 	F_external_memory_handle_type handleType;
 	void * pHostPointer;
+
 S_import_memory_host_pointer_info_EXT( VkImportMemoryHostPointerInfoEXT const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_import_memory_host_pointer_info_EXT ) );	}
 S_import_memory_host_pointer_info_EXT& operator=( VkImportMemoryHostPointerInfoEXT const & rhs ) 
@@ -9332,6 +9752,8 @@ operator VkImportMemoryHostPointerInfoEXT const&() const
 	{	return *reinterpret_cast<const VkImportMemoryHostPointerInfoEXT*>(this);	}
 operator VkImportMemoryHostPointerInfoEXT &() 
 	{	return *reinterpret_cast<VkImportMemoryHostPointerInfoEXT*>(this);	}
+
+friend S_memory_allocate_info;
 
 };
 static_assert(
@@ -9347,6 +9769,7 @@ private:
 	void * pNext = nullptr;
 public:
 	uint32_t memoryTypeBits;
+
 S_memory_host_pointer_properties_EXT( VkMemoryHostPointerPropertiesEXT const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_memory_host_pointer_properties_EXT ) );	}
 S_memory_host_pointer_properties_EXT& operator=( VkMemoryHostPointerPropertiesEXT const & rhs ) 
@@ -9371,6 +9794,7 @@ private:
 	void * pNext = nullptr;
 public:
 	VkDeviceSize minImportedHostPointerAlignment;
+
 S_physical_device_external_memory_host_properties_EXT( VkPhysicalDeviceExternalMemoryHostPropertiesEXT const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_physical_device_external_memory_host_properties_EXT ) );	}
 S_physical_device_external_memory_host_properties_EXT& operator=( VkPhysicalDeviceExternalMemoryHostPropertiesEXT const & rhs ) 
@@ -9379,6 +9803,8 @@ operator VkPhysicalDeviceExternalMemoryHostPropertiesEXT const&() const
 	{	return *reinterpret_cast<const VkPhysicalDeviceExternalMemoryHostPropertiesEXT*>(this);	}
 operator VkPhysicalDeviceExternalMemoryHostPropertiesEXT &() 
 	{	return *reinterpret_cast<VkPhysicalDeviceExternalMemoryHostPropertiesEXT*>(this);	}
+
+friend S_physical_device_properties2;
 
 };
 static_assert(
@@ -9403,6 +9829,7 @@ public:
 	VkBool32 degenerateLinesRasterized;
 	VkBool32 fullyCoveredFragmentShaderInputVariable;
 	VkBool32 conservativeRasterizationPostDepthCoverage;
+
 S_physical_device_conservative_rasterization_properties_EXT( VkPhysicalDeviceConservativeRasterizationPropertiesEXT const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_physical_device_conservative_rasterization_properties_EXT ) );	}
 S_physical_device_conservative_rasterization_properties_EXT& operator=( VkPhysicalDeviceConservativeRasterizationPropertiesEXT const & rhs ) 
@@ -9411,6 +9838,8 @@ operator VkPhysicalDeviceConservativeRasterizationPropertiesEXT const&() const
 	{	return *reinterpret_cast<const VkPhysicalDeviceConservativeRasterizationPropertiesEXT*>(this);	}
 operator VkPhysicalDeviceConservativeRasterizationPropertiesEXT &() 
 	{	return *reinterpret_cast<VkPhysicalDeviceConservativeRasterizationPropertiesEXT*>(this);	}
+
+friend S_physical_device_properties2;
 
 };
 static_assert(
@@ -9441,6 +9870,7 @@ public:
 	uint32_t minVgprAllocation;
 	uint32_t maxVgprAllocation;
 	uint32_t vgprAllocationGranularity;
+
 S_physical_device_shader_core_properties_AMD( VkPhysicalDeviceShaderCorePropertiesAMD const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_physical_device_shader_core_properties_AMD ) );	}
 S_physical_device_shader_core_properties_AMD& operator=( VkPhysicalDeviceShaderCorePropertiesAMD const & rhs ) 
@@ -9449,6 +9879,8 @@ operator VkPhysicalDeviceShaderCorePropertiesAMD const&() const
 	{	return *reinterpret_cast<const VkPhysicalDeviceShaderCorePropertiesAMD*>(this);	}
 operator VkPhysicalDeviceShaderCorePropertiesAMD &() 
 	{	return *reinterpret_cast<VkPhysicalDeviceShaderCorePropertiesAMD*>(this);	}
+
+friend S_physical_device_properties2;
 
 };
 static_assert(
@@ -9467,6 +9899,7 @@ public:
 	VkPipelineRasterizationConservativeStateCreateFlagsEXT flags;
 	E_conservative_rasterization_mode_EXT conservativeRasterizationMode;
 	float extraPrimitiveOverestimationSize;
+
 S_pipeline_rasterization_conservative_state_create_info_EXT( VkPipelineRasterizationConservativeStateCreateInfoEXT const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_pipeline_rasterization_conservative_state_create_info_EXT ) );	}
 S_pipeline_rasterization_conservative_state_create_info_EXT& operator=( VkPipelineRasterizationConservativeStateCreateInfoEXT const & rhs ) 
@@ -9475,6 +9908,8 @@ operator VkPipelineRasterizationConservativeStateCreateInfoEXT const&() const
 	{	return *reinterpret_cast<const VkPipelineRasterizationConservativeStateCreateInfoEXT*>(this);	}
 operator VkPipelineRasterizationConservativeStateCreateInfoEXT &() 
 	{	return *reinterpret_cast<VkPipelineRasterizationConservativeStateCreateInfoEXT*>(this);	}
+
+friend S_pipeline_rasterization_state_create_info;
 
 };
 static_assert(
@@ -9510,6 +9945,7 @@ public:
 	VkBool32 descriptorBindingPartiallyBound;
 	VkBool32 descriptorBindingVariableDescriptorCount;
 	VkBool32 runtimeDescriptorArray;
+
 S_physical_device_descriptor_indexing_features_EXT( VkPhysicalDeviceDescriptorIndexingFeaturesEXT const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_physical_device_descriptor_indexing_features_EXT ) );	}
 S_physical_device_descriptor_indexing_features_EXT& operator=( VkPhysicalDeviceDescriptorIndexingFeaturesEXT const & rhs ) 
@@ -9518,6 +9954,9 @@ operator VkPhysicalDeviceDescriptorIndexingFeaturesEXT const&() const
 	{	return *reinterpret_cast<const VkPhysicalDeviceDescriptorIndexingFeaturesEXT*>(this);	}
 operator VkPhysicalDeviceDescriptorIndexingFeaturesEXT &() 
 	{	return *reinterpret_cast<VkPhysicalDeviceDescriptorIndexingFeaturesEXT*>(this);	}
+
+friend S_physical_device_features2;
+friend S_device_create_info;
 
 };
 static_assert(
@@ -9557,6 +9996,7 @@ public:
 	uint32_t maxDescriptorSetUpdateAfterBindSampledImages;
 	uint32_t maxDescriptorSetUpdateAfterBindStorageImages;
 	uint32_t maxDescriptorSetUpdateAfterBindInputAttachments;
+
 S_physical_device_descriptor_indexing_properties_EXT( VkPhysicalDeviceDescriptorIndexingPropertiesEXT const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_physical_device_descriptor_indexing_properties_EXT ) );	}
 S_physical_device_descriptor_indexing_properties_EXT& operator=( VkPhysicalDeviceDescriptorIndexingPropertiesEXT const & rhs ) 
@@ -9565,6 +10005,8 @@ operator VkPhysicalDeviceDescriptorIndexingPropertiesEXT const&() const
 	{	return *reinterpret_cast<const VkPhysicalDeviceDescriptorIndexingPropertiesEXT*>(this);	}
 operator VkPhysicalDeviceDescriptorIndexingPropertiesEXT &() 
 	{	return *reinterpret_cast<VkPhysicalDeviceDescriptorIndexingPropertiesEXT*>(this);	}
+
+friend S_physical_device_properties2;
 
 };
 static_assert(
@@ -9582,6 +10024,7 @@ private:
 public:
 	uint32_t bindingCount;
 	const F_descriptor_binding_EXT * pBindingFlags;
+
 S_descriptor_set_layout_binding_flags_create_info_EXT( VkDescriptorSetLayoutBindingFlagsCreateInfoEXT const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_descriptor_set_layout_binding_flags_create_info_EXT ) );	}
 S_descriptor_set_layout_binding_flags_create_info_EXT& operator=( VkDescriptorSetLayoutBindingFlagsCreateInfoEXT const & rhs ) 
@@ -9590,6 +10033,8 @@ operator VkDescriptorSetLayoutBindingFlagsCreateInfoEXT const&() const
 	{	return *reinterpret_cast<const VkDescriptorSetLayoutBindingFlagsCreateInfoEXT*>(this);	}
 operator VkDescriptorSetLayoutBindingFlagsCreateInfoEXT &() 
 	{	return *reinterpret_cast<VkDescriptorSetLayoutBindingFlagsCreateInfoEXT*>(this);	}
+
+friend S_descriptor_set_layout_create_info;
 
 };
 static_assert(
@@ -9607,6 +10052,7 @@ private:
 public:
 	uint32_t descriptorSetCount;
 	const uint32_t * pDescriptorCounts;
+
 S_descriptor_set_variable_descriptor_count_allocate_info_EXT( VkDescriptorSetVariableDescriptorCountAllocateInfoEXT const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_descriptor_set_variable_descriptor_count_allocate_info_EXT ) );	}
 S_descriptor_set_variable_descriptor_count_allocate_info_EXT& operator=( VkDescriptorSetVariableDescriptorCountAllocateInfoEXT const & rhs ) 
@@ -9615,6 +10061,8 @@ operator VkDescriptorSetVariableDescriptorCountAllocateInfoEXT const&() const
 	{	return *reinterpret_cast<const VkDescriptorSetVariableDescriptorCountAllocateInfoEXT*>(this);	}
 operator VkDescriptorSetVariableDescriptorCountAllocateInfoEXT &() 
 	{	return *reinterpret_cast<VkDescriptorSetVariableDescriptorCountAllocateInfoEXT*>(this);	}
+
+friend S_descriptor_set_allocate_info;
 
 };
 static_assert(
@@ -9632,6 +10080,7 @@ private:
 	void * pNext = nullptr;
 public:
 	uint32_t maxVariableDescriptorCount;
+
 S_descriptor_set_variable_descriptor_count_layout_support_EXT( VkDescriptorSetVariableDescriptorCountLayoutSupportEXT const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_descriptor_set_variable_descriptor_count_layout_support_EXT ) );	}
 S_descriptor_set_variable_descriptor_count_layout_support_EXT& operator=( VkDescriptorSetVariableDescriptorCountLayoutSupportEXT const & rhs ) 
@@ -9640,6 +10089,8 @@ operator VkDescriptorSetVariableDescriptorCountLayoutSupportEXT const&() const
 	{	return *reinterpret_cast<const VkDescriptorSetVariableDescriptorCountLayoutSupportEXT*>(this);	}
 operator VkDescriptorSetVariableDescriptorCountLayoutSupportEXT &() 
 	{	return *reinterpret_cast<VkDescriptorSetVariableDescriptorCountLayoutSupportEXT*>(this);	}
+
+friend S_descriptor_set_layout_support;
 
 };
 static_assert(
@@ -9663,6 +10114,7 @@ public:
 	E_attachment_store_op stencilStoreOp;
 	E_image_layout initialLayout;
 	E_image_layout finalLayout;
+
 S_attachment_description2_KHR( VkAttachmentDescription2KHR const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_attachment_description2_KHR ) );	}
 S_attachment_description2_KHR& operator=( VkAttachmentDescription2KHR const & rhs ) 
@@ -9688,6 +10140,7 @@ public:
 	uint32_t attachment;
 	E_image_layout layout;
 	F_image_aspect aspectMask;
+
 S_attachment_reference2_KHR( VkAttachmentReference2KHR const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_attachment_reference2_KHR ) );	}
 S_attachment_reference2_KHR& operator=( VkAttachmentReference2KHR const & rhs ) 
@@ -9718,6 +10171,7 @@ public:
 	F_access dstAccessMask;
 	F_dependency dependencyFlags;
 	int32_t viewOffset;
+
 S_subpass_dependency2_KHR( VkSubpassDependency2KHR const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_subpass_dependency2_KHR ) );	}
 S_subpass_dependency2_KHR& operator=( VkSubpassDependency2KHR const & rhs ) 
@@ -9741,6 +10195,7 @@ private:
 	const void * pNext = nullptr;
 public:
 	E_subpass_contents contents;
+
 S_subpass_begin_info_KHR( VkSubpassBeginInfoKHR const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_subpass_begin_info_KHR ) );	}
 S_subpass_begin_info_KHR& operator=( VkSubpassBeginInfoKHR const & rhs ) 
@@ -9762,6 +10217,7 @@ private:
 	VkStructureType sType = 
 			VK_STRUCTURE_TYPE_SUBPASS_END_INFO_KHR;
 	const void * pNext = nullptr;
+
 S_subpass_end_info_KHR( VkSubpassEndInfoKHR const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_subpass_end_info_KHR ) );	}
 S_subpass_end_info_KHR& operator=( VkSubpassEndInfoKHR const & rhs ) 
@@ -9786,6 +10242,7 @@ private:
 	void * pNext = nullptr;
 public:
 	uint32_t maxVertexAttribDivisor;
+
 S_physical_device_vertex_attribute_divisor_properties_EXT( VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_physical_device_vertex_attribute_divisor_properties_EXT ) );	}
 S_physical_device_vertex_attribute_divisor_properties_EXT& operator=( VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT const & rhs ) 
@@ -9794,6 +10251,8 @@ operator VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT const&() const
 	{	return *reinterpret_cast<const VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT*>(this);	}
 operator VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT &() 
 	{	return *reinterpret_cast<VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT*>(this);	}
+
+friend S_physical_device_properties2;
 
 };
 static_assert(
@@ -9810,6 +10269,7 @@ private:
 	const void * pNext = nullptr;
 public:
 	struct AHardwareBuffer * buffer;
+
 S_import_android_hardware_buffer_info_ANDROID( VkImportAndroidHardwareBufferInfoANDROID const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_import_android_hardware_buffer_info_ANDROID ) );	}
 S_import_android_hardware_buffer_info_ANDROID& operator=( VkImportAndroidHardwareBufferInfoANDROID const & rhs ) 
@@ -9818,6 +10278,8 @@ operator VkImportAndroidHardwareBufferInfoANDROID const&() const
 	{	return *reinterpret_cast<const VkImportAndroidHardwareBufferInfoANDROID*>(this);	}
 operator VkImportAndroidHardwareBufferInfoANDROID &() 
 	{	return *reinterpret_cast<VkImportAndroidHardwareBufferInfoANDROID*>(this);	}
+
+friend S_memory_allocate_info;
 
 };
 static_assert(
@@ -9836,6 +10298,7 @@ private:
 	void * pNext = nullptr;
 public:
 	uint64_t androidHardwareBufferUsage;
+
 S_android_hardware_buffer_usage_ANDROID( VkAndroidHardwareBufferUsageANDROID const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_android_hardware_buffer_usage_ANDROID ) );	}
 S_android_hardware_buffer_usage_ANDROID& operator=( VkAndroidHardwareBufferUsageANDROID const & rhs ) 
@@ -9844,6 +10307,8 @@ operator VkAndroidHardwareBufferUsageANDROID const&() const
 	{	return *reinterpret_cast<const VkAndroidHardwareBufferUsageANDROID*>(this);	}
 operator VkAndroidHardwareBufferUsageANDROID &() 
 	{	return *reinterpret_cast<VkAndroidHardwareBufferUsageANDROID*>(this);	}
+
+friend S_image_format_properties2;
 
 };
 static_assert(
@@ -9865,6 +10330,7 @@ private:
 public:
 	VkDeviceSize allocationSize;
 	uint32_t memoryTypeBits;
+
 S_android_hardware_buffer_properties_ANDROID( VkAndroidHardwareBufferPropertiesANDROID const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_android_hardware_buffer_properties_ANDROID ) );	}
 S_android_hardware_buffer_properties_ANDROID& operator=( VkAndroidHardwareBufferPropertiesANDROID const & rhs ) 
@@ -9873,6 +10339,8 @@ operator VkAndroidHardwareBufferPropertiesANDROID const&() const
 	{	return *reinterpret_cast<const VkAndroidHardwareBufferPropertiesANDROID*>(this);	}
 operator VkAndroidHardwareBufferPropertiesANDROID &() 
 	{	return *reinterpret_cast<VkAndroidHardwareBufferPropertiesANDROID*>(this);	}
+
+S_android_hardware_buffer_properties_ANDROID& n_android_hardware_buffer_format_properties_ANDROID(S_android_hardware_buffer_format_properties_ANDROID const& next_);
 
 };
 static_assert(
@@ -9889,6 +10357,7 @@ private:
 	const void * pNext = nullptr;
 public:
 	VkDeviceMemory memory;
+
 S_memory_get_android_hardware_buffer_info_ANDROID( VkMemoryGetAndroidHardwareBufferInfoANDROID const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_memory_get_android_hardware_buffer_info_ANDROID ) );	}
 S_memory_get_android_hardware_buffer_info_ANDROID& operator=( VkMemoryGetAndroidHardwareBufferInfoANDROID const & rhs ) 
@@ -9913,6 +10382,7 @@ private:
 	const void * pNext = nullptr;
 public:
 	VkBool32 conditionalRenderingEnable;
+
 S_command_buffer_inheritance_conditional_rendering_info_EXT( VkCommandBufferInheritanceConditionalRenderingInfoEXT const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_command_buffer_inheritance_conditional_rendering_info_EXT ) );	}
 S_command_buffer_inheritance_conditional_rendering_info_EXT& operator=( VkCommandBufferInheritanceConditionalRenderingInfoEXT const & rhs ) 
@@ -9921,6 +10391,8 @@ operator VkCommandBufferInheritanceConditionalRenderingInfoEXT const&() const
 	{	return *reinterpret_cast<const VkCommandBufferInheritanceConditionalRenderingInfoEXT*>(this);	}
 operator VkCommandBufferInheritanceConditionalRenderingInfoEXT &() 
 	{	return *reinterpret_cast<VkCommandBufferInheritanceConditionalRenderingInfoEXT*>(this);	}
+
+friend S_command_buffer_inheritance_info;
 
 };
 static_assert(
@@ -9937,6 +10409,7 @@ private:
 	void * pNext = nullptr;
 public:
 	uint64_t externalFormat;
+
 S_external_format_ANDROID( VkExternalFormatANDROID const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_external_format_ANDROID ) );	}
 S_external_format_ANDROID& operator=( VkExternalFormatANDROID const & rhs ) 
@@ -9945,6 +10418,9 @@ operator VkExternalFormatANDROID const&() const
 	{	return *reinterpret_cast<const VkExternalFormatANDROID*>(this);	}
 operator VkExternalFormatANDROID &() 
 	{	return *reinterpret_cast<VkExternalFormatANDROID*>(this);	}
+
+friend S_image_create_info;
+friend S_sampler_ycbcr_conversion_create_info;
 
 };
 static_assert(
@@ -9963,6 +10439,7 @@ public:
 	VkBool32 storageBuffer8BitAccess;
 	VkBool32 uniformAndStorageBuffer8BitAccess;
 	VkBool32 storagePushConstant8;
+
 S_physical_device_8bit_storage_features_KHR( VkPhysicalDevice8BitStorageFeaturesKHR const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_physical_device_8bit_storage_features_KHR ) );	}
 S_physical_device_8bit_storage_features_KHR& operator=( VkPhysicalDevice8BitStorageFeaturesKHR const & rhs ) 
@@ -9971,6 +10448,9 @@ operator VkPhysicalDevice8BitStorageFeaturesKHR const&() const
 	{	return *reinterpret_cast<const VkPhysicalDevice8BitStorageFeaturesKHR*>(this);	}
 operator VkPhysicalDevice8BitStorageFeaturesKHR &() 
 	{	return *reinterpret_cast<VkPhysicalDevice8BitStorageFeaturesKHR*>(this);	}
+
+friend S_physical_device_features2;
+friend S_device_create_info;
 
 };
 static_assert(
@@ -9988,6 +10468,7 @@ private:
 public:
 	VkBool32 conditionalRendering;
 	VkBool32 inheritedConditionalRendering;
+
 S_physical_device_conditional_rendering_features_EXT( VkPhysicalDeviceConditionalRenderingFeaturesEXT const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_physical_device_conditional_rendering_features_EXT ) );	}
 S_physical_device_conditional_rendering_features_EXT& operator=( VkPhysicalDeviceConditionalRenderingFeaturesEXT const & rhs ) 
@@ -9996,6 +10477,9 @@ operator VkPhysicalDeviceConditionalRenderingFeaturesEXT const&() const
 	{	return *reinterpret_cast<const VkPhysicalDeviceConditionalRenderingFeaturesEXT*>(this);	}
 operator VkPhysicalDeviceConditionalRenderingFeaturesEXT &() 
 	{	return *reinterpret_cast<VkPhysicalDeviceConditionalRenderingFeaturesEXT*>(this);	}
+
+friend S_physical_device_features2;
+friend S_device_create_info;
 
 };
 static_assert(
@@ -10014,6 +10498,7 @@ private:
 public:
 	VkBool32 vulkanMemoryModel;
 	VkBool32 vulkanMemoryModelDeviceScope;
+
 S_physical_device_vulkan_memory_model_features_KHR( VkPhysicalDeviceVulkanMemoryModelFeaturesKHR const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_physical_device_vulkan_memory_model_features_KHR ) );	}
 S_physical_device_vulkan_memory_model_features_KHR& operator=( VkPhysicalDeviceVulkanMemoryModelFeaturesKHR const & rhs ) 
@@ -10022,6 +10507,9 @@ operator VkPhysicalDeviceVulkanMemoryModelFeaturesKHR const&() const
 	{	return *reinterpret_cast<const VkPhysicalDeviceVulkanMemoryModelFeaturesKHR*>(this);	}
 operator VkPhysicalDeviceVulkanMemoryModelFeaturesKHR &() 
 	{	return *reinterpret_cast<VkPhysicalDeviceVulkanMemoryModelFeaturesKHR*>(this);	}
+
+friend S_physical_device_features2;
+friend S_device_create_info;
 
 };
 static_assert(
@@ -10039,6 +10527,7 @@ private:
 public:
 	VkBool32 shaderBufferInt64Atomics;
 	VkBool32 shaderSharedInt64Atomics;
+
 S_physical_device_shader_atomic_int64_features_KHR( VkPhysicalDeviceShaderAtomicInt64FeaturesKHR const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_physical_device_shader_atomic_int64_features_KHR ) );	}
 S_physical_device_shader_atomic_int64_features_KHR& operator=( VkPhysicalDeviceShaderAtomicInt64FeaturesKHR const & rhs ) 
@@ -10047,6 +10536,9 @@ operator VkPhysicalDeviceShaderAtomicInt64FeaturesKHR const&() const
 	{	return *reinterpret_cast<const VkPhysicalDeviceShaderAtomicInt64FeaturesKHR*>(this);	}
 operator VkPhysicalDeviceShaderAtomicInt64FeaturesKHR &() 
 	{	return *reinterpret_cast<VkPhysicalDeviceShaderAtomicInt64FeaturesKHR*>(this);	}
+
+friend S_physical_device_features2;
+friend S_device_create_info;
 
 };
 static_assert(
@@ -10064,6 +10556,7 @@ private:
 public:
 	VkBool32 vertexAttributeInstanceRateDivisor;
 	VkBool32 vertexAttributeInstanceRateZeroDivisor;
+
 S_physical_device_vertex_attribute_divisor_features_EXT( VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_physical_device_vertex_attribute_divisor_features_EXT ) );	}
 S_physical_device_vertex_attribute_divisor_features_EXT& operator=( VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT const & rhs ) 
@@ -10072,6 +10565,9 @@ operator VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT const&() const
 	{	return *reinterpret_cast<const VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT*>(this);	}
 operator VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT &() 
 	{	return *reinterpret_cast<VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT*>(this);	}
+
+friend S_physical_device_features2;
+friend S_device_create_info;
 
 };
 static_assert(
@@ -10089,6 +10585,7 @@ private:
 	void * pNext = nullptr;
 public:
 	F_pipeline_stage checkpointExecutionStageMask;
+
 S_queue_family_checkpoint_properties_NV( VkQueueFamilyCheckpointPropertiesNV const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_queue_family_checkpoint_properties_NV ) );	}
 S_queue_family_checkpoint_properties_NV& operator=( VkQueueFamilyCheckpointPropertiesNV const & rhs ) 
@@ -10097,6 +10594,8 @@ operator VkQueueFamilyCheckpointPropertiesNV const&() const
 	{	return *reinterpret_cast<const VkQueueFamilyCheckpointPropertiesNV*>(this);	}
 operator VkQueueFamilyCheckpointPropertiesNV &() 
 	{	return *reinterpret_cast<VkQueueFamilyCheckpointPropertiesNV*>(this);	}
+
+friend S_queue_family_properties2;
 
 };
 static_assert(
@@ -10114,6 +10613,7 @@ private:
 public:
 	F_pipeline_stage stage;
 	void * pCheckpointMarker;
+
 S_checkpoint_data_NV( VkCheckpointDataNV const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_checkpoint_data_NV ) );	}
 S_checkpoint_data_NV& operator=( VkCheckpointDataNV const & rhs ) 
@@ -10138,6 +10638,7 @@ private:
 	const void * pNext = nullptr;
 public:
 	E_format decodeMode;
+
 S_image_view_astc_decode_mode_EXT( VkImageViewASTCDecodeModeEXT const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_image_view_astc_decode_mode_EXT ) );	}
 S_image_view_astc_decode_mode_EXT& operator=( VkImageViewASTCDecodeModeEXT const & rhs ) 
@@ -10146,6 +10647,8 @@ operator VkImageViewASTCDecodeModeEXT const&() const
 	{	return *reinterpret_cast<const VkImageViewASTCDecodeModeEXT*>(this);	}
 operator VkImageViewASTCDecodeModeEXT &() 
 	{	return *reinterpret_cast<VkImageViewASTCDecodeModeEXT*>(this);	}
+
+friend S_image_view_create_info;
 
 };
 static_assert(
@@ -10162,6 +10665,7 @@ private:
 	void * pNext = nullptr;
 public:
 	VkBool32 decodeModeSharedExponent;
+
 S_physical_device_astc_decode_features_EXT( VkPhysicalDeviceASTCDecodeFeaturesEXT const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_physical_device_astc_decode_features_EXT ) );	}
 S_physical_device_astc_decode_features_EXT& operator=( VkPhysicalDeviceASTCDecodeFeaturesEXT const & rhs ) 
@@ -10170,6 +10674,9 @@ operator VkPhysicalDeviceASTCDecodeFeaturesEXT const&() const
 	{	return *reinterpret_cast<const VkPhysicalDeviceASTCDecodeFeaturesEXT*>(this);	}
 operator VkPhysicalDeviceASTCDecodeFeaturesEXT &() 
 	{	return *reinterpret_cast<VkPhysicalDeviceASTCDecodeFeaturesEXT*>(this);	}
+
+friend S_physical_device_features2;
+friend S_device_create_info;
 
 };
 static_assert(
@@ -10186,6 +10693,7 @@ private:
 	void * pNext = nullptr;
 public:
 	VkBool32 representativeFragmentTest;
+
 S_physical_device_representative_fragment_test_features_NV( VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_physical_device_representative_fragment_test_features_NV ) );	}
 S_physical_device_representative_fragment_test_features_NV& operator=( VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV const & rhs ) 
@@ -10194,6 +10702,9 @@ operator VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV const&() const
 	{	return *reinterpret_cast<const VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV*>(this);	}
 operator VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV &() 
 	{	return *reinterpret_cast<VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV*>(this);	}
+
+friend S_physical_device_features2;
+friend S_device_create_info;
 
 };
 static_assert(
@@ -10210,6 +10721,7 @@ private:
 	const void * pNext = nullptr;
 public:
 	VkBool32 representativeFragmentTestEnable;
+
 S_pipeline_representative_fragment_test_state_create_info_NV( VkPipelineRepresentativeFragmentTestStateCreateInfoNV const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_pipeline_representative_fragment_test_state_create_info_NV ) );	}
 S_pipeline_representative_fragment_test_state_create_info_NV& operator=( VkPipelineRepresentativeFragmentTestStateCreateInfoNV const & rhs ) 
@@ -10218,6 +10730,8 @@ operator VkPipelineRepresentativeFragmentTestStateCreateInfoNV const&() const
 	{	return *reinterpret_cast<const VkPipelineRepresentativeFragmentTestStateCreateInfoNV*>(this);	}
 operator VkPipelineRepresentativeFragmentTestStateCreateInfoNV &() 
 	{	return *reinterpret_cast<VkPipelineRepresentativeFragmentTestStateCreateInfoNV*>(this);	}
+
+friend S_graphics_pipeline_create_info;
 
 };
 static_assert(
@@ -10234,6 +10748,7 @@ private:
 	void * pNext = nullptr;
 public:
 	VkBool32 exclusiveScissor;
+
 S_physical_device_exclusive_scissor_features_NV( VkPhysicalDeviceExclusiveScissorFeaturesNV const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_physical_device_exclusive_scissor_features_NV ) );	}
 S_physical_device_exclusive_scissor_features_NV& operator=( VkPhysicalDeviceExclusiveScissorFeaturesNV const & rhs ) 
@@ -10242,6 +10757,9 @@ operator VkPhysicalDeviceExclusiveScissorFeaturesNV const&() const
 	{	return *reinterpret_cast<const VkPhysicalDeviceExclusiveScissorFeaturesNV*>(this);	}
 operator VkPhysicalDeviceExclusiveScissorFeaturesNV &() 
 	{	return *reinterpret_cast<VkPhysicalDeviceExclusiveScissorFeaturesNV*>(this);	}
+
+friend S_physical_device_features2;
+friend S_device_create_info;
 
 };
 static_assert(
@@ -10258,6 +10776,7 @@ private:
 	void * pNext = nullptr;
 public:
 	VkBool32 cornerSampledImage;
+
 S_physical_device_corner_sampled_image_features_NV( VkPhysicalDeviceCornerSampledImageFeaturesNV const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_physical_device_corner_sampled_image_features_NV ) );	}
 S_physical_device_corner_sampled_image_features_NV& operator=( VkPhysicalDeviceCornerSampledImageFeaturesNV const & rhs ) 
@@ -10266,6 +10785,9 @@ operator VkPhysicalDeviceCornerSampledImageFeaturesNV const&() const
 	{	return *reinterpret_cast<const VkPhysicalDeviceCornerSampledImageFeaturesNV*>(this);	}
 operator VkPhysicalDeviceCornerSampledImageFeaturesNV &() 
 	{	return *reinterpret_cast<VkPhysicalDeviceCornerSampledImageFeaturesNV*>(this);	}
+
+friend S_physical_device_features2;
+friend S_device_create_info;
 
 };
 static_assert(
@@ -10283,6 +10805,7 @@ private:
 public:
 	VkBool32 computeDerivativeGroupQuads;
 	VkBool32 computeDerivativeGroupLinear;
+
 S_physical_device_compute_shader_derivatives_features_NV( VkPhysicalDeviceComputeShaderDerivativesFeaturesNV const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_physical_device_compute_shader_derivatives_features_NV ) );	}
 S_physical_device_compute_shader_derivatives_features_NV& operator=( VkPhysicalDeviceComputeShaderDerivativesFeaturesNV const & rhs ) 
@@ -10291,6 +10814,9 @@ operator VkPhysicalDeviceComputeShaderDerivativesFeaturesNV const&() const
 	{	return *reinterpret_cast<const VkPhysicalDeviceComputeShaderDerivativesFeaturesNV*>(this);	}
 operator VkPhysicalDeviceComputeShaderDerivativesFeaturesNV &() 
 	{	return *reinterpret_cast<VkPhysicalDeviceComputeShaderDerivativesFeaturesNV*>(this);	}
+
+friend S_physical_device_features2;
+friend S_device_create_info;
 
 };
 static_assert(
@@ -10307,6 +10833,7 @@ private:
 	void * pNext = nullptr;
 public:
 	VkBool32 fragmentShaderBarycentric;
+
 S_physical_device_fragment_shader_barycentric_features_NV( VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_physical_device_fragment_shader_barycentric_features_NV ) );	}
 S_physical_device_fragment_shader_barycentric_features_NV& operator=( VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV const & rhs ) 
@@ -10315,6 +10842,9 @@ operator VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV const&() const
 	{	return *reinterpret_cast<const VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV*>(this);	}
 operator VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV &() 
 	{	return *reinterpret_cast<VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV*>(this);	}
+
+friend S_physical_device_features2;
+friend S_device_create_info;
 
 };
 static_assert(
@@ -10331,6 +10861,7 @@ private:
 	void * pNext = nullptr;
 public:
 	VkBool32 imageFootprint;
+
 S_physical_device_shader_image_footprint_features_NV( VkPhysicalDeviceShaderImageFootprintFeaturesNV const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_physical_device_shader_image_footprint_features_NV ) );	}
 S_physical_device_shader_image_footprint_features_NV& operator=( VkPhysicalDeviceShaderImageFootprintFeaturesNV const & rhs ) 
@@ -10339,6 +10870,9 @@ operator VkPhysicalDeviceShaderImageFootprintFeaturesNV const&() const
 	{	return *reinterpret_cast<const VkPhysicalDeviceShaderImageFootprintFeaturesNV*>(this);	}
 operator VkPhysicalDeviceShaderImageFootprintFeaturesNV &() 
 	{	return *reinterpret_cast<VkPhysicalDeviceShaderImageFootprintFeaturesNV*>(this);	}
+
+friend S_physical_device_features2;
+friend S_device_create_info;
 
 };
 static_assert(
@@ -10356,6 +10890,7 @@ private:
 public:
 	VkBool32 shadingRateImage;
 	VkBool32 shadingRateCoarseSampleOrder;
+
 S_physical_device_shading_rate_image_features_NV( VkPhysicalDeviceShadingRateImageFeaturesNV const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_physical_device_shading_rate_image_features_NV ) );	}
 S_physical_device_shading_rate_image_features_NV& operator=( VkPhysicalDeviceShadingRateImageFeaturesNV const & rhs ) 
@@ -10364,6 +10899,9 @@ operator VkPhysicalDeviceShadingRateImageFeaturesNV const&() const
 	{	return *reinterpret_cast<const VkPhysicalDeviceShadingRateImageFeaturesNV*>(this);	}
 operator VkPhysicalDeviceShadingRateImageFeaturesNV &() 
 	{	return *reinterpret_cast<VkPhysicalDeviceShadingRateImageFeaturesNV*>(this);	}
+
+friend S_physical_device_features2;
+friend S_device_create_info;
 
 };
 static_assert(
@@ -10381,6 +10919,7 @@ private:
 public:
 	VkBool32 taskShader;
 	VkBool32 meshShader;
+
 S_physical_device_mesh_shader_features_NV( VkPhysicalDeviceMeshShaderFeaturesNV const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_physical_device_mesh_shader_features_NV ) );	}
 S_physical_device_mesh_shader_features_NV& operator=( VkPhysicalDeviceMeshShaderFeaturesNV const & rhs ) 
@@ -10389,6 +10928,9 @@ operator VkPhysicalDeviceMeshShaderFeaturesNV const&() const
 	{	return *reinterpret_cast<const VkPhysicalDeviceMeshShaderFeaturesNV*>(this);	}
 operator VkPhysicalDeviceMeshShaderFeaturesNV &() 
 	{	return *reinterpret_cast<VkPhysicalDeviceMeshShaderFeaturesNV*>(this);	}
+
+friend S_physical_device_features2;
+friend S_device_create_info;
 
 };
 static_assert(
@@ -10417,6 +10959,7 @@ public:
 	uint32_t maxMeshMultiviewViewCount;
 	uint32_t meshOutputPerVertexGranularity;
 	uint32_t meshOutputPerPrimitiveGranularity;
+
 S_physical_device_mesh_shader_properties_NV( VkPhysicalDeviceMeshShaderPropertiesNV const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_physical_device_mesh_shader_properties_NV ) );	}
 S_physical_device_mesh_shader_properties_NV& operator=( VkPhysicalDeviceMeshShaderPropertiesNV const & rhs ) 
@@ -10425,6 +10968,8 @@ operator VkPhysicalDeviceMeshShaderPropertiesNV const&() const
 	{	return *reinterpret_cast<const VkPhysicalDeviceMeshShaderPropertiesNV*>(this);	}
 operator VkPhysicalDeviceMeshShaderPropertiesNV &() 
 	{	return *reinterpret_cast<VkPhysicalDeviceMeshShaderPropertiesNV*>(this);	}
+
+friend S_physical_device_properties2;
 
 };
 static_assert(
@@ -10450,6 +10995,7 @@ public:
 	E_index_type indexType;
 	VkBuffer transformData;
 	VkDeviceSize transformOffset;
+
 S_geometry_triangles_NVX( VkGeometryTrianglesNVX const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_geometry_triangles_NVX ) );	}
 S_geometry_triangles_NVX& operator=( VkGeometryTrianglesNVX const & rhs ) 
@@ -10476,6 +11022,7 @@ public:
 	uint32_t numAABBs;
 	uint32_t stride;
 	VkDeviceSize offset;
+
 S_geometry_aabb_NVX( VkGeometryAABBNVX const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_geometry_aabb_NVX ) );	}
 S_geometry_aabb_NVX& operator=( VkGeometryAABBNVX const & rhs ) 
@@ -10503,6 +11050,7 @@ public:
 	VkDeviceSize memoryOffset;
 	uint32_t deviceIndexCount;
 	const uint32_t * pDeviceIndices;
+
 S_bind_acceleration_structure_memory_info_NVX( VkBindAccelerationStructureMemoryInfoNVX const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_bind_acceleration_structure_memory_info_NVX ) );	}
 S_bind_acceleration_structure_memory_info_NVX& operator=( VkBindAccelerationStructureMemoryInfoNVX const & rhs ) 
@@ -10528,6 +11076,7 @@ private:
 public:
 	uint32_t accelerationStructureCount;
 	const VkAccelerationStructureNVX * pAccelerationStructures;
+
 S_descriptor_acceleration_structure_info_NVX( VkDescriptorAccelerationStructureInfoNVX const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_descriptor_acceleration_structure_info_NVX ) );	}
 S_descriptor_acceleration_structure_info_NVX& operator=( VkDescriptorAccelerationStructureInfoNVX const & rhs ) 
@@ -10536,6 +11085,8 @@ operator VkDescriptorAccelerationStructureInfoNVX const&() const
 	{	return *reinterpret_cast<const VkDescriptorAccelerationStructureInfoNVX*>(this);	}
 operator VkDescriptorAccelerationStructureInfoNVX &() 
 	{	return *reinterpret_cast<VkDescriptorAccelerationStructureInfoNVX*>(this);	}
+
+friend S_write_descriptor_set;
 
 };
 static_assert(
@@ -10551,6 +11102,7 @@ private:
 	const void * pNext = nullptr;
 public:
 	VkAccelerationStructureNVX accelerationStructure;
+
 S_acceleration_structure_memory_requirements_info_NVX( VkAccelerationStructureMemoryRequirementsInfoNVX const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_acceleration_structure_memory_requirements_info_NVX ) );	}
 S_acceleration_structure_memory_requirements_info_NVX& operator=( VkAccelerationStructureMemoryRequirementsInfoNVX const & rhs ) 
@@ -10577,6 +11129,7 @@ public:
 	uint32_t shaderHeaderSize;
 	uint32_t maxRecursionDepth;
 	uint32_t maxGeometryCount;
+
 S_physical_device_raytracing_properties_NVX( VkPhysicalDeviceRaytracingPropertiesNVX const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_physical_device_raytracing_properties_NVX ) );	}
 S_physical_device_raytracing_properties_NVX& operator=( VkPhysicalDeviceRaytracingPropertiesNVX const & rhs ) 
@@ -10585,6 +11138,8 @@ operator VkPhysicalDeviceRaytracingPropertiesNVX const&() const
 	{	return *reinterpret_cast<const VkPhysicalDeviceRaytracingPropertiesNVX*>(this);	}
 operator VkPhysicalDeviceRaytracingPropertiesNVX &() 
 	{	return *reinterpret_cast<VkPhysicalDeviceRaytracingPropertiesNVX*>(this);	}
+
+friend S_physical_device_properties2;
 
 };
 static_assert(
@@ -10601,6 +11156,7 @@ private:
 	const void * pNext = nullptr;
 public:
 	uint64_t drmFormatModifier;
+
 S_physical_device_image_drm_format_modifier_info_EXT( VkPhysicalDeviceImageDrmFormatModifierInfoEXT const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_physical_device_image_drm_format_modifier_info_EXT ) );	}
 S_physical_device_image_drm_format_modifier_info_EXT& operator=( VkPhysicalDeviceImageDrmFormatModifierInfoEXT const & rhs ) 
@@ -10609,6 +11165,8 @@ operator VkPhysicalDeviceImageDrmFormatModifierInfoEXT const&() const
 	{	return *reinterpret_cast<const VkPhysicalDeviceImageDrmFormatModifierInfoEXT*>(this);	}
 operator VkPhysicalDeviceImageDrmFormatModifierInfoEXT &() 
 	{	return *reinterpret_cast<VkPhysicalDeviceImageDrmFormatModifierInfoEXT*>(this);	}
+
+friend S_physical_device_image_format_info2;
 
 };
 static_assert(
@@ -10626,6 +11184,7 @@ private:
 public:
 	uint32_t drmFormatModifierCount;
 	const uint64_t * pDrmFormatModifiers;
+
 S_image_drm_format_modifier_list_create_info_EXT( VkImageDrmFormatModifierListCreateInfoEXT const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_image_drm_format_modifier_list_create_info_EXT ) );	}
 S_image_drm_format_modifier_list_create_info_EXT& operator=( VkImageDrmFormatModifierListCreateInfoEXT const & rhs ) 
@@ -10634,6 +11193,8 @@ operator VkImageDrmFormatModifierListCreateInfoEXT const&() const
 	{	return *reinterpret_cast<const VkImageDrmFormatModifierListCreateInfoEXT*>(this);	}
 operator VkImageDrmFormatModifierListCreateInfoEXT &() 
 	{	return *reinterpret_cast<VkImageDrmFormatModifierListCreateInfoEXT*>(this);	}
+
+friend S_image_create_info;
 
 };
 static_assert(
@@ -10650,6 +11211,7 @@ private:
 	void * pNext = nullptr;
 public:
 	uint64_t drmFormatModifier;
+
 S_image_drm_format_modifier_properties_EXT( VkImageDrmFormatModifierPropertiesEXT const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_image_drm_format_modifier_properties_EXT ) );	}
 S_image_drm_format_modifier_properties_EXT& operator=( VkImageDrmFormatModifierPropertiesEXT const & rhs ) 
@@ -10665,13 +11227,122 @@ static_assert(
 	"struct and wrapper have different size!");
 
 
-/*---------------- other struct ---------------------*/
+/*---------------- Advance declaration -------------------*/
+struct S_rect_2d;
+struct S_clear_rect;
+struct S_physical_device_properties;
+struct S_device_create_info;
+struct S_instance_create_info;
+struct S_queue_family_properties;
+struct S_physical_device_memory_properties;
+struct S_sparse_image_format_properties;
+struct S_sparse_image_memory_requirements;
+struct S_image_format_properties;
+struct S_write_descriptor_set;
+struct S_image_memory_barrier;
+struct S_image_create_info;
+struct S_image_view_create_info;
+struct S_sparse_image_memory_bind;
+struct S_sparse_buffer_memory_bind_info;
+struct S_sparse_image_opaque_memory_bind_info;
+struct S_sparse_image_memory_bind_info;
+struct S_bind_sparse_info;
+struct S_image_copy;
+struct S_image_blit;
+struct S_buffer_image_copy;
+struct S_image_resolve;
+struct S_descriptor_set_layout_create_info;
+struct S_descriptor_pool_create_info;
+struct S_specialization_info;
+struct S_pipeline_shader_stage_create_info;
+struct S_compute_pipeline_create_info;
+struct S_pipeline_vertex_input_state_create_info;
+struct S_pipeline_viewport_state_create_info;
+struct S_pipeline_color_blend_state_create_info;
+struct S_pipeline_depth_stencil_state_create_info;
+struct S_graphics_pipeline_create_info;
+struct S_pipeline_layout_create_info;
+struct S_command_buffer_begin_info;
+struct S_render_pass_begin_info;
+struct S_subpass_description;
+struct S_render_pass_create_info;
+struct S_display_properties_KHR;
+struct S_display_mode_parameters_KHR;
+struct S_display_mode_properties_KHR;
+struct S_display_mode_create_info_KHR;
+struct S_display_plane_capabilities_KHR;
+struct S_display_surface_create_info_KHR;
+struct S_display_present_info_KHR;
+struct S_surface_capabilities_KHR;
+struct S_swapchain_create_info_KHR;
+struct S_external_image_format_properties_NV;
+struct S_indirect_commands_layout_create_info_NVX;
+struct S_cmd_process_commands_info_NVX;
+struct S_physical_device_features2;
+struct S_physical_device_properties2;
+struct S_format_properties2;
+struct S_image_format_properties2;
+struct S_queue_family_properties2;
+struct S_physical_device_memory_properties2;
+struct S_sparse_image_format_properties2;
+struct S_physical_device_driver_properties_KHR;
+struct S_present_regions_KHR;
+struct S_present_region_KHR;
+struct S_rect_layer_KHR;
+struct S_external_image_format_properties;
+struct S_external_buffer_properties;
+struct S_surface_capabilities2_EXT;
+struct S_bind_image_memory_device_group_info;
+struct S_device_group_render_pass_begin_info;
+struct S_descriptor_update_template_create_info;
+struct S_hdr_metadata_EXT;
+struct S_present_times_info_GOOGLE;
+struct S_pipeline_viewport_w_scaling_state_create_info_NV;
+struct S_pipeline_viewport_swizzle_state_create_info_NV;
+struct S_pipeline_discard_rectangle_state_create_info_EXT;
+struct S_render_pass_input_attachment_aspect_create_info;
+struct S_surface_capabilities2_KHR;
+struct S_surface_format2_KHR;
+struct S_display_properties2_KHR;
+struct S_display_plane_properties2_KHR;
+struct S_display_mode_properties2_KHR;
+struct S_display_plane_capabilities2_KHR;
+struct S_memory_requirements2;
+struct S_sparse_image_memory_requirements2;
+struct S_sampler_ycbcr_conversion_create_info;
+struct S_sample_locations_info_EXT;
+struct S_attachment_sample_locations_EXT;
+struct S_subpass_sample_locations_EXT;
+struct S_render_pass_sample_locations_begin_info_EXT;
+struct S_pipeline_sample_locations_state_create_info_EXT;
+struct S_physical_device_sample_locations_properties_EXT;
+struct S_multisample_properties_EXT;
+struct S_shader_statistics_info_AMD;
+struct S_debug_utils_messenger_callback_data_EXT;
+struct S_subpass_description2_KHR;
+struct S_render_pass_create_info2_KHR;
+struct S_pipeline_vertex_input_divisor_state_create_info_EXT;
+struct S_android_hardware_buffer_format_properties_ANDROID;
+struct S_pipeline_viewport_exclusive_scissor_state_create_info_NV;
+struct S_pipeline_viewport_shading_rate_image_state_create_info_NV;
+struct S_physical_device_shading_rate_image_properties_NV;
+struct S_coarse_sample_order_custom_NV;
+struct S_pipeline_viewport_coarse_sample_order_state_create_info_NV;
+struct S_raytracing_pipeline_create_info_NVX;
+struct S_geometry_data_NVX;
+struct S_geometry_NVX;
+struct S_acceleration_structure_create_info_NVX;
+struct S_drm_format_modifier_properties_list_EXT;
+struct S_image_drm_format_modifier_explicit_create_info_EXT;
 
+
+/*---------------- other struct ---------------------*/
 /*	VkRect2D
 */
 struct		S_rect_2d{
 	S_offset_2d offset;
 	S_extent_2d extent;
+
 };
 
 /*	VkClearRect
@@ -10680,80 +11351,8 @@ struct		S_clear_rect{
 	S_rect_2d rect;
 	uint32_t baseArrayLayer;
 	uint32_t layerCount;
-};
-
-/*	VkPhysicalDeviceProperties
-(returnedonly)
-ex:
-	VkPhysicalDeviceShadingRateImagePropertiesNV
-*/
-struct		S_physical_device_properties{
-	uint32_t apiVersion;
-	uint32_t driverVersion;
-	uint32_t vendorID;
-	uint32_t deviceID;
-	E_physical_device_type deviceType;
-	char deviceName[VK_MAX_PHYSICAL_DEVICE_NAME_SIZE];
-	uint8_t pipelineCacheUUID[VK_UUID_SIZE];
-	S_physical_device_limits limits;
-	S_physical_device_sparse_properties sparseProperties;
-};
-
-/*	VkDeviceCreateInfo
-ex:
-	VkPhysicalDeviceFeatures2
-	VkPhysicalDeviceVariablePointerFeatures
-	VkPhysicalDeviceMultiviewFeatures
-	VkDeviceGroupDeviceCreateInfo
-	VkPhysicalDevice16BitStorageFeatures
-	VkPhysicalDeviceSamplerYcbcrConversionFeatures
-	VkPhysicalDeviceProtectedMemoryFeatures
-	VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT
-	VkPhysicalDeviceInlineUniformBlockFeaturesEXT
-	VkPhysicalDeviceShaderDrawParameterFeatures
-	VkPhysicalDeviceDescriptorIndexingFeaturesEXT
-	VkPhysicalDevice8BitStorageFeaturesKHR
-	VkPhysicalDeviceConditionalRenderingFeaturesEXT
-	VkPhysicalDeviceVulkanMemoryModelFeaturesKHR
-	VkPhysicalDeviceShaderAtomicInt64FeaturesKHR
-	VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT
-	VkPhysicalDeviceASTCDecodeFeaturesEXT
-	VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV
-	VkPhysicalDeviceExclusiveScissorFeaturesNV
-	VkPhysicalDeviceCornerSampledImageFeaturesNV
-	VkPhysicalDeviceComputeShaderDerivativesFeaturesNV
-	VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV
-	VkPhysicalDeviceShaderImageFootprintFeaturesNV
-	VkPhysicalDeviceShadingRateImageFeaturesNV
-	VkPhysicalDeviceMeshShaderFeaturesNV
-*/
-struct		S_device_create_info{
-private:
-	VkStructureType sType = 
-			VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO;
-	const void * pNext = nullptr;
-public:
-	VkDeviceCreateFlags flags;
-	uint32_t queueCreateInfoCount;
-	const S_device_queue_create_info * pQueueCreateInfos;
-	uint32_t enabledLayerCount;
-	const char * const* ppEnabledLayerNames;
-	uint32_t enabledExtensionCount;
-	const char * const* ppEnabledExtensionNames;
-	const S_physical_device_features * pEnabledFeatures;
-S_device_create_info( VkDeviceCreateInfo const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_device_create_info ) );	}
-S_device_create_info& operator=( VkDeviceCreateInfo const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_device_create_info ) ); return *this;	}
-operator VkDeviceCreateInfo const&() const 
-	{	return *reinterpret_cast<const VkDeviceCreateInfo*>(this);	}
-operator VkDeviceCreateInfo &() 
-	{	return *reinterpret_cast<VkDeviceCreateInfo*>(this);	}
 
 };
-static_assert(
-	sizeof(S_device_create_info) == sizeof(VkDeviceCreateInfo),
-	"struct and wrapper have different size!");
 
 /*	VkInstanceCreateInfo
 ex:
@@ -10773,6 +11372,7 @@ public:
 	const char * const* ppEnabledLayerNames;
 	uint32_t enabledExtensionCount;
 	const char * const* ppEnabledExtensionNames;
+
 S_instance_create_info( VkInstanceCreateInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_instance_create_info ) );	}
 S_instance_create_info& operator=( VkInstanceCreateInfo const & rhs ) 
@@ -10781,6 +11381,10 @@ operator VkInstanceCreateInfo const&() const
 	{	return *reinterpret_cast<const VkInstanceCreateInfo*>(this);	}
 operator VkInstanceCreateInfo &() 
 	{	return *reinterpret_cast<VkInstanceCreateInfo*>(this);	}
+
+S_instance_create_info& n_debug_report_callback_create_info_EXT(S_debug_report_callback_create_info_EXT const& next_);
+S_instance_create_info& n_validation_flags_EXT(S_validation_flags_EXT const& next_);
+S_instance_create_info& n_debug_utils_messenger_create_info_EXT(S_debug_utils_messenger_create_info_EXT const& next_);
 
 };
 static_assert(
@@ -10795,6 +11399,7 @@ struct		S_queue_family_properties{
 	uint32_t queueCount;
 	uint32_t timestampValidBits;
 	S_extent_3d minImageTransferGranularity;
+
 };
 
 /*	VkPhysicalDeviceMemoryProperties
@@ -10805,6 +11410,7 @@ struct		S_physical_device_memory_properties{
 	S_memory_type memoryTypes[VK_MAX_MEMORY_TYPES];
 	uint32_t memoryHeapCount;
 	S_memory_heap memoryHeaps[VK_MAX_MEMORY_HEAPS];
+
 };
 
 /*	VkSparseImageFormatProperties
@@ -10814,6 +11420,7 @@ struct		S_sparse_image_format_properties{
 	F_image_aspect aspectMask;
 	S_extent_3d imageGranularity;
 	F_sparse_image_format flags;
+
 };
 
 /*	VkSparseImageMemoryRequirements
@@ -10825,6 +11432,7 @@ struct		S_sparse_image_memory_requirements{
 	VkDeviceSize imageMipTailSize;
 	VkDeviceSize imageMipTailOffset;
 	VkDeviceSize imageMipTailStride;
+
 };
 
 /*	VkImageFormatProperties
@@ -10836,6 +11444,7 @@ struct		S_image_format_properties{
 	uint32_t maxArrayLayers;
 	F_sample_count sampleCounts;
 	VkDeviceSize maxResourceSize;
+
 };
 
 /*	VkWriteDescriptorSet
@@ -10857,6 +11466,7 @@ public:
 	const S_descriptor_image_info * pImageInfo;
 	const S_descriptor_buffer_info * pBufferInfo;
 	const VkBufferView * pTexelBufferView;
+
 S_write_descriptor_set( VkWriteDescriptorSet const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_write_descriptor_set ) );	}
 S_write_descriptor_set& operator=( VkWriteDescriptorSet const & rhs ) 
@@ -10866,85 +11476,12 @@ operator VkWriteDescriptorSet const&() const
 operator VkWriteDescriptorSet &() 
 	{	return *reinterpret_cast<VkWriteDescriptorSet*>(this);	}
 
+S_write_descriptor_set& n_write_descriptor_set_inline_uniform_block_EXT(S_write_descriptor_set_inline_uniform_block_EXT const& next_);
+S_write_descriptor_set& n_descriptor_acceleration_structure_info_NVX(S_descriptor_acceleration_structure_info_NVX const& next_);
+
 };
 static_assert(
 	sizeof(S_write_descriptor_set) == sizeof(VkWriteDescriptorSet),
-	"struct and wrapper have different size!");
-
-/*	VkImageMemoryBarrier
-ex:
-	VkSampleLocationsInfoEXT
-*/
-struct		S_image_memory_barrier{
-private:
-	VkStructureType sType = 
-			VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER;
-	const void * pNext = nullptr;
-public:
-	F_access srcAccessMask;
-	F_access dstAccessMask;
-	E_image_layout oldLayout;
-	E_image_layout newLayout;
-	uint32_t srcQueueFamilyIndex;
-	uint32_t dstQueueFamilyIndex;
-	VkImage image;
-	S_image_subresource_range subresourceRange;
-S_image_memory_barrier( VkImageMemoryBarrier const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_image_memory_barrier ) );	}
-S_image_memory_barrier& operator=( VkImageMemoryBarrier const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_image_memory_barrier ) ); return *this;	}
-operator VkImageMemoryBarrier const&() const 
-	{	return *reinterpret_cast<const VkImageMemoryBarrier*>(this);	}
-operator VkImageMemoryBarrier &() 
-	{	return *reinterpret_cast<VkImageMemoryBarrier*>(this);	}
-
-};
-static_assert(
-	sizeof(S_image_memory_barrier) == sizeof(VkImageMemoryBarrier),
-	"struct and wrapper have different size!");
-
-/*	VkImageCreateInfo
-ex:
-	VkDedicatedAllocationImageCreateInfoNV
-	VkExternalMemoryImageCreateInfoNV
-	VkExternalMemoryImageCreateInfo
-	VkImageSwapchainCreateInfoKHR
-	VkImageFormatListCreateInfoKHR
-	VkExternalFormatANDROID
-	VkImageDrmFormatModifierListCreateInfoEXT
-	VkImageDrmFormatModifierExplicitCreateInfoEXT
-*/
-struct		S_image_create_info{
-private:
-	VkStructureType sType = 
-			VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO;
-	const void * pNext = nullptr;
-public:
-	F_image_create flags;
-	E_image_type imageType;
-	E_format format;
-	S_extent_3d extent;
-	uint32_t mipLevels;
-	uint32_t arrayLayers;
-	F_sample_count samples;
-	E_image_tiling tiling;
-	F_image_usage usage;
-	E_sharing_mode sharingMode;
-	uint32_t queueFamilyIndexCount;
-	const uint32_t * pQueueFamilyIndices;
-	E_image_layout initialLayout;
-S_image_create_info( VkImageCreateInfo const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_image_create_info ) );	}
-S_image_create_info& operator=( VkImageCreateInfo const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_image_create_info ) ); return *this;	}
-operator VkImageCreateInfo const&() const 
-	{	return *reinterpret_cast<const VkImageCreateInfo*>(this);	}
-operator VkImageCreateInfo &() 
-	{	return *reinterpret_cast<VkImageCreateInfo*>(this);	}
-
-};
-static_assert(
-	sizeof(S_image_create_info) == sizeof(VkImageCreateInfo),
 	"struct and wrapper have different size!");
 
 /*	VkImageViewCreateInfo
@@ -10965,6 +11502,7 @@ public:
 	E_format format;
 	S_component_mapping components;
 	S_image_subresource_range subresourceRange;
+
 S_image_view_create_info( VkImageViewCreateInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_image_view_create_info ) );	}
 S_image_view_create_info& operator=( VkImageViewCreateInfo const & rhs ) 
@@ -10973,6 +11511,10 @@ operator VkImageViewCreateInfo const&() const
 	{	return *reinterpret_cast<const VkImageViewCreateInfo*>(this);	}
 operator VkImageViewCreateInfo &() 
 	{	return *reinterpret_cast<VkImageViewCreateInfo*>(this);	}
+
+S_image_view_create_info& n_image_view_usage_create_info(S_image_view_usage_create_info const& next_);
+S_image_view_create_info& n_sampler_ycbcr_conversion_info(S_sampler_ycbcr_conversion_info const& next_);
+S_image_view_create_info& n_image_view_astc_decode_mode_EXT(S_image_view_astc_decode_mode_EXT const& next_);
 
 };
 static_assert(
@@ -10988,6 +11530,7 @@ struct		S_sparse_image_memory_bind{
 	VkDeviceMemory memory;
 	VkDeviceSize memoryOffset;
 	F_sparse_memory_bind flags;
+
 };
 
 /*	VkSparseBufferMemoryBindInfo
@@ -10996,6 +11539,7 @@ struct		S_sparse_buffer_memory_bind_info{
 	VkBuffer buffer;
 	uint32_t bindCount;
 	const S_sparse_memory_bind * pBinds;
+
 };
 
 /*	VkSparseImageOpaqueMemoryBindInfo
@@ -11004,6 +11548,7 @@ struct		S_sparse_image_opaque_memory_bind_info{
 	VkImage image;
 	uint32_t bindCount;
 	const S_sparse_memory_bind * pBinds;
+
 };
 
 /*	VkSparseImageMemoryBindInfo
@@ -11012,6 +11557,7 @@ struct		S_sparse_image_memory_bind_info{
 	VkImage image;
 	uint32_t bindCount;
 	const S_sparse_image_memory_bind * pBinds;
+
 };
 
 /*	VkBindSparseInfo
@@ -11034,6 +11580,7 @@ public:
 	const S_sparse_image_memory_bind_info * pImageBinds;
 	uint32_t signalSemaphoreCount;
 	const VkSemaphore * pSignalSemaphores;
+
 S_bind_sparse_info( VkBindSparseInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_bind_sparse_info ) );	}
 S_bind_sparse_info& operator=( VkBindSparseInfo const & rhs ) 
@@ -11042,6 +11589,8 @@ operator VkBindSparseInfo const&() const
 	{	return *reinterpret_cast<const VkBindSparseInfo*>(this);	}
 operator VkBindSparseInfo &() 
 	{	return *reinterpret_cast<VkBindSparseInfo*>(this);	}
+
+S_bind_sparse_info& n_device_group_bind_sparse_info(S_device_group_bind_sparse_info const& next_);
 
 };
 static_assert(
@@ -11056,6 +11605,7 @@ struct		S_image_copy{
 	S_image_subresource_layers dstSubresource;
 	S_offset_3d dstOffset;
 	S_extent_3d extent;
+
 };
 
 /*	VkImageBlit
@@ -11065,6 +11615,7 @@ struct		S_image_blit{
 	S_offset_3d srcOffsets[2];
 	S_image_subresource_layers dstSubresource;
 	S_offset_3d dstOffsets[2];
+
 };
 
 /*	VkBufferImageCopy
@@ -11076,6 +11627,7 @@ struct		S_buffer_image_copy{
 	S_image_subresource_layers imageSubresource;
 	S_offset_3d imageOffset;
 	S_extent_3d imageExtent;
+
 };
 
 /*	VkImageResolve
@@ -11086,6 +11638,7 @@ struct		S_image_resolve{
 	S_image_subresource_layers dstSubresource;
 	S_offset_3d dstOffset;
 	S_extent_3d extent;
+
 };
 
 /*	VkDescriptorSetLayoutCreateInfo
@@ -11101,6 +11654,7 @@ public:
 	F_descriptor_set_layout_create flags;
 	uint32_t bindingCount;
 	const S_descriptor_set_layout_binding * pBindings;
+
 S_descriptor_set_layout_create_info( VkDescriptorSetLayoutCreateInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_descriptor_set_layout_create_info ) );	}
 S_descriptor_set_layout_create_info& operator=( VkDescriptorSetLayoutCreateInfo const & rhs ) 
@@ -11109,6 +11663,8 @@ operator VkDescriptorSetLayoutCreateInfo const&() const
 	{	return *reinterpret_cast<const VkDescriptorSetLayoutCreateInfo*>(this);	}
 operator VkDescriptorSetLayoutCreateInfo &() 
 	{	return *reinterpret_cast<VkDescriptorSetLayoutCreateInfo*>(this);	}
+
+S_descriptor_set_layout_create_info& n_descriptor_set_layout_binding_flags_create_info_EXT(S_descriptor_set_layout_binding_flags_create_info_EXT const& next_);
 
 };
 static_assert(
@@ -11129,6 +11685,7 @@ public:
 	uint32_t maxSets;
 	uint32_t poolSizeCount;
 	const S_descriptor_pool_size * pPoolSizes;
+
 S_descriptor_pool_create_info( VkDescriptorPoolCreateInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_descriptor_pool_create_info ) );	}
 S_descriptor_pool_create_info& operator=( VkDescriptorPoolCreateInfo const & rhs ) 
@@ -11137,6 +11694,8 @@ operator VkDescriptorPoolCreateInfo const&() const
 	{	return *reinterpret_cast<const VkDescriptorPoolCreateInfo*>(this);	}
 operator VkDescriptorPoolCreateInfo &() 
 	{	return *reinterpret_cast<VkDescriptorPoolCreateInfo*>(this);	}
+
+S_descriptor_pool_create_info& n_descriptor_pool_inline_uniform_block_create_info_EXT(S_descriptor_pool_inline_uniform_block_create_info_EXT const& next_);
 
 };
 static_assert(
@@ -11150,6 +11709,7 @@ struct		S_specialization_info{
 	const S_specialization_map_entry * pMapEntries;
 	size_t dataSize;
 	const void * pData;
+
 };
 
 /*	VkPipelineShaderStageCreateInfo
@@ -11165,6 +11725,7 @@ public:
 	VkShaderModule module;
 	const char * pName;
 	const S_specialization_info * pSpecializationInfo;
+
 S_pipeline_shader_stage_create_info( VkPipelineShaderStageCreateInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_pipeline_shader_stage_create_info ) );	}
 S_pipeline_shader_stage_create_info& operator=( VkPipelineShaderStageCreateInfo const & rhs ) 
@@ -11192,6 +11753,7 @@ public:
 	VkPipelineLayout layout;
 	VkPipeline basePipelineHandle;
 	int32_t basePipelineIndex;
+
 S_compute_pipeline_create_info( VkComputePipelineCreateInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_compute_pipeline_create_info ) );	}
 S_compute_pipeline_create_info& operator=( VkComputePipelineCreateInfo const & rhs ) 
@@ -11204,68 +11766,6 @@ operator VkComputePipelineCreateInfo &()
 };
 static_assert(
 	sizeof(S_compute_pipeline_create_info) == sizeof(VkComputePipelineCreateInfo),
-	"struct and wrapper have different size!");
-
-/*	VkPipelineVertexInputStateCreateInfo
-ex:
-	VkPipelineVertexInputDivisorStateCreateInfoEXT
-*/
-struct		S_pipeline_vertex_input_state_create_info{
-private:
-	VkStructureType sType = 
-			VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO;
-	const void * pNext = nullptr;
-public:
-	VkPipelineVertexInputStateCreateFlags flags;
-	uint32_t vertexBindingDescriptionCount;
-	const S_vertex_input_binding_description * pVertexBindingDescriptions;
-	uint32_t vertexAttributeDescriptionCount;
-	const S_vertex_input_attribute_description * pVertexAttributeDescriptions;
-S_pipeline_vertex_input_state_create_info( VkPipelineVertexInputStateCreateInfo const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_pipeline_vertex_input_state_create_info ) );	}
-S_pipeline_vertex_input_state_create_info& operator=( VkPipelineVertexInputStateCreateInfo const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_pipeline_vertex_input_state_create_info ) ); return *this;	}
-operator VkPipelineVertexInputStateCreateInfo const&() const 
-	{	return *reinterpret_cast<const VkPipelineVertexInputStateCreateInfo*>(this);	}
-operator VkPipelineVertexInputStateCreateInfo &() 
-	{	return *reinterpret_cast<VkPipelineVertexInputStateCreateInfo*>(this);	}
-
-};
-static_assert(
-	sizeof(S_pipeline_vertex_input_state_create_info) == sizeof(VkPipelineVertexInputStateCreateInfo),
-	"struct and wrapper have different size!");
-
-/*	VkPipelineViewportStateCreateInfo
-ex:
-	VkPipelineViewportWScalingStateCreateInfoNV
-	VkPipelineViewportSwizzleStateCreateInfoNV
-	VkPipelineViewportExclusiveScissorStateCreateInfoNV
-	VkPipelineViewportShadingRateImageStateCreateInfoNV
-	VkPipelineViewportCoarseSampleOrderStateCreateInfoNV
-*/
-struct		S_pipeline_viewport_state_create_info{
-private:
-	VkStructureType sType = 
-			VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_STATE_CREATE_INFO;
-	const void * pNext = nullptr;
-public:
-	VkPipelineViewportStateCreateFlags flags;
-	uint32_t viewportCount;
-	const S_viewport * pViewports;
-	uint32_t scissorCount;
-	const S_rect_2d * pScissors;
-S_pipeline_viewport_state_create_info( VkPipelineViewportStateCreateInfo const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_pipeline_viewport_state_create_info ) );	}
-S_pipeline_viewport_state_create_info& operator=( VkPipelineViewportStateCreateInfo const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_pipeline_viewport_state_create_info ) ); return *this;	}
-operator VkPipelineViewportStateCreateInfo const&() const 
-	{	return *reinterpret_cast<const VkPipelineViewportStateCreateInfo*>(this);	}
-operator VkPipelineViewportStateCreateInfo &() 
-	{	return *reinterpret_cast<VkPipelineViewportStateCreateInfo*>(this);	}
-
-};
-static_assert(
-	sizeof(S_pipeline_viewport_state_create_info) == sizeof(VkPipelineViewportStateCreateInfo),
 	"struct and wrapper have different size!");
 
 /*	VkPipelineColorBlendStateCreateInfo
@@ -11284,6 +11784,7 @@ public:
 	uint32_t attachmentCount;
 	const S_pipeline_color_blend_attachment_state * pAttachments;
 	float blendConstants[4];
+
 S_pipeline_color_blend_state_create_info( VkPipelineColorBlendStateCreateInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_pipeline_color_blend_state_create_info ) );	}
 S_pipeline_color_blend_state_create_info& operator=( VkPipelineColorBlendStateCreateInfo const & rhs ) 
@@ -11292,6 +11793,8 @@ operator VkPipelineColorBlendStateCreateInfo const&() const
 	{	return *reinterpret_cast<const VkPipelineColorBlendStateCreateInfo*>(this);	}
 operator VkPipelineColorBlendStateCreateInfo &() 
 	{	return *reinterpret_cast<VkPipelineColorBlendStateCreateInfo*>(this);	}
+
+S_pipeline_color_blend_state_create_info& n_pipeline_color_blend_advanced_state_create_info_EXT(S_pipeline_color_blend_advanced_state_create_info_EXT const& next_);
 
 };
 static_assert(
@@ -11316,6 +11819,7 @@ public:
 	S_stencil_op_state back;
 	float minDepthBounds;
 	float maxDepthBounds;
+
 S_pipeline_depth_stencil_state_create_info( VkPipelineDepthStencilStateCreateInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_pipeline_depth_stencil_state_create_info ) );	}
 S_pipeline_depth_stencil_state_create_info& operator=( VkPipelineDepthStencilStateCreateInfo const & rhs ) 
@@ -11328,48 +11832,6 @@ operator VkPipelineDepthStencilStateCreateInfo &()
 };
 static_assert(
 	sizeof(S_pipeline_depth_stencil_state_create_info) == sizeof(VkPipelineDepthStencilStateCreateInfo),
-	"struct and wrapper have different size!");
-
-/*	VkGraphicsPipelineCreateInfo
-ex:
-	VkPipelineDiscardRectangleStateCreateInfoEXT
-	VkPipelineRepresentativeFragmentTestStateCreateInfoNV
-*/
-struct		S_graphics_pipeline_create_info{
-private:
-	VkStructureType sType = 
-			VK_STRUCTURE_TYPE_GRAPHICS_PIPELINE_CREATE_INFO;
-	const void * pNext = nullptr;
-public:
-	F_pipeline_create flags;
-	uint32_t stageCount;
-	const S_pipeline_shader_stage_create_info * pStages;
-	const S_pipeline_vertex_input_state_create_info * pVertexInputState;
-	const S_pipeline_input_assembly_state_create_info * pInputAssemblyState;
-	const S_pipeline_tessellation_state_create_info * pTessellationState;
-	const S_pipeline_viewport_state_create_info * pViewportState;
-	const S_pipeline_rasterization_state_create_info * pRasterizationState;
-	const S_pipeline_multisample_state_create_info * pMultisampleState;
-	const S_pipeline_depth_stencil_state_create_info * pDepthStencilState;
-	const S_pipeline_color_blend_state_create_info * pColorBlendState;
-	const S_pipeline_dynamic_state_create_info * pDynamicState;
-	VkPipelineLayout layout;
-	VkRenderPass renderPass;
-	uint32_t subpass;
-	VkPipeline basePipelineHandle;
-	int32_t basePipelineIndex;
-S_graphics_pipeline_create_info( VkGraphicsPipelineCreateInfo const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_graphics_pipeline_create_info ) );	}
-S_graphics_pipeline_create_info& operator=( VkGraphicsPipelineCreateInfo const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_graphics_pipeline_create_info ) ); return *this;	}
-operator VkGraphicsPipelineCreateInfo const&() const 
-	{	return *reinterpret_cast<const VkGraphicsPipelineCreateInfo*>(this);	}
-operator VkGraphicsPipelineCreateInfo &() 
-	{	return *reinterpret_cast<VkGraphicsPipelineCreateInfo*>(this);	}
-
-};
-static_assert(
-	sizeof(S_graphics_pipeline_create_info) == sizeof(VkGraphicsPipelineCreateInfo),
 	"struct and wrapper have different size!");
 
 /*	VkPipelineLayoutCreateInfo
@@ -11385,6 +11847,7 @@ public:
 	const VkDescriptorSetLayout * pSetLayouts;
 	uint32_t pushConstantRangeCount;
 	const S_push_constant_range * pPushConstantRanges;
+
 S_pipeline_layout_create_info( VkPipelineLayoutCreateInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_pipeline_layout_create_info ) );	}
 S_pipeline_layout_create_info& operator=( VkPipelineLayoutCreateInfo const & rhs ) 
@@ -11411,6 +11874,7 @@ private:
 public:
 	F_command_buffer_usage flags;
 	const S_command_buffer_inheritance_info * pInheritanceInfo;
+
 S_command_buffer_begin_info( VkCommandBufferBeginInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_command_buffer_begin_info ) );	}
 S_command_buffer_begin_info& operator=( VkCommandBufferBeginInfo const & rhs ) 
@@ -11420,39 +11884,11 @@ operator VkCommandBufferBeginInfo const&() const
 operator VkCommandBufferBeginInfo &() 
 	{	return *reinterpret_cast<VkCommandBufferBeginInfo*>(this);	}
 
+S_command_buffer_begin_info& n_device_group_command_buffer_begin_info(S_device_group_command_buffer_begin_info const& next_);
+
 };
 static_assert(
 	sizeof(S_command_buffer_begin_info) == sizeof(VkCommandBufferBeginInfo),
-	"struct and wrapper have different size!");
-
-/*	VkRenderPassBeginInfo
-ex:
-	VkDeviceGroupRenderPassBeginInfo
-	VkRenderPassSampleLocationsBeginInfoEXT
-*/
-struct		S_render_pass_begin_info{
-private:
-	VkStructureType sType = 
-			VK_STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO;
-	const void * pNext = nullptr;
-public:
-	VkRenderPass renderPass;
-	VkFramebuffer framebuffer;
-	S_rect_2d renderArea;
-	uint32_t clearValueCount;
-	const VkClearValue * pClearValues;
-S_render_pass_begin_info( VkRenderPassBeginInfo const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_render_pass_begin_info ) );	}
-S_render_pass_begin_info& operator=( VkRenderPassBeginInfo const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_render_pass_begin_info ) ); return *this;	}
-operator VkRenderPassBeginInfo const&() const 
-	{	return *reinterpret_cast<const VkRenderPassBeginInfo*>(this);	}
-operator VkRenderPassBeginInfo &() 
-	{	return *reinterpret_cast<VkRenderPassBeginInfo*>(this);	}
-
-};
-static_assert(
-	sizeof(S_render_pass_begin_info) == sizeof(VkRenderPassBeginInfo),
 	"struct and wrapper have different size!");
 
 /*	VkSubpassDescription
@@ -11468,39 +11904,8 @@ struct		S_subpass_description{
 	const S_attachment_reference * pDepthStencilAttachment;
 	uint32_t preserveAttachmentCount;
 	const uint32_t * pPreserveAttachments;
-};
-
-/*	VkRenderPassCreateInfo
-ex:
-	VkRenderPassMultiviewCreateInfo
-	VkRenderPassInputAttachmentAspectCreateInfo
-*/
-struct		S_render_pass_create_info{
-private:
-	VkStructureType sType = 
-			VK_STRUCTURE_TYPE_RENDER_PASS_CREATE_INFO;
-	const void * pNext = nullptr;
-public:
-	F_render_pass_create flags;
-	uint32_t attachmentCount;
-	const S_attachment_description * pAttachments;
-	uint32_t subpassCount;
-	const S_subpass_description * pSubpasses;
-	uint32_t dependencyCount;
-	const S_subpass_dependency * pDependencies;
-S_render_pass_create_info( VkRenderPassCreateInfo const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_render_pass_create_info ) );	}
-S_render_pass_create_info& operator=( VkRenderPassCreateInfo const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_render_pass_create_info ) ); return *this;	}
-operator VkRenderPassCreateInfo const&() const 
-	{	return *reinterpret_cast<const VkRenderPassCreateInfo*>(this);	}
-operator VkRenderPassCreateInfo &() 
-	{	return *reinterpret_cast<VkRenderPassCreateInfo*>(this);	}
 
 };
-static_assert(
-	sizeof(S_render_pass_create_info) == sizeof(VkRenderPassCreateInfo),
-	"struct and wrapper have different size!");
 
 /*	VkDisplayPropertiesKHR
 (returnedonly)
@@ -11513,6 +11918,7 @@ struct		S_display_properties_KHR{
 	F_surface_transform_KHR supportedTransforms;
 	VkBool32 planeReorderPossible;
 	VkBool32 persistentContent;
+
 };
 
 /*	VkDisplayModeParametersKHR
@@ -11520,6 +11926,7 @@ struct		S_display_properties_KHR{
 struct		S_display_mode_parameters_KHR{
 	S_extent_2d visibleRegion;
 	uint32_t refreshRate;
+
 };
 
 /*	VkDisplayModePropertiesKHR
@@ -11528,6 +11935,7 @@ struct		S_display_mode_parameters_KHR{
 struct		S_display_mode_properties_KHR{
 	VkDisplayModeKHR displayMode;
 	S_display_mode_parameters_KHR parameters;
+
 };
 
 /*	VkDisplayModeCreateInfoKHR
@@ -11540,6 +11948,7 @@ private:
 public:
 	VkDisplayModeCreateFlagsKHR flags;
 	S_display_mode_parameters_KHR parameters;
+
 S_display_mode_create_info_KHR( VkDisplayModeCreateInfoKHR const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_display_mode_create_info_KHR ) );	}
 S_display_mode_create_info_KHR& operator=( VkDisplayModeCreateInfoKHR const & rhs ) 
@@ -11567,6 +11976,7 @@ struct		S_display_plane_capabilities_KHR{
 	S_offset_2d maxDstPosition;
 	S_extent_2d minDstExtent;
 	S_extent_2d maxDstExtent;
+
 };
 
 /*	VkDisplaySurfaceCreateInfoKHR
@@ -11585,6 +11995,7 @@ public:
 	float globalAlpha;
 	F_display_plane_alpha_KHR alphaMode;
 	S_extent_2d imageExtent;
+
 S_display_surface_create_info_KHR( VkDisplaySurfaceCreateInfoKHR const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_display_surface_create_info_KHR ) );	}
 S_display_surface_create_info_KHR& operator=( VkDisplaySurfaceCreateInfoKHR const & rhs ) 
@@ -11611,6 +12022,7 @@ public:
 	S_rect_2d srcRect;
 	S_rect_2d dstRect;
 	VkBool32 persistent;
+
 S_display_present_info_KHR( VkDisplayPresentInfoKHR const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_display_present_info_KHR ) );	}
 S_display_present_info_KHR& operator=( VkDisplayPresentInfoKHR const & rhs ) 
@@ -11619,6 +12031,8 @@ operator VkDisplayPresentInfoKHR const&() const
 	{	return *reinterpret_cast<const VkDisplayPresentInfoKHR*>(this);	}
 operator VkDisplayPresentInfoKHR &() 
 	{	return *reinterpret_cast<VkDisplayPresentInfoKHR*>(this);	}
+
+friend S_present_info_KHR;
 
 };
 static_assert(
@@ -11639,6 +12053,7 @@ struct		S_surface_capabilities_KHR{
 	F_surface_transform_KHR currentTransform;
 	F_composite_alpha_KHR supportedCompositeAlpha;
 	F_image_usage supportedUsageFlags;
+
 };
 
 /*	VkSwapchainCreateInfoKHR
@@ -11668,6 +12083,7 @@ public:
 	E_present_mode_KHR presentMode;
 	VkBool32 clipped;
 	VkSwapchainKHR oldSwapchain;
+
 S_swapchain_create_info_KHR( VkSwapchainCreateInfoKHR const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_swapchain_create_info_KHR ) );	}
 S_swapchain_create_info_KHR& operator=( VkSwapchainCreateInfoKHR const & rhs ) 
@@ -11676,6 +12092,9 @@ operator VkSwapchainCreateInfoKHR const&() const
 	{	return *reinterpret_cast<const VkSwapchainCreateInfoKHR*>(this);	}
 operator VkSwapchainCreateInfoKHR &() 
 	{	return *reinterpret_cast<VkSwapchainCreateInfoKHR*>(this);	}
+
+S_swapchain_create_info_KHR& n_swapchain_counter_create_info_EXT(S_swapchain_counter_create_info_EXT const& next_);
+S_swapchain_create_info_KHR& n_device_group_swapchain_create_info_KHR(S_device_group_swapchain_create_info_KHR const& next_);
 
 };
 static_assert(
@@ -11690,6 +12109,7 @@ struct		S_external_image_format_properties_NV{
 	F_external_memory_feature_NV externalMemoryFeatures;
 	F_external_memory_handle_type_NV exportFromImportedHandleTypes;
 	F_external_memory_handle_type_NV compatibleHandleTypes;
+
 };
 
 /*	VkIndirectCommandsLayoutCreateInfoNVX
@@ -11704,6 +12124,7 @@ public:
 	F_indirect_commands_layout_usage_NVX flags;
 	uint32_t tokenCount;
 	const S_indirect_commands_layout_token_NVX * pTokens;
+
 S_indirect_commands_layout_create_info_NVX( VkIndirectCommandsLayoutCreateInfoNVX const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_indirect_commands_layout_create_info_NVX ) );	}
 S_indirect_commands_layout_create_info_NVX& operator=( VkIndirectCommandsLayoutCreateInfoNVX const & rhs ) 
@@ -11736,6 +12157,7 @@ public:
 	VkDeviceSize sequencesCountOffset;
 	VkBuffer sequencesIndexBuffer;
 	VkDeviceSize sequencesIndexOffset;
+
 S_cmd_process_commands_info_NVX( VkCmdProcessCommandsInfoNVX const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_cmd_process_commands_info_NVX ) );	}
 S_cmd_process_commands_info_NVX& operator=( VkCmdProcessCommandsInfoNVX const & rhs ) 
@@ -11784,6 +12206,7 @@ private:
 	void * pNext = nullptr;
 public:
 	S_physical_device_features features;
+
 S_physical_device_features2( VkPhysicalDeviceFeatures2 const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_physical_device_features2 ) );	}
 S_physical_device_features2& operator=( VkPhysicalDeviceFeatures2 const & rhs ) 
@@ -11793,110 +12216,35 @@ operator VkPhysicalDeviceFeatures2 const&() const
 operator VkPhysicalDeviceFeatures2 &() 
 	{	return *reinterpret_cast<VkPhysicalDeviceFeatures2*>(this);	}
 
+friend S_device_create_info;
+
+S_physical_device_features2& n_physical_device_variable_pointer_features(S_physical_device_variable_pointer_features const& next_);
+S_physical_device_features2& n_physical_device_multiview_features(S_physical_device_multiview_features const& next_);
+S_physical_device_features2& n_physical_device_16bit_storage_features(S_physical_device_16bit_storage_features const& next_);
+S_physical_device_features2& n_physical_device_sampler_ycbcr_conversion_features(S_physical_device_sampler_ycbcr_conversion_features const& next_);
+S_physical_device_features2& n_physical_device_protected_memory_features(S_physical_device_protected_memory_features const& next_);
+S_physical_device_features2& n_physical_device_blend_operation_advanced_features_EXT(S_physical_device_blend_operation_advanced_features_EXT const& next_);
+S_physical_device_features2& n_physical_device_inline_uniform_block_features_EXT(S_physical_device_inline_uniform_block_features_EXT const& next_);
+S_physical_device_features2& n_physical_device_shader_draw_parameter_features(S_physical_device_shader_draw_parameter_features const& next_);
+S_physical_device_features2& n_physical_device_descriptor_indexing_features_EXT(S_physical_device_descriptor_indexing_features_EXT const& next_);
+S_physical_device_features2& n_physical_device_8bit_storage_features_KHR(S_physical_device_8bit_storage_features_KHR const& next_);
+S_physical_device_features2& n_physical_device_conditional_rendering_features_EXT(S_physical_device_conditional_rendering_features_EXT const& next_);
+S_physical_device_features2& n_physical_device_vulkan_memory_model_features_KHR(S_physical_device_vulkan_memory_model_features_KHR const& next_);
+S_physical_device_features2& n_physical_device_shader_atomic_int64_features_KHR(S_physical_device_shader_atomic_int64_features_KHR const& next_);
+S_physical_device_features2& n_physical_device_vertex_attribute_divisor_features_EXT(S_physical_device_vertex_attribute_divisor_features_EXT const& next_);
+S_physical_device_features2& n_physical_device_astc_decode_features_EXT(S_physical_device_astc_decode_features_EXT const& next_);
+S_physical_device_features2& n_physical_device_representative_fragment_test_features_NV(S_physical_device_representative_fragment_test_features_NV const& next_);
+S_physical_device_features2& n_physical_device_exclusive_scissor_features_NV(S_physical_device_exclusive_scissor_features_NV const& next_);
+S_physical_device_features2& n_physical_device_corner_sampled_image_features_NV(S_physical_device_corner_sampled_image_features_NV const& next_);
+S_physical_device_features2& n_physical_device_compute_shader_derivatives_features_NV(S_physical_device_compute_shader_derivatives_features_NV const& next_);
+S_physical_device_features2& n_physical_device_fragment_shader_barycentric_features_NV(S_physical_device_fragment_shader_barycentric_features_NV const& next_);
+S_physical_device_features2& n_physical_device_shader_image_footprint_features_NV(S_physical_device_shader_image_footprint_features_NV const& next_);
+S_physical_device_features2& n_physical_device_shading_rate_image_features_NV(S_physical_device_shading_rate_image_features_NV const& next_);
+S_physical_device_features2& n_physical_device_mesh_shader_features_NV(S_physical_device_mesh_shader_features_NV const& next_);
+
 };
 static_assert(
 	sizeof(S_physical_device_features2) == sizeof(VkPhysicalDeviceFeatures2),
-	"struct and wrapper have different size!");
-
-/*	VkPhysicalDeviceProperties2
-(returnedonly)
-ex:
-	VkPhysicalDevicePushDescriptorPropertiesKHR
-	VkPhysicalDeviceDriverPropertiesKHR
-	VkPhysicalDeviceIDProperties
-	VkPhysicalDeviceMultiviewProperties
-	VkPhysicalDeviceDiscardRectanglePropertiesEXT
-	VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX
-	VkPhysicalDeviceSubgroupProperties
-	VkPhysicalDevicePointClippingProperties
-	VkPhysicalDeviceProtectedMemoryProperties
-	VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT
-	VkPhysicalDeviceSampleLocationsPropertiesEXT
-	VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT
-	VkPhysicalDeviceInlineUniformBlockPropertiesEXT
-	VkPhysicalDeviceMaintenance3Properties
-	VkPhysicalDeviceExternalMemoryHostPropertiesEXT
-	VkPhysicalDeviceConservativeRasterizationPropertiesEXT
-	VkPhysicalDeviceShaderCorePropertiesAMD
-	VkPhysicalDeviceDescriptorIndexingPropertiesEXT
-	VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT
-	VkPhysicalDeviceMeshShaderPropertiesNV
-	VkPhysicalDeviceRaytracingPropertiesNVX
-*/
-struct		S_physical_device_properties2{
-private:
-	VkStructureType sType = 
-			VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROPERTIES_2;
-	void * pNext = nullptr;
-public:
-	S_physical_device_properties properties;
-S_physical_device_properties2( VkPhysicalDeviceProperties2 const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_physical_device_properties2 ) );	}
-S_physical_device_properties2& operator=( VkPhysicalDeviceProperties2 const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_physical_device_properties2 ) ); return *this;	}
-operator VkPhysicalDeviceProperties2 const&() const 
-	{	return *reinterpret_cast<const VkPhysicalDeviceProperties2*>(this);	}
-operator VkPhysicalDeviceProperties2 &() 
-	{	return *reinterpret_cast<VkPhysicalDeviceProperties2*>(this);	}
-
-};
-static_assert(
-	sizeof(S_physical_device_properties2) == sizeof(VkPhysicalDeviceProperties2),
-	"struct and wrapper have different size!");
-
-/*	VkFormatProperties2
-(returnedonly)
-ex:
-	VkDrmFormatModifierPropertiesListEXT
-*/
-struct		S_format_properties2{
-private:
-	VkStructureType sType = 
-			VK_STRUCTURE_TYPE_FORMAT_PROPERTIES_2;
-	void * pNext = nullptr;
-public:
-	S_format_properties formatProperties;
-S_format_properties2( VkFormatProperties2 const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_format_properties2 ) );	}
-S_format_properties2& operator=( VkFormatProperties2 const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_format_properties2 ) ); return *this;	}
-operator VkFormatProperties2 const&() const 
-	{	return *reinterpret_cast<const VkFormatProperties2*>(this);	}
-operator VkFormatProperties2 &() 
-	{	return *reinterpret_cast<VkFormatProperties2*>(this);	}
-
-};
-static_assert(
-	sizeof(S_format_properties2) == sizeof(VkFormatProperties2),
-	"struct and wrapper have different size!");
-
-/*	VkImageFormatProperties2
-(returnedonly)
-ex:
-	VkExternalImageFormatProperties
-	VkSamplerYcbcrConversionImageFormatProperties
-	VkTextureLODGatherFormatPropertiesAMD
-	VkAndroidHardwareBufferUsageANDROID
-*/
-struct		S_image_format_properties2{
-private:
-	VkStructureType sType = 
-			VK_STRUCTURE_TYPE_IMAGE_FORMAT_PROPERTIES_2;
-	void * pNext = nullptr;
-public:
-	S_image_format_properties imageFormatProperties;
-S_image_format_properties2( VkImageFormatProperties2 const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_image_format_properties2 ) );	}
-S_image_format_properties2& operator=( VkImageFormatProperties2 const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_image_format_properties2 ) ); return *this;	}
-operator VkImageFormatProperties2 const&() const 
-	{	return *reinterpret_cast<const VkImageFormatProperties2*>(this);	}
-operator VkImageFormatProperties2 &() 
-	{	return *reinterpret_cast<VkImageFormatProperties2*>(this);	}
-
-};
-static_assert(
-	sizeof(S_image_format_properties2) == sizeof(VkImageFormatProperties2),
 	"struct and wrapper have different size!");
 
 /*	VkQueueFamilyProperties2
@@ -11911,6 +12259,7 @@ private:
 	void * pNext = nullptr;
 public:
 	S_queue_family_properties queueFamilyProperties;
+
 S_queue_family_properties2( VkQueueFamilyProperties2 const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_queue_family_properties2 ) );	}
 S_queue_family_properties2& operator=( VkQueueFamilyProperties2 const & rhs ) 
@@ -11919,6 +12268,8 @@ operator VkQueueFamilyProperties2 const&() const
 	{	return *reinterpret_cast<const VkQueueFamilyProperties2*>(this);	}
 operator VkQueueFamilyProperties2 &() 
 	{	return *reinterpret_cast<VkQueueFamilyProperties2*>(this);	}
+
+S_queue_family_properties2& n_queue_family_checkpoint_properties_NV(S_queue_family_checkpoint_properties_NV const& next_);
 
 };
 static_assert(
@@ -11935,6 +12286,7 @@ private:
 	void * pNext = nullptr;
 public:
 	S_physical_device_memory_properties memoryProperties;
+
 S_physical_device_memory_properties2( VkPhysicalDeviceMemoryProperties2 const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_physical_device_memory_properties2 ) );	}
 S_physical_device_memory_properties2& operator=( VkPhysicalDeviceMemoryProperties2 const & rhs ) 
@@ -11959,6 +12311,7 @@ private:
 	void * pNext = nullptr;
 public:
 	S_sparse_image_format_properties properties;
+
 S_sparse_image_format_properties2( VkSparseImageFormatProperties2 const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_sparse_image_format_properties2 ) );	}
 S_sparse_image_format_properties2& operator=( VkSparseImageFormatProperties2 const & rhs ) 
@@ -11987,6 +12340,7 @@ public:
 	char driverName[VK_MAX_DRIVER_NAME_SIZE_KHR];
 	char driverInfo[VK_MAX_DRIVER_INFO_SIZE_KHR];
 	S_conformance_version_KHR conformanceVersion;
+
 S_physical_device_driver_properties_KHR( VkPhysicalDeviceDriverPropertiesKHR const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_physical_device_driver_properties_KHR ) );	}
 S_physical_device_driver_properties_KHR& operator=( VkPhysicalDeviceDriverPropertiesKHR const & rhs ) 
@@ -11995,6 +12349,8 @@ operator VkPhysicalDeviceDriverPropertiesKHR const&() const
 	{	return *reinterpret_cast<const VkPhysicalDeviceDriverPropertiesKHR*>(this);	}
 operator VkPhysicalDeviceDriverPropertiesKHR &() 
 	{	return *reinterpret_cast<VkPhysicalDeviceDriverPropertiesKHR*>(this);	}
+
+friend S_physical_device_properties2;
 
 };
 static_assert(
@@ -12012,6 +12368,7 @@ private:
 public:
 	uint32_t swapchainCount;
 	const S_present_region_KHR * pRegions;
+
 S_present_regions_KHR( VkPresentRegionsKHR const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_present_regions_KHR ) );	}
 S_present_regions_KHR& operator=( VkPresentRegionsKHR const & rhs ) 
@@ -12020,6 +12377,8 @@ operator VkPresentRegionsKHR const&() const
 	{	return *reinterpret_cast<const VkPresentRegionsKHR*>(this);	}
 operator VkPresentRegionsKHR &() 
 	{	return *reinterpret_cast<VkPresentRegionsKHR*>(this);	}
+
+friend S_present_info_KHR;
 
 };
 static_assert(
@@ -12031,6 +12390,7 @@ static_assert(
 struct		S_present_region_KHR{
 	uint32_t rectangleCount;
 	const S_rect_layer_KHR * pRectangles;
+
 };
 
 /*	VkRectLayerKHR
@@ -12039,6 +12399,7 @@ struct		S_rect_layer_KHR{
 	S_offset_2d offset;
 	S_extent_2d extent;
 	uint32_t layer;
+
 };
 
 /*	VkExternalImageFormatProperties
@@ -12052,6 +12413,7 @@ private:
 	void * pNext = nullptr;
 public:
 	S_external_memory_properties externalMemoryProperties;
+
 S_external_image_format_properties( VkExternalImageFormatProperties const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_external_image_format_properties ) );	}
 S_external_image_format_properties& operator=( VkExternalImageFormatProperties const & rhs ) 
@@ -12060,6 +12422,8 @@ operator VkExternalImageFormatProperties const&() const
 	{	return *reinterpret_cast<const VkExternalImageFormatProperties*>(this);	}
 operator VkExternalImageFormatProperties &() 
 	{	return *reinterpret_cast<VkExternalImageFormatProperties*>(this);	}
+
+friend S_image_format_properties2;
 
 };
 static_assert(
@@ -12076,6 +12440,7 @@ private:
 	void * pNext = nullptr;
 public:
 	S_external_memory_properties externalMemoryProperties;
+
 S_external_buffer_properties( VkExternalBufferProperties const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_external_buffer_properties ) );	}
 S_external_buffer_properties& operator=( VkExternalBufferProperties const & rhs ) 
@@ -12110,6 +12475,7 @@ public:
 	F_composite_alpha_KHR supportedCompositeAlpha;
 	F_image_usage supportedUsageFlags;
 	F_surface_counter_EXT supportedSurfaceCounters;
+
 S_surface_capabilities2_EXT( VkSurfaceCapabilities2EXT const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_surface_capabilities2_EXT ) );	}
 S_surface_capabilities2_EXT& operator=( VkSurfaceCapabilities2EXT const & rhs ) 
@@ -12137,6 +12503,7 @@ public:
 	const uint32_t * pDeviceIndices;
 	uint32_t splitInstanceBindRegionCount;
 	const S_rect_2d * pSplitInstanceBindRegions;
+
 S_bind_image_memory_device_group_info( VkBindImageMemoryDeviceGroupInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_bind_image_memory_device_group_info ) );	}
 S_bind_image_memory_device_group_info& operator=( VkBindImageMemoryDeviceGroupInfo const & rhs ) 
@@ -12145,6 +12512,8 @@ operator VkBindImageMemoryDeviceGroupInfo const&() const
 	{	return *reinterpret_cast<const VkBindImageMemoryDeviceGroupInfo*>(this);	}
 operator VkBindImageMemoryDeviceGroupInfo &() 
 	{	return *reinterpret_cast<VkBindImageMemoryDeviceGroupInfo*>(this);	}
+
+friend S_bind_image_memory_info;
 
 };
 static_assert(
@@ -12163,6 +12532,7 @@ public:
 	uint32_t deviceMask;
 	uint32_t deviceRenderAreaCount;
 	const S_rect_2d * pDeviceRenderAreas;
+
 S_device_group_render_pass_begin_info( VkDeviceGroupRenderPassBeginInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_device_group_render_pass_begin_info ) );	}
 S_device_group_render_pass_begin_info& operator=( VkDeviceGroupRenderPassBeginInfo const & rhs ) 
@@ -12171,6 +12541,8 @@ operator VkDeviceGroupRenderPassBeginInfo const&() const
 	{	return *reinterpret_cast<const VkDeviceGroupRenderPassBeginInfo*>(this);	}
 operator VkDeviceGroupRenderPassBeginInfo &() 
 	{	return *reinterpret_cast<VkDeviceGroupRenderPassBeginInfo*>(this);	}
+
+friend S_render_pass_begin_info;
 
 };
 static_assert(
@@ -12193,6 +12565,7 @@ public:
 	E_pipeline_bind_point pipelineBindPoint;
 	VkPipelineLayout pipelineLayout;
 	uint32_t set;
+
 S_descriptor_update_template_create_info( VkDescriptorUpdateTemplateCreateInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_descriptor_update_template_create_info ) );	}
 S_descriptor_update_template_create_info& operator=( VkDescriptorUpdateTemplateCreateInfo const & rhs ) 
@@ -12223,6 +12596,7 @@ public:
 	float minLuminance;
 	float maxContentLightLevel;
 	float maxFrameAverageLightLevel;
+
 S_hdr_metadata_EXT( VkHdrMetadataEXT const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_hdr_metadata_EXT ) );	}
 S_hdr_metadata_EXT& operator=( VkHdrMetadataEXT const & rhs ) 
@@ -12248,6 +12622,7 @@ private:
 public:
 	uint32_t swapchainCount;
 	const S_present_time_GOOGLE * pTimes;
+
 S_present_times_info_GOOGLE( VkPresentTimesInfoGOOGLE const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_present_times_info_GOOGLE ) );	}
 S_present_times_info_GOOGLE& operator=( VkPresentTimesInfoGOOGLE const & rhs ) 
@@ -12256,6 +12631,8 @@ operator VkPresentTimesInfoGOOGLE const&() const
 	{	return *reinterpret_cast<const VkPresentTimesInfoGOOGLE*>(this);	}
 operator VkPresentTimesInfoGOOGLE &() 
 	{	return *reinterpret_cast<VkPresentTimesInfoGOOGLE*>(this);	}
+
+friend S_present_info_KHR;
 
 };
 static_assert(
@@ -12274,6 +12651,7 @@ public:
 	VkBool32 viewportWScalingEnable;
 	uint32_t viewportCount;
 	const S_viewport_w_scaling_NV * pViewportWScalings;
+
 S_pipeline_viewport_w_scaling_state_create_info_NV( VkPipelineViewportWScalingStateCreateInfoNV const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_pipeline_viewport_w_scaling_state_create_info_NV ) );	}
 S_pipeline_viewport_w_scaling_state_create_info_NV& operator=( VkPipelineViewportWScalingStateCreateInfoNV const & rhs ) 
@@ -12282,6 +12660,8 @@ operator VkPipelineViewportWScalingStateCreateInfoNV const&() const
 	{	return *reinterpret_cast<const VkPipelineViewportWScalingStateCreateInfoNV*>(this);	}
 operator VkPipelineViewportWScalingStateCreateInfoNV &() 
 	{	return *reinterpret_cast<VkPipelineViewportWScalingStateCreateInfoNV*>(this);	}
+
+friend S_pipeline_viewport_state_create_info;
 
 };
 static_assert(
@@ -12300,6 +12680,7 @@ public:
 	VkPipelineViewportSwizzleStateCreateFlagsNV flags;
 	uint32_t viewportCount;
 	const S_viewport_swizzle_NV * pViewportSwizzles;
+
 S_pipeline_viewport_swizzle_state_create_info_NV( VkPipelineViewportSwizzleStateCreateInfoNV const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_pipeline_viewport_swizzle_state_create_info_NV ) );	}
 S_pipeline_viewport_swizzle_state_create_info_NV& operator=( VkPipelineViewportSwizzleStateCreateInfoNV const & rhs ) 
@@ -12308,6 +12689,8 @@ operator VkPipelineViewportSwizzleStateCreateInfoNV const&() const
 	{	return *reinterpret_cast<const VkPipelineViewportSwizzleStateCreateInfoNV*>(this);	}
 operator VkPipelineViewportSwizzleStateCreateInfoNV &() 
 	{	return *reinterpret_cast<VkPipelineViewportSwizzleStateCreateInfoNV*>(this);	}
+
+friend S_pipeline_viewport_state_create_info;
 
 };
 static_assert(
@@ -12327,6 +12710,7 @@ public:
 	E_discard_rectangle_mode_EXT discardRectangleMode;
 	uint32_t discardRectangleCount;
 	const S_rect_2d * pDiscardRectangles;
+
 S_pipeline_discard_rectangle_state_create_info_EXT( VkPipelineDiscardRectangleStateCreateInfoEXT const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_pipeline_discard_rectangle_state_create_info_EXT ) );	}
 S_pipeline_discard_rectangle_state_create_info_EXT& operator=( VkPipelineDiscardRectangleStateCreateInfoEXT const & rhs ) 
@@ -12335,6 +12719,8 @@ operator VkPipelineDiscardRectangleStateCreateInfoEXT const&() const
 	{	return *reinterpret_cast<const VkPipelineDiscardRectangleStateCreateInfoEXT*>(this);	}
 operator VkPipelineDiscardRectangleStateCreateInfoEXT &() 
 	{	return *reinterpret_cast<VkPipelineDiscardRectangleStateCreateInfoEXT*>(this);	}
+
+friend S_graphics_pipeline_create_info;
 
 };
 static_assert(
@@ -12352,6 +12738,7 @@ private:
 public:
 	uint32_t aspectReferenceCount;
 	const S_input_attachment_aspect_reference * pAspectReferences;
+
 S_render_pass_input_attachment_aspect_create_info( VkRenderPassInputAttachmentAspectCreateInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_render_pass_input_attachment_aspect_create_info ) );	}
 S_render_pass_input_attachment_aspect_create_info& operator=( VkRenderPassInputAttachmentAspectCreateInfo const & rhs ) 
@@ -12360,6 +12747,8 @@ operator VkRenderPassInputAttachmentAspectCreateInfo const&() const
 	{	return *reinterpret_cast<const VkRenderPassInputAttachmentAspectCreateInfo*>(this);	}
 operator VkRenderPassInputAttachmentAspectCreateInfo &() 
 	{	return *reinterpret_cast<VkRenderPassInputAttachmentAspectCreateInfo*>(this);	}
+
+friend S_render_pass_create_info;
 
 };
 static_assert(
@@ -12378,6 +12767,7 @@ private:
 	void * pNext = nullptr;
 public:
 	S_surface_capabilities_KHR surfaceCapabilities;
+
 S_surface_capabilities2_KHR( VkSurfaceCapabilities2KHR const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_surface_capabilities2_KHR ) );	}
 S_surface_capabilities2_KHR& operator=( VkSurfaceCapabilities2KHR const & rhs ) 
@@ -12386,6 +12776,8 @@ operator VkSurfaceCapabilities2KHR const&() const
 	{	return *reinterpret_cast<const VkSurfaceCapabilities2KHR*>(this);	}
 operator VkSurfaceCapabilities2KHR &() 
 	{	return *reinterpret_cast<VkSurfaceCapabilities2KHR*>(this);	}
+
+S_surface_capabilities2_KHR& n_shared_present_surface_capabilities_KHR(S_shared_present_surface_capabilities_KHR const& next_);
 
 };
 static_assert(
@@ -12402,6 +12794,7 @@ private:
 	void * pNext = nullptr;
 public:
 	S_surface_format_KHR surfaceFormat;
+
 S_surface_format2_KHR( VkSurfaceFormat2KHR const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_surface_format2_KHR ) );	}
 S_surface_format2_KHR& operator=( VkSurfaceFormat2KHR const & rhs ) 
@@ -12426,6 +12819,7 @@ private:
 	void * pNext = nullptr;
 public:
 	S_display_properties_KHR displayProperties;
+
 S_display_properties2_KHR( VkDisplayProperties2KHR const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_display_properties2_KHR ) );	}
 S_display_properties2_KHR& operator=( VkDisplayProperties2KHR const & rhs ) 
@@ -12450,6 +12844,7 @@ private:
 	void * pNext = nullptr;
 public:
 	S_display_plane_properties_KHR displayPlaneProperties;
+
 S_display_plane_properties2_KHR( VkDisplayPlaneProperties2KHR const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_display_plane_properties2_KHR ) );	}
 S_display_plane_properties2_KHR& operator=( VkDisplayPlaneProperties2KHR const & rhs ) 
@@ -12474,6 +12869,7 @@ private:
 	void * pNext = nullptr;
 public:
 	S_display_mode_properties_KHR displayModeProperties;
+
 S_display_mode_properties2_KHR( VkDisplayModeProperties2KHR const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_display_mode_properties2_KHR ) );	}
 S_display_mode_properties2_KHR& operator=( VkDisplayModeProperties2KHR const & rhs ) 
@@ -12498,6 +12894,7 @@ private:
 	void * pNext = nullptr;
 public:
 	S_display_plane_capabilities_KHR capabilities;
+
 S_display_plane_capabilities2_KHR( VkDisplayPlaneCapabilities2KHR const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_display_plane_capabilities2_KHR ) );	}
 S_display_plane_capabilities2_KHR& operator=( VkDisplayPlaneCapabilities2KHR const & rhs ) 
@@ -12524,6 +12921,7 @@ private:
 	void * pNext = nullptr;
 public:
 	S_memory_requirements memoryRequirements;
+
 S_memory_requirements2( VkMemoryRequirements2 const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_memory_requirements2 ) );	}
 S_memory_requirements2& operator=( VkMemoryRequirements2 const & rhs ) 
@@ -12532,6 +12930,8 @@ operator VkMemoryRequirements2 const&() const
 	{	return *reinterpret_cast<const VkMemoryRequirements2*>(this);	}
 operator VkMemoryRequirements2 &() 
 	{	return *reinterpret_cast<VkMemoryRequirements2*>(this);	}
+
+S_memory_requirements2& n_memory_dedicated_requirements(S_memory_dedicated_requirements const& next_);
 
 };
 static_assert(
@@ -12548,6 +12948,7 @@ private:
 	void * pNext = nullptr;
 public:
 	S_sparse_image_memory_requirements memoryRequirements;
+
 S_sparse_image_memory_requirements2( VkSparseImageMemoryRequirements2 const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_sparse_image_memory_requirements2 ) );	}
 S_sparse_image_memory_requirements2& operator=( VkSparseImageMemoryRequirements2 const & rhs ) 
@@ -12580,6 +12981,7 @@ public:
 	E_chroma_location yChromaOffset;
 	E_filter chromaFilter;
 	VkBool32 forceExplicitReconstruction;
+
 S_sampler_ycbcr_conversion_create_info( VkSamplerYcbcrConversionCreateInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_sampler_ycbcr_conversion_create_info ) );	}
 S_sampler_ycbcr_conversion_create_info& operator=( VkSamplerYcbcrConversionCreateInfo const & rhs ) 
@@ -12588,6 +12990,8 @@ operator VkSamplerYcbcrConversionCreateInfo const&() const
 	{	return *reinterpret_cast<const VkSamplerYcbcrConversionCreateInfo*>(this);	}
 operator VkSamplerYcbcrConversionCreateInfo &() 
 	{	return *reinterpret_cast<VkSamplerYcbcrConversionCreateInfo*>(this);	}
+
+S_sampler_ycbcr_conversion_create_info& n_external_format_ANDROID(S_external_format_ANDROID const& next_);
 
 };
 static_assert(
@@ -12607,6 +13011,7 @@ public:
 	S_extent_2d sampleLocationGridSize;
 	uint32_t sampleLocationsCount;
 	const S_sample_location_EXT * pSampleLocations;
+
 S_sample_locations_info_EXT( VkSampleLocationsInfoEXT const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_sample_locations_info_EXT ) );	}
 S_sample_locations_info_EXT& operator=( VkSampleLocationsInfoEXT const & rhs ) 
@@ -12615,6 +13020,8 @@ operator VkSampleLocationsInfoEXT const&() const
 	{	return *reinterpret_cast<const VkSampleLocationsInfoEXT*>(this);	}
 operator VkSampleLocationsInfoEXT &() 
 	{	return *reinterpret_cast<VkSampleLocationsInfoEXT*>(this);	}
+
+friend S_image_memory_barrier;
 
 };
 static_assert(
@@ -12626,6 +13033,7 @@ static_assert(
 struct		S_attachment_sample_locations_EXT{
 	uint32_t attachmentIndex;
 	S_sample_locations_info_EXT sampleLocationsInfo;
+
 };
 
 /*	VkSubpassSampleLocationsEXT
@@ -12633,6 +13041,7 @@ struct		S_attachment_sample_locations_EXT{
 struct		S_subpass_sample_locations_EXT{
 	uint32_t subpassIndex;
 	S_sample_locations_info_EXT sampleLocationsInfo;
+
 };
 
 /*	VkRenderPassSampleLocationsBeginInfoEXT
@@ -12648,6 +13057,7 @@ public:
 	const S_attachment_sample_locations_EXT * pAttachmentInitialSampleLocations;
 	uint32_t postSubpassSampleLocationsCount;
 	const S_subpass_sample_locations_EXT * pPostSubpassSampleLocations;
+
 S_render_pass_sample_locations_begin_info_EXT( VkRenderPassSampleLocationsBeginInfoEXT const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_render_pass_sample_locations_begin_info_EXT ) );	}
 S_render_pass_sample_locations_begin_info_EXT& operator=( VkRenderPassSampleLocationsBeginInfoEXT const & rhs ) 
@@ -12656,6 +13066,8 @@ operator VkRenderPassSampleLocationsBeginInfoEXT const&() const
 	{	return *reinterpret_cast<const VkRenderPassSampleLocationsBeginInfoEXT*>(this);	}
 operator VkRenderPassSampleLocationsBeginInfoEXT &() 
 	{	return *reinterpret_cast<VkRenderPassSampleLocationsBeginInfoEXT*>(this);	}
+
+friend S_render_pass_begin_info;
 
 };
 static_assert(
@@ -12673,6 +13085,7 @@ private:
 public:
 	VkBool32 sampleLocationsEnable;
 	S_sample_locations_info_EXT sampleLocationsInfo;
+
 S_pipeline_sample_locations_state_create_info_EXT( VkPipelineSampleLocationsStateCreateInfoEXT const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_pipeline_sample_locations_state_create_info_EXT ) );	}
 S_pipeline_sample_locations_state_create_info_EXT& operator=( VkPipelineSampleLocationsStateCreateInfoEXT const & rhs ) 
@@ -12681,6 +13094,8 @@ operator VkPipelineSampleLocationsStateCreateInfoEXT const&() const
 	{	return *reinterpret_cast<const VkPipelineSampleLocationsStateCreateInfoEXT*>(this);	}
 operator VkPipelineSampleLocationsStateCreateInfoEXT &() 
 	{	return *reinterpret_cast<VkPipelineSampleLocationsStateCreateInfoEXT*>(this);	}
+
+friend S_pipeline_multisample_state_create_info;
 
 };
 static_assert(
@@ -12702,6 +13117,7 @@ public:
 	float sampleLocationCoordinateRange[2];
 	uint32_t sampleLocationSubPixelBits;
 	VkBool32 variableSampleLocations;
+
 S_physical_device_sample_locations_properties_EXT( VkPhysicalDeviceSampleLocationsPropertiesEXT const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_physical_device_sample_locations_properties_EXT ) );	}
 S_physical_device_sample_locations_properties_EXT& operator=( VkPhysicalDeviceSampleLocationsPropertiesEXT const & rhs ) 
@@ -12710,6 +13126,8 @@ operator VkPhysicalDeviceSampleLocationsPropertiesEXT const&() const
 	{	return *reinterpret_cast<const VkPhysicalDeviceSampleLocationsPropertiesEXT*>(this);	}
 operator VkPhysicalDeviceSampleLocationsPropertiesEXT &() 
 	{	return *reinterpret_cast<VkPhysicalDeviceSampleLocationsPropertiesEXT*>(this);	}
+
+friend S_physical_device_properties2;
 
 };
 static_assert(
@@ -12726,6 +13144,7 @@ private:
 	void * pNext = nullptr;
 public:
 	S_extent_2d maxSampleLocationGridSize;
+
 S_multisample_properties_EXT( VkMultisamplePropertiesEXT const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_multisample_properties_EXT ) );	}
 S_multisample_properties_EXT& operator=( VkMultisamplePropertiesEXT const & rhs ) 
@@ -12751,6 +13170,7 @@ struct		S_shader_statistics_info_AMD{
 	uint32_t numAvailableVgprs;
 	uint32_t numAvailableSgprs;
 	uint32_t computeWorkGroupSize[3];
+
 };
 
 /*	VkDebugUtilsMessengerCallbackDataEXT
@@ -12771,6 +13191,7 @@ public:
 	S_debug_utils_label_EXT * pCmdBufLabels;
 	uint32_t objectCount;
 	S_debug_utils_object_name_info_EXT * pObjects;
+
 S_debug_utils_messenger_callback_data_EXT( VkDebugUtilsMessengerCallbackDataEXT const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_debug_utils_messenger_callback_data_EXT ) );	}
 S_debug_utils_messenger_callback_data_EXT& operator=( VkDebugUtilsMessengerCallbackDataEXT const & rhs ) 
@@ -12804,6 +13225,7 @@ public:
 	const S_attachment_reference2_KHR * pDepthStencilAttachment;
 	uint32_t preserveAttachmentCount;
 	const uint32_t * pPreserveAttachments;
+
 S_subpass_description2_KHR( VkSubpassDescription2KHR const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_subpass_description2_KHR ) );	}
 S_subpass_description2_KHR& operator=( VkSubpassDescription2KHR const & rhs ) 
@@ -12835,6 +13257,7 @@ public:
 	const S_subpass_dependency2_KHR * pDependencies;
 	uint32_t correlatedViewMaskCount;
 	const uint32_t * pCorrelatedViewMasks;
+
 S_render_pass_create_info2_KHR( VkRenderPassCreateInfo2KHR const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_render_pass_create_info2_KHR ) );	}
 S_render_pass_create_info2_KHR& operator=( VkRenderPassCreateInfo2KHR const & rhs ) 
@@ -12860,6 +13283,7 @@ private:
 public:
 	uint32_t vertexBindingDivisorCount;
 	const S_vertex_input_binding_divisor_description_EXT * pVertexBindingDivisors;
+
 S_pipeline_vertex_input_divisor_state_create_info_EXT( VkPipelineVertexInputDivisorStateCreateInfoEXT const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_pipeline_vertex_input_divisor_state_create_info_EXT ) );	}
 S_pipeline_vertex_input_divisor_state_create_info_EXT& operator=( VkPipelineVertexInputDivisorStateCreateInfoEXT const & rhs ) 
@@ -12868,6 +13292,8 @@ operator VkPipelineVertexInputDivisorStateCreateInfoEXT const&() const
 	{	return *reinterpret_cast<const VkPipelineVertexInputDivisorStateCreateInfoEXT*>(this);	}
 operator VkPipelineVertexInputDivisorStateCreateInfoEXT &() 
 	{	return *reinterpret_cast<VkPipelineVertexInputDivisorStateCreateInfoEXT*>(this);	}
+
+friend S_pipeline_vertex_input_state_create_info;
 
 };
 static_assert(
@@ -12893,6 +13319,7 @@ public:
 	E_sampler_ycbcr_range suggestedYcbcrRange;
 	E_chroma_location suggestedXChromaOffset;
 	E_chroma_location suggestedYChromaOffset;
+
 S_android_hardware_buffer_format_properties_ANDROID( VkAndroidHardwareBufferFormatPropertiesANDROID const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_android_hardware_buffer_format_properties_ANDROID ) );	}
 S_android_hardware_buffer_format_properties_ANDROID& operator=( VkAndroidHardwareBufferFormatPropertiesANDROID const & rhs ) 
@@ -12901,6 +13328,8 @@ operator VkAndroidHardwareBufferFormatPropertiesANDROID const&() const
 	{	return *reinterpret_cast<const VkAndroidHardwareBufferFormatPropertiesANDROID*>(this);	}
 operator VkAndroidHardwareBufferFormatPropertiesANDROID &() 
 	{	return *reinterpret_cast<VkAndroidHardwareBufferFormatPropertiesANDROID*>(this);	}
+
+friend S_android_hardware_buffer_properties_ANDROID;
 
 };
 static_assert(
@@ -12919,6 +13348,7 @@ private:
 public:
 	uint32_t exclusiveScissorCount;
 	const S_rect_2d * pExclusiveScissors;
+
 S_pipeline_viewport_exclusive_scissor_state_create_info_NV( VkPipelineViewportExclusiveScissorStateCreateInfoNV const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_pipeline_viewport_exclusive_scissor_state_create_info_NV ) );	}
 S_pipeline_viewport_exclusive_scissor_state_create_info_NV& operator=( VkPipelineViewportExclusiveScissorStateCreateInfoNV const & rhs ) 
@@ -12927,6 +13357,8 @@ operator VkPipelineViewportExclusiveScissorStateCreateInfoNV const&() const
 	{	return *reinterpret_cast<const VkPipelineViewportExclusiveScissorStateCreateInfoNV*>(this);	}
 operator VkPipelineViewportExclusiveScissorStateCreateInfoNV &() 
 	{	return *reinterpret_cast<VkPipelineViewportExclusiveScissorStateCreateInfoNV*>(this);	}
+
+friend S_pipeline_viewport_state_create_info;
 
 };
 static_assert(
@@ -12945,6 +13377,7 @@ public:
 	VkBool32 shadingRateImageEnable;
 	uint32_t viewportCount;
 	const S_shading_rate_palette_NV * pShadingRatePalettes;
+
 S_pipeline_viewport_shading_rate_image_state_create_info_NV( VkPipelineViewportShadingRateImageStateCreateInfoNV const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_pipeline_viewport_shading_rate_image_state_create_info_NV ) );	}
 S_pipeline_viewport_shading_rate_image_state_create_info_NV& operator=( VkPipelineViewportShadingRateImageStateCreateInfoNV const & rhs ) 
@@ -12953,6 +13386,8 @@ operator VkPipelineViewportShadingRateImageStateCreateInfoNV const&() const
 	{	return *reinterpret_cast<const VkPipelineViewportShadingRateImageStateCreateInfoNV*>(this);	}
 operator VkPipelineViewportShadingRateImageStateCreateInfoNV &() 
 	{	return *reinterpret_cast<VkPipelineViewportShadingRateImageStateCreateInfoNV*>(this);	}
+
+friend S_pipeline_viewport_state_create_info;
 
 };
 static_assert(
@@ -12972,6 +13407,7 @@ public:
 	S_extent_2d shadingRateTexelSize;
 	uint32_t shadingRatePaletteSize;
 	uint32_t shadingRateMaxCoarseSamples;
+
 S_physical_device_shading_rate_image_properties_NV( VkPhysicalDeviceShadingRateImagePropertiesNV const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_physical_device_shading_rate_image_properties_NV ) );	}
 S_physical_device_shading_rate_image_properties_NV& operator=( VkPhysicalDeviceShadingRateImagePropertiesNV const & rhs ) 
@@ -12980,6 +13416,8 @@ operator VkPhysicalDeviceShadingRateImagePropertiesNV const&() const
 	{	return *reinterpret_cast<const VkPhysicalDeviceShadingRateImagePropertiesNV*>(this);	}
 operator VkPhysicalDeviceShadingRateImagePropertiesNV &() 
 	{	return *reinterpret_cast<VkPhysicalDeviceShadingRateImagePropertiesNV*>(this);	}
+
+friend S_physical_device_properties;
 
 };
 static_assert(
@@ -12993,6 +13431,7 @@ struct		S_coarse_sample_order_custom_NV{
 	uint32_t sampleCount;
 	uint32_t sampleLocationCount;
 	const S_coarse_sample_location_NV * pSampleLocations;
+
 };
 
 /*	VkPipelineViewportCoarseSampleOrderStateCreateInfoNV
@@ -13007,6 +13446,7 @@ public:
 	E_coarse_sample_order_type_NV sampleOrderType;
 	uint32_t customSampleOrderCount;
 	const S_coarse_sample_order_custom_NV * pCustomSampleOrders;
+
 S_pipeline_viewport_coarse_sample_order_state_create_info_NV( VkPipelineViewportCoarseSampleOrderStateCreateInfoNV const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_pipeline_viewport_coarse_sample_order_state_create_info_NV ) );	}
 S_pipeline_viewport_coarse_sample_order_state_create_info_NV& operator=( VkPipelineViewportCoarseSampleOrderStateCreateInfoNV const & rhs ) 
@@ -13015,6 +13455,8 @@ operator VkPipelineViewportCoarseSampleOrderStateCreateInfoNV const&() const
 	{	return *reinterpret_cast<const VkPipelineViewportCoarseSampleOrderStateCreateInfoNV*>(this);	}
 operator VkPipelineViewportCoarseSampleOrderStateCreateInfoNV &() 
 	{	return *reinterpret_cast<VkPipelineViewportCoarseSampleOrderStateCreateInfoNV*>(this);	}
+
+friend S_pipeline_viewport_state_create_info;
 
 };
 static_assert(
@@ -13037,6 +13479,7 @@ public:
 	VkPipelineLayout layout;
 	VkPipeline basePipelineHandle;
 	int32_t basePipelineIndex;
+
 S_raytracing_pipeline_create_info_NVX( VkRaytracingPipelineCreateInfoNVX const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_raytracing_pipeline_create_info_NVX ) );	}
 S_raytracing_pipeline_create_info_NVX& operator=( VkRaytracingPipelineCreateInfoNVX const & rhs ) 
@@ -13056,6 +13499,7 @@ static_assert(
 struct		S_geometry_data_NVX{
 	S_geometry_triangles_NVX triangles;
 	S_geometry_aabb_NVX aabbs;
+
 };
 
 /*	VkGeometryNVX
@@ -13069,6 +13513,7 @@ public:
 	E_geometry_type_NVX geometryType;
 	S_geometry_data_NVX geometry;
 	F_geometry_NVX flags;
+
 S_geometry_NVX( VkGeometryNVX const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_geometry_NVX ) );	}
 S_geometry_NVX& operator=( VkGeometryNVX const & rhs ) 
@@ -13097,6 +13542,7 @@ public:
 	uint32_t instanceCount;
 	uint32_t geometryCount;
 	const S_geometry_NVX * pGeometries;
+
 S_acceleration_structure_create_info_NVX( VkAccelerationStructureCreateInfoNVX const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_acceleration_structure_create_info_NVX ) );	}
 S_acceleration_structure_create_info_NVX& operator=( VkAccelerationStructureCreateInfoNVX const & rhs ) 
@@ -13122,6 +13568,7 @@ private:
 public:
 	uint32_t drmFormatModifierCount;
 	S_drm_format_modifier_properties_EXT * pDrmFormatModifierProperties;
+
 S_drm_format_modifier_properties_list_EXT( VkDrmFormatModifierPropertiesListEXT const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_drm_format_modifier_properties_list_EXT ) );	}
 S_drm_format_modifier_properties_list_EXT& operator=( VkDrmFormatModifierPropertiesListEXT const & rhs ) 
@@ -13130,6 +13577,8 @@ operator VkDrmFormatModifierPropertiesListEXT const&() const
 	{	return *reinterpret_cast<const VkDrmFormatModifierPropertiesListEXT*>(this);	}
 operator VkDrmFormatModifierPropertiesListEXT &() 
 	{	return *reinterpret_cast<VkDrmFormatModifierPropertiesListEXT*>(this);	}
+
+friend S_format_properties2;
 
 };
 static_assert(
@@ -13148,6 +13597,7 @@ public:
 	uint64_t drmFormatModifier;
 	uint32_t drmFormatModifierPlaneCount;
 	const S_subresource_layout * pPlaneLayouts;
+
 S_image_drm_format_modifier_explicit_create_info_EXT( VkImageDrmFormatModifierExplicitCreateInfoEXT const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_image_drm_format_modifier_explicit_create_info_EXT ) );	}
 S_image_drm_format_modifier_explicit_create_info_EXT& operator=( VkImageDrmFormatModifierExplicitCreateInfoEXT const & rhs ) 
@@ -13157,9 +13607,524 @@ operator VkImageDrmFormatModifierExplicitCreateInfoEXT const&() const
 operator VkImageDrmFormatModifierExplicitCreateInfoEXT &() 
 	{	return *reinterpret_cast<VkImageDrmFormatModifierExplicitCreateInfoEXT*>(this);	}
 
+friend S_image_create_info;
+
 };
 static_assert(
 	sizeof(S_image_drm_format_modifier_explicit_create_info_EXT) == sizeof(VkImageDrmFormatModifierExplicitCreateInfoEXT),
+	"struct and wrapper have different size!");
+
+/*	VkPhysicalDeviceProperties
+(returnedonly)
+ex:
+	VkPhysicalDeviceShadingRateImagePropertiesNV
+*/
+struct		S_physical_device_properties{
+	uint32_t apiVersion;
+	uint32_t driverVersion;
+	uint32_t vendorID;
+	uint32_t deviceID;
+	E_physical_device_type deviceType;
+	char deviceName[VK_MAX_PHYSICAL_DEVICE_NAME_SIZE];
+	uint8_t pipelineCacheUUID[VK_UUID_SIZE];
+	S_physical_device_limits limits;
+	S_physical_device_sparse_properties sparseProperties;
+
+S_physical_device_properties& n_physical_device_shading_rate_image_properties_NV(S_physical_device_shading_rate_image_properties_NV const& next_);
+
+};
+
+/*	VkDeviceCreateInfo
+ex:
+	VkPhysicalDeviceFeatures2
+	VkPhysicalDeviceVariablePointerFeatures
+	VkPhysicalDeviceMultiviewFeatures
+	VkDeviceGroupDeviceCreateInfo
+	VkPhysicalDevice16BitStorageFeatures
+	VkPhysicalDeviceSamplerYcbcrConversionFeatures
+	VkPhysicalDeviceProtectedMemoryFeatures
+	VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT
+	VkPhysicalDeviceInlineUniformBlockFeaturesEXT
+	VkPhysicalDeviceShaderDrawParameterFeatures
+	VkPhysicalDeviceDescriptorIndexingFeaturesEXT
+	VkPhysicalDevice8BitStorageFeaturesKHR
+	VkPhysicalDeviceConditionalRenderingFeaturesEXT
+	VkPhysicalDeviceVulkanMemoryModelFeaturesKHR
+	VkPhysicalDeviceShaderAtomicInt64FeaturesKHR
+	VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT
+	VkPhysicalDeviceASTCDecodeFeaturesEXT
+	VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV
+	VkPhysicalDeviceExclusiveScissorFeaturesNV
+	VkPhysicalDeviceCornerSampledImageFeaturesNV
+	VkPhysicalDeviceComputeShaderDerivativesFeaturesNV
+	VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV
+	VkPhysicalDeviceShaderImageFootprintFeaturesNV
+	VkPhysicalDeviceShadingRateImageFeaturesNV
+	VkPhysicalDeviceMeshShaderFeaturesNV
+*/
+struct		S_device_create_info{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO;
+	const void * pNext = nullptr;
+public:
+	VkDeviceCreateFlags flags;
+	uint32_t queueCreateInfoCount;
+	const S_device_queue_create_info * pQueueCreateInfos;
+	uint32_t enabledLayerCount;
+	const char * const* ppEnabledLayerNames;
+	uint32_t enabledExtensionCount;
+	const char * const* ppEnabledExtensionNames;
+	const S_physical_device_features * pEnabledFeatures;
+
+S_device_create_info( VkDeviceCreateInfo const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_device_create_info ) );	}
+S_device_create_info& operator=( VkDeviceCreateInfo const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_device_create_info ) ); return *this;	}
+operator VkDeviceCreateInfo const&() const 
+	{	return *reinterpret_cast<const VkDeviceCreateInfo*>(this);	}
+operator VkDeviceCreateInfo &() 
+	{	return *reinterpret_cast<VkDeviceCreateInfo*>(this);	}
+
+S_device_create_info& n_physical_device_features2(S_physical_device_features2 const& next_);
+S_device_create_info& n_physical_device_variable_pointer_features(S_physical_device_variable_pointer_features const& next_);
+S_device_create_info& n_physical_device_multiview_features(S_physical_device_multiview_features const& next_);
+S_device_create_info& n_device_group_device_create_info(S_device_group_device_create_info const& next_);
+S_device_create_info& n_physical_device_16bit_storage_features(S_physical_device_16bit_storage_features const& next_);
+S_device_create_info& n_physical_device_sampler_ycbcr_conversion_features(S_physical_device_sampler_ycbcr_conversion_features const& next_);
+S_device_create_info& n_physical_device_protected_memory_features(S_physical_device_protected_memory_features const& next_);
+S_device_create_info& n_physical_device_blend_operation_advanced_features_EXT(S_physical_device_blend_operation_advanced_features_EXT const& next_);
+S_device_create_info& n_physical_device_inline_uniform_block_features_EXT(S_physical_device_inline_uniform_block_features_EXT const& next_);
+S_device_create_info& n_physical_device_shader_draw_parameter_features(S_physical_device_shader_draw_parameter_features const& next_);
+S_device_create_info& n_physical_device_descriptor_indexing_features_EXT(S_physical_device_descriptor_indexing_features_EXT const& next_);
+S_device_create_info& n_physical_device_8bit_storage_features_KHR(S_physical_device_8bit_storage_features_KHR const& next_);
+S_device_create_info& n_physical_device_conditional_rendering_features_EXT(S_physical_device_conditional_rendering_features_EXT const& next_);
+S_device_create_info& n_physical_device_vulkan_memory_model_features_KHR(S_physical_device_vulkan_memory_model_features_KHR const& next_);
+S_device_create_info& n_physical_device_shader_atomic_int64_features_KHR(S_physical_device_shader_atomic_int64_features_KHR const& next_);
+S_device_create_info& n_physical_device_vertex_attribute_divisor_features_EXT(S_physical_device_vertex_attribute_divisor_features_EXT const& next_);
+S_device_create_info& n_physical_device_astc_decode_features_EXT(S_physical_device_astc_decode_features_EXT const& next_);
+S_device_create_info& n_physical_device_representative_fragment_test_features_NV(S_physical_device_representative_fragment_test_features_NV const& next_);
+S_device_create_info& n_physical_device_exclusive_scissor_features_NV(S_physical_device_exclusive_scissor_features_NV const& next_);
+S_device_create_info& n_physical_device_corner_sampled_image_features_NV(S_physical_device_corner_sampled_image_features_NV const& next_);
+S_device_create_info& n_physical_device_compute_shader_derivatives_features_NV(S_physical_device_compute_shader_derivatives_features_NV const& next_);
+S_device_create_info& n_physical_device_fragment_shader_barycentric_features_NV(S_physical_device_fragment_shader_barycentric_features_NV const& next_);
+S_device_create_info& n_physical_device_shader_image_footprint_features_NV(S_physical_device_shader_image_footprint_features_NV const& next_);
+S_device_create_info& n_physical_device_shading_rate_image_features_NV(S_physical_device_shading_rate_image_features_NV const& next_);
+S_device_create_info& n_physical_device_mesh_shader_features_NV(S_physical_device_mesh_shader_features_NV const& next_);
+
+};
+static_assert(
+	sizeof(S_device_create_info) == sizeof(VkDeviceCreateInfo),
+	"struct and wrapper have different size!");
+
+/*	VkImageMemoryBarrier
+ex:
+	VkSampleLocationsInfoEXT
+*/
+struct		S_image_memory_barrier{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER;
+	const void * pNext = nullptr;
+public:
+	F_access srcAccessMask;
+	F_access dstAccessMask;
+	E_image_layout oldLayout;
+	E_image_layout newLayout;
+	uint32_t srcQueueFamilyIndex;
+	uint32_t dstQueueFamilyIndex;
+	VkImage image;
+	S_image_subresource_range subresourceRange;
+
+S_image_memory_barrier( VkImageMemoryBarrier const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_image_memory_barrier ) );	}
+S_image_memory_barrier& operator=( VkImageMemoryBarrier const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_image_memory_barrier ) ); return *this;	}
+operator VkImageMemoryBarrier const&() const 
+	{	return *reinterpret_cast<const VkImageMemoryBarrier*>(this);	}
+operator VkImageMemoryBarrier &() 
+	{	return *reinterpret_cast<VkImageMemoryBarrier*>(this);	}
+
+S_image_memory_barrier& n_sample_locations_info_EXT(S_sample_locations_info_EXT const& next_);
+
+};
+static_assert(
+	sizeof(S_image_memory_barrier) == sizeof(VkImageMemoryBarrier),
+	"struct and wrapper have different size!");
+
+/*	VkImageCreateInfo
+ex:
+	VkDedicatedAllocationImageCreateInfoNV
+	VkExternalMemoryImageCreateInfoNV
+	VkExternalMemoryImageCreateInfo
+	VkImageSwapchainCreateInfoKHR
+	VkImageFormatListCreateInfoKHR
+	VkExternalFormatANDROID
+	VkImageDrmFormatModifierListCreateInfoEXT
+	VkImageDrmFormatModifierExplicitCreateInfoEXT
+*/
+struct		S_image_create_info{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO;
+	const void * pNext = nullptr;
+public:
+	F_image_create flags;
+	E_image_type imageType;
+	E_format format;
+	S_extent_3d extent;
+	uint32_t mipLevels;
+	uint32_t arrayLayers;
+	F_sample_count samples;
+	E_image_tiling tiling;
+	F_image_usage usage;
+	E_sharing_mode sharingMode;
+	uint32_t queueFamilyIndexCount;
+	const uint32_t * pQueueFamilyIndices;
+	E_image_layout initialLayout;
+
+S_image_create_info( VkImageCreateInfo const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_image_create_info ) );	}
+S_image_create_info& operator=( VkImageCreateInfo const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_image_create_info ) ); return *this;	}
+operator VkImageCreateInfo const&() const 
+	{	return *reinterpret_cast<const VkImageCreateInfo*>(this);	}
+operator VkImageCreateInfo &() 
+	{	return *reinterpret_cast<VkImageCreateInfo*>(this);	}
+
+S_image_create_info& n_dedicated_allocation_image_create_info_NV(S_dedicated_allocation_image_create_info_NV const& next_);
+S_image_create_info& n_external_memory_image_create_info_NV(S_external_memory_image_create_info_NV const& next_);
+S_image_create_info& n_external_memory_image_create_info(S_external_memory_image_create_info const& next_);
+S_image_create_info& n_image_swapchain_create_info_KHR(S_image_swapchain_create_info_KHR const& next_);
+S_image_create_info& n_image_format_list_create_info_KHR(S_image_format_list_create_info_KHR const& next_);
+S_image_create_info& n_external_format_ANDROID(S_external_format_ANDROID const& next_);
+S_image_create_info& n_image_drm_format_modifier_list_create_info_EXT(S_image_drm_format_modifier_list_create_info_EXT const& next_);
+S_image_create_info& n_image_drm_format_modifier_explicit_create_info_EXT(S_image_drm_format_modifier_explicit_create_info_EXT const& next_);
+
+};
+static_assert(
+	sizeof(S_image_create_info) == sizeof(VkImageCreateInfo),
+	"struct and wrapper have different size!");
+
+/*	VkPipelineVertexInputStateCreateInfo
+ex:
+	VkPipelineVertexInputDivisorStateCreateInfoEXT
+*/
+struct		S_pipeline_vertex_input_state_create_info{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO;
+	const void * pNext = nullptr;
+public:
+	VkPipelineVertexInputStateCreateFlags flags;
+	uint32_t vertexBindingDescriptionCount;
+	const S_vertex_input_binding_description * pVertexBindingDescriptions;
+	uint32_t vertexAttributeDescriptionCount;
+	const S_vertex_input_attribute_description * pVertexAttributeDescriptions;
+
+S_pipeline_vertex_input_state_create_info( VkPipelineVertexInputStateCreateInfo const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_pipeline_vertex_input_state_create_info ) );	}
+S_pipeline_vertex_input_state_create_info& operator=( VkPipelineVertexInputStateCreateInfo const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_pipeline_vertex_input_state_create_info ) ); return *this;	}
+operator VkPipelineVertexInputStateCreateInfo const&() const 
+	{	return *reinterpret_cast<const VkPipelineVertexInputStateCreateInfo*>(this);	}
+operator VkPipelineVertexInputStateCreateInfo &() 
+	{	return *reinterpret_cast<VkPipelineVertexInputStateCreateInfo*>(this);	}
+
+S_pipeline_vertex_input_state_create_info& n_pipeline_vertex_input_divisor_state_create_info_EXT(S_pipeline_vertex_input_divisor_state_create_info_EXT const& next_);
+
+};
+static_assert(
+	sizeof(S_pipeline_vertex_input_state_create_info) == sizeof(VkPipelineVertexInputStateCreateInfo),
+	"struct and wrapper have different size!");
+
+/*	VkPipelineViewportStateCreateInfo
+ex:
+	VkPipelineViewportWScalingStateCreateInfoNV
+	VkPipelineViewportSwizzleStateCreateInfoNV
+	VkPipelineViewportExclusiveScissorStateCreateInfoNV
+	VkPipelineViewportShadingRateImageStateCreateInfoNV
+	VkPipelineViewportCoarseSampleOrderStateCreateInfoNV
+*/
+struct		S_pipeline_viewport_state_create_info{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_STATE_CREATE_INFO;
+	const void * pNext = nullptr;
+public:
+	VkPipelineViewportStateCreateFlags flags;
+	uint32_t viewportCount;
+	const S_viewport * pViewports;
+	uint32_t scissorCount;
+	const S_rect_2d * pScissors;
+
+S_pipeline_viewport_state_create_info( VkPipelineViewportStateCreateInfo const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_pipeline_viewport_state_create_info ) );	}
+S_pipeline_viewport_state_create_info& operator=( VkPipelineViewportStateCreateInfo const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_pipeline_viewport_state_create_info ) ); return *this;	}
+operator VkPipelineViewportStateCreateInfo const&() const 
+	{	return *reinterpret_cast<const VkPipelineViewportStateCreateInfo*>(this);	}
+operator VkPipelineViewportStateCreateInfo &() 
+	{	return *reinterpret_cast<VkPipelineViewportStateCreateInfo*>(this);	}
+
+S_pipeline_viewport_state_create_info& n_pipeline_viewport_w_scaling_state_create_info_NV(S_pipeline_viewport_w_scaling_state_create_info_NV const& next_);
+S_pipeline_viewport_state_create_info& n_pipeline_viewport_swizzle_state_create_info_NV(S_pipeline_viewport_swizzle_state_create_info_NV const& next_);
+S_pipeline_viewport_state_create_info& n_pipeline_viewport_exclusive_scissor_state_create_info_NV(S_pipeline_viewport_exclusive_scissor_state_create_info_NV const& next_);
+S_pipeline_viewport_state_create_info& n_pipeline_viewport_shading_rate_image_state_create_info_NV(S_pipeline_viewport_shading_rate_image_state_create_info_NV const& next_);
+S_pipeline_viewport_state_create_info& n_pipeline_viewport_coarse_sample_order_state_create_info_NV(S_pipeline_viewport_coarse_sample_order_state_create_info_NV const& next_);
+
+};
+static_assert(
+	sizeof(S_pipeline_viewport_state_create_info) == sizeof(VkPipelineViewportStateCreateInfo),
+	"struct and wrapper have different size!");
+
+/*	VkGraphicsPipelineCreateInfo
+ex:
+	VkPipelineDiscardRectangleStateCreateInfoEXT
+	VkPipelineRepresentativeFragmentTestStateCreateInfoNV
+*/
+struct		S_graphics_pipeline_create_info{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_GRAPHICS_PIPELINE_CREATE_INFO;
+	const void * pNext = nullptr;
+public:
+	F_pipeline_create flags;
+	uint32_t stageCount;
+	const S_pipeline_shader_stage_create_info * pStages;
+	const S_pipeline_vertex_input_state_create_info * pVertexInputState;
+	const S_pipeline_input_assembly_state_create_info * pInputAssemblyState;
+	const S_pipeline_tessellation_state_create_info * pTessellationState;
+	const S_pipeline_viewport_state_create_info * pViewportState;
+	const S_pipeline_rasterization_state_create_info * pRasterizationState;
+	const S_pipeline_multisample_state_create_info * pMultisampleState;
+	const S_pipeline_depth_stencil_state_create_info * pDepthStencilState;
+	const S_pipeline_color_blend_state_create_info * pColorBlendState;
+	const S_pipeline_dynamic_state_create_info * pDynamicState;
+	VkPipelineLayout layout;
+	VkRenderPass renderPass;
+	uint32_t subpass;
+	VkPipeline basePipelineHandle;
+	int32_t basePipelineIndex;
+
+S_graphics_pipeline_create_info( VkGraphicsPipelineCreateInfo const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_graphics_pipeline_create_info ) );	}
+S_graphics_pipeline_create_info& operator=( VkGraphicsPipelineCreateInfo const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_graphics_pipeline_create_info ) ); return *this;	}
+operator VkGraphicsPipelineCreateInfo const&() const 
+	{	return *reinterpret_cast<const VkGraphicsPipelineCreateInfo*>(this);	}
+operator VkGraphicsPipelineCreateInfo &() 
+	{	return *reinterpret_cast<VkGraphicsPipelineCreateInfo*>(this);	}
+
+S_graphics_pipeline_create_info& n_pipeline_discard_rectangle_state_create_info_EXT(S_pipeline_discard_rectangle_state_create_info_EXT const& next_);
+S_graphics_pipeline_create_info& n_pipeline_representative_fragment_test_state_create_info_NV(S_pipeline_representative_fragment_test_state_create_info_NV const& next_);
+
+};
+static_assert(
+	sizeof(S_graphics_pipeline_create_info) == sizeof(VkGraphicsPipelineCreateInfo),
+	"struct and wrapper have different size!");
+
+/*	VkRenderPassBeginInfo
+ex:
+	VkDeviceGroupRenderPassBeginInfo
+	VkRenderPassSampleLocationsBeginInfoEXT
+*/
+struct		S_render_pass_begin_info{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO;
+	const void * pNext = nullptr;
+public:
+	VkRenderPass renderPass;
+	VkFramebuffer framebuffer;
+	S_rect_2d renderArea;
+	uint32_t clearValueCount;
+	const VkClearValue * pClearValues;
+
+S_render_pass_begin_info( VkRenderPassBeginInfo const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_render_pass_begin_info ) );	}
+S_render_pass_begin_info& operator=( VkRenderPassBeginInfo const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_render_pass_begin_info ) ); return *this;	}
+operator VkRenderPassBeginInfo const&() const 
+	{	return *reinterpret_cast<const VkRenderPassBeginInfo*>(this);	}
+operator VkRenderPassBeginInfo &() 
+	{	return *reinterpret_cast<VkRenderPassBeginInfo*>(this);	}
+
+S_render_pass_begin_info& n_device_group_render_pass_begin_info(S_device_group_render_pass_begin_info const& next_);
+S_render_pass_begin_info& n_render_pass_sample_locations_begin_info_EXT(S_render_pass_sample_locations_begin_info_EXT const& next_);
+
+};
+static_assert(
+	sizeof(S_render_pass_begin_info) == sizeof(VkRenderPassBeginInfo),
+	"struct and wrapper have different size!");
+
+/*	VkRenderPassCreateInfo
+ex:
+	VkRenderPassMultiviewCreateInfo
+	VkRenderPassInputAttachmentAspectCreateInfo
+*/
+struct		S_render_pass_create_info{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_RENDER_PASS_CREATE_INFO;
+	const void * pNext = nullptr;
+public:
+	F_render_pass_create flags;
+	uint32_t attachmentCount;
+	const S_attachment_description * pAttachments;
+	uint32_t subpassCount;
+	const S_subpass_description * pSubpasses;
+	uint32_t dependencyCount;
+	const S_subpass_dependency * pDependencies;
+
+S_render_pass_create_info( VkRenderPassCreateInfo const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_render_pass_create_info ) );	}
+S_render_pass_create_info& operator=( VkRenderPassCreateInfo const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_render_pass_create_info ) ); return *this;	}
+operator VkRenderPassCreateInfo const&() const 
+	{	return *reinterpret_cast<const VkRenderPassCreateInfo*>(this);	}
+operator VkRenderPassCreateInfo &() 
+	{	return *reinterpret_cast<VkRenderPassCreateInfo*>(this);	}
+
+S_render_pass_create_info& n_render_pass_multiview_create_info(S_render_pass_multiview_create_info const& next_);
+S_render_pass_create_info& n_render_pass_input_attachment_aspect_create_info(S_render_pass_input_attachment_aspect_create_info const& next_);
+
+};
+static_assert(
+	sizeof(S_render_pass_create_info) == sizeof(VkRenderPassCreateInfo),
+	"struct and wrapper have different size!");
+
+/*	VkPhysicalDeviceProperties2
+(returnedonly)
+ex:
+	VkPhysicalDevicePushDescriptorPropertiesKHR
+	VkPhysicalDeviceDriverPropertiesKHR
+	VkPhysicalDeviceIDProperties
+	VkPhysicalDeviceMultiviewProperties
+	VkPhysicalDeviceDiscardRectanglePropertiesEXT
+	VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX
+	VkPhysicalDeviceSubgroupProperties
+	VkPhysicalDevicePointClippingProperties
+	VkPhysicalDeviceProtectedMemoryProperties
+	VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT
+	VkPhysicalDeviceSampleLocationsPropertiesEXT
+	VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT
+	VkPhysicalDeviceInlineUniformBlockPropertiesEXT
+	VkPhysicalDeviceMaintenance3Properties
+	VkPhysicalDeviceExternalMemoryHostPropertiesEXT
+	VkPhysicalDeviceConservativeRasterizationPropertiesEXT
+	VkPhysicalDeviceShaderCorePropertiesAMD
+	VkPhysicalDeviceDescriptorIndexingPropertiesEXT
+	VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT
+	VkPhysicalDeviceMeshShaderPropertiesNV
+	VkPhysicalDeviceRaytracingPropertiesNVX
+*/
+struct		S_physical_device_properties2{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROPERTIES_2;
+	void * pNext = nullptr;
+public:
+	S_physical_device_properties properties;
+
+S_physical_device_properties2( VkPhysicalDeviceProperties2 const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_physical_device_properties2 ) );	}
+S_physical_device_properties2& operator=( VkPhysicalDeviceProperties2 const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_physical_device_properties2 ) ); return *this;	}
+operator VkPhysicalDeviceProperties2 const&() const 
+	{	return *reinterpret_cast<const VkPhysicalDeviceProperties2*>(this);	}
+operator VkPhysicalDeviceProperties2 &() 
+	{	return *reinterpret_cast<VkPhysicalDeviceProperties2*>(this);	}
+
+S_physical_device_properties2& n_physical_device_push_descriptor_properties_KHR(S_physical_device_push_descriptor_properties_KHR const& next_);
+S_physical_device_properties2& n_physical_device_driver_properties_KHR(S_physical_device_driver_properties_KHR const& next_);
+S_physical_device_properties2& n_physical_device_id_properties(S_physical_device_id_properties const& next_);
+S_physical_device_properties2& n_physical_device_multiview_properties(S_physical_device_multiview_properties const& next_);
+S_physical_device_properties2& n_physical_device_discard_rectangle_properties_EXT(S_physical_device_discard_rectangle_properties_EXT const& next_);
+S_physical_device_properties2& n_physical_device_multiview_per_view_attributes_properties_NVX(S_physical_device_multiview_per_view_attributes_properties_NVX const& next_);
+S_physical_device_properties2& n_physical_device_subgroup_properties(S_physical_device_subgroup_properties const& next_);
+S_physical_device_properties2& n_physical_device_point_clipping_properties(S_physical_device_point_clipping_properties const& next_);
+S_physical_device_properties2& n_physical_device_protected_memory_properties(S_physical_device_protected_memory_properties const& next_);
+S_physical_device_properties2& n_physical_device_sampler_filter_minmax_properties_EXT(S_physical_device_sampler_filter_minmax_properties_EXT const& next_);
+S_physical_device_properties2& n_physical_device_sample_locations_properties_EXT(S_physical_device_sample_locations_properties_EXT const& next_);
+S_physical_device_properties2& n_physical_device_blend_operation_advanced_properties_EXT(S_physical_device_blend_operation_advanced_properties_EXT const& next_);
+S_physical_device_properties2& n_physical_device_inline_uniform_block_properties_EXT(S_physical_device_inline_uniform_block_properties_EXT const& next_);
+S_physical_device_properties2& n_physical_device_maintenance3_properties(S_physical_device_maintenance3_properties const& next_);
+S_physical_device_properties2& n_physical_device_external_memory_host_properties_EXT(S_physical_device_external_memory_host_properties_EXT const& next_);
+S_physical_device_properties2& n_physical_device_conservative_rasterization_properties_EXT(S_physical_device_conservative_rasterization_properties_EXT const& next_);
+S_physical_device_properties2& n_physical_device_shader_core_properties_AMD(S_physical_device_shader_core_properties_AMD const& next_);
+S_physical_device_properties2& n_physical_device_descriptor_indexing_properties_EXT(S_physical_device_descriptor_indexing_properties_EXT const& next_);
+S_physical_device_properties2& n_physical_device_vertex_attribute_divisor_properties_EXT(S_physical_device_vertex_attribute_divisor_properties_EXT const& next_);
+S_physical_device_properties2& n_physical_device_mesh_shader_properties_NV(S_physical_device_mesh_shader_properties_NV const& next_);
+S_physical_device_properties2& n_physical_device_raytracing_properties_NVX(S_physical_device_raytracing_properties_NVX const& next_);
+
+};
+static_assert(
+	sizeof(S_physical_device_properties2) == sizeof(VkPhysicalDeviceProperties2),
+	"struct and wrapper have different size!");
+
+/*	VkFormatProperties2
+(returnedonly)
+ex:
+	VkDrmFormatModifierPropertiesListEXT
+*/
+struct		S_format_properties2{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_FORMAT_PROPERTIES_2;
+	void * pNext = nullptr;
+public:
+	S_format_properties formatProperties;
+
+S_format_properties2( VkFormatProperties2 const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_format_properties2 ) );	}
+S_format_properties2& operator=( VkFormatProperties2 const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_format_properties2 ) ); return *this;	}
+operator VkFormatProperties2 const&() const 
+	{	return *reinterpret_cast<const VkFormatProperties2*>(this);	}
+operator VkFormatProperties2 &() 
+	{	return *reinterpret_cast<VkFormatProperties2*>(this);	}
+
+S_format_properties2& n_drm_format_modifier_properties_list_EXT(S_drm_format_modifier_properties_list_EXT const& next_);
+
+};
+static_assert(
+	sizeof(S_format_properties2) == sizeof(VkFormatProperties2),
+	"struct and wrapper have different size!");
+
+/*	VkImageFormatProperties2
+(returnedonly)
+ex:
+	VkExternalImageFormatProperties
+	VkSamplerYcbcrConversionImageFormatProperties
+	VkTextureLODGatherFormatPropertiesAMD
+	VkAndroidHardwareBufferUsageANDROID
+*/
+struct		S_image_format_properties2{
+private:
+	VkStructureType sType = 
+			VK_STRUCTURE_TYPE_IMAGE_FORMAT_PROPERTIES_2;
+	void * pNext = nullptr;
+public:
+	S_image_format_properties imageFormatProperties;
+
+S_image_format_properties2( VkImageFormatProperties2 const & rhs )
+	{	memcpy( this, &rhs, sizeof( S_image_format_properties2 ) );	}
+S_image_format_properties2& operator=( VkImageFormatProperties2 const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_image_format_properties2 ) ); return *this;	}
+operator VkImageFormatProperties2 const&() const 
+	{	return *reinterpret_cast<const VkImageFormatProperties2*>(this);	}
+operator VkImageFormatProperties2 &() 
+	{	return *reinterpret_cast<VkImageFormatProperties2*>(this);	}
+
+S_image_format_properties2& n_external_image_format_properties(S_external_image_format_properties const& next_);
+S_image_format_properties2& n_sampler_ycbcr_conversion_image_format_properties(S_sampler_ycbcr_conversion_image_format_properties const& next_);
+S_image_format_properties2& n_texture_lod_gather_format_properties_AMD(S_texture_lod_gather_format_properties_AMD const& next_);
+S_image_format_properties2& n_android_hardware_buffer_usage_ANDROID(S_android_hardware_buffer_usage_ANDROID const& next_);
+
+};
+static_assert(
+	sizeof(S_image_format_properties2) == sizeof(VkImageFormatProperties2),
 	"struct and wrapper have different size!");
 
 
