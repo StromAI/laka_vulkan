@@ -1040,7 +1040,7 @@ bool inline operator==(F_queue f1_, F_queue f2_) { return f1_.flag== f2_.flag; }
 
 /*	VkRenderPassCreateFlagBits*/
 using F_render_pass_create = 
-			VkFlags;
+			VkRenderPassCreateFlagBits;
 
 /*	VkDeviceQueueCreateFlagBits*/
 using F_device_queue_create = 

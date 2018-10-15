@@ -221,7 +221,7 @@ def out_struct(s,cpp_out_str):
         cpp_str = ""
         if ex_s.wsi_macro != "":
             cpp_str += "#ifdef "+ ex_s.wsi_macro+"\n"
-        cpp_str += s.my_name + "& "+s.my_name+"::n_"+ex_s.my_name.replace("S_","")+"("+ex_s.my_name+" const& next_)\n{\n"+\
+        cpp_str += s.my_name + "& "+s.my_name+"::\nn_"+ex_s.my_name.replace("S_","")+"("+ex_s.my_name+" const& next_)\n{\n"+\
                         "void* next = (void*)&next_;void* tail;\n" \
                         "if (pNext != nullptr){\n" \
                         "do {tail = next;next = ((S_base_structure*)next)->pNext;} \n" \
