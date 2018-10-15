@@ -500,7 +500,7 @@ namespace laka { namespace vk {
 			nullptr,
 			c_flags_,
 			u_flags_,
-			handle_type_.get(
+			handle_type_.get()
 		};
 
 		instance->api.vkGetPhysicalDeviceExternalBufferProperties(

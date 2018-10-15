@@ -136,7 +136,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="code_generation\.idea\code_generation.iml" />
-    <None Include="code_generation\types.py" />
     <None Include="code_generation\vk_types.py" />
     <None Include="vk.xlsx" />
   </ItemGroup>

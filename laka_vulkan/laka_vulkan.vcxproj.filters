@@ -79,9 +79,6 @@
     <None Include="code_generation\.idea\code_generation.iml">
       <Filter>资源文件\pyCharm项目</Filter>
     </None>
-    <None Include="code_generation\types.py">
-      <Filter>基础\提取和生成代码</Filter>
-    </None>
     <None Include="code_generation\vk_types.py">
       <Filter>基础\提取和生成代码</Filter>
     </None>
