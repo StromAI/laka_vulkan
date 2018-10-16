@@ -22,6 +22,6 @@ int main()
 
 	printf("flag_q2:%d  flag_q:%d  all_flag:%d", flag_q2.flag, flag_q.flag, flag_q.all_flags().flag);
 
-	
-
+	S_pipeline_shader_stage_create_info s = {};
+	S_geometry_aabb_NVX ss = {};
 }

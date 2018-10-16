@@ -49,6 +49,13 @@ author_list = author_nodes[0].find_all('tag')
 for author_node in author_list:
     author_name_list.append(author_node.get('name') )
 
+handle_nodes = soup.registry.types.find_all("type",attrs = {"category" : "handle"})
+handle_list = []
+for handle_node in handle_nodes:
+    temp = handle_node.find_all('name')
+    if len(temp)>0:
+        handle_list.append(temp[0].get_text() )
+
 wsi_nodes = soup.registry.platforms.find_all('platform')
 wsi_list = []
 wsi_dict = dict([])
@@ -85,8 +92,6 @@ wsi_struct_dict["VkExportFenceWin32HandleInfoKHR"] = "VK_USE_PLATFORM_WIN32_KHR"
 wsi_struct_dict["VkFenceGetWin32HandleInfoKHR"] = "VK_USE_PLATFORM_WIN32_KHR"
 
 cpp = []
-
-print(wsi_dict)
 
 class MyName:
     my_name = ""
@@ -177,6 +182,7 @@ class Member:
     noautovalidity = "" #
     o_comment = ""      #
     comment = ""        #
+    default_value2 = "" #打洞 非常无语
 
 class Struct:
     vk_name = ""
@@ -412,9 +418,6 @@ def out_struct(s,cpp_out_str):
     if s.g == 1 or s.vk_name == "VkBaseOutStructure" or s.vk_name == "VkBaseInStructure":
         return out
 
-    if s.vk_name == "VkPhysicalDeviceLimits":
-        print("")
-
     for m in s.members:
         temp = struct_dict.get(m.type_only)
         if temp != None:
@@ -589,6 +592,10 @@ for struct in struct_list:
         if noautovalidity_temp != None:
             m.noautovalidity = "(noautovalidity)"
 
+        default_values_temp = member.get('values')
+        if default_values_temp != None:
+            m.default_value2 = default_values_temp
+
         m.text = m.o_text.replace(m.o_comment, "")
 
         m.comment += m.noautovalidity+m.externsync+m.altlen+m.len+"\n"+m.o_comment
@@ -655,12 +662,20 @@ for struct in struct_list:
                     m.default_value = "0"
 
         if m.name == "sType":
-            m.default_value = member.get('values')
+            m.default_value = m.default_value2
+            #print(m.default_value2)
         if m.name == "pNext":
             m.default_value = "nullptr"
             m.final_text = m.final_text.replace("const","")
         if m.type_only == "VkClearValue":
             m.default_value = "{}"
+        is_handle = 0
+        for handle in handle_list:
+            if m.type_only == handle:
+                is_handle = 1
+                break
+        if is_handle == 1:
+            m.default_value = "VK_NULL_HANDLE"
 
     ex_list = s.struct_extends_to.split(",")
     s.struct_extends_to_array = ex_list[:]

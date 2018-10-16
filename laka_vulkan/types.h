@@ -4606,7 +4606,7 @@ struct		S_layer_properties{
 */
 struct		S_application_info{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_APPLICATION_INFO;
 	 void * pNext = nullptr;
 public:
 	const char * pApplicationName = nullptr;
@@ -4646,7 +4646,7 @@ ex to: VkDeviceQueueCreateInfo
 */
 struct		S_device_queue_global_priority_create_info_EXT{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_DEVICE_QUEUE_GLOBAL_PRIORITY_CREATE_INFO_EXT;
 	 void * pNext = nullptr;
 public:
 	E_queue_global_priority_EXT globalPriority = E_queue_global_priority_EXT::e_low_ext;
@@ -4673,7 +4673,7 @@ ex:
 */
 struct		S_device_queue_create_info{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_DEVICE_QUEUE_CREATE_INFO;
 	 void * pNext = nullptr;
 public:
 	F_device_queue_create flags;
@@ -4763,7 +4763,7 @@ ex to: VkPhysicalDeviceFeatures2,VkDeviceCreateInfo
 */
 struct		S_physical_device_variable_pointer_features{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VARIABLE_POINTER_FEATURES;
 	void * pNext = nullptr;
 public:
 	VkBool32 variablePointersStorageBuffer = 0;
@@ -4791,7 +4791,7 @@ ex to: VkPhysicalDeviceFeatures2,VkDeviceCreateInfo
 */
 struct		S_physical_device_multiview_features{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTIVIEW_FEATURES;
 	void * pNext = nullptr;
 public:
 	VkBool32 multiview = 0;
@@ -4820,7 +4820,7 @@ ex to: VkPhysicalDeviceFeatures2,VkDeviceCreateInfo
 */
 struct		S_physical_device_16bit_storage_features{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_16BIT_STORAGE_FEATURES;
 	void * pNext = nullptr;
 public:
 	VkBool32 storageBuffer16BitAccess = 0;
@@ -4850,7 +4850,7 @@ ex to: VkPhysicalDeviceFeatures2,VkDeviceCreateInfo
 */
 struct		S_physical_device_sampler_ycbcr_conversion_features{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SAMPLER_YCBCR_CONVERSION_FEATURES;
 	void * pNext = nullptr;
 public:
 	VkBool32 samplerYcbcrConversion = 0;
@@ -4877,7 +4877,7 @@ ex to: VkPhysicalDeviceFeatures2,VkDeviceCreateInfo
 */
 struct		S_physical_device_protected_memory_features{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROTECTED_MEMORY_FEATURES;
 	void * pNext = nullptr;
 public:
 	VkBool32 protectedMemory = 0;
@@ -4904,7 +4904,7 @@ ex to: VkPhysicalDeviceFeatures2,VkDeviceCreateInfo
 */
 struct		S_physical_device_blend_operation_advanced_features_EXT{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_BLEND_OPERATION_ADVANCED_FEATURES_EXT;
 	void * pNext = nullptr;
 public:
 	VkBool32 advancedBlendCoherentOperations = 0;
@@ -4932,7 +4932,7 @@ ex to: VkPhysicalDeviceFeatures2,VkDeviceCreateInfo
 */
 struct		S_physical_device_inline_uniform_block_features_EXT{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_INLINE_UNIFORM_BLOCK_FEATURES_EXT;
 	void * pNext = nullptr;
 public:
 	VkBool32 inlineUniformBlock = 0;
@@ -4960,7 +4960,7 @@ ex to: VkPhysicalDeviceFeatures2,VkDeviceCreateInfo
 */
 struct		S_physical_device_shader_draw_parameter_features{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_DRAW_PARAMETER_FEATURES;
 	void * pNext = nullptr;
 public:
 	VkBool32 shaderDrawParameters = 0;
@@ -4987,7 +4987,7 @@ ex to: VkPhysicalDeviceFeatures2,VkDeviceCreateInfo
 */
 struct		S_physical_device_descriptor_indexing_features_EXT{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_INDEXING_FEATURES_EXT;
 	void * pNext = nullptr;
 public:
 	VkBool32 shaderInputAttachmentArrayDynamicIndexing = 0;
@@ -5033,7 +5033,7 @@ ex to: VkPhysicalDeviceFeatures2,VkDeviceCreateInfo
 */
 struct		S_physical_device_8bit_storage_features_KHR{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_8BIT_STORAGE_FEATURES_KHR;
 	void * pNext = nullptr;
 public:
 	VkBool32 storageBuffer8BitAccess = 0;
@@ -5062,7 +5062,7 @@ ex to: VkPhysicalDeviceFeatures2,VkDeviceCreateInfo
 */
 struct		S_physical_device_conditional_rendering_features_EXT{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CONDITIONAL_RENDERING_FEATURES_EXT;
 	void * pNext = nullptr;
 public:
 	VkBool32 conditionalRendering = 0;
@@ -5091,7 +5091,7 @@ ex to: VkPhysicalDeviceFeatures2,VkDeviceCreateInfo
 */
 struct		S_physical_device_vulkan_memory_model_features_KHR{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_MEMORY_MODEL_FEATURES_KHR;
 	void * pNext = nullptr;
 public:
 	VkBool32 vulkanMemoryModel = 0;
@@ -5120,7 +5120,7 @@ ex to: VkPhysicalDeviceFeatures2,VkDeviceCreateInfo
 #ifdef LAKA_UNKNOW
 struct		S_physical_device_shader_atomic_int64_features_KHR{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_ATOMIC_INT64_FEATURES_KHR;
 	void * pNext = nullptr;
 public:
 	VkBool32 shaderBufferInt64Atomics = 0;
@@ -5149,7 +5149,7 @@ ex to: VkPhysicalDeviceFeatures2,VkDeviceCreateInfo
 */
 struct		S_physical_device_vertex_attribute_divisor_features_EXT{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_DIVISOR_FEATURES_EXT;
 	void * pNext = nullptr;
 public:
 	VkBool32 vertexAttributeInstanceRateDivisor = 0;
@@ -5177,7 +5177,7 @@ ex to: VkPhysicalDeviceFeatures2,VkDeviceCreateInfo
 */
 struct		S_physical_device_astc_decode_features_EXT{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ASTC_DECODE_FEATURES_EXT;
 	void * pNext = nullptr;
 public:
 	VkBool32 decodeModeSharedExponent = 0;
@@ -5204,7 +5204,7 @@ ex to: VkPhysicalDeviceFeatures2,VkDeviceCreateInfo
 */
 struct		S_physical_device_representative_fragment_test_features_NV{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_REPRESENTATIVE_FRAGMENT_TEST_FEATURES_NV;
 	void * pNext = nullptr;
 public:
 	VkBool32 representativeFragmentTest = 0;
@@ -5231,7 +5231,7 @@ ex to: VkPhysicalDeviceFeatures2,VkDeviceCreateInfo
 */
 struct		S_physical_device_exclusive_scissor_features_NV{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXCLUSIVE_SCISSOR_FEATURES_NV;
 	void * pNext = nullptr;
 public:
 	VkBool32 exclusiveScissor = 0;
@@ -5258,7 +5258,7 @@ ex to: VkPhysicalDeviceFeatures2,VkDeviceCreateInfo
 */
 struct		S_physical_device_corner_sampled_image_features_NV{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CORNER_SAMPLED_IMAGE_FEATURES_NV;
 	void * pNext = nullptr;
 public:
 	VkBool32 cornerSampledImage = 0;
@@ -5285,7 +5285,7 @@ ex to: VkPhysicalDeviceFeatures2,VkDeviceCreateInfo
 */
 struct		S_physical_device_compute_shader_derivatives_features_NV{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COMPUTE_SHADER_DERIVATIVES_FEATURES_NV;
 	void * pNext = nullptr;
 public:
 	VkBool32 computeDerivativeGroupQuads = 0;
@@ -5313,7 +5313,7 @@ ex to: VkPhysicalDeviceFeatures2,VkDeviceCreateInfo
 */
 struct		S_physical_device_fragment_shader_barycentric_features_NV{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_SHADER_BARYCENTRIC_FEATURES_NV;
 	void * pNext = nullptr;
 public:
 	VkBool32 fragmentShaderBarycentric = 0;
@@ -5340,7 +5340,7 @@ ex to: VkPhysicalDeviceFeatures2,VkDeviceCreateInfo
 */
 struct		S_physical_device_shader_image_footprint_features_NV{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_IMAGE_FOOTPRINT_FEATURES_NV;
 	void * pNext = nullptr;
 public:
 	VkBool32 imageFootprint = 0;
@@ -5367,7 +5367,7 @@ ex to: VkPhysicalDeviceFeatures2,VkDeviceCreateInfo
 */
 struct		S_physical_device_shading_rate_image_features_NV{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADING_RATE_IMAGE_FEATURES_NV;
 	void * pNext = nullptr;
 public:
 	VkBool32 shadingRateImage = 0;
@@ -5395,7 +5395,7 @@ ex to: VkPhysicalDeviceFeatures2,VkDeviceCreateInfo
 */
 struct		S_physical_device_mesh_shader_features_NV{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MESH_SHADER_FEATURES_NV;
 	void * pNext = nullptr;
 public:
 	VkBool32 taskShader = 0;
@@ -5447,7 +5447,7 @@ ex:
 */
 struct		S_physical_device_features2{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FEATURES_2;
 	void * pNext = nullptr;
 public:
 	S_physical_device_features features = {};
@@ -5499,11 +5499,11 @@ ex to: VkDeviceCreateInfo
 */
 struct		S_device_group_device_create_info{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_DEVICE_GROUP_DEVICE_CREATE_INFO;
 	 void * pNext = nullptr;
 public:
 	uint32_t physicalDeviceCount = 0;
-	const VkPhysicalDevice * pPhysicalDevices = nullptr;
+	const VkPhysicalDevice * pPhysicalDevices = VK_NULL_HANDLE;
 
 S_device_group_device_create_info( VkDeviceGroupDeviceCreateInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_device_group_device_create_info ) );	}
@@ -5551,7 +5551,7 @@ ex:
 */
 struct		S_device_create_info{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO;
 	 void * pNext = nullptr;
 public:
 	VkDeviceCreateFlags flags = 0;
@@ -5610,7 +5610,7 @@ ex to: VkInstanceCreateInfo
 */
 struct		S_debug_report_callback_create_info_EXT{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_DEBUG_REPORT_CALLBACK_CREATE_INFO_EXT;
 	 void * pNext = nullptr;
 public:
 	F_debug_report_EXT flags;
@@ -5638,7 +5638,7 @@ ex to: VkInstanceCreateInfo
 */
 struct		S_validation_flags_EXT{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_VALIDATION_FLAGS_EXT;
 	 void * pNext = nullptr;
 public:
 	uint32_t disabledValidationCheckCount = 0;
@@ -5665,7 +5665,7 @@ ex to: VkInstanceCreateInfo
 */
 struct		S_debug_utils_messenger_create_info_EXT{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CREATE_INFO_EXT;
 	 void * pNext = nullptr;
 public:
 	VkDebugUtilsMessengerCreateFlagsEXT flags = 0;
@@ -5698,7 +5698,7 @@ ex:
 */
 struct		S_instance_create_info{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO;
 	 void * pNext = nullptr;
 public:
 	VkInstanceCreateFlags flags = 0;
@@ -5771,11 +5771,11 @@ ex to: VkMemoryAllocateInfo
 */
 struct		S_dedicated_allocation_memory_allocate_info_NV{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_DEDICATED_ALLOCATION_MEMORY_ALLOCATE_INFO_NV;
 	 void * pNext = nullptr;
 public:
-	VkImage image = 0;
-	VkBuffer buffer = 0;
+	VkImage image = VK_NULL_HANDLE;
+	VkBuffer buffer = VK_NULL_HANDLE;
 
 S_dedicated_allocation_memory_allocate_info_NV( VkDedicatedAllocationMemoryAllocateInfoNV const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_dedicated_allocation_memory_allocate_info_NV ) );	}
@@ -5798,7 +5798,7 @@ ex to: VkMemoryAllocateInfo
 */
 struct		S_export_memory_allocate_info_NV{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_EXPORT_MEMORY_ALLOCATE_INFO_NV;
 	 void * pNext = nullptr;
 public:
 	F_external_memory_handle_type_NV handleTypes;
@@ -5825,7 +5825,7 @@ ex to: VkMemoryAllocateInfo
 #ifdef VK_USE_PLATFORM_WIN32_NV
 struct		S_import_memory_win32_handle_info_NV{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_IMPORT_MEMORY_WIN32_HANDLE_INFO_NV;
 	 void * pNext = nullptr;
 public:
 	F_external_memory_handle_type_NV handleType;
@@ -5854,7 +5854,7 @@ ex to: VkMemoryAllocateInfo
 #ifdef VK_USE_PLATFORM_WIN32_NV
 struct		S_export_memory_win32_handle_info_NV{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_EXPORT_MEMORY_WIN32_HANDLE_INFO_NV;
 	 void * pNext = nullptr;
 public:
 	const SECURITY_ATTRIBUTES * pAttributes = nullptr;
@@ -5882,7 +5882,7 @@ ex to: VkMemoryAllocateInfo
 */
 struct		S_export_memory_allocate_info{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_EXPORT_MEMORY_ALLOCATE_INFO;
 	 void * pNext = nullptr;
 public:
 	F_external_memory_handle_type handleTypes;
@@ -5909,7 +5909,7 @@ ex to: VkMemoryAllocateInfo
 #ifdef VK_USE_PLATFORM_WIN32_KHR
 struct		S_import_memory_win32_handle_info_KHR{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_IMPORT_MEMORY_WIN32_HANDLE_INFO_KHR;
 	 void * pNext = nullptr;
 public:
 	F_external_memory_handle_type handleType;
@@ -5939,7 +5939,7 @@ ex to: VkMemoryAllocateInfo
 #ifdef VK_USE_PLATFORM_WIN32_KHR
 struct		S_export_memory_win32_handle_info_KHR{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_EXPORT_MEMORY_WIN32_HANDLE_INFO_KHR;
 	 void * pNext = nullptr;
 public:
 	const SECURITY_ATTRIBUTES * pAttributes = nullptr;
@@ -5968,7 +5968,7 @@ ex to: VkMemoryAllocateInfo
 */
 struct		S_import_memory_fd_info_KHR{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_IMPORT_MEMORY_FD_INFO_KHR;
 	 void * pNext = nullptr;
 public:
 	F_external_memory_handle_type handleType;
@@ -5995,7 +5995,7 @@ ex to: VkMemoryAllocateInfo
 */
 struct		S_memory_allocate_flags_info{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_FLAGS_INFO;
 	 void * pNext = nullptr;
 public:
 	F_memory_allocate flags;
@@ -6022,11 +6022,11 @@ ex to: VkMemoryAllocateInfo
 */
 struct		S_memory_dedicated_allocate_info{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_MEMORY_DEDICATED_ALLOCATE_INFO;
 	 void * pNext = nullptr;
 public:
-	VkImage image = 0;
-	VkBuffer buffer = 0;
+	VkImage image = VK_NULL_HANDLE;
+	VkBuffer buffer = VK_NULL_HANDLE;
 
 S_memory_dedicated_allocate_info( VkMemoryDedicatedAllocateInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_memory_dedicated_allocate_info ) );	}
@@ -6049,7 +6049,7 @@ ex to: VkMemoryAllocateInfo
 */
 struct		S_import_memory_host_pointer_info_EXT{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_IMPORT_MEMORY_HOST_POINTER_INFO_EXT;
 	 void * pNext = nullptr;
 public:
 	F_external_memory_handle_type handleType;
@@ -6077,7 +6077,7 @@ ex to: VkMemoryAllocateInfo
 #ifdef VK_USE_PLATFORM_ANDROID_KHR
 struct		S_import_android_hardware_buffer_info_ANDROID{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_IMPORT_ANDROID_HARDWARE_BUFFER_INFO_ANDROID;
 	 void * pNext = nullptr;
 public:
 	struct AHardwareBuffer * buffer = nullptr;
@@ -6116,7 +6116,7 @@ ex:
 */
 struct		S_memory_allocate_info{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO;
 	 void * pNext = nullptr;
 public:
 	VkDeviceSize allocationSize = 0;
@@ -6195,10 +6195,10 @@ struct		S_sparse_image_memory_requirements{
 */
 struct		S_mapped_memory_range{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_MAPPED_MEMORY_RANGE;
 	 void * pNext = nullptr;
 public:
-	VkDeviceMemory memory = 0;
+	VkDeviceMemory memory = VK_NULL_HANDLE;
 	VkDeviceSize offset = 0;
 	VkDeviceSize size = 0;
 
@@ -6241,7 +6241,7 @@ struct		S_image_format_properties{
 /*	VkDescriptorBufferInfo
 */
 struct		S_descriptor_buffer_info{
-	VkBuffer buffer = 0;
+	VkBuffer buffer = VK_NULL_HANDLE;
 	VkDeviceSize offset = 0;
 	VkDeviceSize range = 0;
 
@@ -6250,8 +6250,8 @@ struct		S_descriptor_buffer_info{
 /*	VkDescriptorImageInfo
 */
 struct		S_descriptor_image_info{
-	VkSampler sampler = 0;
-	VkImageView imageView = 0;
+	VkSampler sampler = VK_NULL_HANDLE;
+	VkImageView imageView = VK_NULL_HANDLE;
 	E_image_layout imageLayout = E_image_layout::e_undefined;
 
 };
@@ -6261,7 +6261,7 @@ ex to: VkWriteDescriptorSet
 */
 struct		S_write_descriptor_set_inline_uniform_block_EXT{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET_INLINE_UNIFORM_BLOCK_EXT;
 	 void * pNext = nullptr;
 public:
 	uint32_t dataSize = 0;
@@ -6288,11 +6288,11 @@ ex to: VkWriteDescriptorSet
 */
 struct		S_descriptor_acceleration_structure_info_NVX{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_DESCRIPTOR_ACCELERATION_STRUCTURE_INFO_NVX;
 	 void * pNext = nullptr;
 public:
 	uint32_t accelerationStructureCount = 0;
-	const VkAccelerationStructureNVX * pAccelerationStructures = nullptr;
+	const VkAccelerationStructureNVX * pAccelerationStructures = VK_NULL_HANDLE;
 
 S_descriptor_acceleration_structure_info_NVX( VkDescriptorAccelerationStructureInfoNVX const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_descriptor_acceleration_structure_info_NVX ) );	}
@@ -6317,17 +6317,17 @@ ex:
 */
 struct		S_write_descriptor_set{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET;
 	 void * pNext = nullptr;
 public:
-	VkDescriptorSet dstSet = 0;
+	VkDescriptorSet dstSet = VK_NULL_HANDLE;
 	uint32_t dstBinding = 0;
 	uint32_t dstArrayElement = 0;
 	uint32_t descriptorCount = 0;
 	E_descriptor_type descriptorType = E_descriptor_type::e_sampler;
 	const S_descriptor_image_info * pImageInfo = nullptr;
 	const S_descriptor_buffer_info * pBufferInfo = nullptr;
-	const VkBufferView * pTexelBufferView = nullptr;
+	const VkBufferView * pTexelBufferView = VK_NULL_HANDLE;
 
 S_write_descriptor_set( VkWriteDescriptorSet const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_write_descriptor_set ) );	}
@@ -6350,13 +6350,13 @@ static_assert(
 */
 struct		S_copy_descriptor_set{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_COPY_DESCRIPTOR_SET;
 	 void * pNext = nullptr;
 public:
-	VkDescriptorSet srcSet = 0;
+	VkDescriptorSet srcSet = VK_NULL_HANDLE;
 	uint32_t srcBinding = 0;
 	uint32_t srcArrayElement = 0;
-	VkDescriptorSet dstSet = 0;
+	VkDescriptorSet dstSet = VK_NULL_HANDLE;
 	uint32_t dstBinding = 0;
 	uint32_t dstArrayElement = 0;
 	uint32_t descriptorCount = 0;
@@ -6380,7 +6380,7 @@ ex to: VkBufferCreateInfo
 */
 struct		S_dedicated_allocation_buffer_create_info_NV{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_DEDICATED_ALLOCATION_BUFFER_CREATE_INFO_NV;
 	 void * pNext = nullptr;
 public:
 	VkBool32 dedicatedAllocation = 0;
@@ -6406,7 +6406,7 @@ ex to: VkBufferCreateInfo
 */
 struct		S_external_memory_buffer_create_info{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_EXTERNAL_MEMORY_BUFFER_CREATE_INFO;
 	 void * pNext = nullptr;
 public:
 	F_external_memory_handle_type handleTypes;
@@ -6434,7 +6434,7 @@ ex:
 */
 struct		S_buffer_create_info{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO;
 	 void * pNext = nullptr;
 public:
 	F_buffer_create flags;
@@ -6465,11 +6465,11 @@ static_assert(
 */
 struct		S_buffer_view_create_info{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_BUFFER_VIEW_CREATE_INFO;
 	 void * pNext = nullptr;
 public:
 	VkBufferViewCreateFlags flags = 0;
-	VkBuffer buffer = 0;
+	VkBuffer buffer = VK_NULL_HANDLE;
 	E_format format = E_format::e_undefined;
 	VkDeviceSize offset = 0;
 	VkDeviceSize range = 0;
@@ -6522,7 +6522,7 @@ struct		S_image_subresource_range{
 */
 struct		S_memory_barrier{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_MEMORY_BARRIER;
 	 void * pNext = nullptr;
 public:
 	F_access srcAccessMask;
@@ -6546,14 +6546,14 @@ static_assert(
 */
 struct		S_buffer_memory_barrier{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_BUFFER_MEMORY_BARRIER;
 	 void * pNext = nullptr;
 public:
 	F_access srcAccessMask;
 	F_access dstAccessMask;
 	uint32_t srcQueueFamilyIndex = 0;
 	uint32_t dstQueueFamilyIndex = 0;
-	VkBuffer buffer = 0;
+	VkBuffer buffer = VK_NULL_HANDLE;
 	VkDeviceSize offset = 0;
 	VkDeviceSize size = 0;
 
@@ -6584,13 +6584,20 @@ ex to: VkImageMemoryBarrier
 */
 struct		S_sample_locations_info_EXT{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_SAMPLE_LOCATIONS_INFO_EXT;
 	 void * pNext = nullptr;
 public:
 	F_sample_count sampleLocationsPerPixel;
 	S_extent_2d sampleLocationGridSize = {};
 	uint32_t sampleLocationsCount = 0;
 	const S_sample_location_EXT * pSampleLocations = nullptr;
+
+	S_sample_locations_info_EXT(
+		F_sample_count sampleLocationsPerPixel_ = F_sample_count::b_1,
+		S_extent_2d sampleLocationGridSize_ = {},
+		uint32_t sampleLocationsCount_ = 0,
+		const S_sample_location_EXT * pSampleLocations_ = nullptr
+	) {}
 
 S_sample_locations_info_EXT( VkSampleLocationsInfoEXT const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_sample_locations_info_EXT ) );	}
@@ -6614,7 +6621,7 @@ ex:
 */
 struct		S_image_memory_barrier{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER;
 	 void * pNext = nullptr;
 public:
 	F_access srcAccessMask;
@@ -6623,7 +6630,7 @@ public:
 	E_image_layout newLayout = E_image_layout::e_undefined;
 	uint32_t srcQueueFamilyIndex = 0;
 	uint32_t dstQueueFamilyIndex = 0;
-	VkImage image = 0;
+	VkImage image = VK_NULL_HANDLE;
 	S_image_subresource_range subresourceRange = {};
 
 S_image_memory_barrier( VkImageMemoryBarrier const & rhs )
@@ -6647,7 +6654,7 @@ ex to: VkImageCreateInfo
 */
 struct		S_dedicated_allocation_image_create_info_NV{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_DEDICATED_ALLOCATION_IMAGE_CREATE_INFO_NV;
 	 void * pNext = nullptr;
 public:
 	VkBool32 dedicatedAllocation = 0;
@@ -6673,7 +6680,7 @@ ex to: VkImageCreateInfo
 */
 struct		S_external_memory_image_create_info_NV{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_EXTERNAL_MEMORY_IMAGE_CREATE_INFO_NV;
 	 void * pNext = nullptr;
 public:
 	F_external_memory_handle_type_NV handleTypes;
@@ -6699,7 +6706,7 @@ ex to: VkImageCreateInfo
 */
 struct		S_external_memory_image_create_info{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_EXTERNAL_MEMORY_IMAGE_CREATE_INFO;
 	 void * pNext = nullptr;
 public:
 	F_external_memory_handle_type handleTypes;
@@ -6725,10 +6732,10 @@ ex to: VkImageCreateInfo
 */
 struct		S_image_swapchain_create_info_KHR{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_IMAGE_SWAPCHAIN_CREATE_INFO_KHR;
 	 void * pNext = nullptr;
 public:
-	VkSwapchainKHR swapchain = 0;
+	VkSwapchainKHR swapchain = VK_NULL_HANDLE;
 
 S_image_swapchain_create_info_KHR( VkImageSwapchainCreateInfoKHR const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_image_swapchain_create_info_KHR ) );	}
@@ -6751,7 +6758,7 @@ ex to: VkImageCreateInfo
 */
 struct		S_image_format_list_create_info_KHR{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_IMAGE_FORMAT_LIST_CREATE_INFO_KHR;
 	 void * pNext = nullptr;
 public:
 	uint32_t viewFormatCount = 0;
@@ -6779,7 +6786,7 @@ ex to: VkImageCreateInfo,VkSamplerYcbcrConversionCreateInfo
 #ifdef VK_USE_PLATFORM_ANDROID_KHR
 struct		S_external_format_ANDROID{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_EXTERNAL_FORMAT_ANDROID;
 	void * pNext = nullptr;
 public:
 	uint64_t externalFormat = 0;
@@ -6808,7 +6815,7 @@ ex to: VkImageCreateInfo
 #ifdef LAKA_UNKNOW
 struct		S_image_drm_format_modifier_list_create_info_EXT{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_IMAGE_DRM_FORMAT_MODIFIER_LIST_CREATE_INFO_EXT;
 	 void * pNext = nullptr;
 public:
 	uint32_t drmFormatModifierCount = 0;
@@ -6849,7 +6856,7 @@ ex to: VkImageCreateInfo
 #ifdef LAKA_UNKNOW
 struct		S_image_drm_format_modifier_explicit_create_info_EXT{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_IMAGE_EXCPLICIT_DRM_FORMAT_MODIFIER_CREATE_INFO_EXT;
 	 void * pNext = nullptr;
 public:
 	uint64_t drmFormatModifier = 0;
@@ -6886,7 +6893,7 @@ ex:
 */
 struct		S_image_create_info{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO;
 	 void * pNext = nullptr;
 public:
 	F_image_create flags;
@@ -6937,7 +6944,7 @@ ex to: VkImageViewCreateInfo
 */
 struct		S_image_view_usage_create_info{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_IMAGE_VIEW_USAGE_CREATE_INFO;
 	 void * pNext = nullptr;
 public:
 	F_image_usage usage;
@@ -6963,10 +6970,10 @@ ex to: VkSamplerCreateInfo,VkImageViewCreateInfo
 */
 struct		S_sampler_ycbcr_conversion_info{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_INFO;
 	 void * pNext = nullptr;
 public:
-	VkSamplerYcbcrConversion conversion = 0;
+	VkSamplerYcbcrConversion conversion = VK_NULL_HANDLE;
 
 S_sampler_ycbcr_conversion_info( VkSamplerYcbcrConversionInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_sampler_ycbcr_conversion_info ) );	}
@@ -6990,7 +6997,7 @@ ex to: VkImageViewCreateInfo
 */
 struct		S_image_view_astc_decode_mode_EXT{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_IMAGE_VIEW_ASTC_DECODE_MODE_EXT;
 	 void * pNext = nullptr;
 public:
 	E_format decodeMode = E_format::e_undefined;
@@ -7019,11 +7026,11 @@ ex:
 */
 struct		S_image_view_create_info{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO;
 	 void * pNext = nullptr;
 public:
 	VkImageViewCreateFlags flags = 0;
-	VkImage image = 0;
+	VkImage image = VK_NULL_HANDLE;
 	E_image_view_type viewType = E_image_view_type::e_1d;
 	E_format format = E_format::e_undefined;
 	S_component_mapping components = {};
@@ -7061,7 +7068,7 @@ struct		S_buffer_copy{
 struct		S_sparse_memory_bind{
 	VkDeviceSize resourceOffset = 0;
 	VkDeviceSize size = 0;
-	VkDeviceMemory memory = 0;
+	VkDeviceMemory memory = VK_NULL_HANDLE;
 	VkDeviceSize memoryOffset = 0;
 	F_sparse_memory_bind flags;
 
@@ -7073,7 +7080,7 @@ struct		S_sparse_image_memory_bind{
 	S_image_subresource subresource = {};
 	S_offset_3d offset = {};
 	S_extent_3d extent = {};
-	VkDeviceMemory memory = 0;
+	VkDeviceMemory memory = VK_NULL_HANDLE;
 	VkDeviceSize memoryOffset = 0;
 	F_sparse_memory_bind flags;
 
@@ -7082,7 +7089,7 @@ struct		S_sparse_image_memory_bind{
 /*	VkSparseBufferMemoryBindInfo
 */
 struct		S_sparse_buffer_memory_bind_info{
-	VkBuffer buffer = 0;
+	VkBuffer buffer = VK_NULL_HANDLE;
 	uint32_t bindCount = 0;
 	const S_sparse_memory_bind * pBinds = nullptr;
 
@@ -7091,7 +7098,7 @@ struct		S_sparse_buffer_memory_bind_info{
 /*	VkSparseImageOpaqueMemoryBindInfo
 */
 struct		S_sparse_image_opaque_memory_bind_info{
-	VkImage image = 0;
+	VkImage image = VK_NULL_HANDLE;
 	uint32_t bindCount = 0;
 	const S_sparse_memory_bind * pBinds = nullptr;
 
@@ -7100,7 +7107,7 @@ struct		S_sparse_image_opaque_memory_bind_info{
 /*	VkSparseImageMemoryBindInfo
 */
 struct		S_sparse_image_memory_bind_info{
-	VkImage image = 0;
+	VkImage image = VK_NULL_HANDLE;
 	uint32_t bindCount = 0;
 	const S_sparse_image_memory_bind * pBinds = nullptr;
 
@@ -7111,7 +7118,7 @@ ex to: VkBindSparseInfo
 */
 struct		S_device_group_bind_sparse_info{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_DEVICE_GROUP_BIND_SPARSE_INFO;
 	 void * pNext = nullptr;
 public:
 	uint32_t resourceDeviceIndex = 0;
@@ -7139,11 +7146,11 @@ ex:
 */
 struct		S_bind_sparse_info{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_BIND_SPARSE_INFO;
 	 void * pNext = nullptr;
 public:
 	uint32_t waitSemaphoreCount = 0;
-	const VkSemaphore * pWaitSemaphores = nullptr;
+	const VkSemaphore * pWaitSemaphores = VK_NULL_HANDLE;
 	uint32_t bufferBindCount = 0;
 	const S_sparse_buffer_memory_bind_info * pBufferBinds = nullptr;
 	uint32_t imageOpaqueBindCount = 0;
@@ -7151,7 +7158,7 @@ public:
 	uint32_t imageBindCount = 0;
 	const S_sparse_image_memory_bind_info * pImageBinds = nullptr;
 	uint32_t signalSemaphoreCount = 0;
-	const VkSemaphore * pSignalSemaphores = nullptr;
+	const VkSemaphore * pSignalSemaphores = VK_NULL_HANDLE;
 
 S_bind_sparse_info( VkBindSparseInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_bind_sparse_info ) );	}
@@ -7218,10 +7225,10 @@ ex to: VkShaderModuleCreateInfo
 */
 struct		S_shader_module_validation_cache_create_info_EXT{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_SHADER_MODULE_VALIDATION_CACHE_CREATE_INFO_EXT;
 	 void * pNext = nullptr;
 public:
-	VkValidationCacheEXT validationCache = 0;
+	VkValidationCacheEXT validationCache = VK_NULL_HANDLE;
 
 S_shader_module_validation_cache_create_info_EXT( VkShaderModuleValidationCacheCreateInfoEXT const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_shader_module_validation_cache_create_info_EXT ) );	}
@@ -7245,7 +7252,7 @@ ex:
 */
 struct		S_shader_module_create_info{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO;
 	 void * pNext = nullptr;
 public:
 	VkShaderModuleCreateFlags flags = 0;
@@ -7275,7 +7282,7 @@ struct		S_descriptor_set_layout_binding{
 	E_descriptor_type descriptorType = E_descriptor_type::e_sampler;
 	uint32_t descriptorCount = 0;
 	F_shader_stage stageFlags;
-	const VkSampler * pImmutableSamplers = nullptr;
+	const VkSampler * pImmutableSamplers = VK_NULL_HANDLE;
 
 };
 
@@ -7284,7 +7291,7 @@ ex to: VkDescriptorSetLayoutCreateInfo
 */
 struct		S_descriptor_set_layout_binding_flags_create_info_EXT{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_BINDING_FLAGS_CREATE_INFO_EXT;
 	 void * pNext = nullptr;
 public:
 	uint32_t bindingCount = 0;
@@ -7312,7 +7319,7 @@ ex:
 */
 struct		S_descriptor_set_layout_create_info{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_CREATE_INFO;
 	 void * pNext = nullptr;
 public:
 	F_descriptor_set_layout_create flags;
@@ -7348,7 +7355,7 @@ ex to: VkDescriptorPoolCreateInfo
 */
 struct		S_descriptor_pool_inline_uniform_block_create_info_EXT{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_INLINE_UNIFORM_BLOCK_CREATE_INFO_EXT;
 	 void * pNext = nullptr;
 public:
 	uint32_t maxInlineUniformBlockBindings = 0;
@@ -7375,7 +7382,7 @@ ex:
 */
 struct		S_descriptor_pool_create_info{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO;
 	 void * pNext = nullptr;
 public:
 	F_descriptor_pool_create flags;
@@ -7404,7 +7411,7 @@ ex to: VkDescriptorSetAllocateInfo
 */
 struct		S_descriptor_set_variable_descriptor_count_allocate_info_EXT{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_DESCRIPTOR_SET_VARIABLE_DESCRIPTOR_COUNT_ALLOCATE_INFO_EXT;
 	 void * pNext = nullptr;
 public:
 	uint32_t descriptorSetCount = 0;
@@ -7432,12 +7439,12 @@ ex:
 */
 struct		S_descriptor_set_allocate_info{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_DESCRIPTOR_SET_ALLOCATE_INFO;
 	 void * pNext = nullptr;
 public:
-	VkDescriptorPool descriptorPool = 0;
+	VkDescriptorPool descriptorPool = VK_NULL_HANDLE;
 	uint32_t descriptorSetCount = 0;
-	const VkDescriptorSetLayout * pSetLayouts = nullptr;
+	const VkDescriptorSetLayout * pSetLayouts = VK_NULL_HANDLE;
 
 S_descriptor_set_allocate_info( VkDescriptorSetAllocateInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_descriptor_set_allocate_info ) );	}
@@ -7478,14 +7485,27 @@ struct		S_specialization_info{
 */
 struct		S_pipeline_shader_stage_create_info{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO;
 	 void * pNext = nullptr;
 public:
-	VkPipelineShaderStageCreateFlags flags = 0;
+	F_pipeline_create flags;
 	F_shader_stage stage;
-	VkShaderModule module = 0;
-	const char * pName = nullptr;
-	const S_specialization_info * pSpecializationInfo = nullptr;
+	VkShaderModule module = VK_NULL_HANDLE;
+	const char * pName;
+	const S_specialization_info * pSpecializationInfo;
+	
+	S_pipeline_shader_stage_create_info(
+		F_pipeline_create flags_ = F_pipeline_create::b_allow_derivatives,
+		F_shader_stage stage_ = F_shader_stage::b_compute,
+		VkShaderModule module_ = VK_NULL_HANDLE,
+		const char * pName_ = nullptr,
+		const S_specialization_info * pSpecializationInfo_ = nullptr)
+		:flags(flags_)
+		,stage(stage_)
+		,module(module_)
+		,pName(pName_)
+		,pSpecializationInfo(pSpecializationInfo_)
+	{};
 
 S_pipeline_shader_stage_create_info( VkPipelineShaderStageCreateInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_pipeline_shader_stage_create_info ) );	}
@@ -7505,13 +7525,13 @@ static_assert(
 */
 struct		S_compute_pipeline_create_info{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_COMPUTE_PIPELINE_CREATE_INFO;
 	 void * pNext = nullptr;
 public:
 	F_pipeline_create flags;
 	S_pipeline_shader_stage_create_info stage = {};
-	VkPipelineLayout layout = 0;
-	VkPipeline basePipelineHandle = 0;
+	VkPipelineLayout layout = VK_NULL_HANDLE;
+	VkPipeline basePipelineHandle = VK_NULL_HANDLE;
 	int32_t basePipelineIndex = 0;
 
 S_compute_pipeline_create_info( VkComputePipelineCreateInfo const & rhs )
@@ -7560,7 +7580,7 @@ ex to: VkPipelineVertexInputStateCreateInfo
 */
 struct		S_pipeline_vertex_input_divisor_state_create_info_EXT{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_DIVISOR_STATE_CREATE_INFO_EXT;
 	 void * pNext = nullptr;
 public:
 	uint32_t vertexBindingDivisorCount = 0;
@@ -7588,7 +7608,7 @@ ex:
 */
 struct		S_pipeline_vertex_input_state_create_info{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO;
 	 void * pNext = nullptr;
 public:
 	VkPipelineVertexInputStateCreateFlags flags = 0;
@@ -7617,7 +7637,7 @@ static_assert(
 */
 struct		S_pipeline_input_assembly_state_create_info{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_PIPELINE_INPUT_ASSEMBLY_STATE_CREATE_INFO;
 	 void * pNext = nullptr;
 public:
 	VkPipelineInputAssemblyStateCreateFlags flags = 0;
@@ -7643,7 +7663,7 @@ ex to: VkPipelineTessellationStateCreateInfo
 */
 struct		S_pipeline_tessellation_domain_origin_state_create_info{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_PIPELINE_TESSELLATION_DOMAIN_ORIGIN_STATE_CREATE_INFO;
 	 void * pNext = nullptr;
 public:
 	E_tessellation_domain_origin domainOrigin = E_tessellation_domain_origin::e_upper_left;
@@ -7670,7 +7690,7 @@ ex:
 */
 struct		S_pipeline_tessellation_state_create_info{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_PIPELINE_TESSELLATION_STATE_CREATE_INFO;
 	 void * pNext = nullptr;
 public:
 	VkPipelineTessellationStateCreateFlags flags = 0;
@@ -7705,7 +7725,7 @@ ex to: VkPipelineViewportStateCreateInfo
 */
 struct		S_pipeline_viewport_w_scaling_state_create_info_NV{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_W_SCALING_STATE_CREATE_INFO_NV;
 	 void * pNext = nullptr;
 public:
 	VkBool32 viewportWScalingEnable = 0;
@@ -7743,7 +7763,7 @@ ex to: VkPipelineViewportStateCreateInfo
 */
 struct		S_pipeline_viewport_swizzle_state_create_info_NV{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_SWIZZLE_STATE_CREATE_INFO_NV;
 	 void * pNext = nullptr;
 public:
 	VkPipelineViewportSwizzleStateCreateFlagsNV flags = 0;
@@ -7771,7 +7791,7 @@ ex to: VkPipelineViewportStateCreateInfo
 */
 struct		S_pipeline_viewport_exclusive_scissor_state_create_info_NV{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_EXCLUSIVE_SCISSOR_STATE_CREATE_INFO_NV;
 	 void * pNext = nullptr;
 public:
 	uint32_t exclusiveScissorCount = 0;
@@ -7806,7 +7826,7 @@ ex to: VkPipelineViewportStateCreateInfo
 */
 struct		S_pipeline_viewport_shading_rate_image_state_create_info_NV{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_SHADING_RATE_IMAGE_STATE_CREATE_INFO_NV;
 	 void * pNext = nullptr;
 public:
 	VkBool32 shadingRateImageEnable = 0;
@@ -7853,7 +7873,7 @@ ex to: VkPipelineViewportStateCreateInfo
 */
 struct		S_pipeline_viewport_coarse_sample_order_state_create_info_NV{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_COARSE_SAMPLE_ORDER_STATE_CREATE_INFO_NV;
 	 void * pNext = nullptr;
 public:
 	E_coarse_sample_order_type_NV sampleOrderType = E_coarse_sample_order_type_NV::e_default_nv;
@@ -7886,7 +7906,7 @@ ex:
 */
 struct		S_pipeline_viewport_state_create_info{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_STATE_CREATE_INFO;
 	 void * pNext = nullptr;
 public:
 	VkPipelineViewportStateCreateFlags flags = 0;
@@ -7920,7 +7940,7 @@ ex to: VkPipelineRasterizationStateCreateInfo
 */
 struct		S_pipeline_rasterization_state_rasterization_order_AMD{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_STATE_RASTERIZATION_ORDER_AMD;
 	 void * pNext = nullptr;
 public:
 	E_rasterization_order_AMD rasterizationOrder = E_rasterization_order_AMD::e_strict_amd;
@@ -7946,7 +7966,7 @@ ex to: VkPipelineRasterizationStateCreateInfo
 */
 struct		S_pipeline_rasterization_conservative_state_create_info_EXT{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_CONSERVATIVE_STATE_CREATE_INFO_EXT;
 	 void * pNext = nullptr;
 public:
 	VkPipelineRasterizationConservativeStateCreateFlagsEXT flags = 0;
@@ -7976,7 +7996,7 @@ ex:
 */
 struct		S_pipeline_rasterization_state_create_info{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_STATE_CREATE_INFO;
 	 void * pNext = nullptr;
 public:
 	VkPipelineRasterizationStateCreateFlags flags = 0;
@@ -8013,7 +8033,7 @@ ex to: VkPipelineMultisampleStateCreateInfo
 */
 struct		S_pipeline_coverage_to_color_state_create_info_NV{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_PIPELINE_COVERAGE_TO_COLOR_STATE_CREATE_INFO_NV;
 	 void * pNext = nullptr;
 public:
 	VkPipelineCoverageToColorStateCreateFlagsNV flags = 0;
@@ -8041,7 +8061,7 @@ ex to: VkPipelineMultisampleStateCreateInfo
 */
 struct		S_pipeline_sample_locations_state_create_info_EXT{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_PIPELINE_SAMPLE_LOCATIONS_STATE_CREATE_INFO_EXT;
 	 void * pNext = nullptr;
 public:
 	VkBool32 sampleLocationsEnable = 0;
@@ -8068,7 +8088,7 @@ ex to: VkPipelineMultisampleStateCreateInfo
 */
 struct		S_pipeline_coverage_modulation_state_create_info_NV{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_PIPELINE_COVERAGE_MODULATION_STATE_CREATE_INFO_NV;
 	 void * pNext = nullptr;
 public:
 	VkPipelineCoverageModulationStateCreateFlagsNV flags = 0;
@@ -8101,7 +8121,7 @@ ex:
 */
 struct		S_pipeline_multisample_state_create_info{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_PIPELINE_MULTISAMPLE_STATE_CREATE_INFO;
 	 void * pNext = nullptr;
 public:
 	VkPipelineMultisampleStateCreateFlags flags = 0;
@@ -8149,7 +8169,7 @@ ex to: VkPipelineColorBlendStateCreateInfo
 */
 struct		S_pipeline_color_blend_advanced_state_create_info_EXT{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_PIPELINE_COLOR_BLEND_ADVANCED_STATE_CREATE_INFO_EXT;
 	 void * pNext = nullptr;
 public:
 	VkBool32 srcPremultiplied = 0;
@@ -8178,7 +8198,7 @@ ex:
 */
 struct		S_pipeline_color_blend_state_create_info{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_PIPELINE_COLOR_BLEND_STATE_CREATE_INFO;
 	 void * pNext = nullptr;
 public:
 	VkPipelineColorBlendStateCreateFlags flags = 0;
@@ -8208,7 +8228,7 @@ static_assert(
 */
 struct		S_pipeline_dynamic_state_create_info{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_PIPELINE_DYNAMIC_STATE_CREATE_INFO;
 	 void * pNext = nullptr;
 public:
 	VkPipelineDynamicStateCreateFlags flags = 0;
@@ -8246,7 +8266,7 @@ struct		S_stencil_op_state{
 */
 struct		S_pipeline_depth_stencil_state_create_info{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_PIPELINE_DEPTH_STENCIL_STATE_CREATE_INFO;
 	 void * pNext = nullptr;
 public:
 	VkPipelineDepthStencilStateCreateFlags flags = 0;
@@ -8279,7 +8299,7 @@ ex to: VkGraphicsPipelineCreateInfo
 */
 struct		S_pipeline_discard_rectangle_state_create_info_EXT{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_PIPELINE_DISCARD_RECTANGLE_STATE_CREATE_INFO_EXT;
 	 void * pNext = nullptr;
 public:
 	VkPipelineDiscardRectangleStateCreateFlagsEXT flags = 0;
@@ -8308,7 +8328,7 @@ ex to: VkGraphicsPipelineCreateInfo
 */
 struct		S_pipeline_representative_fragment_test_state_create_info_NV{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_PIPELINE_REPRESENTATIVE_FRAGMENT_TEST_STATE_CREATE_INFO_NV;
 	 void * pNext = nullptr;
 public:
 	VkBool32 representativeFragmentTestEnable = 0;
@@ -8336,7 +8356,7 @@ ex:
 */
 struct		S_graphics_pipeline_create_info{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_GRAPHICS_PIPELINE_CREATE_INFO;
 	 void * pNext = nullptr;
 public:
 	F_pipeline_create flags;
@@ -8351,10 +8371,10 @@ public:
 	const S_pipeline_depth_stencil_state_create_info * pDepthStencilState = nullptr;
 	const S_pipeline_color_blend_state_create_info * pColorBlendState = nullptr;
 	const S_pipeline_dynamic_state_create_info * pDynamicState = nullptr;
-	VkPipelineLayout layout = 0;
-	VkRenderPass renderPass = 0;
+	VkPipelineLayout layout = VK_NULL_HANDLE;
+	VkRenderPass renderPass = VK_NULL_HANDLE;
 	uint32_t subpass = 0;
-	VkPipeline basePipelineHandle = 0;
+	VkPipeline basePipelineHandle = VK_NULL_HANDLE;
 	int32_t basePipelineIndex = 0;
 
 S_graphics_pipeline_create_info( VkGraphicsPipelineCreateInfo const & rhs )
@@ -8378,7 +8398,7 @@ static_assert(
 */
 struct		S_pipeline_cache_create_info{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_PIPELINE_CACHE_CREATE_INFO;
 	 void * pNext = nullptr;
 public:
 	VkPipelineCacheCreateFlags flags = 0;
@@ -8412,12 +8432,12 @@ struct		S_push_constant_range{
 */
 struct		S_pipeline_layout_create_info{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_PIPELINE_LAYOUT_CREATE_INFO;
 	 void * pNext = nullptr;
 public:
 	VkPipelineLayoutCreateFlags flags = 0;
 	uint32_t setLayoutCount = 0;
-	const VkDescriptorSetLayout * pSetLayouts = nullptr;
+	const VkDescriptorSetLayout * pSetLayouts = VK_NULL_HANDLE;
 	uint32_t pushConstantRangeCount = 0;
 	const S_push_constant_range * pPushConstantRanges = nullptr;
 
@@ -8440,7 +8460,7 @@ ex to: VkSamplerCreateInfo
 */
 struct		S_sampler_reduction_mode_create_info_EXT{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_SAMPLER_REDUCTION_MODE_CREATE_INFO_EXT;
 	 void * pNext = nullptr;
 public:
 	E_sampler_reduction_mode_EXT reductionMode = E_sampler_reduction_mode_EXT::e_weighted_average_ext;
@@ -8468,7 +8488,7 @@ ex:
 */
 struct		S_sampler_create_info{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_SAMPLER_CREATE_INFO;
 	 void * pNext = nullptr;
 public:
 	VkSamplerCreateFlags flags = 0;
@@ -8509,7 +8529,7 @@ static_assert(
 */
 struct		S_command_pool_create_info{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_COMMAND_POOL_CREATE_INFO;
 	 void * pNext = nullptr;
 public:
 	F_command_pool_create flags;
@@ -8533,10 +8553,10 @@ static_assert(
 */
 struct		S_command_buffer_allocate_info{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO;
 	 void * pNext = nullptr;
 public:
-	VkCommandPool commandPool = 0;
+	VkCommandPool commandPool = VK_NULL_HANDLE;
 	E_command_buffer_level level = E_command_buffer_level::e_primary;
 	uint32_t commandBufferCount = 0;
 
@@ -8559,7 +8579,7 @@ ex to: VkCommandBufferInheritanceInfo
 */
 struct		S_command_buffer_inheritance_conditional_rendering_info_EXT{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_CONDITIONAL_RENDERING_INFO_EXT;
 	 void * pNext = nullptr;
 public:
 	VkBool32 conditionalRenderingEnable = 0;
@@ -8586,12 +8606,12 @@ ex:
 */
 struct		S_command_buffer_inheritance_info{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_INFO;
 	 void * pNext = nullptr;
 public:
-	VkRenderPass renderPass = 0;
+	VkRenderPass renderPass = VK_NULL_HANDLE;
 	uint32_t subpass = 0;
-	VkFramebuffer framebuffer = 0;
+	VkFramebuffer framebuffer = VK_NULL_HANDLE;
 	VkBool32 occlusionQueryEnable = 0;
 	F_query_control queryFlags;
 	F_query_pipeline_statistic pipelineStatistics;
@@ -8617,7 +8637,7 @@ ex to: VkCommandBufferBeginInfo
 */
 struct		S_device_group_command_buffer_begin_info{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_DEVICE_GROUP_COMMAND_BUFFER_BEGIN_INFO;
 	 void * pNext = nullptr;
 public:
 	uint32_t deviceMask = 0;
@@ -8644,7 +8664,7 @@ ex:
 */
 struct		S_command_buffer_begin_info{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO;
 	 void * pNext = nullptr;
 public:
 	F_command_buffer_usage flags;
@@ -8671,7 +8691,7 @@ ex to: VkRenderPassBeginInfo
 */
 struct		S_device_group_render_pass_begin_info{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_DEVICE_GROUP_RENDER_PASS_BEGIN_INFO;
 	 void * pNext = nullptr;
 public:
 	uint32_t deviceMask = 0;
@@ -8715,7 +8735,7 @@ ex to: VkRenderPassBeginInfo
 */
 struct		S_render_pass_sample_locations_begin_info_EXT{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_RENDER_PASS_SAMPLE_LOCATIONS_BEGIN_INFO_EXT;
 	 void * pNext = nullptr;
 public:
 	uint32_t attachmentInitialSampleLocationsCount = 0;
@@ -8746,11 +8766,11 @@ ex:
 */
 struct		S_render_pass_begin_info{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO;
 	 void * pNext = nullptr;
 public:
-	VkRenderPass renderPass = 0;
-	VkFramebuffer framebuffer = 0;
+	VkRenderPass renderPass = VK_NULL_HANDLE;
+	VkFramebuffer framebuffer = VK_NULL_HANDLE;
 	S_rect_2d renderArea = {};
 	uint32_t clearValueCount = 0;
 	const VkClearValue * pClearValues = {};
@@ -8846,7 +8866,7 @@ ex to: VkRenderPassCreateInfo
 */
 struct		S_render_pass_multiview_create_info{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_RENDER_PASS_MULTIVIEW_CREATE_INFO;
 	 void * pNext = nullptr;
 public:
 	uint32_t subpassCount = 0;
@@ -8886,7 +8906,7 @@ ex to: VkRenderPassCreateInfo
 */
 struct		S_render_pass_input_attachment_aspect_create_info{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_RENDER_PASS_INPUT_ATTACHMENT_ASPECT_CREATE_INFO;
 	 void * pNext = nullptr;
 public:
 	uint32_t aspectReferenceCount = 0;
@@ -8915,7 +8935,7 @@ ex:
 */
 struct		S_render_pass_create_info{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_RENDER_PASS_CREATE_INFO;
 	 void * pNext = nullptr;
 public:
 	F_render_pass_create flags;
@@ -8947,7 +8967,7 @@ static_assert(
 */
 struct		S_event_create_info{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_EVENT_CREATE_INFO;
 	 void * pNext = nullptr;
 public:
 	VkEventCreateFlags flags = 0;
@@ -8971,7 +8991,7 @@ ex to: VkFenceCreateInfo
 */
 struct		S_export_fence_create_info{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_EXPORT_FENCE_CREATE_INFO;
 	 void * pNext = nullptr;
 public:
 	F_external_fence_handle_type handleTypes;
@@ -8998,7 +9018,7 @@ ex to: VkFenceCreateInfo
 #ifdef VK_USE_PLATFORM_WIN32_KHR
 struct		S_export_fence_win32_handle_info_KHR{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_EXPORT_FENCE_WIN32_HANDLE_INFO_KHR;
 	 void * pNext = nullptr;
 public:
 	const SECURITY_ATTRIBUTES * pAttributes = nullptr;
@@ -9029,7 +9049,7 @@ ex:
 */
 struct		S_fence_create_info{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_FENCE_CREATE_INFO;
 	 void * pNext = nullptr;
 public:
 	F_fence_create flags;
@@ -9058,7 +9078,7 @@ ex to: VkSemaphoreCreateInfo
 */
 struct		S_export_semaphore_create_info{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_EXPORT_SEMAPHORE_CREATE_INFO;
 	 void * pNext = nullptr;
 public:
 	F_external_semaphore_handle_type handleTypes;
@@ -9085,7 +9105,7 @@ ex to: VkSemaphoreCreateInfo
 #ifdef VK_USE_PLATFORM_WIN32_KHR
 struct		S_export_semaphore_win32_handle_info_KHR{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_EXPORT_SEMAPHORE_WIN32_HANDLE_INFO_KHR;
 	 void * pNext = nullptr;
 public:
 	const SECURITY_ATTRIBUTES * pAttributes = nullptr;
@@ -9116,7 +9136,7 @@ ex:
 */
 struct		S_semaphore_create_info{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_SEMAPHORE_CREATE_INFO;
 	 void * pNext = nullptr;
 public:
 	VkSemaphoreCreateFlags flags = 0;
@@ -9144,7 +9164,7 @@ static_assert(
 */
 struct		S_query_pool_create_info{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_QUERY_POOL_CREATE_INFO;
 	 void * pNext = nullptr;
 public:
 	VkQueryPoolCreateFlags flags = 0;
@@ -9170,13 +9190,13 @@ static_assert(
 */
 struct		S_framebuffer_create_info{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_FRAMEBUFFER_CREATE_INFO;
 	 void * pNext = nullptr;
 public:
 	VkFramebufferCreateFlags flags = 0;
-	VkRenderPass renderPass = 0;
+	VkRenderPass renderPass = VK_NULL_HANDLE;
 	uint32_t attachmentCount = 0;
-	const VkImageView * pAttachments = nullptr;
+	const VkImageView * pAttachments = VK_NULL_HANDLE;
 	uint32_t width = 0;
 	uint32_t height = 0;
 	uint32_t layers = 0;
@@ -9231,15 +9251,15 @@ ex to: VkSubmitInfo
 #ifdef VK_USE_PLATFORM_WIN32_KHR
 struct		S_win32_keyed_mutex_acquire_release_info_NV{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_WIN32_KEYED_MUTEX_ACQUIRE_RELEASE_INFO_NV;
 	 void * pNext = nullptr;
 public:
 	uint32_t acquireCount = 0;
-	const VkDeviceMemory * pAcquireSyncs = nullptr;
+	const VkDeviceMemory * pAcquireSyncs = VK_NULL_HANDLE;
 	const uint64_t * pAcquireKeys = nullptr;
 	const uint32_t * pAcquireTimeoutMilliseconds = nullptr;
 	uint32_t releaseCount = 0;
-	const VkDeviceMemory * pReleaseSyncs = nullptr;
+	const VkDeviceMemory * pReleaseSyncs = VK_NULL_HANDLE;
 	const uint64_t * pReleaseKeys = nullptr;
 
 S_win32_keyed_mutex_acquire_release_info_NV( VkWin32KeyedMutexAcquireReleaseInfoNV const & rhs )
@@ -9265,15 +9285,15 @@ ex to: VkSubmitInfo
 #ifdef VK_USE_PLATFORM_WIN32_KHR
 struct		S_win32_keyed_mutex_acquire_release_info_KHR{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_WIN32_KEYED_MUTEX_ACQUIRE_RELEASE_INFO_KHR;
 	 void * pNext = nullptr;
 public:
 	uint32_t acquireCount = 0;
-	const VkDeviceMemory * pAcquireSyncs = nullptr;
+	const VkDeviceMemory * pAcquireSyncs = VK_NULL_HANDLE;
 	const uint64_t * pAcquireKeys = nullptr;
 	const uint32_t * pAcquireTimeouts = nullptr;
 	uint32_t releaseCount = 0;
-	const VkDeviceMemory * pReleaseSyncs = nullptr;
+	const VkDeviceMemory * pReleaseSyncs = VK_NULL_HANDLE;
 	const uint64_t * pReleaseKeys = nullptr;
 
 S_win32_keyed_mutex_acquire_release_info_KHR( VkWin32KeyedMutexAcquireReleaseInfoKHR const & rhs )
@@ -9299,7 +9319,7 @@ ex to: VkSubmitInfo
 #ifdef VK_USE_PLATFORM_WIN32_KHR
 struct		S_d_3d12_fence_submit_info_KHR{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_D3D12_FENCE_SUBMIT_INFO_KHR;
 	 void * pNext = nullptr;
 public:
 	uint32_t waitSemaphoreValuesCount = 0;
@@ -9329,7 +9349,7 @@ ex to: VkSubmitInfo
 */
 struct		S_device_group_submit_info{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_DEVICE_GROUP_SUBMIT_INFO;
 	 void * pNext = nullptr;
 public:
 	uint32_t waitSemaphoreCount = 0;
@@ -9360,7 +9380,7 @@ ex to: VkSubmitInfo
 */
 struct		S_protected_submit_info{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_PROTECTED_SUBMIT_INFO;
 	 void * pNext = nullptr;
 public:
 	VkBool32 protectedSubmit = 0;
@@ -9391,16 +9411,16 @@ ex:
 */
 struct		S_submit_info{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_SUBMIT_INFO;
 	 void * pNext = nullptr;
 public:
 	uint32_t waitSemaphoreCount = 0;
-	const VkSemaphore * pWaitSemaphores = nullptr;
+	const VkSemaphore * pWaitSemaphores = VK_NULL_HANDLE;
 	const F_pipeline_stage * pWaitDstStageMask = nullptr;
 	uint32_t commandBufferCount = 0;
-	const VkCommandBuffer * pCommandBuffers = nullptr;
+	const VkCommandBuffer * pCommandBuffers = VK_NULL_HANDLE;
 	uint32_t signalSemaphoreCount = 0;
-	const VkSemaphore * pSignalSemaphores = nullptr;
+	const VkSemaphore * pSignalSemaphores = VK_NULL_HANDLE;
 
 S_submit_info( VkSubmitInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_submit_info ) );	}
@@ -9432,7 +9452,7 @@ static_assert(
 (returnedonly)
 */
 struct		S_display_properties_KHR{
-	VkDisplayKHR display = 0;
+	VkDisplayKHR display = VK_NULL_HANDLE;
 	const char * displayName = nullptr;
 	S_extent_2d physicalDimensions = {};
 	S_extent_2d physicalResolution = {};
@@ -9446,7 +9466,7 @@ struct		S_display_properties_KHR{
 (returnedonly)
 */
 struct		S_display_plane_properties_KHR{
-	VkDisplayKHR currentDisplay = 0;
+	VkDisplayKHR currentDisplay = VK_NULL_HANDLE;
 	uint32_t currentStackIndex = 0;
 
 };
@@ -9463,7 +9483,7 @@ struct		S_display_mode_parameters_KHR{
 (returnedonly)
 */
 struct		S_display_mode_properties_KHR{
-	VkDisplayModeKHR displayMode = 0;
+	VkDisplayModeKHR displayMode = VK_NULL_HANDLE;
 	S_display_mode_parameters_KHR parameters = {};
 
 };
@@ -9472,7 +9492,7 @@ struct		S_display_mode_properties_KHR{
 */
 struct		S_display_mode_create_info_KHR{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_DISPLAY_MODE_CREATE_INFO_KHR;
 	 void * pNext = nullptr;
 public:
 	VkDisplayModeCreateFlagsKHR flags = 0;
@@ -9512,11 +9532,11 @@ struct		S_display_plane_capabilities_KHR{
 */
 struct		S_display_surface_create_info_KHR{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_DISPLAY_SURFACE_CREATE_INFO_KHR;
 	 void * pNext = nullptr;
 public:
 	VkDisplaySurfaceCreateFlagsKHR flags = 0;
-	VkDisplayModeKHR displayMode = 0;
+	VkDisplayModeKHR displayMode = VK_NULL_HANDLE;
 	uint32_t planeIndex = 0;
 	uint32_t planeStackIndex = 0;
 	F_surface_transform_KHR transform;
@@ -9543,7 +9563,7 @@ ex to: VkPresentInfoKHR
 */
 struct		S_display_present_info_KHR{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_DISPLAY_PRESENT_INFO_KHR;
 	 void * pNext = nullptr;
 public:
 	S_rect_2d srcRect = {};
@@ -9588,7 +9608,7 @@ struct		S_surface_capabilities_KHR{
 #ifdef VK_USE_PLATFORM_ANDROID_KHR
 struct		S_android_surface_create_info_KHR{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_ANDROID_SURFACE_CREATE_INFO_KHR;
 	 void * pNext = nullptr;
 public:
 	VkAndroidSurfaceCreateFlagsKHR flags = 0;
@@ -9614,7 +9634,7 @@ static_assert(
 #ifdef VK_USE_PLATFORM_MIR_KHR
 struct		S_mir_surface_create_info_KHR{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_MIR_SURFACE_CREATE_INFO_KHR;
 	 void * pNext = nullptr;
 public:
 	VkMirSurfaceCreateFlagsKHR flags = 0;
@@ -9641,7 +9661,7 @@ static_assert(
 #ifdef VK_USE_PLATFORM_VI_NN
 struct		S_vi_surface_create_info_NN{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_VI_SURFACE_CREATE_INFO_NN;
 	 void * pNext = nullptr;
 public:
 	VkViSurfaceCreateFlagsNN flags = 0;
@@ -9667,7 +9687,7 @@ static_assert(
 #ifdef VK_USE_PLATFORM_WAYLAND_KHR
 struct		S_wayland_surface_create_info_KHR{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_WAYLAND_SURFACE_CREATE_INFO_KHR;
 	 void * pNext = nullptr;
 public:
 	VkWaylandSurfaceCreateFlagsKHR flags = 0;
@@ -9694,7 +9714,7 @@ static_assert(
 #ifdef VK_USE_PLATFORM_WIN32_KHR
 struct		S_win32_surface_create_info_KHR{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_WIN32_SURFACE_CREATE_INFO_KHR;
 	 void * pNext = nullptr;
 public:
 	VkWin32SurfaceCreateFlagsKHR flags = 0;
@@ -9721,7 +9741,7 @@ static_assert(
 #ifdef VK_USE_PLATFORM_XLIB_KHR
 struct		S_xlib_surface_create_info_KHR{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_XLIB_SURFACE_CREATE_INFO_KHR;
 	 void * pNext = nullptr;
 public:
 	VkXlibSurfaceCreateFlagsKHR flags = 0;
@@ -9748,7 +9768,7 @@ static_assert(
 #ifdef VK_USE_PLATFORM_XCB_KHR
 struct		S_xcb_surface_create_info_KHR{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_XCB_SURFACE_CREATE_INFO_KHR;
 	 void * pNext = nullptr;
 public:
 	VkXcbSurfaceCreateFlagsKHR flags = 0;
@@ -9784,7 +9804,7 @@ ex to: VkSwapchainCreateInfoKHR
 */
 struct		S_swapchain_counter_create_info_EXT{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_SWAPCHAIN_COUNTER_CREATE_INFO_EXT;
 	 void * pNext = nullptr;
 public:
 	F_surface_counter_EXT surfaceCounters;
@@ -9810,7 +9830,7 @@ ex to: VkSwapchainCreateInfoKHR
 */
 struct		S_device_group_swapchain_create_info_KHR{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_DEVICE_GROUP_SWAPCHAIN_CREATE_INFO_KHR;
 	 void * pNext = nullptr;
 public:
 	F_device_group_present_mode_KHR modes;
@@ -9838,11 +9858,11 @@ ex:
 */
 struct		S_swapchain_create_info_KHR{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_SWAPCHAIN_CREATE_INFO_KHR;
 	 void * pNext = nullptr;
 public:
 	F_swapchain_create_KHR flags;
-	VkSurfaceKHR surface = 0;
+	VkSurfaceKHR surface = VK_NULL_HANDLE;
 	uint32_t minImageCount = 0;
 	E_format imageFormat = E_format::e_undefined;
 	E_color_space_KHR imageColorSpace = E_color_space_KHR::e_srgb_nonlinear_khr;
@@ -9856,7 +9876,7 @@ public:
 	F_composite_alpha_KHR compositeAlpha;
 	E_present_mode_KHR presentMode = E_present_mode_KHR::e_immediate_khr;
 	VkBool32 clipped = 0;
-	VkSwapchainKHR oldSwapchain = 0;
+	VkSwapchainKHR oldSwapchain = VK_NULL_HANDLE;
 
 S_swapchain_create_info_KHR( VkSwapchainCreateInfoKHR const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_swapchain_create_info_KHR ) );	}
@@ -9897,7 +9917,7 @@ ex to: VkPresentInfoKHR
 */
 struct		S_present_regions_KHR{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_PRESENT_REGIONS_KHR;
 	 void * pNext = nullptr;
 public:
 	uint32_t swapchainCount = 0;
@@ -9924,7 +9944,7 @@ ex to: VkPresentInfoKHR
 */
 struct		S_device_group_present_info_KHR{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_DEVICE_GROUP_PRESENT_INFO_KHR;
 	 void * pNext = nullptr;
 public:
 	uint32_t swapchainCount = 0;
@@ -9960,7 +9980,7 @@ ex to: VkPresentInfoKHR
 */
 struct		S_present_times_info_GOOGLE{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_PRESENT_TIMES_INFO_GOOGLE;
 	 void * pNext = nullptr;
 public:
 	uint32_t swapchainCount = 0;
@@ -9991,13 +10011,13 @@ ex:
 */
 struct		S_present_info_KHR{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_PRESENT_INFO_KHR;
 	 void * pNext = nullptr;
 public:
 	uint32_t waitSemaphoreCount = 0;
-	const VkSemaphore * pWaitSemaphores = nullptr;
+	const VkSemaphore * pWaitSemaphores = VK_NULL_HANDLE;
 	uint32_t swapchainCount = 0;
-	const VkSwapchainKHR * pSwapchains = nullptr;
+	const VkSwapchainKHR * pSwapchains = VK_NULL_HANDLE;
 	const uint32_t * pImageIndices = nullptr;
 	E_result * pResults = nullptr;
 
@@ -10024,7 +10044,7 @@ static_assert(
 */
 struct		S_debug_marker_object_name_info_EXT{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_DEBUG_MARKER_OBJECT_NAME_INFO_EXT;
 	 void * pNext = nullptr;
 public:
 	E_debug_report_object_type_EXT objectType = E_debug_report_object_type_EXT::e_unknown_ext;
@@ -10049,7 +10069,7 @@ static_assert(
 */
 struct		S_debug_marker_object_tag_info_EXT{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_DEBUG_MARKER_OBJECT_TAG_INFO_EXT;
 	 void * pNext = nullptr;
 public:
 	E_debug_report_object_type_EXT objectType = E_debug_report_object_type_EXT::e_unknown_ext;
@@ -10076,7 +10096,7 @@ static_assert(
 */
 struct		S_debug_marker_marker_info_EXT{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_DEBUG_MARKER_MARKER_INFO_EXT;
 	 void * pNext = nullptr;
 public:
 	const char * pMarkerName = nullptr;
@@ -10111,7 +10131,7 @@ struct		S_external_image_format_properties_NV{
 */
 struct		S_device_generated_commands_features_NVX{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_DEVICE_GENERATED_COMMANDS_FEATURES_NVX;
 	 void * pNext = nullptr;
 public:
 	VkBool32 computeBindingPointSupport = 0;
@@ -10134,7 +10154,7 @@ static_assert(
 */
 struct		S_device_generated_commands_limits_NVX{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_DEVICE_GENERATED_COMMANDS_LIMITS_NVX;
 	 void * pNext = nullptr;
 public:
 	uint32_t maxIndirectCommandsLayoutTokenCount = 0;
@@ -10161,7 +10181,7 @@ static_assert(
 */
 struct		S_indirect_commands_token_NVX{
 	E_indirect_commands_token_type_NVX tokenType = E_indirect_commands_token_type_NVX::e_pipeline_nvx;
-	VkBuffer buffer = 0;
+	VkBuffer buffer = VK_NULL_HANDLE;
 	VkDeviceSize offset = 0;
 
 };
@@ -10180,7 +10200,7 @@ struct		S_indirect_commands_layout_token_NVX{
 */
 struct		S_indirect_commands_layout_create_info_NVX{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_INDIRECT_COMMANDS_LAYOUT_CREATE_INFO_NVX;
 	 void * pNext = nullptr;
 public:
 	E_pipeline_bind_point pipelineBindPoint = E_pipeline_bind_point::e_graphics;
@@ -10206,18 +10226,18 @@ static_assert(
 */
 struct		S_cmd_process_commands_info_NVX{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_CMD_PROCESS_COMMANDS_INFO_NVX;
 	 void * pNext = nullptr;
 public:
-	VkObjectTableNVX objectTable = 0;
-	VkIndirectCommandsLayoutNVX indirectCommandsLayout = 0;
+	VkObjectTableNVX objectTable = VK_NULL_HANDLE;
+	VkIndirectCommandsLayoutNVX indirectCommandsLayout = VK_NULL_HANDLE;
 	uint32_t indirectCommandsTokenCount = 0;
 	const S_indirect_commands_token_NVX * pIndirectCommandsTokens = nullptr;
 	uint32_t maxSequencesCount = 0;
-	VkCommandBuffer targetCommandBuffer = 0;
-	VkBuffer sequencesCountBuffer = 0;
+	VkCommandBuffer targetCommandBuffer = VK_NULL_HANDLE;
+	VkBuffer sequencesCountBuffer = VK_NULL_HANDLE;
 	VkDeviceSize sequencesCountOffset = 0;
-	VkBuffer sequencesIndexBuffer = 0;
+	VkBuffer sequencesIndexBuffer = VK_NULL_HANDLE;
 	VkDeviceSize sequencesIndexOffset = 0;
 
 S_cmd_process_commands_info_NVX( VkCmdProcessCommandsInfoNVX const & rhs )
@@ -10238,11 +10258,11 @@ static_assert(
 */
 struct		S_cmd_reserve_space_for_commands_info_NVX{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_CMD_RESERVE_SPACE_FOR_COMMANDS_INFO_NVX;
 	 void * pNext = nullptr;
 public:
-	VkObjectTableNVX objectTable = 0;
-	VkIndirectCommandsLayoutNVX indirectCommandsLayout = 0;
+	VkObjectTableNVX objectTable = VK_NULL_HANDLE;
+	VkIndirectCommandsLayoutNVX indirectCommandsLayout = VK_NULL_HANDLE;
 	uint32_t maxSequencesCount = 0;
 
 S_cmd_reserve_space_for_commands_info_NVX( VkCmdReserveSpaceForCommandsInfoNVX const & rhs )
@@ -10263,7 +10283,7 @@ static_assert(
 */
 struct		S_object_table_create_info_NVX{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_OBJECT_TABLE_CREATE_INFO_NVX;
 	 void * pNext = nullptr;
 public:
 	uint32_t objectCount = 0;
@@ -10303,7 +10323,7 @@ struct		S_object_table_entry_NVX{
 struct		S_object_table_pipeline_entry_NVX{
 	E_object_entry_type_NVX type = E_object_entry_type_NVX::e_descriptor_set_nvx;
 	F_object_entry_usage_NVX flags;
-	VkPipeline pipeline = 0;
+	VkPipeline pipeline = VK_NULL_HANDLE;
 
 };
 
@@ -10312,8 +10332,8 @@ struct		S_object_table_pipeline_entry_NVX{
 struct		S_object_table_descriptor_set_entry_NVX{
 	E_object_entry_type_NVX type = E_object_entry_type_NVX::e_descriptor_set_nvx;
 	F_object_entry_usage_NVX flags;
-	VkPipelineLayout pipelineLayout = 0;
-	VkDescriptorSet descriptorSet = 0;
+	VkPipelineLayout pipelineLayout = VK_NULL_HANDLE;
+	VkDescriptorSet descriptorSet = VK_NULL_HANDLE;
 
 };
 
@@ -10322,7 +10342,7 @@ struct		S_object_table_descriptor_set_entry_NVX{
 struct		S_object_table_vertex_buffer_entry_NVX{
 	E_object_entry_type_NVX type = E_object_entry_type_NVX::e_descriptor_set_nvx;
 	F_object_entry_usage_NVX flags;
-	VkBuffer buffer = 0;
+	VkBuffer buffer = VK_NULL_HANDLE;
 
 };
 
@@ -10331,7 +10351,7 @@ struct		S_object_table_vertex_buffer_entry_NVX{
 struct		S_object_table_index_buffer_entry_NVX{
 	E_object_entry_type_NVX type = E_object_entry_type_NVX::e_descriptor_set_nvx;
 	F_object_entry_usage_NVX flags;
-	VkBuffer buffer = 0;
+	VkBuffer buffer = VK_NULL_HANDLE;
 	E_index_type indexType = E_index_type::e_uint16;
 
 };
@@ -10341,7 +10361,7 @@ struct		S_object_table_index_buffer_entry_NVX{
 struct		S_object_table_push_constant_entry_NVX{
 	E_object_entry_type_NVX type = E_object_entry_type_NVX::e_descriptor_set_nvx;
 	F_object_entry_usage_NVX flags;
-	VkPipelineLayout pipelineLayout = 0;
+	VkPipelineLayout pipelineLayout = VK_NULL_HANDLE;
 	F_shader_stage stageFlags;
 
 };
@@ -10351,7 +10371,7 @@ ex to: VkPhysicalDeviceProperties2
 */
 struct		S_physical_device_push_descriptor_properties_KHR{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PUSH_DESCRIPTOR_PROPERTIES_KHR;
 	void * pNext = nullptr;
 public:
 	uint32_t maxPushDescriptors = 0;
@@ -10389,7 +10409,7 @@ ex to: VkPhysicalDeviceProperties2
 #ifdef LAKA_UNKNOW
 struct		S_physical_device_driver_properties_KHR{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DRIVER_PROPERTIES_KHR;
 	void * pNext = nullptr;
 public:
 	uint32_t driverID = 0;
@@ -10420,7 +10440,7 @@ ex to: VkPhysicalDeviceProperties2
 */
 struct		S_physical_device_id_properties{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ID_PROPERTIES;
 	void * pNext = nullptr;
 public:
 	uint8_t deviceUUID[VK_UUID_SIZE] = {};
@@ -10451,7 +10471,7 @@ ex to: VkPhysicalDeviceProperties2
 */
 struct		S_physical_device_multiview_properties{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTIVIEW_PROPERTIES;
 	void * pNext = nullptr;
 public:
 	uint32_t maxMultiviewViewCount = 0;
@@ -10478,7 +10498,7 @@ ex to: VkPhysicalDeviceProperties2
 */
 struct		S_physical_device_discard_rectangle_properties_EXT{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DISCARD_RECTANGLE_PROPERTIES_EXT;
 	void * pNext = nullptr;
 public:
 	uint32_t maxDiscardRectangles = 0;
@@ -10505,7 +10525,7 @@ ex to: VkPhysicalDeviceProperties2
 */
 struct		S_physical_device_multiview_per_view_attributes_properties_NVX{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTIVIEW_PER_VIEW_ATTRIBUTES_PROPERTIES_NVX;
 	void * pNext = nullptr;
 public:
 	VkBool32 perViewPositionAllComponents = 0;
@@ -10532,7 +10552,7 @@ ex to: VkPhysicalDeviceProperties2
 */
 struct		S_physical_device_subgroup_properties{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBGROUP_PROPERTIES;
 	void * pNext = nullptr;
 public:
 	uint32_t subgroupSize = 0;
@@ -10562,7 +10582,7 @@ ex to: VkPhysicalDeviceProperties2
 */
 struct		S_physical_device_point_clipping_properties{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_POINT_CLIPPING_PROPERTIES;
 	void * pNext = nullptr;
 public:
 	E_point_clipping_behavior pointClippingBehavior = E_point_clipping_behavior::e_all_clip_planes;
@@ -10588,7 +10608,7 @@ ex to: VkPhysicalDeviceProperties2
 */
 struct		S_physical_device_protected_memory_properties{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROTECTED_MEMORY_PROPERTIES;
 	void * pNext = nullptr;
 public:
 	VkBool32 protectedNoFault = 0;
@@ -10615,7 +10635,7 @@ ex to: VkPhysicalDeviceProperties2
 */
 struct		S_physical_device_sampler_filter_minmax_properties_EXT{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SAMPLER_FILTER_MINMAX_PROPERTIES_EXT;
 	void * pNext = nullptr;
 public:
 	VkBool32 filterMinmaxSingleComponentFormats = 0;
@@ -10643,7 +10663,7 @@ ex to: VkPhysicalDeviceProperties2
 */
 struct		S_physical_device_sample_locations_properties_EXT{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SAMPLE_LOCATIONS_PROPERTIES_EXT;
 	void * pNext = nullptr;
 public:
 	F_sample_count sampleLocationSampleCounts;
@@ -10674,7 +10694,7 @@ ex to: VkPhysicalDeviceProperties2
 */
 struct		S_physical_device_blend_operation_advanced_properties_EXT{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_BLEND_OPERATION_ADVANCED_PROPERTIES_EXT;
 	void * pNext = nullptr;
 public:
 	uint32_t advancedBlendMaxColorAttachments = 0;
@@ -10706,7 +10726,7 @@ ex to: VkPhysicalDeviceProperties2
 */
 struct		S_physical_device_inline_uniform_block_properties_EXT{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_INLINE_UNIFORM_BLOCK_PROPERTIES_EXT;
 	void * pNext = nullptr;
 public:
 	uint32_t maxInlineUniformBlockSize = 0;
@@ -10737,7 +10757,7 @@ ex to: VkPhysicalDeviceProperties2
 */
 struct		S_physical_device_maintenance3_properties{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_3_PROPERTIES;
 	void * pNext = nullptr;
 public:
 	uint32_t maxPerSetDescriptors = 0;
@@ -10764,7 +10784,7 @@ ex to: VkPhysicalDeviceProperties2
 */
 struct		S_physical_device_external_memory_host_properties_EXT{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_MEMORY_HOST_PROPERTIES_EXT;
 	void * pNext = nullptr;
 public:
 	VkDeviceSize minImportedHostPointerAlignment = 0;
@@ -10790,7 +10810,7 @@ ex to: VkPhysicalDeviceProperties2
 */
 struct		S_physical_device_conservative_rasterization_properties_EXT{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CONSERVATIVE_RASTERIZATION_PROPERTIES_EXT;
 	void * pNext = nullptr;
 public:
 	float primitiveOverestimationSize = 0;
@@ -10825,7 +10845,7 @@ ex to: VkPhysicalDeviceProperties2
 */
 struct		S_physical_device_shader_core_properties_AMD{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_CORE_PROPERTIES_AMD;
 	void * pNext = nullptr;
 public:
 	uint32_t shaderEngineCount = 0;
@@ -10865,7 +10885,7 @@ ex to: VkPhysicalDeviceProperties2
 */
 struct		S_physical_device_descriptor_indexing_properties_EXT{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_INDEXING_PROPERTIES_EXT;
 	void * pNext = nullptr;
 public:
 	uint32_t maxUpdateAfterBindDescriptorsInAllPools = 0;
@@ -10913,7 +10933,7 @@ ex to: VkPhysicalDeviceProperties2
 */
 struct		S_physical_device_vertex_attribute_divisor_properties_EXT{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_DIVISOR_PROPERTIES_EXT;
 	void * pNext = nullptr;
 public:
 	uint32_t maxVertexAttribDivisor = 0;
@@ -10940,7 +10960,7 @@ ex to: VkPhysicalDeviceProperties2
 */
 struct		S_physical_device_shading_rate_image_properties_NV{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADING_RATE_IMAGE_PROPERTIES_NV;
 	void * pNext = nullptr;
 public:
 	S_extent_2d shadingRateTexelSize = {};
@@ -10968,7 +10988,7 @@ ex to: VkPhysicalDeviceProperties2
 */
 struct		S_physical_device_mesh_shader_properties_NV{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MESH_SHADER_PROPERTIES_NV;
 	void * pNext = nullptr;
 public:
 	uint32_t maxDrawMeshTasksCount = 0;
@@ -11006,7 +11026,7 @@ ex to: VkPhysicalDeviceProperties2
 */
 struct		S_physical_device_raytracing_properties_NVX{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RAYTRACING_PROPERTIES_NVX;
 	void * pNext = nullptr;
 public:
 	uint32_t shaderHeaderSize = 0;
@@ -11057,7 +11077,7 @@ ex:
 */
 struct		S_physical_device_properties2{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROPERTIES_2;
 	void * pNext = nullptr;
 public:
 	S_physical_device_properties properties = {};
@@ -11117,7 +11137,7 @@ ex to: VkFormatProperties2
 #ifdef LAKA_UNKNOW
 struct		S_drm_format_modifier_properties_list_EXT{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_DRM_FORMAT_MODIFIER_PROPERTIES_LIST_EXT;
 	void * pNext = nullptr;
 public:
 	uint32_t drmFormatModifierCount = 0;
@@ -11147,7 +11167,7 @@ ex:
 */
 struct		S_format_properties2{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_FORMAT_PROPERTIES_2;
 	void * pNext = nullptr;
 public:
 	S_format_properties formatProperties = {};
@@ -11186,7 +11206,7 @@ ex to: VkImageFormatProperties2
 */
 struct		S_external_image_format_properties{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_EXTERNAL_IMAGE_FORMAT_PROPERTIES;
 	void * pNext = nullptr;
 public:
 	S_external_memory_properties externalMemoryProperties = {};
@@ -11213,7 +11233,7 @@ ex to: VkImageFormatProperties2
 */
 struct		S_sampler_ycbcr_conversion_image_format_properties{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_IMAGE_FORMAT_PROPERTIES;
 	void * pNext = nullptr;
 public:
 	uint32_t combinedImageSamplerDescriptorCount = 0;
@@ -11240,7 +11260,7 @@ ex to: VkImageFormatProperties2
 */
 struct		S_texture_lod_gather_format_properties_AMD{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_TEXTURE_LOD_GATHER_FORMAT_PROPERTIES_AMD;
 	void * pNext = nullptr;
 public:
 	VkBool32 supportsTextureGatherLODBiasAMD = 0;
@@ -11268,7 +11288,7 @@ ex to: VkImageFormatProperties2
 #ifdef VK_USE_PLATFORM_ANDROID_KHR
 struct		S_android_hardware_buffer_usage_ANDROID{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_ANDROID_HARDWARE_BUFFER_USAGE_ANDROID;
 	void * pNext = nullptr;
 public:
 	uint64_t androidHardwareBufferUsage = 0;
@@ -11300,7 +11320,7 @@ ex:
 */
 struct		S_image_format_properties2{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_IMAGE_FORMAT_PROPERTIES_2;
 	void * pNext = nullptr;
 public:
 	S_image_format_properties imageFormatProperties = {};
@@ -11331,7 +11351,7 @@ ex to: VkPhysicalDeviceImageFormatInfo2
 */
 struct		S_physical_device_external_image_format_info{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_IMAGE_FORMAT_INFO;
 	 void * pNext = nullptr;
 public:
 	F_external_memory_handle_type handleType;
@@ -11358,7 +11378,7 @@ ex to: VkPhysicalDeviceImageFormatInfo2
 #ifdef LAKA_UNKNOW
 struct		S_physical_device_image_drm_format_modifier_info_EXT{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_DRM_FORMAT_MODIFIER_INFO_EXT;
 	 void * pNext = nullptr;
 public:
 	uint64_t drmFormatModifier = 0;
@@ -11387,7 +11407,7 @@ ex:
 */
 struct		S_physical_device_image_format_info2{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_FORMAT_INFO_2;
 	 void * pNext = nullptr;
 public:
 	E_format format = E_format::e_undefined;
@@ -11421,7 +11441,7 @@ ex to: VkQueueFamilyProperties2
 */
 struct		S_queue_family_checkpoint_properties_NV{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_QUEUE_FAMILY_CHECKPOINT_PROPERTIES_NV;
 	void * pNext = nullptr;
 public:
 	F_pipeline_stage checkpointExecutionStageMask;
@@ -11449,7 +11469,7 @@ ex:
 */
 struct		S_queue_family_properties2{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_QUEUE_FAMILY_PROPERTIES_2;
 	void * pNext = nullptr;
 public:
 	S_queue_family_properties queueFamilyProperties = {};
@@ -11475,7 +11495,7 @@ static_assert(
 */
 struct		S_physical_device_memory_properties2{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MEMORY_PROPERTIES_2;
 	void * pNext = nullptr;
 public:
 	S_physical_device_memory_properties memoryProperties = {};
@@ -11499,7 +11519,7 @@ static_assert(
 */
 struct		S_sparse_image_format_properties2{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_SPARSE_IMAGE_FORMAT_PROPERTIES_2;
 	void * pNext = nullptr;
 public:
 	S_sparse_image_format_properties properties = {};
@@ -11522,7 +11542,7 @@ static_assert(
 */
 struct		S_physical_device_sparse_image_format_info2{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SPARSE_IMAGE_FORMAT_INFO_2;
 	 void * pNext = nullptr;
 public:
 	E_format format = E_format::e_undefined;
@@ -11549,7 +11569,7 @@ static_assert(
 */
 struct		S_physical_device_external_buffer_info{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_BUFFER_INFO;
 	 void * pNext = nullptr;
 public:
 	F_buffer_create flags;
@@ -11575,7 +11595,7 @@ static_assert(
 */
 struct		S_external_buffer_properties{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_EXTERNAL_BUFFER_PROPERTIES;
 	void * pNext = nullptr;
 public:
 	S_external_memory_properties externalMemoryProperties = {};
@@ -11600,7 +11620,7 @@ static_assert(
 #ifdef VK_USE_PLATFORM_WIN32_KHR
 struct		S_memory_win32_handle_properties_KHR{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_MEMORY_WIN32_HANDLE_PROPERTIES_KHR;
 	void * pNext = nullptr;
 public:
 	uint32_t memoryTypeBits = 0;
@@ -11625,10 +11645,10 @@ static_assert(
 #ifdef VK_USE_PLATFORM_WIN32_KHR
 struct		S_memory_get_win32_handle_info_KHR{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_MEMORY_GET_WIN32_HANDLE_INFO_KHR;
 	 void * pNext = nullptr;
 public:
-	VkDeviceMemory memory = 0;
+	VkDeviceMemory memory = VK_NULL_HANDLE;
 	F_external_memory_handle_type handleType;
 
 S_memory_get_win32_handle_info_KHR( VkMemoryGetWin32HandleInfoKHR const & rhs )
@@ -11651,7 +11671,7 @@ static_assert(
 */
 struct		S_memory_fd_properties_KHR{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_MEMORY_FD_PROPERTIES_KHR;
 	void * pNext = nullptr;
 public:
 	uint32_t memoryTypeBits = 0;
@@ -11674,10 +11694,10 @@ static_assert(
 */
 struct		S_memory_get_fd_info_KHR{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_MEMORY_GET_FD_INFO_KHR;
 	 void * pNext = nullptr;
 public:
-	VkDeviceMemory memory = 0;
+	VkDeviceMemory memory = VK_NULL_HANDLE;
 	F_external_memory_handle_type handleType;
 
 S_memory_get_fd_info_KHR( VkMemoryGetFdInfoKHR const & rhs )
@@ -11698,7 +11718,7 @@ static_assert(
 */
 struct		S_physical_device_external_semaphore_info{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_SEMAPHORE_INFO;
 	 void * pNext = nullptr;
 public:
 	F_external_semaphore_handle_type handleType;
@@ -11722,7 +11742,7 @@ static_assert(
 */
 struct		S_external_semaphore_properties{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_EXTERNAL_SEMAPHORE_PROPERTIES;
 	void * pNext = nullptr;
 public:
 	F_external_semaphore_handle_type exportFromImportedHandleTypes;
@@ -11748,10 +11768,10 @@ static_assert(
 #ifdef VK_USE_PLATFORM_WIN32_KHR
 struct		S_import_semaphore_win32_handle_info_KHR{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_IMPORT_SEMAPHORE_WIN32_HANDLE_INFO_KHR;
 	 void * pNext = nullptr;
 public:
-	VkSemaphore semaphore = 0;
+	VkSemaphore semaphore = VK_NULL_HANDLE;
 	F_semaphore_import flags;
 	F_external_semaphore_handle_type handleType;
 	HANDLE handle = 0;
@@ -11777,10 +11797,10 @@ static_assert(
 #ifdef VK_USE_PLATFORM_WIN32_KHR
 struct		S_semaphore_get_win32_handle_info_KHR{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_SEMAPHORE_GET_WIN32_HANDLE_INFO_KHR;
 	 void * pNext = nullptr;
 public:
-	VkSemaphore semaphore = 0;
+	VkSemaphore semaphore = VK_NULL_HANDLE;
 	F_external_semaphore_handle_type handleType;
 
 S_semaphore_get_win32_handle_info_KHR( VkSemaphoreGetWin32HandleInfoKHR const & rhs )
@@ -11802,10 +11822,10 @@ static_assert(
 */
 struct		S_import_semaphore_fd_info_KHR{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_IMPORT_SEMAPHORE_FD_INFO_KHR;
 	 void * pNext = nullptr;
 public:
-	VkSemaphore semaphore = 0;
+	VkSemaphore semaphore = VK_NULL_HANDLE;
 	F_semaphore_import flags;
 	F_external_semaphore_handle_type handleType;
 	int fd = 0;
@@ -11828,10 +11848,10 @@ static_assert(
 */
 struct		S_semaphore_get_fd_info_KHR{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_SEMAPHORE_GET_FD_INFO_KHR;
 	 void * pNext = nullptr;
 public:
-	VkSemaphore semaphore = 0;
+	VkSemaphore semaphore = VK_NULL_HANDLE;
 	F_external_semaphore_handle_type handleType;
 
 S_semaphore_get_fd_info_KHR( VkSemaphoreGetFdInfoKHR const & rhs )
@@ -11852,7 +11872,7 @@ static_assert(
 */
 struct		S_physical_device_external_fence_info{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_FENCE_INFO;
 	 void * pNext = nullptr;
 public:
 	F_external_fence_handle_type handleType;
@@ -11876,7 +11896,7 @@ static_assert(
 */
 struct		S_external_fence_properties{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_EXTERNAL_FENCE_PROPERTIES;
 	void * pNext = nullptr;
 public:
 	F_external_fence_handle_type exportFromImportedHandleTypes;
@@ -11902,10 +11922,10 @@ static_assert(
 #ifdef VK_USE_PLATFORM_WIN32_KHR
 struct		S_import_fence_win32_handle_info_KHR{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_IMPORT_FENCE_WIN32_HANDLE_INFO_KHR;
 	 void * pNext = nullptr;
 public:
-	VkFence fence = 0;
+	VkFence fence = VK_NULL_HANDLE;
 	F_fence_import flags;
 	F_external_fence_handle_type handleType;
 	HANDLE handle = 0;
@@ -11931,10 +11951,10 @@ static_assert(
 #ifdef VK_USE_PLATFORM_WIN32_KHR
 struct		S_fence_get_win32_handle_info_KHR{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_FENCE_GET_WIN32_HANDLE_INFO_KHR;
 	 void * pNext = nullptr;
 public:
-	VkFence fence = 0;
+	VkFence fence = VK_NULL_HANDLE;
 	F_external_fence_handle_type handleType;
 
 S_fence_get_win32_handle_info_KHR( VkFenceGetWin32HandleInfoKHR const & rhs )
@@ -11956,10 +11976,10 @@ static_assert(
 */
 struct		S_import_fence_fd_info_KHR{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_IMPORT_FENCE_FD_INFO_KHR;
 	 void * pNext = nullptr;
 public:
-	VkFence fence = 0;
+	VkFence fence = VK_NULL_HANDLE;
 	F_fence_import flags;
 	F_external_fence_handle_type handleType;
 	int fd = 0;
@@ -11982,10 +12002,10 @@ static_assert(
 */
 struct		S_fence_get_fd_info_KHR{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_FENCE_GET_FD_INFO_KHR;
 	 void * pNext = nullptr;
 public:
-	VkFence fence = 0;
+	VkFence fence = VK_NULL_HANDLE;
 	F_external_fence_handle_type handleType;
 
 S_fence_get_fd_info_KHR( VkFenceGetFdInfoKHR const & rhs )
@@ -12007,7 +12027,7 @@ static_assert(
 */
 struct		S_surface_capabilities2_EXT{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_SURFACE_CAPABILITIES_2_EXT;
 	void * pNext = nullptr;
 public:
 	uint32_t minImageCount = 0;
@@ -12040,7 +12060,7 @@ static_assert(
 */
 struct		S_display_power_info_EXT{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_DISPLAY_POWER_INFO_EXT;
 	 void * pNext = nullptr;
 public:
 	E_display_power_state_EXT powerState = E_display_power_state_EXT::e_off_ext;
@@ -12063,7 +12083,7 @@ static_assert(
 */
 struct		S_device_event_info_EXT{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_DEVICE_EVENT_INFO_EXT;
 	 void * pNext = nullptr;
 public:
 	E_device_event_type_EXT deviceEvent = E_device_event_type_EXT::e_display_hotplug_ext;
@@ -12086,7 +12106,7 @@ static_assert(
 */
 struct		S_display_event_info_EXT{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_DISPLAY_EVENT_INFO_EXT;
 	 void * pNext = nullptr;
 public:
 	E_display_event_type_EXT displayEvent = E_display_event_type_EXT::e_first_pixel_out_ext;
@@ -12110,7 +12130,7 @@ static_assert(
 */
 struct		S_physical_device_group_properties{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_GROUP_PROPERTIES;
 	void * pNext = nullptr;
 public:
 	uint32_t physicalDeviceCount = 0;
@@ -12136,7 +12156,7 @@ ex to: VkBindBufferMemoryInfo
 */
 struct		S_bind_buffer_memory_device_group_info{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_BIND_BUFFER_MEMORY_DEVICE_GROUP_INFO;
 	 void * pNext = nullptr;
 public:
 	uint32_t deviceIndexCount = 0;
@@ -12164,11 +12184,11 @@ ex:
 */
 struct		S_bind_buffer_memory_info{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_BIND_BUFFER_MEMORY_INFO;
 	 void * pNext = nullptr;
 public:
-	VkBuffer buffer = 0;
-	VkDeviceMemory memory = 0;
+	VkBuffer buffer = VK_NULL_HANDLE;
+	VkDeviceMemory memory = VK_NULL_HANDLE;
 	VkDeviceSize memoryOffset = 0;
 
 S_bind_buffer_memory_info( VkBindBufferMemoryInfo const & rhs )
@@ -12192,7 +12212,7 @@ ex to: VkBindImageMemoryInfo
 */
 struct		S_bind_image_memory_device_group_info{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_BIND_IMAGE_MEMORY_DEVICE_GROUP_INFO;
 	 void * pNext = nullptr;
 public:
 	uint32_t deviceIndexCount = 0;
@@ -12221,10 +12241,10 @@ ex to: VkBindImageMemoryInfo
 */
 struct		S_bind_image_memory_swapchain_info_KHR{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_BIND_IMAGE_MEMORY_SWAPCHAIN_INFO_KHR;
 	 void * pNext = nullptr;
 public:
-	VkSwapchainKHR swapchain = 0;
+	VkSwapchainKHR swapchain = VK_NULL_HANDLE;
 	uint32_t imageIndex = 0;
 
 S_bind_image_memory_swapchain_info_KHR( VkBindImageMemorySwapchainInfoKHR const & rhs )
@@ -12248,7 +12268,7 @@ ex to: VkBindImageMemoryInfo
 */
 struct		S_bind_image_plane_memory_info{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_BIND_IMAGE_PLANE_MEMORY_INFO;
 	 void * pNext = nullptr;
 public:
 	F_image_aspect planeAspect;
@@ -12277,11 +12297,11 @@ ex:
 */
 struct		S_bind_image_memory_info{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_BIND_IMAGE_MEMORY_INFO;
 	 void * pNext = nullptr;
 public:
-	VkImage image = 0;
-	VkDeviceMemory memory = 0;
+	VkImage image = VK_NULL_HANDLE;
+	VkDeviceMemory memory = VK_NULL_HANDLE;
 	VkDeviceSize memoryOffset = 0;
 
 S_bind_image_memory_info( VkBindImageMemoryInfo const & rhs )
@@ -12307,7 +12327,7 @@ static_assert(
 */
 struct		S_device_group_present_capabilities_KHR{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_DEVICE_GROUP_PRESENT_CAPABILITIES_KHR;
 	 void * pNext = nullptr;
 public:
 	uint32_t presentMask[VK_MAX_DEVICE_GROUP_SIZE] = {};
@@ -12331,13 +12351,13 @@ static_assert(
 */
 struct		S_acquire_next_image_info_KHR{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_ACQUIRE_NEXT_IMAGE_INFO_KHR;
 	 void * pNext = nullptr;
 public:
-	VkSwapchainKHR swapchain = 0;
+	VkSwapchainKHR swapchain = VK_NULL_HANDLE;
 	uint64_t timeout = 0;
-	VkSemaphore semaphore = 0;
-	VkFence fence = 0;
+	VkSemaphore semaphore = VK_NULL_HANDLE;
+	VkFence fence = VK_NULL_HANDLE;
 	uint32_t deviceMask = 0;
 
 S_acquire_next_image_info_KHR( VkAcquireNextImageInfoKHR const & rhs )
@@ -12370,16 +12390,16 @@ struct		S_descriptor_update_template_entry{
 */
 struct		S_descriptor_update_template_create_info{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_DESCRIPTOR_UPDATE_TEMPLATE_CREATE_INFO;
 	void * pNext = nullptr;
 public:
 	VkDescriptorUpdateTemplateCreateFlags flags = 0;
 	uint32_t descriptorUpdateEntryCount = 0;
 	const S_descriptor_update_template_entry * pDescriptorUpdateEntries = nullptr;
 	E_descriptor_update_template_type templateType = E_descriptor_update_template_type::e_descriptor_set;
-	VkDescriptorSetLayout descriptorSetLayout = 0;
+	VkDescriptorSetLayout descriptorSetLayout = VK_NULL_HANDLE;
 	E_pipeline_bind_point pipelineBindPoint = E_pipeline_bind_point::e_graphics;
-	VkPipelineLayout pipelineLayout = 0;
+	VkPipelineLayout pipelineLayout = VK_NULL_HANDLE;
 	uint32_t set = 0;
 
 S_descriptor_update_template_create_info( VkDescriptorUpdateTemplateCreateInfo const & rhs )
@@ -12408,7 +12428,7 @@ struct		S_xy_color_EXT{
 */
 struct		S_hdr_metadata_EXT{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_HDR_METADATA_EXT;
 	 void * pNext = nullptr;
 public:
 	S_xy_color_EXT displayPrimaryRed = {};
@@ -12459,7 +12479,7 @@ struct		S_past_presentation_timing_GOOGLE{
 #ifdef VK_USE_PLATFORM_IOS_MVK
 struct		S_ios_surface_create_info_MVK{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_IOS_SURFACE_CREATE_INFO_MVK;
 	 void * pNext = nullptr;
 public:
 	VkIOSSurfaceCreateFlagsMVK flags = 0;
@@ -12485,7 +12505,7 @@ static_assert(
 #ifdef VK_USE_PLATFORM_MACOS_MVK
 struct		S_mac_os_surface_create_info_MVK{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_MACOS_SURFACE_CREATE_INFO_MVK;
 	 void * pNext = nullptr;
 public:
 	VkMacOSSurfaceCreateFlagsMVK flags = 0;
@@ -12510,10 +12530,10 @@ static_assert(
 */
 struct		S_physical_device_surface_info2_KHR{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SURFACE_INFO_2_KHR;
 	 void * pNext = nullptr;
 public:
-	VkSurfaceKHR surface = 0;
+	VkSurfaceKHR surface = VK_NULL_HANDLE;
 
 S_physical_device_surface_info2_KHR( VkPhysicalDeviceSurfaceInfo2KHR const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_physical_device_surface_info2_KHR ) );	}
@@ -12535,7 +12555,7 @@ ex to: VkSurfaceCapabilities2KHR
 */
 struct		S_shared_present_surface_capabilities_KHR{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_SHARED_PRESENT_SURFACE_CAPABILITIES_KHR;
 	void * pNext = nullptr;
 public:
 	F_image_usage sharedPresentSupportedUsageFlags;
@@ -12563,7 +12583,7 @@ ex:
 */
 struct		S_surface_capabilities2_KHR{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_SURFACE_CAPABILITIES_2_KHR;
 	void * pNext = nullptr;
 public:
 	S_surface_capabilities_KHR surfaceCapabilities = {};
@@ -12589,7 +12609,7 @@ static_assert(
 */
 struct		S_surface_format2_KHR{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_SURFACE_FORMAT_2_KHR;
 	void * pNext = nullptr;
 public:
 	S_surface_format_KHR surfaceFormat = {};
@@ -12613,7 +12633,7 @@ static_assert(
 */
 struct		S_display_properties2_KHR{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_DISPLAY_PROPERTIES_2_KHR;
 	void * pNext = nullptr;
 public:
 	S_display_properties_KHR displayProperties = {};
@@ -12637,7 +12657,7 @@ static_assert(
 */
 struct		S_display_plane_properties2_KHR{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_DISPLAY_PLANE_PROPERTIES_2_KHR;
 	void * pNext = nullptr;
 public:
 	S_display_plane_properties_KHR displayPlaneProperties = {};
@@ -12661,7 +12681,7 @@ static_assert(
 */
 struct		S_display_mode_properties2_KHR{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_DISPLAY_MODE_PROPERTIES_2_KHR;
 	void * pNext = nullptr;
 public:
 	S_display_mode_properties_KHR displayModeProperties = {};
@@ -12684,10 +12704,10 @@ static_assert(
 */
 struct		S_display_plane_info2_KHR{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_DISPLAY_PLANE_INFO_2_KHR;
 	 void * pNext = nullptr;
 public:
-	VkDisplayModeKHR mode = 0;
+	VkDisplayModeKHR mode = VK_NULL_HANDLE;
 	uint32_t planeIndex = 0;
 
 S_display_plane_info2_KHR( VkDisplayPlaneInfo2KHR const & rhs )
@@ -12709,7 +12729,7 @@ static_assert(
 */
 struct		S_display_plane_capabilities2_KHR{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_DISPLAY_PLANE_CAPABILITIES_2_KHR;
 	void * pNext = nullptr;
 public:
 	S_display_plane_capabilities_KHR capabilities = {};
@@ -12732,10 +12752,10 @@ static_assert(
 */
 struct		S_buffer_memory_requirements_info2{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_BUFFER_MEMORY_REQUIREMENTS_INFO_2;
 	 void * pNext = nullptr;
 public:
-	VkBuffer buffer = 0;
+	VkBuffer buffer = VK_NULL_HANDLE;
 
 S_buffer_memory_requirements_info2( VkBufferMemoryRequirementsInfo2 const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_buffer_memory_requirements_info2 ) );	}
@@ -12756,7 +12776,7 @@ ex to: VkImageMemoryRequirementsInfo2
 */
 struct		S_image_plane_memory_requirements_info{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_IMAGE_PLANE_MEMORY_REQUIREMENTS_INFO;
 	 void * pNext = nullptr;
 public:
 	F_image_aspect planeAspect;
@@ -12783,10 +12803,10 @@ ex:
 */
 struct		S_image_memory_requirements_info2{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_IMAGE_MEMORY_REQUIREMENTS_INFO_2;
 	 void * pNext = nullptr;
 public:
-	VkImage image = 0;
+	VkImage image = VK_NULL_HANDLE;
 
 S_image_memory_requirements_info2( VkImageMemoryRequirementsInfo2 const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_image_memory_requirements_info2 ) );	}
@@ -12808,10 +12828,10 @@ static_assert(
 */
 struct		S_image_sparse_memory_requirements_info2{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_IMAGE_SPARSE_MEMORY_REQUIREMENTS_INFO_2;
 	 void * pNext = nullptr;
 public:
-	VkImage image = 0;
+	VkImage image = VK_NULL_HANDLE;
 
 S_image_sparse_memory_requirements_info2( VkImageSparseMemoryRequirementsInfo2 const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_image_sparse_memory_requirements_info2 ) );	}
@@ -12833,7 +12853,7 @@ ex to: VkMemoryRequirements2
 */
 struct		S_memory_dedicated_requirements{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_MEMORY_DEDICATED_REQUIREMENTS;
 	void * pNext = nullptr;
 public:
 	VkBool32 prefersDedicatedAllocation = 0;
@@ -12862,7 +12882,7 @@ ex:
 */
 struct		S_memory_requirements2{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_MEMORY_REQUIREMENTS_2;
 	void * pNext = nullptr;
 public:
 	S_memory_requirements memoryRequirements = {};
@@ -12888,7 +12908,7 @@ static_assert(
 */
 struct		S_sparse_image_memory_requirements2{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_SPARSE_IMAGE_MEMORY_REQUIREMENTS_2;
 	void * pNext = nullptr;
 public:
 	S_sparse_image_memory_requirements memoryRequirements = {};
@@ -12913,7 +12933,7 @@ ex:
 */
 struct		S_sampler_ycbcr_conversion_create_info{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_CREATE_INFO;
 	 void * pNext = nullptr;
 public:
 	E_format format = E_format::e_undefined;
@@ -12947,10 +12967,10 @@ static_assert(
 */
 struct		S_conditional_rendering_begin_info_EXT{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_CONDITIONAL_RENDERING_BEGIN_INFO_EXT;
 	 void * pNext = nullptr;
 public:
-	VkBuffer buffer = 0;
+	VkBuffer buffer = VK_NULL_HANDLE;
 	VkDeviceSize offset = 0;
 	F_conditional_rendering_EXT flags;
 
@@ -12972,7 +12992,7 @@ static_assert(
 */
 struct		S_device_queue_info2{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_DEVICE_QUEUE_INFO_2;
 	 void * pNext = nullptr;
 public:
 	F_device_queue_create flags;
@@ -12998,7 +13018,7 @@ static_assert(
 */
 struct		S_multisample_properties_EXT{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_MULTISAMPLE_PROPERTIES_EXT;
 	void * pNext = nullptr;
 public:
 	S_extent_2d maxSampleLocationGridSize = {};
@@ -13021,7 +13041,7 @@ static_assert(
 */
 struct		S_validation_cache_create_info_EXT{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_VALIDATION_CACHE_CREATE_INFO_EXT;
 	 void * pNext = nullptr;
 public:
 	VkValidationCacheCreateFlagsEXT flags = 0;
@@ -13048,7 +13068,7 @@ ex to: VkDescriptorSetLayoutSupport
 */
 struct		S_descriptor_set_variable_descriptor_count_layout_support_EXT{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_DESCRIPTOR_SET_VARIABLE_DESCRIPTOR_COUNT_LAYOUT_SUPPORT_EXT;
 	void * pNext = nullptr;
 public:
 	uint32_t maxVariableDescriptorCount = 0;
@@ -13076,7 +13096,7 @@ ex:
 */
 struct		S_descriptor_set_layout_support{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_SUPPORT;
 	void * pNext = nullptr;
 public:
 	VkBool32 supported = 0;
@@ -13102,7 +13122,7 @@ static_assert(
 #ifdef VK_USE_PLATFORM_ANDROID_KHR
 struct		S_native_buffer_ANDROID{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_NATIVE_BUFFER_ANDROID;
 	 void * pNext = nullptr;
 public:
 	const void * handle = nullptr;
@@ -13155,7 +13175,7 @@ struct		S_shader_statistics_info_AMD{
 */
 struct		S_debug_utils_object_name_info_EXT{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_DEBUG_UTILS_OBJECT_NAME_INFO_EXT;
 	 void * pNext = nullptr;
 public:
 	E_object_type objectType = E_object_type::e_unknown;
@@ -13180,7 +13200,7 @@ static_assert(
 */
 struct		S_debug_utils_object_tag_info_EXT{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_DEBUG_UTILS_OBJECT_TAG_INFO_EXT;
 	 void * pNext = nullptr;
 public:
 	E_object_type objectType = E_object_type::e_unknown;
@@ -13207,7 +13227,7 @@ static_assert(
 */
 struct		S_debug_utils_label_EXT{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_DEBUG_UTILS_LABEL_EXT;
 	 void * pNext = nullptr;
 public:
 	const char * pLabelName = nullptr;
@@ -13231,7 +13251,7 @@ static_assert(
 */
 struct		S_debug_utils_messenger_callback_data_EXT{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CALLBACK_DATA_EXT;
 	 void * pNext = nullptr;
 public:
 	VkDebugUtilsMessengerCallbackDataFlagsEXT flags = 0;
@@ -13263,7 +13283,7 @@ static_assert(
 */
 struct		S_memory_host_pointer_properties_EXT{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_MEMORY_HOST_POINTER_PROPERTIES_EXT;
 	void * pNext = nullptr;
 public:
 	uint32_t memoryTypeBits = 0;
@@ -13286,7 +13306,7 @@ static_assert(
 */
 struct		S_attachment_description2_KHR{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_ATTACHMENT_DESCRIPTION_2_KHR;
 	 void * pNext = nullptr;
 public:
 	F_attachment_description flags;
@@ -13317,7 +13337,7 @@ static_assert(
 */
 struct		S_attachment_reference2_KHR{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_ATTACHMENT_REFERENCE_2_KHR;
 	 void * pNext = nullptr;
 public:
 	uint32_t attachment = 0;
@@ -13342,7 +13362,7 @@ static_assert(
 */
 struct		S_subpass_description2_KHR{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_SUBPASS_DESCRIPTION_2_KHR;
 	 void * pNext = nullptr;
 public:
 	F_subpass_description flags;
@@ -13375,7 +13395,7 @@ static_assert(
 */
 struct		S_subpass_dependency2_KHR{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_SUBPASS_DEPENDENCY_2_KHR;
 	 void * pNext = nullptr;
 public:
 	uint32_t srcSubpass = 0;
@@ -13405,7 +13425,7 @@ static_assert(
 */
 struct		S_render_pass_create_info2_KHR{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_RENDER_PASS_CREATE_INFO_2_KHR;
 	 void * pNext = nullptr;
 public:
 	F_render_pass_create flags;
@@ -13436,7 +13456,7 @@ static_assert(
 */
 struct		S_subpass_begin_info_KHR{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_SUBPASS_BEGIN_INFO_KHR;
 	 void * pNext = nullptr;
 public:
 	E_subpass_contents contents = E_subpass_contents::e_inline;
@@ -13459,7 +13479,7 @@ static_assert(
 */
 struct		S_subpass_end_info_KHR{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_SUBPASS_END_INFO_KHR;
 	 void * pNext = nullptr;
 
 S_subpass_end_info_KHR( VkSubpassEndInfoKHR const & rhs )
@@ -13483,7 +13503,7 @@ ex to: VkAndroidHardwareBufferPropertiesANDROID
 #ifdef VK_USE_PLATFORM_ANDROID_KHR
 struct		S_android_hardware_buffer_format_properties_ANDROID{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_ANDROID_HARDWARE_BUFFER_FORMAT_PROPERTIES_ANDROID;
 	void * pNext = nullptr;
 public:
 	E_format format = E_format::e_undefined;
@@ -13522,7 +13542,7 @@ ex:
 #ifdef VK_USE_PLATFORM_ANDROID_KHR
 struct		S_android_hardware_buffer_properties_ANDROID{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_ANDROID_HARDWARE_BUFFER_PROPERTIES_ANDROID;
 	void * pNext = nullptr;
 public:
 	VkDeviceSize allocationSize = 0;
@@ -13552,10 +13572,10 @@ static_assert(
 #ifdef VK_USE_PLATFORM_ANDROID_KHR
 struct		S_memory_get_android_hardware_buffer_info_ANDROID{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_MEMORY_GET_ANDROID_HARDWARE_BUFFER_INFO_ANDROID;
 	 void * pNext = nullptr;
 public:
-	VkDeviceMemory memory = 0;
+	VkDeviceMemory memory = VK_NULL_HANDLE;
 
 S_memory_get_android_hardware_buffer_info_ANDROID( VkMemoryGetAndroidHardwareBufferInfoANDROID const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_memory_get_android_hardware_buffer_info_ANDROID ) );	}
@@ -13577,7 +13597,7 @@ static_assert(
 */
 struct		S_checkpoint_data_NV{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_CHECKPOINT_DATA_NV;
 	void * pNext = nullptr;
 public:
 	F_pipeline_stage stage;
@@ -13609,7 +13629,7 @@ struct		S_draw_mesh_tasks_indirect_command_NV{
 */
 struct		S_raytracing_pipeline_create_info_NVX{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_RAYTRACING_PIPELINE_CREATE_INFO_NVX;
 	 void * pNext = nullptr;
 public:
 	F_pipeline_create flags;
@@ -13617,8 +13637,8 @@ public:
 	const S_pipeline_shader_stage_create_info * pStages = nullptr;
 	const uint32_t * pGroupNumbers = nullptr;
 	uint32_t maxRecursionDepth = 0;
-	VkPipelineLayout layout = 0;
-	VkPipeline basePipelineHandle = 0;
+	VkPipelineLayout layout = VK_NULL_HANDLE;
+	VkPipeline basePipelineHandle = VK_NULL_HANDLE;
 	int32_t basePipelineIndex = 0;
 
 S_raytracing_pipeline_create_info_NVX( VkRaytracingPipelineCreateInfoNVX const & rhs )
@@ -13639,20 +13659,45 @@ static_assert(
 */
 struct		S_geometry_triangles_NVX{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_GEOMETRY_TRIANGLES_NVX;
 	 void * pNext = nullptr;
 public:
-	VkBuffer vertexData = 0;
+	VkBuffer vertexData = VK_NULL_HANDLE;
 	VkDeviceSize vertexOffset = 0;
 	uint32_t vertexCount = 0;
 	VkDeviceSize vertexStride = 0;
 	E_format vertexFormat = E_format::e_undefined;
-	VkBuffer indexData = 0;
+	VkBuffer indexData = VK_NULL_HANDLE;
 	VkDeviceSize indexOffset = 0;
 	uint32_t indexCount = 0;
 	E_index_type indexType = E_index_type::e_uint16;
-	VkBuffer transformData = 0;
+	VkBuffer transformData = VK_NULL_HANDLE;
 	VkDeviceSize transformOffset = 0;
+
+	S_geometry_triangles_NVX(
+		VkBuffer vertexData_ = VK_NULL_HANDLE,
+		VkDeviceSize vertexOffset_ = 0,
+		uint32_t vertexCount_ = 0,
+		VkDeviceSize vertexStride_ = 0,
+		E_format vertexFormat_ = E_format::e_undefined,
+		VkBuffer indexData_ = VK_NULL_HANDLE,
+		VkDeviceSize indexOffset_ = 0,
+		uint32_t indexCount_ = 0,
+		E_index_type indexType_ = E_index_type::e_uint16,
+		VkBuffer transformData_ = VK_NULL_HANDLE,
+		VkDeviceSize transformOffset_ = 0)
+		: vertexData(vertexData_)
+		, vertexOffset(vertexOffset_)
+		, vertexCount(vertexCount_)
+		, vertexStride(vertexStride_)
+		, vertexFormat(vertexFormat_)
+		, indexData(indexData_)
+		, indexOffset(indexOffset_)
+		, indexCount(indexCount_)
+		, indexType(indexType_)
+		, transformData(transformData_)
+		, transformOffset(transformOffset_)
+	{}
 
 S_geometry_triangles_NVX( VkGeometryTrianglesNVX const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_geometry_triangles_NVX ) );	}
@@ -13672,13 +13717,24 @@ static_assert(
 */
 struct		S_geometry_aabb_NVX{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_GEOMETRY_AABB_NVX;
 	 void * pNext = nullptr;
 public:
-	VkBuffer aabbData = 0;
+	VkBuffer aabbData = VK_NULL_HANDLE;
 	uint32_t numAABBs = 0;
 	uint32_t stride = 0;
 	VkDeviceSize offset = 0;
+
+	S_geometry_aabb_NVX(
+		VkBuffer aabbData_ = VK_NULL_HANDLE,
+		uint32_t numAABBs_ = 0,
+		uint32_t stride_ = 0,
+		VkDeviceSize offset_ = 0)
+		:aabbData(aabbData_)
+		,numAABBs(numAABBs_)
+		,stride(stride_)
+		,offset(offset_)
+	{}
 
 S_geometry_aabb_NVX( VkGeometryAABBNVX const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_geometry_aabb_NVX ) );	}
@@ -13706,12 +13762,12 @@ struct		S_geometry_data_NVX{
 */
 struct		S_geometry_NVX{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_GEOMETRY_NVX;
 	 void * pNext = nullptr;
 public:
 	E_geometry_type_NVX geometryType = E_geometry_type_NVX::e_triangles_nvx;
 	S_geometry_data_NVX geometry = {};
-	F_geometry_NVX flags;
+	F_geometry_NVX flags = F_geometry_NVX::b_no_duplicate_any_hit_invocation_nvx;
 
 S_geometry_NVX( VkGeometryNVX const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_geometry_NVX ) );	}
@@ -13731,7 +13787,7 @@ static_assert(
 */
 struct		S_acceleration_structure_create_info_NVX{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_CREATE_INFO_NVX;
 	 void * pNext = nullptr;
 public:
 	E_acceleration_structure_type_NVX type = E_acceleration_structure_type_NVX::e_top_level_nvx;
@@ -13759,11 +13815,11 @@ static_assert(
 */
 struct		S_bind_acceleration_structure_memory_info_NVX{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_BIND_ACCELERATION_STRUCTURE_MEMORY_INFO_NVX;
 	 void * pNext = nullptr;
 public:
-	VkAccelerationStructureNVX accelerationStructure = 0;
-	VkDeviceMemory memory = 0;
+	VkAccelerationStructureNVX accelerationStructure = VK_NULL_HANDLE;
+	VkDeviceMemory memory = VK_NULL_HANDLE;
 	VkDeviceSize memoryOffset = 0;
 	uint32_t deviceIndexCount = 0;
 	const uint32_t * pDeviceIndices = nullptr;
@@ -13786,10 +13842,10 @@ static_assert(
 */
 struct		S_acceleration_structure_memory_requirements_info_NVX{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_MEMORY_REQUIREMENTS_INFO_NVX;
 	 void * pNext = nullptr;
 public:
-	VkAccelerationStructureNVX accelerationStructure = 0;
+	VkAccelerationStructureNVX accelerationStructure = VK_NULL_HANDLE;
 
 S_acceleration_structure_memory_requirements_info_NVX( VkAccelerationStructureMemoryRequirementsInfoNVX const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_acceleration_structure_memory_requirements_info_NVX ) );	}
@@ -13811,7 +13867,7 @@ static_assert(
 #ifdef LAKA_UNKNOW
 struct		S_image_drm_format_modifier_properties_EXT{
 private:
-	VkStructureType sType;
+	VkStructureType sType = VK_STRUCTURE_TYPE_IMAGE_DRM_FORMAT_MODIFIER_PROPERTIES_EXT;
 	void * pNext = nullptr;
 public:
 	uint64_t drmFormatModifier = 0;
