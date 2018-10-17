@@ -4371,73 +4371,89 @@ struct S_image_drm_format_modifier_properties_EXT;
 /*	VkOffset2D
 */
 struct		S_offset_2d{
-	int32_t x = 0;
-	int32_t y = 0;
+	int32_t x;
+	int32_t y;
+
+S_offset_2d(){}
 
 };
 
 /*	VkOffset3D
 */
 struct		S_offset_3d{
-	int32_t x = 0;
-	int32_t y = 0;
-	int32_t z = 0;
+	int32_t x;
+	int32_t y;
+	int32_t z;
+
+S_offset_3d(){}
 
 };
 
 /*	VkExtent2D
 */
 struct		S_extent_2d{
-	uint32_t width = 0;
-	uint32_t height = 0;
+	uint32_t width;
+	uint32_t height;
+
+S_extent_2d(){}
 
 };
 
 /*	VkExtent3D
 */
 struct		S_extent_3d{
-	uint32_t width = 0;
-	uint32_t height = 0;
-	uint32_t depth = 0;
+	uint32_t width;
+	uint32_t height;
+	uint32_t depth;
+
+S_extent_3d(){}
 
 };
 
 /*	VkViewport
 */
 struct		S_viewport{
-	float x = 0;
-	float y = 0;
-	float width = 0;
-	float height = 0;
-	float minDepth = 0;
-	float maxDepth = 0;
+	float x;
+	float y;
+	float width;
+	float height;
+	float minDepth;
+	float maxDepth;
+
+S_viewport(){}
 
 };
 
 /*	VkRect2D
 */
 struct		S_rect_2d{
-	S_offset_2d offset = {};
-	S_extent_2d extent = {};
+	S_offset_2d offset;
+	S_extent_2d extent;
+
+S_rect_2d(){}
 
 };
 
 /*	VkClearRect
 */
 struct		S_clear_rect{
-	S_rect_2d rect = {};
-	uint32_t baseArrayLayer = 0;
-	uint32_t layerCount = 0;
+	S_rect_2d rect;
+	uint32_t baseArrayLayer;
+	uint32_t layerCount;
+
+S_clear_rect(){}
 
 };
 
 /*	VkComponentMapping
 */
 struct		S_component_mapping{
-	E_component_swizzle r = E_component_swizzle::e_identity;
-	E_component_swizzle g = E_component_swizzle::e_identity;
-	E_component_swizzle b = E_component_swizzle::e_identity;
-	E_component_swizzle a = E_component_swizzle::e_identity;
+	E_component_swizzle r;
+	E_component_swizzle g;
+	E_component_swizzle b;
+	E_component_swizzle a;
+
+S_component_mapping(){}
 
 };
 
@@ -4445,112 +4461,114 @@ struct		S_component_mapping{
 (returnedonly)
 */
 struct		S_physical_device_limits{
-	uint32_t maxImageDimension1D = 0;
-	uint32_t maxImageDimension2D = 0;
-	uint32_t maxImageDimension3D = 0;
-	uint32_t maxImageDimensionCube = 0;
-	uint32_t maxImageArrayLayers = 0;
-	uint32_t maxTexelBufferElements = 0;
-	uint32_t maxUniformBufferRange = 0;
-	uint32_t maxStorageBufferRange = 0;
-	uint32_t maxPushConstantsSize = 0;
-	uint32_t maxMemoryAllocationCount = 0;
-	uint32_t maxSamplerAllocationCount = 0;
-	VkDeviceSize bufferImageGranularity = 0;
-	VkDeviceSize sparseAddressSpaceSize = 0;
-	uint32_t maxBoundDescriptorSets = 0;
-	uint32_t maxPerStageDescriptorSamplers = 0;
-	uint32_t maxPerStageDescriptorUniformBuffers = 0;
-	uint32_t maxPerStageDescriptorStorageBuffers = 0;
-	uint32_t maxPerStageDescriptorSampledImages = 0;
-	uint32_t maxPerStageDescriptorStorageImages = 0;
-	uint32_t maxPerStageDescriptorInputAttachments = 0;
-	uint32_t maxPerStageResources = 0;
-	uint32_t maxDescriptorSetSamplers = 0;
-	uint32_t maxDescriptorSetUniformBuffers = 0;
-	uint32_t maxDescriptorSetUniformBuffersDynamic = 0;
-	uint32_t maxDescriptorSetStorageBuffers = 0;
-	uint32_t maxDescriptorSetStorageBuffersDynamic = 0;
-	uint32_t maxDescriptorSetSampledImages = 0;
-	uint32_t maxDescriptorSetStorageImages = 0;
-	uint32_t maxDescriptorSetInputAttachments = 0;
-	uint32_t maxVertexInputAttributes = 0;
-	uint32_t maxVertexInputBindings = 0;
-	uint32_t maxVertexInputAttributeOffset = 0;
-	uint32_t maxVertexInputBindingStride = 0;
-	uint32_t maxVertexOutputComponents = 0;
-	uint32_t maxTessellationGenerationLevel = 0;
-	uint32_t maxTessellationPatchSize = 0;
-	uint32_t maxTessellationControlPerVertexInputComponents = 0;
-	uint32_t maxTessellationControlPerVertexOutputComponents = 0;
-	uint32_t maxTessellationControlPerPatchOutputComponents = 0;
-	uint32_t maxTessellationControlTotalOutputComponents = 0;
-	uint32_t maxTessellationEvaluationInputComponents = 0;
-	uint32_t maxTessellationEvaluationOutputComponents = 0;
-	uint32_t maxGeometryShaderInvocations = 0;
-	uint32_t maxGeometryInputComponents = 0;
-	uint32_t maxGeometryOutputComponents = 0;
-	uint32_t maxGeometryOutputVertices = 0;
-	uint32_t maxGeometryTotalOutputComponents = 0;
-	uint32_t maxFragmentInputComponents = 0;
-	uint32_t maxFragmentOutputAttachments = 0;
-	uint32_t maxFragmentDualSrcAttachments = 0;
-	uint32_t maxFragmentCombinedOutputResources = 0;
-	uint32_t maxComputeSharedMemorySize = 0;
-	uint32_t maxComputeWorkGroupCount[3] = {};
-	uint32_t maxComputeWorkGroupInvocations = 0;
-	uint32_t maxComputeWorkGroupSize[3] = {};
-	uint32_t subPixelPrecisionBits = 0;
-	uint32_t subTexelPrecisionBits = 0;
-	uint32_t mipmapPrecisionBits = 0;
-	uint32_t maxDrawIndexedIndexValue = 0;
-	uint32_t maxDrawIndirectCount = 0;
-	float maxSamplerLodBias = 0;
-	float maxSamplerAnisotropy = 0;
-	uint32_t maxViewports = 0;
-	uint32_t maxViewportDimensions[2] = {};
-	float viewportBoundsRange[2] = {};
-	uint32_t viewportSubPixelBits = 0;
-	size_t minMemoryMapAlignment = 0;
-	VkDeviceSize minTexelBufferOffsetAlignment = 0;
-	VkDeviceSize minUniformBufferOffsetAlignment = 0;
-	VkDeviceSize minStorageBufferOffsetAlignment = 0;
-	int32_t minTexelOffset = 0;
-	uint32_t maxTexelOffset = 0;
-	int32_t minTexelGatherOffset = 0;
-	uint32_t maxTexelGatherOffset = 0;
-	float minInterpolationOffset = 0;
-	float maxInterpolationOffset = 0;
-	uint32_t subPixelInterpolationOffsetBits = 0;
-	uint32_t maxFramebufferWidth = 0;
-	uint32_t maxFramebufferHeight = 0;
-	uint32_t maxFramebufferLayers = 0;
+	uint32_t maxImageDimension1D;
+	uint32_t maxImageDimension2D;
+	uint32_t maxImageDimension3D;
+	uint32_t maxImageDimensionCube;
+	uint32_t maxImageArrayLayers;
+	uint32_t maxTexelBufferElements;
+	uint32_t maxUniformBufferRange;
+	uint32_t maxStorageBufferRange;
+	uint32_t maxPushConstantsSize;
+	uint32_t maxMemoryAllocationCount;
+	uint32_t maxSamplerAllocationCount;
+	VkDeviceSize bufferImageGranularity;
+	VkDeviceSize sparseAddressSpaceSize;
+	uint32_t maxBoundDescriptorSets;
+	uint32_t maxPerStageDescriptorSamplers;
+	uint32_t maxPerStageDescriptorUniformBuffers;
+	uint32_t maxPerStageDescriptorStorageBuffers;
+	uint32_t maxPerStageDescriptorSampledImages;
+	uint32_t maxPerStageDescriptorStorageImages;
+	uint32_t maxPerStageDescriptorInputAttachments;
+	uint32_t maxPerStageResources;
+	uint32_t maxDescriptorSetSamplers;
+	uint32_t maxDescriptorSetUniformBuffers;
+	uint32_t maxDescriptorSetUniformBuffersDynamic;
+	uint32_t maxDescriptorSetStorageBuffers;
+	uint32_t maxDescriptorSetStorageBuffersDynamic;
+	uint32_t maxDescriptorSetSampledImages;
+	uint32_t maxDescriptorSetStorageImages;
+	uint32_t maxDescriptorSetInputAttachments;
+	uint32_t maxVertexInputAttributes;
+	uint32_t maxVertexInputBindings;
+	uint32_t maxVertexInputAttributeOffset;
+	uint32_t maxVertexInputBindingStride;
+	uint32_t maxVertexOutputComponents;
+	uint32_t maxTessellationGenerationLevel;
+	uint32_t maxTessellationPatchSize;
+	uint32_t maxTessellationControlPerVertexInputComponents;
+	uint32_t maxTessellationControlPerVertexOutputComponents;
+	uint32_t maxTessellationControlPerPatchOutputComponents;
+	uint32_t maxTessellationControlTotalOutputComponents;
+	uint32_t maxTessellationEvaluationInputComponents;
+	uint32_t maxTessellationEvaluationOutputComponents;
+	uint32_t maxGeometryShaderInvocations;
+	uint32_t maxGeometryInputComponents;
+	uint32_t maxGeometryOutputComponents;
+	uint32_t maxGeometryOutputVertices;
+	uint32_t maxGeometryTotalOutputComponents;
+	uint32_t maxFragmentInputComponents;
+	uint32_t maxFragmentOutputAttachments;
+	uint32_t maxFragmentDualSrcAttachments;
+	uint32_t maxFragmentCombinedOutputResources;
+	uint32_t maxComputeSharedMemorySize;
+	uint32_t maxComputeWorkGroupCount[3];
+	uint32_t maxComputeWorkGroupInvocations;
+	uint32_t maxComputeWorkGroupSize[3];
+	uint32_t subPixelPrecisionBits;
+	uint32_t subTexelPrecisionBits;
+	uint32_t mipmapPrecisionBits;
+	uint32_t maxDrawIndexedIndexValue;
+	uint32_t maxDrawIndirectCount;
+	float maxSamplerLodBias;
+	float maxSamplerAnisotropy;
+	uint32_t maxViewports;
+	uint32_t maxViewportDimensions[2];
+	float viewportBoundsRange[2];
+	uint32_t viewportSubPixelBits;
+	size_t minMemoryMapAlignment;
+	VkDeviceSize minTexelBufferOffsetAlignment;
+	VkDeviceSize minUniformBufferOffsetAlignment;
+	VkDeviceSize minStorageBufferOffsetAlignment;
+	int32_t minTexelOffset;
+	uint32_t maxTexelOffset;
+	int32_t minTexelGatherOffset;
+	uint32_t maxTexelGatherOffset;
+	float minInterpolationOffset;
+	float maxInterpolationOffset;
+	uint32_t subPixelInterpolationOffsetBits;
+	uint32_t maxFramebufferWidth;
+	uint32_t maxFramebufferHeight;
+	uint32_t maxFramebufferLayers;
 	F_sample_count framebufferColorSampleCounts;
 	F_sample_count framebufferDepthSampleCounts;
 	F_sample_count framebufferStencilSampleCounts;
 	F_sample_count framebufferNoAttachmentsSampleCounts;
-	uint32_t maxColorAttachments = 0;
+	uint32_t maxColorAttachments;
 	F_sample_count sampledImageColorSampleCounts;
 	F_sample_count sampledImageIntegerSampleCounts;
 	F_sample_count sampledImageDepthSampleCounts;
 	F_sample_count sampledImageStencilSampleCounts;
 	F_sample_count storageImageSampleCounts;
-	uint32_t maxSampleMaskWords = 0;
-	VkBool32 timestampComputeAndGraphics = 0;
-	float timestampPeriod = 0;
-	uint32_t maxClipDistances = 0;
-	uint32_t maxCullDistances = 0;
-	uint32_t maxCombinedClipAndCullDistances = 0;
-	uint32_t discreteQueuePriorities = 0;
-	float pointSizeRange[2] = {};
-	float lineWidthRange[2] = {};
-	float pointSizeGranularity = 0;
-	float lineWidthGranularity = 0;
-	VkBool32 strictLines = 0;
-	VkBool32 standardSampleLocations = 0;
-	VkDeviceSize optimalBufferCopyOffsetAlignment = 0;
-	VkDeviceSize optimalBufferCopyRowPitchAlignment = 0;
-	VkDeviceSize nonCoherentAtomSize = 0;
+	uint32_t maxSampleMaskWords;
+	VkBool32 timestampComputeAndGraphics;
+	float timestampPeriod;
+	uint32_t maxClipDistances;
+	uint32_t maxCullDistances;
+	uint32_t maxCombinedClipAndCullDistances;
+	uint32_t discreteQueuePriorities;
+	float pointSizeRange[2];
+	float lineWidthRange[2];
+	float pointSizeGranularity;
+	float lineWidthGranularity;
+	VkBool32 strictLines;
+	VkBool32 standardSampleLocations;
+	VkDeviceSize optimalBufferCopyOffsetAlignment;
+	VkDeviceSize optimalBufferCopyRowPitchAlignment;
+	VkDeviceSize nonCoherentAtomSize;
+
+S_physical_device_limits(){}
 
 };
 
@@ -4558,11 +4576,13 @@ struct		S_physical_device_limits{
 (returnedonly)
 */
 struct		S_physical_device_sparse_properties{
-	VkBool32 residencyStandard2DBlockShape = 0;
-	VkBool32 residencyStandard2DMultisampleBlockShape = 0;
-	VkBool32 residencyStandard3DBlockShape = 0;
-	VkBool32 residencyAlignedMipSize = 0;
-	VkBool32 residencyNonResidentStrict = 0;
+	VkBool32 residencyStandard2DBlockShape;
+	VkBool32 residencyStandard2DMultisampleBlockShape;
+	VkBool32 residencyStandard3DBlockShape;
+	VkBool32 residencyAlignedMipSize;
+	VkBool32 residencyNonResidentStrict;
+
+S_physical_device_sparse_properties(){}
 
 };
 
@@ -4570,15 +4590,17 @@ struct		S_physical_device_sparse_properties{
 (returnedonly)
 */
 struct		S_physical_device_properties{
-	uint32_t apiVersion = 0;
-	uint32_t driverVersion = 0;
-	uint32_t vendorID = 0;
-	uint32_t deviceID = 0;
-	E_physical_device_type deviceType = E_physical_device_type::e_other;
-	char deviceName[VK_MAX_PHYSICAL_DEVICE_NAME_SIZE] = {};
-	uint8_t pipelineCacheUUID[VK_UUID_SIZE] = {};
-	S_physical_device_limits limits = {};
-	S_physical_device_sparse_properties sparseProperties = {};
+	uint32_t apiVersion;
+	uint32_t driverVersion;
+	uint32_t vendorID;
+	uint32_t deviceID;
+	E_physical_device_type deviceType;
+	char deviceName[VK_MAX_PHYSICAL_DEVICE_NAME_SIZE];
+	uint8_t pipelineCacheUUID[VK_UUID_SIZE];
+	S_physical_device_limits limits;
+	S_physical_device_sparse_properties sparseProperties;
+
+S_physical_device_properties(){}
 
 };
 
@@ -4586,8 +4608,10 @@ struct		S_physical_device_properties{
 (returnedonly)
 */
 struct		S_extension_properties{
-	char extensionName[VK_MAX_EXTENSION_NAME_SIZE] = {};
-	uint32_t specVersion = 0;
+	char extensionName[VK_MAX_EXTENSION_NAME_SIZE];
+	uint32_t specVersion;
+
+S_extension_properties(){}
 
 };
 
@@ -4595,10 +4619,12 @@ struct		S_extension_properties{
 (returnedonly)
 */
 struct		S_layer_properties{
-	char layerName[VK_MAX_EXTENSION_NAME_SIZE] = {};
-	uint32_t specVersion = 0;
-	uint32_t implementationVersion = 0;
-	char description[VK_MAX_DESCRIPTION_SIZE] = {};
+	char layerName[VK_MAX_EXTENSION_NAME_SIZE];
+	uint32_t specVersion;
+	uint32_t implementationVersion;
+	char description[VK_MAX_DESCRIPTION_SIZE];
+
+S_layer_properties(){}
 
 };
 
@@ -4609,11 +4635,27 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_APPLICATION_INFO;
 	 void * pNext = nullptr;
 public:
-	const char * pApplicationName = nullptr;
-	uint32_t applicationVersion = 0;
-	const char * pEngineName = nullptr;
-	uint32_t engineVersion = 0;
-	uint32_t apiVersion = 0;
+	const char * pApplicationName;
+	uint32_t applicationVersion;
+	const char * pEngineName;
+	uint32_t engineVersion;
+	uint32_t apiVersion;
+
+S_application_info(){}
+
+S_application_info(
+	const char * pApplicationName_,
+	uint32_t applicationVersion_,
+	const char * pEngineName_,
+	uint32_t engineVersion_,
+	uint32_t apiVersion_)
+	:pApplicationName(pApplicationName_)
+	,applicationVersion(applicationVersion_)
+	,pEngineName(pEngineName_)
+	,engineVersion(engineVersion_)
+	,apiVersion(apiVersion_)
+{
+}
 
 S_application_info( VkApplicationInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_application_info ) );	}
@@ -4632,12 +4674,14 @@ static_assert(
 /*	VkAllocationCallbacks
 */
 struct		S_allocation_callbacks{
-	void * pUserData = nullptr;
-	PFN_vkAllocationFunction pfnAllocation = 0;
-	PFN_vkReallocationFunction pfnReallocation = 0;
-	PFN_vkFreeFunction pfnFree = 0;
-	PFN_vkInternalAllocationNotification pfnInternalAllocation = 0;
-	PFN_vkInternalFreeNotification pfnInternalFree = 0;
+	void * pUserData;
+	PFN_vkAllocationFunction pfnAllocation;
+	PFN_vkReallocationFunction pfnReallocation;
+	PFN_vkFreeFunction pfnFree;
+	PFN_vkInternalAllocationNotification pfnInternalAllocation;
+	PFN_vkInternalFreeNotification pfnInternalFree;
+
+S_allocation_callbacks(){}
 
 };
 
@@ -4649,7 +4693,15 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_DEVICE_QUEUE_GLOBAL_PRIORITY_CREATE_INFO_EXT;
 	 void * pNext = nullptr;
 public:
-	E_queue_global_priority_EXT globalPriority = E_queue_global_priority_EXT::e_low_ext;
+	E_queue_global_priority_EXT globalPriority;
+
+S_device_queue_global_priority_create_info_EXT(){}
+
+S_device_queue_global_priority_create_info_EXT(
+	E_queue_global_priority_EXT globalPriority_)
+	:globalPriority(globalPriority_)
+{
+}
 
 S_device_queue_global_priority_create_info_EXT( VkDeviceQueueGlobalPriorityCreateInfoEXT const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_device_queue_global_priority_create_info_EXT ) );	}
@@ -4677,9 +4729,23 @@ private:
 	 void * pNext = nullptr;
 public:
 	F_device_queue_create flags;
-	uint32_t queueFamilyIndex = 0;
-	uint32_t queueCount = 0;
-	const float * pQueuePriorities = nullptr;
+	uint32_t queueFamilyIndex;
+	uint32_t queueCount;
+	const float * pQueuePriorities;
+
+S_device_queue_create_info(){}
+
+S_device_queue_create_info(
+	F_device_queue_create flags_,
+	uint32_t queueFamilyIndex_,
+	uint32_t queueCount_,
+	const float * pQueuePriorities_)
+	:flags(flags_)
+	,queueFamilyIndex(queueFamilyIndex_)
+	,queueCount(queueCount_)
+	,pQueuePriorities(pQueuePriorities_)
+{
+}
 
 S_device_queue_create_info( VkDeviceQueueCreateInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_device_queue_create_info ) );	}
@@ -4700,61 +4766,63 @@ static_assert(
 /*	VkPhysicalDeviceFeatures
 */
 struct		S_physical_device_features{
-	VkBool32 robustBufferAccess = 0;
-	VkBool32 fullDrawIndexUint32 = 0;
-	VkBool32 imageCubeArray = 0;
-	VkBool32 independentBlend = 0;
-	VkBool32 geometryShader = 0;
-	VkBool32 tessellationShader = 0;
-	VkBool32 sampleRateShading = 0;
-	VkBool32 dualSrcBlend = 0;
-	VkBool32 logicOp = 0;
-	VkBool32 multiDrawIndirect = 0;
-	VkBool32 drawIndirectFirstInstance = 0;
-	VkBool32 depthClamp = 0;
-	VkBool32 depthBiasClamp = 0;
-	VkBool32 fillModeNonSolid = 0;
-	VkBool32 depthBounds = 0;
-	VkBool32 wideLines = 0;
-	VkBool32 largePoints = 0;
-	VkBool32 alphaToOne = 0;
-	VkBool32 multiViewport = 0;
-	VkBool32 samplerAnisotropy = 0;
-	VkBool32 textureCompressionETC2 = 0;
-	VkBool32 textureCompressionASTC_LDR = 0;
-	VkBool32 textureCompressionBC = 0;
-	VkBool32 occlusionQueryPrecise = 0;
-	VkBool32 pipelineStatisticsQuery = 0;
-	VkBool32 vertexPipelineStoresAndAtomics = 0;
-	VkBool32 fragmentStoresAndAtomics = 0;
-	VkBool32 shaderTessellationAndGeometryPointSize = 0;
-	VkBool32 shaderImageGatherExtended = 0;
-	VkBool32 shaderStorageImageExtendedFormats = 0;
-	VkBool32 shaderStorageImageMultisample = 0;
-	VkBool32 shaderStorageImageReadWithoutFormat = 0;
-	VkBool32 shaderStorageImageWriteWithoutFormat = 0;
-	VkBool32 shaderUniformBufferArrayDynamicIndexing = 0;
-	VkBool32 shaderSampledImageArrayDynamicIndexing = 0;
-	VkBool32 shaderStorageBufferArrayDynamicIndexing = 0;
-	VkBool32 shaderStorageImageArrayDynamicIndexing = 0;
-	VkBool32 shaderClipDistance = 0;
-	VkBool32 shaderCullDistance = 0;
-	VkBool32 shaderFloat64 = 0;
-	VkBool32 shaderInt64 = 0;
-	VkBool32 shaderInt16 = 0;
-	VkBool32 shaderResourceResidency = 0;
-	VkBool32 shaderResourceMinLod = 0;
-	VkBool32 sparseBinding = 0;
-	VkBool32 sparseResidencyBuffer = 0;
-	VkBool32 sparseResidencyImage2D = 0;
-	VkBool32 sparseResidencyImage3D = 0;
-	VkBool32 sparseResidency2Samples = 0;
-	VkBool32 sparseResidency4Samples = 0;
-	VkBool32 sparseResidency8Samples = 0;
-	VkBool32 sparseResidency16Samples = 0;
-	VkBool32 sparseResidencyAliased = 0;
-	VkBool32 variableMultisampleRate = 0;
-	VkBool32 inheritedQueries = 0;
+	VkBool32 robustBufferAccess;
+	VkBool32 fullDrawIndexUint32;
+	VkBool32 imageCubeArray;
+	VkBool32 independentBlend;
+	VkBool32 geometryShader;
+	VkBool32 tessellationShader;
+	VkBool32 sampleRateShading;
+	VkBool32 dualSrcBlend;
+	VkBool32 logicOp;
+	VkBool32 multiDrawIndirect;
+	VkBool32 drawIndirectFirstInstance;
+	VkBool32 depthClamp;
+	VkBool32 depthBiasClamp;
+	VkBool32 fillModeNonSolid;
+	VkBool32 depthBounds;
+	VkBool32 wideLines;
+	VkBool32 largePoints;
+	VkBool32 alphaToOne;
+	VkBool32 multiViewport;
+	VkBool32 samplerAnisotropy;
+	VkBool32 textureCompressionETC2;
+	VkBool32 textureCompressionASTC_LDR;
+	VkBool32 textureCompressionBC;
+	VkBool32 occlusionQueryPrecise;
+	VkBool32 pipelineStatisticsQuery;
+	VkBool32 vertexPipelineStoresAndAtomics;
+	VkBool32 fragmentStoresAndAtomics;
+	VkBool32 shaderTessellationAndGeometryPointSize;
+	VkBool32 shaderImageGatherExtended;
+	VkBool32 shaderStorageImageExtendedFormats;
+	VkBool32 shaderStorageImageMultisample;
+	VkBool32 shaderStorageImageReadWithoutFormat;
+	VkBool32 shaderStorageImageWriteWithoutFormat;
+	VkBool32 shaderUniformBufferArrayDynamicIndexing;
+	VkBool32 shaderSampledImageArrayDynamicIndexing;
+	VkBool32 shaderStorageBufferArrayDynamicIndexing;
+	VkBool32 shaderStorageImageArrayDynamicIndexing;
+	VkBool32 shaderClipDistance;
+	VkBool32 shaderCullDistance;
+	VkBool32 shaderFloat64;
+	VkBool32 shaderInt64;
+	VkBool32 shaderInt16;
+	VkBool32 shaderResourceResidency;
+	VkBool32 shaderResourceMinLod;
+	VkBool32 sparseBinding;
+	VkBool32 sparseResidencyBuffer;
+	VkBool32 sparseResidencyImage2D;
+	VkBool32 sparseResidencyImage3D;
+	VkBool32 sparseResidency2Samples;
+	VkBool32 sparseResidency4Samples;
+	VkBool32 sparseResidency8Samples;
+	VkBool32 sparseResidency16Samples;
+	VkBool32 sparseResidencyAliased;
+	VkBool32 variableMultisampleRate;
+	VkBool32 inheritedQueries;
+
+S_physical_device_features(){}
 
 };
 
@@ -4766,8 +4834,18 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VARIABLE_POINTER_FEATURES;
 	void * pNext = nullptr;
 public:
-	VkBool32 variablePointersStorageBuffer = 0;
-	VkBool32 variablePointers = 0;
+	VkBool32 variablePointersStorageBuffer;
+	VkBool32 variablePointers;
+
+S_physical_device_variable_pointer_features(){}
+
+S_physical_device_variable_pointer_features(
+	VkBool32 variablePointersStorageBuffer_,
+	VkBool32 variablePointers_)
+	:variablePointersStorageBuffer(variablePointersStorageBuffer_)
+	,variablePointers(variablePointers_)
+{
+}
 
 S_physical_device_variable_pointer_features( VkPhysicalDeviceVariablePointerFeatures const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_physical_device_variable_pointer_features ) );	}
@@ -4794,9 +4872,21 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTIVIEW_FEATURES;
 	void * pNext = nullptr;
 public:
-	VkBool32 multiview = 0;
-	VkBool32 multiviewGeometryShader = 0;
-	VkBool32 multiviewTessellationShader = 0;
+	VkBool32 multiview;
+	VkBool32 multiviewGeometryShader;
+	VkBool32 multiviewTessellationShader;
+
+S_physical_device_multiview_features(){}
+
+S_physical_device_multiview_features(
+	VkBool32 multiview_,
+	VkBool32 multiviewGeometryShader_,
+	VkBool32 multiviewTessellationShader_)
+	:multiview(multiview_)
+	,multiviewGeometryShader(multiviewGeometryShader_)
+	,multiviewTessellationShader(multiviewTessellationShader_)
+{
+}
 
 S_physical_device_multiview_features( VkPhysicalDeviceMultiviewFeatures const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_physical_device_multiview_features ) );	}
@@ -4823,10 +4913,24 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_16BIT_STORAGE_FEATURES;
 	void * pNext = nullptr;
 public:
-	VkBool32 storageBuffer16BitAccess = 0;
-	VkBool32 uniformAndStorageBuffer16BitAccess = 0;
-	VkBool32 storagePushConstant16 = 0;
-	VkBool32 storageInputOutput16 = 0;
+	VkBool32 storageBuffer16BitAccess;
+	VkBool32 uniformAndStorageBuffer16BitAccess;
+	VkBool32 storagePushConstant16;
+	VkBool32 storageInputOutput16;
+
+S_physical_device_16bit_storage_features(){}
+
+S_physical_device_16bit_storage_features(
+	VkBool32 storageBuffer16BitAccess_,
+	VkBool32 uniformAndStorageBuffer16BitAccess_,
+	VkBool32 storagePushConstant16_,
+	VkBool32 storageInputOutput16_)
+	:storageBuffer16BitAccess(storageBuffer16BitAccess_)
+	,uniformAndStorageBuffer16BitAccess(uniformAndStorageBuffer16BitAccess_)
+	,storagePushConstant16(storagePushConstant16_)
+	,storageInputOutput16(storageInputOutput16_)
+{
+}
 
 S_physical_device_16bit_storage_features( VkPhysicalDevice16BitStorageFeatures const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_physical_device_16bit_storage_features ) );	}
@@ -4853,7 +4957,15 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SAMPLER_YCBCR_CONVERSION_FEATURES;
 	void * pNext = nullptr;
 public:
-	VkBool32 samplerYcbcrConversion = 0;
+	VkBool32 samplerYcbcrConversion;
+
+S_physical_device_sampler_ycbcr_conversion_features(){}
+
+S_physical_device_sampler_ycbcr_conversion_features(
+	VkBool32 samplerYcbcrConversion_)
+	:samplerYcbcrConversion(samplerYcbcrConversion_)
+{
+}
 
 S_physical_device_sampler_ycbcr_conversion_features( VkPhysicalDeviceSamplerYcbcrConversionFeatures const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_physical_device_sampler_ycbcr_conversion_features ) );	}
@@ -4880,7 +4992,15 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROTECTED_MEMORY_FEATURES;
 	void * pNext = nullptr;
 public:
-	VkBool32 protectedMemory = 0;
+	VkBool32 protectedMemory;
+
+S_physical_device_protected_memory_features(){}
+
+S_physical_device_protected_memory_features(
+	VkBool32 protectedMemory_)
+	:protectedMemory(protectedMemory_)
+{
+}
 
 S_physical_device_protected_memory_features( VkPhysicalDeviceProtectedMemoryFeatures const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_physical_device_protected_memory_features ) );	}
@@ -4907,7 +5027,15 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_BLEND_OPERATION_ADVANCED_FEATURES_EXT;
 	void * pNext = nullptr;
 public:
-	VkBool32 advancedBlendCoherentOperations = 0;
+	VkBool32 advancedBlendCoherentOperations;
+
+S_physical_device_blend_operation_advanced_features_EXT(){}
+
+S_physical_device_blend_operation_advanced_features_EXT(
+	VkBool32 advancedBlendCoherentOperations_)
+	:advancedBlendCoherentOperations(advancedBlendCoherentOperations_)
+{
+}
 
 S_physical_device_blend_operation_advanced_features_EXT( VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_physical_device_blend_operation_advanced_features_EXT ) );	}
@@ -4935,8 +5063,18 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_INLINE_UNIFORM_BLOCK_FEATURES_EXT;
 	void * pNext = nullptr;
 public:
-	VkBool32 inlineUniformBlock = 0;
-	VkBool32 descriptorBindingInlineUniformBlockUpdateAfterBind = 0;
+	VkBool32 inlineUniformBlock;
+	VkBool32 descriptorBindingInlineUniformBlockUpdateAfterBind;
+
+S_physical_device_inline_uniform_block_features_EXT(){}
+
+S_physical_device_inline_uniform_block_features_EXT(
+	VkBool32 inlineUniformBlock_,
+	VkBool32 descriptorBindingInlineUniformBlockUpdateAfterBind_)
+	:inlineUniformBlock(inlineUniformBlock_)
+	,descriptorBindingInlineUniformBlockUpdateAfterBind(descriptorBindingInlineUniformBlockUpdateAfterBind_)
+{
+}
 
 S_physical_device_inline_uniform_block_features_EXT( VkPhysicalDeviceInlineUniformBlockFeaturesEXT const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_physical_device_inline_uniform_block_features_EXT ) );	}
@@ -4963,7 +5101,15 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_DRAW_PARAMETER_FEATURES;
 	void * pNext = nullptr;
 public:
-	VkBool32 shaderDrawParameters = 0;
+	VkBool32 shaderDrawParameters;
+
+S_physical_device_shader_draw_parameter_features(){}
+
+S_physical_device_shader_draw_parameter_features(
+	VkBool32 shaderDrawParameters_)
+	:shaderDrawParameters(shaderDrawParameters_)
+{
+}
 
 S_physical_device_shader_draw_parameter_features( VkPhysicalDeviceShaderDrawParameterFeatures const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_physical_device_shader_draw_parameter_features ) );	}
@@ -4990,26 +5136,72 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_INDEXING_FEATURES_EXT;
 	void * pNext = nullptr;
 public:
-	VkBool32 shaderInputAttachmentArrayDynamicIndexing = 0;
-	VkBool32 shaderUniformTexelBufferArrayDynamicIndexing = 0;
-	VkBool32 shaderStorageTexelBufferArrayDynamicIndexing = 0;
-	VkBool32 shaderUniformBufferArrayNonUniformIndexing = 0;
-	VkBool32 shaderSampledImageArrayNonUniformIndexing = 0;
-	VkBool32 shaderStorageBufferArrayNonUniformIndexing = 0;
-	VkBool32 shaderStorageImageArrayNonUniformIndexing = 0;
-	VkBool32 shaderInputAttachmentArrayNonUniformIndexing = 0;
-	VkBool32 shaderUniformTexelBufferArrayNonUniformIndexing = 0;
-	VkBool32 shaderStorageTexelBufferArrayNonUniformIndexing = 0;
-	VkBool32 descriptorBindingUniformBufferUpdateAfterBind = 0;
-	VkBool32 descriptorBindingSampledImageUpdateAfterBind = 0;
-	VkBool32 descriptorBindingStorageImageUpdateAfterBind = 0;
-	VkBool32 descriptorBindingStorageBufferUpdateAfterBind = 0;
-	VkBool32 descriptorBindingUniformTexelBufferUpdateAfterBind = 0;
-	VkBool32 descriptorBindingStorageTexelBufferUpdateAfterBind = 0;
-	VkBool32 descriptorBindingUpdateUnusedWhilePending = 0;
-	VkBool32 descriptorBindingPartiallyBound = 0;
-	VkBool32 descriptorBindingVariableDescriptorCount = 0;
-	VkBool32 runtimeDescriptorArray = 0;
+	VkBool32 shaderInputAttachmentArrayDynamicIndexing;
+	VkBool32 shaderUniformTexelBufferArrayDynamicIndexing;
+	VkBool32 shaderStorageTexelBufferArrayDynamicIndexing;
+	VkBool32 shaderUniformBufferArrayNonUniformIndexing;
+	VkBool32 shaderSampledImageArrayNonUniformIndexing;
+	VkBool32 shaderStorageBufferArrayNonUniformIndexing;
+	VkBool32 shaderStorageImageArrayNonUniformIndexing;
+	VkBool32 shaderInputAttachmentArrayNonUniformIndexing;
+	VkBool32 shaderUniformTexelBufferArrayNonUniformIndexing;
+	VkBool32 shaderStorageTexelBufferArrayNonUniformIndexing;
+	VkBool32 descriptorBindingUniformBufferUpdateAfterBind;
+	VkBool32 descriptorBindingSampledImageUpdateAfterBind;
+	VkBool32 descriptorBindingStorageImageUpdateAfterBind;
+	VkBool32 descriptorBindingStorageBufferUpdateAfterBind;
+	VkBool32 descriptorBindingUniformTexelBufferUpdateAfterBind;
+	VkBool32 descriptorBindingStorageTexelBufferUpdateAfterBind;
+	VkBool32 descriptorBindingUpdateUnusedWhilePending;
+	VkBool32 descriptorBindingPartiallyBound;
+	VkBool32 descriptorBindingVariableDescriptorCount;
+	VkBool32 runtimeDescriptorArray;
+
+S_physical_device_descriptor_indexing_features_EXT(){}
+
+S_physical_device_descriptor_indexing_features_EXT(
+	VkBool32 shaderInputAttachmentArrayDynamicIndexing_,
+	VkBool32 shaderUniformTexelBufferArrayDynamicIndexing_,
+	VkBool32 shaderStorageTexelBufferArrayDynamicIndexing_,
+	VkBool32 shaderUniformBufferArrayNonUniformIndexing_,
+	VkBool32 shaderSampledImageArrayNonUniformIndexing_,
+	VkBool32 shaderStorageBufferArrayNonUniformIndexing_,
+	VkBool32 shaderStorageImageArrayNonUniformIndexing_,
+	VkBool32 shaderInputAttachmentArrayNonUniformIndexing_,
+	VkBool32 shaderUniformTexelBufferArrayNonUniformIndexing_,
+	VkBool32 shaderStorageTexelBufferArrayNonUniformIndexing_,
+	VkBool32 descriptorBindingUniformBufferUpdateAfterBind_,
+	VkBool32 descriptorBindingSampledImageUpdateAfterBind_,
+	VkBool32 descriptorBindingStorageImageUpdateAfterBind_,
+	VkBool32 descriptorBindingStorageBufferUpdateAfterBind_,
+	VkBool32 descriptorBindingUniformTexelBufferUpdateAfterBind_,
+	VkBool32 descriptorBindingStorageTexelBufferUpdateAfterBind_,
+	VkBool32 descriptorBindingUpdateUnusedWhilePending_,
+	VkBool32 descriptorBindingPartiallyBound_,
+	VkBool32 descriptorBindingVariableDescriptorCount_,
+	VkBool32 runtimeDescriptorArray_)
+	:shaderInputAttachmentArrayDynamicIndexing(shaderInputAttachmentArrayDynamicIndexing_)
+	,shaderUniformTexelBufferArrayDynamicIndexing(shaderUniformTexelBufferArrayDynamicIndexing_)
+	,shaderStorageTexelBufferArrayDynamicIndexing(shaderStorageTexelBufferArrayDynamicIndexing_)
+	,shaderUniformBufferArrayNonUniformIndexing(shaderUniformBufferArrayNonUniformIndexing_)
+	,shaderSampledImageArrayNonUniformIndexing(shaderSampledImageArrayNonUniformIndexing_)
+	,shaderStorageBufferArrayNonUniformIndexing(shaderStorageBufferArrayNonUniformIndexing_)
+	,shaderStorageImageArrayNonUniformIndexing(shaderStorageImageArrayNonUniformIndexing_)
+	,shaderInputAttachmentArrayNonUniformIndexing(shaderInputAttachmentArrayNonUniformIndexing_)
+	,shaderUniformTexelBufferArrayNonUniformIndexing(shaderUniformTexelBufferArrayNonUniformIndexing_)
+	,shaderStorageTexelBufferArrayNonUniformIndexing(shaderStorageTexelBufferArrayNonUniformIndexing_)
+	,descriptorBindingUniformBufferUpdateAfterBind(descriptorBindingUniformBufferUpdateAfterBind_)
+	,descriptorBindingSampledImageUpdateAfterBind(descriptorBindingSampledImageUpdateAfterBind_)
+	,descriptorBindingStorageImageUpdateAfterBind(descriptorBindingStorageImageUpdateAfterBind_)
+	,descriptorBindingStorageBufferUpdateAfterBind(descriptorBindingStorageBufferUpdateAfterBind_)
+	,descriptorBindingUniformTexelBufferUpdateAfterBind(descriptorBindingUniformTexelBufferUpdateAfterBind_)
+	,descriptorBindingStorageTexelBufferUpdateAfterBind(descriptorBindingStorageTexelBufferUpdateAfterBind_)
+	,descriptorBindingUpdateUnusedWhilePending(descriptorBindingUpdateUnusedWhilePending_)
+	,descriptorBindingPartiallyBound(descriptorBindingPartiallyBound_)
+	,descriptorBindingVariableDescriptorCount(descriptorBindingVariableDescriptorCount_)
+	,runtimeDescriptorArray(runtimeDescriptorArray_)
+{
+}
 
 S_physical_device_descriptor_indexing_features_EXT( VkPhysicalDeviceDescriptorIndexingFeaturesEXT const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_physical_device_descriptor_indexing_features_EXT ) );	}
@@ -5036,9 +5228,21 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_8BIT_STORAGE_FEATURES_KHR;
 	void * pNext = nullptr;
 public:
-	VkBool32 storageBuffer8BitAccess = 0;
-	VkBool32 uniformAndStorageBuffer8BitAccess = 0;
-	VkBool32 storagePushConstant8 = 0;
+	VkBool32 storageBuffer8BitAccess;
+	VkBool32 uniformAndStorageBuffer8BitAccess;
+	VkBool32 storagePushConstant8;
+
+S_physical_device_8bit_storage_features_KHR(){}
+
+S_physical_device_8bit_storage_features_KHR(
+	VkBool32 storageBuffer8BitAccess_,
+	VkBool32 uniformAndStorageBuffer8BitAccess_,
+	VkBool32 storagePushConstant8_)
+	:storageBuffer8BitAccess(storageBuffer8BitAccess_)
+	,uniformAndStorageBuffer8BitAccess(uniformAndStorageBuffer8BitAccess_)
+	,storagePushConstant8(storagePushConstant8_)
+{
+}
 
 S_physical_device_8bit_storage_features_KHR( VkPhysicalDevice8BitStorageFeaturesKHR const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_physical_device_8bit_storage_features_KHR ) );	}
@@ -5065,8 +5269,18 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CONDITIONAL_RENDERING_FEATURES_EXT;
 	void * pNext = nullptr;
 public:
-	VkBool32 conditionalRendering = 0;
-	VkBool32 inheritedConditionalRendering = 0;
+	VkBool32 conditionalRendering;
+	VkBool32 inheritedConditionalRendering;
+
+S_physical_device_conditional_rendering_features_EXT(){}
+
+S_physical_device_conditional_rendering_features_EXT(
+	VkBool32 conditionalRendering_,
+	VkBool32 inheritedConditionalRendering_)
+	:conditionalRendering(conditionalRendering_)
+	,inheritedConditionalRendering(inheritedConditionalRendering_)
+{
+}
 
 S_physical_device_conditional_rendering_features_EXT( VkPhysicalDeviceConditionalRenderingFeaturesEXT const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_physical_device_conditional_rendering_features_EXT ) );	}
@@ -5094,8 +5308,18 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_MEMORY_MODEL_FEATURES_KHR;
 	void * pNext = nullptr;
 public:
-	VkBool32 vulkanMemoryModel = 0;
-	VkBool32 vulkanMemoryModelDeviceScope = 0;
+	VkBool32 vulkanMemoryModel;
+	VkBool32 vulkanMemoryModelDeviceScope;
+
+S_physical_device_vulkan_memory_model_features_KHR(){}
+
+S_physical_device_vulkan_memory_model_features_KHR(
+	VkBool32 vulkanMemoryModel_,
+	VkBool32 vulkanMemoryModelDeviceScope_)
+	:vulkanMemoryModel(vulkanMemoryModel_)
+	,vulkanMemoryModelDeviceScope(vulkanMemoryModelDeviceScope_)
+{
+}
 
 S_physical_device_vulkan_memory_model_features_KHR( VkPhysicalDeviceVulkanMemoryModelFeaturesKHR const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_physical_device_vulkan_memory_model_features_KHR ) );	}
@@ -5123,8 +5347,18 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_ATOMIC_INT64_FEATURES_KHR;
 	void * pNext = nullptr;
 public:
-	VkBool32 shaderBufferInt64Atomics = 0;
-	VkBool32 shaderSharedInt64Atomics = 0;
+	VkBool32 shaderBufferInt64Atomics;
+	VkBool32 shaderSharedInt64Atomics;
+
+S_physical_device_shader_atomic_int64_features_KHR(){}
+
+S_physical_device_shader_atomic_int64_features_KHR(
+	VkBool32 shaderBufferInt64Atomics_,
+	VkBool32 shaderSharedInt64Atomics_)
+	:shaderBufferInt64Atomics(shaderBufferInt64Atomics_)
+	,shaderSharedInt64Atomics(shaderSharedInt64Atomics_)
+{
+}
 
 S_physical_device_shader_atomic_int64_features_KHR( VkPhysicalDeviceShaderAtomicInt64FeaturesKHR const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_physical_device_shader_atomic_int64_features_KHR ) );	}
@@ -5152,8 +5386,18 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_DIVISOR_FEATURES_EXT;
 	void * pNext = nullptr;
 public:
-	VkBool32 vertexAttributeInstanceRateDivisor = 0;
-	VkBool32 vertexAttributeInstanceRateZeroDivisor = 0;
+	VkBool32 vertexAttributeInstanceRateDivisor;
+	VkBool32 vertexAttributeInstanceRateZeroDivisor;
+
+S_physical_device_vertex_attribute_divisor_features_EXT(){}
+
+S_physical_device_vertex_attribute_divisor_features_EXT(
+	VkBool32 vertexAttributeInstanceRateDivisor_,
+	VkBool32 vertexAttributeInstanceRateZeroDivisor_)
+	:vertexAttributeInstanceRateDivisor(vertexAttributeInstanceRateDivisor_)
+	,vertexAttributeInstanceRateZeroDivisor(vertexAttributeInstanceRateZeroDivisor_)
+{
+}
 
 S_physical_device_vertex_attribute_divisor_features_EXT( VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_physical_device_vertex_attribute_divisor_features_EXT ) );	}
@@ -5180,7 +5424,15 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ASTC_DECODE_FEATURES_EXT;
 	void * pNext = nullptr;
 public:
-	VkBool32 decodeModeSharedExponent = 0;
+	VkBool32 decodeModeSharedExponent;
+
+S_physical_device_astc_decode_features_EXT(){}
+
+S_physical_device_astc_decode_features_EXT(
+	VkBool32 decodeModeSharedExponent_)
+	:decodeModeSharedExponent(decodeModeSharedExponent_)
+{
+}
 
 S_physical_device_astc_decode_features_EXT( VkPhysicalDeviceASTCDecodeFeaturesEXT const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_physical_device_astc_decode_features_EXT ) );	}
@@ -5207,7 +5459,15 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_REPRESENTATIVE_FRAGMENT_TEST_FEATURES_NV;
 	void * pNext = nullptr;
 public:
-	VkBool32 representativeFragmentTest = 0;
+	VkBool32 representativeFragmentTest;
+
+S_physical_device_representative_fragment_test_features_NV(){}
+
+S_physical_device_representative_fragment_test_features_NV(
+	VkBool32 representativeFragmentTest_)
+	:representativeFragmentTest(representativeFragmentTest_)
+{
+}
 
 S_physical_device_representative_fragment_test_features_NV( VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_physical_device_representative_fragment_test_features_NV ) );	}
@@ -5234,7 +5494,15 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXCLUSIVE_SCISSOR_FEATURES_NV;
 	void * pNext = nullptr;
 public:
-	VkBool32 exclusiveScissor = 0;
+	VkBool32 exclusiveScissor;
+
+S_physical_device_exclusive_scissor_features_NV(){}
+
+S_physical_device_exclusive_scissor_features_NV(
+	VkBool32 exclusiveScissor_)
+	:exclusiveScissor(exclusiveScissor_)
+{
+}
 
 S_physical_device_exclusive_scissor_features_NV( VkPhysicalDeviceExclusiveScissorFeaturesNV const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_physical_device_exclusive_scissor_features_NV ) );	}
@@ -5261,7 +5529,15 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CORNER_SAMPLED_IMAGE_FEATURES_NV;
 	void * pNext = nullptr;
 public:
-	VkBool32 cornerSampledImage = 0;
+	VkBool32 cornerSampledImage;
+
+S_physical_device_corner_sampled_image_features_NV(){}
+
+S_physical_device_corner_sampled_image_features_NV(
+	VkBool32 cornerSampledImage_)
+	:cornerSampledImage(cornerSampledImage_)
+{
+}
 
 S_physical_device_corner_sampled_image_features_NV( VkPhysicalDeviceCornerSampledImageFeaturesNV const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_physical_device_corner_sampled_image_features_NV ) );	}
@@ -5288,8 +5564,18 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COMPUTE_SHADER_DERIVATIVES_FEATURES_NV;
 	void * pNext = nullptr;
 public:
-	VkBool32 computeDerivativeGroupQuads = 0;
-	VkBool32 computeDerivativeGroupLinear = 0;
+	VkBool32 computeDerivativeGroupQuads;
+	VkBool32 computeDerivativeGroupLinear;
+
+S_physical_device_compute_shader_derivatives_features_NV(){}
+
+S_physical_device_compute_shader_derivatives_features_NV(
+	VkBool32 computeDerivativeGroupQuads_,
+	VkBool32 computeDerivativeGroupLinear_)
+	:computeDerivativeGroupQuads(computeDerivativeGroupQuads_)
+	,computeDerivativeGroupLinear(computeDerivativeGroupLinear_)
+{
+}
 
 S_physical_device_compute_shader_derivatives_features_NV( VkPhysicalDeviceComputeShaderDerivativesFeaturesNV const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_physical_device_compute_shader_derivatives_features_NV ) );	}
@@ -5316,7 +5602,15 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_SHADER_BARYCENTRIC_FEATURES_NV;
 	void * pNext = nullptr;
 public:
-	VkBool32 fragmentShaderBarycentric = 0;
+	VkBool32 fragmentShaderBarycentric;
+
+S_physical_device_fragment_shader_barycentric_features_NV(){}
+
+S_physical_device_fragment_shader_barycentric_features_NV(
+	VkBool32 fragmentShaderBarycentric_)
+	:fragmentShaderBarycentric(fragmentShaderBarycentric_)
+{
+}
 
 S_physical_device_fragment_shader_barycentric_features_NV( VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_physical_device_fragment_shader_barycentric_features_NV ) );	}
@@ -5343,7 +5637,15 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_IMAGE_FOOTPRINT_FEATURES_NV;
 	void * pNext = nullptr;
 public:
-	VkBool32 imageFootprint = 0;
+	VkBool32 imageFootprint;
+
+S_physical_device_shader_image_footprint_features_NV(){}
+
+S_physical_device_shader_image_footprint_features_NV(
+	VkBool32 imageFootprint_)
+	:imageFootprint(imageFootprint_)
+{
+}
 
 S_physical_device_shader_image_footprint_features_NV( VkPhysicalDeviceShaderImageFootprintFeaturesNV const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_physical_device_shader_image_footprint_features_NV ) );	}
@@ -5370,8 +5672,18 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADING_RATE_IMAGE_FEATURES_NV;
 	void * pNext = nullptr;
 public:
-	VkBool32 shadingRateImage = 0;
-	VkBool32 shadingRateCoarseSampleOrder = 0;
+	VkBool32 shadingRateImage;
+	VkBool32 shadingRateCoarseSampleOrder;
+
+S_physical_device_shading_rate_image_features_NV(){}
+
+S_physical_device_shading_rate_image_features_NV(
+	VkBool32 shadingRateImage_,
+	VkBool32 shadingRateCoarseSampleOrder_)
+	:shadingRateImage(shadingRateImage_)
+	,shadingRateCoarseSampleOrder(shadingRateCoarseSampleOrder_)
+{
+}
 
 S_physical_device_shading_rate_image_features_NV( VkPhysicalDeviceShadingRateImageFeaturesNV const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_physical_device_shading_rate_image_features_NV ) );	}
@@ -5398,8 +5710,18 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MESH_SHADER_FEATURES_NV;
 	void * pNext = nullptr;
 public:
-	VkBool32 taskShader = 0;
-	VkBool32 meshShader = 0;
+	VkBool32 taskShader;
+	VkBool32 meshShader;
+
+S_physical_device_mesh_shader_features_NV(){}
+
+S_physical_device_mesh_shader_features_NV(
+	VkBool32 taskShader_,
+	VkBool32 meshShader_)
+	:taskShader(taskShader_)
+	,meshShader(meshShader_)
+{
+}
 
 S_physical_device_mesh_shader_features_NV( VkPhysicalDeviceMeshShaderFeaturesNV const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_physical_device_mesh_shader_features_NV ) );	}
@@ -5450,7 +5772,15 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FEATURES_2;
 	void * pNext = nullptr;
 public:
-	S_physical_device_features features = {};
+	S_physical_device_features features;
+
+S_physical_device_features2(){}
+
+S_physical_device_features2(
+	S_physical_device_features features_)
+	:features(features_)
+{
+}
 
 S_physical_device_features2( VkPhysicalDeviceFeatures2 const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_physical_device_features2 ) );	}
@@ -5502,8 +5832,18 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_DEVICE_GROUP_DEVICE_CREATE_INFO;
 	 void * pNext = nullptr;
 public:
-	uint32_t physicalDeviceCount = 0;
-	const VkPhysicalDevice * pPhysicalDevices = VK_NULL_HANDLE;
+	uint32_t physicalDeviceCount;
+	const VkPhysicalDevice * pPhysicalDevices;
+
+S_device_group_device_create_info(){}
+
+S_device_group_device_create_info(
+	uint32_t physicalDeviceCount_,
+	const VkPhysicalDevice * pPhysicalDevices_)
+	:physicalDeviceCount(physicalDeviceCount_)
+	,pPhysicalDevices(pPhysicalDevices_)
+{
+}
 
 S_device_group_device_create_info( VkDeviceGroupDeviceCreateInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_device_group_device_create_info ) );	}
@@ -5554,14 +5894,36 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO;
 	 void * pNext = nullptr;
 public:
-	VkDeviceCreateFlags flags = 0;
-	uint32_t queueCreateInfoCount = 0;
-	const S_device_queue_create_info * pQueueCreateInfos = nullptr;
-	uint32_t enabledLayerCount = 0;
-	const char * const* ppEnabledLayerNames = nullptr;
-	uint32_t enabledExtensionCount = 0;
-	const char * const* ppEnabledExtensionNames = nullptr;
-	const S_physical_device_features * pEnabledFeatures = nullptr;
+	VkDeviceCreateFlags flags;
+	uint32_t queueCreateInfoCount;
+	const S_device_queue_create_info * pQueueCreateInfos;
+	uint32_t enabledLayerCount;
+	const char * const* ppEnabledLayerNames;
+	uint32_t enabledExtensionCount;
+	const char * const* ppEnabledExtensionNames;
+	const S_physical_device_features * pEnabledFeatures;
+
+S_device_create_info(){}
+
+S_device_create_info(
+	VkDeviceCreateFlags flags_,
+	uint32_t queueCreateInfoCount_,
+	const S_device_queue_create_info * pQueueCreateInfos_,
+	uint32_t enabledLayerCount_,
+	const char * const* ppEnabledLayerNames_,
+	uint32_t enabledExtensionCount_,
+	const char * const* ppEnabledExtensionNames_,
+	const S_physical_device_features * pEnabledFeatures_)
+	:flags(flags_)
+	,queueCreateInfoCount(queueCreateInfoCount_)
+	,pQueueCreateInfos(pQueueCreateInfos_)
+	,enabledLayerCount(enabledLayerCount_)
+	,ppEnabledLayerNames(ppEnabledLayerNames_)
+	,enabledExtensionCount(enabledExtensionCount_)
+	,ppEnabledExtensionNames(ppEnabledExtensionNames_)
+	,pEnabledFeatures(pEnabledFeatures_)
+{
+}
 
 S_device_create_info( VkDeviceCreateInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_device_create_info ) );	}
@@ -5614,8 +5976,20 @@ private:
 	 void * pNext = nullptr;
 public:
 	F_debug_report_EXT flags;
-	PFN_vkDebugReportCallbackEXT pfnCallback = 0;
-	void * pUserData = nullptr;
+	PFN_vkDebugReportCallbackEXT pfnCallback;
+	void * pUserData;
+
+S_debug_report_callback_create_info_EXT(){}
+
+S_debug_report_callback_create_info_EXT(
+	F_debug_report_EXT flags_,
+	PFN_vkDebugReportCallbackEXT pfnCallback_,
+	void * pUserData_)
+	:flags(flags_)
+	,pfnCallback(pfnCallback_)
+	,pUserData(pUserData_)
+{
+}
 
 S_debug_report_callback_create_info_EXT( VkDebugReportCallbackCreateInfoEXT const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_debug_report_callback_create_info_EXT ) );	}
@@ -5641,8 +6015,18 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_VALIDATION_FLAGS_EXT;
 	 void * pNext = nullptr;
 public:
-	uint32_t disabledValidationCheckCount = 0;
-	const E_validation_check_EXT * pDisabledValidationChecks = nullptr;
+	uint32_t disabledValidationCheckCount;
+	const E_validation_check_EXT * pDisabledValidationChecks;
+
+S_validation_flags_EXT(){}
+
+S_validation_flags_EXT(
+	uint32_t disabledValidationCheckCount_,
+	const E_validation_check_EXT * pDisabledValidationChecks_)
+	:disabledValidationCheckCount(disabledValidationCheckCount_)
+	,pDisabledValidationChecks(pDisabledValidationChecks_)
+{
+}
 
 S_validation_flags_EXT( VkValidationFlagsEXT const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_validation_flags_EXT ) );	}
@@ -5668,11 +6052,27 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CREATE_INFO_EXT;
 	 void * pNext = nullptr;
 public:
-	VkDebugUtilsMessengerCreateFlagsEXT flags = 0;
+	VkDebugUtilsMessengerCreateFlagsEXT flags;
 	F_debug_utils_message_severity_EXT messageSeverity;
 	F_debug_utils_message_type_EXT messageType;
-	PFN_vkDebugUtilsMessengerCallbackEXT pfnUserCallback = 0;
-	void * pUserData = nullptr;
+	PFN_vkDebugUtilsMessengerCallbackEXT pfnUserCallback;
+	void * pUserData;
+
+S_debug_utils_messenger_create_info_EXT(){}
+
+S_debug_utils_messenger_create_info_EXT(
+	VkDebugUtilsMessengerCreateFlagsEXT flags_,
+	F_debug_utils_message_severity_EXT messageSeverity_,
+	F_debug_utils_message_type_EXT messageType_,
+	PFN_vkDebugUtilsMessengerCallbackEXT pfnUserCallback_,
+	void * pUserData_)
+	:flags(flags_)
+	,messageSeverity(messageSeverity_)
+	,messageType(messageType_)
+	,pfnUserCallback(pfnUserCallback_)
+	,pUserData(pUserData_)
+{
+}
 
 S_debug_utils_messenger_create_info_EXT( VkDebugUtilsMessengerCreateInfoEXT const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_debug_utils_messenger_create_info_EXT ) );	}
@@ -5701,12 +6101,30 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO;
 	 void * pNext = nullptr;
 public:
-	VkInstanceCreateFlags flags = 0;
-	const S_application_info * pApplicationInfo = nullptr;
-	uint32_t enabledLayerCount = 0;
-	const char * const* ppEnabledLayerNames = nullptr;
-	uint32_t enabledExtensionCount = 0;
-	const char * const* ppEnabledExtensionNames = nullptr;
+	VkInstanceCreateFlags flags;
+	const S_application_info * pApplicationInfo;
+	uint32_t enabledLayerCount;
+	const char * const* ppEnabledLayerNames;
+	uint32_t enabledExtensionCount;
+	const char * const* ppEnabledExtensionNames;
+
+S_instance_create_info(){}
+
+S_instance_create_info(
+	VkInstanceCreateFlags flags_,
+	const S_application_info * pApplicationInfo_,
+	uint32_t enabledLayerCount_,
+	const char * const* ppEnabledLayerNames_,
+	uint32_t enabledExtensionCount_,
+	const char * const* ppEnabledExtensionNames_)
+	:flags(flags_)
+	,pApplicationInfo(pApplicationInfo_)
+	,enabledLayerCount(enabledLayerCount_)
+	,ppEnabledLayerNames(ppEnabledLayerNames_)
+	,enabledExtensionCount(enabledExtensionCount_)
+	,ppEnabledExtensionNames(ppEnabledExtensionNames_)
+{
+}
 
 S_instance_create_info( VkInstanceCreateInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_instance_create_info ) );	}
@@ -5731,9 +6149,11 @@ static_assert(
 */
 struct		S_queue_family_properties{
 	F_queue queueFlags;
-	uint32_t queueCount = 0;
-	uint32_t timestampValidBits = 0;
-	S_extent_3d minImageTransferGranularity = {};
+	uint32_t queueCount;
+	uint32_t timestampValidBits;
+	S_extent_3d minImageTransferGranularity;
+
+S_queue_family_properties(){}
 
 };
 
@@ -5742,7 +6162,9 @@ struct		S_queue_family_properties{
 */
 struct		S_memory_type{
 	F_memory_property propertyFlags;
-	uint32_t heapIndex = 0;
+	uint32_t heapIndex;
+
+S_memory_type(){}
 
 };
 
@@ -5750,8 +6172,10 @@ struct		S_memory_type{
 (returnedonly)
 */
 struct		S_memory_heap{
-	VkDeviceSize size = 0;
+	VkDeviceSize size;
 	F_memory_heap flags;
+
+S_memory_heap(){}
 
 };
 
@@ -5759,10 +6183,12 @@ struct		S_memory_heap{
 (returnedonly)
 */
 struct		S_physical_device_memory_properties{
-	uint32_t memoryTypeCount = 0;
-	S_memory_type memoryTypes[VK_MAX_MEMORY_TYPES] = {};
-	uint32_t memoryHeapCount = 0;
-	S_memory_heap memoryHeaps[VK_MAX_MEMORY_HEAPS] = {};
+	uint32_t memoryTypeCount;
+	S_memory_type memoryTypes[VK_MAX_MEMORY_TYPES];
+	uint32_t memoryHeapCount;
+	S_memory_heap memoryHeaps[VK_MAX_MEMORY_HEAPS];
+
+S_physical_device_memory_properties(){}
 
 };
 
@@ -5774,8 +6200,18 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_DEDICATED_ALLOCATION_MEMORY_ALLOCATE_INFO_NV;
 	 void * pNext = nullptr;
 public:
-	VkImage image = VK_NULL_HANDLE;
-	VkBuffer buffer = VK_NULL_HANDLE;
+	VkImage image;
+	VkBuffer buffer;
+
+S_dedicated_allocation_memory_allocate_info_NV(){}
+
+S_dedicated_allocation_memory_allocate_info_NV(
+	VkImage image_,
+	VkBuffer buffer_)
+	:image(image_)
+	,buffer(buffer_)
+{
+}
 
 S_dedicated_allocation_memory_allocate_info_NV( VkDedicatedAllocationMemoryAllocateInfoNV const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_dedicated_allocation_memory_allocate_info_NV ) );	}
@@ -5803,6 +6239,14 @@ private:
 public:
 	F_external_memory_handle_type_NV handleTypes;
 
+S_export_memory_allocate_info_NV(){}
+
+S_export_memory_allocate_info_NV(
+	F_external_memory_handle_type_NV handleTypes_)
+	:handleTypes(handleTypes_)
+{
+}
+
 S_export_memory_allocate_info_NV( VkExportMemoryAllocateInfoNV const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_export_memory_allocate_info_NV ) );	}
 S_export_memory_allocate_info_NV& operator=( VkExportMemoryAllocateInfoNV const & rhs ) 
@@ -5829,7 +6273,17 @@ private:
 	 void * pNext = nullptr;
 public:
 	F_external_memory_handle_type_NV handleType;
-	HANDLE handle = 0;
+	HANDLE handle;
+
+S_import_memory_win32_handle_info_NV(){}
+
+S_import_memory_win32_handle_info_NV(
+	F_external_memory_handle_type_NV handleType_,
+	HANDLE handle_)
+	:handleType(handleType_)
+	,handle(handle_)
+{
+}
 
 S_import_memory_win32_handle_info_NV( VkImportMemoryWin32HandleInfoNV const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_import_memory_win32_handle_info_NV ) );	}
@@ -5857,8 +6311,18 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_EXPORT_MEMORY_WIN32_HANDLE_INFO_NV;
 	 void * pNext = nullptr;
 public:
-	const SECURITY_ATTRIBUTES * pAttributes = nullptr;
-	DWORD dwAccess = 0;
+	const SECURITY_ATTRIBUTES * pAttributes;
+	DWORD dwAccess;
+
+S_export_memory_win32_handle_info_NV(){}
+
+S_export_memory_win32_handle_info_NV(
+	const SECURITY_ATTRIBUTES * pAttributes_,
+	DWORD dwAccess_)
+	:pAttributes(pAttributes_)
+	,dwAccess(dwAccess_)
+{
+}
 
 S_export_memory_win32_handle_info_NV( VkExportMemoryWin32HandleInfoNV const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_export_memory_win32_handle_info_NV ) );	}
@@ -5887,6 +6351,14 @@ private:
 public:
 	F_external_memory_handle_type handleTypes;
 
+S_export_memory_allocate_info(){}
+
+S_export_memory_allocate_info(
+	F_external_memory_handle_type handleTypes_)
+	:handleTypes(handleTypes_)
+{
+}
+
 S_export_memory_allocate_info( VkExportMemoryAllocateInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_export_memory_allocate_info ) );	}
 S_export_memory_allocate_info& operator=( VkExportMemoryAllocateInfo const & rhs ) 
@@ -5913,8 +6385,20 @@ private:
 	 void * pNext = nullptr;
 public:
 	F_external_memory_handle_type handleType;
-	HANDLE handle = 0;
-	LPCWSTR name = 0;
+	HANDLE handle;
+	LPCWSTR name;
+
+S_import_memory_win32_handle_info_KHR(){}
+
+S_import_memory_win32_handle_info_KHR(
+	F_external_memory_handle_type handleType_,
+	HANDLE handle_,
+	LPCWSTR name_)
+	:handleType(handleType_)
+	,handle(handle_)
+	,name(name_)
+{
+}
 
 S_import_memory_win32_handle_info_KHR( VkImportMemoryWin32HandleInfoKHR const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_import_memory_win32_handle_info_KHR ) );	}
@@ -5942,9 +6426,21 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_EXPORT_MEMORY_WIN32_HANDLE_INFO_KHR;
 	 void * pNext = nullptr;
 public:
-	const SECURITY_ATTRIBUTES * pAttributes = nullptr;
-	DWORD dwAccess = 0;
-	LPCWSTR name = 0;
+	const SECURITY_ATTRIBUTES * pAttributes;
+	DWORD dwAccess;
+	LPCWSTR name;
+
+S_export_memory_win32_handle_info_KHR(){}
+
+S_export_memory_win32_handle_info_KHR(
+	const SECURITY_ATTRIBUTES * pAttributes_,
+	DWORD dwAccess_,
+	LPCWSTR name_)
+	:pAttributes(pAttributes_)
+	,dwAccess(dwAccess_)
+	,name(name_)
+{
+}
 
 S_export_memory_win32_handle_info_KHR( VkExportMemoryWin32HandleInfoKHR const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_export_memory_win32_handle_info_KHR ) );	}
@@ -5972,7 +6468,17 @@ private:
 	 void * pNext = nullptr;
 public:
 	F_external_memory_handle_type handleType;
-	int fd = 0;
+	int fd;
+
+S_import_memory_fd_info_KHR(){}
+
+S_import_memory_fd_info_KHR(
+	F_external_memory_handle_type handleType_,
+	int fd_)
+	:handleType(handleType_)
+	,fd(fd_)
+{
+}
 
 S_import_memory_fd_info_KHR( VkImportMemoryFdInfoKHR const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_import_memory_fd_info_KHR ) );	}
@@ -5999,7 +6505,17 @@ private:
 	 void * pNext = nullptr;
 public:
 	F_memory_allocate flags;
-	uint32_t deviceMask = 0;
+	uint32_t deviceMask;
+
+S_memory_allocate_flags_info(){}
+
+S_memory_allocate_flags_info(
+	F_memory_allocate flags_,
+	uint32_t deviceMask_)
+	:flags(flags_)
+	,deviceMask(deviceMask_)
+{
+}
 
 S_memory_allocate_flags_info( VkMemoryAllocateFlagsInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_memory_allocate_flags_info ) );	}
@@ -6025,8 +6541,18 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_MEMORY_DEDICATED_ALLOCATE_INFO;
 	 void * pNext = nullptr;
 public:
-	VkImage image = VK_NULL_HANDLE;
-	VkBuffer buffer = VK_NULL_HANDLE;
+	VkImage image;
+	VkBuffer buffer;
+
+S_memory_dedicated_allocate_info(){}
+
+S_memory_dedicated_allocate_info(
+	VkImage image_,
+	VkBuffer buffer_)
+	:image(image_)
+	,buffer(buffer_)
+{
+}
 
 S_memory_dedicated_allocate_info( VkMemoryDedicatedAllocateInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_memory_dedicated_allocate_info ) );	}
@@ -6053,7 +6579,17 @@ private:
 	 void * pNext = nullptr;
 public:
 	F_external_memory_handle_type handleType;
-	void * pHostPointer = nullptr;
+	void * pHostPointer;
+
+S_import_memory_host_pointer_info_EXT(){}
+
+S_import_memory_host_pointer_info_EXT(
+	F_external_memory_handle_type handleType_,
+	void * pHostPointer_)
+	:handleType(handleType_)
+	,pHostPointer(pHostPointer_)
+{
+}
 
 S_import_memory_host_pointer_info_EXT( VkImportMemoryHostPointerInfoEXT const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_import_memory_host_pointer_info_EXT ) );	}
@@ -6080,7 +6616,15 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_IMPORT_ANDROID_HARDWARE_BUFFER_INFO_ANDROID;
 	 void * pNext = nullptr;
 public:
-	struct AHardwareBuffer * buffer = nullptr;
+	struct AHardwareBuffer * buffer;
+
+S_import_android_hardware_buffer_info_ANDROID(){}
+
+S_import_android_hardware_buffer_info_ANDROID(
+	struct AHardwareBuffer * buffer_)
+	:buffer(buffer_)
+{
+}
 
 S_import_android_hardware_buffer_info_ANDROID( VkImportAndroidHardwareBufferInfoANDROID const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_import_android_hardware_buffer_info_ANDROID ) );	}
@@ -6119,8 +6663,18 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO;
 	 void * pNext = nullptr;
 public:
-	VkDeviceSize allocationSize = 0;
-	uint32_t memoryTypeIndex = 0;
+	VkDeviceSize allocationSize;
+	uint32_t memoryTypeIndex;
+
+S_memory_allocate_info(){}
+
+S_memory_allocate_info(
+	VkDeviceSize allocationSize_,
+	uint32_t memoryTypeIndex_)
+	:allocationSize(allocationSize_)
+	,memoryTypeIndex(memoryTypeIndex_)
+{
+}
 
 S_memory_allocate_info( VkMemoryAllocateInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_memory_allocate_info ) );	}
@@ -6163,9 +6717,11 @@ static_assert(
 (returnedonly)
 */
 struct		S_memory_requirements{
-	VkDeviceSize size = 0;
-	VkDeviceSize alignment = 0;
-	uint32_t memoryTypeBits = 0;
+	VkDeviceSize size;
+	VkDeviceSize alignment;
+	uint32_t memoryTypeBits;
+
+S_memory_requirements(){}
 
 };
 
@@ -6174,8 +6730,10 @@ struct		S_memory_requirements{
 */
 struct		S_sparse_image_format_properties{
 	F_image_aspect aspectMask;
-	S_extent_3d imageGranularity = {};
+	S_extent_3d imageGranularity;
 	F_sparse_image_format flags;
+
+S_sparse_image_format_properties(){}
 
 };
 
@@ -6183,11 +6741,13 @@ struct		S_sparse_image_format_properties{
 (returnedonly)
 */
 struct		S_sparse_image_memory_requirements{
-	S_sparse_image_format_properties formatProperties = {};
-	uint32_t imageMipTailFirstLod = 0;
-	VkDeviceSize imageMipTailSize = 0;
-	VkDeviceSize imageMipTailOffset = 0;
-	VkDeviceSize imageMipTailStride = 0;
+	S_sparse_image_format_properties formatProperties;
+	uint32_t imageMipTailFirstLod;
+	VkDeviceSize imageMipTailSize;
+	VkDeviceSize imageMipTailOffset;
+	VkDeviceSize imageMipTailStride;
+
+S_sparse_image_memory_requirements(){}
 
 };
 
@@ -6198,9 +6758,21 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_MAPPED_MEMORY_RANGE;
 	 void * pNext = nullptr;
 public:
-	VkDeviceMemory memory = VK_NULL_HANDLE;
-	VkDeviceSize offset = 0;
-	VkDeviceSize size = 0;
+	VkDeviceMemory memory;
+	VkDeviceSize offset;
+	VkDeviceSize size;
+
+S_mapped_memory_range(){}
+
+S_mapped_memory_range(
+	VkDeviceMemory memory_,
+	VkDeviceSize offset_,
+	VkDeviceSize size_)
+	:memory(memory_)
+	,offset(offset_)
+	,size(size_)
+{
+}
 
 S_mapped_memory_range( VkMappedMemoryRange const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_mapped_memory_range ) );	}
@@ -6224,35 +6796,43 @@ struct		S_format_properties{
 	F_format_feature optimalTilingFeatures;
 	F_format_feature bufferFeatures;
 
+S_format_properties(){}
+
 };
 
 /*	VkImageFormatProperties
 (returnedonly)
 */
 struct		S_image_format_properties{
-	S_extent_3d maxExtent = {};
-	uint32_t maxMipLevels = 0;
-	uint32_t maxArrayLayers = 0;
+	S_extent_3d maxExtent;
+	uint32_t maxMipLevels;
+	uint32_t maxArrayLayers;
 	F_sample_count sampleCounts;
-	VkDeviceSize maxResourceSize = 0;
+	VkDeviceSize maxResourceSize;
+
+S_image_format_properties(){}
 
 };
 
 /*	VkDescriptorBufferInfo
 */
 struct		S_descriptor_buffer_info{
-	VkBuffer buffer = VK_NULL_HANDLE;
-	VkDeviceSize offset = 0;
-	VkDeviceSize range = 0;
+	VkBuffer buffer;
+	VkDeviceSize offset;
+	VkDeviceSize range;
+
+S_descriptor_buffer_info(){}
 
 };
 
 /*	VkDescriptorImageInfo
 */
 struct		S_descriptor_image_info{
-	VkSampler sampler = VK_NULL_HANDLE;
-	VkImageView imageView = VK_NULL_HANDLE;
-	E_image_layout imageLayout = E_image_layout::e_undefined;
+	VkSampler sampler;
+	VkImageView imageView;
+	E_image_layout imageLayout;
+
+S_descriptor_image_info(){}
 
 };
 
@@ -6264,8 +6844,18 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET_INLINE_UNIFORM_BLOCK_EXT;
 	 void * pNext = nullptr;
 public:
-	uint32_t dataSize = 0;
-	const void * pData = nullptr;
+	uint32_t dataSize;
+	const void * pData;
+
+S_write_descriptor_set_inline_uniform_block_EXT(){}
+
+S_write_descriptor_set_inline_uniform_block_EXT(
+	uint32_t dataSize_,
+	const void * pData_)
+	:dataSize(dataSize_)
+	,pData(pData_)
+{
+}
 
 S_write_descriptor_set_inline_uniform_block_EXT( VkWriteDescriptorSetInlineUniformBlockEXT const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_write_descriptor_set_inline_uniform_block_EXT ) );	}
@@ -6291,8 +6881,18 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_DESCRIPTOR_ACCELERATION_STRUCTURE_INFO_NVX;
 	 void * pNext = nullptr;
 public:
-	uint32_t accelerationStructureCount = 0;
-	const VkAccelerationStructureNVX * pAccelerationStructures = VK_NULL_HANDLE;
+	uint32_t accelerationStructureCount;
+	const VkAccelerationStructureNVX * pAccelerationStructures;
+
+S_descriptor_acceleration_structure_info_NVX(){}
+
+S_descriptor_acceleration_structure_info_NVX(
+	uint32_t accelerationStructureCount_,
+	const VkAccelerationStructureNVX * pAccelerationStructures_)
+	:accelerationStructureCount(accelerationStructureCount_)
+	,pAccelerationStructures(pAccelerationStructures_)
+{
+}
 
 S_descriptor_acceleration_structure_info_NVX( VkDescriptorAccelerationStructureInfoNVX const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_descriptor_acceleration_structure_info_NVX ) );	}
@@ -6320,14 +6920,36 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET;
 	 void * pNext = nullptr;
 public:
-	VkDescriptorSet dstSet = VK_NULL_HANDLE;
-	uint32_t dstBinding = 0;
-	uint32_t dstArrayElement = 0;
-	uint32_t descriptorCount = 0;
-	E_descriptor_type descriptorType = E_descriptor_type::e_sampler;
-	const S_descriptor_image_info * pImageInfo = nullptr;
-	const S_descriptor_buffer_info * pBufferInfo = nullptr;
-	const VkBufferView * pTexelBufferView = VK_NULL_HANDLE;
+	VkDescriptorSet dstSet;
+	uint32_t dstBinding;
+	uint32_t dstArrayElement;
+	uint32_t descriptorCount;
+	E_descriptor_type descriptorType;
+	const S_descriptor_image_info * pImageInfo;
+	const S_descriptor_buffer_info * pBufferInfo;
+	const VkBufferView * pTexelBufferView;
+
+S_write_descriptor_set(){}
+
+S_write_descriptor_set(
+	VkDescriptorSet dstSet_,
+	uint32_t dstBinding_,
+	uint32_t dstArrayElement_,
+	uint32_t descriptorCount_,
+	E_descriptor_type descriptorType_,
+	const S_descriptor_image_info * pImageInfo_,
+	const S_descriptor_buffer_info * pBufferInfo_,
+	const VkBufferView * pTexelBufferView_)
+	:dstSet(dstSet_)
+	,dstBinding(dstBinding_)
+	,dstArrayElement(dstArrayElement_)
+	,descriptorCount(descriptorCount_)
+	,descriptorType(descriptorType_)
+	,pImageInfo(pImageInfo_)
+	,pBufferInfo(pBufferInfo_)
+	,pTexelBufferView(pTexelBufferView_)
+{
+}
 
 S_write_descriptor_set( VkWriteDescriptorSet const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_write_descriptor_set ) );	}
@@ -6353,13 +6975,33 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_COPY_DESCRIPTOR_SET;
 	 void * pNext = nullptr;
 public:
-	VkDescriptorSet srcSet = VK_NULL_HANDLE;
-	uint32_t srcBinding = 0;
-	uint32_t srcArrayElement = 0;
-	VkDescriptorSet dstSet = VK_NULL_HANDLE;
-	uint32_t dstBinding = 0;
-	uint32_t dstArrayElement = 0;
-	uint32_t descriptorCount = 0;
+	VkDescriptorSet srcSet;
+	uint32_t srcBinding;
+	uint32_t srcArrayElement;
+	VkDescriptorSet dstSet;
+	uint32_t dstBinding;
+	uint32_t dstArrayElement;
+	uint32_t descriptorCount;
+
+S_copy_descriptor_set(){}
+
+S_copy_descriptor_set(
+	VkDescriptorSet srcSet_,
+	uint32_t srcBinding_,
+	uint32_t srcArrayElement_,
+	VkDescriptorSet dstSet_,
+	uint32_t dstBinding_,
+	uint32_t dstArrayElement_,
+	uint32_t descriptorCount_)
+	:srcSet(srcSet_)
+	,srcBinding(srcBinding_)
+	,srcArrayElement(srcArrayElement_)
+	,dstSet(dstSet_)
+	,dstBinding(dstBinding_)
+	,dstArrayElement(dstArrayElement_)
+	,descriptorCount(descriptorCount_)
+{
+}
 
 S_copy_descriptor_set( VkCopyDescriptorSet const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_copy_descriptor_set ) );	}
@@ -6383,7 +7025,15 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_DEDICATED_ALLOCATION_BUFFER_CREATE_INFO_NV;
 	 void * pNext = nullptr;
 public:
-	VkBool32 dedicatedAllocation = 0;
+	VkBool32 dedicatedAllocation;
+
+S_dedicated_allocation_buffer_create_info_NV(){}
+
+S_dedicated_allocation_buffer_create_info_NV(
+	VkBool32 dedicatedAllocation_)
+	:dedicatedAllocation(dedicatedAllocation_)
+{
+}
 
 S_dedicated_allocation_buffer_create_info_NV( VkDedicatedAllocationBufferCreateInfoNV const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_dedicated_allocation_buffer_create_info_NV ) );	}
@@ -6410,6 +7060,14 @@ private:
 	 void * pNext = nullptr;
 public:
 	F_external_memory_handle_type handleTypes;
+
+S_external_memory_buffer_create_info(){}
+
+S_external_memory_buffer_create_info(
+	F_external_memory_handle_type handleTypes_)
+	:handleTypes(handleTypes_)
+{
+}
 
 S_external_memory_buffer_create_info( VkExternalMemoryBufferCreateInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_external_memory_buffer_create_info ) );	}
@@ -6438,11 +7096,29 @@ private:
 	 void * pNext = nullptr;
 public:
 	F_buffer_create flags;
-	VkDeviceSize size = 0;
+	VkDeviceSize size;
 	F_buffer_usage usage;
-	E_sharing_mode sharingMode = E_sharing_mode::e_exclusive;
-	uint32_t queueFamilyIndexCount = 0;
-	const uint32_t * pQueueFamilyIndices = nullptr;
+	E_sharing_mode sharingMode;
+	uint32_t queueFamilyIndexCount;
+	const uint32_t * pQueueFamilyIndices;
+
+S_buffer_create_info(){}
+
+S_buffer_create_info(
+	F_buffer_create flags_,
+	VkDeviceSize size_,
+	F_buffer_usage usage_,
+	E_sharing_mode sharingMode_,
+	uint32_t queueFamilyIndexCount_,
+	const uint32_t * pQueueFamilyIndices_)
+	:flags(flags_)
+	,size(size_)
+	,usage(usage_)
+	,sharingMode(sharingMode_)
+	,queueFamilyIndexCount(queueFamilyIndexCount_)
+	,pQueueFamilyIndices(pQueueFamilyIndices_)
+{
+}
 
 S_buffer_create_info( VkBufferCreateInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_buffer_create_info ) );	}
@@ -6468,11 +7144,27 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_BUFFER_VIEW_CREATE_INFO;
 	 void * pNext = nullptr;
 public:
-	VkBufferViewCreateFlags flags = 0;
-	VkBuffer buffer = VK_NULL_HANDLE;
-	E_format format = E_format::e_undefined;
-	VkDeviceSize offset = 0;
-	VkDeviceSize range = 0;
+	VkBufferViewCreateFlags flags;
+	VkBuffer buffer;
+	E_format format;
+	VkDeviceSize offset;
+	VkDeviceSize range;
+
+S_buffer_view_create_info(){}
+
+S_buffer_view_create_info(
+	VkBufferViewCreateFlags flags_,
+	VkBuffer buffer_,
+	E_format format_,
+	VkDeviceSize offset_,
+	VkDeviceSize range_)
+	:flags(flags_)
+	,buffer(buffer_)
+	,format(format_)
+	,offset(offset_)
+	,range(range_)
+{
+}
 
 S_buffer_view_create_info( VkBufferViewCreateInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_buffer_view_create_info ) );	}
@@ -6492,8 +7184,10 @@ static_assert(
 */
 struct		S_image_subresource{
 	F_image_aspect aspectMask;
-	uint32_t mipLevel = 0;
-	uint32_t arrayLayer = 0;
+	uint32_t mipLevel;
+	uint32_t arrayLayer;
+
+S_image_subresource(){}
 
 };
 
@@ -6501,9 +7195,11 @@ struct		S_image_subresource{
 */
 struct		S_image_subresource_layers{
 	F_image_aspect aspectMask;
-	uint32_t mipLevel = 0;
-	uint32_t baseArrayLayer = 0;
-	uint32_t layerCount = 0;
+	uint32_t mipLevel;
+	uint32_t baseArrayLayer;
+	uint32_t layerCount;
+
+S_image_subresource_layers(){}
 
 };
 
@@ -6511,10 +7207,12 @@ struct		S_image_subresource_layers{
 */
 struct		S_image_subresource_range{
 	F_image_aspect aspectMask;
-	uint32_t baseMipLevel = 0;
-	uint32_t levelCount = 0;
-	uint32_t baseArrayLayer = 0;
-	uint32_t layerCount = 0;
+	uint32_t baseMipLevel;
+	uint32_t levelCount;
+	uint32_t baseArrayLayer;
+	uint32_t layerCount;
+
+S_image_subresource_range(){}
 
 };
 
@@ -6527,6 +7225,16 @@ private:
 public:
 	F_access srcAccessMask;
 	F_access dstAccessMask;
+
+S_memory_barrier(){}
+
+S_memory_barrier(
+	F_access srcAccessMask_,
+	F_access dstAccessMask_)
+	:srcAccessMask(srcAccessMask_)
+	,dstAccessMask(dstAccessMask_)
+{
+}
 
 S_memory_barrier( VkMemoryBarrier const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_memory_barrier ) );	}
@@ -6551,11 +7259,31 @@ private:
 public:
 	F_access srcAccessMask;
 	F_access dstAccessMask;
-	uint32_t srcQueueFamilyIndex = 0;
-	uint32_t dstQueueFamilyIndex = 0;
-	VkBuffer buffer = VK_NULL_HANDLE;
-	VkDeviceSize offset = 0;
-	VkDeviceSize size = 0;
+	uint32_t srcQueueFamilyIndex;
+	uint32_t dstQueueFamilyIndex;
+	VkBuffer buffer;
+	VkDeviceSize offset;
+	VkDeviceSize size;
+
+S_buffer_memory_barrier(){}
+
+S_buffer_memory_barrier(
+	F_access srcAccessMask_,
+	F_access dstAccessMask_,
+	uint32_t srcQueueFamilyIndex_,
+	uint32_t dstQueueFamilyIndex_,
+	VkBuffer buffer_,
+	VkDeviceSize offset_,
+	VkDeviceSize size_)
+	:srcAccessMask(srcAccessMask_)
+	,dstAccessMask(dstAccessMask_)
+	,srcQueueFamilyIndex(srcQueueFamilyIndex_)
+	,dstQueueFamilyIndex(dstQueueFamilyIndex_)
+	,buffer(buffer_)
+	,offset(offset_)
+	,size(size_)
+{
+}
 
 S_buffer_memory_barrier( VkBufferMemoryBarrier const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_buffer_memory_barrier ) );	}
@@ -6574,8 +7302,10 @@ static_assert(
 /*	VkSampleLocationEXT
 */
 struct		S_sample_location_EXT{
-	float x = 0;
-	float y = 0;
+	float x;
+	float y;
+
+S_sample_location_EXT(){}
 
 };
 
@@ -6588,16 +7318,23 @@ private:
 	 void * pNext = nullptr;
 public:
 	F_sample_count sampleLocationsPerPixel;
-	S_extent_2d sampleLocationGridSize = {};
-	uint32_t sampleLocationsCount = 0;
-	const S_sample_location_EXT * pSampleLocations = nullptr;
+	S_extent_2d sampleLocationGridSize;
+	uint32_t sampleLocationsCount;
+	const S_sample_location_EXT * pSampleLocations;
 
-	S_sample_locations_info_EXT(
-		F_sample_count sampleLocationsPerPixel_ = F_sample_count::b_1,
-		S_extent_2d sampleLocationGridSize_ = {},
-		uint32_t sampleLocationsCount_ = 0,
-		const S_sample_location_EXT * pSampleLocations_ = nullptr
-	) {}
+S_sample_locations_info_EXT(){}
+
+S_sample_locations_info_EXT(
+	F_sample_count sampleLocationsPerPixel_,
+	S_extent_2d sampleLocationGridSize_,
+	uint32_t sampleLocationsCount_,
+	const S_sample_location_EXT * pSampleLocations_)
+	:sampleLocationsPerPixel(sampleLocationsPerPixel_)
+	,sampleLocationGridSize(sampleLocationGridSize_)
+	,sampleLocationsCount(sampleLocationsCount_)
+	,pSampleLocations(pSampleLocations_)
+{
+}
 
 S_sample_locations_info_EXT( VkSampleLocationsInfoEXT const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_sample_locations_info_EXT ) );	}
@@ -6626,12 +7363,34 @@ private:
 public:
 	F_access srcAccessMask;
 	F_access dstAccessMask;
-	E_image_layout oldLayout = E_image_layout::e_undefined;
-	E_image_layout newLayout = E_image_layout::e_undefined;
-	uint32_t srcQueueFamilyIndex = 0;
-	uint32_t dstQueueFamilyIndex = 0;
-	VkImage image = VK_NULL_HANDLE;
-	S_image_subresource_range subresourceRange = {};
+	E_image_layout oldLayout;
+	E_image_layout newLayout;
+	uint32_t srcQueueFamilyIndex;
+	uint32_t dstQueueFamilyIndex;
+	VkImage image;
+	S_image_subresource_range subresourceRange;
+
+S_image_memory_barrier(){}
+
+S_image_memory_barrier(
+	F_access srcAccessMask_,
+	F_access dstAccessMask_,
+	E_image_layout oldLayout_,
+	E_image_layout newLayout_,
+	uint32_t srcQueueFamilyIndex_,
+	uint32_t dstQueueFamilyIndex_,
+	VkImage image_,
+	S_image_subresource_range subresourceRange_)
+	:srcAccessMask(srcAccessMask_)
+	,dstAccessMask(dstAccessMask_)
+	,oldLayout(oldLayout_)
+	,newLayout(newLayout_)
+	,srcQueueFamilyIndex(srcQueueFamilyIndex_)
+	,dstQueueFamilyIndex(dstQueueFamilyIndex_)
+	,image(image_)
+	,subresourceRange(subresourceRange_)
+{
+}
 
 S_image_memory_barrier( VkImageMemoryBarrier const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_image_memory_barrier ) );	}
@@ -6657,7 +7416,15 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_DEDICATED_ALLOCATION_IMAGE_CREATE_INFO_NV;
 	 void * pNext = nullptr;
 public:
-	VkBool32 dedicatedAllocation = 0;
+	VkBool32 dedicatedAllocation;
+
+S_dedicated_allocation_image_create_info_NV(){}
+
+S_dedicated_allocation_image_create_info_NV(
+	VkBool32 dedicatedAllocation_)
+	:dedicatedAllocation(dedicatedAllocation_)
+{
+}
 
 S_dedicated_allocation_image_create_info_NV( VkDedicatedAllocationImageCreateInfoNV const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_dedicated_allocation_image_create_info_NV ) );	}
@@ -6685,6 +7452,14 @@ private:
 public:
 	F_external_memory_handle_type_NV handleTypes;
 
+S_external_memory_image_create_info_NV(){}
+
+S_external_memory_image_create_info_NV(
+	F_external_memory_handle_type_NV handleTypes_)
+	:handleTypes(handleTypes_)
+{
+}
+
 S_external_memory_image_create_info_NV( VkExternalMemoryImageCreateInfoNV const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_external_memory_image_create_info_NV ) );	}
 S_external_memory_image_create_info_NV& operator=( VkExternalMemoryImageCreateInfoNV const & rhs ) 
@@ -6711,6 +7486,14 @@ private:
 public:
 	F_external_memory_handle_type handleTypes;
 
+S_external_memory_image_create_info(){}
+
+S_external_memory_image_create_info(
+	F_external_memory_handle_type handleTypes_)
+	:handleTypes(handleTypes_)
+{
+}
+
 S_external_memory_image_create_info( VkExternalMemoryImageCreateInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_external_memory_image_create_info ) );	}
 S_external_memory_image_create_info& operator=( VkExternalMemoryImageCreateInfo const & rhs ) 
@@ -6735,7 +7518,15 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_IMAGE_SWAPCHAIN_CREATE_INFO_KHR;
 	 void * pNext = nullptr;
 public:
-	VkSwapchainKHR swapchain = VK_NULL_HANDLE;
+	VkSwapchainKHR swapchain;
+
+S_image_swapchain_create_info_KHR(){}
+
+S_image_swapchain_create_info_KHR(
+	VkSwapchainKHR swapchain_)
+	:swapchain(swapchain_)
+{
+}
 
 S_image_swapchain_create_info_KHR( VkImageSwapchainCreateInfoKHR const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_image_swapchain_create_info_KHR ) );	}
@@ -6761,8 +7552,18 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_IMAGE_FORMAT_LIST_CREATE_INFO_KHR;
 	 void * pNext = nullptr;
 public:
-	uint32_t viewFormatCount = 0;
-	const E_format * pViewFormats = nullptr;
+	uint32_t viewFormatCount;
+	const E_format * pViewFormats;
+
+S_image_format_list_create_info_KHR(){}
+
+S_image_format_list_create_info_KHR(
+	uint32_t viewFormatCount_,
+	const E_format * pViewFormats_)
+	:viewFormatCount(viewFormatCount_)
+	,pViewFormats(pViewFormats_)
+{
+}
 
 S_image_format_list_create_info_KHR( VkImageFormatListCreateInfoKHR const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_image_format_list_create_info_KHR ) );	}
@@ -6789,7 +7590,15 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_EXTERNAL_FORMAT_ANDROID;
 	void * pNext = nullptr;
 public:
-	uint64_t externalFormat = 0;
+	uint64_t externalFormat;
+
+S_external_format_ANDROID(){}
+
+S_external_format_ANDROID(
+	uint64_t externalFormat_)
+	:externalFormat(externalFormat_)
+{
+}
 
 S_external_format_ANDROID( VkExternalFormatANDROID const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_external_format_ANDROID ) );	}
@@ -6818,8 +7627,18 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_IMAGE_DRM_FORMAT_MODIFIER_LIST_CREATE_INFO_EXT;
 	 void * pNext = nullptr;
 public:
-	uint32_t drmFormatModifierCount = 0;
-	const uint64_t * pDrmFormatModifiers = nullptr;
+	uint32_t drmFormatModifierCount;
+	const uint64_t * pDrmFormatModifiers;
+
+S_image_drm_format_modifier_list_create_info_EXT(){}
+
+S_image_drm_format_modifier_list_create_info_EXT(
+	uint32_t drmFormatModifierCount_,
+	const uint64_t * pDrmFormatModifiers_)
+	:drmFormatModifierCount(drmFormatModifierCount_)
+	,pDrmFormatModifiers(pDrmFormatModifiers_)
+{
+}
 
 S_image_drm_format_modifier_list_create_info_EXT( VkImageDrmFormatModifierListCreateInfoEXT const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_image_drm_format_modifier_list_create_info_EXT ) );	}
@@ -6842,11 +7661,13 @@ static_assert(
 (returnedonly)
 */
 struct		S_subresource_layout{
-	VkDeviceSize offset = 0;
-	VkDeviceSize size = 0;
-	VkDeviceSize rowPitch = 0;
-	VkDeviceSize arrayPitch = 0;
-	VkDeviceSize depthPitch = 0;
+	VkDeviceSize offset;
+	VkDeviceSize size;
+	VkDeviceSize rowPitch;
+	VkDeviceSize arrayPitch;
+	VkDeviceSize depthPitch;
+
+S_subresource_layout(){}
 
 };
 
@@ -6859,9 +7680,21 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_IMAGE_EXCPLICIT_DRM_FORMAT_MODIFIER_CREATE_INFO_EXT;
 	 void * pNext = nullptr;
 public:
-	uint64_t drmFormatModifier = 0;
-	uint32_t drmFormatModifierPlaneCount = 0;
-	const S_subresource_layout * pPlaneLayouts = nullptr;
+	uint64_t drmFormatModifier;
+	uint32_t drmFormatModifierPlaneCount;
+	const S_subresource_layout * pPlaneLayouts;
+
+S_image_drm_format_modifier_explicit_create_info_EXT(){}
+
+S_image_drm_format_modifier_explicit_create_info_EXT(
+	uint64_t drmFormatModifier_,
+	uint32_t drmFormatModifierPlaneCount_,
+	const S_subresource_layout * pPlaneLayouts_)
+	:drmFormatModifier(drmFormatModifier_)
+	,drmFormatModifierPlaneCount(drmFormatModifierPlaneCount_)
+	,pPlaneLayouts(pPlaneLayouts_)
+{
+}
 
 S_image_drm_format_modifier_explicit_create_info_EXT( VkImageDrmFormatModifierExplicitCreateInfoEXT const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_image_drm_format_modifier_explicit_create_info_EXT ) );	}
@@ -6897,18 +7730,50 @@ private:
 	 void * pNext = nullptr;
 public:
 	F_image_create flags;
-	E_image_type imageType = E_image_type::e_1d;
-	E_format format = E_format::e_undefined;
-	S_extent_3d extent = {};
-	uint32_t mipLevels = 0;
-	uint32_t arrayLayers = 0;
+	E_image_type imageType;
+	E_format format;
+	S_extent_3d extent;
+	uint32_t mipLevels;
+	uint32_t arrayLayers;
 	F_sample_count samples;
-	E_image_tiling tiling = E_image_tiling::e_optimal;
+	E_image_tiling tiling;
 	F_image_usage usage;
-	E_sharing_mode sharingMode = E_sharing_mode::e_exclusive;
-	uint32_t queueFamilyIndexCount = 0;
-	const uint32_t * pQueueFamilyIndices = nullptr;
-	E_image_layout initialLayout = E_image_layout::e_undefined;
+	E_sharing_mode sharingMode;
+	uint32_t queueFamilyIndexCount;
+	const uint32_t * pQueueFamilyIndices;
+	E_image_layout initialLayout;
+
+S_image_create_info(){}
+
+S_image_create_info(
+	F_image_create flags_,
+	E_image_type imageType_,
+	E_format format_,
+	S_extent_3d extent_,
+	uint32_t mipLevels_,
+	uint32_t arrayLayers_,
+	F_sample_count samples_,
+	E_image_tiling tiling_,
+	F_image_usage usage_,
+	E_sharing_mode sharingMode_,
+	uint32_t queueFamilyIndexCount_,
+	const uint32_t * pQueueFamilyIndices_,
+	E_image_layout initialLayout_)
+	:flags(flags_)
+	,imageType(imageType_)
+	,format(format_)
+	,extent(extent_)
+	,mipLevels(mipLevels_)
+	,arrayLayers(arrayLayers_)
+	,samples(samples_)
+	,tiling(tiling_)
+	,usage(usage_)
+	,sharingMode(sharingMode_)
+	,queueFamilyIndexCount(queueFamilyIndexCount_)
+	,pQueueFamilyIndices(pQueueFamilyIndices_)
+	,initialLayout(initialLayout_)
+{
+}
 
 S_image_create_info( VkImageCreateInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_image_create_info ) );	}
@@ -6949,6 +7814,14 @@ private:
 public:
 	F_image_usage usage;
 
+S_image_view_usage_create_info(){}
+
+S_image_view_usage_create_info(
+	F_image_usage usage_)
+	:usage(usage_)
+{
+}
+
 S_image_view_usage_create_info( VkImageViewUsageCreateInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_image_view_usage_create_info ) );	}
 S_image_view_usage_create_info& operator=( VkImageViewUsageCreateInfo const & rhs ) 
@@ -6973,7 +7846,15 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_INFO;
 	 void * pNext = nullptr;
 public:
-	VkSamplerYcbcrConversion conversion = VK_NULL_HANDLE;
+	VkSamplerYcbcrConversion conversion;
+
+S_sampler_ycbcr_conversion_info(){}
+
+S_sampler_ycbcr_conversion_info(
+	VkSamplerYcbcrConversion conversion_)
+	:conversion(conversion_)
+{
+}
 
 S_sampler_ycbcr_conversion_info( VkSamplerYcbcrConversionInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_sampler_ycbcr_conversion_info ) );	}
@@ -7000,7 +7881,15 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_IMAGE_VIEW_ASTC_DECODE_MODE_EXT;
 	 void * pNext = nullptr;
 public:
-	E_format decodeMode = E_format::e_undefined;
+	E_format decodeMode;
+
+S_image_view_astc_decode_mode_EXT(){}
+
+S_image_view_astc_decode_mode_EXT(
+	E_format decodeMode_)
+	:decodeMode(decodeMode_)
+{
+}
 
 S_image_view_astc_decode_mode_EXT( VkImageViewASTCDecodeModeEXT const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_image_view_astc_decode_mode_EXT ) );	}
@@ -7029,12 +7918,30 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO;
 	 void * pNext = nullptr;
 public:
-	VkImageViewCreateFlags flags = 0;
-	VkImage image = VK_NULL_HANDLE;
-	E_image_view_type viewType = E_image_view_type::e_1d;
-	E_format format = E_format::e_undefined;
-	S_component_mapping components = {};
-	S_image_subresource_range subresourceRange = {};
+	VkImageViewCreateFlags flags;
+	VkImage image;
+	E_image_view_type viewType;
+	E_format format;
+	S_component_mapping components;
+	S_image_subresource_range subresourceRange;
+
+S_image_view_create_info(){}
+
+S_image_view_create_info(
+	VkImageViewCreateFlags flags_,
+	VkImage image_,
+	E_image_view_type viewType_,
+	E_format format_,
+	S_component_mapping components_,
+	S_image_subresource_range subresourceRange_)
+	:flags(flags_)
+	,image(image_)
+	,viewType(viewType_)
+	,format(format_)
+	,components(components_)
+	,subresourceRange(subresourceRange_)
+{
+}
 
 S_image_view_create_info( VkImageViewCreateInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_image_view_create_info ) );	}
@@ -7057,59 +7964,71 @@ static_assert(
 /*	VkBufferCopy
 */
 struct		S_buffer_copy{
-	VkDeviceSize srcOffset = 0;
-	VkDeviceSize dstOffset = 0;
-	VkDeviceSize size = 0;
+	VkDeviceSize srcOffset;
+	VkDeviceSize dstOffset;
+	VkDeviceSize size;
+
+S_buffer_copy(){}
 
 };
 
 /*	VkSparseMemoryBind
 */
 struct		S_sparse_memory_bind{
-	VkDeviceSize resourceOffset = 0;
-	VkDeviceSize size = 0;
-	VkDeviceMemory memory = VK_NULL_HANDLE;
-	VkDeviceSize memoryOffset = 0;
+	VkDeviceSize resourceOffset;
+	VkDeviceSize size;
+	VkDeviceMemory memory;
+	VkDeviceSize memoryOffset;
 	F_sparse_memory_bind flags;
+
+S_sparse_memory_bind(){}
 
 };
 
 /*	VkSparseImageMemoryBind
 */
 struct		S_sparse_image_memory_bind{
-	S_image_subresource subresource = {};
-	S_offset_3d offset = {};
-	S_extent_3d extent = {};
-	VkDeviceMemory memory = VK_NULL_HANDLE;
-	VkDeviceSize memoryOffset = 0;
+	S_image_subresource subresource;
+	S_offset_3d offset;
+	S_extent_3d extent;
+	VkDeviceMemory memory;
+	VkDeviceSize memoryOffset;
 	F_sparse_memory_bind flags;
+
+S_sparse_image_memory_bind(){}
 
 };
 
 /*	VkSparseBufferMemoryBindInfo
 */
 struct		S_sparse_buffer_memory_bind_info{
-	VkBuffer buffer = VK_NULL_HANDLE;
-	uint32_t bindCount = 0;
-	const S_sparse_memory_bind * pBinds = nullptr;
+	VkBuffer buffer;
+	uint32_t bindCount;
+	const S_sparse_memory_bind * pBinds;
+
+S_sparse_buffer_memory_bind_info(){}
 
 };
 
 /*	VkSparseImageOpaqueMemoryBindInfo
 */
 struct		S_sparse_image_opaque_memory_bind_info{
-	VkImage image = VK_NULL_HANDLE;
-	uint32_t bindCount = 0;
-	const S_sparse_memory_bind * pBinds = nullptr;
+	VkImage image;
+	uint32_t bindCount;
+	const S_sparse_memory_bind * pBinds;
+
+S_sparse_image_opaque_memory_bind_info(){}
 
 };
 
 /*	VkSparseImageMemoryBindInfo
 */
 struct		S_sparse_image_memory_bind_info{
-	VkImage image = VK_NULL_HANDLE;
-	uint32_t bindCount = 0;
-	const S_sparse_image_memory_bind * pBinds = nullptr;
+	VkImage image;
+	uint32_t bindCount;
+	const S_sparse_image_memory_bind * pBinds;
+
+S_sparse_image_memory_bind_info(){}
 
 };
 
@@ -7121,8 +8040,18 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_DEVICE_GROUP_BIND_SPARSE_INFO;
 	 void * pNext = nullptr;
 public:
-	uint32_t resourceDeviceIndex = 0;
-	uint32_t memoryDeviceIndex = 0;
+	uint32_t resourceDeviceIndex;
+	uint32_t memoryDeviceIndex;
+
+S_device_group_bind_sparse_info(){}
+
+S_device_group_bind_sparse_info(
+	uint32_t resourceDeviceIndex_,
+	uint32_t memoryDeviceIndex_)
+	:resourceDeviceIndex(resourceDeviceIndex_)
+	,memoryDeviceIndex(memoryDeviceIndex_)
+{
+}
 
 S_device_group_bind_sparse_info( VkDeviceGroupBindSparseInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_device_group_bind_sparse_info ) );	}
@@ -7149,16 +8078,42 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_BIND_SPARSE_INFO;
 	 void * pNext = nullptr;
 public:
-	uint32_t waitSemaphoreCount = 0;
-	const VkSemaphore * pWaitSemaphores = VK_NULL_HANDLE;
-	uint32_t bufferBindCount = 0;
-	const S_sparse_buffer_memory_bind_info * pBufferBinds = nullptr;
-	uint32_t imageOpaqueBindCount = 0;
-	const S_sparse_image_opaque_memory_bind_info * pImageOpaqueBinds = nullptr;
-	uint32_t imageBindCount = 0;
-	const S_sparse_image_memory_bind_info * pImageBinds = nullptr;
-	uint32_t signalSemaphoreCount = 0;
-	const VkSemaphore * pSignalSemaphores = VK_NULL_HANDLE;
+	uint32_t waitSemaphoreCount;
+	const VkSemaphore * pWaitSemaphores;
+	uint32_t bufferBindCount;
+	const S_sparse_buffer_memory_bind_info * pBufferBinds;
+	uint32_t imageOpaqueBindCount;
+	const S_sparse_image_opaque_memory_bind_info * pImageOpaqueBinds;
+	uint32_t imageBindCount;
+	const S_sparse_image_memory_bind_info * pImageBinds;
+	uint32_t signalSemaphoreCount;
+	const VkSemaphore * pSignalSemaphores;
+
+S_bind_sparse_info(){}
+
+S_bind_sparse_info(
+	uint32_t waitSemaphoreCount_,
+	const VkSemaphore * pWaitSemaphores_,
+	uint32_t bufferBindCount_,
+	const S_sparse_buffer_memory_bind_info * pBufferBinds_,
+	uint32_t imageOpaqueBindCount_,
+	const S_sparse_image_opaque_memory_bind_info * pImageOpaqueBinds_,
+	uint32_t imageBindCount_,
+	const S_sparse_image_memory_bind_info * pImageBinds_,
+	uint32_t signalSemaphoreCount_,
+	const VkSemaphore * pSignalSemaphores_)
+	:waitSemaphoreCount(waitSemaphoreCount_)
+	,pWaitSemaphores(pWaitSemaphores_)
+	,bufferBindCount(bufferBindCount_)
+	,pBufferBinds(pBufferBinds_)
+	,imageOpaqueBindCount(imageOpaqueBindCount_)
+	,pImageOpaqueBinds(pImageOpaqueBinds_)
+	,imageBindCount(imageBindCount_)
+	,pImageBinds(pImageBinds_)
+	,signalSemaphoreCount(signalSemaphoreCount_)
+	,pSignalSemaphores(pSignalSemaphores_)
+{
+}
 
 S_bind_sparse_info( VkBindSparseInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_bind_sparse_info ) );	}
@@ -7179,44 +8134,52 @@ static_assert(
 /*	VkImageCopy
 */
 struct		S_image_copy{
-	S_image_subresource_layers srcSubresource = {};
-	S_offset_3d srcOffset = {};
-	S_image_subresource_layers dstSubresource = {};
-	S_offset_3d dstOffset = {};
-	S_extent_3d extent = {};
+	S_image_subresource_layers srcSubresource;
+	S_offset_3d srcOffset;
+	S_image_subresource_layers dstSubresource;
+	S_offset_3d dstOffset;
+	S_extent_3d extent;
+
+S_image_copy(){}
 
 };
 
 /*	VkImageBlit
 */
 struct		S_image_blit{
-	S_image_subresource_layers srcSubresource = {};
-	S_offset_3d srcOffsets[2] = {};
-	S_image_subresource_layers dstSubresource = {};
-	S_offset_3d dstOffsets[2] = {};
+	S_image_subresource_layers srcSubresource;
+	S_offset_3d srcOffsets[2];
+	S_image_subresource_layers dstSubresource;
+	S_offset_3d dstOffsets[2];
+
+S_image_blit(){}
 
 };
 
 /*	VkBufferImageCopy
 */
 struct		S_buffer_image_copy{
-	VkDeviceSize bufferOffset = 0;
-	uint32_t bufferRowLength = 0;
-	uint32_t bufferImageHeight = 0;
-	S_image_subresource_layers imageSubresource = {};
-	S_offset_3d imageOffset = {};
-	S_extent_3d imageExtent = {};
+	VkDeviceSize bufferOffset;
+	uint32_t bufferRowLength;
+	uint32_t bufferImageHeight;
+	S_image_subresource_layers imageSubresource;
+	S_offset_3d imageOffset;
+	S_extent_3d imageExtent;
+
+S_buffer_image_copy(){}
 
 };
 
 /*	VkImageResolve
 */
 struct		S_image_resolve{
-	S_image_subresource_layers srcSubresource = {};
-	S_offset_3d srcOffset = {};
-	S_image_subresource_layers dstSubresource = {};
-	S_offset_3d dstOffset = {};
-	S_extent_3d extent = {};
+	S_image_subresource_layers srcSubresource;
+	S_offset_3d srcOffset;
+	S_image_subresource_layers dstSubresource;
+	S_offset_3d dstOffset;
+	S_extent_3d extent;
+
+S_image_resolve(){}
 
 };
 
@@ -7228,7 +8191,15 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_SHADER_MODULE_VALIDATION_CACHE_CREATE_INFO_EXT;
 	 void * pNext = nullptr;
 public:
-	VkValidationCacheEXT validationCache = VK_NULL_HANDLE;
+	VkValidationCacheEXT validationCache;
+
+S_shader_module_validation_cache_create_info_EXT(){}
+
+S_shader_module_validation_cache_create_info_EXT(
+	VkValidationCacheEXT validationCache_)
+	:validationCache(validationCache_)
+{
+}
 
 S_shader_module_validation_cache_create_info_EXT( VkShaderModuleValidationCacheCreateInfoEXT const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_shader_module_validation_cache_create_info_EXT ) );	}
@@ -7255,9 +8226,21 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO;
 	 void * pNext = nullptr;
 public:
-	VkShaderModuleCreateFlags flags = 0;
-	size_t codeSize = 0;
-	const uint32_t * pCode = nullptr;
+	VkShaderModuleCreateFlags flags;
+	size_t codeSize;
+	const uint32_t * pCode;
+
+S_shader_module_create_info(){}
+
+S_shader_module_create_info(
+	VkShaderModuleCreateFlags flags_,
+	size_t codeSize_,
+	const uint32_t * pCode_)
+	:flags(flags_)
+	,codeSize(codeSize_)
+	,pCode(pCode_)
+{
+}
 
 S_shader_module_create_info( VkShaderModuleCreateInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_shader_module_create_info ) );	}
@@ -7278,11 +8261,13 @@ static_assert(
 /*	VkDescriptorSetLayoutBinding
 */
 struct		S_descriptor_set_layout_binding{
-	uint32_t binding = 0;
-	E_descriptor_type descriptorType = E_descriptor_type::e_sampler;
-	uint32_t descriptorCount = 0;
+	uint32_t binding;
+	E_descriptor_type descriptorType;
+	uint32_t descriptorCount;
 	F_shader_stage stageFlags;
-	const VkSampler * pImmutableSamplers = VK_NULL_HANDLE;
+	const VkSampler * pImmutableSamplers;
+
+S_descriptor_set_layout_binding(){}
 
 };
 
@@ -7294,8 +8279,18 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_BINDING_FLAGS_CREATE_INFO_EXT;
 	 void * pNext = nullptr;
 public:
-	uint32_t bindingCount = 0;
-	const F_descriptor_binding_EXT * pBindingFlags = nullptr;
+	uint32_t bindingCount;
+	const F_descriptor_binding_EXT * pBindingFlags;
+
+S_descriptor_set_layout_binding_flags_create_info_EXT(){}
+
+S_descriptor_set_layout_binding_flags_create_info_EXT(
+	uint32_t bindingCount_,
+	const F_descriptor_binding_EXT * pBindingFlags_)
+	:bindingCount(bindingCount_)
+	,pBindingFlags(pBindingFlags_)
+{
+}
 
 S_descriptor_set_layout_binding_flags_create_info_EXT( VkDescriptorSetLayoutBindingFlagsCreateInfoEXT const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_descriptor_set_layout_binding_flags_create_info_EXT ) );	}
@@ -7323,8 +8318,20 @@ private:
 	 void * pNext = nullptr;
 public:
 	F_descriptor_set_layout_create flags;
-	uint32_t bindingCount = 0;
-	const S_descriptor_set_layout_binding * pBindings = nullptr;
+	uint32_t bindingCount;
+	const S_descriptor_set_layout_binding * pBindings;
+
+S_descriptor_set_layout_create_info(){}
+
+S_descriptor_set_layout_create_info(
+	F_descriptor_set_layout_create flags_,
+	uint32_t bindingCount_,
+	const S_descriptor_set_layout_binding * pBindings_)
+	:flags(flags_)
+	,bindingCount(bindingCount_)
+	,pBindings(pBindings_)
+{
+}
 
 S_descriptor_set_layout_create_info( VkDescriptorSetLayoutCreateInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_descriptor_set_layout_create_info ) );	}
@@ -7345,8 +8352,10 @@ static_assert(
 /*	VkDescriptorPoolSize
 */
 struct		S_descriptor_pool_size{
-	E_descriptor_type type = E_descriptor_type::e_sampler;
-	uint32_t descriptorCount = 0;
+	E_descriptor_type type;
+	uint32_t descriptorCount;
+
+S_descriptor_pool_size(){}
 
 };
 
@@ -7358,7 +8367,15 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_INLINE_UNIFORM_BLOCK_CREATE_INFO_EXT;
 	 void * pNext = nullptr;
 public:
-	uint32_t maxInlineUniformBlockBindings = 0;
+	uint32_t maxInlineUniformBlockBindings;
+
+S_descriptor_pool_inline_uniform_block_create_info_EXT(){}
+
+S_descriptor_pool_inline_uniform_block_create_info_EXT(
+	uint32_t maxInlineUniformBlockBindings_)
+	:maxInlineUniformBlockBindings(maxInlineUniformBlockBindings_)
+{
+}
 
 S_descriptor_pool_inline_uniform_block_create_info_EXT( VkDescriptorPoolInlineUniformBlockCreateInfoEXT const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_descriptor_pool_inline_uniform_block_create_info_EXT ) );	}
@@ -7386,9 +8403,23 @@ private:
 	 void * pNext = nullptr;
 public:
 	F_descriptor_pool_create flags;
-	uint32_t maxSets = 0;
-	uint32_t poolSizeCount = 0;
-	const S_descriptor_pool_size * pPoolSizes = nullptr;
+	uint32_t maxSets;
+	uint32_t poolSizeCount;
+	const S_descriptor_pool_size * pPoolSizes;
+
+S_descriptor_pool_create_info(){}
+
+S_descriptor_pool_create_info(
+	F_descriptor_pool_create flags_,
+	uint32_t maxSets_,
+	uint32_t poolSizeCount_,
+	const S_descriptor_pool_size * pPoolSizes_)
+	:flags(flags_)
+	,maxSets(maxSets_)
+	,poolSizeCount(poolSizeCount_)
+	,pPoolSizes(pPoolSizes_)
+{
+}
 
 S_descriptor_pool_create_info( VkDescriptorPoolCreateInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_descriptor_pool_create_info ) );	}
@@ -7414,8 +8445,18 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_DESCRIPTOR_SET_VARIABLE_DESCRIPTOR_COUNT_ALLOCATE_INFO_EXT;
 	 void * pNext = nullptr;
 public:
-	uint32_t descriptorSetCount = 0;
-	const uint32_t * pDescriptorCounts = nullptr;
+	uint32_t descriptorSetCount;
+	const uint32_t * pDescriptorCounts;
+
+S_descriptor_set_variable_descriptor_count_allocate_info_EXT(){}
+
+S_descriptor_set_variable_descriptor_count_allocate_info_EXT(
+	uint32_t descriptorSetCount_,
+	const uint32_t * pDescriptorCounts_)
+	:descriptorSetCount(descriptorSetCount_)
+	,pDescriptorCounts(pDescriptorCounts_)
+{
+}
 
 S_descriptor_set_variable_descriptor_count_allocate_info_EXT( VkDescriptorSetVariableDescriptorCountAllocateInfoEXT const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_descriptor_set_variable_descriptor_count_allocate_info_EXT ) );	}
@@ -7442,9 +8483,21 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_DESCRIPTOR_SET_ALLOCATE_INFO;
 	 void * pNext = nullptr;
 public:
-	VkDescriptorPool descriptorPool = VK_NULL_HANDLE;
-	uint32_t descriptorSetCount = 0;
-	const VkDescriptorSetLayout * pSetLayouts = VK_NULL_HANDLE;
+	VkDescriptorPool descriptorPool;
+	uint32_t descriptorSetCount;
+	const VkDescriptorSetLayout * pSetLayouts;
+
+S_descriptor_set_allocate_info(){}
+
+S_descriptor_set_allocate_info(
+	VkDescriptorPool descriptorPool_,
+	uint32_t descriptorSetCount_,
+	const VkDescriptorSetLayout * pSetLayouts_)
+	:descriptorPool(descriptorPool_)
+	,descriptorSetCount(descriptorSetCount_)
+	,pSetLayouts(pSetLayouts_)
+{
+}
 
 S_descriptor_set_allocate_info( VkDescriptorSetAllocateInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_descriptor_set_allocate_info ) );	}
@@ -7465,19 +8518,23 @@ static_assert(
 /*	VkSpecializationMapEntry
 */
 struct		S_specialization_map_entry{
-	uint32_t constantID = 0;
-	uint32_t offset = 0;
-	size_t size = 0;
+	uint32_t constantID;
+	uint32_t offset;
+	size_t size;
+
+S_specialization_map_entry(){}
 
 };
 
 /*	VkSpecializationInfo
 */
 struct		S_specialization_info{
-	uint32_t mapEntryCount = 0;
-	const S_specialization_map_entry * pMapEntries = nullptr;
-	size_t dataSize = 0;
-	const void * pData = nullptr;
+	uint32_t mapEntryCount;
+	const S_specialization_map_entry * pMapEntries;
+	size_t dataSize;
+	const void * pData;
+
+S_specialization_info(){}
 
 };
 
@@ -7488,24 +8545,27 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO;
 	 void * pNext = nullptr;
 public:
-	F_pipeline_create flags;
+	VkPipelineShaderStageCreateFlags flags;
 	F_shader_stage stage;
-	VkShaderModule module = VK_NULL_HANDLE;
+	VkShaderModule module;
 	const char * pName;
 	const S_specialization_info * pSpecializationInfo;
-	
-	S_pipeline_shader_stage_create_info(
-		F_pipeline_create flags_ = F_pipeline_create::b_allow_derivatives,
-		F_shader_stage stage_ = F_shader_stage::b_compute,
-		VkShaderModule module_ = VK_NULL_HANDLE,
-		const char * pName_ = nullptr,
-		const S_specialization_info * pSpecializationInfo_ = nullptr)
-		:flags(flags_)
-		,stage(stage_)
-		,module(module_)
-		,pName(pName_)
-		,pSpecializationInfo(pSpecializationInfo_)
-	{};
+
+S_pipeline_shader_stage_create_info(){}
+
+S_pipeline_shader_stage_create_info(
+	VkPipelineShaderStageCreateFlags flags_,
+	F_shader_stage stage_,
+	VkShaderModule module_,
+	const char * pName_,
+	const S_specialization_info * pSpecializationInfo_)
+	:flags(flags_)
+	,stage(stage_)
+	,module(module_)
+	,pName(pName_)
+	,pSpecializationInfo(pSpecializationInfo_)
+{
+}
 
 S_pipeline_shader_stage_create_info( VkPipelineShaderStageCreateInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_pipeline_shader_stage_create_info ) );	}
@@ -7529,10 +8589,26 @@ private:
 	 void * pNext = nullptr;
 public:
 	F_pipeline_create flags;
-	S_pipeline_shader_stage_create_info stage = {};
-	VkPipelineLayout layout = VK_NULL_HANDLE;
-	VkPipeline basePipelineHandle = VK_NULL_HANDLE;
-	int32_t basePipelineIndex = 0;
+	S_pipeline_shader_stage_create_info stage;
+	VkPipelineLayout layout;
+	VkPipeline basePipelineHandle;
+	int32_t basePipelineIndex;
+
+S_compute_pipeline_create_info(){}
+
+S_compute_pipeline_create_info(
+	F_pipeline_create flags_,
+	S_pipeline_shader_stage_create_info stage_,
+	VkPipelineLayout layout_,
+	VkPipeline basePipelineHandle_,
+	int32_t basePipelineIndex_)
+	:flags(flags_)
+	,stage(stage_)
+	,layout(layout_)
+	,basePipelineHandle(basePipelineHandle_)
+	,basePipelineIndex(basePipelineIndex_)
+{
+}
 
 S_compute_pipeline_create_info( VkComputePipelineCreateInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_compute_pipeline_create_info ) );	}
@@ -7551,27 +8627,33 @@ static_assert(
 /*	VkVertexInputBindingDescription
 */
 struct		S_vertex_input_binding_description{
-	uint32_t binding = 0;
-	uint32_t stride = 0;
-	E_vertex_input_rate inputRate = E_vertex_input_rate::e_vertex;
+	uint32_t binding;
+	uint32_t stride;
+	E_vertex_input_rate inputRate;
+
+S_vertex_input_binding_description(){}
 
 };
 
 /*	VkVertexInputAttributeDescription
 */
 struct		S_vertex_input_attribute_description{
-	uint32_t location = 0;
-	uint32_t binding = 0;
-	E_format format = E_format::e_undefined;
-	uint32_t offset = 0;
+	uint32_t location;
+	uint32_t binding;
+	E_format format;
+	uint32_t offset;
+
+S_vertex_input_attribute_description(){}
 
 };
 
 /*	VkVertexInputBindingDivisorDescriptionEXT
 */
 struct		S_vertex_input_binding_divisor_description_EXT{
-	uint32_t binding = 0;
-	uint32_t divisor = 0;
+	uint32_t binding;
+	uint32_t divisor;
+
+S_vertex_input_binding_divisor_description_EXT(){}
 
 };
 
@@ -7583,8 +8665,18 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_DIVISOR_STATE_CREATE_INFO_EXT;
 	 void * pNext = nullptr;
 public:
-	uint32_t vertexBindingDivisorCount = 0;
-	const S_vertex_input_binding_divisor_description_EXT * pVertexBindingDivisors = nullptr;
+	uint32_t vertexBindingDivisorCount;
+	const S_vertex_input_binding_divisor_description_EXT * pVertexBindingDivisors;
+
+S_pipeline_vertex_input_divisor_state_create_info_EXT(){}
+
+S_pipeline_vertex_input_divisor_state_create_info_EXT(
+	uint32_t vertexBindingDivisorCount_,
+	const S_vertex_input_binding_divisor_description_EXT * pVertexBindingDivisors_)
+	:vertexBindingDivisorCount(vertexBindingDivisorCount_)
+	,pVertexBindingDivisors(pVertexBindingDivisors_)
+{
+}
 
 S_pipeline_vertex_input_divisor_state_create_info_EXT( VkPipelineVertexInputDivisorStateCreateInfoEXT const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_pipeline_vertex_input_divisor_state_create_info_EXT ) );	}
@@ -7611,11 +8703,27 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO;
 	 void * pNext = nullptr;
 public:
-	VkPipelineVertexInputStateCreateFlags flags = 0;
-	uint32_t vertexBindingDescriptionCount = 0;
-	const S_vertex_input_binding_description * pVertexBindingDescriptions = nullptr;
-	uint32_t vertexAttributeDescriptionCount = 0;
-	const S_vertex_input_attribute_description * pVertexAttributeDescriptions = nullptr;
+	VkPipelineVertexInputStateCreateFlags flags;
+	uint32_t vertexBindingDescriptionCount;
+	const S_vertex_input_binding_description * pVertexBindingDescriptions;
+	uint32_t vertexAttributeDescriptionCount;
+	const S_vertex_input_attribute_description * pVertexAttributeDescriptions;
+
+S_pipeline_vertex_input_state_create_info(){}
+
+S_pipeline_vertex_input_state_create_info(
+	VkPipelineVertexInputStateCreateFlags flags_,
+	uint32_t vertexBindingDescriptionCount_,
+	const S_vertex_input_binding_description * pVertexBindingDescriptions_,
+	uint32_t vertexAttributeDescriptionCount_,
+	const S_vertex_input_attribute_description * pVertexAttributeDescriptions_)
+	:flags(flags_)
+	,vertexBindingDescriptionCount(vertexBindingDescriptionCount_)
+	,pVertexBindingDescriptions(pVertexBindingDescriptions_)
+	,vertexAttributeDescriptionCount(vertexAttributeDescriptionCount_)
+	,pVertexAttributeDescriptions(pVertexAttributeDescriptions_)
+{
+}
 
 S_pipeline_vertex_input_state_create_info( VkPipelineVertexInputStateCreateInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_pipeline_vertex_input_state_create_info ) );	}
@@ -7640,9 +8748,21 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_PIPELINE_INPUT_ASSEMBLY_STATE_CREATE_INFO;
 	 void * pNext = nullptr;
 public:
-	VkPipelineInputAssemblyStateCreateFlags flags = 0;
-	E_primitive_topology topology = E_primitive_topology::e_point_list;
-	VkBool32 primitiveRestartEnable = 0;
+	VkPipelineInputAssemblyStateCreateFlags flags;
+	E_primitive_topology topology;
+	VkBool32 primitiveRestartEnable;
+
+S_pipeline_input_assembly_state_create_info(){}
+
+S_pipeline_input_assembly_state_create_info(
+	VkPipelineInputAssemblyStateCreateFlags flags_,
+	E_primitive_topology topology_,
+	VkBool32 primitiveRestartEnable_)
+	:flags(flags_)
+	,topology(topology_)
+	,primitiveRestartEnable(primitiveRestartEnable_)
+{
+}
 
 S_pipeline_input_assembly_state_create_info( VkPipelineInputAssemblyStateCreateInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_pipeline_input_assembly_state_create_info ) );	}
@@ -7666,7 +8786,15 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_PIPELINE_TESSELLATION_DOMAIN_ORIGIN_STATE_CREATE_INFO;
 	 void * pNext = nullptr;
 public:
-	E_tessellation_domain_origin domainOrigin = E_tessellation_domain_origin::e_upper_left;
+	E_tessellation_domain_origin domainOrigin;
+
+S_pipeline_tessellation_domain_origin_state_create_info(){}
+
+S_pipeline_tessellation_domain_origin_state_create_info(
+	E_tessellation_domain_origin domainOrigin_)
+	:domainOrigin(domainOrigin_)
+{
+}
 
 S_pipeline_tessellation_domain_origin_state_create_info( VkPipelineTessellationDomainOriginStateCreateInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_pipeline_tessellation_domain_origin_state_create_info ) );	}
@@ -7693,8 +8821,18 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_PIPELINE_TESSELLATION_STATE_CREATE_INFO;
 	 void * pNext = nullptr;
 public:
-	VkPipelineTessellationStateCreateFlags flags = 0;
-	uint32_t patchControlPoints = 0;
+	VkPipelineTessellationStateCreateFlags flags;
+	uint32_t patchControlPoints;
+
+S_pipeline_tessellation_state_create_info(){}
+
+S_pipeline_tessellation_state_create_info(
+	VkPipelineTessellationStateCreateFlags flags_,
+	uint32_t patchControlPoints_)
+	:flags(flags_)
+	,patchControlPoints(patchControlPoints_)
+{
+}
 
 S_pipeline_tessellation_state_create_info( VkPipelineTessellationStateCreateInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_pipeline_tessellation_state_create_info ) );	}
@@ -7715,8 +8853,10 @@ static_assert(
 /*	VkViewportWScalingNV
 */
 struct		S_viewport_w_scaling_NV{
-	float xcoeff = 0;
-	float ycoeff = 0;
+	float xcoeff;
+	float ycoeff;
+
+S_viewport_w_scaling_NV(){}
 
 };
 
@@ -7728,9 +8868,21 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_W_SCALING_STATE_CREATE_INFO_NV;
 	 void * pNext = nullptr;
 public:
-	VkBool32 viewportWScalingEnable = 0;
-	uint32_t viewportCount = 0;
-	const S_viewport_w_scaling_NV * pViewportWScalings = nullptr;
+	VkBool32 viewportWScalingEnable;
+	uint32_t viewportCount;
+	const S_viewport_w_scaling_NV * pViewportWScalings;
+
+S_pipeline_viewport_w_scaling_state_create_info_NV(){}
+
+S_pipeline_viewport_w_scaling_state_create_info_NV(
+	VkBool32 viewportWScalingEnable_,
+	uint32_t viewportCount_,
+	const S_viewport_w_scaling_NV * pViewportWScalings_)
+	:viewportWScalingEnable(viewportWScalingEnable_)
+	,viewportCount(viewportCount_)
+	,pViewportWScalings(pViewportWScalings_)
+{
+}
 
 S_pipeline_viewport_w_scaling_state_create_info_NV( VkPipelineViewportWScalingStateCreateInfoNV const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_pipeline_viewport_w_scaling_state_create_info_NV ) );	}
@@ -7751,10 +8903,12 @@ static_assert(
 /*	VkViewportSwizzleNV
 */
 struct		S_viewport_swizzle_NV{
-	E_viewport_coordinate_swizzle_NV x = E_viewport_coordinate_swizzle_NV::e_positive_x_nv;
-	E_viewport_coordinate_swizzle_NV y = E_viewport_coordinate_swizzle_NV::e_positive_x_nv;
-	E_viewport_coordinate_swizzle_NV z = E_viewport_coordinate_swizzle_NV::e_positive_x_nv;
-	E_viewport_coordinate_swizzle_NV w = E_viewport_coordinate_swizzle_NV::e_positive_x_nv;
+	E_viewport_coordinate_swizzle_NV x;
+	E_viewport_coordinate_swizzle_NV y;
+	E_viewport_coordinate_swizzle_NV z;
+	E_viewport_coordinate_swizzle_NV w;
+
+S_viewport_swizzle_NV(){}
 
 };
 
@@ -7766,9 +8920,21 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_SWIZZLE_STATE_CREATE_INFO_NV;
 	 void * pNext = nullptr;
 public:
-	VkPipelineViewportSwizzleStateCreateFlagsNV flags = 0;
-	uint32_t viewportCount = 0;
-	const S_viewport_swizzle_NV * pViewportSwizzles = nullptr;
+	VkPipelineViewportSwizzleStateCreateFlagsNV flags;
+	uint32_t viewportCount;
+	const S_viewport_swizzle_NV * pViewportSwizzles;
+
+S_pipeline_viewport_swizzle_state_create_info_NV(){}
+
+S_pipeline_viewport_swizzle_state_create_info_NV(
+	VkPipelineViewportSwizzleStateCreateFlagsNV flags_,
+	uint32_t viewportCount_,
+	const S_viewport_swizzle_NV * pViewportSwizzles_)
+	:flags(flags_)
+	,viewportCount(viewportCount_)
+	,pViewportSwizzles(pViewportSwizzles_)
+{
+}
 
 S_pipeline_viewport_swizzle_state_create_info_NV( VkPipelineViewportSwizzleStateCreateInfoNV const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_pipeline_viewport_swizzle_state_create_info_NV ) );	}
@@ -7794,8 +8960,18 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_EXCLUSIVE_SCISSOR_STATE_CREATE_INFO_NV;
 	 void * pNext = nullptr;
 public:
-	uint32_t exclusiveScissorCount = 0;
-	const S_rect_2d * pExclusiveScissors = nullptr;
+	uint32_t exclusiveScissorCount;
+	const S_rect_2d * pExclusiveScissors;
+
+S_pipeline_viewport_exclusive_scissor_state_create_info_NV(){}
+
+S_pipeline_viewport_exclusive_scissor_state_create_info_NV(
+	uint32_t exclusiveScissorCount_,
+	const S_rect_2d * pExclusiveScissors_)
+	:exclusiveScissorCount(exclusiveScissorCount_)
+	,pExclusiveScissors(pExclusiveScissors_)
+{
+}
 
 S_pipeline_viewport_exclusive_scissor_state_create_info_NV( VkPipelineViewportExclusiveScissorStateCreateInfoNV const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_pipeline_viewport_exclusive_scissor_state_create_info_NV ) );	}
@@ -7816,8 +8992,10 @@ static_assert(
 /*	VkShadingRatePaletteNV
 */
 struct		S_shading_rate_palette_NV{
-	uint32_t shadingRatePaletteEntryCount = 0;
-	const E_shading_rate_palette_entry_NV * pShadingRatePaletteEntries = nullptr;
+	uint32_t shadingRatePaletteEntryCount;
+	const E_shading_rate_palette_entry_NV * pShadingRatePaletteEntries;
+
+S_shading_rate_palette_NV(){}
 
 };
 
@@ -7829,9 +9007,21 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_SHADING_RATE_IMAGE_STATE_CREATE_INFO_NV;
 	 void * pNext = nullptr;
 public:
-	VkBool32 shadingRateImageEnable = 0;
-	uint32_t viewportCount = 0;
-	const S_shading_rate_palette_NV * pShadingRatePalettes = nullptr;
+	VkBool32 shadingRateImageEnable;
+	uint32_t viewportCount;
+	const S_shading_rate_palette_NV * pShadingRatePalettes;
+
+S_pipeline_viewport_shading_rate_image_state_create_info_NV(){}
+
+S_pipeline_viewport_shading_rate_image_state_create_info_NV(
+	VkBool32 shadingRateImageEnable_,
+	uint32_t viewportCount_,
+	const S_shading_rate_palette_NV * pShadingRatePalettes_)
+	:shadingRateImageEnable(shadingRateImageEnable_)
+	,viewportCount(viewportCount_)
+	,pShadingRatePalettes(pShadingRatePalettes_)
+{
+}
 
 S_pipeline_viewport_shading_rate_image_state_create_info_NV( VkPipelineViewportShadingRateImageStateCreateInfoNV const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_pipeline_viewport_shading_rate_image_state_create_info_NV ) );	}
@@ -7852,19 +9042,23 @@ static_assert(
 /*	VkCoarseSampleLocationNV
 */
 struct		S_coarse_sample_location_NV{
-	uint32_t pixelX = 0;
-	uint32_t pixelY = 0;
-	uint32_t sample = 0;
+	uint32_t pixelX;
+	uint32_t pixelY;
+	uint32_t sample;
+
+S_coarse_sample_location_NV(){}
 
 };
 
 /*	VkCoarseSampleOrderCustomNV
 */
 struct		S_coarse_sample_order_custom_NV{
-	E_shading_rate_palette_entry_NV shadingRate = E_shading_rate_palette_entry_NV::e_no_invocations_nv;
-	uint32_t sampleCount = 0;
-	uint32_t sampleLocationCount = 0;
-	const S_coarse_sample_location_NV * pSampleLocations = nullptr;
+	E_shading_rate_palette_entry_NV shadingRate;
+	uint32_t sampleCount;
+	uint32_t sampleLocationCount;
+	const S_coarse_sample_location_NV * pSampleLocations;
+
+S_coarse_sample_order_custom_NV(){}
 
 };
 
@@ -7876,9 +9070,21 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_COARSE_SAMPLE_ORDER_STATE_CREATE_INFO_NV;
 	 void * pNext = nullptr;
 public:
-	E_coarse_sample_order_type_NV sampleOrderType = E_coarse_sample_order_type_NV::e_default_nv;
-	uint32_t customSampleOrderCount = 0;
-	const S_coarse_sample_order_custom_NV * pCustomSampleOrders = nullptr;
+	E_coarse_sample_order_type_NV sampleOrderType;
+	uint32_t customSampleOrderCount;
+	const S_coarse_sample_order_custom_NV * pCustomSampleOrders;
+
+S_pipeline_viewport_coarse_sample_order_state_create_info_NV(){}
+
+S_pipeline_viewport_coarse_sample_order_state_create_info_NV(
+	E_coarse_sample_order_type_NV sampleOrderType_,
+	uint32_t customSampleOrderCount_,
+	const S_coarse_sample_order_custom_NV * pCustomSampleOrders_)
+	:sampleOrderType(sampleOrderType_)
+	,customSampleOrderCount(customSampleOrderCount_)
+	,pCustomSampleOrders(pCustomSampleOrders_)
+{
+}
 
 S_pipeline_viewport_coarse_sample_order_state_create_info_NV( VkPipelineViewportCoarseSampleOrderStateCreateInfoNV const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_pipeline_viewport_coarse_sample_order_state_create_info_NV ) );	}
@@ -7909,11 +9115,27 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_STATE_CREATE_INFO;
 	 void * pNext = nullptr;
 public:
-	VkPipelineViewportStateCreateFlags flags = 0;
-	uint32_t viewportCount = 0;
-	const S_viewport * pViewports = nullptr;
-	uint32_t scissorCount = 0;
-	const S_rect_2d * pScissors = nullptr;
+	VkPipelineViewportStateCreateFlags flags;
+	uint32_t viewportCount;
+	const S_viewport * pViewports;
+	uint32_t scissorCount;
+	const S_rect_2d * pScissors;
+
+S_pipeline_viewport_state_create_info(){}
+
+S_pipeline_viewport_state_create_info(
+	VkPipelineViewportStateCreateFlags flags_,
+	uint32_t viewportCount_,
+	const S_viewport * pViewports_,
+	uint32_t scissorCount_,
+	const S_rect_2d * pScissors_)
+	:flags(flags_)
+	,viewportCount(viewportCount_)
+	,pViewports(pViewports_)
+	,scissorCount(scissorCount_)
+	,pScissors(pScissors_)
+{
+}
 
 S_pipeline_viewport_state_create_info( VkPipelineViewportStateCreateInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_pipeline_viewport_state_create_info ) );	}
@@ -7943,7 +9165,15 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_STATE_RASTERIZATION_ORDER_AMD;
 	 void * pNext = nullptr;
 public:
-	E_rasterization_order_AMD rasterizationOrder = E_rasterization_order_AMD::e_strict_amd;
+	E_rasterization_order_AMD rasterizationOrder;
+
+S_pipeline_rasterization_state_rasterization_order_AMD(){}
+
+S_pipeline_rasterization_state_rasterization_order_AMD(
+	E_rasterization_order_AMD rasterizationOrder_)
+	:rasterizationOrder(rasterizationOrder_)
+{
+}
 
 S_pipeline_rasterization_state_rasterization_order_AMD( VkPipelineRasterizationStateRasterizationOrderAMD const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_pipeline_rasterization_state_rasterization_order_AMD ) );	}
@@ -7969,9 +9199,21 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_CONSERVATIVE_STATE_CREATE_INFO_EXT;
 	 void * pNext = nullptr;
 public:
-	VkPipelineRasterizationConservativeStateCreateFlagsEXT flags = 0;
-	E_conservative_rasterization_mode_EXT conservativeRasterizationMode = E_conservative_rasterization_mode_EXT::e_disabled_ext;
-	float extraPrimitiveOverestimationSize = 0;
+	VkPipelineRasterizationConservativeStateCreateFlagsEXT flags;
+	E_conservative_rasterization_mode_EXT conservativeRasterizationMode;
+	float extraPrimitiveOverestimationSize;
+
+S_pipeline_rasterization_conservative_state_create_info_EXT(){}
+
+S_pipeline_rasterization_conservative_state_create_info_EXT(
+	VkPipelineRasterizationConservativeStateCreateFlagsEXT flags_,
+	E_conservative_rasterization_mode_EXT conservativeRasterizationMode_,
+	float extraPrimitiveOverestimationSize_)
+	:flags(flags_)
+	,conservativeRasterizationMode(conservativeRasterizationMode_)
+	,extraPrimitiveOverestimationSize(extraPrimitiveOverestimationSize_)
+{
+}
 
 S_pipeline_rasterization_conservative_state_create_info_EXT( VkPipelineRasterizationConservativeStateCreateInfoEXT const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_pipeline_rasterization_conservative_state_create_info_EXT ) );	}
@@ -7999,17 +9241,45 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_STATE_CREATE_INFO;
 	 void * pNext = nullptr;
 public:
-	VkPipelineRasterizationStateCreateFlags flags = 0;
-	VkBool32 depthClampEnable = 0;
-	VkBool32 rasterizerDiscardEnable = 0;
-	E_polygon_mode polygonMode = E_polygon_mode::e_fill;
+	VkPipelineRasterizationStateCreateFlags flags;
+	VkBool32 depthClampEnable;
+	VkBool32 rasterizerDiscardEnable;
+	E_polygon_mode polygonMode;
 	F_cull_mode cullMode;
-	E_front_face frontFace = E_front_face::e_counter_clockwise;
-	VkBool32 depthBiasEnable = 0;
-	float depthBiasConstantFactor = 0;
-	float depthBiasClamp = 0;
-	float depthBiasSlopeFactor = 0;
-	float lineWidth = 0;
+	E_front_face frontFace;
+	VkBool32 depthBiasEnable;
+	float depthBiasConstantFactor;
+	float depthBiasClamp;
+	float depthBiasSlopeFactor;
+	float lineWidth;
+
+S_pipeline_rasterization_state_create_info(){}
+
+S_pipeline_rasterization_state_create_info(
+	VkPipelineRasterizationStateCreateFlags flags_,
+	VkBool32 depthClampEnable_,
+	VkBool32 rasterizerDiscardEnable_,
+	E_polygon_mode polygonMode_,
+	F_cull_mode cullMode_,
+	E_front_face frontFace_,
+	VkBool32 depthBiasEnable_,
+	float depthBiasConstantFactor_,
+	float depthBiasClamp_,
+	float depthBiasSlopeFactor_,
+	float lineWidth_)
+	:flags(flags_)
+	,depthClampEnable(depthClampEnable_)
+	,rasterizerDiscardEnable(rasterizerDiscardEnable_)
+	,polygonMode(polygonMode_)
+	,cullMode(cullMode_)
+	,frontFace(frontFace_)
+	,depthBiasEnable(depthBiasEnable_)
+	,depthBiasConstantFactor(depthBiasConstantFactor_)
+	,depthBiasClamp(depthBiasClamp_)
+	,depthBiasSlopeFactor(depthBiasSlopeFactor_)
+	,lineWidth(lineWidth_)
+{
+}
 
 S_pipeline_rasterization_state_create_info( VkPipelineRasterizationStateCreateInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_pipeline_rasterization_state_create_info ) );	}
@@ -8036,9 +9306,21 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_PIPELINE_COVERAGE_TO_COLOR_STATE_CREATE_INFO_NV;
 	 void * pNext = nullptr;
 public:
-	VkPipelineCoverageToColorStateCreateFlagsNV flags = 0;
-	VkBool32 coverageToColorEnable = 0;
-	uint32_t coverageToColorLocation = 0;
+	VkPipelineCoverageToColorStateCreateFlagsNV flags;
+	VkBool32 coverageToColorEnable;
+	uint32_t coverageToColorLocation;
+
+S_pipeline_coverage_to_color_state_create_info_NV(){}
+
+S_pipeline_coverage_to_color_state_create_info_NV(
+	VkPipelineCoverageToColorStateCreateFlagsNV flags_,
+	VkBool32 coverageToColorEnable_,
+	uint32_t coverageToColorLocation_)
+	:flags(flags_)
+	,coverageToColorEnable(coverageToColorEnable_)
+	,coverageToColorLocation(coverageToColorLocation_)
+{
+}
 
 S_pipeline_coverage_to_color_state_create_info_NV( VkPipelineCoverageToColorStateCreateInfoNV const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_pipeline_coverage_to_color_state_create_info_NV ) );	}
@@ -8064,8 +9346,18 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_PIPELINE_SAMPLE_LOCATIONS_STATE_CREATE_INFO_EXT;
 	 void * pNext = nullptr;
 public:
-	VkBool32 sampleLocationsEnable = 0;
-	S_sample_locations_info_EXT sampleLocationsInfo = {};
+	VkBool32 sampleLocationsEnable;
+	S_sample_locations_info_EXT sampleLocationsInfo;
+
+S_pipeline_sample_locations_state_create_info_EXT(){}
+
+S_pipeline_sample_locations_state_create_info_EXT(
+	VkBool32 sampleLocationsEnable_,
+	S_sample_locations_info_EXT sampleLocationsInfo_)
+	:sampleLocationsEnable(sampleLocationsEnable_)
+	,sampleLocationsInfo(sampleLocationsInfo_)
+{
+}
 
 S_pipeline_sample_locations_state_create_info_EXT( VkPipelineSampleLocationsStateCreateInfoEXT const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_pipeline_sample_locations_state_create_info_EXT ) );	}
@@ -8091,11 +9383,27 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_PIPELINE_COVERAGE_MODULATION_STATE_CREATE_INFO_NV;
 	 void * pNext = nullptr;
 public:
-	VkPipelineCoverageModulationStateCreateFlagsNV flags = 0;
-	E_coverage_modulation_mode_NV coverageModulationMode = E_coverage_modulation_mode_NV::e_none_nv;
-	VkBool32 coverageModulationTableEnable = 0;
-	uint32_t coverageModulationTableCount = 0;
-	const float * pCoverageModulationTable = nullptr;
+	VkPipelineCoverageModulationStateCreateFlagsNV flags;
+	E_coverage_modulation_mode_NV coverageModulationMode;
+	VkBool32 coverageModulationTableEnable;
+	uint32_t coverageModulationTableCount;
+	const float * pCoverageModulationTable;
+
+S_pipeline_coverage_modulation_state_create_info_NV(){}
+
+S_pipeline_coverage_modulation_state_create_info_NV(
+	VkPipelineCoverageModulationStateCreateFlagsNV flags_,
+	E_coverage_modulation_mode_NV coverageModulationMode_,
+	VkBool32 coverageModulationTableEnable_,
+	uint32_t coverageModulationTableCount_,
+	const float * pCoverageModulationTable_)
+	:flags(flags_)
+	,coverageModulationMode(coverageModulationMode_)
+	,coverageModulationTableEnable(coverageModulationTableEnable_)
+	,coverageModulationTableCount(coverageModulationTableCount_)
+	,pCoverageModulationTable(pCoverageModulationTable_)
+{
+}
 
 S_pipeline_coverage_modulation_state_create_info_NV( VkPipelineCoverageModulationStateCreateInfoNV const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_pipeline_coverage_modulation_state_create_info_NV ) );	}
@@ -8124,13 +9432,33 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_PIPELINE_MULTISAMPLE_STATE_CREATE_INFO;
 	 void * pNext = nullptr;
 public:
-	VkPipelineMultisampleStateCreateFlags flags = 0;
+	VkPipelineMultisampleStateCreateFlags flags;
 	F_sample_count rasterizationSamples;
-	VkBool32 sampleShadingEnable = 0;
-	float minSampleShading = 0;
-	const VkSampleMask * pSampleMask = nullptr;
-	VkBool32 alphaToCoverageEnable = 0;
-	VkBool32 alphaToOneEnable = 0;
+	VkBool32 sampleShadingEnable;
+	float minSampleShading;
+	const VkSampleMask * pSampleMask;
+	VkBool32 alphaToCoverageEnable;
+	VkBool32 alphaToOneEnable;
+
+S_pipeline_multisample_state_create_info(){}
+
+S_pipeline_multisample_state_create_info(
+	VkPipelineMultisampleStateCreateFlags flags_,
+	F_sample_count rasterizationSamples_,
+	VkBool32 sampleShadingEnable_,
+	float minSampleShading_,
+	const VkSampleMask * pSampleMask_,
+	VkBool32 alphaToCoverageEnable_,
+	VkBool32 alphaToOneEnable_)
+	:flags(flags_)
+	,rasterizationSamples(rasterizationSamples_)
+	,sampleShadingEnable(sampleShadingEnable_)
+	,minSampleShading(minSampleShading_)
+	,pSampleMask(pSampleMask_)
+	,alphaToCoverageEnable(alphaToCoverageEnable_)
+	,alphaToOneEnable(alphaToOneEnable_)
+{
+}
 
 S_pipeline_multisample_state_create_info( VkPipelineMultisampleStateCreateInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_pipeline_multisample_state_create_info ) );	}
@@ -8153,14 +9481,16 @@ static_assert(
 /*	VkPipelineColorBlendAttachmentState
 */
 struct		S_pipeline_color_blend_attachment_state{
-	VkBool32 blendEnable = 0;
-	E_blend_factor srcColorBlendFactor = E_blend_factor::e_zero;
-	E_blend_factor dstColorBlendFactor = E_blend_factor::e_zero;
-	E_blend_op colorBlendOp = E_blend_op::e_add;
-	E_blend_factor srcAlphaBlendFactor = E_blend_factor::e_zero;
-	E_blend_factor dstAlphaBlendFactor = E_blend_factor::e_zero;
-	E_blend_op alphaBlendOp = E_blend_op::e_add;
+	VkBool32 blendEnable;
+	E_blend_factor srcColorBlendFactor;
+	E_blend_factor dstColorBlendFactor;
+	E_blend_op colorBlendOp;
+	E_blend_factor srcAlphaBlendFactor;
+	E_blend_factor dstAlphaBlendFactor;
+	E_blend_op alphaBlendOp;
 	F_color_component colorWriteMask;
+
+S_pipeline_color_blend_attachment_state(){}
 
 };
 
@@ -8172,9 +9502,21 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_PIPELINE_COLOR_BLEND_ADVANCED_STATE_CREATE_INFO_EXT;
 	 void * pNext = nullptr;
 public:
-	VkBool32 srcPremultiplied = 0;
-	VkBool32 dstPremultiplied = 0;
-	E_blend_overlap_EXT blendOverlap = E_blend_overlap_EXT::e_uncorrelated_ext;
+	VkBool32 srcPremultiplied;
+	VkBool32 dstPremultiplied;
+	E_blend_overlap_EXT blendOverlap;
+
+S_pipeline_color_blend_advanced_state_create_info_EXT(){}
+
+S_pipeline_color_blend_advanced_state_create_info_EXT(
+	VkBool32 srcPremultiplied_,
+	VkBool32 dstPremultiplied_,
+	E_blend_overlap_EXT blendOverlap_)
+	:srcPremultiplied(srcPremultiplied_)
+	,dstPremultiplied(dstPremultiplied_)
+	,blendOverlap(blendOverlap_)
+{
+}
 
 S_pipeline_color_blend_advanced_state_create_info_EXT( VkPipelineColorBlendAdvancedStateCreateInfoEXT const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_pipeline_color_blend_advanced_state_create_info_EXT ) );	}
@@ -8201,12 +9543,30 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_PIPELINE_COLOR_BLEND_STATE_CREATE_INFO;
 	 void * pNext = nullptr;
 public:
-	VkPipelineColorBlendStateCreateFlags flags = 0;
-	VkBool32 logicOpEnable = 0;
-	E_logic_op logicOp = E_logic_op::e_clear;
-	uint32_t attachmentCount = 0;
-	const S_pipeline_color_blend_attachment_state * pAttachments = nullptr;
-	float blendConstants[4] = {};
+	VkPipelineColorBlendStateCreateFlags flags;
+	VkBool32 logicOpEnable;
+	E_logic_op logicOp;
+	uint32_t attachmentCount;
+	const S_pipeline_color_blend_attachment_state * pAttachments;
+	float blendConstants[4];
+
+S_pipeline_color_blend_state_create_info(){}
+
+S_pipeline_color_blend_state_create_info(
+	VkPipelineColorBlendStateCreateFlags flags_,
+	VkBool32 logicOpEnable_,
+	E_logic_op logicOp_,
+	uint32_t attachmentCount_,
+	const S_pipeline_color_blend_attachment_state * pAttachments_,
+	float blendConstants_[4])
+	:flags(flags_)
+	,logicOpEnable(logicOpEnable_)
+	,logicOp(logicOp_)
+	,attachmentCount(attachmentCount_)
+	,pAttachments(pAttachments_)
+{
+memcpy(blendConstants,blendConstants_,sizeof(blendConstants) );
+}
 
 S_pipeline_color_blend_state_create_info( VkPipelineColorBlendStateCreateInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_pipeline_color_blend_state_create_info ) );	}
@@ -8231,9 +9591,21 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_PIPELINE_DYNAMIC_STATE_CREATE_INFO;
 	 void * pNext = nullptr;
 public:
-	VkPipelineDynamicStateCreateFlags flags = 0;
-	uint32_t dynamicStateCount = 0;
-	const E_dynamic_state * pDynamicStates = nullptr;
+	VkPipelineDynamicStateCreateFlags flags;
+	uint32_t dynamicStateCount;
+	const E_dynamic_state * pDynamicStates;
+
+S_pipeline_dynamic_state_create_info(){}
+
+S_pipeline_dynamic_state_create_info(
+	VkPipelineDynamicStateCreateFlags flags_,
+	uint32_t dynamicStateCount_,
+	const E_dynamic_state * pDynamicStates_)
+	:flags(flags_)
+	,dynamicStateCount(dynamicStateCount_)
+	,pDynamicStates(pDynamicStates_)
+{
+}
 
 S_pipeline_dynamic_state_create_info( VkPipelineDynamicStateCreateInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_pipeline_dynamic_state_create_info ) );	}
@@ -8252,13 +9624,15 @@ static_assert(
 /*	VkStencilOpState
 */
 struct		S_stencil_op_state{
-	E_stencil_op failOp = E_stencil_op::e_keep;
-	E_stencil_op passOp = E_stencil_op::e_keep;
-	E_stencil_op depthFailOp = E_stencil_op::e_keep;
-	E_compare_op compareOp = E_compare_op::e_never;
-	uint32_t compareMask = 0;
-	uint32_t writeMask = 0;
-	uint32_t reference = 0;
+	E_stencil_op failOp;
+	E_stencil_op passOp;
+	E_stencil_op depthFailOp;
+	E_compare_op compareOp;
+	uint32_t compareMask;
+	uint32_t writeMask;
+	uint32_t reference;
+
+S_stencil_op_state(){}
 
 };
 
@@ -8269,16 +9643,42 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_PIPELINE_DEPTH_STENCIL_STATE_CREATE_INFO;
 	 void * pNext = nullptr;
 public:
-	VkPipelineDepthStencilStateCreateFlags flags = 0;
-	VkBool32 depthTestEnable = 0;
-	VkBool32 depthWriteEnable = 0;
-	E_compare_op depthCompareOp = E_compare_op::e_never;
-	VkBool32 depthBoundsTestEnable = 0;
-	VkBool32 stencilTestEnable = 0;
-	S_stencil_op_state front = {};
-	S_stencil_op_state back = {};
-	float minDepthBounds = 0;
-	float maxDepthBounds = 0;
+	VkPipelineDepthStencilStateCreateFlags flags;
+	VkBool32 depthTestEnable;
+	VkBool32 depthWriteEnable;
+	E_compare_op depthCompareOp;
+	VkBool32 depthBoundsTestEnable;
+	VkBool32 stencilTestEnable;
+	S_stencil_op_state front;
+	S_stencil_op_state back;
+	float minDepthBounds;
+	float maxDepthBounds;
+
+S_pipeline_depth_stencil_state_create_info(){}
+
+S_pipeline_depth_stencil_state_create_info(
+	VkPipelineDepthStencilStateCreateFlags flags_,
+	VkBool32 depthTestEnable_,
+	VkBool32 depthWriteEnable_,
+	E_compare_op depthCompareOp_,
+	VkBool32 depthBoundsTestEnable_,
+	VkBool32 stencilTestEnable_,
+	S_stencil_op_state front_,
+	S_stencil_op_state back_,
+	float minDepthBounds_,
+	float maxDepthBounds_)
+	:flags(flags_)
+	,depthTestEnable(depthTestEnable_)
+	,depthWriteEnable(depthWriteEnable_)
+	,depthCompareOp(depthCompareOp_)
+	,depthBoundsTestEnable(depthBoundsTestEnable_)
+	,stencilTestEnable(stencilTestEnable_)
+	,front(front_)
+	,back(back_)
+	,minDepthBounds(minDepthBounds_)
+	,maxDepthBounds(maxDepthBounds_)
+{
+}
 
 S_pipeline_depth_stencil_state_create_info( VkPipelineDepthStencilStateCreateInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_pipeline_depth_stencil_state_create_info ) );	}
@@ -8302,10 +9702,24 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_PIPELINE_DISCARD_RECTANGLE_STATE_CREATE_INFO_EXT;
 	 void * pNext = nullptr;
 public:
-	VkPipelineDiscardRectangleStateCreateFlagsEXT flags = 0;
-	E_discard_rectangle_mode_EXT discardRectangleMode = E_discard_rectangle_mode_EXT::e_inclusive_ext;
-	uint32_t discardRectangleCount = 0;
-	const S_rect_2d * pDiscardRectangles = nullptr;
+	VkPipelineDiscardRectangleStateCreateFlagsEXT flags;
+	E_discard_rectangle_mode_EXT discardRectangleMode;
+	uint32_t discardRectangleCount;
+	const S_rect_2d * pDiscardRectangles;
+
+S_pipeline_discard_rectangle_state_create_info_EXT(){}
+
+S_pipeline_discard_rectangle_state_create_info_EXT(
+	VkPipelineDiscardRectangleStateCreateFlagsEXT flags_,
+	E_discard_rectangle_mode_EXT discardRectangleMode_,
+	uint32_t discardRectangleCount_,
+	const S_rect_2d * pDiscardRectangles_)
+	:flags(flags_)
+	,discardRectangleMode(discardRectangleMode_)
+	,discardRectangleCount(discardRectangleCount_)
+	,pDiscardRectangles(pDiscardRectangles_)
+{
+}
 
 S_pipeline_discard_rectangle_state_create_info_EXT( VkPipelineDiscardRectangleStateCreateInfoEXT const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_pipeline_discard_rectangle_state_create_info_EXT ) );	}
@@ -8331,7 +9745,15 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_PIPELINE_REPRESENTATIVE_FRAGMENT_TEST_STATE_CREATE_INFO_NV;
 	 void * pNext = nullptr;
 public:
-	VkBool32 representativeFragmentTestEnable = 0;
+	VkBool32 representativeFragmentTestEnable;
+
+S_pipeline_representative_fragment_test_state_create_info_NV(){}
+
+S_pipeline_representative_fragment_test_state_create_info_NV(
+	VkBool32 representativeFragmentTestEnable_)
+	:representativeFragmentTestEnable(representativeFragmentTestEnable_)
+{
+}
 
 S_pipeline_representative_fragment_test_state_create_info_NV( VkPipelineRepresentativeFragmentTestStateCreateInfoNV const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_pipeline_representative_fragment_test_state_create_info_NV ) );	}
@@ -8360,22 +9782,62 @@ private:
 	 void * pNext = nullptr;
 public:
 	F_pipeline_create flags;
-	uint32_t stageCount = 0;
-	const S_pipeline_shader_stage_create_info * pStages = nullptr;
-	const S_pipeline_vertex_input_state_create_info * pVertexInputState = nullptr;
-	const S_pipeline_input_assembly_state_create_info * pInputAssemblyState = nullptr;
-	const S_pipeline_tessellation_state_create_info * pTessellationState = nullptr;
-	const S_pipeline_viewport_state_create_info * pViewportState = nullptr;
-	const S_pipeline_rasterization_state_create_info * pRasterizationState = nullptr;
-	const S_pipeline_multisample_state_create_info * pMultisampleState = nullptr;
-	const S_pipeline_depth_stencil_state_create_info * pDepthStencilState = nullptr;
-	const S_pipeline_color_blend_state_create_info * pColorBlendState = nullptr;
-	const S_pipeline_dynamic_state_create_info * pDynamicState = nullptr;
-	VkPipelineLayout layout = VK_NULL_HANDLE;
-	VkRenderPass renderPass = VK_NULL_HANDLE;
-	uint32_t subpass = 0;
-	VkPipeline basePipelineHandle = VK_NULL_HANDLE;
-	int32_t basePipelineIndex = 0;
+	uint32_t stageCount;
+	const S_pipeline_shader_stage_create_info * pStages;
+	const S_pipeline_vertex_input_state_create_info * pVertexInputState;
+	const S_pipeline_input_assembly_state_create_info * pInputAssemblyState;
+	const S_pipeline_tessellation_state_create_info * pTessellationState;
+	const S_pipeline_viewport_state_create_info * pViewportState;
+	const S_pipeline_rasterization_state_create_info * pRasterizationState;
+	const S_pipeline_multisample_state_create_info * pMultisampleState;
+	const S_pipeline_depth_stencil_state_create_info * pDepthStencilState;
+	const S_pipeline_color_blend_state_create_info * pColorBlendState;
+	const S_pipeline_dynamic_state_create_info * pDynamicState;
+	VkPipelineLayout layout;
+	VkRenderPass renderPass;
+	uint32_t subpass;
+	VkPipeline basePipelineHandle;
+	int32_t basePipelineIndex;
+
+S_graphics_pipeline_create_info(){}
+
+S_graphics_pipeline_create_info(
+	F_pipeline_create flags_,
+	uint32_t stageCount_,
+	const S_pipeline_shader_stage_create_info * pStages_,
+	const S_pipeline_vertex_input_state_create_info * pVertexInputState_,
+	const S_pipeline_input_assembly_state_create_info * pInputAssemblyState_,
+	const S_pipeline_tessellation_state_create_info * pTessellationState_,
+	const S_pipeline_viewport_state_create_info * pViewportState_,
+	const S_pipeline_rasterization_state_create_info * pRasterizationState_,
+	const S_pipeline_multisample_state_create_info * pMultisampleState_,
+	const S_pipeline_depth_stencil_state_create_info * pDepthStencilState_,
+	const S_pipeline_color_blend_state_create_info * pColorBlendState_,
+	const S_pipeline_dynamic_state_create_info * pDynamicState_,
+	VkPipelineLayout layout_,
+	VkRenderPass renderPass_,
+	uint32_t subpass_,
+	VkPipeline basePipelineHandle_,
+	int32_t basePipelineIndex_)
+	:flags(flags_)
+	,stageCount(stageCount_)
+	,pStages(pStages_)
+	,pVertexInputState(pVertexInputState_)
+	,pInputAssemblyState(pInputAssemblyState_)
+	,pTessellationState(pTessellationState_)
+	,pViewportState(pViewportState_)
+	,pRasterizationState(pRasterizationState_)
+	,pMultisampleState(pMultisampleState_)
+	,pDepthStencilState(pDepthStencilState_)
+	,pColorBlendState(pColorBlendState_)
+	,pDynamicState(pDynamicState_)
+	,layout(layout_)
+	,renderPass(renderPass_)
+	,subpass(subpass_)
+	,basePipelineHandle(basePipelineHandle_)
+	,basePipelineIndex(basePipelineIndex_)
+{
+}
 
 S_graphics_pipeline_create_info( VkGraphicsPipelineCreateInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_graphics_pipeline_create_info ) );	}
@@ -8401,9 +9863,21 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_PIPELINE_CACHE_CREATE_INFO;
 	 void * pNext = nullptr;
 public:
-	VkPipelineCacheCreateFlags flags = 0;
-	size_t initialDataSize = 0;
-	const void * pInitialData = nullptr;
+	VkPipelineCacheCreateFlags flags;
+	size_t initialDataSize;
+	const void * pInitialData;
+
+S_pipeline_cache_create_info(){}
+
+S_pipeline_cache_create_info(
+	VkPipelineCacheCreateFlags flags_,
+	size_t initialDataSize_,
+	const void * pInitialData_)
+	:flags(flags_)
+	,initialDataSize(initialDataSize_)
+	,pInitialData(pInitialData_)
+{
+}
 
 S_pipeline_cache_create_info( VkPipelineCacheCreateInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_pipeline_cache_create_info ) );	}
@@ -8423,8 +9897,10 @@ static_assert(
 */
 struct		S_push_constant_range{
 	F_shader_stage stageFlags;
-	uint32_t offset = 0;
-	uint32_t size = 0;
+	uint32_t offset;
+	uint32_t size;
+
+S_push_constant_range(){}
 
 };
 
@@ -8435,11 +9911,27 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_PIPELINE_LAYOUT_CREATE_INFO;
 	 void * pNext = nullptr;
 public:
-	VkPipelineLayoutCreateFlags flags = 0;
-	uint32_t setLayoutCount = 0;
-	const VkDescriptorSetLayout * pSetLayouts = VK_NULL_HANDLE;
-	uint32_t pushConstantRangeCount = 0;
-	const S_push_constant_range * pPushConstantRanges = nullptr;
+	VkPipelineLayoutCreateFlags flags;
+	uint32_t setLayoutCount;
+	const VkDescriptorSetLayout * pSetLayouts;
+	uint32_t pushConstantRangeCount;
+	const S_push_constant_range * pPushConstantRanges;
+
+S_pipeline_layout_create_info(){}
+
+S_pipeline_layout_create_info(
+	VkPipelineLayoutCreateFlags flags_,
+	uint32_t setLayoutCount_,
+	const VkDescriptorSetLayout * pSetLayouts_,
+	uint32_t pushConstantRangeCount_,
+	const S_push_constant_range * pPushConstantRanges_)
+	:flags(flags_)
+	,setLayoutCount(setLayoutCount_)
+	,pSetLayouts(pSetLayouts_)
+	,pushConstantRangeCount(pushConstantRangeCount_)
+	,pPushConstantRanges(pPushConstantRanges_)
+{
+}
 
 S_pipeline_layout_create_info( VkPipelineLayoutCreateInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_pipeline_layout_create_info ) );	}
@@ -8463,7 +9955,15 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_SAMPLER_REDUCTION_MODE_CREATE_INFO_EXT;
 	 void * pNext = nullptr;
 public:
-	E_sampler_reduction_mode_EXT reductionMode = E_sampler_reduction_mode_EXT::e_weighted_average_ext;
+	E_sampler_reduction_mode_EXT reductionMode;
+
+S_sampler_reduction_mode_create_info_EXT(){}
+
+S_sampler_reduction_mode_create_info_EXT(
+	E_sampler_reduction_mode_EXT reductionMode_)
+	:reductionMode(reductionMode_)
+{
+}
 
 S_sampler_reduction_mode_create_info_EXT( VkSamplerReductionModeCreateInfoEXT const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_sampler_reduction_mode_create_info_EXT ) );	}
@@ -8491,22 +9991,60 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_SAMPLER_CREATE_INFO;
 	 void * pNext = nullptr;
 public:
-	VkSamplerCreateFlags flags = 0;
-	E_filter magFilter = E_filter::e_nearest;
-	E_filter minFilter = E_filter::e_nearest;
-	E_sampler_mipmap_mode mipmapMode = E_sampler_mipmap_mode::e_nearest;
-	E_sampler_address_mode addressModeU = E_sampler_address_mode::e_repeat;
-	E_sampler_address_mode addressModeV = E_sampler_address_mode::e_repeat;
-	E_sampler_address_mode addressModeW = E_sampler_address_mode::e_repeat;
-	float mipLodBias = 0;
-	VkBool32 anisotropyEnable = 0;
-	float maxAnisotropy = 0;
-	VkBool32 compareEnable = 0;
-	E_compare_op compareOp = E_compare_op::e_never;
-	float minLod = 0;
-	float maxLod = 0;
-	E_border_color borderColor = E_border_color::e_float_transparent_black;
-	VkBool32 unnormalizedCoordinates = 0;
+	VkSamplerCreateFlags flags;
+	E_filter magFilter;
+	E_filter minFilter;
+	E_sampler_mipmap_mode mipmapMode;
+	E_sampler_address_mode addressModeU;
+	E_sampler_address_mode addressModeV;
+	E_sampler_address_mode addressModeW;
+	float mipLodBias;
+	VkBool32 anisotropyEnable;
+	float maxAnisotropy;
+	VkBool32 compareEnable;
+	E_compare_op compareOp;
+	float minLod;
+	float maxLod;
+	E_border_color borderColor;
+	VkBool32 unnormalizedCoordinates;
+
+S_sampler_create_info(){}
+
+S_sampler_create_info(
+	VkSamplerCreateFlags flags_,
+	E_filter magFilter_,
+	E_filter minFilter_,
+	E_sampler_mipmap_mode mipmapMode_,
+	E_sampler_address_mode addressModeU_,
+	E_sampler_address_mode addressModeV_,
+	E_sampler_address_mode addressModeW_,
+	float mipLodBias_,
+	VkBool32 anisotropyEnable_,
+	float maxAnisotropy_,
+	VkBool32 compareEnable_,
+	E_compare_op compareOp_,
+	float minLod_,
+	float maxLod_,
+	E_border_color borderColor_,
+	VkBool32 unnormalizedCoordinates_)
+	:flags(flags_)
+	,magFilter(magFilter_)
+	,minFilter(minFilter_)
+	,mipmapMode(mipmapMode_)
+	,addressModeU(addressModeU_)
+	,addressModeV(addressModeV_)
+	,addressModeW(addressModeW_)
+	,mipLodBias(mipLodBias_)
+	,anisotropyEnable(anisotropyEnable_)
+	,maxAnisotropy(maxAnisotropy_)
+	,compareEnable(compareEnable_)
+	,compareOp(compareOp_)
+	,minLod(minLod_)
+	,maxLod(maxLod_)
+	,borderColor(borderColor_)
+	,unnormalizedCoordinates(unnormalizedCoordinates_)
+{
+}
 
 S_sampler_create_info( VkSamplerCreateInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_sampler_create_info ) );	}
@@ -8533,7 +10071,17 @@ private:
 	 void * pNext = nullptr;
 public:
 	F_command_pool_create flags;
-	uint32_t queueFamilyIndex = 0;
+	uint32_t queueFamilyIndex;
+
+S_command_pool_create_info(){}
+
+S_command_pool_create_info(
+	F_command_pool_create flags_,
+	uint32_t queueFamilyIndex_)
+	:flags(flags_)
+	,queueFamilyIndex(queueFamilyIndex_)
+{
+}
 
 S_command_pool_create_info( VkCommandPoolCreateInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_command_pool_create_info ) );	}
@@ -8556,9 +10104,21 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO;
 	 void * pNext = nullptr;
 public:
-	VkCommandPool commandPool = VK_NULL_HANDLE;
-	E_command_buffer_level level = E_command_buffer_level::e_primary;
-	uint32_t commandBufferCount = 0;
+	VkCommandPool commandPool;
+	E_command_buffer_level level;
+	uint32_t commandBufferCount;
+
+S_command_buffer_allocate_info(){}
+
+S_command_buffer_allocate_info(
+	VkCommandPool commandPool_,
+	E_command_buffer_level level_,
+	uint32_t commandBufferCount_)
+	:commandPool(commandPool_)
+	,level(level_)
+	,commandBufferCount(commandBufferCount_)
+{
+}
 
 S_command_buffer_allocate_info( VkCommandBufferAllocateInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_command_buffer_allocate_info ) );	}
@@ -8582,7 +10142,15 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_CONDITIONAL_RENDERING_INFO_EXT;
 	 void * pNext = nullptr;
 public:
-	VkBool32 conditionalRenderingEnable = 0;
+	VkBool32 conditionalRenderingEnable;
+
+S_command_buffer_inheritance_conditional_rendering_info_EXT(){}
+
+S_command_buffer_inheritance_conditional_rendering_info_EXT(
+	VkBool32 conditionalRenderingEnable_)
+	:conditionalRenderingEnable(conditionalRenderingEnable_)
+{
+}
 
 S_command_buffer_inheritance_conditional_rendering_info_EXT( VkCommandBufferInheritanceConditionalRenderingInfoEXT const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_command_buffer_inheritance_conditional_rendering_info_EXT ) );	}
@@ -8609,12 +10177,30 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_INFO;
 	 void * pNext = nullptr;
 public:
-	VkRenderPass renderPass = VK_NULL_HANDLE;
-	uint32_t subpass = 0;
-	VkFramebuffer framebuffer = VK_NULL_HANDLE;
-	VkBool32 occlusionQueryEnable = 0;
+	VkRenderPass renderPass;
+	uint32_t subpass;
+	VkFramebuffer framebuffer;
+	VkBool32 occlusionQueryEnable;
 	F_query_control queryFlags;
 	F_query_pipeline_statistic pipelineStatistics;
+
+S_command_buffer_inheritance_info(){}
+
+S_command_buffer_inheritance_info(
+	VkRenderPass renderPass_,
+	uint32_t subpass_,
+	VkFramebuffer framebuffer_,
+	VkBool32 occlusionQueryEnable_,
+	F_query_control queryFlags_,
+	F_query_pipeline_statistic pipelineStatistics_)
+	:renderPass(renderPass_)
+	,subpass(subpass_)
+	,framebuffer(framebuffer_)
+	,occlusionQueryEnable(occlusionQueryEnable_)
+	,queryFlags(queryFlags_)
+	,pipelineStatistics(pipelineStatistics_)
+{
+}
 
 S_command_buffer_inheritance_info( VkCommandBufferInheritanceInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_command_buffer_inheritance_info ) );	}
@@ -8640,7 +10226,15 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_DEVICE_GROUP_COMMAND_BUFFER_BEGIN_INFO;
 	 void * pNext = nullptr;
 public:
-	uint32_t deviceMask = 0;
+	uint32_t deviceMask;
+
+S_device_group_command_buffer_begin_info(){}
+
+S_device_group_command_buffer_begin_info(
+	uint32_t deviceMask_)
+	:deviceMask(deviceMask_)
+{
+}
 
 S_device_group_command_buffer_begin_info( VkDeviceGroupCommandBufferBeginInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_device_group_command_buffer_begin_info ) );	}
@@ -8668,7 +10262,17 @@ private:
 	 void * pNext = nullptr;
 public:
 	F_command_buffer_usage flags;
-	const S_command_buffer_inheritance_info * pInheritanceInfo = nullptr;
+	const S_command_buffer_inheritance_info * pInheritanceInfo;
+
+S_command_buffer_begin_info(){}
+
+S_command_buffer_begin_info(
+	F_command_buffer_usage flags_,
+	const S_command_buffer_inheritance_info * pInheritanceInfo_)
+	:flags(flags_)
+	,pInheritanceInfo(pInheritanceInfo_)
+{
+}
 
 S_command_buffer_begin_info( VkCommandBufferBeginInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_command_buffer_begin_info ) );	}
@@ -8694,9 +10298,21 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_DEVICE_GROUP_RENDER_PASS_BEGIN_INFO;
 	 void * pNext = nullptr;
 public:
-	uint32_t deviceMask = 0;
-	uint32_t deviceRenderAreaCount = 0;
-	const S_rect_2d * pDeviceRenderAreas = nullptr;
+	uint32_t deviceMask;
+	uint32_t deviceRenderAreaCount;
+	const S_rect_2d * pDeviceRenderAreas;
+
+S_device_group_render_pass_begin_info(){}
+
+S_device_group_render_pass_begin_info(
+	uint32_t deviceMask_,
+	uint32_t deviceRenderAreaCount_,
+	const S_rect_2d * pDeviceRenderAreas_)
+	:deviceMask(deviceMask_)
+	,deviceRenderAreaCount(deviceRenderAreaCount_)
+	,pDeviceRenderAreas(pDeviceRenderAreas_)
+{
+}
 
 S_device_group_render_pass_begin_info( VkDeviceGroupRenderPassBeginInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_device_group_render_pass_begin_info ) );	}
@@ -8717,16 +10333,20 @@ static_assert(
 /*	VkAttachmentSampleLocationsEXT
 */
 struct		S_attachment_sample_locations_EXT{
-	uint32_t attachmentIndex = 0;
-	S_sample_locations_info_EXT sampleLocationsInfo = {};
+	uint32_t attachmentIndex;
+	S_sample_locations_info_EXT sampleLocationsInfo;
+
+S_attachment_sample_locations_EXT(){}
 
 };
 
 /*	VkSubpassSampleLocationsEXT
 */
 struct		S_subpass_sample_locations_EXT{
-	uint32_t subpassIndex = 0;
-	S_sample_locations_info_EXT sampleLocationsInfo = {};
+	uint32_t subpassIndex;
+	S_sample_locations_info_EXT sampleLocationsInfo;
+
+S_subpass_sample_locations_EXT(){}
 
 };
 
@@ -8738,10 +10358,24 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_RENDER_PASS_SAMPLE_LOCATIONS_BEGIN_INFO_EXT;
 	 void * pNext = nullptr;
 public:
-	uint32_t attachmentInitialSampleLocationsCount = 0;
-	const S_attachment_sample_locations_EXT * pAttachmentInitialSampleLocations = nullptr;
-	uint32_t postSubpassSampleLocationsCount = 0;
-	const S_subpass_sample_locations_EXT * pPostSubpassSampleLocations = nullptr;
+	uint32_t attachmentInitialSampleLocationsCount;
+	const S_attachment_sample_locations_EXT * pAttachmentInitialSampleLocations;
+	uint32_t postSubpassSampleLocationsCount;
+	const S_subpass_sample_locations_EXT * pPostSubpassSampleLocations;
+
+S_render_pass_sample_locations_begin_info_EXT(){}
+
+S_render_pass_sample_locations_begin_info_EXT(
+	uint32_t attachmentInitialSampleLocationsCount_,
+	const S_attachment_sample_locations_EXT * pAttachmentInitialSampleLocations_,
+	uint32_t postSubpassSampleLocationsCount_,
+	const S_subpass_sample_locations_EXT * pPostSubpassSampleLocations_)
+	:attachmentInitialSampleLocationsCount(attachmentInitialSampleLocationsCount_)
+	,pAttachmentInitialSampleLocations(pAttachmentInitialSampleLocations_)
+	,postSubpassSampleLocationsCount(postSubpassSampleLocationsCount_)
+	,pPostSubpassSampleLocations(pPostSubpassSampleLocations_)
+{
+}
 
 S_render_pass_sample_locations_begin_info_EXT( VkRenderPassSampleLocationsBeginInfoEXT const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_render_pass_sample_locations_begin_info_EXT ) );	}
@@ -8769,11 +10403,27 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO;
 	 void * pNext = nullptr;
 public:
-	VkRenderPass renderPass = VK_NULL_HANDLE;
-	VkFramebuffer framebuffer = VK_NULL_HANDLE;
-	S_rect_2d renderArea = {};
-	uint32_t clearValueCount = 0;
-	const VkClearValue * pClearValues = {};
+	VkRenderPass renderPass;
+	VkFramebuffer framebuffer;
+	S_rect_2d renderArea;
+	uint32_t clearValueCount;
+	const VkClearValue * pClearValues;
+
+S_render_pass_begin_info(){}
+
+S_render_pass_begin_info(
+	VkRenderPass renderPass_,
+	VkFramebuffer framebuffer_,
+	S_rect_2d renderArea_,
+	uint32_t clearValueCount_,
+	const VkClearValue * pClearValues_)
+	:renderPass(renderPass_)
+	,framebuffer(framebuffer_)
+	,renderArea(renderArea_)
+	,clearValueCount(clearValueCount_)
+	,pClearValues(pClearValues_)
+{
+}
 
 S_render_pass_begin_info( VkRenderPassBeginInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_render_pass_begin_info ) );	}
@@ -8795,8 +10445,10 @@ static_assert(
 /*	VkClearDepthStencilValue
 */
 struct		S_clear_depth_stencil_value{
-	float depth = 0;
-	uint32_t stencil = 0;
+	float depth;
+	uint32_t stencil;
+
+S_clear_depth_stencil_value(){}
 
 };
 
@@ -8804,8 +10456,10 @@ struct		S_clear_depth_stencil_value{
 */
 struct		S_clear_attachment{
 	F_image_aspect aspectMask;
-	uint32_t colorAttachment = 0;
-	VkClearValue clearValue = {};
+	uint32_t colorAttachment;
+	VkClearValue clearValue;
+
+S_clear_attachment(){}
 
 };
 
@@ -8813,22 +10467,26 @@ struct		S_clear_attachment{
 */
 struct		S_attachment_description{
 	F_attachment_description flags;
-	E_format format = E_format::e_undefined;
+	E_format format;
 	F_sample_count samples;
-	E_attachment_load_op loadOp = E_attachment_load_op::e_load;
-	E_attachment_store_op storeOp = E_attachment_store_op::e_store;
-	E_attachment_load_op stencilLoadOp = E_attachment_load_op::e_load;
-	E_attachment_store_op stencilStoreOp = E_attachment_store_op::e_store;
-	E_image_layout initialLayout = E_image_layout::e_undefined;
-	E_image_layout finalLayout = E_image_layout::e_undefined;
+	E_attachment_load_op loadOp;
+	E_attachment_store_op storeOp;
+	E_attachment_load_op stencilLoadOp;
+	E_attachment_store_op stencilStoreOp;
+	E_image_layout initialLayout;
+	E_image_layout finalLayout;
+
+S_attachment_description(){}
 
 };
 
 /*	VkAttachmentReference
 */
 struct		S_attachment_reference{
-	uint32_t attachment = 0;
-	E_image_layout layout = E_image_layout::e_undefined;
+	uint32_t attachment;
+	E_image_layout layout;
+
+S_attachment_reference(){}
 
 };
 
@@ -8836,28 +10494,32 @@ struct		S_attachment_reference{
 */
 struct		S_subpass_description{
 	F_subpass_description flags;
-	E_pipeline_bind_point pipelineBindPoint = E_pipeline_bind_point::e_graphics;
-	uint32_t inputAttachmentCount = 0;
-	const S_attachment_reference * pInputAttachments = nullptr;
-	uint32_t colorAttachmentCount = 0;
-	const S_attachment_reference * pColorAttachments = nullptr;
-	const S_attachment_reference * pResolveAttachments = nullptr;
-	const S_attachment_reference * pDepthStencilAttachment = nullptr;
-	uint32_t preserveAttachmentCount = 0;
-	const uint32_t * pPreserveAttachments = nullptr;
+	E_pipeline_bind_point pipelineBindPoint;
+	uint32_t inputAttachmentCount;
+	const S_attachment_reference * pInputAttachments;
+	uint32_t colorAttachmentCount;
+	const S_attachment_reference * pColorAttachments;
+	const S_attachment_reference * pResolveAttachments;
+	const S_attachment_reference * pDepthStencilAttachment;
+	uint32_t preserveAttachmentCount;
+	const uint32_t * pPreserveAttachments;
+
+S_subpass_description(){}
 
 };
 
 /*	VkSubpassDependency
 */
 struct		S_subpass_dependency{
-	uint32_t srcSubpass = 0;
-	uint32_t dstSubpass = 0;
+	uint32_t srcSubpass;
+	uint32_t dstSubpass;
 	F_pipeline_stage srcStageMask;
 	F_pipeline_stage dstStageMask;
 	F_access srcAccessMask;
 	F_access dstAccessMask;
 	F_dependency dependencyFlags;
+
+S_subpass_dependency(){}
 
 };
 
@@ -8869,12 +10531,30 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_RENDER_PASS_MULTIVIEW_CREATE_INFO;
 	 void * pNext = nullptr;
 public:
-	uint32_t subpassCount = 0;
-	const uint32_t * pViewMasks = nullptr;
-	uint32_t dependencyCount = 0;
-	const int32_t * pViewOffsets = nullptr;
-	uint32_t correlationMaskCount = 0;
-	const uint32_t * pCorrelationMasks = nullptr;
+	uint32_t subpassCount;
+	const uint32_t * pViewMasks;
+	uint32_t dependencyCount;
+	const int32_t * pViewOffsets;
+	uint32_t correlationMaskCount;
+	const uint32_t * pCorrelationMasks;
+
+S_render_pass_multiview_create_info(){}
+
+S_render_pass_multiview_create_info(
+	uint32_t subpassCount_,
+	const uint32_t * pViewMasks_,
+	uint32_t dependencyCount_,
+	const int32_t * pViewOffsets_,
+	uint32_t correlationMaskCount_,
+	const uint32_t * pCorrelationMasks_)
+	:subpassCount(subpassCount_)
+	,pViewMasks(pViewMasks_)
+	,dependencyCount(dependencyCount_)
+	,pViewOffsets(pViewOffsets_)
+	,correlationMaskCount(correlationMaskCount_)
+	,pCorrelationMasks(pCorrelationMasks_)
+{
+}
 
 S_render_pass_multiview_create_info( VkRenderPassMultiviewCreateInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_render_pass_multiview_create_info ) );	}
@@ -8895,9 +10575,11 @@ static_assert(
 /*	VkInputAttachmentAspectReference
 */
 struct		S_input_attachment_aspect_reference{
-	uint32_t subpass = 0;
-	uint32_t inputAttachmentIndex = 0;
+	uint32_t subpass;
+	uint32_t inputAttachmentIndex;
 	F_image_aspect aspectMask;
+
+S_input_attachment_aspect_reference(){}
 
 };
 
@@ -8909,8 +10591,18 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_RENDER_PASS_INPUT_ATTACHMENT_ASPECT_CREATE_INFO;
 	 void * pNext = nullptr;
 public:
-	uint32_t aspectReferenceCount = 0;
-	const S_input_attachment_aspect_reference * pAspectReferences = nullptr;
+	uint32_t aspectReferenceCount;
+	const S_input_attachment_aspect_reference * pAspectReferences;
+
+S_render_pass_input_attachment_aspect_create_info(){}
+
+S_render_pass_input_attachment_aspect_create_info(
+	uint32_t aspectReferenceCount_,
+	const S_input_attachment_aspect_reference * pAspectReferences_)
+	:aspectReferenceCount(aspectReferenceCount_)
+	,pAspectReferences(pAspectReferences_)
+{
+}
 
 S_render_pass_input_attachment_aspect_create_info( VkRenderPassInputAttachmentAspectCreateInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_render_pass_input_attachment_aspect_create_info ) );	}
@@ -8939,12 +10631,32 @@ private:
 	 void * pNext = nullptr;
 public:
 	F_render_pass_create flags;
-	uint32_t attachmentCount = 0;
-	const S_attachment_description * pAttachments = nullptr;
-	uint32_t subpassCount = 0;
-	const S_subpass_description * pSubpasses = nullptr;
-	uint32_t dependencyCount = 0;
-	const S_subpass_dependency * pDependencies = nullptr;
+	uint32_t attachmentCount;
+	const S_attachment_description * pAttachments;
+	uint32_t subpassCount;
+	const S_subpass_description * pSubpasses;
+	uint32_t dependencyCount;
+	const S_subpass_dependency * pDependencies;
+
+S_render_pass_create_info(){}
+
+S_render_pass_create_info(
+	F_render_pass_create flags_,
+	uint32_t attachmentCount_,
+	const S_attachment_description * pAttachments_,
+	uint32_t subpassCount_,
+	const S_subpass_description * pSubpasses_,
+	uint32_t dependencyCount_,
+	const S_subpass_dependency * pDependencies_)
+	:flags(flags_)
+	,attachmentCount(attachmentCount_)
+	,pAttachments(pAttachments_)
+	,subpassCount(subpassCount_)
+	,pSubpasses(pSubpasses_)
+	,dependencyCount(dependencyCount_)
+	,pDependencies(pDependencies_)
+{
+}
 
 S_render_pass_create_info( VkRenderPassCreateInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_render_pass_create_info ) );	}
@@ -8970,7 +10682,15 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_EVENT_CREATE_INFO;
 	 void * pNext = nullptr;
 public:
-	VkEventCreateFlags flags = 0;
+	VkEventCreateFlags flags;
+
+S_event_create_info(){}
+
+S_event_create_info(
+	VkEventCreateFlags flags_)
+	:flags(flags_)
+{
+}
 
 S_event_create_info( VkEventCreateInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_event_create_info ) );	}
@@ -8995,6 +10715,14 @@ private:
 	 void * pNext = nullptr;
 public:
 	F_external_fence_handle_type handleTypes;
+
+S_export_fence_create_info(){}
+
+S_export_fence_create_info(
+	F_external_fence_handle_type handleTypes_)
+	:handleTypes(handleTypes_)
+{
+}
 
 S_export_fence_create_info( VkExportFenceCreateInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_export_fence_create_info ) );	}
@@ -9021,9 +10749,21 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_EXPORT_FENCE_WIN32_HANDLE_INFO_KHR;
 	 void * pNext = nullptr;
 public:
-	const SECURITY_ATTRIBUTES * pAttributes = nullptr;
-	DWORD dwAccess = 0;
-	LPCWSTR name = 0;
+	const SECURITY_ATTRIBUTES * pAttributes;
+	DWORD dwAccess;
+	LPCWSTR name;
+
+S_export_fence_win32_handle_info_KHR(){}
+
+S_export_fence_win32_handle_info_KHR(
+	const SECURITY_ATTRIBUTES * pAttributes_,
+	DWORD dwAccess_,
+	LPCWSTR name_)
+	:pAttributes(pAttributes_)
+	,dwAccess(dwAccess_)
+	,name(name_)
+{
+}
 
 S_export_fence_win32_handle_info_KHR( VkExportFenceWin32HandleInfoKHR const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_export_fence_win32_handle_info_KHR ) );	}
@@ -9054,6 +10794,14 @@ private:
 public:
 	F_fence_create flags;
 
+S_fence_create_info(){}
+
+S_fence_create_info(
+	F_fence_create flags_)
+	:flags(flags_)
+{
+}
+
 S_fence_create_info( VkFenceCreateInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_fence_create_info ) );	}
 S_fence_create_info& operator=( VkFenceCreateInfo const & rhs ) 
@@ -9083,6 +10831,14 @@ private:
 public:
 	F_external_semaphore_handle_type handleTypes;
 
+S_export_semaphore_create_info(){}
+
+S_export_semaphore_create_info(
+	F_external_semaphore_handle_type handleTypes_)
+	:handleTypes(handleTypes_)
+{
+}
+
 S_export_semaphore_create_info( VkExportSemaphoreCreateInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_export_semaphore_create_info ) );	}
 S_export_semaphore_create_info& operator=( VkExportSemaphoreCreateInfo const & rhs ) 
@@ -9108,9 +10864,21 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_EXPORT_SEMAPHORE_WIN32_HANDLE_INFO_KHR;
 	 void * pNext = nullptr;
 public:
-	const SECURITY_ATTRIBUTES * pAttributes = nullptr;
-	DWORD dwAccess = 0;
-	LPCWSTR name = 0;
+	const SECURITY_ATTRIBUTES * pAttributes;
+	DWORD dwAccess;
+	LPCWSTR name;
+
+S_export_semaphore_win32_handle_info_KHR(){}
+
+S_export_semaphore_win32_handle_info_KHR(
+	const SECURITY_ATTRIBUTES * pAttributes_,
+	DWORD dwAccess_,
+	LPCWSTR name_)
+	:pAttributes(pAttributes_)
+	,dwAccess(dwAccess_)
+	,name(name_)
+{
+}
 
 S_export_semaphore_win32_handle_info_KHR( VkExportSemaphoreWin32HandleInfoKHR const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_export_semaphore_win32_handle_info_KHR ) );	}
@@ -9139,7 +10907,15 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_SEMAPHORE_CREATE_INFO;
 	 void * pNext = nullptr;
 public:
-	VkSemaphoreCreateFlags flags = 0;
+	VkSemaphoreCreateFlags flags;
+
+S_semaphore_create_info(){}
+
+S_semaphore_create_info(
+	VkSemaphoreCreateFlags flags_)
+	:flags(flags_)
+{
+}
 
 S_semaphore_create_info( VkSemaphoreCreateInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_semaphore_create_info ) );	}
@@ -9167,10 +10943,24 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_QUERY_POOL_CREATE_INFO;
 	 void * pNext = nullptr;
 public:
-	VkQueryPoolCreateFlags flags = 0;
-	E_query_type queryType = E_query_type::e_occlusion;
-	uint32_t queryCount = 0;
+	VkQueryPoolCreateFlags flags;
+	E_query_type queryType;
+	uint32_t queryCount;
 	F_query_pipeline_statistic pipelineStatistics;
+
+S_query_pool_create_info(){}
+
+S_query_pool_create_info(
+	VkQueryPoolCreateFlags flags_,
+	E_query_type queryType_,
+	uint32_t queryCount_,
+	F_query_pipeline_statistic pipelineStatistics_)
+	:flags(flags_)
+	,queryType(queryType_)
+	,queryCount(queryCount_)
+	,pipelineStatistics(pipelineStatistics_)
+{
+}
 
 S_query_pool_create_info( VkQueryPoolCreateInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_query_pool_create_info ) );	}
@@ -9193,13 +10983,33 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_FRAMEBUFFER_CREATE_INFO;
 	 void * pNext = nullptr;
 public:
-	VkFramebufferCreateFlags flags = 0;
-	VkRenderPass renderPass = VK_NULL_HANDLE;
-	uint32_t attachmentCount = 0;
-	const VkImageView * pAttachments = VK_NULL_HANDLE;
-	uint32_t width = 0;
-	uint32_t height = 0;
-	uint32_t layers = 0;
+	VkFramebufferCreateFlags flags;
+	VkRenderPass renderPass;
+	uint32_t attachmentCount;
+	const VkImageView * pAttachments;
+	uint32_t width;
+	uint32_t height;
+	uint32_t layers;
+
+S_framebuffer_create_info(){}
+
+S_framebuffer_create_info(
+	VkFramebufferCreateFlags flags_,
+	VkRenderPass renderPass_,
+	uint32_t attachmentCount_,
+	const VkImageView * pAttachments_,
+	uint32_t width_,
+	uint32_t height_,
+	uint32_t layers_)
+	:flags(flags_)
+	,renderPass(renderPass_)
+	,attachmentCount(attachmentCount_)
+	,pAttachments(pAttachments_)
+	,width(width_)
+	,height(height_)
+	,layers(layers_)
+{
+}
 
 S_framebuffer_create_info( VkFramebufferCreateInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_framebuffer_create_info ) );	}
@@ -9218,30 +11028,36 @@ static_assert(
 /*	VkDrawIndirectCommand
 */
 struct		S_draw_indirect_command{
-	uint32_t vertexCount = 0;
-	uint32_t instanceCount = 0;
-	uint32_t firstVertex = 0;
-	uint32_t firstInstance = 0;
+	uint32_t vertexCount;
+	uint32_t instanceCount;
+	uint32_t firstVertex;
+	uint32_t firstInstance;
+
+S_draw_indirect_command(){}
 
 };
 
 /*	VkDrawIndexedIndirectCommand
 */
 struct		S_draw_indexed_indirect_command{
-	uint32_t indexCount = 0;
-	uint32_t instanceCount = 0;
-	uint32_t firstIndex = 0;
-	int32_t vertexOffset = 0;
-	uint32_t firstInstance = 0;
+	uint32_t indexCount;
+	uint32_t instanceCount;
+	uint32_t firstIndex;
+	int32_t vertexOffset;
+	uint32_t firstInstance;
+
+S_draw_indexed_indirect_command(){}
 
 };
 
 /*	VkDispatchIndirectCommand
 */
 struct		S_dispatch_indirect_command{
-	uint32_t x = 0;
-	uint32_t y = 0;
-	uint32_t z = 0;
+	uint32_t x;
+	uint32_t y;
+	uint32_t z;
+
+S_dispatch_indirect_command(){}
 
 };
 
@@ -9254,13 +11070,33 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_WIN32_KEYED_MUTEX_ACQUIRE_RELEASE_INFO_NV;
 	 void * pNext = nullptr;
 public:
-	uint32_t acquireCount = 0;
-	const VkDeviceMemory * pAcquireSyncs = VK_NULL_HANDLE;
-	const uint64_t * pAcquireKeys = nullptr;
-	const uint32_t * pAcquireTimeoutMilliseconds = nullptr;
-	uint32_t releaseCount = 0;
-	const VkDeviceMemory * pReleaseSyncs = VK_NULL_HANDLE;
-	const uint64_t * pReleaseKeys = nullptr;
+	uint32_t acquireCount;
+	const VkDeviceMemory * pAcquireSyncs;
+	const uint64_t * pAcquireKeys;
+	const uint32_t * pAcquireTimeoutMilliseconds;
+	uint32_t releaseCount;
+	const VkDeviceMemory * pReleaseSyncs;
+	const uint64_t * pReleaseKeys;
+
+S_win32_keyed_mutex_acquire_release_info_NV(){}
+
+S_win32_keyed_mutex_acquire_release_info_NV(
+	uint32_t acquireCount_,
+	const VkDeviceMemory * pAcquireSyncs_,
+	const uint64_t * pAcquireKeys_,
+	const uint32_t * pAcquireTimeoutMilliseconds_,
+	uint32_t releaseCount_,
+	const VkDeviceMemory * pReleaseSyncs_,
+	const uint64_t * pReleaseKeys_)
+	:acquireCount(acquireCount_)
+	,pAcquireSyncs(pAcquireSyncs_)
+	,pAcquireKeys(pAcquireKeys_)
+	,pAcquireTimeoutMilliseconds(pAcquireTimeoutMilliseconds_)
+	,releaseCount(releaseCount_)
+	,pReleaseSyncs(pReleaseSyncs_)
+	,pReleaseKeys(pReleaseKeys_)
+{
+}
 
 S_win32_keyed_mutex_acquire_release_info_NV( VkWin32KeyedMutexAcquireReleaseInfoNV const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_win32_keyed_mutex_acquire_release_info_NV ) );	}
@@ -9288,13 +11124,33 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_WIN32_KEYED_MUTEX_ACQUIRE_RELEASE_INFO_KHR;
 	 void * pNext = nullptr;
 public:
-	uint32_t acquireCount = 0;
-	const VkDeviceMemory * pAcquireSyncs = VK_NULL_HANDLE;
-	const uint64_t * pAcquireKeys = nullptr;
-	const uint32_t * pAcquireTimeouts = nullptr;
-	uint32_t releaseCount = 0;
-	const VkDeviceMemory * pReleaseSyncs = VK_NULL_HANDLE;
-	const uint64_t * pReleaseKeys = nullptr;
+	uint32_t acquireCount;
+	const VkDeviceMemory * pAcquireSyncs;
+	const uint64_t * pAcquireKeys;
+	const uint32_t * pAcquireTimeouts;
+	uint32_t releaseCount;
+	const VkDeviceMemory * pReleaseSyncs;
+	const uint64_t * pReleaseKeys;
+
+S_win32_keyed_mutex_acquire_release_info_KHR(){}
+
+S_win32_keyed_mutex_acquire_release_info_KHR(
+	uint32_t acquireCount_,
+	const VkDeviceMemory * pAcquireSyncs_,
+	const uint64_t * pAcquireKeys_,
+	const uint32_t * pAcquireTimeouts_,
+	uint32_t releaseCount_,
+	const VkDeviceMemory * pReleaseSyncs_,
+	const uint64_t * pReleaseKeys_)
+	:acquireCount(acquireCount_)
+	,pAcquireSyncs(pAcquireSyncs_)
+	,pAcquireKeys(pAcquireKeys_)
+	,pAcquireTimeouts(pAcquireTimeouts_)
+	,releaseCount(releaseCount_)
+	,pReleaseSyncs(pReleaseSyncs_)
+	,pReleaseKeys(pReleaseKeys_)
+{
+}
 
 S_win32_keyed_mutex_acquire_release_info_KHR( VkWin32KeyedMutexAcquireReleaseInfoKHR const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_win32_keyed_mutex_acquire_release_info_KHR ) );	}
@@ -9322,10 +11178,24 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_D3D12_FENCE_SUBMIT_INFO_KHR;
 	 void * pNext = nullptr;
 public:
-	uint32_t waitSemaphoreValuesCount = 0;
-	const uint64_t * pWaitSemaphoreValues = nullptr;
-	uint32_t signalSemaphoreValuesCount = 0;
-	const uint64_t * pSignalSemaphoreValues = nullptr;
+	uint32_t waitSemaphoreValuesCount;
+	const uint64_t * pWaitSemaphoreValues;
+	uint32_t signalSemaphoreValuesCount;
+	const uint64_t * pSignalSemaphoreValues;
+
+S_d_3d12_fence_submit_info_KHR(){}
+
+S_d_3d12_fence_submit_info_KHR(
+	uint32_t waitSemaphoreValuesCount_,
+	const uint64_t * pWaitSemaphoreValues_,
+	uint32_t signalSemaphoreValuesCount_,
+	const uint64_t * pSignalSemaphoreValues_)
+	:waitSemaphoreValuesCount(waitSemaphoreValuesCount_)
+	,pWaitSemaphoreValues(pWaitSemaphoreValues_)
+	,signalSemaphoreValuesCount(signalSemaphoreValuesCount_)
+	,pSignalSemaphoreValues(pSignalSemaphoreValues_)
+{
+}
 
 S_d_3d12_fence_submit_info_KHR( VkD3D12FenceSubmitInfoKHR const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_d_3d12_fence_submit_info_KHR ) );	}
@@ -9352,12 +11222,30 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_DEVICE_GROUP_SUBMIT_INFO;
 	 void * pNext = nullptr;
 public:
-	uint32_t waitSemaphoreCount = 0;
-	const uint32_t * pWaitSemaphoreDeviceIndices = nullptr;
-	uint32_t commandBufferCount = 0;
-	const uint32_t * pCommandBufferDeviceMasks = nullptr;
-	uint32_t signalSemaphoreCount = 0;
-	const uint32_t * pSignalSemaphoreDeviceIndices = nullptr;
+	uint32_t waitSemaphoreCount;
+	const uint32_t * pWaitSemaphoreDeviceIndices;
+	uint32_t commandBufferCount;
+	const uint32_t * pCommandBufferDeviceMasks;
+	uint32_t signalSemaphoreCount;
+	const uint32_t * pSignalSemaphoreDeviceIndices;
+
+S_device_group_submit_info(){}
+
+S_device_group_submit_info(
+	uint32_t waitSemaphoreCount_,
+	const uint32_t * pWaitSemaphoreDeviceIndices_,
+	uint32_t commandBufferCount_,
+	const uint32_t * pCommandBufferDeviceMasks_,
+	uint32_t signalSemaphoreCount_,
+	const uint32_t * pSignalSemaphoreDeviceIndices_)
+	:waitSemaphoreCount(waitSemaphoreCount_)
+	,pWaitSemaphoreDeviceIndices(pWaitSemaphoreDeviceIndices_)
+	,commandBufferCount(commandBufferCount_)
+	,pCommandBufferDeviceMasks(pCommandBufferDeviceMasks_)
+	,signalSemaphoreCount(signalSemaphoreCount_)
+	,pSignalSemaphoreDeviceIndices(pSignalSemaphoreDeviceIndices_)
+{
+}
 
 S_device_group_submit_info( VkDeviceGroupSubmitInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_device_group_submit_info ) );	}
@@ -9383,7 +11271,15 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_PROTECTED_SUBMIT_INFO;
 	 void * pNext = nullptr;
 public:
-	VkBool32 protectedSubmit = 0;
+	VkBool32 protectedSubmit;
+
+S_protected_submit_info(){}
+
+S_protected_submit_info(
+	VkBool32 protectedSubmit_)
+	:protectedSubmit(protectedSubmit_)
+{
+}
 
 S_protected_submit_info( VkProtectedSubmitInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_protected_submit_info ) );	}
@@ -9414,13 +11310,33 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_SUBMIT_INFO;
 	 void * pNext = nullptr;
 public:
-	uint32_t waitSemaphoreCount = 0;
-	const VkSemaphore * pWaitSemaphores = VK_NULL_HANDLE;
-	const F_pipeline_stage * pWaitDstStageMask = nullptr;
-	uint32_t commandBufferCount = 0;
-	const VkCommandBuffer * pCommandBuffers = VK_NULL_HANDLE;
-	uint32_t signalSemaphoreCount = 0;
-	const VkSemaphore * pSignalSemaphores = VK_NULL_HANDLE;
+	uint32_t waitSemaphoreCount;
+	const VkSemaphore * pWaitSemaphores;
+	const F_pipeline_stage * pWaitDstStageMask;
+	uint32_t commandBufferCount;
+	const VkCommandBuffer * pCommandBuffers;
+	uint32_t signalSemaphoreCount;
+	const VkSemaphore * pSignalSemaphores;
+
+S_submit_info(){}
+
+S_submit_info(
+	uint32_t waitSemaphoreCount_,
+	const VkSemaphore * pWaitSemaphores_,
+	const F_pipeline_stage * pWaitDstStageMask_,
+	uint32_t commandBufferCount_,
+	const VkCommandBuffer * pCommandBuffers_,
+	uint32_t signalSemaphoreCount_,
+	const VkSemaphore * pSignalSemaphores_)
+	:waitSemaphoreCount(waitSemaphoreCount_)
+	,pWaitSemaphores(pWaitSemaphores_)
+	,pWaitDstStageMask(pWaitDstStageMask_)
+	,commandBufferCount(commandBufferCount_)
+	,pCommandBuffers(pCommandBuffers_)
+	,signalSemaphoreCount(signalSemaphoreCount_)
+	,pSignalSemaphores(pSignalSemaphores_)
+{
+}
 
 S_submit_info( VkSubmitInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_submit_info ) );	}
@@ -9452,13 +11368,15 @@ static_assert(
 (returnedonly)
 */
 struct		S_display_properties_KHR{
-	VkDisplayKHR display = VK_NULL_HANDLE;
-	const char * displayName = nullptr;
-	S_extent_2d physicalDimensions = {};
-	S_extent_2d physicalResolution = {};
+	VkDisplayKHR display;
+	const char * displayName;
+	S_extent_2d physicalDimensions;
+	S_extent_2d physicalResolution;
 	F_surface_transform_KHR supportedTransforms;
-	VkBool32 planeReorderPossible = 0;
-	VkBool32 persistentContent = 0;
+	VkBool32 planeReorderPossible;
+	VkBool32 persistentContent;
+
+S_display_properties_KHR(){}
 
 };
 
@@ -9466,16 +11384,20 @@ struct		S_display_properties_KHR{
 (returnedonly)
 */
 struct		S_display_plane_properties_KHR{
-	VkDisplayKHR currentDisplay = VK_NULL_HANDLE;
-	uint32_t currentStackIndex = 0;
+	VkDisplayKHR currentDisplay;
+	uint32_t currentStackIndex;
+
+S_display_plane_properties_KHR(){}
 
 };
 
 /*	VkDisplayModeParametersKHR
 */
 struct		S_display_mode_parameters_KHR{
-	S_extent_2d visibleRegion = {};
-	uint32_t refreshRate = 0;
+	S_extent_2d visibleRegion;
+	uint32_t refreshRate;
+
+S_display_mode_parameters_KHR(){}
 
 };
 
@@ -9483,8 +11405,10 @@ struct		S_display_mode_parameters_KHR{
 (returnedonly)
 */
 struct		S_display_mode_properties_KHR{
-	VkDisplayModeKHR displayMode = VK_NULL_HANDLE;
-	S_display_mode_parameters_KHR parameters = {};
+	VkDisplayModeKHR displayMode;
+	S_display_mode_parameters_KHR parameters;
+
+S_display_mode_properties_KHR(){}
 
 };
 
@@ -9495,8 +11419,18 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_DISPLAY_MODE_CREATE_INFO_KHR;
 	 void * pNext = nullptr;
 public:
-	VkDisplayModeCreateFlagsKHR flags = 0;
-	S_display_mode_parameters_KHR parameters = {};
+	VkDisplayModeCreateFlagsKHR flags;
+	S_display_mode_parameters_KHR parameters;
+
+S_display_mode_create_info_KHR(){}
+
+S_display_mode_create_info_KHR(
+	VkDisplayModeCreateFlagsKHR flags_,
+	S_display_mode_parameters_KHR parameters_)
+	:flags(flags_)
+	,parameters(parameters_)
+{
+}
 
 S_display_mode_create_info_KHR( VkDisplayModeCreateInfoKHR const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_display_mode_create_info_KHR ) );	}
@@ -9517,14 +11451,16 @@ static_assert(
 */
 struct		S_display_plane_capabilities_KHR{
 	F_display_plane_alpha_KHR supportedAlpha;
-	S_offset_2d minSrcPosition = {};
-	S_offset_2d maxSrcPosition = {};
-	S_extent_2d minSrcExtent = {};
-	S_extent_2d maxSrcExtent = {};
-	S_offset_2d minDstPosition = {};
-	S_offset_2d maxDstPosition = {};
-	S_extent_2d minDstExtent = {};
-	S_extent_2d maxDstExtent = {};
+	S_offset_2d minSrcPosition;
+	S_offset_2d maxSrcPosition;
+	S_extent_2d minSrcExtent;
+	S_extent_2d maxSrcExtent;
+	S_offset_2d minDstPosition;
+	S_offset_2d maxDstPosition;
+	S_extent_2d minDstExtent;
+	S_extent_2d maxDstExtent;
+
+S_display_plane_capabilities_KHR(){}
 
 };
 
@@ -9535,14 +11471,36 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_DISPLAY_SURFACE_CREATE_INFO_KHR;
 	 void * pNext = nullptr;
 public:
-	VkDisplaySurfaceCreateFlagsKHR flags = 0;
-	VkDisplayModeKHR displayMode = VK_NULL_HANDLE;
-	uint32_t planeIndex = 0;
-	uint32_t planeStackIndex = 0;
+	VkDisplaySurfaceCreateFlagsKHR flags;
+	VkDisplayModeKHR displayMode;
+	uint32_t planeIndex;
+	uint32_t planeStackIndex;
 	F_surface_transform_KHR transform;
-	float globalAlpha = 0;
+	float globalAlpha;
 	F_display_plane_alpha_KHR alphaMode;
-	S_extent_2d imageExtent = {};
+	S_extent_2d imageExtent;
+
+S_display_surface_create_info_KHR(){}
+
+S_display_surface_create_info_KHR(
+	VkDisplaySurfaceCreateFlagsKHR flags_,
+	VkDisplayModeKHR displayMode_,
+	uint32_t planeIndex_,
+	uint32_t planeStackIndex_,
+	F_surface_transform_KHR transform_,
+	float globalAlpha_,
+	F_display_plane_alpha_KHR alphaMode_,
+	S_extent_2d imageExtent_)
+	:flags(flags_)
+	,displayMode(displayMode_)
+	,planeIndex(planeIndex_)
+	,planeStackIndex(planeStackIndex_)
+	,transform(transform_)
+	,globalAlpha(globalAlpha_)
+	,alphaMode(alphaMode_)
+	,imageExtent(imageExtent_)
+{
+}
 
 S_display_surface_create_info_KHR( VkDisplaySurfaceCreateInfoKHR const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_display_surface_create_info_KHR ) );	}
@@ -9566,9 +11524,21 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_DISPLAY_PRESENT_INFO_KHR;
 	 void * pNext = nullptr;
 public:
-	S_rect_2d srcRect = {};
-	S_rect_2d dstRect = {};
-	VkBool32 persistent = 0;
+	S_rect_2d srcRect;
+	S_rect_2d dstRect;
+	VkBool32 persistent;
+
+S_display_present_info_KHR(){}
+
+S_display_present_info_KHR(
+	S_rect_2d srcRect_,
+	S_rect_2d dstRect_,
+	VkBool32 persistent_)
+	:srcRect(srcRect_)
+	,dstRect(dstRect_)
+	,persistent(persistent_)
+{
+}
 
 S_display_present_info_KHR( VkDisplayPresentInfoKHR const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_display_present_info_KHR ) );	}
@@ -9590,16 +11560,18 @@ static_assert(
 (returnedonly)
 */
 struct		S_surface_capabilities_KHR{
-	uint32_t minImageCount = 0;
-	uint32_t maxImageCount = 0;
-	S_extent_2d currentExtent = {};
-	S_extent_2d minImageExtent = {};
-	S_extent_2d maxImageExtent = {};
-	uint32_t maxImageArrayLayers = 0;
+	uint32_t minImageCount;
+	uint32_t maxImageCount;
+	S_extent_2d currentExtent;
+	S_extent_2d minImageExtent;
+	S_extent_2d maxImageExtent;
+	uint32_t maxImageArrayLayers;
 	F_surface_transform_KHR supportedTransforms;
 	F_surface_transform_KHR currentTransform;
 	F_composite_alpha_KHR supportedCompositeAlpha;
 	F_image_usage supportedUsageFlags;
+
+S_surface_capabilities_KHR(){}
 
 };
 
@@ -9611,8 +11583,18 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_ANDROID_SURFACE_CREATE_INFO_KHR;
 	 void * pNext = nullptr;
 public:
-	VkAndroidSurfaceCreateFlagsKHR flags = 0;
-	struct ANativeWindow * window = nullptr;
+	VkAndroidSurfaceCreateFlagsKHR flags;
+	struct ANativeWindow * window;
+
+S_android_surface_create_info_KHR(){}
+
+S_android_surface_create_info_KHR(
+	VkAndroidSurfaceCreateFlagsKHR flags_,
+	struct ANativeWindow * window_)
+	:flags(flags_)
+	,window(window_)
+{
+}
 
 S_android_surface_create_info_KHR( VkAndroidSurfaceCreateInfoKHR const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_android_surface_create_info_KHR ) );	}
@@ -9637,9 +11619,21 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_MIR_SURFACE_CREATE_INFO_KHR;
 	 void * pNext = nullptr;
 public:
-	VkMirSurfaceCreateFlagsKHR flags = 0;
-	MirConnection * connection = nullptr;
-	MirSurface * mirSurface = nullptr;
+	VkMirSurfaceCreateFlagsKHR flags;
+	MirConnection * connection;
+	MirSurface * mirSurface;
+
+S_mir_surface_create_info_KHR(){}
+
+S_mir_surface_create_info_KHR(
+	VkMirSurfaceCreateFlagsKHR flags_,
+	MirConnection * connection_,
+	MirSurface * mirSurface_)
+	:flags(flags_)
+	,connection(connection_)
+	,mirSurface(mirSurface_)
+{
+}
 
 S_mir_surface_create_info_KHR( VkMirSurfaceCreateInfoKHR const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_mir_surface_create_info_KHR ) );	}
@@ -9664,8 +11658,18 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_VI_SURFACE_CREATE_INFO_NN;
 	 void * pNext = nullptr;
 public:
-	VkViSurfaceCreateFlagsNN flags = 0;
-	void * window = nullptr;
+	VkViSurfaceCreateFlagsNN flags;
+	void * window;
+
+S_vi_surface_create_info_NN(){}
+
+S_vi_surface_create_info_NN(
+	VkViSurfaceCreateFlagsNN flags_,
+	void * window_)
+	:flags(flags_)
+	,window(window_)
+{
+}
 
 S_vi_surface_create_info_NN( VkViSurfaceCreateInfoNN const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_vi_surface_create_info_NN ) );	}
@@ -9690,9 +11694,21 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_WAYLAND_SURFACE_CREATE_INFO_KHR;
 	 void * pNext = nullptr;
 public:
-	VkWaylandSurfaceCreateFlagsKHR flags = 0;
-	struct wl_display * display = nullptr;
-	struct wl_surface * surface = nullptr;
+	VkWaylandSurfaceCreateFlagsKHR flags;
+	struct wl_display * display;
+	struct wl_surface * surface;
+
+S_wayland_surface_create_info_KHR(){}
+
+S_wayland_surface_create_info_KHR(
+	VkWaylandSurfaceCreateFlagsKHR flags_,
+	struct wl_display * display_,
+	struct wl_surface * surface_)
+	:flags(flags_)
+	,display(display_)
+	,surface(surface_)
+{
+}
 
 S_wayland_surface_create_info_KHR( VkWaylandSurfaceCreateInfoKHR const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_wayland_surface_create_info_KHR ) );	}
@@ -9717,9 +11733,21 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_WIN32_SURFACE_CREATE_INFO_KHR;
 	 void * pNext = nullptr;
 public:
-	VkWin32SurfaceCreateFlagsKHR flags = 0;
-	HINSTANCE hinstance = 0;
-	HWND hwnd = 0;
+	VkWin32SurfaceCreateFlagsKHR flags;
+	HINSTANCE hinstance;
+	HWND hwnd;
+
+S_win32_surface_create_info_KHR(){}
+
+S_win32_surface_create_info_KHR(
+	VkWin32SurfaceCreateFlagsKHR flags_,
+	HINSTANCE hinstance_,
+	HWND hwnd_)
+	:flags(flags_)
+	,hinstance(hinstance_)
+	,hwnd(hwnd_)
+{
+}
 
 S_win32_surface_create_info_KHR( VkWin32SurfaceCreateInfoKHR const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_win32_surface_create_info_KHR ) );	}
@@ -9744,9 +11772,21 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_XLIB_SURFACE_CREATE_INFO_KHR;
 	 void * pNext = nullptr;
 public:
-	VkXlibSurfaceCreateFlagsKHR flags = 0;
-	Display * dpy = nullptr;
-	Window window = 0;
+	VkXlibSurfaceCreateFlagsKHR flags;
+	Display * dpy;
+	Window window;
+
+S_xlib_surface_create_info_KHR(){}
+
+S_xlib_surface_create_info_KHR(
+	VkXlibSurfaceCreateFlagsKHR flags_,
+	Display * dpy_,
+	Window window_)
+	:flags(flags_)
+	,dpy(dpy_)
+	,window(window_)
+{
+}
 
 S_xlib_surface_create_info_KHR( VkXlibSurfaceCreateInfoKHR const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_xlib_surface_create_info_KHR ) );	}
@@ -9771,9 +11811,21 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_XCB_SURFACE_CREATE_INFO_KHR;
 	 void * pNext = nullptr;
 public:
-	VkXcbSurfaceCreateFlagsKHR flags = 0;
-	xcb_connection_t * connection = nullptr;
-	xcb_window_t window = 0;
+	VkXcbSurfaceCreateFlagsKHR flags;
+	xcb_connection_t * connection;
+	xcb_window_t window;
+
+S_xcb_surface_create_info_KHR(){}
+
+S_xcb_surface_create_info_KHR(
+	VkXcbSurfaceCreateFlagsKHR flags_,
+	xcb_connection_t * connection_,
+	xcb_window_t window_)
+	:flags(flags_)
+	,connection(connection_)
+	,window(window_)
+{
+}
 
 S_xcb_surface_create_info_KHR( VkXcbSurfaceCreateInfoKHR const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_xcb_surface_create_info_KHR ) );	}
@@ -9794,8 +11846,10 @@ static_assert(
 (returnedonly)
 */
 struct		S_surface_format_KHR{
-	E_format format = E_format::e_undefined;
-	E_color_space_KHR colorSpace = E_color_space_KHR::e_srgb_nonlinear_khr;
+	E_format format;
+	E_color_space_KHR colorSpace;
+
+S_surface_format_KHR(){}
 
 };
 
@@ -9808,6 +11862,14 @@ private:
 	 void * pNext = nullptr;
 public:
 	F_surface_counter_EXT surfaceCounters;
+
+S_swapchain_counter_create_info_EXT(){}
+
+S_swapchain_counter_create_info_EXT(
+	F_surface_counter_EXT surfaceCounters_)
+	:surfaceCounters(surfaceCounters_)
+{
+}
 
 S_swapchain_counter_create_info_EXT( VkSwapchainCounterCreateInfoEXT const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_swapchain_counter_create_info_EXT ) );	}
@@ -9834,6 +11896,14 @@ private:
 	 void * pNext = nullptr;
 public:
 	F_device_group_present_mode_KHR modes;
+
+S_device_group_swapchain_create_info_KHR(){}
+
+S_device_group_swapchain_create_info_KHR(
+	F_device_group_present_mode_KHR modes_)
+	:modes(modes_)
+{
+}
 
 S_device_group_swapchain_create_info_KHR( VkDeviceGroupSwapchainCreateInfoKHR const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_device_group_swapchain_create_info_KHR ) );	}
@@ -9862,21 +11932,59 @@ private:
 	 void * pNext = nullptr;
 public:
 	F_swapchain_create_KHR flags;
-	VkSurfaceKHR surface = VK_NULL_HANDLE;
-	uint32_t minImageCount = 0;
-	E_format imageFormat = E_format::e_undefined;
-	E_color_space_KHR imageColorSpace = E_color_space_KHR::e_srgb_nonlinear_khr;
-	S_extent_2d imageExtent = {};
-	uint32_t imageArrayLayers = 0;
+	VkSurfaceKHR surface;
+	uint32_t minImageCount;
+	E_format imageFormat;
+	E_color_space_KHR imageColorSpace;
+	S_extent_2d imageExtent;
+	uint32_t imageArrayLayers;
 	F_image_usage imageUsage;
-	E_sharing_mode imageSharingMode = E_sharing_mode::e_exclusive;
-	uint32_t queueFamilyIndexCount = 0;
-	const uint32_t * pQueueFamilyIndices = nullptr;
+	E_sharing_mode imageSharingMode;
+	uint32_t queueFamilyIndexCount;
+	const uint32_t * pQueueFamilyIndices;
 	F_surface_transform_KHR preTransform;
 	F_composite_alpha_KHR compositeAlpha;
-	E_present_mode_KHR presentMode = E_present_mode_KHR::e_immediate_khr;
-	VkBool32 clipped = 0;
-	VkSwapchainKHR oldSwapchain = VK_NULL_HANDLE;
+	E_present_mode_KHR presentMode;
+	VkBool32 clipped;
+	VkSwapchainKHR oldSwapchain;
+
+S_swapchain_create_info_KHR(){}
+
+S_swapchain_create_info_KHR(
+	F_swapchain_create_KHR flags_,
+	VkSurfaceKHR surface_,
+	uint32_t minImageCount_,
+	E_format imageFormat_,
+	E_color_space_KHR imageColorSpace_,
+	S_extent_2d imageExtent_,
+	uint32_t imageArrayLayers_,
+	F_image_usage imageUsage_,
+	E_sharing_mode imageSharingMode_,
+	uint32_t queueFamilyIndexCount_,
+	const uint32_t * pQueueFamilyIndices_,
+	F_surface_transform_KHR preTransform_,
+	F_composite_alpha_KHR compositeAlpha_,
+	E_present_mode_KHR presentMode_,
+	VkBool32 clipped_,
+	VkSwapchainKHR oldSwapchain_)
+	:flags(flags_)
+	,surface(surface_)
+	,minImageCount(minImageCount_)
+	,imageFormat(imageFormat_)
+	,imageColorSpace(imageColorSpace_)
+	,imageExtent(imageExtent_)
+	,imageArrayLayers(imageArrayLayers_)
+	,imageUsage(imageUsage_)
+	,imageSharingMode(imageSharingMode_)
+	,queueFamilyIndexCount(queueFamilyIndexCount_)
+	,pQueueFamilyIndices(pQueueFamilyIndices_)
+	,preTransform(preTransform_)
+	,compositeAlpha(compositeAlpha_)
+	,presentMode(presentMode_)
+	,clipped(clipped_)
+	,oldSwapchain(oldSwapchain_)
+{
+}
 
 S_swapchain_create_info_KHR( VkSwapchainCreateInfoKHR const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_swapchain_create_info_KHR ) );	}
@@ -9898,17 +12006,21 @@ static_assert(
 /*	VkRectLayerKHR
 */
 struct		S_rect_layer_KHR{
-	S_offset_2d offset = {};
-	S_extent_2d extent = {};
-	uint32_t layer = 0;
+	S_offset_2d offset;
+	S_extent_2d extent;
+	uint32_t layer;
+
+S_rect_layer_KHR(){}
 
 };
 
 /*	VkPresentRegionKHR
 */
 struct		S_present_region_KHR{
-	uint32_t rectangleCount = 0;
-	const S_rect_layer_KHR * pRectangles = nullptr;
+	uint32_t rectangleCount;
+	const S_rect_layer_KHR * pRectangles;
+
+S_present_region_KHR(){}
 
 };
 
@@ -9920,8 +12032,18 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_PRESENT_REGIONS_KHR;
 	 void * pNext = nullptr;
 public:
-	uint32_t swapchainCount = 0;
-	const S_present_region_KHR * pRegions = nullptr;
+	uint32_t swapchainCount;
+	const S_present_region_KHR * pRegions;
+
+S_present_regions_KHR(){}
+
+S_present_regions_KHR(
+	uint32_t swapchainCount_,
+	const S_present_region_KHR * pRegions_)
+	:swapchainCount(swapchainCount_)
+	,pRegions(pRegions_)
+{
+}
 
 S_present_regions_KHR( VkPresentRegionsKHR const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_present_regions_KHR ) );	}
@@ -9947,9 +12069,21 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_DEVICE_GROUP_PRESENT_INFO_KHR;
 	 void * pNext = nullptr;
 public:
-	uint32_t swapchainCount = 0;
-	const uint32_t * pDeviceMasks = nullptr;
+	uint32_t swapchainCount;
+	const uint32_t * pDeviceMasks;
 	F_device_group_present_mode_KHR mode;
+
+S_device_group_present_info_KHR(){}
+
+S_device_group_present_info_KHR(
+	uint32_t swapchainCount_,
+	const uint32_t * pDeviceMasks_,
+	F_device_group_present_mode_KHR mode_)
+	:swapchainCount(swapchainCount_)
+	,pDeviceMasks(pDeviceMasks_)
+	,mode(mode_)
+{
+}
 
 S_device_group_present_info_KHR( VkDeviceGroupPresentInfoKHR const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_device_group_present_info_KHR ) );	}
@@ -9970,8 +12104,10 @@ static_assert(
 /*	VkPresentTimeGOOGLE
 */
 struct		S_present_time_GOOGLE{
-	uint32_t presentID = 0;
-	uint64_t desiredPresentTime = 0;
+	uint32_t presentID;
+	uint64_t desiredPresentTime;
+
+S_present_time_GOOGLE(){}
 
 };
 
@@ -9983,8 +12119,18 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_PRESENT_TIMES_INFO_GOOGLE;
 	 void * pNext = nullptr;
 public:
-	uint32_t swapchainCount = 0;
-	const S_present_time_GOOGLE * pTimes = nullptr;
+	uint32_t swapchainCount;
+	const S_present_time_GOOGLE * pTimes;
+
+S_present_times_info_GOOGLE(){}
+
+S_present_times_info_GOOGLE(
+	uint32_t swapchainCount_,
+	const S_present_time_GOOGLE * pTimes_)
+	:swapchainCount(swapchainCount_)
+	,pTimes(pTimes_)
+{
+}
 
 S_present_times_info_GOOGLE( VkPresentTimesInfoGOOGLE const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_present_times_info_GOOGLE ) );	}
@@ -10014,12 +12160,30 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_PRESENT_INFO_KHR;
 	 void * pNext = nullptr;
 public:
-	uint32_t waitSemaphoreCount = 0;
-	const VkSemaphore * pWaitSemaphores = VK_NULL_HANDLE;
-	uint32_t swapchainCount = 0;
-	const VkSwapchainKHR * pSwapchains = VK_NULL_HANDLE;
-	const uint32_t * pImageIndices = nullptr;
-	E_result * pResults = nullptr;
+	uint32_t waitSemaphoreCount;
+	const VkSemaphore * pWaitSemaphores;
+	uint32_t swapchainCount;
+	const VkSwapchainKHR * pSwapchains;
+	const uint32_t * pImageIndices;
+	E_result * pResults;
+
+S_present_info_KHR(){}
+
+S_present_info_KHR(
+	uint32_t waitSemaphoreCount_,
+	const VkSemaphore * pWaitSemaphores_,
+	uint32_t swapchainCount_,
+	const VkSwapchainKHR * pSwapchains_,
+	const uint32_t * pImageIndices_,
+	E_result * pResults_)
+	:waitSemaphoreCount(waitSemaphoreCount_)
+	,pWaitSemaphores(pWaitSemaphores_)
+	,swapchainCount(swapchainCount_)
+	,pSwapchains(pSwapchains_)
+	,pImageIndices(pImageIndices_)
+	,pResults(pResults_)
+{
+}
 
 S_present_info_KHR( VkPresentInfoKHR const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_present_info_KHR ) );	}
@@ -10047,9 +12211,21 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_DEBUG_MARKER_OBJECT_NAME_INFO_EXT;
 	 void * pNext = nullptr;
 public:
-	E_debug_report_object_type_EXT objectType = E_debug_report_object_type_EXT::e_unknown_ext;
-	uint64_t object = 0;
-	const char * pObjectName = nullptr;
+	E_debug_report_object_type_EXT objectType;
+	uint64_t object;
+	const char * pObjectName;
+
+S_debug_marker_object_name_info_EXT(){}
+
+S_debug_marker_object_name_info_EXT(
+	E_debug_report_object_type_EXT objectType_,
+	uint64_t object_,
+	const char * pObjectName_)
+	:objectType(objectType_)
+	,object(object_)
+	,pObjectName(pObjectName_)
+{
+}
 
 S_debug_marker_object_name_info_EXT( VkDebugMarkerObjectNameInfoEXT const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_debug_marker_object_name_info_EXT ) );	}
@@ -10072,11 +12248,27 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_DEBUG_MARKER_OBJECT_TAG_INFO_EXT;
 	 void * pNext = nullptr;
 public:
-	E_debug_report_object_type_EXT objectType = E_debug_report_object_type_EXT::e_unknown_ext;
-	uint64_t object = 0;
-	uint64_t tagName = 0;
-	size_t tagSize = 0;
-	const void * pTag = nullptr;
+	E_debug_report_object_type_EXT objectType;
+	uint64_t object;
+	uint64_t tagName;
+	size_t tagSize;
+	const void * pTag;
+
+S_debug_marker_object_tag_info_EXT(){}
+
+S_debug_marker_object_tag_info_EXT(
+	E_debug_report_object_type_EXT objectType_,
+	uint64_t object_,
+	uint64_t tagName_,
+	size_t tagSize_,
+	const void * pTag_)
+	:objectType(objectType_)
+	,object(object_)
+	,tagName(tagName_)
+	,tagSize(tagSize_)
+	,pTag(pTag_)
+{
+}
 
 S_debug_marker_object_tag_info_EXT( VkDebugMarkerObjectTagInfoEXT const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_debug_marker_object_tag_info_EXT ) );	}
@@ -10099,8 +12291,18 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_DEBUG_MARKER_MARKER_INFO_EXT;
 	 void * pNext = nullptr;
 public:
-	const char * pMarkerName = nullptr;
-	float color[4] = {};
+	const char * pMarkerName;
+	float color[4];
+
+S_debug_marker_marker_info_EXT(){}
+
+S_debug_marker_marker_info_EXT(
+	const char * pMarkerName_,
+	float color_[4])
+	:pMarkerName(pMarkerName_)
+{
+memcpy(color,color_,sizeof(color) );
+}
 
 S_debug_marker_marker_info_EXT( VkDebugMarkerMarkerInfoEXT const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_debug_marker_marker_info_EXT ) );	}
@@ -10120,10 +12322,12 @@ static_assert(
 (returnedonly)
 */
 struct		S_external_image_format_properties_NV{
-	S_image_format_properties imageFormatProperties = {};
+	S_image_format_properties imageFormatProperties;
 	F_external_memory_feature_NV externalMemoryFeatures;
 	F_external_memory_handle_type_NV exportFromImportedHandleTypes;
 	F_external_memory_handle_type_NV compatibleHandleTypes;
+
+S_external_image_format_properties_NV(){}
 
 };
 
@@ -10134,7 +12338,15 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_DEVICE_GENERATED_COMMANDS_FEATURES_NVX;
 	 void * pNext = nullptr;
 public:
-	VkBool32 computeBindingPointSupport = 0;
+	VkBool32 computeBindingPointSupport;
+
+S_device_generated_commands_features_NVX(){}
+
+S_device_generated_commands_features_NVX(
+	VkBool32 computeBindingPointSupport_)
+	:computeBindingPointSupport(computeBindingPointSupport_)
+{
+}
 
 S_device_generated_commands_features_NVX( VkDeviceGeneratedCommandsFeaturesNVX const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_device_generated_commands_features_NVX ) );	}
@@ -10157,11 +12369,27 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_DEVICE_GENERATED_COMMANDS_LIMITS_NVX;
 	 void * pNext = nullptr;
 public:
-	uint32_t maxIndirectCommandsLayoutTokenCount = 0;
-	uint32_t maxObjectEntryCounts = 0;
-	uint32_t minSequenceCountBufferOffsetAlignment = 0;
-	uint32_t minSequenceIndexBufferOffsetAlignment = 0;
-	uint32_t minCommandsTokenBufferOffsetAlignment = 0;
+	uint32_t maxIndirectCommandsLayoutTokenCount;
+	uint32_t maxObjectEntryCounts;
+	uint32_t minSequenceCountBufferOffsetAlignment;
+	uint32_t minSequenceIndexBufferOffsetAlignment;
+	uint32_t minCommandsTokenBufferOffsetAlignment;
+
+S_device_generated_commands_limits_NVX(){}
+
+S_device_generated_commands_limits_NVX(
+	uint32_t maxIndirectCommandsLayoutTokenCount_,
+	uint32_t maxObjectEntryCounts_,
+	uint32_t minSequenceCountBufferOffsetAlignment_,
+	uint32_t minSequenceIndexBufferOffsetAlignment_,
+	uint32_t minCommandsTokenBufferOffsetAlignment_)
+	:maxIndirectCommandsLayoutTokenCount(maxIndirectCommandsLayoutTokenCount_)
+	,maxObjectEntryCounts(maxObjectEntryCounts_)
+	,minSequenceCountBufferOffsetAlignment(minSequenceCountBufferOffsetAlignment_)
+	,minSequenceIndexBufferOffsetAlignment(minSequenceIndexBufferOffsetAlignment_)
+	,minCommandsTokenBufferOffsetAlignment(minCommandsTokenBufferOffsetAlignment_)
+{
+}
 
 S_device_generated_commands_limits_NVX( VkDeviceGeneratedCommandsLimitsNVX const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_device_generated_commands_limits_NVX ) );	}
@@ -10180,19 +12408,23 @@ static_assert(
 /*	VkIndirectCommandsTokenNVX
 */
 struct		S_indirect_commands_token_NVX{
-	E_indirect_commands_token_type_NVX tokenType = E_indirect_commands_token_type_NVX::e_pipeline_nvx;
-	VkBuffer buffer = VK_NULL_HANDLE;
-	VkDeviceSize offset = 0;
+	E_indirect_commands_token_type_NVX tokenType;
+	VkBuffer buffer;
+	VkDeviceSize offset;
+
+S_indirect_commands_token_NVX(){}
 
 };
 
 /*	VkIndirectCommandsLayoutTokenNVX
 */
 struct		S_indirect_commands_layout_token_NVX{
-	E_indirect_commands_token_type_NVX tokenType = E_indirect_commands_token_type_NVX::e_pipeline_nvx;
-	uint32_t bindingUnit = 0;
-	uint32_t dynamicCount = 0;
-	uint32_t divisor = 0;
+	E_indirect_commands_token_type_NVX tokenType;
+	uint32_t bindingUnit;
+	uint32_t dynamicCount;
+	uint32_t divisor;
+
+S_indirect_commands_layout_token_NVX(){}
 
 };
 
@@ -10203,10 +12435,24 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_INDIRECT_COMMANDS_LAYOUT_CREATE_INFO_NVX;
 	 void * pNext = nullptr;
 public:
-	E_pipeline_bind_point pipelineBindPoint = E_pipeline_bind_point::e_graphics;
+	E_pipeline_bind_point pipelineBindPoint;
 	F_indirect_commands_layout_usage_NVX flags;
-	uint32_t tokenCount = 0;
-	const S_indirect_commands_layout_token_NVX * pTokens = nullptr;
+	uint32_t tokenCount;
+	const S_indirect_commands_layout_token_NVX * pTokens;
+
+S_indirect_commands_layout_create_info_NVX(){}
+
+S_indirect_commands_layout_create_info_NVX(
+	E_pipeline_bind_point pipelineBindPoint_,
+	F_indirect_commands_layout_usage_NVX flags_,
+	uint32_t tokenCount_,
+	const S_indirect_commands_layout_token_NVX * pTokens_)
+	:pipelineBindPoint(pipelineBindPoint_)
+	,flags(flags_)
+	,tokenCount(tokenCount_)
+	,pTokens(pTokens_)
+{
+}
 
 S_indirect_commands_layout_create_info_NVX( VkIndirectCommandsLayoutCreateInfoNVX const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_indirect_commands_layout_create_info_NVX ) );	}
@@ -10229,16 +12475,42 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_CMD_PROCESS_COMMANDS_INFO_NVX;
 	 void * pNext = nullptr;
 public:
-	VkObjectTableNVX objectTable = VK_NULL_HANDLE;
-	VkIndirectCommandsLayoutNVX indirectCommandsLayout = VK_NULL_HANDLE;
-	uint32_t indirectCommandsTokenCount = 0;
-	const S_indirect_commands_token_NVX * pIndirectCommandsTokens = nullptr;
-	uint32_t maxSequencesCount = 0;
-	VkCommandBuffer targetCommandBuffer = VK_NULL_HANDLE;
-	VkBuffer sequencesCountBuffer = VK_NULL_HANDLE;
-	VkDeviceSize sequencesCountOffset = 0;
-	VkBuffer sequencesIndexBuffer = VK_NULL_HANDLE;
-	VkDeviceSize sequencesIndexOffset = 0;
+	VkObjectTableNVX objectTable;
+	VkIndirectCommandsLayoutNVX indirectCommandsLayout;
+	uint32_t indirectCommandsTokenCount;
+	const S_indirect_commands_token_NVX * pIndirectCommandsTokens;
+	uint32_t maxSequencesCount;
+	VkCommandBuffer targetCommandBuffer;
+	VkBuffer sequencesCountBuffer;
+	VkDeviceSize sequencesCountOffset;
+	VkBuffer sequencesIndexBuffer;
+	VkDeviceSize sequencesIndexOffset;
+
+S_cmd_process_commands_info_NVX(){}
+
+S_cmd_process_commands_info_NVX(
+	VkObjectTableNVX objectTable_,
+	VkIndirectCommandsLayoutNVX indirectCommandsLayout_,
+	uint32_t indirectCommandsTokenCount_,
+	const S_indirect_commands_token_NVX * pIndirectCommandsTokens_,
+	uint32_t maxSequencesCount_,
+	VkCommandBuffer targetCommandBuffer_,
+	VkBuffer sequencesCountBuffer_,
+	VkDeviceSize sequencesCountOffset_,
+	VkBuffer sequencesIndexBuffer_,
+	VkDeviceSize sequencesIndexOffset_)
+	:objectTable(objectTable_)
+	,indirectCommandsLayout(indirectCommandsLayout_)
+	,indirectCommandsTokenCount(indirectCommandsTokenCount_)
+	,pIndirectCommandsTokens(pIndirectCommandsTokens_)
+	,maxSequencesCount(maxSequencesCount_)
+	,targetCommandBuffer(targetCommandBuffer_)
+	,sequencesCountBuffer(sequencesCountBuffer_)
+	,sequencesCountOffset(sequencesCountOffset_)
+	,sequencesIndexBuffer(sequencesIndexBuffer_)
+	,sequencesIndexOffset(sequencesIndexOffset_)
+{
+}
 
 S_cmd_process_commands_info_NVX( VkCmdProcessCommandsInfoNVX const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_cmd_process_commands_info_NVX ) );	}
@@ -10261,9 +12533,21 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_CMD_RESERVE_SPACE_FOR_COMMANDS_INFO_NVX;
 	 void * pNext = nullptr;
 public:
-	VkObjectTableNVX objectTable = VK_NULL_HANDLE;
-	VkIndirectCommandsLayoutNVX indirectCommandsLayout = VK_NULL_HANDLE;
-	uint32_t maxSequencesCount = 0;
+	VkObjectTableNVX objectTable;
+	VkIndirectCommandsLayoutNVX indirectCommandsLayout;
+	uint32_t maxSequencesCount;
+
+S_cmd_reserve_space_for_commands_info_NVX(){}
+
+S_cmd_reserve_space_for_commands_info_NVX(
+	VkObjectTableNVX objectTable_,
+	VkIndirectCommandsLayoutNVX indirectCommandsLayout_,
+	uint32_t maxSequencesCount_)
+	:objectTable(objectTable_)
+	,indirectCommandsLayout(indirectCommandsLayout_)
+	,maxSequencesCount(maxSequencesCount_)
+{
+}
 
 S_cmd_reserve_space_for_commands_info_NVX( VkCmdReserveSpaceForCommandsInfoNVX const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_cmd_reserve_space_for_commands_info_NVX ) );	}
@@ -10286,15 +12570,39 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_OBJECT_TABLE_CREATE_INFO_NVX;
 	 void * pNext = nullptr;
 public:
-	uint32_t objectCount = 0;
-	const E_object_entry_type_NVX * pObjectEntryTypes = nullptr;
-	const uint32_t * pObjectEntryCounts = nullptr;
-	const F_object_entry_usage_NVX * pObjectEntryUsageFlags = nullptr;
-	uint32_t maxUniformBuffersPerDescriptor = 0;
-	uint32_t maxStorageBuffersPerDescriptor = 0;
-	uint32_t maxStorageImagesPerDescriptor = 0;
-	uint32_t maxSampledImagesPerDescriptor = 0;
-	uint32_t maxPipelineLayouts = 0;
+	uint32_t objectCount;
+	const E_object_entry_type_NVX * pObjectEntryTypes;
+	const uint32_t * pObjectEntryCounts;
+	const F_object_entry_usage_NVX * pObjectEntryUsageFlags;
+	uint32_t maxUniformBuffersPerDescriptor;
+	uint32_t maxStorageBuffersPerDescriptor;
+	uint32_t maxStorageImagesPerDescriptor;
+	uint32_t maxSampledImagesPerDescriptor;
+	uint32_t maxPipelineLayouts;
+
+S_object_table_create_info_NVX(){}
+
+S_object_table_create_info_NVX(
+	uint32_t objectCount_,
+	const E_object_entry_type_NVX * pObjectEntryTypes_,
+	const uint32_t * pObjectEntryCounts_,
+	const F_object_entry_usage_NVX * pObjectEntryUsageFlags_,
+	uint32_t maxUniformBuffersPerDescriptor_,
+	uint32_t maxStorageBuffersPerDescriptor_,
+	uint32_t maxStorageImagesPerDescriptor_,
+	uint32_t maxSampledImagesPerDescriptor_,
+	uint32_t maxPipelineLayouts_)
+	:objectCount(objectCount_)
+	,pObjectEntryTypes(pObjectEntryTypes_)
+	,pObjectEntryCounts(pObjectEntryCounts_)
+	,pObjectEntryUsageFlags(pObjectEntryUsageFlags_)
+	,maxUniformBuffersPerDescriptor(maxUniformBuffersPerDescriptor_)
+	,maxStorageBuffersPerDescriptor(maxStorageBuffersPerDescriptor_)
+	,maxStorageImagesPerDescriptor(maxStorageImagesPerDescriptor_)
+	,maxSampledImagesPerDescriptor(maxSampledImagesPerDescriptor_)
+	,maxPipelineLayouts(maxPipelineLayouts_)
+{
+}
 
 S_object_table_create_info_NVX( VkObjectTableCreateInfoNVX const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_object_table_create_info_NVX ) );	}
@@ -10313,56 +12621,68 @@ static_assert(
 /*	VkObjectTableEntryNVX
 */
 struct		S_object_table_entry_NVX{
-	E_object_entry_type_NVX type = E_object_entry_type_NVX::e_descriptor_set_nvx;
+	E_object_entry_type_NVX type;
 	F_object_entry_usage_NVX flags;
+
+S_object_table_entry_NVX(){}
 
 };
 
 /*	VkObjectTablePipelineEntryNVX
 */
 struct		S_object_table_pipeline_entry_NVX{
-	E_object_entry_type_NVX type = E_object_entry_type_NVX::e_descriptor_set_nvx;
+	E_object_entry_type_NVX type;
 	F_object_entry_usage_NVX flags;
-	VkPipeline pipeline = VK_NULL_HANDLE;
+	VkPipeline pipeline;
+
+S_object_table_pipeline_entry_NVX(){}
 
 };
 
 /*	VkObjectTableDescriptorSetEntryNVX
 */
 struct		S_object_table_descriptor_set_entry_NVX{
-	E_object_entry_type_NVX type = E_object_entry_type_NVX::e_descriptor_set_nvx;
+	E_object_entry_type_NVX type;
 	F_object_entry_usage_NVX flags;
-	VkPipelineLayout pipelineLayout = VK_NULL_HANDLE;
-	VkDescriptorSet descriptorSet = VK_NULL_HANDLE;
+	VkPipelineLayout pipelineLayout;
+	VkDescriptorSet descriptorSet;
+
+S_object_table_descriptor_set_entry_NVX(){}
 
 };
 
 /*	VkObjectTableVertexBufferEntryNVX
 */
 struct		S_object_table_vertex_buffer_entry_NVX{
-	E_object_entry_type_NVX type = E_object_entry_type_NVX::e_descriptor_set_nvx;
+	E_object_entry_type_NVX type;
 	F_object_entry_usage_NVX flags;
-	VkBuffer buffer = VK_NULL_HANDLE;
+	VkBuffer buffer;
+
+S_object_table_vertex_buffer_entry_NVX(){}
 
 };
 
 /*	VkObjectTableIndexBufferEntryNVX
 */
 struct		S_object_table_index_buffer_entry_NVX{
-	E_object_entry_type_NVX type = E_object_entry_type_NVX::e_descriptor_set_nvx;
+	E_object_entry_type_NVX type;
 	F_object_entry_usage_NVX flags;
-	VkBuffer buffer = VK_NULL_HANDLE;
-	E_index_type indexType = E_index_type::e_uint16;
+	VkBuffer buffer;
+	E_index_type indexType;
+
+S_object_table_index_buffer_entry_NVX(){}
 
 };
 
 /*	VkObjectTablePushConstantEntryNVX
 */
 struct		S_object_table_push_constant_entry_NVX{
-	E_object_entry_type_NVX type = E_object_entry_type_NVX::e_descriptor_set_nvx;
+	E_object_entry_type_NVX type;
 	F_object_entry_usage_NVX flags;
-	VkPipelineLayout pipelineLayout = VK_NULL_HANDLE;
+	VkPipelineLayout pipelineLayout;
 	F_shader_stage stageFlags;
+
+S_object_table_push_constant_entry_NVX(){}
 
 };
 
@@ -10374,7 +12694,15 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PUSH_DESCRIPTOR_PROPERTIES_KHR;
 	void * pNext = nullptr;
 public:
-	uint32_t maxPushDescriptors = 0;
+	uint32_t maxPushDescriptors;
+
+S_physical_device_push_descriptor_properties_KHR(){}
+
+S_physical_device_push_descriptor_properties_KHR(
+	uint32_t maxPushDescriptors_)
+	:maxPushDescriptors(maxPushDescriptors_)
+{
+}
 
 S_physical_device_push_descriptor_properties_KHR( VkPhysicalDevicePushDescriptorPropertiesKHR const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_physical_device_push_descriptor_properties_KHR ) );	}
@@ -10395,10 +12723,12 @@ static_assert(
 /*	VkConformanceVersionKHR
 */
 struct		S_conformance_version_KHR{
-	uint8_t major = 0;
-	uint8_t minor = 0;
-	uint8_t subminor = 0;
-	uint8_t patch = 0;
+	uint8_t major;
+	uint8_t minor;
+	uint8_t subminor;
+	uint8_t patch;
+
+S_conformance_version_KHR(){}
 
 };
 
@@ -10412,10 +12742,24 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DRIVER_PROPERTIES_KHR;
 	void * pNext = nullptr;
 public:
-	uint32_t driverID = 0;
-	char driverName[VK_MAX_DRIVER_NAME_SIZE_KHR] = {};
-	char driverInfo[VK_MAX_DRIVER_INFO_SIZE_KHR] = {};
-	S_conformance_version_KHR conformanceVersion = {};
+	uint32_t driverID;
+	char driverName[VK_MAX_DRIVER_NAME_SIZE_KHR];
+	char driverInfo[VK_MAX_DRIVER_INFO_SIZE_KHR];
+	S_conformance_version_KHR conformanceVersion;
+
+S_physical_device_driver_properties_KHR(){}
+
+S_physical_device_driver_properties_KHR(
+	uint32_t driverID_,
+	char driverName_[VK_MAX_DRIVER_NAME_SIZE_KHR],
+	char driverInfo_[VK_MAX_DRIVER_INFO_SIZE_KHR],
+	S_conformance_version_KHR conformanceVersion_)
+	:driverID(driverID_)
+	,conformanceVersion(conformanceVersion_)
+{
+memcpy(driverName,driverName_,sizeof(driverName) );
+memcpy(driverInfo,driverInfo_,sizeof(driverInfo) );
+}
 
 S_physical_device_driver_properties_KHR( VkPhysicalDeviceDriverPropertiesKHR const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_physical_device_driver_properties_KHR ) );	}
@@ -10443,11 +12787,27 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ID_PROPERTIES;
 	void * pNext = nullptr;
 public:
-	uint8_t deviceUUID[VK_UUID_SIZE] = {};
-	uint8_t driverUUID[VK_UUID_SIZE] = {};
-	uint8_t deviceLUID[VK_LUID_SIZE] = {};
-	uint32_t deviceNodeMask = 0;
-	VkBool32 deviceLUIDValid = 0;
+	uint8_t deviceUUID[VK_UUID_SIZE];
+	uint8_t driverUUID[VK_UUID_SIZE];
+	uint8_t deviceLUID[VK_LUID_SIZE];
+	uint32_t deviceNodeMask;
+	VkBool32 deviceLUIDValid;
+
+S_physical_device_id_properties(){}
+
+S_physical_device_id_properties(
+	uint8_t deviceUUID_[VK_UUID_SIZE],
+	uint8_t driverUUID_[VK_UUID_SIZE],
+	uint8_t deviceLUID_[VK_LUID_SIZE],
+	uint32_t deviceNodeMask_,
+	VkBool32 deviceLUIDValid_)
+	:deviceNodeMask(deviceNodeMask_)
+	,deviceLUIDValid(deviceLUIDValid_)
+{
+memcpy(deviceUUID,deviceUUID_,sizeof(deviceUUID) );
+memcpy(driverUUID,driverUUID_,sizeof(driverUUID) );
+memcpy(deviceLUID,deviceLUID_,sizeof(deviceLUID) );
+}
 
 S_physical_device_id_properties( VkPhysicalDeviceIDProperties const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_physical_device_id_properties ) );	}
@@ -10474,8 +12834,18 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTIVIEW_PROPERTIES;
 	void * pNext = nullptr;
 public:
-	uint32_t maxMultiviewViewCount = 0;
-	uint32_t maxMultiviewInstanceIndex = 0;
+	uint32_t maxMultiviewViewCount;
+	uint32_t maxMultiviewInstanceIndex;
+
+S_physical_device_multiview_properties(){}
+
+S_physical_device_multiview_properties(
+	uint32_t maxMultiviewViewCount_,
+	uint32_t maxMultiviewInstanceIndex_)
+	:maxMultiviewViewCount(maxMultiviewViewCount_)
+	,maxMultiviewInstanceIndex(maxMultiviewInstanceIndex_)
+{
+}
 
 S_physical_device_multiview_properties( VkPhysicalDeviceMultiviewProperties const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_physical_device_multiview_properties ) );	}
@@ -10501,7 +12871,15 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DISCARD_RECTANGLE_PROPERTIES_EXT;
 	void * pNext = nullptr;
 public:
-	uint32_t maxDiscardRectangles = 0;
+	uint32_t maxDiscardRectangles;
+
+S_physical_device_discard_rectangle_properties_EXT(){}
+
+S_physical_device_discard_rectangle_properties_EXT(
+	uint32_t maxDiscardRectangles_)
+	:maxDiscardRectangles(maxDiscardRectangles_)
+{
+}
 
 S_physical_device_discard_rectangle_properties_EXT( VkPhysicalDeviceDiscardRectanglePropertiesEXT const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_physical_device_discard_rectangle_properties_EXT ) );	}
@@ -10528,7 +12906,15 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTIVIEW_PER_VIEW_ATTRIBUTES_PROPERTIES_NVX;
 	void * pNext = nullptr;
 public:
-	VkBool32 perViewPositionAllComponents = 0;
+	VkBool32 perViewPositionAllComponents;
+
+S_physical_device_multiview_per_view_attributes_properties_NVX(){}
+
+S_physical_device_multiview_per_view_attributes_properties_NVX(
+	VkBool32 perViewPositionAllComponents_)
+	:perViewPositionAllComponents(perViewPositionAllComponents_)
+{
+}
 
 S_physical_device_multiview_per_view_attributes_properties_NVX( VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_physical_device_multiview_per_view_attributes_properties_NVX ) );	}
@@ -10555,10 +12941,24 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBGROUP_PROPERTIES;
 	void * pNext = nullptr;
 public:
-	uint32_t subgroupSize = 0;
+	uint32_t subgroupSize;
 	F_shader_stage supportedStages;
 	F_subgroup_feature supportedOperations;
-	VkBool32 quadOperationsInAllStages = 0;
+	VkBool32 quadOperationsInAllStages;
+
+S_physical_device_subgroup_properties(){}
+
+S_physical_device_subgroup_properties(
+	uint32_t subgroupSize_,
+	F_shader_stage supportedStages_,
+	F_subgroup_feature supportedOperations_,
+	VkBool32 quadOperationsInAllStages_)
+	:subgroupSize(subgroupSize_)
+	,supportedStages(supportedStages_)
+	,supportedOperations(supportedOperations_)
+	,quadOperationsInAllStages(quadOperationsInAllStages_)
+{
+}
 
 S_physical_device_subgroup_properties( VkPhysicalDeviceSubgroupProperties const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_physical_device_subgroup_properties ) );	}
@@ -10585,7 +12985,15 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_POINT_CLIPPING_PROPERTIES;
 	void * pNext = nullptr;
 public:
-	E_point_clipping_behavior pointClippingBehavior = E_point_clipping_behavior::e_all_clip_planes;
+	E_point_clipping_behavior pointClippingBehavior;
+
+S_physical_device_point_clipping_properties(){}
+
+S_physical_device_point_clipping_properties(
+	E_point_clipping_behavior pointClippingBehavior_)
+	:pointClippingBehavior(pointClippingBehavior_)
+{
+}
 
 S_physical_device_point_clipping_properties( VkPhysicalDevicePointClippingProperties const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_physical_device_point_clipping_properties ) );	}
@@ -10611,7 +13019,15 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROTECTED_MEMORY_PROPERTIES;
 	void * pNext = nullptr;
 public:
-	VkBool32 protectedNoFault = 0;
+	VkBool32 protectedNoFault;
+
+S_physical_device_protected_memory_properties(){}
+
+S_physical_device_protected_memory_properties(
+	VkBool32 protectedNoFault_)
+	:protectedNoFault(protectedNoFault_)
+{
+}
 
 S_physical_device_protected_memory_properties( VkPhysicalDeviceProtectedMemoryProperties const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_physical_device_protected_memory_properties ) );	}
@@ -10638,8 +13054,18 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SAMPLER_FILTER_MINMAX_PROPERTIES_EXT;
 	void * pNext = nullptr;
 public:
-	VkBool32 filterMinmaxSingleComponentFormats = 0;
-	VkBool32 filterMinmaxImageComponentMapping = 0;
+	VkBool32 filterMinmaxSingleComponentFormats;
+	VkBool32 filterMinmaxImageComponentMapping;
+
+S_physical_device_sampler_filter_minmax_properties_EXT(){}
+
+S_physical_device_sampler_filter_minmax_properties_EXT(
+	VkBool32 filterMinmaxSingleComponentFormats_,
+	VkBool32 filterMinmaxImageComponentMapping_)
+	:filterMinmaxSingleComponentFormats(filterMinmaxSingleComponentFormats_)
+	,filterMinmaxImageComponentMapping(filterMinmaxImageComponentMapping_)
+{
+}
 
 S_physical_device_sampler_filter_minmax_properties_EXT( VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_physical_device_sampler_filter_minmax_properties_EXT ) );	}
@@ -10667,10 +13093,26 @@ private:
 	void * pNext = nullptr;
 public:
 	F_sample_count sampleLocationSampleCounts;
-	S_extent_2d maxSampleLocationGridSize = {};
-	float sampleLocationCoordinateRange[2] = {};
-	uint32_t sampleLocationSubPixelBits = 0;
-	VkBool32 variableSampleLocations = 0;
+	S_extent_2d maxSampleLocationGridSize;
+	float sampleLocationCoordinateRange[2];
+	uint32_t sampleLocationSubPixelBits;
+	VkBool32 variableSampleLocations;
+
+S_physical_device_sample_locations_properties_EXT(){}
+
+S_physical_device_sample_locations_properties_EXT(
+	F_sample_count sampleLocationSampleCounts_,
+	S_extent_2d maxSampleLocationGridSize_,
+	float sampleLocationCoordinateRange_[2],
+	uint32_t sampleLocationSubPixelBits_,
+	VkBool32 variableSampleLocations_)
+	:sampleLocationSampleCounts(sampleLocationSampleCounts_)
+	,maxSampleLocationGridSize(maxSampleLocationGridSize_)
+	,sampleLocationSubPixelBits(sampleLocationSubPixelBits_)
+	,variableSampleLocations(variableSampleLocations_)
+{
+memcpy(sampleLocationCoordinateRange,sampleLocationCoordinateRange_,sizeof(sampleLocationCoordinateRange) );
+}
 
 S_physical_device_sample_locations_properties_EXT( VkPhysicalDeviceSampleLocationsPropertiesEXT const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_physical_device_sample_locations_properties_EXT ) );	}
@@ -10697,12 +13139,30 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_BLEND_OPERATION_ADVANCED_PROPERTIES_EXT;
 	void * pNext = nullptr;
 public:
-	uint32_t advancedBlendMaxColorAttachments = 0;
-	VkBool32 advancedBlendIndependentBlend = 0;
-	VkBool32 advancedBlendNonPremultipliedSrcColor = 0;
-	VkBool32 advancedBlendNonPremultipliedDstColor = 0;
-	VkBool32 advancedBlendCorrelatedOverlap = 0;
-	VkBool32 advancedBlendAllOperations = 0;
+	uint32_t advancedBlendMaxColorAttachments;
+	VkBool32 advancedBlendIndependentBlend;
+	VkBool32 advancedBlendNonPremultipliedSrcColor;
+	VkBool32 advancedBlendNonPremultipliedDstColor;
+	VkBool32 advancedBlendCorrelatedOverlap;
+	VkBool32 advancedBlendAllOperations;
+
+S_physical_device_blend_operation_advanced_properties_EXT(){}
+
+S_physical_device_blend_operation_advanced_properties_EXT(
+	uint32_t advancedBlendMaxColorAttachments_,
+	VkBool32 advancedBlendIndependentBlend_,
+	VkBool32 advancedBlendNonPremultipliedSrcColor_,
+	VkBool32 advancedBlendNonPremultipliedDstColor_,
+	VkBool32 advancedBlendCorrelatedOverlap_,
+	VkBool32 advancedBlendAllOperations_)
+	:advancedBlendMaxColorAttachments(advancedBlendMaxColorAttachments_)
+	,advancedBlendIndependentBlend(advancedBlendIndependentBlend_)
+	,advancedBlendNonPremultipliedSrcColor(advancedBlendNonPremultipliedSrcColor_)
+	,advancedBlendNonPremultipliedDstColor(advancedBlendNonPremultipliedDstColor_)
+	,advancedBlendCorrelatedOverlap(advancedBlendCorrelatedOverlap_)
+	,advancedBlendAllOperations(advancedBlendAllOperations_)
+{
+}
 
 S_physical_device_blend_operation_advanced_properties_EXT( VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_physical_device_blend_operation_advanced_properties_EXT ) );	}
@@ -10729,11 +13189,27 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_INLINE_UNIFORM_BLOCK_PROPERTIES_EXT;
 	void * pNext = nullptr;
 public:
-	uint32_t maxInlineUniformBlockSize = 0;
-	uint32_t maxPerStageDescriptorInlineUniformBlocks = 0;
-	uint32_t maxPerStageDescriptorUpdateAfterBindInlineUniformBlocks = 0;
-	uint32_t maxDescriptorSetInlineUniformBlocks = 0;
-	uint32_t maxDescriptorSetUpdateAfterBindInlineUniformBlocks = 0;
+	uint32_t maxInlineUniformBlockSize;
+	uint32_t maxPerStageDescriptorInlineUniformBlocks;
+	uint32_t maxPerStageDescriptorUpdateAfterBindInlineUniformBlocks;
+	uint32_t maxDescriptorSetInlineUniformBlocks;
+	uint32_t maxDescriptorSetUpdateAfterBindInlineUniformBlocks;
+
+S_physical_device_inline_uniform_block_properties_EXT(){}
+
+S_physical_device_inline_uniform_block_properties_EXT(
+	uint32_t maxInlineUniformBlockSize_,
+	uint32_t maxPerStageDescriptorInlineUniformBlocks_,
+	uint32_t maxPerStageDescriptorUpdateAfterBindInlineUniformBlocks_,
+	uint32_t maxDescriptorSetInlineUniformBlocks_,
+	uint32_t maxDescriptorSetUpdateAfterBindInlineUniformBlocks_)
+	:maxInlineUniformBlockSize(maxInlineUniformBlockSize_)
+	,maxPerStageDescriptorInlineUniformBlocks(maxPerStageDescriptorInlineUniformBlocks_)
+	,maxPerStageDescriptorUpdateAfterBindInlineUniformBlocks(maxPerStageDescriptorUpdateAfterBindInlineUniformBlocks_)
+	,maxDescriptorSetInlineUniformBlocks(maxDescriptorSetInlineUniformBlocks_)
+	,maxDescriptorSetUpdateAfterBindInlineUniformBlocks(maxDescriptorSetUpdateAfterBindInlineUniformBlocks_)
+{
+}
 
 S_physical_device_inline_uniform_block_properties_EXT( VkPhysicalDeviceInlineUniformBlockPropertiesEXT const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_physical_device_inline_uniform_block_properties_EXT ) );	}
@@ -10760,8 +13236,18 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_3_PROPERTIES;
 	void * pNext = nullptr;
 public:
-	uint32_t maxPerSetDescriptors = 0;
-	VkDeviceSize maxMemoryAllocationSize = 0;
+	uint32_t maxPerSetDescriptors;
+	VkDeviceSize maxMemoryAllocationSize;
+
+S_physical_device_maintenance3_properties(){}
+
+S_physical_device_maintenance3_properties(
+	uint32_t maxPerSetDescriptors_,
+	VkDeviceSize maxMemoryAllocationSize_)
+	:maxPerSetDescriptors(maxPerSetDescriptors_)
+	,maxMemoryAllocationSize(maxMemoryAllocationSize_)
+{
+}
 
 S_physical_device_maintenance3_properties( VkPhysicalDeviceMaintenance3Properties const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_physical_device_maintenance3_properties ) );	}
@@ -10787,7 +13273,15 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_MEMORY_HOST_PROPERTIES_EXT;
 	void * pNext = nullptr;
 public:
-	VkDeviceSize minImportedHostPointerAlignment = 0;
+	VkDeviceSize minImportedHostPointerAlignment;
+
+S_physical_device_external_memory_host_properties_EXT(){}
+
+S_physical_device_external_memory_host_properties_EXT(
+	VkDeviceSize minImportedHostPointerAlignment_)
+	:minImportedHostPointerAlignment(minImportedHostPointerAlignment_)
+{
+}
 
 S_physical_device_external_memory_host_properties_EXT( VkPhysicalDeviceExternalMemoryHostPropertiesEXT const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_physical_device_external_memory_host_properties_EXT ) );	}
@@ -10813,15 +13307,39 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CONSERVATIVE_RASTERIZATION_PROPERTIES_EXT;
 	void * pNext = nullptr;
 public:
-	float primitiveOverestimationSize = 0;
-	float maxExtraPrimitiveOverestimationSize = 0;
-	float extraPrimitiveOverestimationSizeGranularity = 0;
-	VkBool32 primitiveUnderestimation = 0;
-	VkBool32 conservativePointAndLineRasterization = 0;
-	VkBool32 degenerateTrianglesRasterized = 0;
-	VkBool32 degenerateLinesRasterized = 0;
-	VkBool32 fullyCoveredFragmentShaderInputVariable = 0;
-	VkBool32 conservativeRasterizationPostDepthCoverage = 0;
+	float primitiveOverestimationSize;
+	float maxExtraPrimitiveOverestimationSize;
+	float extraPrimitiveOverestimationSizeGranularity;
+	VkBool32 primitiveUnderestimation;
+	VkBool32 conservativePointAndLineRasterization;
+	VkBool32 degenerateTrianglesRasterized;
+	VkBool32 degenerateLinesRasterized;
+	VkBool32 fullyCoveredFragmentShaderInputVariable;
+	VkBool32 conservativeRasterizationPostDepthCoverage;
+
+S_physical_device_conservative_rasterization_properties_EXT(){}
+
+S_physical_device_conservative_rasterization_properties_EXT(
+	float primitiveOverestimationSize_,
+	float maxExtraPrimitiveOverestimationSize_,
+	float extraPrimitiveOverestimationSizeGranularity_,
+	VkBool32 primitiveUnderestimation_,
+	VkBool32 conservativePointAndLineRasterization_,
+	VkBool32 degenerateTrianglesRasterized_,
+	VkBool32 degenerateLinesRasterized_,
+	VkBool32 fullyCoveredFragmentShaderInputVariable_,
+	VkBool32 conservativeRasterizationPostDepthCoverage_)
+	:primitiveOverestimationSize(primitiveOverestimationSize_)
+	,maxExtraPrimitiveOverestimationSize(maxExtraPrimitiveOverestimationSize_)
+	,extraPrimitiveOverestimationSizeGranularity(extraPrimitiveOverestimationSizeGranularity_)
+	,primitiveUnderestimation(primitiveUnderestimation_)
+	,conservativePointAndLineRasterization(conservativePointAndLineRasterization_)
+	,degenerateTrianglesRasterized(degenerateTrianglesRasterized_)
+	,degenerateLinesRasterized(degenerateLinesRasterized_)
+	,fullyCoveredFragmentShaderInputVariable(fullyCoveredFragmentShaderInputVariable_)
+	,conservativeRasterizationPostDepthCoverage(conservativeRasterizationPostDepthCoverage_)
+{
+}
 
 S_physical_device_conservative_rasterization_properties_EXT( VkPhysicalDeviceConservativeRasterizationPropertiesEXT const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_physical_device_conservative_rasterization_properties_EXT ) );	}
@@ -10848,20 +13366,54 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_CORE_PROPERTIES_AMD;
 	void * pNext = nullptr;
 public:
-	uint32_t shaderEngineCount = 0;
-	uint32_t shaderArraysPerEngineCount = 0;
-	uint32_t computeUnitsPerShaderArray = 0;
-	uint32_t simdPerComputeUnit = 0;
-	uint32_t wavefrontsPerSimd = 0;
-	uint32_t wavefrontSize = 0;
-	uint32_t sgprsPerSimd = 0;
-	uint32_t minSgprAllocation = 0;
-	uint32_t maxSgprAllocation = 0;
-	uint32_t sgprAllocationGranularity = 0;
-	uint32_t vgprsPerSimd = 0;
-	uint32_t minVgprAllocation = 0;
-	uint32_t maxVgprAllocation = 0;
-	uint32_t vgprAllocationGranularity = 0;
+	uint32_t shaderEngineCount;
+	uint32_t shaderArraysPerEngineCount;
+	uint32_t computeUnitsPerShaderArray;
+	uint32_t simdPerComputeUnit;
+	uint32_t wavefrontsPerSimd;
+	uint32_t wavefrontSize;
+	uint32_t sgprsPerSimd;
+	uint32_t minSgprAllocation;
+	uint32_t maxSgprAllocation;
+	uint32_t sgprAllocationGranularity;
+	uint32_t vgprsPerSimd;
+	uint32_t minVgprAllocation;
+	uint32_t maxVgprAllocation;
+	uint32_t vgprAllocationGranularity;
+
+S_physical_device_shader_core_properties_AMD(){}
+
+S_physical_device_shader_core_properties_AMD(
+	uint32_t shaderEngineCount_,
+	uint32_t shaderArraysPerEngineCount_,
+	uint32_t computeUnitsPerShaderArray_,
+	uint32_t simdPerComputeUnit_,
+	uint32_t wavefrontsPerSimd_,
+	uint32_t wavefrontSize_,
+	uint32_t sgprsPerSimd_,
+	uint32_t minSgprAllocation_,
+	uint32_t maxSgprAllocation_,
+	uint32_t sgprAllocationGranularity_,
+	uint32_t vgprsPerSimd_,
+	uint32_t minVgprAllocation_,
+	uint32_t maxVgprAllocation_,
+	uint32_t vgprAllocationGranularity_)
+	:shaderEngineCount(shaderEngineCount_)
+	,shaderArraysPerEngineCount(shaderArraysPerEngineCount_)
+	,computeUnitsPerShaderArray(computeUnitsPerShaderArray_)
+	,simdPerComputeUnit(simdPerComputeUnit_)
+	,wavefrontsPerSimd(wavefrontsPerSimd_)
+	,wavefrontSize(wavefrontSize_)
+	,sgprsPerSimd(sgprsPerSimd_)
+	,minSgprAllocation(minSgprAllocation_)
+	,maxSgprAllocation(maxSgprAllocation_)
+	,sgprAllocationGranularity(sgprAllocationGranularity_)
+	,vgprsPerSimd(vgprsPerSimd_)
+	,minVgprAllocation(minVgprAllocation_)
+	,maxVgprAllocation(maxVgprAllocation_)
+	,vgprAllocationGranularity(vgprAllocationGranularity_)
+{
+}
 
 S_physical_device_shader_core_properties_AMD( VkPhysicalDeviceShaderCorePropertiesAMD const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_physical_device_shader_core_properties_AMD ) );	}
@@ -10888,29 +13440,81 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_INDEXING_PROPERTIES_EXT;
 	void * pNext = nullptr;
 public:
-	uint32_t maxUpdateAfterBindDescriptorsInAllPools = 0;
-	VkBool32 shaderUniformBufferArrayNonUniformIndexingNative = 0;
-	VkBool32 shaderSampledImageArrayNonUniformIndexingNative = 0;
-	VkBool32 shaderStorageBufferArrayNonUniformIndexingNative = 0;
-	VkBool32 shaderStorageImageArrayNonUniformIndexingNative = 0;
-	VkBool32 shaderInputAttachmentArrayNonUniformIndexingNative = 0;
-	VkBool32 robustBufferAccessUpdateAfterBind = 0;
-	VkBool32 quadDivergentImplicitLod = 0;
-	uint32_t maxPerStageDescriptorUpdateAfterBindSamplers = 0;
-	uint32_t maxPerStageDescriptorUpdateAfterBindUniformBuffers = 0;
-	uint32_t maxPerStageDescriptorUpdateAfterBindStorageBuffers = 0;
-	uint32_t maxPerStageDescriptorUpdateAfterBindSampledImages = 0;
-	uint32_t maxPerStageDescriptorUpdateAfterBindStorageImages = 0;
-	uint32_t maxPerStageDescriptorUpdateAfterBindInputAttachments = 0;
-	uint32_t maxPerStageUpdateAfterBindResources = 0;
-	uint32_t maxDescriptorSetUpdateAfterBindSamplers = 0;
-	uint32_t maxDescriptorSetUpdateAfterBindUniformBuffers = 0;
-	uint32_t maxDescriptorSetUpdateAfterBindUniformBuffersDynamic = 0;
-	uint32_t maxDescriptorSetUpdateAfterBindStorageBuffers = 0;
-	uint32_t maxDescriptorSetUpdateAfterBindStorageBuffersDynamic = 0;
-	uint32_t maxDescriptorSetUpdateAfterBindSampledImages = 0;
-	uint32_t maxDescriptorSetUpdateAfterBindStorageImages = 0;
-	uint32_t maxDescriptorSetUpdateAfterBindInputAttachments = 0;
+	uint32_t maxUpdateAfterBindDescriptorsInAllPools;
+	VkBool32 shaderUniformBufferArrayNonUniformIndexingNative;
+	VkBool32 shaderSampledImageArrayNonUniformIndexingNative;
+	VkBool32 shaderStorageBufferArrayNonUniformIndexingNative;
+	VkBool32 shaderStorageImageArrayNonUniformIndexingNative;
+	VkBool32 shaderInputAttachmentArrayNonUniformIndexingNative;
+	VkBool32 robustBufferAccessUpdateAfterBind;
+	VkBool32 quadDivergentImplicitLod;
+	uint32_t maxPerStageDescriptorUpdateAfterBindSamplers;
+	uint32_t maxPerStageDescriptorUpdateAfterBindUniformBuffers;
+	uint32_t maxPerStageDescriptorUpdateAfterBindStorageBuffers;
+	uint32_t maxPerStageDescriptorUpdateAfterBindSampledImages;
+	uint32_t maxPerStageDescriptorUpdateAfterBindStorageImages;
+	uint32_t maxPerStageDescriptorUpdateAfterBindInputAttachments;
+	uint32_t maxPerStageUpdateAfterBindResources;
+	uint32_t maxDescriptorSetUpdateAfterBindSamplers;
+	uint32_t maxDescriptorSetUpdateAfterBindUniformBuffers;
+	uint32_t maxDescriptorSetUpdateAfterBindUniformBuffersDynamic;
+	uint32_t maxDescriptorSetUpdateAfterBindStorageBuffers;
+	uint32_t maxDescriptorSetUpdateAfterBindStorageBuffersDynamic;
+	uint32_t maxDescriptorSetUpdateAfterBindSampledImages;
+	uint32_t maxDescriptorSetUpdateAfterBindStorageImages;
+	uint32_t maxDescriptorSetUpdateAfterBindInputAttachments;
+
+S_physical_device_descriptor_indexing_properties_EXT(){}
+
+S_physical_device_descriptor_indexing_properties_EXT(
+	uint32_t maxUpdateAfterBindDescriptorsInAllPools_,
+	VkBool32 shaderUniformBufferArrayNonUniformIndexingNative_,
+	VkBool32 shaderSampledImageArrayNonUniformIndexingNative_,
+	VkBool32 shaderStorageBufferArrayNonUniformIndexingNative_,
+	VkBool32 shaderStorageImageArrayNonUniformIndexingNative_,
+	VkBool32 shaderInputAttachmentArrayNonUniformIndexingNative_,
+	VkBool32 robustBufferAccessUpdateAfterBind_,
+	VkBool32 quadDivergentImplicitLod_,
+	uint32_t maxPerStageDescriptorUpdateAfterBindSamplers_,
+	uint32_t maxPerStageDescriptorUpdateAfterBindUniformBuffers_,
+	uint32_t maxPerStageDescriptorUpdateAfterBindStorageBuffers_,
+	uint32_t maxPerStageDescriptorUpdateAfterBindSampledImages_,
+	uint32_t maxPerStageDescriptorUpdateAfterBindStorageImages_,
+	uint32_t maxPerStageDescriptorUpdateAfterBindInputAttachments_,
+	uint32_t maxPerStageUpdateAfterBindResources_,
+	uint32_t maxDescriptorSetUpdateAfterBindSamplers_,
+	uint32_t maxDescriptorSetUpdateAfterBindUniformBuffers_,
+	uint32_t maxDescriptorSetUpdateAfterBindUniformBuffersDynamic_,
+	uint32_t maxDescriptorSetUpdateAfterBindStorageBuffers_,
+	uint32_t maxDescriptorSetUpdateAfterBindStorageBuffersDynamic_,
+	uint32_t maxDescriptorSetUpdateAfterBindSampledImages_,
+	uint32_t maxDescriptorSetUpdateAfterBindStorageImages_,
+	uint32_t maxDescriptorSetUpdateAfterBindInputAttachments_)
+	:maxUpdateAfterBindDescriptorsInAllPools(maxUpdateAfterBindDescriptorsInAllPools_)
+	,shaderUniformBufferArrayNonUniformIndexingNative(shaderUniformBufferArrayNonUniformIndexingNative_)
+	,shaderSampledImageArrayNonUniformIndexingNative(shaderSampledImageArrayNonUniformIndexingNative_)
+	,shaderStorageBufferArrayNonUniformIndexingNative(shaderStorageBufferArrayNonUniformIndexingNative_)
+	,shaderStorageImageArrayNonUniformIndexingNative(shaderStorageImageArrayNonUniformIndexingNative_)
+	,shaderInputAttachmentArrayNonUniformIndexingNative(shaderInputAttachmentArrayNonUniformIndexingNative_)
+	,robustBufferAccessUpdateAfterBind(robustBufferAccessUpdateAfterBind_)
+	,quadDivergentImplicitLod(quadDivergentImplicitLod_)
+	,maxPerStageDescriptorUpdateAfterBindSamplers(maxPerStageDescriptorUpdateAfterBindSamplers_)
+	,maxPerStageDescriptorUpdateAfterBindUniformBuffers(maxPerStageDescriptorUpdateAfterBindUniformBuffers_)
+	,maxPerStageDescriptorUpdateAfterBindStorageBuffers(maxPerStageDescriptorUpdateAfterBindStorageBuffers_)
+	,maxPerStageDescriptorUpdateAfterBindSampledImages(maxPerStageDescriptorUpdateAfterBindSampledImages_)
+	,maxPerStageDescriptorUpdateAfterBindStorageImages(maxPerStageDescriptorUpdateAfterBindStorageImages_)
+	,maxPerStageDescriptorUpdateAfterBindInputAttachments(maxPerStageDescriptorUpdateAfterBindInputAttachments_)
+	,maxPerStageUpdateAfterBindResources(maxPerStageUpdateAfterBindResources_)
+	,maxDescriptorSetUpdateAfterBindSamplers(maxDescriptorSetUpdateAfterBindSamplers_)
+	,maxDescriptorSetUpdateAfterBindUniformBuffers(maxDescriptorSetUpdateAfterBindUniformBuffers_)
+	,maxDescriptorSetUpdateAfterBindUniformBuffersDynamic(maxDescriptorSetUpdateAfterBindUniformBuffersDynamic_)
+	,maxDescriptorSetUpdateAfterBindStorageBuffers(maxDescriptorSetUpdateAfterBindStorageBuffers_)
+	,maxDescriptorSetUpdateAfterBindStorageBuffersDynamic(maxDescriptorSetUpdateAfterBindStorageBuffersDynamic_)
+	,maxDescriptorSetUpdateAfterBindSampledImages(maxDescriptorSetUpdateAfterBindSampledImages_)
+	,maxDescriptorSetUpdateAfterBindStorageImages(maxDescriptorSetUpdateAfterBindStorageImages_)
+	,maxDescriptorSetUpdateAfterBindInputAttachments(maxDescriptorSetUpdateAfterBindInputAttachments_)
+{
+}
 
 S_physical_device_descriptor_indexing_properties_EXT( VkPhysicalDeviceDescriptorIndexingPropertiesEXT const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_physical_device_descriptor_indexing_properties_EXT ) );	}
@@ -10936,7 +13540,15 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_DIVISOR_PROPERTIES_EXT;
 	void * pNext = nullptr;
 public:
-	uint32_t maxVertexAttribDivisor = 0;
+	uint32_t maxVertexAttribDivisor;
+
+S_physical_device_vertex_attribute_divisor_properties_EXT(){}
+
+S_physical_device_vertex_attribute_divisor_properties_EXT(
+	uint32_t maxVertexAttribDivisor_)
+	:maxVertexAttribDivisor(maxVertexAttribDivisor_)
+{
+}
 
 S_physical_device_vertex_attribute_divisor_properties_EXT( VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_physical_device_vertex_attribute_divisor_properties_EXT ) );	}
@@ -10963,9 +13575,21 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADING_RATE_IMAGE_PROPERTIES_NV;
 	void * pNext = nullptr;
 public:
-	S_extent_2d shadingRateTexelSize = {};
-	uint32_t shadingRatePaletteSize = 0;
-	uint32_t shadingRateMaxCoarseSamples = 0;
+	S_extent_2d shadingRateTexelSize;
+	uint32_t shadingRatePaletteSize;
+	uint32_t shadingRateMaxCoarseSamples;
+
+S_physical_device_shading_rate_image_properties_NV(){}
+
+S_physical_device_shading_rate_image_properties_NV(
+	S_extent_2d shadingRateTexelSize_,
+	uint32_t shadingRatePaletteSize_,
+	uint32_t shadingRateMaxCoarseSamples_)
+	:shadingRateTexelSize(shadingRateTexelSize_)
+	,shadingRatePaletteSize(shadingRatePaletteSize_)
+	,shadingRateMaxCoarseSamples(shadingRateMaxCoarseSamples_)
+{
+}
 
 S_physical_device_shading_rate_image_properties_NV( VkPhysicalDeviceShadingRateImagePropertiesNV const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_physical_device_shading_rate_image_properties_NV ) );	}
@@ -10991,19 +13615,51 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MESH_SHADER_PROPERTIES_NV;
 	void * pNext = nullptr;
 public:
-	uint32_t maxDrawMeshTasksCount = 0;
-	uint32_t maxTaskWorkGroupInvocations = 0;
-	uint32_t maxTaskWorkGroupSize[3] = {};
-	uint32_t maxTaskTotalMemorySize = 0;
-	uint32_t maxTaskOutputCount = 0;
-	uint32_t maxMeshWorkGroupInvocations = 0;
-	uint32_t maxMeshWorkGroupSize[3] = {};
-	uint32_t maxMeshTotalMemorySize = 0;
-	uint32_t maxMeshOutputVertices = 0;
-	uint32_t maxMeshOutputPrimitives = 0;
-	uint32_t maxMeshMultiviewViewCount = 0;
-	uint32_t meshOutputPerVertexGranularity = 0;
-	uint32_t meshOutputPerPrimitiveGranularity = 0;
+	uint32_t maxDrawMeshTasksCount;
+	uint32_t maxTaskWorkGroupInvocations;
+	uint32_t maxTaskWorkGroupSize[3];
+	uint32_t maxTaskTotalMemorySize;
+	uint32_t maxTaskOutputCount;
+	uint32_t maxMeshWorkGroupInvocations;
+	uint32_t maxMeshWorkGroupSize[3];
+	uint32_t maxMeshTotalMemorySize;
+	uint32_t maxMeshOutputVertices;
+	uint32_t maxMeshOutputPrimitives;
+	uint32_t maxMeshMultiviewViewCount;
+	uint32_t meshOutputPerVertexGranularity;
+	uint32_t meshOutputPerPrimitiveGranularity;
+
+S_physical_device_mesh_shader_properties_NV(){}
+
+S_physical_device_mesh_shader_properties_NV(
+	uint32_t maxDrawMeshTasksCount_,
+	uint32_t maxTaskWorkGroupInvocations_,
+	uint32_t maxTaskWorkGroupSize_[3],
+	uint32_t maxTaskTotalMemorySize_,
+	uint32_t maxTaskOutputCount_,
+	uint32_t maxMeshWorkGroupInvocations_,
+	uint32_t maxMeshWorkGroupSize_[3],
+	uint32_t maxMeshTotalMemorySize_,
+	uint32_t maxMeshOutputVertices_,
+	uint32_t maxMeshOutputPrimitives_,
+	uint32_t maxMeshMultiviewViewCount_,
+	uint32_t meshOutputPerVertexGranularity_,
+	uint32_t meshOutputPerPrimitiveGranularity_)
+	:maxDrawMeshTasksCount(maxDrawMeshTasksCount_)
+	,maxTaskWorkGroupInvocations(maxTaskWorkGroupInvocations_)
+	,maxTaskTotalMemorySize(maxTaskTotalMemorySize_)
+	,maxTaskOutputCount(maxTaskOutputCount_)
+	,maxMeshWorkGroupInvocations(maxMeshWorkGroupInvocations_)
+	,maxMeshTotalMemorySize(maxMeshTotalMemorySize_)
+	,maxMeshOutputVertices(maxMeshOutputVertices_)
+	,maxMeshOutputPrimitives(maxMeshOutputPrimitives_)
+	,maxMeshMultiviewViewCount(maxMeshMultiviewViewCount_)
+	,meshOutputPerVertexGranularity(meshOutputPerVertexGranularity_)
+	,meshOutputPerPrimitiveGranularity(meshOutputPerPrimitiveGranularity_)
+{
+memcpy(maxTaskWorkGroupSize,maxTaskWorkGroupSize_,sizeof(maxTaskWorkGroupSize) );
+memcpy(maxMeshWorkGroupSize,maxMeshWorkGroupSize_,sizeof(maxMeshWorkGroupSize) );
+}
 
 S_physical_device_mesh_shader_properties_NV( VkPhysicalDeviceMeshShaderPropertiesNV const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_physical_device_mesh_shader_properties_NV ) );	}
@@ -11029,9 +13685,21 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RAYTRACING_PROPERTIES_NVX;
 	void * pNext = nullptr;
 public:
-	uint32_t shaderHeaderSize = 0;
-	uint32_t maxRecursionDepth = 0;
-	uint32_t maxGeometryCount = 0;
+	uint32_t shaderHeaderSize;
+	uint32_t maxRecursionDepth;
+	uint32_t maxGeometryCount;
+
+S_physical_device_raytracing_properties_NVX(){}
+
+S_physical_device_raytracing_properties_NVX(
+	uint32_t shaderHeaderSize_,
+	uint32_t maxRecursionDepth_,
+	uint32_t maxGeometryCount_)
+	:shaderHeaderSize(shaderHeaderSize_)
+	,maxRecursionDepth(maxRecursionDepth_)
+	,maxGeometryCount(maxGeometryCount_)
+{
+}
 
 S_physical_device_raytracing_properties_NVX( VkPhysicalDeviceRaytracingPropertiesNVX const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_physical_device_raytracing_properties_NVX ) );	}
@@ -11080,7 +13748,15 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROPERTIES_2;
 	void * pNext = nullptr;
 public:
-	S_physical_device_properties properties = {};
+	S_physical_device_properties properties;
+
+S_physical_device_properties2(){}
+
+S_physical_device_properties2(
+	S_physical_device_properties properties_)
+	:properties(properties_)
+{
+}
 
 S_physical_device_properties2( VkPhysicalDeviceProperties2 const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_physical_device_properties2 ) );	}
@@ -11125,9 +13801,11 @@ static_assert(
 (returnedonly)
 */
 struct		S_drm_format_modifier_properties_EXT{
-	uint64_t drmFormatModifier = 0;
-	uint32_t drmFormatModifierPlaneCount = 0;
+	uint64_t drmFormatModifier;
+	uint32_t drmFormatModifierPlaneCount;
 	F_format_feature drmFormatModifierTilingFeatures;
+
+S_drm_format_modifier_properties_EXT(){}
 
 };
 
@@ -11140,8 +13818,18 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_DRM_FORMAT_MODIFIER_PROPERTIES_LIST_EXT;
 	void * pNext = nullptr;
 public:
-	uint32_t drmFormatModifierCount = 0;
-	S_drm_format_modifier_properties_EXT * pDrmFormatModifierProperties = nullptr;
+	uint32_t drmFormatModifierCount;
+	S_drm_format_modifier_properties_EXT * pDrmFormatModifierProperties;
+
+S_drm_format_modifier_properties_list_EXT(){}
+
+S_drm_format_modifier_properties_list_EXT(
+	uint32_t drmFormatModifierCount_,
+	S_drm_format_modifier_properties_EXT * pDrmFormatModifierProperties_)
+	:drmFormatModifierCount(drmFormatModifierCount_)
+	,pDrmFormatModifierProperties(pDrmFormatModifierProperties_)
+{
+}
 
 S_drm_format_modifier_properties_list_EXT( VkDrmFormatModifierPropertiesListEXT const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_drm_format_modifier_properties_list_EXT ) );	}
@@ -11170,7 +13858,15 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_FORMAT_PROPERTIES_2;
 	void * pNext = nullptr;
 public:
-	S_format_properties formatProperties = {};
+	S_format_properties formatProperties;
+
+S_format_properties2(){}
+
+S_format_properties2(
+	S_format_properties formatProperties_)
+	:formatProperties(formatProperties_)
+{
+}
 
 S_format_properties2( VkFormatProperties2 const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_format_properties2 ) );	}
@@ -11198,6 +13894,8 @@ struct		S_external_memory_properties{
 	F_external_memory_handle_type exportFromImportedHandleTypes;
 	F_external_memory_handle_type compatibleHandleTypes;
 
+S_external_memory_properties(){}
+
 };
 
 /*	VkExternalImageFormatProperties
@@ -11209,7 +13907,15 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_EXTERNAL_IMAGE_FORMAT_PROPERTIES;
 	void * pNext = nullptr;
 public:
-	S_external_memory_properties externalMemoryProperties = {};
+	S_external_memory_properties externalMemoryProperties;
+
+S_external_image_format_properties(){}
+
+S_external_image_format_properties(
+	S_external_memory_properties externalMemoryProperties_)
+	:externalMemoryProperties(externalMemoryProperties_)
+{
+}
 
 S_external_image_format_properties( VkExternalImageFormatProperties const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_external_image_format_properties ) );	}
@@ -11236,7 +13942,15 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_IMAGE_FORMAT_PROPERTIES;
 	void * pNext = nullptr;
 public:
-	uint32_t combinedImageSamplerDescriptorCount = 0;
+	uint32_t combinedImageSamplerDescriptorCount;
+
+S_sampler_ycbcr_conversion_image_format_properties(){}
+
+S_sampler_ycbcr_conversion_image_format_properties(
+	uint32_t combinedImageSamplerDescriptorCount_)
+	:combinedImageSamplerDescriptorCount(combinedImageSamplerDescriptorCount_)
+{
+}
 
 S_sampler_ycbcr_conversion_image_format_properties( VkSamplerYcbcrConversionImageFormatProperties const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_sampler_ycbcr_conversion_image_format_properties ) );	}
@@ -11263,7 +13977,15 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_TEXTURE_LOD_GATHER_FORMAT_PROPERTIES_AMD;
 	void * pNext = nullptr;
 public:
-	VkBool32 supportsTextureGatherLODBiasAMD = 0;
+	VkBool32 supportsTextureGatherLODBiasAMD;
+
+S_texture_lod_gather_format_properties_AMD(){}
+
+S_texture_lod_gather_format_properties_AMD(
+	VkBool32 supportsTextureGatherLODBiasAMD_)
+	:supportsTextureGatherLODBiasAMD(supportsTextureGatherLODBiasAMD_)
+{
+}
 
 S_texture_lod_gather_format_properties_AMD( VkTextureLODGatherFormatPropertiesAMD const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_texture_lod_gather_format_properties_AMD ) );	}
@@ -11291,7 +14013,15 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_ANDROID_HARDWARE_BUFFER_USAGE_ANDROID;
 	void * pNext = nullptr;
 public:
-	uint64_t androidHardwareBufferUsage = 0;
+	uint64_t androidHardwareBufferUsage;
+
+S_android_hardware_buffer_usage_ANDROID(){}
+
+S_android_hardware_buffer_usage_ANDROID(
+	uint64_t androidHardwareBufferUsage_)
+	:androidHardwareBufferUsage(androidHardwareBufferUsage_)
+{
+}
 
 S_android_hardware_buffer_usage_ANDROID( VkAndroidHardwareBufferUsageANDROID const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_android_hardware_buffer_usage_ANDROID ) );	}
@@ -11323,7 +14053,15 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_IMAGE_FORMAT_PROPERTIES_2;
 	void * pNext = nullptr;
 public:
-	S_image_format_properties imageFormatProperties = {};
+	S_image_format_properties imageFormatProperties;
+
+S_image_format_properties2(){}
+
+S_image_format_properties2(
+	S_image_format_properties imageFormatProperties_)
+	:imageFormatProperties(imageFormatProperties_)
+{
+}
 
 S_image_format_properties2( VkImageFormatProperties2 const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_image_format_properties2 ) );	}
@@ -11356,6 +14094,14 @@ private:
 public:
 	F_external_memory_handle_type handleType;
 
+S_physical_device_external_image_format_info(){}
+
+S_physical_device_external_image_format_info(
+	F_external_memory_handle_type handleType_)
+	:handleType(handleType_)
+{
+}
+
 S_physical_device_external_image_format_info( VkPhysicalDeviceExternalImageFormatInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_physical_device_external_image_format_info ) );	}
 S_physical_device_external_image_format_info& operator=( VkPhysicalDeviceExternalImageFormatInfo const & rhs ) 
@@ -11381,7 +14127,15 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_DRM_FORMAT_MODIFIER_INFO_EXT;
 	 void * pNext = nullptr;
 public:
-	uint64_t drmFormatModifier = 0;
+	uint64_t drmFormatModifier;
+
+S_physical_device_image_drm_format_modifier_info_EXT(){}
+
+S_physical_device_image_drm_format_modifier_info_EXT(
+	uint64_t drmFormatModifier_)
+	:drmFormatModifier(drmFormatModifier_)
+{
+}
 
 S_physical_device_image_drm_format_modifier_info_EXT( VkPhysicalDeviceImageDrmFormatModifierInfoEXT const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_physical_device_image_drm_format_modifier_info_EXT ) );	}
@@ -11410,11 +14164,27 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_FORMAT_INFO_2;
 	 void * pNext = nullptr;
 public:
-	E_format format = E_format::e_undefined;
-	E_image_type type = E_image_type::e_1d;
-	E_image_tiling tiling = E_image_tiling::e_optimal;
+	E_format format;
+	E_image_type type;
+	E_image_tiling tiling;
 	F_image_usage usage;
 	F_image_create flags;
+
+S_physical_device_image_format_info2(){}
+
+S_physical_device_image_format_info2(
+	E_format format_,
+	E_image_type type_,
+	E_image_tiling tiling_,
+	F_image_usage usage_,
+	F_image_create flags_)
+	:format(format_)
+	,type(type_)
+	,tiling(tiling_)
+	,usage(usage_)
+	,flags(flags_)
+{
+}
 
 S_physical_device_image_format_info2( VkPhysicalDeviceImageFormatInfo2 const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_physical_device_image_format_info2 ) );	}
@@ -11446,6 +14216,14 @@ private:
 public:
 	F_pipeline_stage checkpointExecutionStageMask;
 
+S_queue_family_checkpoint_properties_NV(){}
+
+S_queue_family_checkpoint_properties_NV(
+	F_pipeline_stage checkpointExecutionStageMask_)
+	:checkpointExecutionStageMask(checkpointExecutionStageMask_)
+{
+}
+
 S_queue_family_checkpoint_properties_NV( VkQueueFamilyCheckpointPropertiesNV const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_queue_family_checkpoint_properties_NV ) );	}
 S_queue_family_checkpoint_properties_NV& operator=( VkQueueFamilyCheckpointPropertiesNV const & rhs ) 
@@ -11472,7 +14250,15 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_QUEUE_FAMILY_PROPERTIES_2;
 	void * pNext = nullptr;
 public:
-	S_queue_family_properties queueFamilyProperties = {};
+	S_queue_family_properties queueFamilyProperties;
+
+S_queue_family_properties2(){}
+
+S_queue_family_properties2(
+	S_queue_family_properties queueFamilyProperties_)
+	:queueFamilyProperties(queueFamilyProperties_)
+{
+}
 
 S_queue_family_properties2( VkQueueFamilyProperties2 const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_queue_family_properties2 ) );	}
@@ -11498,7 +14284,15 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MEMORY_PROPERTIES_2;
 	void * pNext = nullptr;
 public:
-	S_physical_device_memory_properties memoryProperties = {};
+	S_physical_device_memory_properties memoryProperties;
+
+S_physical_device_memory_properties2(){}
+
+S_physical_device_memory_properties2(
+	S_physical_device_memory_properties memoryProperties_)
+	:memoryProperties(memoryProperties_)
+{
+}
 
 S_physical_device_memory_properties2( VkPhysicalDeviceMemoryProperties2 const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_physical_device_memory_properties2 ) );	}
@@ -11522,7 +14316,15 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_SPARSE_IMAGE_FORMAT_PROPERTIES_2;
 	void * pNext = nullptr;
 public:
-	S_sparse_image_format_properties properties = {};
+	S_sparse_image_format_properties properties;
+
+S_sparse_image_format_properties2(){}
+
+S_sparse_image_format_properties2(
+	S_sparse_image_format_properties properties_)
+	:properties(properties_)
+{
+}
 
 S_sparse_image_format_properties2( VkSparseImageFormatProperties2 const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_sparse_image_format_properties2 ) );	}
@@ -11545,11 +14347,27 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SPARSE_IMAGE_FORMAT_INFO_2;
 	 void * pNext = nullptr;
 public:
-	E_format format = E_format::e_undefined;
-	E_image_type type = E_image_type::e_1d;
+	E_format format;
+	E_image_type type;
 	F_sample_count samples;
 	F_image_usage usage;
-	E_image_tiling tiling = E_image_tiling::e_optimal;
+	E_image_tiling tiling;
+
+S_physical_device_sparse_image_format_info2(){}
+
+S_physical_device_sparse_image_format_info2(
+	E_format format_,
+	E_image_type type_,
+	F_sample_count samples_,
+	F_image_usage usage_,
+	E_image_tiling tiling_)
+	:format(format_)
+	,type(type_)
+	,samples(samples_)
+	,usage(usage_)
+	,tiling(tiling_)
+{
+}
 
 S_physical_device_sparse_image_format_info2( VkPhysicalDeviceSparseImageFormatInfo2 const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_physical_device_sparse_image_format_info2 ) );	}
@@ -11576,6 +14394,18 @@ public:
 	F_buffer_usage usage;
 	F_external_memory_handle_type handleType;
 
+S_physical_device_external_buffer_info(){}
+
+S_physical_device_external_buffer_info(
+	F_buffer_create flags_,
+	F_buffer_usage usage_,
+	F_external_memory_handle_type handleType_)
+	:flags(flags_)
+	,usage(usage_)
+	,handleType(handleType_)
+{
+}
+
 S_physical_device_external_buffer_info( VkPhysicalDeviceExternalBufferInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_physical_device_external_buffer_info ) );	}
 S_physical_device_external_buffer_info& operator=( VkPhysicalDeviceExternalBufferInfo const & rhs ) 
@@ -11598,7 +14428,15 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_EXTERNAL_BUFFER_PROPERTIES;
 	void * pNext = nullptr;
 public:
-	S_external_memory_properties externalMemoryProperties = {};
+	S_external_memory_properties externalMemoryProperties;
+
+S_external_buffer_properties(){}
+
+S_external_buffer_properties(
+	S_external_memory_properties externalMemoryProperties_)
+	:externalMemoryProperties(externalMemoryProperties_)
+{
+}
 
 S_external_buffer_properties( VkExternalBufferProperties const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_external_buffer_properties ) );	}
@@ -11623,7 +14461,15 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_MEMORY_WIN32_HANDLE_PROPERTIES_KHR;
 	void * pNext = nullptr;
 public:
-	uint32_t memoryTypeBits = 0;
+	uint32_t memoryTypeBits;
+
+S_memory_win32_handle_properties_KHR(){}
+
+S_memory_win32_handle_properties_KHR(
+	uint32_t memoryTypeBits_)
+	:memoryTypeBits(memoryTypeBits_)
+{
+}
 
 S_memory_win32_handle_properties_KHR( VkMemoryWin32HandlePropertiesKHR const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_memory_win32_handle_properties_KHR ) );	}
@@ -11648,8 +14494,18 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_MEMORY_GET_WIN32_HANDLE_INFO_KHR;
 	 void * pNext = nullptr;
 public:
-	VkDeviceMemory memory = VK_NULL_HANDLE;
+	VkDeviceMemory memory;
 	F_external_memory_handle_type handleType;
+
+S_memory_get_win32_handle_info_KHR(){}
+
+S_memory_get_win32_handle_info_KHR(
+	VkDeviceMemory memory_,
+	F_external_memory_handle_type handleType_)
+	:memory(memory_)
+	,handleType(handleType_)
+{
+}
 
 S_memory_get_win32_handle_info_KHR( VkMemoryGetWin32HandleInfoKHR const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_memory_get_win32_handle_info_KHR ) );	}
@@ -11674,7 +14530,15 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_MEMORY_FD_PROPERTIES_KHR;
 	void * pNext = nullptr;
 public:
-	uint32_t memoryTypeBits = 0;
+	uint32_t memoryTypeBits;
+
+S_memory_fd_properties_KHR(){}
+
+S_memory_fd_properties_KHR(
+	uint32_t memoryTypeBits_)
+	:memoryTypeBits(memoryTypeBits_)
+{
+}
 
 S_memory_fd_properties_KHR( VkMemoryFdPropertiesKHR const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_memory_fd_properties_KHR ) );	}
@@ -11697,8 +14561,18 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_MEMORY_GET_FD_INFO_KHR;
 	 void * pNext = nullptr;
 public:
-	VkDeviceMemory memory = VK_NULL_HANDLE;
+	VkDeviceMemory memory;
 	F_external_memory_handle_type handleType;
+
+S_memory_get_fd_info_KHR(){}
+
+S_memory_get_fd_info_KHR(
+	VkDeviceMemory memory_,
+	F_external_memory_handle_type handleType_)
+	:memory(memory_)
+	,handleType(handleType_)
+{
+}
 
 S_memory_get_fd_info_KHR( VkMemoryGetFdInfoKHR const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_memory_get_fd_info_KHR ) );	}
@@ -11722,6 +14596,14 @@ private:
 	 void * pNext = nullptr;
 public:
 	F_external_semaphore_handle_type handleType;
+
+S_physical_device_external_semaphore_info(){}
+
+S_physical_device_external_semaphore_info(
+	F_external_semaphore_handle_type handleType_)
+	:handleType(handleType_)
+{
+}
 
 S_physical_device_external_semaphore_info( VkPhysicalDeviceExternalSemaphoreInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_physical_device_external_semaphore_info ) );	}
@@ -11749,6 +14631,18 @@ public:
 	F_external_semaphore_handle_type compatibleHandleTypes;
 	F_external_semaphore_feature externalSemaphoreFeatures;
 
+S_external_semaphore_properties(){}
+
+S_external_semaphore_properties(
+	F_external_semaphore_handle_type exportFromImportedHandleTypes_,
+	F_external_semaphore_handle_type compatibleHandleTypes_,
+	F_external_semaphore_feature externalSemaphoreFeatures_)
+	:exportFromImportedHandleTypes(exportFromImportedHandleTypes_)
+	,compatibleHandleTypes(compatibleHandleTypes_)
+	,externalSemaphoreFeatures(externalSemaphoreFeatures_)
+{
+}
+
 S_external_semaphore_properties( VkExternalSemaphoreProperties const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_external_semaphore_properties ) );	}
 S_external_semaphore_properties& operator=( VkExternalSemaphoreProperties const & rhs ) 
@@ -11771,11 +14665,27 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_IMPORT_SEMAPHORE_WIN32_HANDLE_INFO_KHR;
 	 void * pNext = nullptr;
 public:
-	VkSemaphore semaphore = VK_NULL_HANDLE;
+	VkSemaphore semaphore;
 	F_semaphore_import flags;
 	F_external_semaphore_handle_type handleType;
-	HANDLE handle = 0;
-	LPCWSTR name = 0;
+	HANDLE handle;
+	LPCWSTR name;
+
+S_import_semaphore_win32_handle_info_KHR(){}
+
+S_import_semaphore_win32_handle_info_KHR(
+	VkSemaphore semaphore_,
+	F_semaphore_import flags_,
+	F_external_semaphore_handle_type handleType_,
+	HANDLE handle_,
+	LPCWSTR name_)
+	:semaphore(semaphore_)
+	,flags(flags_)
+	,handleType(handleType_)
+	,handle(handle_)
+	,name(name_)
+{
+}
 
 S_import_semaphore_win32_handle_info_KHR( VkImportSemaphoreWin32HandleInfoKHR const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_import_semaphore_win32_handle_info_KHR ) );	}
@@ -11800,8 +14710,18 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_SEMAPHORE_GET_WIN32_HANDLE_INFO_KHR;
 	 void * pNext = nullptr;
 public:
-	VkSemaphore semaphore = VK_NULL_HANDLE;
+	VkSemaphore semaphore;
 	F_external_semaphore_handle_type handleType;
+
+S_semaphore_get_win32_handle_info_KHR(){}
+
+S_semaphore_get_win32_handle_info_KHR(
+	VkSemaphore semaphore_,
+	F_external_semaphore_handle_type handleType_)
+	:semaphore(semaphore_)
+	,handleType(handleType_)
+{
+}
 
 S_semaphore_get_win32_handle_info_KHR( VkSemaphoreGetWin32HandleInfoKHR const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_semaphore_get_win32_handle_info_KHR ) );	}
@@ -11825,10 +14745,24 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_IMPORT_SEMAPHORE_FD_INFO_KHR;
 	 void * pNext = nullptr;
 public:
-	VkSemaphore semaphore = VK_NULL_HANDLE;
+	VkSemaphore semaphore;
 	F_semaphore_import flags;
 	F_external_semaphore_handle_type handleType;
-	int fd = 0;
+	int fd;
+
+S_import_semaphore_fd_info_KHR(){}
+
+S_import_semaphore_fd_info_KHR(
+	VkSemaphore semaphore_,
+	F_semaphore_import flags_,
+	F_external_semaphore_handle_type handleType_,
+	int fd_)
+	:semaphore(semaphore_)
+	,flags(flags_)
+	,handleType(handleType_)
+	,fd(fd_)
+{
+}
 
 S_import_semaphore_fd_info_KHR( VkImportSemaphoreFdInfoKHR const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_import_semaphore_fd_info_KHR ) );	}
@@ -11851,8 +14785,18 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_SEMAPHORE_GET_FD_INFO_KHR;
 	 void * pNext = nullptr;
 public:
-	VkSemaphore semaphore = VK_NULL_HANDLE;
+	VkSemaphore semaphore;
 	F_external_semaphore_handle_type handleType;
+
+S_semaphore_get_fd_info_KHR(){}
+
+S_semaphore_get_fd_info_KHR(
+	VkSemaphore semaphore_,
+	F_external_semaphore_handle_type handleType_)
+	:semaphore(semaphore_)
+	,handleType(handleType_)
+{
+}
 
 S_semaphore_get_fd_info_KHR( VkSemaphoreGetFdInfoKHR const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_semaphore_get_fd_info_KHR ) );	}
@@ -11876,6 +14820,14 @@ private:
 	 void * pNext = nullptr;
 public:
 	F_external_fence_handle_type handleType;
+
+S_physical_device_external_fence_info(){}
+
+S_physical_device_external_fence_info(
+	F_external_fence_handle_type handleType_)
+	:handleType(handleType_)
+{
+}
 
 S_physical_device_external_fence_info( VkPhysicalDeviceExternalFenceInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_physical_device_external_fence_info ) );	}
@@ -11903,6 +14855,18 @@ public:
 	F_external_fence_handle_type compatibleHandleTypes;
 	F_external_fence_feature externalFenceFeatures;
 
+S_external_fence_properties(){}
+
+S_external_fence_properties(
+	F_external_fence_handle_type exportFromImportedHandleTypes_,
+	F_external_fence_handle_type compatibleHandleTypes_,
+	F_external_fence_feature externalFenceFeatures_)
+	:exportFromImportedHandleTypes(exportFromImportedHandleTypes_)
+	,compatibleHandleTypes(compatibleHandleTypes_)
+	,externalFenceFeatures(externalFenceFeatures_)
+{
+}
+
 S_external_fence_properties( VkExternalFenceProperties const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_external_fence_properties ) );	}
 S_external_fence_properties& operator=( VkExternalFenceProperties const & rhs ) 
@@ -11925,11 +14889,27 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_IMPORT_FENCE_WIN32_HANDLE_INFO_KHR;
 	 void * pNext = nullptr;
 public:
-	VkFence fence = VK_NULL_HANDLE;
+	VkFence fence;
 	F_fence_import flags;
 	F_external_fence_handle_type handleType;
-	HANDLE handle = 0;
-	LPCWSTR name = 0;
+	HANDLE handle;
+	LPCWSTR name;
+
+S_import_fence_win32_handle_info_KHR(){}
+
+S_import_fence_win32_handle_info_KHR(
+	VkFence fence_,
+	F_fence_import flags_,
+	F_external_fence_handle_type handleType_,
+	HANDLE handle_,
+	LPCWSTR name_)
+	:fence(fence_)
+	,flags(flags_)
+	,handleType(handleType_)
+	,handle(handle_)
+	,name(name_)
+{
+}
 
 S_import_fence_win32_handle_info_KHR( VkImportFenceWin32HandleInfoKHR const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_import_fence_win32_handle_info_KHR ) );	}
@@ -11954,8 +14934,18 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_FENCE_GET_WIN32_HANDLE_INFO_KHR;
 	 void * pNext = nullptr;
 public:
-	VkFence fence = VK_NULL_HANDLE;
+	VkFence fence;
 	F_external_fence_handle_type handleType;
+
+S_fence_get_win32_handle_info_KHR(){}
+
+S_fence_get_win32_handle_info_KHR(
+	VkFence fence_,
+	F_external_fence_handle_type handleType_)
+	:fence(fence_)
+	,handleType(handleType_)
+{
+}
 
 S_fence_get_win32_handle_info_KHR( VkFenceGetWin32HandleInfoKHR const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_fence_get_win32_handle_info_KHR ) );	}
@@ -11979,10 +14969,24 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_IMPORT_FENCE_FD_INFO_KHR;
 	 void * pNext = nullptr;
 public:
-	VkFence fence = VK_NULL_HANDLE;
+	VkFence fence;
 	F_fence_import flags;
 	F_external_fence_handle_type handleType;
-	int fd = 0;
+	int fd;
+
+S_import_fence_fd_info_KHR(){}
+
+S_import_fence_fd_info_KHR(
+	VkFence fence_,
+	F_fence_import flags_,
+	F_external_fence_handle_type handleType_,
+	int fd_)
+	:fence(fence_)
+	,flags(flags_)
+	,handleType(handleType_)
+	,fd(fd_)
+{
+}
 
 S_import_fence_fd_info_KHR( VkImportFenceFdInfoKHR const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_import_fence_fd_info_KHR ) );	}
@@ -12005,8 +15009,18 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_FENCE_GET_FD_INFO_KHR;
 	 void * pNext = nullptr;
 public:
-	VkFence fence = VK_NULL_HANDLE;
+	VkFence fence;
 	F_external_fence_handle_type handleType;
+
+S_fence_get_fd_info_KHR(){}
+
+S_fence_get_fd_info_KHR(
+	VkFence fence_,
+	F_external_fence_handle_type handleType_)
+	:fence(fence_)
+	,handleType(handleType_)
+{
+}
 
 S_fence_get_fd_info_KHR( VkFenceGetFdInfoKHR const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_fence_get_fd_info_KHR ) );	}
@@ -12030,17 +15044,45 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_SURFACE_CAPABILITIES_2_EXT;
 	void * pNext = nullptr;
 public:
-	uint32_t minImageCount = 0;
-	uint32_t maxImageCount = 0;
-	S_extent_2d currentExtent = {};
-	S_extent_2d minImageExtent = {};
-	S_extent_2d maxImageExtent = {};
-	uint32_t maxImageArrayLayers = 0;
+	uint32_t minImageCount;
+	uint32_t maxImageCount;
+	S_extent_2d currentExtent;
+	S_extent_2d minImageExtent;
+	S_extent_2d maxImageExtent;
+	uint32_t maxImageArrayLayers;
 	F_surface_transform_KHR supportedTransforms;
 	F_surface_transform_KHR currentTransform;
 	F_composite_alpha_KHR supportedCompositeAlpha;
 	F_image_usage supportedUsageFlags;
 	F_surface_counter_EXT supportedSurfaceCounters;
+
+S_surface_capabilities2_EXT(){}
+
+S_surface_capabilities2_EXT(
+	uint32_t minImageCount_,
+	uint32_t maxImageCount_,
+	S_extent_2d currentExtent_,
+	S_extent_2d minImageExtent_,
+	S_extent_2d maxImageExtent_,
+	uint32_t maxImageArrayLayers_,
+	F_surface_transform_KHR supportedTransforms_,
+	F_surface_transform_KHR currentTransform_,
+	F_composite_alpha_KHR supportedCompositeAlpha_,
+	F_image_usage supportedUsageFlags_,
+	F_surface_counter_EXT supportedSurfaceCounters_)
+	:minImageCount(minImageCount_)
+	,maxImageCount(maxImageCount_)
+	,currentExtent(currentExtent_)
+	,minImageExtent(minImageExtent_)
+	,maxImageExtent(maxImageExtent_)
+	,maxImageArrayLayers(maxImageArrayLayers_)
+	,supportedTransforms(supportedTransforms_)
+	,currentTransform(currentTransform_)
+	,supportedCompositeAlpha(supportedCompositeAlpha_)
+	,supportedUsageFlags(supportedUsageFlags_)
+	,supportedSurfaceCounters(supportedSurfaceCounters_)
+{
+}
 
 S_surface_capabilities2_EXT( VkSurfaceCapabilities2EXT const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_surface_capabilities2_EXT ) );	}
@@ -12063,7 +15105,15 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_DISPLAY_POWER_INFO_EXT;
 	 void * pNext = nullptr;
 public:
-	E_display_power_state_EXT powerState = E_display_power_state_EXT::e_off_ext;
+	E_display_power_state_EXT powerState;
+
+S_display_power_info_EXT(){}
+
+S_display_power_info_EXT(
+	E_display_power_state_EXT powerState_)
+	:powerState(powerState_)
+{
+}
 
 S_display_power_info_EXT( VkDisplayPowerInfoEXT const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_display_power_info_EXT ) );	}
@@ -12086,7 +15136,15 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_DEVICE_EVENT_INFO_EXT;
 	 void * pNext = nullptr;
 public:
-	E_device_event_type_EXT deviceEvent = E_device_event_type_EXT::e_display_hotplug_ext;
+	E_device_event_type_EXT deviceEvent;
+
+S_device_event_info_EXT(){}
+
+S_device_event_info_EXT(
+	E_device_event_type_EXT deviceEvent_)
+	:deviceEvent(deviceEvent_)
+{
+}
 
 S_device_event_info_EXT( VkDeviceEventInfoEXT const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_device_event_info_EXT ) );	}
@@ -12109,7 +15167,15 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_DISPLAY_EVENT_INFO_EXT;
 	 void * pNext = nullptr;
 public:
-	E_display_event_type_EXT displayEvent = E_display_event_type_EXT::e_first_pixel_out_ext;
+	E_display_event_type_EXT displayEvent;
+
+S_display_event_info_EXT(){}
+
+S_display_event_info_EXT(
+	E_display_event_type_EXT displayEvent_)
+	:displayEvent(displayEvent_)
+{
+}
 
 S_display_event_info_EXT( VkDisplayEventInfoEXT const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_display_event_info_EXT ) );	}
@@ -12133,9 +15199,21 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_GROUP_PROPERTIES;
 	void * pNext = nullptr;
 public:
-	uint32_t physicalDeviceCount = 0;
-	VkPhysicalDevice physicalDevices[VK_MAX_DEVICE_GROUP_SIZE] = {};
-	VkBool32 subsetAllocation = 0;
+	uint32_t physicalDeviceCount;
+	VkPhysicalDevice physicalDevices[VK_MAX_DEVICE_GROUP_SIZE];
+	VkBool32 subsetAllocation;
+
+S_physical_device_group_properties(){}
+
+S_physical_device_group_properties(
+	uint32_t physicalDeviceCount_,
+	VkPhysicalDevice physicalDevices_[VK_MAX_DEVICE_GROUP_SIZE],
+	VkBool32 subsetAllocation_)
+	:physicalDeviceCount(physicalDeviceCount_)
+	,subsetAllocation(subsetAllocation_)
+{
+memcpy(physicalDevices,physicalDevices_,sizeof(physicalDevices) );
+}
 
 S_physical_device_group_properties( VkPhysicalDeviceGroupProperties const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_physical_device_group_properties ) );	}
@@ -12159,8 +15237,18 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_BIND_BUFFER_MEMORY_DEVICE_GROUP_INFO;
 	 void * pNext = nullptr;
 public:
-	uint32_t deviceIndexCount = 0;
-	const uint32_t * pDeviceIndices = nullptr;
+	uint32_t deviceIndexCount;
+	const uint32_t * pDeviceIndices;
+
+S_bind_buffer_memory_device_group_info(){}
+
+S_bind_buffer_memory_device_group_info(
+	uint32_t deviceIndexCount_,
+	const uint32_t * pDeviceIndices_)
+	:deviceIndexCount(deviceIndexCount_)
+	,pDeviceIndices(pDeviceIndices_)
+{
+}
 
 S_bind_buffer_memory_device_group_info( VkBindBufferMemoryDeviceGroupInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_bind_buffer_memory_device_group_info ) );	}
@@ -12187,9 +15275,21 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_BIND_BUFFER_MEMORY_INFO;
 	 void * pNext = nullptr;
 public:
-	VkBuffer buffer = VK_NULL_HANDLE;
-	VkDeviceMemory memory = VK_NULL_HANDLE;
-	VkDeviceSize memoryOffset = 0;
+	VkBuffer buffer;
+	VkDeviceMemory memory;
+	VkDeviceSize memoryOffset;
+
+S_bind_buffer_memory_info(){}
+
+S_bind_buffer_memory_info(
+	VkBuffer buffer_,
+	VkDeviceMemory memory_,
+	VkDeviceSize memoryOffset_)
+	:buffer(buffer_)
+	,memory(memory_)
+	,memoryOffset(memoryOffset_)
+{
+}
 
 S_bind_buffer_memory_info( VkBindBufferMemoryInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_bind_buffer_memory_info ) );	}
@@ -12215,10 +15315,24 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_BIND_IMAGE_MEMORY_DEVICE_GROUP_INFO;
 	 void * pNext = nullptr;
 public:
-	uint32_t deviceIndexCount = 0;
-	const uint32_t * pDeviceIndices = nullptr;
-	uint32_t splitInstanceBindRegionCount = 0;
-	const S_rect_2d * pSplitInstanceBindRegions = nullptr;
+	uint32_t deviceIndexCount;
+	const uint32_t * pDeviceIndices;
+	uint32_t splitInstanceBindRegionCount;
+	const S_rect_2d * pSplitInstanceBindRegions;
+
+S_bind_image_memory_device_group_info(){}
+
+S_bind_image_memory_device_group_info(
+	uint32_t deviceIndexCount_,
+	const uint32_t * pDeviceIndices_,
+	uint32_t splitInstanceBindRegionCount_,
+	const S_rect_2d * pSplitInstanceBindRegions_)
+	:deviceIndexCount(deviceIndexCount_)
+	,pDeviceIndices(pDeviceIndices_)
+	,splitInstanceBindRegionCount(splitInstanceBindRegionCount_)
+	,pSplitInstanceBindRegions(pSplitInstanceBindRegions_)
+{
+}
 
 S_bind_image_memory_device_group_info( VkBindImageMemoryDeviceGroupInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_bind_image_memory_device_group_info ) );	}
@@ -12244,8 +15358,18 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_BIND_IMAGE_MEMORY_SWAPCHAIN_INFO_KHR;
 	 void * pNext = nullptr;
 public:
-	VkSwapchainKHR swapchain = VK_NULL_HANDLE;
-	uint32_t imageIndex = 0;
+	VkSwapchainKHR swapchain;
+	uint32_t imageIndex;
+
+S_bind_image_memory_swapchain_info_KHR(){}
+
+S_bind_image_memory_swapchain_info_KHR(
+	VkSwapchainKHR swapchain_,
+	uint32_t imageIndex_)
+	:swapchain(swapchain_)
+	,imageIndex(imageIndex_)
+{
+}
 
 S_bind_image_memory_swapchain_info_KHR( VkBindImageMemorySwapchainInfoKHR const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_bind_image_memory_swapchain_info_KHR ) );	}
@@ -12272,6 +15396,14 @@ private:
 	 void * pNext = nullptr;
 public:
 	F_image_aspect planeAspect;
+
+S_bind_image_plane_memory_info(){}
+
+S_bind_image_plane_memory_info(
+	F_image_aspect planeAspect_)
+	:planeAspect(planeAspect_)
+{
+}
 
 S_bind_image_plane_memory_info( VkBindImagePlaneMemoryInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_bind_image_plane_memory_info ) );	}
@@ -12300,9 +15432,21 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_BIND_IMAGE_MEMORY_INFO;
 	 void * pNext = nullptr;
 public:
-	VkImage image = VK_NULL_HANDLE;
-	VkDeviceMemory memory = VK_NULL_HANDLE;
-	VkDeviceSize memoryOffset = 0;
+	VkImage image;
+	VkDeviceMemory memory;
+	VkDeviceSize memoryOffset;
+
+S_bind_image_memory_info(){}
+
+S_bind_image_memory_info(
+	VkImage image_,
+	VkDeviceMemory memory_,
+	VkDeviceSize memoryOffset_)
+	:image(image_)
+	,memory(memory_)
+	,memoryOffset(memoryOffset_)
+{
+}
 
 S_bind_image_memory_info( VkBindImageMemoryInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_bind_image_memory_info ) );	}
@@ -12330,8 +15474,18 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_DEVICE_GROUP_PRESENT_CAPABILITIES_KHR;
 	 void * pNext = nullptr;
 public:
-	uint32_t presentMask[VK_MAX_DEVICE_GROUP_SIZE] = {};
+	uint32_t presentMask[VK_MAX_DEVICE_GROUP_SIZE];
 	F_device_group_present_mode_KHR modes;
+
+S_device_group_present_capabilities_KHR(){}
+
+S_device_group_present_capabilities_KHR(
+	uint32_t presentMask_[VK_MAX_DEVICE_GROUP_SIZE],
+	F_device_group_present_mode_KHR modes_)
+	:modes(modes_)
+{
+memcpy(presentMask,presentMask_,sizeof(presentMask) );
+}
 
 S_device_group_present_capabilities_KHR( VkDeviceGroupPresentCapabilitiesKHR const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_device_group_present_capabilities_KHR ) );	}
@@ -12354,11 +15508,27 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_ACQUIRE_NEXT_IMAGE_INFO_KHR;
 	 void * pNext = nullptr;
 public:
-	VkSwapchainKHR swapchain = VK_NULL_HANDLE;
-	uint64_t timeout = 0;
-	VkSemaphore semaphore = VK_NULL_HANDLE;
-	VkFence fence = VK_NULL_HANDLE;
-	uint32_t deviceMask = 0;
+	VkSwapchainKHR swapchain;
+	uint64_t timeout;
+	VkSemaphore semaphore;
+	VkFence fence;
+	uint32_t deviceMask;
+
+S_acquire_next_image_info_KHR(){}
+
+S_acquire_next_image_info_KHR(
+	VkSwapchainKHR swapchain_,
+	uint64_t timeout_,
+	VkSemaphore semaphore_,
+	VkFence fence_,
+	uint32_t deviceMask_)
+	:swapchain(swapchain_)
+	,timeout(timeout_)
+	,semaphore(semaphore_)
+	,fence(fence_)
+	,deviceMask(deviceMask_)
+{
+}
 
 S_acquire_next_image_info_KHR( VkAcquireNextImageInfoKHR const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_acquire_next_image_info_KHR ) );	}
@@ -12377,12 +15547,14 @@ static_assert(
 /*	VkDescriptorUpdateTemplateEntry
 */
 struct		S_descriptor_update_template_entry{
-	uint32_t dstBinding = 0;
-	uint32_t dstArrayElement = 0;
-	uint32_t descriptorCount = 0;
-	E_descriptor_type descriptorType = E_descriptor_type::e_sampler;
-	size_t offset = 0;
-	size_t stride = 0;
+	uint32_t dstBinding;
+	uint32_t dstArrayElement;
+	uint32_t descriptorCount;
+	E_descriptor_type descriptorType;
+	size_t offset;
+	size_t stride;
+
+S_descriptor_update_template_entry(){}
 
 };
 
@@ -12393,14 +15565,36 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_DESCRIPTOR_UPDATE_TEMPLATE_CREATE_INFO;
 	void * pNext = nullptr;
 public:
-	VkDescriptorUpdateTemplateCreateFlags flags = 0;
-	uint32_t descriptorUpdateEntryCount = 0;
-	const S_descriptor_update_template_entry * pDescriptorUpdateEntries = nullptr;
-	E_descriptor_update_template_type templateType = E_descriptor_update_template_type::e_descriptor_set;
-	VkDescriptorSetLayout descriptorSetLayout = VK_NULL_HANDLE;
-	E_pipeline_bind_point pipelineBindPoint = E_pipeline_bind_point::e_graphics;
-	VkPipelineLayout pipelineLayout = VK_NULL_HANDLE;
-	uint32_t set = 0;
+	VkDescriptorUpdateTemplateCreateFlags flags;
+	uint32_t descriptorUpdateEntryCount;
+	const S_descriptor_update_template_entry * pDescriptorUpdateEntries;
+	E_descriptor_update_template_type templateType;
+	VkDescriptorSetLayout descriptorSetLayout;
+	E_pipeline_bind_point pipelineBindPoint;
+	VkPipelineLayout pipelineLayout;
+	uint32_t set;
+
+S_descriptor_update_template_create_info(){}
+
+S_descriptor_update_template_create_info(
+	VkDescriptorUpdateTemplateCreateFlags flags_,
+	uint32_t descriptorUpdateEntryCount_,
+	const S_descriptor_update_template_entry * pDescriptorUpdateEntries_,
+	E_descriptor_update_template_type templateType_,
+	VkDescriptorSetLayout descriptorSetLayout_,
+	E_pipeline_bind_point pipelineBindPoint_,
+	VkPipelineLayout pipelineLayout_,
+	uint32_t set_)
+	:flags(flags_)
+	,descriptorUpdateEntryCount(descriptorUpdateEntryCount_)
+	,pDescriptorUpdateEntries(pDescriptorUpdateEntries_)
+	,templateType(templateType_)
+	,descriptorSetLayout(descriptorSetLayout_)
+	,pipelineBindPoint(pipelineBindPoint_)
+	,pipelineLayout(pipelineLayout_)
+	,set(set_)
+{
+}
 
 S_descriptor_update_template_create_info( VkDescriptorUpdateTemplateCreateInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_descriptor_update_template_create_info ) );	}
@@ -12419,8 +15613,10 @@ static_assert(
 /*	VkXYColorEXT
 Chromaticity coordinate*/
 struct		S_xy_color_EXT{
-	float x = 0;
-	float y = 0;
+	float x;
+	float y;
+
+S_xy_color_EXT(){}
 
 };
 
@@ -12431,14 +15627,36 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_HDR_METADATA_EXT;
 	 void * pNext = nullptr;
 public:
-	S_xy_color_EXT displayPrimaryRed = {};
-	S_xy_color_EXT displayPrimaryGreen = {};
-	S_xy_color_EXT displayPrimaryBlue = {};
-	S_xy_color_EXT whitePoint = {};
-	float maxLuminance = 0;
-	float minLuminance = 0;
-	float maxContentLightLevel = 0;
-	float maxFrameAverageLightLevel = 0;
+	S_xy_color_EXT displayPrimaryRed;
+	S_xy_color_EXT displayPrimaryGreen;
+	S_xy_color_EXT displayPrimaryBlue;
+	S_xy_color_EXT whitePoint;
+	float maxLuminance;
+	float minLuminance;
+	float maxContentLightLevel;
+	float maxFrameAverageLightLevel;
+
+S_hdr_metadata_EXT(){}
+
+S_hdr_metadata_EXT(
+	S_xy_color_EXT displayPrimaryRed_,
+	S_xy_color_EXT displayPrimaryGreen_,
+	S_xy_color_EXT displayPrimaryBlue_,
+	S_xy_color_EXT whitePoint_,
+	float maxLuminance_,
+	float minLuminance_,
+	float maxContentLightLevel_,
+	float maxFrameAverageLightLevel_)
+	:displayPrimaryRed(displayPrimaryRed_)
+	,displayPrimaryGreen(displayPrimaryGreen_)
+	,displayPrimaryBlue(displayPrimaryBlue_)
+	,whitePoint(whitePoint_)
+	,maxLuminance(maxLuminance_)
+	,minLuminance(minLuminance_)
+	,maxContentLightLevel(maxContentLightLevel_)
+	,maxFrameAverageLightLevel(maxFrameAverageLightLevel_)
+{
+}
 
 S_hdr_metadata_EXT( VkHdrMetadataEXT const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_hdr_metadata_EXT ) );	}
@@ -12458,7 +15676,9 @@ static_assert(
 (returnedonly)
 */
 struct		S_refresh_cycle_duration_GOOGLE{
-	uint64_t refreshDuration = 0;
+	uint64_t refreshDuration;
+
+S_refresh_cycle_duration_GOOGLE(){}
 
 };
 
@@ -12466,11 +15686,13 @@ struct		S_refresh_cycle_duration_GOOGLE{
 (returnedonly)
 */
 struct		S_past_presentation_timing_GOOGLE{
-	uint32_t presentID = 0;
-	uint64_t desiredPresentTime = 0;
-	uint64_t actualPresentTime = 0;
-	uint64_t earliestPresentTime = 0;
-	uint64_t presentMargin = 0;
+	uint32_t presentID;
+	uint64_t desiredPresentTime;
+	uint64_t actualPresentTime;
+	uint64_t earliestPresentTime;
+	uint64_t presentMargin;
+
+S_past_presentation_timing_GOOGLE(){}
 
 };
 
@@ -12482,8 +15704,18 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_IOS_SURFACE_CREATE_INFO_MVK;
 	 void * pNext = nullptr;
 public:
-	VkIOSSurfaceCreateFlagsMVK flags = 0;
-	const void * pView = nullptr;
+	VkIOSSurfaceCreateFlagsMVK flags;
+	const void * pView;
+
+S_ios_surface_create_info_MVK(){}
+
+S_ios_surface_create_info_MVK(
+	VkIOSSurfaceCreateFlagsMVK flags_,
+	const void * pView_)
+	:flags(flags_)
+	,pView(pView_)
+{
+}
 
 S_ios_surface_create_info_MVK( VkIOSSurfaceCreateInfoMVK const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_ios_surface_create_info_MVK ) );	}
@@ -12508,8 +15740,18 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_MACOS_SURFACE_CREATE_INFO_MVK;
 	 void * pNext = nullptr;
 public:
-	VkMacOSSurfaceCreateFlagsMVK flags = 0;
-	const void * pView = nullptr;
+	VkMacOSSurfaceCreateFlagsMVK flags;
+	const void * pView;
+
+S_mac_os_surface_create_info_MVK(){}
+
+S_mac_os_surface_create_info_MVK(
+	VkMacOSSurfaceCreateFlagsMVK flags_,
+	const void * pView_)
+	:flags(flags_)
+	,pView(pView_)
+{
+}
 
 S_mac_os_surface_create_info_MVK( VkMacOSSurfaceCreateInfoMVK const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_mac_os_surface_create_info_MVK ) );	}
@@ -12533,7 +15775,15 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SURFACE_INFO_2_KHR;
 	 void * pNext = nullptr;
 public:
-	VkSurfaceKHR surface = VK_NULL_HANDLE;
+	VkSurfaceKHR surface;
+
+S_physical_device_surface_info2_KHR(){}
+
+S_physical_device_surface_info2_KHR(
+	VkSurfaceKHR surface_)
+	:surface(surface_)
+{
+}
 
 S_physical_device_surface_info2_KHR( VkPhysicalDeviceSurfaceInfo2KHR const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_physical_device_surface_info2_KHR ) );	}
@@ -12559,6 +15809,14 @@ private:
 	void * pNext = nullptr;
 public:
 	F_image_usage sharedPresentSupportedUsageFlags;
+
+S_shared_present_surface_capabilities_KHR(){}
+
+S_shared_present_surface_capabilities_KHR(
+	F_image_usage sharedPresentSupportedUsageFlags_)
+	:sharedPresentSupportedUsageFlags(sharedPresentSupportedUsageFlags_)
+{
+}
 
 S_shared_present_surface_capabilities_KHR( VkSharedPresentSurfaceCapabilitiesKHR const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_shared_present_surface_capabilities_KHR ) );	}
@@ -12586,7 +15844,15 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_SURFACE_CAPABILITIES_2_KHR;
 	void * pNext = nullptr;
 public:
-	S_surface_capabilities_KHR surfaceCapabilities = {};
+	S_surface_capabilities_KHR surfaceCapabilities;
+
+S_surface_capabilities2_KHR(){}
+
+S_surface_capabilities2_KHR(
+	S_surface_capabilities_KHR surfaceCapabilities_)
+	:surfaceCapabilities(surfaceCapabilities_)
+{
+}
 
 S_surface_capabilities2_KHR( VkSurfaceCapabilities2KHR const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_surface_capabilities2_KHR ) );	}
@@ -12612,7 +15878,15 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_SURFACE_FORMAT_2_KHR;
 	void * pNext = nullptr;
 public:
-	S_surface_format_KHR surfaceFormat = {};
+	S_surface_format_KHR surfaceFormat;
+
+S_surface_format2_KHR(){}
+
+S_surface_format2_KHR(
+	S_surface_format_KHR surfaceFormat_)
+	:surfaceFormat(surfaceFormat_)
+{
+}
 
 S_surface_format2_KHR( VkSurfaceFormat2KHR const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_surface_format2_KHR ) );	}
@@ -12636,7 +15910,15 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_DISPLAY_PROPERTIES_2_KHR;
 	void * pNext = nullptr;
 public:
-	S_display_properties_KHR displayProperties = {};
+	S_display_properties_KHR displayProperties;
+
+S_display_properties2_KHR(){}
+
+S_display_properties2_KHR(
+	S_display_properties_KHR displayProperties_)
+	:displayProperties(displayProperties_)
+{
+}
 
 S_display_properties2_KHR( VkDisplayProperties2KHR const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_display_properties2_KHR ) );	}
@@ -12660,7 +15942,15 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_DISPLAY_PLANE_PROPERTIES_2_KHR;
 	void * pNext = nullptr;
 public:
-	S_display_plane_properties_KHR displayPlaneProperties = {};
+	S_display_plane_properties_KHR displayPlaneProperties;
+
+S_display_plane_properties2_KHR(){}
+
+S_display_plane_properties2_KHR(
+	S_display_plane_properties_KHR displayPlaneProperties_)
+	:displayPlaneProperties(displayPlaneProperties_)
+{
+}
 
 S_display_plane_properties2_KHR( VkDisplayPlaneProperties2KHR const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_display_plane_properties2_KHR ) );	}
@@ -12684,7 +15974,15 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_DISPLAY_MODE_PROPERTIES_2_KHR;
 	void * pNext = nullptr;
 public:
-	S_display_mode_properties_KHR displayModeProperties = {};
+	S_display_mode_properties_KHR displayModeProperties;
+
+S_display_mode_properties2_KHR(){}
+
+S_display_mode_properties2_KHR(
+	S_display_mode_properties_KHR displayModeProperties_)
+	:displayModeProperties(displayModeProperties_)
+{
+}
 
 S_display_mode_properties2_KHR( VkDisplayModeProperties2KHR const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_display_mode_properties2_KHR ) );	}
@@ -12707,8 +16005,18 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_DISPLAY_PLANE_INFO_2_KHR;
 	 void * pNext = nullptr;
 public:
-	VkDisplayModeKHR mode = VK_NULL_HANDLE;
-	uint32_t planeIndex = 0;
+	VkDisplayModeKHR mode;
+	uint32_t planeIndex;
+
+S_display_plane_info2_KHR(){}
+
+S_display_plane_info2_KHR(
+	VkDisplayModeKHR mode_,
+	uint32_t planeIndex_)
+	:mode(mode_)
+	,planeIndex(planeIndex_)
+{
+}
 
 S_display_plane_info2_KHR( VkDisplayPlaneInfo2KHR const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_display_plane_info2_KHR ) );	}
@@ -12732,7 +16040,15 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_DISPLAY_PLANE_CAPABILITIES_2_KHR;
 	void * pNext = nullptr;
 public:
-	S_display_plane_capabilities_KHR capabilities = {};
+	S_display_plane_capabilities_KHR capabilities;
+
+S_display_plane_capabilities2_KHR(){}
+
+S_display_plane_capabilities2_KHR(
+	S_display_plane_capabilities_KHR capabilities_)
+	:capabilities(capabilities_)
+{
+}
 
 S_display_plane_capabilities2_KHR( VkDisplayPlaneCapabilities2KHR const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_display_plane_capabilities2_KHR ) );	}
@@ -12755,7 +16071,15 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_BUFFER_MEMORY_REQUIREMENTS_INFO_2;
 	 void * pNext = nullptr;
 public:
-	VkBuffer buffer = VK_NULL_HANDLE;
+	VkBuffer buffer;
+
+S_buffer_memory_requirements_info2(){}
+
+S_buffer_memory_requirements_info2(
+	VkBuffer buffer_)
+	:buffer(buffer_)
+{
+}
 
 S_buffer_memory_requirements_info2( VkBufferMemoryRequirementsInfo2 const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_buffer_memory_requirements_info2 ) );	}
@@ -12780,6 +16104,14 @@ private:
 	 void * pNext = nullptr;
 public:
 	F_image_aspect planeAspect;
+
+S_image_plane_memory_requirements_info(){}
+
+S_image_plane_memory_requirements_info(
+	F_image_aspect planeAspect_)
+	:planeAspect(planeAspect_)
+{
+}
 
 S_image_plane_memory_requirements_info( VkImagePlaneMemoryRequirementsInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_image_plane_memory_requirements_info ) );	}
@@ -12806,7 +16138,15 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_IMAGE_MEMORY_REQUIREMENTS_INFO_2;
 	 void * pNext = nullptr;
 public:
-	VkImage image = VK_NULL_HANDLE;
+	VkImage image;
+
+S_image_memory_requirements_info2(){}
+
+S_image_memory_requirements_info2(
+	VkImage image_)
+	:image(image_)
+{
+}
 
 S_image_memory_requirements_info2( VkImageMemoryRequirementsInfo2 const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_image_memory_requirements_info2 ) );	}
@@ -12831,7 +16171,15 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_IMAGE_SPARSE_MEMORY_REQUIREMENTS_INFO_2;
 	 void * pNext = nullptr;
 public:
-	VkImage image = VK_NULL_HANDLE;
+	VkImage image;
+
+S_image_sparse_memory_requirements_info2(){}
+
+S_image_sparse_memory_requirements_info2(
+	VkImage image_)
+	:image(image_)
+{
+}
 
 S_image_sparse_memory_requirements_info2( VkImageSparseMemoryRequirementsInfo2 const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_image_sparse_memory_requirements_info2 ) );	}
@@ -12856,8 +16204,18 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_MEMORY_DEDICATED_REQUIREMENTS;
 	void * pNext = nullptr;
 public:
-	VkBool32 prefersDedicatedAllocation = 0;
-	VkBool32 requiresDedicatedAllocation = 0;
+	VkBool32 prefersDedicatedAllocation;
+	VkBool32 requiresDedicatedAllocation;
+
+S_memory_dedicated_requirements(){}
+
+S_memory_dedicated_requirements(
+	VkBool32 prefersDedicatedAllocation_,
+	VkBool32 requiresDedicatedAllocation_)
+	:prefersDedicatedAllocation(prefersDedicatedAllocation_)
+	,requiresDedicatedAllocation(requiresDedicatedAllocation_)
+{
+}
 
 S_memory_dedicated_requirements( VkMemoryDedicatedRequirements const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_memory_dedicated_requirements ) );	}
@@ -12885,7 +16243,15 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_MEMORY_REQUIREMENTS_2;
 	void * pNext = nullptr;
 public:
-	S_memory_requirements memoryRequirements = {};
+	S_memory_requirements memoryRequirements;
+
+S_memory_requirements2(){}
+
+S_memory_requirements2(
+	S_memory_requirements memoryRequirements_)
+	:memoryRequirements(memoryRequirements_)
+{
+}
 
 S_memory_requirements2( VkMemoryRequirements2 const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_memory_requirements2 ) );	}
@@ -12911,7 +16277,15 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_SPARSE_IMAGE_MEMORY_REQUIREMENTS_2;
 	void * pNext = nullptr;
 public:
-	S_sparse_image_memory_requirements memoryRequirements = {};
+	S_sparse_image_memory_requirements memoryRequirements;
+
+S_sparse_image_memory_requirements2(){}
+
+S_sparse_image_memory_requirements2(
+	S_sparse_image_memory_requirements memoryRequirements_)
+	:memoryRequirements(memoryRequirements_)
+{
+}
 
 S_sparse_image_memory_requirements2( VkSparseImageMemoryRequirements2 const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_sparse_image_memory_requirements2 ) );	}
@@ -12936,14 +16310,36 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_CREATE_INFO;
 	 void * pNext = nullptr;
 public:
-	E_format format = E_format::e_undefined;
-	E_sampler_ycbcr_model_conversion ycbcrModel = E_sampler_ycbcr_model_conversion::e_rgb_identity;
-	E_sampler_ycbcr_range ycbcrRange = E_sampler_ycbcr_range::e_itu_full;
-	S_component_mapping components = {};
-	E_chroma_location xChromaOffset = E_chroma_location::e_cosited_even;
-	E_chroma_location yChromaOffset = E_chroma_location::e_cosited_even;
-	E_filter chromaFilter = E_filter::e_nearest;
-	VkBool32 forceExplicitReconstruction = 0;
+	E_format format;
+	E_sampler_ycbcr_model_conversion ycbcrModel;
+	E_sampler_ycbcr_range ycbcrRange;
+	S_component_mapping components;
+	E_chroma_location xChromaOffset;
+	E_chroma_location yChromaOffset;
+	E_filter chromaFilter;
+	VkBool32 forceExplicitReconstruction;
+
+S_sampler_ycbcr_conversion_create_info(){}
+
+S_sampler_ycbcr_conversion_create_info(
+	E_format format_,
+	E_sampler_ycbcr_model_conversion ycbcrModel_,
+	E_sampler_ycbcr_range ycbcrRange_,
+	S_component_mapping components_,
+	E_chroma_location xChromaOffset_,
+	E_chroma_location yChromaOffset_,
+	E_filter chromaFilter_,
+	VkBool32 forceExplicitReconstruction_)
+	:format(format_)
+	,ycbcrModel(ycbcrModel_)
+	,ycbcrRange(ycbcrRange_)
+	,components(components_)
+	,xChromaOffset(xChromaOffset_)
+	,yChromaOffset(yChromaOffset_)
+	,chromaFilter(chromaFilter_)
+	,forceExplicitReconstruction(forceExplicitReconstruction_)
+{
+}
 
 S_sampler_ycbcr_conversion_create_info( VkSamplerYcbcrConversionCreateInfo const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_sampler_ycbcr_conversion_create_info ) );	}
@@ -12970,9 +16366,21 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_CONDITIONAL_RENDERING_BEGIN_INFO_EXT;
 	 void * pNext = nullptr;
 public:
-	VkBuffer buffer = VK_NULL_HANDLE;
-	VkDeviceSize offset = 0;
+	VkBuffer buffer;
+	VkDeviceSize offset;
 	F_conditional_rendering_EXT flags;
+
+S_conditional_rendering_begin_info_EXT(){}
+
+S_conditional_rendering_begin_info_EXT(
+	VkBuffer buffer_,
+	VkDeviceSize offset_,
+	F_conditional_rendering_EXT flags_)
+	:buffer(buffer_)
+	,offset(offset_)
+	,flags(flags_)
+{
+}
 
 S_conditional_rendering_begin_info_EXT( VkConditionalRenderingBeginInfoEXT const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_conditional_rendering_begin_info_EXT ) );	}
@@ -12996,8 +16404,20 @@ private:
 	 void * pNext = nullptr;
 public:
 	F_device_queue_create flags;
-	uint32_t queueFamilyIndex = 0;
-	uint32_t queueIndex = 0;
+	uint32_t queueFamilyIndex;
+	uint32_t queueIndex;
+
+S_device_queue_info2(){}
+
+S_device_queue_info2(
+	F_device_queue_create flags_,
+	uint32_t queueFamilyIndex_,
+	uint32_t queueIndex_)
+	:flags(flags_)
+	,queueFamilyIndex(queueFamilyIndex_)
+	,queueIndex(queueIndex_)
+{
+}
 
 S_device_queue_info2( VkDeviceQueueInfo2 const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_device_queue_info2 ) );	}
@@ -13021,7 +16441,15 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_MULTISAMPLE_PROPERTIES_EXT;
 	void * pNext = nullptr;
 public:
-	S_extent_2d maxSampleLocationGridSize = {};
+	S_extent_2d maxSampleLocationGridSize;
+
+S_multisample_properties_EXT(){}
+
+S_multisample_properties_EXT(
+	S_extent_2d maxSampleLocationGridSize_)
+	:maxSampleLocationGridSize(maxSampleLocationGridSize_)
+{
+}
 
 S_multisample_properties_EXT( VkMultisamplePropertiesEXT const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_multisample_properties_EXT ) );	}
@@ -13044,9 +16472,21 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_VALIDATION_CACHE_CREATE_INFO_EXT;
 	 void * pNext = nullptr;
 public:
-	VkValidationCacheCreateFlagsEXT flags = 0;
-	size_t initialDataSize = 0;
-	const void * pInitialData = nullptr;
+	VkValidationCacheCreateFlagsEXT flags;
+	size_t initialDataSize;
+	const void * pInitialData;
+
+S_validation_cache_create_info_EXT(){}
+
+S_validation_cache_create_info_EXT(
+	VkValidationCacheCreateFlagsEXT flags_,
+	size_t initialDataSize_,
+	const void * pInitialData_)
+	:flags(flags_)
+	,initialDataSize(initialDataSize_)
+	,pInitialData(pInitialData_)
+{
+}
 
 S_validation_cache_create_info_EXT( VkValidationCacheCreateInfoEXT const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_validation_cache_create_info_EXT ) );	}
@@ -13071,7 +16511,15 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_DESCRIPTOR_SET_VARIABLE_DESCRIPTOR_COUNT_LAYOUT_SUPPORT_EXT;
 	void * pNext = nullptr;
 public:
-	uint32_t maxVariableDescriptorCount = 0;
+	uint32_t maxVariableDescriptorCount;
+
+S_descriptor_set_variable_descriptor_count_layout_support_EXT(){}
+
+S_descriptor_set_variable_descriptor_count_layout_support_EXT(
+	uint32_t maxVariableDescriptorCount_)
+	:maxVariableDescriptorCount(maxVariableDescriptorCount_)
+{
+}
 
 S_descriptor_set_variable_descriptor_count_layout_support_EXT( VkDescriptorSetVariableDescriptorCountLayoutSupportEXT const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_descriptor_set_variable_descriptor_count_layout_support_EXT ) );	}
@@ -13099,7 +16547,15 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_SUPPORT;
 	void * pNext = nullptr;
 public:
-	VkBool32 supported = 0;
+	VkBool32 supported;
+
+S_descriptor_set_layout_support(){}
+
+S_descriptor_set_layout_support(
+	VkBool32 supported_)
+	:supported(supported_)
+{
+}
 
 S_descriptor_set_layout_support( VkDescriptorSetLayoutSupport const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_descriptor_set_layout_support ) );	}
@@ -13125,10 +16581,24 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_NATIVE_BUFFER_ANDROID;
 	 void * pNext = nullptr;
 public:
-	const void * handle = nullptr;
-	int stride = 0;
-	int format = 0;
-	int usage = 0;
+	const void * handle;
+	int stride;
+	int format;
+	int usage;
+
+S_native_buffer_ANDROID(){}
+
+S_native_buffer_ANDROID(
+	const void * handle_,
+	int stride_,
+	int format_,
+	int usage_)
+	:handle(handle_)
+	,stride(stride_)
+	,format(format_)
+	,usage(usage_)
+{
+}
 
 S_native_buffer_ANDROID( VkNativeBufferANDROID const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_native_buffer_ANDROID ) );	}
@@ -13149,11 +16619,13 @@ static_assert(
 (returnedonly)
 */
 struct		S_shader_resource_usage_AMD{
-	uint32_t numUsedVgprs = 0;
-	uint32_t numUsedSgprs = 0;
-	uint32_t ldsSizePerLocalWorkGroup = 0;
-	size_t ldsUsageSizeInBytes = 0;
-	size_t scratchMemUsageInBytes = 0;
+	uint32_t numUsedVgprs;
+	uint32_t numUsedSgprs;
+	uint32_t ldsSizePerLocalWorkGroup;
+	size_t ldsUsageSizeInBytes;
+	size_t scratchMemUsageInBytes;
+
+S_shader_resource_usage_AMD(){}
 
 };
 
@@ -13162,12 +16634,14 @@ struct		S_shader_resource_usage_AMD{
 */
 struct		S_shader_statistics_info_AMD{
 	F_shader_stage shaderStageMask;
-	S_shader_resource_usage_AMD resourceUsage = {};
-	uint32_t numPhysicalVgprs = 0;
-	uint32_t numPhysicalSgprs = 0;
-	uint32_t numAvailableVgprs = 0;
-	uint32_t numAvailableSgprs = 0;
-	uint32_t computeWorkGroupSize[3] = {};
+	S_shader_resource_usage_AMD resourceUsage;
+	uint32_t numPhysicalVgprs;
+	uint32_t numPhysicalSgprs;
+	uint32_t numAvailableVgprs;
+	uint32_t numAvailableSgprs;
+	uint32_t computeWorkGroupSize[3];
+
+S_shader_statistics_info_AMD(){}
 
 };
 
@@ -13178,9 +16652,21 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_DEBUG_UTILS_OBJECT_NAME_INFO_EXT;
 	 void * pNext = nullptr;
 public:
-	E_object_type objectType = E_object_type::e_unknown;
-	uint64_t objectHandle = 0;
-	const char * pObjectName = nullptr;
+	E_object_type objectType;
+	uint64_t objectHandle;
+	const char * pObjectName;
+
+S_debug_utils_object_name_info_EXT(){}
+
+S_debug_utils_object_name_info_EXT(
+	E_object_type objectType_,
+	uint64_t objectHandle_,
+	const char * pObjectName_)
+	:objectType(objectType_)
+	,objectHandle(objectHandle_)
+	,pObjectName(pObjectName_)
+{
+}
 
 S_debug_utils_object_name_info_EXT( VkDebugUtilsObjectNameInfoEXT const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_debug_utils_object_name_info_EXT ) );	}
@@ -13203,11 +16689,27 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_DEBUG_UTILS_OBJECT_TAG_INFO_EXT;
 	 void * pNext = nullptr;
 public:
-	E_object_type objectType = E_object_type::e_unknown;
-	uint64_t objectHandle = 0;
-	uint64_t tagName = 0;
-	size_t tagSize = 0;
-	const void * pTag = nullptr;
+	E_object_type objectType;
+	uint64_t objectHandle;
+	uint64_t tagName;
+	size_t tagSize;
+	const void * pTag;
+
+S_debug_utils_object_tag_info_EXT(){}
+
+S_debug_utils_object_tag_info_EXT(
+	E_object_type objectType_,
+	uint64_t objectHandle_,
+	uint64_t tagName_,
+	size_t tagSize_,
+	const void * pTag_)
+	:objectType(objectType_)
+	,objectHandle(objectHandle_)
+	,tagName(tagName_)
+	,tagSize(tagSize_)
+	,pTag(pTag_)
+{
+}
 
 S_debug_utils_object_tag_info_EXT( VkDebugUtilsObjectTagInfoEXT const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_debug_utils_object_tag_info_EXT ) );	}
@@ -13230,8 +16732,18 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_DEBUG_UTILS_LABEL_EXT;
 	 void * pNext = nullptr;
 public:
-	const char * pLabelName = nullptr;
-	float color[4] = {};
+	const char * pLabelName;
+	float color[4];
+
+S_debug_utils_label_EXT(){}
+
+S_debug_utils_label_EXT(
+	const char * pLabelName_,
+	float color_[4])
+	:pLabelName(pLabelName_)
+{
+memcpy(color,color_,sizeof(color) );
+}
 
 S_debug_utils_label_EXT( VkDebugUtilsLabelEXT const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_debug_utils_label_EXT ) );	}
@@ -13254,16 +16766,42 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CALLBACK_DATA_EXT;
 	 void * pNext = nullptr;
 public:
-	VkDebugUtilsMessengerCallbackDataFlagsEXT flags = 0;
-	const char * pMessageIdName = nullptr;
-	int32_t messageIdNumber = 0;
-	const char * pMessage = nullptr;
-	uint32_t queueLabelCount = 0;
-	S_debug_utils_label_EXT * pQueueLabels = nullptr;
-	uint32_t cmdBufLabelCount = 0;
-	S_debug_utils_label_EXT * pCmdBufLabels = nullptr;
-	uint32_t objectCount = 0;
-	S_debug_utils_object_name_info_EXT * pObjects = nullptr;
+	VkDebugUtilsMessengerCallbackDataFlagsEXT flags;
+	const char * pMessageIdName;
+	int32_t messageIdNumber;
+	const char * pMessage;
+	uint32_t queueLabelCount;
+	S_debug_utils_label_EXT * pQueueLabels;
+	uint32_t cmdBufLabelCount;
+	S_debug_utils_label_EXT * pCmdBufLabels;
+	uint32_t objectCount;
+	S_debug_utils_object_name_info_EXT * pObjects;
+
+S_debug_utils_messenger_callback_data_EXT(){}
+
+S_debug_utils_messenger_callback_data_EXT(
+	VkDebugUtilsMessengerCallbackDataFlagsEXT flags_,
+	const char * pMessageIdName_,
+	int32_t messageIdNumber_,
+	const char * pMessage_,
+	uint32_t queueLabelCount_,
+	S_debug_utils_label_EXT * pQueueLabels_,
+	uint32_t cmdBufLabelCount_,
+	S_debug_utils_label_EXT * pCmdBufLabels_,
+	uint32_t objectCount_,
+	S_debug_utils_object_name_info_EXT * pObjects_)
+	:flags(flags_)
+	,pMessageIdName(pMessageIdName_)
+	,messageIdNumber(messageIdNumber_)
+	,pMessage(pMessage_)
+	,queueLabelCount(queueLabelCount_)
+	,pQueueLabels(pQueueLabels_)
+	,cmdBufLabelCount(cmdBufLabelCount_)
+	,pCmdBufLabels(pCmdBufLabels_)
+	,objectCount(objectCount_)
+	,pObjects(pObjects_)
+{
+}
 
 S_debug_utils_messenger_callback_data_EXT( VkDebugUtilsMessengerCallbackDataEXT const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_debug_utils_messenger_callback_data_EXT ) );	}
@@ -13286,7 +16824,15 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_MEMORY_HOST_POINTER_PROPERTIES_EXT;
 	void * pNext = nullptr;
 public:
-	uint32_t memoryTypeBits = 0;
+	uint32_t memoryTypeBits;
+
+S_memory_host_pointer_properties_EXT(){}
+
+S_memory_host_pointer_properties_EXT(
+	uint32_t memoryTypeBits_)
+	:memoryTypeBits(memoryTypeBits_)
+{
+}
 
 S_memory_host_pointer_properties_EXT( VkMemoryHostPointerPropertiesEXT const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_memory_host_pointer_properties_EXT ) );	}
@@ -13310,14 +16856,38 @@ private:
 	 void * pNext = nullptr;
 public:
 	F_attachment_description flags;
-	E_format format = E_format::e_undefined;
+	E_format format;
 	F_sample_count samples;
-	E_attachment_load_op loadOp = E_attachment_load_op::e_load;
-	E_attachment_store_op storeOp = E_attachment_store_op::e_store;
-	E_attachment_load_op stencilLoadOp = E_attachment_load_op::e_load;
-	E_attachment_store_op stencilStoreOp = E_attachment_store_op::e_store;
-	E_image_layout initialLayout = E_image_layout::e_undefined;
-	E_image_layout finalLayout = E_image_layout::e_undefined;
+	E_attachment_load_op loadOp;
+	E_attachment_store_op storeOp;
+	E_attachment_load_op stencilLoadOp;
+	E_attachment_store_op stencilStoreOp;
+	E_image_layout initialLayout;
+	E_image_layout finalLayout;
+
+S_attachment_description2_KHR(){}
+
+S_attachment_description2_KHR(
+	F_attachment_description flags_,
+	E_format format_,
+	F_sample_count samples_,
+	E_attachment_load_op loadOp_,
+	E_attachment_store_op storeOp_,
+	E_attachment_load_op stencilLoadOp_,
+	E_attachment_store_op stencilStoreOp_,
+	E_image_layout initialLayout_,
+	E_image_layout finalLayout_)
+	:flags(flags_)
+	,format(format_)
+	,samples(samples_)
+	,loadOp(loadOp_)
+	,storeOp(storeOp_)
+	,stencilLoadOp(stencilLoadOp_)
+	,stencilStoreOp(stencilStoreOp_)
+	,initialLayout(initialLayout_)
+	,finalLayout(finalLayout_)
+{
+}
 
 S_attachment_description2_KHR( VkAttachmentDescription2KHR const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_attachment_description2_KHR ) );	}
@@ -13340,9 +16910,21 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_ATTACHMENT_REFERENCE_2_KHR;
 	 void * pNext = nullptr;
 public:
-	uint32_t attachment = 0;
-	E_image_layout layout = E_image_layout::e_undefined;
+	uint32_t attachment;
+	E_image_layout layout;
 	F_image_aspect aspectMask;
+
+S_attachment_reference2_KHR(){}
+
+S_attachment_reference2_KHR(
+	uint32_t attachment_,
+	E_image_layout layout_,
+	F_image_aspect aspectMask_)
+	:attachment(attachment_)
+	,layout(layout_)
+	,aspectMask(aspectMask_)
+{
+}
 
 S_attachment_reference2_KHR( VkAttachmentReference2KHR const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_attachment_reference2_KHR ) );	}
@@ -13366,16 +16948,44 @@ private:
 	 void * pNext = nullptr;
 public:
 	F_subpass_description flags;
-	E_pipeline_bind_point pipelineBindPoint = E_pipeline_bind_point::e_graphics;
-	uint32_t viewMask = 0;
-	uint32_t inputAttachmentCount = 0;
-	const S_attachment_reference2_KHR * pInputAttachments = nullptr;
-	uint32_t colorAttachmentCount = 0;
-	const S_attachment_reference2_KHR * pColorAttachments = nullptr;
-	const S_attachment_reference2_KHR * pResolveAttachments = nullptr;
-	const S_attachment_reference2_KHR * pDepthStencilAttachment = nullptr;
-	uint32_t preserveAttachmentCount = 0;
-	const uint32_t * pPreserveAttachments = nullptr;
+	E_pipeline_bind_point pipelineBindPoint;
+	uint32_t viewMask;
+	uint32_t inputAttachmentCount;
+	const S_attachment_reference2_KHR * pInputAttachments;
+	uint32_t colorAttachmentCount;
+	const S_attachment_reference2_KHR * pColorAttachments;
+	const S_attachment_reference2_KHR * pResolveAttachments;
+	const S_attachment_reference2_KHR * pDepthStencilAttachment;
+	uint32_t preserveAttachmentCount;
+	const uint32_t * pPreserveAttachments;
+
+S_subpass_description2_KHR(){}
+
+S_subpass_description2_KHR(
+	F_subpass_description flags_,
+	E_pipeline_bind_point pipelineBindPoint_,
+	uint32_t viewMask_,
+	uint32_t inputAttachmentCount_,
+	const S_attachment_reference2_KHR * pInputAttachments_,
+	uint32_t colorAttachmentCount_,
+	const S_attachment_reference2_KHR * pColorAttachments_,
+	const S_attachment_reference2_KHR * pResolveAttachments_,
+	const S_attachment_reference2_KHR * pDepthStencilAttachment_,
+	uint32_t preserveAttachmentCount_,
+	const uint32_t * pPreserveAttachments_)
+	:flags(flags_)
+	,pipelineBindPoint(pipelineBindPoint_)
+	,viewMask(viewMask_)
+	,inputAttachmentCount(inputAttachmentCount_)
+	,pInputAttachments(pInputAttachments_)
+	,colorAttachmentCount(colorAttachmentCount_)
+	,pColorAttachments(pColorAttachments_)
+	,pResolveAttachments(pResolveAttachments_)
+	,pDepthStencilAttachment(pDepthStencilAttachment_)
+	,preserveAttachmentCount(preserveAttachmentCount_)
+	,pPreserveAttachments(pPreserveAttachments_)
+{
+}
 
 S_subpass_description2_KHR( VkSubpassDescription2KHR const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_subpass_description2_KHR ) );	}
@@ -13398,14 +17008,36 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_SUBPASS_DEPENDENCY_2_KHR;
 	 void * pNext = nullptr;
 public:
-	uint32_t srcSubpass = 0;
-	uint32_t dstSubpass = 0;
+	uint32_t srcSubpass;
+	uint32_t dstSubpass;
 	F_pipeline_stage srcStageMask;
 	F_pipeline_stage dstStageMask;
 	F_access srcAccessMask;
 	F_access dstAccessMask;
 	F_dependency dependencyFlags;
-	int32_t viewOffset = 0;
+	int32_t viewOffset;
+
+S_subpass_dependency2_KHR(){}
+
+S_subpass_dependency2_KHR(
+	uint32_t srcSubpass_,
+	uint32_t dstSubpass_,
+	F_pipeline_stage srcStageMask_,
+	F_pipeline_stage dstStageMask_,
+	F_access srcAccessMask_,
+	F_access dstAccessMask_,
+	F_dependency dependencyFlags_,
+	int32_t viewOffset_)
+	:srcSubpass(srcSubpass_)
+	,dstSubpass(dstSubpass_)
+	,srcStageMask(srcStageMask_)
+	,dstStageMask(dstStageMask_)
+	,srcAccessMask(srcAccessMask_)
+	,dstAccessMask(dstAccessMask_)
+	,dependencyFlags(dependencyFlags_)
+	,viewOffset(viewOffset_)
+{
+}
 
 S_subpass_dependency2_KHR( VkSubpassDependency2KHR const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_subpass_dependency2_KHR ) );	}
@@ -13429,14 +17061,38 @@ private:
 	 void * pNext = nullptr;
 public:
 	F_render_pass_create flags;
-	uint32_t attachmentCount = 0;
-	const S_attachment_description2_KHR * pAttachments = nullptr;
-	uint32_t subpassCount = 0;
-	const S_subpass_description2_KHR * pSubpasses = nullptr;
-	uint32_t dependencyCount = 0;
-	const S_subpass_dependency2_KHR * pDependencies = nullptr;
-	uint32_t correlatedViewMaskCount = 0;
-	const uint32_t * pCorrelatedViewMasks = nullptr;
+	uint32_t attachmentCount;
+	const S_attachment_description2_KHR * pAttachments;
+	uint32_t subpassCount;
+	const S_subpass_description2_KHR * pSubpasses;
+	uint32_t dependencyCount;
+	const S_subpass_dependency2_KHR * pDependencies;
+	uint32_t correlatedViewMaskCount;
+	const uint32_t * pCorrelatedViewMasks;
+
+S_render_pass_create_info2_KHR(){}
+
+S_render_pass_create_info2_KHR(
+	F_render_pass_create flags_,
+	uint32_t attachmentCount_,
+	const S_attachment_description2_KHR * pAttachments_,
+	uint32_t subpassCount_,
+	const S_subpass_description2_KHR * pSubpasses_,
+	uint32_t dependencyCount_,
+	const S_subpass_dependency2_KHR * pDependencies_,
+	uint32_t correlatedViewMaskCount_,
+	const uint32_t * pCorrelatedViewMasks_)
+	:flags(flags_)
+	,attachmentCount(attachmentCount_)
+	,pAttachments(pAttachments_)
+	,subpassCount(subpassCount_)
+	,pSubpasses(pSubpasses_)
+	,dependencyCount(dependencyCount_)
+	,pDependencies(pDependencies_)
+	,correlatedViewMaskCount(correlatedViewMaskCount_)
+	,pCorrelatedViewMasks(pCorrelatedViewMasks_)
+{
+}
 
 S_render_pass_create_info2_KHR( VkRenderPassCreateInfo2KHR const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_render_pass_create_info2_KHR ) );	}
@@ -13459,7 +17115,15 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_SUBPASS_BEGIN_INFO_KHR;
 	 void * pNext = nullptr;
 public:
-	E_subpass_contents contents = E_subpass_contents::e_inline;
+	E_subpass_contents contents;
+
+S_subpass_begin_info_KHR(){}
+
+S_subpass_begin_info_KHR(
+	E_subpass_contents contents_)
+	:contents(contents_)
+{
+}
 
 S_subpass_begin_info_KHR( VkSubpassBeginInfoKHR const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_subpass_begin_info_KHR ) );	}
@@ -13482,14 +17146,7 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_SUBPASS_END_INFO_KHR;
 	 void * pNext = nullptr;
 
-S_subpass_end_info_KHR( VkSubpassEndInfoKHR const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_subpass_end_info_KHR ) );	}
-S_subpass_end_info_KHR& operator=( VkSubpassEndInfoKHR const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_subpass_end_info_KHR ) ); return *this;	}
-operator VkSubpassEndInfoKHR const&() const 
-	{	return *reinterpret_cast<const VkSubpassEndInfoKHR*>(this);	}
-operator VkSubpassEndInfoKHR &() 
-	{	return *reinterpret_cast<VkSubpassEndInfoKHR*>(this);	}
+S_subpass_end_info_KHR(){}
 
 };
 static_assert(
@@ -13506,14 +17163,36 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_ANDROID_HARDWARE_BUFFER_FORMAT_PROPERTIES_ANDROID;
 	void * pNext = nullptr;
 public:
-	E_format format = E_format::e_undefined;
-	uint64_t externalFormat = 0;
+	E_format format;
+	uint64_t externalFormat;
 	F_format_feature formatFeatures;
-	S_component_mapping samplerYcbcrConversionComponents = {};
-	E_sampler_ycbcr_model_conversion suggestedYcbcrModel = E_sampler_ycbcr_model_conversion::e_rgb_identity;
-	E_sampler_ycbcr_range suggestedYcbcrRange = E_sampler_ycbcr_range::e_itu_full;
-	E_chroma_location suggestedXChromaOffset = E_chroma_location::e_cosited_even;
-	E_chroma_location suggestedYChromaOffset = E_chroma_location::e_cosited_even;
+	S_component_mapping samplerYcbcrConversionComponents;
+	E_sampler_ycbcr_model_conversion suggestedYcbcrModel;
+	E_sampler_ycbcr_range suggestedYcbcrRange;
+	E_chroma_location suggestedXChromaOffset;
+	E_chroma_location suggestedYChromaOffset;
+
+S_android_hardware_buffer_format_properties_ANDROID(){}
+
+S_android_hardware_buffer_format_properties_ANDROID(
+	E_format format_,
+	uint64_t externalFormat_,
+	F_format_feature formatFeatures_,
+	S_component_mapping samplerYcbcrConversionComponents_,
+	E_sampler_ycbcr_model_conversion suggestedYcbcrModel_,
+	E_sampler_ycbcr_range suggestedYcbcrRange_,
+	E_chroma_location suggestedXChromaOffset_,
+	E_chroma_location suggestedYChromaOffset_)
+	:format(format_)
+	,externalFormat(externalFormat_)
+	,formatFeatures(formatFeatures_)
+	,samplerYcbcrConversionComponents(samplerYcbcrConversionComponents_)
+	,suggestedYcbcrModel(suggestedYcbcrModel_)
+	,suggestedYcbcrRange(suggestedYcbcrRange_)
+	,suggestedXChromaOffset(suggestedXChromaOffset_)
+	,suggestedYChromaOffset(suggestedYChromaOffset_)
+{
+}
 
 S_android_hardware_buffer_format_properties_ANDROID( VkAndroidHardwareBufferFormatPropertiesANDROID const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_android_hardware_buffer_format_properties_ANDROID ) );	}
@@ -13545,8 +17224,18 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_ANDROID_HARDWARE_BUFFER_PROPERTIES_ANDROID;
 	void * pNext = nullptr;
 public:
-	VkDeviceSize allocationSize = 0;
-	uint32_t memoryTypeBits = 0;
+	VkDeviceSize allocationSize;
+	uint32_t memoryTypeBits;
+
+S_android_hardware_buffer_properties_ANDROID(){}
+
+S_android_hardware_buffer_properties_ANDROID(
+	VkDeviceSize allocationSize_,
+	uint32_t memoryTypeBits_)
+	:allocationSize(allocationSize_)
+	,memoryTypeBits(memoryTypeBits_)
+{
+}
 
 S_android_hardware_buffer_properties_ANDROID( VkAndroidHardwareBufferPropertiesANDROID const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_android_hardware_buffer_properties_ANDROID ) );	}
@@ -13575,7 +17264,15 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_MEMORY_GET_ANDROID_HARDWARE_BUFFER_INFO_ANDROID;
 	 void * pNext = nullptr;
 public:
-	VkDeviceMemory memory = VK_NULL_HANDLE;
+	VkDeviceMemory memory;
+
+S_memory_get_android_hardware_buffer_info_ANDROID(){}
+
+S_memory_get_android_hardware_buffer_info_ANDROID(
+	VkDeviceMemory memory_)
+	:memory(memory_)
+{
+}
 
 S_memory_get_android_hardware_buffer_info_ANDROID( VkMemoryGetAndroidHardwareBufferInfoANDROID const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_memory_get_android_hardware_buffer_info_ANDROID ) );	}
@@ -13601,7 +17298,17 @@ private:
 	void * pNext = nullptr;
 public:
 	F_pipeline_stage stage;
-	void * pCheckpointMarker = nullptr;
+	void * pCheckpointMarker;
+
+S_checkpoint_data_NV(){}
+
+S_checkpoint_data_NV(
+	F_pipeline_stage stage_,
+	void * pCheckpointMarker_)
+	:stage(stage_)
+	,pCheckpointMarker(pCheckpointMarker_)
+{
+}
 
 S_checkpoint_data_NV( VkCheckpointDataNV const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_checkpoint_data_NV ) );	}
@@ -13620,8 +17327,10 @@ static_assert(
 /*	VkDrawMeshTasksIndirectCommandNV
 */
 struct		S_draw_mesh_tasks_indirect_command_NV{
-	uint32_t taskCount = 0;
-	uint32_t firstTask = 0;
+	uint32_t taskCount;
+	uint32_t firstTask;
+
+S_draw_mesh_tasks_indirect_command_NV(){}
 
 };
 
@@ -13633,13 +17342,35 @@ private:
 	 void * pNext = nullptr;
 public:
 	F_pipeline_create flags;
-	uint32_t stageCount = 0;
-	const S_pipeline_shader_stage_create_info * pStages = nullptr;
-	const uint32_t * pGroupNumbers = nullptr;
-	uint32_t maxRecursionDepth = 0;
-	VkPipelineLayout layout = VK_NULL_HANDLE;
-	VkPipeline basePipelineHandle = VK_NULL_HANDLE;
-	int32_t basePipelineIndex = 0;
+	uint32_t stageCount;
+	const S_pipeline_shader_stage_create_info * pStages;
+	const uint32_t * pGroupNumbers;
+	uint32_t maxRecursionDepth;
+	VkPipelineLayout layout;
+	VkPipeline basePipelineHandle;
+	int32_t basePipelineIndex;
+
+S_raytracing_pipeline_create_info_NVX(){}
+
+S_raytracing_pipeline_create_info_NVX(
+	F_pipeline_create flags_,
+	uint32_t stageCount_,
+	const S_pipeline_shader_stage_create_info * pStages_,
+	const uint32_t * pGroupNumbers_,
+	uint32_t maxRecursionDepth_,
+	VkPipelineLayout layout_,
+	VkPipeline basePipelineHandle_,
+	int32_t basePipelineIndex_)
+	:flags(flags_)
+	,stageCount(stageCount_)
+	,pStages(pStages_)
+	,pGroupNumbers(pGroupNumbers_)
+	,maxRecursionDepth(maxRecursionDepth_)
+	,layout(layout_)
+	,basePipelineHandle(basePipelineHandle_)
+	,basePipelineIndex(basePipelineIndex_)
+{
+}
 
 S_raytracing_pipeline_create_info_NVX( VkRaytracingPipelineCreateInfoNVX const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_raytracing_pipeline_create_info_NVX ) );	}
@@ -13662,42 +17393,45 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_GEOMETRY_TRIANGLES_NVX;
 	 void * pNext = nullptr;
 public:
-	VkBuffer vertexData = VK_NULL_HANDLE;
-	VkDeviceSize vertexOffset = 0;
-	uint32_t vertexCount = 0;
-	VkDeviceSize vertexStride = 0;
-	E_format vertexFormat = E_format::e_undefined;
-	VkBuffer indexData = VK_NULL_HANDLE;
-	VkDeviceSize indexOffset = 0;
-	uint32_t indexCount = 0;
-	E_index_type indexType = E_index_type::e_uint16;
-	VkBuffer transformData = VK_NULL_HANDLE;
-	VkDeviceSize transformOffset = 0;
+	VkBuffer vertexData;
+	VkDeviceSize vertexOffset;
+	uint32_t vertexCount;
+	VkDeviceSize vertexStride;
+	E_format vertexFormat;
+	VkBuffer indexData;
+	VkDeviceSize indexOffset;
+	uint32_t indexCount;
+	E_index_type indexType;
+	VkBuffer transformData;
+	VkDeviceSize transformOffset;
 
-	S_geometry_triangles_NVX(
-		VkBuffer vertexData_ = VK_NULL_HANDLE,
-		VkDeviceSize vertexOffset_ = 0,
-		uint32_t vertexCount_ = 0,
-		VkDeviceSize vertexStride_ = 0,
-		E_format vertexFormat_ = E_format::e_undefined,
-		VkBuffer indexData_ = VK_NULL_HANDLE,
-		VkDeviceSize indexOffset_ = 0,
-		uint32_t indexCount_ = 0,
-		E_index_type indexType_ = E_index_type::e_uint16,
-		VkBuffer transformData_ = VK_NULL_HANDLE,
-		VkDeviceSize transformOffset_ = 0)
-		: vertexData(vertexData_)
-		, vertexOffset(vertexOffset_)
-		, vertexCount(vertexCount_)
-		, vertexStride(vertexStride_)
-		, vertexFormat(vertexFormat_)
-		, indexData(indexData_)
-		, indexOffset(indexOffset_)
-		, indexCount(indexCount_)
-		, indexType(indexType_)
-		, transformData(transformData_)
-		, transformOffset(transformOffset_)
-	{}
+S_geometry_triangles_NVX(){}
+
+S_geometry_triangles_NVX(
+	VkBuffer vertexData_,
+	VkDeviceSize vertexOffset_,
+	uint32_t vertexCount_,
+	VkDeviceSize vertexStride_,
+	E_format vertexFormat_,
+	VkBuffer indexData_,
+	VkDeviceSize indexOffset_,
+	uint32_t indexCount_,
+	E_index_type indexType_,
+	VkBuffer transformData_,
+	VkDeviceSize transformOffset_)
+	:vertexData(vertexData_)
+	,vertexOffset(vertexOffset_)
+	,vertexCount(vertexCount_)
+	,vertexStride(vertexStride_)
+	,vertexFormat(vertexFormat_)
+	,indexData(indexData_)
+	,indexOffset(indexOffset_)
+	,indexCount(indexCount_)
+	,indexType(indexType_)
+	,transformData(transformData_)
+	,transformOffset(transformOffset_)
+{
+}
 
 S_geometry_triangles_NVX( VkGeometryTrianglesNVX const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_geometry_triangles_NVX ) );	}
@@ -13720,21 +17454,24 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_GEOMETRY_AABB_NVX;
 	 void * pNext = nullptr;
 public:
-	VkBuffer aabbData = VK_NULL_HANDLE;
-	uint32_t numAABBs = 0;
-	uint32_t stride = 0;
-	VkDeviceSize offset = 0;
+	VkBuffer aabbData;
+	uint32_t numAABBs;
+	uint32_t stride;
+	VkDeviceSize offset;
 
-	S_geometry_aabb_NVX(
-		VkBuffer aabbData_ = VK_NULL_HANDLE,
-		uint32_t numAABBs_ = 0,
-		uint32_t stride_ = 0,
-		VkDeviceSize offset_ = 0)
-		:aabbData(aabbData_)
-		,numAABBs(numAABBs_)
-		,stride(stride_)
-		,offset(offset_)
-	{}
+S_geometry_aabb_NVX(){}
+
+S_geometry_aabb_NVX(
+	VkBuffer aabbData_,
+	uint32_t numAABBs_,
+	uint32_t stride_,
+	VkDeviceSize offset_)
+	:aabbData(aabbData_)
+	,numAABBs(numAABBs_)
+	,stride(stride_)
+	,offset(offset_)
+{
+}
 
 S_geometry_aabb_NVX( VkGeometryAABBNVX const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_geometry_aabb_NVX ) );	}
@@ -13753,8 +17490,10 @@ static_assert(
 /*	VkGeometryDataNVX
 */
 struct		S_geometry_data_NVX{
-	S_geometry_triangles_NVX triangles = {};
-	S_geometry_aabb_NVX aabbs = {};
+	S_geometry_triangles_NVX triangles;
+	S_geometry_aabb_NVX aabbs;
+
+S_geometry_data_NVX(){}
 
 };
 
@@ -13765,9 +17504,21 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_GEOMETRY_NVX;
 	 void * pNext = nullptr;
 public:
-	E_geometry_type_NVX geometryType = E_geometry_type_NVX::e_triangles_nvx;
-	S_geometry_data_NVX geometry = {};
-	F_geometry_NVX flags = F_geometry_NVX::b_no_duplicate_any_hit_invocation_nvx;
+	E_geometry_type_NVX geometryType;
+	S_geometry_data_NVX geometry;
+	F_geometry_NVX flags;
+
+S_geometry_NVX(){}
+
+S_geometry_NVX(
+	E_geometry_type_NVX geometryType_,
+	S_geometry_data_NVX geometry_,
+	F_geometry_NVX flags_)
+	:geometryType(geometryType_)
+	,geometry(geometry_)
+	,flags(flags_)
+{
+}
 
 S_geometry_NVX( VkGeometryNVX const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_geometry_NVX ) );	}
@@ -13790,12 +17541,30 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_CREATE_INFO_NVX;
 	 void * pNext = nullptr;
 public:
-	E_acceleration_structure_type_NVX type = E_acceleration_structure_type_NVX::e_top_level_nvx;
+	E_acceleration_structure_type_NVX type;
 	F_build_acceleration_structure_NVX flags;
-	VkDeviceSize compactedSize = 0;
-	uint32_t instanceCount = 0;
-	uint32_t geometryCount = 0;
-	const S_geometry_NVX * pGeometries = nullptr;
+	VkDeviceSize compactedSize;
+	uint32_t instanceCount;
+	uint32_t geometryCount;
+	const S_geometry_NVX * pGeometries;
+
+S_acceleration_structure_create_info_NVX(){}
+
+S_acceleration_structure_create_info_NVX(
+	E_acceleration_structure_type_NVX type_,
+	F_build_acceleration_structure_NVX flags_,
+	VkDeviceSize compactedSize_,
+	uint32_t instanceCount_,
+	uint32_t geometryCount_,
+	const S_geometry_NVX * pGeometries_)
+	:type(type_)
+	,flags(flags_)
+	,compactedSize(compactedSize_)
+	,instanceCount(instanceCount_)
+	,geometryCount(geometryCount_)
+	,pGeometries(pGeometries_)
+{
+}
 
 S_acceleration_structure_create_info_NVX( VkAccelerationStructureCreateInfoNVX const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_acceleration_structure_create_info_NVX ) );	}
@@ -13818,11 +17587,27 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_BIND_ACCELERATION_STRUCTURE_MEMORY_INFO_NVX;
 	 void * pNext = nullptr;
 public:
-	VkAccelerationStructureNVX accelerationStructure = VK_NULL_HANDLE;
-	VkDeviceMemory memory = VK_NULL_HANDLE;
-	VkDeviceSize memoryOffset = 0;
-	uint32_t deviceIndexCount = 0;
-	const uint32_t * pDeviceIndices = nullptr;
+	VkAccelerationStructureNVX accelerationStructure;
+	VkDeviceMemory memory;
+	VkDeviceSize memoryOffset;
+	uint32_t deviceIndexCount;
+	const uint32_t * pDeviceIndices;
+
+S_bind_acceleration_structure_memory_info_NVX(){}
+
+S_bind_acceleration_structure_memory_info_NVX(
+	VkAccelerationStructureNVX accelerationStructure_,
+	VkDeviceMemory memory_,
+	VkDeviceSize memoryOffset_,
+	uint32_t deviceIndexCount_,
+	const uint32_t * pDeviceIndices_)
+	:accelerationStructure(accelerationStructure_)
+	,memory(memory_)
+	,memoryOffset(memoryOffset_)
+	,deviceIndexCount(deviceIndexCount_)
+	,pDeviceIndices(pDeviceIndices_)
+{
+}
 
 S_bind_acceleration_structure_memory_info_NVX( VkBindAccelerationStructureMemoryInfoNVX const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_bind_acceleration_structure_memory_info_NVX ) );	}
@@ -13845,7 +17630,15 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_MEMORY_REQUIREMENTS_INFO_NVX;
 	 void * pNext = nullptr;
 public:
-	VkAccelerationStructureNVX accelerationStructure = VK_NULL_HANDLE;
+	VkAccelerationStructureNVX accelerationStructure;
+
+S_acceleration_structure_memory_requirements_info_NVX(){}
+
+S_acceleration_structure_memory_requirements_info_NVX(
+	VkAccelerationStructureNVX accelerationStructure_)
+	:accelerationStructure(accelerationStructure_)
+{
+}
 
 S_acceleration_structure_memory_requirements_info_NVX( VkAccelerationStructureMemoryRequirementsInfoNVX const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_acceleration_structure_memory_requirements_info_NVX ) );	}
@@ -13870,7 +17663,15 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_IMAGE_DRM_FORMAT_MODIFIER_PROPERTIES_EXT;
 	void * pNext = nullptr;
 public:
-	uint64_t drmFormatModifier = 0;
+	uint64_t drmFormatModifier;
+
+S_image_drm_format_modifier_properties_EXT(){}
+
+S_image_drm_format_modifier_properties_EXT(
+	uint64_t drmFormatModifier_)
+	:drmFormatModifier(drmFormatModifier_)
+{
+}
 
 S_image_drm_format_modifier_properties_EXT( VkImageDrmFormatModifierPropertiesEXT const & rhs )
 	{	memcpy( this, &rhs, sizeof( S_image_drm_format_modifier_properties_EXT ) );	}

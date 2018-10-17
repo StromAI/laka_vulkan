@@ -144,7 +144,9 @@
     <Xml Include="code_generation\.idea\modules.xml" />
     <Xml Include="code_generation\.idea\vcs.xml" />
     <Xml Include="code_generation\.idea\workspace.xml" />
-    <Xml Include="vk.xml" />
+    <Xml Include="vk.xml">
+      <SubType>Designer</SubType>
+    </Xml>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

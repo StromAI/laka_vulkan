@@ -22,9 +22,7 @@ Permission is granted to anyone to use this software for any purpose, including 
     #平台相关结构问题 vk.xml里根本没有说明过
     #想让pNext可以被IDE自动枚举到编码界面 但是VS这个IDE的自动完成或提示真是弱爆 用VA也一样!
 
-#todo:先过编译
-#todo:const成员的结构体使用构造函数进行初始化.
-#todo:pNext封装重新设计
+#todo:将struct父子关系链写进每个struct注释
 
 import re
 from bs4 import BeautifulSoup
@@ -293,6 +291,7 @@ for enum in enum_list:
 #========================= flag bits =======================
 flagbits_out = ""
 flag_bits_list = soup.registry.find_all('enums', attrs={'type':'bitmask'})
+fb_obj_list = []
 for enum in flag_bits_list:
     vk_name = enum.get('name')
     temp_name = enum.get('name').replace("FlagBits", "")
@@ -405,6 +404,17 @@ for enum in flag_bits_list:
         .format(fb_obj.my_name).replace("@","{").replace("$","}")
 
     all_type_dict[fb_obj.vk_name] = fb_obj
+    fb_obj_list.append(fb_obj)
+
+'''
+flags_list = soup.registry.types.find_all('type', attrs={'category':'bitmask'})
+for flags in flags_list:
+    if len(flags.find_all('name'))>0:
+        flags_name = flags.find_all('name')[0].get_text()
+        my_name = name_dict.get(flags_name.replace("Flags","FlagBits") )
+        if my_name != None:
+            name_dict[flags_name] = my_name
+'''
 
 #========================== 处理struct ========================
 struct_out = ""
@@ -433,6 +443,7 @@ def out_struct(s,cpp_out_str):
     if s.is_wsi == 1:
         out += "#ifdef "+s.wsi_macro+"\n"
 
+    have_const = 0
     out += "struct\t\t" + s.my_name + "{\n"
     count = 0
     for m in s.members:
@@ -443,39 +454,80 @@ def out_struct(s,cpp_out_str):
             m.comment+="\t/* "+m.comment.replace("\n","")+" */\n"
 
         out += "\t"+m.final_text
-        if m.default_value!="" and m.default_value != None:
-            out+=" = " + m.default_value
-        out+=";\n"
+        if m.name == "sType" or m.name == "pNext":
+            out+=" = "+ m.default_value
+        out += ";\n"
 
         if m.name == "pNext" and (count+1) < len(s.members):
             out += "public:\n"
+
+        if m.final_text.find("const") != -1:
+            have_const = 1
+
         count+=1
 
-    if s.have_sType == 1:
-        out+= \
-            "\n{0}( {1} const & rhs )\n"\
-            "\t@\tmemcpy( this, &rhs, sizeof( {0} ) );\t$\n"\
-            "{0}& operator=( {1} const & rhs ) \n"\
-            "\t@\tmemcpy( this, &rhs, sizeof( {0} ) ); return *this;\t$\n"\
-            "operator {1} const&() const \n"\
-            "\t@\treturn *reinterpret_cast<const {1}*>(this);\t$\n"\
-            "operator {1} &() \n"\
-            "\t@\treturn *reinterpret_cast<{1}*>(this);\t$\n"\
-        .format(s.my_name,s.vk_name).replace("@","{").replace("$","}")
+    #构造函数
+    out+="\n"+s.my_name+"(){}\n"
+    if s.have_sType == 1 and len(s.members) > 2:
+        out += "\n"+s.my_name+"("
+        count = 0
+        for m in s.members:
+            if m.name == "sType" or m.name == "pNext":
+                continue
+            if count != 0:
+                out+=","
+            de_temp = ""
+            if m.final_text.find("[") == -1:
+                de_temp+=m.final_text+"_"
+            else:
+                de_temp+=m.final_text.replace("[","_[")
+            out+="\n\t"+de_temp
+            #if m.default_value != "" and m.default_value != None:
+                #out+=" = "+m.default_value
+            count+=1
+        out+=")"
+        count = 0
+        for m in s.members:
+            if m.name == "sType" or m.name == "pNext" or m.final_text.find('[') != -1:
+                continue
+            if count == 0:
+                out+="\n\t:"
+            else:
+                out+="\n\t,"
+            out+=m.name+"("+m.name+"_)"
+            count+=1
+        out+="\n{\n"
+        for m in s.members:
+            if m.final_text.find('[') == -1:
+                continue
+            out+="memcpy("+m.name+","+m.name+"_,"+"sizeof("+m.name+") );\n"
+        out+="}\n\n"
 
-    count = 0
-    for ex2 in s.struct_extends_to_array:
-        if count == 0:
-            out+="\n"
-        ex2_s = struct_dict[ex2]
-        if ex2_s.is_wsi == 1:
-            out+="#ifdef "+ex2_s.wsi_macro+"\n"
-        out+="friend "+ex2_s.my_name+";\n"
-        if ex2_s.is_wsi == 1:
-            out+="#endif\n"
-        count+=1
+        if s.have_sType == 1:
+            out+= \
+                "{0}( {1} const & rhs )\n"\
+                "\t@\tmemcpy( this, &rhs, sizeof( {0} ) );\t$\n"\
+                "{0}& operator=( {1} const & rhs ) \n"\
+                "\t@\tmemcpy( this, &rhs, sizeof( {0} ) ); return *this;\t$\n"\
+                "operator {1} const&() const \n"\
+                "\t@\treturn *reinterpret_cast<const {1}*>(this);\t$\n"\
+                "operator {1} &() \n"\
+                "\t@\treturn *reinterpret_cast<{1}*>(this);\t$\n"\
+            .format(s.my_name,s.vk_name).replace("@","{").replace("$","}")
 
+        count = 0
+        for ex2 in s.struct_extends_to_array:
+            if count == 0:
+                out+="\n"
+            ex2_s = struct_dict[ex2]
+            if ex2_s.is_wsi == 1:
+                out+="#ifdef "+ex2_s.wsi_macro+"\n"
+            out+="friend "+ex2_s.my_name+";\n"
+            if ex2_s.is_wsi == 1:
+                out+="#endif\n"
+            count+=1
 
+#pNext
     count = 0
     for ex in s.struct_extends:
         if count == 0:
@@ -658,6 +710,8 @@ for struct in struct_list:
                     if temp.my_name[:2] == "E_":
                         if len(all_type_dict[temp.vk_name].members)>0:
                             m.default_value = temp.my_name+"::"+all_type_dict[temp.vk_name].members[0].name.my_name
+                    if temp.my_name[:2] == "F_":
+                        m.default_value = "{}"
                 else:
                     m.default_value = "0"
 
