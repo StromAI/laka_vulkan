@@ -224,11 +224,11 @@ namespace laka {namespace vk {
 		VkResult wait_idle();
 		//...
 		VkResult submit(
-			std::vector<VkSubmitInfo>& pSubmitInfo,
+			std::vector<S_submit_info>& pSubmitInfo,
 			Fence&	fence);
 		//...
 		VkResult bind_sparse(
-			std::vector<VkBindSparseInfo>&              pBindInfo,
+			std::vector<S_bind_sparse_info>&              pBindInfo,
 			Fence&                                      fence);
 	};
 
