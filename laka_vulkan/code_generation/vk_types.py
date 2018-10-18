@@ -528,19 +528,20 @@ def out_struct(s,cpp_out_str):
             count+=1
 
 #pNext
+    temp_h_out = ""
+    cpp_str = ""
     count = 0
     for ex in s.struct_extends:
         if count == 0:
-            out+="\n"
-            count+=1
+            temp_h_out+="\n"
         ex_s = struct_dict[ex]
         if ex_s.is_wsi==1:
-            out+="#ifdef "+ex_s.wsi_macro+"\n"
-        out += s.my_name+"& n_"+ex_s.my_name.replace("S_","")+"("+ex_s.my_name+" const& next_);\n"
+            temp_h_out+="#ifdef "+ex_s.wsi_macro+"\n"
+        temp_h_out += s.my_name+"& n_"+ex_s.my_name.replace("S_","")+"("+ex_s.my_name+" const& next_);\n"
         if ex_s.is_wsi==1:
-            out+="#endif\n"
+            temp_h_out+="#endif\n"
 
-        cpp_str = ""
+
         if ex_s.is_wsi==1:
             cpp_str+="#ifdef "+ex_s.wsi_macro+"\n"
         cpp_str += s.my_name + "& "+s.my_name+"::\nn_"+ex_s.my_name.replace("S_","")+"("+ex_s.my_name+" const& next_)\n{\n"+\
@@ -556,16 +557,58 @@ def out_struct(s,cpp_out_str):
             cpp_str+="#endif\n"
         else:
             cpp_str+="\n"
-        cpp_out_str.append(cpp_str)
+        count += 1
+
+    temp_h_out2 = ""
+    cpp_str2 = ""
+    N_name = s.my_name.replace("S_","N_")
+    #用于函数参数pNext的快捷结构
+    if count!=0:
+        temp_h_out2+="\nstruct "+N_name+"{\nprivate:\n\tvoid* pNext = nullptr;\npublic:\n"\
+        "void* get(){ return pNext; }"
+        count2 = 0
+        for ex in s.struct_extends:
+            if count2 == 0:
+                temp_h_out2+="\n"
+            ex_s = struct_dict[ex]
+            if ex_s.is_wsi==1:
+                temp_h_out2+="#ifdef "+ex_s.wsi_macro+"\n"
+            temp_h_out2 += N_name+"& n_"+ex_s.my_name.replace("S_","")+"("+ex_s.my_name+" const& next_);\n"
+            if ex_s.is_wsi==1:
+                temp_h_out2+="#endif\n"
+
+
+            if ex_s.is_wsi==1:
+                cpp_str2+="#ifdef "+ex_s.wsi_macro+"\n"
+            cpp_str2 += N_name + "& "+N_name+"::\nn_"+ex_s.my_name.replace("S_","")+"("+ex_s.my_name+" const& next_)\n{\n"+\
+                            "void* next = (void*)&next_;void* tail;\n" \
+                            "if (pNext != nullptr){\n" \
+                            "do {tail = next;next = ((S_base_structure*)next)->pNext;} \n" \
+                            "while (next != nullptr);\n" \
+                            "((S_base_structure*)tail)->pNext = (void*)pNext;\n" \
+                            "}\n" \
+                            "pNext = (void*)&next_;\n"\
+                            "return *this;\n}\n"
+            if ex_s.is_wsi==1:
+                cpp_str2+="#endif\n"
+            else:
+                cpp_str2+="\n"
+            count2 += 1
+
+    cpp_out_str.append(cpp_str)
+    out+=temp_h_out+"};\n"
 
     # 处理pNext
     is_ex_to = len(s.struct_extends_to_array) > 0
     is_ex_base = len(s.struct_extends) > 0
     is_pNext = is_ex_base or is_ex_to
 
-    out += "\n};\n"
     if s.have_sType==1:
         out += "static_assert(\n\tsizeof(" + s.my_name + ") == sizeof(" + s.vk_name + "),\n\t\"struct and wrapper have different size!\");\n"
+
+    if count>0:
+        cpp_out_str.append(cpp_str2)
+        out += temp_h_out2 + "};\n"
 
     #宏结束
     if s.is_wsi == 1:

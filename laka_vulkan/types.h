@@ -4375,7 +4375,6 @@ struct		S_offset_2d{
 	int32_t y;
 
 S_offset_2d(){}
-
 };
 
 /*	VkOffset3D
@@ -4386,7 +4385,6 @@ struct		S_offset_3d{
 	int32_t z;
 
 S_offset_3d(){}
-
 };
 
 /*	VkExtent2D
@@ -4396,7 +4394,6 @@ struct		S_extent_2d{
 	uint32_t height;
 
 S_extent_2d(){}
-
 };
 
 /*	VkExtent3D
@@ -4407,7 +4404,6 @@ struct		S_extent_3d{
 	uint32_t depth;
 
 S_extent_3d(){}
-
 };
 
 /*	VkViewport
@@ -4421,7 +4417,6 @@ struct		S_viewport{
 	float maxDepth;
 
 S_viewport(){}
-
 };
 
 /*	VkRect2D
@@ -4431,7 +4426,6 @@ struct		S_rect_2d{
 	S_extent_2d extent;
 
 S_rect_2d(){}
-
 };
 
 /*	VkClearRect
@@ -4442,7 +4436,6 @@ struct		S_clear_rect{
 	uint32_t layerCount;
 
 S_clear_rect(){}
-
 };
 
 /*	VkComponentMapping
@@ -4454,7 +4447,6 @@ struct		S_component_mapping{
 	E_component_swizzle a;
 
 S_component_mapping(){}
-
 };
 
 /*	VkPhysicalDeviceLimits
@@ -4569,7 +4561,6 @@ struct		S_physical_device_limits{
 	VkDeviceSize nonCoherentAtomSize;
 
 S_physical_device_limits(){}
-
 };
 
 /*	VkPhysicalDeviceSparseProperties
@@ -4583,7 +4574,6 @@ struct		S_physical_device_sparse_properties{
 	VkBool32 residencyNonResidentStrict;
 
 S_physical_device_sparse_properties(){}
-
 };
 
 /*	VkPhysicalDeviceProperties
@@ -4601,7 +4591,6 @@ struct		S_physical_device_properties{
 	S_physical_device_sparse_properties sparseProperties;
 
 S_physical_device_properties(){}
-
 };
 
 /*	VkExtensionProperties
@@ -4612,7 +4601,6 @@ struct		S_extension_properties{
 	uint32_t specVersion;
 
 S_extension_properties(){}
-
 };
 
 /*	VkLayerProperties
@@ -4625,7 +4613,6 @@ struct		S_layer_properties{
 	char description[VK_MAX_DESCRIPTION_SIZE];
 
 S_layer_properties(){}
-
 };
 
 /*	VkApplicationInfo
@@ -4665,7 +4652,6 @@ operator VkApplicationInfo const&() const
 	{	return *reinterpret_cast<const VkApplicationInfo*>(this);	}
 operator VkApplicationInfo &() 
 	{	return *reinterpret_cast<VkApplicationInfo*>(this);	}
-
 };
 static_assert(
 	sizeof(S_application_info) == sizeof(VkApplicationInfo),
@@ -4682,7 +4668,6 @@ struct		S_allocation_callbacks{
 	PFN_vkInternalFreeNotification pfnInternalFree;
 
 S_allocation_callbacks(){}
-
 };
 
 /*	VkDeviceQueueGlobalPriorityCreateInfoEXT
@@ -4713,7 +4698,6 @@ operator VkDeviceQueueGlobalPriorityCreateInfoEXT &()
 	{	return *reinterpret_cast<VkDeviceQueueGlobalPriorityCreateInfoEXT*>(this);	}
 
 friend S_device_queue_create_info;
-
 };
 static_assert(
 	sizeof(S_device_queue_global_priority_create_info_EXT) == sizeof(VkDeviceQueueGlobalPriorityCreateInfoEXT),
@@ -4757,11 +4741,18 @@ operator VkDeviceQueueCreateInfo &()
 	{	return *reinterpret_cast<VkDeviceQueueCreateInfo*>(this);	}
 
 S_device_queue_create_info& n_device_queue_global_priority_create_info_EXT(S_device_queue_global_priority_create_info_EXT const& next_);
-
 };
 static_assert(
 	sizeof(S_device_queue_create_info) == sizeof(VkDeviceQueueCreateInfo),
 	"struct and wrapper have different size!");
+
+struct N_device_queue_create_info{
+private:
+	void* pNext = nullptr;
+public:
+void* get(){ return pNext; }
+N_device_queue_create_info& n_device_queue_global_priority_create_info_EXT(S_device_queue_global_priority_create_info_EXT const& next_);
+};
 
 /*	VkPhysicalDeviceFeatures
 */
@@ -4823,7 +4814,6 @@ struct		S_physical_device_features{
 	VkBool32 inheritedQueries;
 
 S_physical_device_features(){}
-
 };
 
 /*	VkPhysicalDeviceVariablePointerFeatures
@@ -4858,7 +4848,6 @@ operator VkPhysicalDeviceVariablePointerFeatures &()
 
 friend S_physical_device_features2;
 friend S_device_create_info;
-
 };
 static_assert(
 	sizeof(S_physical_device_variable_pointer_features) == sizeof(VkPhysicalDeviceVariablePointerFeatures),
@@ -4899,7 +4888,6 @@ operator VkPhysicalDeviceMultiviewFeatures &()
 
 friend S_physical_device_features2;
 friend S_device_create_info;
-
 };
 static_assert(
 	sizeof(S_physical_device_multiview_features) == sizeof(VkPhysicalDeviceMultiviewFeatures),
@@ -4943,7 +4931,6 @@ operator VkPhysicalDevice16BitStorageFeatures &()
 
 friend S_physical_device_features2;
 friend S_device_create_info;
-
 };
 static_assert(
 	sizeof(S_physical_device_16bit_storage_features) == sizeof(VkPhysicalDevice16BitStorageFeatures),
@@ -4978,7 +4965,6 @@ operator VkPhysicalDeviceSamplerYcbcrConversionFeatures &()
 
 friend S_physical_device_features2;
 friend S_device_create_info;
-
 };
 static_assert(
 	sizeof(S_physical_device_sampler_ycbcr_conversion_features) == sizeof(VkPhysicalDeviceSamplerYcbcrConversionFeatures),
@@ -5013,7 +4999,6 @@ operator VkPhysicalDeviceProtectedMemoryFeatures &()
 
 friend S_physical_device_features2;
 friend S_device_create_info;
-
 };
 static_assert(
 	sizeof(S_physical_device_protected_memory_features) == sizeof(VkPhysicalDeviceProtectedMemoryFeatures),
@@ -5048,7 +5033,6 @@ operator VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT &()
 
 friend S_physical_device_features2;
 friend S_device_create_info;
-
 };
 static_assert(
 	sizeof(S_physical_device_blend_operation_advanced_features_EXT) == sizeof(VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT),
@@ -5087,7 +5071,6 @@ operator VkPhysicalDeviceInlineUniformBlockFeaturesEXT &()
 
 friend S_physical_device_features2;
 friend S_device_create_info;
-
 };
 static_assert(
 	sizeof(S_physical_device_inline_uniform_block_features_EXT) == sizeof(VkPhysicalDeviceInlineUniformBlockFeaturesEXT),
@@ -5122,7 +5105,6 @@ operator VkPhysicalDeviceShaderDrawParameterFeatures &()
 
 friend S_physical_device_features2;
 friend S_device_create_info;
-
 };
 static_assert(
 	sizeof(S_physical_device_shader_draw_parameter_features) == sizeof(VkPhysicalDeviceShaderDrawParameterFeatures),
@@ -5214,7 +5196,6 @@ operator VkPhysicalDeviceDescriptorIndexingFeaturesEXT &()
 
 friend S_physical_device_features2;
 friend S_device_create_info;
-
 };
 static_assert(
 	sizeof(S_physical_device_descriptor_indexing_features_EXT) == sizeof(VkPhysicalDeviceDescriptorIndexingFeaturesEXT),
@@ -5255,7 +5236,6 @@ operator VkPhysicalDevice8BitStorageFeaturesKHR &()
 
 friend S_physical_device_features2;
 friend S_device_create_info;
-
 };
 static_assert(
 	sizeof(S_physical_device_8bit_storage_features_KHR) == sizeof(VkPhysicalDevice8BitStorageFeaturesKHR),
@@ -5293,7 +5273,6 @@ operator VkPhysicalDeviceConditionalRenderingFeaturesEXT &()
 
 friend S_physical_device_features2;
 friend S_device_create_info;
-
 };
 static_assert(
 	sizeof(S_physical_device_conditional_rendering_features_EXT) == sizeof(VkPhysicalDeviceConditionalRenderingFeaturesEXT),
@@ -5332,7 +5311,6 @@ operator VkPhysicalDeviceVulkanMemoryModelFeaturesKHR &()
 
 friend S_physical_device_features2;
 friend S_device_create_info;
-
 };
 static_assert(
 	sizeof(S_physical_device_vulkan_memory_model_features_KHR) == sizeof(VkPhysicalDeviceVulkanMemoryModelFeaturesKHR),
@@ -5371,7 +5349,6 @@ operator VkPhysicalDeviceShaderAtomicInt64FeaturesKHR &()
 
 friend S_physical_device_features2;
 friend S_device_create_info;
-
 };
 static_assert(
 	sizeof(S_physical_device_shader_atomic_int64_features_KHR) == sizeof(VkPhysicalDeviceShaderAtomicInt64FeaturesKHR),
@@ -5410,7 +5387,6 @@ operator VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT &()
 
 friend S_physical_device_features2;
 friend S_device_create_info;
-
 };
 static_assert(
 	sizeof(S_physical_device_vertex_attribute_divisor_features_EXT) == sizeof(VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT),
@@ -5445,7 +5421,6 @@ operator VkPhysicalDeviceASTCDecodeFeaturesEXT &()
 
 friend S_physical_device_features2;
 friend S_device_create_info;
-
 };
 static_assert(
 	sizeof(S_physical_device_astc_decode_features_EXT) == sizeof(VkPhysicalDeviceASTCDecodeFeaturesEXT),
@@ -5480,7 +5455,6 @@ operator VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV &()
 
 friend S_physical_device_features2;
 friend S_device_create_info;
-
 };
 static_assert(
 	sizeof(S_physical_device_representative_fragment_test_features_NV) == sizeof(VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV),
@@ -5515,7 +5489,6 @@ operator VkPhysicalDeviceExclusiveScissorFeaturesNV &()
 
 friend S_physical_device_features2;
 friend S_device_create_info;
-
 };
 static_assert(
 	sizeof(S_physical_device_exclusive_scissor_features_NV) == sizeof(VkPhysicalDeviceExclusiveScissorFeaturesNV),
@@ -5550,7 +5523,6 @@ operator VkPhysicalDeviceCornerSampledImageFeaturesNV &()
 
 friend S_physical_device_features2;
 friend S_device_create_info;
-
 };
 static_assert(
 	sizeof(S_physical_device_corner_sampled_image_features_NV) == sizeof(VkPhysicalDeviceCornerSampledImageFeaturesNV),
@@ -5588,7 +5560,6 @@ operator VkPhysicalDeviceComputeShaderDerivativesFeaturesNV &()
 
 friend S_physical_device_features2;
 friend S_device_create_info;
-
 };
 static_assert(
 	sizeof(S_physical_device_compute_shader_derivatives_features_NV) == sizeof(VkPhysicalDeviceComputeShaderDerivativesFeaturesNV),
@@ -5623,7 +5594,6 @@ operator VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV &()
 
 friend S_physical_device_features2;
 friend S_device_create_info;
-
 };
 static_assert(
 	sizeof(S_physical_device_fragment_shader_barycentric_features_NV) == sizeof(VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV),
@@ -5658,7 +5628,6 @@ operator VkPhysicalDeviceShaderImageFootprintFeaturesNV &()
 
 friend S_physical_device_features2;
 friend S_device_create_info;
-
 };
 static_assert(
 	sizeof(S_physical_device_shader_image_footprint_features_NV) == sizeof(VkPhysicalDeviceShaderImageFootprintFeaturesNV),
@@ -5696,7 +5665,6 @@ operator VkPhysicalDeviceShadingRateImageFeaturesNV &()
 
 friend S_physical_device_features2;
 friend S_device_create_info;
-
 };
 static_assert(
 	sizeof(S_physical_device_shading_rate_image_features_NV) == sizeof(VkPhysicalDeviceShadingRateImageFeaturesNV),
@@ -5734,7 +5702,6 @@ operator VkPhysicalDeviceMeshShaderFeaturesNV &()
 
 friend S_physical_device_features2;
 friend S_device_create_info;
-
 };
 static_assert(
 	sizeof(S_physical_device_mesh_shader_features_NV) == sizeof(VkPhysicalDeviceMeshShaderFeaturesNV),
@@ -5818,11 +5785,42 @@ S_physical_device_features2& n_physical_device_fragment_shader_barycentric_featu
 S_physical_device_features2& n_physical_device_shader_image_footprint_features_NV(S_physical_device_shader_image_footprint_features_NV const& next_);
 S_physical_device_features2& n_physical_device_shading_rate_image_features_NV(S_physical_device_shading_rate_image_features_NV const& next_);
 S_physical_device_features2& n_physical_device_mesh_shader_features_NV(S_physical_device_mesh_shader_features_NV const& next_);
-
 };
 static_assert(
 	sizeof(S_physical_device_features2) == sizeof(VkPhysicalDeviceFeatures2),
 	"struct and wrapper have different size!");
+
+struct N_physical_device_features2{
+private:
+	void* pNext = nullptr;
+public:
+void* get(){ return pNext; }
+N_physical_device_features2& n_physical_device_variable_pointer_features(S_physical_device_variable_pointer_features const& next_);
+N_physical_device_features2& n_physical_device_multiview_features(S_physical_device_multiview_features const& next_);
+N_physical_device_features2& n_physical_device_16bit_storage_features(S_physical_device_16bit_storage_features const& next_);
+N_physical_device_features2& n_physical_device_sampler_ycbcr_conversion_features(S_physical_device_sampler_ycbcr_conversion_features const& next_);
+N_physical_device_features2& n_physical_device_protected_memory_features(S_physical_device_protected_memory_features const& next_);
+N_physical_device_features2& n_physical_device_blend_operation_advanced_features_EXT(S_physical_device_blend_operation_advanced_features_EXT const& next_);
+N_physical_device_features2& n_physical_device_inline_uniform_block_features_EXT(S_physical_device_inline_uniform_block_features_EXT const& next_);
+N_physical_device_features2& n_physical_device_shader_draw_parameter_features(S_physical_device_shader_draw_parameter_features const& next_);
+N_physical_device_features2& n_physical_device_descriptor_indexing_features_EXT(S_physical_device_descriptor_indexing_features_EXT const& next_);
+N_physical_device_features2& n_physical_device_8bit_storage_features_KHR(S_physical_device_8bit_storage_features_KHR const& next_);
+N_physical_device_features2& n_physical_device_conditional_rendering_features_EXT(S_physical_device_conditional_rendering_features_EXT const& next_);
+N_physical_device_features2& n_physical_device_vulkan_memory_model_features_KHR(S_physical_device_vulkan_memory_model_features_KHR const& next_);
+#ifdef LAKA_UNKNOW
+N_physical_device_features2& n_physical_device_shader_atomic_int64_features_KHR(S_physical_device_shader_atomic_int64_features_KHR const& next_);
+#endif
+N_physical_device_features2& n_physical_device_vertex_attribute_divisor_features_EXT(S_physical_device_vertex_attribute_divisor_features_EXT const& next_);
+N_physical_device_features2& n_physical_device_astc_decode_features_EXT(S_physical_device_astc_decode_features_EXT const& next_);
+N_physical_device_features2& n_physical_device_representative_fragment_test_features_NV(S_physical_device_representative_fragment_test_features_NV const& next_);
+N_physical_device_features2& n_physical_device_exclusive_scissor_features_NV(S_physical_device_exclusive_scissor_features_NV const& next_);
+N_physical_device_features2& n_physical_device_corner_sampled_image_features_NV(S_physical_device_corner_sampled_image_features_NV const& next_);
+N_physical_device_features2& n_physical_device_compute_shader_derivatives_features_NV(S_physical_device_compute_shader_derivatives_features_NV const& next_);
+N_physical_device_features2& n_physical_device_fragment_shader_barycentric_features_NV(S_physical_device_fragment_shader_barycentric_features_NV const& next_);
+N_physical_device_features2& n_physical_device_shader_image_footprint_features_NV(S_physical_device_shader_image_footprint_features_NV const& next_);
+N_physical_device_features2& n_physical_device_shading_rate_image_features_NV(S_physical_device_shading_rate_image_features_NV const& next_);
+N_physical_device_features2& n_physical_device_mesh_shader_features_NV(S_physical_device_mesh_shader_features_NV const& next_);
+};
 
 /*	VkDeviceGroupDeviceCreateInfo
 ex to: VkDeviceCreateInfo
@@ -5855,7 +5853,6 @@ operator VkDeviceGroupDeviceCreateInfo &()
 	{	return *reinterpret_cast<VkDeviceGroupDeviceCreateInfo*>(this);	}
 
 friend S_device_create_info;
-
 };
 static_assert(
 	sizeof(S_device_group_device_create_info) == sizeof(VkDeviceGroupDeviceCreateInfo),
@@ -5961,11 +5958,44 @@ S_device_create_info& n_physical_device_fragment_shader_barycentric_features_NV(
 S_device_create_info& n_physical_device_shader_image_footprint_features_NV(S_physical_device_shader_image_footprint_features_NV const& next_);
 S_device_create_info& n_physical_device_shading_rate_image_features_NV(S_physical_device_shading_rate_image_features_NV const& next_);
 S_device_create_info& n_physical_device_mesh_shader_features_NV(S_physical_device_mesh_shader_features_NV const& next_);
-
 };
 static_assert(
 	sizeof(S_device_create_info) == sizeof(VkDeviceCreateInfo),
 	"struct and wrapper have different size!");
+
+struct N_device_create_info{
+private:
+	void* pNext = nullptr;
+public:
+void* get(){ return pNext; }
+N_device_create_info& n_physical_device_features2(S_physical_device_features2 const& next_);
+N_device_create_info& n_physical_device_variable_pointer_features(S_physical_device_variable_pointer_features const& next_);
+N_device_create_info& n_physical_device_multiview_features(S_physical_device_multiview_features const& next_);
+N_device_create_info& n_device_group_device_create_info(S_device_group_device_create_info const& next_);
+N_device_create_info& n_physical_device_16bit_storage_features(S_physical_device_16bit_storage_features const& next_);
+N_device_create_info& n_physical_device_sampler_ycbcr_conversion_features(S_physical_device_sampler_ycbcr_conversion_features const& next_);
+N_device_create_info& n_physical_device_protected_memory_features(S_physical_device_protected_memory_features const& next_);
+N_device_create_info& n_physical_device_blend_operation_advanced_features_EXT(S_physical_device_blend_operation_advanced_features_EXT const& next_);
+N_device_create_info& n_physical_device_inline_uniform_block_features_EXT(S_physical_device_inline_uniform_block_features_EXT const& next_);
+N_device_create_info& n_physical_device_shader_draw_parameter_features(S_physical_device_shader_draw_parameter_features const& next_);
+N_device_create_info& n_physical_device_descriptor_indexing_features_EXT(S_physical_device_descriptor_indexing_features_EXT const& next_);
+N_device_create_info& n_physical_device_8bit_storage_features_KHR(S_physical_device_8bit_storage_features_KHR const& next_);
+N_device_create_info& n_physical_device_conditional_rendering_features_EXT(S_physical_device_conditional_rendering_features_EXT const& next_);
+N_device_create_info& n_physical_device_vulkan_memory_model_features_KHR(S_physical_device_vulkan_memory_model_features_KHR const& next_);
+#ifdef LAKA_UNKNOW
+N_device_create_info& n_physical_device_shader_atomic_int64_features_KHR(S_physical_device_shader_atomic_int64_features_KHR const& next_);
+#endif
+N_device_create_info& n_physical_device_vertex_attribute_divisor_features_EXT(S_physical_device_vertex_attribute_divisor_features_EXT const& next_);
+N_device_create_info& n_physical_device_astc_decode_features_EXT(S_physical_device_astc_decode_features_EXT const& next_);
+N_device_create_info& n_physical_device_representative_fragment_test_features_NV(S_physical_device_representative_fragment_test_features_NV const& next_);
+N_device_create_info& n_physical_device_exclusive_scissor_features_NV(S_physical_device_exclusive_scissor_features_NV const& next_);
+N_device_create_info& n_physical_device_corner_sampled_image_features_NV(S_physical_device_corner_sampled_image_features_NV const& next_);
+N_device_create_info& n_physical_device_compute_shader_derivatives_features_NV(S_physical_device_compute_shader_derivatives_features_NV const& next_);
+N_device_create_info& n_physical_device_fragment_shader_barycentric_features_NV(S_physical_device_fragment_shader_barycentric_features_NV const& next_);
+N_device_create_info& n_physical_device_shader_image_footprint_features_NV(S_physical_device_shader_image_footprint_features_NV const& next_);
+N_device_create_info& n_physical_device_shading_rate_image_features_NV(S_physical_device_shading_rate_image_features_NV const& next_);
+N_device_create_info& n_physical_device_mesh_shader_features_NV(S_physical_device_mesh_shader_features_NV const& next_);
+};
 
 /*	VkDebugReportCallbackCreateInfoEXT
 ex to: VkInstanceCreateInfo
@@ -6001,7 +6031,6 @@ operator VkDebugReportCallbackCreateInfoEXT &()
 	{	return *reinterpret_cast<VkDebugReportCallbackCreateInfoEXT*>(this);	}
 
 friend S_instance_create_info;
-
 };
 static_assert(
 	sizeof(S_debug_report_callback_create_info_EXT) == sizeof(VkDebugReportCallbackCreateInfoEXT),
@@ -6038,7 +6067,6 @@ operator VkValidationFlagsEXT &()
 	{	return *reinterpret_cast<VkValidationFlagsEXT*>(this);	}
 
 friend S_instance_create_info;
-
 };
 static_assert(
 	sizeof(S_validation_flags_EXT) == sizeof(VkValidationFlagsEXT),
@@ -6084,7 +6112,6 @@ operator VkDebugUtilsMessengerCreateInfoEXT &()
 	{	return *reinterpret_cast<VkDebugUtilsMessengerCreateInfoEXT*>(this);	}
 
 friend S_instance_create_info;
-
 };
 static_assert(
 	sizeof(S_debug_utils_messenger_create_info_EXT) == sizeof(VkDebugUtilsMessengerCreateInfoEXT),
@@ -6138,11 +6165,20 @@ operator VkInstanceCreateInfo &()
 S_instance_create_info& n_debug_report_callback_create_info_EXT(S_debug_report_callback_create_info_EXT const& next_);
 S_instance_create_info& n_validation_flags_EXT(S_validation_flags_EXT const& next_);
 S_instance_create_info& n_debug_utils_messenger_create_info_EXT(S_debug_utils_messenger_create_info_EXT const& next_);
-
 };
 static_assert(
 	sizeof(S_instance_create_info) == sizeof(VkInstanceCreateInfo),
 	"struct and wrapper have different size!");
+
+struct N_instance_create_info{
+private:
+	void* pNext = nullptr;
+public:
+void* get(){ return pNext; }
+N_instance_create_info& n_debug_report_callback_create_info_EXT(S_debug_report_callback_create_info_EXT const& next_);
+N_instance_create_info& n_validation_flags_EXT(S_validation_flags_EXT const& next_);
+N_instance_create_info& n_debug_utils_messenger_create_info_EXT(S_debug_utils_messenger_create_info_EXT const& next_);
+};
 
 /*	VkQueueFamilyProperties
 (returnedonly)
@@ -6154,7 +6190,6 @@ struct		S_queue_family_properties{
 	S_extent_3d minImageTransferGranularity;
 
 S_queue_family_properties(){}
-
 };
 
 /*	VkMemoryType
@@ -6165,7 +6200,6 @@ struct		S_memory_type{
 	uint32_t heapIndex;
 
 S_memory_type(){}
-
 };
 
 /*	VkMemoryHeap
@@ -6176,7 +6210,6 @@ struct		S_memory_heap{
 	F_memory_heap flags;
 
 S_memory_heap(){}
-
 };
 
 /*	VkPhysicalDeviceMemoryProperties
@@ -6189,7 +6222,6 @@ struct		S_physical_device_memory_properties{
 	S_memory_heap memoryHeaps[VK_MAX_MEMORY_HEAPS];
 
 S_physical_device_memory_properties(){}
-
 };
 
 /*	VkDedicatedAllocationMemoryAllocateInfoNV
@@ -6223,7 +6255,6 @@ operator VkDedicatedAllocationMemoryAllocateInfoNV &()
 	{	return *reinterpret_cast<VkDedicatedAllocationMemoryAllocateInfoNV*>(this);	}
 
 friend S_memory_allocate_info;
-
 };
 static_assert(
 	sizeof(S_dedicated_allocation_memory_allocate_info_NV) == sizeof(VkDedicatedAllocationMemoryAllocateInfoNV),
@@ -6257,7 +6288,6 @@ operator VkExportMemoryAllocateInfoNV &()
 	{	return *reinterpret_cast<VkExportMemoryAllocateInfoNV*>(this);	}
 
 friend S_memory_allocate_info;
-
 };
 static_assert(
 	sizeof(S_export_memory_allocate_info_NV) == sizeof(VkExportMemoryAllocateInfoNV),
@@ -6295,7 +6325,6 @@ operator VkImportMemoryWin32HandleInfoNV &()
 	{	return *reinterpret_cast<VkImportMemoryWin32HandleInfoNV*>(this);	}
 
 friend S_memory_allocate_info;
-
 };
 static_assert(
 	sizeof(S_import_memory_win32_handle_info_NV) == sizeof(VkImportMemoryWin32HandleInfoNV),
@@ -6334,7 +6363,6 @@ operator VkExportMemoryWin32HandleInfoNV &()
 	{	return *reinterpret_cast<VkExportMemoryWin32HandleInfoNV*>(this);	}
 
 friend S_memory_allocate_info;
-
 };
 static_assert(
 	sizeof(S_export_memory_win32_handle_info_NV) == sizeof(VkExportMemoryWin32HandleInfoNV),
@@ -6369,7 +6397,6 @@ operator VkExportMemoryAllocateInfo &()
 	{	return *reinterpret_cast<VkExportMemoryAllocateInfo*>(this);	}
 
 friend S_memory_allocate_info;
-
 };
 static_assert(
 	sizeof(S_export_memory_allocate_info) == sizeof(VkExportMemoryAllocateInfo),
@@ -6410,7 +6437,6 @@ operator VkImportMemoryWin32HandleInfoKHR &()
 	{	return *reinterpret_cast<VkImportMemoryWin32HandleInfoKHR*>(this);	}
 
 friend S_memory_allocate_info;
-
 };
 static_assert(
 	sizeof(S_import_memory_win32_handle_info_KHR) == sizeof(VkImportMemoryWin32HandleInfoKHR),
@@ -6452,7 +6478,6 @@ operator VkExportMemoryWin32HandleInfoKHR &()
 	{	return *reinterpret_cast<VkExportMemoryWin32HandleInfoKHR*>(this);	}
 
 friend S_memory_allocate_info;
-
 };
 static_assert(
 	sizeof(S_export_memory_win32_handle_info_KHR) == sizeof(VkExportMemoryWin32HandleInfoKHR),
@@ -6490,7 +6515,6 @@ operator VkImportMemoryFdInfoKHR &()
 	{	return *reinterpret_cast<VkImportMemoryFdInfoKHR*>(this);	}
 
 friend S_memory_allocate_info;
-
 };
 static_assert(
 	sizeof(S_import_memory_fd_info_KHR) == sizeof(VkImportMemoryFdInfoKHR),
@@ -6527,7 +6551,6 @@ operator VkMemoryAllocateFlagsInfo &()
 	{	return *reinterpret_cast<VkMemoryAllocateFlagsInfo*>(this);	}
 
 friend S_memory_allocate_info;
-
 };
 static_assert(
 	sizeof(S_memory_allocate_flags_info) == sizeof(VkMemoryAllocateFlagsInfo),
@@ -6564,7 +6587,6 @@ operator VkMemoryDedicatedAllocateInfo &()
 	{	return *reinterpret_cast<VkMemoryDedicatedAllocateInfo*>(this);	}
 
 friend S_memory_allocate_info;
-
 };
 static_assert(
 	sizeof(S_memory_dedicated_allocate_info) == sizeof(VkMemoryDedicatedAllocateInfo),
@@ -6601,7 +6623,6 @@ operator VkImportMemoryHostPointerInfoEXT &()
 	{	return *reinterpret_cast<VkImportMemoryHostPointerInfoEXT*>(this);	}
 
 friend S_memory_allocate_info;
-
 };
 static_assert(
 	sizeof(S_import_memory_host_pointer_info_EXT) == sizeof(VkImportMemoryHostPointerInfoEXT),
@@ -6636,7 +6657,6 @@ operator VkImportAndroidHardwareBufferInfoANDROID &()
 	{	return *reinterpret_cast<VkImportAndroidHardwareBufferInfoANDROID*>(this);	}
 
 friend S_memory_allocate_info;
-
 };
 static_assert(
 	sizeof(S_import_android_hardware_buffer_info_ANDROID) == sizeof(VkImportAndroidHardwareBufferInfoANDROID),
@@ -6707,11 +6727,39 @@ S_memory_allocate_info& n_import_memory_host_pointer_info_EXT(S_import_memory_ho
 #ifdef VK_USE_PLATFORM_ANDROID_KHR
 S_memory_allocate_info& n_import_android_hardware_buffer_info_ANDROID(S_import_android_hardware_buffer_info_ANDROID const& next_);
 #endif
-
 };
 static_assert(
 	sizeof(S_memory_allocate_info) == sizeof(VkMemoryAllocateInfo),
 	"struct and wrapper have different size!");
+
+struct N_memory_allocate_info{
+private:
+	void* pNext = nullptr;
+public:
+void* get(){ return pNext; }
+N_memory_allocate_info& n_dedicated_allocation_memory_allocate_info_NV(S_dedicated_allocation_memory_allocate_info_NV const& next_);
+N_memory_allocate_info& n_export_memory_allocate_info_NV(S_export_memory_allocate_info_NV const& next_);
+#ifdef VK_USE_PLATFORM_WIN32_NV
+N_memory_allocate_info& n_import_memory_win32_handle_info_NV(S_import_memory_win32_handle_info_NV const& next_);
+#endif
+#ifdef VK_USE_PLATFORM_WIN32_NV
+N_memory_allocate_info& n_export_memory_win32_handle_info_NV(S_export_memory_win32_handle_info_NV const& next_);
+#endif
+N_memory_allocate_info& n_export_memory_allocate_info(S_export_memory_allocate_info const& next_);
+#ifdef VK_USE_PLATFORM_WIN32_KHR
+N_memory_allocate_info& n_import_memory_win32_handle_info_KHR(S_import_memory_win32_handle_info_KHR const& next_);
+#endif
+#ifdef VK_USE_PLATFORM_WIN32_KHR
+N_memory_allocate_info& n_export_memory_win32_handle_info_KHR(S_export_memory_win32_handle_info_KHR const& next_);
+#endif
+N_memory_allocate_info& n_import_memory_fd_info_KHR(S_import_memory_fd_info_KHR const& next_);
+N_memory_allocate_info& n_memory_allocate_flags_info(S_memory_allocate_flags_info const& next_);
+N_memory_allocate_info& n_memory_dedicated_allocate_info(S_memory_dedicated_allocate_info const& next_);
+N_memory_allocate_info& n_import_memory_host_pointer_info_EXT(S_import_memory_host_pointer_info_EXT const& next_);
+#ifdef VK_USE_PLATFORM_ANDROID_KHR
+N_memory_allocate_info& n_import_android_hardware_buffer_info_ANDROID(S_import_android_hardware_buffer_info_ANDROID const& next_);
+#endif
+};
 
 /*	VkMemoryRequirements
 (returnedonly)
@@ -6722,7 +6770,6 @@ struct		S_memory_requirements{
 	uint32_t memoryTypeBits;
 
 S_memory_requirements(){}
-
 };
 
 /*	VkSparseImageFormatProperties
@@ -6734,7 +6781,6 @@ struct		S_sparse_image_format_properties{
 	F_sparse_image_format flags;
 
 S_sparse_image_format_properties(){}
-
 };
 
 /*	VkSparseImageMemoryRequirements
@@ -6748,7 +6794,6 @@ struct		S_sparse_image_memory_requirements{
 	VkDeviceSize imageMipTailStride;
 
 S_sparse_image_memory_requirements(){}
-
 };
 
 /*	VkMappedMemoryRange
@@ -6782,7 +6827,6 @@ operator VkMappedMemoryRange const&() const
 	{	return *reinterpret_cast<const VkMappedMemoryRange*>(this);	}
 operator VkMappedMemoryRange &() 
 	{	return *reinterpret_cast<VkMappedMemoryRange*>(this);	}
-
 };
 static_assert(
 	sizeof(S_mapped_memory_range) == sizeof(VkMappedMemoryRange),
@@ -6797,7 +6841,6 @@ struct		S_format_properties{
 	F_format_feature bufferFeatures;
 
 S_format_properties(){}
-
 };
 
 /*	VkImageFormatProperties
@@ -6811,7 +6854,6 @@ struct		S_image_format_properties{
 	VkDeviceSize maxResourceSize;
 
 S_image_format_properties(){}
-
 };
 
 /*	VkDescriptorBufferInfo
@@ -6822,7 +6864,6 @@ struct		S_descriptor_buffer_info{
 	VkDeviceSize range;
 
 S_descriptor_buffer_info(){}
-
 };
 
 /*	VkDescriptorImageInfo
@@ -6833,7 +6874,6 @@ struct		S_descriptor_image_info{
 	E_image_layout imageLayout;
 
 S_descriptor_image_info(){}
-
 };
 
 /*	VkWriteDescriptorSetInlineUniformBlockEXT
@@ -6867,7 +6907,6 @@ operator VkWriteDescriptorSetInlineUniformBlockEXT &()
 	{	return *reinterpret_cast<VkWriteDescriptorSetInlineUniformBlockEXT*>(this);	}
 
 friend S_write_descriptor_set;
-
 };
 static_assert(
 	sizeof(S_write_descriptor_set_inline_uniform_block_EXT) == sizeof(VkWriteDescriptorSetInlineUniformBlockEXT),
@@ -6904,7 +6943,6 @@ operator VkDescriptorAccelerationStructureInfoNVX &()
 	{	return *reinterpret_cast<VkDescriptorAccelerationStructureInfoNVX*>(this);	}
 
 friend S_write_descriptor_set;
-
 };
 static_assert(
 	sizeof(S_descriptor_acceleration_structure_info_NVX) == sizeof(VkDescriptorAccelerationStructureInfoNVX),
@@ -6962,11 +7000,19 @@ operator VkWriteDescriptorSet &()
 
 S_write_descriptor_set& n_write_descriptor_set_inline_uniform_block_EXT(S_write_descriptor_set_inline_uniform_block_EXT const& next_);
 S_write_descriptor_set& n_descriptor_acceleration_structure_info_NVX(S_descriptor_acceleration_structure_info_NVX const& next_);
-
 };
 static_assert(
 	sizeof(S_write_descriptor_set) == sizeof(VkWriteDescriptorSet),
 	"struct and wrapper have different size!");
+
+struct N_write_descriptor_set{
+private:
+	void* pNext = nullptr;
+public:
+void* get(){ return pNext; }
+N_write_descriptor_set& n_write_descriptor_set_inline_uniform_block_EXT(S_write_descriptor_set_inline_uniform_block_EXT const& next_);
+N_write_descriptor_set& n_descriptor_acceleration_structure_info_NVX(S_descriptor_acceleration_structure_info_NVX const& next_);
+};
 
 /*	VkCopyDescriptorSet
 */
@@ -7011,7 +7057,6 @@ operator VkCopyDescriptorSet const&() const
 	{	return *reinterpret_cast<const VkCopyDescriptorSet*>(this);	}
 operator VkCopyDescriptorSet &() 
 	{	return *reinterpret_cast<VkCopyDescriptorSet*>(this);	}
-
 };
 static_assert(
 	sizeof(S_copy_descriptor_set) == sizeof(VkCopyDescriptorSet),
@@ -7045,7 +7090,6 @@ operator VkDedicatedAllocationBufferCreateInfoNV &()
 	{	return *reinterpret_cast<VkDedicatedAllocationBufferCreateInfoNV*>(this);	}
 
 friend S_buffer_create_info;
-
 };
 static_assert(
 	sizeof(S_dedicated_allocation_buffer_create_info_NV) == sizeof(VkDedicatedAllocationBufferCreateInfoNV),
@@ -7079,7 +7123,6 @@ operator VkExternalMemoryBufferCreateInfo &()
 	{	return *reinterpret_cast<VkExternalMemoryBufferCreateInfo*>(this);	}
 
 friend S_buffer_create_info;
-
 };
 static_assert(
 	sizeof(S_external_memory_buffer_create_info) == sizeof(VkExternalMemoryBufferCreateInfo),
@@ -7131,11 +7174,19 @@ operator VkBufferCreateInfo &()
 
 S_buffer_create_info& n_dedicated_allocation_buffer_create_info_NV(S_dedicated_allocation_buffer_create_info_NV const& next_);
 S_buffer_create_info& n_external_memory_buffer_create_info(S_external_memory_buffer_create_info const& next_);
-
 };
 static_assert(
 	sizeof(S_buffer_create_info) == sizeof(VkBufferCreateInfo),
 	"struct and wrapper have different size!");
+
+struct N_buffer_create_info{
+private:
+	void* pNext = nullptr;
+public:
+void* get(){ return pNext; }
+N_buffer_create_info& n_dedicated_allocation_buffer_create_info_NV(S_dedicated_allocation_buffer_create_info_NV const& next_);
+N_buffer_create_info& n_external_memory_buffer_create_info(S_external_memory_buffer_create_info const& next_);
+};
 
 /*	VkBufferViewCreateInfo
 */
@@ -7174,7 +7225,6 @@ operator VkBufferViewCreateInfo const&() const
 	{	return *reinterpret_cast<const VkBufferViewCreateInfo*>(this);	}
 operator VkBufferViewCreateInfo &() 
 	{	return *reinterpret_cast<VkBufferViewCreateInfo*>(this);	}
-
 };
 static_assert(
 	sizeof(S_buffer_view_create_info) == sizeof(VkBufferViewCreateInfo),
@@ -7188,7 +7238,6 @@ struct		S_image_subresource{
 	uint32_t arrayLayer;
 
 S_image_subresource(){}
-
 };
 
 /*	VkImageSubresourceLayers
@@ -7200,7 +7249,6 @@ struct		S_image_subresource_layers{
 	uint32_t layerCount;
 
 S_image_subresource_layers(){}
-
 };
 
 /*	VkImageSubresourceRange
@@ -7213,7 +7261,6 @@ struct		S_image_subresource_range{
 	uint32_t layerCount;
 
 S_image_subresource_range(){}
-
 };
 
 /*	VkMemoryBarrier
@@ -7244,7 +7291,6 @@ operator VkMemoryBarrier const&() const
 	{	return *reinterpret_cast<const VkMemoryBarrier*>(this);	}
 operator VkMemoryBarrier &() 
 	{	return *reinterpret_cast<VkMemoryBarrier*>(this);	}
-
 };
 static_assert(
 	sizeof(S_memory_barrier) == sizeof(VkMemoryBarrier),
@@ -7293,7 +7339,6 @@ operator VkBufferMemoryBarrier const&() const
 	{	return *reinterpret_cast<const VkBufferMemoryBarrier*>(this);	}
 operator VkBufferMemoryBarrier &() 
 	{	return *reinterpret_cast<VkBufferMemoryBarrier*>(this);	}
-
 };
 static_assert(
 	sizeof(S_buffer_memory_barrier) == sizeof(VkBufferMemoryBarrier),
@@ -7306,7 +7351,6 @@ struct		S_sample_location_EXT{
 	float y;
 
 S_sample_location_EXT(){}
-
 };
 
 /*	VkSampleLocationsInfoEXT
@@ -7346,7 +7390,6 @@ operator VkSampleLocationsInfoEXT &()
 	{	return *reinterpret_cast<VkSampleLocationsInfoEXT*>(this);	}
 
 friend S_image_memory_barrier;
-
 };
 static_assert(
 	sizeof(S_sample_locations_info_EXT) == sizeof(VkSampleLocationsInfoEXT),
@@ -7402,11 +7445,18 @@ operator VkImageMemoryBarrier &()
 	{	return *reinterpret_cast<VkImageMemoryBarrier*>(this);	}
 
 S_image_memory_barrier& n_sample_locations_info_EXT(S_sample_locations_info_EXT const& next_);
-
 };
 static_assert(
 	sizeof(S_image_memory_barrier) == sizeof(VkImageMemoryBarrier),
 	"struct and wrapper have different size!");
+
+struct N_image_memory_barrier{
+private:
+	void* pNext = nullptr;
+public:
+void* get(){ return pNext; }
+N_image_memory_barrier& n_sample_locations_info_EXT(S_sample_locations_info_EXT const& next_);
+};
 
 /*	VkDedicatedAllocationImageCreateInfoNV
 ex to: VkImageCreateInfo
@@ -7436,7 +7486,6 @@ operator VkDedicatedAllocationImageCreateInfoNV &()
 	{	return *reinterpret_cast<VkDedicatedAllocationImageCreateInfoNV*>(this);	}
 
 friend S_image_create_info;
-
 };
 static_assert(
 	sizeof(S_dedicated_allocation_image_create_info_NV) == sizeof(VkDedicatedAllocationImageCreateInfoNV),
@@ -7470,7 +7519,6 @@ operator VkExternalMemoryImageCreateInfoNV &()
 	{	return *reinterpret_cast<VkExternalMemoryImageCreateInfoNV*>(this);	}
 
 friend S_image_create_info;
-
 };
 static_assert(
 	sizeof(S_external_memory_image_create_info_NV) == sizeof(VkExternalMemoryImageCreateInfoNV),
@@ -7504,7 +7552,6 @@ operator VkExternalMemoryImageCreateInfo &()
 	{	return *reinterpret_cast<VkExternalMemoryImageCreateInfo*>(this);	}
 
 friend S_image_create_info;
-
 };
 static_assert(
 	sizeof(S_external_memory_image_create_info) == sizeof(VkExternalMemoryImageCreateInfo),
@@ -7538,7 +7585,6 @@ operator VkImageSwapchainCreateInfoKHR &()
 	{	return *reinterpret_cast<VkImageSwapchainCreateInfoKHR*>(this);	}
 
 friend S_image_create_info;
-
 };
 static_assert(
 	sizeof(S_image_swapchain_create_info_KHR) == sizeof(VkImageSwapchainCreateInfoKHR),
@@ -7575,7 +7621,6 @@ operator VkImageFormatListCreateInfoKHR &()
 	{	return *reinterpret_cast<VkImageFormatListCreateInfoKHR*>(this);	}
 
 friend S_image_create_info;
-
 };
 static_assert(
 	sizeof(S_image_format_list_create_info_KHR) == sizeof(VkImageFormatListCreateInfoKHR),
@@ -7611,7 +7656,6 @@ operator VkExternalFormatANDROID &()
 
 friend S_image_create_info;
 friend S_sampler_ycbcr_conversion_create_info;
-
 };
 static_assert(
 	sizeof(S_external_format_ANDROID) == sizeof(VkExternalFormatANDROID),
@@ -7650,7 +7694,6 @@ operator VkImageDrmFormatModifierListCreateInfoEXT &()
 	{	return *reinterpret_cast<VkImageDrmFormatModifierListCreateInfoEXT*>(this);	}
 
 friend S_image_create_info;
-
 };
 static_assert(
 	sizeof(S_image_drm_format_modifier_list_create_info_EXT) == sizeof(VkImageDrmFormatModifierListCreateInfoEXT),
@@ -7668,7 +7711,6 @@ struct		S_subresource_layout{
 	VkDeviceSize depthPitch;
 
 S_subresource_layout(){}
-
 };
 
 /*	VkImageDrmFormatModifierExplicitCreateInfoEXT
@@ -7706,7 +7748,6 @@ operator VkImageDrmFormatModifierExplicitCreateInfoEXT &()
 	{	return *reinterpret_cast<VkImageDrmFormatModifierExplicitCreateInfoEXT*>(this);	}
 
 friend S_image_create_info;
-
 };
 static_assert(
 	sizeof(S_image_drm_format_modifier_explicit_create_info_EXT) == sizeof(VkImageDrmFormatModifierExplicitCreateInfoEXT),
@@ -7798,11 +7839,31 @@ S_image_create_info& n_image_drm_format_modifier_list_create_info_EXT(S_image_dr
 #ifdef LAKA_UNKNOW
 S_image_create_info& n_image_drm_format_modifier_explicit_create_info_EXT(S_image_drm_format_modifier_explicit_create_info_EXT const& next_);
 #endif
-
 };
 static_assert(
 	sizeof(S_image_create_info) == sizeof(VkImageCreateInfo),
 	"struct and wrapper have different size!");
+
+struct N_image_create_info{
+private:
+	void* pNext = nullptr;
+public:
+void* get(){ return pNext; }
+N_image_create_info& n_dedicated_allocation_image_create_info_NV(S_dedicated_allocation_image_create_info_NV const& next_);
+N_image_create_info& n_external_memory_image_create_info_NV(S_external_memory_image_create_info_NV const& next_);
+N_image_create_info& n_external_memory_image_create_info(S_external_memory_image_create_info const& next_);
+N_image_create_info& n_image_swapchain_create_info_KHR(S_image_swapchain_create_info_KHR const& next_);
+N_image_create_info& n_image_format_list_create_info_KHR(S_image_format_list_create_info_KHR const& next_);
+#ifdef VK_USE_PLATFORM_ANDROID_KHR
+N_image_create_info& n_external_format_ANDROID(S_external_format_ANDROID const& next_);
+#endif
+#ifdef LAKA_UNKNOW
+N_image_create_info& n_image_drm_format_modifier_list_create_info_EXT(S_image_drm_format_modifier_list_create_info_EXT const& next_);
+#endif
+#ifdef LAKA_UNKNOW
+N_image_create_info& n_image_drm_format_modifier_explicit_create_info_EXT(S_image_drm_format_modifier_explicit_create_info_EXT const& next_);
+#endif
+};
 
 /*	VkImageViewUsageCreateInfo
 ex to: VkImageViewCreateInfo
@@ -7832,7 +7893,6 @@ operator VkImageViewUsageCreateInfo &()
 	{	return *reinterpret_cast<VkImageViewUsageCreateInfo*>(this);	}
 
 friend S_image_view_create_info;
-
 };
 static_assert(
 	sizeof(S_image_view_usage_create_info) == sizeof(VkImageViewUsageCreateInfo),
@@ -7867,7 +7927,6 @@ operator VkSamplerYcbcrConversionInfo &()
 
 friend S_sampler_create_info;
 friend S_image_view_create_info;
-
 };
 static_assert(
 	sizeof(S_sampler_ycbcr_conversion_info) == sizeof(VkSamplerYcbcrConversionInfo),
@@ -7901,7 +7960,6 @@ operator VkImageViewASTCDecodeModeEXT &()
 	{	return *reinterpret_cast<VkImageViewASTCDecodeModeEXT*>(this);	}
 
 friend S_image_view_create_info;
-
 };
 static_assert(
 	sizeof(S_image_view_astc_decode_mode_EXT) == sizeof(VkImageViewASTCDecodeModeEXT),
@@ -7955,11 +8013,20 @@ operator VkImageViewCreateInfo &()
 S_image_view_create_info& n_image_view_usage_create_info(S_image_view_usage_create_info const& next_);
 S_image_view_create_info& n_sampler_ycbcr_conversion_info(S_sampler_ycbcr_conversion_info const& next_);
 S_image_view_create_info& n_image_view_astc_decode_mode_EXT(S_image_view_astc_decode_mode_EXT const& next_);
-
 };
 static_assert(
 	sizeof(S_image_view_create_info) == sizeof(VkImageViewCreateInfo),
 	"struct and wrapper have different size!");
+
+struct N_image_view_create_info{
+private:
+	void* pNext = nullptr;
+public:
+void* get(){ return pNext; }
+N_image_view_create_info& n_image_view_usage_create_info(S_image_view_usage_create_info const& next_);
+N_image_view_create_info& n_sampler_ycbcr_conversion_info(S_sampler_ycbcr_conversion_info const& next_);
+N_image_view_create_info& n_image_view_astc_decode_mode_EXT(S_image_view_astc_decode_mode_EXT const& next_);
+};
 
 /*	VkBufferCopy
 */
@@ -7969,7 +8036,6 @@ struct		S_buffer_copy{
 	VkDeviceSize size;
 
 S_buffer_copy(){}
-
 };
 
 /*	VkSparseMemoryBind
@@ -7982,7 +8048,6 @@ struct		S_sparse_memory_bind{
 	F_sparse_memory_bind flags;
 
 S_sparse_memory_bind(){}
-
 };
 
 /*	VkSparseImageMemoryBind
@@ -7996,7 +8061,6 @@ struct		S_sparse_image_memory_bind{
 	F_sparse_memory_bind flags;
 
 S_sparse_image_memory_bind(){}
-
 };
 
 /*	VkSparseBufferMemoryBindInfo
@@ -8007,7 +8071,6 @@ struct		S_sparse_buffer_memory_bind_info{
 	const S_sparse_memory_bind * pBinds;
 
 S_sparse_buffer_memory_bind_info(){}
-
 };
 
 /*	VkSparseImageOpaqueMemoryBindInfo
@@ -8018,7 +8081,6 @@ struct		S_sparse_image_opaque_memory_bind_info{
 	const S_sparse_memory_bind * pBinds;
 
 S_sparse_image_opaque_memory_bind_info(){}
-
 };
 
 /*	VkSparseImageMemoryBindInfo
@@ -8029,7 +8091,6 @@ struct		S_sparse_image_memory_bind_info{
 	const S_sparse_image_memory_bind * pBinds;
 
 S_sparse_image_memory_bind_info(){}
-
 };
 
 /*	VkDeviceGroupBindSparseInfo
@@ -8063,7 +8124,6 @@ operator VkDeviceGroupBindSparseInfo &()
 	{	return *reinterpret_cast<VkDeviceGroupBindSparseInfo*>(this);	}
 
 friend S_bind_sparse_info;
-
 };
 static_assert(
 	sizeof(S_device_group_bind_sparse_info) == sizeof(VkDeviceGroupBindSparseInfo),
@@ -8125,11 +8185,18 @@ operator VkBindSparseInfo &()
 	{	return *reinterpret_cast<VkBindSparseInfo*>(this);	}
 
 S_bind_sparse_info& n_device_group_bind_sparse_info(S_device_group_bind_sparse_info const& next_);
-
 };
 static_assert(
 	sizeof(S_bind_sparse_info) == sizeof(VkBindSparseInfo),
 	"struct and wrapper have different size!");
+
+struct N_bind_sparse_info{
+private:
+	void* pNext = nullptr;
+public:
+void* get(){ return pNext; }
+N_bind_sparse_info& n_device_group_bind_sparse_info(S_device_group_bind_sparse_info const& next_);
+};
 
 /*	VkImageCopy
 */
@@ -8141,7 +8208,6 @@ struct		S_image_copy{
 	S_extent_3d extent;
 
 S_image_copy(){}
-
 };
 
 /*	VkImageBlit
@@ -8153,7 +8219,6 @@ struct		S_image_blit{
 	S_offset_3d dstOffsets[2];
 
 S_image_blit(){}
-
 };
 
 /*	VkBufferImageCopy
@@ -8167,7 +8232,6 @@ struct		S_buffer_image_copy{
 	S_extent_3d imageExtent;
 
 S_buffer_image_copy(){}
-
 };
 
 /*	VkImageResolve
@@ -8180,7 +8244,6 @@ struct		S_image_resolve{
 	S_extent_3d extent;
 
 S_image_resolve(){}
-
 };
 
 /*	VkShaderModuleValidationCacheCreateInfoEXT
@@ -8211,7 +8274,6 @@ operator VkShaderModuleValidationCacheCreateInfoEXT &()
 	{	return *reinterpret_cast<VkShaderModuleValidationCacheCreateInfoEXT*>(this);	}
 
 friend S_shader_module_create_info;
-
 };
 static_assert(
 	sizeof(S_shader_module_validation_cache_create_info_EXT) == sizeof(VkShaderModuleValidationCacheCreateInfoEXT),
@@ -8252,11 +8314,18 @@ operator VkShaderModuleCreateInfo &()
 	{	return *reinterpret_cast<VkShaderModuleCreateInfo*>(this);	}
 
 S_shader_module_create_info& n_shader_module_validation_cache_create_info_EXT(S_shader_module_validation_cache_create_info_EXT const& next_);
-
 };
 static_assert(
 	sizeof(S_shader_module_create_info) == sizeof(VkShaderModuleCreateInfo),
 	"struct and wrapper have different size!");
+
+struct N_shader_module_create_info{
+private:
+	void* pNext = nullptr;
+public:
+void* get(){ return pNext; }
+N_shader_module_create_info& n_shader_module_validation_cache_create_info_EXT(S_shader_module_validation_cache_create_info_EXT const& next_);
+};
 
 /*	VkDescriptorSetLayoutBinding
 */
@@ -8268,7 +8337,6 @@ struct		S_descriptor_set_layout_binding{
 	const VkSampler * pImmutableSamplers;
 
 S_descriptor_set_layout_binding(){}
-
 };
 
 /*	VkDescriptorSetLayoutBindingFlagsCreateInfoEXT
@@ -8302,7 +8370,6 @@ operator VkDescriptorSetLayoutBindingFlagsCreateInfoEXT &()
 	{	return *reinterpret_cast<VkDescriptorSetLayoutBindingFlagsCreateInfoEXT*>(this);	}
 
 friend S_descriptor_set_layout_create_info;
-
 };
 static_assert(
 	sizeof(S_descriptor_set_layout_binding_flags_create_info_EXT) == sizeof(VkDescriptorSetLayoutBindingFlagsCreateInfoEXT),
@@ -8343,11 +8410,18 @@ operator VkDescriptorSetLayoutCreateInfo &()
 	{	return *reinterpret_cast<VkDescriptorSetLayoutCreateInfo*>(this);	}
 
 S_descriptor_set_layout_create_info& n_descriptor_set_layout_binding_flags_create_info_EXT(S_descriptor_set_layout_binding_flags_create_info_EXT const& next_);
-
 };
 static_assert(
 	sizeof(S_descriptor_set_layout_create_info) == sizeof(VkDescriptorSetLayoutCreateInfo),
 	"struct and wrapper have different size!");
+
+struct N_descriptor_set_layout_create_info{
+private:
+	void* pNext = nullptr;
+public:
+void* get(){ return pNext; }
+N_descriptor_set_layout_create_info& n_descriptor_set_layout_binding_flags_create_info_EXT(S_descriptor_set_layout_binding_flags_create_info_EXT const& next_);
+};
 
 /*	VkDescriptorPoolSize
 */
@@ -8356,7 +8430,6 @@ struct		S_descriptor_pool_size{
 	uint32_t descriptorCount;
 
 S_descriptor_pool_size(){}
-
 };
 
 /*	VkDescriptorPoolInlineUniformBlockCreateInfoEXT
@@ -8387,7 +8460,6 @@ operator VkDescriptorPoolInlineUniformBlockCreateInfoEXT &()
 	{	return *reinterpret_cast<VkDescriptorPoolInlineUniformBlockCreateInfoEXT*>(this);	}
 
 friend S_descriptor_pool_create_info;
-
 };
 static_assert(
 	sizeof(S_descriptor_pool_inline_uniform_block_create_info_EXT) == sizeof(VkDescriptorPoolInlineUniformBlockCreateInfoEXT),
@@ -8431,11 +8503,18 @@ operator VkDescriptorPoolCreateInfo &()
 	{	return *reinterpret_cast<VkDescriptorPoolCreateInfo*>(this);	}
 
 S_descriptor_pool_create_info& n_descriptor_pool_inline_uniform_block_create_info_EXT(S_descriptor_pool_inline_uniform_block_create_info_EXT const& next_);
-
 };
 static_assert(
 	sizeof(S_descriptor_pool_create_info) == sizeof(VkDescriptorPoolCreateInfo),
 	"struct and wrapper have different size!");
+
+struct N_descriptor_pool_create_info{
+private:
+	void* pNext = nullptr;
+public:
+void* get(){ return pNext; }
+N_descriptor_pool_create_info& n_descriptor_pool_inline_uniform_block_create_info_EXT(S_descriptor_pool_inline_uniform_block_create_info_EXT const& next_);
+};
 
 /*	VkDescriptorSetVariableDescriptorCountAllocateInfoEXT
 ex to: VkDescriptorSetAllocateInfo
@@ -8468,7 +8547,6 @@ operator VkDescriptorSetVariableDescriptorCountAllocateInfoEXT &()
 	{	return *reinterpret_cast<VkDescriptorSetVariableDescriptorCountAllocateInfoEXT*>(this);	}
 
 friend S_descriptor_set_allocate_info;
-
 };
 static_assert(
 	sizeof(S_descriptor_set_variable_descriptor_count_allocate_info_EXT) == sizeof(VkDescriptorSetVariableDescriptorCountAllocateInfoEXT),
@@ -8509,11 +8587,18 @@ operator VkDescriptorSetAllocateInfo &()
 	{	return *reinterpret_cast<VkDescriptorSetAllocateInfo*>(this);	}
 
 S_descriptor_set_allocate_info& n_descriptor_set_variable_descriptor_count_allocate_info_EXT(S_descriptor_set_variable_descriptor_count_allocate_info_EXT const& next_);
-
 };
 static_assert(
 	sizeof(S_descriptor_set_allocate_info) == sizeof(VkDescriptorSetAllocateInfo),
 	"struct and wrapper have different size!");
+
+struct N_descriptor_set_allocate_info{
+private:
+	void* pNext = nullptr;
+public:
+void* get(){ return pNext; }
+N_descriptor_set_allocate_info& n_descriptor_set_variable_descriptor_count_allocate_info_EXT(S_descriptor_set_variable_descriptor_count_allocate_info_EXT const& next_);
+};
 
 /*	VkSpecializationMapEntry
 */
@@ -8523,7 +8608,6 @@ struct		S_specialization_map_entry{
 	size_t size;
 
 S_specialization_map_entry(){}
-
 };
 
 /*	VkSpecializationInfo
@@ -8535,7 +8619,6 @@ struct		S_specialization_info{
 	const void * pData;
 
 S_specialization_info(){}
-
 };
 
 /*	VkPipelineShaderStageCreateInfo
@@ -8575,7 +8658,6 @@ operator VkPipelineShaderStageCreateInfo const&() const
 	{	return *reinterpret_cast<const VkPipelineShaderStageCreateInfo*>(this);	}
 operator VkPipelineShaderStageCreateInfo &() 
 	{	return *reinterpret_cast<VkPipelineShaderStageCreateInfo*>(this);	}
-
 };
 static_assert(
 	sizeof(S_pipeline_shader_stage_create_info) == sizeof(VkPipelineShaderStageCreateInfo),
@@ -8618,7 +8700,6 @@ operator VkComputePipelineCreateInfo const&() const
 	{	return *reinterpret_cast<const VkComputePipelineCreateInfo*>(this);	}
 operator VkComputePipelineCreateInfo &() 
 	{	return *reinterpret_cast<VkComputePipelineCreateInfo*>(this);	}
-
 };
 static_assert(
 	sizeof(S_compute_pipeline_create_info) == sizeof(VkComputePipelineCreateInfo),
@@ -8632,7 +8713,6 @@ struct		S_vertex_input_binding_description{
 	E_vertex_input_rate inputRate;
 
 S_vertex_input_binding_description(){}
-
 };
 
 /*	VkVertexInputAttributeDescription
@@ -8644,7 +8724,6 @@ struct		S_vertex_input_attribute_description{
 	uint32_t offset;
 
 S_vertex_input_attribute_description(){}
-
 };
 
 /*	VkVertexInputBindingDivisorDescriptionEXT
@@ -8654,7 +8733,6 @@ struct		S_vertex_input_binding_divisor_description_EXT{
 	uint32_t divisor;
 
 S_vertex_input_binding_divisor_description_EXT(){}
-
 };
 
 /*	VkPipelineVertexInputDivisorStateCreateInfoEXT
@@ -8688,7 +8766,6 @@ operator VkPipelineVertexInputDivisorStateCreateInfoEXT &()
 	{	return *reinterpret_cast<VkPipelineVertexInputDivisorStateCreateInfoEXT*>(this);	}
 
 friend S_pipeline_vertex_input_state_create_info;
-
 };
 static_assert(
 	sizeof(S_pipeline_vertex_input_divisor_state_create_info_EXT) == sizeof(VkPipelineVertexInputDivisorStateCreateInfoEXT),
@@ -8735,11 +8812,18 @@ operator VkPipelineVertexInputStateCreateInfo &()
 	{	return *reinterpret_cast<VkPipelineVertexInputStateCreateInfo*>(this);	}
 
 S_pipeline_vertex_input_state_create_info& n_pipeline_vertex_input_divisor_state_create_info_EXT(S_pipeline_vertex_input_divisor_state_create_info_EXT const& next_);
-
 };
 static_assert(
 	sizeof(S_pipeline_vertex_input_state_create_info) == sizeof(VkPipelineVertexInputStateCreateInfo),
 	"struct and wrapper have different size!");
+
+struct N_pipeline_vertex_input_state_create_info{
+private:
+	void* pNext = nullptr;
+public:
+void* get(){ return pNext; }
+N_pipeline_vertex_input_state_create_info& n_pipeline_vertex_input_divisor_state_create_info_EXT(S_pipeline_vertex_input_divisor_state_create_info_EXT const& next_);
+};
 
 /*	VkPipelineInputAssemblyStateCreateInfo
 */
@@ -8772,7 +8856,6 @@ operator VkPipelineInputAssemblyStateCreateInfo const&() const
 	{	return *reinterpret_cast<const VkPipelineInputAssemblyStateCreateInfo*>(this);	}
 operator VkPipelineInputAssemblyStateCreateInfo &() 
 	{	return *reinterpret_cast<VkPipelineInputAssemblyStateCreateInfo*>(this);	}
-
 };
 static_assert(
 	sizeof(S_pipeline_input_assembly_state_create_info) == sizeof(VkPipelineInputAssemblyStateCreateInfo),
@@ -8806,7 +8889,6 @@ operator VkPipelineTessellationDomainOriginStateCreateInfo &()
 	{	return *reinterpret_cast<VkPipelineTessellationDomainOriginStateCreateInfo*>(this);	}
 
 friend S_pipeline_tessellation_state_create_info;
-
 };
 static_assert(
 	sizeof(S_pipeline_tessellation_domain_origin_state_create_info) == sizeof(VkPipelineTessellationDomainOriginStateCreateInfo),
@@ -8844,11 +8926,18 @@ operator VkPipelineTessellationStateCreateInfo &()
 	{	return *reinterpret_cast<VkPipelineTessellationStateCreateInfo*>(this);	}
 
 S_pipeline_tessellation_state_create_info& n_pipeline_tessellation_domain_origin_state_create_info(S_pipeline_tessellation_domain_origin_state_create_info const& next_);
-
 };
 static_assert(
 	sizeof(S_pipeline_tessellation_state_create_info) == sizeof(VkPipelineTessellationStateCreateInfo),
 	"struct and wrapper have different size!");
+
+struct N_pipeline_tessellation_state_create_info{
+private:
+	void* pNext = nullptr;
+public:
+void* get(){ return pNext; }
+N_pipeline_tessellation_state_create_info& n_pipeline_tessellation_domain_origin_state_create_info(S_pipeline_tessellation_domain_origin_state_create_info const& next_);
+};
 
 /*	VkViewportWScalingNV
 */
@@ -8857,7 +8946,6 @@ struct		S_viewport_w_scaling_NV{
 	float ycoeff;
 
 S_viewport_w_scaling_NV(){}
-
 };
 
 /*	VkPipelineViewportWScalingStateCreateInfoNV
@@ -8894,7 +8982,6 @@ operator VkPipelineViewportWScalingStateCreateInfoNV &()
 	{	return *reinterpret_cast<VkPipelineViewportWScalingStateCreateInfoNV*>(this);	}
 
 friend S_pipeline_viewport_state_create_info;
-
 };
 static_assert(
 	sizeof(S_pipeline_viewport_w_scaling_state_create_info_NV) == sizeof(VkPipelineViewportWScalingStateCreateInfoNV),
@@ -8909,7 +8996,6 @@ struct		S_viewport_swizzle_NV{
 	E_viewport_coordinate_swizzle_NV w;
 
 S_viewport_swizzle_NV(){}
-
 };
 
 /*	VkPipelineViewportSwizzleStateCreateInfoNV
@@ -8946,7 +9032,6 @@ operator VkPipelineViewportSwizzleStateCreateInfoNV &()
 	{	return *reinterpret_cast<VkPipelineViewportSwizzleStateCreateInfoNV*>(this);	}
 
 friend S_pipeline_viewport_state_create_info;
-
 };
 static_assert(
 	sizeof(S_pipeline_viewport_swizzle_state_create_info_NV) == sizeof(VkPipelineViewportSwizzleStateCreateInfoNV),
@@ -8983,7 +9068,6 @@ operator VkPipelineViewportExclusiveScissorStateCreateInfoNV &()
 	{	return *reinterpret_cast<VkPipelineViewportExclusiveScissorStateCreateInfoNV*>(this);	}
 
 friend S_pipeline_viewport_state_create_info;
-
 };
 static_assert(
 	sizeof(S_pipeline_viewport_exclusive_scissor_state_create_info_NV) == sizeof(VkPipelineViewportExclusiveScissorStateCreateInfoNV),
@@ -8996,7 +9080,6 @@ struct		S_shading_rate_palette_NV{
 	const E_shading_rate_palette_entry_NV * pShadingRatePaletteEntries;
 
 S_shading_rate_palette_NV(){}
-
 };
 
 /*	VkPipelineViewportShadingRateImageStateCreateInfoNV
@@ -9033,7 +9116,6 @@ operator VkPipelineViewportShadingRateImageStateCreateInfoNV &()
 	{	return *reinterpret_cast<VkPipelineViewportShadingRateImageStateCreateInfoNV*>(this);	}
 
 friend S_pipeline_viewport_state_create_info;
-
 };
 static_assert(
 	sizeof(S_pipeline_viewport_shading_rate_image_state_create_info_NV) == sizeof(VkPipelineViewportShadingRateImageStateCreateInfoNV),
@@ -9047,7 +9129,6 @@ struct		S_coarse_sample_location_NV{
 	uint32_t sample;
 
 S_coarse_sample_location_NV(){}
-
 };
 
 /*	VkCoarseSampleOrderCustomNV
@@ -9059,7 +9140,6 @@ struct		S_coarse_sample_order_custom_NV{
 	const S_coarse_sample_location_NV * pSampleLocations;
 
 S_coarse_sample_order_custom_NV(){}
-
 };
 
 /*	VkPipelineViewportCoarseSampleOrderStateCreateInfoNV
@@ -9096,7 +9176,6 @@ operator VkPipelineViewportCoarseSampleOrderStateCreateInfoNV &()
 	{	return *reinterpret_cast<VkPipelineViewportCoarseSampleOrderStateCreateInfoNV*>(this);	}
 
 friend S_pipeline_viewport_state_create_info;
-
 };
 static_assert(
 	sizeof(S_pipeline_viewport_coarse_sample_order_state_create_info_NV) == sizeof(VkPipelineViewportCoarseSampleOrderStateCreateInfoNV),
@@ -9151,11 +9230,22 @@ S_pipeline_viewport_state_create_info& n_pipeline_viewport_swizzle_state_create_
 S_pipeline_viewport_state_create_info& n_pipeline_viewport_exclusive_scissor_state_create_info_NV(S_pipeline_viewport_exclusive_scissor_state_create_info_NV const& next_);
 S_pipeline_viewport_state_create_info& n_pipeline_viewport_shading_rate_image_state_create_info_NV(S_pipeline_viewport_shading_rate_image_state_create_info_NV const& next_);
 S_pipeline_viewport_state_create_info& n_pipeline_viewport_coarse_sample_order_state_create_info_NV(S_pipeline_viewport_coarse_sample_order_state_create_info_NV const& next_);
-
 };
 static_assert(
 	sizeof(S_pipeline_viewport_state_create_info) == sizeof(VkPipelineViewportStateCreateInfo),
 	"struct and wrapper have different size!");
+
+struct N_pipeline_viewport_state_create_info{
+private:
+	void* pNext = nullptr;
+public:
+void* get(){ return pNext; }
+N_pipeline_viewport_state_create_info& n_pipeline_viewport_w_scaling_state_create_info_NV(S_pipeline_viewport_w_scaling_state_create_info_NV const& next_);
+N_pipeline_viewport_state_create_info& n_pipeline_viewport_swizzle_state_create_info_NV(S_pipeline_viewport_swizzle_state_create_info_NV const& next_);
+N_pipeline_viewport_state_create_info& n_pipeline_viewport_exclusive_scissor_state_create_info_NV(S_pipeline_viewport_exclusive_scissor_state_create_info_NV const& next_);
+N_pipeline_viewport_state_create_info& n_pipeline_viewport_shading_rate_image_state_create_info_NV(S_pipeline_viewport_shading_rate_image_state_create_info_NV const& next_);
+N_pipeline_viewport_state_create_info& n_pipeline_viewport_coarse_sample_order_state_create_info_NV(S_pipeline_viewport_coarse_sample_order_state_create_info_NV const& next_);
+};
 
 /*	VkPipelineRasterizationStateRasterizationOrderAMD
 ex to: VkPipelineRasterizationStateCreateInfo
@@ -9185,7 +9275,6 @@ operator VkPipelineRasterizationStateRasterizationOrderAMD &()
 	{	return *reinterpret_cast<VkPipelineRasterizationStateRasterizationOrderAMD*>(this);	}
 
 friend S_pipeline_rasterization_state_create_info;
-
 };
 static_assert(
 	sizeof(S_pipeline_rasterization_state_rasterization_order_AMD) == sizeof(VkPipelineRasterizationStateRasterizationOrderAMD),
@@ -9225,7 +9314,6 @@ operator VkPipelineRasterizationConservativeStateCreateInfoEXT &()
 	{	return *reinterpret_cast<VkPipelineRasterizationConservativeStateCreateInfoEXT*>(this);	}
 
 friend S_pipeline_rasterization_state_create_info;
-
 };
 static_assert(
 	sizeof(S_pipeline_rasterization_conservative_state_create_info_EXT) == sizeof(VkPipelineRasterizationConservativeStateCreateInfoEXT),
@@ -9292,11 +9380,19 @@ operator VkPipelineRasterizationStateCreateInfo &()
 
 S_pipeline_rasterization_state_create_info& n_pipeline_rasterization_state_rasterization_order_AMD(S_pipeline_rasterization_state_rasterization_order_AMD const& next_);
 S_pipeline_rasterization_state_create_info& n_pipeline_rasterization_conservative_state_create_info_EXT(S_pipeline_rasterization_conservative_state_create_info_EXT const& next_);
-
 };
 static_assert(
 	sizeof(S_pipeline_rasterization_state_create_info) == sizeof(VkPipelineRasterizationStateCreateInfo),
 	"struct and wrapper have different size!");
+
+struct N_pipeline_rasterization_state_create_info{
+private:
+	void* pNext = nullptr;
+public:
+void* get(){ return pNext; }
+N_pipeline_rasterization_state_create_info& n_pipeline_rasterization_state_rasterization_order_AMD(S_pipeline_rasterization_state_rasterization_order_AMD const& next_);
+N_pipeline_rasterization_state_create_info& n_pipeline_rasterization_conservative_state_create_info_EXT(S_pipeline_rasterization_conservative_state_create_info_EXT const& next_);
+};
 
 /*	VkPipelineCoverageToColorStateCreateInfoNV
 ex to: VkPipelineMultisampleStateCreateInfo
@@ -9332,7 +9428,6 @@ operator VkPipelineCoverageToColorStateCreateInfoNV &()
 	{	return *reinterpret_cast<VkPipelineCoverageToColorStateCreateInfoNV*>(this);	}
 
 friend S_pipeline_multisample_state_create_info;
-
 };
 static_assert(
 	sizeof(S_pipeline_coverage_to_color_state_create_info_NV) == sizeof(VkPipelineCoverageToColorStateCreateInfoNV),
@@ -9369,7 +9464,6 @@ operator VkPipelineSampleLocationsStateCreateInfoEXT &()
 	{	return *reinterpret_cast<VkPipelineSampleLocationsStateCreateInfoEXT*>(this);	}
 
 friend S_pipeline_multisample_state_create_info;
-
 };
 static_assert(
 	sizeof(S_pipeline_sample_locations_state_create_info_EXT) == sizeof(VkPipelineSampleLocationsStateCreateInfoEXT),
@@ -9415,7 +9509,6 @@ operator VkPipelineCoverageModulationStateCreateInfoNV &()
 	{	return *reinterpret_cast<VkPipelineCoverageModulationStateCreateInfoNV*>(this);	}
 
 friend S_pipeline_multisample_state_create_info;
-
 };
 static_assert(
 	sizeof(S_pipeline_coverage_modulation_state_create_info_NV) == sizeof(VkPipelineCoverageModulationStateCreateInfoNV),
@@ -9472,11 +9565,20 @@ operator VkPipelineMultisampleStateCreateInfo &()
 S_pipeline_multisample_state_create_info& n_pipeline_coverage_to_color_state_create_info_NV(S_pipeline_coverage_to_color_state_create_info_NV const& next_);
 S_pipeline_multisample_state_create_info& n_pipeline_sample_locations_state_create_info_EXT(S_pipeline_sample_locations_state_create_info_EXT const& next_);
 S_pipeline_multisample_state_create_info& n_pipeline_coverage_modulation_state_create_info_NV(S_pipeline_coverage_modulation_state_create_info_NV const& next_);
-
 };
 static_assert(
 	sizeof(S_pipeline_multisample_state_create_info) == sizeof(VkPipelineMultisampleStateCreateInfo),
 	"struct and wrapper have different size!");
+
+struct N_pipeline_multisample_state_create_info{
+private:
+	void* pNext = nullptr;
+public:
+void* get(){ return pNext; }
+N_pipeline_multisample_state_create_info& n_pipeline_coverage_to_color_state_create_info_NV(S_pipeline_coverage_to_color_state_create_info_NV const& next_);
+N_pipeline_multisample_state_create_info& n_pipeline_sample_locations_state_create_info_EXT(S_pipeline_sample_locations_state_create_info_EXT const& next_);
+N_pipeline_multisample_state_create_info& n_pipeline_coverage_modulation_state_create_info_NV(S_pipeline_coverage_modulation_state_create_info_NV const& next_);
+};
 
 /*	VkPipelineColorBlendAttachmentState
 */
@@ -9491,7 +9593,6 @@ struct		S_pipeline_color_blend_attachment_state{
 	F_color_component colorWriteMask;
 
 S_pipeline_color_blend_attachment_state(){}
-
 };
 
 /*	VkPipelineColorBlendAdvancedStateCreateInfoEXT
@@ -9528,7 +9629,6 @@ operator VkPipelineColorBlendAdvancedStateCreateInfoEXT &()
 	{	return *reinterpret_cast<VkPipelineColorBlendAdvancedStateCreateInfoEXT*>(this);	}
 
 friend S_pipeline_color_blend_state_create_info;
-
 };
 static_assert(
 	sizeof(S_pipeline_color_blend_advanced_state_create_info_EXT) == sizeof(VkPipelineColorBlendAdvancedStateCreateInfoEXT),
@@ -9578,11 +9678,18 @@ operator VkPipelineColorBlendStateCreateInfo &()
 	{	return *reinterpret_cast<VkPipelineColorBlendStateCreateInfo*>(this);	}
 
 S_pipeline_color_blend_state_create_info& n_pipeline_color_blend_advanced_state_create_info_EXT(S_pipeline_color_blend_advanced_state_create_info_EXT const& next_);
-
 };
 static_assert(
 	sizeof(S_pipeline_color_blend_state_create_info) == sizeof(VkPipelineColorBlendStateCreateInfo),
 	"struct and wrapper have different size!");
+
+struct N_pipeline_color_blend_state_create_info{
+private:
+	void* pNext = nullptr;
+public:
+void* get(){ return pNext; }
+N_pipeline_color_blend_state_create_info& n_pipeline_color_blend_advanced_state_create_info_EXT(S_pipeline_color_blend_advanced_state_create_info_EXT const& next_);
+};
 
 /*	VkPipelineDynamicStateCreateInfo
 */
@@ -9615,7 +9722,6 @@ operator VkPipelineDynamicStateCreateInfo const&() const
 	{	return *reinterpret_cast<const VkPipelineDynamicStateCreateInfo*>(this);	}
 operator VkPipelineDynamicStateCreateInfo &() 
 	{	return *reinterpret_cast<VkPipelineDynamicStateCreateInfo*>(this);	}
-
 };
 static_assert(
 	sizeof(S_pipeline_dynamic_state_create_info) == sizeof(VkPipelineDynamicStateCreateInfo),
@@ -9633,7 +9739,6 @@ struct		S_stencil_op_state{
 	uint32_t reference;
 
 S_stencil_op_state(){}
-
 };
 
 /*	VkPipelineDepthStencilStateCreateInfo
@@ -9688,7 +9793,6 @@ operator VkPipelineDepthStencilStateCreateInfo const&() const
 	{	return *reinterpret_cast<const VkPipelineDepthStencilStateCreateInfo*>(this);	}
 operator VkPipelineDepthStencilStateCreateInfo &() 
 	{	return *reinterpret_cast<VkPipelineDepthStencilStateCreateInfo*>(this);	}
-
 };
 static_assert(
 	sizeof(S_pipeline_depth_stencil_state_create_info) == sizeof(VkPipelineDepthStencilStateCreateInfo),
@@ -9731,7 +9835,6 @@ operator VkPipelineDiscardRectangleStateCreateInfoEXT &()
 	{	return *reinterpret_cast<VkPipelineDiscardRectangleStateCreateInfoEXT*>(this);	}
 
 friend S_graphics_pipeline_create_info;
-
 };
 static_assert(
 	sizeof(S_pipeline_discard_rectangle_state_create_info_EXT) == sizeof(VkPipelineDiscardRectangleStateCreateInfoEXT),
@@ -9765,7 +9868,6 @@ operator VkPipelineRepresentativeFragmentTestStateCreateInfoNV &()
 	{	return *reinterpret_cast<VkPipelineRepresentativeFragmentTestStateCreateInfoNV*>(this);	}
 
 friend S_graphics_pipeline_create_info;
-
 };
 static_assert(
 	sizeof(S_pipeline_representative_fragment_test_state_create_info_NV) == sizeof(VkPipelineRepresentativeFragmentTestStateCreateInfoNV),
@@ -9850,11 +9952,19 @@ operator VkGraphicsPipelineCreateInfo &()
 
 S_graphics_pipeline_create_info& n_pipeline_discard_rectangle_state_create_info_EXT(S_pipeline_discard_rectangle_state_create_info_EXT const& next_);
 S_graphics_pipeline_create_info& n_pipeline_representative_fragment_test_state_create_info_NV(S_pipeline_representative_fragment_test_state_create_info_NV const& next_);
-
 };
 static_assert(
 	sizeof(S_graphics_pipeline_create_info) == sizeof(VkGraphicsPipelineCreateInfo),
 	"struct and wrapper have different size!");
+
+struct N_graphics_pipeline_create_info{
+private:
+	void* pNext = nullptr;
+public:
+void* get(){ return pNext; }
+N_graphics_pipeline_create_info& n_pipeline_discard_rectangle_state_create_info_EXT(S_pipeline_discard_rectangle_state_create_info_EXT const& next_);
+N_graphics_pipeline_create_info& n_pipeline_representative_fragment_test_state_create_info_NV(S_pipeline_representative_fragment_test_state_create_info_NV const& next_);
+};
 
 /*	VkPipelineCacheCreateInfo
 */
@@ -9887,7 +9997,6 @@ operator VkPipelineCacheCreateInfo const&() const
 	{	return *reinterpret_cast<const VkPipelineCacheCreateInfo*>(this);	}
 operator VkPipelineCacheCreateInfo &() 
 	{	return *reinterpret_cast<VkPipelineCacheCreateInfo*>(this);	}
-
 };
 static_assert(
 	sizeof(S_pipeline_cache_create_info) == sizeof(VkPipelineCacheCreateInfo),
@@ -9901,7 +10010,6 @@ struct		S_push_constant_range{
 	uint32_t size;
 
 S_push_constant_range(){}
-
 };
 
 /*	VkPipelineLayoutCreateInfo
@@ -9941,7 +10049,6 @@ operator VkPipelineLayoutCreateInfo const&() const
 	{	return *reinterpret_cast<const VkPipelineLayoutCreateInfo*>(this);	}
 operator VkPipelineLayoutCreateInfo &() 
 	{	return *reinterpret_cast<VkPipelineLayoutCreateInfo*>(this);	}
-
 };
 static_assert(
 	sizeof(S_pipeline_layout_create_info) == sizeof(VkPipelineLayoutCreateInfo),
@@ -9975,7 +10082,6 @@ operator VkSamplerReductionModeCreateInfoEXT &()
 	{	return *reinterpret_cast<VkSamplerReductionModeCreateInfoEXT*>(this);	}
 
 friend S_sampler_create_info;
-
 };
 static_assert(
 	sizeof(S_sampler_reduction_mode_create_info_EXT) == sizeof(VkSamplerReductionModeCreateInfoEXT),
@@ -10057,11 +10163,19 @@ operator VkSamplerCreateInfo &()
 
 S_sampler_create_info& n_sampler_ycbcr_conversion_info(S_sampler_ycbcr_conversion_info const& next_);
 S_sampler_create_info& n_sampler_reduction_mode_create_info_EXT(S_sampler_reduction_mode_create_info_EXT const& next_);
-
 };
 static_assert(
 	sizeof(S_sampler_create_info) == sizeof(VkSamplerCreateInfo),
 	"struct and wrapper have different size!");
+
+struct N_sampler_create_info{
+private:
+	void* pNext = nullptr;
+public:
+void* get(){ return pNext; }
+N_sampler_create_info& n_sampler_ycbcr_conversion_info(S_sampler_ycbcr_conversion_info const& next_);
+N_sampler_create_info& n_sampler_reduction_mode_create_info_EXT(S_sampler_reduction_mode_create_info_EXT const& next_);
+};
 
 /*	VkCommandPoolCreateInfo
 */
@@ -10091,7 +10205,6 @@ operator VkCommandPoolCreateInfo const&() const
 	{	return *reinterpret_cast<const VkCommandPoolCreateInfo*>(this);	}
 operator VkCommandPoolCreateInfo &() 
 	{	return *reinterpret_cast<VkCommandPoolCreateInfo*>(this);	}
-
 };
 static_assert(
 	sizeof(S_command_pool_create_info) == sizeof(VkCommandPoolCreateInfo),
@@ -10128,7 +10241,6 @@ operator VkCommandBufferAllocateInfo const&() const
 	{	return *reinterpret_cast<const VkCommandBufferAllocateInfo*>(this);	}
 operator VkCommandBufferAllocateInfo &() 
 	{	return *reinterpret_cast<VkCommandBufferAllocateInfo*>(this);	}
-
 };
 static_assert(
 	sizeof(S_command_buffer_allocate_info) == sizeof(VkCommandBufferAllocateInfo),
@@ -10162,7 +10274,6 @@ operator VkCommandBufferInheritanceConditionalRenderingInfoEXT &()
 	{	return *reinterpret_cast<VkCommandBufferInheritanceConditionalRenderingInfoEXT*>(this);	}
 
 friend S_command_buffer_inheritance_info;
-
 };
 static_assert(
 	sizeof(S_command_buffer_inheritance_conditional_rendering_info_EXT) == sizeof(VkCommandBufferInheritanceConditionalRenderingInfoEXT),
@@ -10212,11 +10323,18 @@ operator VkCommandBufferInheritanceInfo &()
 	{	return *reinterpret_cast<VkCommandBufferInheritanceInfo*>(this);	}
 
 S_command_buffer_inheritance_info& n_command_buffer_inheritance_conditional_rendering_info_EXT(S_command_buffer_inheritance_conditional_rendering_info_EXT const& next_);
-
 };
 static_assert(
 	sizeof(S_command_buffer_inheritance_info) == sizeof(VkCommandBufferInheritanceInfo),
 	"struct and wrapper have different size!");
+
+struct N_command_buffer_inheritance_info{
+private:
+	void* pNext = nullptr;
+public:
+void* get(){ return pNext; }
+N_command_buffer_inheritance_info& n_command_buffer_inheritance_conditional_rendering_info_EXT(S_command_buffer_inheritance_conditional_rendering_info_EXT const& next_);
+};
 
 /*	VkDeviceGroupCommandBufferBeginInfo
 ex to: VkCommandBufferBeginInfo
@@ -10246,7 +10364,6 @@ operator VkDeviceGroupCommandBufferBeginInfo &()
 	{	return *reinterpret_cast<VkDeviceGroupCommandBufferBeginInfo*>(this);	}
 
 friend S_command_buffer_begin_info;
-
 };
 static_assert(
 	sizeof(S_device_group_command_buffer_begin_info) == sizeof(VkDeviceGroupCommandBufferBeginInfo),
@@ -10284,11 +10401,18 @@ operator VkCommandBufferBeginInfo &()
 	{	return *reinterpret_cast<VkCommandBufferBeginInfo*>(this);	}
 
 S_command_buffer_begin_info& n_device_group_command_buffer_begin_info(S_device_group_command_buffer_begin_info const& next_);
-
 };
 static_assert(
 	sizeof(S_command_buffer_begin_info) == sizeof(VkCommandBufferBeginInfo),
 	"struct and wrapper have different size!");
+
+struct N_command_buffer_begin_info{
+private:
+	void* pNext = nullptr;
+public:
+void* get(){ return pNext; }
+N_command_buffer_begin_info& n_device_group_command_buffer_begin_info(S_device_group_command_buffer_begin_info const& next_);
+};
 
 /*	VkDeviceGroupRenderPassBeginInfo
 ex to: VkRenderPassBeginInfo
@@ -10324,7 +10448,6 @@ operator VkDeviceGroupRenderPassBeginInfo &()
 	{	return *reinterpret_cast<VkDeviceGroupRenderPassBeginInfo*>(this);	}
 
 friend S_render_pass_begin_info;
-
 };
 static_assert(
 	sizeof(S_device_group_render_pass_begin_info) == sizeof(VkDeviceGroupRenderPassBeginInfo),
@@ -10337,7 +10460,6 @@ struct		S_attachment_sample_locations_EXT{
 	S_sample_locations_info_EXT sampleLocationsInfo;
 
 S_attachment_sample_locations_EXT(){}
-
 };
 
 /*	VkSubpassSampleLocationsEXT
@@ -10347,7 +10469,6 @@ struct		S_subpass_sample_locations_EXT{
 	S_sample_locations_info_EXT sampleLocationsInfo;
 
 S_subpass_sample_locations_EXT(){}
-
 };
 
 /*	VkRenderPassSampleLocationsBeginInfoEXT
@@ -10387,7 +10508,6 @@ operator VkRenderPassSampleLocationsBeginInfoEXT &()
 	{	return *reinterpret_cast<VkRenderPassSampleLocationsBeginInfoEXT*>(this);	}
 
 friend S_render_pass_begin_info;
-
 };
 static_assert(
 	sizeof(S_render_pass_sample_locations_begin_info_EXT) == sizeof(VkRenderPassSampleLocationsBeginInfoEXT),
@@ -10436,11 +10556,19 @@ operator VkRenderPassBeginInfo &()
 
 S_render_pass_begin_info& n_device_group_render_pass_begin_info(S_device_group_render_pass_begin_info const& next_);
 S_render_pass_begin_info& n_render_pass_sample_locations_begin_info_EXT(S_render_pass_sample_locations_begin_info_EXT const& next_);
-
 };
 static_assert(
 	sizeof(S_render_pass_begin_info) == sizeof(VkRenderPassBeginInfo),
 	"struct and wrapper have different size!");
+
+struct N_render_pass_begin_info{
+private:
+	void* pNext = nullptr;
+public:
+void* get(){ return pNext; }
+N_render_pass_begin_info& n_device_group_render_pass_begin_info(S_device_group_render_pass_begin_info const& next_);
+N_render_pass_begin_info& n_render_pass_sample_locations_begin_info_EXT(S_render_pass_sample_locations_begin_info_EXT const& next_);
+};
 
 /*	VkClearDepthStencilValue
 */
@@ -10449,7 +10577,6 @@ struct		S_clear_depth_stencil_value{
 	uint32_t stencil;
 
 S_clear_depth_stencil_value(){}
-
 };
 
 /*	VkClearAttachment
@@ -10460,7 +10587,6 @@ struct		S_clear_attachment{
 	VkClearValue clearValue;
 
 S_clear_attachment(){}
-
 };
 
 /*	VkAttachmentDescription
@@ -10477,7 +10603,6 @@ struct		S_attachment_description{
 	E_image_layout finalLayout;
 
 S_attachment_description(){}
-
 };
 
 /*	VkAttachmentReference
@@ -10487,7 +10612,6 @@ struct		S_attachment_reference{
 	E_image_layout layout;
 
 S_attachment_reference(){}
-
 };
 
 /*	VkSubpassDescription
@@ -10505,7 +10629,6 @@ struct		S_subpass_description{
 	const uint32_t * pPreserveAttachments;
 
 S_subpass_description(){}
-
 };
 
 /*	VkSubpassDependency
@@ -10520,7 +10643,6 @@ struct		S_subpass_dependency{
 	F_dependency dependencyFlags;
 
 S_subpass_dependency(){}
-
 };
 
 /*	VkRenderPassMultiviewCreateInfo
@@ -10566,7 +10688,6 @@ operator VkRenderPassMultiviewCreateInfo &()
 	{	return *reinterpret_cast<VkRenderPassMultiviewCreateInfo*>(this);	}
 
 friend S_render_pass_create_info;
-
 };
 static_assert(
 	sizeof(S_render_pass_multiview_create_info) == sizeof(VkRenderPassMultiviewCreateInfo),
@@ -10580,7 +10701,6 @@ struct		S_input_attachment_aspect_reference{
 	F_image_aspect aspectMask;
 
 S_input_attachment_aspect_reference(){}
-
 };
 
 /*	VkRenderPassInputAttachmentAspectCreateInfo
@@ -10614,7 +10734,6 @@ operator VkRenderPassInputAttachmentAspectCreateInfo &()
 	{	return *reinterpret_cast<VkRenderPassInputAttachmentAspectCreateInfo*>(this);	}
 
 friend S_render_pass_create_info;
-
 };
 static_assert(
 	sizeof(S_render_pass_input_attachment_aspect_create_info) == sizeof(VkRenderPassInputAttachmentAspectCreateInfo),
@@ -10669,11 +10788,19 @@ operator VkRenderPassCreateInfo &()
 
 S_render_pass_create_info& n_render_pass_multiview_create_info(S_render_pass_multiview_create_info const& next_);
 S_render_pass_create_info& n_render_pass_input_attachment_aspect_create_info(S_render_pass_input_attachment_aspect_create_info const& next_);
-
 };
 static_assert(
 	sizeof(S_render_pass_create_info) == sizeof(VkRenderPassCreateInfo),
 	"struct and wrapper have different size!");
+
+struct N_render_pass_create_info{
+private:
+	void* pNext = nullptr;
+public:
+void* get(){ return pNext; }
+N_render_pass_create_info& n_render_pass_multiview_create_info(S_render_pass_multiview_create_info const& next_);
+N_render_pass_create_info& n_render_pass_input_attachment_aspect_create_info(S_render_pass_input_attachment_aspect_create_info const& next_);
+};
 
 /*	VkEventCreateInfo
 */
@@ -10700,7 +10827,6 @@ operator VkEventCreateInfo const&() const
 	{	return *reinterpret_cast<const VkEventCreateInfo*>(this);	}
 operator VkEventCreateInfo &() 
 	{	return *reinterpret_cast<VkEventCreateInfo*>(this);	}
-
 };
 static_assert(
 	sizeof(S_event_create_info) == sizeof(VkEventCreateInfo),
@@ -10734,7 +10860,6 @@ operator VkExportFenceCreateInfo &()
 	{	return *reinterpret_cast<VkExportFenceCreateInfo*>(this);	}
 
 friend S_fence_create_info;
-
 };
 static_assert(
 	sizeof(S_export_fence_create_info) == sizeof(VkExportFenceCreateInfo),
@@ -10775,7 +10900,6 @@ operator VkExportFenceWin32HandleInfoKHR &()
 	{	return *reinterpret_cast<VkExportFenceWin32HandleInfoKHR*>(this);	}
 
 friend S_fence_create_info;
-
 };
 static_assert(
 	sizeof(S_export_fence_win32_handle_info_KHR) == sizeof(VkExportFenceWin32HandleInfoKHR),
@@ -10815,11 +10939,21 @@ S_fence_create_info& n_export_fence_create_info(S_export_fence_create_info const
 #ifdef VK_USE_PLATFORM_WIN32_KHR
 S_fence_create_info& n_export_fence_win32_handle_info_KHR(S_export_fence_win32_handle_info_KHR const& next_);
 #endif
-
 };
 static_assert(
 	sizeof(S_fence_create_info) == sizeof(VkFenceCreateInfo),
 	"struct and wrapper have different size!");
+
+struct N_fence_create_info{
+private:
+	void* pNext = nullptr;
+public:
+void* get(){ return pNext; }
+N_fence_create_info& n_export_fence_create_info(S_export_fence_create_info const& next_);
+#ifdef VK_USE_PLATFORM_WIN32_KHR
+N_fence_create_info& n_export_fence_win32_handle_info_KHR(S_export_fence_win32_handle_info_KHR const& next_);
+#endif
+};
 
 /*	VkExportSemaphoreCreateInfo
 ex to: VkSemaphoreCreateInfo
@@ -10849,7 +10983,6 @@ operator VkExportSemaphoreCreateInfo &()
 	{	return *reinterpret_cast<VkExportSemaphoreCreateInfo*>(this);	}
 
 friend S_semaphore_create_info;
-
 };
 static_assert(
 	sizeof(S_export_semaphore_create_info) == sizeof(VkExportSemaphoreCreateInfo),
@@ -10890,7 +11023,6 @@ operator VkExportSemaphoreWin32HandleInfoKHR &()
 	{	return *reinterpret_cast<VkExportSemaphoreWin32HandleInfoKHR*>(this);	}
 
 friend S_semaphore_create_info;
-
 };
 static_assert(
 	sizeof(S_export_semaphore_win32_handle_info_KHR) == sizeof(VkExportSemaphoreWin32HandleInfoKHR),
@@ -10930,11 +11062,21 @@ S_semaphore_create_info& n_export_semaphore_create_info(S_export_semaphore_creat
 #ifdef VK_USE_PLATFORM_WIN32_KHR
 S_semaphore_create_info& n_export_semaphore_win32_handle_info_KHR(S_export_semaphore_win32_handle_info_KHR const& next_);
 #endif
-
 };
 static_assert(
 	sizeof(S_semaphore_create_info) == sizeof(VkSemaphoreCreateInfo),
 	"struct and wrapper have different size!");
+
+struct N_semaphore_create_info{
+private:
+	void* pNext = nullptr;
+public:
+void* get(){ return pNext; }
+N_semaphore_create_info& n_export_semaphore_create_info(S_export_semaphore_create_info const& next_);
+#ifdef VK_USE_PLATFORM_WIN32_KHR
+N_semaphore_create_info& n_export_semaphore_win32_handle_info_KHR(S_export_semaphore_win32_handle_info_KHR const& next_);
+#endif
+};
 
 /*	VkQueryPoolCreateInfo
 */
@@ -10970,7 +11112,6 @@ operator VkQueryPoolCreateInfo const&() const
 	{	return *reinterpret_cast<const VkQueryPoolCreateInfo*>(this);	}
 operator VkQueryPoolCreateInfo &() 
 	{	return *reinterpret_cast<VkQueryPoolCreateInfo*>(this);	}
-
 };
 static_assert(
 	sizeof(S_query_pool_create_info) == sizeof(VkQueryPoolCreateInfo),
@@ -11019,7 +11160,6 @@ operator VkFramebufferCreateInfo const&() const
 	{	return *reinterpret_cast<const VkFramebufferCreateInfo*>(this);	}
 operator VkFramebufferCreateInfo &() 
 	{	return *reinterpret_cast<VkFramebufferCreateInfo*>(this);	}
-
 };
 static_assert(
 	sizeof(S_framebuffer_create_info) == sizeof(VkFramebufferCreateInfo),
@@ -11034,7 +11174,6 @@ struct		S_draw_indirect_command{
 	uint32_t firstInstance;
 
 S_draw_indirect_command(){}
-
 };
 
 /*	VkDrawIndexedIndirectCommand
@@ -11047,7 +11186,6 @@ struct		S_draw_indexed_indirect_command{
 	uint32_t firstInstance;
 
 S_draw_indexed_indirect_command(){}
-
 };
 
 /*	VkDispatchIndirectCommand
@@ -11058,7 +11196,6 @@ struct		S_dispatch_indirect_command{
 	uint32_t z;
 
 S_dispatch_indirect_command(){}
-
 };
 
 /*	VkWin32KeyedMutexAcquireReleaseInfoNV
@@ -11108,7 +11245,6 @@ operator VkWin32KeyedMutexAcquireReleaseInfoNV &()
 	{	return *reinterpret_cast<VkWin32KeyedMutexAcquireReleaseInfoNV*>(this);	}
 
 friend S_submit_info;
-
 };
 static_assert(
 	sizeof(S_win32_keyed_mutex_acquire_release_info_NV) == sizeof(VkWin32KeyedMutexAcquireReleaseInfoNV),
@@ -11162,7 +11298,6 @@ operator VkWin32KeyedMutexAcquireReleaseInfoKHR &()
 	{	return *reinterpret_cast<VkWin32KeyedMutexAcquireReleaseInfoKHR*>(this);	}
 
 friend S_submit_info;
-
 };
 static_assert(
 	sizeof(S_win32_keyed_mutex_acquire_release_info_KHR) == sizeof(VkWin32KeyedMutexAcquireReleaseInfoKHR),
@@ -11207,7 +11342,6 @@ operator VkD3D12FenceSubmitInfoKHR &()
 	{	return *reinterpret_cast<VkD3D12FenceSubmitInfoKHR*>(this);	}
 
 friend S_submit_info;
-
 };
 static_assert(
 	sizeof(S_d_3d12_fence_submit_info_KHR) == sizeof(VkD3D12FenceSubmitInfoKHR),
@@ -11257,7 +11391,6 @@ operator VkDeviceGroupSubmitInfo &()
 	{	return *reinterpret_cast<VkDeviceGroupSubmitInfo*>(this);	}
 
 friend S_submit_info;
-
 };
 static_assert(
 	sizeof(S_device_group_submit_info) == sizeof(VkDeviceGroupSubmitInfo),
@@ -11291,7 +11424,6 @@ operator VkProtectedSubmitInfo &()
 	{	return *reinterpret_cast<VkProtectedSubmitInfo*>(this);	}
 
 friend S_submit_info;
-
 };
 static_assert(
 	sizeof(S_protected_submit_info) == sizeof(VkProtectedSubmitInfo),
@@ -11358,11 +11490,28 @@ S_submit_info& n_d_3d12_fence_submit_info_KHR(S_d_3d12_fence_submit_info_KHR con
 #endif
 S_submit_info& n_device_group_submit_info(S_device_group_submit_info const& next_);
 S_submit_info& n_protected_submit_info(S_protected_submit_info const& next_);
-
 };
 static_assert(
 	sizeof(S_submit_info) == sizeof(VkSubmitInfo),
 	"struct and wrapper have different size!");
+
+struct N_submit_info{
+private:
+	void* pNext = nullptr;
+public:
+void* get(){ return pNext; }
+#ifdef VK_USE_PLATFORM_WIN32_KHR
+N_submit_info& n_win32_keyed_mutex_acquire_release_info_NV(S_win32_keyed_mutex_acquire_release_info_NV const& next_);
+#endif
+#ifdef VK_USE_PLATFORM_WIN32_KHR
+N_submit_info& n_win32_keyed_mutex_acquire_release_info_KHR(S_win32_keyed_mutex_acquire_release_info_KHR const& next_);
+#endif
+#ifdef VK_USE_PLATFORM_WIN32_KHR
+N_submit_info& n_d_3d12_fence_submit_info_KHR(S_d_3d12_fence_submit_info_KHR const& next_);
+#endif
+N_submit_info& n_device_group_submit_info(S_device_group_submit_info const& next_);
+N_submit_info& n_protected_submit_info(S_protected_submit_info const& next_);
+};
 
 /*	VkDisplayPropertiesKHR
 (returnedonly)
@@ -11377,7 +11526,6 @@ struct		S_display_properties_KHR{
 	VkBool32 persistentContent;
 
 S_display_properties_KHR(){}
-
 };
 
 /*	VkDisplayPlanePropertiesKHR
@@ -11388,7 +11536,6 @@ struct		S_display_plane_properties_KHR{
 	uint32_t currentStackIndex;
 
 S_display_plane_properties_KHR(){}
-
 };
 
 /*	VkDisplayModeParametersKHR
@@ -11398,7 +11545,6 @@ struct		S_display_mode_parameters_KHR{
 	uint32_t refreshRate;
 
 S_display_mode_parameters_KHR(){}
-
 };
 
 /*	VkDisplayModePropertiesKHR
@@ -11409,7 +11555,6 @@ struct		S_display_mode_properties_KHR{
 	S_display_mode_parameters_KHR parameters;
 
 S_display_mode_properties_KHR(){}
-
 };
 
 /*	VkDisplayModeCreateInfoKHR
@@ -11440,7 +11585,6 @@ operator VkDisplayModeCreateInfoKHR const&() const
 	{	return *reinterpret_cast<const VkDisplayModeCreateInfoKHR*>(this);	}
 operator VkDisplayModeCreateInfoKHR &() 
 	{	return *reinterpret_cast<VkDisplayModeCreateInfoKHR*>(this);	}
-
 };
 static_assert(
 	sizeof(S_display_mode_create_info_KHR) == sizeof(VkDisplayModeCreateInfoKHR),
@@ -11461,7 +11605,6 @@ struct		S_display_plane_capabilities_KHR{
 	S_extent_2d maxDstExtent;
 
 S_display_plane_capabilities_KHR(){}
-
 };
 
 /*	VkDisplaySurfaceCreateInfoKHR
@@ -11510,7 +11653,6 @@ operator VkDisplaySurfaceCreateInfoKHR const&() const
 	{	return *reinterpret_cast<const VkDisplaySurfaceCreateInfoKHR*>(this);	}
 operator VkDisplaySurfaceCreateInfoKHR &() 
 	{	return *reinterpret_cast<VkDisplaySurfaceCreateInfoKHR*>(this);	}
-
 };
 static_assert(
 	sizeof(S_display_surface_create_info_KHR) == sizeof(VkDisplaySurfaceCreateInfoKHR),
@@ -11550,7 +11692,6 @@ operator VkDisplayPresentInfoKHR &()
 	{	return *reinterpret_cast<VkDisplayPresentInfoKHR*>(this);	}
 
 friend S_present_info_KHR;
-
 };
 static_assert(
 	sizeof(S_display_present_info_KHR) == sizeof(VkDisplayPresentInfoKHR),
@@ -11572,7 +11713,6 @@ struct		S_surface_capabilities_KHR{
 	F_image_usage supportedUsageFlags;
 
 S_surface_capabilities_KHR(){}
-
 };
 
 /*	VkAndroidSurfaceCreateInfoKHR
@@ -11604,7 +11744,6 @@ operator VkAndroidSurfaceCreateInfoKHR const&() const
 	{	return *reinterpret_cast<const VkAndroidSurfaceCreateInfoKHR*>(this);	}
 operator VkAndroidSurfaceCreateInfoKHR &() 
 	{	return *reinterpret_cast<VkAndroidSurfaceCreateInfoKHR*>(this);	}
-
 };
 static_assert(
 	sizeof(S_android_surface_create_info_KHR) == sizeof(VkAndroidSurfaceCreateInfoKHR),
@@ -11643,7 +11782,6 @@ operator VkMirSurfaceCreateInfoKHR const&() const
 	{	return *reinterpret_cast<const VkMirSurfaceCreateInfoKHR*>(this);	}
 operator VkMirSurfaceCreateInfoKHR &() 
 	{	return *reinterpret_cast<VkMirSurfaceCreateInfoKHR*>(this);	}
-
 };
 static_assert(
 	sizeof(S_mir_surface_create_info_KHR) == sizeof(VkMirSurfaceCreateInfoKHR),
@@ -11679,7 +11817,6 @@ operator VkViSurfaceCreateInfoNN const&() const
 	{	return *reinterpret_cast<const VkViSurfaceCreateInfoNN*>(this);	}
 operator VkViSurfaceCreateInfoNN &() 
 	{	return *reinterpret_cast<VkViSurfaceCreateInfoNN*>(this);	}
-
 };
 static_assert(
 	sizeof(S_vi_surface_create_info_NN) == sizeof(VkViSurfaceCreateInfoNN),
@@ -11718,7 +11855,6 @@ operator VkWaylandSurfaceCreateInfoKHR const&() const
 	{	return *reinterpret_cast<const VkWaylandSurfaceCreateInfoKHR*>(this);	}
 operator VkWaylandSurfaceCreateInfoKHR &() 
 	{	return *reinterpret_cast<VkWaylandSurfaceCreateInfoKHR*>(this);	}
-
 };
 static_assert(
 	sizeof(S_wayland_surface_create_info_KHR) == sizeof(VkWaylandSurfaceCreateInfoKHR),
@@ -11757,7 +11893,6 @@ operator VkWin32SurfaceCreateInfoKHR const&() const
 	{	return *reinterpret_cast<const VkWin32SurfaceCreateInfoKHR*>(this);	}
 operator VkWin32SurfaceCreateInfoKHR &() 
 	{	return *reinterpret_cast<VkWin32SurfaceCreateInfoKHR*>(this);	}
-
 };
 static_assert(
 	sizeof(S_win32_surface_create_info_KHR) == sizeof(VkWin32SurfaceCreateInfoKHR),
@@ -11796,7 +11931,6 @@ operator VkXlibSurfaceCreateInfoKHR const&() const
 	{	return *reinterpret_cast<const VkXlibSurfaceCreateInfoKHR*>(this);	}
 operator VkXlibSurfaceCreateInfoKHR &() 
 	{	return *reinterpret_cast<VkXlibSurfaceCreateInfoKHR*>(this);	}
-
 };
 static_assert(
 	sizeof(S_xlib_surface_create_info_KHR) == sizeof(VkXlibSurfaceCreateInfoKHR),
@@ -11835,7 +11969,6 @@ operator VkXcbSurfaceCreateInfoKHR const&() const
 	{	return *reinterpret_cast<const VkXcbSurfaceCreateInfoKHR*>(this);	}
 operator VkXcbSurfaceCreateInfoKHR &() 
 	{	return *reinterpret_cast<VkXcbSurfaceCreateInfoKHR*>(this);	}
-
 };
 static_assert(
 	sizeof(S_xcb_surface_create_info_KHR) == sizeof(VkXcbSurfaceCreateInfoKHR),
@@ -11850,7 +11983,6 @@ struct		S_surface_format_KHR{
 	E_color_space_KHR colorSpace;
 
 S_surface_format_KHR(){}
-
 };
 
 /*	VkSwapchainCounterCreateInfoEXT
@@ -11881,7 +12013,6 @@ operator VkSwapchainCounterCreateInfoEXT &()
 	{	return *reinterpret_cast<VkSwapchainCounterCreateInfoEXT*>(this);	}
 
 friend S_swapchain_create_info_KHR;
-
 };
 static_assert(
 	sizeof(S_swapchain_counter_create_info_EXT) == sizeof(VkSwapchainCounterCreateInfoEXT),
@@ -11915,7 +12046,6 @@ operator VkDeviceGroupSwapchainCreateInfoKHR &()
 	{	return *reinterpret_cast<VkDeviceGroupSwapchainCreateInfoKHR*>(this);	}
 
 friend S_swapchain_create_info_KHR;
-
 };
 static_assert(
 	sizeof(S_device_group_swapchain_create_info_KHR) == sizeof(VkDeviceGroupSwapchainCreateInfoKHR),
@@ -11997,11 +12127,19 @@ operator VkSwapchainCreateInfoKHR &()
 
 S_swapchain_create_info_KHR& n_swapchain_counter_create_info_EXT(S_swapchain_counter_create_info_EXT const& next_);
 S_swapchain_create_info_KHR& n_device_group_swapchain_create_info_KHR(S_device_group_swapchain_create_info_KHR const& next_);
-
 };
 static_assert(
 	sizeof(S_swapchain_create_info_KHR) == sizeof(VkSwapchainCreateInfoKHR),
 	"struct and wrapper have different size!");
+
+struct N_swapchain_create_info_KHR{
+private:
+	void* pNext = nullptr;
+public:
+void* get(){ return pNext; }
+N_swapchain_create_info_KHR& n_swapchain_counter_create_info_EXT(S_swapchain_counter_create_info_EXT const& next_);
+N_swapchain_create_info_KHR& n_device_group_swapchain_create_info_KHR(S_device_group_swapchain_create_info_KHR const& next_);
+};
 
 /*	VkRectLayerKHR
 */
@@ -12011,7 +12149,6 @@ struct		S_rect_layer_KHR{
 	uint32_t layer;
 
 S_rect_layer_KHR(){}
-
 };
 
 /*	VkPresentRegionKHR
@@ -12021,7 +12158,6 @@ struct		S_present_region_KHR{
 	const S_rect_layer_KHR * pRectangles;
 
 S_present_region_KHR(){}
-
 };
 
 /*	VkPresentRegionsKHR
@@ -12055,7 +12191,6 @@ operator VkPresentRegionsKHR &()
 	{	return *reinterpret_cast<VkPresentRegionsKHR*>(this);	}
 
 friend S_present_info_KHR;
-
 };
 static_assert(
 	sizeof(S_present_regions_KHR) == sizeof(VkPresentRegionsKHR),
@@ -12095,7 +12230,6 @@ operator VkDeviceGroupPresentInfoKHR &()
 	{	return *reinterpret_cast<VkDeviceGroupPresentInfoKHR*>(this);	}
 
 friend S_present_info_KHR;
-
 };
 static_assert(
 	sizeof(S_device_group_present_info_KHR) == sizeof(VkDeviceGroupPresentInfoKHR),
@@ -12108,7 +12242,6 @@ struct		S_present_time_GOOGLE{
 	uint64_t desiredPresentTime;
 
 S_present_time_GOOGLE(){}
-
 };
 
 /*	VkPresentTimesInfoGOOGLE
@@ -12142,7 +12275,6 @@ operator VkPresentTimesInfoGOOGLE &()
 	{	return *reinterpret_cast<VkPresentTimesInfoGOOGLE*>(this);	}
 
 friend S_present_info_KHR;
-
 };
 static_assert(
 	sizeof(S_present_times_info_GOOGLE) == sizeof(VkPresentTimesInfoGOOGLE),
@@ -12198,11 +12330,21 @@ S_present_info_KHR& n_display_present_info_KHR(S_display_present_info_KHR const&
 S_present_info_KHR& n_present_regions_KHR(S_present_regions_KHR const& next_);
 S_present_info_KHR& n_device_group_present_info_KHR(S_device_group_present_info_KHR const& next_);
 S_present_info_KHR& n_present_times_info_GOOGLE(S_present_times_info_GOOGLE const& next_);
-
 };
 static_assert(
 	sizeof(S_present_info_KHR) == sizeof(VkPresentInfoKHR),
 	"struct and wrapper have different size!");
+
+struct N_present_info_KHR{
+private:
+	void* pNext = nullptr;
+public:
+void* get(){ return pNext; }
+N_present_info_KHR& n_display_present_info_KHR(S_display_present_info_KHR const& next_);
+N_present_info_KHR& n_present_regions_KHR(S_present_regions_KHR const& next_);
+N_present_info_KHR& n_device_group_present_info_KHR(S_device_group_present_info_KHR const& next_);
+N_present_info_KHR& n_present_times_info_GOOGLE(S_present_times_info_GOOGLE const& next_);
+};
 
 /*	VkDebugMarkerObjectNameInfoEXT
 */
@@ -12235,7 +12377,6 @@ operator VkDebugMarkerObjectNameInfoEXT const&() const
 	{	return *reinterpret_cast<const VkDebugMarkerObjectNameInfoEXT*>(this);	}
 operator VkDebugMarkerObjectNameInfoEXT &() 
 	{	return *reinterpret_cast<VkDebugMarkerObjectNameInfoEXT*>(this);	}
-
 };
 static_assert(
 	sizeof(S_debug_marker_object_name_info_EXT) == sizeof(VkDebugMarkerObjectNameInfoEXT),
@@ -12278,7 +12419,6 @@ operator VkDebugMarkerObjectTagInfoEXT const&() const
 	{	return *reinterpret_cast<const VkDebugMarkerObjectTagInfoEXT*>(this);	}
 operator VkDebugMarkerObjectTagInfoEXT &() 
 	{	return *reinterpret_cast<VkDebugMarkerObjectTagInfoEXT*>(this);	}
-
 };
 static_assert(
 	sizeof(S_debug_marker_object_tag_info_EXT) == sizeof(VkDebugMarkerObjectTagInfoEXT),
@@ -12312,7 +12452,6 @@ operator VkDebugMarkerMarkerInfoEXT const&() const
 	{	return *reinterpret_cast<const VkDebugMarkerMarkerInfoEXT*>(this);	}
 operator VkDebugMarkerMarkerInfoEXT &() 
 	{	return *reinterpret_cast<VkDebugMarkerMarkerInfoEXT*>(this);	}
-
 };
 static_assert(
 	sizeof(S_debug_marker_marker_info_EXT) == sizeof(VkDebugMarkerMarkerInfoEXT),
@@ -12328,7 +12467,6 @@ struct		S_external_image_format_properties_NV{
 	F_external_memory_handle_type_NV compatibleHandleTypes;
 
 S_external_image_format_properties_NV(){}
-
 };
 
 /*	VkDeviceGeneratedCommandsFeaturesNVX
@@ -12356,7 +12494,6 @@ operator VkDeviceGeneratedCommandsFeaturesNVX const&() const
 	{	return *reinterpret_cast<const VkDeviceGeneratedCommandsFeaturesNVX*>(this);	}
 operator VkDeviceGeneratedCommandsFeaturesNVX &() 
 	{	return *reinterpret_cast<VkDeviceGeneratedCommandsFeaturesNVX*>(this);	}
-
 };
 static_assert(
 	sizeof(S_device_generated_commands_features_NVX) == sizeof(VkDeviceGeneratedCommandsFeaturesNVX),
@@ -12399,7 +12536,6 @@ operator VkDeviceGeneratedCommandsLimitsNVX const&() const
 	{	return *reinterpret_cast<const VkDeviceGeneratedCommandsLimitsNVX*>(this);	}
 operator VkDeviceGeneratedCommandsLimitsNVX &() 
 	{	return *reinterpret_cast<VkDeviceGeneratedCommandsLimitsNVX*>(this);	}
-
 };
 static_assert(
 	sizeof(S_device_generated_commands_limits_NVX) == sizeof(VkDeviceGeneratedCommandsLimitsNVX),
@@ -12413,7 +12549,6 @@ struct		S_indirect_commands_token_NVX{
 	VkDeviceSize offset;
 
 S_indirect_commands_token_NVX(){}
-
 };
 
 /*	VkIndirectCommandsLayoutTokenNVX
@@ -12425,7 +12560,6 @@ struct		S_indirect_commands_layout_token_NVX{
 	uint32_t divisor;
 
 S_indirect_commands_layout_token_NVX(){}
-
 };
 
 /*	VkIndirectCommandsLayoutCreateInfoNVX
@@ -12462,7 +12596,6 @@ operator VkIndirectCommandsLayoutCreateInfoNVX const&() const
 	{	return *reinterpret_cast<const VkIndirectCommandsLayoutCreateInfoNVX*>(this);	}
 operator VkIndirectCommandsLayoutCreateInfoNVX &() 
 	{	return *reinterpret_cast<VkIndirectCommandsLayoutCreateInfoNVX*>(this);	}
-
 };
 static_assert(
 	sizeof(S_indirect_commands_layout_create_info_NVX) == sizeof(VkIndirectCommandsLayoutCreateInfoNVX),
@@ -12520,7 +12653,6 @@ operator VkCmdProcessCommandsInfoNVX const&() const
 	{	return *reinterpret_cast<const VkCmdProcessCommandsInfoNVX*>(this);	}
 operator VkCmdProcessCommandsInfoNVX &() 
 	{	return *reinterpret_cast<VkCmdProcessCommandsInfoNVX*>(this);	}
-
 };
 static_assert(
 	sizeof(S_cmd_process_commands_info_NVX) == sizeof(VkCmdProcessCommandsInfoNVX),
@@ -12557,7 +12689,6 @@ operator VkCmdReserveSpaceForCommandsInfoNVX const&() const
 	{	return *reinterpret_cast<const VkCmdReserveSpaceForCommandsInfoNVX*>(this);	}
 operator VkCmdReserveSpaceForCommandsInfoNVX &() 
 	{	return *reinterpret_cast<VkCmdReserveSpaceForCommandsInfoNVX*>(this);	}
-
 };
 static_assert(
 	sizeof(S_cmd_reserve_space_for_commands_info_NVX) == sizeof(VkCmdReserveSpaceForCommandsInfoNVX),
@@ -12612,7 +12743,6 @@ operator VkObjectTableCreateInfoNVX const&() const
 	{	return *reinterpret_cast<const VkObjectTableCreateInfoNVX*>(this);	}
 operator VkObjectTableCreateInfoNVX &() 
 	{	return *reinterpret_cast<VkObjectTableCreateInfoNVX*>(this);	}
-
 };
 static_assert(
 	sizeof(S_object_table_create_info_NVX) == sizeof(VkObjectTableCreateInfoNVX),
@@ -12625,7 +12755,6 @@ struct		S_object_table_entry_NVX{
 	F_object_entry_usage_NVX flags;
 
 S_object_table_entry_NVX(){}
-
 };
 
 /*	VkObjectTablePipelineEntryNVX
@@ -12636,7 +12765,6 @@ struct		S_object_table_pipeline_entry_NVX{
 	VkPipeline pipeline;
 
 S_object_table_pipeline_entry_NVX(){}
-
 };
 
 /*	VkObjectTableDescriptorSetEntryNVX
@@ -12648,7 +12776,6 @@ struct		S_object_table_descriptor_set_entry_NVX{
 	VkDescriptorSet descriptorSet;
 
 S_object_table_descriptor_set_entry_NVX(){}
-
 };
 
 /*	VkObjectTableVertexBufferEntryNVX
@@ -12659,7 +12786,6 @@ struct		S_object_table_vertex_buffer_entry_NVX{
 	VkBuffer buffer;
 
 S_object_table_vertex_buffer_entry_NVX(){}
-
 };
 
 /*	VkObjectTableIndexBufferEntryNVX
@@ -12671,7 +12797,6 @@ struct		S_object_table_index_buffer_entry_NVX{
 	E_index_type indexType;
 
 S_object_table_index_buffer_entry_NVX(){}
-
 };
 
 /*	VkObjectTablePushConstantEntryNVX
@@ -12683,7 +12808,6 @@ struct		S_object_table_push_constant_entry_NVX{
 	F_shader_stage stageFlags;
 
 S_object_table_push_constant_entry_NVX(){}
-
 };
 
 /*	VkPhysicalDevicePushDescriptorPropertiesKHR
@@ -12714,7 +12838,6 @@ operator VkPhysicalDevicePushDescriptorPropertiesKHR &()
 	{	return *reinterpret_cast<VkPhysicalDevicePushDescriptorPropertiesKHR*>(this);	}
 
 friend S_physical_device_properties2;
-
 };
 static_assert(
 	sizeof(S_physical_device_push_descriptor_properties_KHR) == sizeof(VkPhysicalDevicePushDescriptorPropertiesKHR),
@@ -12729,7 +12852,6 @@ struct		S_conformance_version_KHR{
 	uint8_t patch;
 
 S_conformance_version_KHR(){}
-
 };
 
 /*	VkPhysicalDeviceDriverPropertiesKHR
@@ -12771,7 +12893,6 @@ operator VkPhysicalDeviceDriverPropertiesKHR &()
 	{	return *reinterpret_cast<VkPhysicalDeviceDriverPropertiesKHR*>(this);	}
 
 friend S_physical_device_properties2;
-
 };
 static_assert(
 	sizeof(S_physical_device_driver_properties_KHR) == sizeof(VkPhysicalDeviceDriverPropertiesKHR),
@@ -12819,7 +12940,6 @@ operator VkPhysicalDeviceIDProperties &()
 	{	return *reinterpret_cast<VkPhysicalDeviceIDProperties*>(this);	}
 
 friend S_physical_device_properties2;
-
 };
 static_assert(
 	sizeof(S_physical_device_id_properties) == sizeof(VkPhysicalDeviceIDProperties),
@@ -12857,7 +12977,6 @@ operator VkPhysicalDeviceMultiviewProperties &()
 	{	return *reinterpret_cast<VkPhysicalDeviceMultiviewProperties*>(this);	}
 
 friend S_physical_device_properties2;
-
 };
 static_assert(
 	sizeof(S_physical_device_multiview_properties) == sizeof(VkPhysicalDeviceMultiviewProperties),
@@ -12891,7 +13010,6 @@ operator VkPhysicalDeviceDiscardRectanglePropertiesEXT &()
 	{	return *reinterpret_cast<VkPhysicalDeviceDiscardRectanglePropertiesEXT*>(this);	}
 
 friend S_physical_device_properties2;
-
 };
 static_assert(
 	sizeof(S_physical_device_discard_rectangle_properties_EXT) == sizeof(VkPhysicalDeviceDiscardRectanglePropertiesEXT),
@@ -12926,7 +13044,6 @@ operator VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX &()
 	{	return *reinterpret_cast<VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX*>(this);	}
 
 friend S_physical_device_properties2;
-
 };
 static_assert(
 	sizeof(S_physical_device_multiview_per_view_attributes_properties_NVX) == sizeof(VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX),
@@ -12970,7 +13087,6 @@ operator VkPhysicalDeviceSubgroupProperties &()
 	{	return *reinterpret_cast<VkPhysicalDeviceSubgroupProperties*>(this);	}
 
 friend S_physical_device_properties2;
-
 };
 static_assert(
 	sizeof(S_physical_device_subgroup_properties) == sizeof(VkPhysicalDeviceSubgroupProperties),
@@ -13005,7 +13121,6 @@ operator VkPhysicalDevicePointClippingProperties &()
 	{	return *reinterpret_cast<VkPhysicalDevicePointClippingProperties*>(this);	}
 
 friend S_physical_device_properties2;
-
 };
 static_assert(
 	sizeof(S_physical_device_point_clipping_properties) == sizeof(VkPhysicalDevicePointClippingProperties),
@@ -13039,7 +13154,6 @@ operator VkPhysicalDeviceProtectedMemoryProperties &()
 	{	return *reinterpret_cast<VkPhysicalDeviceProtectedMemoryProperties*>(this);	}
 
 friend S_physical_device_properties2;
-
 };
 static_assert(
 	sizeof(S_physical_device_protected_memory_properties) == sizeof(VkPhysicalDeviceProtectedMemoryProperties),
@@ -13077,7 +13191,6 @@ operator VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT &()
 	{	return *reinterpret_cast<VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT*>(this);	}
 
 friend S_physical_device_properties2;
-
 };
 static_assert(
 	sizeof(S_physical_device_sampler_filter_minmax_properties_EXT) == sizeof(VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT),
@@ -13124,7 +13237,6 @@ operator VkPhysicalDeviceSampleLocationsPropertiesEXT &()
 	{	return *reinterpret_cast<VkPhysicalDeviceSampleLocationsPropertiesEXT*>(this);	}
 
 friend S_physical_device_properties2;
-
 };
 static_assert(
 	sizeof(S_physical_device_sample_locations_properties_EXT) == sizeof(VkPhysicalDeviceSampleLocationsPropertiesEXT),
@@ -13174,7 +13286,6 @@ operator VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT &()
 	{	return *reinterpret_cast<VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT*>(this);	}
 
 friend S_physical_device_properties2;
-
 };
 static_assert(
 	sizeof(S_physical_device_blend_operation_advanced_properties_EXT) == sizeof(VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT),
@@ -13221,7 +13332,6 @@ operator VkPhysicalDeviceInlineUniformBlockPropertiesEXT &()
 	{	return *reinterpret_cast<VkPhysicalDeviceInlineUniformBlockPropertiesEXT*>(this);	}
 
 friend S_physical_device_properties2;
-
 };
 static_assert(
 	sizeof(S_physical_device_inline_uniform_block_properties_EXT) == sizeof(VkPhysicalDeviceInlineUniformBlockPropertiesEXT),
@@ -13259,7 +13369,6 @@ operator VkPhysicalDeviceMaintenance3Properties &()
 	{	return *reinterpret_cast<VkPhysicalDeviceMaintenance3Properties*>(this);	}
 
 friend S_physical_device_properties2;
-
 };
 static_assert(
 	sizeof(S_physical_device_maintenance3_properties) == sizeof(VkPhysicalDeviceMaintenance3Properties),
@@ -13293,7 +13402,6 @@ operator VkPhysicalDeviceExternalMemoryHostPropertiesEXT &()
 	{	return *reinterpret_cast<VkPhysicalDeviceExternalMemoryHostPropertiesEXT*>(this);	}
 
 friend S_physical_device_properties2;
-
 };
 static_assert(
 	sizeof(S_physical_device_external_memory_host_properties_EXT) == sizeof(VkPhysicalDeviceExternalMemoryHostPropertiesEXT),
@@ -13351,7 +13459,6 @@ operator VkPhysicalDeviceConservativeRasterizationPropertiesEXT &()
 	{	return *reinterpret_cast<VkPhysicalDeviceConservativeRasterizationPropertiesEXT*>(this);	}
 
 friend S_physical_device_properties2;
-
 };
 static_assert(
 	sizeof(S_physical_device_conservative_rasterization_properties_EXT) == sizeof(VkPhysicalDeviceConservativeRasterizationPropertiesEXT),
@@ -13425,7 +13532,6 @@ operator VkPhysicalDeviceShaderCorePropertiesAMD &()
 	{	return *reinterpret_cast<VkPhysicalDeviceShaderCorePropertiesAMD*>(this);	}
 
 friend S_physical_device_properties2;
-
 };
 static_assert(
 	sizeof(S_physical_device_shader_core_properties_AMD) == sizeof(VkPhysicalDeviceShaderCorePropertiesAMD),
@@ -13526,7 +13632,6 @@ operator VkPhysicalDeviceDescriptorIndexingPropertiesEXT &()
 	{	return *reinterpret_cast<VkPhysicalDeviceDescriptorIndexingPropertiesEXT*>(this);	}
 
 friend S_physical_device_properties2;
-
 };
 static_assert(
 	sizeof(S_physical_device_descriptor_indexing_properties_EXT) == sizeof(VkPhysicalDeviceDescriptorIndexingPropertiesEXT),
@@ -13560,7 +13665,6 @@ operator VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT &()
 	{	return *reinterpret_cast<VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT*>(this);	}
 
 friend S_physical_device_properties2;
-
 };
 static_assert(
 	sizeof(S_physical_device_vertex_attribute_divisor_properties_EXT) == sizeof(VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT),
@@ -13601,7 +13705,6 @@ operator VkPhysicalDeviceShadingRateImagePropertiesNV &()
 	{	return *reinterpret_cast<VkPhysicalDeviceShadingRateImagePropertiesNV*>(this);	}
 
 friend S_physical_device_properties2;
-
 };
 static_assert(
 	sizeof(S_physical_device_shading_rate_image_properties_NV) == sizeof(VkPhysicalDeviceShadingRateImagePropertiesNV),
@@ -13671,7 +13774,6 @@ operator VkPhysicalDeviceMeshShaderPropertiesNV &()
 	{	return *reinterpret_cast<VkPhysicalDeviceMeshShaderPropertiesNV*>(this);	}
 
 friend S_physical_device_properties2;
-
 };
 static_assert(
 	sizeof(S_physical_device_mesh_shader_properties_NV) == sizeof(VkPhysicalDeviceMeshShaderPropertiesNV),
@@ -13711,7 +13813,6 @@ operator VkPhysicalDeviceRaytracingPropertiesNVX &()
 	{	return *reinterpret_cast<VkPhysicalDeviceRaytracingPropertiesNVX*>(this);	}
 
 friend S_physical_device_properties2;
-
 };
 static_assert(
 	sizeof(S_physical_device_raytracing_properties_NVX) == sizeof(VkPhysicalDeviceRaytracingPropertiesNVX),
@@ -13791,11 +13892,41 @@ S_physical_device_properties2& n_physical_device_vertex_attribute_divisor_proper
 S_physical_device_properties2& n_physical_device_shading_rate_image_properties_NV(S_physical_device_shading_rate_image_properties_NV const& next_);
 S_physical_device_properties2& n_physical_device_mesh_shader_properties_NV(S_physical_device_mesh_shader_properties_NV const& next_);
 S_physical_device_properties2& n_physical_device_raytracing_properties_NVX(S_physical_device_raytracing_properties_NVX const& next_);
-
 };
 static_assert(
 	sizeof(S_physical_device_properties2) == sizeof(VkPhysicalDeviceProperties2),
 	"struct and wrapper have different size!");
+
+struct N_physical_device_properties2{
+private:
+	void* pNext = nullptr;
+public:
+void* get(){ return pNext; }
+N_physical_device_properties2& n_physical_device_push_descriptor_properties_KHR(S_physical_device_push_descriptor_properties_KHR const& next_);
+#ifdef LAKA_UNKNOW
+N_physical_device_properties2& n_physical_device_driver_properties_KHR(S_physical_device_driver_properties_KHR const& next_);
+#endif
+N_physical_device_properties2& n_physical_device_id_properties(S_physical_device_id_properties const& next_);
+N_physical_device_properties2& n_physical_device_multiview_properties(S_physical_device_multiview_properties const& next_);
+N_physical_device_properties2& n_physical_device_discard_rectangle_properties_EXT(S_physical_device_discard_rectangle_properties_EXT const& next_);
+N_physical_device_properties2& n_physical_device_multiview_per_view_attributes_properties_NVX(S_physical_device_multiview_per_view_attributes_properties_NVX const& next_);
+N_physical_device_properties2& n_physical_device_subgroup_properties(S_physical_device_subgroup_properties const& next_);
+N_physical_device_properties2& n_physical_device_point_clipping_properties(S_physical_device_point_clipping_properties const& next_);
+N_physical_device_properties2& n_physical_device_protected_memory_properties(S_physical_device_protected_memory_properties const& next_);
+N_physical_device_properties2& n_physical_device_sampler_filter_minmax_properties_EXT(S_physical_device_sampler_filter_minmax_properties_EXT const& next_);
+N_physical_device_properties2& n_physical_device_sample_locations_properties_EXT(S_physical_device_sample_locations_properties_EXT const& next_);
+N_physical_device_properties2& n_physical_device_blend_operation_advanced_properties_EXT(S_physical_device_blend_operation_advanced_properties_EXT const& next_);
+N_physical_device_properties2& n_physical_device_inline_uniform_block_properties_EXT(S_physical_device_inline_uniform_block_properties_EXT const& next_);
+N_physical_device_properties2& n_physical_device_maintenance3_properties(S_physical_device_maintenance3_properties const& next_);
+N_physical_device_properties2& n_physical_device_external_memory_host_properties_EXT(S_physical_device_external_memory_host_properties_EXT const& next_);
+N_physical_device_properties2& n_physical_device_conservative_rasterization_properties_EXT(S_physical_device_conservative_rasterization_properties_EXT const& next_);
+N_physical_device_properties2& n_physical_device_shader_core_properties_AMD(S_physical_device_shader_core_properties_AMD const& next_);
+N_physical_device_properties2& n_physical_device_descriptor_indexing_properties_EXT(S_physical_device_descriptor_indexing_properties_EXT const& next_);
+N_physical_device_properties2& n_physical_device_vertex_attribute_divisor_properties_EXT(S_physical_device_vertex_attribute_divisor_properties_EXT const& next_);
+N_physical_device_properties2& n_physical_device_shading_rate_image_properties_NV(S_physical_device_shading_rate_image_properties_NV const& next_);
+N_physical_device_properties2& n_physical_device_mesh_shader_properties_NV(S_physical_device_mesh_shader_properties_NV const& next_);
+N_physical_device_properties2& n_physical_device_raytracing_properties_NVX(S_physical_device_raytracing_properties_NVX const& next_);
+};
 
 /*	VkDrmFormatModifierPropertiesEXT
 (returnedonly)
@@ -13806,7 +13937,6 @@ struct		S_drm_format_modifier_properties_EXT{
 	F_format_feature drmFormatModifierTilingFeatures;
 
 S_drm_format_modifier_properties_EXT(){}
-
 };
 
 /*	VkDrmFormatModifierPropertiesListEXT
@@ -13841,7 +13971,6 @@ operator VkDrmFormatModifierPropertiesListEXT &()
 	{	return *reinterpret_cast<VkDrmFormatModifierPropertiesListEXT*>(this);	}
 
 friend S_format_properties2;
-
 };
 static_assert(
 	sizeof(S_drm_format_modifier_properties_list_EXT) == sizeof(VkDrmFormatModifierPropertiesListEXT),
@@ -13880,11 +14009,20 @@ operator VkFormatProperties2 &()
 #ifdef LAKA_UNKNOW
 S_format_properties2& n_drm_format_modifier_properties_list_EXT(S_drm_format_modifier_properties_list_EXT const& next_);
 #endif
-
 };
 static_assert(
 	sizeof(S_format_properties2) == sizeof(VkFormatProperties2),
 	"struct and wrapper have different size!");
+
+struct N_format_properties2{
+private:
+	void* pNext = nullptr;
+public:
+void* get(){ return pNext; }
+#ifdef LAKA_UNKNOW
+N_format_properties2& n_drm_format_modifier_properties_list_EXT(S_drm_format_modifier_properties_list_EXT const& next_);
+#endif
+};
 
 /*	VkExternalMemoryProperties
 (returnedonly)
@@ -13895,7 +14033,6 @@ struct		S_external_memory_properties{
 	F_external_memory_handle_type compatibleHandleTypes;
 
 S_external_memory_properties(){}
-
 };
 
 /*	VkExternalImageFormatProperties
@@ -13927,7 +14064,6 @@ operator VkExternalImageFormatProperties &()
 	{	return *reinterpret_cast<VkExternalImageFormatProperties*>(this);	}
 
 friend S_image_format_properties2;
-
 };
 static_assert(
 	sizeof(S_external_image_format_properties) == sizeof(VkExternalImageFormatProperties),
@@ -13962,7 +14098,6 @@ operator VkSamplerYcbcrConversionImageFormatProperties &()
 	{	return *reinterpret_cast<VkSamplerYcbcrConversionImageFormatProperties*>(this);	}
 
 friend S_image_format_properties2;
-
 };
 static_assert(
 	sizeof(S_sampler_ycbcr_conversion_image_format_properties) == sizeof(VkSamplerYcbcrConversionImageFormatProperties),
@@ -13997,7 +14132,6 @@ operator VkTextureLODGatherFormatPropertiesAMD &()
 	{	return *reinterpret_cast<VkTextureLODGatherFormatPropertiesAMD*>(this);	}
 
 friend S_image_format_properties2;
-
 };
 static_assert(
 	sizeof(S_texture_lod_gather_format_properties_AMD) == sizeof(VkTextureLODGatherFormatPropertiesAMD),
@@ -14033,7 +14167,6 @@ operator VkAndroidHardwareBufferUsageANDROID &()
 	{	return *reinterpret_cast<VkAndroidHardwareBufferUsageANDROID*>(this);	}
 
 friend S_image_format_properties2;
-
 };
 static_assert(
 	sizeof(S_android_hardware_buffer_usage_ANDROID) == sizeof(VkAndroidHardwareBufferUsageANDROID),
@@ -14078,11 +14211,23 @@ S_image_format_properties2& n_texture_lod_gather_format_properties_AMD(S_texture
 #ifdef VK_USE_PLATFORM_ANDROID_KHR
 S_image_format_properties2& n_android_hardware_buffer_usage_ANDROID(S_android_hardware_buffer_usage_ANDROID const& next_);
 #endif
-
 };
 static_assert(
 	sizeof(S_image_format_properties2) == sizeof(VkImageFormatProperties2),
 	"struct and wrapper have different size!");
+
+struct N_image_format_properties2{
+private:
+	void* pNext = nullptr;
+public:
+void* get(){ return pNext; }
+N_image_format_properties2& n_external_image_format_properties(S_external_image_format_properties const& next_);
+N_image_format_properties2& n_sampler_ycbcr_conversion_image_format_properties(S_sampler_ycbcr_conversion_image_format_properties const& next_);
+N_image_format_properties2& n_texture_lod_gather_format_properties_AMD(S_texture_lod_gather_format_properties_AMD const& next_);
+#ifdef VK_USE_PLATFORM_ANDROID_KHR
+N_image_format_properties2& n_android_hardware_buffer_usage_ANDROID(S_android_hardware_buffer_usage_ANDROID const& next_);
+#endif
+};
 
 /*	VkPhysicalDeviceExternalImageFormatInfo
 ex to: VkPhysicalDeviceImageFormatInfo2
@@ -14112,7 +14257,6 @@ operator VkPhysicalDeviceExternalImageFormatInfo &()
 	{	return *reinterpret_cast<VkPhysicalDeviceExternalImageFormatInfo*>(this);	}
 
 friend S_physical_device_image_format_info2;
-
 };
 static_assert(
 	sizeof(S_physical_device_external_image_format_info) == sizeof(VkPhysicalDeviceExternalImageFormatInfo),
@@ -14147,7 +14291,6 @@ operator VkPhysicalDeviceImageDrmFormatModifierInfoEXT &()
 	{	return *reinterpret_cast<VkPhysicalDeviceImageDrmFormatModifierInfoEXT*>(this);	}
 
 friend S_physical_device_image_format_info2;
-
 };
 static_assert(
 	sizeof(S_physical_device_image_drm_format_modifier_info_EXT) == sizeof(VkPhysicalDeviceImageDrmFormatModifierInfoEXT),
@@ -14199,11 +14342,21 @@ S_physical_device_image_format_info2& n_physical_device_external_image_format_in
 #ifdef LAKA_UNKNOW
 S_physical_device_image_format_info2& n_physical_device_image_drm_format_modifier_info_EXT(S_physical_device_image_drm_format_modifier_info_EXT const& next_);
 #endif
-
 };
 static_assert(
 	sizeof(S_physical_device_image_format_info2) == sizeof(VkPhysicalDeviceImageFormatInfo2),
 	"struct and wrapper have different size!");
+
+struct N_physical_device_image_format_info2{
+private:
+	void* pNext = nullptr;
+public:
+void* get(){ return pNext; }
+N_physical_device_image_format_info2& n_physical_device_external_image_format_info(S_physical_device_external_image_format_info const& next_);
+#ifdef LAKA_UNKNOW
+N_physical_device_image_format_info2& n_physical_device_image_drm_format_modifier_info_EXT(S_physical_device_image_drm_format_modifier_info_EXT const& next_);
+#endif
+};
 
 /*	VkQueueFamilyCheckpointPropertiesNV
 (returnedonly)
@@ -14234,7 +14387,6 @@ operator VkQueueFamilyCheckpointPropertiesNV &()
 	{	return *reinterpret_cast<VkQueueFamilyCheckpointPropertiesNV*>(this);	}
 
 friend S_queue_family_properties2;
-
 };
 static_assert(
 	sizeof(S_queue_family_checkpoint_properties_NV) == sizeof(VkQueueFamilyCheckpointPropertiesNV),
@@ -14270,11 +14422,18 @@ operator VkQueueFamilyProperties2 &()
 	{	return *reinterpret_cast<VkQueueFamilyProperties2*>(this);	}
 
 S_queue_family_properties2& n_queue_family_checkpoint_properties_NV(S_queue_family_checkpoint_properties_NV const& next_);
-
 };
 static_assert(
 	sizeof(S_queue_family_properties2) == sizeof(VkQueueFamilyProperties2),
 	"struct and wrapper have different size!");
+
+struct N_queue_family_properties2{
+private:
+	void* pNext = nullptr;
+public:
+void* get(){ return pNext; }
+N_queue_family_properties2& n_queue_family_checkpoint_properties_NV(S_queue_family_checkpoint_properties_NV const& next_);
+};
 
 /*	VkPhysicalDeviceMemoryProperties2
 (returnedonly)
@@ -14302,7 +14461,6 @@ operator VkPhysicalDeviceMemoryProperties2 const&() const
 	{	return *reinterpret_cast<const VkPhysicalDeviceMemoryProperties2*>(this);	}
 operator VkPhysicalDeviceMemoryProperties2 &() 
 	{	return *reinterpret_cast<VkPhysicalDeviceMemoryProperties2*>(this);	}
-
 };
 static_assert(
 	sizeof(S_physical_device_memory_properties2) == sizeof(VkPhysicalDeviceMemoryProperties2),
@@ -14334,7 +14492,6 @@ operator VkSparseImageFormatProperties2 const&() const
 	{	return *reinterpret_cast<const VkSparseImageFormatProperties2*>(this);	}
 operator VkSparseImageFormatProperties2 &() 
 	{	return *reinterpret_cast<VkSparseImageFormatProperties2*>(this);	}
-
 };
 static_assert(
 	sizeof(S_sparse_image_format_properties2) == sizeof(VkSparseImageFormatProperties2),
@@ -14377,7 +14534,6 @@ operator VkPhysicalDeviceSparseImageFormatInfo2 const&() const
 	{	return *reinterpret_cast<const VkPhysicalDeviceSparseImageFormatInfo2*>(this);	}
 operator VkPhysicalDeviceSparseImageFormatInfo2 &() 
 	{	return *reinterpret_cast<VkPhysicalDeviceSparseImageFormatInfo2*>(this);	}
-
 };
 static_assert(
 	sizeof(S_physical_device_sparse_image_format_info2) == sizeof(VkPhysicalDeviceSparseImageFormatInfo2),
@@ -14414,7 +14570,6 @@ operator VkPhysicalDeviceExternalBufferInfo const&() const
 	{	return *reinterpret_cast<const VkPhysicalDeviceExternalBufferInfo*>(this);	}
 operator VkPhysicalDeviceExternalBufferInfo &() 
 	{	return *reinterpret_cast<VkPhysicalDeviceExternalBufferInfo*>(this);	}
-
 };
 static_assert(
 	sizeof(S_physical_device_external_buffer_info) == sizeof(VkPhysicalDeviceExternalBufferInfo),
@@ -14446,7 +14601,6 @@ operator VkExternalBufferProperties const&() const
 	{	return *reinterpret_cast<const VkExternalBufferProperties*>(this);	}
 operator VkExternalBufferProperties &() 
 	{	return *reinterpret_cast<VkExternalBufferProperties*>(this);	}
-
 };
 static_assert(
 	sizeof(S_external_buffer_properties) == sizeof(VkExternalBufferProperties),
@@ -14479,7 +14633,6 @@ operator VkMemoryWin32HandlePropertiesKHR const&() const
 	{	return *reinterpret_cast<const VkMemoryWin32HandlePropertiesKHR*>(this);	}
 operator VkMemoryWin32HandlePropertiesKHR &() 
 	{	return *reinterpret_cast<VkMemoryWin32HandlePropertiesKHR*>(this);	}
-
 };
 static_assert(
 	sizeof(S_memory_win32_handle_properties_KHR) == sizeof(VkMemoryWin32HandlePropertiesKHR),
@@ -14515,7 +14668,6 @@ operator VkMemoryGetWin32HandleInfoKHR const&() const
 	{	return *reinterpret_cast<const VkMemoryGetWin32HandleInfoKHR*>(this);	}
 operator VkMemoryGetWin32HandleInfoKHR &() 
 	{	return *reinterpret_cast<VkMemoryGetWin32HandleInfoKHR*>(this);	}
-
 };
 static_assert(
 	sizeof(S_memory_get_win32_handle_info_KHR) == sizeof(VkMemoryGetWin32HandleInfoKHR),
@@ -14548,7 +14700,6 @@ operator VkMemoryFdPropertiesKHR const&() const
 	{	return *reinterpret_cast<const VkMemoryFdPropertiesKHR*>(this);	}
 operator VkMemoryFdPropertiesKHR &() 
 	{	return *reinterpret_cast<VkMemoryFdPropertiesKHR*>(this);	}
-
 };
 static_assert(
 	sizeof(S_memory_fd_properties_KHR) == sizeof(VkMemoryFdPropertiesKHR),
@@ -14582,7 +14733,6 @@ operator VkMemoryGetFdInfoKHR const&() const
 	{	return *reinterpret_cast<const VkMemoryGetFdInfoKHR*>(this);	}
 operator VkMemoryGetFdInfoKHR &() 
 	{	return *reinterpret_cast<VkMemoryGetFdInfoKHR*>(this);	}
-
 };
 static_assert(
 	sizeof(S_memory_get_fd_info_KHR) == sizeof(VkMemoryGetFdInfoKHR),
@@ -14613,7 +14763,6 @@ operator VkPhysicalDeviceExternalSemaphoreInfo const&() const
 	{	return *reinterpret_cast<const VkPhysicalDeviceExternalSemaphoreInfo*>(this);	}
 operator VkPhysicalDeviceExternalSemaphoreInfo &() 
 	{	return *reinterpret_cast<VkPhysicalDeviceExternalSemaphoreInfo*>(this);	}
-
 };
 static_assert(
 	sizeof(S_physical_device_external_semaphore_info) == sizeof(VkPhysicalDeviceExternalSemaphoreInfo),
@@ -14651,7 +14800,6 @@ operator VkExternalSemaphoreProperties const&() const
 	{	return *reinterpret_cast<const VkExternalSemaphoreProperties*>(this);	}
 operator VkExternalSemaphoreProperties &() 
 	{	return *reinterpret_cast<VkExternalSemaphoreProperties*>(this);	}
-
 };
 static_assert(
 	sizeof(S_external_semaphore_properties) == sizeof(VkExternalSemaphoreProperties),
@@ -14695,7 +14843,6 @@ operator VkImportSemaphoreWin32HandleInfoKHR const&() const
 	{	return *reinterpret_cast<const VkImportSemaphoreWin32HandleInfoKHR*>(this);	}
 operator VkImportSemaphoreWin32HandleInfoKHR &() 
 	{	return *reinterpret_cast<VkImportSemaphoreWin32HandleInfoKHR*>(this);	}
-
 };
 static_assert(
 	sizeof(S_import_semaphore_win32_handle_info_KHR) == sizeof(VkImportSemaphoreWin32HandleInfoKHR),
@@ -14731,7 +14878,6 @@ operator VkSemaphoreGetWin32HandleInfoKHR const&() const
 	{	return *reinterpret_cast<const VkSemaphoreGetWin32HandleInfoKHR*>(this);	}
 operator VkSemaphoreGetWin32HandleInfoKHR &() 
 	{	return *reinterpret_cast<VkSemaphoreGetWin32HandleInfoKHR*>(this);	}
-
 };
 static_assert(
 	sizeof(S_semaphore_get_win32_handle_info_KHR) == sizeof(VkSemaphoreGetWin32HandleInfoKHR),
@@ -14772,7 +14918,6 @@ operator VkImportSemaphoreFdInfoKHR const&() const
 	{	return *reinterpret_cast<const VkImportSemaphoreFdInfoKHR*>(this);	}
 operator VkImportSemaphoreFdInfoKHR &() 
 	{	return *reinterpret_cast<VkImportSemaphoreFdInfoKHR*>(this);	}
-
 };
 static_assert(
 	sizeof(S_import_semaphore_fd_info_KHR) == sizeof(VkImportSemaphoreFdInfoKHR),
@@ -14806,7 +14951,6 @@ operator VkSemaphoreGetFdInfoKHR const&() const
 	{	return *reinterpret_cast<const VkSemaphoreGetFdInfoKHR*>(this);	}
 operator VkSemaphoreGetFdInfoKHR &() 
 	{	return *reinterpret_cast<VkSemaphoreGetFdInfoKHR*>(this);	}
-
 };
 static_assert(
 	sizeof(S_semaphore_get_fd_info_KHR) == sizeof(VkSemaphoreGetFdInfoKHR),
@@ -14837,7 +14981,6 @@ operator VkPhysicalDeviceExternalFenceInfo const&() const
 	{	return *reinterpret_cast<const VkPhysicalDeviceExternalFenceInfo*>(this);	}
 operator VkPhysicalDeviceExternalFenceInfo &() 
 	{	return *reinterpret_cast<VkPhysicalDeviceExternalFenceInfo*>(this);	}
-
 };
 static_assert(
 	sizeof(S_physical_device_external_fence_info) == sizeof(VkPhysicalDeviceExternalFenceInfo),
@@ -14875,7 +15018,6 @@ operator VkExternalFenceProperties const&() const
 	{	return *reinterpret_cast<const VkExternalFenceProperties*>(this);	}
 operator VkExternalFenceProperties &() 
 	{	return *reinterpret_cast<VkExternalFenceProperties*>(this);	}
-
 };
 static_assert(
 	sizeof(S_external_fence_properties) == sizeof(VkExternalFenceProperties),
@@ -14919,7 +15061,6 @@ operator VkImportFenceWin32HandleInfoKHR const&() const
 	{	return *reinterpret_cast<const VkImportFenceWin32HandleInfoKHR*>(this);	}
 operator VkImportFenceWin32HandleInfoKHR &() 
 	{	return *reinterpret_cast<VkImportFenceWin32HandleInfoKHR*>(this);	}
-
 };
 static_assert(
 	sizeof(S_import_fence_win32_handle_info_KHR) == sizeof(VkImportFenceWin32HandleInfoKHR),
@@ -14955,7 +15096,6 @@ operator VkFenceGetWin32HandleInfoKHR const&() const
 	{	return *reinterpret_cast<const VkFenceGetWin32HandleInfoKHR*>(this);	}
 operator VkFenceGetWin32HandleInfoKHR &() 
 	{	return *reinterpret_cast<VkFenceGetWin32HandleInfoKHR*>(this);	}
-
 };
 static_assert(
 	sizeof(S_fence_get_win32_handle_info_KHR) == sizeof(VkFenceGetWin32HandleInfoKHR),
@@ -14996,7 +15136,6 @@ operator VkImportFenceFdInfoKHR const&() const
 	{	return *reinterpret_cast<const VkImportFenceFdInfoKHR*>(this);	}
 operator VkImportFenceFdInfoKHR &() 
 	{	return *reinterpret_cast<VkImportFenceFdInfoKHR*>(this);	}
-
 };
 static_assert(
 	sizeof(S_import_fence_fd_info_KHR) == sizeof(VkImportFenceFdInfoKHR),
@@ -15030,7 +15169,6 @@ operator VkFenceGetFdInfoKHR const&() const
 	{	return *reinterpret_cast<const VkFenceGetFdInfoKHR*>(this);	}
 operator VkFenceGetFdInfoKHR &() 
 	{	return *reinterpret_cast<VkFenceGetFdInfoKHR*>(this);	}
-
 };
 static_assert(
 	sizeof(S_fence_get_fd_info_KHR) == sizeof(VkFenceGetFdInfoKHR),
@@ -15092,7 +15230,6 @@ operator VkSurfaceCapabilities2EXT const&() const
 	{	return *reinterpret_cast<const VkSurfaceCapabilities2EXT*>(this);	}
 operator VkSurfaceCapabilities2EXT &() 
 	{	return *reinterpret_cast<VkSurfaceCapabilities2EXT*>(this);	}
-
 };
 static_assert(
 	sizeof(S_surface_capabilities2_EXT) == sizeof(VkSurfaceCapabilities2EXT),
@@ -15123,7 +15260,6 @@ operator VkDisplayPowerInfoEXT const&() const
 	{	return *reinterpret_cast<const VkDisplayPowerInfoEXT*>(this);	}
 operator VkDisplayPowerInfoEXT &() 
 	{	return *reinterpret_cast<VkDisplayPowerInfoEXT*>(this);	}
-
 };
 static_assert(
 	sizeof(S_display_power_info_EXT) == sizeof(VkDisplayPowerInfoEXT),
@@ -15154,7 +15290,6 @@ operator VkDeviceEventInfoEXT const&() const
 	{	return *reinterpret_cast<const VkDeviceEventInfoEXT*>(this);	}
 operator VkDeviceEventInfoEXT &() 
 	{	return *reinterpret_cast<VkDeviceEventInfoEXT*>(this);	}
-
 };
 static_assert(
 	sizeof(S_device_event_info_EXT) == sizeof(VkDeviceEventInfoEXT),
@@ -15185,7 +15320,6 @@ operator VkDisplayEventInfoEXT const&() const
 	{	return *reinterpret_cast<const VkDisplayEventInfoEXT*>(this);	}
 operator VkDisplayEventInfoEXT &() 
 	{	return *reinterpret_cast<VkDisplayEventInfoEXT*>(this);	}
-
 };
 static_assert(
 	sizeof(S_display_event_info_EXT) == sizeof(VkDisplayEventInfoEXT),
@@ -15223,7 +15357,6 @@ operator VkPhysicalDeviceGroupProperties const&() const
 	{	return *reinterpret_cast<const VkPhysicalDeviceGroupProperties*>(this);	}
 operator VkPhysicalDeviceGroupProperties &() 
 	{	return *reinterpret_cast<VkPhysicalDeviceGroupProperties*>(this);	}
-
 };
 static_assert(
 	sizeof(S_physical_device_group_properties) == sizeof(VkPhysicalDeviceGroupProperties),
@@ -15260,7 +15393,6 @@ operator VkBindBufferMemoryDeviceGroupInfo &()
 	{	return *reinterpret_cast<VkBindBufferMemoryDeviceGroupInfo*>(this);	}
 
 friend S_bind_buffer_memory_info;
-
 };
 static_assert(
 	sizeof(S_bind_buffer_memory_device_group_info) == sizeof(VkBindBufferMemoryDeviceGroupInfo),
@@ -15301,11 +15433,18 @@ operator VkBindBufferMemoryInfo &()
 	{	return *reinterpret_cast<VkBindBufferMemoryInfo*>(this);	}
 
 S_bind_buffer_memory_info& n_bind_buffer_memory_device_group_info(S_bind_buffer_memory_device_group_info const& next_);
-
 };
 static_assert(
 	sizeof(S_bind_buffer_memory_info) == sizeof(VkBindBufferMemoryInfo),
 	"struct and wrapper have different size!");
+
+struct N_bind_buffer_memory_info{
+private:
+	void* pNext = nullptr;
+public:
+void* get(){ return pNext; }
+N_bind_buffer_memory_info& n_bind_buffer_memory_device_group_info(S_bind_buffer_memory_device_group_info const& next_);
+};
 
 /*	VkBindImageMemoryDeviceGroupInfo
 ex to: VkBindImageMemoryInfo
@@ -15344,7 +15483,6 @@ operator VkBindImageMemoryDeviceGroupInfo &()
 	{	return *reinterpret_cast<VkBindImageMemoryDeviceGroupInfo*>(this);	}
 
 friend S_bind_image_memory_info;
-
 };
 static_assert(
 	sizeof(S_bind_image_memory_device_group_info) == sizeof(VkBindImageMemoryDeviceGroupInfo),
@@ -15381,7 +15519,6 @@ operator VkBindImageMemorySwapchainInfoKHR &()
 	{	return *reinterpret_cast<VkBindImageMemorySwapchainInfoKHR*>(this);	}
 
 friend S_bind_image_memory_info;
-
 };
 static_assert(
 	sizeof(S_bind_image_memory_swapchain_info_KHR) == sizeof(VkBindImageMemorySwapchainInfoKHR),
@@ -15415,7 +15552,6 @@ operator VkBindImagePlaneMemoryInfo &()
 	{	return *reinterpret_cast<VkBindImagePlaneMemoryInfo*>(this);	}
 
 friend S_bind_image_memory_info;
-
 };
 static_assert(
 	sizeof(S_bind_image_plane_memory_info) == sizeof(VkBindImagePlaneMemoryInfo),
@@ -15460,11 +15596,20 @@ operator VkBindImageMemoryInfo &()
 S_bind_image_memory_info& n_bind_image_memory_device_group_info(S_bind_image_memory_device_group_info const& next_);
 S_bind_image_memory_info& n_bind_image_memory_swapchain_info_KHR(S_bind_image_memory_swapchain_info_KHR const& next_);
 S_bind_image_memory_info& n_bind_image_plane_memory_info(S_bind_image_plane_memory_info const& next_);
-
 };
 static_assert(
 	sizeof(S_bind_image_memory_info) == sizeof(VkBindImageMemoryInfo),
 	"struct and wrapper have different size!");
+
+struct N_bind_image_memory_info{
+private:
+	void* pNext = nullptr;
+public:
+void* get(){ return pNext; }
+N_bind_image_memory_info& n_bind_image_memory_device_group_info(S_bind_image_memory_device_group_info const& next_);
+N_bind_image_memory_info& n_bind_image_memory_swapchain_info_KHR(S_bind_image_memory_swapchain_info_KHR const& next_);
+N_bind_image_memory_info& n_bind_image_plane_memory_info(S_bind_image_plane_memory_info const& next_);
+};
 
 /*	VkDeviceGroupPresentCapabilitiesKHR
 (returnedonly)
@@ -15495,7 +15640,6 @@ operator VkDeviceGroupPresentCapabilitiesKHR const&() const
 	{	return *reinterpret_cast<const VkDeviceGroupPresentCapabilitiesKHR*>(this);	}
 operator VkDeviceGroupPresentCapabilitiesKHR &() 
 	{	return *reinterpret_cast<VkDeviceGroupPresentCapabilitiesKHR*>(this);	}
-
 };
 static_assert(
 	sizeof(S_device_group_present_capabilities_KHR) == sizeof(VkDeviceGroupPresentCapabilitiesKHR),
@@ -15538,7 +15682,6 @@ operator VkAcquireNextImageInfoKHR const&() const
 	{	return *reinterpret_cast<const VkAcquireNextImageInfoKHR*>(this);	}
 operator VkAcquireNextImageInfoKHR &() 
 	{	return *reinterpret_cast<VkAcquireNextImageInfoKHR*>(this);	}
-
 };
 static_assert(
 	sizeof(S_acquire_next_image_info_KHR) == sizeof(VkAcquireNextImageInfoKHR),
@@ -15555,7 +15698,6 @@ struct		S_descriptor_update_template_entry{
 	size_t stride;
 
 S_descriptor_update_template_entry(){}
-
 };
 
 /*	VkDescriptorUpdateTemplateCreateInfo
@@ -15604,7 +15746,6 @@ operator VkDescriptorUpdateTemplateCreateInfo const&() const
 	{	return *reinterpret_cast<const VkDescriptorUpdateTemplateCreateInfo*>(this);	}
 operator VkDescriptorUpdateTemplateCreateInfo &() 
 	{	return *reinterpret_cast<VkDescriptorUpdateTemplateCreateInfo*>(this);	}
-
 };
 static_assert(
 	sizeof(S_descriptor_update_template_create_info) == sizeof(VkDescriptorUpdateTemplateCreateInfo),
@@ -15617,7 +15758,6 @@ struct		S_xy_color_EXT{
 	float y;
 
 S_xy_color_EXT(){}
-
 };
 
 /*	VkHdrMetadataEXT
@@ -15666,7 +15806,6 @@ operator VkHdrMetadataEXT const&() const
 	{	return *reinterpret_cast<const VkHdrMetadataEXT*>(this);	}
 operator VkHdrMetadataEXT &() 
 	{	return *reinterpret_cast<VkHdrMetadataEXT*>(this);	}
-
 };
 static_assert(
 	sizeof(S_hdr_metadata_EXT) == sizeof(VkHdrMetadataEXT),
@@ -15679,7 +15818,6 @@ struct		S_refresh_cycle_duration_GOOGLE{
 	uint64_t refreshDuration;
 
 S_refresh_cycle_duration_GOOGLE(){}
-
 };
 
 /*	VkPastPresentationTimingGOOGLE
@@ -15693,7 +15831,6 @@ struct		S_past_presentation_timing_GOOGLE{
 	uint64_t presentMargin;
 
 S_past_presentation_timing_GOOGLE(){}
-
 };
 
 /*	VkIOSSurfaceCreateInfoMVK
@@ -15725,7 +15862,6 @@ operator VkIOSSurfaceCreateInfoMVK const&() const
 	{	return *reinterpret_cast<const VkIOSSurfaceCreateInfoMVK*>(this);	}
 operator VkIOSSurfaceCreateInfoMVK &() 
 	{	return *reinterpret_cast<VkIOSSurfaceCreateInfoMVK*>(this);	}
-
 };
 static_assert(
 	sizeof(S_ios_surface_create_info_MVK) == sizeof(VkIOSSurfaceCreateInfoMVK),
@@ -15761,7 +15897,6 @@ operator VkMacOSSurfaceCreateInfoMVK const&() const
 	{	return *reinterpret_cast<const VkMacOSSurfaceCreateInfoMVK*>(this);	}
 operator VkMacOSSurfaceCreateInfoMVK &() 
 	{	return *reinterpret_cast<VkMacOSSurfaceCreateInfoMVK*>(this);	}
-
 };
 static_assert(
 	sizeof(S_mac_os_surface_create_info_MVK) == sizeof(VkMacOSSurfaceCreateInfoMVK),
@@ -15793,7 +15928,6 @@ operator VkPhysicalDeviceSurfaceInfo2KHR const&() const
 	{	return *reinterpret_cast<const VkPhysicalDeviceSurfaceInfo2KHR*>(this);	}
 operator VkPhysicalDeviceSurfaceInfo2KHR &() 
 	{	return *reinterpret_cast<VkPhysicalDeviceSurfaceInfo2KHR*>(this);	}
-
 };
 static_assert(
 	sizeof(S_physical_device_surface_info2_KHR) == sizeof(VkPhysicalDeviceSurfaceInfo2KHR),
@@ -15828,7 +15962,6 @@ operator VkSharedPresentSurfaceCapabilitiesKHR &()
 	{	return *reinterpret_cast<VkSharedPresentSurfaceCapabilitiesKHR*>(this);	}
 
 friend S_surface_capabilities2_KHR;
-
 };
 static_assert(
 	sizeof(S_shared_present_surface_capabilities_KHR) == sizeof(VkSharedPresentSurfaceCapabilitiesKHR),
@@ -15864,11 +15997,18 @@ operator VkSurfaceCapabilities2KHR &()
 	{	return *reinterpret_cast<VkSurfaceCapabilities2KHR*>(this);	}
 
 S_surface_capabilities2_KHR& n_shared_present_surface_capabilities_KHR(S_shared_present_surface_capabilities_KHR const& next_);
-
 };
 static_assert(
 	sizeof(S_surface_capabilities2_KHR) == sizeof(VkSurfaceCapabilities2KHR),
 	"struct and wrapper have different size!");
+
+struct N_surface_capabilities2_KHR{
+private:
+	void* pNext = nullptr;
+public:
+void* get(){ return pNext; }
+N_surface_capabilities2_KHR& n_shared_present_surface_capabilities_KHR(S_shared_present_surface_capabilities_KHR const& next_);
+};
 
 /*	VkSurfaceFormat2KHR
 (returnedonly)
@@ -15896,7 +16036,6 @@ operator VkSurfaceFormat2KHR const&() const
 	{	return *reinterpret_cast<const VkSurfaceFormat2KHR*>(this);	}
 operator VkSurfaceFormat2KHR &() 
 	{	return *reinterpret_cast<VkSurfaceFormat2KHR*>(this);	}
-
 };
 static_assert(
 	sizeof(S_surface_format2_KHR) == sizeof(VkSurfaceFormat2KHR),
@@ -15928,7 +16067,6 @@ operator VkDisplayProperties2KHR const&() const
 	{	return *reinterpret_cast<const VkDisplayProperties2KHR*>(this);	}
 operator VkDisplayProperties2KHR &() 
 	{	return *reinterpret_cast<VkDisplayProperties2KHR*>(this);	}
-
 };
 static_assert(
 	sizeof(S_display_properties2_KHR) == sizeof(VkDisplayProperties2KHR),
@@ -15960,7 +16098,6 @@ operator VkDisplayPlaneProperties2KHR const&() const
 	{	return *reinterpret_cast<const VkDisplayPlaneProperties2KHR*>(this);	}
 operator VkDisplayPlaneProperties2KHR &() 
 	{	return *reinterpret_cast<VkDisplayPlaneProperties2KHR*>(this);	}
-
 };
 static_assert(
 	sizeof(S_display_plane_properties2_KHR) == sizeof(VkDisplayPlaneProperties2KHR),
@@ -15992,7 +16129,6 @@ operator VkDisplayModeProperties2KHR const&() const
 	{	return *reinterpret_cast<const VkDisplayModeProperties2KHR*>(this);	}
 operator VkDisplayModeProperties2KHR &() 
 	{	return *reinterpret_cast<VkDisplayModeProperties2KHR*>(this);	}
-
 };
 static_assert(
 	sizeof(S_display_mode_properties2_KHR) == sizeof(VkDisplayModeProperties2KHR),
@@ -16026,7 +16162,6 @@ operator VkDisplayPlaneInfo2KHR const&() const
 	{	return *reinterpret_cast<const VkDisplayPlaneInfo2KHR*>(this);	}
 operator VkDisplayPlaneInfo2KHR &() 
 	{	return *reinterpret_cast<VkDisplayPlaneInfo2KHR*>(this);	}
-
 };
 static_assert(
 	sizeof(S_display_plane_info2_KHR) == sizeof(VkDisplayPlaneInfo2KHR),
@@ -16058,7 +16193,6 @@ operator VkDisplayPlaneCapabilities2KHR const&() const
 	{	return *reinterpret_cast<const VkDisplayPlaneCapabilities2KHR*>(this);	}
 operator VkDisplayPlaneCapabilities2KHR &() 
 	{	return *reinterpret_cast<VkDisplayPlaneCapabilities2KHR*>(this);	}
-
 };
 static_assert(
 	sizeof(S_display_plane_capabilities2_KHR) == sizeof(VkDisplayPlaneCapabilities2KHR),
@@ -16089,7 +16223,6 @@ operator VkBufferMemoryRequirementsInfo2 const&() const
 	{	return *reinterpret_cast<const VkBufferMemoryRequirementsInfo2*>(this);	}
 operator VkBufferMemoryRequirementsInfo2 &() 
 	{	return *reinterpret_cast<VkBufferMemoryRequirementsInfo2*>(this);	}
-
 };
 static_assert(
 	sizeof(S_buffer_memory_requirements_info2) == sizeof(VkBufferMemoryRequirementsInfo2),
@@ -16123,7 +16256,6 @@ operator VkImagePlaneMemoryRequirementsInfo &()
 	{	return *reinterpret_cast<VkImagePlaneMemoryRequirementsInfo*>(this);	}
 
 friend S_image_memory_requirements_info2;
-
 };
 static_assert(
 	sizeof(S_image_plane_memory_requirements_info) == sizeof(VkImagePlaneMemoryRequirementsInfo),
@@ -16158,11 +16290,18 @@ operator VkImageMemoryRequirementsInfo2 &()
 	{	return *reinterpret_cast<VkImageMemoryRequirementsInfo2*>(this);	}
 
 S_image_memory_requirements_info2& n_image_plane_memory_requirements_info(S_image_plane_memory_requirements_info const& next_);
-
 };
 static_assert(
 	sizeof(S_image_memory_requirements_info2) == sizeof(VkImageMemoryRequirementsInfo2),
 	"struct and wrapper have different size!");
+
+struct N_image_memory_requirements_info2{
+private:
+	void* pNext = nullptr;
+public:
+void* get(){ return pNext; }
+N_image_memory_requirements_info2& n_image_plane_memory_requirements_info(S_image_plane_memory_requirements_info const& next_);
+};
 
 /*	VkImageSparseMemoryRequirementsInfo2
 */
@@ -16189,7 +16328,6 @@ operator VkImageSparseMemoryRequirementsInfo2 const&() const
 	{	return *reinterpret_cast<const VkImageSparseMemoryRequirementsInfo2*>(this);	}
 operator VkImageSparseMemoryRequirementsInfo2 &() 
 	{	return *reinterpret_cast<VkImageSparseMemoryRequirementsInfo2*>(this);	}
-
 };
 static_assert(
 	sizeof(S_image_sparse_memory_requirements_info2) == sizeof(VkImageSparseMemoryRequirementsInfo2),
@@ -16227,7 +16365,6 @@ operator VkMemoryDedicatedRequirements &()
 	{	return *reinterpret_cast<VkMemoryDedicatedRequirements*>(this);	}
 
 friend S_memory_requirements2;
-
 };
 static_assert(
 	sizeof(S_memory_dedicated_requirements) == sizeof(VkMemoryDedicatedRequirements),
@@ -16263,11 +16400,18 @@ operator VkMemoryRequirements2 &()
 	{	return *reinterpret_cast<VkMemoryRequirements2*>(this);	}
 
 S_memory_requirements2& n_memory_dedicated_requirements(S_memory_dedicated_requirements const& next_);
-
 };
 static_assert(
 	sizeof(S_memory_requirements2) == sizeof(VkMemoryRequirements2),
 	"struct and wrapper have different size!");
+
+struct N_memory_requirements2{
+private:
+	void* pNext = nullptr;
+public:
+void* get(){ return pNext; }
+N_memory_requirements2& n_memory_dedicated_requirements(S_memory_dedicated_requirements const& next_);
+};
 
 /*	VkSparseImageMemoryRequirements2
 (returnedonly)
@@ -16295,7 +16439,6 @@ operator VkSparseImageMemoryRequirements2 const&() const
 	{	return *reinterpret_cast<const VkSparseImageMemoryRequirements2*>(this);	}
 operator VkSparseImageMemoryRequirements2 &() 
 	{	return *reinterpret_cast<VkSparseImageMemoryRequirements2*>(this);	}
-
 };
 static_assert(
 	sizeof(S_sparse_image_memory_requirements2) == sizeof(VkSparseImageMemoryRequirements2),
@@ -16353,11 +16496,20 @@ operator VkSamplerYcbcrConversionCreateInfo &()
 #ifdef VK_USE_PLATFORM_ANDROID_KHR
 S_sampler_ycbcr_conversion_create_info& n_external_format_ANDROID(S_external_format_ANDROID const& next_);
 #endif
-
 };
 static_assert(
 	sizeof(S_sampler_ycbcr_conversion_create_info) == sizeof(VkSamplerYcbcrConversionCreateInfo),
 	"struct and wrapper have different size!");
+
+struct N_sampler_ycbcr_conversion_create_info{
+private:
+	void* pNext = nullptr;
+public:
+void* get(){ return pNext; }
+#ifdef VK_USE_PLATFORM_ANDROID_KHR
+N_sampler_ycbcr_conversion_create_info& n_external_format_ANDROID(S_external_format_ANDROID const& next_);
+#endif
+};
 
 /*	VkConditionalRenderingBeginInfoEXT
 */
@@ -16390,7 +16542,6 @@ operator VkConditionalRenderingBeginInfoEXT const&() const
 	{	return *reinterpret_cast<const VkConditionalRenderingBeginInfoEXT*>(this);	}
 operator VkConditionalRenderingBeginInfoEXT &() 
 	{	return *reinterpret_cast<VkConditionalRenderingBeginInfoEXT*>(this);	}
-
 };
 static_assert(
 	sizeof(S_conditional_rendering_begin_info_EXT) == sizeof(VkConditionalRenderingBeginInfoEXT),
@@ -16427,7 +16578,6 @@ operator VkDeviceQueueInfo2 const&() const
 	{	return *reinterpret_cast<const VkDeviceQueueInfo2*>(this);	}
 operator VkDeviceQueueInfo2 &() 
 	{	return *reinterpret_cast<VkDeviceQueueInfo2*>(this);	}
-
 };
 static_assert(
 	sizeof(S_device_queue_info2) == sizeof(VkDeviceQueueInfo2),
@@ -16459,7 +16609,6 @@ operator VkMultisamplePropertiesEXT const&() const
 	{	return *reinterpret_cast<const VkMultisamplePropertiesEXT*>(this);	}
 operator VkMultisamplePropertiesEXT &() 
 	{	return *reinterpret_cast<VkMultisamplePropertiesEXT*>(this);	}
-
 };
 static_assert(
 	sizeof(S_multisample_properties_EXT) == sizeof(VkMultisamplePropertiesEXT),
@@ -16496,7 +16645,6 @@ operator VkValidationCacheCreateInfoEXT const&() const
 	{	return *reinterpret_cast<const VkValidationCacheCreateInfoEXT*>(this);	}
 operator VkValidationCacheCreateInfoEXT &() 
 	{	return *reinterpret_cast<VkValidationCacheCreateInfoEXT*>(this);	}
-
 };
 static_assert(
 	sizeof(S_validation_cache_create_info_EXT) == sizeof(VkValidationCacheCreateInfoEXT),
@@ -16531,7 +16679,6 @@ operator VkDescriptorSetVariableDescriptorCountLayoutSupportEXT &()
 	{	return *reinterpret_cast<VkDescriptorSetVariableDescriptorCountLayoutSupportEXT*>(this);	}
 
 friend S_descriptor_set_layout_support;
-
 };
 static_assert(
 	sizeof(S_descriptor_set_variable_descriptor_count_layout_support_EXT) == sizeof(VkDescriptorSetVariableDescriptorCountLayoutSupportEXT),
@@ -16567,11 +16714,18 @@ operator VkDescriptorSetLayoutSupport &()
 	{	return *reinterpret_cast<VkDescriptorSetLayoutSupport*>(this);	}
 
 S_descriptor_set_layout_support& n_descriptor_set_variable_descriptor_count_layout_support_EXT(S_descriptor_set_variable_descriptor_count_layout_support_EXT const& next_);
-
 };
 static_assert(
 	sizeof(S_descriptor_set_layout_support) == sizeof(VkDescriptorSetLayoutSupport),
 	"struct and wrapper have different size!");
+
+struct N_descriptor_set_layout_support{
+private:
+	void* pNext = nullptr;
+public:
+void* get(){ return pNext; }
+N_descriptor_set_layout_support& n_descriptor_set_variable_descriptor_count_layout_support_EXT(S_descriptor_set_variable_descriptor_count_layout_support_EXT const& next_);
+};
 
 /*	VkNativeBufferANDROID
 */
@@ -16608,7 +16762,6 @@ operator VkNativeBufferANDROID const&() const
 	{	return *reinterpret_cast<const VkNativeBufferANDROID*>(this);	}
 operator VkNativeBufferANDROID &() 
 	{	return *reinterpret_cast<VkNativeBufferANDROID*>(this);	}
-
 };
 static_assert(
 	sizeof(S_native_buffer_ANDROID) == sizeof(VkNativeBufferANDROID),
@@ -16626,7 +16779,6 @@ struct		S_shader_resource_usage_AMD{
 	size_t scratchMemUsageInBytes;
 
 S_shader_resource_usage_AMD(){}
-
 };
 
 /*	VkShaderStatisticsInfoAMD
@@ -16642,7 +16794,6 @@ struct		S_shader_statistics_info_AMD{
 	uint32_t computeWorkGroupSize[3];
 
 S_shader_statistics_info_AMD(){}
-
 };
 
 /*	VkDebugUtilsObjectNameInfoEXT
@@ -16676,7 +16827,6 @@ operator VkDebugUtilsObjectNameInfoEXT const&() const
 	{	return *reinterpret_cast<const VkDebugUtilsObjectNameInfoEXT*>(this);	}
 operator VkDebugUtilsObjectNameInfoEXT &() 
 	{	return *reinterpret_cast<VkDebugUtilsObjectNameInfoEXT*>(this);	}
-
 };
 static_assert(
 	sizeof(S_debug_utils_object_name_info_EXT) == sizeof(VkDebugUtilsObjectNameInfoEXT),
@@ -16719,7 +16869,6 @@ operator VkDebugUtilsObjectTagInfoEXT const&() const
 	{	return *reinterpret_cast<const VkDebugUtilsObjectTagInfoEXT*>(this);	}
 operator VkDebugUtilsObjectTagInfoEXT &() 
 	{	return *reinterpret_cast<VkDebugUtilsObjectTagInfoEXT*>(this);	}
-
 };
 static_assert(
 	sizeof(S_debug_utils_object_tag_info_EXT) == sizeof(VkDebugUtilsObjectTagInfoEXT),
@@ -16753,7 +16902,6 @@ operator VkDebugUtilsLabelEXT const&() const
 	{	return *reinterpret_cast<const VkDebugUtilsLabelEXT*>(this);	}
 operator VkDebugUtilsLabelEXT &() 
 	{	return *reinterpret_cast<VkDebugUtilsLabelEXT*>(this);	}
-
 };
 static_assert(
 	sizeof(S_debug_utils_label_EXT) == sizeof(VkDebugUtilsLabelEXT),
@@ -16811,7 +16959,6 @@ operator VkDebugUtilsMessengerCallbackDataEXT const&() const
 	{	return *reinterpret_cast<const VkDebugUtilsMessengerCallbackDataEXT*>(this);	}
 operator VkDebugUtilsMessengerCallbackDataEXT &() 
 	{	return *reinterpret_cast<VkDebugUtilsMessengerCallbackDataEXT*>(this);	}
-
 };
 static_assert(
 	sizeof(S_debug_utils_messenger_callback_data_EXT) == sizeof(VkDebugUtilsMessengerCallbackDataEXT),
@@ -16842,7 +16989,6 @@ operator VkMemoryHostPointerPropertiesEXT const&() const
 	{	return *reinterpret_cast<const VkMemoryHostPointerPropertiesEXT*>(this);	}
 operator VkMemoryHostPointerPropertiesEXT &() 
 	{	return *reinterpret_cast<VkMemoryHostPointerPropertiesEXT*>(this);	}
-
 };
 static_assert(
 	sizeof(S_memory_host_pointer_properties_EXT) == sizeof(VkMemoryHostPointerPropertiesEXT),
@@ -16897,7 +17043,6 @@ operator VkAttachmentDescription2KHR const&() const
 	{	return *reinterpret_cast<const VkAttachmentDescription2KHR*>(this);	}
 operator VkAttachmentDescription2KHR &() 
 	{	return *reinterpret_cast<VkAttachmentDescription2KHR*>(this);	}
-
 };
 static_assert(
 	sizeof(S_attachment_description2_KHR) == sizeof(VkAttachmentDescription2KHR),
@@ -16934,7 +17079,6 @@ operator VkAttachmentReference2KHR const&() const
 	{	return *reinterpret_cast<const VkAttachmentReference2KHR*>(this);	}
 operator VkAttachmentReference2KHR &() 
 	{	return *reinterpret_cast<VkAttachmentReference2KHR*>(this);	}
-
 };
 static_assert(
 	sizeof(S_attachment_reference2_KHR) == sizeof(VkAttachmentReference2KHR),
@@ -16995,7 +17139,6 @@ operator VkSubpassDescription2KHR const&() const
 	{	return *reinterpret_cast<const VkSubpassDescription2KHR*>(this);	}
 operator VkSubpassDescription2KHR &() 
 	{	return *reinterpret_cast<VkSubpassDescription2KHR*>(this);	}
-
 };
 static_assert(
 	sizeof(S_subpass_description2_KHR) == sizeof(VkSubpassDescription2KHR),
@@ -17047,7 +17190,6 @@ operator VkSubpassDependency2KHR const&() const
 	{	return *reinterpret_cast<const VkSubpassDependency2KHR*>(this);	}
 operator VkSubpassDependency2KHR &() 
 	{	return *reinterpret_cast<VkSubpassDependency2KHR*>(this);	}
-
 };
 static_assert(
 	sizeof(S_subpass_dependency2_KHR) == sizeof(VkSubpassDependency2KHR),
@@ -17102,7 +17244,6 @@ operator VkRenderPassCreateInfo2KHR const&() const
 	{	return *reinterpret_cast<const VkRenderPassCreateInfo2KHR*>(this);	}
 operator VkRenderPassCreateInfo2KHR &() 
 	{	return *reinterpret_cast<VkRenderPassCreateInfo2KHR*>(this);	}
-
 };
 static_assert(
 	sizeof(S_render_pass_create_info2_KHR) == sizeof(VkRenderPassCreateInfo2KHR),
@@ -17133,7 +17274,6 @@ operator VkSubpassBeginInfoKHR const&() const
 	{	return *reinterpret_cast<const VkSubpassBeginInfoKHR*>(this);	}
 operator VkSubpassBeginInfoKHR &() 
 	{	return *reinterpret_cast<VkSubpassBeginInfoKHR*>(this);	}
-
 };
 static_assert(
 	sizeof(S_subpass_begin_info_KHR) == sizeof(VkSubpassBeginInfoKHR),
@@ -17147,7 +17287,6 @@ private:
 	 void * pNext = nullptr;
 
 S_subpass_end_info_KHR(){}
-
 };
 static_assert(
 	sizeof(S_subpass_end_info_KHR) == sizeof(VkSubpassEndInfoKHR),
@@ -17206,7 +17345,6 @@ operator VkAndroidHardwareBufferFormatPropertiesANDROID &()
 #ifdef VK_USE_PLATFORM_ANDROID_KHR
 friend S_android_hardware_buffer_properties_ANDROID;
 #endif
-
 };
 static_assert(
 	sizeof(S_android_hardware_buffer_format_properties_ANDROID) == sizeof(VkAndroidHardwareBufferFormatPropertiesANDROID),
@@ -17249,11 +17387,20 @@ operator VkAndroidHardwareBufferPropertiesANDROID &()
 #ifdef VK_USE_PLATFORM_ANDROID_KHR
 S_android_hardware_buffer_properties_ANDROID& n_android_hardware_buffer_format_properties_ANDROID(S_android_hardware_buffer_format_properties_ANDROID const& next_);
 #endif
-
 };
 static_assert(
 	sizeof(S_android_hardware_buffer_properties_ANDROID) == sizeof(VkAndroidHardwareBufferPropertiesANDROID),
 	"struct and wrapper have different size!");
+
+struct N_android_hardware_buffer_properties_ANDROID{
+private:
+	void* pNext = nullptr;
+public:
+void* get(){ return pNext; }
+#ifdef VK_USE_PLATFORM_ANDROID_KHR
+N_android_hardware_buffer_properties_ANDROID& n_android_hardware_buffer_format_properties_ANDROID(S_android_hardware_buffer_format_properties_ANDROID const& next_);
+#endif
+};
 #endif //VK_USE_PLATFORM_ANDROID_KHR
 
 /*	VkMemoryGetAndroidHardwareBufferInfoANDROID
@@ -17282,7 +17429,6 @@ operator VkMemoryGetAndroidHardwareBufferInfoANDROID const&() const
 	{	return *reinterpret_cast<const VkMemoryGetAndroidHardwareBufferInfoANDROID*>(this);	}
 operator VkMemoryGetAndroidHardwareBufferInfoANDROID &() 
 	{	return *reinterpret_cast<VkMemoryGetAndroidHardwareBufferInfoANDROID*>(this);	}
-
 };
 static_assert(
 	sizeof(S_memory_get_android_hardware_buffer_info_ANDROID) == sizeof(VkMemoryGetAndroidHardwareBufferInfoANDROID),
@@ -17318,7 +17464,6 @@ operator VkCheckpointDataNV const&() const
 	{	return *reinterpret_cast<const VkCheckpointDataNV*>(this);	}
 operator VkCheckpointDataNV &() 
 	{	return *reinterpret_cast<VkCheckpointDataNV*>(this);	}
-
 };
 static_assert(
 	sizeof(S_checkpoint_data_NV) == sizeof(VkCheckpointDataNV),
@@ -17331,7 +17476,6 @@ struct		S_draw_mesh_tasks_indirect_command_NV{
 	uint32_t firstTask;
 
 S_draw_mesh_tasks_indirect_command_NV(){}
-
 };
 
 /*	VkRaytracingPipelineCreateInfoNVX
@@ -17380,7 +17524,6 @@ operator VkRaytracingPipelineCreateInfoNVX const&() const
 	{	return *reinterpret_cast<const VkRaytracingPipelineCreateInfoNVX*>(this);	}
 operator VkRaytracingPipelineCreateInfoNVX &() 
 	{	return *reinterpret_cast<VkRaytracingPipelineCreateInfoNVX*>(this);	}
-
 };
 static_assert(
 	sizeof(S_raytracing_pipeline_create_info_NVX) == sizeof(VkRaytracingPipelineCreateInfoNVX),
@@ -17441,7 +17584,6 @@ operator VkGeometryTrianglesNVX const&() const
 	{	return *reinterpret_cast<const VkGeometryTrianglesNVX*>(this);	}
 operator VkGeometryTrianglesNVX &() 
 	{	return *reinterpret_cast<VkGeometryTrianglesNVX*>(this);	}
-
 };
 static_assert(
 	sizeof(S_geometry_triangles_NVX) == sizeof(VkGeometryTrianglesNVX),
@@ -17481,7 +17623,6 @@ operator VkGeometryAABBNVX const&() const
 	{	return *reinterpret_cast<const VkGeometryAABBNVX*>(this);	}
 operator VkGeometryAABBNVX &() 
 	{	return *reinterpret_cast<VkGeometryAABBNVX*>(this);	}
-
 };
 static_assert(
 	sizeof(S_geometry_aabb_NVX) == sizeof(VkGeometryAABBNVX),
@@ -17494,7 +17635,6 @@ struct		S_geometry_data_NVX{
 	S_geometry_aabb_NVX aabbs;
 
 S_geometry_data_NVX(){}
-
 };
 
 /*	VkGeometryNVX
@@ -17528,7 +17668,6 @@ operator VkGeometryNVX const&() const
 	{	return *reinterpret_cast<const VkGeometryNVX*>(this);	}
 operator VkGeometryNVX &() 
 	{	return *reinterpret_cast<VkGeometryNVX*>(this);	}
-
 };
 static_assert(
 	sizeof(S_geometry_NVX) == sizeof(VkGeometryNVX),
@@ -17574,7 +17713,6 @@ operator VkAccelerationStructureCreateInfoNVX const&() const
 	{	return *reinterpret_cast<const VkAccelerationStructureCreateInfoNVX*>(this);	}
 operator VkAccelerationStructureCreateInfoNVX &() 
 	{	return *reinterpret_cast<VkAccelerationStructureCreateInfoNVX*>(this);	}
-
 };
 static_assert(
 	sizeof(S_acceleration_structure_create_info_NVX) == sizeof(VkAccelerationStructureCreateInfoNVX),
@@ -17617,7 +17755,6 @@ operator VkBindAccelerationStructureMemoryInfoNVX const&() const
 	{	return *reinterpret_cast<const VkBindAccelerationStructureMemoryInfoNVX*>(this);	}
 operator VkBindAccelerationStructureMemoryInfoNVX &() 
 	{	return *reinterpret_cast<VkBindAccelerationStructureMemoryInfoNVX*>(this);	}
-
 };
 static_assert(
 	sizeof(S_bind_acceleration_structure_memory_info_NVX) == sizeof(VkBindAccelerationStructureMemoryInfoNVX),
@@ -17648,7 +17785,6 @@ operator VkAccelerationStructureMemoryRequirementsInfoNVX const&() const
 	{	return *reinterpret_cast<const VkAccelerationStructureMemoryRequirementsInfoNVX*>(this);	}
 operator VkAccelerationStructureMemoryRequirementsInfoNVX &() 
 	{	return *reinterpret_cast<VkAccelerationStructureMemoryRequirementsInfoNVX*>(this);	}
-
 };
 static_assert(
 	sizeof(S_acceleration_structure_memory_requirements_info_NVX) == sizeof(VkAccelerationStructureMemoryRequirementsInfoNVX),
@@ -17681,7 +17817,6 @@ operator VkImageDrmFormatModifierPropertiesEXT const&() const
 	{	return *reinterpret_cast<const VkImageDrmFormatModifierPropertiesEXT*>(this);	}
 operator VkImageDrmFormatModifierPropertiesEXT &() 
 	{	return *reinterpret_cast<VkImageDrmFormatModifierPropertiesEXT*>(this);	}
-
 };
 static_assert(
 	sizeof(S_image_drm_format_modifier_properties_EXT) == sizeof(VkImageDrmFormatModifierPropertiesEXT),

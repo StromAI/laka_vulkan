@@ -25,7 +25,7 @@ Permission is granted to anyone to use this software for any purpose, including 
 
 /*
 todo:
-    针对pNext可扩展的结构体 建立struct xxx{ void* pNext} 配合operator<< () 作为函数参数的引导
+    针对pNext可扩展的结构体 建立struct xxx{ void* pNext} 以及n_函数 作为函数参数的引导
     很多对象都会有放在一个数组中处理的情况 需要有一种新方式来处理
 */
 
