@@ -320,20 +320,20 @@ void test_all()
 
 		auto pd_lp = physical_device.get_layer_propertiess();
 		show_info("设备层信息:");
-		for (auto&& lp : *pd_lp)
-		{
-			show_info(mean(lp)->c_str());
+        /*for (auto&& lp : *pd_lp)
+        {
+            show_info(mean(lp)->c_str());
 
-			auto pd_ext = physical_device.get_extension_properties(lp.layerName);
-			show_info("层扩展信息:");
-			for (auto&& ext : *pd_ext)
-			{
-				show_info(mean(ext)->c_str());
-			}
-		}
+            auto pd_ext = physical_device.get_extension_properties(lp.layerName);
+            show_info("层扩展信息:");
+            for (auto&& ext : *pd_ext)
+            {
+                show_info(mean(ext)->c_str());
+            }
+        }
 
-		show_info("设备特性:{}", mean(*physical_device.get_features())->c_str());
-
+        show_info("设备特性:{}", mean(*physical_device.get_features())->c_str());
+*/
 		//show_info("设备属性:{}", mean(*physical_device.get_properties())->c_str() );
 
 		index++;

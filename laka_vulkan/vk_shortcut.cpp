@@ -29,24 +29,3 @@ using namespace std;
 //{
 //    return Create_flags(flag | value_);
 //}
-
-#define define_flags(name0__,name1__) \
-name0__::name1__::name1__(int flag_):flag(flag_){};\
-name0__::name1__ name0__::name1__::operator|(name1__ value_)\
-{return name1__(flag|value_.flag);}\
-name0__::name1__ name0__::name1__::operator|(Bits value_)\
-{return name1__(flag|value_);}
-
-define_flags(Buffer, E_Create);
-define_flags(Buffer, E_Usage);
-
-define_flags(Image, E_Create);
-define_flags(Image, E_Usage);
-
-define_flags(Command_pool, E_Create);
-
-define_flags(Descriptor_pool, E_Create);
-
-define_flags(Query_pool, E_Pipeline_statistic);
-
-define_flags(Descriptor_set_layout, E_Create);

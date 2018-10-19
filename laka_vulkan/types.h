@@ -6,7 +6,8 @@
 namespace laka { namespace vk {
 /*	VkImageLayout
 */
-enum class E_image_layout{
+struct E_image_layout{
+enum{
 e_undefined = VK_IMAGE_LAYOUT_UNDEFINED,
 e_general = VK_IMAGE_LAYOUT_GENERAL,
 e_color_attachment_optimal = VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL,
@@ -16,41 +17,96 @@ e_shader_read_only_optimal = VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,
 e_transfer_src_optimal = VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL,
 e_transfer_dst_optimal = VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL,
 e_preinitialized = VK_IMAGE_LAYOUT_PREINITIALIZED,
+}flag;
+E_image_layout(VkImageLayout flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
+E_image_layout(){}
+E_image_layout(E_image_layout const& e_):flag(e_.flag) {}
+operator VkImageLayout&() { return *this; }
+E_image_layout& operator = (E_image_layout e_) { flag = e_.flag; return *this; }
+bool operator== (E_image_layout e_) { return flag == e_.flag; }
+bool operator== (VkImageLayout e_) { return flag == static_cast<decltype(flag)>(e_); }
+bool operator!= (E_image_layout e_) { return !(*this == e_); }
+bool operator!= (VkImageLayout e_) { return !(*this == e_); }
 };
 
 /*	VkAttachmentLoadOp
 */
-enum class E_attachment_load_op{
+struct E_attachment_load_op{
+enum{
 e_load = VK_ATTACHMENT_LOAD_OP_LOAD,
 e_clear = VK_ATTACHMENT_LOAD_OP_CLEAR,
 e_dont_care = VK_ATTACHMENT_LOAD_OP_DONT_CARE,
+}flag;
+E_attachment_load_op(VkAttachmentLoadOp flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
+E_attachment_load_op(){}
+E_attachment_load_op(E_attachment_load_op const& e_):flag(e_.flag) {}
+operator VkAttachmentLoadOp&() { return *this; }
+E_attachment_load_op& operator = (E_attachment_load_op e_) { flag = e_.flag; return *this; }
+bool operator== (E_attachment_load_op e_) { return flag == e_.flag; }
+bool operator== (VkAttachmentLoadOp e_) { return flag == static_cast<decltype(flag)>(e_); }
+bool operator!= (E_attachment_load_op e_) { return !(*this == e_); }
+bool operator!= (VkAttachmentLoadOp e_) { return !(*this == e_); }
 };
 
 /*	VkAttachmentStoreOp
 */
-enum class E_attachment_store_op{
+struct E_attachment_store_op{
+enum{
 e_store = VK_ATTACHMENT_STORE_OP_STORE,
 e_dont_care = VK_ATTACHMENT_STORE_OP_DONT_CARE,
+}flag;
+E_attachment_store_op(VkAttachmentStoreOp flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
+E_attachment_store_op(){}
+E_attachment_store_op(E_attachment_store_op const& e_):flag(e_.flag) {}
+operator VkAttachmentStoreOp&() { return *this; }
+E_attachment_store_op& operator = (E_attachment_store_op e_) { flag = e_.flag; return *this; }
+bool operator== (E_attachment_store_op e_) { return flag == e_.flag; }
+bool operator== (VkAttachmentStoreOp e_) { return flag == static_cast<decltype(flag)>(e_); }
+bool operator!= (E_attachment_store_op e_) { return !(*this == e_); }
+bool operator!= (VkAttachmentStoreOp e_) { return !(*this == e_); }
 };
 
 /*	VkImageType
 */
-enum class E_image_type{
+struct E_image_type{
+enum{
 e_1d = VK_IMAGE_TYPE_1D,
 e_2d = VK_IMAGE_TYPE_2D,
 e_3d = VK_IMAGE_TYPE_3D,
+}flag;
+E_image_type(VkImageType flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
+E_image_type(){}
+E_image_type(E_image_type const& e_):flag(e_.flag) {}
+operator VkImageType&() { return *this; }
+E_image_type& operator = (E_image_type e_) { flag = e_.flag; return *this; }
+bool operator== (E_image_type e_) { return flag == e_.flag; }
+bool operator== (VkImageType e_) { return flag == static_cast<decltype(flag)>(e_); }
+bool operator!= (E_image_type e_) { return !(*this == e_); }
+bool operator!= (VkImageType e_) { return !(*this == e_); }
 };
 
 /*	VkImageTiling
 */
-enum class E_image_tiling{
+struct E_image_tiling{
+enum{
 e_optimal = VK_IMAGE_TILING_OPTIMAL,
 e_linear = VK_IMAGE_TILING_LINEAR,
+}flag;
+E_image_tiling(VkImageTiling flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
+E_image_tiling(){}
+E_image_tiling(E_image_tiling const& e_):flag(e_.flag) {}
+operator VkImageTiling&() { return *this; }
+E_image_tiling& operator = (E_image_tiling e_) { flag = e_.flag; return *this; }
+bool operator== (E_image_tiling e_) { return flag == e_.flag; }
+bool operator== (VkImageTiling e_) { return flag == static_cast<decltype(flag)>(e_); }
+bool operator!= (E_image_tiling e_) { return !(*this == e_); }
+bool operator!= (VkImageTiling e_) { return !(*this == e_); }
 };
 
 /*	VkImageViewType
 */
-enum class E_image_view_type{
+struct E_image_view_type{
+enum{
 e_1d = VK_IMAGE_VIEW_TYPE_1D,
 e_2d = VK_IMAGE_VIEW_TYPE_2D,
 e_3d = VK_IMAGE_VIEW_TYPE_3D,
@@ -58,18 +114,40 @@ e_cube = VK_IMAGE_VIEW_TYPE_CUBE,
 e_1d_array = VK_IMAGE_VIEW_TYPE_1D_ARRAY,
 e_2d_array = VK_IMAGE_VIEW_TYPE_2D_ARRAY,
 e_cube_array = VK_IMAGE_VIEW_TYPE_CUBE_ARRAY,
+}flag;
+E_image_view_type(VkImageViewType flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
+E_image_view_type(){}
+E_image_view_type(E_image_view_type const& e_):flag(e_.flag) {}
+operator VkImageViewType&() { return *this; }
+E_image_view_type& operator = (E_image_view_type e_) { flag = e_.flag; return *this; }
+bool operator== (E_image_view_type e_) { return flag == e_.flag; }
+bool operator== (VkImageViewType e_) { return flag == static_cast<decltype(flag)>(e_); }
+bool operator!= (E_image_view_type e_) { return !(*this == e_); }
+bool operator!= (VkImageViewType e_) { return !(*this == e_); }
 };
 
 /*	VkCommandBufferLevel
 */
-enum class E_command_buffer_level{
+struct E_command_buffer_level{
+enum{
 e_primary = VK_COMMAND_BUFFER_LEVEL_PRIMARY,
 e_secondary = VK_COMMAND_BUFFER_LEVEL_SECONDARY,
+}flag;
+E_command_buffer_level(VkCommandBufferLevel flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
+E_command_buffer_level(){}
+E_command_buffer_level(E_command_buffer_level const& e_):flag(e_.flag) {}
+operator VkCommandBufferLevel&() { return *this; }
+E_command_buffer_level& operator = (E_command_buffer_level e_) { flag = e_.flag; return *this; }
+bool operator== (E_command_buffer_level e_) { return flag == e_.flag; }
+bool operator== (VkCommandBufferLevel e_) { return flag == static_cast<decltype(flag)>(e_); }
+bool operator!= (E_command_buffer_level e_) { return !(*this == e_); }
+bool operator!= (VkCommandBufferLevel e_) { return !(*this == e_); }
 };
 
 /*	VkComponentSwizzle
 */
-enum class E_component_swizzle{
+struct E_component_swizzle{
+enum{
 e_identity = VK_COMPONENT_SWIZZLE_IDENTITY,
 e_zero = VK_COMPONENT_SWIZZLE_ZERO,
 e_one = VK_COMPONENT_SWIZZLE_ONE,
@@ -77,11 +155,22 @@ e_r = VK_COMPONENT_SWIZZLE_R,
 e_g = VK_COMPONENT_SWIZZLE_G,
 e_b = VK_COMPONENT_SWIZZLE_B,
 e_a = VK_COMPONENT_SWIZZLE_A,
+}flag;
+E_component_swizzle(VkComponentSwizzle flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
+E_component_swizzle(){}
+E_component_swizzle(E_component_swizzle const& e_):flag(e_.flag) {}
+operator VkComponentSwizzle&() { return *this; }
+E_component_swizzle& operator = (E_component_swizzle e_) { flag = e_.flag; return *this; }
+bool operator== (E_component_swizzle e_) { return flag == e_.flag; }
+bool operator== (VkComponentSwizzle e_) { return flag == static_cast<decltype(flag)>(e_); }
+bool operator!= (E_component_swizzle e_) { return !(*this == e_); }
+bool operator!= (VkComponentSwizzle e_) { return !(*this == e_); }
 };
 
 /*	VkDescriptorType
 */
-enum class E_descriptor_type{
+struct E_descriptor_type{
+enum{
 e_sampler = VK_DESCRIPTOR_TYPE_SAMPLER,
 e_combined_image_sampler = VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,
 e_sampled_image = VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE,
@@ -93,43 +182,98 @@ e_storage_buffer = VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,
 e_uniform_buffer_dynamic = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER_DYNAMIC,
 e_storage_buffer_dynamic = VK_DESCRIPTOR_TYPE_STORAGE_BUFFER_DYNAMIC,
 e_input_attachment = VK_DESCRIPTOR_TYPE_INPUT_ATTACHMENT,
+}flag;
+E_descriptor_type(VkDescriptorType flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
+E_descriptor_type(){}
+E_descriptor_type(E_descriptor_type const& e_):flag(e_.flag) {}
+operator VkDescriptorType&() { return *this; }
+E_descriptor_type& operator = (E_descriptor_type e_) { flag = e_.flag; return *this; }
+bool operator== (E_descriptor_type e_) { return flag == e_.flag; }
+bool operator== (VkDescriptorType e_) { return flag == static_cast<decltype(flag)>(e_); }
+bool operator!= (E_descriptor_type e_) { return !(*this == e_); }
+bool operator!= (VkDescriptorType e_) { return !(*this == e_); }
 };
 
 /*	VkQueryType
 */
-enum class E_query_type{
+struct E_query_type{
+enum{
 e_occlusion = VK_QUERY_TYPE_OCCLUSION,
 e_pipeline_statistics = VK_QUERY_TYPE_PIPELINE_STATISTICS,
 e_timestamp = VK_QUERY_TYPE_TIMESTAMP,
+}flag;
+E_query_type(VkQueryType flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
+E_query_type(){}
+E_query_type(E_query_type const& e_):flag(e_.flag) {}
+operator VkQueryType&() { return *this; }
+E_query_type& operator = (E_query_type e_) { flag = e_.flag; return *this; }
+bool operator== (E_query_type e_) { return flag == e_.flag; }
+bool operator== (VkQueryType e_) { return flag == static_cast<decltype(flag)>(e_); }
+bool operator!= (E_query_type e_) { return !(*this == e_); }
+bool operator!= (VkQueryType e_) { return !(*this == e_); }
 };
 
 /*	VkBorderColor
 */
-enum class E_border_color{
+struct E_border_color{
+enum{
 e_float_transparent_black = VK_BORDER_COLOR_FLOAT_TRANSPARENT_BLACK,
 e_int_transparent_black = VK_BORDER_COLOR_INT_TRANSPARENT_BLACK,
 e_float_opaque_black = VK_BORDER_COLOR_FLOAT_OPAQUE_BLACK,
 e_int_opaque_black = VK_BORDER_COLOR_INT_OPAQUE_BLACK,
 e_float_opaque_white = VK_BORDER_COLOR_FLOAT_OPAQUE_WHITE,
 e_int_opaque_white = VK_BORDER_COLOR_INT_OPAQUE_WHITE,
+}flag;
+E_border_color(VkBorderColor flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
+E_border_color(){}
+E_border_color(E_border_color const& e_):flag(e_.flag) {}
+operator VkBorderColor&() { return *this; }
+E_border_color& operator = (E_border_color e_) { flag = e_.flag; return *this; }
+bool operator== (E_border_color e_) { return flag == e_.flag; }
+bool operator== (VkBorderColor e_) { return flag == static_cast<decltype(flag)>(e_); }
+bool operator!= (E_border_color e_) { return !(*this == e_); }
+bool operator!= (VkBorderColor e_) { return !(*this == e_); }
 };
 
 /*	VkPipelineBindPoint
 */
-enum class E_pipeline_bind_point{
+struct E_pipeline_bind_point{
+enum{
 e_graphics = VK_PIPELINE_BIND_POINT_GRAPHICS,
 e_compute = VK_PIPELINE_BIND_POINT_COMPUTE,
+}flag;
+E_pipeline_bind_point(VkPipelineBindPoint flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
+E_pipeline_bind_point(){}
+E_pipeline_bind_point(E_pipeline_bind_point const& e_):flag(e_.flag) {}
+operator VkPipelineBindPoint&() { return *this; }
+E_pipeline_bind_point& operator = (E_pipeline_bind_point e_) { flag = e_.flag; return *this; }
+bool operator== (E_pipeline_bind_point e_) { return flag == e_.flag; }
+bool operator== (VkPipelineBindPoint e_) { return flag == static_cast<decltype(flag)>(e_); }
+bool operator!= (E_pipeline_bind_point e_) { return !(*this == e_); }
+bool operator!= (VkPipelineBindPoint e_) { return !(*this == e_); }
 };
 
 /*	VkPipelineCacheHeaderVersion
 */
-enum class E_pipeline_cache_header_version{
+struct E_pipeline_cache_header_version{
+enum{
 e_one = VK_PIPELINE_CACHE_HEADER_VERSION_ONE,
+}flag;
+E_pipeline_cache_header_version(VkPipelineCacheHeaderVersion flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
+E_pipeline_cache_header_version(){}
+E_pipeline_cache_header_version(E_pipeline_cache_header_version const& e_):flag(e_.flag) {}
+operator VkPipelineCacheHeaderVersion&() { return *this; }
+E_pipeline_cache_header_version& operator = (E_pipeline_cache_header_version e_) { flag = e_.flag; return *this; }
+bool operator== (E_pipeline_cache_header_version e_) { return flag == e_.flag; }
+bool operator== (VkPipelineCacheHeaderVersion e_) { return flag == static_cast<decltype(flag)>(e_); }
+bool operator!= (E_pipeline_cache_header_version e_) { return !(*this == e_); }
+bool operator!= (VkPipelineCacheHeaderVersion e_) { return !(*this == e_); }
 };
 
 /*	VkPrimitiveTopology
 */
-enum class E_primitive_topology{
+struct E_primitive_topology{
+enum{
 e_point_list = VK_PRIMITIVE_TOPOLOGY_POINT_LIST,
 e_line_list = VK_PRIMITIVE_TOPOLOGY_LINE_LIST,
 e_line_strip = VK_PRIMITIVE_TOPOLOGY_LINE_STRIP,
@@ -141,48 +285,114 @@ e_line_strip_with_adjacency = VK_PRIMITIVE_TOPOLOGY_LINE_STRIP_WITH_ADJACENCY,
 e_triangle_list_with_adjacency = VK_PRIMITIVE_TOPOLOGY_TRIANGLE_LIST_WITH_ADJACENCY,
 e_triangle_strip_with_adjacency = VK_PRIMITIVE_TOPOLOGY_TRIANGLE_STRIP_WITH_ADJACENCY,
 e_patch_list = VK_PRIMITIVE_TOPOLOGY_PATCH_LIST,
+}flag;
+E_primitive_topology(VkPrimitiveTopology flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
+E_primitive_topology(){}
+E_primitive_topology(E_primitive_topology const& e_):flag(e_.flag) {}
+operator VkPrimitiveTopology&() { return *this; }
+E_primitive_topology& operator = (E_primitive_topology e_) { flag = e_.flag; return *this; }
+bool operator== (E_primitive_topology e_) { return flag == e_.flag; }
+bool operator== (VkPrimitiveTopology e_) { return flag == static_cast<decltype(flag)>(e_); }
+bool operator!= (E_primitive_topology e_) { return !(*this == e_); }
+bool operator!= (VkPrimitiveTopology e_) { return !(*this == e_); }
 };
 
 /*	VkSharingMode
 */
-enum class E_sharing_mode{
+struct E_sharing_mode{
+enum{
 e_exclusive = VK_SHARING_MODE_EXCLUSIVE,
 e_concurrent = VK_SHARING_MODE_CONCURRENT,
+}flag;
+E_sharing_mode(VkSharingMode flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
+E_sharing_mode(){}
+E_sharing_mode(E_sharing_mode const& e_):flag(e_.flag) {}
+operator VkSharingMode&() { return *this; }
+E_sharing_mode& operator = (E_sharing_mode e_) { flag = e_.flag; return *this; }
+bool operator== (E_sharing_mode e_) { return flag == e_.flag; }
+bool operator== (VkSharingMode e_) { return flag == static_cast<decltype(flag)>(e_); }
+bool operator!= (E_sharing_mode e_) { return !(*this == e_); }
+bool operator!= (VkSharingMode e_) { return !(*this == e_); }
 };
 
 /*	VkIndexType
 */
-enum class E_index_type{
+struct E_index_type{
+enum{
 e_uint16 = VK_INDEX_TYPE_UINT16,
 e_uint32 = VK_INDEX_TYPE_UINT32,
+}flag;
+E_index_type(VkIndexType flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
+E_index_type(){}
+E_index_type(E_index_type const& e_):flag(e_.flag) {}
+operator VkIndexType&() { return *this; }
+E_index_type& operator = (E_index_type e_) { flag = e_.flag; return *this; }
+bool operator== (E_index_type e_) { return flag == e_.flag; }
+bool operator== (VkIndexType e_) { return flag == static_cast<decltype(flag)>(e_); }
+bool operator!= (E_index_type e_) { return !(*this == e_); }
+bool operator!= (VkIndexType e_) { return !(*this == e_); }
 };
 
 /*	VkFilter
 */
-enum class E_filter{
+struct E_filter{
+enum{
 e_nearest = VK_FILTER_NEAREST,
 e_linear = VK_FILTER_LINEAR,
+}flag;
+E_filter(VkFilter flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
+E_filter(){}
+E_filter(E_filter const& e_):flag(e_.flag) {}
+operator VkFilter&() { return *this; }
+E_filter& operator = (E_filter e_) { flag = e_.flag; return *this; }
+bool operator== (E_filter e_) { return flag == e_.flag; }
+bool operator== (VkFilter e_) { return flag == static_cast<decltype(flag)>(e_); }
+bool operator!= (E_filter e_) { return !(*this == e_); }
+bool operator!= (VkFilter e_) { return !(*this == e_); }
 };
 
 /*	VkSamplerMipmapMode
 */
-enum class E_sampler_mipmap_mode{
+struct E_sampler_mipmap_mode{
+enum{
 e_nearest = VK_SAMPLER_MIPMAP_MODE_NEAREST,
 e_linear = VK_SAMPLER_MIPMAP_MODE_LINEAR,
+}flag;
+E_sampler_mipmap_mode(VkSamplerMipmapMode flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
+E_sampler_mipmap_mode(){}
+E_sampler_mipmap_mode(E_sampler_mipmap_mode const& e_):flag(e_.flag) {}
+operator VkSamplerMipmapMode&() { return *this; }
+E_sampler_mipmap_mode& operator = (E_sampler_mipmap_mode e_) { flag = e_.flag; return *this; }
+bool operator== (E_sampler_mipmap_mode e_) { return flag == e_.flag; }
+bool operator== (VkSamplerMipmapMode e_) { return flag == static_cast<decltype(flag)>(e_); }
+bool operator!= (E_sampler_mipmap_mode e_) { return !(*this == e_); }
+bool operator!= (VkSamplerMipmapMode e_) { return !(*this == e_); }
 };
 
 /*	VkSamplerAddressMode
 */
-enum class E_sampler_address_mode{
+struct E_sampler_address_mode{
+enum{
 e_repeat = VK_SAMPLER_ADDRESS_MODE_REPEAT,
 e_mirrored_repeat = VK_SAMPLER_ADDRESS_MODE_MIRRORED_REPEAT,
 e_clamp_to_edge = VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE,
 e_clamp_to_border = VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_BORDER,
+}flag;
+E_sampler_address_mode(VkSamplerAddressMode flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
+E_sampler_address_mode(){}
+E_sampler_address_mode(E_sampler_address_mode const& e_):flag(e_.flag) {}
+operator VkSamplerAddressMode&() { return *this; }
+E_sampler_address_mode& operator = (E_sampler_address_mode e_) { flag = e_.flag; return *this; }
+bool operator== (E_sampler_address_mode e_) { return flag == e_.flag; }
+bool operator== (VkSamplerAddressMode e_) { return flag == static_cast<decltype(flag)>(e_); }
+bool operator!= (E_sampler_address_mode e_) { return !(*this == e_); }
+bool operator!= (VkSamplerAddressMode e_) { return !(*this == e_); }
 };
 
 /*	VkCompareOp
 */
-enum class E_compare_op{
+struct E_compare_op{
+enum{
 e_never = VK_COMPARE_OP_NEVER,
 e_less = VK_COMPARE_OP_LESS,
 e_equal = VK_COMPARE_OP_EQUAL,
@@ -191,26 +401,59 @@ e_greater = VK_COMPARE_OP_GREATER,
 e_not_equal = VK_COMPARE_OP_NOT_EQUAL,
 e_greater_or_equal = VK_COMPARE_OP_GREATER_OR_EQUAL,
 e_always = VK_COMPARE_OP_ALWAYS,
+}flag;
+E_compare_op(VkCompareOp flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
+E_compare_op(){}
+E_compare_op(E_compare_op const& e_):flag(e_.flag) {}
+operator VkCompareOp&() { return *this; }
+E_compare_op& operator = (E_compare_op e_) { flag = e_.flag; return *this; }
+bool operator== (E_compare_op e_) { return flag == e_.flag; }
+bool operator== (VkCompareOp e_) { return flag == static_cast<decltype(flag)>(e_); }
+bool operator!= (E_compare_op e_) { return !(*this == e_); }
+bool operator!= (VkCompareOp e_) { return !(*this == e_); }
 };
 
 /*	VkPolygonMode
 */
-enum class E_polygon_mode{
+struct E_polygon_mode{
+enum{
 e_fill = VK_POLYGON_MODE_FILL,
 e_line = VK_POLYGON_MODE_LINE,
 e_point = VK_POLYGON_MODE_POINT,
+}flag;
+E_polygon_mode(VkPolygonMode flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
+E_polygon_mode(){}
+E_polygon_mode(E_polygon_mode const& e_):flag(e_.flag) {}
+operator VkPolygonMode&() { return *this; }
+E_polygon_mode& operator = (E_polygon_mode e_) { flag = e_.flag; return *this; }
+bool operator== (E_polygon_mode e_) { return flag == e_.flag; }
+bool operator== (VkPolygonMode e_) { return flag == static_cast<decltype(flag)>(e_); }
+bool operator!= (E_polygon_mode e_) { return !(*this == e_); }
+bool operator!= (VkPolygonMode e_) { return !(*this == e_); }
 };
 
 /*	VkFrontFace
 */
-enum class E_front_face{
+struct E_front_face{
+enum{
 e_counter_clockwise = VK_FRONT_FACE_COUNTER_CLOCKWISE,
 e_clockwise = VK_FRONT_FACE_CLOCKWISE,
+}flag;
+E_front_face(VkFrontFace flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
+E_front_face(){}
+E_front_face(E_front_face const& e_):flag(e_.flag) {}
+operator VkFrontFace&() { return *this; }
+E_front_face& operator = (E_front_face e_) { flag = e_.flag; return *this; }
+bool operator== (E_front_face e_) { return flag == e_.flag; }
+bool operator== (VkFrontFace e_) { return flag == static_cast<decltype(flag)>(e_); }
+bool operator!= (E_front_face e_) { return !(*this == e_); }
+bool operator!= (VkFrontFace e_) { return !(*this == e_); }
 };
 
 /*	VkBlendFactor
 */
-enum class E_blend_factor{
+struct E_blend_factor{
+enum{
 e_zero = VK_BLEND_FACTOR_ZERO,
 e_one = VK_BLEND_FACTOR_ONE,
 e_src_color = VK_BLEND_FACTOR_SRC_COLOR,
@@ -230,21 +473,43 @@ e_src1_color = VK_BLEND_FACTOR_SRC1_COLOR,
 e_one_minus_src1_color = VK_BLEND_FACTOR_ONE_MINUS_SRC1_COLOR,
 e_src1_alpha = VK_BLEND_FACTOR_SRC1_ALPHA,
 e_one_minus_src1_alpha = VK_BLEND_FACTOR_ONE_MINUS_SRC1_ALPHA,
+}flag;
+E_blend_factor(VkBlendFactor flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
+E_blend_factor(){}
+E_blend_factor(E_blend_factor const& e_):flag(e_.flag) {}
+operator VkBlendFactor&() { return *this; }
+E_blend_factor& operator = (E_blend_factor e_) { flag = e_.flag; return *this; }
+bool operator== (E_blend_factor e_) { return flag == e_.flag; }
+bool operator== (VkBlendFactor e_) { return flag == static_cast<decltype(flag)>(e_); }
+bool operator!= (E_blend_factor e_) { return !(*this == e_); }
+bool operator!= (VkBlendFactor e_) { return !(*this == e_); }
 };
 
 /*	VkBlendOp
 */
-enum class E_blend_op{
+struct E_blend_op{
+enum{
 e_add = VK_BLEND_OP_ADD,
 e_subtract = VK_BLEND_OP_SUBTRACT,
 e_reverse_subtract = VK_BLEND_OP_REVERSE_SUBTRACT,
 e_min = VK_BLEND_OP_MIN,
 e_max = VK_BLEND_OP_MAX,
+}flag;
+E_blend_op(VkBlendOp flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
+E_blend_op(){}
+E_blend_op(E_blend_op const& e_):flag(e_.flag) {}
+operator VkBlendOp&() { return *this; }
+E_blend_op& operator = (E_blend_op e_) { flag = e_.flag; return *this; }
+bool operator== (E_blend_op e_) { return flag == e_.flag; }
+bool operator== (VkBlendOp e_) { return flag == static_cast<decltype(flag)>(e_); }
+bool operator!= (E_blend_op e_) { return !(*this == e_); }
+bool operator!= (VkBlendOp e_) { return !(*this == e_); }
 };
 
 /*	VkStencilOp
 */
-enum class E_stencil_op{
+struct E_stencil_op{
+enum{
 e_keep = VK_STENCIL_OP_KEEP,
 e_zero = VK_STENCIL_OP_ZERO,
 e_replace = VK_STENCIL_OP_REPLACE,
@@ -253,11 +518,22 @@ e_decrement_and_clamp = VK_STENCIL_OP_DECREMENT_AND_CLAMP,
 e_invert = VK_STENCIL_OP_INVERT,
 e_increment_and_wrap = VK_STENCIL_OP_INCREMENT_AND_WRAP,
 e_decrement_and_wrap = VK_STENCIL_OP_DECREMENT_AND_WRAP,
+}flag;
+E_stencil_op(VkStencilOp flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
+E_stencil_op(){}
+E_stencil_op(E_stencil_op const& e_):flag(e_.flag) {}
+operator VkStencilOp&() { return *this; }
+E_stencil_op& operator = (E_stencil_op e_) { flag = e_.flag; return *this; }
+bool operator== (E_stencil_op e_) { return flag == e_.flag; }
+bool operator== (VkStencilOp e_) { return flag == static_cast<decltype(flag)>(e_); }
+bool operator!= (E_stencil_op e_) { return !(*this == e_); }
+bool operator!= (VkStencilOp e_) { return !(*this == e_); }
 };
 
 /*	VkLogicOp
 */
-enum class E_logic_op{
+struct E_logic_op{
+enum{
 e_clear = VK_LOGIC_OP_CLEAR,
 e_and = VK_LOGIC_OP_AND,
 e_and_reverse = VK_LOGIC_OP_AND_REVERSE,
@@ -274,44 +550,99 @@ e_copy_inverted = VK_LOGIC_OP_COPY_INVERTED,
 e_or_inverted = VK_LOGIC_OP_OR_INVERTED,
 e_nand = VK_LOGIC_OP_NAND,
 e_set = VK_LOGIC_OP_SET,
+}flag;
+E_logic_op(VkLogicOp flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
+E_logic_op(){}
+E_logic_op(E_logic_op const& e_):flag(e_.flag) {}
+operator VkLogicOp&() { return *this; }
+E_logic_op& operator = (E_logic_op e_) { flag = e_.flag; return *this; }
+bool operator== (E_logic_op e_) { return flag == e_.flag; }
+bool operator== (VkLogicOp e_) { return flag == static_cast<decltype(flag)>(e_); }
+bool operator!= (E_logic_op e_) { return !(*this == e_); }
+bool operator!= (VkLogicOp e_) { return !(*this == e_); }
 };
 
 /*	VkInternalAllocationType
 */
-enum class E_internal_allocation_type{
+struct E_internal_allocation_type{
+enum{
 e_executable = VK_INTERNAL_ALLOCATION_TYPE_EXECUTABLE,
+}flag;
+E_internal_allocation_type(VkInternalAllocationType flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
+E_internal_allocation_type(){}
+E_internal_allocation_type(E_internal_allocation_type const& e_):flag(e_.flag) {}
+operator VkInternalAllocationType&() { return *this; }
+E_internal_allocation_type& operator = (E_internal_allocation_type e_) { flag = e_.flag; return *this; }
+bool operator== (E_internal_allocation_type e_) { return flag == e_.flag; }
+bool operator== (VkInternalAllocationType e_) { return flag == static_cast<decltype(flag)>(e_); }
+bool operator!= (E_internal_allocation_type e_) { return !(*this == e_); }
+bool operator!= (VkInternalAllocationType e_) { return !(*this == e_); }
 };
 
 /*	VkSystemAllocationScope
 */
-enum class E_system_allocation_scope{
+struct E_system_allocation_scope{
+enum{
 e_command = VK_SYSTEM_ALLOCATION_SCOPE_COMMAND,
 e_object = VK_SYSTEM_ALLOCATION_SCOPE_OBJECT,
 e_cache = VK_SYSTEM_ALLOCATION_SCOPE_CACHE,
 e_device = VK_SYSTEM_ALLOCATION_SCOPE_DEVICE,
 e_instance = VK_SYSTEM_ALLOCATION_SCOPE_INSTANCE,
+}flag;
+E_system_allocation_scope(VkSystemAllocationScope flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
+E_system_allocation_scope(){}
+E_system_allocation_scope(E_system_allocation_scope const& e_):flag(e_.flag) {}
+operator VkSystemAllocationScope&() { return *this; }
+E_system_allocation_scope& operator = (E_system_allocation_scope e_) { flag = e_.flag; return *this; }
+bool operator== (E_system_allocation_scope e_) { return flag == e_.flag; }
+bool operator== (VkSystemAllocationScope e_) { return flag == static_cast<decltype(flag)>(e_); }
+bool operator!= (E_system_allocation_scope e_) { return !(*this == e_); }
+bool operator!= (VkSystemAllocationScope e_) { return !(*this == e_); }
 };
 
 /*	VkPhysicalDeviceType
 */
-enum class E_physical_device_type{
+struct E_physical_device_type{
+enum{
 e_other = VK_PHYSICAL_DEVICE_TYPE_OTHER,
 e_integrated_gpu = VK_PHYSICAL_DEVICE_TYPE_INTEGRATED_GPU,
 e_discrete_gpu = VK_PHYSICAL_DEVICE_TYPE_DISCRETE_GPU,
 e_virtual_gpu = VK_PHYSICAL_DEVICE_TYPE_VIRTUAL_GPU,
 e_cpu = VK_PHYSICAL_DEVICE_TYPE_CPU,
+}flag;
+E_physical_device_type(VkPhysicalDeviceType flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
+E_physical_device_type(){}
+E_physical_device_type(E_physical_device_type const& e_):flag(e_.flag) {}
+operator VkPhysicalDeviceType&() { return *this; }
+E_physical_device_type& operator = (E_physical_device_type e_) { flag = e_.flag; return *this; }
+bool operator== (E_physical_device_type e_) { return flag == e_.flag; }
+bool operator== (VkPhysicalDeviceType e_) { return flag == static_cast<decltype(flag)>(e_); }
+bool operator!= (E_physical_device_type e_) { return !(*this == e_); }
+bool operator!= (VkPhysicalDeviceType e_) { return !(*this == e_); }
 };
 
 /*	VkVertexInputRate
 */
-enum class E_vertex_input_rate{
+struct E_vertex_input_rate{
+enum{
 e_vertex = VK_VERTEX_INPUT_RATE_VERTEX,
 e_instance = VK_VERTEX_INPUT_RATE_INSTANCE,
+}flag;
+E_vertex_input_rate(VkVertexInputRate flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
+E_vertex_input_rate(){}
+E_vertex_input_rate(E_vertex_input_rate const& e_):flag(e_.flag) {}
+operator VkVertexInputRate&() { return *this; }
+E_vertex_input_rate& operator = (E_vertex_input_rate e_) { flag = e_.flag; return *this; }
+bool operator== (E_vertex_input_rate e_) { return flag == e_.flag; }
+bool operator== (VkVertexInputRate e_) { return flag == static_cast<decltype(flag)>(e_); }
+bool operator!= (E_vertex_input_rate e_) { return !(*this == e_); }
+bool operator!= (VkVertexInputRate e_) { return !(*this == e_); }
 };
 
 /*	VkFormat
 Vulkan format definitions*/
-enum class E_format{
+struct E_format{
+enum{
 e_undefined = VK_FORMAT_UNDEFINED,
 e_r4g4_unorm_pack8 = VK_FORMAT_R4G4_UNORM_PACK8,
 e_r4g4b4a4_unorm_pack16 = VK_FORMAT_R4G4B4A4_UNORM_PACK16,
@@ -497,11 +828,22 @@ e_astc_12x10_unorm_block = VK_FORMAT_ASTC_12x10_UNORM_BLOCK,
 e_astc_12x10_srgb_block = VK_FORMAT_ASTC_12x10_SRGB_BLOCK,
 e_astc_12x12_unorm_block = VK_FORMAT_ASTC_12x12_UNORM_BLOCK,
 e_astc_12x12_srgb_block = VK_FORMAT_ASTC_12x12_SRGB_BLOCK,
+}flag;
+E_format(VkFormat flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
+E_format(){}
+E_format(E_format const& e_):flag(e_.flag) {}
+operator VkFormat&() { return *this; }
+E_format& operator = (E_format e_) { flag = e_.flag; return *this; }
+bool operator== (E_format e_) { return flag == e_.flag; }
+bool operator== (VkFormat e_) { return flag == static_cast<decltype(flag)>(e_); }
+bool operator!= (E_format e_) { return !(*this == e_); }
+bool operator!= (VkFormat e_) { return !(*this == e_); }
 };
 
 /*	VkStructureType
 Structure type enumerant*/
-enum class E_structure_type{
+struct E_structure_type{
+enum{
 e_application_info = VK_STRUCTURE_TYPE_APPLICATION_INFO,
 e_instance_create_info = VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO,
 e_device_queue_create_info = VK_STRUCTURE_TYPE_DEVICE_QUEUE_CREATE_INFO,
@@ -551,18 +893,40 @@ e_image_memory_barrier = VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER,
 e_memory_barrier = VK_STRUCTURE_TYPE_MEMORY_BARRIER,
 e_loader_instance_create_info = VK_STRUCTURE_TYPE_LOADER_INSTANCE_CREATE_INFO,
 e_loader_device_create_info = VK_STRUCTURE_TYPE_LOADER_DEVICE_CREATE_INFO,
+}flag;
+E_structure_type(VkStructureType flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
+E_structure_type(){}
+E_structure_type(E_structure_type const& e_):flag(e_.flag) {}
+operator VkStructureType&() { return *this; }
+E_structure_type& operator = (E_structure_type e_) { flag = e_.flag; return *this; }
+bool operator== (E_structure_type e_) { return flag == e_.flag; }
+bool operator== (VkStructureType e_) { return flag == static_cast<decltype(flag)>(e_); }
+bool operator!= (E_structure_type e_) { return !(*this == e_); }
+bool operator!= (VkStructureType e_) { return !(*this == e_); }
 };
 
 /*	VkSubpassContents
 */
-enum class E_subpass_contents{
+struct E_subpass_contents{
+enum{
 e_inline = VK_SUBPASS_CONTENTS_INLINE,
 e_secondary_command_buffers = VK_SUBPASS_CONTENTS_SECONDARY_COMMAND_BUFFERS,
+}flag;
+E_subpass_contents(VkSubpassContents flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
+E_subpass_contents(){}
+E_subpass_contents(E_subpass_contents const& e_):flag(e_.flag) {}
+operator VkSubpassContents&() { return *this; }
+E_subpass_contents& operator = (E_subpass_contents e_) { flag = e_.flag; return *this; }
+bool operator== (E_subpass_contents e_) { return flag == e_.flag; }
+bool operator== (VkSubpassContents e_) { return flag == static_cast<decltype(flag)>(e_); }
+bool operator!= (E_subpass_contents e_) { return !(*this == e_); }
+bool operator!= (VkSubpassContents e_) { return !(*this == e_); }
 };
 
 /*	VkResult
 API result codes*/
-enum class E_result{
+struct E_result{
+enum{
 evk_success = VK_SUCCESS,
 evk_not_ready = VK_NOT_READY,
 evk_timeout = VK_TIMEOUT,
@@ -581,11 +945,22 @@ evk_error_incompatible_driver = VK_ERROR_INCOMPATIBLE_DRIVER,
 evk_error_too_many_objects = VK_ERROR_TOO_MANY_OBJECTS,
 evk_error_format_not_supported = VK_ERROR_FORMAT_NOT_SUPPORTED,
 evk_error_fragmented_pool = VK_ERROR_FRAGMENTED_POOL,
+}flag;
+E_result(VkResult flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
+E_result(){}
+E_result(E_result const& e_):flag(e_.flag) {}
+operator VkResult&() { return *this; }
+E_result& operator = (E_result e_) { flag = e_.flag; return *this; }
+bool operator== (E_result e_) { return flag == e_.flag; }
+bool operator== (VkResult e_) { return flag == static_cast<decltype(flag)>(e_); }
+bool operator!= (E_result e_) { return !(*this == e_); }
+bool operator!= (VkResult e_) { return !(*this == e_); }
 };
 
 /*	VkDynamicState
 */
-enum class E_dynamic_state{
+struct E_dynamic_state{
+enum{
 e_viewport = VK_DYNAMIC_STATE_VIEWPORT,
 e_scissor = VK_DYNAMIC_STATE_SCISSOR,
 e_line_width = VK_DYNAMIC_STATE_LINE_WIDTH,
@@ -595,17 +970,39 @@ e_depth_bounds = VK_DYNAMIC_STATE_DEPTH_BOUNDS,
 e_stencil_compare_mask = VK_DYNAMIC_STATE_STENCIL_COMPARE_MASK,
 e_stencil_write_mask = VK_DYNAMIC_STATE_STENCIL_WRITE_MASK,
 e_stencil_reference = VK_DYNAMIC_STATE_STENCIL_REFERENCE,
+}flag;
+E_dynamic_state(VkDynamicState flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
+E_dynamic_state(){}
+E_dynamic_state(E_dynamic_state const& e_):flag(e_.flag) {}
+operator VkDynamicState&() { return *this; }
+E_dynamic_state& operator = (E_dynamic_state e_) { flag = e_.flag; return *this; }
+bool operator== (E_dynamic_state e_) { return flag == e_.flag; }
+bool operator== (VkDynamicState e_) { return flag == static_cast<decltype(flag)>(e_); }
+bool operator!= (E_dynamic_state e_) { return !(*this == e_); }
+bool operator!= (VkDynamicState e_) { return !(*this == e_); }
 };
 
 /*	VkDescriptorUpdateTemplateType
 */
-enum class E_descriptor_update_template_type{
+struct E_descriptor_update_template_type{
+enum{
 e_descriptor_set = VK_DESCRIPTOR_UPDATE_TEMPLATE_TYPE_DESCRIPTOR_SET,
+}flag;
+E_descriptor_update_template_type(VkDescriptorUpdateTemplateType flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
+E_descriptor_update_template_type(){}
+E_descriptor_update_template_type(E_descriptor_update_template_type const& e_):flag(e_.flag) {}
+operator VkDescriptorUpdateTemplateType&() { return *this; }
+E_descriptor_update_template_type& operator = (E_descriptor_update_template_type e_) { flag = e_.flag; return *this; }
+bool operator== (E_descriptor_update_template_type e_) { return flag == e_.flag; }
+bool operator== (VkDescriptorUpdateTemplateType e_) { return flag == static_cast<decltype(flag)>(e_); }
+bool operator!= (E_descriptor_update_template_type e_) { return !(*this == e_); }
+bool operator!= (VkDescriptorUpdateTemplateType e_) { return !(*this == e_); }
 };
 
 /*	VkObjectType
 Enums to track objects of various types*/
-enum class E_object_type{
+struct E_object_type{
+enum{
 e_unknown = VK_OBJECT_TYPE_UNKNOWN,
 e_instance = VK_OBJECT_TYPE_INSTANCE,
 e_physical_device = VK_OBJECT_TYPE_PHYSICAL_DEVICE,
@@ -632,27 +1029,60 @@ e_descriptor_pool = VK_OBJECT_TYPE_DESCRIPTOR_POOL,
 e_descriptor_set = VK_OBJECT_TYPE_DESCRIPTOR_SET,
 e_framebuffer = VK_OBJECT_TYPE_FRAMEBUFFER,
 e_command_pool = VK_OBJECT_TYPE_COMMAND_POOL,
+}flag;
+E_object_type(VkObjectType flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
+E_object_type(){}
+E_object_type(E_object_type const& e_):flag(e_.flag) {}
+operator VkObjectType&() { return *this; }
+E_object_type& operator = (E_object_type e_) { flag = e_.flag; return *this; }
+bool operator== (E_object_type e_) { return flag == e_.flag; }
+bool operator== (VkObjectType e_) { return flag == static_cast<decltype(flag)>(e_); }
+bool operator!= (E_object_type e_) { return !(*this == e_); }
+bool operator!= (VkObjectType e_) { return !(*this == e_); }
 };
 
 /*	VkPresentModeKHR
 */
-enum class E_present_mode_KHR{
+struct E_present_mode_KHR{
+enum{
 e_immediate_khr = VK_PRESENT_MODE_IMMEDIATE_KHR,
 e_mailbox_khr = VK_PRESENT_MODE_MAILBOX_KHR,
 e_fifo_khr = VK_PRESENT_MODE_FIFO_KHR,
 e_fifo_relaxed_khr = VK_PRESENT_MODE_FIFO_RELAXED_KHR,
+}flag;
+E_present_mode_KHR(VkPresentModeKHR flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
+E_present_mode_KHR(){}
+E_present_mode_KHR(E_present_mode_KHR const& e_):flag(e_.flag) {}
+operator VkPresentModeKHR&() { return *this; }
+E_present_mode_KHR& operator = (E_present_mode_KHR e_) { flag = e_.flag; return *this; }
+bool operator== (E_present_mode_KHR e_) { return flag == e_.flag; }
+bool operator== (VkPresentModeKHR e_) { return flag == static_cast<decltype(flag)>(e_); }
+bool operator!= (E_present_mode_KHR e_) { return !(*this == e_); }
+bool operator!= (VkPresentModeKHR e_) { return !(*this == e_); }
 };
 
 /*	VkColorSpaceKHR
 */
-enum class E_color_space_KHR{
+struct E_color_space_KHR{
+enum{
 e_srgb_nonlinear_khr = VK_COLOR_SPACE_SRGB_NONLINEAR_KHR,
 evk_colorspace_srgb_nonlinear_khr = VK_COLORSPACE_SRGB_NONLINEAR_KHR,
+}flag;
+E_color_space_KHR(VkColorSpaceKHR flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
+E_color_space_KHR(){}
+E_color_space_KHR(E_color_space_KHR const& e_):flag(e_.flag) {}
+operator VkColorSpaceKHR&() { return *this; }
+E_color_space_KHR& operator = (E_color_space_KHR e_) { flag = e_.flag; return *this; }
+bool operator== (E_color_space_KHR e_) { return flag == e_.flag; }
+bool operator== (VkColorSpaceKHR e_) { return flag == static_cast<decltype(flag)>(e_); }
+bool operator!= (E_color_space_KHR e_) { return !(*this == e_); }
+bool operator!= (VkColorSpaceKHR e_) { return !(*this == e_); }
 };
 
 /*	VkDebugReportObjectTypeEXT
 */
-enum class E_debug_report_object_type_EXT{
+struct E_debug_report_object_type_EXT{
+enum{
 e_unknown_ext = VK_DEBUG_REPORT_OBJECT_TYPE_UNKNOWN_EXT,
 e_instance_ext = VK_DEBUG_REPORT_OBJECT_TYPE_INSTANCE_EXT,
 e_physical_device_ext = VK_DEBUG_REPORT_OBJECT_TYPE_PHYSICAL_DEVICE_EXT,
@@ -689,25 +1119,58 @@ e_object_table_nvx_ext = VK_DEBUG_REPORT_OBJECT_TYPE_OBJECT_TABLE_NVX_EXT,
 e_indirect_commands_layout_nvx_ext = VK_DEBUG_REPORT_OBJECT_TYPE_INDIRECT_COMMANDS_LAYOUT_NVX_EXT,
 e_validation_cache_ext_ext = VK_DEBUG_REPORT_OBJECT_TYPE_VALIDATION_CACHE_EXT_EXT,
 e_validation_cache_ext = VK_DEBUG_REPORT_OBJECT_TYPE_VALIDATION_CACHE_EXT,
+}flag;
+E_debug_report_object_type_EXT(VkDebugReportObjectTypeEXT flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
+E_debug_report_object_type_EXT(){}
+E_debug_report_object_type_EXT(E_debug_report_object_type_EXT const& e_):flag(e_.flag) {}
+operator VkDebugReportObjectTypeEXT&() { return *this; }
+E_debug_report_object_type_EXT& operator = (E_debug_report_object_type_EXT e_) { flag = e_.flag; return *this; }
+bool operator== (E_debug_report_object_type_EXT e_) { return flag == e_.flag; }
+bool operator== (VkDebugReportObjectTypeEXT e_) { return flag == static_cast<decltype(flag)>(e_); }
+bool operator!= (E_debug_report_object_type_EXT e_) { return !(*this == e_); }
+bool operator!= (VkDebugReportObjectTypeEXT e_) { return !(*this == e_); }
 };
 
 /*	VkRasterizationOrderAMD
 */
-enum class E_rasterization_order_AMD{
+struct E_rasterization_order_AMD{
+enum{
 e_strict_amd = VK_RASTERIZATION_ORDER_STRICT_AMD,
 e_relaxed_amd = VK_RASTERIZATION_ORDER_RELAXED_AMD,
+}flag;
+E_rasterization_order_AMD(VkRasterizationOrderAMD flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
+E_rasterization_order_AMD(){}
+E_rasterization_order_AMD(E_rasterization_order_AMD const& e_):flag(e_.flag) {}
+operator VkRasterizationOrderAMD&() { return *this; }
+E_rasterization_order_AMD& operator = (E_rasterization_order_AMD e_) { flag = e_.flag; return *this; }
+bool operator== (E_rasterization_order_AMD e_) { return flag == e_.flag; }
+bool operator== (VkRasterizationOrderAMD e_) { return flag == static_cast<decltype(flag)>(e_); }
+bool operator!= (E_rasterization_order_AMD e_) { return !(*this == e_); }
+bool operator!= (VkRasterizationOrderAMD e_) { return !(*this == e_); }
 };
 
 /*	VkValidationCheckEXT
 */
-enum class E_validation_check_EXT{
+struct E_validation_check_EXT{
+enum{
 e_all_ext = VK_VALIDATION_CHECK_ALL_EXT,
 e_shaders_ext = VK_VALIDATION_CHECK_SHADERS_EXT,
+}flag;
+E_validation_check_EXT(VkValidationCheckEXT flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
+E_validation_check_EXT(){}
+E_validation_check_EXT(E_validation_check_EXT const& e_):flag(e_.flag) {}
+operator VkValidationCheckEXT&() { return *this; }
+E_validation_check_EXT& operator = (E_validation_check_EXT e_) { flag = e_.flag; return *this; }
+bool operator== (E_validation_check_EXT e_) { return flag == e_.flag; }
+bool operator== (VkValidationCheckEXT e_) { return flag == static_cast<decltype(flag)>(e_); }
+bool operator!= (E_validation_check_EXT e_) { return !(*this == e_); }
+bool operator!= (VkValidationCheckEXT e_) { return !(*this == e_); }
 };
 
 /*	VkIndirectCommandsTokenTypeNVX
 */
-enum class E_indirect_commands_token_type_NVX{
+struct E_indirect_commands_token_type_NVX{
+enum{
 e_pipeline_nvx = VK_INDIRECT_COMMANDS_TOKEN_TYPE_PIPELINE_NVX,
 e_descriptor_set_nvx = VK_INDIRECT_COMMANDS_TOKEN_TYPE_DESCRIPTOR_SET_NVX,
 e_index_buffer_nvx = VK_INDIRECT_COMMANDS_TOKEN_TYPE_INDEX_BUFFER_NVX,
@@ -716,41 +1179,96 @@ e_push_constant_nvx = VK_INDIRECT_COMMANDS_TOKEN_TYPE_PUSH_CONSTANT_NVX,
 e_draw_indexed_nvx = VK_INDIRECT_COMMANDS_TOKEN_TYPE_DRAW_INDEXED_NVX,
 e_draw_nvx = VK_INDIRECT_COMMANDS_TOKEN_TYPE_DRAW_NVX,
 e_dispatch_nvx = VK_INDIRECT_COMMANDS_TOKEN_TYPE_DISPATCH_NVX,
+}flag;
+E_indirect_commands_token_type_NVX(VkIndirectCommandsTokenTypeNVX flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
+E_indirect_commands_token_type_NVX(){}
+E_indirect_commands_token_type_NVX(E_indirect_commands_token_type_NVX const& e_):flag(e_.flag) {}
+operator VkIndirectCommandsTokenTypeNVX&() { return *this; }
+E_indirect_commands_token_type_NVX& operator = (E_indirect_commands_token_type_NVX e_) { flag = e_.flag; return *this; }
+bool operator== (E_indirect_commands_token_type_NVX e_) { return flag == e_.flag; }
+bool operator== (VkIndirectCommandsTokenTypeNVX e_) { return flag == static_cast<decltype(flag)>(e_); }
+bool operator!= (E_indirect_commands_token_type_NVX e_) { return !(*this == e_); }
+bool operator!= (VkIndirectCommandsTokenTypeNVX e_) { return !(*this == e_); }
 };
 
 /*	VkObjectEntryTypeNVX
 */
-enum class E_object_entry_type_NVX{
+struct E_object_entry_type_NVX{
+enum{
 e_descriptor_set_nvx = VK_OBJECT_ENTRY_TYPE_DESCRIPTOR_SET_NVX,
 e_pipeline_nvx = VK_OBJECT_ENTRY_TYPE_PIPELINE_NVX,
 e_index_buffer_nvx = VK_OBJECT_ENTRY_TYPE_INDEX_BUFFER_NVX,
 e_vertex_buffer_nvx = VK_OBJECT_ENTRY_TYPE_VERTEX_BUFFER_NVX,
 e_push_constant_nvx = VK_OBJECT_ENTRY_TYPE_PUSH_CONSTANT_NVX,
+}flag;
+E_object_entry_type_NVX(VkObjectEntryTypeNVX flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
+E_object_entry_type_NVX(){}
+E_object_entry_type_NVX(E_object_entry_type_NVX const& e_):flag(e_.flag) {}
+operator VkObjectEntryTypeNVX&() { return *this; }
+E_object_entry_type_NVX& operator = (E_object_entry_type_NVX e_) { flag = e_.flag; return *this; }
+bool operator== (E_object_entry_type_NVX e_) { return flag == e_.flag; }
+bool operator== (VkObjectEntryTypeNVX e_) { return flag == static_cast<decltype(flag)>(e_); }
+bool operator!= (E_object_entry_type_NVX e_) { return !(*this == e_); }
+bool operator!= (VkObjectEntryTypeNVX e_) { return !(*this == e_); }
 };
 
 /*	VkDisplayPowerStateEXT
 */
-enum class E_display_power_state_EXT{
+struct E_display_power_state_EXT{
+enum{
 e_off_ext = VK_DISPLAY_POWER_STATE_OFF_EXT,
 e_suspend_ext = VK_DISPLAY_POWER_STATE_SUSPEND_EXT,
 e_on_ext = VK_DISPLAY_POWER_STATE_ON_EXT,
+}flag;
+E_display_power_state_EXT(VkDisplayPowerStateEXT flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
+E_display_power_state_EXT(){}
+E_display_power_state_EXT(E_display_power_state_EXT const& e_):flag(e_.flag) {}
+operator VkDisplayPowerStateEXT&() { return *this; }
+E_display_power_state_EXT& operator = (E_display_power_state_EXT e_) { flag = e_.flag; return *this; }
+bool operator== (E_display_power_state_EXT e_) { return flag == e_.flag; }
+bool operator== (VkDisplayPowerStateEXT e_) { return flag == static_cast<decltype(flag)>(e_); }
+bool operator!= (E_display_power_state_EXT e_) { return !(*this == e_); }
+bool operator!= (VkDisplayPowerStateEXT e_) { return !(*this == e_); }
 };
 
 /*	VkDeviceEventTypeEXT
 */
-enum class E_device_event_type_EXT{
+struct E_device_event_type_EXT{
+enum{
 e_display_hotplug_ext = VK_DEVICE_EVENT_TYPE_DISPLAY_HOTPLUG_EXT,
+}flag;
+E_device_event_type_EXT(VkDeviceEventTypeEXT flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
+E_device_event_type_EXT(){}
+E_device_event_type_EXT(E_device_event_type_EXT const& e_):flag(e_.flag) {}
+operator VkDeviceEventTypeEXT&() { return *this; }
+E_device_event_type_EXT& operator = (E_device_event_type_EXT e_) { flag = e_.flag; return *this; }
+bool operator== (E_device_event_type_EXT e_) { return flag == e_.flag; }
+bool operator== (VkDeviceEventTypeEXT e_) { return flag == static_cast<decltype(flag)>(e_); }
+bool operator!= (E_device_event_type_EXT e_) { return !(*this == e_); }
+bool operator!= (VkDeviceEventTypeEXT e_) { return !(*this == e_); }
 };
 
 /*	VkDisplayEventTypeEXT
 */
-enum class E_display_event_type_EXT{
+struct E_display_event_type_EXT{
+enum{
 e_first_pixel_out_ext = VK_DISPLAY_EVENT_TYPE_FIRST_PIXEL_OUT_EXT,
+}flag;
+E_display_event_type_EXT(VkDisplayEventTypeEXT flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
+E_display_event_type_EXT(){}
+E_display_event_type_EXT(E_display_event_type_EXT const& e_):flag(e_.flag) {}
+operator VkDisplayEventTypeEXT&() { return *this; }
+E_display_event_type_EXT& operator = (E_display_event_type_EXT e_) { flag = e_.flag; return *this; }
+bool operator== (E_display_event_type_EXT e_) { return flag == e_.flag; }
+bool operator== (VkDisplayEventTypeEXT e_) { return flag == static_cast<decltype(flag)>(e_); }
+bool operator!= (E_display_event_type_EXT e_) { return !(*this == e_); }
+bool operator!= (VkDisplayEventTypeEXT e_) { return !(*this == e_); }
 };
 
 /*	VkViewportCoordinateSwizzleNV
 */
-enum class E_viewport_coordinate_swizzle_NV{
+struct E_viewport_coordinate_swizzle_NV{
+enum{
 e_positive_x_nv = VK_VIEWPORT_COORDINATE_SWIZZLE_POSITIVE_X_NV,
 e_negative_x_nv = VK_VIEWPORT_COORDINATE_SWIZZLE_NEGATIVE_X_NV,
 e_positive_y_nv = VK_VIEWPORT_COORDINATE_SWIZZLE_POSITIVE_Y_NV,
@@ -759,121 +1277,286 @@ e_positive_z_nv = VK_VIEWPORT_COORDINATE_SWIZZLE_POSITIVE_Z_NV,
 e_negative_z_nv = VK_VIEWPORT_COORDINATE_SWIZZLE_NEGATIVE_Z_NV,
 e_positive_w_nv = VK_VIEWPORT_COORDINATE_SWIZZLE_POSITIVE_W_NV,
 e_negative_w_nv = VK_VIEWPORT_COORDINATE_SWIZZLE_NEGATIVE_W_NV,
+}flag;
+E_viewport_coordinate_swizzle_NV(VkViewportCoordinateSwizzleNV flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
+E_viewport_coordinate_swizzle_NV(){}
+E_viewport_coordinate_swizzle_NV(E_viewport_coordinate_swizzle_NV const& e_):flag(e_.flag) {}
+operator VkViewportCoordinateSwizzleNV&() { return *this; }
+E_viewport_coordinate_swizzle_NV& operator = (E_viewport_coordinate_swizzle_NV e_) { flag = e_.flag; return *this; }
+bool operator== (E_viewport_coordinate_swizzle_NV e_) { return flag == e_.flag; }
+bool operator== (VkViewportCoordinateSwizzleNV e_) { return flag == static_cast<decltype(flag)>(e_); }
+bool operator!= (E_viewport_coordinate_swizzle_NV e_) { return !(*this == e_); }
+bool operator!= (VkViewportCoordinateSwizzleNV e_) { return !(*this == e_); }
 };
 
 /*	VkDiscardRectangleModeEXT
 */
-enum class E_discard_rectangle_mode_EXT{
+struct E_discard_rectangle_mode_EXT{
+enum{
 e_inclusive_ext = VK_DISCARD_RECTANGLE_MODE_INCLUSIVE_EXT,
 e_exclusive_ext = VK_DISCARD_RECTANGLE_MODE_EXCLUSIVE_EXT,
+}flag;
+E_discard_rectangle_mode_EXT(VkDiscardRectangleModeEXT flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
+E_discard_rectangle_mode_EXT(){}
+E_discard_rectangle_mode_EXT(E_discard_rectangle_mode_EXT const& e_):flag(e_.flag) {}
+operator VkDiscardRectangleModeEXT&() { return *this; }
+E_discard_rectangle_mode_EXT& operator = (E_discard_rectangle_mode_EXT e_) { flag = e_.flag; return *this; }
+bool operator== (E_discard_rectangle_mode_EXT e_) { return flag == e_.flag; }
+bool operator== (VkDiscardRectangleModeEXT e_) { return flag == static_cast<decltype(flag)>(e_); }
+bool operator!= (E_discard_rectangle_mode_EXT e_) { return !(*this == e_); }
+bool operator!= (VkDiscardRectangleModeEXT e_) { return !(*this == e_); }
 };
 
 /*	VkPointClippingBehavior
 */
-enum class E_point_clipping_behavior{
+struct E_point_clipping_behavior{
+enum{
 e_all_clip_planes = VK_POINT_CLIPPING_BEHAVIOR_ALL_CLIP_PLANES,
 e_user_clip_planes_only = VK_POINT_CLIPPING_BEHAVIOR_USER_CLIP_PLANES_ONLY,
+}flag;
+E_point_clipping_behavior(VkPointClippingBehavior flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
+E_point_clipping_behavior(){}
+E_point_clipping_behavior(E_point_clipping_behavior const& e_):flag(e_.flag) {}
+operator VkPointClippingBehavior&() { return *this; }
+E_point_clipping_behavior& operator = (E_point_clipping_behavior e_) { flag = e_.flag; return *this; }
+bool operator== (E_point_clipping_behavior e_) { return flag == e_.flag; }
+bool operator== (VkPointClippingBehavior e_) { return flag == static_cast<decltype(flag)>(e_); }
+bool operator!= (E_point_clipping_behavior e_) { return !(*this == e_); }
+bool operator!= (VkPointClippingBehavior e_) { return !(*this == e_); }
 };
 
 /*	VkSamplerReductionModeEXT
 */
-enum class E_sampler_reduction_mode_EXT{
+struct E_sampler_reduction_mode_EXT{
+enum{
 e_weighted_average_ext = VK_SAMPLER_REDUCTION_MODE_WEIGHTED_AVERAGE_EXT,
 e_min_ext = VK_SAMPLER_REDUCTION_MODE_MIN_EXT,
 e_max_ext = VK_SAMPLER_REDUCTION_MODE_MAX_EXT,
+}flag;
+E_sampler_reduction_mode_EXT(VkSamplerReductionModeEXT flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
+E_sampler_reduction_mode_EXT(){}
+E_sampler_reduction_mode_EXT(E_sampler_reduction_mode_EXT const& e_):flag(e_.flag) {}
+operator VkSamplerReductionModeEXT&() { return *this; }
+E_sampler_reduction_mode_EXT& operator = (E_sampler_reduction_mode_EXT e_) { flag = e_.flag; return *this; }
+bool operator== (E_sampler_reduction_mode_EXT e_) { return flag == e_.flag; }
+bool operator== (VkSamplerReductionModeEXT e_) { return flag == static_cast<decltype(flag)>(e_); }
+bool operator!= (E_sampler_reduction_mode_EXT e_) { return !(*this == e_); }
+bool operator!= (VkSamplerReductionModeEXT e_) { return !(*this == e_); }
 };
 
 /*	VkTessellationDomainOrigin
 */
-enum class E_tessellation_domain_origin{
+struct E_tessellation_domain_origin{
+enum{
 e_upper_left = VK_TESSELLATION_DOMAIN_ORIGIN_UPPER_LEFT,
 e_lower_left = VK_TESSELLATION_DOMAIN_ORIGIN_LOWER_LEFT,
+}flag;
+E_tessellation_domain_origin(VkTessellationDomainOrigin flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
+E_tessellation_domain_origin(){}
+E_tessellation_domain_origin(E_tessellation_domain_origin const& e_):flag(e_.flag) {}
+operator VkTessellationDomainOrigin&() { return *this; }
+E_tessellation_domain_origin& operator = (E_tessellation_domain_origin e_) { flag = e_.flag; return *this; }
+bool operator== (E_tessellation_domain_origin e_) { return flag == e_.flag; }
+bool operator== (VkTessellationDomainOrigin e_) { return flag == static_cast<decltype(flag)>(e_); }
+bool operator!= (E_tessellation_domain_origin e_) { return !(*this == e_); }
+bool operator!= (VkTessellationDomainOrigin e_) { return !(*this == e_); }
 };
 
 /*	VkSamplerYcbcrModelConversion
 */
-enum class E_sampler_ycbcr_model_conversion{
+struct E_sampler_ycbcr_model_conversion{
+enum{
 e_rgb_identity = VK_SAMPLER_YCBCR_MODEL_CONVERSION_RGB_IDENTITY,
 e_ycbcr_identity = VK_SAMPLER_YCBCR_MODEL_CONVERSION_YCBCR_IDENTITY,
 e_ycbcr_709 = VK_SAMPLER_YCBCR_MODEL_CONVERSION_YCBCR_709,
 e_ycbcr_601 = VK_SAMPLER_YCBCR_MODEL_CONVERSION_YCBCR_601,
 e_ycbcr_2020 = VK_SAMPLER_YCBCR_MODEL_CONVERSION_YCBCR_2020,
+}flag;
+E_sampler_ycbcr_model_conversion(VkSamplerYcbcrModelConversion flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
+E_sampler_ycbcr_model_conversion(){}
+E_sampler_ycbcr_model_conversion(E_sampler_ycbcr_model_conversion const& e_):flag(e_.flag) {}
+operator VkSamplerYcbcrModelConversion&() { return *this; }
+E_sampler_ycbcr_model_conversion& operator = (E_sampler_ycbcr_model_conversion e_) { flag = e_.flag; return *this; }
+bool operator== (E_sampler_ycbcr_model_conversion e_) { return flag == e_.flag; }
+bool operator== (VkSamplerYcbcrModelConversion e_) { return flag == static_cast<decltype(flag)>(e_); }
+bool operator!= (E_sampler_ycbcr_model_conversion e_) { return !(*this == e_); }
+bool operator!= (VkSamplerYcbcrModelConversion e_) { return !(*this == e_); }
 };
 
 /*	VkSamplerYcbcrRange
 */
-enum class E_sampler_ycbcr_range{
+struct E_sampler_ycbcr_range{
+enum{
 e_itu_full = VK_SAMPLER_YCBCR_RANGE_ITU_FULL,
 e_itu_narrow = VK_SAMPLER_YCBCR_RANGE_ITU_NARROW,
+}flag;
+E_sampler_ycbcr_range(VkSamplerYcbcrRange flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
+E_sampler_ycbcr_range(){}
+E_sampler_ycbcr_range(E_sampler_ycbcr_range const& e_):flag(e_.flag) {}
+operator VkSamplerYcbcrRange&() { return *this; }
+E_sampler_ycbcr_range& operator = (E_sampler_ycbcr_range e_) { flag = e_.flag; return *this; }
+bool operator== (E_sampler_ycbcr_range e_) { return flag == e_.flag; }
+bool operator== (VkSamplerYcbcrRange e_) { return flag == static_cast<decltype(flag)>(e_); }
+bool operator!= (E_sampler_ycbcr_range e_) { return !(*this == e_); }
+bool operator!= (VkSamplerYcbcrRange e_) { return !(*this == e_); }
 };
 
 /*	VkChromaLocation
 */
-enum class E_chroma_location{
+struct E_chroma_location{
+enum{
 e_cosited_even = VK_CHROMA_LOCATION_COSITED_EVEN,
 e_midpoint = VK_CHROMA_LOCATION_MIDPOINT,
+}flag;
+E_chroma_location(VkChromaLocation flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
+E_chroma_location(){}
+E_chroma_location(E_chroma_location const& e_):flag(e_.flag) {}
+operator VkChromaLocation&() { return *this; }
+E_chroma_location& operator = (E_chroma_location e_) { flag = e_.flag; return *this; }
+bool operator== (E_chroma_location e_) { return flag == e_.flag; }
+bool operator== (VkChromaLocation e_) { return flag == static_cast<decltype(flag)>(e_); }
+bool operator!= (E_chroma_location e_) { return !(*this == e_); }
+bool operator!= (VkChromaLocation e_) { return !(*this == e_); }
 };
 
 /*	VkBlendOverlapEXT
 */
-enum class E_blend_overlap_EXT{
+struct E_blend_overlap_EXT{
+enum{
 e_uncorrelated_ext = VK_BLEND_OVERLAP_UNCORRELATED_EXT,
 e_disjoint_ext = VK_BLEND_OVERLAP_DISJOINT_EXT,
 e_conjoint_ext = VK_BLEND_OVERLAP_CONJOINT_EXT,
+}flag;
+E_blend_overlap_EXT(VkBlendOverlapEXT flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
+E_blend_overlap_EXT(){}
+E_blend_overlap_EXT(E_blend_overlap_EXT const& e_):flag(e_.flag) {}
+operator VkBlendOverlapEXT&() { return *this; }
+E_blend_overlap_EXT& operator = (E_blend_overlap_EXT e_) { flag = e_.flag; return *this; }
+bool operator== (E_blend_overlap_EXT e_) { return flag == e_.flag; }
+bool operator== (VkBlendOverlapEXT e_) { return flag == static_cast<decltype(flag)>(e_); }
+bool operator!= (E_blend_overlap_EXT e_) { return !(*this == e_); }
+bool operator!= (VkBlendOverlapEXT e_) { return !(*this == e_); }
 };
 
 /*	VkCoverageModulationModeNV
 */
-enum class E_coverage_modulation_mode_NV{
+struct E_coverage_modulation_mode_NV{
+enum{
 e_none_nv = VK_COVERAGE_MODULATION_MODE_NONE_NV,
 e_rgb_nv = VK_COVERAGE_MODULATION_MODE_RGB_NV,
 e_alpha_nv = VK_COVERAGE_MODULATION_MODE_ALPHA_NV,
 e_rgba_nv = VK_COVERAGE_MODULATION_MODE_RGBA_NV,
+}flag;
+E_coverage_modulation_mode_NV(VkCoverageModulationModeNV flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
+E_coverage_modulation_mode_NV(){}
+E_coverage_modulation_mode_NV(E_coverage_modulation_mode_NV const& e_):flag(e_.flag) {}
+operator VkCoverageModulationModeNV&() { return *this; }
+E_coverage_modulation_mode_NV& operator = (E_coverage_modulation_mode_NV e_) { flag = e_.flag; return *this; }
+bool operator== (E_coverage_modulation_mode_NV e_) { return flag == e_.flag; }
+bool operator== (VkCoverageModulationModeNV e_) { return flag == static_cast<decltype(flag)>(e_); }
+bool operator!= (E_coverage_modulation_mode_NV e_) { return !(*this == e_); }
+bool operator!= (VkCoverageModulationModeNV e_) { return !(*this == e_); }
 };
 
 /*	VkValidationCacheHeaderVersionEXT
 */
-enum class E_validation_cache_header_version_EXT{
+struct E_validation_cache_header_version_EXT{
+enum{
 e_one_ext = VK_VALIDATION_CACHE_HEADER_VERSION_ONE_EXT,
+}flag;
+E_validation_cache_header_version_EXT(VkValidationCacheHeaderVersionEXT flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
+E_validation_cache_header_version_EXT(){}
+E_validation_cache_header_version_EXT(E_validation_cache_header_version_EXT const& e_):flag(e_.flag) {}
+operator VkValidationCacheHeaderVersionEXT&() { return *this; }
+E_validation_cache_header_version_EXT& operator = (E_validation_cache_header_version_EXT e_) { flag = e_.flag; return *this; }
+bool operator== (E_validation_cache_header_version_EXT e_) { return flag == e_.flag; }
+bool operator== (VkValidationCacheHeaderVersionEXT e_) { return flag == static_cast<decltype(flag)>(e_); }
+bool operator!= (E_validation_cache_header_version_EXT e_) { return !(*this == e_); }
+bool operator!= (VkValidationCacheHeaderVersionEXT e_) { return !(*this == e_); }
 };
 
 /*	VkShaderInfoTypeAMD
 */
-enum class E_shader_info_type_AMD{
+struct E_shader_info_type_AMD{
+enum{
 e_statistics_amd = VK_SHADER_INFO_TYPE_STATISTICS_AMD,
 e_binary_amd = VK_SHADER_INFO_TYPE_BINARY_AMD,
 e_disassembly_amd = VK_SHADER_INFO_TYPE_DISASSEMBLY_AMD,
+}flag;
+E_shader_info_type_AMD(VkShaderInfoTypeAMD flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
+E_shader_info_type_AMD(){}
+E_shader_info_type_AMD(E_shader_info_type_AMD const& e_):flag(e_.flag) {}
+operator VkShaderInfoTypeAMD&() { return *this; }
+E_shader_info_type_AMD& operator = (E_shader_info_type_AMD e_) { flag = e_.flag; return *this; }
+bool operator== (E_shader_info_type_AMD e_) { return flag == e_.flag; }
+bool operator== (VkShaderInfoTypeAMD e_) { return flag == static_cast<decltype(flag)>(e_); }
+bool operator!= (E_shader_info_type_AMD e_) { return !(*this == e_); }
+bool operator!= (VkShaderInfoTypeAMD e_) { return !(*this == e_); }
 };
 
 /*	VkQueueGlobalPriorityEXT
 */
-enum class E_queue_global_priority_EXT{
+struct E_queue_global_priority_EXT{
+enum{
 e_low_ext = VK_QUEUE_GLOBAL_PRIORITY_LOW_EXT,
 e_medium_ext = VK_QUEUE_GLOBAL_PRIORITY_MEDIUM_EXT,
 e_high_ext = VK_QUEUE_GLOBAL_PRIORITY_HIGH_EXT,
 e_realtime_ext = VK_QUEUE_GLOBAL_PRIORITY_REALTIME_EXT,
+}flag;
+E_queue_global_priority_EXT(VkQueueGlobalPriorityEXT flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
+E_queue_global_priority_EXT(){}
+E_queue_global_priority_EXT(E_queue_global_priority_EXT const& e_):flag(e_.flag) {}
+operator VkQueueGlobalPriorityEXT&() { return *this; }
+E_queue_global_priority_EXT& operator = (E_queue_global_priority_EXT e_) { flag = e_.flag; return *this; }
+bool operator== (E_queue_global_priority_EXT e_) { return flag == e_.flag; }
+bool operator== (VkQueueGlobalPriorityEXT e_) { return flag == static_cast<decltype(flag)>(e_); }
+bool operator!= (E_queue_global_priority_EXT e_) { return !(*this == e_); }
+bool operator!= (VkQueueGlobalPriorityEXT e_) { return !(*this == e_); }
 };
 
 /*	VkConservativeRasterizationModeEXT
 */
-enum class E_conservative_rasterization_mode_EXT{
+struct E_conservative_rasterization_mode_EXT{
+enum{
 e_disabled_ext = VK_CONSERVATIVE_RASTERIZATION_MODE_DISABLED_EXT,
 e_overestimate_ext = VK_CONSERVATIVE_RASTERIZATION_MODE_OVERESTIMATE_EXT,
 e_underestimate_ext = VK_CONSERVATIVE_RASTERIZATION_MODE_UNDERESTIMATE_EXT,
+}flag;
+E_conservative_rasterization_mode_EXT(VkConservativeRasterizationModeEXT flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
+E_conservative_rasterization_mode_EXT(){}
+E_conservative_rasterization_mode_EXT(E_conservative_rasterization_mode_EXT const& e_):flag(e_.flag) {}
+operator VkConservativeRasterizationModeEXT&() { return *this; }
+E_conservative_rasterization_mode_EXT& operator = (E_conservative_rasterization_mode_EXT e_) { flag = e_.flag; return *this; }
+bool operator== (E_conservative_rasterization_mode_EXT e_) { return flag == e_.flag; }
+bool operator== (VkConservativeRasterizationModeEXT e_) { return flag == static_cast<decltype(flag)>(e_); }
+bool operator!= (E_conservative_rasterization_mode_EXT e_) { return !(*this == e_); }
+bool operator!= (VkConservativeRasterizationModeEXT e_) { return !(*this == e_); }
 };
 
 /*	VkVendorId
 */
-enum class E_vendor_id{
+struct E_vendor_id{
+enum{
 e_viv = VK_VENDOR_ID_VIV,
 e_vsi = VK_VENDOR_ID_VSI,
 e_kazan = VK_VENDOR_ID_KAZAN,
+}flag;
+E_vendor_id(VkVendorId flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
+E_vendor_id(){}
+E_vendor_id(E_vendor_id const& e_):flag(e_.flag) {}
+operator VkVendorId&() { return *this; }
+E_vendor_id& operator = (E_vendor_id e_) { flag = e_.flag; return *this; }
+bool operator== (E_vendor_id e_) { return flag == e_.flag; }
+bool operator== (VkVendorId e_) { return flag == static_cast<decltype(flag)>(e_); }
+bool operator!= (E_vendor_id e_) { return !(*this == e_); }
+bool operator!= (VkVendorId e_) { return !(*this == e_); }
 };
 
 /*	VkDriverIdKHR
 */
-enum class E_driver_id_KHR{
 #if 0
+struct E_driver_id_KHR{
+enum{
 e_amd_proprietary_khr = VK_DRIVER_ID_AMD_PROPRIETARY_KHR,
 e_amd_open_source_khr = VK_DRIVER_ID_AMD_OPEN_SOURCE_KHR,
 e_mesa_radv_khr = VK_DRIVER_ID_MESA_RADV_KHR,
@@ -883,13 +1566,24 @@ e_intel_open_source_mesa_khr = VK_DRIVER_ID_INTEL_OPEN_SOURCE_MESA_KHR,
 e_imagination_proprietary_khr = VK_DRIVER_ID_IMAGINATION_PROPRIETARY_KHR,
 e_qualcomm_proprietary_khr = VK_DRIVER_ID_QUALCOMM_PROPRIETARY_KHR,
 e_arm_proprietary_khr = VK_DRIVER_ID_ARM_PROPRIETARY_KHR,
-#endif 
-
+}flag;
+E_driver_id_KHR(VkDriverIdKHR flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
+E_driver_id_KHR(){}
+E_driver_id_KHR(E_driver_id_KHR const& e_):flag(e_.flag) {}
+operator VkDriverIdKHR&() { return *this; }
+E_driver_id_KHR& operator = (E_driver_id_KHR e_) { flag = e_.flag; return *this; }
+bool operator== (E_driver_id_KHR e_) { return flag == e_.flag; }
+bool operator== (VkDriverIdKHR e_) { return flag == static_cast<decltype(flag)>(e_); }
+bool operator!= (E_driver_id_KHR e_) { return !(*this == e_); }
+bool operator!= (VkDriverIdKHR e_) { return !(*this == e_); }
 };
+
+#endif 
 
 /*	VkShadingRatePaletteEntryNV
 */
-enum class E_shading_rate_palette_entry_NV{
+struct E_shading_rate_palette_entry_NV{
+enum{
 e_no_invocations_nv = VK_SHADING_RATE_PALETTE_ENTRY_NO_INVOCATIONS_NV,
 e_16_invocations_per_pixel_nv = VK_SHADING_RATE_PALETTE_ENTRY_16_INVOCATIONS_PER_PIXEL_NV,
 e_8_invocations_per_pixel_nv = VK_SHADING_RATE_PALETTE_ENTRY_8_INVOCATIONS_PER_PIXEL_NV,
@@ -902,36 +1596,90 @@ e_1_invocation_per_2x2_pixels_nv = VK_SHADING_RATE_PALETTE_ENTRY_1_INVOCATION_PE
 e_1_invocation_per_4x2_pixels_nv = VK_SHADING_RATE_PALETTE_ENTRY_1_INVOCATION_PER_4X2_PIXELS_NV,
 e_1_invocation_per_2x4_pixels_nv = VK_SHADING_RATE_PALETTE_ENTRY_1_INVOCATION_PER_2X4_PIXELS_NV,
 e_1_invocation_per_4x4_pixels_nv = VK_SHADING_RATE_PALETTE_ENTRY_1_INVOCATION_PER_4X4_PIXELS_NV,
+}flag;
+E_shading_rate_palette_entry_NV(VkShadingRatePaletteEntryNV flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
+E_shading_rate_palette_entry_NV(){}
+E_shading_rate_palette_entry_NV(E_shading_rate_palette_entry_NV const& e_):flag(e_.flag) {}
+operator VkShadingRatePaletteEntryNV&() { return *this; }
+E_shading_rate_palette_entry_NV& operator = (E_shading_rate_palette_entry_NV e_) { flag = e_.flag; return *this; }
+bool operator== (E_shading_rate_palette_entry_NV e_) { return flag == e_.flag; }
+bool operator== (VkShadingRatePaletteEntryNV e_) { return flag == static_cast<decltype(flag)>(e_); }
+bool operator!= (E_shading_rate_palette_entry_NV e_) { return !(*this == e_); }
+bool operator!= (VkShadingRatePaletteEntryNV e_) { return !(*this == e_); }
 };
 
 /*	VkCoarseSampleOrderTypeNV
 */
-enum class E_coarse_sample_order_type_NV{
+struct E_coarse_sample_order_type_NV{
+enum{
 e_default_nv = VK_COARSE_SAMPLE_ORDER_TYPE_DEFAULT_NV,
 e_custom_nv = VK_COARSE_SAMPLE_ORDER_TYPE_CUSTOM_NV,
 e_pixel_major_nv = VK_COARSE_SAMPLE_ORDER_TYPE_PIXEL_MAJOR_NV,
 e_sample_major_nv = VK_COARSE_SAMPLE_ORDER_TYPE_SAMPLE_MAJOR_NV,
+}flag;
+E_coarse_sample_order_type_NV(VkCoarseSampleOrderTypeNV flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
+E_coarse_sample_order_type_NV(){}
+E_coarse_sample_order_type_NV(E_coarse_sample_order_type_NV const& e_):flag(e_.flag) {}
+operator VkCoarseSampleOrderTypeNV&() { return *this; }
+E_coarse_sample_order_type_NV& operator = (E_coarse_sample_order_type_NV e_) { flag = e_.flag; return *this; }
+bool operator== (E_coarse_sample_order_type_NV e_) { return flag == e_.flag; }
+bool operator== (VkCoarseSampleOrderTypeNV e_) { return flag == static_cast<decltype(flag)>(e_); }
+bool operator!= (E_coarse_sample_order_type_NV e_) { return !(*this == e_); }
+bool operator!= (VkCoarseSampleOrderTypeNV e_) { return !(*this == e_); }
 };
 
 /*	VkCopyAccelerationStructureModeNVX
 */
-enum class E_copy_acceleration_structure_mode_NVX{
+struct E_copy_acceleration_structure_mode_NVX{
+enum{
 e_clone_nvx = VK_COPY_ACCELERATION_STRUCTURE_MODE_CLONE_NVX,
 e_compact_nvx = VK_COPY_ACCELERATION_STRUCTURE_MODE_COMPACT_NVX,
+}flag;
+E_copy_acceleration_structure_mode_NVX(VkCopyAccelerationStructureModeNVX flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
+E_copy_acceleration_structure_mode_NVX(){}
+E_copy_acceleration_structure_mode_NVX(E_copy_acceleration_structure_mode_NVX const& e_):flag(e_.flag) {}
+operator VkCopyAccelerationStructureModeNVX&() { return *this; }
+E_copy_acceleration_structure_mode_NVX& operator = (E_copy_acceleration_structure_mode_NVX e_) { flag = e_.flag; return *this; }
+bool operator== (E_copy_acceleration_structure_mode_NVX e_) { return flag == e_.flag; }
+bool operator== (VkCopyAccelerationStructureModeNVX e_) { return flag == static_cast<decltype(flag)>(e_); }
+bool operator!= (E_copy_acceleration_structure_mode_NVX e_) { return !(*this == e_); }
+bool operator!= (VkCopyAccelerationStructureModeNVX e_) { return !(*this == e_); }
 };
 
 /*	VkAccelerationStructureTypeNVX
 */
-enum class E_acceleration_structure_type_NVX{
+struct E_acceleration_structure_type_NVX{
+enum{
 e_top_level_nvx = VK_ACCELERATION_STRUCTURE_TYPE_TOP_LEVEL_NVX,
 e_bottom_level_nvx = VK_ACCELERATION_STRUCTURE_TYPE_BOTTOM_LEVEL_NVX,
+}flag;
+E_acceleration_structure_type_NVX(VkAccelerationStructureTypeNVX flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
+E_acceleration_structure_type_NVX(){}
+E_acceleration_structure_type_NVX(E_acceleration_structure_type_NVX const& e_):flag(e_.flag) {}
+operator VkAccelerationStructureTypeNVX&() { return *this; }
+E_acceleration_structure_type_NVX& operator = (E_acceleration_structure_type_NVX e_) { flag = e_.flag; return *this; }
+bool operator== (E_acceleration_structure_type_NVX e_) { return flag == e_.flag; }
+bool operator== (VkAccelerationStructureTypeNVX e_) { return flag == static_cast<decltype(flag)>(e_); }
+bool operator!= (E_acceleration_structure_type_NVX e_) { return !(*this == e_); }
+bool operator!= (VkAccelerationStructureTypeNVX e_) { return !(*this == e_); }
 };
 
 /*	VkGeometryTypeNVX
 */
-enum class E_geometry_type_NVX{
+struct E_geometry_type_NVX{
+enum{
 e_triangles_nvx = VK_GEOMETRY_TYPE_TRIANGLES_NVX,
 e_aabbs_nvx = VK_GEOMETRY_TYPE_AABBS_NVX,
+}flag;
+E_geometry_type_NVX(VkGeometryTypeNVX flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
+E_geometry_type_NVX(){}
+E_geometry_type_NVX(E_geometry_type_NVX const& e_):flag(e_.flag) {}
+operator VkGeometryTypeNVX&() { return *this; }
+E_geometry_type_NVX& operator = (E_geometry_type_NVX e_) { flag = e_.flag; return *this; }
+bool operator== (E_geometry_type_NVX e_) { return flag == e_.flag; }
+bool operator== (VkGeometryTypeNVX e_) { return flag == static_cast<decltype(flag)>(e_); }
+bool operator!= (E_geometry_type_NVX e_) { return !(*this == e_); }
+bool operator!= (VkGeometryTypeNVX e_) { return !(*this == e_); }
 };
 
 /*	VkCullModeFlagBits*/

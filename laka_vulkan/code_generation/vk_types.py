@@ -200,11 +200,6 @@ class Struct:
     wsi_macro = ""
 
 
-
-
-
-
-
 all_type_dict = dict([])
 name_dict = dict([])
 disable_names = ["VkDriverIdKHR"]
@@ -216,7 +211,7 @@ all_out = \
 "#include <array>\n\n"\
 "namespace laka { namespace vk {\n"
 
-#处理enum
+#========================= 处理enum ===========================
 enum_file_name = "vk_enums"
 enum_out = ""
 enum_list = soup.registry.find_all('enums',attrs={'type':'enum'})
@@ -238,9 +233,6 @@ for enum in enum_list:
             de = 1
             break
 
-    enum_out += \
-    "enum class " + my_name.my_name + "{\n"
-
     if de == 1:
         enum_out += "#if 0\n"
 
@@ -248,6 +240,11 @@ for enum in enum_list:
     if len(member_list) <= 0:
         enum_out+= "using " + my_name.my_name + " = " + enum_vk_name + ";\n\n"
         continue
+
+    enum_out += \
+        "struct "+my_name.my_name+"{\nenum{\n"
+    #"enum class " + my_name.my_name + "{\n"
+
 
     e_obj = Struct()
     e_obj.vk_name = my_name.vk_name
@@ -281,10 +278,21 @@ for enum in enum_list:
         enum_out += mobj.final_text
         e_obj.members.append(mobj)
 
-    if de == 1:
-        enum_out += "#endif \n\n"
+    enum_out += \
+        "#flag;\n{0}({1} flag_) :flag(static_cast<decltype(flag)>(flag_) ) @#\n"\
+        "{0}()@#\n"\
+        "{0}({0} const& e_):flag(e_.flag) @#\n"\
+        "operator {1}&() @ return *this; #\n"\
+        "{0}& operator = ({0} e_) @ flag = e_.flag; return *this; #\n"\
+        "bool operator== ({0} e_) @ return flag == e_.flag; #\n"\
+        "bool operator== ({1} e_) @ return flag == static_cast<decltype(flag)>(e_); #\n"\
+        "bool operator!= ({0} e_) @ return !(*this == e_); #\n"\
+        "bool operator!= ({1} e_) @ return !(*this == e_); #\n"\
+        "#;\n\n"\
+            .format(my_name.my_name,my_name.vk_name).replace("@","{").replace("#","}")
 
-    enum_out += "};\n\n"
+    if de == 1:
+        enum_out +=  "#endif \n\n"
 
     all_type_dict[e_obj.vk_name] = e_obj
 

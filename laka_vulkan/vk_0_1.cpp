@@ -117,6 +117,7 @@ namespace laka { namespace vk {
         vector<VkLayerProperties> properties;
         vector<vector<VkExtensionProperties>> layer_extension_properties;
     };
+    static Layer_properties layer_properties;
 
     class Extension_properties {
     public:
@@ -179,8 +180,6 @@ namespace laka { namespace vk {
         }
         vector<VkExtensionProperties> properties;
     };
-
-    static Layer_properties layer_properties;
     static Extension_properties extension_properties;
 
     Instance::Instance(
@@ -557,31 +556,30 @@ namespace laka { namespace vk {
 
     shared_ptr<S_image_format_properties2>
         Physical_device::get_image_format_properties(
-            const S_physical_device_sparse_image_format_info2& format_info_)
+            const S_physical_device_image_format_info2& format_info_)
     {
         shared_ptr<S_image_format_properties2> sptr(new S_image_format_properties2);
-
         instance->api.vkGetPhysicalDeviceImageFormatProperties2(
             handle,
-            image_format_info,
+            format_info_.get_vkptr(),
             (VkImageFormatProperties2*)sptr.get()
         );
         return sptr;
     }
     shared_ptr<S_image_format_properties2>
         Physical_device::get_image_format_properties(
-            VkFormat                                    format_,
-            VkImageType                                 type_,
-            VkImageTiling                               tiling_,
-            VkImageUsageFlags                           usage_,
-            VkImageCreateFlags                          flags_,
-            void*                                        next_)
+            E_format        format_,
+            E_image_type    type_,
+            E_image_tiling  tiling_,
+            F_image_usage   usage_,
+            F_image_create  flags_,
+            N_image_format_properties2  next_)
     {
         shared_ptr<S_image_format_properties2> sptr(new S_image_format_properties2);
 
         VkPhysicalDeviceImageFormatInfo2 image_format_info{
             VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_FORMAT_INFO_2,
-            next_,
+            next_.get(),
             format_,
             type_,
             tiling_,
@@ -596,7 +594,11 @@ namespace laka { namespace vk {
         return sptr;
     }
 
-
+    enum E_fuck {
+        aaaa,
+        bbb,
+        ccc,
+    };
 
 
 
