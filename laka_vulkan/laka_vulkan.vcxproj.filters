@@ -48,6 +48,9 @@
     <ClCompile Include="types.cpp">
       <Filter>基础\提取和生成代码</Filter>
     </ClCompile>
+    <ClCompile Include="vk_0_1.cpp">
+      <Filter>封装</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="common.h">

@@ -122,6 +122,7 @@
     <ClCompile Include="types.cpp" />
     <ClCompile Include="test_all.cpp" />
     <ClCompile Include="vk.cpp" />
+    <ClCompile Include="vk_0_1.cpp" />
     <ClCompile Include="vk_mean.cpp" />
     <ClCompile Include="vk_shortcut.cpp" />
   </ItemGroup>

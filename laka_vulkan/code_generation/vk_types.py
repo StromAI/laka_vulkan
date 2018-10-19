@@ -18,12 +18,10 @@ Permission is granted to anyone to use this software for any purpose, including 
 #2 安全性 引导性
 #3 免除使用sType
 #4 封装pNext
-#现在第四项很烦:
-    #平台相关结构问题 vk.xml里根本没有说明过
-    #想让pNext可以被IDE自动枚举到编码界面 但是VS这个IDE的自动完成或提示真是弱爆 用VA也一样!
 
 #todo:将struct父子关系链写进每个struct注释
-
+#todo:为pNext的封装结构添加{xxxx,xxxx,xxxx}用法
+#todo:纯struct去掉默认构造函数
 import re
 from bs4 import BeautifulSoup
 
@@ -88,6 +86,8 @@ wsi_struct_dict["VkSemaphoreGetWin32HandleInfoKHR"] = "VK_USE_PLATFORM_WIN32_KHR
 wsi_struct_dict["VkImportFenceWin32HandleInfoKHR"] = "VK_USE_PLATFORM_WIN32_KHR"
 wsi_struct_dict["VkExportFenceWin32HandleInfoKHR"] = "VK_USE_PLATFORM_WIN32_KHR"
 wsi_struct_dict["VkFenceGetWin32HandleInfoKHR"] = "VK_USE_PLATFORM_WIN32_KHR"
+wsi_struct_dict["VkConformanceVersionKHR"] = "LAKA_UNKNOW"
+wsi_struct_dict["VkDrmFormatModifierPropertiesEXT"] = "LAKA_UNKNOW"
 
 cpp = []
 
@@ -397,6 +397,7 @@ for enum in flag_bits_list:
         flagbits_out += fb_obj.my_name + "& off_"+m.name.replace("b_","")+"()"\
                           "{ flag &= ~" + m.name+"; return *this; }\n"
 
+    flagbits_out+=fb_obj.vk_name+" get_vkfb(){ return "+fb_obj.vk_name+"(flag); }\n"
     flagbits_out+="};\n"
 
 
@@ -466,8 +467,11 @@ def out_struct(s,cpp_out_str):
 
         count+=1
 
+    out+="\n"+s.vk_name+"*const get_vkptr(){return reinterpret_cast<"+s.vk_name+"*>(this);}\n"
+
     #构造函数
-    out+="\n"+s.my_name+"(){}\n"
+    if s.have_sType == 1:
+        out+="\n"+s.my_name+"(){}\n"
     if s.have_sType == 1 and len(s.members) > 2:
         out += "\n"+s.my_name+"("
         count = 0

@@ -979,6 +979,7 @@ F_cull_mode& on_back(){ flag |= b_back; return *this; }
 F_cull_mode& off_back(){ flag &= ~b_back; return *this; }
 F_cull_mode& on_front_and_back(){ flag |= b_front_and_back; return *this; }
 F_cull_mode& off_front_and_back(){ flag &= ~b_front_and_back; return *this; }
+VkCullModeFlagBits get_vkfb(){ return VkCullModeFlagBits(flag); }
 };
 F_cull_mode inline operator|(F_cull_mode::B bit1_, F_cull_mode::B bit2_){F_cull_mode flags(bit1_);return flags | bit2_;}
 bool inline operator==(F_cull_mode f1_, F_cull_mode f2_) { return f1_.flag== f2_.flag; }
@@ -1032,6 +1033,7 @@ F_queue& on_transfer(){ flag |= b_transfer; return *this; }
 F_queue& off_transfer(){ flag &= ~b_transfer; return *this; }
 F_queue& on_sparse_binding(){ flag |= b_sparse_binding; return *this; }
 F_queue& off_sparse_binding(){ flag &= ~b_sparse_binding; return *this; }
+VkQueueFlagBits get_vkfb(){ return VkQueueFlagBits(flag); }
 };
 F_queue inline operator|(F_queue::B bit1_, F_queue::B bit2_){F_queue flags(bit1_);return flags | bit2_;}
 bool inline operator==(F_queue f1_, F_queue f2_) { return f1_.flag== f2_.flag; }
@@ -1096,6 +1098,7 @@ F_memory_property& on_host_cached(){ flag |= b_host_cached; return *this; }
 F_memory_property& off_host_cached(){ flag &= ~b_host_cached; return *this; }
 F_memory_property& on_lazily_allocated(){ flag |= b_lazily_allocated; return *this; }
 F_memory_property& off_lazily_allocated(){ flag &= ~b_lazily_allocated; return *this; }
+VkMemoryPropertyFlagBits get_vkfb(){ return VkMemoryPropertyFlagBits(flag); }
 };
 F_memory_property inline operator|(F_memory_property::B bit1_, F_memory_property::B bit2_){F_memory_property flags(bit1_);return flags | bit2_;}
 bool inline operator==(F_memory_property f1_, F_memory_property f2_) { return f1_.flag== f2_.flag; }
@@ -1137,6 +1140,7 @@ return b_device_local;
 }
 F_memory_heap& on_device_local(){ flag |= b_device_local; return *this; }
 F_memory_heap& off_device_local(){ flag &= ~b_device_local; return *this; }
+VkMemoryHeapFlagBits get_vkfb(){ return VkMemoryHeapFlagBits(flag); }
 };
 F_memory_heap inline operator|(F_memory_heap::B bit1_, F_memory_heap::B bit2_){F_memory_heap flags(bit1_);return flags | bit2_;}
 bool inline operator==(F_memory_heap f1_, F_memory_heap f2_) { return f1_.flag== f2_.flag; }
@@ -1242,6 +1246,7 @@ F_access& on_memory_read(){ flag |= b_memory_read; return *this; }
 F_access& off_memory_read(){ flag &= ~b_memory_read; return *this; }
 F_access& on_memory_write(){ flag |= b_memory_write; return *this; }
 F_access& off_memory_write(){ flag &= ~b_memory_write; return *this; }
+VkAccessFlagBits get_vkfb(){ return VkAccessFlagBits(flag); }
 };
 F_access inline operator|(F_access::B bit1_, F_access::B bit2_){F_access flags(bit1_);return flags | bit2_;}
 bool inline operator==(F_access f1_, F_access f2_) { return f1_.flag== f2_.flag; }
@@ -1315,6 +1320,7 @@ F_buffer_usage& on_vertex_buffer(){ flag |= b_vertex_buffer; return *this; }
 F_buffer_usage& off_vertex_buffer(){ flag &= ~b_vertex_buffer; return *this; }
 F_buffer_usage& on_indirect_buffer(){ flag |= b_indirect_buffer; return *this; }
 F_buffer_usage& off_indirect_buffer(){ flag &= ~b_indirect_buffer; return *this; }
+VkBufferUsageFlagBits get_vkfb(){ return VkBufferUsageFlagBits(flag); }
 };
 F_buffer_usage inline operator|(F_buffer_usage::B bit1_, F_buffer_usage::B bit2_){F_buffer_usage flags(bit1_);return flags | bit2_;}
 bool inline operator==(F_buffer_usage f1_, F_buffer_usage f2_) { return f1_.flag== f2_.flag; }
@@ -1364,6 +1370,7 @@ F_buffer_create& on_sparse_residency(){ flag |= b_sparse_residency; return *this
 F_buffer_create& off_sparse_residency(){ flag &= ~b_sparse_residency; return *this; }
 F_buffer_create& on_sparse_aliased(){ flag |= b_sparse_aliased; return *this; }
 F_buffer_create& off_sparse_aliased(){ flag &= ~b_sparse_aliased; return *this; }
+VkBufferCreateFlagBits get_vkfb(){ return VkBufferCreateFlagBits(flag); }
 };
 F_buffer_create inline operator|(F_buffer_create::B bit1_, F_buffer_create::B bit2_){F_buffer_create flags(bit1_);return flags | bit2_;}
 bool inline operator==(F_buffer_create f1_, F_buffer_create f2_) { return f1_.flag== f2_.flag; }
@@ -1425,6 +1432,7 @@ F_shader_stage& on_all_graphics(){ flag |= b_all_graphics; return *this; }
 F_shader_stage& off_all_graphics(){ flag &= ~b_all_graphics; return *this; }
 F_shader_stage& on_all(){ flag |= b_all; return *this; }
 F_shader_stage& off_all(){ flag &= ~b_all; return *this; }
+VkShaderStageFlagBits get_vkfb(){ return VkShaderStageFlagBits(flag); }
 };
 F_shader_stage inline operator|(F_shader_stage::B bit1_, F_shader_stage::B bit2_){F_shader_stage flags(bit1_);return flags | bit2_;}
 bool inline operator==(F_shader_stage f1_, F_shader_stage f2_) { return f1_.flag== f2_.flag; }
@@ -1494,6 +1502,7 @@ F_image_usage& on_transient_attachment(){ flag |= b_transient_attachment; return
 F_image_usage& off_transient_attachment(){ flag &= ~b_transient_attachment; return *this; }
 F_image_usage& on_input_attachment(){ flag |= b_input_attachment; return *this; }
 F_image_usage& off_input_attachment(){ flag &= ~b_input_attachment; return *this; }
+VkImageUsageFlagBits get_vkfb(){ return VkImageUsageFlagBits(flag); }
 };
 F_image_usage inline operator|(F_image_usage::B bit1_, F_image_usage::B bit2_){F_image_usage flags(bit1_);return flags | bit2_;}
 bool inline operator==(F_image_usage f1_, F_image_usage f2_) { return f1_.flag== f2_.flag; }
@@ -1551,6 +1560,7 @@ F_image_create& on_mutable_format(){ flag |= b_mutable_format; return *this; }
 F_image_create& off_mutable_format(){ flag &= ~b_mutable_format; return *this; }
 F_image_create& on_cube_compatible(){ flag |= b_cube_compatible; return *this; }
 F_image_create& off_cube_compatible(){ flag &= ~b_cube_compatible; return *this; }
+VkImageCreateFlagBits get_vkfb(){ return VkImageCreateFlagBits(flag); }
 };
 F_image_create inline operator|(F_image_create::B bit1_, F_image_create::B bit2_){F_image_create flags(bit1_);return flags | bit2_;}
 bool inline operator==(F_image_create f1_, F_image_create f2_) { return f1_.flag== f2_.flag; }
@@ -1597,6 +1607,7 @@ F_pipeline_create& on_allow_derivatives(){ flag |= b_allow_derivatives; return *
 F_pipeline_create& off_allow_derivatives(){ flag &= ~b_allow_derivatives; return *this; }
 F_pipeline_create& on_derivative(){ flag |= b_derivative; return *this; }
 F_pipeline_create& off_derivative(){ flag &= ~b_derivative; return *this; }
+VkPipelineCreateFlagBits get_vkfb(){ return VkPipelineCreateFlagBits(flag); }
 };
 F_pipeline_create inline operator|(F_pipeline_create::B bit1_, F_pipeline_create::B bit2_){F_pipeline_create flags(bit1_);return flags | bit2_;}
 bool inline operator==(F_pipeline_create f1_, F_pipeline_create f2_) { return f1_.flag== f2_.flag; }
@@ -1646,6 +1657,7 @@ F_color_component& on_b(){ flag |= b_b; return *this; }
 F_color_component& off_b(){ flag &= ~b_b; return *this; }
 F_color_component& on_a(){ flag |= b_a; return *this; }
 F_color_component& off_a(){ flag &= ~b_a; return *this; }
+VkColorComponentFlagBits get_vkfb(){ return VkColorComponentFlagBits(flag); }
 };
 F_color_component inline operator|(F_color_component::B bit1_, F_color_component::B bit2_){F_color_component flags(bit1_);return flags | bit2_;}
 bool inline operator==(F_color_component f1_, F_color_component f2_) { return f1_.flag== f2_.flag; }
@@ -1686,6 +1698,7 @@ return b_signaled;
 }
 F_fence_create& on_signaled(){ flag |= b_signaled; return *this; }
 F_fence_create& off_signaled(){ flag &= ~b_signaled; return *this; }
+VkFenceCreateFlagBits get_vkfb(){ return VkFenceCreateFlagBits(flag); }
 };
 F_fence_create inline operator|(F_fence_create::B bit1_, F_fence_create::B bit2_){F_fence_create flags(bit1_);return flags | bit2_;}
 bool inline operator==(F_fence_create f1_, F_fence_create f2_) { return f1_.flag== f2_.flag; }
@@ -1775,6 +1788,7 @@ F_format_feature& on_blit_dst(){ flag |= b_blit_dst; return *this; }
 F_format_feature& off_blit_dst(){ flag &= ~b_blit_dst; return *this; }
 F_format_feature& on_sampled_image_filter_linear(){ flag |= b_sampled_image_filter_linear; return *this; }
 F_format_feature& off_sampled_image_filter_linear(){ flag &= ~b_sampled_image_filter_linear; return *this; }
+VkFormatFeatureFlagBits get_vkfb(){ return VkFormatFeatureFlagBits(flag); }
 };
 F_format_feature inline operator|(F_format_feature::B bit1_, F_format_feature::B bit2_){F_format_feature flags(bit1_);return flags | bit2_;}
 bool inline operator==(F_format_feature f1_, F_format_feature f2_) { return f1_.flag== f2_.flag; }
@@ -1816,6 +1830,7 @@ return b_precise;
 }
 F_query_control& on_precise(){ flag |= b_precise; return *this; }
 F_query_control& off_precise(){ flag &= ~b_precise; return *this; }
+VkQueryControlFlagBits get_vkfb(){ return VkQueryControlFlagBits(flag); }
 };
 F_query_control inline operator|(F_query_control::B bit1_, F_query_control::B bit2_){F_query_control flags(bit1_);return flags | bit2_;}
 bool inline operator==(F_query_control f1_, F_query_control f2_) { return f1_.flag== f2_.flag; }
@@ -1869,6 +1884,7 @@ F_query_result& on_with_availability(){ flag |= b_with_availability; return *thi
 F_query_result& off_with_availability(){ flag &= ~b_with_availability; return *this; }
 F_query_result& on_partial(){ flag |= b_partial; return *this; }
 F_query_result& off_partial(){ flag &= ~b_partial; return *this; }
+VkQueryResultFlagBits get_vkfb(){ return VkQueryResultFlagBits(flag); }
 };
 F_query_result inline operator|(F_query_result::B bit1_, F_query_result::B bit2_){F_query_result flags(bit1_);return flags | bit2_;}
 bool inline operator==(F_query_result f1_, F_query_result f2_) { return f1_.flag== f2_.flag; }
@@ -1916,6 +1932,7 @@ F_command_buffer_usage& on_render_pass_continue(){ flag |= b_render_pass_continu
 F_command_buffer_usage& off_render_pass_continue(){ flag &= ~b_render_pass_continue; return *this; }
 F_command_buffer_usage& on_simultaneous_use(){ flag |= b_simultaneous_use; return *this; }
 F_command_buffer_usage& off_simultaneous_use(){ flag &= ~b_simultaneous_use; return *this; }
+VkCommandBufferUsageFlagBits get_vkfb(){ return VkCommandBufferUsageFlagBits(flag); }
 };
 F_command_buffer_usage inline operator|(F_command_buffer_usage::B bit1_, F_command_buffer_usage::B bit2_){F_command_buffer_usage flags(bit1_);return flags | bit2_;}
 bool inline operator==(F_command_buffer_usage f1_, F_command_buffer_usage f2_) { return f1_.flag== f2_.flag; }
@@ -1997,6 +2014,7 @@ F_query_pipeline_statistic& on_tessellation_evaluation_shader_invocations(){ fla
 F_query_pipeline_statistic& off_tessellation_evaluation_shader_invocations(){ flag &= ~b_tessellation_evaluation_shader_invocations; return *this; }
 F_query_pipeline_statistic& on_compute_shader_invocations(){ flag |= b_compute_shader_invocations; return *this; }
 F_query_pipeline_statistic& off_compute_shader_invocations(){ flag &= ~b_compute_shader_invocations; return *this; }
+VkQueryPipelineStatisticFlagBits get_vkfb(){ return VkQueryPipelineStatisticFlagBits(flag); }
 };
 F_query_pipeline_statistic inline operator|(F_query_pipeline_statistic::B bit1_, F_query_pipeline_statistic::B bit2_){F_query_pipeline_statistic flags(bit1_);return flags | bit2_;}
 bool inline operator==(F_query_pipeline_statistic f1_, F_query_pipeline_statistic f2_) { return f1_.flag== f2_.flag; }
@@ -2046,6 +2064,7 @@ F_image_aspect& on_stencil(){ flag |= b_stencil; return *this; }
 F_image_aspect& off_stencil(){ flag &= ~b_stencil; return *this; }
 F_image_aspect& on_metadata(){ flag |= b_metadata; return *this; }
 F_image_aspect& off_metadata(){ flag &= ~b_metadata; return *this; }
+VkImageAspectFlagBits get_vkfb(){ return VkImageAspectFlagBits(flag); }
 };
 F_image_aspect inline operator|(F_image_aspect::B bit1_, F_image_aspect::B bit2_){F_image_aspect flags(bit1_);return flags | bit2_;}
 bool inline operator==(F_image_aspect f1_, F_image_aspect f2_) { return f1_.flag== f2_.flag; }
@@ -2095,6 +2114,7 @@ F_sparse_image_format& on_aligned_mip_size(){ flag |= b_aligned_mip_size; return
 F_sparse_image_format& off_aligned_mip_size(){ flag &= ~b_aligned_mip_size; return *this; }
 F_sparse_image_format& on_nonstandard_block_size(){ flag |= b_nonstandard_block_size; return *this; }
 F_sparse_image_format& off_nonstandard_block_size(){ flag &= ~b_nonstandard_block_size; return *this; }
+VkSparseImageFormatFlagBits get_vkfb(){ return VkSparseImageFormatFlagBits(flag); }
 };
 F_sparse_image_format inline operator|(F_sparse_image_format::B bit1_, F_sparse_image_format::B bit2_){F_sparse_image_format flags(bit1_);return flags | bit2_;}
 bool inline operator==(F_sparse_image_format f1_, F_sparse_image_format f2_) { return f1_.flag== f2_.flag; }
@@ -2136,6 +2156,7 @@ return b_metadata;
 }
 F_sparse_memory_bind& on_metadata(){ flag |= b_metadata; return *this; }
 F_sparse_memory_bind& off_metadata(){ flag &= ~b_metadata; return *this; }
+VkSparseMemoryBindFlagBits get_vkfb(){ return VkSparseMemoryBindFlagBits(flag); }
 };
 F_sparse_memory_bind inline operator|(F_sparse_memory_bind::B bit1_, F_sparse_memory_bind::B bit2_){F_sparse_memory_bind flags(bit1_);return flags | bit2_;}
 bool inline operator==(F_sparse_memory_bind f1_, F_sparse_memory_bind f2_) { return f1_.flag== f2_.flag; }
@@ -2241,6 +2262,7 @@ F_pipeline_stage& on_all_graphics(){ flag |= b_all_graphics; return *this; }
 F_pipeline_stage& off_all_graphics(){ flag &= ~b_all_graphics; return *this; }
 F_pipeline_stage& on_all_commands(){ flag |= b_all_commands; return *this; }
 F_pipeline_stage& off_all_commands(){ flag &= ~b_all_commands; return *this; }
+VkPipelineStageFlagBits get_vkfb(){ return VkPipelineStageFlagBits(flag); }
 };
 F_pipeline_stage inline operator|(F_pipeline_stage::B bit1_, F_pipeline_stage::B bit2_){F_pipeline_stage flags(bit1_);return flags | bit2_;}
 bool inline operator==(F_pipeline_stage f1_, F_pipeline_stage f2_) { return f1_.flag== f2_.flag; }
@@ -2286,6 +2308,7 @@ F_command_pool_create& on_transient(){ flag |= b_transient; return *this; }
 F_command_pool_create& off_transient(){ flag &= ~b_transient; return *this; }
 F_command_pool_create& on_reset_command_buffer(){ flag |= b_reset_command_buffer; return *this; }
 F_command_pool_create& off_reset_command_buffer(){ flag &= ~b_reset_command_buffer; return *this; }
+VkCommandPoolCreateFlagBits get_vkfb(){ return VkCommandPoolCreateFlagBits(flag); }
 };
 F_command_pool_create inline operator|(F_command_pool_create::B bit1_, F_command_pool_create::B bit2_){F_command_pool_create flags(bit1_);return flags | bit2_;}
 bool inline operator==(F_command_pool_create f1_, F_command_pool_create f2_) { return f1_.flag== f2_.flag; }
@@ -2327,6 +2350,7 @@ return b_release_resources;
 }
 F_command_pool_reset& on_release_resources(){ flag |= b_release_resources; return *this; }
 F_command_pool_reset& off_release_resources(){ flag &= ~b_release_resources; return *this; }
+VkCommandPoolResetFlagBits get_vkfb(){ return VkCommandPoolResetFlagBits(flag); }
 };
 F_command_pool_reset inline operator|(F_command_pool_reset::B bit1_, F_command_pool_reset::B bit2_){F_command_pool_reset flags(bit1_);return flags | bit2_;}
 bool inline operator==(F_command_pool_reset f1_, F_command_pool_reset f2_) { return f1_.flag== f2_.flag; }
@@ -2368,6 +2392,7 @@ return b_release_resources;
 }
 F_command_buffer_reset& on_release_resources(){ flag |= b_release_resources; return *this; }
 F_command_buffer_reset& off_release_resources(){ flag &= ~b_release_resources; return *this; }
+VkCommandBufferResetFlagBits get_vkfb(){ return VkCommandBufferResetFlagBits(flag); }
 };
 F_command_buffer_reset inline operator|(F_command_buffer_reset::B bit1_, F_command_buffer_reset::B bit2_){F_command_buffer_reset flags(bit1_);return flags | bit2_;}
 bool inline operator==(F_command_buffer_reset f1_, F_command_buffer_reset f2_) { return f1_.flag== f2_.flag; }
@@ -2433,6 +2458,7 @@ F_sample_count& on_32(){ flag |= b_32; return *this; }
 F_sample_count& off_32(){ flag &= ~b_32; return *this; }
 F_sample_count& on_64(){ flag |= b_64; return *this; }
 F_sample_count& off_64(){ flag &= ~b_64; return *this; }
+VkSampleCountFlagBits get_vkfb(){ return VkSampleCountFlagBits(flag); }
 };
 F_sample_count inline operator|(F_sample_count::B bit1_, F_sample_count::B bit2_){F_sample_count flags(bit1_);return flags | bit2_;}
 bool inline operator==(F_sample_count f1_, F_sample_count f2_) { return f1_.flag== f2_.flag; }
@@ -2474,6 +2500,7 @@ return b_may_alias;
 }
 F_attachment_description& on_may_alias(){ flag |= b_may_alias; return *this; }
 F_attachment_description& off_may_alias(){ flag &= ~b_may_alias; return *this; }
+VkAttachmentDescriptionFlagBits get_vkfb(){ return VkAttachmentDescriptionFlagBits(flag); }
 };
 F_attachment_description inline operator|(F_attachment_description::B bit1_, F_attachment_description::B bit2_){F_attachment_description flags(bit1_);return flags | bit2_;}
 bool inline operator==(F_attachment_description f1_, F_attachment_description f2_) { return f1_.flag== f2_.flag; }
@@ -2523,6 +2550,7 @@ F_stencil_face& on_back(){ flag |= b_back; return *this; }
 F_stencil_face& off_back(){ flag &= ~b_back; return *this; }
 F_stencil_face& on_vk_stencil_front_and_back(){ flag |= b_vk_stencil_front_and_back; return *this; }
 F_stencil_face& off_vk_stencil_front_and_back(){ flag &= ~b_vk_stencil_front_and_back; return *this; }
+VkStencilFaceFlagBits get_vkfb(){ return VkStencilFaceFlagBits(flag); }
 };
 F_stencil_face inline operator|(F_stencil_face::B bit1_, F_stencil_face::B bit2_){F_stencil_face flags(bit1_);return flags | bit2_;}
 bool inline operator==(F_stencil_face f1_, F_stencil_face f2_) { return f1_.flag== f2_.flag; }
@@ -2564,6 +2592,7 @@ return b_free_descriptor_set;
 }
 F_descriptor_pool_create& on_free_descriptor_set(){ flag |= b_free_descriptor_set; return *this; }
 F_descriptor_pool_create& off_free_descriptor_set(){ flag &= ~b_free_descriptor_set; return *this; }
+VkDescriptorPoolCreateFlagBits get_vkfb(){ return VkDescriptorPoolCreateFlagBits(flag); }
 };
 F_descriptor_pool_create inline operator|(F_descriptor_pool_create::B bit1_, F_descriptor_pool_create::B bit2_){F_descriptor_pool_create flags(bit1_);return flags | bit2_;}
 bool inline operator==(F_descriptor_pool_create f1_, F_descriptor_pool_create f2_) { return f1_.flag== f2_.flag; }
@@ -2605,6 +2634,7 @@ return b_by_region;
 }
 F_dependency& on_by_region(){ flag |= b_by_region; return *this; }
 F_dependency& off_by_region(){ flag &= ~b_by_region; return *this; }
+VkDependencyFlagBits get_vkfb(){ return VkDependencyFlagBits(flag); }
 };
 F_dependency inline operator|(F_dependency::B bit1_, F_dependency::B bit2_){F_dependency flags(bit1_);return flags | bit2_;}
 bool inline operator==(F_dependency f1_, F_dependency f2_) { return f1_.flag== f2_.flag; }
@@ -2654,6 +2684,7 @@ F_display_plane_alpha_KHR& on_per_pixel_khr(){ flag |= b_per_pixel_khr; return *
 F_display_plane_alpha_KHR& off_per_pixel_khr(){ flag &= ~b_per_pixel_khr; return *this; }
 F_display_plane_alpha_KHR& on_per_pixel_premultiplied_khr(){ flag |= b_per_pixel_premultiplied_khr; return *this; }
 F_display_plane_alpha_KHR& off_per_pixel_premultiplied_khr(){ flag &= ~b_per_pixel_premultiplied_khr; return *this; }
+VkDisplayPlaneAlphaFlagBitsKHR get_vkfb(){ return VkDisplayPlaneAlphaFlagBitsKHR(flag); }
 };
 F_display_plane_alpha_KHR inline operator|(F_display_plane_alpha_KHR::B bit1_, F_display_plane_alpha_KHR::B bit2_){F_display_plane_alpha_KHR flags(bit1_);return flags | bit2_;}
 bool inline operator==(F_display_plane_alpha_KHR f1_, F_display_plane_alpha_KHR f2_) { return f1_.flag== f2_.flag; }
@@ -2703,6 +2734,7 @@ F_composite_alpha_KHR& on_post_multiplied_khr(){ flag |= b_post_multiplied_khr; 
 F_composite_alpha_KHR& off_post_multiplied_khr(){ flag &= ~b_post_multiplied_khr; return *this; }
 F_composite_alpha_KHR& on_inherit_khr(){ flag |= b_inherit_khr; return *this; }
 F_composite_alpha_KHR& off_inherit_khr(){ flag &= ~b_inherit_khr; return *this; }
+VkCompositeAlphaFlagBitsKHR get_vkfb(){ return VkCompositeAlphaFlagBitsKHR(flag); }
 };
 F_composite_alpha_KHR inline operator|(F_composite_alpha_KHR::B bit1_, F_composite_alpha_KHR::B bit2_){F_composite_alpha_KHR flags(bit1_);return flags | bit2_;}
 bool inline operator==(F_composite_alpha_KHR f1_, F_composite_alpha_KHR f2_) { return f1_.flag== f2_.flag; }
@@ -2767,6 +2799,7 @@ F_surface_transform_KHR& on_horizontal_mirror_rotate_270_khr(){ flag |= b_horizo
 F_surface_transform_KHR& off_horizontal_mirror_rotate_270_khr(){ flag &= ~b_horizontal_mirror_rotate_270_khr; return *this; }
 F_surface_transform_KHR& on_inherit_khr(){ flag |= b_inherit_khr; return *this; }
 F_surface_transform_KHR& off_inherit_khr(){ flag &= ~b_inherit_khr; return *this; }
+VkSurfaceTransformFlagBitsKHR get_vkfb(){ return VkSurfaceTransformFlagBitsKHR(flag); }
 };
 F_surface_transform_KHR inline operator|(F_surface_transform_KHR::B bit1_, F_surface_transform_KHR::B bit2_){F_surface_transform_KHR flags(bit1_);return flags | bit2_;}
 bool inline operator==(F_surface_transform_KHR f1_, F_surface_transform_KHR f2_) { return f1_.flag== f2_.flag; }
@@ -2819,6 +2852,7 @@ F_debug_report_EXT& on_error_ext(){ flag |= b_error_ext; return *this; }
 F_debug_report_EXT& off_error_ext(){ flag &= ~b_error_ext; return *this; }
 F_debug_report_EXT& on_debug_ext(){ flag |= b_debug_ext; return *this; }
 F_debug_report_EXT& off_debug_ext(){ flag &= ~b_debug_ext; return *this; }
+VkDebugReportFlagBitsEXT get_vkfb(){ return VkDebugReportFlagBitsEXT(flag); }
 };
 F_debug_report_EXT inline operator|(F_debug_report_EXT::B bit1_, F_debug_report_EXT::B bit2_){F_debug_report_EXT flags(bit1_);return flags | bit2_;}
 bool inline operator==(F_debug_report_EXT f1_, F_debug_report_EXT f2_) { return f1_.flag== f2_.flag; }
@@ -2868,6 +2902,7 @@ F_external_memory_handle_type_NV& on_d3d11_image_nv(){ flag |= b_d3d11_image_nv;
 F_external_memory_handle_type_NV& off_d3d11_image_nv(){ flag &= ~b_d3d11_image_nv; return *this; }
 F_external_memory_handle_type_NV& on_d3d11_image_kmt_nv(){ flag |= b_d3d11_image_kmt_nv; return *this; }
 F_external_memory_handle_type_NV& off_d3d11_image_kmt_nv(){ flag &= ~b_d3d11_image_kmt_nv; return *this; }
+VkExternalMemoryHandleTypeFlagBitsNV get_vkfb(){ return VkExternalMemoryHandleTypeFlagBitsNV(flag); }
 };
 F_external_memory_handle_type_NV inline operator|(F_external_memory_handle_type_NV::B bit1_, F_external_memory_handle_type_NV::B bit2_){F_external_memory_handle_type_NV flags(bit1_);return flags | bit2_;}
 bool inline operator==(F_external_memory_handle_type_NV f1_, F_external_memory_handle_type_NV f2_) { return f1_.flag== f2_.flag; }
@@ -2914,6 +2949,7 @@ F_external_memory_feature_NV& on_exportable_nv(){ flag |= b_exportable_nv; retur
 F_external_memory_feature_NV& off_exportable_nv(){ flag &= ~b_exportable_nv; return *this; }
 F_external_memory_feature_NV& on_importable_nv(){ flag |= b_importable_nv; return *this; }
 F_external_memory_feature_NV& off_importable_nv(){ flag &= ~b_importable_nv; return *this; }
+VkExternalMemoryFeatureFlagBitsNV get_vkfb(){ return VkExternalMemoryFeatureFlagBitsNV(flag); }
 };
 F_external_memory_feature_NV inline operator|(F_external_memory_feature_NV::B bit1_, F_external_memory_feature_NV::B bit2_){F_external_memory_feature_NV flags(bit1_);return flags | bit2_;}
 bool inline operator==(F_external_memory_feature_NV f1_, F_external_memory_feature_NV f2_) { return f1_.flag== f2_.flag; }
@@ -2983,6 +3019,7 @@ F_subgroup_feature& on_clustered(){ flag |= b_clustered; return *this; }
 F_subgroup_feature& off_clustered(){ flag &= ~b_clustered; return *this; }
 F_subgroup_feature& on_quad(){ flag |= b_quad; return *this; }
 F_subgroup_feature& off_quad(){ flag &= ~b_quad; return *this; }
+VkSubgroupFeatureFlagBits get_vkfb(){ return VkSubgroupFeatureFlagBits(flag); }
 };
 F_subgroup_feature inline operator|(F_subgroup_feature::B bit1_, F_subgroup_feature::B bit2_){F_subgroup_feature flags(bit1_);return flags | bit2_;}
 bool inline operator==(F_subgroup_feature f1_, F_subgroup_feature f2_) { return f1_.flag== f2_.flag; }
@@ -3032,6 +3069,7 @@ F_indirect_commands_layout_usage_NVX& on_empty_executions_nvx(){ flag |= b_empty
 F_indirect_commands_layout_usage_NVX& off_empty_executions_nvx(){ flag &= ~b_empty_executions_nvx; return *this; }
 F_indirect_commands_layout_usage_NVX& on_indexed_sequences_nvx(){ flag |= b_indexed_sequences_nvx; return *this; }
 F_indirect_commands_layout_usage_NVX& off_indexed_sequences_nvx(){ flag &= ~b_indexed_sequences_nvx; return *this; }
+VkIndirectCommandsLayoutUsageFlagBitsNVX get_vkfb(){ return VkIndirectCommandsLayoutUsageFlagBitsNVX(flag); }
 };
 F_indirect_commands_layout_usage_NVX inline operator|(F_indirect_commands_layout_usage_NVX::B bit1_, F_indirect_commands_layout_usage_NVX::B bit2_){F_indirect_commands_layout_usage_NVX flags(bit1_);return flags | bit2_;}
 bool inline operator==(F_indirect_commands_layout_usage_NVX f1_, F_indirect_commands_layout_usage_NVX f2_) { return f1_.flag== f2_.flag; }
@@ -3075,6 +3113,7 @@ F_object_entry_usage_NVX& on_graphics_nvx(){ flag |= b_graphics_nvx; return *thi
 F_object_entry_usage_NVX& off_graphics_nvx(){ flag &= ~b_graphics_nvx; return *this; }
 F_object_entry_usage_NVX& on_compute_nvx(){ flag |= b_compute_nvx; return *this; }
 F_object_entry_usage_NVX& off_compute_nvx(){ flag &= ~b_compute_nvx; return *this; }
+VkObjectEntryUsageFlagBitsNVX get_vkfb(){ return VkObjectEntryUsageFlagBitsNVX(flag); }
 };
 F_object_entry_usage_NVX inline operator|(F_object_entry_usage_NVX::B bit1_, F_object_entry_usage_NVX::B bit2_){F_object_entry_usage_NVX flags(bit1_);return flags | bit2_;}
 bool inline operator==(F_object_entry_usage_NVX f1_, F_object_entry_usage_NVX f2_) { return f1_.flag== f2_.flag; }
@@ -3137,6 +3176,7 @@ F_external_memory_handle_type& on_d3d12_heap(){ flag |= b_d3d12_heap; return *th
 F_external_memory_handle_type& off_d3d12_heap(){ flag &= ~b_d3d12_heap; return *this; }
 F_external_memory_handle_type& on_d3d12_resource(){ flag |= b_d3d12_resource; return *this; }
 F_external_memory_handle_type& off_d3d12_resource(){ flag &= ~b_d3d12_resource; return *this; }
+VkExternalMemoryHandleTypeFlagBits get_vkfb(){ return VkExternalMemoryHandleTypeFlagBits(flag); }
 };
 F_external_memory_handle_type inline operator|(F_external_memory_handle_type::B bit1_, F_external_memory_handle_type::B bit2_){F_external_memory_handle_type flags(bit1_);return flags | bit2_;}
 bool inline operator==(F_external_memory_handle_type f1_, F_external_memory_handle_type f2_) { return f1_.flag== f2_.flag; }
@@ -3183,6 +3223,7 @@ F_external_memory_feature& on_exportable(){ flag |= b_exportable; return *this; 
 F_external_memory_feature& off_exportable(){ flag &= ~b_exportable; return *this; }
 F_external_memory_feature& on_importable(){ flag |= b_importable; return *this; }
 F_external_memory_feature& off_importable(){ flag &= ~b_importable; return *this; }
+VkExternalMemoryFeatureFlagBits get_vkfb(){ return VkExternalMemoryFeatureFlagBits(flag); }
 };
 F_external_memory_feature inline operator|(F_external_memory_feature::B bit1_, F_external_memory_feature::B bit2_){F_external_memory_feature flags(bit1_);return flags | bit2_;}
 bool inline operator==(F_external_memory_feature f1_, F_external_memory_feature f2_) { return f1_.flag== f2_.flag; }
@@ -3235,6 +3276,7 @@ F_external_semaphore_handle_type& on_d3d12_fence(){ flag |= b_d3d12_fence; retur
 F_external_semaphore_handle_type& off_d3d12_fence(){ flag &= ~b_d3d12_fence; return *this; }
 F_external_semaphore_handle_type& on_sync_fd(){ flag |= b_sync_fd; return *this; }
 F_external_semaphore_handle_type& off_sync_fd(){ flag &= ~b_sync_fd; return *this; }
+VkExternalSemaphoreHandleTypeFlagBits get_vkfb(){ return VkExternalSemaphoreHandleTypeFlagBits(flag); }
 };
 F_external_semaphore_handle_type inline operator|(F_external_semaphore_handle_type::B bit1_, F_external_semaphore_handle_type::B bit2_){F_external_semaphore_handle_type flags(bit1_);return flags | bit2_;}
 bool inline operator==(F_external_semaphore_handle_type f1_, F_external_semaphore_handle_type f2_) { return f1_.flag== f2_.flag; }
@@ -3278,6 +3320,7 @@ F_external_semaphore_feature& on_exportable(){ flag |= b_exportable; return *thi
 F_external_semaphore_feature& off_exportable(){ flag &= ~b_exportable; return *this; }
 F_external_semaphore_feature& on_importable(){ flag |= b_importable; return *this; }
 F_external_semaphore_feature& off_importable(){ flag &= ~b_importable; return *this; }
+VkExternalSemaphoreFeatureFlagBits get_vkfb(){ return VkExternalSemaphoreFeatureFlagBits(flag); }
 };
 F_external_semaphore_feature inline operator|(F_external_semaphore_feature::B bit1_, F_external_semaphore_feature::B bit2_){F_external_semaphore_feature flags(bit1_);return flags | bit2_;}
 bool inline operator==(F_external_semaphore_feature f1_, F_external_semaphore_feature f2_) { return f1_.flag== f2_.flag; }
@@ -3318,6 +3361,7 @@ return b_temporary;
 }
 F_semaphore_import& on_temporary(){ flag |= b_temporary; return *this; }
 F_semaphore_import& off_temporary(){ flag &= ~b_temporary; return *this; }
+VkSemaphoreImportFlagBits get_vkfb(){ return VkSemaphoreImportFlagBits(flag); }
 };
 F_semaphore_import inline operator|(F_semaphore_import::B bit1_, F_semaphore_import::B bit2_){F_semaphore_import flags(bit1_);return flags | bit2_;}
 bool inline operator==(F_semaphore_import f1_, F_semaphore_import f2_) { return f1_.flag== f2_.flag; }
@@ -3367,6 +3411,7 @@ F_external_fence_handle_type& on_opaque_win32_kmt(){ flag |= b_opaque_win32_kmt;
 F_external_fence_handle_type& off_opaque_win32_kmt(){ flag &= ~b_opaque_win32_kmt; return *this; }
 F_external_fence_handle_type& on_sync_fd(){ flag |= b_sync_fd; return *this; }
 F_external_fence_handle_type& off_sync_fd(){ flag &= ~b_sync_fd; return *this; }
+VkExternalFenceHandleTypeFlagBits get_vkfb(){ return VkExternalFenceHandleTypeFlagBits(flag); }
 };
 F_external_fence_handle_type inline operator|(F_external_fence_handle_type::B bit1_, F_external_fence_handle_type::B bit2_){F_external_fence_handle_type flags(bit1_);return flags | bit2_;}
 bool inline operator==(F_external_fence_handle_type f1_, F_external_fence_handle_type f2_) { return f1_.flag== f2_.flag; }
@@ -3410,6 +3455,7 @@ F_external_fence_feature& on_exportable(){ flag |= b_exportable; return *this; }
 F_external_fence_feature& off_exportable(){ flag &= ~b_exportable; return *this; }
 F_external_fence_feature& on_importable(){ flag |= b_importable; return *this; }
 F_external_fence_feature& off_importable(){ flag &= ~b_importable; return *this; }
+VkExternalFenceFeatureFlagBits get_vkfb(){ return VkExternalFenceFeatureFlagBits(flag); }
 };
 F_external_fence_feature inline operator|(F_external_fence_feature::B bit1_, F_external_fence_feature::B bit2_){F_external_fence_feature flags(bit1_);return flags | bit2_;}
 bool inline operator==(F_external_fence_feature f1_, F_external_fence_feature f2_) { return f1_.flag== f2_.flag; }
@@ -3450,6 +3496,7 @@ return b_temporary;
 }
 F_fence_import& on_temporary(){ flag |= b_temporary; return *this; }
 F_fence_import& off_temporary(){ flag &= ~b_temporary; return *this; }
+VkFenceImportFlagBits get_vkfb(){ return VkFenceImportFlagBits(flag); }
 };
 F_fence_import inline operator|(F_fence_import::B bit1_, F_fence_import::B bit2_){F_fence_import flags(bit1_);return flags | bit2_;}
 bool inline operator==(F_fence_import f1_, F_fence_import f2_) { return f1_.flag== f2_.flag; }
@@ -3490,6 +3537,7 @@ return b_vblank_ext;
 }
 F_surface_counter_EXT& on_vblank_ext(){ flag |= b_vblank_ext; return *this; }
 F_surface_counter_EXT& off_vblank_ext(){ flag &= ~b_vblank_ext; return *this; }
+VkSurfaceCounterFlagBitsEXT get_vkfb(){ return VkSurfaceCounterFlagBitsEXT(flag); }
 };
 F_surface_counter_EXT inline operator|(F_surface_counter_EXT::B bit1_, F_surface_counter_EXT::B bit2_){F_surface_counter_EXT flags(bit1_);return flags | bit2_;}
 bool inline operator==(F_surface_counter_EXT f1_, F_surface_counter_EXT f2_) { return f1_.flag== f2_.flag; }
@@ -3543,6 +3591,7 @@ F_peer_memory_feature& on_generic_src(){ flag |= b_generic_src; return *this; }
 F_peer_memory_feature& off_generic_src(){ flag &= ~b_generic_src; return *this; }
 F_peer_memory_feature& on_generic_dst(){ flag |= b_generic_dst; return *this; }
 F_peer_memory_feature& off_generic_dst(){ flag &= ~b_generic_dst; return *this; }
+VkPeerMemoryFeatureFlagBits get_vkfb(){ return VkPeerMemoryFeatureFlagBits(flag); }
 };
 F_peer_memory_feature inline operator|(F_peer_memory_feature::B bit1_, F_peer_memory_feature::B bit2_){F_peer_memory_feature flags(bit1_);return flags | bit2_;}
 bool inline operator==(F_peer_memory_feature f1_, F_peer_memory_feature f2_) { return f1_.flag== f2_.flag; }
@@ -3584,6 +3633,7 @@ return b_device_mask;
 }
 F_memory_allocate& on_device_mask(){ flag |= b_device_mask; return *this; }
 F_memory_allocate& off_device_mask(){ flag &= ~b_device_mask; return *this; }
+VkMemoryAllocateFlagBits get_vkfb(){ return VkMemoryAllocateFlagBits(flag); }
 };
 F_memory_allocate inline operator|(F_memory_allocate::B bit1_, F_memory_allocate::B bit2_){F_memory_allocate flags(bit1_);return flags | bit2_;}
 bool inline operator==(F_memory_allocate f1_, F_memory_allocate f2_) { return f1_.flag== f2_.flag; }
@@ -3637,6 +3687,7 @@ F_device_group_present_mode_KHR& on_sum_khr(){ flag |= b_sum_khr; return *this; 
 F_device_group_present_mode_KHR& off_sum_khr(){ flag &= ~b_sum_khr; return *this; }
 F_device_group_present_mode_KHR& on_local_multi_device_khr(){ flag |= b_local_multi_device_khr; return *this; }
 F_device_group_present_mode_KHR& off_local_multi_device_khr(){ flag &= ~b_local_multi_device_khr; return *this; }
+VkDeviceGroupPresentModeFlagBitsKHR get_vkfb(){ return VkDeviceGroupPresentModeFlagBitsKHR(flag); }
 };
 F_device_group_present_mode_KHR inline operator|(F_device_group_present_mode_KHR::B bit1_, F_device_group_present_mode_KHR::B bit2_){F_device_group_present_mode_KHR flags(bit1_);return flags | bit2_;}
 bool inline operator==(F_device_group_present_mode_KHR f1_, F_device_group_present_mode_KHR f2_) { return f1_.flag== f2_.flag; }
@@ -3694,6 +3745,7 @@ F_debug_utils_message_severity_EXT& on_warning_ext(){ flag |= b_warning_ext; ret
 F_debug_utils_message_severity_EXT& off_warning_ext(){ flag &= ~b_warning_ext; return *this; }
 F_debug_utils_message_severity_EXT& on_error_ext(){ flag |= b_error_ext; return *this; }
 F_debug_utils_message_severity_EXT& off_error_ext(){ flag &= ~b_error_ext; return *this; }
+VkDebugUtilsMessageSeverityFlagBitsEXT get_vkfb(){ return VkDebugUtilsMessageSeverityFlagBitsEXT(flag); }
 };
 F_debug_utils_message_severity_EXT inline operator|(F_debug_utils_message_severity_EXT::B bit1_, F_debug_utils_message_severity_EXT::B bit2_){F_debug_utils_message_severity_EXT flags(bit1_);return flags | bit2_;}
 bool inline operator==(F_debug_utils_message_severity_EXT f1_, F_debug_utils_message_severity_EXT f2_) { return f1_.flag== f2_.flag; }
@@ -3740,6 +3792,7 @@ F_debug_utils_message_type_EXT& on_validation_ext(){ flag |= b_validation_ext; r
 F_debug_utils_message_type_EXT& off_validation_ext(){ flag &= ~b_validation_ext; return *this; }
 F_debug_utils_message_type_EXT& on_performance_ext(){ flag |= b_performance_ext; return *this; }
 F_debug_utils_message_type_EXT& off_performance_ext(){ flag &= ~b_performance_ext; return *this; }
+VkDebugUtilsMessageTypeFlagBitsEXT get_vkfb(){ return VkDebugUtilsMessageTypeFlagBitsEXT(flag); }
 };
 F_debug_utils_message_type_EXT inline operator|(F_debug_utils_message_type_EXT::B bit1_, F_debug_utils_message_type_EXT::B bit2_){F_debug_utils_message_type_EXT flags(bit1_);return flags | bit2_;}
 bool inline operator==(F_debug_utils_message_type_EXT f1_, F_debug_utils_message_type_EXT f2_) { return f1_.flag== f2_.flag; }
@@ -3789,6 +3842,7 @@ F_descriptor_binding_EXT& on_partially_bound_ext(){ flag |= b_partially_bound_ex
 F_descriptor_binding_EXT& off_partially_bound_ext(){ flag &= ~b_partially_bound_ext; return *this; }
 F_descriptor_binding_EXT& on_variable_descriptor_count_ext(){ flag |= b_variable_descriptor_count_ext; return *this; }
 F_descriptor_binding_EXT& off_variable_descriptor_count_ext(){ flag &= ~b_variable_descriptor_count_ext; return *this; }
+VkDescriptorBindingFlagBitsEXT get_vkfb(){ return VkDescriptorBindingFlagBitsEXT(flag); }
 };
 F_descriptor_binding_EXT inline operator|(F_descriptor_binding_EXT::B bit1_, F_descriptor_binding_EXT::B bit2_){F_descriptor_binding_EXT flags(bit1_);return flags | bit2_;}
 bool inline operator==(F_descriptor_binding_EXT f1_, F_descriptor_binding_EXT f2_) { return f1_.flag== f2_.flag; }
@@ -3829,6 +3883,7 @@ return b_inverted_ext;
 }
 F_conditional_rendering_EXT& on_inverted_ext(){ flag |= b_inverted_ext; return *this; }
 F_conditional_rendering_EXT& off_inverted_ext(){ flag &= ~b_inverted_ext; return *this; }
+VkConditionalRenderingFlagBitsEXT get_vkfb(){ return VkConditionalRenderingFlagBitsEXT(flag); }
 };
 F_conditional_rendering_EXT inline operator|(F_conditional_rendering_EXT::B bit1_, F_conditional_rendering_EXT::B bit2_){F_conditional_rendering_EXT flags(bit1_);return flags | bit2_;}
 bool inline operator==(F_conditional_rendering_EXT f1_, F_conditional_rendering_EXT f2_) { return f1_.flag== f2_.flag; }
@@ -3878,6 +3933,7 @@ F_geometry_instance_NVX& on_force_opaque_nvx(){ flag |= b_force_opaque_nvx; retu
 F_geometry_instance_NVX& off_force_opaque_nvx(){ flag &= ~b_force_opaque_nvx; return *this; }
 F_geometry_instance_NVX& on_force_no_opaque_nvx(){ flag |= b_force_no_opaque_nvx; return *this; }
 F_geometry_instance_NVX& off_force_no_opaque_nvx(){ flag &= ~b_force_no_opaque_nvx; return *this; }
+VkGeometryInstanceFlagBitsNVX get_vkfb(){ return VkGeometryInstanceFlagBitsNVX(flag); }
 };
 F_geometry_instance_NVX inline operator|(F_geometry_instance_NVX::B bit1_, F_geometry_instance_NVX::B bit2_){F_geometry_instance_NVX flags(bit1_);return flags | bit2_;}
 bool inline operator==(F_geometry_instance_NVX f1_, F_geometry_instance_NVX f2_) { return f1_.flag== f2_.flag; }
@@ -3921,6 +3977,7 @@ F_geometry_NVX& on_opaque_nvx(){ flag |= b_opaque_nvx; return *this; }
 F_geometry_NVX& off_opaque_nvx(){ flag &= ~b_opaque_nvx; return *this; }
 F_geometry_NVX& on_no_duplicate_any_hit_invocation_nvx(){ flag |= b_no_duplicate_any_hit_invocation_nvx; return *this; }
 F_geometry_NVX& off_no_duplicate_any_hit_invocation_nvx(){ flag &= ~b_no_duplicate_any_hit_invocation_nvx; return *this; }
+VkGeometryFlagBitsNVX get_vkfb(){ return VkGeometryFlagBitsNVX(flag); }
 };
 F_geometry_NVX inline operator|(F_geometry_NVX::B bit1_, F_geometry_NVX::B bit2_){F_geometry_NVX flags(bit1_);return flags | bit2_;}
 bool inline operator==(F_geometry_NVX f1_, F_geometry_NVX f2_) { return f1_.flag== f2_.flag; }
@@ -3973,6 +4030,7 @@ F_build_acceleration_structure_NVX& on_prefer_fast_build_nvx(){ flag |= b_prefer
 F_build_acceleration_structure_NVX& off_prefer_fast_build_nvx(){ flag &= ~b_prefer_fast_build_nvx; return *this; }
 F_build_acceleration_structure_NVX& on_low_memory_nvx(){ flag |= b_low_memory_nvx; return *this; }
 F_build_acceleration_structure_NVX& off_low_memory_nvx(){ flag &= ~b_low_memory_nvx; return *this; }
+VkBuildAccelerationStructureFlagBitsNVX get_vkfb(){ return VkBuildAccelerationStructureFlagBitsNVX(flag); }
 };
 F_build_acceleration_structure_NVX inline operator|(F_build_acceleration_structure_NVX::B bit1_, F_build_acceleration_structure_NVX::B bit2_){F_build_acceleration_structure_NVX flags(bit1_);return flags | bit2_;}
 bool inline operator==(F_build_acceleration_structure_NVX f1_, F_build_acceleration_structure_NVX f2_) { return f1_.flag== f2_.flag; }
@@ -4374,7 +4432,7 @@ struct		S_offset_2d{
 	int32_t x;
 	int32_t y;
 
-S_offset_2d(){}
+VkOffset2D*const get_vkptr(){return reinterpret_cast<VkOffset2D*>(this);}
 };
 
 /*	VkOffset3D
@@ -4384,7 +4442,7 @@ struct		S_offset_3d{
 	int32_t y;
 	int32_t z;
 
-S_offset_3d(){}
+VkOffset3D*const get_vkptr(){return reinterpret_cast<VkOffset3D*>(this);}
 };
 
 /*	VkExtent2D
@@ -4393,7 +4451,7 @@ struct		S_extent_2d{
 	uint32_t width;
 	uint32_t height;
 
-S_extent_2d(){}
+VkExtent2D*const get_vkptr(){return reinterpret_cast<VkExtent2D*>(this);}
 };
 
 /*	VkExtent3D
@@ -4403,7 +4461,7 @@ struct		S_extent_3d{
 	uint32_t height;
 	uint32_t depth;
 
-S_extent_3d(){}
+VkExtent3D*const get_vkptr(){return reinterpret_cast<VkExtent3D*>(this);}
 };
 
 /*	VkViewport
@@ -4416,7 +4474,7 @@ struct		S_viewport{
 	float minDepth;
 	float maxDepth;
 
-S_viewport(){}
+VkViewport*const get_vkptr(){return reinterpret_cast<VkViewport*>(this);}
 };
 
 /*	VkRect2D
@@ -4425,7 +4483,7 @@ struct		S_rect_2d{
 	S_offset_2d offset;
 	S_extent_2d extent;
 
-S_rect_2d(){}
+VkRect2D*const get_vkptr(){return reinterpret_cast<VkRect2D*>(this);}
 };
 
 /*	VkClearRect
@@ -4435,7 +4493,7 @@ struct		S_clear_rect{
 	uint32_t baseArrayLayer;
 	uint32_t layerCount;
 
-S_clear_rect(){}
+VkClearRect*const get_vkptr(){return reinterpret_cast<VkClearRect*>(this);}
 };
 
 /*	VkComponentMapping
@@ -4446,7 +4504,7 @@ struct		S_component_mapping{
 	E_component_swizzle b;
 	E_component_swizzle a;
 
-S_component_mapping(){}
+VkComponentMapping*const get_vkptr(){return reinterpret_cast<VkComponentMapping*>(this);}
 };
 
 /*	VkPhysicalDeviceLimits
@@ -4560,7 +4618,7 @@ struct		S_physical_device_limits{
 	VkDeviceSize optimalBufferCopyRowPitchAlignment;
 	VkDeviceSize nonCoherentAtomSize;
 
-S_physical_device_limits(){}
+VkPhysicalDeviceLimits*const get_vkptr(){return reinterpret_cast<VkPhysicalDeviceLimits*>(this);}
 };
 
 /*	VkPhysicalDeviceSparseProperties
@@ -4573,7 +4631,7 @@ struct		S_physical_device_sparse_properties{
 	VkBool32 residencyAlignedMipSize;
 	VkBool32 residencyNonResidentStrict;
 
-S_physical_device_sparse_properties(){}
+VkPhysicalDeviceSparseProperties*const get_vkptr(){return reinterpret_cast<VkPhysicalDeviceSparseProperties*>(this);}
 };
 
 /*	VkPhysicalDeviceProperties
@@ -4590,7 +4648,7 @@ struct		S_physical_device_properties{
 	S_physical_device_limits limits;
 	S_physical_device_sparse_properties sparseProperties;
 
-S_physical_device_properties(){}
+VkPhysicalDeviceProperties*const get_vkptr(){return reinterpret_cast<VkPhysicalDeviceProperties*>(this);}
 };
 
 /*	VkExtensionProperties
@@ -4600,7 +4658,7 @@ struct		S_extension_properties{
 	char extensionName[VK_MAX_EXTENSION_NAME_SIZE];
 	uint32_t specVersion;
 
-S_extension_properties(){}
+VkExtensionProperties*const get_vkptr(){return reinterpret_cast<VkExtensionProperties*>(this);}
 };
 
 /*	VkLayerProperties
@@ -4612,7 +4670,7 @@ struct		S_layer_properties{
 	uint32_t implementationVersion;
 	char description[VK_MAX_DESCRIPTION_SIZE];
 
-S_layer_properties(){}
+VkLayerProperties*const get_vkptr(){return reinterpret_cast<VkLayerProperties*>(this);}
 };
 
 /*	VkApplicationInfo
@@ -4627,6 +4685,8 @@ public:
 	const char * pEngineName;
 	uint32_t engineVersion;
 	uint32_t apiVersion;
+
+VkApplicationInfo*const get_vkptr(){return reinterpret_cast<VkApplicationInfo*>(this);}
 
 S_application_info(){}
 
@@ -4667,7 +4727,7 @@ struct		S_allocation_callbacks{
 	PFN_vkInternalAllocationNotification pfnInternalAllocation;
 	PFN_vkInternalFreeNotification pfnInternalFree;
 
-S_allocation_callbacks(){}
+VkAllocationCallbacks*const get_vkptr(){return reinterpret_cast<VkAllocationCallbacks*>(this);}
 };
 
 /*	VkDeviceQueueGlobalPriorityCreateInfoEXT
@@ -4679,6 +4739,8 @@ private:
 	 void * pNext = nullptr;
 public:
 	E_queue_global_priority_EXT globalPriority;
+
+VkDeviceQueueGlobalPriorityCreateInfoEXT*const get_vkptr(){return reinterpret_cast<VkDeviceQueueGlobalPriorityCreateInfoEXT*>(this);}
 
 S_device_queue_global_priority_create_info_EXT(){}
 
@@ -4716,6 +4778,8 @@ public:
 	uint32_t queueFamilyIndex;
 	uint32_t queueCount;
 	const float * pQueuePriorities;
+
+VkDeviceQueueCreateInfo*const get_vkptr(){return reinterpret_cast<VkDeviceQueueCreateInfo*>(this);}
 
 S_device_queue_create_info(){}
 
@@ -4813,7 +4877,7 @@ struct		S_physical_device_features{
 	VkBool32 variableMultisampleRate;
 	VkBool32 inheritedQueries;
 
-S_physical_device_features(){}
+VkPhysicalDeviceFeatures*const get_vkptr(){return reinterpret_cast<VkPhysicalDeviceFeatures*>(this);}
 };
 
 /*	VkPhysicalDeviceVariablePointerFeatures
@@ -4826,6 +4890,8 @@ private:
 public:
 	VkBool32 variablePointersStorageBuffer;
 	VkBool32 variablePointers;
+
+VkPhysicalDeviceVariablePointerFeatures*const get_vkptr(){return reinterpret_cast<VkPhysicalDeviceVariablePointerFeatures*>(this);}
 
 S_physical_device_variable_pointer_features(){}
 
@@ -4864,6 +4930,8 @@ public:
 	VkBool32 multiview;
 	VkBool32 multiviewGeometryShader;
 	VkBool32 multiviewTessellationShader;
+
+VkPhysicalDeviceMultiviewFeatures*const get_vkptr(){return reinterpret_cast<VkPhysicalDeviceMultiviewFeatures*>(this);}
 
 S_physical_device_multiview_features(){}
 
@@ -4906,6 +4974,8 @@ public:
 	VkBool32 storagePushConstant16;
 	VkBool32 storageInputOutput16;
 
+VkPhysicalDevice16BitStorageFeatures*const get_vkptr(){return reinterpret_cast<VkPhysicalDevice16BitStorageFeatures*>(this);}
+
 S_physical_device_16bit_storage_features(){}
 
 S_physical_device_16bit_storage_features(
@@ -4946,6 +5016,8 @@ private:
 public:
 	VkBool32 samplerYcbcrConversion;
 
+VkPhysicalDeviceSamplerYcbcrConversionFeatures*const get_vkptr(){return reinterpret_cast<VkPhysicalDeviceSamplerYcbcrConversionFeatures*>(this);}
+
 S_physical_device_sampler_ycbcr_conversion_features(){}
 
 S_physical_device_sampler_ycbcr_conversion_features(
@@ -4980,6 +5052,8 @@ private:
 public:
 	VkBool32 protectedMemory;
 
+VkPhysicalDeviceProtectedMemoryFeatures*const get_vkptr(){return reinterpret_cast<VkPhysicalDeviceProtectedMemoryFeatures*>(this);}
+
 S_physical_device_protected_memory_features(){}
 
 S_physical_device_protected_memory_features(
@@ -5013,6 +5087,8 @@ private:
 	void * pNext = nullptr;
 public:
 	VkBool32 advancedBlendCoherentOperations;
+
+VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT*const get_vkptr(){return reinterpret_cast<VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT*>(this);}
 
 S_physical_device_blend_operation_advanced_features_EXT(){}
 
@@ -5050,6 +5126,8 @@ public:
 	VkBool32 inlineUniformBlock;
 	VkBool32 descriptorBindingInlineUniformBlockUpdateAfterBind;
 
+VkPhysicalDeviceInlineUniformBlockFeaturesEXT*const get_vkptr(){return reinterpret_cast<VkPhysicalDeviceInlineUniformBlockFeaturesEXT*>(this);}
+
 S_physical_device_inline_uniform_block_features_EXT(){}
 
 S_physical_device_inline_uniform_block_features_EXT(
@@ -5085,6 +5163,8 @@ private:
 	void * pNext = nullptr;
 public:
 	VkBool32 shaderDrawParameters;
+
+VkPhysicalDeviceShaderDrawParameterFeatures*const get_vkptr(){return reinterpret_cast<VkPhysicalDeviceShaderDrawParameterFeatures*>(this);}
 
 S_physical_device_shader_draw_parameter_features(){}
 
@@ -5138,6 +5218,8 @@ public:
 	VkBool32 descriptorBindingPartiallyBound;
 	VkBool32 descriptorBindingVariableDescriptorCount;
 	VkBool32 runtimeDescriptorArray;
+
+VkPhysicalDeviceDescriptorIndexingFeaturesEXT*const get_vkptr(){return reinterpret_cast<VkPhysicalDeviceDescriptorIndexingFeaturesEXT*>(this);}
 
 S_physical_device_descriptor_indexing_features_EXT(){}
 
@@ -5213,6 +5295,8 @@ public:
 	VkBool32 uniformAndStorageBuffer8BitAccess;
 	VkBool32 storagePushConstant8;
 
+VkPhysicalDevice8BitStorageFeaturesKHR*const get_vkptr(){return reinterpret_cast<VkPhysicalDevice8BitStorageFeaturesKHR*>(this);}
+
 S_physical_device_8bit_storage_features_KHR(){}
 
 S_physical_device_8bit_storage_features_KHR(
@@ -5252,6 +5336,8 @@ public:
 	VkBool32 conditionalRendering;
 	VkBool32 inheritedConditionalRendering;
 
+VkPhysicalDeviceConditionalRenderingFeaturesEXT*const get_vkptr(){return reinterpret_cast<VkPhysicalDeviceConditionalRenderingFeaturesEXT*>(this);}
+
 S_physical_device_conditional_rendering_features_EXT(){}
 
 S_physical_device_conditional_rendering_features_EXT(
@@ -5289,6 +5375,8 @@ private:
 public:
 	VkBool32 vulkanMemoryModel;
 	VkBool32 vulkanMemoryModelDeviceScope;
+
+VkPhysicalDeviceVulkanMemoryModelFeaturesKHR*const get_vkptr(){return reinterpret_cast<VkPhysicalDeviceVulkanMemoryModelFeaturesKHR*>(this);}
 
 S_physical_device_vulkan_memory_model_features_KHR(){}
 
@@ -5328,6 +5416,8 @@ public:
 	VkBool32 shaderBufferInt64Atomics;
 	VkBool32 shaderSharedInt64Atomics;
 
+VkPhysicalDeviceShaderAtomicInt64FeaturesKHR*const get_vkptr(){return reinterpret_cast<VkPhysicalDeviceShaderAtomicInt64FeaturesKHR*>(this);}
+
 S_physical_device_shader_atomic_int64_features_KHR(){}
 
 S_physical_device_shader_atomic_int64_features_KHR(
@@ -5366,6 +5456,8 @@ public:
 	VkBool32 vertexAttributeInstanceRateDivisor;
 	VkBool32 vertexAttributeInstanceRateZeroDivisor;
 
+VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT*const get_vkptr(){return reinterpret_cast<VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT*>(this);}
+
 S_physical_device_vertex_attribute_divisor_features_EXT(){}
 
 S_physical_device_vertex_attribute_divisor_features_EXT(
@@ -5402,6 +5494,8 @@ private:
 public:
 	VkBool32 decodeModeSharedExponent;
 
+VkPhysicalDeviceASTCDecodeFeaturesEXT*const get_vkptr(){return reinterpret_cast<VkPhysicalDeviceASTCDecodeFeaturesEXT*>(this);}
+
 S_physical_device_astc_decode_features_EXT(){}
 
 S_physical_device_astc_decode_features_EXT(
@@ -5435,6 +5529,8 @@ private:
 	void * pNext = nullptr;
 public:
 	VkBool32 representativeFragmentTest;
+
+VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV*const get_vkptr(){return reinterpret_cast<VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV*>(this);}
 
 S_physical_device_representative_fragment_test_features_NV(){}
 
@@ -5470,6 +5566,8 @@ private:
 public:
 	VkBool32 exclusiveScissor;
 
+VkPhysicalDeviceExclusiveScissorFeaturesNV*const get_vkptr(){return reinterpret_cast<VkPhysicalDeviceExclusiveScissorFeaturesNV*>(this);}
+
 S_physical_device_exclusive_scissor_features_NV(){}
 
 S_physical_device_exclusive_scissor_features_NV(
@@ -5503,6 +5601,8 @@ private:
 	void * pNext = nullptr;
 public:
 	VkBool32 cornerSampledImage;
+
+VkPhysicalDeviceCornerSampledImageFeaturesNV*const get_vkptr(){return reinterpret_cast<VkPhysicalDeviceCornerSampledImageFeaturesNV*>(this);}
 
 S_physical_device_corner_sampled_image_features_NV(){}
 
@@ -5538,6 +5638,8 @@ private:
 public:
 	VkBool32 computeDerivativeGroupQuads;
 	VkBool32 computeDerivativeGroupLinear;
+
+VkPhysicalDeviceComputeShaderDerivativesFeaturesNV*const get_vkptr(){return reinterpret_cast<VkPhysicalDeviceComputeShaderDerivativesFeaturesNV*>(this);}
 
 S_physical_device_compute_shader_derivatives_features_NV(){}
 
@@ -5575,6 +5677,8 @@ private:
 public:
 	VkBool32 fragmentShaderBarycentric;
 
+VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV*const get_vkptr(){return reinterpret_cast<VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV*>(this);}
+
 S_physical_device_fragment_shader_barycentric_features_NV(){}
 
 S_physical_device_fragment_shader_barycentric_features_NV(
@@ -5608,6 +5712,8 @@ private:
 	void * pNext = nullptr;
 public:
 	VkBool32 imageFootprint;
+
+VkPhysicalDeviceShaderImageFootprintFeaturesNV*const get_vkptr(){return reinterpret_cast<VkPhysicalDeviceShaderImageFootprintFeaturesNV*>(this);}
 
 S_physical_device_shader_image_footprint_features_NV(){}
 
@@ -5643,6 +5749,8 @@ private:
 public:
 	VkBool32 shadingRateImage;
 	VkBool32 shadingRateCoarseSampleOrder;
+
+VkPhysicalDeviceShadingRateImageFeaturesNV*const get_vkptr(){return reinterpret_cast<VkPhysicalDeviceShadingRateImageFeaturesNV*>(this);}
 
 S_physical_device_shading_rate_image_features_NV(){}
 
@@ -5680,6 +5788,8 @@ private:
 public:
 	VkBool32 taskShader;
 	VkBool32 meshShader;
+
+VkPhysicalDeviceMeshShaderFeaturesNV*const get_vkptr(){return reinterpret_cast<VkPhysicalDeviceMeshShaderFeaturesNV*>(this);}
 
 S_physical_device_mesh_shader_features_NV(){}
 
@@ -5740,6 +5850,8 @@ private:
 	void * pNext = nullptr;
 public:
 	S_physical_device_features features;
+
+VkPhysicalDeviceFeatures2*const get_vkptr(){return reinterpret_cast<VkPhysicalDeviceFeatures2*>(this);}
 
 S_physical_device_features2(){}
 
@@ -5833,6 +5945,8 @@ public:
 	uint32_t physicalDeviceCount;
 	const VkPhysicalDevice * pPhysicalDevices;
 
+VkDeviceGroupDeviceCreateInfo*const get_vkptr(){return reinterpret_cast<VkDeviceGroupDeviceCreateInfo*>(this);}
+
 S_device_group_device_create_info(){}
 
 S_device_group_device_create_info(
@@ -5899,6 +6013,8 @@ public:
 	uint32_t enabledExtensionCount;
 	const char * const* ppEnabledExtensionNames;
 	const S_physical_device_features * pEnabledFeatures;
+
+VkDeviceCreateInfo*const get_vkptr(){return reinterpret_cast<VkDeviceCreateInfo*>(this);}
 
 S_device_create_info(){}
 
@@ -6009,6 +6125,8 @@ public:
 	PFN_vkDebugReportCallbackEXT pfnCallback;
 	void * pUserData;
 
+VkDebugReportCallbackCreateInfoEXT*const get_vkptr(){return reinterpret_cast<VkDebugReportCallbackCreateInfoEXT*>(this);}
+
 S_debug_report_callback_create_info_EXT(){}
 
 S_debug_report_callback_create_info_EXT(
@@ -6046,6 +6164,8 @@ private:
 public:
 	uint32_t disabledValidationCheckCount;
 	const E_validation_check_EXT * pDisabledValidationChecks;
+
+VkValidationFlagsEXT*const get_vkptr(){return reinterpret_cast<VkValidationFlagsEXT*>(this);}
 
 S_validation_flags_EXT(){}
 
@@ -6085,6 +6205,8 @@ public:
 	F_debug_utils_message_type_EXT messageType;
 	PFN_vkDebugUtilsMessengerCallbackEXT pfnUserCallback;
 	void * pUserData;
+
+VkDebugUtilsMessengerCreateInfoEXT*const get_vkptr(){return reinterpret_cast<VkDebugUtilsMessengerCreateInfoEXT*>(this);}
 
 S_debug_utils_messenger_create_info_EXT(){}
 
@@ -6134,6 +6256,8 @@ public:
 	const char * const* ppEnabledLayerNames;
 	uint32_t enabledExtensionCount;
 	const char * const* ppEnabledExtensionNames;
+
+VkInstanceCreateInfo*const get_vkptr(){return reinterpret_cast<VkInstanceCreateInfo*>(this);}
 
 S_instance_create_info(){}
 
@@ -6189,7 +6313,7 @@ struct		S_queue_family_properties{
 	uint32_t timestampValidBits;
 	S_extent_3d minImageTransferGranularity;
 
-S_queue_family_properties(){}
+VkQueueFamilyProperties*const get_vkptr(){return reinterpret_cast<VkQueueFamilyProperties*>(this);}
 };
 
 /*	VkMemoryType
@@ -6199,7 +6323,7 @@ struct		S_memory_type{
 	F_memory_property propertyFlags;
 	uint32_t heapIndex;
 
-S_memory_type(){}
+VkMemoryType*const get_vkptr(){return reinterpret_cast<VkMemoryType*>(this);}
 };
 
 /*	VkMemoryHeap
@@ -6209,7 +6333,7 @@ struct		S_memory_heap{
 	VkDeviceSize size;
 	F_memory_heap flags;
 
-S_memory_heap(){}
+VkMemoryHeap*const get_vkptr(){return reinterpret_cast<VkMemoryHeap*>(this);}
 };
 
 /*	VkPhysicalDeviceMemoryProperties
@@ -6221,7 +6345,7 @@ struct		S_physical_device_memory_properties{
 	uint32_t memoryHeapCount;
 	S_memory_heap memoryHeaps[VK_MAX_MEMORY_HEAPS];
 
-S_physical_device_memory_properties(){}
+VkPhysicalDeviceMemoryProperties*const get_vkptr(){return reinterpret_cast<VkPhysicalDeviceMemoryProperties*>(this);}
 };
 
 /*	VkDedicatedAllocationMemoryAllocateInfoNV
@@ -6234,6 +6358,8 @@ private:
 public:
 	VkImage image;
 	VkBuffer buffer;
+
+VkDedicatedAllocationMemoryAllocateInfoNV*const get_vkptr(){return reinterpret_cast<VkDedicatedAllocationMemoryAllocateInfoNV*>(this);}
 
 S_dedicated_allocation_memory_allocate_info_NV(){}
 
@@ -6270,6 +6396,8 @@ private:
 public:
 	F_external_memory_handle_type_NV handleTypes;
 
+VkExportMemoryAllocateInfoNV*const get_vkptr(){return reinterpret_cast<VkExportMemoryAllocateInfoNV*>(this);}
+
 S_export_memory_allocate_info_NV(){}
 
 S_export_memory_allocate_info_NV(
@@ -6304,6 +6432,8 @@ private:
 public:
 	F_external_memory_handle_type_NV handleType;
 	HANDLE handle;
+
+VkImportMemoryWin32HandleInfoNV*const get_vkptr(){return reinterpret_cast<VkImportMemoryWin32HandleInfoNV*>(this);}
 
 S_import_memory_win32_handle_info_NV(){}
 
@@ -6343,6 +6473,8 @@ public:
 	const SECURITY_ATTRIBUTES * pAttributes;
 	DWORD dwAccess;
 
+VkExportMemoryWin32HandleInfoNV*const get_vkptr(){return reinterpret_cast<VkExportMemoryWin32HandleInfoNV*>(this);}
+
 S_export_memory_win32_handle_info_NV(){}
 
 S_export_memory_win32_handle_info_NV(
@@ -6379,6 +6511,8 @@ private:
 public:
 	F_external_memory_handle_type handleTypes;
 
+VkExportMemoryAllocateInfo*const get_vkptr(){return reinterpret_cast<VkExportMemoryAllocateInfo*>(this);}
+
 S_export_memory_allocate_info(){}
 
 S_export_memory_allocate_info(
@@ -6414,6 +6548,8 @@ public:
 	F_external_memory_handle_type handleType;
 	HANDLE handle;
 	LPCWSTR name;
+
+VkImportMemoryWin32HandleInfoKHR*const get_vkptr(){return reinterpret_cast<VkImportMemoryWin32HandleInfoKHR*>(this);}
 
 S_import_memory_win32_handle_info_KHR(){}
 
@@ -6456,6 +6592,8 @@ public:
 	DWORD dwAccess;
 	LPCWSTR name;
 
+VkExportMemoryWin32HandleInfoKHR*const get_vkptr(){return reinterpret_cast<VkExportMemoryWin32HandleInfoKHR*>(this);}
+
 S_export_memory_win32_handle_info_KHR(){}
 
 S_export_memory_win32_handle_info_KHR(
@@ -6495,6 +6633,8 @@ public:
 	F_external_memory_handle_type handleType;
 	int fd;
 
+VkImportMemoryFdInfoKHR*const get_vkptr(){return reinterpret_cast<VkImportMemoryFdInfoKHR*>(this);}
+
 S_import_memory_fd_info_KHR(){}
 
 S_import_memory_fd_info_KHR(
@@ -6530,6 +6670,8 @@ private:
 public:
 	F_memory_allocate flags;
 	uint32_t deviceMask;
+
+VkMemoryAllocateFlagsInfo*const get_vkptr(){return reinterpret_cast<VkMemoryAllocateFlagsInfo*>(this);}
 
 S_memory_allocate_flags_info(){}
 
@@ -6567,6 +6709,8 @@ public:
 	VkImage image;
 	VkBuffer buffer;
 
+VkMemoryDedicatedAllocateInfo*const get_vkptr(){return reinterpret_cast<VkMemoryDedicatedAllocateInfo*>(this);}
+
 S_memory_dedicated_allocate_info(){}
 
 S_memory_dedicated_allocate_info(
@@ -6603,6 +6747,8 @@ public:
 	F_external_memory_handle_type handleType;
 	void * pHostPointer;
 
+VkImportMemoryHostPointerInfoEXT*const get_vkptr(){return reinterpret_cast<VkImportMemoryHostPointerInfoEXT*>(this);}
+
 S_import_memory_host_pointer_info_EXT(){}
 
 S_import_memory_host_pointer_info_EXT(
@@ -6638,6 +6784,8 @@ private:
 	 void * pNext = nullptr;
 public:
 	struct AHardwareBuffer * buffer;
+
+VkImportAndroidHardwareBufferInfoANDROID*const get_vkptr(){return reinterpret_cast<VkImportAndroidHardwareBufferInfoANDROID*>(this);}
 
 S_import_android_hardware_buffer_info_ANDROID(){}
 
@@ -6685,6 +6833,8 @@ private:
 public:
 	VkDeviceSize allocationSize;
 	uint32_t memoryTypeIndex;
+
+VkMemoryAllocateInfo*const get_vkptr(){return reinterpret_cast<VkMemoryAllocateInfo*>(this);}
 
 S_memory_allocate_info(){}
 
@@ -6769,7 +6919,7 @@ struct		S_memory_requirements{
 	VkDeviceSize alignment;
 	uint32_t memoryTypeBits;
 
-S_memory_requirements(){}
+VkMemoryRequirements*const get_vkptr(){return reinterpret_cast<VkMemoryRequirements*>(this);}
 };
 
 /*	VkSparseImageFormatProperties
@@ -6780,7 +6930,7 @@ struct		S_sparse_image_format_properties{
 	S_extent_3d imageGranularity;
 	F_sparse_image_format flags;
 
-S_sparse_image_format_properties(){}
+VkSparseImageFormatProperties*const get_vkptr(){return reinterpret_cast<VkSparseImageFormatProperties*>(this);}
 };
 
 /*	VkSparseImageMemoryRequirements
@@ -6793,7 +6943,7 @@ struct		S_sparse_image_memory_requirements{
 	VkDeviceSize imageMipTailOffset;
 	VkDeviceSize imageMipTailStride;
 
-S_sparse_image_memory_requirements(){}
+VkSparseImageMemoryRequirements*const get_vkptr(){return reinterpret_cast<VkSparseImageMemoryRequirements*>(this);}
 };
 
 /*	VkMappedMemoryRange
@@ -6806,6 +6956,8 @@ public:
 	VkDeviceMemory memory;
 	VkDeviceSize offset;
 	VkDeviceSize size;
+
+VkMappedMemoryRange*const get_vkptr(){return reinterpret_cast<VkMappedMemoryRange*>(this);}
 
 S_mapped_memory_range(){}
 
@@ -6840,7 +6992,7 @@ struct		S_format_properties{
 	F_format_feature optimalTilingFeatures;
 	F_format_feature bufferFeatures;
 
-S_format_properties(){}
+VkFormatProperties*const get_vkptr(){return reinterpret_cast<VkFormatProperties*>(this);}
 };
 
 /*	VkImageFormatProperties
@@ -6853,7 +7005,7 @@ struct		S_image_format_properties{
 	F_sample_count sampleCounts;
 	VkDeviceSize maxResourceSize;
 
-S_image_format_properties(){}
+VkImageFormatProperties*const get_vkptr(){return reinterpret_cast<VkImageFormatProperties*>(this);}
 };
 
 /*	VkDescriptorBufferInfo
@@ -6863,7 +7015,7 @@ struct		S_descriptor_buffer_info{
 	VkDeviceSize offset;
 	VkDeviceSize range;
 
-S_descriptor_buffer_info(){}
+VkDescriptorBufferInfo*const get_vkptr(){return reinterpret_cast<VkDescriptorBufferInfo*>(this);}
 };
 
 /*	VkDescriptorImageInfo
@@ -6873,7 +7025,7 @@ struct		S_descriptor_image_info{
 	VkImageView imageView;
 	E_image_layout imageLayout;
 
-S_descriptor_image_info(){}
+VkDescriptorImageInfo*const get_vkptr(){return reinterpret_cast<VkDescriptorImageInfo*>(this);}
 };
 
 /*	VkWriteDescriptorSetInlineUniformBlockEXT
@@ -6886,6 +7038,8 @@ private:
 public:
 	uint32_t dataSize;
 	const void * pData;
+
+VkWriteDescriptorSetInlineUniformBlockEXT*const get_vkptr(){return reinterpret_cast<VkWriteDescriptorSetInlineUniformBlockEXT*>(this);}
 
 S_write_descriptor_set_inline_uniform_block_EXT(){}
 
@@ -6922,6 +7076,8 @@ private:
 public:
 	uint32_t accelerationStructureCount;
 	const VkAccelerationStructureNVX * pAccelerationStructures;
+
+VkDescriptorAccelerationStructureInfoNVX*const get_vkptr(){return reinterpret_cast<VkDescriptorAccelerationStructureInfoNVX*>(this);}
 
 S_descriptor_acceleration_structure_info_NVX(){}
 
@@ -6966,6 +7122,8 @@ public:
 	const S_descriptor_image_info * pImageInfo;
 	const S_descriptor_buffer_info * pBufferInfo;
 	const VkBufferView * pTexelBufferView;
+
+VkWriteDescriptorSet*const get_vkptr(){return reinterpret_cast<VkWriteDescriptorSet*>(this);}
 
 S_write_descriptor_set(){}
 
@@ -7029,6 +7187,8 @@ public:
 	uint32_t dstArrayElement;
 	uint32_t descriptorCount;
 
+VkCopyDescriptorSet*const get_vkptr(){return reinterpret_cast<VkCopyDescriptorSet*>(this);}
+
 S_copy_descriptor_set(){}
 
 S_copy_descriptor_set(
@@ -7072,6 +7232,8 @@ private:
 public:
 	VkBool32 dedicatedAllocation;
 
+VkDedicatedAllocationBufferCreateInfoNV*const get_vkptr(){return reinterpret_cast<VkDedicatedAllocationBufferCreateInfoNV*>(this);}
+
 S_dedicated_allocation_buffer_create_info_NV(){}
 
 S_dedicated_allocation_buffer_create_info_NV(
@@ -7104,6 +7266,8 @@ private:
 	 void * pNext = nullptr;
 public:
 	F_external_memory_handle_type handleTypes;
+
+VkExternalMemoryBufferCreateInfo*const get_vkptr(){return reinterpret_cast<VkExternalMemoryBufferCreateInfo*>(this);}
 
 S_external_memory_buffer_create_info(){}
 
@@ -7144,6 +7308,8 @@ public:
 	E_sharing_mode sharingMode;
 	uint32_t queueFamilyIndexCount;
 	const uint32_t * pQueueFamilyIndices;
+
+VkBufferCreateInfo*const get_vkptr(){return reinterpret_cast<VkBufferCreateInfo*>(this);}
 
 S_buffer_create_info(){}
 
@@ -7201,6 +7367,8 @@ public:
 	VkDeviceSize offset;
 	VkDeviceSize range;
 
+VkBufferViewCreateInfo*const get_vkptr(){return reinterpret_cast<VkBufferViewCreateInfo*>(this);}
+
 S_buffer_view_create_info(){}
 
 S_buffer_view_create_info(
@@ -7237,7 +7405,7 @@ struct		S_image_subresource{
 	uint32_t mipLevel;
 	uint32_t arrayLayer;
 
-S_image_subresource(){}
+VkImageSubresource*const get_vkptr(){return reinterpret_cast<VkImageSubresource*>(this);}
 };
 
 /*	VkImageSubresourceLayers
@@ -7248,7 +7416,7 @@ struct		S_image_subresource_layers{
 	uint32_t baseArrayLayer;
 	uint32_t layerCount;
 
-S_image_subresource_layers(){}
+VkImageSubresourceLayers*const get_vkptr(){return reinterpret_cast<VkImageSubresourceLayers*>(this);}
 };
 
 /*	VkImageSubresourceRange
@@ -7260,7 +7428,7 @@ struct		S_image_subresource_range{
 	uint32_t baseArrayLayer;
 	uint32_t layerCount;
 
-S_image_subresource_range(){}
+VkImageSubresourceRange*const get_vkptr(){return reinterpret_cast<VkImageSubresourceRange*>(this);}
 };
 
 /*	VkMemoryBarrier
@@ -7272,6 +7440,8 @@ private:
 public:
 	F_access srcAccessMask;
 	F_access dstAccessMask;
+
+VkMemoryBarrier*const get_vkptr(){return reinterpret_cast<VkMemoryBarrier*>(this);}
 
 S_memory_barrier(){}
 
@@ -7310,6 +7480,8 @@ public:
 	VkBuffer buffer;
 	VkDeviceSize offset;
 	VkDeviceSize size;
+
+VkBufferMemoryBarrier*const get_vkptr(){return reinterpret_cast<VkBufferMemoryBarrier*>(this);}
 
 S_buffer_memory_barrier(){}
 
@@ -7350,7 +7522,7 @@ struct		S_sample_location_EXT{
 	float x;
 	float y;
 
-S_sample_location_EXT(){}
+VkSampleLocationEXT*const get_vkptr(){return reinterpret_cast<VkSampleLocationEXT*>(this);}
 };
 
 /*	VkSampleLocationsInfoEXT
@@ -7365,6 +7537,8 @@ public:
 	S_extent_2d sampleLocationGridSize;
 	uint32_t sampleLocationsCount;
 	const S_sample_location_EXT * pSampleLocations;
+
+VkSampleLocationsInfoEXT*const get_vkptr(){return reinterpret_cast<VkSampleLocationsInfoEXT*>(this);}
 
 S_sample_locations_info_EXT(){}
 
@@ -7412,6 +7586,8 @@ public:
 	uint32_t dstQueueFamilyIndex;
 	VkImage image;
 	S_image_subresource_range subresourceRange;
+
+VkImageMemoryBarrier*const get_vkptr(){return reinterpret_cast<VkImageMemoryBarrier*>(this);}
 
 S_image_memory_barrier(){}
 
@@ -7468,6 +7644,8 @@ private:
 public:
 	VkBool32 dedicatedAllocation;
 
+VkDedicatedAllocationImageCreateInfoNV*const get_vkptr(){return reinterpret_cast<VkDedicatedAllocationImageCreateInfoNV*>(this);}
+
 S_dedicated_allocation_image_create_info_NV(){}
 
 S_dedicated_allocation_image_create_info_NV(
@@ -7500,6 +7678,8 @@ private:
 	 void * pNext = nullptr;
 public:
 	F_external_memory_handle_type_NV handleTypes;
+
+VkExternalMemoryImageCreateInfoNV*const get_vkptr(){return reinterpret_cast<VkExternalMemoryImageCreateInfoNV*>(this);}
 
 S_external_memory_image_create_info_NV(){}
 
@@ -7534,6 +7714,8 @@ private:
 public:
 	F_external_memory_handle_type handleTypes;
 
+VkExternalMemoryImageCreateInfo*const get_vkptr(){return reinterpret_cast<VkExternalMemoryImageCreateInfo*>(this);}
+
 S_external_memory_image_create_info(){}
 
 S_external_memory_image_create_info(
@@ -7566,6 +7748,8 @@ private:
 	 void * pNext = nullptr;
 public:
 	VkSwapchainKHR swapchain;
+
+VkImageSwapchainCreateInfoKHR*const get_vkptr(){return reinterpret_cast<VkImageSwapchainCreateInfoKHR*>(this);}
 
 S_image_swapchain_create_info_KHR(){}
 
@@ -7600,6 +7784,8 @@ private:
 public:
 	uint32_t viewFormatCount;
 	const E_format * pViewFormats;
+
+VkImageFormatListCreateInfoKHR*const get_vkptr(){return reinterpret_cast<VkImageFormatListCreateInfoKHR*>(this);}
 
 S_image_format_list_create_info_KHR(){}
 
@@ -7636,6 +7822,8 @@ private:
 	void * pNext = nullptr;
 public:
 	uint64_t externalFormat;
+
+VkExternalFormatANDROID*const get_vkptr(){return reinterpret_cast<VkExternalFormatANDROID*>(this);}
 
 S_external_format_ANDROID(){}
 
@@ -7674,6 +7862,8 @@ public:
 	uint32_t drmFormatModifierCount;
 	const uint64_t * pDrmFormatModifiers;
 
+VkImageDrmFormatModifierListCreateInfoEXT*const get_vkptr(){return reinterpret_cast<VkImageDrmFormatModifierListCreateInfoEXT*>(this);}
+
 S_image_drm_format_modifier_list_create_info_EXT(){}
 
 S_image_drm_format_modifier_list_create_info_EXT(
@@ -7710,7 +7900,7 @@ struct		S_subresource_layout{
 	VkDeviceSize arrayPitch;
 	VkDeviceSize depthPitch;
 
-S_subresource_layout(){}
+VkSubresourceLayout*const get_vkptr(){return reinterpret_cast<VkSubresourceLayout*>(this);}
 };
 
 /*	VkImageDrmFormatModifierExplicitCreateInfoEXT
@@ -7725,6 +7915,8 @@ public:
 	uint64_t drmFormatModifier;
 	uint32_t drmFormatModifierPlaneCount;
 	const S_subresource_layout * pPlaneLayouts;
+
+VkImageDrmFormatModifierExplicitCreateInfoEXT*const get_vkptr(){return reinterpret_cast<VkImageDrmFormatModifierExplicitCreateInfoEXT*>(this);}
 
 S_image_drm_format_modifier_explicit_create_info_EXT(){}
 
@@ -7783,6 +7975,8 @@ public:
 	uint32_t queueFamilyIndexCount;
 	const uint32_t * pQueueFamilyIndices;
 	E_image_layout initialLayout;
+
+VkImageCreateInfo*const get_vkptr(){return reinterpret_cast<VkImageCreateInfo*>(this);}
 
 S_image_create_info(){}
 
@@ -7875,6 +8069,8 @@ private:
 public:
 	F_image_usage usage;
 
+VkImageViewUsageCreateInfo*const get_vkptr(){return reinterpret_cast<VkImageViewUsageCreateInfo*>(this);}
+
 S_image_view_usage_create_info(){}
 
 S_image_view_usage_create_info(
@@ -7907,6 +8103,8 @@ private:
 	 void * pNext = nullptr;
 public:
 	VkSamplerYcbcrConversion conversion;
+
+VkSamplerYcbcrConversionInfo*const get_vkptr(){return reinterpret_cast<VkSamplerYcbcrConversionInfo*>(this);}
 
 S_sampler_ycbcr_conversion_info(){}
 
@@ -7941,6 +8139,8 @@ private:
 	 void * pNext = nullptr;
 public:
 	E_format decodeMode;
+
+VkImageViewASTCDecodeModeEXT*const get_vkptr(){return reinterpret_cast<VkImageViewASTCDecodeModeEXT*>(this);}
 
 S_image_view_astc_decode_mode_EXT(){}
 
@@ -7982,6 +8182,8 @@ public:
 	E_format format;
 	S_component_mapping components;
 	S_image_subresource_range subresourceRange;
+
+VkImageViewCreateInfo*const get_vkptr(){return reinterpret_cast<VkImageViewCreateInfo*>(this);}
 
 S_image_view_create_info(){}
 
@@ -8035,7 +8237,7 @@ struct		S_buffer_copy{
 	VkDeviceSize dstOffset;
 	VkDeviceSize size;
 
-S_buffer_copy(){}
+VkBufferCopy*const get_vkptr(){return reinterpret_cast<VkBufferCopy*>(this);}
 };
 
 /*	VkSparseMemoryBind
@@ -8047,7 +8249,7 @@ struct		S_sparse_memory_bind{
 	VkDeviceSize memoryOffset;
 	F_sparse_memory_bind flags;
 
-S_sparse_memory_bind(){}
+VkSparseMemoryBind*const get_vkptr(){return reinterpret_cast<VkSparseMemoryBind*>(this);}
 };
 
 /*	VkSparseImageMemoryBind
@@ -8060,7 +8262,7 @@ struct		S_sparse_image_memory_bind{
 	VkDeviceSize memoryOffset;
 	F_sparse_memory_bind flags;
 
-S_sparse_image_memory_bind(){}
+VkSparseImageMemoryBind*const get_vkptr(){return reinterpret_cast<VkSparseImageMemoryBind*>(this);}
 };
 
 /*	VkSparseBufferMemoryBindInfo
@@ -8070,7 +8272,7 @@ struct		S_sparse_buffer_memory_bind_info{
 	uint32_t bindCount;
 	const S_sparse_memory_bind * pBinds;
 
-S_sparse_buffer_memory_bind_info(){}
+VkSparseBufferMemoryBindInfo*const get_vkptr(){return reinterpret_cast<VkSparseBufferMemoryBindInfo*>(this);}
 };
 
 /*	VkSparseImageOpaqueMemoryBindInfo
@@ -8080,7 +8282,7 @@ struct		S_sparse_image_opaque_memory_bind_info{
 	uint32_t bindCount;
 	const S_sparse_memory_bind * pBinds;
 
-S_sparse_image_opaque_memory_bind_info(){}
+VkSparseImageOpaqueMemoryBindInfo*const get_vkptr(){return reinterpret_cast<VkSparseImageOpaqueMemoryBindInfo*>(this);}
 };
 
 /*	VkSparseImageMemoryBindInfo
@@ -8090,7 +8292,7 @@ struct		S_sparse_image_memory_bind_info{
 	uint32_t bindCount;
 	const S_sparse_image_memory_bind * pBinds;
 
-S_sparse_image_memory_bind_info(){}
+VkSparseImageMemoryBindInfo*const get_vkptr(){return reinterpret_cast<VkSparseImageMemoryBindInfo*>(this);}
 };
 
 /*	VkDeviceGroupBindSparseInfo
@@ -8103,6 +8305,8 @@ private:
 public:
 	uint32_t resourceDeviceIndex;
 	uint32_t memoryDeviceIndex;
+
+VkDeviceGroupBindSparseInfo*const get_vkptr(){return reinterpret_cast<VkDeviceGroupBindSparseInfo*>(this);}
 
 S_device_group_bind_sparse_info(){}
 
@@ -8148,6 +8352,8 @@ public:
 	const S_sparse_image_memory_bind_info * pImageBinds;
 	uint32_t signalSemaphoreCount;
 	const VkSemaphore * pSignalSemaphores;
+
+VkBindSparseInfo*const get_vkptr(){return reinterpret_cast<VkBindSparseInfo*>(this);}
 
 S_bind_sparse_info(){}
 
@@ -8207,7 +8413,7 @@ struct		S_image_copy{
 	S_offset_3d dstOffset;
 	S_extent_3d extent;
 
-S_image_copy(){}
+VkImageCopy*const get_vkptr(){return reinterpret_cast<VkImageCopy*>(this);}
 };
 
 /*	VkImageBlit
@@ -8218,7 +8424,7 @@ struct		S_image_blit{
 	S_image_subresource_layers dstSubresource;
 	S_offset_3d dstOffsets[2];
 
-S_image_blit(){}
+VkImageBlit*const get_vkptr(){return reinterpret_cast<VkImageBlit*>(this);}
 };
 
 /*	VkBufferImageCopy
@@ -8231,7 +8437,7 @@ struct		S_buffer_image_copy{
 	S_offset_3d imageOffset;
 	S_extent_3d imageExtent;
 
-S_buffer_image_copy(){}
+VkBufferImageCopy*const get_vkptr(){return reinterpret_cast<VkBufferImageCopy*>(this);}
 };
 
 /*	VkImageResolve
@@ -8243,7 +8449,7 @@ struct		S_image_resolve{
 	S_offset_3d dstOffset;
 	S_extent_3d extent;
 
-S_image_resolve(){}
+VkImageResolve*const get_vkptr(){return reinterpret_cast<VkImageResolve*>(this);}
 };
 
 /*	VkShaderModuleValidationCacheCreateInfoEXT
@@ -8255,6 +8461,8 @@ private:
 	 void * pNext = nullptr;
 public:
 	VkValidationCacheEXT validationCache;
+
+VkShaderModuleValidationCacheCreateInfoEXT*const get_vkptr(){return reinterpret_cast<VkShaderModuleValidationCacheCreateInfoEXT*>(this);}
 
 S_shader_module_validation_cache_create_info_EXT(){}
 
@@ -8291,6 +8499,8 @@ public:
 	VkShaderModuleCreateFlags flags;
 	size_t codeSize;
 	const uint32_t * pCode;
+
+VkShaderModuleCreateInfo*const get_vkptr(){return reinterpret_cast<VkShaderModuleCreateInfo*>(this);}
 
 S_shader_module_create_info(){}
 
@@ -8336,7 +8546,7 @@ struct		S_descriptor_set_layout_binding{
 	F_shader_stage stageFlags;
 	const VkSampler * pImmutableSamplers;
 
-S_descriptor_set_layout_binding(){}
+VkDescriptorSetLayoutBinding*const get_vkptr(){return reinterpret_cast<VkDescriptorSetLayoutBinding*>(this);}
 };
 
 /*	VkDescriptorSetLayoutBindingFlagsCreateInfoEXT
@@ -8349,6 +8559,8 @@ private:
 public:
 	uint32_t bindingCount;
 	const F_descriptor_binding_EXT * pBindingFlags;
+
+VkDescriptorSetLayoutBindingFlagsCreateInfoEXT*const get_vkptr(){return reinterpret_cast<VkDescriptorSetLayoutBindingFlagsCreateInfoEXT*>(this);}
 
 S_descriptor_set_layout_binding_flags_create_info_EXT(){}
 
@@ -8387,6 +8599,8 @@ public:
 	F_descriptor_set_layout_create flags;
 	uint32_t bindingCount;
 	const S_descriptor_set_layout_binding * pBindings;
+
+VkDescriptorSetLayoutCreateInfo*const get_vkptr(){return reinterpret_cast<VkDescriptorSetLayoutCreateInfo*>(this);}
 
 S_descriptor_set_layout_create_info(){}
 
@@ -8429,7 +8643,7 @@ struct		S_descriptor_pool_size{
 	E_descriptor_type type;
 	uint32_t descriptorCount;
 
-S_descriptor_pool_size(){}
+VkDescriptorPoolSize*const get_vkptr(){return reinterpret_cast<VkDescriptorPoolSize*>(this);}
 };
 
 /*	VkDescriptorPoolInlineUniformBlockCreateInfoEXT
@@ -8441,6 +8655,8 @@ private:
 	 void * pNext = nullptr;
 public:
 	uint32_t maxInlineUniformBlockBindings;
+
+VkDescriptorPoolInlineUniformBlockCreateInfoEXT*const get_vkptr(){return reinterpret_cast<VkDescriptorPoolInlineUniformBlockCreateInfoEXT*>(this);}
 
 S_descriptor_pool_inline_uniform_block_create_info_EXT(){}
 
@@ -8478,6 +8694,8 @@ public:
 	uint32_t maxSets;
 	uint32_t poolSizeCount;
 	const S_descriptor_pool_size * pPoolSizes;
+
+VkDescriptorPoolCreateInfo*const get_vkptr(){return reinterpret_cast<VkDescriptorPoolCreateInfo*>(this);}
 
 S_descriptor_pool_create_info(){}
 
@@ -8527,6 +8745,8 @@ public:
 	uint32_t descriptorSetCount;
 	const uint32_t * pDescriptorCounts;
 
+VkDescriptorSetVariableDescriptorCountAllocateInfoEXT*const get_vkptr(){return reinterpret_cast<VkDescriptorSetVariableDescriptorCountAllocateInfoEXT*>(this);}
+
 S_descriptor_set_variable_descriptor_count_allocate_info_EXT(){}
 
 S_descriptor_set_variable_descriptor_count_allocate_info_EXT(
@@ -8564,6 +8784,8 @@ public:
 	VkDescriptorPool descriptorPool;
 	uint32_t descriptorSetCount;
 	const VkDescriptorSetLayout * pSetLayouts;
+
+VkDescriptorSetAllocateInfo*const get_vkptr(){return reinterpret_cast<VkDescriptorSetAllocateInfo*>(this);}
 
 S_descriptor_set_allocate_info(){}
 
@@ -8607,7 +8829,7 @@ struct		S_specialization_map_entry{
 	uint32_t offset;
 	size_t size;
 
-S_specialization_map_entry(){}
+VkSpecializationMapEntry*const get_vkptr(){return reinterpret_cast<VkSpecializationMapEntry*>(this);}
 };
 
 /*	VkSpecializationInfo
@@ -8618,7 +8840,7 @@ struct		S_specialization_info{
 	size_t dataSize;
 	const void * pData;
 
-S_specialization_info(){}
+VkSpecializationInfo*const get_vkptr(){return reinterpret_cast<VkSpecializationInfo*>(this);}
 };
 
 /*	VkPipelineShaderStageCreateInfo
@@ -8633,6 +8855,8 @@ public:
 	VkShaderModule module;
 	const char * pName;
 	const S_specialization_info * pSpecializationInfo;
+
+VkPipelineShaderStageCreateInfo*const get_vkptr(){return reinterpret_cast<VkPipelineShaderStageCreateInfo*>(this);}
 
 S_pipeline_shader_stage_create_info(){}
 
@@ -8676,6 +8900,8 @@ public:
 	VkPipeline basePipelineHandle;
 	int32_t basePipelineIndex;
 
+VkComputePipelineCreateInfo*const get_vkptr(){return reinterpret_cast<VkComputePipelineCreateInfo*>(this);}
+
 S_compute_pipeline_create_info(){}
 
 S_compute_pipeline_create_info(
@@ -8712,7 +8938,7 @@ struct		S_vertex_input_binding_description{
 	uint32_t stride;
 	E_vertex_input_rate inputRate;
 
-S_vertex_input_binding_description(){}
+VkVertexInputBindingDescription*const get_vkptr(){return reinterpret_cast<VkVertexInputBindingDescription*>(this);}
 };
 
 /*	VkVertexInputAttributeDescription
@@ -8723,7 +8949,7 @@ struct		S_vertex_input_attribute_description{
 	E_format format;
 	uint32_t offset;
 
-S_vertex_input_attribute_description(){}
+VkVertexInputAttributeDescription*const get_vkptr(){return reinterpret_cast<VkVertexInputAttributeDescription*>(this);}
 };
 
 /*	VkVertexInputBindingDivisorDescriptionEXT
@@ -8732,7 +8958,7 @@ struct		S_vertex_input_binding_divisor_description_EXT{
 	uint32_t binding;
 	uint32_t divisor;
 
-S_vertex_input_binding_divisor_description_EXT(){}
+VkVertexInputBindingDivisorDescriptionEXT*const get_vkptr(){return reinterpret_cast<VkVertexInputBindingDivisorDescriptionEXT*>(this);}
 };
 
 /*	VkPipelineVertexInputDivisorStateCreateInfoEXT
@@ -8745,6 +8971,8 @@ private:
 public:
 	uint32_t vertexBindingDivisorCount;
 	const S_vertex_input_binding_divisor_description_EXT * pVertexBindingDivisors;
+
+VkPipelineVertexInputDivisorStateCreateInfoEXT*const get_vkptr(){return reinterpret_cast<VkPipelineVertexInputDivisorStateCreateInfoEXT*>(this);}
 
 S_pipeline_vertex_input_divisor_state_create_info_EXT(){}
 
@@ -8785,6 +9013,8 @@ public:
 	const S_vertex_input_binding_description * pVertexBindingDescriptions;
 	uint32_t vertexAttributeDescriptionCount;
 	const S_vertex_input_attribute_description * pVertexAttributeDescriptions;
+
+VkPipelineVertexInputStateCreateInfo*const get_vkptr(){return reinterpret_cast<VkPipelineVertexInputStateCreateInfo*>(this);}
 
 S_pipeline_vertex_input_state_create_info(){}
 
@@ -8836,6 +9066,8 @@ public:
 	E_primitive_topology topology;
 	VkBool32 primitiveRestartEnable;
 
+VkPipelineInputAssemblyStateCreateInfo*const get_vkptr(){return reinterpret_cast<VkPipelineInputAssemblyStateCreateInfo*>(this);}
+
 S_pipeline_input_assembly_state_create_info(){}
 
 S_pipeline_input_assembly_state_create_info(
@@ -8871,6 +9103,8 @@ private:
 public:
 	E_tessellation_domain_origin domainOrigin;
 
+VkPipelineTessellationDomainOriginStateCreateInfo*const get_vkptr(){return reinterpret_cast<VkPipelineTessellationDomainOriginStateCreateInfo*>(this);}
+
 S_pipeline_tessellation_domain_origin_state_create_info(){}
 
 S_pipeline_tessellation_domain_origin_state_create_info(
@@ -8905,6 +9139,8 @@ private:
 public:
 	VkPipelineTessellationStateCreateFlags flags;
 	uint32_t patchControlPoints;
+
+VkPipelineTessellationStateCreateInfo*const get_vkptr(){return reinterpret_cast<VkPipelineTessellationStateCreateInfo*>(this);}
 
 S_pipeline_tessellation_state_create_info(){}
 
@@ -8945,7 +9181,7 @@ struct		S_viewport_w_scaling_NV{
 	float xcoeff;
 	float ycoeff;
 
-S_viewport_w_scaling_NV(){}
+VkViewportWScalingNV*const get_vkptr(){return reinterpret_cast<VkViewportWScalingNV*>(this);}
 };
 
 /*	VkPipelineViewportWScalingStateCreateInfoNV
@@ -8959,6 +9195,8 @@ public:
 	VkBool32 viewportWScalingEnable;
 	uint32_t viewportCount;
 	const S_viewport_w_scaling_NV * pViewportWScalings;
+
+VkPipelineViewportWScalingStateCreateInfoNV*const get_vkptr(){return reinterpret_cast<VkPipelineViewportWScalingStateCreateInfoNV*>(this);}
 
 S_pipeline_viewport_w_scaling_state_create_info_NV(){}
 
@@ -8995,7 +9233,7 @@ struct		S_viewport_swizzle_NV{
 	E_viewport_coordinate_swizzle_NV z;
 	E_viewport_coordinate_swizzle_NV w;
 
-S_viewport_swizzle_NV(){}
+VkViewportSwizzleNV*const get_vkptr(){return reinterpret_cast<VkViewportSwizzleNV*>(this);}
 };
 
 /*	VkPipelineViewportSwizzleStateCreateInfoNV
@@ -9009,6 +9247,8 @@ public:
 	VkPipelineViewportSwizzleStateCreateFlagsNV flags;
 	uint32_t viewportCount;
 	const S_viewport_swizzle_NV * pViewportSwizzles;
+
+VkPipelineViewportSwizzleStateCreateInfoNV*const get_vkptr(){return reinterpret_cast<VkPipelineViewportSwizzleStateCreateInfoNV*>(this);}
 
 S_pipeline_viewport_swizzle_state_create_info_NV(){}
 
@@ -9048,6 +9288,8 @@ public:
 	uint32_t exclusiveScissorCount;
 	const S_rect_2d * pExclusiveScissors;
 
+VkPipelineViewportExclusiveScissorStateCreateInfoNV*const get_vkptr(){return reinterpret_cast<VkPipelineViewportExclusiveScissorStateCreateInfoNV*>(this);}
+
 S_pipeline_viewport_exclusive_scissor_state_create_info_NV(){}
 
 S_pipeline_viewport_exclusive_scissor_state_create_info_NV(
@@ -9079,7 +9321,7 @@ struct		S_shading_rate_palette_NV{
 	uint32_t shadingRatePaletteEntryCount;
 	const E_shading_rate_palette_entry_NV * pShadingRatePaletteEntries;
 
-S_shading_rate_palette_NV(){}
+VkShadingRatePaletteNV*const get_vkptr(){return reinterpret_cast<VkShadingRatePaletteNV*>(this);}
 };
 
 /*	VkPipelineViewportShadingRateImageStateCreateInfoNV
@@ -9093,6 +9335,8 @@ public:
 	VkBool32 shadingRateImageEnable;
 	uint32_t viewportCount;
 	const S_shading_rate_palette_NV * pShadingRatePalettes;
+
+VkPipelineViewportShadingRateImageStateCreateInfoNV*const get_vkptr(){return reinterpret_cast<VkPipelineViewportShadingRateImageStateCreateInfoNV*>(this);}
 
 S_pipeline_viewport_shading_rate_image_state_create_info_NV(){}
 
@@ -9128,7 +9372,7 @@ struct		S_coarse_sample_location_NV{
 	uint32_t pixelY;
 	uint32_t sample;
 
-S_coarse_sample_location_NV(){}
+VkCoarseSampleLocationNV*const get_vkptr(){return reinterpret_cast<VkCoarseSampleLocationNV*>(this);}
 };
 
 /*	VkCoarseSampleOrderCustomNV
@@ -9139,7 +9383,7 @@ struct		S_coarse_sample_order_custom_NV{
 	uint32_t sampleLocationCount;
 	const S_coarse_sample_location_NV * pSampleLocations;
 
-S_coarse_sample_order_custom_NV(){}
+VkCoarseSampleOrderCustomNV*const get_vkptr(){return reinterpret_cast<VkCoarseSampleOrderCustomNV*>(this);}
 };
 
 /*	VkPipelineViewportCoarseSampleOrderStateCreateInfoNV
@@ -9153,6 +9397,8 @@ public:
 	E_coarse_sample_order_type_NV sampleOrderType;
 	uint32_t customSampleOrderCount;
 	const S_coarse_sample_order_custom_NV * pCustomSampleOrders;
+
+VkPipelineViewportCoarseSampleOrderStateCreateInfoNV*const get_vkptr(){return reinterpret_cast<VkPipelineViewportCoarseSampleOrderStateCreateInfoNV*>(this);}
 
 S_pipeline_viewport_coarse_sample_order_state_create_info_NV(){}
 
@@ -9199,6 +9445,8 @@ public:
 	const S_viewport * pViewports;
 	uint32_t scissorCount;
 	const S_rect_2d * pScissors;
+
+VkPipelineViewportStateCreateInfo*const get_vkptr(){return reinterpret_cast<VkPipelineViewportStateCreateInfo*>(this);}
 
 S_pipeline_viewport_state_create_info(){}
 
@@ -9257,6 +9505,8 @@ private:
 public:
 	E_rasterization_order_AMD rasterizationOrder;
 
+VkPipelineRasterizationStateRasterizationOrderAMD*const get_vkptr(){return reinterpret_cast<VkPipelineRasterizationStateRasterizationOrderAMD*>(this);}
+
 S_pipeline_rasterization_state_rasterization_order_AMD(){}
 
 S_pipeline_rasterization_state_rasterization_order_AMD(
@@ -9291,6 +9541,8 @@ public:
 	VkPipelineRasterizationConservativeStateCreateFlagsEXT flags;
 	E_conservative_rasterization_mode_EXT conservativeRasterizationMode;
 	float extraPrimitiveOverestimationSize;
+
+VkPipelineRasterizationConservativeStateCreateInfoEXT*const get_vkptr(){return reinterpret_cast<VkPipelineRasterizationConservativeStateCreateInfoEXT*>(this);}
 
 S_pipeline_rasterization_conservative_state_create_info_EXT(){}
 
@@ -9340,6 +9592,8 @@ public:
 	float depthBiasClamp;
 	float depthBiasSlopeFactor;
 	float lineWidth;
+
+VkPipelineRasterizationStateCreateInfo*const get_vkptr(){return reinterpret_cast<VkPipelineRasterizationStateCreateInfo*>(this);}
 
 S_pipeline_rasterization_state_create_info(){}
 
@@ -9406,6 +9660,8 @@ public:
 	VkBool32 coverageToColorEnable;
 	uint32_t coverageToColorLocation;
 
+VkPipelineCoverageToColorStateCreateInfoNV*const get_vkptr(){return reinterpret_cast<VkPipelineCoverageToColorStateCreateInfoNV*>(this);}
+
 S_pipeline_coverage_to_color_state_create_info_NV(){}
 
 S_pipeline_coverage_to_color_state_create_info_NV(
@@ -9443,6 +9699,8 @@ private:
 public:
 	VkBool32 sampleLocationsEnable;
 	S_sample_locations_info_EXT sampleLocationsInfo;
+
+VkPipelineSampleLocationsStateCreateInfoEXT*const get_vkptr(){return reinterpret_cast<VkPipelineSampleLocationsStateCreateInfoEXT*>(this);}
 
 S_pipeline_sample_locations_state_create_info_EXT(){}
 
@@ -9482,6 +9740,8 @@ public:
 	VkBool32 coverageModulationTableEnable;
 	uint32_t coverageModulationTableCount;
 	const float * pCoverageModulationTable;
+
+VkPipelineCoverageModulationStateCreateInfoNV*const get_vkptr(){return reinterpret_cast<VkPipelineCoverageModulationStateCreateInfoNV*>(this);}
 
 S_pipeline_coverage_modulation_state_create_info_NV(){}
 
@@ -9532,6 +9792,8 @@ public:
 	const VkSampleMask * pSampleMask;
 	VkBool32 alphaToCoverageEnable;
 	VkBool32 alphaToOneEnable;
+
+VkPipelineMultisampleStateCreateInfo*const get_vkptr(){return reinterpret_cast<VkPipelineMultisampleStateCreateInfo*>(this);}
 
 S_pipeline_multisample_state_create_info(){}
 
@@ -9592,7 +9854,7 @@ struct		S_pipeline_color_blend_attachment_state{
 	E_blend_op alphaBlendOp;
 	F_color_component colorWriteMask;
 
-S_pipeline_color_blend_attachment_state(){}
+VkPipelineColorBlendAttachmentState*const get_vkptr(){return reinterpret_cast<VkPipelineColorBlendAttachmentState*>(this);}
 };
 
 /*	VkPipelineColorBlendAdvancedStateCreateInfoEXT
@@ -9606,6 +9868,8 @@ public:
 	VkBool32 srcPremultiplied;
 	VkBool32 dstPremultiplied;
 	E_blend_overlap_EXT blendOverlap;
+
+VkPipelineColorBlendAdvancedStateCreateInfoEXT*const get_vkptr(){return reinterpret_cast<VkPipelineColorBlendAdvancedStateCreateInfoEXT*>(this);}
 
 S_pipeline_color_blend_advanced_state_create_info_EXT(){}
 
@@ -9649,6 +9913,8 @@ public:
 	uint32_t attachmentCount;
 	const S_pipeline_color_blend_attachment_state * pAttachments;
 	float blendConstants[4];
+
+VkPipelineColorBlendStateCreateInfo*const get_vkptr(){return reinterpret_cast<VkPipelineColorBlendStateCreateInfo*>(this);}
 
 S_pipeline_color_blend_state_create_info(){}
 
@@ -9702,6 +9968,8 @@ public:
 	uint32_t dynamicStateCount;
 	const E_dynamic_state * pDynamicStates;
 
+VkPipelineDynamicStateCreateInfo*const get_vkptr(){return reinterpret_cast<VkPipelineDynamicStateCreateInfo*>(this);}
+
 S_pipeline_dynamic_state_create_info(){}
 
 S_pipeline_dynamic_state_create_info(
@@ -9738,7 +10006,7 @@ struct		S_stencil_op_state{
 	uint32_t writeMask;
 	uint32_t reference;
 
-S_stencil_op_state(){}
+VkStencilOpState*const get_vkptr(){return reinterpret_cast<VkStencilOpState*>(this);}
 };
 
 /*	VkPipelineDepthStencilStateCreateInfo
@@ -9758,6 +10026,8 @@ public:
 	S_stencil_op_state back;
 	float minDepthBounds;
 	float maxDepthBounds;
+
+VkPipelineDepthStencilStateCreateInfo*const get_vkptr(){return reinterpret_cast<VkPipelineDepthStencilStateCreateInfo*>(this);}
 
 S_pipeline_depth_stencil_state_create_info(){}
 
@@ -9811,6 +10081,8 @@ public:
 	uint32_t discardRectangleCount;
 	const S_rect_2d * pDiscardRectangles;
 
+VkPipelineDiscardRectangleStateCreateInfoEXT*const get_vkptr(){return reinterpret_cast<VkPipelineDiscardRectangleStateCreateInfoEXT*>(this);}
+
 S_pipeline_discard_rectangle_state_create_info_EXT(){}
 
 S_pipeline_discard_rectangle_state_create_info_EXT(
@@ -9849,6 +10121,8 @@ private:
 	 void * pNext = nullptr;
 public:
 	VkBool32 representativeFragmentTestEnable;
+
+VkPipelineRepresentativeFragmentTestStateCreateInfoNV*const get_vkptr(){return reinterpret_cast<VkPipelineRepresentativeFragmentTestStateCreateInfoNV*>(this);}
 
 S_pipeline_representative_fragment_test_state_create_info_NV(){}
 
@@ -9900,6 +10174,8 @@ public:
 	uint32_t subpass;
 	VkPipeline basePipelineHandle;
 	int32_t basePipelineIndex;
+
+VkGraphicsPipelineCreateInfo*const get_vkptr(){return reinterpret_cast<VkGraphicsPipelineCreateInfo*>(this);}
 
 S_graphics_pipeline_create_info(){}
 
@@ -9977,6 +10253,8 @@ public:
 	size_t initialDataSize;
 	const void * pInitialData;
 
+VkPipelineCacheCreateInfo*const get_vkptr(){return reinterpret_cast<VkPipelineCacheCreateInfo*>(this);}
+
 S_pipeline_cache_create_info(){}
 
 S_pipeline_cache_create_info(
@@ -10009,7 +10287,7 @@ struct		S_push_constant_range{
 	uint32_t offset;
 	uint32_t size;
 
-S_push_constant_range(){}
+VkPushConstantRange*const get_vkptr(){return reinterpret_cast<VkPushConstantRange*>(this);}
 };
 
 /*	VkPipelineLayoutCreateInfo
@@ -10024,6 +10302,8 @@ public:
 	const VkDescriptorSetLayout * pSetLayouts;
 	uint32_t pushConstantRangeCount;
 	const S_push_constant_range * pPushConstantRanges;
+
+VkPipelineLayoutCreateInfo*const get_vkptr(){return reinterpret_cast<VkPipelineLayoutCreateInfo*>(this);}
 
 S_pipeline_layout_create_info(){}
 
@@ -10063,6 +10343,8 @@ private:
 	 void * pNext = nullptr;
 public:
 	E_sampler_reduction_mode_EXT reductionMode;
+
+VkSamplerReductionModeCreateInfoEXT*const get_vkptr(){return reinterpret_cast<VkSamplerReductionModeCreateInfoEXT*>(this);}
 
 S_sampler_reduction_mode_create_info_EXT(){}
 
@@ -10113,6 +10395,8 @@ public:
 	float maxLod;
 	E_border_color borderColor;
 	VkBool32 unnormalizedCoordinates;
+
+VkSamplerCreateInfo*const get_vkptr(){return reinterpret_cast<VkSamplerCreateInfo*>(this);}
 
 S_sampler_create_info(){}
 
@@ -10187,6 +10471,8 @@ public:
 	F_command_pool_create flags;
 	uint32_t queueFamilyIndex;
 
+VkCommandPoolCreateInfo*const get_vkptr(){return reinterpret_cast<VkCommandPoolCreateInfo*>(this);}
+
 S_command_pool_create_info(){}
 
 S_command_pool_create_info(
@@ -10220,6 +10506,8 @@ public:
 	VkCommandPool commandPool;
 	E_command_buffer_level level;
 	uint32_t commandBufferCount;
+
+VkCommandBufferAllocateInfo*const get_vkptr(){return reinterpret_cast<VkCommandBufferAllocateInfo*>(this);}
 
 S_command_buffer_allocate_info(){}
 
@@ -10255,6 +10543,8 @@ private:
 	 void * pNext = nullptr;
 public:
 	VkBool32 conditionalRenderingEnable;
+
+VkCommandBufferInheritanceConditionalRenderingInfoEXT*const get_vkptr(){return reinterpret_cast<VkCommandBufferInheritanceConditionalRenderingInfoEXT*>(this);}
 
 S_command_buffer_inheritance_conditional_rendering_info_EXT(){}
 
@@ -10294,6 +10584,8 @@ public:
 	VkBool32 occlusionQueryEnable;
 	F_query_control queryFlags;
 	F_query_pipeline_statistic pipelineStatistics;
+
+VkCommandBufferInheritanceInfo*const get_vkptr(){return reinterpret_cast<VkCommandBufferInheritanceInfo*>(this);}
 
 S_command_buffer_inheritance_info(){}
 
@@ -10346,6 +10638,8 @@ private:
 public:
 	uint32_t deviceMask;
 
+VkDeviceGroupCommandBufferBeginInfo*const get_vkptr(){return reinterpret_cast<VkDeviceGroupCommandBufferBeginInfo*>(this);}
+
 S_device_group_command_buffer_begin_info(){}
 
 S_device_group_command_buffer_begin_info(
@@ -10380,6 +10674,8 @@ private:
 public:
 	F_command_buffer_usage flags;
 	const S_command_buffer_inheritance_info * pInheritanceInfo;
+
+VkCommandBufferBeginInfo*const get_vkptr(){return reinterpret_cast<VkCommandBufferBeginInfo*>(this);}
 
 S_command_buffer_begin_info(){}
 
@@ -10426,6 +10722,8 @@ public:
 	uint32_t deviceRenderAreaCount;
 	const S_rect_2d * pDeviceRenderAreas;
 
+VkDeviceGroupRenderPassBeginInfo*const get_vkptr(){return reinterpret_cast<VkDeviceGroupRenderPassBeginInfo*>(this);}
+
 S_device_group_render_pass_begin_info(){}
 
 S_device_group_render_pass_begin_info(
@@ -10459,7 +10757,7 @@ struct		S_attachment_sample_locations_EXT{
 	uint32_t attachmentIndex;
 	S_sample_locations_info_EXT sampleLocationsInfo;
 
-S_attachment_sample_locations_EXT(){}
+VkAttachmentSampleLocationsEXT*const get_vkptr(){return reinterpret_cast<VkAttachmentSampleLocationsEXT*>(this);}
 };
 
 /*	VkSubpassSampleLocationsEXT
@@ -10468,7 +10766,7 @@ struct		S_subpass_sample_locations_EXT{
 	uint32_t subpassIndex;
 	S_sample_locations_info_EXT sampleLocationsInfo;
 
-S_subpass_sample_locations_EXT(){}
+VkSubpassSampleLocationsEXT*const get_vkptr(){return reinterpret_cast<VkSubpassSampleLocationsEXT*>(this);}
 };
 
 /*	VkRenderPassSampleLocationsBeginInfoEXT
@@ -10483,6 +10781,8 @@ public:
 	const S_attachment_sample_locations_EXT * pAttachmentInitialSampleLocations;
 	uint32_t postSubpassSampleLocationsCount;
 	const S_subpass_sample_locations_EXT * pPostSubpassSampleLocations;
+
+VkRenderPassSampleLocationsBeginInfoEXT*const get_vkptr(){return reinterpret_cast<VkRenderPassSampleLocationsBeginInfoEXT*>(this);}
 
 S_render_pass_sample_locations_begin_info_EXT(){}
 
@@ -10528,6 +10828,8 @@ public:
 	S_rect_2d renderArea;
 	uint32_t clearValueCount;
 	const VkClearValue * pClearValues;
+
+VkRenderPassBeginInfo*const get_vkptr(){return reinterpret_cast<VkRenderPassBeginInfo*>(this);}
 
 S_render_pass_begin_info(){}
 
@@ -10576,7 +10878,7 @@ struct		S_clear_depth_stencil_value{
 	float depth;
 	uint32_t stencil;
 
-S_clear_depth_stencil_value(){}
+VkClearDepthStencilValue*const get_vkptr(){return reinterpret_cast<VkClearDepthStencilValue*>(this);}
 };
 
 /*	VkClearAttachment
@@ -10586,7 +10888,7 @@ struct		S_clear_attachment{
 	uint32_t colorAttachment;
 	VkClearValue clearValue;
 
-S_clear_attachment(){}
+VkClearAttachment*const get_vkptr(){return reinterpret_cast<VkClearAttachment*>(this);}
 };
 
 /*	VkAttachmentDescription
@@ -10602,7 +10904,7 @@ struct		S_attachment_description{
 	E_image_layout initialLayout;
 	E_image_layout finalLayout;
 
-S_attachment_description(){}
+VkAttachmentDescription*const get_vkptr(){return reinterpret_cast<VkAttachmentDescription*>(this);}
 };
 
 /*	VkAttachmentReference
@@ -10611,7 +10913,7 @@ struct		S_attachment_reference{
 	uint32_t attachment;
 	E_image_layout layout;
 
-S_attachment_reference(){}
+VkAttachmentReference*const get_vkptr(){return reinterpret_cast<VkAttachmentReference*>(this);}
 };
 
 /*	VkSubpassDescription
@@ -10628,7 +10930,7 @@ struct		S_subpass_description{
 	uint32_t preserveAttachmentCount;
 	const uint32_t * pPreserveAttachments;
 
-S_subpass_description(){}
+VkSubpassDescription*const get_vkptr(){return reinterpret_cast<VkSubpassDescription*>(this);}
 };
 
 /*	VkSubpassDependency
@@ -10642,7 +10944,7 @@ struct		S_subpass_dependency{
 	F_access dstAccessMask;
 	F_dependency dependencyFlags;
 
-S_subpass_dependency(){}
+VkSubpassDependency*const get_vkptr(){return reinterpret_cast<VkSubpassDependency*>(this);}
 };
 
 /*	VkRenderPassMultiviewCreateInfo
@@ -10659,6 +10961,8 @@ public:
 	const int32_t * pViewOffsets;
 	uint32_t correlationMaskCount;
 	const uint32_t * pCorrelationMasks;
+
+VkRenderPassMultiviewCreateInfo*const get_vkptr(){return reinterpret_cast<VkRenderPassMultiviewCreateInfo*>(this);}
 
 S_render_pass_multiview_create_info(){}
 
@@ -10700,7 +11004,7 @@ struct		S_input_attachment_aspect_reference{
 	uint32_t inputAttachmentIndex;
 	F_image_aspect aspectMask;
 
-S_input_attachment_aspect_reference(){}
+VkInputAttachmentAspectReference*const get_vkptr(){return reinterpret_cast<VkInputAttachmentAspectReference*>(this);}
 };
 
 /*	VkRenderPassInputAttachmentAspectCreateInfo
@@ -10713,6 +11017,8 @@ private:
 public:
 	uint32_t aspectReferenceCount;
 	const S_input_attachment_aspect_reference * pAspectReferences;
+
+VkRenderPassInputAttachmentAspectCreateInfo*const get_vkptr(){return reinterpret_cast<VkRenderPassInputAttachmentAspectCreateInfo*>(this);}
 
 S_render_pass_input_attachment_aspect_create_info(){}
 
@@ -10756,6 +11062,8 @@ public:
 	const S_subpass_description * pSubpasses;
 	uint32_t dependencyCount;
 	const S_subpass_dependency * pDependencies;
+
+VkRenderPassCreateInfo*const get_vkptr(){return reinterpret_cast<VkRenderPassCreateInfo*>(this);}
 
 S_render_pass_create_info(){}
 
@@ -10811,6 +11119,8 @@ private:
 public:
 	VkEventCreateFlags flags;
 
+VkEventCreateInfo*const get_vkptr(){return reinterpret_cast<VkEventCreateInfo*>(this);}
+
 S_event_create_info(){}
 
 S_event_create_info(
@@ -10841,6 +11151,8 @@ private:
 	 void * pNext = nullptr;
 public:
 	F_external_fence_handle_type handleTypes;
+
+VkExportFenceCreateInfo*const get_vkptr(){return reinterpret_cast<VkExportFenceCreateInfo*>(this);}
 
 S_export_fence_create_info(){}
 
@@ -10877,6 +11189,8 @@ public:
 	const SECURITY_ATTRIBUTES * pAttributes;
 	DWORD dwAccess;
 	LPCWSTR name;
+
+VkExportFenceWin32HandleInfoKHR*const get_vkptr(){return reinterpret_cast<VkExportFenceWin32HandleInfoKHR*>(this);}
 
 S_export_fence_win32_handle_info_KHR(){}
 
@@ -10917,6 +11231,8 @@ private:
 	 void * pNext = nullptr;
 public:
 	F_fence_create flags;
+
+VkFenceCreateInfo*const get_vkptr(){return reinterpret_cast<VkFenceCreateInfo*>(this);}
 
 S_fence_create_info(){}
 
@@ -10965,6 +11281,8 @@ private:
 public:
 	F_external_semaphore_handle_type handleTypes;
 
+VkExportSemaphoreCreateInfo*const get_vkptr(){return reinterpret_cast<VkExportSemaphoreCreateInfo*>(this);}
+
 S_export_semaphore_create_info(){}
 
 S_export_semaphore_create_info(
@@ -11000,6 +11318,8 @@ public:
 	const SECURITY_ATTRIBUTES * pAttributes;
 	DWORD dwAccess;
 	LPCWSTR name;
+
+VkExportSemaphoreWin32HandleInfoKHR*const get_vkptr(){return reinterpret_cast<VkExportSemaphoreWin32HandleInfoKHR*>(this);}
 
 S_export_semaphore_win32_handle_info_KHR(){}
 
@@ -11040,6 +11360,8 @@ private:
 	 void * pNext = nullptr;
 public:
 	VkSemaphoreCreateFlags flags;
+
+VkSemaphoreCreateInfo*const get_vkptr(){return reinterpret_cast<VkSemaphoreCreateInfo*>(this);}
 
 S_semaphore_create_info(){}
 
@@ -11090,6 +11412,8 @@ public:
 	uint32_t queryCount;
 	F_query_pipeline_statistic pipelineStatistics;
 
+VkQueryPoolCreateInfo*const get_vkptr(){return reinterpret_cast<VkQueryPoolCreateInfo*>(this);}
+
 S_query_pool_create_info(){}
 
 S_query_pool_create_info(
@@ -11132,6 +11456,8 @@ public:
 	uint32_t height;
 	uint32_t layers;
 
+VkFramebufferCreateInfo*const get_vkptr(){return reinterpret_cast<VkFramebufferCreateInfo*>(this);}
+
 S_framebuffer_create_info(){}
 
 S_framebuffer_create_info(
@@ -11173,7 +11499,7 @@ struct		S_draw_indirect_command{
 	uint32_t firstVertex;
 	uint32_t firstInstance;
 
-S_draw_indirect_command(){}
+VkDrawIndirectCommand*const get_vkptr(){return reinterpret_cast<VkDrawIndirectCommand*>(this);}
 };
 
 /*	VkDrawIndexedIndirectCommand
@@ -11185,7 +11511,7 @@ struct		S_draw_indexed_indirect_command{
 	int32_t vertexOffset;
 	uint32_t firstInstance;
 
-S_draw_indexed_indirect_command(){}
+VkDrawIndexedIndirectCommand*const get_vkptr(){return reinterpret_cast<VkDrawIndexedIndirectCommand*>(this);}
 };
 
 /*	VkDispatchIndirectCommand
@@ -11195,7 +11521,7 @@ struct		S_dispatch_indirect_command{
 	uint32_t y;
 	uint32_t z;
 
-S_dispatch_indirect_command(){}
+VkDispatchIndirectCommand*const get_vkptr(){return reinterpret_cast<VkDispatchIndirectCommand*>(this);}
 };
 
 /*	VkWin32KeyedMutexAcquireReleaseInfoNV
@@ -11214,6 +11540,8 @@ public:
 	uint32_t releaseCount;
 	const VkDeviceMemory * pReleaseSyncs;
 	const uint64_t * pReleaseKeys;
+
+VkWin32KeyedMutexAcquireReleaseInfoNV*const get_vkptr(){return reinterpret_cast<VkWin32KeyedMutexAcquireReleaseInfoNV*>(this);}
 
 S_win32_keyed_mutex_acquire_release_info_NV(){}
 
@@ -11268,6 +11596,8 @@ public:
 	const VkDeviceMemory * pReleaseSyncs;
 	const uint64_t * pReleaseKeys;
 
+VkWin32KeyedMutexAcquireReleaseInfoKHR*const get_vkptr(){return reinterpret_cast<VkWin32KeyedMutexAcquireReleaseInfoKHR*>(this);}
+
 S_win32_keyed_mutex_acquire_release_info_KHR(){}
 
 S_win32_keyed_mutex_acquire_release_info_KHR(
@@ -11318,6 +11648,8 @@ public:
 	uint32_t signalSemaphoreValuesCount;
 	const uint64_t * pSignalSemaphoreValues;
 
+VkD3D12FenceSubmitInfoKHR*const get_vkptr(){return reinterpret_cast<VkD3D12FenceSubmitInfoKHR*>(this);}
+
 S_d_3d12_fence_submit_info_KHR(){}
 
 S_d_3d12_fence_submit_info_KHR(
@@ -11363,6 +11695,8 @@ public:
 	uint32_t signalSemaphoreCount;
 	const uint32_t * pSignalSemaphoreDeviceIndices;
 
+VkDeviceGroupSubmitInfo*const get_vkptr(){return reinterpret_cast<VkDeviceGroupSubmitInfo*>(this);}
+
 S_device_group_submit_info(){}
 
 S_device_group_submit_info(
@@ -11405,6 +11739,8 @@ private:
 	 void * pNext = nullptr;
 public:
 	VkBool32 protectedSubmit;
+
+VkProtectedSubmitInfo*const get_vkptr(){return reinterpret_cast<VkProtectedSubmitInfo*>(this);}
 
 S_protected_submit_info(){}
 
@@ -11449,6 +11785,8 @@ public:
 	const VkCommandBuffer * pCommandBuffers;
 	uint32_t signalSemaphoreCount;
 	const VkSemaphore * pSignalSemaphores;
+
+VkSubmitInfo*const get_vkptr(){return reinterpret_cast<VkSubmitInfo*>(this);}
 
 S_submit_info(){}
 
@@ -11525,7 +11863,7 @@ struct		S_display_properties_KHR{
 	VkBool32 planeReorderPossible;
 	VkBool32 persistentContent;
 
-S_display_properties_KHR(){}
+VkDisplayPropertiesKHR*const get_vkptr(){return reinterpret_cast<VkDisplayPropertiesKHR*>(this);}
 };
 
 /*	VkDisplayPlanePropertiesKHR
@@ -11535,7 +11873,7 @@ struct		S_display_plane_properties_KHR{
 	VkDisplayKHR currentDisplay;
 	uint32_t currentStackIndex;
 
-S_display_plane_properties_KHR(){}
+VkDisplayPlanePropertiesKHR*const get_vkptr(){return reinterpret_cast<VkDisplayPlanePropertiesKHR*>(this);}
 };
 
 /*	VkDisplayModeParametersKHR
@@ -11544,7 +11882,7 @@ struct		S_display_mode_parameters_KHR{
 	S_extent_2d visibleRegion;
 	uint32_t refreshRate;
 
-S_display_mode_parameters_KHR(){}
+VkDisplayModeParametersKHR*const get_vkptr(){return reinterpret_cast<VkDisplayModeParametersKHR*>(this);}
 };
 
 /*	VkDisplayModePropertiesKHR
@@ -11554,7 +11892,7 @@ struct		S_display_mode_properties_KHR{
 	VkDisplayModeKHR displayMode;
 	S_display_mode_parameters_KHR parameters;
 
-S_display_mode_properties_KHR(){}
+VkDisplayModePropertiesKHR*const get_vkptr(){return reinterpret_cast<VkDisplayModePropertiesKHR*>(this);}
 };
 
 /*	VkDisplayModeCreateInfoKHR
@@ -11566,6 +11904,8 @@ private:
 public:
 	VkDisplayModeCreateFlagsKHR flags;
 	S_display_mode_parameters_KHR parameters;
+
+VkDisplayModeCreateInfoKHR*const get_vkptr(){return reinterpret_cast<VkDisplayModeCreateInfoKHR*>(this);}
 
 S_display_mode_create_info_KHR(){}
 
@@ -11604,7 +11944,7 @@ struct		S_display_plane_capabilities_KHR{
 	S_extent_2d minDstExtent;
 	S_extent_2d maxDstExtent;
 
-S_display_plane_capabilities_KHR(){}
+VkDisplayPlaneCapabilitiesKHR*const get_vkptr(){return reinterpret_cast<VkDisplayPlaneCapabilitiesKHR*>(this);}
 };
 
 /*	VkDisplaySurfaceCreateInfoKHR
@@ -11622,6 +11962,8 @@ public:
 	float globalAlpha;
 	F_display_plane_alpha_KHR alphaMode;
 	S_extent_2d imageExtent;
+
+VkDisplaySurfaceCreateInfoKHR*const get_vkptr(){return reinterpret_cast<VkDisplaySurfaceCreateInfoKHR*>(this);}
 
 S_display_surface_create_info_KHR(){}
 
@@ -11670,6 +12012,8 @@ public:
 	S_rect_2d dstRect;
 	VkBool32 persistent;
 
+VkDisplayPresentInfoKHR*const get_vkptr(){return reinterpret_cast<VkDisplayPresentInfoKHR*>(this);}
+
 S_display_present_info_KHR(){}
 
 S_display_present_info_KHR(
@@ -11712,7 +12056,7 @@ struct		S_surface_capabilities_KHR{
 	F_composite_alpha_KHR supportedCompositeAlpha;
 	F_image_usage supportedUsageFlags;
 
-S_surface_capabilities_KHR(){}
+VkSurfaceCapabilitiesKHR*const get_vkptr(){return reinterpret_cast<VkSurfaceCapabilitiesKHR*>(this);}
 };
 
 /*	VkAndroidSurfaceCreateInfoKHR
@@ -11725,6 +12069,8 @@ private:
 public:
 	VkAndroidSurfaceCreateFlagsKHR flags;
 	struct ANativeWindow * window;
+
+VkAndroidSurfaceCreateInfoKHR*const get_vkptr(){return reinterpret_cast<VkAndroidSurfaceCreateInfoKHR*>(this);}
 
 S_android_surface_create_info_KHR(){}
 
@@ -11761,6 +12107,8 @@ public:
 	VkMirSurfaceCreateFlagsKHR flags;
 	MirConnection * connection;
 	MirSurface * mirSurface;
+
+VkMirSurfaceCreateInfoKHR*const get_vkptr(){return reinterpret_cast<VkMirSurfaceCreateInfoKHR*>(this);}
 
 S_mir_surface_create_info_KHR(){}
 
@@ -11799,6 +12147,8 @@ public:
 	VkViSurfaceCreateFlagsNN flags;
 	void * window;
 
+VkViSurfaceCreateInfoNN*const get_vkptr(){return reinterpret_cast<VkViSurfaceCreateInfoNN*>(this);}
+
 S_vi_surface_create_info_NN(){}
 
 S_vi_surface_create_info_NN(
@@ -11834,6 +12184,8 @@ public:
 	VkWaylandSurfaceCreateFlagsKHR flags;
 	struct wl_display * display;
 	struct wl_surface * surface;
+
+VkWaylandSurfaceCreateInfoKHR*const get_vkptr(){return reinterpret_cast<VkWaylandSurfaceCreateInfoKHR*>(this);}
 
 S_wayland_surface_create_info_KHR(){}
 
@@ -11873,6 +12225,8 @@ public:
 	HINSTANCE hinstance;
 	HWND hwnd;
 
+VkWin32SurfaceCreateInfoKHR*const get_vkptr(){return reinterpret_cast<VkWin32SurfaceCreateInfoKHR*>(this);}
+
 S_win32_surface_create_info_KHR(){}
 
 S_win32_surface_create_info_KHR(
@@ -11910,6 +12264,8 @@ public:
 	VkXlibSurfaceCreateFlagsKHR flags;
 	Display * dpy;
 	Window window;
+
+VkXlibSurfaceCreateInfoKHR*const get_vkptr(){return reinterpret_cast<VkXlibSurfaceCreateInfoKHR*>(this);}
 
 S_xlib_surface_create_info_KHR(){}
 
@@ -11949,6 +12305,8 @@ public:
 	xcb_connection_t * connection;
 	xcb_window_t window;
 
+VkXcbSurfaceCreateInfoKHR*const get_vkptr(){return reinterpret_cast<VkXcbSurfaceCreateInfoKHR*>(this);}
+
 S_xcb_surface_create_info_KHR(){}
 
 S_xcb_surface_create_info_KHR(
@@ -11982,7 +12340,7 @@ struct		S_surface_format_KHR{
 	E_format format;
 	E_color_space_KHR colorSpace;
 
-S_surface_format_KHR(){}
+VkSurfaceFormatKHR*const get_vkptr(){return reinterpret_cast<VkSurfaceFormatKHR*>(this);}
 };
 
 /*	VkSwapchainCounterCreateInfoEXT
@@ -11994,6 +12352,8 @@ private:
 	 void * pNext = nullptr;
 public:
 	F_surface_counter_EXT surfaceCounters;
+
+VkSwapchainCounterCreateInfoEXT*const get_vkptr(){return reinterpret_cast<VkSwapchainCounterCreateInfoEXT*>(this);}
 
 S_swapchain_counter_create_info_EXT(){}
 
@@ -12027,6 +12387,8 @@ private:
 	 void * pNext = nullptr;
 public:
 	F_device_group_present_mode_KHR modes;
+
+VkDeviceGroupSwapchainCreateInfoKHR*const get_vkptr(){return reinterpret_cast<VkDeviceGroupSwapchainCreateInfoKHR*>(this);}
 
 S_device_group_swapchain_create_info_KHR(){}
 
@@ -12077,6 +12439,8 @@ public:
 	E_present_mode_KHR presentMode;
 	VkBool32 clipped;
 	VkSwapchainKHR oldSwapchain;
+
+VkSwapchainCreateInfoKHR*const get_vkptr(){return reinterpret_cast<VkSwapchainCreateInfoKHR*>(this);}
 
 S_swapchain_create_info_KHR(){}
 
@@ -12148,7 +12512,7 @@ struct		S_rect_layer_KHR{
 	S_extent_2d extent;
 	uint32_t layer;
 
-S_rect_layer_KHR(){}
+VkRectLayerKHR*const get_vkptr(){return reinterpret_cast<VkRectLayerKHR*>(this);}
 };
 
 /*	VkPresentRegionKHR
@@ -12157,7 +12521,7 @@ struct		S_present_region_KHR{
 	uint32_t rectangleCount;
 	const S_rect_layer_KHR * pRectangles;
 
-S_present_region_KHR(){}
+VkPresentRegionKHR*const get_vkptr(){return reinterpret_cast<VkPresentRegionKHR*>(this);}
 };
 
 /*	VkPresentRegionsKHR
@@ -12170,6 +12534,8 @@ private:
 public:
 	uint32_t swapchainCount;
 	const S_present_region_KHR * pRegions;
+
+VkPresentRegionsKHR*const get_vkptr(){return reinterpret_cast<VkPresentRegionsKHR*>(this);}
 
 S_present_regions_KHR(){}
 
@@ -12208,6 +12574,8 @@ public:
 	const uint32_t * pDeviceMasks;
 	F_device_group_present_mode_KHR mode;
 
+VkDeviceGroupPresentInfoKHR*const get_vkptr(){return reinterpret_cast<VkDeviceGroupPresentInfoKHR*>(this);}
+
 S_device_group_present_info_KHR(){}
 
 S_device_group_present_info_KHR(
@@ -12241,7 +12609,7 @@ struct		S_present_time_GOOGLE{
 	uint32_t presentID;
 	uint64_t desiredPresentTime;
 
-S_present_time_GOOGLE(){}
+VkPresentTimeGOOGLE*const get_vkptr(){return reinterpret_cast<VkPresentTimeGOOGLE*>(this);}
 };
 
 /*	VkPresentTimesInfoGOOGLE
@@ -12254,6 +12622,8 @@ private:
 public:
 	uint32_t swapchainCount;
 	const S_present_time_GOOGLE * pTimes;
+
+VkPresentTimesInfoGOOGLE*const get_vkptr(){return reinterpret_cast<VkPresentTimesInfoGOOGLE*>(this);}
 
 S_present_times_info_GOOGLE(){}
 
@@ -12298,6 +12668,8 @@ public:
 	const VkSwapchainKHR * pSwapchains;
 	const uint32_t * pImageIndices;
 	E_result * pResults;
+
+VkPresentInfoKHR*const get_vkptr(){return reinterpret_cast<VkPresentInfoKHR*>(this);}
 
 S_present_info_KHR(){}
 
@@ -12357,6 +12729,8 @@ public:
 	uint64_t object;
 	const char * pObjectName;
 
+VkDebugMarkerObjectNameInfoEXT*const get_vkptr(){return reinterpret_cast<VkDebugMarkerObjectNameInfoEXT*>(this);}
+
 S_debug_marker_object_name_info_EXT(){}
 
 S_debug_marker_object_name_info_EXT(
@@ -12394,6 +12768,8 @@ public:
 	uint64_t tagName;
 	size_t tagSize;
 	const void * pTag;
+
+VkDebugMarkerObjectTagInfoEXT*const get_vkptr(){return reinterpret_cast<VkDebugMarkerObjectTagInfoEXT*>(this);}
 
 S_debug_marker_object_tag_info_EXT(){}
 
@@ -12434,6 +12810,8 @@ public:
 	const char * pMarkerName;
 	float color[4];
 
+VkDebugMarkerMarkerInfoEXT*const get_vkptr(){return reinterpret_cast<VkDebugMarkerMarkerInfoEXT*>(this);}
+
 S_debug_marker_marker_info_EXT(){}
 
 S_debug_marker_marker_info_EXT(
@@ -12466,7 +12844,7 @@ struct		S_external_image_format_properties_NV{
 	F_external_memory_handle_type_NV exportFromImportedHandleTypes;
 	F_external_memory_handle_type_NV compatibleHandleTypes;
 
-S_external_image_format_properties_NV(){}
+VkExternalImageFormatPropertiesNV*const get_vkptr(){return reinterpret_cast<VkExternalImageFormatPropertiesNV*>(this);}
 };
 
 /*	VkDeviceGeneratedCommandsFeaturesNVX
@@ -12477,6 +12855,8 @@ private:
 	 void * pNext = nullptr;
 public:
 	VkBool32 computeBindingPointSupport;
+
+VkDeviceGeneratedCommandsFeaturesNVX*const get_vkptr(){return reinterpret_cast<VkDeviceGeneratedCommandsFeaturesNVX*>(this);}
 
 S_device_generated_commands_features_NVX(){}
 
@@ -12511,6 +12891,8 @@ public:
 	uint32_t minSequenceCountBufferOffsetAlignment;
 	uint32_t minSequenceIndexBufferOffsetAlignment;
 	uint32_t minCommandsTokenBufferOffsetAlignment;
+
+VkDeviceGeneratedCommandsLimitsNVX*const get_vkptr(){return reinterpret_cast<VkDeviceGeneratedCommandsLimitsNVX*>(this);}
 
 S_device_generated_commands_limits_NVX(){}
 
@@ -12548,7 +12930,7 @@ struct		S_indirect_commands_token_NVX{
 	VkBuffer buffer;
 	VkDeviceSize offset;
 
-S_indirect_commands_token_NVX(){}
+VkIndirectCommandsTokenNVX*const get_vkptr(){return reinterpret_cast<VkIndirectCommandsTokenNVX*>(this);}
 };
 
 /*	VkIndirectCommandsLayoutTokenNVX
@@ -12559,7 +12941,7 @@ struct		S_indirect_commands_layout_token_NVX{
 	uint32_t dynamicCount;
 	uint32_t divisor;
 
-S_indirect_commands_layout_token_NVX(){}
+VkIndirectCommandsLayoutTokenNVX*const get_vkptr(){return reinterpret_cast<VkIndirectCommandsLayoutTokenNVX*>(this);}
 };
 
 /*	VkIndirectCommandsLayoutCreateInfoNVX
@@ -12573,6 +12955,8 @@ public:
 	F_indirect_commands_layout_usage_NVX flags;
 	uint32_t tokenCount;
 	const S_indirect_commands_layout_token_NVX * pTokens;
+
+VkIndirectCommandsLayoutCreateInfoNVX*const get_vkptr(){return reinterpret_cast<VkIndirectCommandsLayoutCreateInfoNVX*>(this);}
 
 S_indirect_commands_layout_create_info_NVX(){}
 
@@ -12618,6 +13002,8 @@ public:
 	VkDeviceSize sequencesCountOffset;
 	VkBuffer sequencesIndexBuffer;
 	VkDeviceSize sequencesIndexOffset;
+
+VkCmdProcessCommandsInfoNVX*const get_vkptr(){return reinterpret_cast<VkCmdProcessCommandsInfoNVX*>(this);}
 
 S_cmd_process_commands_info_NVX(){}
 
@@ -12669,6 +13055,8 @@ public:
 	VkIndirectCommandsLayoutNVX indirectCommandsLayout;
 	uint32_t maxSequencesCount;
 
+VkCmdReserveSpaceForCommandsInfoNVX*const get_vkptr(){return reinterpret_cast<VkCmdReserveSpaceForCommandsInfoNVX*>(this);}
+
 S_cmd_reserve_space_for_commands_info_NVX(){}
 
 S_cmd_reserve_space_for_commands_info_NVX(
@@ -12710,6 +13098,8 @@ public:
 	uint32_t maxStorageImagesPerDescriptor;
 	uint32_t maxSampledImagesPerDescriptor;
 	uint32_t maxPipelineLayouts;
+
+VkObjectTableCreateInfoNVX*const get_vkptr(){return reinterpret_cast<VkObjectTableCreateInfoNVX*>(this);}
 
 S_object_table_create_info_NVX(){}
 
@@ -12754,7 +13144,7 @@ struct		S_object_table_entry_NVX{
 	E_object_entry_type_NVX type;
 	F_object_entry_usage_NVX flags;
 
-S_object_table_entry_NVX(){}
+VkObjectTableEntryNVX*const get_vkptr(){return reinterpret_cast<VkObjectTableEntryNVX*>(this);}
 };
 
 /*	VkObjectTablePipelineEntryNVX
@@ -12764,7 +13154,7 @@ struct		S_object_table_pipeline_entry_NVX{
 	F_object_entry_usage_NVX flags;
 	VkPipeline pipeline;
 
-S_object_table_pipeline_entry_NVX(){}
+VkObjectTablePipelineEntryNVX*const get_vkptr(){return reinterpret_cast<VkObjectTablePipelineEntryNVX*>(this);}
 };
 
 /*	VkObjectTableDescriptorSetEntryNVX
@@ -12775,7 +13165,7 @@ struct		S_object_table_descriptor_set_entry_NVX{
 	VkPipelineLayout pipelineLayout;
 	VkDescriptorSet descriptorSet;
 
-S_object_table_descriptor_set_entry_NVX(){}
+VkObjectTableDescriptorSetEntryNVX*const get_vkptr(){return reinterpret_cast<VkObjectTableDescriptorSetEntryNVX*>(this);}
 };
 
 /*	VkObjectTableVertexBufferEntryNVX
@@ -12785,7 +13175,7 @@ struct		S_object_table_vertex_buffer_entry_NVX{
 	F_object_entry_usage_NVX flags;
 	VkBuffer buffer;
 
-S_object_table_vertex_buffer_entry_NVX(){}
+VkObjectTableVertexBufferEntryNVX*const get_vkptr(){return reinterpret_cast<VkObjectTableVertexBufferEntryNVX*>(this);}
 };
 
 /*	VkObjectTableIndexBufferEntryNVX
@@ -12796,7 +13186,7 @@ struct		S_object_table_index_buffer_entry_NVX{
 	VkBuffer buffer;
 	E_index_type indexType;
 
-S_object_table_index_buffer_entry_NVX(){}
+VkObjectTableIndexBufferEntryNVX*const get_vkptr(){return reinterpret_cast<VkObjectTableIndexBufferEntryNVX*>(this);}
 };
 
 /*	VkObjectTablePushConstantEntryNVX
@@ -12807,7 +13197,7 @@ struct		S_object_table_push_constant_entry_NVX{
 	VkPipelineLayout pipelineLayout;
 	F_shader_stage stageFlags;
 
-S_object_table_push_constant_entry_NVX(){}
+VkObjectTablePushConstantEntryNVX*const get_vkptr(){return reinterpret_cast<VkObjectTablePushConstantEntryNVX*>(this);}
 };
 
 /*	VkPhysicalDevicePushDescriptorPropertiesKHR
@@ -12819,6 +13209,8 @@ private:
 	void * pNext = nullptr;
 public:
 	uint32_t maxPushDescriptors;
+
+VkPhysicalDevicePushDescriptorPropertiesKHR*const get_vkptr(){return reinterpret_cast<VkPhysicalDevicePushDescriptorPropertiesKHR*>(this);}
 
 S_physical_device_push_descriptor_properties_KHR(){}
 
@@ -12845,14 +13237,16 @@ static_assert(
 
 /*	VkConformanceVersionKHR
 */
+#ifdef LAKA_UNKNOW
 struct		S_conformance_version_KHR{
 	uint8_t major;
 	uint8_t minor;
 	uint8_t subminor;
 	uint8_t patch;
 
-S_conformance_version_KHR(){}
+VkConformanceVersionKHR*const get_vkptr(){return reinterpret_cast<VkConformanceVersionKHR*>(this);}
 };
+#endif //LAKA_UNKNOW
 
 /*	VkPhysicalDeviceDriverPropertiesKHR
 (returnedonly)
@@ -12868,6 +13262,8 @@ public:
 	char driverName[VK_MAX_DRIVER_NAME_SIZE_KHR];
 	char driverInfo[VK_MAX_DRIVER_INFO_SIZE_KHR];
 	S_conformance_version_KHR conformanceVersion;
+
+VkPhysicalDeviceDriverPropertiesKHR*const get_vkptr(){return reinterpret_cast<VkPhysicalDeviceDriverPropertiesKHR*>(this);}
 
 S_physical_device_driver_properties_KHR(){}
 
@@ -12914,6 +13310,8 @@ public:
 	uint32_t deviceNodeMask;
 	VkBool32 deviceLUIDValid;
 
+VkPhysicalDeviceIDProperties*const get_vkptr(){return reinterpret_cast<VkPhysicalDeviceIDProperties*>(this);}
+
 S_physical_device_id_properties(){}
 
 S_physical_device_id_properties(
@@ -12957,6 +13355,8 @@ public:
 	uint32_t maxMultiviewViewCount;
 	uint32_t maxMultiviewInstanceIndex;
 
+VkPhysicalDeviceMultiviewProperties*const get_vkptr(){return reinterpret_cast<VkPhysicalDeviceMultiviewProperties*>(this);}
+
 S_physical_device_multiview_properties(){}
 
 S_physical_device_multiview_properties(
@@ -12992,6 +13392,8 @@ private:
 public:
 	uint32_t maxDiscardRectangles;
 
+VkPhysicalDeviceDiscardRectanglePropertiesEXT*const get_vkptr(){return reinterpret_cast<VkPhysicalDeviceDiscardRectanglePropertiesEXT*>(this);}
+
 S_physical_device_discard_rectangle_properties_EXT(){}
 
 S_physical_device_discard_rectangle_properties_EXT(
@@ -13025,6 +13427,8 @@ private:
 	void * pNext = nullptr;
 public:
 	VkBool32 perViewPositionAllComponents;
+
+VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX*const get_vkptr(){return reinterpret_cast<VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX*>(this);}
 
 S_physical_device_multiview_per_view_attributes_properties_NVX(){}
 
@@ -13062,6 +13466,8 @@ public:
 	F_shader_stage supportedStages;
 	F_subgroup_feature supportedOperations;
 	VkBool32 quadOperationsInAllStages;
+
+VkPhysicalDeviceSubgroupProperties*const get_vkptr(){return reinterpret_cast<VkPhysicalDeviceSubgroupProperties*>(this);}
 
 S_physical_device_subgroup_properties(){}
 
@@ -13103,6 +13509,8 @@ private:
 public:
 	E_point_clipping_behavior pointClippingBehavior;
 
+VkPhysicalDevicePointClippingProperties*const get_vkptr(){return reinterpret_cast<VkPhysicalDevicePointClippingProperties*>(this);}
+
 S_physical_device_point_clipping_properties(){}
 
 S_physical_device_point_clipping_properties(
@@ -13135,6 +13543,8 @@ private:
 	void * pNext = nullptr;
 public:
 	VkBool32 protectedNoFault;
+
+VkPhysicalDeviceProtectedMemoryProperties*const get_vkptr(){return reinterpret_cast<VkPhysicalDeviceProtectedMemoryProperties*>(this);}
 
 S_physical_device_protected_memory_properties(){}
 
@@ -13170,6 +13580,8 @@ private:
 public:
 	VkBool32 filterMinmaxSingleComponentFormats;
 	VkBool32 filterMinmaxImageComponentMapping;
+
+VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT*const get_vkptr(){return reinterpret_cast<VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT*>(this);}
 
 S_physical_device_sampler_filter_minmax_properties_EXT(){}
 
@@ -13210,6 +13622,8 @@ public:
 	float sampleLocationCoordinateRange[2];
 	uint32_t sampleLocationSubPixelBits;
 	VkBool32 variableSampleLocations;
+
+VkPhysicalDeviceSampleLocationsPropertiesEXT*const get_vkptr(){return reinterpret_cast<VkPhysicalDeviceSampleLocationsPropertiesEXT*>(this);}
 
 S_physical_device_sample_locations_properties_EXT(){}
 
@@ -13257,6 +13671,8 @@ public:
 	VkBool32 advancedBlendNonPremultipliedDstColor;
 	VkBool32 advancedBlendCorrelatedOverlap;
 	VkBool32 advancedBlendAllOperations;
+
+VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT*const get_vkptr(){return reinterpret_cast<VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT*>(this);}
 
 S_physical_device_blend_operation_advanced_properties_EXT(){}
 
@@ -13306,6 +13722,8 @@ public:
 	uint32_t maxDescriptorSetInlineUniformBlocks;
 	uint32_t maxDescriptorSetUpdateAfterBindInlineUniformBlocks;
 
+VkPhysicalDeviceInlineUniformBlockPropertiesEXT*const get_vkptr(){return reinterpret_cast<VkPhysicalDeviceInlineUniformBlockPropertiesEXT*>(this);}
+
 S_physical_device_inline_uniform_block_properties_EXT(){}
 
 S_physical_device_inline_uniform_block_properties_EXT(
@@ -13349,6 +13767,8 @@ public:
 	uint32_t maxPerSetDescriptors;
 	VkDeviceSize maxMemoryAllocationSize;
 
+VkPhysicalDeviceMaintenance3Properties*const get_vkptr(){return reinterpret_cast<VkPhysicalDeviceMaintenance3Properties*>(this);}
+
 S_physical_device_maintenance3_properties(){}
 
 S_physical_device_maintenance3_properties(
@@ -13383,6 +13803,8 @@ private:
 	void * pNext = nullptr;
 public:
 	VkDeviceSize minImportedHostPointerAlignment;
+
+VkPhysicalDeviceExternalMemoryHostPropertiesEXT*const get_vkptr(){return reinterpret_cast<VkPhysicalDeviceExternalMemoryHostPropertiesEXT*>(this);}
 
 S_physical_device_external_memory_host_properties_EXT(){}
 
@@ -13424,6 +13846,8 @@ public:
 	VkBool32 degenerateLinesRasterized;
 	VkBool32 fullyCoveredFragmentShaderInputVariable;
 	VkBool32 conservativeRasterizationPostDepthCoverage;
+
+VkPhysicalDeviceConservativeRasterizationPropertiesEXT*const get_vkptr(){return reinterpret_cast<VkPhysicalDeviceConservativeRasterizationPropertiesEXT*>(this);}
 
 S_physical_device_conservative_rasterization_properties_EXT(){}
 
@@ -13487,6 +13911,8 @@ public:
 	uint32_t minVgprAllocation;
 	uint32_t maxVgprAllocation;
 	uint32_t vgprAllocationGranularity;
+
+VkPhysicalDeviceShaderCorePropertiesAMD*const get_vkptr(){return reinterpret_cast<VkPhysicalDeviceShaderCorePropertiesAMD*>(this);}
 
 S_physical_device_shader_core_properties_AMD(){}
 
@@ -13570,6 +13996,8 @@ public:
 	uint32_t maxDescriptorSetUpdateAfterBindStorageImages;
 	uint32_t maxDescriptorSetUpdateAfterBindInputAttachments;
 
+VkPhysicalDeviceDescriptorIndexingPropertiesEXT*const get_vkptr(){return reinterpret_cast<VkPhysicalDeviceDescriptorIndexingPropertiesEXT*>(this);}
+
 S_physical_device_descriptor_indexing_properties_EXT(){}
 
 S_physical_device_descriptor_indexing_properties_EXT(
@@ -13647,6 +14075,8 @@ private:
 public:
 	uint32_t maxVertexAttribDivisor;
 
+VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT*const get_vkptr(){return reinterpret_cast<VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT*>(this);}
+
 S_physical_device_vertex_attribute_divisor_properties_EXT(){}
 
 S_physical_device_vertex_attribute_divisor_properties_EXT(
@@ -13682,6 +14112,8 @@ public:
 	S_extent_2d shadingRateTexelSize;
 	uint32_t shadingRatePaletteSize;
 	uint32_t shadingRateMaxCoarseSamples;
+
+VkPhysicalDeviceShadingRateImagePropertiesNV*const get_vkptr(){return reinterpret_cast<VkPhysicalDeviceShadingRateImagePropertiesNV*>(this);}
 
 S_physical_device_shading_rate_image_properties_NV(){}
 
@@ -13731,6 +14163,8 @@ public:
 	uint32_t maxMeshMultiviewViewCount;
 	uint32_t meshOutputPerVertexGranularity;
 	uint32_t meshOutputPerPrimitiveGranularity;
+
+VkPhysicalDeviceMeshShaderPropertiesNV*const get_vkptr(){return reinterpret_cast<VkPhysicalDeviceMeshShaderPropertiesNV*>(this);}
 
 S_physical_device_mesh_shader_properties_NV(){}
 
@@ -13791,6 +14225,8 @@ public:
 	uint32_t maxRecursionDepth;
 	uint32_t maxGeometryCount;
 
+VkPhysicalDeviceRaytracingPropertiesNVX*const get_vkptr(){return reinterpret_cast<VkPhysicalDeviceRaytracingPropertiesNVX*>(this);}
+
 S_physical_device_raytracing_properties_NVX(){}
 
 S_physical_device_raytracing_properties_NVX(
@@ -13850,6 +14286,8 @@ private:
 	void * pNext = nullptr;
 public:
 	S_physical_device_properties properties;
+
+VkPhysicalDeviceProperties2*const get_vkptr(){return reinterpret_cast<VkPhysicalDeviceProperties2*>(this);}
 
 S_physical_device_properties2(){}
 
@@ -13931,13 +14369,15 @@ N_physical_device_properties2& n_physical_device_raytracing_properties_NVX(S_phy
 /*	VkDrmFormatModifierPropertiesEXT
 (returnedonly)
 */
+#ifdef LAKA_UNKNOW
 struct		S_drm_format_modifier_properties_EXT{
 	uint64_t drmFormatModifier;
 	uint32_t drmFormatModifierPlaneCount;
 	F_format_feature drmFormatModifierTilingFeatures;
 
-S_drm_format_modifier_properties_EXT(){}
+VkDrmFormatModifierPropertiesEXT*const get_vkptr(){return reinterpret_cast<VkDrmFormatModifierPropertiesEXT*>(this);}
 };
+#endif //LAKA_UNKNOW
 
 /*	VkDrmFormatModifierPropertiesListEXT
 ex to: VkFormatProperties2
@@ -13950,6 +14390,8 @@ private:
 public:
 	uint32_t drmFormatModifierCount;
 	S_drm_format_modifier_properties_EXT * pDrmFormatModifierProperties;
+
+VkDrmFormatModifierPropertiesListEXT*const get_vkptr(){return reinterpret_cast<VkDrmFormatModifierPropertiesListEXT*>(this);}
 
 S_drm_format_modifier_properties_list_EXT(){}
 
@@ -13988,6 +14430,8 @@ private:
 	void * pNext = nullptr;
 public:
 	S_format_properties formatProperties;
+
+VkFormatProperties2*const get_vkptr(){return reinterpret_cast<VkFormatProperties2*>(this);}
 
 S_format_properties2(){}
 
@@ -14032,7 +14476,7 @@ struct		S_external_memory_properties{
 	F_external_memory_handle_type exportFromImportedHandleTypes;
 	F_external_memory_handle_type compatibleHandleTypes;
 
-S_external_memory_properties(){}
+VkExternalMemoryProperties*const get_vkptr(){return reinterpret_cast<VkExternalMemoryProperties*>(this);}
 };
 
 /*	VkExternalImageFormatProperties
@@ -14045,6 +14489,8 @@ private:
 	void * pNext = nullptr;
 public:
 	S_external_memory_properties externalMemoryProperties;
+
+VkExternalImageFormatProperties*const get_vkptr(){return reinterpret_cast<VkExternalImageFormatProperties*>(this);}
 
 S_external_image_format_properties(){}
 
@@ -14080,6 +14526,8 @@ private:
 public:
 	uint32_t combinedImageSamplerDescriptorCount;
 
+VkSamplerYcbcrConversionImageFormatProperties*const get_vkptr(){return reinterpret_cast<VkSamplerYcbcrConversionImageFormatProperties*>(this);}
+
 S_sampler_ycbcr_conversion_image_format_properties(){}
 
 S_sampler_ycbcr_conversion_image_format_properties(
@@ -14113,6 +14561,8 @@ private:
 	void * pNext = nullptr;
 public:
 	VkBool32 supportsTextureGatherLODBiasAMD;
+
+VkTextureLODGatherFormatPropertiesAMD*const get_vkptr(){return reinterpret_cast<VkTextureLODGatherFormatPropertiesAMD*>(this);}
 
 S_texture_lod_gather_format_properties_AMD(){}
 
@@ -14148,6 +14598,8 @@ private:
 	void * pNext = nullptr;
 public:
 	uint64_t androidHardwareBufferUsage;
+
+VkAndroidHardwareBufferUsageANDROID*const get_vkptr(){return reinterpret_cast<VkAndroidHardwareBufferUsageANDROID*>(this);}
 
 S_android_hardware_buffer_usage_ANDROID(){}
 
@@ -14187,6 +14639,8 @@ private:
 	void * pNext = nullptr;
 public:
 	S_image_format_properties imageFormatProperties;
+
+VkImageFormatProperties2*const get_vkptr(){return reinterpret_cast<VkImageFormatProperties2*>(this);}
 
 S_image_format_properties2(){}
 
@@ -14239,6 +14693,8 @@ private:
 public:
 	F_external_memory_handle_type handleType;
 
+VkPhysicalDeviceExternalImageFormatInfo*const get_vkptr(){return reinterpret_cast<VkPhysicalDeviceExternalImageFormatInfo*>(this);}
+
 S_physical_device_external_image_format_info(){}
 
 S_physical_device_external_image_format_info(
@@ -14272,6 +14728,8 @@ private:
 	 void * pNext = nullptr;
 public:
 	uint64_t drmFormatModifier;
+
+VkPhysicalDeviceImageDrmFormatModifierInfoEXT*const get_vkptr(){return reinterpret_cast<VkPhysicalDeviceImageDrmFormatModifierInfoEXT*>(this);}
 
 S_physical_device_image_drm_format_modifier_info_EXT(){}
 
@@ -14312,6 +14770,8 @@ public:
 	E_image_tiling tiling;
 	F_image_usage usage;
 	F_image_create flags;
+
+VkPhysicalDeviceImageFormatInfo2*const get_vkptr(){return reinterpret_cast<VkPhysicalDeviceImageFormatInfo2*>(this);}
 
 S_physical_device_image_format_info2(){}
 
@@ -14369,6 +14829,8 @@ private:
 public:
 	F_pipeline_stage checkpointExecutionStageMask;
 
+VkQueueFamilyCheckpointPropertiesNV*const get_vkptr(){return reinterpret_cast<VkQueueFamilyCheckpointPropertiesNV*>(this);}
+
 S_queue_family_checkpoint_properties_NV(){}
 
 S_queue_family_checkpoint_properties_NV(
@@ -14403,6 +14865,8 @@ private:
 	void * pNext = nullptr;
 public:
 	S_queue_family_properties queueFamilyProperties;
+
+VkQueueFamilyProperties2*const get_vkptr(){return reinterpret_cast<VkQueueFamilyProperties2*>(this);}
 
 S_queue_family_properties2(){}
 
@@ -14445,6 +14909,8 @@ private:
 public:
 	S_physical_device_memory_properties memoryProperties;
 
+VkPhysicalDeviceMemoryProperties2*const get_vkptr(){return reinterpret_cast<VkPhysicalDeviceMemoryProperties2*>(this);}
+
 S_physical_device_memory_properties2(){}
 
 S_physical_device_memory_properties2(
@@ -14475,6 +14941,8 @@ private:
 	void * pNext = nullptr;
 public:
 	S_sparse_image_format_properties properties;
+
+VkSparseImageFormatProperties2*const get_vkptr(){return reinterpret_cast<VkSparseImageFormatProperties2*>(this);}
 
 S_sparse_image_format_properties2(){}
 
@@ -14509,6 +14977,8 @@ public:
 	F_sample_count samples;
 	F_image_usage usage;
 	E_image_tiling tiling;
+
+VkPhysicalDeviceSparseImageFormatInfo2*const get_vkptr(){return reinterpret_cast<VkPhysicalDeviceSparseImageFormatInfo2*>(this);}
 
 S_physical_device_sparse_image_format_info2(){}
 
@@ -14550,6 +15020,8 @@ public:
 	F_buffer_usage usage;
 	F_external_memory_handle_type handleType;
 
+VkPhysicalDeviceExternalBufferInfo*const get_vkptr(){return reinterpret_cast<VkPhysicalDeviceExternalBufferInfo*>(this);}
+
 S_physical_device_external_buffer_info(){}
 
 S_physical_device_external_buffer_info(
@@ -14585,6 +15057,8 @@ private:
 public:
 	S_external_memory_properties externalMemoryProperties;
 
+VkExternalBufferProperties*const get_vkptr(){return reinterpret_cast<VkExternalBufferProperties*>(this);}
+
 S_external_buffer_properties(){}
 
 S_external_buffer_properties(
@@ -14616,6 +15090,8 @@ private:
 	void * pNext = nullptr;
 public:
 	uint32_t memoryTypeBits;
+
+VkMemoryWin32HandlePropertiesKHR*const get_vkptr(){return reinterpret_cast<VkMemoryWin32HandlePropertiesKHR*>(this);}
 
 S_memory_win32_handle_properties_KHR(){}
 
@@ -14649,6 +15125,8 @@ private:
 public:
 	VkDeviceMemory memory;
 	F_external_memory_handle_type handleType;
+
+VkMemoryGetWin32HandleInfoKHR*const get_vkptr(){return reinterpret_cast<VkMemoryGetWin32HandleInfoKHR*>(this);}
 
 S_memory_get_win32_handle_info_KHR(){}
 
@@ -14684,6 +15162,8 @@ private:
 public:
 	uint32_t memoryTypeBits;
 
+VkMemoryFdPropertiesKHR*const get_vkptr(){return reinterpret_cast<VkMemoryFdPropertiesKHR*>(this);}
+
 S_memory_fd_properties_KHR(){}
 
 S_memory_fd_properties_KHR(
@@ -14714,6 +15194,8 @@ private:
 public:
 	VkDeviceMemory memory;
 	F_external_memory_handle_type handleType;
+
+VkMemoryGetFdInfoKHR*const get_vkptr(){return reinterpret_cast<VkMemoryGetFdInfoKHR*>(this);}
 
 S_memory_get_fd_info_KHR(){}
 
@@ -14747,6 +15229,8 @@ private:
 public:
 	F_external_semaphore_handle_type handleType;
 
+VkPhysicalDeviceExternalSemaphoreInfo*const get_vkptr(){return reinterpret_cast<VkPhysicalDeviceExternalSemaphoreInfo*>(this);}
+
 S_physical_device_external_semaphore_info(){}
 
 S_physical_device_external_semaphore_info(
@@ -14779,6 +15263,8 @@ public:
 	F_external_semaphore_handle_type exportFromImportedHandleTypes;
 	F_external_semaphore_handle_type compatibleHandleTypes;
 	F_external_semaphore_feature externalSemaphoreFeatures;
+
+VkExternalSemaphoreProperties*const get_vkptr(){return reinterpret_cast<VkExternalSemaphoreProperties*>(this);}
 
 S_external_semaphore_properties(){}
 
@@ -14818,6 +15304,8 @@ public:
 	F_external_semaphore_handle_type handleType;
 	HANDLE handle;
 	LPCWSTR name;
+
+VkImportSemaphoreWin32HandleInfoKHR*const get_vkptr(){return reinterpret_cast<VkImportSemaphoreWin32HandleInfoKHR*>(this);}
 
 S_import_semaphore_win32_handle_info_KHR(){}
 
@@ -14860,6 +15348,8 @@ public:
 	VkSemaphore semaphore;
 	F_external_semaphore_handle_type handleType;
 
+VkSemaphoreGetWin32HandleInfoKHR*const get_vkptr(){return reinterpret_cast<VkSemaphoreGetWin32HandleInfoKHR*>(this);}
+
 S_semaphore_get_win32_handle_info_KHR(){}
 
 S_semaphore_get_win32_handle_info_KHR(
@@ -14895,6 +15385,8 @@ public:
 	F_semaphore_import flags;
 	F_external_semaphore_handle_type handleType;
 	int fd;
+
+VkImportSemaphoreFdInfoKHR*const get_vkptr(){return reinterpret_cast<VkImportSemaphoreFdInfoKHR*>(this);}
 
 S_import_semaphore_fd_info_KHR(){}
 
@@ -14933,6 +15425,8 @@ public:
 	VkSemaphore semaphore;
 	F_external_semaphore_handle_type handleType;
 
+VkSemaphoreGetFdInfoKHR*const get_vkptr(){return reinterpret_cast<VkSemaphoreGetFdInfoKHR*>(this);}
+
 S_semaphore_get_fd_info_KHR(){}
 
 S_semaphore_get_fd_info_KHR(
@@ -14964,6 +15458,8 @@ private:
 	 void * pNext = nullptr;
 public:
 	F_external_fence_handle_type handleType;
+
+VkPhysicalDeviceExternalFenceInfo*const get_vkptr(){return reinterpret_cast<VkPhysicalDeviceExternalFenceInfo*>(this);}
 
 S_physical_device_external_fence_info(){}
 
@@ -14997,6 +15493,8 @@ public:
 	F_external_fence_handle_type exportFromImportedHandleTypes;
 	F_external_fence_handle_type compatibleHandleTypes;
 	F_external_fence_feature externalFenceFeatures;
+
+VkExternalFenceProperties*const get_vkptr(){return reinterpret_cast<VkExternalFenceProperties*>(this);}
 
 S_external_fence_properties(){}
 
@@ -15036,6 +15534,8 @@ public:
 	F_external_fence_handle_type handleType;
 	HANDLE handle;
 	LPCWSTR name;
+
+VkImportFenceWin32HandleInfoKHR*const get_vkptr(){return reinterpret_cast<VkImportFenceWin32HandleInfoKHR*>(this);}
 
 S_import_fence_win32_handle_info_KHR(){}
 
@@ -15078,6 +15578,8 @@ public:
 	VkFence fence;
 	F_external_fence_handle_type handleType;
 
+VkFenceGetWin32HandleInfoKHR*const get_vkptr(){return reinterpret_cast<VkFenceGetWin32HandleInfoKHR*>(this);}
+
 S_fence_get_win32_handle_info_KHR(){}
 
 S_fence_get_win32_handle_info_KHR(
@@ -15113,6 +15615,8 @@ public:
 	F_fence_import flags;
 	F_external_fence_handle_type handleType;
 	int fd;
+
+VkImportFenceFdInfoKHR*const get_vkptr(){return reinterpret_cast<VkImportFenceFdInfoKHR*>(this);}
 
 S_import_fence_fd_info_KHR(){}
 
@@ -15150,6 +15654,8 @@ private:
 public:
 	VkFence fence;
 	F_external_fence_handle_type handleType;
+
+VkFenceGetFdInfoKHR*const get_vkptr(){return reinterpret_cast<VkFenceGetFdInfoKHR*>(this);}
 
 S_fence_get_fd_info_KHR(){}
 
@@ -15193,6 +15699,8 @@ public:
 	F_composite_alpha_KHR supportedCompositeAlpha;
 	F_image_usage supportedUsageFlags;
 	F_surface_counter_EXT supportedSurfaceCounters;
+
+VkSurfaceCapabilities2EXT*const get_vkptr(){return reinterpret_cast<VkSurfaceCapabilities2EXT*>(this);}
 
 S_surface_capabilities2_EXT(){}
 
@@ -15244,6 +15752,8 @@ private:
 public:
 	E_display_power_state_EXT powerState;
 
+VkDisplayPowerInfoEXT*const get_vkptr(){return reinterpret_cast<VkDisplayPowerInfoEXT*>(this);}
+
 S_display_power_info_EXT(){}
 
 S_display_power_info_EXT(
@@ -15274,6 +15784,8 @@ private:
 public:
 	E_device_event_type_EXT deviceEvent;
 
+VkDeviceEventInfoEXT*const get_vkptr(){return reinterpret_cast<VkDeviceEventInfoEXT*>(this);}
+
 S_device_event_info_EXT(){}
 
 S_device_event_info_EXT(
@@ -15303,6 +15815,8 @@ private:
 	 void * pNext = nullptr;
 public:
 	E_display_event_type_EXT displayEvent;
+
+VkDisplayEventInfoEXT*const get_vkptr(){return reinterpret_cast<VkDisplayEventInfoEXT*>(this);}
 
 S_display_event_info_EXT(){}
 
@@ -15336,6 +15850,8 @@ public:
 	uint32_t physicalDeviceCount;
 	VkPhysicalDevice physicalDevices[VK_MAX_DEVICE_GROUP_SIZE];
 	VkBool32 subsetAllocation;
+
+VkPhysicalDeviceGroupProperties*const get_vkptr(){return reinterpret_cast<VkPhysicalDeviceGroupProperties*>(this);}
 
 S_physical_device_group_properties(){}
 
@@ -15372,6 +15888,8 @@ private:
 public:
 	uint32_t deviceIndexCount;
 	const uint32_t * pDeviceIndices;
+
+VkBindBufferMemoryDeviceGroupInfo*const get_vkptr(){return reinterpret_cast<VkBindBufferMemoryDeviceGroupInfo*>(this);}
 
 S_bind_buffer_memory_device_group_info(){}
 
@@ -15410,6 +15928,8 @@ public:
 	VkBuffer buffer;
 	VkDeviceMemory memory;
 	VkDeviceSize memoryOffset;
+
+VkBindBufferMemoryInfo*const get_vkptr(){return reinterpret_cast<VkBindBufferMemoryInfo*>(this);}
 
 S_bind_buffer_memory_info(){}
 
@@ -15459,6 +15979,8 @@ public:
 	uint32_t splitInstanceBindRegionCount;
 	const S_rect_2d * pSplitInstanceBindRegions;
 
+VkBindImageMemoryDeviceGroupInfo*const get_vkptr(){return reinterpret_cast<VkBindImageMemoryDeviceGroupInfo*>(this);}
+
 S_bind_image_memory_device_group_info(){}
 
 S_bind_image_memory_device_group_info(
@@ -15499,6 +16021,8 @@ public:
 	VkSwapchainKHR swapchain;
 	uint32_t imageIndex;
 
+VkBindImageMemorySwapchainInfoKHR*const get_vkptr(){return reinterpret_cast<VkBindImageMemorySwapchainInfoKHR*>(this);}
+
 S_bind_image_memory_swapchain_info_KHR(){}
 
 S_bind_image_memory_swapchain_info_KHR(
@@ -15533,6 +16057,8 @@ private:
 	 void * pNext = nullptr;
 public:
 	F_image_aspect planeAspect;
+
+VkBindImagePlaneMemoryInfo*const get_vkptr(){return reinterpret_cast<VkBindImagePlaneMemoryInfo*>(this);}
 
 S_bind_image_plane_memory_info(){}
 
@@ -15571,6 +16097,8 @@ public:
 	VkImage image;
 	VkDeviceMemory memory;
 	VkDeviceSize memoryOffset;
+
+VkBindImageMemoryInfo*const get_vkptr(){return reinterpret_cast<VkBindImageMemoryInfo*>(this);}
 
 S_bind_image_memory_info(){}
 
@@ -15622,6 +16150,8 @@ public:
 	uint32_t presentMask[VK_MAX_DEVICE_GROUP_SIZE];
 	F_device_group_present_mode_KHR modes;
 
+VkDeviceGroupPresentCapabilitiesKHR*const get_vkptr(){return reinterpret_cast<VkDeviceGroupPresentCapabilitiesKHR*>(this);}
+
 S_device_group_present_capabilities_KHR(){}
 
 S_device_group_present_capabilities_KHR(
@@ -15657,6 +16187,8 @@ public:
 	VkSemaphore semaphore;
 	VkFence fence;
 	uint32_t deviceMask;
+
+VkAcquireNextImageInfoKHR*const get_vkptr(){return reinterpret_cast<VkAcquireNextImageInfoKHR*>(this);}
 
 S_acquire_next_image_info_KHR(){}
 
@@ -15697,7 +16229,7 @@ struct		S_descriptor_update_template_entry{
 	size_t offset;
 	size_t stride;
 
-S_descriptor_update_template_entry(){}
+VkDescriptorUpdateTemplateEntry*const get_vkptr(){return reinterpret_cast<VkDescriptorUpdateTemplateEntry*>(this);}
 };
 
 /*	VkDescriptorUpdateTemplateCreateInfo
@@ -15715,6 +16247,8 @@ public:
 	E_pipeline_bind_point pipelineBindPoint;
 	VkPipelineLayout pipelineLayout;
 	uint32_t set;
+
+VkDescriptorUpdateTemplateCreateInfo*const get_vkptr(){return reinterpret_cast<VkDescriptorUpdateTemplateCreateInfo*>(this);}
 
 S_descriptor_update_template_create_info(){}
 
@@ -15757,7 +16291,7 @@ struct		S_xy_color_EXT{
 	float x;
 	float y;
 
-S_xy_color_EXT(){}
+VkXYColorEXT*const get_vkptr(){return reinterpret_cast<VkXYColorEXT*>(this);}
 };
 
 /*	VkHdrMetadataEXT
@@ -15775,6 +16309,8 @@ public:
 	float minLuminance;
 	float maxContentLightLevel;
 	float maxFrameAverageLightLevel;
+
+VkHdrMetadataEXT*const get_vkptr(){return reinterpret_cast<VkHdrMetadataEXT*>(this);}
 
 S_hdr_metadata_EXT(){}
 
@@ -15817,7 +16353,7 @@ static_assert(
 struct		S_refresh_cycle_duration_GOOGLE{
 	uint64_t refreshDuration;
 
-S_refresh_cycle_duration_GOOGLE(){}
+VkRefreshCycleDurationGOOGLE*const get_vkptr(){return reinterpret_cast<VkRefreshCycleDurationGOOGLE*>(this);}
 };
 
 /*	VkPastPresentationTimingGOOGLE
@@ -15830,7 +16366,7 @@ struct		S_past_presentation_timing_GOOGLE{
 	uint64_t earliestPresentTime;
 	uint64_t presentMargin;
 
-S_past_presentation_timing_GOOGLE(){}
+VkPastPresentationTimingGOOGLE*const get_vkptr(){return reinterpret_cast<VkPastPresentationTimingGOOGLE*>(this);}
 };
 
 /*	VkIOSSurfaceCreateInfoMVK
@@ -15843,6 +16379,8 @@ private:
 public:
 	VkIOSSurfaceCreateFlagsMVK flags;
 	const void * pView;
+
+VkIOSSurfaceCreateInfoMVK*const get_vkptr(){return reinterpret_cast<VkIOSSurfaceCreateInfoMVK*>(this);}
 
 S_ios_surface_create_info_MVK(){}
 
@@ -15879,6 +16417,8 @@ public:
 	VkMacOSSurfaceCreateFlagsMVK flags;
 	const void * pView;
 
+VkMacOSSurfaceCreateInfoMVK*const get_vkptr(){return reinterpret_cast<VkMacOSSurfaceCreateInfoMVK*>(this);}
+
 S_mac_os_surface_create_info_MVK(){}
 
 S_mac_os_surface_create_info_MVK(
@@ -15912,6 +16452,8 @@ private:
 public:
 	VkSurfaceKHR surface;
 
+VkPhysicalDeviceSurfaceInfo2KHR*const get_vkptr(){return reinterpret_cast<VkPhysicalDeviceSurfaceInfo2KHR*>(this);}
+
 S_physical_device_surface_info2_KHR(){}
 
 S_physical_device_surface_info2_KHR(
@@ -15943,6 +16485,8 @@ private:
 	void * pNext = nullptr;
 public:
 	F_image_usage sharedPresentSupportedUsageFlags;
+
+VkSharedPresentSurfaceCapabilitiesKHR*const get_vkptr(){return reinterpret_cast<VkSharedPresentSurfaceCapabilitiesKHR*>(this);}
 
 S_shared_present_surface_capabilities_KHR(){}
 
@@ -15978,6 +16522,8 @@ private:
 	void * pNext = nullptr;
 public:
 	S_surface_capabilities_KHR surfaceCapabilities;
+
+VkSurfaceCapabilities2KHR*const get_vkptr(){return reinterpret_cast<VkSurfaceCapabilities2KHR*>(this);}
 
 S_surface_capabilities2_KHR(){}
 
@@ -16020,6 +16566,8 @@ private:
 public:
 	S_surface_format_KHR surfaceFormat;
 
+VkSurfaceFormat2KHR*const get_vkptr(){return reinterpret_cast<VkSurfaceFormat2KHR*>(this);}
+
 S_surface_format2_KHR(){}
 
 S_surface_format2_KHR(
@@ -16050,6 +16598,8 @@ private:
 	void * pNext = nullptr;
 public:
 	S_display_properties_KHR displayProperties;
+
+VkDisplayProperties2KHR*const get_vkptr(){return reinterpret_cast<VkDisplayProperties2KHR*>(this);}
 
 S_display_properties2_KHR(){}
 
@@ -16082,6 +16632,8 @@ private:
 public:
 	S_display_plane_properties_KHR displayPlaneProperties;
 
+VkDisplayPlaneProperties2KHR*const get_vkptr(){return reinterpret_cast<VkDisplayPlaneProperties2KHR*>(this);}
+
 S_display_plane_properties2_KHR(){}
 
 S_display_plane_properties2_KHR(
@@ -16113,6 +16665,8 @@ private:
 public:
 	S_display_mode_properties_KHR displayModeProperties;
 
+VkDisplayModeProperties2KHR*const get_vkptr(){return reinterpret_cast<VkDisplayModeProperties2KHR*>(this);}
+
 S_display_mode_properties2_KHR(){}
 
 S_display_mode_properties2_KHR(
@@ -16143,6 +16697,8 @@ private:
 public:
 	VkDisplayModeKHR mode;
 	uint32_t planeIndex;
+
+VkDisplayPlaneInfo2KHR*const get_vkptr(){return reinterpret_cast<VkDisplayPlaneInfo2KHR*>(this);}
 
 S_display_plane_info2_KHR(){}
 
@@ -16177,6 +16733,8 @@ private:
 public:
 	S_display_plane_capabilities_KHR capabilities;
 
+VkDisplayPlaneCapabilities2KHR*const get_vkptr(){return reinterpret_cast<VkDisplayPlaneCapabilities2KHR*>(this);}
+
 S_display_plane_capabilities2_KHR(){}
 
 S_display_plane_capabilities2_KHR(
@@ -16206,6 +16764,8 @@ private:
 	 void * pNext = nullptr;
 public:
 	VkBuffer buffer;
+
+VkBufferMemoryRequirementsInfo2*const get_vkptr(){return reinterpret_cast<VkBufferMemoryRequirementsInfo2*>(this);}
 
 S_buffer_memory_requirements_info2(){}
 
@@ -16237,6 +16797,8 @@ private:
 	 void * pNext = nullptr;
 public:
 	F_image_aspect planeAspect;
+
+VkImagePlaneMemoryRequirementsInfo*const get_vkptr(){return reinterpret_cast<VkImagePlaneMemoryRequirementsInfo*>(this);}
 
 S_image_plane_memory_requirements_info(){}
 
@@ -16271,6 +16833,8 @@ private:
 	 void * pNext = nullptr;
 public:
 	VkImage image;
+
+VkImageMemoryRequirementsInfo2*const get_vkptr(){return reinterpret_cast<VkImageMemoryRequirementsInfo2*>(this);}
 
 S_image_memory_requirements_info2(){}
 
@@ -16312,6 +16876,8 @@ private:
 public:
 	VkImage image;
 
+VkImageSparseMemoryRequirementsInfo2*const get_vkptr(){return reinterpret_cast<VkImageSparseMemoryRequirementsInfo2*>(this);}
+
 S_image_sparse_memory_requirements_info2(){}
 
 S_image_sparse_memory_requirements_info2(
@@ -16344,6 +16910,8 @@ private:
 public:
 	VkBool32 prefersDedicatedAllocation;
 	VkBool32 requiresDedicatedAllocation;
+
+VkMemoryDedicatedRequirements*const get_vkptr(){return reinterpret_cast<VkMemoryDedicatedRequirements*>(this);}
 
 S_memory_dedicated_requirements(){}
 
@@ -16381,6 +16949,8 @@ private:
 	void * pNext = nullptr;
 public:
 	S_memory_requirements memoryRequirements;
+
+VkMemoryRequirements2*const get_vkptr(){return reinterpret_cast<VkMemoryRequirements2*>(this);}
 
 S_memory_requirements2(){}
 
@@ -16423,6 +16993,8 @@ private:
 public:
 	S_sparse_image_memory_requirements memoryRequirements;
 
+VkSparseImageMemoryRequirements2*const get_vkptr(){return reinterpret_cast<VkSparseImageMemoryRequirements2*>(this);}
+
 S_sparse_image_memory_requirements2(){}
 
 S_sparse_image_memory_requirements2(
@@ -16461,6 +17033,8 @@ public:
 	E_chroma_location yChromaOffset;
 	E_filter chromaFilter;
 	VkBool32 forceExplicitReconstruction;
+
+VkSamplerYcbcrConversionCreateInfo*const get_vkptr(){return reinterpret_cast<VkSamplerYcbcrConversionCreateInfo*>(this);}
 
 S_sampler_ycbcr_conversion_create_info(){}
 
@@ -16522,6 +17096,8 @@ public:
 	VkDeviceSize offset;
 	F_conditional_rendering_EXT flags;
 
+VkConditionalRenderingBeginInfoEXT*const get_vkptr(){return reinterpret_cast<VkConditionalRenderingBeginInfoEXT*>(this);}
+
 S_conditional_rendering_begin_info_EXT(){}
 
 S_conditional_rendering_begin_info_EXT(
@@ -16558,6 +17134,8 @@ public:
 	uint32_t queueFamilyIndex;
 	uint32_t queueIndex;
 
+VkDeviceQueueInfo2*const get_vkptr(){return reinterpret_cast<VkDeviceQueueInfo2*>(this);}
+
 S_device_queue_info2(){}
 
 S_device_queue_info2(
@@ -16593,6 +17171,8 @@ private:
 public:
 	S_extent_2d maxSampleLocationGridSize;
 
+VkMultisamplePropertiesEXT*const get_vkptr(){return reinterpret_cast<VkMultisamplePropertiesEXT*>(this);}
+
 S_multisample_properties_EXT(){}
 
 S_multisample_properties_EXT(
@@ -16624,6 +17204,8 @@ public:
 	VkValidationCacheCreateFlagsEXT flags;
 	size_t initialDataSize;
 	const void * pInitialData;
+
+VkValidationCacheCreateInfoEXT*const get_vkptr(){return reinterpret_cast<VkValidationCacheCreateInfoEXT*>(this);}
 
 S_validation_cache_create_info_EXT(){}
 
@@ -16661,6 +17243,8 @@ private:
 public:
 	uint32_t maxVariableDescriptorCount;
 
+VkDescriptorSetVariableDescriptorCountLayoutSupportEXT*const get_vkptr(){return reinterpret_cast<VkDescriptorSetVariableDescriptorCountLayoutSupportEXT*>(this);}
+
 S_descriptor_set_variable_descriptor_count_layout_support_EXT(){}
 
 S_descriptor_set_variable_descriptor_count_layout_support_EXT(
@@ -16695,6 +17279,8 @@ private:
 	void * pNext = nullptr;
 public:
 	VkBool32 supported;
+
+VkDescriptorSetLayoutSupport*const get_vkptr(){return reinterpret_cast<VkDescriptorSetLayoutSupport*>(this);}
 
 S_descriptor_set_layout_support(){}
 
@@ -16740,6 +17326,8 @@ public:
 	int format;
 	int usage;
 
+VkNativeBufferANDROID*const get_vkptr(){return reinterpret_cast<VkNativeBufferANDROID*>(this);}
+
 S_native_buffer_ANDROID(){}
 
 S_native_buffer_ANDROID(
@@ -16778,7 +17366,7 @@ struct		S_shader_resource_usage_AMD{
 	size_t ldsUsageSizeInBytes;
 	size_t scratchMemUsageInBytes;
 
-S_shader_resource_usage_AMD(){}
+VkShaderResourceUsageAMD*const get_vkptr(){return reinterpret_cast<VkShaderResourceUsageAMD*>(this);}
 };
 
 /*	VkShaderStatisticsInfoAMD
@@ -16793,7 +17381,7 @@ struct		S_shader_statistics_info_AMD{
 	uint32_t numAvailableSgprs;
 	uint32_t computeWorkGroupSize[3];
 
-S_shader_statistics_info_AMD(){}
+VkShaderStatisticsInfoAMD*const get_vkptr(){return reinterpret_cast<VkShaderStatisticsInfoAMD*>(this);}
 };
 
 /*	VkDebugUtilsObjectNameInfoEXT
@@ -16806,6 +17394,8 @@ public:
 	E_object_type objectType;
 	uint64_t objectHandle;
 	const char * pObjectName;
+
+VkDebugUtilsObjectNameInfoEXT*const get_vkptr(){return reinterpret_cast<VkDebugUtilsObjectNameInfoEXT*>(this);}
 
 S_debug_utils_object_name_info_EXT(){}
 
@@ -16845,6 +17435,8 @@ public:
 	size_t tagSize;
 	const void * pTag;
 
+VkDebugUtilsObjectTagInfoEXT*const get_vkptr(){return reinterpret_cast<VkDebugUtilsObjectTagInfoEXT*>(this);}
+
 S_debug_utils_object_tag_info_EXT(){}
 
 S_debug_utils_object_tag_info_EXT(
@@ -16883,6 +17475,8 @@ private:
 public:
 	const char * pLabelName;
 	float color[4];
+
+VkDebugUtilsLabelEXT*const get_vkptr(){return reinterpret_cast<VkDebugUtilsLabelEXT*>(this);}
 
 S_debug_utils_label_EXT(){}
 
@@ -16924,6 +17518,8 @@ public:
 	S_debug_utils_label_EXT * pCmdBufLabels;
 	uint32_t objectCount;
 	S_debug_utils_object_name_info_EXT * pObjects;
+
+VkDebugUtilsMessengerCallbackDataEXT*const get_vkptr(){return reinterpret_cast<VkDebugUtilsMessengerCallbackDataEXT*>(this);}
 
 S_debug_utils_messenger_callback_data_EXT(){}
 
@@ -16973,6 +17569,8 @@ private:
 public:
 	uint32_t memoryTypeBits;
 
+VkMemoryHostPointerPropertiesEXT*const get_vkptr(){return reinterpret_cast<VkMemoryHostPointerPropertiesEXT*>(this);}
+
 S_memory_host_pointer_properties_EXT(){}
 
 S_memory_host_pointer_properties_EXT(
@@ -17010,6 +17608,8 @@ public:
 	E_attachment_store_op stencilStoreOp;
 	E_image_layout initialLayout;
 	E_image_layout finalLayout;
+
+VkAttachmentDescription2KHR*const get_vkptr(){return reinterpret_cast<VkAttachmentDescription2KHR*>(this);}
 
 S_attachment_description2_KHR(){}
 
@@ -17059,6 +17659,8 @@ public:
 	E_image_layout layout;
 	F_image_aspect aspectMask;
 
+VkAttachmentReference2KHR*const get_vkptr(){return reinterpret_cast<VkAttachmentReference2KHR*>(this);}
+
 S_attachment_reference2_KHR(){}
 
 S_attachment_reference2_KHR(
@@ -17102,6 +17704,8 @@ public:
 	const S_attachment_reference2_KHR * pDepthStencilAttachment;
 	uint32_t preserveAttachmentCount;
 	const uint32_t * pPreserveAttachments;
+
+VkSubpassDescription2KHR*const get_vkptr(){return reinterpret_cast<VkSubpassDescription2KHR*>(this);}
 
 S_subpass_description2_KHR(){}
 
@@ -17160,6 +17764,8 @@ public:
 	F_dependency dependencyFlags;
 	int32_t viewOffset;
 
+VkSubpassDependency2KHR*const get_vkptr(){return reinterpret_cast<VkSubpassDependency2KHR*>(this);}
+
 S_subpass_dependency2_KHR(){}
 
 S_subpass_dependency2_KHR(
@@ -17212,6 +17818,8 @@ public:
 	uint32_t correlatedViewMaskCount;
 	const uint32_t * pCorrelatedViewMasks;
 
+VkRenderPassCreateInfo2KHR*const get_vkptr(){return reinterpret_cast<VkRenderPassCreateInfo2KHR*>(this);}
+
 S_render_pass_create_info2_KHR(){}
 
 S_render_pass_create_info2_KHR(
@@ -17258,6 +17866,8 @@ private:
 public:
 	E_subpass_contents contents;
 
+VkSubpassBeginInfoKHR*const get_vkptr(){return reinterpret_cast<VkSubpassBeginInfoKHR*>(this);}
+
 S_subpass_begin_info_KHR(){}
 
 S_subpass_begin_info_KHR(
@@ -17286,6 +17896,8 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_SUBPASS_END_INFO_KHR;
 	 void * pNext = nullptr;
 
+VkSubpassEndInfoKHR*const get_vkptr(){return reinterpret_cast<VkSubpassEndInfoKHR*>(this);}
+
 S_subpass_end_info_KHR(){}
 };
 static_assert(
@@ -17310,6 +17922,8 @@ public:
 	E_sampler_ycbcr_range suggestedYcbcrRange;
 	E_chroma_location suggestedXChromaOffset;
 	E_chroma_location suggestedYChromaOffset;
+
+VkAndroidHardwareBufferFormatPropertiesANDROID*const get_vkptr(){return reinterpret_cast<VkAndroidHardwareBufferFormatPropertiesANDROID*>(this);}
 
 S_android_hardware_buffer_format_properties_ANDROID(){}
 
@@ -17365,6 +17979,8 @@ public:
 	VkDeviceSize allocationSize;
 	uint32_t memoryTypeBits;
 
+VkAndroidHardwareBufferPropertiesANDROID*const get_vkptr(){return reinterpret_cast<VkAndroidHardwareBufferPropertiesANDROID*>(this);}
+
 S_android_hardware_buffer_properties_ANDROID(){}
 
 S_android_hardware_buffer_properties_ANDROID(
@@ -17413,6 +18029,8 @@ private:
 public:
 	VkDeviceMemory memory;
 
+VkMemoryGetAndroidHardwareBufferInfoANDROID*const get_vkptr(){return reinterpret_cast<VkMemoryGetAndroidHardwareBufferInfoANDROID*>(this);}
+
 S_memory_get_android_hardware_buffer_info_ANDROID(){}
 
 S_memory_get_android_hardware_buffer_info_ANDROID(
@@ -17446,6 +18064,8 @@ public:
 	F_pipeline_stage stage;
 	void * pCheckpointMarker;
 
+VkCheckpointDataNV*const get_vkptr(){return reinterpret_cast<VkCheckpointDataNV*>(this);}
+
 S_checkpoint_data_NV(){}
 
 S_checkpoint_data_NV(
@@ -17475,7 +18095,7 @@ struct		S_draw_mesh_tasks_indirect_command_NV{
 	uint32_t taskCount;
 	uint32_t firstTask;
 
-S_draw_mesh_tasks_indirect_command_NV(){}
+VkDrawMeshTasksIndirectCommandNV*const get_vkptr(){return reinterpret_cast<VkDrawMeshTasksIndirectCommandNV*>(this);}
 };
 
 /*	VkRaytracingPipelineCreateInfoNVX
@@ -17493,6 +18113,8 @@ public:
 	VkPipelineLayout layout;
 	VkPipeline basePipelineHandle;
 	int32_t basePipelineIndex;
+
+VkRaytracingPipelineCreateInfoNVX*const get_vkptr(){return reinterpret_cast<VkRaytracingPipelineCreateInfoNVX*>(this);}
 
 S_raytracing_pipeline_create_info_NVX(){}
 
@@ -17548,6 +18170,8 @@ public:
 	VkBuffer transformData;
 	VkDeviceSize transformOffset;
 
+VkGeometryTrianglesNVX*const get_vkptr(){return reinterpret_cast<VkGeometryTrianglesNVX*>(this);}
+
 S_geometry_triangles_NVX(){}
 
 S_geometry_triangles_NVX(
@@ -17601,6 +18225,8 @@ public:
 	uint32_t stride;
 	VkDeviceSize offset;
 
+VkGeometryAABBNVX*const get_vkptr(){return reinterpret_cast<VkGeometryAABBNVX*>(this);}
+
 S_geometry_aabb_NVX(){}
 
 S_geometry_aabb_NVX(
@@ -17634,7 +18260,7 @@ struct		S_geometry_data_NVX{
 	S_geometry_triangles_NVX triangles;
 	S_geometry_aabb_NVX aabbs;
 
-S_geometry_data_NVX(){}
+VkGeometryDataNVX*const get_vkptr(){return reinterpret_cast<VkGeometryDataNVX*>(this);}
 };
 
 /*	VkGeometryNVX
@@ -17647,6 +18273,8 @@ public:
 	E_geometry_type_NVX geometryType;
 	S_geometry_data_NVX geometry;
 	F_geometry_NVX flags;
+
+VkGeometryNVX*const get_vkptr(){return reinterpret_cast<VkGeometryNVX*>(this);}
 
 S_geometry_NVX(){}
 
@@ -17686,6 +18314,8 @@ public:
 	uint32_t instanceCount;
 	uint32_t geometryCount;
 	const S_geometry_NVX * pGeometries;
+
+VkAccelerationStructureCreateInfoNVX*const get_vkptr(){return reinterpret_cast<VkAccelerationStructureCreateInfoNVX*>(this);}
 
 S_acceleration_structure_create_info_NVX(){}
 
@@ -17731,6 +18361,8 @@ public:
 	uint32_t deviceIndexCount;
 	const uint32_t * pDeviceIndices;
 
+VkBindAccelerationStructureMemoryInfoNVX*const get_vkptr(){return reinterpret_cast<VkBindAccelerationStructureMemoryInfoNVX*>(this);}
+
 S_bind_acceleration_structure_memory_info_NVX(){}
 
 S_bind_acceleration_structure_memory_info_NVX(
@@ -17769,6 +18401,8 @@ private:
 public:
 	VkAccelerationStructureNVX accelerationStructure;
 
+VkAccelerationStructureMemoryRequirementsInfoNVX*const get_vkptr(){return reinterpret_cast<VkAccelerationStructureMemoryRequirementsInfoNVX*>(this);}
+
 S_acceleration_structure_memory_requirements_info_NVX(){}
 
 S_acceleration_structure_memory_requirements_info_NVX(
@@ -17800,6 +18434,8 @@ private:
 	void * pNext = nullptr;
 public:
 	uint64_t drmFormatModifier;
+
+VkImageDrmFormatModifierPropertiesEXT*const get_vkptr(){return reinterpret_cast<VkImageDrmFormatModifierPropertiesEXT*>(this);}
 
 S_image_drm_format_modifier_properties_EXT(){}
 
