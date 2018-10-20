@@ -207,7 +207,8 @@ disable_names = ["VkDriverIdKHR"]
 all_out = \
 "#pragma once\n"\
 "#include \"vulkan/vulkan.h\"\n"\
-"#include \"common.h\"\n"\
+"#include \"common.h\"\n\n"\
+"#include <type_traits>\n"\
 "#include <array>\n\n"\
 "namespace laka { namespace vk {\n"
 
@@ -279,10 +280,12 @@ for enum in enum_list:
         e_obj.members.append(mobj)
 
     enum_out += \
-        "#flag;\n{0}({1} flag_) :flag(static_cast<decltype(flag)>(flag_) ) @#\n"\
+        "#flag;\n"\
         "{0}()@#\n"\
+        "{0}(decltype(flag) flag_):flag(flag_) @#\n"\
         "{0}({0} const& e_):flag(e_.flag) @#\n"\
-        "operator {1}&() @ return *this; #\n"\
+        "{0}({1} flag_) :flag(static_cast<decltype(flag)>(flag_) ) @#\n"\
+        "operator {1}&() @ return reinterpret_cast<{1}&>(*this); #\n"\
         "{0}& operator = ({0} e_) @ flag = e_.flag; return *this; #\n"\
         "bool operator== ({0} e_) @ return flag == e_.flag; #\n"\
         "bool operator== ({1} e_) @ return flag == static_cast<decltype(flag)>(e_); #\n"\
@@ -446,7 +449,7 @@ def out_struct(s,cpp_out_str):
         temp = struct_dict.get(ex)
         if temp != None:
             out+=out_struct(temp,cpp_out_str)
-
+    print(s.my_name)
     out += "/*"+s.comment+"*/\n"
     #平台相关struct用宏包起
     if s.is_wsi == 1:
@@ -475,13 +478,29 @@ def out_struct(s,cpp_out_str):
 
         count+=1
 
-    out+="\n"+s.vk_name+"*const get_vkptr(){return reinterpret_cast<"+s.vk_name+"*>(this);}\n"
-
     #构造函数
+
+    out += \
+        "\noperator {1}*()\n" \
+        "\t@\treturn reinterpret_cast<{1}*>(this);\t$\n" \
+        "operator const {1}*() const\n" \
+        "\t@\treturn reinterpret_cast<const {1}*>(this);\t$\n" \
+        "{0}& operator=( {1} const & rhs ) \n" \
+        "\t@\tmemcpy( this, &rhs, sizeof( {0} ) ); return *this;\t$\n" \
+        "operator {1} const&() const \n" \
+        "\t@\treturn *reinterpret_cast<const {1}*>(this);\t$\n" \
+        "operator {1} &() \n" \
+        "\t@\treturn *reinterpret_cast<{1}*>(this);\t$\n\n" \
+            .format(s.my_name, s.vk_name).replace("@", "{").replace("$", "}")
+
+    #"{0}( {1} const & rhs )\n" \
+    #"\t@\tmemcpy( this, &rhs, sizeof( {0} ) );\t$\n" \
+
     if s.have_sType == 1:
         out+="\n"+s.my_name+"(){}\n"
+        out+=s.my_name+"("+s.vk_name+"& rhs)\n\t{\tmemcpy( this, &rhs, sizeof( "+s.my_name+" ) );\t}\n"
     if s.have_sType == 1 and len(s.members) > 2:
-        out += "\n"+s.my_name+"("
+        out += s.my_name+"("
         count = 0
         for m in s.members:
             if m.name == "sType" or m.name == "pNext":
@@ -508,24 +527,18 @@ def out_struct(s,cpp_out_str):
                 out+="\n\t,"
             out+=m.name+"("+m.name+"_)"
             count+=1
-        out+="\n{\n"
+        out+="\n{"
+        count_temp = 0
         for m in s.members:
             if m.final_text.find('[') == -1:
                 continue
+            if count_temp == 0:
+                out += "\n"
+            count_temp += 1
             out+="memcpy("+m.name+","+m.name+"_,"+"sizeof("+m.name+") );\n"
-        out+="}\n\n"
+        out+="}\n"
 
-        if s.have_sType == 1:
-            out+= \
-                "{0}( {1} const & rhs )\n"\
-                "\t@\tmemcpy( this, &rhs, sizeof( {0} ) );\t$\n"\
-                "{0}& operator=( {1} const & rhs ) \n"\
-                "\t@\tmemcpy( this, &rhs, sizeof( {0} ) ); return *this;\t$\n"\
-                "operator {1} const&() const \n"\
-                "\t@\treturn *reinterpret_cast<const {1}*>(this);\t$\n"\
-                "operator {1} &() \n"\
-                "\t@\treturn *reinterpret_cast<{1}*>(this);\t$\n"\
-            .format(s.my_name,s.vk_name).replace("@","{").replace("$","}")
+        #out += s.vk_name + "*const get_vkptr(){return reinterpret_cast<" + s.vk_name + "*>(this);}\n"
 
         count = 0
         for ex2 in s.struct_extends_to_array:
@@ -577,7 +590,7 @@ def out_struct(s,cpp_out_str):
     #用于函数参数pNext的快捷结构
     if count!=0:
         temp_h_out2+="\nstruct "+N_name+"{\nprivate:\n\tvoid* pNext = nullptr;\npublic:\n"\
-        "void* get(){ return pNext; }"
+        "operator void*() { return pNext; }"
         count2 = 0
         for ex in s.struct_extends:
             if count2 == 0:

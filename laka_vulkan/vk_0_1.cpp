@@ -328,7 +328,7 @@ namespace laka { namespace vk {
 
         VkInstanceCreateInfo info{
             VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO,
-            next_.get(),
+            next_,
             0,
             &app_info,
             static_cast<uint32_t>(enabled_layer_names_.size()),
@@ -338,7 +338,7 @@ namespace laka { namespace vk {
         };
 
         VkInstance this_handle;
-        auto ret = vkCreateInstance(&info, (VkAllocationCallbacks*)allocator_, &this_handle);
+        auto ret = vkCreateInstance(&info, *allocator_, &this_handle);
         show_result(ret);
         if (ret < 0)
         {
@@ -356,7 +356,7 @@ namespace laka { namespace vk {
     {
         init_show;
         show_function_name;
-        api.vkDestroyInstance(handle, allocator_callbacks_ptr->get_vkptr());
+        api.vkDestroyInstance(handle, *allocator_callbacks_ptr);
     }
 
     shared_ptr<Device_creator> Instance::get_a_device_creator(
@@ -441,6 +441,8 @@ namespace laka { namespace vk {
         );
         return sptr;
     }
+    S_allocation_callbacks ssss{nullptr,nullptr ,nullptr ,nullptr ,nullptr ,nullptr };
+
 
     shared_ptr<S_physical_device_features>  Physical_device::get_features()
     {
@@ -516,11 +518,11 @@ namespace laka { namespace vk {
         return sptr;
     }
 
-    shared_ptr<S_external_buffer_properties>
+    shared_ptr<S_external_fence_properties>
         Physical_device::get_external_fence_properties(
             F_external_fence_handle_type    handle_type_)
     {
-        shared_ptr<S_external_buffer_properties> sptr(new S_external_buffer_properties);
+        shared_ptr<S_external_fence_properties> sptr(new S_external_fence_properties);
 
         VkPhysicalDeviceExternalFenceInfo external_fence_info{
             VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_FENCE_INFO,
@@ -530,7 +532,7 @@ namespace laka { namespace vk {
         instance->api.vkGetPhysicalDeviceExternalFenceProperties(
             handle,
             &external_fence_info,
-            (VkExternalFenceProperties*)sptr.get()
+            *sptr
         );
         return sptr;
     }
@@ -549,7 +551,7 @@ namespace laka { namespace vk {
         instance->api.vkGetPhysicalDeviceExternalSemaphoreProperties(
             handle,
             &external_semaphore_info,
-            (VkExternalSemaphoreProperties*)sptr.get()
+            *sptr
         );
         return sptr;
     }
@@ -561,8 +563,8 @@ namespace laka { namespace vk {
         shared_ptr<S_image_format_properties2> sptr(new S_image_format_properties2);
         instance->api.vkGetPhysicalDeviceImageFormatProperties2(
             handle,
-            format_info_.get_vkptr(),
-            (VkImageFormatProperties2*)sptr.get()
+            format_info_,
+            *sptr
         );
         return sptr;
     }
@@ -579,7 +581,7 @@ namespace laka { namespace vk {
 
         VkPhysicalDeviceImageFormatInfo2 image_format_info{
             VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_FORMAT_INFO_2,
-            next_.get(),
+            next_,
             format_,
             type_,
             tiling_,
@@ -589,20 +591,10 @@ namespace laka { namespace vk {
         instance->api.vkGetPhysicalDeviceImageFormatProperties2(
             handle,
             &image_format_info,
-            (VkImageFormatProperties2*)sptr.get()
+            *sptr
         );
         return sptr;
     }
-
-    enum E_fuck {
-        aaaa,
-        bbb,
-        ccc,
-    };
-
-
-
-
 
 
 

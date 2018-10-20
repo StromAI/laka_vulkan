@@ -1,6 +1,8 @@
 #pragma once
 #include "vulkan/vulkan.h"
 #include "common.h"
+
+#include <type_traits>
 #include <array>
 
 namespace laka { namespace vk {
@@ -18,10 +20,11 @@ e_transfer_src_optimal = VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL,
 e_transfer_dst_optimal = VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL,
 e_preinitialized = VK_IMAGE_LAYOUT_PREINITIALIZED,
 }flag;
-E_image_layout(VkImageLayout flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
 E_image_layout(){}
+E_image_layout(decltype(flag) flag_):flag(flag_) {}
 E_image_layout(E_image_layout const& e_):flag(e_.flag) {}
-operator VkImageLayout&() { return *this; }
+E_image_layout(VkImageLayout flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
+operator VkImageLayout&() { return reinterpret_cast<VkImageLayout&>(*this); }
 E_image_layout& operator = (E_image_layout e_) { flag = e_.flag; return *this; }
 bool operator== (E_image_layout e_) { return flag == e_.flag; }
 bool operator== (VkImageLayout e_) { return flag == static_cast<decltype(flag)>(e_); }
@@ -37,10 +40,11 @@ e_load = VK_ATTACHMENT_LOAD_OP_LOAD,
 e_clear = VK_ATTACHMENT_LOAD_OP_CLEAR,
 e_dont_care = VK_ATTACHMENT_LOAD_OP_DONT_CARE,
 }flag;
-E_attachment_load_op(VkAttachmentLoadOp flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
 E_attachment_load_op(){}
+E_attachment_load_op(decltype(flag) flag_):flag(flag_) {}
 E_attachment_load_op(E_attachment_load_op const& e_):flag(e_.flag) {}
-operator VkAttachmentLoadOp&() { return *this; }
+E_attachment_load_op(VkAttachmentLoadOp flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
+operator VkAttachmentLoadOp&() { return reinterpret_cast<VkAttachmentLoadOp&>(*this); }
 E_attachment_load_op& operator = (E_attachment_load_op e_) { flag = e_.flag; return *this; }
 bool operator== (E_attachment_load_op e_) { return flag == e_.flag; }
 bool operator== (VkAttachmentLoadOp e_) { return flag == static_cast<decltype(flag)>(e_); }
@@ -55,10 +59,11 @@ enum{
 e_store = VK_ATTACHMENT_STORE_OP_STORE,
 e_dont_care = VK_ATTACHMENT_STORE_OP_DONT_CARE,
 }flag;
-E_attachment_store_op(VkAttachmentStoreOp flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
 E_attachment_store_op(){}
+E_attachment_store_op(decltype(flag) flag_):flag(flag_) {}
 E_attachment_store_op(E_attachment_store_op const& e_):flag(e_.flag) {}
-operator VkAttachmentStoreOp&() { return *this; }
+E_attachment_store_op(VkAttachmentStoreOp flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
+operator VkAttachmentStoreOp&() { return reinterpret_cast<VkAttachmentStoreOp&>(*this); }
 E_attachment_store_op& operator = (E_attachment_store_op e_) { flag = e_.flag; return *this; }
 bool operator== (E_attachment_store_op e_) { return flag == e_.flag; }
 bool operator== (VkAttachmentStoreOp e_) { return flag == static_cast<decltype(flag)>(e_); }
@@ -74,10 +79,11 @@ e_1d = VK_IMAGE_TYPE_1D,
 e_2d = VK_IMAGE_TYPE_2D,
 e_3d = VK_IMAGE_TYPE_3D,
 }flag;
-E_image_type(VkImageType flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
 E_image_type(){}
+E_image_type(decltype(flag) flag_):flag(flag_) {}
 E_image_type(E_image_type const& e_):flag(e_.flag) {}
-operator VkImageType&() { return *this; }
+E_image_type(VkImageType flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
+operator VkImageType&() { return reinterpret_cast<VkImageType&>(*this); }
 E_image_type& operator = (E_image_type e_) { flag = e_.flag; return *this; }
 bool operator== (E_image_type e_) { return flag == e_.flag; }
 bool operator== (VkImageType e_) { return flag == static_cast<decltype(flag)>(e_); }
@@ -92,10 +98,11 @@ enum{
 e_optimal = VK_IMAGE_TILING_OPTIMAL,
 e_linear = VK_IMAGE_TILING_LINEAR,
 }flag;
-E_image_tiling(VkImageTiling flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
 E_image_tiling(){}
+E_image_tiling(decltype(flag) flag_):flag(flag_) {}
 E_image_tiling(E_image_tiling const& e_):flag(e_.flag) {}
-operator VkImageTiling&() { return *this; }
+E_image_tiling(VkImageTiling flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
+operator VkImageTiling&() { return reinterpret_cast<VkImageTiling&>(*this); }
 E_image_tiling& operator = (E_image_tiling e_) { flag = e_.flag; return *this; }
 bool operator== (E_image_tiling e_) { return flag == e_.flag; }
 bool operator== (VkImageTiling e_) { return flag == static_cast<decltype(flag)>(e_); }
@@ -115,10 +122,11 @@ e_1d_array = VK_IMAGE_VIEW_TYPE_1D_ARRAY,
 e_2d_array = VK_IMAGE_VIEW_TYPE_2D_ARRAY,
 e_cube_array = VK_IMAGE_VIEW_TYPE_CUBE_ARRAY,
 }flag;
-E_image_view_type(VkImageViewType flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
 E_image_view_type(){}
+E_image_view_type(decltype(flag) flag_):flag(flag_) {}
 E_image_view_type(E_image_view_type const& e_):flag(e_.flag) {}
-operator VkImageViewType&() { return *this; }
+E_image_view_type(VkImageViewType flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
+operator VkImageViewType&() { return reinterpret_cast<VkImageViewType&>(*this); }
 E_image_view_type& operator = (E_image_view_type e_) { flag = e_.flag; return *this; }
 bool operator== (E_image_view_type e_) { return flag == e_.flag; }
 bool operator== (VkImageViewType e_) { return flag == static_cast<decltype(flag)>(e_); }
@@ -133,10 +141,11 @@ enum{
 e_primary = VK_COMMAND_BUFFER_LEVEL_PRIMARY,
 e_secondary = VK_COMMAND_BUFFER_LEVEL_SECONDARY,
 }flag;
-E_command_buffer_level(VkCommandBufferLevel flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
 E_command_buffer_level(){}
+E_command_buffer_level(decltype(flag) flag_):flag(flag_) {}
 E_command_buffer_level(E_command_buffer_level const& e_):flag(e_.flag) {}
-operator VkCommandBufferLevel&() { return *this; }
+E_command_buffer_level(VkCommandBufferLevel flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
+operator VkCommandBufferLevel&() { return reinterpret_cast<VkCommandBufferLevel&>(*this); }
 E_command_buffer_level& operator = (E_command_buffer_level e_) { flag = e_.flag; return *this; }
 bool operator== (E_command_buffer_level e_) { return flag == e_.flag; }
 bool operator== (VkCommandBufferLevel e_) { return flag == static_cast<decltype(flag)>(e_); }
@@ -156,10 +165,11 @@ e_g = VK_COMPONENT_SWIZZLE_G,
 e_b = VK_COMPONENT_SWIZZLE_B,
 e_a = VK_COMPONENT_SWIZZLE_A,
 }flag;
-E_component_swizzle(VkComponentSwizzle flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
 E_component_swizzle(){}
+E_component_swizzle(decltype(flag) flag_):flag(flag_) {}
 E_component_swizzle(E_component_swizzle const& e_):flag(e_.flag) {}
-operator VkComponentSwizzle&() { return *this; }
+E_component_swizzle(VkComponentSwizzle flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
+operator VkComponentSwizzle&() { return reinterpret_cast<VkComponentSwizzle&>(*this); }
 E_component_swizzle& operator = (E_component_swizzle e_) { flag = e_.flag; return *this; }
 bool operator== (E_component_swizzle e_) { return flag == e_.flag; }
 bool operator== (VkComponentSwizzle e_) { return flag == static_cast<decltype(flag)>(e_); }
@@ -183,10 +193,11 @@ e_uniform_buffer_dynamic = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER_DYNAMIC,
 e_storage_buffer_dynamic = VK_DESCRIPTOR_TYPE_STORAGE_BUFFER_DYNAMIC,
 e_input_attachment = VK_DESCRIPTOR_TYPE_INPUT_ATTACHMENT,
 }flag;
-E_descriptor_type(VkDescriptorType flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
 E_descriptor_type(){}
+E_descriptor_type(decltype(flag) flag_):flag(flag_) {}
 E_descriptor_type(E_descriptor_type const& e_):flag(e_.flag) {}
-operator VkDescriptorType&() { return *this; }
+E_descriptor_type(VkDescriptorType flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
+operator VkDescriptorType&() { return reinterpret_cast<VkDescriptorType&>(*this); }
 E_descriptor_type& operator = (E_descriptor_type e_) { flag = e_.flag; return *this; }
 bool operator== (E_descriptor_type e_) { return flag == e_.flag; }
 bool operator== (VkDescriptorType e_) { return flag == static_cast<decltype(flag)>(e_); }
@@ -202,10 +213,11 @@ e_occlusion = VK_QUERY_TYPE_OCCLUSION,
 e_pipeline_statistics = VK_QUERY_TYPE_PIPELINE_STATISTICS,
 e_timestamp = VK_QUERY_TYPE_TIMESTAMP,
 }flag;
-E_query_type(VkQueryType flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
 E_query_type(){}
+E_query_type(decltype(flag) flag_):flag(flag_) {}
 E_query_type(E_query_type const& e_):flag(e_.flag) {}
-operator VkQueryType&() { return *this; }
+E_query_type(VkQueryType flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
+operator VkQueryType&() { return reinterpret_cast<VkQueryType&>(*this); }
 E_query_type& operator = (E_query_type e_) { flag = e_.flag; return *this; }
 bool operator== (E_query_type e_) { return flag == e_.flag; }
 bool operator== (VkQueryType e_) { return flag == static_cast<decltype(flag)>(e_); }
@@ -224,10 +236,11 @@ e_int_opaque_black = VK_BORDER_COLOR_INT_OPAQUE_BLACK,
 e_float_opaque_white = VK_BORDER_COLOR_FLOAT_OPAQUE_WHITE,
 e_int_opaque_white = VK_BORDER_COLOR_INT_OPAQUE_WHITE,
 }flag;
-E_border_color(VkBorderColor flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
 E_border_color(){}
+E_border_color(decltype(flag) flag_):flag(flag_) {}
 E_border_color(E_border_color const& e_):flag(e_.flag) {}
-operator VkBorderColor&() { return *this; }
+E_border_color(VkBorderColor flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
+operator VkBorderColor&() { return reinterpret_cast<VkBorderColor&>(*this); }
 E_border_color& operator = (E_border_color e_) { flag = e_.flag; return *this; }
 bool operator== (E_border_color e_) { return flag == e_.flag; }
 bool operator== (VkBorderColor e_) { return flag == static_cast<decltype(flag)>(e_); }
@@ -242,10 +255,11 @@ enum{
 e_graphics = VK_PIPELINE_BIND_POINT_GRAPHICS,
 e_compute = VK_PIPELINE_BIND_POINT_COMPUTE,
 }flag;
-E_pipeline_bind_point(VkPipelineBindPoint flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
 E_pipeline_bind_point(){}
+E_pipeline_bind_point(decltype(flag) flag_):flag(flag_) {}
 E_pipeline_bind_point(E_pipeline_bind_point const& e_):flag(e_.flag) {}
-operator VkPipelineBindPoint&() { return *this; }
+E_pipeline_bind_point(VkPipelineBindPoint flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
+operator VkPipelineBindPoint&() { return reinterpret_cast<VkPipelineBindPoint&>(*this); }
 E_pipeline_bind_point& operator = (E_pipeline_bind_point e_) { flag = e_.flag; return *this; }
 bool operator== (E_pipeline_bind_point e_) { return flag == e_.flag; }
 bool operator== (VkPipelineBindPoint e_) { return flag == static_cast<decltype(flag)>(e_); }
@@ -259,10 +273,11 @@ struct E_pipeline_cache_header_version{
 enum{
 e_one = VK_PIPELINE_CACHE_HEADER_VERSION_ONE,
 }flag;
-E_pipeline_cache_header_version(VkPipelineCacheHeaderVersion flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
 E_pipeline_cache_header_version(){}
+E_pipeline_cache_header_version(decltype(flag) flag_):flag(flag_) {}
 E_pipeline_cache_header_version(E_pipeline_cache_header_version const& e_):flag(e_.flag) {}
-operator VkPipelineCacheHeaderVersion&() { return *this; }
+E_pipeline_cache_header_version(VkPipelineCacheHeaderVersion flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
+operator VkPipelineCacheHeaderVersion&() { return reinterpret_cast<VkPipelineCacheHeaderVersion&>(*this); }
 E_pipeline_cache_header_version& operator = (E_pipeline_cache_header_version e_) { flag = e_.flag; return *this; }
 bool operator== (E_pipeline_cache_header_version e_) { return flag == e_.flag; }
 bool operator== (VkPipelineCacheHeaderVersion e_) { return flag == static_cast<decltype(flag)>(e_); }
@@ -286,10 +301,11 @@ e_triangle_list_with_adjacency = VK_PRIMITIVE_TOPOLOGY_TRIANGLE_LIST_WITH_ADJACE
 e_triangle_strip_with_adjacency = VK_PRIMITIVE_TOPOLOGY_TRIANGLE_STRIP_WITH_ADJACENCY,
 e_patch_list = VK_PRIMITIVE_TOPOLOGY_PATCH_LIST,
 }flag;
-E_primitive_topology(VkPrimitiveTopology flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
 E_primitive_topology(){}
+E_primitive_topology(decltype(flag) flag_):flag(flag_) {}
 E_primitive_topology(E_primitive_topology const& e_):flag(e_.flag) {}
-operator VkPrimitiveTopology&() { return *this; }
+E_primitive_topology(VkPrimitiveTopology flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
+operator VkPrimitiveTopology&() { return reinterpret_cast<VkPrimitiveTopology&>(*this); }
 E_primitive_topology& operator = (E_primitive_topology e_) { flag = e_.flag; return *this; }
 bool operator== (E_primitive_topology e_) { return flag == e_.flag; }
 bool operator== (VkPrimitiveTopology e_) { return flag == static_cast<decltype(flag)>(e_); }
@@ -304,10 +320,11 @@ enum{
 e_exclusive = VK_SHARING_MODE_EXCLUSIVE,
 e_concurrent = VK_SHARING_MODE_CONCURRENT,
 }flag;
-E_sharing_mode(VkSharingMode flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
 E_sharing_mode(){}
+E_sharing_mode(decltype(flag) flag_):flag(flag_) {}
 E_sharing_mode(E_sharing_mode const& e_):flag(e_.flag) {}
-operator VkSharingMode&() { return *this; }
+E_sharing_mode(VkSharingMode flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
+operator VkSharingMode&() { return reinterpret_cast<VkSharingMode&>(*this); }
 E_sharing_mode& operator = (E_sharing_mode e_) { flag = e_.flag; return *this; }
 bool operator== (E_sharing_mode e_) { return flag == e_.flag; }
 bool operator== (VkSharingMode e_) { return flag == static_cast<decltype(flag)>(e_); }
@@ -322,10 +339,11 @@ enum{
 e_uint16 = VK_INDEX_TYPE_UINT16,
 e_uint32 = VK_INDEX_TYPE_UINT32,
 }flag;
-E_index_type(VkIndexType flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
 E_index_type(){}
+E_index_type(decltype(flag) flag_):flag(flag_) {}
 E_index_type(E_index_type const& e_):flag(e_.flag) {}
-operator VkIndexType&() { return *this; }
+E_index_type(VkIndexType flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
+operator VkIndexType&() { return reinterpret_cast<VkIndexType&>(*this); }
 E_index_type& operator = (E_index_type e_) { flag = e_.flag; return *this; }
 bool operator== (E_index_type e_) { return flag == e_.flag; }
 bool operator== (VkIndexType e_) { return flag == static_cast<decltype(flag)>(e_); }
@@ -340,10 +358,11 @@ enum{
 e_nearest = VK_FILTER_NEAREST,
 e_linear = VK_FILTER_LINEAR,
 }flag;
-E_filter(VkFilter flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
 E_filter(){}
+E_filter(decltype(flag) flag_):flag(flag_) {}
 E_filter(E_filter const& e_):flag(e_.flag) {}
-operator VkFilter&() { return *this; }
+E_filter(VkFilter flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
+operator VkFilter&() { return reinterpret_cast<VkFilter&>(*this); }
 E_filter& operator = (E_filter e_) { flag = e_.flag; return *this; }
 bool operator== (E_filter e_) { return flag == e_.flag; }
 bool operator== (VkFilter e_) { return flag == static_cast<decltype(flag)>(e_); }
@@ -358,10 +377,11 @@ enum{
 e_nearest = VK_SAMPLER_MIPMAP_MODE_NEAREST,
 e_linear = VK_SAMPLER_MIPMAP_MODE_LINEAR,
 }flag;
-E_sampler_mipmap_mode(VkSamplerMipmapMode flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
 E_sampler_mipmap_mode(){}
+E_sampler_mipmap_mode(decltype(flag) flag_):flag(flag_) {}
 E_sampler_mipmap_mode(E_sampler_mipmap_mode const& e_):flag(e_.flag) {}
-operator VkSamplerMipmapMode&() { return *this; }
+E_sampler_mipmap_mode(VkSamplerMipmapMode flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
+operator VkSamplerMipmapMode&() { return reinterpret_cast<VkSamplerMipmapMode&>(*this); }
 E_sampler_mipmap_mode& operator = (E_sampler_mipmap_mode e_) { flag = e_.flag; return *this; }
 bool operator== (E_sampler_mipmap_mode e_) { return flag == e_.flag; }
 bool operator== (VkSamplerMipmapMode e_) { return flag == static_cast<decltype(flag)>(e_); }
@@ -378,10 +398,11 @@ e_mirrored_repeat = VK_SAMPLER_ADDRESS_MODE_MIRRORED_REPEAT,
 e_clamp_to_edge = VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE,
 e_clamp_to_border = VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_BORDER,
 }flag;
-E_sampler_address_mode(VkSamplerAddressMode flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
 E_sampler_address_mode(){}
+E_sampler_address_mode(decltype(flag) flag_):flag(flag_) {}
 E_sampler_address_mode(E_sampler_address_mode const& e_):flag(e_.flag) {}
-operator VkSamplerAddressMode&() { return *this; }
+E_sampler_address_mode(VkSamplerAddressMode flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
+operator VkSamplerAddressMode&() { return reinterpret_cast<VkSamplerAddressMode&>(*this); }
 E_sampler_address_mode& operator = (E_sampler_address_mode e_) { flag = e_.flag; return *this; }
 bool operator== (E_sampler_address_mode e_) { return flag == e_.flag; }
 bool operator== (VkSamplerAddressMode e_) { return flag == static_cast<decltype(flag)>(e_); }
@@ -402,10 +423,11 @@ e_not_equal = VK_COMPARE_OP_NOT_EQUAL,
 e_greater_or_equal = VK_COMPARE_OP_GREATER_OR_EQUAL,
 e_always = VK_COMPARE_OP_ALWAYS,
 }flag;
-E_compare_op(VkCompareOp flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
 E_compare_op(){}
+E_compare_op(decltype(flag) flag_):flag(flag_) {}
 E_compare_op(E_compare_op const& e_):flag(e_.flag) {}
-operator VkCompareOp&() { return *this; }
+E_compare_op(VkCompareOp flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
+operator VkCompareOp&() { return reinterpret_cast<VkCompareOp&>(*this); }
 E_compare_op& operator = (E_compare_op e_) { flag = e_.flag; return *this; }
 bool operator== (E_compare_op e_) { return flag == e_.flag; }
 bool operator== (VkCompareOp e_) { return flag == static_cast<decltype(flag)>(e_); }
@@ -421,10 +443,11 @@ e_fill = VK_POLYGON_MODE_FILL,
 e_line = VK_POLYGON_MODE_LINE,
 e_point = VK_POLYGON_MODE_POINT,
 }flag;
-E_polygon_mode(VkPolygonMode flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
 E_polygon_mode(){}
+E_polygon_mode(decltype(flag) flag_):flag(flag_) {}
 E_polygon_mode(E_polygon_mode const& e_):flag(e_.flag) {}
-operator VkPolygonMode&() { return *this; }
+E_polygon_mode(VkPolygonMode flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
+operator VkPolygonMode&() { return reinterpret_cast<VkPolygonMode&>(*this); }
 E_polygon_mode& operator = (E_polygon_mode e_) { flag = e_.flag; return *this; }
 bool operator== (E_polygon_mode e_) { return flag == e_.flag; }
 bool operator== (VkPolygonMode e_) { return flag == static_cast<decltype(flag)>(e_); }
@@ -439,10 +462,11 @@ enum{
 e_counter_clockwise = VK_FRONT_FACE_COUNTER_CLOCKWISE,
 e_clockwise = VK_FRONT_FACE_CLOCKWISE,
 }flag;
-E_front_face(VkFrontFace flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
 E_front_face(){}
+E_front_face(decltype(flag) flag_):flag(flag_) {}
 E_front_face(E_front_face const& e_):flag(e_.flag) {}
-operator VkFrontFace&() { return *this; }
+E_front_face(VkFrontFace flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
+operator VkFrontFace&() { return reinterpret_cast<VkFrontFace&>(*this); }
 E_front_face& operator = (E_front_face e_) { flag = e_.flag; return *this; }
 bool operator== (E_front_face e_) { return flag == e_.flag; }
 bool operator== (VkFrontFace e_) { return flag == static_cast<decltype(flag)>(e_); }
@@ -474,10 +498,11 @@ e_one_minus_src1_color = VK_BLEND_FACTOR_ONE_MINUS_SRC1_COLOR,
 e_src1_alpha = VK_BLEND_FACTOR_SRC1_ALPHA,
 e_one_minus_src1_alpha = VK_BLEND_FACTOR_ONE_MINUS_SRC1_ALPHA,
 }flag;
-E_blend_factor(VkBlendFactor flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
 E_blend_factor(){}
+E_blend_factor(decltype(flag) flag_):flag(flag_) {}
 E_blend_factor(E_blend_factor const& e_):flag(e_.flag) {}
-operator VkBlendFactor&() { return *this; }
+E_blend_factor(VkBlendFactor flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
+operator VkBlendFactor&() { return reinterpret_cast<VkBlendFactor&>(*this); }
 E_blend_factor& operator = (E_blend_factor e_) { flag = e_.flag; return *this; }
 bool operator== (E_blend_factor e_) { return flag == e_.flag; }
 bool operator== (VkBlendFactor e_) { return flag == static_cast<decltype(flag)>(e_); }
@@ -495,10 +520,11 @@ e_reverse_subtract = VK_BLEND_OP_REVERSE_SUBTRACT,
 e_min = VK_BLEND_OP_MIN,
 e_max = VK_BLEND_OP_MAX,
 }flag;
-E_blend_op(VkBlendOp flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
 E_blend_op(){}
+E_blend_op(decltype(flag) flag_):flag(flag_) {}
 E_blend_op(E_blend_op const& e_):flag(e_.flag) {}
-operator VkBlendOp&() { return *this; }
+E_blend_op(VkBlendOp flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
+operator VkBlendOp&() { return reinterpret_cast<VkBlendOp&>(*this); }
 E_blend_op& operator = (E_blend_op e_) { flag = e_.flag; return *this; }
 bool operator== (E_blend_op e_) { return flag == e_.flag; }
 bool operator== (VkBlendOp e_) { return flag == static_cast<decltype(flag)>(e_); }
@@ -519,10 +545,11 @@ e_invert = VK_STENCIL_OP_INVERT,
 e_increment_and_wrap = VK_STENCIL_OP_INCREMENT_AND_WRAP,
 e_decrement_and_wrap = VK_STENCIL_OP_DECREMENT_AND_WRAP,
 }flag;
-E_stencil_op(VkStencilOp flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
 E_stencil_op(){}
+E_stencil_op(decltype(flag) flag_):flag(flag_) {}
 E_stencil_op(E_stencil_op const& e_):flag(e_.flag) {}
-operator VkStencilOp&() { return *this; }
+E_stencil_op(VkStencilOp flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
+operator VkStencilOp&() { return reinterpret_cast<VkStencilOp&>(*this); }
 E_stencil_op& operator = (E_stencil_op e_) { flag = e_.flag; return *this; }
 bool operator== (E_stencil_op e_) { return flag == e_.flag; }
 bool operator== (VkStencilOp e_) { return flag == static_cast<decltype(flag)>(e_); }
@@ -551,10 +578,11 @@ e_or_inverted = VK_LOGIC_OP_OR_INVERTED,
 e_nand = VK_LOGIC_OP_NAND,
 e_set = VK_LOGIC_OP_SET,
 }flag;
-E_logic_op(VkLogicOp flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
 E_logic_op(){}
+E_logic_op(decltype(flag) flag_):flag(flag_) {}
 E_logic_op(E_logic_op const& e_):flag(e_.flag) {}
-operator VkLogicOp&() { return *this; }
+E_logic_op(VkLogicOp flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
+operator VkLogicOp&() { return reinterpret_cast<VkLogicOp&>(*this); }
 E_logic_op& operator = (E_logic_op e_) { flag = e_.flag; return *this; }
 bool operator== (E_logic_op e_) { return flag == e_.flag; }
 bool operator== (VkLogicOp e_) { return flag == static_cast<decltype(flag)>(e_); }
@@ -568,10 +596,11 @@ struct E_internal_allocation_type{
 enum{
 e_executable = VK_INTERNAL_ALLOCATION_TYPE_EXECUTABLE,
 }flag;
-E_internal_allocation_type(VkInternalAllocationType flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
 E_internal_allocation_type(){}
+E_internal_allocation_type(decltype(flag) flag_):flag(flag_) {}
 E_internal_allocation_type(E_internal_allocation_type const& e_):flag(e_.flag) {}
-operator VkInternalAllocationType&() { return *this; }
+E_internal_allocation_type(VkInternalAllocationType flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
+operator VkInternalAllocationType&() { return reinterpret_cast<VkInternalAllocationType&>(*this); }
 E_internal_allocation_type& operator = (E_internal_allocation_type e_) { flag = e_.flag; return *this; }
 bool operator== (E_internal_allocation_type e_) { return flag == e_.flag; }
 bool operator== (VkInternalAllocationType e_) { return flag == static_cast<decltype(flag)>(e_); }
@@ -589,10 +618,11 @@ e_cache = VK_SYSTEM_ALLOCATION_SCOPE_CACHE,
 e_device = VK_SYSTEM_ALLOCATION_SCOPE_DEVICE,
 e_instance = VK_SYSTEM_ALLOCATION_SCOPE_INSTANCE,
 }flag;
-E_system_allocation_scope(VkSystemAllocationScope flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
 E_system_allocation_scope(){}
+E_system_allocation_scope(decltype(flag) flag_):flag(flag_) {}
 E_system_allocation_scope(E_system_allocation_scope const& e_):flag(e_.flag) {}
-operator VkSystemAllocationScope&() { return *this; }
+E_system_allocation_scope(VkSystemAllocationScope flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
+operator VkSystemAllocationScope&() { return reinterpret_cast<VkSystemAllocationScope&>(*this); }
 E_system_allocation_scope& operator = (E_system_allocation_scope e_) { flag = e_.flag; return *this; }
 bool operator== (E_system_allocation_scope e_) { return flag == e_.flag; }
 bool operator== (VkSystemAllocationScope e_) { return flag == static_cast<decltype(flag)>(e_); }
@@ -610,10 +640,11 @@ e_discrete_gpu = VK_PHYSICAL_DEVICE_TYPE_DISCRETE_GPU,
 e_virtual_gpu = VK_PHYSICAL_DEVICE_TYPE_VIRTUAL_GPU,
 e_cpu = VK_PHYSICAL_DEVICE_TYPE_CPU,
 }flag;
-E_physical_device_type(VkPhysicalDeviceType flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
 E_physical_device_type(){}
+E_physical_device_type(decltype(flag) flag_):flag(flag_) {}
 E_physical_device_type(E_physical_device_type const& e_):flag(e_.flag) {}
-operator VkPhysicalDeviceType&() { return *this; }
+E_physical_device_type(VkPhysicalDeviceType flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
+operator VkPhysicalDeviceType&() { return reinterpret_cast<VkPhysicalDeviceType&>(*this); }
 E_physical_device_type& operator = (E_physical_device_type e_) { flag = e_.flag; return *this; }
 bool operator== (E_physical_device_type e_) { return flag == e_.flag; }
 bool operator== (VkPhysicalDeviceType e_) { return flag == static_cast<decltype(flag)>(e_); }
@@ -628,10 +659,11 @@ enum{
 e_vertex = VK_VERTEX_INPUT_RATE_VERTEX,
 e_instance = VK_VERTEX_INPUT_RATE_INSTANCE,
 }flag;
-E_vertex_input_rate(VkVertexInputRate flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
 E_vertex_input_rate(){}
+E_vertex_input_rate(decltype(flag) flag_):flag(flag_) {}
 E_vertex_input_rate(E_vertex_input_rate const& e_):flag(e_.flag) {}
-operator VkVertexInputRate&() { return *this; }
+E_vertex_input_rate(VkVertexInputRate flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
+operator VkVertexInputRate&() { return reinterpret_cast<VkVertexInputRate&>(*this); }
 E_vertex_input_rate& operator = (E_vertex_input_rate e_) { flag = e_.flag; return *this; }
 bool operator== (E_vertex_input_rate e_) { return flag == e_.flag; }
 bool operator== (VkVertexInputRate e_) { return flag == static_cast<decltype(flag)>(e_); }
@@ -829,10 +861,11 @@ e_astc_12x10_srgb_block = VK_FORMAT_ASTC_12x10_SRGB_BLOCK,
 e_astc_12x12_unorm_block = VK_FORMAT_ASTC_12x12_UNORM_BLOCK,
 e_astc_12x12_srgb_block = VK_FORMAT_ASTC_12x12_SRGB_BLOCK,
 }flag;
-E_format(VkFormat flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
 E_format(){}
+E_format(decltype(flag) flag_):flag(flag_) {}
 E_format(E_format const& e_):flag(e_.flag) {}
-operator VkFormat&() { return *this; }
+E_format(VkFormat flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
+operator VkFormat&() { return reinterpret_cast<VkFormat&>(*this); }
 E_format& operator = (E_format e_) { flag = e_.flag; return *this; }
 bool operator== (E_format e_) { return flag == e_.flag; }
 bool operator== (VkFormat e_) { return flag == static_cast<decltype(flag)>(e_); }
@@ -894,10 +927,11 @@ e_memory_barrier = VK_STRUCTURE_TYPE_MEMORY_BARRIER,
 e_loader_instance_create_info = VK_STRUCTURE_TYPE_LOADER_INSTANCE_CREATE_INFO,
 e_loader_device_create_info = VK_STRUCTURE_TYPE_LOADER_DEVICE_CREATE_INFO,
 }flag;
-E_structure_type(VkStructureType flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
 E_structure_type(){}
+E_structure_type(decltype(flag) flag_):flag(flag_) {}
 E_structure_type(E_structure_type const& e_):flag(e_.flag) {}
-operator VkStructureType&() { return *this; }
+E_structure_type(VkStructureType flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
+operator VkStructureType&() { return reinterpret_cast<VkStructureType&>(*this); }
 E_structure_type& operator = (E_structure_type e_) { flag = e_.flag; return *this; }
 bool operator== (E_structure_type e_) { return flag == e_.flag; }
 bool operator== (VkStructureType e_) { return flag == static_cast<decltype(flag)>(e_); }
@@ -912,10 +946,11 @@ enum{
 e_inline = VK_SUBPASS_CONTENTS_INLINE,
 e_secondary_command_buffers = VK_SUBPASS_CONTENTS_SECONDARY_COMMAND_BUFFERS,
 }flag;
-E_subpass_contents(VkSubpassContents flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
 E_subpass_contents(){}
+E_subpass_contents(decltype(flag) flag_):flag(flag_) {}
 E_subpass_contents(E_subpass_contents const& e_):flag(e_.flag) {}
-operator VkSubpassContents&() { return *this; }
+E_subpass_contents(VkSubpassContents flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
+operator VkSubpassContents&() { return reinterpret_cast<VkSubpassContents&>(*this); }
 E_subpass_contents& operator = (E_subpass_contents e_) { flag = e_.flag; return *this; }
 bool operator== (E_subpass_contents e_) { return flag == e_.flag; }
 bool operator== (VkSubpassContents e_) { return flag == static_cast<decltype(flag)>(e_); }
@@ -946,10 +981,11 @@ evk_error_too_many_objects = VK_ERROR_TOO_MANY_OBJECTS,
 evk_error_format_not_supported = VK_ERROR_FORMAT_NOT_SUPPORTED,
 evk_error_fragmented_pool = VK_ERROR_FRAGMENTED_POOL,
 }flag;
-E_result(VkResult flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
 E_result(){}
+E_result(decltype(flag) flag_):flag(flag_) {}
 E_result(E_result const& e_):flag(e_.flag) {}
-operator VkResult&() { return *this; }
+E_result(VkResult flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
+operator VkResult&() { return reinterpret_cast<VkResult&>(*this); }
 E_result& operator = (E_result e_) { flag = e_.flag; return *this; }
 bool operator== (E_result e_) { return flag == e_.flag; }
 bool operator== (VkResult e_) { return flag == static_cast<decltype(flag)>(e_); }
@@ -971,10 +1007,11 @@ e_stencil_compare_mask = VK_DYNAMIC_STATE_STENCIL_COMPARE_MASK,
 e_stencil_write_mask = VK_DYNAMIC_STATE_STENCIL_WRITE_MASK,
 e_stencil_reference = VK_DYNAMIC_STATE_STENCIL_REFERENCE,
 }flag;
-E_dynamic_state(VkDynamicState flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
 E_dynamic_state(){}
+E_dynamic_state(decltype(flag) flag_):flag(flag_) {}
 E_dynamic_state(E_dynamic_state const& e_):flag(e_.flag) {}
-operator VkDynamicState&() { return *this; }
+E_dynamic_state(VkDynamicState flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
+operator VkDynamicState&() { return reinterpret_cast<VkDynamicState&>(*this); }
 E_dynamic_state& operator = (E_dynamic_state e_) { flag = e_.flag; return *this; }
 bool operator== (E_dynamic_state e_) { return flag == e_.flag; }
 bool operator== (VkDynamicState e_) { return flag == static_cast<decltype(flag)>(e_); }
@@ -988,10 +1025,11 @@ struct E_descriptor_update_template_type{
 enum{
 e_descriptor_set = VK_DESCRIPTOR_UPDATE_TEMPLATE_TYPE_DESCRIPTOR_SET,
 }flag;
-E_descriptor_update_template_type(VkDescriptorUpdateTemplateType flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
 E_descriptor_update_template_type(){}
+E_descriptor_update_template_type(decltype(flag) flag_):flag(flag_) {}
 E_descriptor_update_template_type(E_descriptor_update_template_type const& e_):flag(e_.flag) {}
-operator VkDescriptorUpdateTemplateType&() { return *this; }
+E_descriptor_update_template_type(VkDescriptorUpdateTemplateType flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
+operator VkDescriptorUpdateTemplateType&() { return reinterpret_cast<VkDescriptorUpdateTemplateType&>(*this); }
 E_descriptor_update_template_type& operator = (E_descriptor_update_template_type e_) { flag = e_.flag; return *this; }
 bool operator== (E_descriptor_update_template_type e_) { return flag == e_.flag; }
 bool operator== (VkDescriptorUpdateTemplateType e_) { return flag == static_cast<decltype(flag)>(e_); }
@@ -1030,10 +1068,11 @@ e_descriptor_set = VK_OBJECT_TYPE_DESCRIPTOR_SET,
 e_framebuffer = VK_OBJECT_TYPE_FRAMEBUFFER,
 e_command_pool = VK_OBJECT_TYPE_COMMAND_POOL,
 }flag;
-E_object_type(VkObjectType flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
 E_object_type(){}
+E_object_type(decltype(flag) flag_):flag(flag_) {}
 E_object_type(E_object_type const& e_):flag(e_.flag) {}
-operator VkObjectType&() { return *this; }
+E_object_type(VkObjectType flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
+operator VkObjectType&() { return reinterpret_cast<VkObjectType&>(*this); }
 E_object_type& operator = (E_object_type e_) { flag = e_.flag; return *this; }
 bool operator== (E_object_type e_) { return flag == e_.flag; }
 bool operator== (VkObjectType e_) { return flag == static_cast<decltype(flag)>(e_); }
@@ -1050,10 +1089,11 @@ e_mailbox_khr = VK_PRESENT_MODE_MAILBOX_KHR,
 e_fifo_khr = VK_PRESENT_MODE_FIFO_KHR,
 e_fifo_relaxed_khr = VK_PRESENT_MODE_FIFO_RELAXED_KHR,
 }flag;
-E_present_mode_KHR(VkPresentModeKHR flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
 E_present_mode_KHR(){}
+E_present_mode_KHR(decltype(flag) flag_):flag(flag_) {}
 E_present_mode_KHR(E_present_mode_KHR const& e_):flag(e_.flag) {}
-operator VkPresentModeKHR&() { return *this; }
+E_present_mode_KHR(VkPresentModeKHR flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
+operator VkPresentModeKHR&() { return reinterpret_cast<VkPresentModeKHR&>(*this); }
 E_present_mode_KHR& operator = (E_present_mode_KHR e_) { flag = e_.flag; return *this; }
 bool operator== (E_present_mode_KHR e_) { return flag == e_.flag; }
 bool operator== (VkPresentModeKHR e_) { return flag == static_cast<decltype(flag)>(e_); }
@@ -1068,10 +1108,11 @@ enum{
 e_srgb_nonlinear_khr = VK_COLOR_SPACE_SRGB_NONLINEAR_KHR,
 evk_colorspace_srgb_nonlinear_khr = VK_COLORSPACE_SRGB_NONLINEAR_KHR,
 }flag;
-E_color_space_KHR(VkColorSpaceKHR flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
 E_color_space_KHR(){}
+E_color_space_KHR(decltype(flag) flag_):flag(flag_) {}
 E_color_space_KHR(E_color_space_KHR const& e_):flag(e_.flag) {}
-operator VkColorSpaceKHR&() { return *this; }
+E_color_space_KHR(VkColorSpaceKHR flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
+operator VkColorSpaceKHR&() { return reinterpret_cast<VkColorSpaceKHR&>(*this); }
 E_color_space_KHR& operator = (E_color_space_KHR e_) { flag = e_.flag; return *this; }
 bool operator== (E_color_space_KHR e_) { return flag == e_.flag; }
 bool operator== (VkColorSpaceKHR e_) { return flag == static_cast<decltype(flag)>(e_); }
@@ -1120,10 +1161,11 @@ e_indirect_commands_layout_nvx_ext = VK_DEBUG_REPORT_OBJECT_TYPE_INDIRECT_COMMAN
 e_validation_cache_ext_ext = VK_DEBUG_REPORT_OBJECT_TYPE_VALIDATION_CACHE_EXT_EXT,
 e_validation_cache_ext = VK_DEBUG_REPORT_OBJECT_TYPE_VALIDATION_CACHE_EXT,
 }flag;
-E_debug_report_object_type_EXT(VkDebugReportObjectTypeEXT flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
 E_debug_report_object_type_EXT(){}
+E_debug_report_object_type_EXT(decltype(flag) flag_):flag(flag_) {}
 E_debug_report_object_type_EXT(E_debug_report_object_type_EXT const& e_):flag(e_.flag) {}
-operator VkDebugReportObjectTypeEXT&() { return *this; }
+E_debug_report_object_type_EXT(VkDebugReportObjectTypeEXT flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
+operator VkDebugReportObjectTypeEXT&() { return reinterpret_cast<VkDebugReportObjectTypeEXT&>(*this); }
 E_debug_report_object_type_EXT& operator = (E_debug_report_object_type_EXT e_) { flag = e_.flag; return *this; }
 bool operator== (E_debug_report_object_type_EXT e_) { return flag == e_.flag; }
 bool operator== (VkDebugReportObjectTypeEXT e_) { return flag == static_cast<decltype(flag)>(e_); }
@@ -1138,10 +1180,11 @@ enum{
 e_strict_amd = VK_RASTERIZATION_ORDER_STRICT_AMD,
 e_relaxed_amd = VK_RASTERIZATION_ORDER_RELAXED_AMD,
 }flag;
-E_rasterization_order_AMD(VkRasterizationOrderAMD flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
 E_rasterization_order_AMD(){}
+E_rasterization_order_AMD(decltype(flag) flag_):flag(flag_) {}
 E_rasterization_order_AMD(E_rasterization_order_AMD const& e_):flag(e_.flag) {}
-operator VkRasterizationOrderAMD&() { return *this; }
+E_rasterization_order_AMD(VkRasterizationOrderAMD flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
+operator VkRasterizationOrderAMD&() { return reinterpret_cast<VkRasterizationOrderAMD&>(*this); }
 E_rasterization_order_AMD& operator = (E_rasterization_order_AMD e_) { flag = e_.flag; return *this; }
 bool operator== (E_rasterization_order_AMD e_) { return flag == e_.flag; }
 bool operator== (VkRasterizationOrderAMD e_) { return flag == static_cast<decltype(flag)>(e_); }
@@ -1156,10 +1199,11 @@ enum{
 e_all_ext = VK_VALIDATION_CHECK_ALL_EXT,
 e_shaders_ext = VK_VALIDATION_CHECK_SHADERS_EXT,
 }flag;
-E_validation_check_EXT(VkValidationCheckEXT flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
 E_validation_check_EXT(){}
+E_validation_check_EXT(decltype(flag) flag_):flag(flag_) {}
 E_validation_check_EXT(E_validation_check_EXT const& e_):flag(e_.flag) {}
-operator VkValidationCheckEXT&() { return *this; }
+E_validation_check_EXT(VkValidationCheckEXT flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
+operator VkValidationCheckEXT&() { return reinterpret_cast<VkValidationCheckEXT&>(*this); }
 E_validation_check_EXT& operator = (E_validation_check_EXT e_) { flag = e_.flag; return *this; }
 bool operator== (E_validation_check_EXT e_) { return flag == e_.flag; }
 bool operator== (VkValidationCheckEXT e_) { return flag == static_cast<decltype(flag)>(e_); }
@@ -1180,10 +1224,11 @@ e_draw_indexed_nvx = VK_INDIRECT_COMMANDS_TOKEN_TYPE_DRAW_INDEXED_NVX,
 e_draw_nvx = VK_INDIRECT_COMMANDS_TOKEN_TYPE_DRAW_NVX,
 e_dispatch_nvx = VK_INDIRECT_COMMANDS_TOKEN_TYPE_DISPATCH_NVX,
 }flag;
-E_indirect_commands_token_type_NVX(VkIndirectCommandsTokenTypeNVX flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
 E_indirect_commands_token_type_NVX(){}
+E_indirect_commands_token_type_NVX(decltype(flag) flag_):flag(flag_) {}
 E_indirect_commands_token_type_NVX(E_indirect_commands_token_type_NVX const& e_):flag(e_.flag) {}
-operator VkIndirectCommandsTokenTypeNVX&() { return *this; }
+E_indirect_commands_token_type_NVX(VkIndirectCommandsTokenTypeNVX flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
+operator VkIndirectCommandsTokenTypeNVX&() { return reinterpret_cast<VkIndirectCommandsTokenTypeNVX&>(*this); }
 E_indirect_commands_token_type_NVX& operator = (E_indirect_commands_token_type_NVX e_) { flag = e_.flag; return *this; }
 bool operator== (E_indirect_commands_token_type_NVX e_) { return flag == e_.flag; }
 bool operator== (VkIndirectCommandsTokenTypeNVX e_) { return flag == static_cast<decltype(flag)>(e_); }
@@ -1201,10 +1246,11 @@ e_index_buffer_nvx = VK_OBJECT_ENTRY_TYPE_INDEX_BUFFER_NVX,
 e_vertex_buffer_nvx = VK_OBJECT_ENTRY_TYPE_VERTEX_BUFFER_NVX,
 e_push_constant_nvx = VK_OBJECT_ENTRY_TYPE_PUSH_CONSTANT_NVX,
 }flag;
-E_object_entry_type_NVX(VkObjectEntryTypeNVX flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
 E_object_entry_type_NVX(){}
+E_object_entry_type_NVX(decltype(flag) flag_):flag(flag_) {}
 E_object_entry_type_NVX(E_object_entry_type_NVX const& e_):flag(e_.flag) {}
-operator VkObjectEntryTypeNVX&() { return *this; }
+E_object_entry_type_NVX(VkObjectEntryTypeNVX flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
+operator VkObjectEntryTypeNVX&() { return reinterpret_cast<VkObjectEntryTypeNVX&>(*this); }
 E_object_entry_type_NVX& operator = (E_object_entry_type_NVX e_) { flag = e_.flag; return *this; }
 bool operator== (E_object_entry_type_NVX e_) { return flag == e_.flag; }
 bool operator== (VkObjectEntryTypeNVX e_) { return flag == static_cast<decltype(flag)>(e_); }
@@ -1220,10 +1266,11 @@ e_off_ext = VK_DISPLAY_POWER_STATE_OFF_EXT,
 e_suspend_ext = VK_DISPLAY_POWER_STATE_SUSPEND_EXT,
 e_on_ext = VK_DISPLAY_POWER_STATE_ON_EXT,
 }flag;
-E_display_power_state_EXT(VkDisplayPowerStateEXT flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
 E_display_power_state_EXT(){}
+E_display_power_state_EXT(decltype(flag) flag_):flag(flag_) {}
 E_display_power_state_EXT(E_display_power_state_EXT const& e_):flag(e_.flag) {}
-operator VkDisplayPowerStateEXT&() { return *this; }
+E_display_power_state_EXT(VkDisplayPowerStateEXT flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
+operator VkDisplayPowerStateEXT&() { return reinterpret_cast<VkDisplayPowerStateEXT&>(*this); }
 E_display_power_state_EXT& operator = (E_display_power_state_EXT e_) { flag = e_.flag; return *this; }
 bool operator== (E_display_power_state_EXT e_) { return flag == e_.flag; }
 bool operator== (VkDisplayPowerStateEXT e_) { return flag == static_cast<decltype(flag)>(e_); }
@@ -1237,10 +1284,11 @@ struct E_device_event_type_EXT{
 enum{
 e_display_hotplug_ext = VK_DEVICE_EVENT_TYPE_DISPLAY_HOTPLUG_EXT,
 }flag;
-E_device_event_type_EXT(VkDeviceEventTypeEXT flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
 E_device_event_type_EXT(){}
+E_device_event_type_EXT(decltype(flag) flag_):flag(flag_) {}
 E_device_event_type_EXT(E_device_event_type_EXT const& e_):flag(e_.flag) {}
-operator VkDeviceEventTypeEXT&() { return *this; }
+E_device_event_type_EXT(VkDeviceEventTypeEXT flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
+operator VkDeviceEventTypeEXT&() { return reinterpret_cast<VkDeviceEventTypeEXT&>(*this); }
 E_device_event_type_EXT& operator = (E_device_event_type_EXT e_) { flag = e_.flag; return *this; }
 bool operator== (E_device_event_type_EXT e_) { return flag == e_.flag; }
 bool operator== (VkDeviceEventTypeEXT e_) { return flag == static_cast<decltype(flag)>(e_); }
@@ -1254,10 +1302,11 @@ struct E_display_event_type_EXT{
 enum{
 e_first_pixel_out_ext = VK_DISPLAY_EVENT_TYPE_FIRST_PIXEL_OUT_EXT,
 }flag;
-E_display_event_type_EXT(VkDisplayEventTypeEXT flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
 E_display_event_type_EXT(){}
+E_display_event_type_EXT(decltype(flag) flag_):flag(flag_) {}
 E_display_event_type_EXT(E_display_event_type_EXT const& e_):flag(e_.flag) {}
-operator VkDisplayEventTypeEXT&() { return *this; }
+E_display_event_type_EXT(VkDisplayEventTypeEXT flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
+operator VkDisplayEventTypeEXT&() { return reinterpret_cast<VkDisplayEventTypeEXT&>(*this); }
 E_display_event_type_EXT& operator = (E_display_event_type_EXT e_) { flag = e_.flag; return *this; }
 bool operator== (E_display_event_type_EXT e_) { return flag == e_.flag; }
 bool operator== (VkDisplayEventTypeEXT e_) { return flag == static_cast<decltype(flag)>(e_); }
@@ -1278,10 +1327,11 @@ e_negative_z_nv = VK_VIEWPORT_COORDINATE_SWIZZLE_NEGATIVE_Z_NV,
 e_positive_w_nv = VK_VIEWPORT_COORDINATE_SWIZZLE_POSITIVE_W_NV,
 e_negative_w_nv = VK_VIEWPORT_COORDINATE_SWIZZLE_NEGATIVE_W_NV,
 }flag;
-E_viewport_coordinate_swizzle_NV(VkViewportCoordinateSwizzleNV flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
 E_viewport_coordinate_swizzle_NV(){}
+E_viewport_coordinate_swizzle_NV(decltype(flag) flag_):flag(flag_) {}
 E_viewport_coordinate_swizzle_NV(E_viewport_coordinate_swizzle_NV const& e_):flag(e_.flag) {}
-operator VkViewportCoordinateSwizzleNV&() { return *this; }
+E_viewport_coordinate_swizzle_NV(VkViewportCoordinateSwizzleNV flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
+operator VkViewportCoordinateSwizzleNV&() { return reinterpret_cast<VkViewportCoordinateSwizzleNV&>(*this); }
 E_viewport_coordinate_swizzle_NV& operator = (E_viewport_coordinate_swizzle_NV e_) { flag = e_.flag; return *this; }
 bool operator== (E_viewport_coordinate_swizzle_NV e_) { return flag == e_.flag; }
 bool operator== (VkViewportCoordinateSwizzleNV e_) { return flag == static_cast<decltype(flag)>(e_); }
@@ -1296,10 +1346,11 @@ enum{
 e_inclusive_ext = VK_DISCARD_RECTANGLE_MODE_INCLUSIVE_EXT,
 e_exclusive_ext = VK_DISCARD_RECTANGLE_MODE_EXCLUSIVE_EXT,
 }flag;
-E_discard_rectangle_mode_EXT(VkDiscardRectangleModeEXT flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
 E_discard_rectangle_mode_EXT(){}
+E_discard_rectangle_mode_EXT(decltype(flag) flag_):flag(flag_) {}
 E_discard_rectangle_mode_EXT(E_discard_rectangle_mode_EXT const& e_):flag(e_.flag) {}
-operator VkDiscardRectangleModeEXT&() { return *this; }
+E_discard_rectangle_mode_EXT(VkDiscardRectangleModeEXT flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
+operator VkDiscardRectangleModeEXT&() { return reinterpret_cast<VkDiscardRectangleModeEXT&>(*this); }
 E_discard_rectangle_mode_EXT& operator = (E_discard_rectangle_mode_EXT e_) { flag = e_.flag; return *this; }
 bool operator== (E_discard_rectangle_mode_EXT e_) { return flag == e_.flag; }
 bool operator== (VkDiscardRectangleModeEXT e_) { return flag == static_cast<decltype(flag)>(e_); }
@@ -1314,10 +1365,11 @@ enum{
 e_all_clip_planes = VK_POINT_CLIPPING_BEHAVIOR_ALL_CLIP_PLANES,
 e_user_clip_planes_only = VK_POINT_CLIPPING_BEHAVIOR_USER_CLIP_PLANES_ONLY,
 }flag;
-E_point_clipping_behavior(VkPointClippingBehavior flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
 E_point_clipping_behavior(){}
+E_point_clipping_behavior(decltype(flag) flag_):flag(flag_) {}
 E_point_clipping_behavior(E_point_clipping_behavior const& e_):flag(e_.flag) {}
-operator VkPointClippingBehavior&() { return *this; }
+E_point_clipping_behavior(VkPointClippingBehavior flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
+operator VkPointClippingBehavior&() { return reinterpret_cast<VkPointClippingBehavior&>(*this); }
 E_point_clipping_behavior& operator = (E_point_clipping_behavior e_) { flag = e_.flag; return *this; }
 bool operator== (E_point_clipping_behavior e_) { return flag == e_.flag; }
 bool operator== (VkPointClippingBehavior e_) { return flag == static_cast<decltype(flag)>(e_); }
@@ -1333,10 +1385,11 @@ e_weighted_average_ext = VK_SAMPLER_REDUCTION_MODE_WEIGHTED_AVERAGE_EXT,
 e_min_ext = VK_SAMPLER_REDUCTION_MODE_MIN_EXT,
 e_max_ext = VK_SAMPLER_REDUCTION_MODE_MAX_EXT,
 }flag;
-E_sampler_reduction_mode_EXT(VkSamplerReductionModeEXT flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
 E_sampler_reduction_mode_EXT(){}
+E_sampler_reduction_mode_EXT(decltype(flag) flag_):flag(flag_) {}
 E_sampler_reduction_mode_EXT(E_sampler_reduction_mode_EXT const& e_):flag(e_.flag) {}
-operator VkSamplerReductionModeEXT&() { return *this; }
+E_sampler_reduction_mode_EXT(VkSamplerReductionModeEXT flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
+operator VkSamplerReductionModeEXT&() { return reinterpret_cast<VkSamplerReductionModeEXT&>(*this); }
 E_sampler_reduction_mode_EXT& operator = (E_sampler_reduction_mode_EXT e_) { flag = e_.flag; return *this; }
 bool operator== (E_sampler_reduction_mode_EXT e_) { return flag == e_.flag; }
 bool operator== (VkSamplerReductionModeEXT e_) { return flag == static_cast<decltype(flag)>(e_); }
@@ -1351,10 +1404,11 @@ enum{
 e_upper_left = VK_TESSELLATION_DOMAIN_ORIGIN_UPPER_LEFT,
 e_lower_left = VK_TESSELLATION_DOMAIN_ORIGIN_LOWER_LEFT,
 }flag;
-E_tessellation_domain_origin(VkTessellationDomainOrigin flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
 E_tessellation_domain_origin(){}
+E_tessellation_domain_origin(decltype(flag) flag_):flag(flag_) {}
 E_tessellation_domain_origin(E_tessellation_domain_origin const& e_):flag(e_.flag) {}
-operator VkTessellationDomainOrigin&() { return *this; }
+E_tessellation_domain_origin(VkTessellationDomainOrigin flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
+operator VkTessellationDomainOrigin&() { return reinterpret_cast<VkTessellationDomainOrigin&>(*this); }
 E_tessellation_domain_origin& operator = (E_tessellation_domain_origin e_) { flag = e_.flag; return *this; }
 bool operator== (E_tessellation_domain_origin e_) { return flag == e_.flag; }
 bool operator== (VkTessellationDomainOrigin e_) { return flag == static_cast<decltype(flag)>(e_); }
@@ -1372,10 +1426,11 @@ e_ycbcr_709 = VK_SAMPLER_YCBCR_MODEL_CONVERSION_YCBCR_709,
 e_ycbcr_601 = VK_SAMPLER_YCBCR_MODEL_CONVERSION_YCBCR_601,
 e_ycbcr_2020 = VK_SAMPLER_YCBCR_MODEL_CONVERSION_YCBCR_2020,
 }flag;
-E_sampler_ycbcr_model_conversion(VkSamplerYcbcrModelConversion flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
 E_sampler_ycbcr_model_conversion(){}
+E_sampler_ycbcr_model_conversion(decltype(flag) flag_):flag(flag_) {}
 E_sampler_ycbcr_model_conversion(E_sampler_ycbcr_model_conversion const& e_):flag(e_.flag) {}
-operator VkSamplerYcbcrModelConversion&() { return *this; }
+E_sampler_ycbcr_model_conversion(VkSamplerYcbcrModelConversion flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
+operator VkSamplerYcbcrModelConversion&() { return reinterpret_cast<VkSamplerYcbcrModelConversion&>(*this); }
 E_sampler_ycbcr_model_conversion& operator = (E_sampler_ycbcr_model_conversion e_) { flag = e_.flag; return *this; }
 bool operator== (E_sampler_ycbcr_model_conversion e_) { return flag == e_.flag; }
 bool operator== (VkSamplerYcbcrModelConversion e_) { return flag == static_cast<decltype(flag)>(e_); }
@@ -1390,10 +1445,11 @@ enum{
 e_itu_full = VK_SAMPLER_YCBCR_RANGE_ITU_FULL,
 e_itu_narrow = VK_SAMPLER_YCBCR_RANGE_ITU_NARROW,
 }flag;
-E_sampler_ycbcr_range(VkSamplerYcbcrRange flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
 E_sampler_ycbcr_range(){}
+E_sampler_ycbcr_range(decltype(flag) flag_):flag(flag_) {}
 E_sampler_ycbcr_range(E_sampler_ycbcr_range const& e_):flag(e_.flag) {}
-operator VkSamplerYcbcrRange&() { return *this; }
+E_sampler_ycbcr_range(VkSamplerYcbcrRange flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
+operator VkSamplerYcbcrRange&() { return reinterpret_cast<VkSamplerYcbcrRange&>(*this); }
 E_sampler_ycbcr_range& operator = (E_sampler_ycbcr_range e_) { flag = e_.flag; return *this; }
 bool operator== (E_sampler_ycbcr_range e_) { return flag == e_.flag; }
 bool operator== (VkSamplerYcbcrRange e_) { return flag == static_cast<decltype(flag)>(e_); }
@@ -1408,10 +1464,11 @@ enum{
 e_cosited_even = VK_CHROMA_LOCATION_COSITED_EVEN,
 e_midpoint = VK_CHROMA_LOCATION_MIDPOINT,
 }flag;
-E_chroma_location(VkChromaLocation flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
 E_chroma_location(){}
+E_chroma_location(decltype(flag) flag_):flag(flag_) {}
 E_chroma_location(E_chroma_location const& e_):flag(e_.flag) {}
-operator VkChromaLocation&() { return *this; }
+E_chroma_location(VkChromaLocation flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
+operator VkChromaLocation&() { return reinterpret_cast<VkChromaLocation&>(*this); }
 E_chroma_location& operator = (E_chroma_location e_) { flag = e_.flag; return *this; }
 bool operator== (E_chroma_location e_) { return flag == e_.flag; }
 bool operator== (VkChromaLocation e_) { return flag == static_cast<decltype(flag)>(e_); }
@@ -1427,10 +1484,11 @@ e_uncorrelated_ext = VK_BLEND_OVERLAP_UNCORRELATED_EXT,
 e_disjoint_ext = VK_BLEND_OVERLAP_DISJOINT_EXT,
 e_conjoint_ext = VK_BLEND_OVERLAP_CONJOINT_EXT,
 }flag;
-E_blend_overlap_EXT(VkBlendOverlapEXT flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
 E_blend_overlap_EXT(){}
+E_blend_overlap_EXT(decltype(flag) flag_):flag(flag_) {}
 E_blend_overlap_EXT(E_blend_overlap_EXT const& e_):flag(e_.flag) {}
-operator VkBlendOverlapEXT&() { return *this; }
+E_blend_overlap_EXT(VkBlendOverlapEXT flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
+operator VkBlendOverlapEXT&() { return reinterpret_cast<VkBlendOverlapEXT&>(*this); }
 E_blend_overlap_EXT& operator = (E_blend_overlap_EXT e_) { flag = e_.flag; return *this; }
 bool operator== (E_blend_overlap_EXT e_) { return flag == e_.flag; }
 bool operator== (VkBlendOverlapEXT e_) { return flag == static_cast<decltype(flag)>(e_); }
@@ -1447,10 +1505,11 @@ e_rgb_nv = VK_COVERAGE_MODULATION_MODE_RGB_NV,
 e_alpha_nv = VK_COVERAGE_MODULATION_MODE_ALPHA_NV,
 e_rgba_nv = VK_COVERAGE_MODULATION_MODE_RGBA_NV,
 }flag;
-E_coverage_modulation_mode_NV(VkCoverageModulationModeNV flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
 E_coverage_modulation_mode_NV(){}
+E_coverage_modulation_mode_NV(decltype(flag) flag_):flag(flag_) {}
 E_coverage_modulation_mode_NV(E_coverage_modulation_mode_NV const& e_):flag(e_.flag) {}
-operator VkCoverageModulationModeNV&() { return *this; }
+E_coverage_modulation_mode_NV(VkCoverageModulationModeNV flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
+operator VkCoverageModulationModeNV&() { return reinterpret_cast<VkCoverageModulationModeNV&>(*this); }
 E_coverage_modulation_mode_NV& operator = (E_coverage_modulation_mode_NV e_) { flag = e_.flag; return *this; }
 bool operator== (E_coverage_modulation_mode_NV e_) { return flag == e_.flag; }
 bool operator== (VkCoverageModulationModeNV e_) { return flag == static_cast<decltype(flag)>(e_); }
@@ -1464,10 +1523,11 @@ struct E_validation_cache_header_version_EXT{
 enum{
 e_one_ext = VK_VALIDATION_CACHE_HEADER_VERSION_ONE_EXT,
 }flag;
-E_validation_cache_header_version_EXT(VkValidationCacheHeaderVersionEXT flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
 E_validation_cache_header_version_EXT(){}
+E_validation_cache_header_version_EXT(decltype(flag) flag_):flag(flag_) {}
 E_validation_cache_header_version_EXT(E_validation_cache_header_version_EXT const& e_):flag(e_.flag) {}
-operator VkValidationCacheHeaderVersionEXT&() { return *this; }
+E_validation_cache_header_version_EXT(VkValidationCacheHeaderVersionEXT flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
+operator VkValidationCacheHeaderVersionEXT&() { return reinterpret_cast<VkValidationCacheHeaderVersionEXT&>(*this); }
 E_validation_cache_header_version_EXT& operator = (E_validation_cache_header_version_EXT e_) { flag = e_.flag; return *this; }
 bool operator== (E_validation_cache_header_version_EXT e_) { return flag == e_.flag; }
 bool operator== (VkValidationCacheHeaderVersionEXT e_) { return flag == static_cast<decltype(flag)>(e_); }
@@ -1483,10 +1543,11 @@ e_statistics_amd = VK_SHADER_INFO_TYPE_STATISTICS_AMD,
 e_binary_amd = VK_SHADER_INFO_TYPE_BINARY_AMD,
 e_disassembly_amd = VK_SHADER_INFO_TYPE_DISASSEMBLY_AMD,
 }flag;
-E_shader_info_type_AMD(VkShaderInfoTypeAMD flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
 E_shader_info_type_AMD(){}
+E_shader_info_type_AMD(decltype(flag) flag_):flag(flag_) {}
 E_shader_info_type_AMD(E_shader_info_type_AMD const& e_):flag(e_.flag) {}
-operator VkShaderInfoTypeAMD&() { return *this; }
+E_shader_info_type_AMD(VkShaderInfoTypeAMD flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
+operator VkShaderInfoTypeAMD&() { return reinterpret_cast<VkShaderInfoTypeAMD&>(*this); }
 E_shader_info_type_AMD& operator = (E_shader_info_type_AMD e_) { flag = e_.flag; return *this; }
 bool operator== (E_shader_info_type_AMD e_) { return flag == e_.flag; }
 bool operator== (VkShaderInfoTypeAMD e_) { return flag == static_cast<decltype(flag)>(e_); }
@@ -1503,10 +1564,11 @@ e_medium_ext = VK_QUEUE_GLOBAL_PRIORITY_MEDIUM_EXT,
 e_high_ext = VK_QUEUE_GLOBAL_PRIORITY_HIGH_EXT,
 e_realtime_ext = VK_QUEUE_GLOBAL_PRIORITY_REALTIME_EXT,
 }flag;
-E_queue_global_priority_EXT(VkQueueGlobalPriorityEXT flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
 E_queue_global_priority_EXT(){}
+E_queue_global_priority_EXT(decltype(flag) flag_):flag(flag_) {}
 E_queue_global_priority_EXT(E_queue_global_priority_EXT const& e_):flag(e_.flag) {}
-operator VkQueueGlobalPriorityEXT&() { return *this; }
+E_queue_global_priority_EXT(VkQueueGlobalPriorityEXT flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
+operator VkQueueGlobalPriorityEXT&() { return reinterpret_cast<VkQueueGlobalPriorityEXT&>(*this); }
 E_queue_global_priority_EXT& operator = (E_queue_global_priority_EXT e_) { flag = e_.flag; return *this; }
 bool operator== (E_queue_global_priority_EXT e_) { return flag == e_.flag; }
 bool operator== (VkQueueGlobalPriorityEXT e_) { return flag == static_cast<decltype(flag)>(e_); }
@@ -1522,10 +1584,11 @@ e_disabled_ext = VK_CONSERVATIVE_RASTERIZATION_MODE_DISABLED_EXT,
 e_overestimate_ext = VK_CONSERVATIVE_RASTERIZATION_MODE_OVERESTIMATE_EXT,
 e_underestimate_ext = VK_CONSERVATIVE_RASTERIZATION_MODE_UNDERESTIMATE_EXT,
 }flag;
-E_conservative_rasterization_mode_EXT(VkConservativeRasterizationModeEXT flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
 E_conservative_rasterization_mode_EXT(){}
+E_conservative_rasterization_mode_EXT(decltype(flag) flag_):flag(flag_) {}
 E_conservative_rasterization_mode_EXT(E_conservative_rasterization_mode_EXT const& e_):flag(e_.flag) {}
-operator VkConservativeRasterizationModeEXT&() { return *this; }
+E_conservative_rasterization_mode_EXT(VkConservativeRasterizationModeEXT flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
+operator VkConservativeRasterizationModeEXT&() { return reinterpret_cast<VkConservativeRasterizationModeEXT&>(*this); }
 E_conservative_rasterization_mode_EXT& operator = (E_conservative_rasterization_mode_EXT e_) { flag = e_.flag; return *this; }
 bool operator== (E_conservative_rasterization_mode_EXT e_) { return flag == e_.flag; }
 bool operator== (VkConservativeRasterizationModeEXT e_) { return flag == static_cast<decltype(flag)>(e_); }
@@ -1541,10 +1604,11 @@ e_viv = VK_VENDOR_ID_VIV,
 e_vsi = VK_VENDOR_ID_VSI,
 e_kazan = VK_VENDOR_ID_KAZAN,
 }flag;
-E_vendor_id(VkVendorId flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
 E_vendor_id(){}
+E_vendor_id(decltype(flag) flag_):flag(flag_) {}
 E_vendor_id(E_vendor_id const& e_):flag(e_.flag) {}
-operator VkVendorId&() { return *this; }
+E_vendor_id(VkVendorId flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
+operator VkVendorId&() { return reinterpret_cast<VkVendorId&>(*this); }
 E_vendor_id& operator = (E_vendor_id e_) { flag = e_.flag; return *this; }
 bool operator== (E_vendor_id e_) { return flag == e_.flag; }
 bool operator== (VkVendorId e_) { return flag == static_cast<decltype(flag)>(e_); }
@@ -1567,10 +1631,11 @@ e_imagination_proprietary_khr = VK_DRIVER_ID_IMAGINATION_PROPRIETARY_KHR,
 e_qualcomm_proprietary_khr = VK_DRIVER_ID_QUALCOMM_PROPRIETARY_KHR,
 e_arm_proprietary_khr = VK_DRIVER_ID_ARM_PROPRIETARY_KHR,
 }flag;
-E_driver_id_KHR(VkDriverIdKHR flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
 E_driver_id_KHR(){}
+E_driver_id_KHR(decltype(flag) flag_):flag(flag_) {}
 E_driver_id_KHR(E_driver_id_KHR const& e_):flag(e_.flag) {}
-operator VkDriverIdKHR&() { return *this; }
+E_driver_id_KHR(VkDriverIdKHR flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
+operator VkDriverIdKHR&() { return reinterpret_cast<VkDriverIdKHR&>(*this); }
 E_driver_id_KHR& operator = (E_driver_id_KHR e_) { flag = e_.flag; return *this; }
 bool operator== (E_driver_id_KHR e_) { return flag == e_.flag; }
 bool operator== (VkDriverIdKHR e_) { return flag == static_cast<decltype(flag)>(e_); }
@@ -1597,10 +1662,11 @@ e_1_invocation_per_4x2_pixels_nv = VK_SHADING_RATE_PALETTE_ENTRY_1_INVOCATION_PE
 e_1_invocation_per_2x4_pixels_nv = VK_SHADING_RATE_PALETTE_ENTRY_1_INVOCATION_PER_2X4_PIXELS_NV,
 e_1_invocation_per_4x4_pixels_nv = VK_SHADING_RATE_PALETTE_ENTRY_1_INVOCATION_PER_4X4_PIXELS_NV,
 }flag;
-E_shading_rate_palette_entry_NV(VkShadingRatePaletteEntryNV flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
 E_shading_rate_palette_entry_NV(){}
+E_shading_rate_palette_entry_NV(decltype(flag) flag_):flag(flag_) {}
 E_shading_rate_palette_entry_NV(E_shading_rate_palette_entry_NV const& e_):flag(e_.flag) {}
-operator VkShadingRatePaletteEntryNV&() { return *this; }
+E_shading_rate_palette_entry_NV(VkShadingRatePaletteEntryNV flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
+operator VkShadingRatePaletteEntryNV&() { return reinterpret_cast<VkShadingRatePaletteEntryNV&>(*this); }
 E_shading_rate_palette_entry_NV& operator = (E_shading_rate_palette_entry_NV e_) { flag = e_.flag; return *this; }
 bool operator== (E_shading_rate_palette_entry_NV e_) { return flag == e_.flag; }
 bool operator== (VkShadingRatePaletteEntryNV e_) { return flag == static_cast<decltype(flag)>(e_); }
@@ -1617,10 +1683,11 @@ e_custom_nv = VK_COARSE_SAMPLE_ORDER_TYPE_CUSTOM_NV,
 e_pixel_major_nv = VK_COARSE_SAMPLE_ORDER_TYPE_PIXEL_MAJOR_NV,
 e_sample_major_nv = VK_COARSE_SAMPLE_ORDER_TYPE_SAMPLE_MAJOR_NV,
 }flag;
-E_coarse_sample_order_type_NV(VkCoarseSampleOrderTypeNV flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
 E_coarse_sample_order_type_NV(){}
+E_coarse_sample_order_type_NV(decltype(flag) flag_):flag(flag_) {}
 E_coarse_sample_order_type_NV(E_coarse_sample_order_type_NV const& e_):flag(e_.flag) {}
-operator VkCoarseSampleOrderTypeNV&() { return *this; }
+E_coarse_sample_order_type_NV(VkCoarseSampleOrderTypeNV flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
+operator VkCoarseSampleOrderTypeNV&() { return reinterpret_cast<VkCoarseSampleOrderTypeNV&>(*this); }
 E_coarse_sample_order_type_NV& operator = (E_coarse_sample_order_type_NV e_) { flag = e_.flag; return *this; }
 bool operator== (E_coarse_sample_order_type_NV e_) { return flag == e_.flag; }
 bool operator== (VkCoarseSampleOrderTypeNV e_) { return flag == static_cast<decltype(flag)>(e_); }
@@ -1635,10 +1702,11 @@ enum{
 e_clone_nvx = VK_COPY_ACCELERATION_STRUCTURE_MODE_CLONE_NVX,
 e_compact_nvx = VK_COPY_ACCELERATION_STRUCTURE_MODE_COMPACT_NVX,
 }flag;
-E_copy_acceleration_structure_mode_NVX(VkCopyAccelerationStructureModeNVX flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
 E_copy_acceleration_structure_mode_NVX(){}
+E_copy_acceleration_structure_mode_NVX(decltype(flag) flag_):flag(flag_) {}
 E_copy_acceleration_structure_mode_NVX(E_copy_acceleration_structure_mode_NVX const& e_):flag(e_.flag) {}
-operator VkCopyAccelerationStructureModeNVX&() { return *this; }
+E_copy_acceleration_structure_mode_NVX(VkCopyAccelerationStructureModeNVX flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
+operator VkCopyAccelerationStructureModeNVX&() { return reinterpret_cast<VkCopyAccelerationStructureModeNVX&>(*this); }
 E_copy_acceleration_structure_mode_NVX& operator = (E_copy_acceleration_structure_mode_NVX e_) { flag = e_.flag; return *this; }
 bool operator== (E_copy_acceleration_structure_mode_NVX e_) { return flag == e_.flag; }
 bool operator== (VkCopyAccelerationStructureModeNVX e_) { return flag == static_cast<decltype(flag)>(e_); }
@@ -1653,10 +1721,11 @@ enum{
 e_top_level_nvx = VK_ACCELERATION_STRUCTURE_TYPE_TOP_LEVEL_NVX,
 e_bottom_level_nvx = VK_ACCELERATION_STRUCTURE_TYPE_BOTTOM_LEVEL_NVX,
 }flag;
-E_acceleration_structure_type_NVX(VkAccelerationStructureTypeNVX flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
 E_acceleration_structure_type_NVX(){}
+E_acceleration_structure_type_NVX(decltype(flag) flag_):flag(flag_) {}
 E_acceleration_structure_type_NVX(E_acceleration_structure_type_NVX const& e_):flag(e_.flag) {}
-operator VkAccelerationStructureTypeNVX&() { return *this; }
+E_acceleration_structure_type_NVX(VkAccelerationStructureTypeNVX flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
+operator VkAccelerationStructureTypeNVX&() { return reinterpret_cast<VkAccelerationStructureTypeNVX&>(*this); }
 E_acceleration_structure_type_NVX& operator = (E_acceleration_structure_type_NVX e_) { flag = e_.flag; return *this; }
 bool operator== (E_acceleration_structure_type_NVX e_) { return flag == e_.flag; }
 bool operator== (VkAccelerationStructureTypeNVX e_) { return flag == static_cast<decltype(flag)>(e_); }
@@ -1671,10 +1740,11 @@ enum{
 e_triangles_nvx = VK_GEOMETRY_TYPE_TRIANGLES_NVX,
 e_aabbs_nvx = VK_GEOMETRY_TYPE_AABBS_NVX,
 }flag;
-E_geometry_type_NVX(VkGeometryTypeNVX flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
 E_geometry_type_NVX(){}
+E_geometry_type_NVX(decltype(flag) flag_):flag(flag_) {}
 E_geometry_type_NVX(E_geometry_type_NVX const& e_):flag(e_.flag) {}
-operator VkGeometryTypeNVX&() { return *this; }
+E_geometry_type_NVX(VkGeometryTypeNVX flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
+operator VkGeometryTypeNVX&() { return reinterpret_cast<VkGeometryTypeNVX&>(*this); }
 E_geometry_type_NVX& operator = (E_geometry_type_NVX e_) { flag = e_.flag; return *this; }
 bool operator== (E_geometry_type_NVX e_) { return flag == e_.flag; }
 bool operator== (VkGeometryTypeNVX e_) { return flag == static_cast<decltype(flag)>(e_); }
@@ -5180,7 +5250,17 @@ struct		S_offset_2d{
 	int32_t x;
 	int32_t y;
 
-VkOffset2D*const get_vkptr(){return reinterpret_cast<VkOffset2D*>(this);}
+operator VkOffset2D*()
+	{	return reinterpret_cast<VkOffset2D*>(this);	}
+operator const VkOffset2D*() const
+	{	return reinterpret_cast<const VkOffset2D*>(this);	}
+S_offset_2d& operator=( VkOffset2D const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_offset_2d ) ); return *this;	}
+operator VkOffset2D const&() const 
+	{	return *reinterpret_cast<const VkOffset2D*>(this);	}
+operator VkOffset2D &() 
+	{	return *reinterpret_cast<VkOffset2D*>(this);	}
+
 };
 
 /*	VkOffset3D
@@ -5190,7 +5270,17 @@ struct		S_offset_3d{
 	int32_t y;
 	int32_t z;
 
-VkOffset3D*const get_vkptr(){return reinterpret_cast<VkOffset3D*>(this);}
+operator VkOffset3D*()
+	{	return reinterpret_cast<VkOffset3D*>(this);	}
+operator const VkOffset3D*() const
+	{	return reinterpret_cast<const VkOffset3D*>(this);	}
+S_offset_3d& operator=( VkOffset3D const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_offset_3d ) ); return *this;	}
+operator VkOffset3D const&() const 
+	{	return *reinterpret_cast<const VkOffset3D*>(this);	}
+operator VkOffset3D &() 
+	{	return *reinterpret_cast<VkOffset3D*>(this);	}
+
 };
 
 /*	VkExtent2D
@@ -5199,7 +5289,17 @@ struct		S_extent_2d{
 	uint32_t width;
 	uint32_t height;
 
-VkExtent2D*const get_vkptr(){return reinterpret_cast<VkExtent2D*>(this);}
+operator VkExtent2D*()
+	{	return reinterpret_cast<VkExtent2D*>(this);	}
+operator const VkExtent2D*() const
+	{	return reinterpret_cast<const VkExtent2D*>(this);	}
+S_extent_2d& operator=( VkExtent2D const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_extent_2d ) ); return *this;	}
+operator VkExtent2D const&() const 
+	{	return *reinterpret_cast<const VkExtent2D*>(this);	}
+operator VkExtent2D &() 
+	{	return *reinterpret_cast<VkExtent2D*>(this);	}
+
 };
 
 /*	VkExtent3D
@@ -5209,7 +5309,17 @@ struct		S_extent_3d{
 	uint32_t height;
 	uint32_t depth;
 
-VkExtent3D*const get_vkptr(){return reinterpret_cast<VkExtent3D*>(this);}
+operator VkExtent3D*()
+	{	return reinterpret_cast<VkExtent3D*>(this);	}
+operator const VkExtent3D*() const
+	{	return reinterpret_cast<const VkExtent3D*>(this);	}
+S_extent_3d& operator=( VkExtent3D const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_extent_3d ) ); return *this;	}
+operator VkExtent3D const&() const 
+	{	return *reinterpret_cast<const VkExtent3D*>(this);	}
+operator VkExtent3D &() 
+	{	return *reinterpret_cast<VkExtent3D*>(this);	}
+
 };
 
 /*	VkViewport
@@ -5222,7 +5332,17 @@ struct		S_viewport{
 	float minDepth;
 	float maxDepth;
 
-VkViewport*const get_vkptr(){return reinterpret_cast<VkViewport*>(this);}
+operator VkViewport*()
+	{	return reinterpret_cast<VkViewport*>(this);	}
+operator const VkViewport*() const
+	{	return reinterpret_cast<const VkViewport*>(this);	}
+S_viewport& operator=( VkViewport const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_viewport ) ); return *this;	}
+operator VkViewport const&() const 
+	{	return *reinterpret_cast<const VkViewport*>(this);	}
+operator VkViewport &() 
+	{	return *reinterpret_cast<VkViewport*>(this);	}
+
 };
 
 /*	VkRect2D
@@ -5231,7 +5351,17 @@ struct		S_rect_2d{
 	S_offset_2d offset;
 	S_extent_2d extent;
 
-VkRect2D*const get_vkptr(){return reinterpret_cast<VkRect2D*>(this);}
+operator VkRect2D*()
+	{	return reinterpret_cast<VkRect2D*>(this);	}
+operator const VkRect2D*() const
+	{	return reinterpret_cast<const VkRect2D*>(this);	}
+S_rect_2d& operator=( VkRect2D const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_rect_2d ) ); return *this;	}
+operator VkRect2D const&() const 
+	{	return *reinterpret_cast<const VkRect2D*>(this);	}
+operator VkRect2D &() 
+	{	return *reinterpret_cast<VkRect2D*>(this);	}
+
 };
 
 /*	VkClearRect
@@ -5241,7 +5371,17 @@ struct		S_clear_rect{
 	uint32_t baseArrayLayer;
 	uint32_t layerCount;
 
-VkClearRect*const get_vkptr(){return reinterpret_cast<VkClearRect*>(this);}
+operator VkClearRect*()
+	{	return reinterpret_cast<VkClearRect*>(this);	}
+operator const VkClearRect*() const
+	{	return reinterpret_cast<const VkClearRect*>(this);	}
+S_clear_rect& operator=( VkClearRect const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_clear_rect ) ); return *this;	}
+operator VkClearRect const&() const 
+	{	return *reinterpret_cast<const VkClearRect*>(this);	}
+operator VkClearRect &() 
+	{	return *reinterpret_cast<VkClearRect*>(this);	}
+
 };
 
 /*	VkComponentMapping
@@ -5252,7 +5392,17 @@ struct		S_component_mapping{
 	E_component_swizzle b;
 	E_component_swizzle a;
 
-VkComponentMapping*const get_vkptr(){return reinterpret_cast<VkComponentMapping*>(this);}
+operator VkComponentMapping*()
+	{	return reinterpret_cast<VkComponentMapping*>(this);	}
+operator const VkComponentMapping*() const
+	{	return reinterpret_cast<const VkComponentMapping*>(this);	}
+S_component_mapping& operator=( VkComponentMapping const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_component_mapping ) ); return *this;	}
+operator VkComponentMapping const&() const 
+	{	return *reinterpret_cast<const VkComponentMapping*>(this);	}
+operator VkComponentMapping &() 
+	{	return *reinterpret_cast<VkComponentMapping*>(this);	}
+
 };
 
 /*	VkPhysicalDeviceLimits
@@ -5366,7 +5516,17 @@ struct		S_physical_device_limits{
 	VkDeviceSize optimalBufferCopyRowPitchAlignment;
 	VkDeviceSize nonCoherentAtomSize;
 
-VkPhysicalDeviceLimits*const get_vkptr(){return reinterpret_cast<VkPhysicalDeviceLimits*>(this);}
+operator VkPhysicalDeviceLimits*()
+	{	return reinterpret_cast<VkPhysicalDeviceLimits*>(this);	}
+operator const VkPhysicalDeviceLimits*() const
+	{	return reinterpret_cast<const VkPhysicalDeviceLimits*>(this);	}
+S_physical_device_limits& operator=( VkPhysicalDeviceLimits const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_physical_device_limits ) ); return *this;	}
+operator VkPhysicalDeviceLimits const&() const 
+	{	return *reinterpret_cast<const VkPhysicalDeviceLimits*>(this);	}
+operator VkPhysicalDeviceLimits &() 
+	{	return *reinterpret_cast<VkPhysicalDeviceLimits*>(this);	}
+
 };
 
 /*	VkPhysicalDeviceSparseProperties
@@ -5379,7 +5539,17 @@ struct		S_physical_device_sparse_properties{
 	VkBool32 residencyAlignedMipSize;
 	VkBool32 residencyNonResidentStrict;
 
-VkPhysicalDeviceSparseProperties*const get_vkptr(){return reinterpret_cast<VkPhysicalDeviceSparseProperties*>(this);}
+operator VkPhysicalDeviceSparseProperties*()
+	{	return reinterpret_cast<VkPhysicalDeviceSparseProperties*>(this);	}
+operator const VkPhysicalDeviceSparseProperties*() const
+	{	return reinterpret_cast<const VkPhysicalDeviceSparseProperties*>(this);	}
+S_physical_device_sparse_properties& operator=( VkPhysicalDeviceSparseProperties const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_physical_device_sparse_properties ) ); return *this;	}
+operator VkPhysicalDeviceSparseProperties const&() const 
+	{	return *reinterpret_cast<const VkPhysicalDeviceSparseProperties*>(this);	}
+operator VkPhysicalDeviceSparseProperties &() 
+	{	return *reinterpret_cast<VkPhysicalDeviceSparseProperties*>(this);	}
+
 };
 
 /*	VkPhysicalDeviceProperties
@@ -5396,7 +5566,17 @@ struct		S_physical_device_properties{
 	S_physical_device_limits limits;
 	S_physical_device_sparse_properties sparseProperties;
 
-VkPhysicalDeviceProperties*const get_vkptr(){return reinterpret_cast<VkPhysicalDeviceProperties*>(this);}
+operator VkPhysicalDeviceProperties*()
+	{	return reinterpret_cast<VkPhysicalDeviceProperties*>(this);	}
+operator const VkPhysicalDeviceProperties*() const
+	{	return reinterpret_cast<const VkPhysicalDeviceProperties*>(this);	}
+S_physical_device_properties& operator=( VkPhysicalDeviceProperties const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_physical_device_properties ) ); return *this;	}
+operator VkPhysicalDeviceProperties const&() const 
+	{	return *reinterpret_cast<const VkPhysicalDeviceProperties*>(this);	}
+operator VkPhysicalDeviceProperties &() 
+	{	return *reinterpret_cast<VkPhysicalDeviceProperties*>(this);	}
+
 };
 
 /*	VkExtensionProperties
@@ -5406,7 +5586,17 @@ struct		S_extension_properties{
 	char extensionName[VK_MAX_EXTENSION_NAME_SIZE];
 	uint32_t specVersion;
 
-VkExtensionProperties*const get_vkptr(){return reinterpret_cast<VkExtensionProperties*>(this);}
+operator VkExtensionProperties*()
+	{	return reinterpret_cast<VkExtensionProperties*>(this);	}
+operator const VkExtensionProperties*() const
+	{	return reinterpret_cast<const VkExtensionProperties*>(this);	}
+S_extension_properties& operator=( VkExtensionProperties const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_extension_properties ) ); return *this;	}
+operator VkExtensionProperties const&() const 
+	{	return *reinterpret_cast<const VkExtensionProperties*>(this);	}
+operator VkExtensionProperties &() 
+	{	return *reinterpret_cast<VkExtensionProperties*>(this);	}
+
 };
 
 /*	VkLayerProperties
@@ -5418,7 +5608,17 @@ struct		S_layer_properties{
 	uint32_t implementationVersion;
 	char description[VK_MAX_DESCRIPTION_SIZE];
 
-VkLayerProperties*const get_vkptr(){return reinterpret_cast<VkLayerProperties*>(this);}
+operator VkLayerProperties*()
+	{	return reinterpret_cast<VkLayerProperties*>(this);	}
+operator const VkLayerProperties*() const
+	{	return reinterpret_cast<const VkLayerProperties*>(this);	}
+S_layer_properties& operator=( VkLayerProperties const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_layer_properties ) ); return *this;	}
+operator VkLayerProperties const&() const 
+	{	return *reinterpret_cast<const VkLayerProperties*>(this);	}
+operator VkLayerProperties &() 
+	{	return *reinterpret_cast<VkLayerProperties*>(this);	}
+
 };
 
 /*	VkApplicationInfo
@@ -5434,10 +5634,21 @@ public:
 	uint32_t engineVersion;
 	uint32_t apiVersion;
 
-VkApplicationInfo*const get_vkptr(){return reinterpret_cast<VkApplicationInfo*>(this);}
+operator VkApplicationInfo*()
+	{	return reinterpret_cast<VkApplicationInfo*>(this);	}
+operator const VkApplicationInfo*() const
+	{	return reinterpret_cast<const VkApplicationInfo*>(this);	}
+S_application_info& operator=( VkApplicationInfo const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_application_info ) ); return *this;	}
+operator VkApplicationInfo const&() const 
+	{	return *reinterpret_cast<const VkApplicationInfo*>(this);	}
+operator VkApplicationInfo &() 
+	{	return *reinterpret_cast<VkApplicationInfo*>(this);	}
+
 
 S_application_info(){}
-
+S_application_info(VkApplicationInfo& rhs)
+	{	memcpy( this, &rhs, sizeof( S_application_info ) );	}
 S_application_info(
 	const char * pApplicationName_,
 	uint32_t applicationVersion_,
@@ -5449,17 +5660,7 @@ S_application_info(
 	,pEngineName(pEngineName_)
 	,engineVersion(engineVersion_)
 	,apiVersion(apiVersion_)
-{
-}
-
-S_application_info( VkApplicationInfo const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_application_info ) );	}
-S_application_info& operator=( VkApplicationInfo const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_application_info ) ); return *this;	}
-operator VkApplicationInfo const&() const 
-	{	return *reinterpret_cast<const VkApplicationInfo*>(this);	}
-operator VkApplicationInfo &() 
-	{	return *reinterpret_cast<VkApplicationInfo*>(this);	}
+{}
 };
 static_assert(
 	sizeof(S_application_info) == sizeof(VkApplicationInfo),
@@ -5475,7 +5676,17 @@ struct		S_allocation_callbacks{
 	PFN_vkInternalAllocationNotification pfnInternalAllocation;
 	PFN_vkInternalFreeNotification pfnInternalFree;
 
-VkAllocationCallbacks*const get_vkptr(){return reinterpret_cast<VkAllocationCallbacks*>(this);}
+operator VkAllocationCallbacks*()
+	{	return reinterpret_cast<VkAllocationCallbacks*>(this);	}
+operator const VkAllocationCallbacks*() const
+	{	return reinterpret_cast<const VkAllocationCallbacks*>(this);	}
+S_allocation_callbacks& operator=( VkAllocationCallbacks const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_allocation_callbacks ) ); return *this;	}
+operator VkAllocationCallbacks const&() const 
+	{	return *reinterpret_cast<const VkAllocationCallbacks*>(this);	}
+operator VkAllocationCallbacks &() 
+	{	return *reinterpret_cast<VkAllocationCallbacks*>(this);	}
+
 };
 
 /*	VkDeviceQueueGlobalPriorityCreateInfoEXT
@@ -5488,24 +5699,25 @@ private:
 public:
 	E_queue_global_priority_EXT globalPriority;
 
-VkDeviceQueueGlobalPriorityCreateInfoEXT*const get_vkptr(){return reinterpret_cast<VkDeviceQueueGlobalPriorityCreateInfoEXT*>(this);}
-
-S_device_queue_global_priority_create_info_EXT(){}
-
-S_device_queue_global_priority_create_info_EXT(
-	E_queue_global_priority_EXT globalPriority_)
-	:globalPriority(globalPriority_)
-{
-}
-
-S_device_queue_global_priority_create_info_EXT( VkDeviceQueueGlobalPriorityCreateInfoEXT const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_device_queue_global_priority_create_info_EXT ) );	}
+operator VkDeviceQueueGlobalPriorityCreateInfoEXT*()
+	{	return reinterpret_cast<VkDeviceQueueGlobalPriorityCreateInfoEXT*>(this);	}
+operator const VkDeviceQueueGlobalPriorityCreateInfoEXT*() const
+	{	return reinterpret_cast<const VkDeviceQueueGlobalPriorityCreateInfoEXT*>(this);	}
 S_device_queue_global_priority_create_info_EXT& operator=( VkDeviceQueueGlobalPriorityCreateInfoEXT const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_device_queue_global_priority_create_info_EXT ) ); return *this;	}
 operator VkDeviceQueueGlobalPriorityCreateInfoEXT const&() const 
 	{	return *reinterpret_cast<const VkDeviceQueueGlobalPriorityCreateInfoEXT*>(this);	}
 operator VkDeviceQueueGlobalPriorityCreateInfoEXT &() 
 	{	return *reinterpret_cast<VkDeviceQueueGlobalPriorityCreateInfoEXT*>(this);	}
+
+
+S_device_queue_global_priority_create_info_EXT(){}
+S_device_queue_global_priority_create_info_EXT(VkDeviceQueueGlobalPriorityCreateInfoEXT& rhs)
+	{	memcpy( this, &rhs, sizeof( S_device_queue_global_priority_create_info_EXT ) );	}
+S_device_queue_global_priority_create_info_EXT(
+	E_queue_global_priority_EXT globalPriority_)
+	:globalPriority(globalPriority_)
+{}
 
 friend S_device_queue_create_info;
 };
@@ -5527,10 +5739,21 @@ public:
 	uint32_t queueCount;
 	const float * pQueuePriorities;
 
-VkDeviceQueueCreateInfo*const get_vkptr(){return reinterpret_cast<VkDeviceQueueCreateInfo*>(this);}
+operator VkDeviceQueueCreateInfo*()
+	{	return reinterpret_cast<VkDeviceQueueCreateInfo*>(this);	}
+operator const VkDeviceQueueCreateInfo*() const
+	{	return reinterpret_cast<const VkDeviceQueueCreateInfo*>(this);	}
+S_device_queue_create_info& operator=( VkDeviceQueueCreateInfo const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_device_queue_create_info ) ); return *this;	}
+operator VkDeviceQueueCreateInfo const&() const 
+	{	return *reinterpret_cast<const VkDeviceQueueCreateInfo*>(this);	}
+operator VkDeviceQueueCreateInfo &() 
+	{	return *reinterpret_cast<VkDeviceQueueCreateInfo*>(this);	}
+
 
 S_device_queue_create_info(){}
-
+S_device_queue_create_info(VkDeviceQueueCreateInfo& rhs)
+	{	memcpy( this, &rhs, sizeof( S_device_queue_create_info ) );	}
 S_device_queue_create_info(
 	F_device_queue_create flags_,
 	uint32_t queueFamilyIndex_,
@@ -5540,17 +5763,7 @@ S_device_queue_create_info(
 	,queueFamilyIndex(queueFamilyIndex_)
 	,queueCount(queueCount_)
 	,pQueuePriorities(pQueuePriorities_)
-{
-}
-
-S_device_queue_create_info( VkDeviceQueueCreateInfo const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_device_queue_create_info ) );	}
-S_device_queue_create_info& operator=( VkDeviceQueueCreateInfo const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_device_queue_create_info ) ); return *this;	}
-operator VkDeviceQueueCreateInfo const&() const 
-	{	return *reinterpret_cast<const VkDeviceQueueCreateInfo*>(this);	}
-operator VkDeviceQueueCreateInfo &() 
-	{	return *reinterpret_cast<VkDeviceQueueCreateInfo*>(this);	}
+{}
 
 S_device_queue_create_info& n_device_queue_global_priority_create_info_EXT(S_device_queue_global_priority_create_info_EXT const& next_);
 };
@@ -5562,7 +5775,7 @@ struct N_device_queue_create_info{
 private:
 	void* pNext = nullptr;
 public:
-void* get(){ return pNext; }
+operator void*() { return pNext; }
 N_device_queue_create_info& n_device_queue_global_priority_create_info_EXT(S_device_queue_global_priority_create_info_EXT const& next_);
 };
 
@@ -5625,7 +5838,17 @@ struct		S_physical_device_features{
 	VkBool32 variableMultisampleRate;
 	VkBool32 inheritedQueries;
 
-VkPhysicalDeviceFeatures*const get_vkptr(){return reinterpret_cast<VkPhysicalDeviceFeatures*>(this);}
+operator VkPhysicalDeviceFeatures*()
+	{	return reinterpret_cast<VkPhysicalDeviceFeatures*>(this);	}
+operator const VkPhysicalDeviceFeatures*() const
+	{	return reinterpret_cast<const VkPhysicalDeviceFeatures*>(this);	}
+S_physical_device_features& operator=( VkPhysicalDeviceFeatures const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_physical_device_features ) ); return *this;	}
+operator VkPhysicalDeviceFeatures const&() const 
+	{	return *reinterpret_cast<const VkPhysicalDeviceFeatures*>(this);	}
+operator VkPhysicalDeviceFeatures &() 
+	{	return *reinterpret_cast<VkPhysicalDeviceFeatures*>(this);	}
+
 };
 
 /*	VkPhysicalDeviceVariablePointerFeatures
@@ -5639,26 +5862,27 @@ public:
 	VkBool32 variablePointersStorageBuffer;
 	VkBool32 variablePointers;
 
-VkPhysicalDeviceVariablePointerFeatures*const get_vkptr(){return reinterpret_cast<VkPhysicalDeviceVariablePointerFeatures*>(this);}
-
-S_physical_device_variable_pointer_features(){}
-
-S_physical_device_variable_pointer_features(
-	VkBool32 variablePointersStorageBuffer_,
-	VkBool32 variablePointers_)
-	:variablePointersStorageBuffer(variablePointersStorageBuffer_)
-	,variablePointers(variablePointers_)
-{
-}
-
-S_physical_device_variable_pointer_features( VkPhysicalDeviceVariablePointerFeatures const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_physical_device_variable_pointer_features ) );	}
+operator VkPhysicalDeviceVariablePointerFeatures*()
+	{	return reinterpret_cast<VkPhysicalDeviceVariablePointerFeatures*>(this);	}
+operator const VkPhysicalDeviceVariablePointerFeatures*() const
+	{	return reinterpret_cast<const VkPhysicalDeviceVariablePointerFeatures*>(this);	}
 S_physical_device_variable_pointer_features& operator=( VkPhysicalDeviceVariablePointerFeatures const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_physical_device_variable_pointer_features ) ); return *this;	}
 operator VkPhysicalDeviceVariablePointerFeatures const&() const 
 	{	return *reinterpret_cast<const VkPhysicalDeviceVariablePointerFeatures*>(this);	}
 operator VkPhysicalDeviceVariablePointerFeatures &() 
 	{	return *reinterpret_cast<VkPhysicalDeviceVariablePointerFeatures*>(this);	}
+
+
+S_physical_device_variable_pointer_features(){}
+S_physical_device_variable_pointer_features(VkPhysicalDeviceVariablePointerFeatures& rhs)
+	{	memcpy( this, &rhs, sizeof( S_physical_device_variable_pointer_features ) );	}
+S_physical_device_variable_pointer_features(
+	VkBool32 variablePointersStorageBuffer_,
+	VkBool32 variablePointers_)
+	:variablePointersStorageBuffer(variablePointersStorageBuffer_)
+	,variablePointers(variablePointers_)
+{}
 
 friend S_physical_device_features2;
 friend S_device_create_info;
@@ -5679,10 +5903,21 @@ public:
 	VkBool32 multiviewGeometryShader;
 	VkBool32 multiviewTessellationShader;
 
-VkPhysicalDeviceMultiviewFeatures*const get_vkptr(){return reinterpret_cast<VkPhysicalDeviceMultiviewFeatures*>(this);}
+operator VkPhysicalDeviceMultiviewFeatures*()
+	{	return reinterpret_cast<VkPhysicalDeviceMultiviewFeatures*>(this);	}
+operator const VkPhysicalDeviceMultiviewFeatures*() const
+	{	return reinterpret_cast<const VkPhysicalDeviceMultiviewFeatures*>(this);	}
+S_physical_device_multiview_features& operator=( VkPhysicalDeviceMultiviewFeatures const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_physical_device_multiview_features ) ); return *this;	}
+operator VkPhysicalDeviceMultiviewFeatures const&() const 
+	{	return *reinterpret_cast<const VkPhysicalDeviceMultiviewFeatures*>(this);	}
+operator VkPhysicalDeviceMultiviewFeatures &() 
+	{	return *reinterpret_cast<VkPhysicalDeviceMultiviewFeatures*>(this);	}
+
 
 S_physical_device_multiview_features(){}
-
+S_physical_device_multiview_features(VkPhysicalDeviceMultiviewFeatures& rhs)
+	{	memcpy( this, &rhs, sizeof( S_physical_device_multiview_features ) );	}
 S_physical_device_multiview_features(
 	VkBool32 multiview_,
 	VkBool32 multiviewGeometryShader_,
@@ -5690,17 +5925,7 @@ S_physical_device_multiview_features(
 	:multiview(multiview_)
 	,multiviewGeometryShader(multiviewGeometryShader_)
 	,multiviewTessellationShader(multiviewTessellationShader_)
-{
-}
-
-S_physical_device_multiview_features( VkPhysicalDeviceMultiviewFeatures const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_physical_device_multiview_features ) );	}
-S_physical_device_multiview_features& operator=( VkPhysicalDeviceMultiviewFeatures const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_physical_device_multiview_features ) ); return *this;	}
-operator VkPhysicalDeviceMultiviewFeatures const&() const 
-	{	return *reinterpret_cast<const VkPhysicalDeviceMultiviewFeatures*>(this);	}
-operator VkPhysicalDeviceMultiviewFeatures &() 
-	{	return *reinterpret_cast<VkPhysicalDeviceMultiviewFeatures*>(this);	}
+{}
 
 friend S_physical_device_features2;
 friend S_device_create_info;
@@ -5722,10 +5947,21 @@ public:
 	VkBool32 storagePushConstant16;
 	VkBool32 storageInputOutput16;
 
-VkPhysicalDevice16BitStorageFeatures*const get_vkptr(){return reinterpret_cast<VkPhysicalDevice16BitStorageFeatures*>(this);}
+operator VkPhysicalDevice16BitStorageFeatures*()
+	{	return reinterpret_cast<VkPhysicalDevice16BitStorageFeatures*>(this);	}
+operator const VkPhysicalDevice16BitStorageFeatures*() const
+	{	return reinterpret_cast<const VkPhysicalDevice16BitStorageFeatures*>(this);	}
+S_physical_device_16bit_storage_features& operator=( VkPhysicalDevice16BitStorageFeatures const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_physical_device_16bit_storage_features ) ); return *this;	}
+operator VkPhysicalDevice16BitStorageFeatures const&() const 
+	{	return *reinterpret_cast<const VkPhysicalDevice16BitStorageFeatures*>(this);	}
+operator VkPhysicalDevice16BitStorageFeatures &() 
+	{	return *reinterpret_cast<VkPhysicalDevice16BitStorageFeatures*>(this);	}
+
 
 S_physical_device_16bit_storage_features(){}
-
+S_physical_device_16bit_storage_features(VkPhysicalDevice16BitStorageFeatures& rhs)
+	{	memcpy( this, &rhs, sizeof( S_physical_device_16bit_storage_features ) );	}
 S_physical_device_16bit_storage_features(
 	VkBool32 storageBuffer16BitAccess_,
 	VkBool32 uniformAndStorageBuffer16BitAccess_,
@@ -5735,17 +5971,7 @@ S_physical_device_16bit_storage_features(
 	,uniformAndStorageBuffer16BitAccess(uniformAndStorageBuffer16BitAccess_)
 	,storagePushConstant16(storagePushConstant16_)
 	,storageInputOutput16(storageInputOutput16_)
-{
-}
-
-S_physical_device_16bit_storage_features( VkPhysicalDevice16BitStorageFeatures const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_physical_device_16bit_storage_features ) );	}
-S_physical_device_16bit_storage_features& operator=( VkPhysicalDevice16BitStorageFeatures const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_physical_device_16bit_storage_features ) ); return *this;	}
-operator VkPhysicalDevice16BitStorageFeatures const&() const 
-	{	return *reinterpret_cast<const VkPhysicalDevice16BitStorageFeatures*>(this);	}
-operator VkPhysicalDevice16BitStorageFeatures &() 
-	{	return *reinterpret_cast<VkPhysicalDevice16BitStorageFeatures*>(this);	}
+{}
 
 friend S_physical_device_features2;
 friend S_device_create_info;
@@ -5764,24 +5990,25 @@ private:
 public:
 	VkBool32 samplerYcbcrConversion;
 
-VkPhysicalDeviceSamplerYcbcrConversionFeatures*const get_vkptr(){return reinterpret_cast<VkPhysicalDeviceSamplerYcbcrConversionFeatures*>(this);}
-
-S_physical_device_sampler_ycbcr_conversion_features(){}
-
-S_physical_device_sampler_ycbcr_conversion_features(
-	VkBool32 samplerYcbcrConversion_)
-	:samplerYcbcrConversion(samplerYcbcrConversion_)
-{
-}
-
-S_physical_device_sampler_ycbcr_conversion_features( VkPhysicalDeviceSamplerYcbcrConversionFeatures const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_physical_device_sampler_ycbcr_conversion_features ) );	}
+operator VkPhysicalDeviceSamplerYcbcrConversionFeatures*()
+	{	return reinterpret_cast<VkPhysicalDeviceSamplerYcbcrConversionFeatures*>(this);	}
+operator const VkPhysicalDeviceSamplerYcbcrConversionFeatures*() const
+	{	return reinterpret_cast<const VkPhysicalDeviceSamplerYcbcrConversionFeatures*>(this);	}
 S_physical_device_sampler_ycbcr_conversion_features& operator=( VkPhysicalDeviceSamplerYcbcrConversionFeatures const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_physical_device_sampler_ycbcr_conversion_features ) ); return *this;	}
 operator VkPhysicalDeviceSamplerYcbcrConversionFeatures const&() const 
 	{	return *reinterpret_cast<const VkPhysicalDeviceSamplerYcbcrConversionFeatures*>(this);	}
 operator VkPhysicalDeviceSamplerYcbcrConversionFeatures &() 
 	{	return *reinterpret_cast<VkPhysicalDeviceSamplerYcbcrConversionFeatures*>(this);	}
+
+
+S_physical_device_sampler_ycbcr_conversion_features(){}
+S_physical_device_sampler_ycbcr_conversion_features(VkPhysicalDeviceSamplerYcbcrConversionFeatures& rhs)
+	{	memcpy( this, &rhs, sizeof( S_physical_device_sampler_ycbcr_conversion_features ) );	}
+S_physical_device_sampler_ycbcr_conversion_features(
+	VkBool32 samplerYcbcrConversion_)
+	:samplerYcbcrConversion(samplerYcbcrConversion_)
+{}
 
 friend S_physical_device_features2;
 friend S_device_create_info;
@@ -5800,24 +6027,25 @@ private:
 public:
 	VkBool32 protectedMemory;
 
-VkPhysicalDeviceProtectedMemoryFeatures*const get_vkptr(){return reinterpret_cast<VkPhysicalDeviceProtectedMemoryFeatures*>(this);}
-
-S_physical_device_protected_memory_features(){}
-
-S_physical_device_protected_memory_features(
-	VkBool32 protectedMemory_)
-	:protectedMemory(protectedMemory_)
-{
-}
-
-S_physical_device_protected_memory_features( VkPhysicalDeviceProtectedMemoryFeatures const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_physical_device_protected_memory_features ) );	}
+operator VkPhysicalDeviceProtectedMemoryFeatures*()
+	{	return reinterpret_cast<VkPhysicalDeviceProtectedMemoryFeatures*>(this);	}
+operator const VkPhysicalDeviceProtectedMemoryFeatures*() const
+	{	return reinterpret_cast<const VkPhysicalDeviceProtectedMemoryFeatures*>(this);	}
 S_physical_device_protected_memory_features& operator=( VkPhysicalDeviceProtectedMemoryFeatures const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_physical_device_protected_memory_features ) ); return *this;	}
 operator VkPhysicalDeviceProtectedMemoryFeatures const&() const 
 	{	return *reinterpret_cast<const VkPhysicalDeviceProtectedMemoryFeatures*>(this);	}
 operator VkPhysicalDeviceProtectedMemoryFeatures &() 
 	{	return *reinterpret_cast<VkPhysicalDeviceProtectedMemoryFeatures*>(this);	}
+
+
+S_physical_device_protected_memory_features(){}
+S_physical_device_protected_memory_features(VkPhysicalDeviceProtectedMemoryFeatures& rhs)
+	{	memcpy( this, &rhs, sizeof( S_physical_device_protected_memory_features ) );	}
+S_physical_device_protected_memory_features(
+	VkBool32 protectedMemory_)
+	:protectedMemory(protectedMemory_)
+{}
 
 friend S_physical_device_features2;
 friend S_device_create_info;
@@ -5836,24 +6064,25 @@ private:
 public:
 	VkBool32 advancedBlendCoherentOperations;
 
-VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT*const get_vkptr(){return reinterpret_cast<VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT*>(this);}
-
-S_physical_device_blend_operation_advanced_features_EXT(){}
-
-S_physical_device_blend_operation_advanced_features_EXT(
-	VkBool32 advancedBlendCoherentOperations_)
-	:advancedBlendCoherentOperations(advancedBlendCoherentOperations_)
-{
-}
-
-S_physical_device_blend_operation_advanced_features_EXT( VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_physical_device_blend_operation_advanced_features_EXT ) );	}
+operator VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT*()
+	{	return reinterpret_cast<VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT*>(this);	}
+operator const VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT*() const
+	{	return reinterpret_cast<const VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT*>(this);	}
 S_physical_device_blend_operation_advanced_features_EXT& operator=( VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_physical_device_blend_operation_advanced_features_EXT ) ); return *this;	}
 operator VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT const&() const 
 	{	return *reinterpret_cast<const VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT*>(this);	}
 operator VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT &() 
 	{	return *reinterpret_cast<VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT*>(this);	}
+
+
+S_physical_device_blend_operation_advanced_features_EXT(){}
+S_physical_device_blend_operation_advanced_features_EXT(VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT& rhs)
+	{	memcpy( this, &rhs, sizeof( S_physical_device_blend_operation_advanced_features_EXT ) );	}
+S_physical_device_blend_operation_advanced_features_EXT(
+	VkBool32 advancedBlendCoherentOperations_)
+	:advancedBlendCoherentOperations(advancedBlendCoherentOperations_)
+{}
 
 friend S_physical_device_features2;
 friend S_device_create_info;
@@ -5874,26 +6103,27 @@ public:
 	VkBool32 inlineUniformBlock;
 	VkBool32 descriptorBindingInlineUniformBlockUpdateAfterBind;
 
-VkPhysicalDeviceInlineUniformBlockFeaturesEXT*const get_vkptr(){return reinterpret_cast<VkPhysicalDeviceInlineUniformBlockFeaturesEXT*>(this);}
-
-S_physical_device_inline_uniform_block_features_EXT(){}
-
-S_physical_device_inline_uniform_block_features_EXT(
-	VkBool32 inlineUniformBlock_,
-	VkBool32 descriptorBindingInlineUniformBlockUpdateAfterBind_)
-	:inlineUniformBlock(inlineUniformBlock_)
-	,descriptorBindingInlineUniformBlockUpdateAfterBind(descriptorBindingInlineUniformBlockUpdateAfterBind_)
-{
-}
-
-S_physical_device_inline_uniform_block_features_EXT( VkPhysicalDeviceInlineUniformBlockFeaturesEXT const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_physical_device_inline_uniform_block_features_EXT ) );	}
+operator VkPhysicalDeviceInlineUniformBlockFeaturesEXT*()
+	{	return reinterpret_cast<VkPhysicalDeviceInlineUniformBlockFeaturesEXT*>(this);	}
+operator const VkPhysicalDeviceInlineUniformBlockFeaturesEXT*() const
+	{	return reinterpret_cast<const VkPhysicalDeviceInlineUniformBlockFeaturesEXT*>(this);	}
 S_physical_device_inline_uniform_block_features_EXT& operator=( VkPhysicalDeviceInlineUniformBlockFeaturesEXT const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_physical_device_inline_uniform_block_features_EXT ) ); return *this;	}
 operator VkPhysicalDeviceInlineUniformBlockFeaturesEXT const&() const 
 	{	return *reinterpret_cast<const VkPhysicalDeviceInlineUniformBlockFeaturesEXT*>(this);	}
 operator VkPhysicalDeviceInlineUniformBlockFeaturesEXT &() 
 	{	return *reinterpret_cast<VkPhysicalDeviceInlineUniformBlockFeaturesEXT*>(this);	}
+
+
+S_physical_device_inline_uniform_block_features_EXT(){}
+S_physical_device_inline_uniform_block_features_EXT(VkPhysicalDeviceInlineUniformBlockFeaturesEXT& rhs)
+	{	memcpy( this, &rhs, sizeof( S_physical_device_inline_uniform_block_features_EXT ) );	}
+S_physical_device_inline_uniform_block_features_EXT(
+	VkBool32 inlineUniformBlock_,
+	VkBool32 descriptorBindingInlineUniformBlockUpdateAfterBind_)
+	:inlineUniformBlock(inlineUniformBlock_)
+	,descriptorBindingInlineUniformBlockUpdateAfterBind(descriptorBindingInlineUniformBlockUpdateAfterBind_)
+{}
 
 friend S_physical_device_features2;
 friend S_device_create_info;
@@ -5912,24 +6142,25 @@ private:
 public:
 	VkBool32 shaderDrawParameters;
 
-VkPhysicalDeviceShaderDrawParameterFeatures*const get_vkptr(){return reinterpret_cast<VkPhysicalDeviceShaderDrawParameterFeatures*>(this);}
-
-S_physical_device_shader_draw_parameter_features(){}
-
-S_physical_device_shader_draw_parameter_features(
-	VkBool32 shaderDrawParameters_)
-	:shaderDrawParameters(shaderDrawParameters_)
-{
-}
-
-S_physical_device_shader_draw_parameter_features( VkPhysicalDeviceShaderDrawParameterFeatures const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_physical_device_shader_draw_parameter_features ) );	}
+operator VkPhysicalDeviceShaderDrawParameterFeatures*()
+	{	return reinterpret_cast<VkPhysicalDeviceShaderDrawParameterFeatures*>(this);	}
+operator const VkPhysicalDeviceShaderDrawParameterFeatures*() const
+	{	return reinterpret_cast<const VkPhysicalDeviceShaderDrawParameterFeatures*>(this);	}
 S_physical_device_shader_draw_parameter_features& operator=( VkPhysicalDeviceShaderDrawParameterFeatures const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_physical_device_shader_draw_parameter_features ) ); return *this;	}
 operator VkPhysicalDeviceShaderDrawParameterFeatures const&() const 
 	{	return *reinterpret_cast<const VkPhysicalDeviceShaderDrawParameterFeatures*>(this);	}
 operator VkPhysicalDeviceShaderDrawParameterFeatures &() 
 	{	return *reinterpret_cast<VkPhysicalDeviceShaderDrawParameterFeatures*>(this);	}
+
+
+S_physical_device_shader_draw_parameter_features(){}
+S_physical_device_shader_draw_parameter_features(VkPhysicalDeviceShaderDrawParameterFeatures& rhs)
+	{	memcpy( this, &rhs, sizeof( S_physical_device_shader_draw_parameter_features ) );	}
+S_physical_device_shader_draw_parameter_features(
+	VkBool32 shaderDrawParameters_)
+	:shaderDrawParameters(shaderDrawParameters_)
+{}
 
 friend S_physical_device_features2;
 friend S_device_create_info;
@@ -5967,10 +6198,21 @@ public:
 	VkBool32 descriptorBindingVariableDescriptorCount;
 	VkBool32 runtimeDescriptorArray;
 
-VkPhysicalDeviceDescriptorIndexingFeaturesEXT*const get_vkptr(){return reinterpret_cast<VkPhysicalDeviceDescriptorIndexingFeaturesEXT*>(this);}
+operator VkPhysicalDeviceDescriptorIndexingFeaturesEXT*()
+	{	return reinterpret_cast<VkPhysicalDeviceDescriptorIndexingFeaturesEXT*>(this);	}
+operator const VkPhysicalDeviceDescriptorIndexingFeaturesEXT*() const
+	{	return reinterpret_cast<const VkPhysicalDeviceDescriptorIndexingFeaturesEXT*>(this);	}
+S_physical_device_descriptor_indexing_features_EXT& operator=( VkPhysicalDeviceDescriptorIndexingFeaturesEXT const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_physical_device_descriptor_indexing_features_EXT ) ); return *this;	}
+operator VkPhysicalDeviceDescriptorIndexingFeaturesEXT const&() const 
+	{	return *reinterpret_cast<const VkPhysicalDeviceDescriptorIndexingFeaturesEXT*>(this);	}
+operator VkPhysicalDeviceDescriptorIndexingFeaturesEXT &() 
+	{	return *reinterpret_cast<VkPhysicalDeviceDescriptorIndexingFeaturesEXT*>(this);	}
+
 
 S_physical_device_descriptor_indexing_features_EXT(){}
-
+S_physical_device_descriptor_indexing_features_EXT(VkPhysicalDeviceDescriptorIndexingFeaturesEXT& rhs)
+	{	memcpy( this, &rhs, sizeof( S_physical_device_descriptor_indexing_features_EXT ) );	}
 S_physical_device_descriptor_indexing_features_EXT(
 	VkBool32 shaderInputAttachmentArrayDynamicIndexing_,
 	VkBool32 shaderUniformTexelBufferArrayDynamicIndexing_,
@@ -6012,17 +6254,7 @@ S_physical_device_descriptor_indexing_features_EXT(
 	,descriptorBindingPartiallyBound(descriptorBindingPartiallyBound_)
 	,descriptorBindingVariableDescriptorCount(descriptorBindingVariableDescriptorCount_)
 	,runtimeDescriptorArray(runtimeDescriptorArray_)
-{
-}
-
-S_physical_device_descriptor_indexing_features_EXT( VkPhysicalDeviceDescriptorIndexingFeaturesEXT const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_physical_device_descriptor_indexing_features_EXT ) );	}
-S_physical_device_descriptor_indexing_features_EXT& operator=( VkPhysicalDeviceDescriptorIndexingFeaturesEXT const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_physical_device_descriptor_indexing_features_EXT ) ); return *this;	}
-operator VkPhysicalDeviceDescriptorIndexingFeaturesEXT const&() const 
-	{	return *reinterpret_cast<const VkPhysicalDeviceDescriptorIndexingFeaturesEXT*>(this);	}
-operator VkPhysicalDeviceDescriptorIndexingFeaturesEXT &() 
-	{	return *reinterpret_cast<VkPhysicalDeviceDescriptorIndexingFeaturesEXT*>(this);	}
+{}
 
 friend S_physical_device_features2;
 friend S_device_create_info;
@@ -6043,10 +6275,21 @@ public:
 	VkBool32 uniformAndStorageBuffer8BitAccess;
 	VkBool32 storagePushConstant8;
 
-VkPhysicalDevice8BitStorageFeaturesKHR*const get_vkptr(){return reinterpret_cast<VkPhysicalDevice8BitStorageFeaturesKHR*>(this);}
+operator VkPhysicalDevice8BitStorageFeaturesKHR*()
+	{	return reinterpret_cast<VkPhysicalDevice8BitStorageFeaturesKHR*>(this);	}
+operator const VkPhysicalDevice8BitStorageFeaturesKHR*() const
+	{	return reinterpret_cast<const VkPhysicalDevice8BitStorageFeaturesKHR*>(this);	}
+S_physical_device_8bit_storage_features_KHR& operator=( VkPhysicalDevice8BitStorageFeaturesKHR const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_physical_device_8bit_storage_features_KHR ) ); return *this;	}
+operator VkPhysicalDevice8BitStorageFeaturesKHR const&() const 
+	{	return *reinterpret_cast<const VkPhysicalDevice8BitStorageFeaturesKHR*>(this);	}
+operator VkPhysicalDevice8BitStorageFeaturesKHR &() 
+	{	return *reinterpret_cast<VkPhysicalDevice8BitStorageFeaturesKHR*>(this);	}
+
 
 S_physical_device_8bit_storage_features_KHR(){}
-
+S_physical_device_8bit_storage_features_KHR(VkPhysicalDevice8BitStorageFeaturesKHR& rhs)
+	{	memcpy( this, &rhs, sizeof( S_physical_device_8bit_storage_features_KHR ) );	}
 S_physical_device_8bit_storage_features_KHR(
 	VkBool32 storageBuffer8BitAccess_,
 	VkBool32 uniformAndStorageBuffer8BitAccess_,
@@ -6054,17 +6297,7 @@ S_physical_device_8bit_storage_features_KHR(
 	:storageBuffer8BitAccess(storageBuffer8BitAccess_)
 	,uniformAndStorageBuffer8BitAccess(uniformAndStorageBuffer8BitAccess_)
 	,storagePushConstant8(storagePushConstant8_)
-{
-}
-
-S_physical_device_8bit_storage_features_KHR( VkPhysicalDevice8BitStorageFeaturesKHR const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_physical_device_8bit_storage_features_KHR ) );	}
-S_physical_device_8bit_storage_features_KHR& operator=( VkPhysicalDevice8BitStorageFeaturesKHR const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_physical_device_8bit_storage_features_KHR ) ); return *this;	}
-operator VkPhysicalDevice8BitStorageFeaturesKHR const&() const 
-	{	return *reinterpret_cast<const VkPhysicalDevice8BitStorageFeaturesKHR*>(this);	}
-operator VkPhysicalDevice8BitStorageFeaturesKHR &() 
-	{	return *reinterpret_cast<VkPhysicalDevice8BitStorageFeaturesKHR*>(this);	}
+{}
 
 friend S_physical_device_features2;
 friend S_device_create_info;
@@ -6084,26 +6317,27 @@ public:
 	VkBool32 conditionalRendering;
 	VkBool32 inheritedConditionalRendering;
 
-VkPhysicalDeviceConditionalRenderingFeaturesEXT*const get_vkptr(){return reinterpret_cast<VkPhysicalDeviceConditionalRenderingFeaturesEXT*>(this);}
-
-S_physical_device_conditional_rendering_features_EXT(){}
-
-S_physical_device_conditional_rendering_features_EXT(
-	VkBool32 conditionalRendering_,
-	VkBool32 inheritedConditionalRendering_)
-	:conditionalRendering(conditionalRendering_)
-	,inheritedConditionalRendering(inheritedConditionalRendering_)
-{
-}
-
-S_physical_device_conditional_rendering_features_EXT( VkPhysicalDeviceConditionalRenderingFeaturesEXT const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_physical_device_conditional_rendering_features_EXT ) );	}
+operator VkPhysicalDeviceConditionalRenderingFeaturesEXT*()
+	{	return reinterpret_cast<VkPhysicalDeviceConditionalRenderingFeaturesEXT*>(this);	}
+operator const VkPhysicalDeviceConditionalRenderingFeaturesEXT*() const
+	{	return reinterpret_cast<const VkPhysicalDeviceConditionalRenderingFeaturesEXT*>(this);	}
 S_physical_device_conditional_rendering_features_EXT& operator=( VkPhysicalDeviceConditionalRenderingFeaturesEXT const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_physical_device_conditional_rendering_features_EXT ) ); return *this;	}
 operator VkPhysicalDeviceConditionalRenderingFeaturesEXT const&() const 
 	{	return *reinterpret_cast<const VkPhysicalDeviceConditionalRenderingFeaturesEXT*>(this);	}
 operator VkPhysicalDeviceConditionalRenderingFeaturesEXT &() 
 	{	return *reinterpret_cast<VkPhysicalDeviceConditionalRenderingFeaturesEXT*>(this);	}
+
+
+S_physical_device_conditional_rendering_features_EXT(){}
+S_physical_device_conditional_rendering_features_EXT(VkPhysicalDeviceConditionalRenderingFeaturesEXT& rhs)
+	{	memcpy( this, &rhs, sizeof( S_physical_device_conditional_rendering_features_EXT ) );	}
+S_physical_device_conditional_rendering_features_EXT(
+	VkBool32 conditionalRendering_,
+	VkBool32 inheritedConditionalRendering_)
+	:conditionalRendering(conditionalRendering_)
+	,inheritedConditionalRendering(inheritedConditionalRendering_)
+{}
 
 friend S_physical_device_features2;
 friend S_device_create_info;
@@ -6124,26 +6358,27 @@ public:
 	VkBool32 vulkanMemoryModel;
 	VkBool32 vulkanMemoryModelDeviceScope;
 
-VkPhysicalDeviceVulkanMemoryModelFeaturesKHR*const get_vkptr(){return reinterpret_cast<VkPhysicalDeviceVulkanMemoryModelFeaturesKHR*>(this);}
-
-S_physical_device_vulkan_memory_model_features_KHR(){}
-
-S_physical_device_vulkan_memory_model_features_KHR(
-	VkBool32 vulkanMemoryModel_,
-	VkBool32 vulkanMemoryModelDeviceScope_)
-	:vulkanMemoryModel(vulkanMemoryModel_)
-	,vulkanMemoryModelDeviceScope(vulkanMemoryModelDeviceScope_)
-{
-}
-
-S_physical_device_vulkan_memory_model_features_KHR( VkPhysicalDeviceVulkanMemoryModelFeaturesKHR const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_physical_device_vulkan_memory_model_features_KHR ) );	}
+operator VkPhysicalDeviceVulkanMemoryModelFeaturesKHR*()
+	{	return reinterpret_cast<VkPhysicalDeviceVulkanMemoryModelFeaturesKHR*>(this);	}
+operator const VkPhysicalDeviceVulkanMemoryModelFeaturesKHR*() const
+	{	return reinterpret_cast<const VkPhysicalDeviceVulkanMemoryModelFeaturesKHR*>(this);	}
 S_physical_device_vulkan_memory_model_features_KHR& operator=( VkPhysicalDeviceVulkanMemoryModelFeaturesKHR const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_physical_device_vulkan_memory_model_features_KHR ) ); return *this;	}
 operator VkPhysicalDeviceVulkanMemoryModelFeaturesKHR const&() const 
 	{	return *reinterpret_cast<const VkPhysicalDeviceVulkanMemoryModelFeaturesKHR*>(this);	}
 operator VkPhysicalDeviceVulkanMemoryModelFeaturesKHR &() 
 	{	return *reinterpret_cast<VkPhysicalDeviceVulkanMemoryModelFeaturesKHR*>(this);	}
+
+
+S_physical_device_vulkan_memory_model_features_KHR(){}
+S_physical_device_vulkan_memory_model_features_KHR(VkPhysicalDeviceVulkanMemoryModelFeaturesKHR& rhs)
+	{	memcpy( this, &rhs, sizeof( S_physical_device_vulkan_memory_model_features_KHR ) );	}
+S_physical_device_vulkan_memory_model_features_KHR(
+	VkBool32 vulkanMemoryModel_,
+	VkBool32 vulkanMemoryModelDeviceScope_)
+	:vulkanMemoryModel(vulkanMemoryModel_)
+	,vulkanMemoryModelDeviceScope(vulkanMemoryModelDeviceScope_)
+{}
 
 friend S_physical_device_features2;
 friend S_device_create_info;
@@ -6164,26 +6399,27 @@ public:
 	VkBool32 shaderBufferInt64Atomics;
 	VkBool32 shaderSharedInt64Atomics;
 
-VkPhysicalDeviceShaderAtomicInt64FeaturesKHR*const get_vkptr(){return reinterpret_cast<VkPhysicalDeviceShaderAtomicInt64FeaturesKHR*>(this);}
-
-S_physical_device_shader_atomic_int64_features_KHR(){}
-
-S_physical_device_shader_atomic_int64_features_KHR(
-	VkBool32 shaderBufferInt64Atomics_,
-	VkBool32 shaderSharedInt64Atomics_)
-	:shaderBufferInt64Atomics(shaderBufferInt64Atomics_)
-	,shaderSharedInt64Atomics(shaderSharedInt64Atomics_)
-{
-}
-
-S_physical_device_shader_atomic_int64_features_KHR( VkPhysicalDeviceShaderAtomicInt64FeaturesKHR const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_physical_device_shader_atomic_int64_features_KHR ) );	}
+operator VkPhysicalDeviceShaderAtomicInt64FeaturesKHR*()
+	{	return reinterpret_cast<VkPhysicalDeviceShaderAtomicInt64FeaturesKHR*>(this);	}
+operator const VkPhysicalDeviceShaderAtomicInt64FeaturesKHR*() const
+	{	return reinterpret_cast<const VkPhysicalDeviceShaderAtomicInt64FeaturesKHR*>(this);	}
 S_physical_device_shader_atomic_int64_features_KHR& operator=( VkPhysicalDeviceShaderAtomicInt64FeaturesKHR const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_physical_device_shader_atomic_int64_features_KHR ) ); return *this;	}
 operator VkPhysicalDeviceShaderAtomicInt64FeaturesKHR const&() const 
 	{	return *reinterpret_cast<const VkPhysicalDeviceShaderAtomicInt64FeaturesKHR*>(this);	}
 operator VkPhysicalDeviceShaderAtomicInt64FeaturesKHR &() 
 	{	return *reinterpret_cast<VkPhysicalDeviceShaderAtomicInt64FeaturesKHR*>(this);	}
+
+
+S_physical_device_shader_atomic_int64_features_KHR(){}
+S_physical_device_shader_atomic_int64_features_KHR(VkPhysicalDeviceShaderAtomicInt64FeaturesKHR& rhs)
+	{	memcpy( this, &rhs, sizeof( S_physical_device_shader_atomic_int64_features_KHR ) );	}
+S_physical_device_shader_atomic_int64_features_KHR(
+	VkBool32 shaderBufferInt64Atomics_,
+	VkBool32 shaderSharedInt64Atomics_)
+	:shaderBufferInt64Atomics(shaderBufferInt64Atomics_)
+	,shaderSharedInt64Atomics(shaderSharedInt64Atomics_)
+{}
 
 friend S_physical_device_features2;
 friend S_device_create_info;
@@ -6204,26 +6440,27 @@ public:
 	VkBool32 vertexAttributeInstanceRateDivisor;
 	VkBool32 vertexAttributeInstanceRateZeroDivisor;
 
-VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT*const get_vkptr(){return reinterpret_cast<VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT*>(this);}
-
-S_physical_device_vertex_attribute_divisor_features_EXT(){}
-
-S_physical_device_vertex_attribute_divisor_features_EXT(
-	VkBool32 vertexAttributeInstanceRateDivisor_,
-	VkBool32 vertexAttributeInstanceRateZeroDivisor_)
-	:vertexAttributeInstanceRateDivisor(vertexAttributeInstanceRateDivisor_)
-	,vertexAttributeInstanceRateZeroDivisor(vertexAttributeInstanceRateZeroDivisor_)
-{
-}
-
-S_physical_device_vertex_attribute_divisor_features_EXT( VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_physical_device_vertex_attribute_divisor_features_EXT ) );	}
+operator VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT*()
+	{	return reinterpret_cast<VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT*>(this);	}
+operator const VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT*() const
+	{	return reinterpret_cast<const VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT*>(this);	}
 S_physical_device_vertex_attribute_divisor_features_EXT& operator=( VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_physical_device_vertex_attribute_divisor_features_EXT ) ); return *this;	}
 operator VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT const&() const 
 	{	return *reinterpret_cast<const VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT*>(this);	}
 operator VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT &() 
 	{	return *reinterpret_cast<VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT*>(this);	}
+
+
+S_physical_device_vertex_attribute_divisor_features_EXT(){}
+S_physical_device_vertex_attribute_divisor_features_EXT(VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT& rhs)
+	{	memcpy( this, &rhs, sizeof( S_physical_device_vertex_attribute_divisor_features_EXT ) );	}
+S_physical_device_vertex_attribute_divisor_features_EXT(
+	VkBool32 vertexAttributeInstanceRateDivisor_,
+	VkBool32 vertexAttributeInstanceRateZeroDivisor_)
+	:vertexAttributeInstanceRateDivisor(vertexAttributeInstanceRateDivisor_)
+	,vertexAttributeInstanceRateZeroDivisor(vertexAttributeInstanceRateZeroDivisor_)
+{}
 
 friend S_physical_device_features2;
 friend S_device_create_info;
@@ -6242,24 +6479,25 @@ private:
 public:
 	VkBool32 decodeModeSharedExponent;
 
-VkPhysicalDeviceASTCDecodeFeaturesEXT*const get_vkptr(){return reinterpret_cast<VkPhysicalDeviceASTCDecodeFeaturesEXT*>(this);}
-
-S_physical_device_astc_decode_features_EXT(){}
-
-S_physical_device_astc_decode_features_EXT(
-	VkBool32 decodeModeSharedExponent_)
-	:decodeModeSharedExponent(decodeModeSharedExponent_)
-{
-}
-
-S_physical_device_astc_decode_features_EXT( VkPhysicalDeviceASTCDecodeFeaturesEXT const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_physical_device_astc_decode_features_EXT ) );	}
+operator VkPhysicalDeviceASTCDecodeFeaturesEXT*()
+	{	return reinterpret_cast<VkPhysicalDeviceASTCDecodeFeaturesEXT*>(this);	}
+operator const VkPhysicalDeviceASTCDecodeFeaturesEXT*() const
+	{	return reinterpret_cast<const VkPhysicalDeviceASTCDecodeFeaturesEXT*>(this);	}
 S_physical_device_astc_decode_features_EXT& operator=( VkPhysicalDeviceASTCDecodeFeaturesEXT const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_physical_device_astc_decode_features_EXT ) ); return *this;	}
 operator VkPhysicalDeviceASTCDecodeFeaturesEXT const&() const 
 	{	return *reinterpret_cast<const VkPhysicalDeviceASTCDecodeFeaturesEXT*>(this);	}
 operator VkPhysicalDeviceASTCDecodeFeaturesEXT &() 
 	{	return *reinterpret_cast<VkPhysicalDeviceASTCDecodeFeaturesEXT*>(this);	}
+
+
+S_physical_device_astc_decode_features_EXT(){}
+S_physical_device_astc_decode_features_EXT(VkPhysicalDeviceASTCDecodeFeaturesEXT& rhs)
+	{	memcpy( this, &rhs, sizeof( S_physical_device_astc_decode_features_EXT ) );	}
+S_physical_device_astc_decode_features_EXT(
+	VkBool32 decodeModeSharedExponent_)
+	:decodeModeSharedExponent(decodeModeSharedExponent_)
+{}
 
 friend S_physical_device_features2;
 friend S_device_create_info;
@@ -6278,24 +6516,25 @@ private:
 public:
 	VkBool32 representativeFragmentTest;
 
-VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV*const get_vkptr(){return reinterpret_cast<VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV*>(this);}
-
-S_physical_device_representative_fragment_test_features_NV(){}
-
-S_physical_device_representative_fragment_test_features_NV(
-	VkBool32 representativeFragmentTest_)
-	:representativeFragmentTest(representativeFragmentTest_)
-{
-}
-
-S_physical_device_representative_fragment_test_features_NV( VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_physical_device_representative_fragment_test_features_NV ) );	}
+operator VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV*()
+	{	return reinterpret_cast<VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV*>(this);	}
+operator const VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV*() const
+	{	return reinterpret_cast<const VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV*>(this);	}
 S_physical_device_representative_fragment_test_features_NV& operator=( VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_physical_device_representative_fragment_test_features_NV ) ); return *this;	}
 operator VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV const&() const 
 	{	return *reinterpret_cast<const VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV*>(this);	}
 operator VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV &() 
 	{	return *reinterpret_cast<VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV*>(this);	}
+
+
+S_physical_device_representative_fragment_test_features_NV(){}
+S_physical_device_representative_fragment_test_features_NV(VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV& rhs)
+	{	memcpy( this, &rhs, sizeof( S_physical_device_representative_fragment_test_features_NV ) );	}
+S_physical_device_representative_fragment_test_features_NV(
+	VkBool32 representativeFragmentTest_)
+	:representativeFragmentTest(representativeFragmentTest_)
+{}
 
 friend S_physical_device_features2;
 friend S_device_create_info;
@@ -6314,24 +6553,25 @@ private:
 public:
 	VkBool32 exclusiveScissor;
 
-VkPhysicalDeviceExclusiveScissorFeaturesNV*const get_vkptr(){return reinterpret_cast<VkPhysicalDeviceExclusiveScissorFeaturesNV*>(this);}
-
-S_physical_device_exclusive_scissor_features_NV(){}
-
-S_physical_device_exclusive_scissor_features_NV(
-	VkBool32 exclusiveScissor_)
-	:exclusiveScissor(exclusiveScissor_)
-{
-}
-
-S_physical_device_exclusive_scissor_features_NV( VkPhysicalDeviceExclusiveScissorFeaturesNV const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_physical_device_exclusive_scissor_features_NV ) );	}
+operator VkPhysicalDeviceExclusiveScissorFeaturesNV*()
+	{	return reinterpret_cast<VkPhysicalDeviceExclusiveScissorFeaturesNV*>(this);	}
+operator const VkPhysicalDeviceExclusiveScissorFeaturesNV*() const
+	{	return reinterpret_cast<const VkPhysicalDeviceExclusiveScissorFeaturesNV*>(this);	}
 S_physical_device_exclusive_scissor_features_NV& operator=( VkPhysicalDeviceExclusiveScissorFeaturesNV const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_physical_device_exclusive_scissor_features_NV ) ); return *this;	}
 operator VkPhysicalDeviceExclusiveScissorFeaturesNV const&() const 
 	{	return *reinterpret_cast<const VkPhysicalDeviceExclusiveScissorFeaturesNV*>(this);	}
 operator VkPhysicalDeviceExclusiveScissorFeaturesNV &() 
 	{	return *reinterpret_cast<VkPhysicalDeviceExclusiveScissorFeaturesNV*>(this);	}
+
+
+S_physical_device_exclusive_scissor_features_NV(){}
+S_physical_device_exclusive_scissor_features_NV(VkPhysicalDeviceExclusiveScissorFeaturesNV& rhs)
+	{	memcpy( this, &rhs, sizeof( S_physical_device_exclusive_scissor_features_NV ) );	}
+S_physical_device_exclusive_scissor_features_NV(
+	VkBool32 exclusiveScissor_)
+	:exclusiveScissor(exclusiveScissor_)
+{}
 
 friend S_physical_device_features2;
 friend S_device_create_info;
@@ -6350,24 +6590,25 @@ private:
 public:
 	VkBool32 cornerSampledImage;
 
-VkPhysicalDeviceCornerSampledImageFeaturesNV*const get_vkptr(){return reinterpret_cast<VkPhysicalDeviceCornerSampledImageFeaturesNV*>(this);}
-
-S_physical_device_corner_sampled_image_features_NV(){}
-
-S_physical_device_corner_sampled_image_features_NV(
-	VkBool32 cornerSampledImage_)
-	:cornerSampledImage(cornerSampledImage_)
-{
-}
-
-S_physical_device_corner_sampled_image_features_NV( VkPhysicalDeviceCornerSampledImageFeaturesNV const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_physical_device_corner_sampled_image_features_NV ) );	}
+operator VkPhysicalDeviceCornerSampledImageFeaturesNV*()
+	{	return reinterpret_cast<VkPhysicalDeviceCornerSampledImageFeaturesNV*>(this);	}
+operator const VkPhysicalDeviceCornerSampledImageFeaturesNV*() const
+	{	return reinterpret_cast<const VkPhysicalDeviceCornerSampledImageFeaturesNV*>(this);	}
 S_physical_device_corner_sampled_image_features_NV& operator=( VkPhysicalDeviceCornerSampledImageFeaturesNV const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_physical_device_corner_sampled_image_features_NV ) ); return *this;	}
 operator VkPhysicalDeviceCornerSampledImageFeaturesNV const&() const 
 	{	return *reinterpret_cast<const VkPhysicalDeviceCornerSampledImageFeaturesNV*>(this);	}
 operator VkPhysicalDeviceCornerSampledImageFeaturesNV &() 
 	{	return *reinterpret_cast<VkPhysicalDeviceCornerSampledImageFeaturesNV*>(this);	}
+
+
+S_physical_device_corner_sampled_image_features_NV(){}
+S_physical_device_corner_sampled_image_features_NV(VkPhysicalDeviceCornerSampledImageFeaturesNV& rhs)
+	{	memcpy( this, &rhs, sizeof( S_physical_device_corner_sampled_image_features_NV ) );	}
+S_physical_device_corner_sampled_image_features_NV(
+	VkBool32 cornerSampledImage_)
+	:cornerSampledImage(cornerSampledImage_)
+{}
 
 friend S_physical_device_features2;
 friend S_device_create_info;
@@ -6387,26 +6628,27 @@ public:
 	VkBool32 computeDerivativeGroupQuads;
 	VkBool32 computeDerivativeGroupLinear;
 
-VkPhysicalDeviceComputeShaderDerivativesFeaturesNV*const get_vkptr(){return reinterpret_cast<VkPhysicalDeviceComputeShaderDerivativesFeaturesNV*>(this);}
-
-S_physical_device_compute_shader_derivatives_features_NV(){}
-
-S_physical_device_compute_shader_derivatives_features_NV(
-	VkBool32 computeDerivativeGroupQuads_,
-	VkBool32 computeDerivativeGroupLinear_)
-	:computeDerivativeGroupQuads(computeDerivativeGroupQuads_)
-	,computeDerivativeGroupLinear(computeDerivativeGroupLinear_)
-{
-}
-
-S_physical_device_compute_shader_derivatives_features_NV( VkPhysicalDeviceComputeShaderDerivativesFeaturesNV const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_physical_device_compute_shader_derivatives_features_NV ) );	}
+operator VkPhysicalDeviceComputeShaderDerivativesFeaturesNV*()
+	{	return reinterpret_cast<VkPhysicalDeviceComputeShaderDerivativesFeaturesNV*>(this);	}
+operator const VkPhysicalDeviceComputeShaderDerivativesFeaturesNV*() const
+	{	return reinterpret_cast<const VkPhysicalDeviceComputeShaderDerivativesFeaturesNV*>(this);	}
 S_physical_device_compute_shader_derivatives_features_NV& operator=( VkPhysicalDeviceComputeShaderDerivativesFeaturesNV const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_physical_device_compute_shader_derivatives_features_NV ) ); return *this;	}
 operator VkPhysicalDeviceComputeShaderDerivativesFeaturesNV const&() const 
 	{	return *reinterpret_cast<const VkPhysicalDeviceComputeShaderDerivativesFeaturesNV*>(this);	}
 operator VkPhysicalDeviceComputeShaderDerivativesFeaturesNV &() 
 	{	return *reinterpret_cast<VkPhysicalDeviceComputeShaderDerivativesFeaturesNV*>(this);	}
+
+
+S_physical_device_compute_shader_derivatives_features_NV(){}
+S_physical_device_compute_shader_derivatives_features_NV(VkPhysicalDeviceComputeShaderDerivativesFeaturesNV& rhs)
+	{	memcpy( this, &rhs, sizeof( S_physical_device_compute_shader_derivatives_features_NV ) );	}
+S_physical_device_compute_shader_derivatives_features_NV(
+	VkBool32 computeDerivativeGroupQuads_,
+	VkBool32 computeDerivativeGroupLinear_)
+	:computeDerivativeGroupQuads(computeDerivativeGroupQuads_)
+	,computeDerivativeGroupLinear(computeDerivativeGroupLinear_)
+{}
 
 friend S_physical_device_features2;
 friend S_device_create_info;
@@ -6425,24 +6667,25 @@ private:
 public:
 	VkBool32 fragmentShaderBarycentric;
 
-VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV*const get_vkptr(){return reinterpret_cast<VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV*>(this);}
-
-S_physical_device_fragment_shader_barycentric_features_NV(){}
-
-S_physical_device_fragment_shader_barycentric_features_NV(
-	VkBool32 fragmentShaderBarycentric_)
-	:fragmentShaderBarycentric(fragmentShaderBarycentric_)
-{
-}
-
-S_physical_device_fragment_shader_barycentric_features_NV( VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_physical_device_fragment_shader_barycentric_features_NV ) );	}
+operator VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV*()
+	{	return reinterpret_cast<VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV*>(this);	}
+operator const VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV*() const
+	{	return reinterpret_cast<const VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV*>(this);	}
 S_physical_device_fragment_shader_barycentric_features_NV& operator=( VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_physical_device_fragment_shader_barycentric_features_NV ) ); return *this;	}
 operator VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV const&() const 
 	{	return *reinterpret_cast<const VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV*>(this);	}
 operator VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV &() 
 	{	return *reinterpret_cast<VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV*>(this);	}
+
+
+S_physical_device_fragment_shader_barycentric_features_NV(){}
+S_physical_device_fragment_shader_barycentric_features_NV(VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV& rhs)
+	{	memcpy( this, &rhs, sizeof( S_physical_device_fragment_shader_barycentric_features_NV ) );	}
+S_physical_device_fragment_shader_barycentric_features_NV(
+	VkBool32 fragmentShaderBarycentric_)
+	:fragmentShaderBarycentric(fragmentShaderBarycentric_)
+{}
 
 friend S_physical_device_features2;
 friend S_device_create_info;
@@ -6461,24 +6704,25 @@ private:
 public:
 	VkBool32 imageFootprint;
 
-VkPhysicalDeviceShaderImageFootprintFeaturesNV*const get_vkptr(){return reinterpret_cast<VkPhysicalDeviceShaderImageFootprintFeaturesNV*>(this);}
-
-S_physical_device_shader_image_footprint_features_NV(){}
-
-S_physical_device_shader_image_footprint_features_NV(
-	VkBool32 imageFootprint_)
-	:imageFootprint(imageFootprint_)
-{
-}
-
-S_physical_device_shader_image_footprint_features_NV( VkPhysicalDeviceShaderImageFootprintFeaturesNV const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_physical_device_shader_image_footprint_features_NV ) );	}
+operator VkPhysicalDeviceShaderImageFootprintFeaturesNV*()
+	{	return reinterpret_cast<VkPhysicalDeviceShaderImageFootprintFeaturesNV*>(this);	}
+operator const VkPhysicalDeviceShaderImageFootprintFeaturesNV*() const
+	{	return reinterpret_cast<const VkPhysicalDeviceShaderImageFootprintFeaturesNV*>(this);	}
 S_physical_device_shader_image_footprint_features_NV& operator=( VkPhysicalDeviceShaderImageFootprintFeaturesNV const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_physical_device_shader_image_footprint_features_NV ) ); return *this;	}
 operator VkPhysicalDeviceShaderImageFootprintFeaturesNV const&() const 
 	{	return *reinterpret_cast<const VkPhysicalDeviceShaderImageFootprintFeaturesNV*>(this);	}
 operator VkPhysicalDeviceShaderImageFootprintFeaturesNV &() 
 	{	return *reinterpret_cast<VkPhysicalDeviceShaderImageFootprintFeaturesNV*>(this);	}
+
+
+S_physical_device_shader_image_footprint_features_NV(){}
+S_physical_device_shader_image_footprint_features_NV(VkPhysicalDeviceShaderImageFootprintFeaturesNV& rhs)
+	{	memcpy( this, &rhs, sizeof( S_physical_device_shader_image_footprint_features_NV ) );	}
+S_physical_device_shader_image_footprint_features_NV(
+	VkBool32 imageFootprint_)
+	:imageFootprint(imageFootprint_)
+{}
 
 friend S_physical_device_features2;
 friend S_device_create_info;
@@ -6498,26 +6742,27 @@ public:
 	VkBool32 shadingRateImage;
 	VkBool32 shadingRateCoarseSampleOrder;
 
-VkPhysicalDeviceShadingRateImageFeaturesNV*const get_vkptr(){return reinterpret_cast<VkPhysicalDeviceShadingRateImageFeaturesNV*>(this);}
-
-S_physical_device_shading_rate_image_features_NV(){}
-
-S_physical_device_shading_rate_image_features_NV(
-	VkBool32 shadingRateImage_,
-	VkBool32 shadingRateCoarseSampleOrder_)
-	:shadingRateImage(shadingRateImage_)
-	,shadingRateCoarseSampleOrder(shadingRateCoarseSampleOrder_)
-{
-}
-
-S_physical_device_shading_rate_image_features_NV( VkPhysicalDeviceShadingRateImageFeaturesNV const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_physical_device_shading_rate_image_features_NV ) );	}
+operator VkPhysicalDeviceShadingRateImageFeaturesNV*()
+	{	return reinterpret_cast<VkPhysicalDeviceShadingRateImageFeaturesNV*>(this);	}
+operator const VkPhysicalDeviceShadingRateImageFeaturesNV*() const
+	{	return reinterpret_cast<const VkPhysicalDeviceShadingRateImageFeaturesNV*>(this);	}
 S_physical_device_shading_rate_image_features_NV& operator=( VkPhysicalDeviceShadingRateImageFeaturesNV const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_physical_device_shading_rate_image_features_NV ) ); return *this;	}
 operator VkPhysicalDeviceShadingRateImageFeaturesNV const&() const 
 	{	return *reinterpret_cast<const VkPhysicalDeviceShadingRateImageFeaturesNV*>(this);	}
 operator VkPhysicalDeviceShadingRateImageFeaturesNV &() 
 	{	return *reinterpret_cast<VkPhysicalDeviceShadingRateImageFeaturesNV*>(this);	}
+
+
+S_physical_device_shading_rate_image_features_NV(){}
+S_physical_device_shading_rate_image_features_NV(VkPhysicalDeviceShadingRateImageFeaturesNV& rhs)
+	{	memcpy( this, &rhs, sizeof( S_physical_device_shading_rate_image_features_NV ) );	}
+S_physical_device_shading_rate_image_features_NV(
+	VkBool32 shadingRateImage_,
+	VkBool32 shadingRateCoarseSampleOrder_)
+	:shadingRateImage(shadingRateImage_)
+	,shadingRateCoarseSampleOrder(shadingRateCoarseSampleOrder_)
+{}
 
 friend S_physical_device_features2;
 friend S_device_create_info;
@@ -6537,26 +6782,27 @@ public:
 	VkBool32 taskShader;
 	VkBool32 meshShader;
 
-VkPhysicalDeviceMeshShaderFeaturesNV*const get_vkptr(){return reinterpret_cast<VkPhysicalDeviceMeshShaderFeaturesNV*>(this);}
-
-S_physical_device_mesh_shader_features_NV(){}
-
-S_physical_device_mesh_shader_features_NV(
-	VkBool32 taskShader_,
-	VkBool32 meshShader_)
-	:taskShader(taskShader_)
-	,meshShader(meshShader_)
-{
-}
-
-S_physical_device_mesh_shader_features_NV( VkPhysicalDeviceMeshShaderFeaturesNV const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_physical_device_mesh_shader_features_NV ) );	}
+operator VkPhysicalDeviceMeshShaderFeaturesNV*()
+	{	return reinterpret_cast<VkPhysicalDeviceMeshShaderFeaturesNV*>(this);	}
+operator const VkPhysicalDeviceMeshShaderFeaturesNV*() const
+	{	return reinterpret_cast<const VkPhysicalDeviceMeshShaderFeaturesNV*>(this);	}
 S_physical_device_mesh_shader_features_NV& operator=( VkPhysicalDeviceMeshShaderFeaturesNV const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_physical_device_mesh_shader_features_NV ) ); return *this;	}
 operator VkPhysicalDeviceMeshShaderFeaturesNV const&() const 
 	{	return *reinterpret_cast<const VkPhysicalDeviceMeshShaderFeaturesNV*>(this);	}
 operator VkPhysicalDeviceMeshShaderFeaturesNV &() 
 	{	return *reinterpret_cast<VkPhysicalDeviceMeshShaderFeaturesNV*>(this);	}
+
+
+S_physical_device_mesh_shader_features_NV(){}
+S_physical_device_mesh_shader_features_NV(VkPhysicalDeviceMeshShaderFeaturesNV& rhs)
+	{	memcpy( this, &rhs, sizeof( S_physical_device_mesh_shader_features_NV ) );	}
+S_physical_device_mesh_shader_features_NV(
+	VkBool32 taskShader_,
+	VkBool32 meshShader_)
+	:taskShader(taskShader_)
+	,meshShader(meshShader_)
+{}
 
 friend S_physical_device_features2;
 friend S_device_create_info;
@@ -6599,24 +6845,25 @@ private:
 public:
 	S_physical_device_features features;
 
-VkPhysicalDeviceFeatures2*const get_vkptr(){return reinterpret_cast<VkPhysicalDeviceFeatures2*>(this);}
-
-S_physical_device_features2(){}
-
-S_physical_device_features2(
-	S_physical_device_features features_)
-	:features(features_)
-{
-}
-
-S_physical_device_features2( VkPhysicalDeviceFeatures2 const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_physical_device_features2 ) );	}
+operator VkPhysicalDeviceFeatures2*()
+	{	return reinterpret_cast<VkPhysicalDeviceFeatures2*>(this);	}
+operator const VkPhysicalDeviceFeatures2*() const
+	{	return reinterpret_cast<const VkPhysicalDeviceFeatures2*>(this);	}
 S_physical_device_features2& operator=( VkPhysicalDeviceFeatures2 const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_physical_device_features2 ) ); return *this;	}
 operator VkPhysicalDeviceFeatures2 const&() const 
 	{	return *reinterpret_cast<const VkPhysicalDeviceFeatures2*>(this);	}
 operator VkPhysicalDeviceFeatures2 &() 
 	{	return *reinterpret_cast<VkPhysicalDeviceFeatures2*>(this);	}
+
+
+S_physical_device_features2(){}
+S_physical_device_features2(VkPhysicalDeviceFeatures2& rhs)
+	{	memcpy( this, &rhs, sizeof( S_physical_device_features2 ) );	}
+S_physical_device_features2(
+	S_physical_device_features features_)
+	:features(features_)
+{}
 
 friend S_device_create_info;
 
@@ -6654,7 +6901,7 @@ struct N_physical_device_features2{
 private:
 	void* pNext = nullptr;
 public:
-void* get(){ return pNext; }
+operator void*() { return pNext; }
 N_physical_device_features2& n_physical_device_variable_pointer_features(S_physical_device_variable_pointer_features const& next_);
 N_physical_device_features2& n_physical_device_multiview_features(S_physical_device_multiview_features const& next_);
 N_physical_device_features2& n_physical_device_16bit_storage_features(S_physical_device_16bit_storage_features const& next_);
@@ -6693,26 +6940,27 @@ public:
 	uint32_t physicalDeviceCount;
 	const VkPhysicalDevice * pPhysicalDevices;
 
-VkDeviceGroupDeviceCreateInfo*const get_vkptr(){return reinterpret_cast<VkDeviceGroupDeviceCreateInfo*>(this);}
-
-S_device_group_device_create_info(){}
-
-S_device_group_device_create_info(
-	uint32_t physicalDeviceCount_,
-	const VkPhysicalDevice * pPhysicalDevices_)
-	:physicalDeviceCount(physicalDeviceCount_)
-	,pPhysicalDevices(pPhysicalDevices_)
-{
-}
-
-S_device_group_device_create_info( VkDeviceGroupDeviceCreateInfo const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_device_group_device_create_info ) );	}
+operator VkDeviceGroupDeviceCreateInfo*()
+	{	return reinterpret_cast<VkDeviceGroupDeviceCreateInfo*>(this);	}
+operator const VkDeviceGroupDeviceCreateInfo*() const
+	{	return reinterpret_cast<const VkDeviceGroupDeviceCreateInfo*>(this);	}
 S_device_group_device_create_info& operator=( VkDeviceGroupDeviceCreateInfo const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_device_group_device_create_info ) ); return *this;	}
 operator VkDeviceGroupDeviceCreateInfo const&() const 
 	{	return *reinterpret_cast<const VkDeviceGroupDeviceCreateInfo*>(this);	}
 operator VkDeviceGroupDeviceCreateInfo &() 
 	{	return *reinterpret_cast<VkDeviceGroupDeviceCreateInfo*>(this);	}
+
+
+S_device_group_device_create_info(){}
+S_device_group_device_create_info(VkDeviceGroupDeviceCreateInfo& rhs)
+	{	memcpy( this, &rhs, sizeof( S_device_group_device_create_info ) );	}
+S_device_group_device_create_info(
+	uint32_t physicalDeviceCount_,
+	const VkPhysicalDevice * pPhysicalDevices_)
+	:physicalDeviceCount(physicalDeviceCount_)
+	,pPhysicalDevices(pPhysicalDevices_)
+{}
 
 friend S_device_create_info;
 };
@@ -6762,10 +7010,21 @@ public:
 	const char * const* ppEnabledExtensionNames;
 	const S_physical_device_features * pEnabledFeatures;
 
-VkDeviceCreateInfo*const get_vkptr(){return reinterpret_cast<VkDeviceCreateInfo*>(this);}
+operator VkDeviceCreateInfo*()
+	{	return reinterpret_cast<VkDeviceCreateInfo*>(this);	}
+operator const VkDeviceCreateInfo*() const
+	{	return reinterpret_cast<const VkDeviceCreateInfo*>(this);	}
+S_device_create_info& operator=( VkDeviceCreateInfo const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_device_create_info ) ); return *this;	}
+operator VkDeviceCreateInfo const&() const 
+	{	return *reinterpret_cast<const VkDeviceCreateInfo*>(this);	}
+operator VkDeviceCreateInfo &() 
+	{	return *reinterpret_cast<VkDeviceCreateInfo*>(this);	}
+
 
 S_device_create_info(){}
-
+S_device_create_info(VkDeviceCreateInfo& rhs)
+	{	memcpy( this, &rhs, sizeof( S_device_create_info ) );	}
 S_device_create_info(
 	VkDeviceCreateFlags flags_,
 	uint32_t queueCreateInfoCount_,
@@ -6783,17 +7042,7 @@ S_device_create_info(
 	,enabledExtensionCount(enabledExtensionCount_)
 	,ppEnabledExtensionNames(ppEnabledExtensionNames_)
 	,pEnabledFeatures(pEnabledFeatures_)
-{
-}
-
-S_device_create_info( VkDeviceCreateInfo const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_device_create_info ) );	}
-S_device_create_info& operator=( VkDeviceCreateInfo const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_device_create_info ) ); return *this;	}
-operator VkDeviceCreateInfo const&() const 
-	{	return *reinterpret_cast<const VkDeviceCreateInfo*>(this);	}
-operator VkDeviceCreateInfo &() 
-	{	return *reinterpret_cast<VkDeviceCreateInfo*>(this);	}
+{}
 
 S_device_create_info& n_physical_device_features2(S_physical_device_features2 const& next_);
 S_device_create_info& n_physical_device_variable_pointer_features(S_physical_device_variable_pointer_features const& next_);
@@ -6831,7 +7080,7 @@ struct N_device_create_info{
 private:
 	void* pNext = nullptr;
 public:
-void* get(){ return pNext; }
+operator void*() { return pNext; }
 N_device_create_info& n_physical_device_features2(S_physical_device_features2 const& next_);
 N_device_create_info& n_physical_device_variable_pointer_features(S_physical_device_variable_pointer_features const& next_);
 N_device_create_info& n_physical_device_multiview_features(S_physical_device_multiview_features const& next_);
@@ -6873,10 +7122,21 @@ public:
 	PFN_vkDebugReportCallbackEXT pfnCallback;
 	void * pUserData;
 
-VkDebugReportCallbackCreateInfoEXT*const get_vkptr(){return reinterpret_cast<VkDebugReportCallbackCreateInfoEXT*>(this);}
+operator VkDebugReportCallbackCreateInfoEXT*()
+	{	return reinterpret_cast<VkDebugReportCallbackCreateInfoEXT*>(this);	}
+operator const VkDebugReportCallbackCreateInfoEXT*() const
+	{	return reinterpret_cast<const VkDebugReportCallbackCreateInfoEXT*>(this);	}
+S_debug_report_callback_create_info_EXT& operator=( VkDebugReportCallbackCreateInfoEXT const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_debug_report_callback_create_info_EXT ) ); return *this;	}
+operator VkDebugReportCallbackCreateInfoEXT const&() const 
+	{	return *reinterpret_cast<const VkDebugReportCallbackCreateInfoEXT*>(this);	}
+operator VkDebugReportCallbackCreateInfoEXT &() 
+	{	return *reinterpret_cast<VkDebugReportCallbackCreateInfoEXT*>(this);	}
+
 
 S_debug_report_callback_create_info_EXT(){}
-
+S_debug_report_callback_create_info_EXT(VkDebugReportCallbackCreateInfoEXT& rhs)
+	{	memcpy( this, &rhs, sizeof( S_debug_report_callback_create_info_EXT ) );	}
 S_debug_report_callback_create_info_EXT(
 	F_debug_report_EXT flags_,
 	PFN_vkDebugReportCallbackEXT pfnCallback_,
@@ -6884,17 +7144,7 @@ S_debug_report_callback_create_info_EXT(
 	:flags(flags_)
 	,pfnCallback(pfnCallback_)
 	,pUserData(pUserData_)
-{
-}
-
-S_debug_report_callback_create_info_EXT( VkDebugReportCallbackCreateInfoEXT const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_debug_report_callback_create_info_EXT ) );	}
-S_debug_report_callback_create_info_EXT& operator=( VkDebugReportCallbackCreateInfoEXT const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_debug_report_callback_create_info_EXT ) ); return *this;	}
-operator VkDebugReportCallbackCreateInfoEXT const&() const 
-	{	return *reinterpret_cast<const VkDebugReportCallbackCreateInfoEXT*>(this);	}
-operator VkDebugReportCallbackCreateInfoEXT &() 
-	{	return *reinterpret_cast<VkDebugReportCallbackCreateInfoEXT*>(this);	}
+{}
 
 friend S_instance_create_info;
 };
@@ -6913,26 +7163,27 @@ public:
 	uint32_t disabledValidationCheckCount;
 	const E_validation_check_EXT * pDisabledValidationChecks;
 
-VkValidationFlagsEXT*const get_vkptr(){return reinterpret_cast<VkValidationFlagsEXT*>(this);}
-
-S_validation_flags_EXT(){}
-
-S_validation_flags_EXT(
-	uint32_t disabledValidationCheckCount_,
-	const E_validation_check_EXT * pDisabledValidationChecks_)
-	:disabledValidationCheckCount(disabledValidationCheckCount_)
-	,pDisabledValidationChecks(pDisabledValidationChecks_)
-{
-}
-
-S_validation_flags_EXT( VkValidationFlagsEXT const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_validation_flags_EXT ) );	}
+operator VkValidationFlagsEXT*()
+	{	return reinterpret_cast<VkValidationFlagsEXT*>(this);	}
+operator const VkValidationFlagsEXT*() const
+	{	return reinterpret_cast<const VkValidationFlagsEXT*>(this);	}
 S_validation_flags_EXT& operator=( VkValidationFlagsEXT const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_validation_flags_EXT ) ); return *this;	}
 operator VkValidationFlagsEXT const&() const 
 	{	return *reinterpret_cast<const VkValidationFlagsEXT*>(this);	}
 operator VkValidationFlagsEXT &() 
 	{	return *reinterpret_cast<VkValidationFlagsEXT*>(this);	}
+
+
+S_validation_flags_EXT(){}
+S_validation_flags_EXT(VkValidationFlagsEXT& rhs)
+	{	memcpy( this, &rhs, sizeof( S_validation_flags_EXT ) );	}
+S_validation_flags_EXT(
+	uint32_t disabledValidationCheckCount_,
+	const E_validation_check_EXT * pDisabledValidationChecks_)
+	:disabledValidationCheckCount(disabledValidationCheckCount_)
+	,pDisabledValidationChecks(pDisabledValidationChecks_)
+{}
 
 friend S_instance_create_info;
 };
@@ -6954,10 +7205,21 @@ public:
 	PFN_vkDebugUtilsMessengerCallbackEXT pfnUserCallback;
 	void * pUserData;
 
-VkDebugUtilsMessengerCreateInfoEXT*const get_vkptr(){return reinterpret_cast<VkDebugUtilsMessengerCreateInfoEXT*>(this);}
+operator VkDebugUtilsMessengerCreateInfoEXT*()
+	{	return reinterpret_cast<VkDebugUtilsMessengerCreateInfoEXT*>(this);	}
+operator const VkDebugUtilsMessengerCreateInfoEXT*() const
+	{	return reinterpret_cast<const VkDebugUtilsMessengerCreateInfoEXT*>(this);	}
+S_debug_utils_messenger_create_info_EXT& operator=( VkDebugUtilsMessengerCreateInfoEXT const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_debug_utils_messenger_create_info_EXT ) ); return *this;	}
+operator VkDebugUtilsMessengerCreateInfoEXT const&() const 
+	{	return *reinterpret_cast<const VkDebugUtilsMessengerCreateInfoEXT*>(this);	}
+operator VkDebugUtilsMessengerCreateInfoEXT &() 
+	{	return *reinterpret_cast<VkDebugUtilsMessengerCreateInfoEXT*>(this);	}
+
 
 S_debug_utils_messenger_create_info_EXT(){}
-
+S_debug_utils_messenger_create_info_EXT(VkDebugUtilsMessengerCreateInfoEXT& rhs)
+	{	memcpy( this, &rhs, sizeof( S_debug_utils_messenger_create_info_EXT ) );	}
 S_debug_utils_messenger_create_info_EXT(
 	VkDebugUtilsMessengerCreateFlagsEXT flags_,
 	F_debug_utils_message_severity_EXT messageSeverity_,
@@ -6969,17 +7231,7 @@ S_debug_utils_messenger_create_info_EXT(
 	,messageType(messageType_)
 	,pfnUserCallback(pfnUserCallback_)
 	,pUserData(pUserData_)
-{
-}
-
-S_debug_utils_messenger_create_info_EXT( VkDebugUtilsMessengerCreateInfoEXT const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_debug_utils_messenger_create_info_EXT ) );	}
-S_debug_utils_messenger_create_info_EXT& operator=( VkDebugUtilsMessengerCreateInfoEXT const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_debug_utils_messenger_create_info_EXT ) ); return *this;	}
-operator VkDebugUtilsMessengerCreateInfoEXT const&() const 
-	{	return *reinterpret_cast<const VkDebugUtilsMessengerCreateInfoEXT*>(this);	}
-operator VkDebugUtilsMessengerCreateInfoEXT &() 
-	{	return *reinterpret_cast<VkDebugUtilsMessengerCreateInfoEXT*>(this);	}
+{}
 
 friend S_instance_create_info;
 };
@@ -7005,10 +7257,21 @@ public:
 	uint32_t enabledExtensionCount;
 	const char * const* ppEnabledExtensionNames;
 
-VkInstanceCreateInfo*const get_vkptr(){return reinterpret_cast<VkInstanceCreateInfo*>(this);}
+operator VkInstanceCreateInfo*()
+	{	return reinterpret_cast<VkInstanceCreateInfo*>(this);	}
+operator const VkInstanceCreateInfo*() const
+	{	return reinterpret_cast<const VkInstanceCreateInfo*>(this);	}
+S_instance_create_info& operator=( VkInstanceCreateInfo const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_instance_create_info ) ); return *this;	}
+operator VkInstanceCreateInfo const&() const 
+	{	return *reinterpret_cast<const VkInstanceCreateInfo*>(this);	}
+operator VkInstanceCreateInfo &() 
+	{	return *reinterpret_cast<VkInstanceCreateInfo*>(this);	}
+
 
 S_instance_create_info(){}
-
+S_instance_create_info(VkInstanceCreateInfo& rhs)
+	{	memcpy( this, &rhs, sizeof( S_instance_create_info ) );	}
 S_instance_create_info(
 	VkInstanceCreateFlags flags_,
 	const S_application_info * pApplicationInfo_,
@@ -7022,17 +7285,7 @@ S_instance_create_info(
 	,ppEnabledLayerNames(ppEnabledLayerNames_)
 	,enabledExtensionCount(enabledExtensionCount_)
 	,ppEnabledExtensionNames(ppEnabledExtensionNames_)
-{
-}
-
-S_instance_create_info( VkInstanceCreateInfo const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_instance_create_info ) );	}
-S_instance_create_info& operator=( VkInstanceCreateInfo const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_instance_create_info ) ); return *this;	}
-operator VkInstanceCreateInfo const&() const 
-	{	return *reinterpret_cast<const VkInstanceCreateInfo*>(this);	}
-operator VkInstanceCreateInfo &() 
-	{	return *reinterpret_cast<VkInstanceCreateInfo*>(this);	}
+{}
 
 S_instance_create_info& n_debug_report_callback_create_info_EXT(S_debug_report_callback_create_info_EXT const& next_);
 S_instance_create_info& n_validation_flags_EXT(S_validation_flags_EXT const& next_);
@@ -7046,7 +7299,7 @@ struct N_instance_create_info{
 private:
 	void* pNext = nullptr;
 public:
-void* get(){ return pNext; }
+operator void*() { return pNext; }
 N_instance_create_info& n_debug_report_callback_create_info_EXT(S_debug_report_callback_create_info_EXT const& next_);
 N_instance_create_info& n_validation_flags_EXT(S_validation_flags_EXT const& next_);
 N_instance_create_info& n_debug_utils_messenger_create_info_EXT(S_debug_utils_messenger_create_info_EXT const& next_);
@@ -7061,7 +7314,17 @@ struct		S_queue_family_properties{
 	uint32_t timestampValidBits;
 	S_extent_3d minImageTransferGranularity;
 
-VkQueueFamilyProperties*const get_vkptr(){return reinterpret_cast<VkQueueFamilyProperties*>(this);}
+operator VkQueueFamilyProperties*()
+	{	return reinterpret_cast<VkQueueFamilyProperties*>(this);	}
+operator const VkQueueFamilyProperties*() const
+	{	return reinterpret_cast<const VkQueueFamilyProperties*>(this);	}
+S_queue_family_properties& operator=( VkQueueFamilyProperties const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_queue_family_properties ) ); return *this;	}
+operator VkQueueFamilyProperties const&() const 
+	{	return *reinterpret_cast<const VkQueueFamilyProperties*>(this);	}
+operator VkQueueFamilyProperties &() 
+	{	return *reinterpret_cast<VkQueueFamilyProperties*>(this);	}
+
 };
 
 /*	VkMemoryType
@@ -7071,7 +7334,17 @@ struct		S_memory_type{
 	F_memory_property propertyFlags;
 	uint32_t heapIndex;
 
-VkMemoryType*const get_vkptr(){return reinterpret_cast<VkMemoryType*>(this);}
+operator VkMemoryType*()
+	{	return reinterpret_cast<VkMemoryType*>(this);	}
+operator const VkMemoryType*() const
+	{	return reinterpret_cast<const VkMemoryType*>(this);	}
+S_memory_type& operator=( VkMemoryType const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_memory_type ) ); return *this;	}
+operator VkMemoryType const&() const 
+	{	return *reinterpret_cast<const VkMemoryType*>(this);	}
+operator VkMemoryType &() 
+	{	return *reinterpret_cast<VkMemoryType*>(this);	}
+
 };
 
 /*	VkMemoryHeap
@@ -7081,7 +7354,17 @@ struct		S_memory_heap{
 	VkDeviceSize size;
 	F_memory_heap flags;
 
-VkMemoryHeap*const get_vkptr(){return reinterpret_cast<VkMemoryHeap*>(this);}
+operator VkMemoryHeap*()
+	{	return reinterpret_cast<VkMemoryHeap*>(this);	}
+operator const VkMemoryHeap*() const
+	{	return reinterpret_cast<const VkMemoryHeap*>(this);	}
+S_memory_heap& operator=( VkMemoryHeap const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_memory_heap ) ); return *this;	}
+operator VkMemoryHeap const&() const 
+	{	return *reinterpret_cast<const VkMemoryHeap*>(this);	}
+operator VkMemoryHeap &() 
+	{	return *reinterpret_cast<VkMemoryHeap*>(this);	}
+
 };
 
 /*	VkPhysicalDeviceMemoryProperties
@@ -7093,7 +7376,17 @@ struct		S_physical_device_memory_properties{
 	uint32_t memoryHeapCount;
 	S_memory_heap memoryHeaps[VK_MAX_MEMORY_HEAPS];
 
-VkPhysicalDeviceMemoryProperties*const get_vkptr(){return reinterpret_cast<VkPhysicalDeviceMemoryProperties*>(this);}
+operator VkPhysicalDeviceMemoryProperties*()
+	{	return reinterpret_cast<VkPhysicalDeviceMemoryProperties*>(this);	}
+operator const VkPhysicalDeviceMemoryProperties*() const
+	{	return reinterpret_cast<const VkPhysicalDeviceMemoryProperties*>(this);	}
+S_physical_device_memory_properties& operator=( VkPhysicalDeviceMemoryProperties const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_physical_device_memory_properties ) ); return *this;	}
+operator VkPhysicalDeviceMemoryProperties const&() const 
+	{	return *reinterpret_cast<const VkPhysicalDeviceMemoryProperties*>(this);	}
+operator VkPhysicalDeviceMemoryProperties &() 
+	{	return *reinterpret_cast<VkPhysicalDeviceMemoryProperties*>(this);	}
+
 };
 
 /*	VkDedicatedAllocationMemoryAllocateInfoNV
@@ -7107,26 +7400,27 @@ public:
 	VkImage image;
 	VkBuffer buffer;
 
-VkDedicatedAllocationMemoryAllocateInfoNV*const get_vkptr(){return reinterpret_cast<VkDedicatedAllocationMemoryAllocateInfoNV*>(this);}
-
-S_dedicated_allocation_memory_allocate_info_NV(){}
-
-S_dedicated_allocation_memory_allocate_info_NV(
-	VkImage image_,
-	VkBuffer buffer_)
-	:image(image_)
-	,buffer(buffer_)
-{
-}
-
-S_dedicated_allocation_memory_allocate_info_NV( VkDedicatedAllocationMemoryAllocateInfoNV const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_dedicated_allocation_memory_allocate_info_NV ) );	}
+operator VkDedicatedAllocationMemoryAllocateInfoNV*()
+	{	return reinterpret_cast<VkDedicatedAllocationMemoryAllocateInfoNV*>(this);	}
+operator const VkDedicatedAllocationMemoryAllocateInfoNV*() const
+	{	return reinterpret_cast<const VkDedicatedAllocationMemoryAllocateInfoNV*>(this);	}
 S_dedicated_allocation_memory_allocate_info_NV& operator=( VkDedicatedAllocationMemoryAllocateInfoNV const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_dedicated_allocation_memory_allocate_info_NV ) ); return *this;	}
 operator VkDedicatedAllocationMemoryAllocateInfoNV const&() const 
 	{	return *reinterpret_cast<const VkDedicatedAllocationMemoryAllocateInfoNV*>(this);	}
 operator VkDedicatedAllocationMemoryAllocateInfoNV &() 
 	{	return *reinterpret_cast<VkDedicatedAllocationMemoryAllocateInfoNV*>(this);	}
+
+
+S_dedicated_allocation_memory_allocate_info_NV(){}
+S_dedicated_allocation_memory_allocate_info_NV(VkDedicatedAllocationMemoryAllocateInfoNV& rhs)
+	{	memcpy( this, &rhs, sizeof( S_dedicated_allocation_memory_allocate_info_NV ) );	}
+S_dedicated_allocation_memory_allocate_info_NV(
+	VkImage image_,
+	VkBuffer buffer_)
+	:image(image_)
+	,buffer(buffer_)
+{}
 
 friend S_memory_allocate_info;
 };
@@ -7144,24 +7438,25 @@ private:
 public:
 	F_external_memory_handle_type_NV handleTypes;
 
-VkExportMemoryAllocateInfoNV*const get_vkptr(){return reinterpret_cast<VkExportMemoryAllocateInfoNV*>(this);}
-
-S_export_memory_allocate_info_NV(){}
-
-S_export_memory_allocate_info_NV(
-	F_external_memory_handle_type_NV handleTypes_)
-	:handleTypes(handleTypes_)
-{
-}
-
-S_export_memory_allocate_info_NV( VkExportMemoryAllocateInfoNV const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_export_memory_allocate_info_NV ) );	}
+operator VkExportMemoryAllocateInfoNV*()
+	{	return reinterpret_cast<VkExportMemoryAllocateInfoNV*>(this);	}
+operator const VkExportMemoryAllocateInfoNV*() const
+	{	return reinterpret_cast<const VkExportMemoryAllocateInfoNV*>(this);	}
 S_export_memory_allocate_info_NV& operator=( VkExportMemoryAllocateInfoNV const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_export_memory_allocate_info_NV ) ); return *this;	}
 operator VkExportMemoryAllocateInfoNV const&() const 
 	{	return *reinterpret_cast<const VkExportMemoryAllocateInfoNV*>(this);	}
 operator VkExportMemoryAllocateInfoNV &() 
 	{	return *reinterpret_cast<VkExportMemoryAllocateInfoNV*>(this);	}
+
+
+S_export_memory_allocate_info_NV(){}
+S_export_memory_allocate_info_NV(VkExportMemoryAllocateInfoNV& rhs)
+	{	memcpy( this, &rhs, sizeof( S_export_memory_allocate_info_NV ) );	}
+S_export_memory_allocate_info_NV(
+	F_external_memory_handle_type_NV handleTypes_)
+	:handleTypes(handleTypes_)
+{}
 
 friend S_memory_allocate_info;
 };
@@ -7181,26 +7476,27 @@ public:
 	F_external_memory_handle_type_NV handleType;
 	HANDLE handle;
 
-VkImportMemoryWin32HandleInfoNV*const get_vkptr(){return reinterpret_cast<VkImportMemoryWin32HandleInfoNV*>(this);}
-
-S_import_memory_win32_handle_info_NV(){}
-
-S_import_memory_win32_handle_info_NV(
-	F_external_memory_handle_type_NV handleType_,
-	HANDLE handle_)
-	:handleType(handleType_)
-	,handle(handle_)
-{
-}
-
-S_import_memory_win32_handle_info_NV( VkImportMemoryWin32HandleInfoNV const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_import_memory_win32_handle_info_NV ) );	}
+operator VkImportMemoryWin32HandleInfoNV*()
+	{	return reinterpret_cast<VkImportMemoryWin32HandleInfoNV*>(this);	}
+operator const VkImportMemoryWin32HandleInfoNV*() const
+	{	return reinterpret_cast<const VkImportMemoryWin32HandleInfoNV*>(this);	}
 S_import_memory_win32_handle_info_NV& operator=( VkImportMemoryWin32HandleInfoNV const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_import_memory_win32_handle_info_NV ) ); return *this;	}
 operator VkImportMemoryWin32HandleInfoNV const&() const 
 	{	return *reinterpret_cast<const VkImportMemoryWin32HandleInfoNV*>(this);	}
 operator VkImportMemoryWin32HandleInfoNV &() 
 	{	return *reinterpret_cast<VkImportMemoryWin32HandleInfoNV*>(this);	}
+
+
+S_import_memory_win32_handle_info_NV(){}
+S_import_memory_win32_handle_info_NV(VkImportMemoryWin32HandleInfoNV& rhs)
+	{	memcpy( this, &rhs, sizeof( S_import_memory_win32_handle_info_NV ) );	}
+S_import_memory_win32_handle_info_NV(
+	F_external_memory_handle_type_NV handleType_,
+	HANDLE handle_)
+	:handleType(handleType_)
+	,handle(handle_)
+{}
 
 friend S_memory_allocate_info;
 };
@@ -7221,26 +7517,27 @@ public:
 	const SECURITY_ATTRIBUTES * pAttributes;
 	DWORD dwAccess;
 
-VkExportMemoryWin32HandleInfoNV*const get_vkptr(){return reinterpret_cast<VkExportMemoryWin32HandleInfoNV*>(this);}
-
-S_export_memory_win32_handle_info_NV(){}
-
-S_export_memory_win32_handle_info_NV(
-	const SECURITY_ATTRIBUTES * pAttributes_,
-	DWORD dwAccess_)
-	:pAttributes(pAttributes_)
-	,dwAccess(dwAccess_)
-{
-}
-
-S_export_memory_win32_handle_info_NV( VkExportMemoryWin32HandleInfoNV const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_export_memory_win32_handle_info_NV ) );	}
+operator VkExportMemoryWin32HandleInfoNV*()
+	{	return reinterpret_cast<VkExportMemoryWin32HandleInfoNV*>(this);	}
+operator const VkExportMemoryWin32HandleInfoNV*() const
+	{	return reinterpret_cast<const VkExportMemoryWin32HandleInfoNV*>(this);	}
 S_export_memory_win32_handle_info_NV& operator=( VkExportMemoryWin32HandleInfoNV const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_export_memory_win32_handle_info_NV ) ); return *this;	}
 operator VkExportMemoryWin32HandleInfoNV const&() const 
 	{	return *reinterpret_cast<const VkExportMemoryWin32HandleInfoNV*>(this);	}
 operator VkExportMemoryWin32HandleInfoNV &() 
 	{	return *reinterpret_cast<VkExportMemoryWin32HandleInfoNV*>(this);	}
+
+
+S_export_memory_win32_handle_info_NV(){}
+S_export_memory_win32_handle_info_NV(VkExportMemoryWin32HandleInfoNV& rhs)
+	{	memcpy( this, &rhs, sizeof( S_export_memory_win32_handle_info_NV ) );	}
+S_export_memory_win32_handle_info_NV(
+	const SECURITY_ATTRIBUTES * pAttributes_,
+	DWORD dwAccess_)
+	:pAttributes(pAttributes_)
+	,dwAccess(dwAccess_)
+{}
 
 friend S_memory_allocate_info;
 };
@@ -7259,24 +7556,25 @@ private:
 public:
 	F_external_memory_handle_type handleTypes;
 
-VkExportMemoryAllocateInfo*const get_vkptr(){return reinterpret_cast<VkExportMemoryAllocateInfo*>(this);}
-
-S_export_memory_allocate_info(){}
-
-S_export_memory_allocate_info(
-	F_external_memory_handle_type handleTypes_)
-	:handleTypes(handleTypes_)
-{
-}
-
-S_export_memory_allocate_info( VkExportMemoryAllocateInfo const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_export_memory_allocate_info ) );	}
+operator VkExportMemoryAllocateInfo*()
+	{	return reinterpret_cast<VkExportMemoryAllocateInfo*>(this);	}
+operator const VkExportMemoryAllocateInfo*() const
+	{	return reinterpret_cast<const VkExportMemoryAllocateInfo*>(this);	}
 S_export_memory_allocate_info& operator=( VkExportMemoryAllocateInfo const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_export_memory_allocate_info ) ); return *this;	}
 operator VkExportMemoryAllocateInfo const&() const 
 	{	return *reinterpret_cast<const VkExportMemoryAllocateInfo*>(this);	}
 operator VkExportMemoryAllocateInfo &() 
 	{	return *reinterpret_cast<VkExportMemoryAllocateInfo*>(this);	}
+
+
+S_export_memory_allocate_info(){}
+S_export_memory_allocate_info(VkExportMemoryAllocateInfo& rhs)
+	{	memcpy( this, &rhs, sizeof( S_export_memory_allocate_info ) );	}
+S_export_memory_allocate_info(
+	F_external_memory_handle_type handleTypes_)
+	:handleTypes(handleTypes_)
+{}
 
 friend S_memory_allocate_info;
 };
@@ -7297,10 +7595,21 @@ public:
 	HANDLE handle;
 	LPCWSTR name;
 
-VkImportMemoryWin32HandleInfoKHR*const get_vkptr(){return reinterpret_cast<VkImportMemoryWin32HandleInfoKHR*>(this);}
+operator VkImportMemoryWin32HandleInfoKHR*()
+	{	return reinterpret_cast<VkImportMemoryWin32HandleInfoKHR*>(this);	}
+operator const VkImportMemoryWin32HandleInfoKHR*() const
+	{	return reinterpret_cast<const VkImportMemoryWin32HandleInfoKHR*>(this);	}
+S_import_memory_win32_handle_info_KHR& operator=( VkImportMemoryWin32HandleInfoKHR const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_import_memory_win32_handle_info_KHR ) ); return *this;	}
+operator VkImportMemoryWin32HandleInfoKHR const&() const 
+	{	return *reinterpret_cast<const VkImportMemoryWin32HandleInfoKHR*>(this);	}
+operator VkImportMemoryWin32HandleInfoKHR &() 
+	{	return *reinterpret_cast<VkImportMemoryWin32HandleInfoKHR*>(this);	}
+
 
 S_import_memory_win32_handle_info_KHR(){}
-
+S_import_memory_win32_handle_info_KHR(VkImportMemoryWin32HandleInfoKHR& rhs)
+	{	memcpy( this, &rhs, sizeof( S_import_memory_win32_handle_info_KHR ) );	}
 S_import_memory_win32_handle_info_KHR(
 	F_external_memory_handle_type handleType_,
 	HANDLE handle_,
@@ -7308,17 +7617,7 @@ S_import_memory_win32_handle_info_KHR(
 	:handleType(handleType_)
 	,handle(handle_)
 	,name(name_)
-{
-}
-
-S_import_memory_win32_handle_info_KHR( VkImportMemoryWin32HandleInfoKHR const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_import_memory_win32_handle_info_KHR ) );	}
-S_import_memory_win32_handle_info_KHR& operator=( VkImportMemoryWin32HandleInfoKHR const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_import_memory_win32_handle_info_KHR ) ); return *this;	}
-operator VkImportMemoryWin32HandleInfoKHR const&() const 
-	{	return *reinterpret_cast<const VkImportMemoryWin32HandleInfoKHR*>(this);	}
-operator VkImportMemoryWin32HandleInfoKHR &() 
-	{	return *reinterpret_cast<VkImportMemoryWin32HandleInfoKHR*>(this);	}
+{}
 
 friend S_memory_allocate_info;
 };
@@ -7340,10 +7639,21 @@ public:
 	DWORD dwAccess;
 	LPCWSTR name;
 
-VkExportMemoryWin32HandleInfoKHR*const get_vkptr(){return reinterpret_cast<VkExportMemoryWin32HandleInfoKHR*>(this);}
+operator VkExportMemoryWin32HandleInfoKHR*()
+	{	return reinterpret_cast<VkExportMemoryWin32HandleInfoKHR*>(this);	}
+operator const VkExportMemoryWin32HandleInfoKHR*() const
+	{	return reinterpret_cast<const VkExportMemoryWin32HandleInfoKHR*>(this);	}
+S_export_memory_win32_handle_info_KHR& operator=( VkExportMemoryWin32HandleInfoKHR const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_export_memory_win32_handle_info_KHR ) ); return *this;	}
+operator VkExportMemoryWin32HandleInfoKHR const&() const 
+	{	return *reinterpret_cast<const VkExportMemoryWin32HandleInfoKHR*>(this);	}
+operator VkExportMemoryWin32HandleInfoKHR &() 
+	{	return *reinterpret_cast<VkExportMemoryWin32HandleInfoKHR*>(this);	}
+
 
 S_export_memory_win32_handle_info_KHR(){}
-
+S_export_memory_win32_handle_info_KHR(VkExportMemoryWin32HandleInfoKHR& rhs)
+	{	memcpy( this, &rhs, sizeof( S_export_memory_win32_handle_info_KHR ) );	}
 S_export_memory_win32_handle_info_KHR(
 	const SECURITY_ATTRIBUTES * pAttributes_,
 	DWORD dwAccess_,
@@ -7351,17 +7661,7 @@ S_export_memory_win32_handle_info_KHR(
 	:pAttributes(pAttributes_)
 	,dwAccess(dwAccess_)
 	,name(name_)
-{
-}
-
-S_export_memory_win32_handle_info_KHR( VkExportMemoryWin32HandleInfoKHR const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_export_memory_win32_handle_info_KHR ) );	}
-S_export_memory_win32_handle_info_KHR& operator=( VkExportMemoryWin32HandleInfoKHR const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_export_memory_win32_handle_info_KHR ) ); return *this;	}
-operator VkExportMemoryWin32HandleInfoKHR const&() const 
-	{	return *reinterpret_cast<const VkExportMemoryWin32HandleInfoKHR*>(this);	}
-operator VkExportMemoryWin32HandleInfoKHR &() 
-	{	return *reinterpret_cast<VkExportMemoryWin32HandleInfoKHR*>(this);	}
+{}
 
 friend S_memory_allocate_info;
 };
@@ -7381,26 +7681,27 @@ public:
 	F_external_memory_handle_type handleType;
 	int fd;
 
-VkImportMemoryFdInfoKHR*const get_vkptr(){return reinterpret_cast<VkImportMemoryFdInfoKHR*>(this);}
-
-S_import_memory_fd_info_KHR(){}
-
-S_import_memory_fd_info_KHR(
-	F_external_memory_handle_type handleType_,
-	int fd_)
-	:handleType(handleType_)
-	,fd(fd_)
-{
-}
-
-S_import_memory_fd_info_KHR( VkImportMemoryFdInfoKHR const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_import_memory_fd_info_KHR ) );	}
+operator VkImportMemoryFdInfoKHR*()
+	{	return reinterpret_cast<VkImportMemoryFdInfoKHR*>(this);	}
+operator const VkImportMemoryFdInfoKHR*() const
+	{	return reinterpret_cast<const VkImportMemoryFdInfoKHR*>(this);	}
 S_import_memory_fd_info_KHR& operator=( VkImportMemoryFdInfoKHR const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_import_memory_fd_info_KHR ) ); return *this;	}
 operator VkImportMemoryFdInfoKHR const&() const 
 	{	return *reinterpret_cast<const VkImportMemoryFdInfoKHR*>(this);	}
 operator VkImportMemoryFdInfoKHR &() 
 	{	return *reinterpret_cast<VkImportMemoryFdInfoKHR*>(this);	}
+
+
+S_import_memory_fd_info_KHR(){}
+S_import_memory_fd_info_KHR(VkImportMemoryFdInfoKHR& rhs)
+	{	memcpy( this, &rhs, sizeof( S_import_memory_fd_info_KHR ) );	}
+S_import_memory_fd_info_KHR(
+	F_external_memory_handle_type handleType_,
+	int fd_)
+	:handleType(handleType_)
+	,fd(fd_)
+{}
 
 friend S_memory_allocate_info;
 };
@@ -7419,26 +7720,27 @@ public:
 	F_memory_allocate flags;
 	uint32_t deviceMask;
 
-VkMemoryAllocateFlagsInfo*const get_vkptr(){return reinterpret_cast<VkMemoryAllocateFlagsInfo*>(this);}
-
-S_memory_allocate_flags_info(){}
-
-S_memory_allocate_flags_info(
-	F_memory_allocate flags_,
-	uint32_t deviceMask_)
-	:flags(flags_)
-	,deviceMask(deviceMask_)
-{
-}
-
-S_memory_allocate_flags_info( VkMemoryAllocateFlagsInfo const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_memory_allocate_flags_info ) );	}
+operator VkMemoryAllocateFlagsInfo*()
+	{	return reinterpret_cast<VkMemoryAllocateFlagsInfo*>(this);	}
+operator const VkMemoryAllocateFlagsInfo*() const
+	{	return reinterpret_cast<const VkMemoryAllocateFlagsInfo*>(this);	}
 S_memory_allocate_flags_info& operator=( VkMemoryAllocateFlagsInfo const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_memory_allocate_flags_info ) ); return *this;	}
 operator VkMemoryAllocateFlagsInfo const&() const 
 	{	return *reinterpret_cast<const VkMemoryAllocateFlagsInfo*>(this);	}
 operator VkMemoryAllocateFlagsInfo &() 
 	{	return *reinterpret_cast<VkMemoryAllocateFlagsInfo*>(this);	}
+
+
+S_memory_allocate_flags_info(){}
+S_memory_allocate_flags_info(VkMemoryAllocateFlagsInfo& rhs)
+	{	memcpy( this, &rhs, sizeof( S_memory_allocate_flags_info ) );	}
+S_memory_allocate_flags_info(
+	F_memory_allocate flags_,
+	uint32_t deviceMask_)
+	:flags(flags_)
+	,deviceMask(deviceMask_)
+{}
 
 friend S_memory_allocate_info;
 };
@@ -7457,26 +7759,27 @@ public:
 	VkImage image;
 	VkBuffer buffer;
 
-VkMemoryDedicatedAllocateInfo*const get_vkptr(){return reinterpret_cast<VkMemoryDedicatedAllocateInfo*>(this);}
-
-S_memory_dedicated_allocate_info(){}
-
-S_memory_dedicated_allocate_info(
-	VkImage image_,
-	VkBuffer buffer_)
-	:image(image_)
-	,buffer(buffer_)
-{
-}
-
-S_memory_dedicated_allocate_info( VkMemoryDedicatedAllocateInfo const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_memory_dedicated_allocate_info ) );	}
+operator VkMemoryDedicatedAllocateInfo*()
+	{	return reinterpret_cast<VkMemoryDedicatedAllocateInfo*>(this);	}
+operator const VkMemoryDedicatedAllocateInfo*() const
+	{	return reinterpret_cast<const VkMemoryDedicatedAllocateInfo*>(this);	}
 S_memory_dedicated_allocate_info& operator=( VkMemoryDedicatedAllocateInfo const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_memory_dedicated_allocate_info ) ); return *this;	}
 operator VkMemoryDedicatedAllocateInfo const&() const 
 	{	return *reinterpret_cast<const VkMemoryDedicatedAllocateInfo*>(this);	}
 operator VkMemoryDedicatedAllocateInfo &() 
 	{	return *reinterpret_cast<VkMemoryDedicatedAllocateInfo*>(this);	}
+
+
+S_memory_dedicated_allocate_info(){}
+S_memory_dedicated_allocate_info(VkMemoryDedicatedAllocateInfo& rhs)
+	{	memcpy( this, &rhs, sizeof( S_memory_dedicated_allocate_info ) );	}
+S_memory_dedicated_allocate_info(
+	VkImage image_,
+	VkBuffer buffer_)
+	:image(image_)
+	,buffer(buffer_)
+{}
 
 friend S_memory_allocate_info;
 };
@@ -7495,26 +7798,27 @@ public:
 	F_external_memory_handle_type handleType;
 	void * pHostPointer;
 
-VkImportMemoryHostPointerInfoEXT*const get_vkptr(){return reinterpret_cast<VkImportMemoryHostPointerInfoEXT*>(this);}
-
-S_import_memory_host_pointer_info_EXT(){}
-
-S_import_memory_host_pointer_info_EXT(
-	F_external_memory_handle_type handleType_,
-	void * pHostPointer_)
-	:handleType(handleType_)
-	,pHostPointer(pHostPointer_)
-{
-}
-
-S_import_memory_host_pointer_info_EXT( VkImportMemoryHostPointerInfoEXT const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_import_memory_host_pointer_info_EXT ) );	}
+operator VkImportMemoryHostPointerInfoEXT*()
+	{	return reinterpret_cast<VkImportMemoryHostPointerInfoEXT*>(this);	}
+operator const VkImportMemoryHostPointerInfoEXT*() const
+	{	return reinterpret_cast<const VkImportMemoryHostPointerInfoEXT*>(this);	}
 S_import_memory_host_pointer_info_EXT& operator=( VkImportMemoryHostPointerInfoEXT const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_import_memory_host_pointer_info_EXT ) ); return *this;	}
 operator VkImportMemoryHostPointerInfoEXT const&() const 
 	{	return *reinterpret_cast<const VkImportMemoryHostPointerInfoEXT*>(this);	}
 operator VkImportMemoryHostPointerInfoEXT &() 
 	{	return *reinterpret_cast<VkImportMemoryHostPointerInfoEXT*>(this);	}
+
+
+S_import_memory_host_pointer_info_EXT(){}
+S_import_memory_host_pointer_info_EXT(VkImportMemoryHostPointerInfoEXT& rhs)
+	{	memcpy( this, &rhs, sizeof( S_import_memory_host_pointer_info_EXT ) );	}
+S_import_memory_host_pointer_info_EXT(
+	F_external_memory_handle_type handleType_,
+	void * pHostPointer_)
+	:handleType(handleType_)
+	,pHostPointer(pHostPointer_)
+{}
 
 friend S_memory_allocate_info;
 };
@@ -7533,24 +7837,25 @@ private:
 public:
 	struct AHardwareBuffer * buffer;
 
-VkImportAndroidHardwareBufferInfoANDROID*const get_vkptr(){return reinterpret_cast<VkImportAndroidHardwareBufferInfoANDROID*>(this);}
-
-S_import_android_hardware_buffer_info_ANDROID(){}
-
-S_import_android_hardware_buffer_info_ANDROID(
-	struct AHardwareBuffer * buffer_)
-	:buffer(buffer_)
-{
-}
-
-S_import_android_hardware_buffer_info_ANDROID( VkImportAndroidHardwareBufferInfoANDROID const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_import_android_hardware_buffer_info_ANDROID ) );	}
+operator VkImportAndroidHardwareBufferInfoANDROID*()
+	{	return reinterpret_cast<VkImportAndroidHardwareBufferInfoANDROID*>(this);	}
+operator const VkImportAndroidHardwareBufferInfoANDROID*() const
+	{	return reinterpret_cast<const VkImportAndroidHardwareBufferInfoANDROID*>(this);	}
 S_import_android_hardware_buffer_info_ANDROID& operator=( VkImportAndroidHardwareBufferInfoANDROID const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_import_android_hardware_buffer_info_ANDROID ) ); return *this;	}
 operator VkImportAndroidHardwareBufferInfoANDROID const&() const 
 	{	return *reinterpret_cast<const VkImportAndroidHardwareBufferInfoANDROID*>(this);	}
 operator VkImportAndroidHardwareBufferInfoANDROID &() 
 	{	return *reinterpret_cast<VkImportAndroidHardwareBufferInfoANDROID*>(this);	}
+
+
+S_import_android_hardware_buffer_info_ANDROID(){}
+S_import_android_hardware_buffer_info_ANDROID(VkImportAndroidHardwareBufferInfoANDROID& rhs)
+	{	memcpy( this, &rhs, sizeof( S_import_android_hardware_buffer_info_ANDROID ) );	}
+S_import_android_hardware_buffer_info_ANDROID(
+	struct AHardwareBuffer * buffer_)
+	:buffer(buffer_)
+{}
 
 friend S_memory_allocate_info;
 };
@@ -7582,26 +7887,27 @@ public:
 	VkDeviceSize allocationSize;
 	uint32_t memoryTypeIndex;
 
-VkMemoryAllocateInfo*const get_vkptr(){return reinterpret_cast<VkMemoryAllocateInfo*>(this);}
-
-S_memory_allocate_info(){}
-
-S_memory_allocate_info(
-	VkDeviceSize allocationSize_,
-	uint32_t memoryTypeIndex_)
-	:allocationSize(allocationSize_)
-	,memoryTypeIndex(memoryTypeIndex_)
-{
-}
-
-S_memory_allocate_info( VkMemoryAllocateInfo const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_memory_allocate_info ) );	}
+operator VkMemoryAllocateInfo*()
+	{	return reinterpret_cast<VkMemoryAllocateInfo*>(this);	}
+operator const VkMemoryAllocateInfo*() const
+	{	return reinterpret_cast<const VkMemoryAllocateInfo*>(this);	}
 S_memory_allocate_info& operator=( VkMemoryAllocateInfo const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_memory_allocate_info ) ); return *this;	}
 operator VkMemoryAllocateInfo const&() const 
 	{	return *reinterpret_cast<const VkMemoryAllocateInfo*>(this);	}
 operator VkMemoryAllocateInfo &() 
 	{	return *reinterpret_cast<VkMemoryAllocateInfo*>(this);	}
+
+
+S_memory_allocate_info(){}
+S_memory_allocate_info(VkMemoryAllocateInfo& rhs)
+	{	memcpy( this, &rhs, sizeof( S_memory_allocate_info ) );	}
+S_memory_allocate_info(
+	VkDeviceSize allocationSize_,
+	uint32_t memoryTypeIndex_)
+	:allocationSize(allocationSize_)
+	,memoryTypeIndex(memoryTypeIndex_)
+{}
 
 S_memory_allocate_info& n_dedicated_allocation_memory_allocate_info_NV(S_dedicated_allocation_memory_allocate_info_NV const& next_);
 S_memory_allocate_info& n_export_memory_allocate_info_NV(S_export_memory_allocate_info_NV const& next_);
@@ -7634,7 +7940,7 @@ struct N_memory_allocate_info{
 private:
 	void* pNext = nullptr;
 public:
-void* get(){ return pNext; }
+operator void*() { return pNext; }
 N_memory_allocate_info& n_dedicated_allocation_memory_allocate_info_NV(S_dedicated_allocation_memory_allocate_info_NV const& next_);
 N_memory_allocate_info& n_export_memory_allocate_info_NV(S_export_memory_allocate_info_NV const& next_);
 #ifdef VK_USE_PLATFORM_WIN32_NV
@@ -7667,7 +7973,17 @@ struct		S_memory_requirements{
 	VkDeviceSize alignment;
 	uint32_t memoryTypeBits;
 
-VkMemoryRequirements*const get_vkptr(){return reinterpret_cast<VkMemoryRequirements*>(this);}
+operator VkMemoryRequirements*()
+	{	return reinterpret_cast<VkMemoryRequirements*>(this);	}
+operator const VkMemoryRequirements*() const
+	{	return reinterpret_cast<const VkMemoryRequirements*>(this);	}
+S_memory_requirements& operator=( VkMemoryRequirements const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_memory_requirements ) ); return *this;	}
+operator VkMemoryRequirements const&() const 
+	{	return *reinterpret_cast<const VkMemoryRequirements*>(this);	}
+operator VkMemoryRequirements &() 
+	{	return *reinterpret_cast<VkMemoryRequirements*>(this);	}
+
 };
 
 /*	VkSparseImageFormatProperties
@@ -7678,7 +7994,17 @@ struct		S_sparse_image_format_properties{
 	S_extent_3d imageGranularity;
 	F_sparse_image_format flags;
 
-VkSparseImageFormatProperties*const get_vkptr(){return reinterpret_cast<VkSparseImageFormatProperties*>(this);}
+operator VkSparseImageFormatProperties*()
+	{	return reinterpret_cast<VkSparseImageFormatProperties*>(this);	}
+operator const VkSparseImageFormatProperties*() const
+	{	return reinterpret_cast<const VkSparseImageFormatProperties*>(this);	}
+S_sparse_image_format_properties& operator=( VkSparseImageFormatProperties const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_sparse_image_format_properties ) ); return *this;	}
+operator VkSparseImageFormatProperties const&() const 
+	{	return *reinterpret_cast<const VkSparseImageFormatProperties*>(this);	}
+operator VkSparseImageFormatProperties &() 
+	{	return *reinterpret_cast<VkSparseImageFormatProperties*>(this);	}
+
 };
 
 /*	VkSparseImageMemoryRequirements
@@ -7691,7 +8017,17 @@ struct		S_sparse_image_memory_requirements{
 	VkDeviceSize imageMipTailOffset;
 	VkDeviceSize imageMipTailStride;
 
-VkSparseImageMemoryRequirements*const get_vkptr(){return reinterpret_cast<VkSparseImageMemoryRequirements*>(this);}
+operator VkSparseImageMemoryRequirements*()
+	{	return reinterpret_cast<VkSparseImageMemoryRequirements*>(this);	}
+operator const VkSparseImageMemoryRequirements*() const
+	{	return reinterpret_cast<const VkSparseImageMemoryRequirements*>(this);	}
+S_sparse_image_memory_requirements& operator=( VkSparseImageMemoryRequirements const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_sparse_image_memory_requirements ) ); return *this;	}
+operator VkSparseImageMemoryRequirements const&() const 
+	{	return *reinterpret_cast<const VkSparseImageMemoryRequirements*>(this);	}
+operator VkSparseImageMemoryRequirements &() 
+	{	return *reinterpret_cast<VkSparseImageMemoryRequirements*>(this);	}
+
 };
 
 /*	VkMappedMemoryRange
@@ -7705,10 +8041,21 @@ public:
 	VkDeviceSize offset;
 	VkDeviceSize size;
 
-VkMappedMemoryRange*const get_vkptr(){return reinterpret_cast<VkMappedMemoryRange*>(this);}
+operator VkMappedMemoryRange*()
+	{	return reinterpret_cast<VkMappedMemoryRange*>(this);	}
+operator const VkMappedMemoryRange*() const
+	{	return reinterpret_cast<const VkMappedMemoryRange*>(this);	}
+S_mapped_memory_range& operator=( VkMappedMemoryRange const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_mapped_memory_range ) ); return *this;	}
+operator VkMappedMemoryRange const&() const 
+	{	return *reinterpret_cast<const VkMappedMemoryRange*>(this);	}
+operator VkMappedMemoryRange &() 
+	{	return *reinterpret_cast<VkMappedMemoryRange*>(this);	}
+
 
 S_mapped_memory_range(){}
-
+S_mapped_memory_range(VkMappedMemoryRange& rhs)
+	{	memcpy( this, &rhs, sizeof( S_mapped_memory_range ) );	}
 S_mapped_memory_range(
 	VkDeviceMemory memory_,
 	VkDeviceSize offset_,
@@ -7716,17 +8063,7 @@ S_mapped_memory_range(
 	:memory(memory_)
 	,offset(offset_)
 	,size(size_)
-{
-}
-
-S_mapped_memory_range( VkMappedMemoryRange const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_mapped_memory_range ) );	}
-S_mapped_memory_range& operator=( VkMappedMemoryRange const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_mapped_memory_range ) ); return *this;	}
-operator VkMappedMemoryRange const&() const 
-	{	return *reinterpret_cast<const VkMappedMemoryRange*>(this);	}
-operator VkMappedMemoryRange &() 
-	{	return *reinterpret_cast<VkMappedMemoryRange*>(this);	}
+{}
 };
 static_assert(
 	sizeof(S_mapped_memory_range) == sizeof(VkMappedMemoryRange),
@@ -7740,7 +8077,17 @@ struct		S_format_properties{
 	F_format_feature optimalTilingFeatures;
 	F_format_feature bufferFeatures;
 
-VkFormatProperties*const get_vkptr(){return reinterpret_cast<VkFormatProperties*>(this);}
+operator VkFormatProperties*()
+	{	return reinterpret_cast<VkFormatProperties*>(this);	}
+operator const VkFormatProperties*() const
+	{	return reinterpret_cast<const VkFormatProperties*>(this);	}
+S_format_properties& operator=( VkFormatProperties const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_format_properties ) ); return *this;	}
+operator VkFormatProperties const&() const 
+	{	return *reinterpret_cast<const VkFormatProperties*>(this);	}
+operator VkFormatProperties &() 
+	{	return *reinterpret_cast<VkFormatProperties*>(this);	}
+
 };
 
 /*	VkImageFormatProperties
@@ -7753,7 +8100,17 @@ struct		S_image_format_properties{
 	F_sample_count sampleCounts;
 	VkDeviceSize maxResourceSize;
 
-VkImageFormatProperties*const get_vkptr(){return reinterpret_cast<VkImageFormatProperties*>(this);}
+operator VkImageFormatProperties*()
+	{	return reinterpret_cast<VkImageFormatProperties*>(this);	}
+operator const VkImageFormatProperties*() const
+	{	return reinterpret_cast<const VkImageFormatProperties*>(this);	}
+S_image_format_properties& operator=( VkImageFormatProperties const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_image_format_properties ) ); return *this;	}
+operator VkImageFormatProperties const&() const 
+	{	return *reinterpret_cast<const VkImageFormatProperties*>(this);	}
+operator VkImageFormatProperties &() 
+	{	return *reinterpret_cast<VkImageFormatProperties*>(this);	}
+
 };
 
 /*	VkDescriptorBufferInfo
@@ -7763,7 +8120,17 @@ struct		S_descriptor_buffer_info{
 	VkDeviceSize offset;
 	VkDeviceSize range;
 
-VkDescriptorBufferInfo*const get_vkptr(){return reinterpret_cast<VkDescriptorBufferInfo*>(this);}
+operator VkDescriptorBufferInfo*()
+	{	return reinterpret_cast<VkDescriptorBufferInfo*>(this);	}
+operator const VkDescriptorBufferInfo*() const
+	{	return reinterpret_cast<const VkDescriptorBufferInfo*>(this);	}
+S_descriptor_buffer_info& operator=( VkDescriptorBufferInfo const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_descriptor_buffer_info ) ); return *this;	}
+operator VkDescriptorBufferInfo const&() const 
+	{	return *reinterpret_cast<const VkDescriptorBufferInfo*>(this);	}
+operator VkDescriptorBufferInfo &() 
+	{	return *reinterpret_cast<VkDescriptorBufferInfo*>(this);	}
+
 };
 
 /*	VkDescriptorImageInfo
@@ -7773,7 +8140,17 @@ struct		S_descriptor_image_info{
 	VkImageView imageView;
 	E_image_layout imageLayout;
 
-VkDescriptorImageInfo*const get_vkptr(){return reinterpret_cast<VkDescriptorImageInfo*>(this);}
+operator VkDescriptorImageInfo*()
+	{	return reinterpret_cast<VkDescriptorImageInfo*>(this);	}
+operator const VkDescriptorImageInfo*() const
+	{	return reinterpret_cast<const VkDescriptorImageInfo*>(this);	}
+S_descriptor_image_info& operator=( VkDescriptorImageInfo const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_descriptor_image_info ) ); return *this;	}
+operator VkDescriptorImageInfo const&() const 
+	{	return *reinterpret_cast<const VkDescriptorImageInfo*>(this);	}
+operator VkDescriptorImageInfo &() 
+	{	return *reinterpret_cast<VkDescriptorImageInfo*>(this);	}
+
 };
 
 /*	VkWriteDescriptorSetInlineUniformBlockEXT
@@ -7787,26 +8164,27 @@ public:
 	uint32_t dataSize;
 	const void * pData;
 
-VkWriteDescriptorSetInlineUniformBlockEXT*const get_vkptr(){return reinterpret_cast<VkWriteDescriptorSetInlineUniformBlockEXT*>(this);}
-
-S_write_descriptor_set_inline_uniform_block_EXT(){}
-
-S_write_descriptor_set_inline_uniform_block_EXT(
-	uint32_t dataSize_,
-	const void * pData_)
-	:dataSize(dataSize_)
-	,pData(pData_)
-{
-}
-
-S_write_descriptor_set_inline_uniform_block_EXT( VkWriteDescriptorSetInlineUniformBlockEXT const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_write_descriptor_set_inline_uniform_block_EXT ) );	}
+operator VkWriteDescriptorSetInlineUniformBlockEXT*()
+	{	return reinterpret_cast<VkWriteDescriptorSetInlineUniformBlockEXT*>(this);	}
+operator const VkWriteDescriptorSetInlineUniformBlockEXT*() const
+	{	return reinterpret_cast<const VkWriteDescriptorSetInlineUniformBlockEXT*>(this);	}
 S_write_descriptor_set_inline_uniform_block_EXT& operator=( VkWriteDescriptorSetInlineUniformBlockEXT const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_write_descriptor_set_inline_uniform_block_EXT ) ); return *this;	}
 operator VkWriteDescriptorSetInlineUniformBlockEXT const&() const 
 	{	return *reinterpret_cast<const VkWriteDescriptorSetInlineUniformBlockEXT*>(this);	}
 operator VkWriteDescriptorSetInlineUniformBlockEXT &() 
 	{	return *reinterpret_cast<VkWriteDescriptorSetInlineUniformBlockEXT*>(this);	}
+
+
+S_write_descriptor_set_inline_uniform_block_EXT(){}
+S_write_descriptor_set_inline_uniform_block_EXT(VkWriteDescriptorSetInlineUniformBlockEXT& rhs)
+	{	memcpy( this, &rhs, sizeof( S_write_descriptor_set_inline_uniform_block_EXT ) );	}
+S_write_descriptor_set_inline_uniform_block_EXT(
+	uint32_t dataSize_,
+	const void * pData_)
+	:dataSize(dataSize_)
+	,pData(pData_)
+{}
 
 friend S_write_descriptor_set;
 };
@@ -7825,26 +8203,27 @@ public:
 	uint32_t accelerationStructureCount;
 	const VkAccelerationStructureNVX * pAccelerationStructures;
 
-VkDescriptorAccelerationStructureInfoNVX*const get_vkptr(){return reinterpret_cast<VkDescriptorAccelerationStructureInfoNVX*>(this);}
-
-S_descriptor_acceleration_structure_info_NVX(){}
-
-S_descriptor_acceleration_structure_info_NVX(
-	uint32_t accelerationStructureCount_,
-	const VkAccelerationStructureNVX * pAccelerationStructures_)
-	:accelerationStructureCount(accelerationStructureCount_)
-	,pAccelerationStructures(pAccelerationStructures_)
-{
-}
-
-S_descriptor_acceleration_structure_info_NVX( VkDescriptorAccelerationStructureInfoNVX const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_descriptor_acceleration_structure_info_NVX ) );	}
+operator VkDescriptorAccelerationStructureInfoNVX*()
+	{	return reinterpret_cast<VkDescriptorAccelerationStructureInfoNVX*>(this);	}
+operator const VkDescriptorAccelerationStructureInfoNVX*() const
+	{	return reinterpret_cast<const VkDescriptorAccelerationStructureInfoNVX*>(this);	}
 S_descriptor_acceleration_structure_info_NVX& operator=( VkDescriptorAccelerationStructureInfoNVX const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_descriptor_acceleration_structure_info_NVX ) ); return *this;	}
 operator VkDescriptorAccelerationStructureInfoNVX const&() const 
 	{	return *reinterpret_cast<const VkDescriptorAccelerationStructureInfoNVX*>(this);	}
 operator VkDescriptorAccelerationStructureInfoNVX &() 
 	{	return *reinterpret_cast<VkDescriptorAccelerationStructureInfoNVX*>(this);	}
+
+
+S_descriptor_acceleration_structure_info_NVX(){}
+S_descriptor_acceleration_structure_info_NVX(VkDescriptorAccelerationStructureInfoNVX& rhs)
+	{	memcpy( this, &rhs, sizeof( S_descriptor_acceleration_structure_info_NVX ) );	}
+S_descriptor_acceleration_structure_info_NVX(
+	uint32_t accelerationStructureCount_,
+	const VkAccelerationStructureNVX * pAccelerationStructures_)
+	:accelerationStructureCount(accelerationStructureCount_)
+	,pAccelerationStructures(pAccelerationStructures_)
+{}
 
 friend S_write_descriptor_set;
 };
@@ -7871,10 +8250,21 @@ public:
 	const S_descriptor_buffer_info * pBufferInfo;
 	const VkBufferView * pTexelBufferView;
 
-VkWriteDescriptorSet*const get_vkptr(){return reinterpret_cast<VkWriteDescriptorSet*>(this);}
+operator VkWriteDescriptorSet*()
+	{	return reinterpret_cast<VkWriteDescriptorSet*>(this);	}
+operator const VkWriteDescriptorSet*() const
+	{	return reinterpret_cast<const VkWriteDescriptorSet*>(this);	}
+S_write_descriptor_set& operator=( VkWriteDescriptorSet const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_write_descriptor_set ) ); return *this;	}
+operator VkWriteDescriptorSet const&() const 
+	{	return *reinterpret_cast<const VkWriteDescriptorSet*>(this);	}
+operator VkWriteDescriptorSet &() 
+	{	return *reinterpret_cast<VkWriteDescriptorSet*>(this);	}
+
 
 S_write_descriptor_set(){}
-
+S_write_descriptor_set(VkWriteDescriptorSet& rhs)
+	{	memcpy( this, &rhs, sizeof( S_write_descriptor_set ) );	}
 S_write_descriptor_set(
 	VkDescriptorSet dstSet_,
 	uint32_t dstBinding_,
@@ -7892,17 +8282,7 @@ S_write_descriptor_set(
 	,pImageInfo(pImageInfo_)
 	,pBufferInfo(pBufferInfo_)
 	,pTexelBufferView(pTexelBufferView_)
-{
-}
-
-S_write_descriptor_set( VkWriteDescriptorSet const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_write_descriptor_set ) );	}
-S_write_descriptor_set& operator=( VkWriteDescriptorSet const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_write_descriptor_set ) ); return *this;	}
-operator VkWriteDescriptorSet const&() const 
-	{	return *reinterpret_cast<const VkWriteDescriptorSet*>(this);	}
-operator VkWriteDescriptorSet &() 
-	{	return *reinterpret_cast<VkWriteDescriptorSet*>(this);	}
+{}
 
 S_write_descriptor_set& n_write_descriptor_set_inline_uniform_block_EXT(S_write_descriptor_set_inline_uniform_block_EXT const& next_);
 S_write_descriptor_set& n_descriptor_acceleration_structure_info_NVX(S_descriptor_acceleration_structure_info_NVX const& next_);
@@ -7915,7 +8295,7 @@ struct N_write_descriptor_set{
 private:
 	void* pNext = nullptr;
 public:
-void* get(){ return pNext; }
+operator void*() { return pNext; }
 N_write_descriptor_set& n_write_descriptor_set_inline_uniform_block_EXT(S_write_descriptor_set_inline_uniform_block_EXT const& next_);
 N_write_descriptor_set& n_descriptor_acceleration_structure_info_NVX(S_descriptor_acceleration_structure_info_NVX const& next_);
 };
@@ -7935,10 +8315,21 @@ public:
 	uint32_t dstArrayElement;
 	uint32_t descriptorCount;
 
-VkCopyDescriptorSet*const get_vkptr(){return reinterpret_cast<VkCopyDescriptorSet*>(this);}
+operator VkCopyDescriptorSet*()
+	{	return reinterpret_cast<VkCopyDescriptorSet*>(this);	}
+operator const VkCopyDescriptorSet*() const
+	{	return reinterpret_cast<const VkCopyDescriptorSet*>(this);	}
+S_copy_descriptor_set& operator=( VkCopyDescriptorSet const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_copy_descriptor_set ) ); return *this;	}
+operator VkCopyDescriptorSet const&() const 
+	{	return *reinterpret_cast<const VkCopyDescriptorSet*>(this);	}
+operator VkCopyDescriptorSet &() 
+	{	return *reinterpret_cast<VkCopyDescriptorSet*>(this);	}
+
 
 S_copy_descriptor_set(){}
-
+S_copy_descriptor_set(VkCopyDescriptorSet& rhs)
+	{	memcpy( this, &rhs, sizeof( S_copy_descriptor_set ) );	}
 S_copy_descriptor_set(
 	VkDescriptorSet srcSet_,
 	uint32_t srcBinding_,
@@ -7954,17 +8345,7 @@ S_copy_descriptor_set(
 	,dstBinding(dstBinding_)
 	,dstArrayElement(dstArrayElement_)
 	,descriptorCount(descriptorCount_)
-{
-}
-
-S_copy_descriptor_set( VkCopyDescriptorSet const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_copy_descriptor_set ) );	}
-S_copy_descriptor_set& operator=( VkCopyDescriptorSet const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_copy_descriptor_set ) ); return *this;	}
-operator VkCopyDescriptorSet const&() const 
-	{	return *reinterpret_cast<const VkCopyDescriptorSet*>(this);	}
-operator VkCopyDescriptorSet &() 
-	{	return *reinterpret_cast<VkCopyDescriptorSet*>(this);	}
+{}
 };
 static_assert(
 	sizeof(S_copy_descriptor_set) == sizeof(VkCopyDescriptorSet),
@@ -7980,24 +8361,25 @@ private:
 public:
 	VkBool32 dedicatedAllocation;
 
-VkDedicatedAllocationBufferCreateInfoNV*const get_vkptr(){return reinterpret_cast<VkDedicatedAllocationBufferCreateInfoNV*>(this);}
-
-S_dedicated_allocation_buffer_create_info_NV(){}
-
-S_dedicated_allocation_buffer_create_info_NV(
-	VkBool32 dedicatedAllocation_)
-	:dedicatedAllocation(dedicatedAllocation_)
-{
-}
-
-S_dedicated_allocation_buffer_create_info_NV( VkDedicatedAllocationBufferCreateInfoNV const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_dedicated_allocation_buffer_create_info_NV ) );	}
+operator VkDedicatedAllocationBufferCreateInfoNV*()
+	{	return reinterpret_cast<VkDedicatedAllocationBufferCreateInfoNV*>(this);	}
+operator const VkDedicatedAllocationBufferCreateInfoNV*() const
+	{	return reinterpret_cast<const VkDedicatedAllocationBufferCreateInfoNV*>(this);	}
 S_dedicated_allocation_buffer_create_info_NV& operator=( VkDedicatedAllocationBufferCreateInfoNV const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_dedicated_allocation_buffer_create_info_NV ) ); return *this;	}
 operator VkDedicatedAllocationBufferCreateInfoNV const&() const 
 	{	return *reinterpret_cast<const VkDedicatedAllocationBufferCreateInfoNV*>(this);	}
 operator VkDedicatedAllocationBufferCreateInfoNV &() 
 	{	return *reinterpret_cast<VkDedicatedAllocationBufferCreateInfoNV*>(this);	}
+
+
+S_dedicated_allocation_buffer_create_info_NV(){}
+S_dedicated_allocation_buffer_create_info_NV(VkDedicatedAllocationBufferCreateInfoNV& rhs)
+	{	memcpy( this, &rhs, sizeof( S_dedicated_allocation_buffer_create_info_NV ) );	}
+S_dedicated_allocation_buffer_create_info_NV(
+	VkBool32 dedicatedAllocation_)
+	:dedicatedAllocation(dedicatedAllocation_)
+{}
 
 friend S_buffer_create_info;
 };
@@ -8015,24 +8397,25 @@ private:
 public:
 	F_external_memory_handle_type handleTypes;
 
-VkExternalMemoryBufferCreateInfo*const get_vkptr(){return reinterpret_cast<VkExternalMemoryBufferCreateInfo*>(this);}
-
-S_external_memory_buffer_create_info(){}
-
-S_external_memory_buffer_create_info(
-	F_external_memory_handle_type handleTypes_)
-	:handleTypes(handleTypes_)
-{
-}
-
-S_external_memory_buffer_create_info( VkExternalMemoryBufferCreateInfo const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_external_memory_buffer_create_info ) );	}
+operator VkExternalMemoryBufferCreateInfo*()
+	{	return reinterpret_cast<VkExternalMemoryBufferCreateInfo*>(this);	}
+operator const VkExternalMemoryBufferCreateInfo*() const
+	{	return reinterpret_cast<const VkExternalMemoryBufferCreateInfo*>(this);	}
 S_external_memory_buffer_create_info& operator=( VkExternalMemoryBufferCreateInfo const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_external_memory_buffer_create_info ) ); return *this;	}
 operator VkExternalMemoryBufferCreateInfo const&() const 
 	{	return *reinterpret_cast<const VkExternalMemoryBufferCreateInfo*>(this);	}
 operator VkExternalMemoryBufferCreateInfo &() 
 	{	return *reinterpret_cast<VkExternalMemoryBufferCreateInfo*>(this);	}
+
+
+S_external_memory_buffer_create_info(){}
+S_external_memory_buffer_create_info(VkExternalMemoryBufferCreateInfo& rhs)
+	{	memcpy( this, &rhs, sizeof( S_external_memory_buffer_create_info ) );	}
+S_external_memory_buffer_create_info(
+	F_external_memory_handle_type handleTypes_)
+	:handleTypes(handleTypes_)
+{}
 
 friend S_buffer_create_info;
 };
@@ -8057,10 +8440,21 @@ public:
 	uint32_t queueFamilyIndexCount;
 	const uint32_t * pQueueFamilyIndices;
 
-VkBufferCreateInfo*const get_vkptr(){return reinterpret_cast<VkBufferCreateInfo*>(this);}
+operator VkBufferCreateInfo*()
+	{	return reinterpret_cast<VkBufferCreateInfo*>(this);	}
+operator const VkBufferCreateInfo*() const
+	{	return reinterpret_cast<const VkBufferCreateInfo*>(this);	}
+S_buffer_create_info& operator=( VkBufferCreateInfo const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_buffer_create_info ) ); return *this;	}
+operator VkBufferCreateInfo const&() const 
+	{	return *reinterpret_cast<const VkBufferCreateInfo*>(this);	}
+operator VkBufferCreateInfo &() 
+	{	return *reinterpret_cast<VkBufferCreateInfo*>(this);	}
+
 
 S_buffer_create_info(){}
-
+S_buffer_create_info(VkBufferCreateInfo& rhs)
+	{	memcpy( this, &rhs, sizeof( S_buffer_create_info ) );	}
 S_buffer_create_info(
 	F_buffer_create flags_,
 	VkDeviceSize size_,
@@ -8074,17 +8468,7 @@ S_buffer_create_info(
 	,sharingMode(sharingMode_)
 	,queueFamilyIndexCount(queueFamilyIndexCount_)
 	,pQueueFamilyIndices(pQueueFamilyIndices_)
-{
-}
-
-S_buffer_create_info( VkBufferCreateInfo const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_buffer_create_info ) );	}
-S_buffer_create_info& operator=( VkBufferCreateInfo const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_buffer_create_info ) ); return *this;	}
-operator VkBufferCreateInfo const&() const 
-	{	return *reinterpret_cast<const VkBufferCreateInfo*>(this);	}
-operator VkBufferCreateInfo &() 
-	{	return *reinterpret_cast<VkBufferCreateInfo*>(this);	}
+{}
 
 S_buffer_create_info& n_dedicated_allocation_buffer_create_info_NV(S_dedicated_allocation_buffer_create_info_NV const& next_);
 S_buffer_create_info& n_external_memory_buffer_create_info(S_external_memory_buffer_create_info const& next_);
@@ -8097,7 +8481,7 @@ struct N_buffer_create_info{
 private:
 	void* pNext = nullptr;
 public:
-void* get(){ return pNext; }
+operator void*() { return pNext; }
 N_buffer_create_info& n_dedicated_allocation_buffer_create_info_NV(S_dedicated_allocation_buffer_create_info_NV const& next_);
 N_buffer_create_info& n_external_memory_buffer_create_info(S_external_memory_buffer_create_info const& next_);
 };
@@ -8115,10 +8499,21 @@ public:
 	VkDeviceSize offset;
 	VkDeviceSize range;
 
-VkBufferViewCreateInfo*const get_vkptr(){return reinterpret_cast<VkBufferViewCreateInfo*>(this);}
+operator VkBufferViewCreateInfo*()
+	{	return reinterpret_cast<VkBufferViewCreateInfo*>(this);	}
+operator const VkBufferViewCreateInfo*() const
+	{	return reinterpret_cast<const VkBufferViewCreateInfo*>(this);	}
+S_buffer_view_create_info& operator=( VkBufferViewCreateInfo const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_buffer_view_create_info ) ); return *this;	}
+operator VkBufferViewCreateInfo const&() const 
+	{	return *reinterpret_cast<const VkBufferViewCreateInfo*>(this);	}
+operator VkBufferViewCreateInfo &() 
+	{	return *reinterpret_cast<VkBufferViewCreateInfo*>(this);	}
+
 
 S_buffer_view_create_info(){}
-
+S_buffer_view_create_info(VkBufferViewCreateInfo& rhs)
+	{	memcpy( this, &rhs, sizeof( S_buffer_view_create_info ) );	}
 S_buffer_view_create_info(
 	VkBufferViewCreateFlags flags_,
 	VkBuffer buffer_,
@@ -8130,17 +8525,7 @@ S_buffer_view_create_info(
 	,format(format_)
 	,offset(offset_)
 	,range(range_)
-{
-}
-
-S_buffer_view_create_info( VkBufferViewCreateInfo const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_buffer_view_create_info ) );	}
-S_buffer_view_create_info& operator=( VkBufferViewCreateInfo const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_buffer_view_create_info ) ); return *this;	}
-operator VkBufferViewCreateInfo const&() const 
-	{	return *reinterpret_cast<const VkBufferViewCreateInfo*>(this);	}
-operator VkBufferViewCreateInfo &() 
-	{	return *reinterpret_cast<VkBufferViewCreateInfo*>(this);	}
+{}
 };
 static_assert(
 	sizeof(S_buffer_view_create_info) == sizeof(VkBufferViewCreateInfo),
@@ -8153,7 +8538,17 @@ struct		S_image_subresource{
 	uint32_t mipLevel;
 	uint32_t arrayLayer;
 
-VkImageSubresource*const get_vkptr(){return reinterpret_cast<VkImageSubresource*>(this);}
+operator VkImageSubresource*()
+	{	return reinterpret_cast<VkImageSubresource*>(this);	}
+operator const VkImageSubresource*() const
+	{	return reinterpret_cast<const VkImageSubresource*>(this);	}
+S_image_subresource& operator=( VkImageSubresource const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_image_subresource ) ); return *this;	}
+operator VkImageSubresource const&() const 
+	{	return *reinterpret_cast<const VkImageSubresource*>(this);	}
+operator VkImageSubresource &() 
+	{	return *reinterpret_cast<VkImageSubresource*>(this);	}
+
 };
 
 /*	VkImageSubresourceLayers
@@ -8164,7 +8559,17 @@ struct		S_image_subresource_layers{
 	uint32_t baseArrayLayer;
 	uint32_t layerCount;
 
-VkImageSubresourceLayers*const get_vkptr(){return reinterpret_cast<VkImageSubresourceLayers*>(this);}
+operator VkImageSubresourceLayers*()
+	{	return reinterpret_cast<VkImageSubresourceLayers*>(this);	}
+operator const VkImageSubresourceLayers*() const
+	{	return reinterpret_cast<const VkImageSubresourceLayers*>(this);	}
+S_image_subresource_layers& operator=( VkImageSubresourceLayers const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_image_subresource_layers ) ); return *this;	}
+operator VkImageSubresourceLayers const&() const 
+	{	return *reinterpret_cast<const VkImageSubresourceLayers*>(this);	}
+operator VkImageSubresourceLayers &() 
+	{	return *reinterpret_cast<VkImageSubresourceLayers*>(this);	}
+
 };
 
 /*	VkImageSubresourceRange
@@ -8176,7 +8581,17 @@ struct		S_image_subresource_range{
 	uint32_t baseArrayLayer;
 	uint32_t layerCount;
 
-VkImageSubresourceRange*const get_vkptr(){return reinterpret_cast<VkImageSubresourceRange*>(this);}
+operator VkImageSubresourceRange*()
+	{	return reinterpret_cast<VkImageSubresourceRange*>(this);	}
+operator const VkImageSubresourceRange*() const
+	{	return reinterpret_cast<const VkImageSubresourceRange*>(this);	}
+S_image_subresource_range& operator=( VkImageSubresourceRange const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_image_subresource_range ) ); return *this;	}
+operator VkImageSubresourceRange const&() const 
+	{	return *reinterpret_cast<const VkImageSubresourceRange*>(this);	}
+operator VkImageSubresourceRange &() 
+	{	return *reinterpret_cast<VkImageSubresourceRange*>(this);	}
+
 };
 
 /*	VkMemoryBarrier
@@ -8189,26 +8604,27 @@ public:
 	F_access srcAccessMask;
 	F_access dstAccessMask;
 
-VkMemoryBarrier*const get_vkptr(){return reinterpret_cast<VkMemoryBarrier*>(this);}
-
-S_memory_barrier(){}
-
-S_memory_barrier(
-	F_access srcAccessMask_,
-	F_access dstAccessMask_)
-	:srcAccessMask(srcAccessMask_)
-	,dstAccessMask(dstAccessMask_)
-{
-}
-
-S_memory_barrier( VkMemoryBarrier const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_memory_barrier ) );	}
+operator VkMemoryBarrier*()
+	{	return reinterpret_cast<VkMemoryBarrier*>(this);	}
+operator const VkMemoryBarrier*() const
+	{	return reinterpret_cast<const VkMemoryBarrier*>(this);	}
 S_memory_barrier& operator=( VkMemoryBarrier const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_memory_barrier ) ); return *this;	}
 operator VkMemoryBarrier const&() const 
 	{	return *reinterpret_cast<const VkMemoryBarrier*>(this);	}
 operator VkMemoryBarrier &() 
 	{	return *reinterpret_cast<VkMemoryBarrier*>(this);	}
+
+
+S_memory_barrier(){}
+S_memory_barrier(VkMemoryBarrier& rhs)
+	{	memcpy( this, &rhs, sizeof( S_memory_barrier ) );	}
+S_memory_barrier(
+	F_access srcAccessMask_,
+	F_access dstAccessMask_)
+	:srcAccessMask(srcAccessMask_)
+	,dstAccessMask(dstAccessMask_)
+{}
 };
 static_assert(
 	sizeof(S_memory_barrier) == sizeof(VkMemoryBarrier),
@@ -8229,10 +8645,21 @@ public:
 	VkDeviceSize offset;
 	VkDeviceSize size;
 
-VkBufferMemoryBarrier*const get_vkptr(){return reinterpret_cast<VkBufferMemoryBarrier*>(this);}
+operator VkBufferMemoryBarrier*()
+	{	return reinterpret_cast<VkBufferMemoryBarrier*>(this);	}
+operator const VkBufferMemoryBarrier*() const
+	{	return reinterpret_cast<const VkBufferMemoryBarrier*>(this);	}
+S_buffer_memory_barrier& operator=( VkBufferMemoryBarrier const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_buffer_memory_barrier ) ); return *this;	}
+operator VkBufferMemoryBarrier const&() const 
+	{	return *reinterpret_cast<const VkBufferMemoryBarrier*>(this);	}
+operator VkBufferMemoryBarrier &() 
+	{	return *reinterpret_cast<VkBufferMemoryBarrier*>(this);	}
+
 
 S_buffer_memory_barrier(){}
-
+S_buffer_memory_barrier(VkBufferMemoryBarrier& rhs)
+	{	memcpy( this, &rhs, sizeof( S_buffer_memory_barrier ) );	}
 S_buffer_memory_barrier(
 	F_access srcAccessMask_,
 	F_access dstAccessMask_,
@@ -8248,17 +8675,7 @@ S_buffer_memory_barrier(
 	,buffer(buffer_)
 	,offset(offset_)
 	,size(size_)
-{
-}
-
-S_buffer_memory_barrier( VkBufferMemoryBarrier const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_buffer_memory_barrier ) );	}
-S_buffer_memory_barrier& operator=( VkBufferMemoryBarrier const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_buffer_memory_barrier ) ); return *this;	}
-operator VkBufferMemoryBarrier const&() const 
-	{	return *reinterpret_cast<const VkBufferMemoryBarrier*>(this);	}
-operator VkBufferMemoryBarrier &() 
-	{	return *reinterpret_cast<VkBufferMemoryBarrier*>(this);	}
+{}
 };
 static_assert(
 	sizeof(S_buffer_memory_barrier) == sizeof(VkBufferMemoryBarrier),
@@ -8270,7 +8687,17 @@ struct		S_sample_location_EXT{
 	float x;
 	float y;
 
-VkSampleLocationEXT*const get_vkptr(){return reinterpret_cast<VkSampleLocationEXT*>(this);}
+operator VkSampleLocationEXT*()
+	{	return reinterpret_cast<VkSampleLocationEXT*>(this);	}
+operator const VkSampleLocationEXT*() const
+	{	return reinterpret_cast<const VkSampleLocationEXT*>(this);	}
+S_sample_location_EXT& operator=( VkSampleLocationEXT const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_sample_location_EXT ) ); return *this;	}
+operator VkSampleLocationEXT const&() const 
+	{	return *reinterpret_cast<const VkSampleLocationEXT*>(this);	}
+operator VkSampleLocationEXT &() 
+	{	return *reinterpret_cast<VkSampleLocationEXT*>(this);	}
+
 };
 
 /*	VkSampleLocationsInfoEXT
@@ -8286,10 +8713,21 @@ public:
 	uint32_t sampleLocationsCount;
 	const S_sample_location_EXT * pSampleLocations;
 
-VkSampleLocationsInfoEXT*const get_vkptr(){return reinterpret_cast<VkSampleLocationsInfoEXT*>(this);}
+operator VkSampleLocationsInfoEXT*()
+	{	return reinterpret_cast<VkSampleLocationsInfoEXT*>(this);	}
+operator const VkSampleLocationsInfoEXT*() const
+	{	return reinterpret_cast<const VkSampleLocationsInfoEXT*>(this);	}
+S_sample_locations_info_EXT& operator=( VkSampleLocationsInfoEXT const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_sample_locations_info_EXT ) ); return *this;	}
+operator VkSampleLocationsInfoEXT const&() const 
+	{	return *reinterpret_cast<const VkSampleLocationsInfoEXT*>(this);	}
+operator VkSampleLocationsInfoEXT &() 
+	{	return *reinterpret_cast<VkSampleLocationsInfoEXT*>(this);	}
+
 
 S_sample_locations_info_EXT(){}
-
+S_sample_locations_info_EXT(VkSampleLocationsInfoEXT& rhs)
+	{	memcpy( this, &rhs, sizeof( S_sample_locations_info_EXT ) );	}
 S_sample_locations_info_EXT(
 	F_sample_count sampleLocationsPerPixel_,
 	S_extent_2d sampleLocationGridSize_,
@@ -8299,17 +8737,7 @@ S_sample_locations_info_EXT(
 	,sampleLocationGridSize(sampleLocationGridSize_)
 	,sampleLocationsCount(sampleLocationsCount_)
 	,pSampleLocations(pSampleLocations_)
-{
-}
-
-S_sample_locations_info_EXT( VkSampleLocationsInfoEXT const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_sample_locations_info_EXT ) );	}
-S_sample_locations_info_EXT& operator=( VkSampleLocationsInfoEXT const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_sample_locations_info_EXT ) ); return *this;	}
-operator VkSampleLocationsInfoEXT const&() const 
-	{	return *reinterpret_cast<const VkSampleLocationsInfoEXT*>(this);	}
-operator VkSampleLocationsInfoEXT &() 
-	{	return *reinterpret_cast<VkSampleLocationsInfoEXT*>(this);	}
+{}
 
 friend S_image_memory_barrier;
 };
@@ -8335,10 +8763,21 @@ public:
 	VkImage image;
 	S_image_subresource_range subresourceRange;
 
-VkImageMemoryBarrier*const get_vkptr(){return reinterpret_cast<VkImageMemoryBarrier*>(this);}
+operator VkImageMemoryBarrier*()
+	{	return reinterpret_cast<VkImageMemoryBarrier*>(this);	}
+operator const VkImageMemoryBarrier*() const
+	{	return reinterpret_cast<const VkImageMemoryBarrier*>(this);	}
+S_image_memory_barrier& operator=( VkImageMemoryBarrier const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_image_memory_barrier ) ); return *this;	}
+operator VkImageMemoryBarrier const&() const 
+	{	return *reinterpret_cast<const VkImageMemoryBarrier*>(this);	}
+operator VkImageMemoryBarrier &() 
+	{	return *reinterpret_cast<VkImageMemoryBarrier*>(this);	}
+
 
 S_image_memory_barrier(){}
-
+S_image_memory_barrier(VkImageMemoryBarrier& rhs)
+	{	memcpy( this, &rhs, sizeof( S_image_memory_barrier ) );	}
 S_image_memory_barrier(
 	F_access srcAccessMask_,
 	F_access dstAccessMask_,
@@ -8356,17 +8795,7 @@ S_image_memory_barrier(
 	,dstQueueFamilyIndex(dstQueueFamilyIndex_)
 	,image(image_)
 	,subresourceRange(subresourceRange_)
-{
-}
-
-S_image_memory_barrier( VkImageMemoryBarrier const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_image_memory_barrier ) );	}
-S_image_memory_barrier& operator=( VkImageMemoryBarrier const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_image_memory_barrier ) ); return *this;	}
-operator VkImageMemoryBarrier const&() const 
-	{	return *reinterpret_cast<const VkImageMemoryBarrier*>(this);	}
-operator VkImageMemoryBarrier &() 
-	{	return *reinterpret_cast<VkImageMemoryBarrier*>(this);	}
+{}
 
 S_image_memory_barrier& n_sample_locations_info_EXT(S_sample_locations_info_EXT const& next_);
 };
@@ -8378,7 +8807,7 @@ struct N_image_memory_barrier{
 private:
 	void* pNext = nullptr;
 public:
-void* get(){ return pNext; }
+operator void*() { return pNext; }
 N_image_memory_barrier& n_sample_locations_info_EXT(S_sample_locations_info_EXT const& next_);
 };
 
@@ -8392,24 +8821,25 @@ private:
 public:
 	VkBool32 dedicatedAllocation;
 
-VkDedicatedAllocationImageCreateInfoNV*const get_vkptr(){return reinterpret_cast<VkDedicatedAllocationImageCreateInfoNV*>(this);}
-
-S_dedicated_allocation_image_create_info_NV(){}
-
-S_dedicated_allocation_image_create_info_NV(
-	VkBool32 dedicatedAllocation_)
-	:dedicatedAllocation(dedicatedAllocation_)
-{
-}
-
-S_dedicated_allocation_image_create_info_NV( VkDedicatedAllocationImageCreateInfoNV const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_dedicated_allocation_image_create_info_NV ) );	}
+operator VkDedicatedAllocationImageCreateInfoNV*()
+	{	return reinterpret_cast<VkDedicatedAllocationImageCreateInfoNV*>(this);	}
+operator const VkDedicatedAllocationImageCreateInfoNV*() const
+	{	return reinterpret_cast<const VkDedicatedAllocationImageCreateInfoNV*>(this);	}
 S_dedicated_allocation_image_create_info_NV& operator=( VkDedicatedAllocationImageCreateInfoNV const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_dedicated_allocation_image_create_info_NV ) ); return *this;	}
 operator VkDedicatedAllocationImageCreateInfoNV const&() const 
 	{	return *reinterpret_cast<const VkDedicatedAllocationImageCreateInfoNV*>(this);	}
 operator VkDedicatedAllocationImageCreateInfoNV &() 
 	{	return *reinterpret_cast<VkDedicatedAllocationImageCreateInfoNV*>(this);	}
+
+
+S_dedicated_allocation_image_create_info_NV(){}
+S_dedicated_allocation_image_create_info_NV(VkDedicatedAllocationImageCreateInfoNV& rhs)
+	{	memcpy( this, &rhs, sizeof( S_dedicated_allocation_image_create_info_NV ) );	}
+S_dedicated_allocation_image_create_info_NV(
+	VkBool32 dedicatedAllocation_)
+	:dedicatedAllocation(dedicatedAllocation_)
+{}
 
 friend S_image_create_info;
 };
@@ -8427,24 +8857,25 @@ private:
 public:
 	F_external_memory_handle_type_NV handleTypes;
 
-VkExternalMemoryImageCreateInfoNV*const get_vkptr(){return reinterpret_cast<VkExternalMemoryImageCreateInfoNV*>(this);}
-
-S_external_memory_image_create_info_NV(){}
-
-S_external_memory_image_create_info_NV(
-	F_external_memory_handle_type_NV handleTypes_)
-	:handleTypes(handleTypes_)
-{
-}
-
-S_external_memory_image_create_info_NV( VkExternalMemoryImageCreateInfoNV const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_external_memory_image_create_info_NV ) );	}
+operator VkExternalMemoryImageCreateInfoNV*()
+	{	return reinterpret_cast<VkExternalMemoryImageCreateInfoNV*>(this);	}
+operator const VkExternalMemoryImageCreateInfoNV*() const
+	{	return reinterpret_cast<const VkExternalMemoryImageCreateInfoNV*>(this);	}
 S_external_memory_image_create_info_NV& operator=( VkExternalMemoryImageCreateInfoNV const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_external_memory_image_create_info_NV ) ); return *this;	}
 operator VkExternalMemoryImageCreateInfoNV const&() const 
 	{	return *reinterpret_cast<const VkExternalMemoryImageCreateInfoNV*>(this);	}
 operator VkExternalMemoryImageCreateInfoNV &() 
 	{	return *reinterpret_cast<VkExternalMemoryImageCreateInfoNV*>(this);	}
+
+
+S_external_memory_image_create_info_NV(){}
+S_external_memory_image_create_info_NV(VkExternalMemoryImageCreateInfoNV& rhs)
+	{	memcpy( this, &rhs, sizeof( S_external_memory_image_create_info_NV ) );	}
+S_external_memory_image_create_info_NV(
+	F_external_memory_handle_type_NV handleTypes_)
+	:handleTypes(handleTypes_)
+{}
 
 friend S_image_create_info;
 };
@@ -8462,24 +8893,25 @@ private:
 public:
 	F_external_memory_handle_type handleTypes;
 
-VkExternalMemoryImageCreateInfo*const get_vkptr(){return reinterpret_cast<VkExternalMemoryImageCreateInfo*>(this);}
-
-S_external_memory_image_create_info(){}
-
-S_external_memory_image_create_info(
-	F_external_memory_handle_type handleTypes_)
-	:handleTypes(handleTypes_)
-{
-}
-
-S_external_memory_image_create_info( VkExternalMemoryImageCreateInfo const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_external_memory_image_create_info ) );	}
+operator VkExternalMemoryImageCreateInfo*()
+	{	return reinterpret_cast<VkExternalMemoryImageCreateInfo*>(this);	}
+operator const VkExternalMemoryImageCreateInfo*() const
+	{	return reinterpret_cast<const VkExternalMemoryImageCreateInfo*>(this);	}
 S_external_memory_image_create_info& operator=( VkExternalMemoryImageCreateInfo const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_external_memory_image_create_info ) ); return *this;	}
 operator VkExternalMemoryImageCreateInfo const&() const 
 	{	return *reinterpret_cast<const VkExternalMemoryImageCreateInfo*>(this);	}
 operator VkExternalMemoryImageCreateInfo &() 
 	{	return *reinterpret_cast<VkExternalMemoryImageCreateInfo*>(this);	}
+
+
+S_external_memory_image_create_info(){}
+S_external_memory_image_create_info(VkExternalMemoryImageCreateInfo& rhs)
+	{	memcpy( this, &rhs, sizeof( S_external_memory_image_create_info ) );	}
+S_external_memory_image_create_info(
+	F_external_memory_handle_type handleTypes_)
+	:handleTypes(handleTypes_)
+{}
 
 friend S_image_create_info;
 };
@@ -8497,24 +8929,25 @@ private:
 public:
 	VkSwapchainKHR swapchain;
 
-VkImageSwapchainCreateInfoKHR*const get_vkptr(){return reinterpret_cast<VkImageSwapchainCreateInfoKHR*>(this);}
-
-S_image_swapchain_create_info_KHR(){}
-
-S_image_swapchain_create_info_KHR(
-	VkSwapchainKHR swapchain_)
-	:swapchain(swapchain_)
-{
-}
-
-S_image_swapchain_create_info_KHR( VkImageSwapchainCreateInfoKHR const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_image_swapchain_create_info_KHR ) );	}
+operator VkImageSwapchainCreateInfoKHR*()
+	{	return reinterpret_cast<VkImageSwapchainCreateInfoKHR*>(this);	}
+operator const VkImageSwapchainCreateInfoKHR*() const
+	{	return reinterpret_cast<const VkImageSwapchainCreateInfoKHR*>(this);	}
 S_image_swapchain_create_info_KHR& operator=( VkImageSwapchainCreateInfoKHR const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_image_swapchain_create_info_KHR ) ); return *this;	}
 operator VkImageSwapchainCreateInfoKHR const&() const 
 	{	return *reinterpret_cast<const VkImageSwapchainCreateInfoKHR*>(this);	}
 operator VkImageSwapchainCreateInfoKHR &() 
 	{	return *reinterpret_cast<VkImageSwapchainCreateInfoKHR*>(this);	}
+
+
+S_image_swapchain_create_info_KHR(){}
+S_image_swapchain_create_info_KHR(VkImageSwapchainCreateInfoKHR& rhs)
+	{	memcpy( this, &rhs, sizeof( S_image_swapchain_create_info_KHR ) );	}
+S_image_swapchain_create_info_KHR(
+	VkSwapchainKHR swapchain_)
+	:swapchain(swapchain_)
+{}
 
 friend S_image_create_info;
 };
@@ -8533,26 +8966,27 @@ public:
 	uint32_t viewFormatCount;
 	const E_format * pViewFormats;
 
-VkImageFormatListCreateInfoKHR*const get_vkptr(){return reinterpret_cast<VkImageFormatListCreateInfoKHR*>(this);}
-
-S_image_format_list_create_info_KHR(){}
-
-S_image_format_list_create_info_KHR(
-	uint32_t viewFormatCount_,
-	const E_format * pViewFormats_)
-	:viewFormatCount(viewFormatCount_)
-	,pViewFormats(pViewFormats_)
-{
-}
-
-S_image_format_list_create_info_KHR( VkImageFormatListCreateInfoKHR const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_image_format_list_create_info_KHR ) );	}
+operator VkImageFormatListCreateInfoKHR*()
+	{	return reinterpret_cast<VkImageFormatListCreateInfoKHR*>(this);	}
+operator const VkImageFormatListCreateInfoKHR*() const
+	{	return reinterpret_cast<const VkImageFormatListCreateInfoKHR*>(this);	}
 S_image_format_list_create_info_KHR& operator=( VkImageFormatListCreateInfoKHR const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_image_format_list_create_info_KHR ) ); return *this;	}
 operator VkImageFormatListCreateInfoKHR const&() const 
 	{	return *reinterpret_cast<const VkImageFormatListCreateInfoKHR*>(this);	}
 operator VkImageFormatListCreateInfoKHR &() 
 	{	return *reinterpret_cast<VkImageFormatListCreateInfoKHR*>(this);	}
+
+
+S_image_format_list_create_info_KHR(){}
+S_image_format_list_create_info_KHR(VkImageFormatListCreateInfoKHR& rhs)
+	{	memcpy( this, &rhs, sizeof( S_image_format_list_create_info_KHR ) );	}
+S_image_format_list_create_info_KHR(
+	uint32_t viewFormatCount_,
+	const E_format * pViewFormats_)
+	:viewFormatCount(viewFormatCount_)
+	,pViewFormats(pViewFormats_)
+{}
 
 friend S_image_create_info;
 };
@@ -8571,24 +9005,25 @@ private:
 public:
 	uint64_t externalFormat;
 
-VkExternalFormatANDROID*const get_vkptr(){return reinterpret_cast<VkExternalFormatANDROID*>(this);}
-
-S_external_format_ANDROID(){}
-
-S_external_format_ANDROID(
-	uint64_t externalFormat_)
-	:externalFormat(externalFormat_)
-{
-}
-
-S_external_format_ANDROID( VkExternalFormatANDROID const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_external_format_ANDROID ) );	}
+operator VkExternalFormatANDROID*()
+	{	return reinterpret_cast<VkExternalFormatANDROID*>(this);	}
+operator const VkExternalFormatANDROID*() const
+	{	return reinterpret_cast<const VkExternalFormatANDROID*>(this);	}
 S_external_format_ANDROID& operator=( VkExternalFormatANDROID const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_external_format_ANDROID ) ); return *this;	}
 operator VkExternalFormatANDROID const&() const 
 	{	return *reinterpret_cast<const VkExternalFormatANDROID*>(this);	}
 operator VkExternalFormatANDROID &() 
 	{	return *reinterpret_cast<VkExternalFormatANDROID*>(this);	}
+
+
+S_external_format_ANDROID(){}
+S_external_format_ANDROID(VkExternalFormatANDROID& rhs)
+	{	memcpy( this, &rhs, sizeof( S_external_format_ANDROID ) );	}
+S_external_format_ANDROID(
+	uint64_t externalFormat_)
+	:externalFormat(externalFormat_)
+{}
 
 friend S_image_create_info;
 friend S_sampler_ycbcr_conversion_create_info;
@@ -8610,26 +9045,27 @@ public:
 	uint32_t drmFormatModifierCount;
 	const uint64_t * pDrmFormatModifiers;
 
-VkImageDrmFormatModifierListCreateInfoEXT*const get_vkptr(){return reinterpret_cast<VkImageDrmFormatModifierListCreateInfoEXT*>(this);}
-
-S_image_drm_format_modifier_list_create_info_EXT(){}
-
-S_image_drm_format_modifier_list_create_info_EXT(
-	uint32_t drmFormatModifierCount_,
-	const uint64_t * pDrmFormatModifiers_)
-	:drmFormatModifierCount(drmFormatModifierCount_)
-	,pDrmFormatModifiers(pDrmFormatModifiers_)
-{
-}
-
-S_image_drm_format_modifier_list_create_info_EXT( VkImageDrmFormatModifierListCreateInfoEXT const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_image_drm_format_modifier_list_create_info_EXT ) );	}
+operator VkImageDrmFormatModifierListCreateInfoEXT*()
+	{	return reinterpret_cast<VkImageDrmFormatModifierListCreateInfoEXT*>(this);	}
+operator const VkImageDrmFormatModifierListCreateInfoEXT*() const
+	{	return reinterpret_cast<const VkImageDrmFormatModifierListCreateInfoEXT*>(this);	}
 S_image_drm_format_modifier_list_create_info_EXT& operator=( VkImageDrmFormatModifierListCreateInfoEXT const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_image_drm_format_modifier_list_create_info_EXT ) ); return *this;	}
 operator VkImageDrmFormatModifierListCreateInfoEXT const&() const 
 	{	return *reinterpret_cast<const VkImageDrmFormatModifierListCreateInfoEXT*>(this);	}
 operator VkImageDrmFormatModifierListCreateInfoEXT &() 
 	{	return *reinterpret_cast<VkImageDrmFormatModifierListCreateInfoEXT*>(this);	}
+
+
+S_image_drm_format_modifier_list_create_info_EXT(){}
+S_image_drm_format_modifier_list_create_info_EXT(VkImageDrmFormatModifierListCreateInfoEXT& rhs)
+	{	memcpy( this, &rhs, sizeof( S_image_drm_format_modifier_list_create_info_EXT ) );	}
+S_image_drm_format_modifier_list_create_info_EXT(
+	uint32_t drmFormatModifierCount_,
+	const uint64_t * pDrmFormatModifiers_)
+	:drmFormatModifierCount(drmFormatModifierCount_)
+	,pDrmFormatModifiers(pDrmFormatModifiers_)
+{}
 
 friend S_image_create_info;
 };
@@ -8648,7 +9084,17 @@ struct		S_subresource_layout{
 	VkDeviceSize arrayPitch;
 	VkDeviceSize depthPitch;
 
-VkSubresourceLayout*const get_vkptr(){return reinterpret_cast<VkSubresourceLayout*>(this);}
+operator VkSubresourceLayout*()
+	{	return reinterpret_cast<VkSubresourceLayout*>(this);	}
+operator const VkSubresourceLayout*() const
+	{	return reinterpret_cast<const VkSubresourceLayout*>(this);	}
+S_subresource_layout& operator=( VkSubresourceLayout const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_subresource_layout ) ); return *this;	}
+operator VkSubresourceLayout const&() const 
+	{	return *reinterpret_cast<const VkSubresourceLayout*>(this);	}
+operator VkSubresourceLayout &() 
+	{	return *reinterpret_cast<VkSubresourceLayout*>(this);	}
+
 };
 
 /*	VkImageDrmFormatModifierExplicitCreateInfoEXT
@@ -8664,10 +9110,21 @@ public:
 	uint32_t drmFormatModifierPlaneCount;
 	const S_subresource_layout * pPlaneLayouts;
 
-VkImageDrmFormatModifierExplicitCreateInfoEXT*const get_vkptr(){return reinterpret_cast<VkImageDrmFormatModifierExplicitCreateInfoEXT*>(this);}
+operator VkImageDrmFormatModifierExplicitCreateInfoEXT*()
+	{	return reinterpret_cast<VkImageDrmFormatModifierExplicitCreateInfoEXT*>(this);	}
+operator const VkImageDrmFormatModifierExplicitCreateInfoEXT*() const
+	{	return reinterpret_cast<const VkImageDrmFormatModifierExplicitCreateInfoEXT*>(this);	}
+S_image_drm_format_modifier_explicit_create_info_EXT& operator=( VkImageDrmFormatModifierExplicitCreateInfoEXT const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_image_drm_format_modifier_explicit_create_info_EXT ) ); return *this;	}
+operator VkImageDrmFormatModifierExplicitCreateInfoEXT const&() const 
+	{	return *reinterpret_cast<const VkImageDrmFormatModifierExplicitCreateInfoEXT*>(this);	}
+operator VkImageDrmFormatModifierExplicitCreateInfoEXT &() 
+	{	return *reinterpret_cast<VkImageDrmFormatModifierExplicitCreateInfoEXT*>(this);	}
+
 
 S_image_drm_format_modifier_explicit_create_info_EXT(){}
-
+S_image_drm_format_modifier_explicit_create_info_EXT(VkImageDrmFormatModifierExplicitCreateInfoEXT& rhs)
+	{	memcpy( this, &rhs, sizeof( S_image_drm_format_modifier_explicit_create_info_EXT ) );	}
 S_image_drm_format_modifier_explicit_create_info_EXT(
 	uint64_t drmFormatModifier_,
 	uint32_t drmFormatModifierPlaneCount_,
@@ -8675,17 +9132,7 @@ S_image_drm_format_modifier_explicit_create_info_EXT(
 	:drmFormatModifier(drmFormatModifier_)
 	,drmFormatModifierPlaneCount(drmFormatModifierPlaneCount_)
 	,pPlaneLayouts(pPlaneLayouts_)
-{
-}
-
-S_image_drm_format_modifier_explicit_create_info_EXT( VkImageDrmFormatModifierExplicitCreateInfoEXT const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_image_drm_format_modifier_explicit_create_info_EXT ) );	}
-S_image_drm_format_modifier_explicit_create_info_EXT& operator=( VkImageDrmFormatModifierExplicitCreateInfoEXT const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_image_drm_format_modifier_explicit_create_info_EXT ) ); return *this;	}
-operator VkImageDrmFormatModifierExplicitCreateInfoEXT const&() const 
-	{	return *reinterpret_cast<const VkImageDrmFormatModifierExplicitCreateInfoEXT*>(this);	}
-operator VkImageDrmFormatModifierExplicitCreateInfoEXT &() 
-	{	return *reinterpret_cast<VkImageDrmFormatModifierExplicitCreateInfoEXT*>(this);	}
+{}
 
 friend S_image_create_info;
 };
@@ -8724,10 +9171,21 @@ public:
 	const uint32_t * pQueueFamilyIndices;
 	E_image_layout initialLayout;
 
-VkImageCreateInfo*const get_vkptr(){return reinterpret_cast<VkImageCreateInfo*>(this);}
+operator VkImageCreateInfo*()
+	{	return reinterpret_cast<VkImageCreateInfo*>(this);	}
+operator const VkImageCreateInfo*() const
+	{	return reinterpret_cast<const VkImageCreateInfo*>(this);	}
+S_image_create_info& operator=( VkImageCreateInfo const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_image_create_info ) ); return *this;	}
+operator VkImageCreateInfo const&() const 
+	{	return *reinterpret_cast<const VkImageCreateInfo*>(this);	}
+operator VkImageCreateInfo &() 
+	{	return *reinterpret_cast<VkImageCreateInfo*>(this);	}
+
 
 S_image_create_info(){}
-
+S_image_create_info(VkImageCreateInfo& rhs)
+	{	memcpy( this, &rhs, sizeof( S_image_create_info ) );	}
 S_image_create_info(
 	F_image_create flags_,
 	E_image_type imageType_,
@@ -8755,17 +9213,7 @@ S_image_create_info(
 	,queueFamilyIndexCount(queueFamilyIndexCount_)
 	,pQueueFamilyIndices(pQueueFamilyIndices_)
 	,initialLayout(initialLayout_)
-{
-}
-
-S_image_create_info( VkImageCreateInfo const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_image_create_info ) );	}
-S_image_create_info& operator=( VkImageCreateInfo const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_image_create_info ) ); return *this;	}
-operator VkImageCreateInfo const&() const 
-	{	return *reinterpret_cast<const VkImageCreateInfo*>(this);	}
-operator VkImageCreateInfo &() 
-	{	return *reinterpret_cast<VkImageCreateInfo*>(this);	}
+{}
 
 S_image_create_info& n_dedicated_allocation_image_create_info_NV(S_dedicated_allocation_image_create_info_NV const& next_);
 S_image_create_info& n_external_memory_image_create_info_NV(S_external_memory_image_create_info_NV const& next_);
@@ -8790,7 +9238,7 @@ struct N_image_create_info{
 private:
 	void* pNext = nullptr;
 public:
-void* get(){ return pNext; }
+operator void*() { return pNext; }
 N_image_create_info& n_dedicated_allocation_image_create_info_NV(S_dedicated_allocation_image_create_info_NV const& next_);
 N_image_create_info& n_external_memory_image_create_info_NV(S_external_memory_image_create_info_NV const& next_);
 N_image_create_info& n_external_memory_image_create_info(S_external_memory_image_create_info const& next_);
@@ -8817,24 +9265,25 @@ private:
 public:
 	F_image_usage usage;
 
-VkImageViewUsageCreateInfo*const get_vkptr(){return reinterpret_cast<VkImageViewUsageCreateInfo*>(this);}
-
-S_image_view_usage_create_info(){}
-
-S_image_view_usage_create_info(
-	F_image_usage usage_)
-	:usage(usage_)
-{
-}
-
-S_image_view_usage_create_info( VkImageViewUsageCreateInfo const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_image_view_usage_create_info ) );	}
+operator VkImageViewUsageCreateInfo*()
+	{	return reinterpret_cast<VkImageViewUsageCreateInfo*>(this);	}
+operator const VkImageViewUsageCreateInfo*() const
+	{	return reinterpret_cast<const VkImageViewUsageCreateInfo*>(this);	}
 S_image_view_usage_create_info& operator=( VkImageViewUsageCreateInfo const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_image_view_usage_create_info ) ); return *this;	}
 operator VkImageViewUsageCreateInfo const&() const 
 	{	return *reinterpret_cast<const VkImageViewUsageCreateInfo*>(this);	}
 operator VkImageViewUsageCreateInfo &() 
 	{	return *reinterpret_cast<VkImageViewUsageCreateInfo*>(this);	}
+
+
+S_image_view_usage_create_info(){}
+S_image_view_usage_create_info(VkImageViewUsageCreateInfo& rhs)
+	{	memcpy( this, &rhs, sizeof( S_image_view_usage_create_info ) );	}
+S_image_view_usage_create_info(
+	F_image_usage usage_)
+	:usage(usage_)
+{}
 
 friend S_image_view_create_info;
 };
@@ -8852,24 +9301,25 @@ private:
 public:
 	VkSamplerYcbcrConversion conversion;
 
-VkSamplerYcbcrConversionInfo*const get_vkptr(){return reinterpret_cast<VkSamplerYcbcrConversionInfo*>(this);}
-
-S_sampler_ycbcr_conversion_info(){}
-
-S_sampler_ycbcr_conversion_info(
-	VkSamplerYcbcrConversion conversion_)
-	:conversion(conversion_)
-{
-}
-
-S_sampler_ycbcr_conversion_info( VkSamplerYcbcrConversionInfo const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_sampler_ycbcr_conversion_info ) );	}
+operator VkSamplerYcbcrConversionInfo*()
+	{	return reinterpret_cast<VkSamplerYcbcrConversionInfo*>(this);	}
+operator const VkSamplerYcbcrConversionInfo*() const
+	{	return reinterpret_cast<const VkSamplerYcbcrConversionInfo*>(this);	}
 S_sampler_ycbcr_conversion_info& operator=( VkSamplerYcbcrConversionInfo const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_sampler_ycbcr_conversion_info ) ); return *this;	}
 operator VkSamplerYcbcrConversionInfo const&() const 
 	{	return *reinterpret_cast<const VkSamplerYcbcrConversionInfo*>(this);	}
 operator VkSamplerYcbcrConversionInfo &() 
 	{	return *reinterpret_cast<VkSamplerYcbcrConversionInfo*>(this);	}
+
+
+S_sampler_ycbcr_conversion_info(){}
+S_sampler_ycbcr_conversion_info(VkSamplerYcbcrConversionInfo& rhs)
+	{	memcpy( this, &rhs, sizeof( S_sampler_ycbcr_conversion_info ) );	}
+S_sampler_ycbcr_conversion_info(
+	VkSamplerYcbcrConversion conversion_)
+	:conversion(conversion_)
+{}
 
 friend S_sampler_create_info;
 friend S_image_view_create_info;
@@ -8888,24 +9338,25 @@ private:
 public:
 	E_format decodeMode;
 
-VkImageViewASTCDecodeModeEXT*const get_vkptr(){return reinterpret_cast<VkImageViewASTCDecodeModeEXT*>(this);}
-
-S_image_view_astc_decode_mode_EXT(){}
-
-S_image_view_astc_decode_mode_EXT(
-	E_format decodeMode_)
-	:decodeMode(decodeMode_)
-{
-}
-
-S_image_view_astc_decode_mode_EXT( VkImageViewASTCDecodeModeEXT const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_image_view_astc_decode_mode_EXT ) );	}
+operator VkImageViewASTCDecodeModeEXT*()
+	{	return reinterpret_cast<VkImageViewASTCDecodeModeEXT*>(this);	}
+operator const VkImageViewASTCDecodeModeEXT*() const
+	{	return reinterpret_cast<const VkImageViewASTCDecodeModeEXT*>(this);	}
 S_image_view_astc_decode_mode_EXT& operator=( VkImageViewASTCDecodeModeEXT const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_image_view_astc_decode_mode_EXT ) ); return *this;	}
 operator VkImageViewASTCDecodeModeEXT const&() const 
 	{	return *reinterpret_cast<const VkImageViewASTCDecodeModeEXT*>(this);	}
 operator VkImageViewASTCDecodeModeEXT &() 
 	{	return *reinterpret_cast<VkImageViewASTCDecodeModeEXT*>(this);	}
+
+
+S_image_view_astc_decode_mode_EXT(){}
+S_image_view_astc_decode_mode_EXT(VkImageViewASTCDecodeModeEXT& rhs)
+	{	memcpy( this, &rhs, sizeof( S_image_view_astc_decode_mode_EXT ) );	}
+S_image_view_astc_decode_mode_EXT(
+	E_format decodeMode_)
+	:decodeMode(decodeMode_)
+{}
 
 friend S_image_view_create_info;
 };
@@ -8931,10 +9382,21 @@ public:
 	S_component_mapping components;
 	S_image_subresource_range subresourceRange;
 
-VkImageViewCreateInfo*const get_vkptr(){return reinterpret_cast<VkImageViewCreateInfo*>(this);}
+operator VkImageViewCreateInfo*()
+	{	return reinterpret_cast<VkImageViewCreateInfo*>(this);	}
+operator const VkImageViewCreateInfo*() const
+	{	return reinterpret_cast<const VkImageViewCreateInfo*>(this);	}
+S_image_view_create_info& operator=( VkImageViewCreateInfo const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_image_view_create_info ) ); return *this;	}
+operator VkImageViewCreateInfo const&() const 
+	{	return *reinterpret_cast<const VkImageViewCreateInfo*>(this);	}
+operator VkImageViewCreateInfo &() 
+	{	return *reinterpret_cast<VkImageViewCreateInfo*>(this);	}
+
 
 S_image_view_create_info(){}
-
+S_image_view_create_info(VkImageViewCreateInfo& rhs)
+	{	memcpy( this, &rhs, sizeof( S_image_view_create_info ) );	}
 S_image_view_create_info(
 	VkImageViewCreateFlags flags_,
 	VkImage image_,
@@ -8948,17 +9410,7 @@ S_image_view_create_info(
 	,format(format_)
 	,components(components_)
 	,subresourceRange(subresourceRange_)
-{
-}
-
-S_image_view_create_info( VkImageViewCreateInfo const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_image_view_create_info ) );	}
-S_image_view_create_info& operator=( VkImageViewCreateInfo const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_image_view_create_info ) ); return *this;	}
-operator VkImageViewCreateInfo const&() const 
-	{	return *reinterpret_cast<const VkImageViewCreateInfo*>(this);	}
-operator VkImageViewCreateInfo &() 
-	{	return *reinterpret_cast<VkImageViewCreateInfo*>(this);	}
+{}
 
 S_image_view_create_info& n_image_view_usage_create_info(S_image_view_usage_create_info const& next_);
 S_image_view_create_info& n_sampler_ycbcr_conversion_info(S_sampler_ycbcr_conversion_info const& next_);
@@ -8972,7 +9424,7 @@ struct N_image_view_create_info{
 private:
 	void* pNext = nullptr;
 public:
-void* get(){ return pNext; }
+operator void*() { return pNext; }
 N_image_view_create_info& n_image_view_usage_create_info(S_image_view_usage_create_info const& next_);
 N_image_view_create_info& n_sampler_ycbcr_conversion_info(S_sampler_ycbcr_conversion_info const& next_);
 N_image_view_create_info& n_image_view_astc_decode_mode_EXT(S_image_view_astc_decode_mode_EXT const& next_);
@@ -8985,7 +9437,17 @@ struct		S_buffer_copy{
 	VkDeviceSize dstOffset;
 	VkDeviceSize size;
 
-VkBufferCopy*const get_vkptr(){return reinterpret_cast<VkBufferCopy*>(this);}
+operator VkBufferCopy*()
+	{	return reinterpret_cast<VkBufferCopy*>(this);	}
+operator const VkBufferCopy*() const
+	{	return reinterpret_cast<const VkBufferCopy*>(this);	}
+S_buffer_copy& operator=( VkBufferCopy const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_buffer_copy ) ); return *this;	}
+operator VkBufferCopy const&() const 
+	{	return *reinterpret_cast<const VkBufferCopy*>(this);	}
+operator VkBufferCopy &() 
+	{	return *reinterpret_cast<VkBufferCopy*>(this);	}
+
 };
 
 /*	VkSparseMemoryBind
@@ -8997,7 +9459,17 @@ struct		S_sparse_memory_bind{
 	VkDeviceSize memoryOffset;
 	F_sparse_memory_bind flags;
 
-VkSparseMemoryBind*const get_vkptr(){return reinterpret_cast<VkSparseMemoryBind*>(this);}
+operator VkSparseMemoryBind*()
+	{	return reinterpret_cast<VkSparseMemoryBind*>(this);	}
+operator const VkSparseMemoryBind*() const
+	{	return reinterpret_cast<const VkSparseMemoryBind*>(this);	}
+S_sparse_memory_bind& operator=( VkSparseMemoryBind const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_sparse_memory_bind ) ); return *this;	}
+operator VkSparseMemoryBind const&() const 
+	{	return *reinterpret_cast<const VkSparseMemoryBind*>(this);	}
+operator VkSparseMemoryBind &() 
+	{	return *reinterpret_cast<VkSparseMemoryBind*>(this);	}
+
 };
 
 /*	VkSparseImageMemoryBind
@@ -9010,7 +9482,17 @@ struct		S_sparse_image_memory_bind{
 	VkDeviceSize memoryOffset;
 	F_sparse_memory_bind flags;
 
-VkSparseImageMemoryBind*const get_vkptr(){return reinterpret_cast<VkSparseImageMemoryBind*>(this);}
+operator VkSparseImageMemoryBind*()
+	{	return reinterpret_cast<VkSparseImageMemoryBind*>(this);	}
+operator const VkSparseImageMemoryBind*() const
+	{	return reinterpret_cast<const VkSparseImageMemoryBind*>(this);	}
+S_sparse_image_memory_bind& operator=( VkSparseImageMemoryBind const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_sparse_image_memory_bind ) ); return *this;	}
+operator VkSparseImageMemoryBind const&() const 
+	{	return *reinterpret_cast<const VkSparseImageMemoryBind*>(this);	}
+operator VkSparseImageMemoryBind &() 
+	{	return *reinterpret_cast<VkSparseImageMemoryBind*>(this);	}
+
 };
 
 /*	VkSparseBufferMemoryBindInfo
@@ -9020,7 +9502,17 @@ struct		S_sparse_buffer_memory_bind_info{
 	uint32_t bindCount;
 	const S_sparse_memory_bind * pBinds;
 
-VkSparseBufferMemoryBindInfo*const get_vkptr(){return reinterpret_cast<VkSparseBufferMemoryBindInfo*>(this);}
+operator VkSparseBufferMemoryBindInfo*()
+	{	return reinterpret_cast<VkSparseBufferMemoryBindInfo*>(this);	}
+operator const VkSparseBufferMemoryBindInfo*() const
+	{	return reinterpret_cast<const VkSparseBufferMemoryBindInfo*>(this);	}
+S_sparse_buffer_memory_bind_info& operator=( VkSparseBufferMemoryBindInfo const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_sparse_buffer_memory_bind_info ) ); return *this;	}
+operator VkSparseBufferMemoryBindInfo const&() const 
+	{	return *reinterpret_cast<const VkSparseBufferMemoryBindInfo*>(this);	}
+operator VkSparseBufferMemoryBindInfo &() 
+	{	return *reinterpret_cast<VkSparseBufferMemoryBindInfo*>(this);	}
+
 };
 
 /*	VkSparseImageOpaqueMemoryBindInfo
@@ -9030,7 +9522,17 @@ struct		S_sparse_image_opaque_memory_bind_info{
 	uint32_t bindCount;
 	const S_sparse_memory_bind * pBinds;
 
-VkSparseImageOpaqueMemoryBindInfo*const get_vkptr(){return reinterpret_cast<VkSparseImageOpaqueMemoryBindInfo*>(this);}
+operator VkSparseImageOpaqueMemoryBindInfo*()
+	{	return reinterpret_cast<VkSparseImageOpaqueMemoryBindInfo*>(this);	}
+operator const VkSparseImageOpaqueMemoryBindInfo*() const
+	{	return reinterpret_cast<const VkSparseImageOpaqueMemoryBindInfo*>(this);	}
+S_sparse_image_opaque_memory_bind_info& operator=( VkSparseImageOpaqueMemoryBindInfo const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_sparse_image_opaque_memory_bind_info ) ); return *this;	}
+operator VkSparseImageOpaqueMemoryBindInfo const&() const 
+	{	return *reinterpret_cast<const VkSparseImageOpaqueMemoryBindInfo*>(this);	}
+operator VkSparseImageOpaqueMemoryBindInfo &() 
+	{	return *reinterpret_cast<VkSparseImageOpaqueMemoryBindInfo*>(this);	}
+
 };
 
 /*	VkSparseImageMemoryBindInfo
@@ -9040,7 +9542,17 @@ struct		S_sparse_image_memory_bind_info{
 	uint32_t bindCount;
 	const S_sparse_image_memory_bind * pBinds;
 
-VkSparseImageMemoryBindInfo*const get_vkptr(){return reinterpret_cast<VkSparseImageMemoryBindInfo*>(this);}
+operator VkSparseImageMemoryBindInfo*()
+	{	return reinterpret_cast<VkSparseImageMemoryBindInfo*>(this);	}
+operator const VkSparseImageMemoryBindInfo*() const
+	{	return reinterpret_cast<const VkSparseImageMemoryBindInfo*>(this);	}
+S_sparse_image_memory_bind_info& operator=( VkSparseImageMemoryBindInfo const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_sparse_image_memory_bind_info ) ); return *this;	}
+operator VkSparseImageMemoryBindInfo const&() const 
+	{	return *reinterpret_cast<const VkSparseImageMemoryBindInfo*>(this);	}
+operator VkSparseImageMemoryBindInfo &() 
+	{	return *reinterpret_cast<VkSparseImageMemoryBindInfo*>(this);	}
+
 };
 
 /*	VkDeviceGroupBindSparseInfo
@@ -9054,26 +9566,27 @@ public:
 	uint32_t resourceDeviceIndex;
 	uint32_t memoryDeviceIndex;
 
-VkDeviceGroupBindSparseInfo*const get_vkptr(){return reinterpret_cast<VkDeviceGroupBindSparseInfo*>(this);}
-
-S_device_group_bind_sparse_info(){}
-
-S_device_group_bind_sparse_info(
-	uint32_t resourceDeviceIndex_,
-	uint32_t memoryDeviceIndex_)
-	:resourceDeviceIndex(resourceDeviceIndex_)
-	,memoryDeviceIndex(memoryDeviceIndex_)
-{
-}
-
-S_device_group_bind_sparse_info( VkDeviceGroupBindSparseInfo const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_device_group_bind_sparse_info ) );	}
+operator VkDeviceGroupBindSparseInfo*()
+	{	return reinterpret_cast<VkDeviceGroupBindSparseInfo*>(this);	}
+operator const VkDeviceGroupBindSparseInfo*() const
+	{	return reinterpret_cast<const VkDeviceGroupBindSparseInfo*>(this);	}
 S_device_group_bind_sparse_info& operator=( VkDeviceGroupBindSparseInfo const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_device_group_bind_sparse_info ) ); return *this;	}
 operator VkDeviceGroupBindSparseInfo const&() const 
 	{	return *reinterpret_cast<const VkDeviceGroupBindSparseInfo*>(this);	}
 operator VkDeviceGroupBindSparseInfo &() 
 	{	return *reinterpret_cast<VkDeviceGroupBindSparseInfo*>(this);	}
+
+
+S_device_group_bind_sparse_info(){}
+S_device_group_bind_sparse_info(VkDeviceGroupBindSparseInfo& rhs)
+	{	memcpy( this, &rhs, sizeof( S_device_group_bind_sparse_info ) );	}
+S_device_group_bind_sparse_info(
+	uint32_t resourceDeviceIndex_,
+	uint32_t memoryDeviceIndex_)
+	:resourceDeviceIndex(resourceDeviceIndex_)
+	,memoryDeviceIndex(memoryDeviceIndex_)
+{}
 
 friend S_bind_sparse_info;
 };
@@ -9101,10 +9614,21 @@ public:
 	uint32_t signalSemaphoreCount;
 	const VkSemaphore * pSignalSemaphores;
 
-VkBindSparseInfo*const get_vkptr(){return reinterpret_cast<VkBindSparseInfo*>(this);}
+operator VkBindSparseInfo*()
+	{	return reinterpret_cast<VkBindSparseInfo*>(this);	}
+operator const VkBindSparseInfo*() const
+	{	return reinterpret_cast<const VkBindSparseInfo*>(this);	}
+S_bind_sparse_info& operator=( VkBindSparseInfo const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_bind_sparse_info ) ); return *this;	}
+operator VkBindSparseInfo const&() const 
+	{	return *reinterpret_cast<const VkBindSparseInfo*>(this);	}
+operator VkBindSparseInfo &() 
+	{	return *reinterpret_cast<VkBindSparseInfo*>(this);	}
+
 
 S_bind_sparse_info(){}
-
+S_bind_sparse_info(VkBindSparseInfo& rhs)
+	{	memcpy( this, &rhs, sizeof( S_bind_sparse_info ) );	}
 S_bind_sparse_info(
 	uint32_t waitSemaphoreCount_,
 	const VkSemaphore * pWaitSemaphores_,
@@ -9126,17 +9650,7 @@ S_bind_sparse_info(
 	,pImageBinds(pImageBinds_)
 	,signalSemaphoreCount(signalSemaphoreCount_)
 	,pSignalSemaphores(pSignalSemaphores_)
-{
-}
-
-S_bind_sparse_info( VkBindSparseInfo const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_bind_sparse_info ) );	}
-S_bind_sparse_info& operator=( VkBindSparseInfo const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_bind_sparse_info ) ); return *this;	}
-operator VkBindSparseInfo const&() const 
-	{	return *reinterpret_cast<const VkBindSparseInfo*>(this);	}
-operator VkBindSparseInfo &() 
-	{	return *reinterpret_cast<VkBindSparseInfo*>(this);	}
+{}
 
 S_bind_sparse_info& n_device_group_bind_sparse_info(S_device_group_bind_sparse_info const& next_);
 };
@@ -9148,7 +9662,7 @@ struct N_bind_sparse_info{
 private:
 	void* pNext = nullptr;
 public:
-void* get(){ return pNext; }
+operator void*() { return pNext; }
 N_bind_sparse_info& n_device_group_bind_sparse_info(S_device_group_bind_sparse_info const& next_);
 };
 
@@ -9161,7 +9675,17 @@ struct		S_image_copy{
 	S_offset_3d dstOffset;
 	S_extent_3d extent;
 
-VkImageCopy*const get_vkptr(){return reinterpret_cast<VkImageCopy*>(this);}
+operator VkImageCopy*()
+	{	return reinterpret_cast<VkImageCopy*>(this);	}
+operator const VkImageCopy*() const
+	{	return reinterpret_cast<const VkImageCopy*>(this);	}
+S_image_copy& operator=( VkImageCopy const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_image_copy ) ); return *this;	}
+operator VkImageCopy const&() const 
+	{	return *reinterpret_cast<const VkImageCopy*>(this);	}
+operator VkImageCopy &() 
+	{	return *reinterpret_cast<VkImageCopy*>(this);	}
+
 };
 
 /*	VkImageBlit
@@ -9172,7 +9696,17 @@ struct		S_image_blit{
 	S_image_subresource_layers dstSubresource;
 	S_offset_3d dstOffsets[2];
 
-VkImageBlit*const get_vkptr(){return reinterpret_cast<VkImageBlit*>(this);}
+operator VkImageBlit*()
+	{	return reinterpret_cast<VkImageBlit*>(this);	}
+operator const VkImageBlit*() const
+	{	return reinterpret_cast<const VkImageBlit*>(this);	}
+S_image_blit& operator=( VkImageBlit const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_image_blit ) ); return *this;	}
+operator VkImageBlit const&() const 
+	{	return *reinterpret_cast<const VkImageBlit*>(this);	}
+operator VkImageBlit &() 
+	{	return *reinterpret_cast<VkImageBlit*>(this);	}
+
 };
 
 /*	VkBufferImageCopy
@@ -9185,7 +9719,17 @@ struct		S_buffer_image_copy{
 	S_offset_3d imageOffset;
 	S_extent_3d imageExtent;
 
-VkBufferImageCopy*const get_vkptr(){return reinterpret_cast<VkBufferImageCopy*>(this);}
+operator VkBufferImageCopy*()
+	{	return reinterpret_cast<VkBufferImageCopy*>(this);	}
+operator const VkBufferImageCopy*() const
+	{	return reinterpret_cast<const VkBufferImageCopy*>(this);	}
+S_buffer_image_copy& operator=( VkBufferImageCopy const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_buffer_image_copy ) ); return *this;	}
+operator VkBufferImageCopy const&() const 
+	{	return *reinterpret_cast<const VkBufferImageCopy*>(this);	}
+operator VkBufferImageCopy &() 
+	{	return *reinterpret_cast<VkBufferImageCopy*>(this);	}
+
 };
 
 /*	VkImageResolve
@@ -9197,7 +9741,17 @@ struct		S_image_resolve{
 	S_offset_3d dstOffset;
 	S_extent_3d extent;
 
-VkImageResolve*const get_vkptr(){return reinterpret_cast<VkImageResolve*>(this);}
+operator VkImageResolve*()
+	{	return reinterpret_cast<VkImageResolve*>(this);	}
+operator const VkImageResolve*() const
+	{	return reinterpret_cast<const VkImageResolve*>(this);	}
+S_image_resolve& operator=( VkImageResolve const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_image_resolve ) ); return *this;	}
+operator VkImageResolve const&() const 
+	{	return *reinterpret_cast<const VkImageResolve*>(this);	}
+operator VkImageResolve &() 
+	{	return *reinterpret_cast<VkImageResolve*>(this);	}
+
 };
 
 /*	VkShaderModuleValidationCacheCreateInfoEXT
@@ -9210,24 +9764,25 @@ private:
 public:
 	VkValidationCacheEXT validationCache;
 
-VkShaderModuleValidationCacheCreateInfoEXT*const get_vkptr(){return reinterpret_cast<VkShaderModuleValidationCacheCreateInfoEXT*>(this);}
-
-S_shader_module_validation_cache_create_info_EXT(){}
-
-S_shader_module_validation_cache_create_info_EXT(
-	VkValidationCacheEXT validationCache_)
-	:validationCache(validationCache_)
-{
-}
-
-S_shader_module_validation_cache_create_info_EXT( VkShaderModuleValidationCacheCreateInfoEXT const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_shader_module_validation_cache_create_info_EXT ) );	}
+operator VkShaderModuleValidationCacheCreateInfoEXT*()
+	{	return reinterpret_cast<VkShaderModuleValidationCacheCreateInfoEXT*>(this);	}
+operator const VkShaderModuleValidationCacheCreateInfoEXT*() const
+	{	return reinterpret_cast<const VkShaderModuleValidationCacheCreateInfoEXT*>(this);	}
 S_shader_module_validation_cache_create_info_EXT& operator=( VkShaderModuleValidationCacheCreateInfoEXT const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_shader_module_validation_cache_create_info_EXT ) ); return *this;	}
 operator VkShaderModuleValidationCacheCreateInfoEXT const&() const 
 	{	return *reinterpret_cast<const VkShaderModuleValidationCacheCreateInfoEXT*>(this);	}
 operator VkShaderModuleValidationCacheCreateInfoEXT &() 
 	{	return *reinterpret_cast<VkShaderModuleValidationCacheCreateInfoEXT*>(this);	}
+
+
+S_shader_module_validation_cache_create_info_EXT(){}
+S_shader_module_validation_cache_create_info_EXT(VkShaderModuleValidationCacheCreateInfoEXT& rhs)
+	{	memcpy( this, &rhs, sizeof( S_shader_module_validation_cache_create_info_EXT ) );	}
+S_shader_module_validation_cache_create_info_EXT(
+	VkValidationCacheEXT validationCache_)
+	:validationCache(validationCache_)
+{}
 
 friend S_shader_module_create_info;
 };
@@ -9248,10 +9803,21 @@ public:
 	size_t codeSize;
 	const uint32_t * pCode;
 
-VkShaderModuleCreateInfo*const get_vkptr(){return reinterpret_cast<VkShaderModuleCreateInfo*>(this);}
+operator VkShaderModuleCreateInfo*()
+	{	return reinterpret_cast<VkShaderModuleCreateInfo*>(this);	}
+operator const VkShaderModuleCreateInfo*() const
+	{	return reinterpret_cast<const VkShaderModuleCreateInfo*>(this);	}
+S_shader_module_create_info& operator=( VkShaderModuleCreateInfo const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_shader_module_create_info ) ); return *this;	}
+operator VkShaderModuleCreateInfo const&() const 
+	{	return *reinterpret_cast<const VkShaderModuleCreateInfo*>(this);	}
+operator VkShaderModuleCreateInfo &() 
+	{	return *reinterpret_cast<VkShaderModuleCreateInfo*>(this);	}
+
 
 S_shader_module_create_info(){}
-
+S_shader_module_create_info(VkShaderModuleCreateInfo& rhs)
+	{	memcpy( this, &rhs, sizeof( S_shader_module_create_info ) );	}
 S_shader_module_create_info(
 	VkShaderModuleCreateFlags flags_,
 	size_t codeSize_,
@@ -9259,17 +9825,7 @@ S_shader_module_create_info(
 	:flags(flags_)
 	,codeSize(codeSize_)
 	,pCode(pCode_)
-{
-}
-
-S_shader_module_create_info( VkShaderModuleCreateInfo const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_shader_module_create_info ) );	}
-S_shader_module_create_info& operator=( VkShaderModuleCreateInfo const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_shader_module_create_info ) ); return *this;	}
-operator VkShaderModuleCreateInfo const&() const 
-	{	return *reinterpret_cast<const VkShaderModuleCreateInfo*>(this);	}
-operator VkShaderModuleCreateInfo &() 
-	{	return *reinterpret_cast<VkShaderModuleCreateInfo*>(this);	}
+{}
 
 S_shader_module_create_info& n_shader_module_validation_cache_create_info_EXT(S_shader_module_validation_cache_create_info_EXT const& next_);
 };
@@ -9281,7 +9837,7 @@ struct N_shader_module_create_info{
 private:
 	void* pNext = nullptr;
 public:
-void* get(){ return pNext; }
+operator void*() { return pNext; }
 N_shader_module_create_info& n_shader_module_validation_cache_create_info_EXT(S_shader_module_validation_cache_create_info_EXT const& next_);
 };
 
@@ -9294,7 +9850,17 @@ struct		S_descriptor_set_layout_binding{
 	F_shader_stage stageFlags;
 	const VkSampler * pImmutableSamplers;
 
-VkDescriptorSetLayoutBinding*const get_vkptr(){return reinterpret_cast<VkDescriptorSetLayoutBinding*>(this);}
+operator VkDescriptorSetLayoutBinding*()
+	{	return reinterpret_cast<VkDescriptorSetLayoutBinding*>(this);	}
+operator const VkDescriptorSetLayoutBinding*() const
+	{	return reinterpret_cast<const VkDescriptorSetLayoutBinding*>(this);	}
+S_descriptor_set_layout_binding& operator=( VkDescriptorSetLayoutBinding const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_descriptor_set_layout_binding ) ); return *this;	}
+operator VkDescriptorSetLayoutBinding const&() const 
+	{	return *reinterpret_cast<const VkDescriptorSetLayoutBinding*>(this);	}
+operator VkDescriptorSetLayoutBinding &() 
+	{	return *reinterpret_cast<VkDescriptorSetLayoutBinding*>(this);	}
+
 };
 
 /*	VkDescriptorSetLayoutBindingFlagsCreateInfoEXT
@@ -9308,26 +9874,27 @@ public:
 	uint32_t bindingCount;
 	const F_descriptor_binding_EXT * pBindingFlags;
 
-VkDescriptorSetLayoutBindingFlagsCreateInfoEXT*const get_vkptr(){return reinterpret_cast<VkDescriptorSetLayoutBindingFlagsCreateInfoEXT*>(this);}
-
-S_descriptor_set_layout_binding_flags_create_info_EXT(){}
-
-S_descriptor_set_layout_binding_flags_create_info_EXT(
-	uint32_t bindingCount_,
-	const F_descriptor_binding_EXT * pBindingFlags_)
-	:bindingCount(bindingCount_)
-	,pBindingFlags(pBindingFlags_)
-{
-}
-
-S_descriptor_set_layout_binding_flags_create_info_EXT( VkDescriptorSetLayoutBindingFlagsCreateInfoEXT const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_descriptor_set_layout_binding_flags_create_info_EXT ) );	}
+operator VkDescriptorSetLayoutBindingFlagsCreateInfoEXT*()
+	{	return reinterpret_cast<VkDescriptorSetLayoutBindingFlagsCreateInfoEXT*>(this);	}
+operator const VkDescriptorSetLayoutBindingFlagsCreateInfoEXT*() const
+	{	return reinterpret_cast<const VkDescriptorSetLayoutBindingFlagsCreateInfoEXT*>(this);	}
 S_descriptor_set_layout_binding_flags_create_info_EXT& operator=( VkDescriptorSetLayoutBindingFlagsCreateInfoEXT const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_descriptor_set_layout_binding_flags_create_info_EXT ) ); return *this;	}
 operator VkDescriptorSetLayoutBindingFlagsCreateInfoEXT const&() const 
 	{	return *reinterpret_cast<const VkDescriptorSetLayoutBindingFlagsCreateInfoEXT*>(this);	}
 operator VkDescriptorSetLayoutBindingFlagsCreateInfoEXT &() 
 	{	return *reinterpret_cast<VkDescriptorSetLayoutBindingFlagsCreateInfoEXT*>(this);	}
+
+
+S_descriptor_set_layout_binding_flags_create_info_EXT(){}
+S_descriptor_set_layout_binding_flags_create_info_EXT(VkDescriptorSetLayoutBindingFlagsCreateInfoEXT& rhs)
+	{	memcpy( this, &rhs, sizeof( S_descriptor_set_layout_binding_flags_create_info_EXT ) );	}
+S_descriptor_set_layout_binding_flags_create_info_EXT(
+	uint32_t bindingCount_,
+	const F_descriptor_binding_EXT * pBindingFlags_)
+	:bindingCount(bindingCount_)
+	,pBindingFlags(pBindingFlags_)
+{}
 
 friend S_descriptor_set_layout_create_info;
 };
@@ -9348,10 +9915,21 @@ public:
 	uint32_t bindingCount;
 	const S_descriptor_set_layout_binding * pBindings;
 
-VkDescriptorSetLayoutCreateInfo*const get_vkptr(){return reinterpret_cast<VkDescriptorSetLayoutCreateInfo*>(this);}
+operator VkDescriptorSetLayoutCreateInfo*()
+	{	return reinterpret_cast<VkDescriptorSetLayoutCreateInfo*>(this);	}
+operator const VkDescriptorSetLayoutCreateInfo*() const
+	{	return reinterpret_cast<const VkDescriptorSetLayoutCreateInfo*>(this);	}
+S_descriptor_set_layout_create_info& operator=( VkDescriptorSetLayoutCreateInfo const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_descriptor_set_layout_create_info ) ); return *this;	}
+operator VkDescriptorSetLayoutCreateInfo const&() const 
+	{	return *reinterpret_cast<const VkDescriptorSetLayoutCreateInfo*>(this);	}
+operator VkDescriptorSetLayoutCreateInfo &() 
+	{	return *reinterpret_cast<VkDescriptorSetLayoutCreateInfo*>(this);	}
+
 
 S_descriptor_set_layout_create_info(){}
-
+S_descriptor_set_layout_create_info(VkDescriptorSetLayoutCreateInfo& rhs)
+	{	memcpy( this, &rhs, sizeof( S_descriptor_set_layout_create_info ) );	}
 S_descriptor_set_layout_create_info(
 	F_descriptor_set_layout_create flags_,
 	uint32_t bindingCount_,
@@ -9359,17 +9937,7 @@ S_descriptor_set_layout_create_info(
 	:flags(flags_)
 	,bindingCount(bindingCount_)
 	,pBindings(pBindings_)
-{
-}
-
-S_descriptor_set_layout_create_info( VkDescriptorSetLayoutCreateInfo const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_descriptor_set_layout_create_info ) );	}
-S_descriptor_set_layout_create_info& operator=( VkDescriptorSetLayoutCreateInfo const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_descriptor_set_layout_create_info ) ); return *this;	}
-operator VkDescriptorSetLayoutCreateInfo const&() const 
-	{	return *reinterpret_cast<const VkDescriptorSetLayoutCreateInfo*>(this);	}
-operator VkDescriptorSetLayoutCreateInfo &() 
-	{	return *reinterpret_cast<VkDescriptorSetLayoutCreateInfo*>(this);	}
+{}
 
 S_descriptor_set_layout_create_info& n_descriptor_set_layout_binding_flags_create_info_EXT(S_descriptor_set_layout_binding_flags_create_info_EXT const& next_);
 };
@@ -9381,7 +9949,7 @@ struct N_descriptor_set_layout_create_info{
 private:
 	void* pNext = nullptr;
 public:
-void* get(){ return pNext; }
+operator void*() { return pNext; }
 N_descriptor_set_layout_create_info& n_descriptor_set_layout_binding_flags_create_info_EXT(S_descriptor_set_layout_binding_flags_create_info_EXT const& next_);
 };
 
@@ -9391,7 +9959,17 @@ struct		S_descriptor_pool_size{
 	E_descriptor_type type;
 	uint32_t descriptorCount;
 
-VkDescriptorPoolSize*const get_vkptr(){return reinterpret_cast<VkDescriptorPoolSize*>(this);}
+operator VkDescriptorPoolSize*()
+	{	return reinterpret_cast<VkDescriptorPoolSize*>(this);	}
+operator const VkDescriptorPoolSize*() const
+	{	return reinterpret_cast<const VkDescriptorPoolSize*>(this);	}
+S_descriptor_pool_size& operator=( VkDescriptorPoolSize const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_descriptor_pool_size ) ); return *this;	}
+operator VkDescriptorPoolSize const&() const 
+	{	return *reinterpret_cast<const VkDescriptorPoolSize*>(this);	}
+operator VkDescriptorPoolSize &() 
+	{	return *reinterpret_cast<VkDescriptorPoolSize*>(this);	}
+
 };
 
 /*	VkDescriptorPoolInlineUniformBlockCreateInfoEXT
@@ -9404,24 +9982,25 @@ private:
 public:
 	uint32_t maxInlineUniformBlockBindings;
 
-VkDescriptorPoolInlineUniformBlockCreateInfoEXT*const get_vkptr(){return reinterpret_cast<VkDescriptorPoolInlineUniformBlockCreateInfoEXT*>(this);}
-
-S_descriptor_pool_inline_uniform_block_create_info_EXT(){}
-
-S_descriptor_pool_inline_uniform_block_create_info_EXT(
-	uint32_t maxInlineUniformBlockBindings_)
-	:maxInlineUniformBlockBindings(maxInlineUniformBlockBindings_)
-{
-}
-
-S_descriptor_pool_inline_uniform_block_create_info_EXT( VkDescriptorPoolInlineUniformBlockCreateInfoEXT const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_descriptor_pool_inline_uniform_block_create_info_EXT ) );	}
+operator VkDescriptorPoolInlineUniformBlockCreateInfoEXT*()
+	{	return reinterpret_cast<VkDescriptorPoolInlineUniformBlockCreateInfoEXT*>(this);	}
+operator const VkDescriptorPoolInlineUniformBlockCreateInfoEXT*() const
+	{	return reinterpret_cast<const VkDescriptorPoolInlineUniformBlockCreateInfoEXT*>(this);	}
 S_descriptor_pool_inline_uniform_block_create_info_EXT& operator=( VkDescriptorPoolInlineUniformBlockCreateInfoEXT const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_descriptor_pool_inline_uniform_block_create_info_EXT ) ); return *this;	}
 operator VkDescriptorPoolInlineUniformBlockCreateInfoEXT const&() const 
 	{	return *reinterpret_cast<const VkDescriptorPoolInlineUniformBlockCreateInfoEXT*>(this);	}
 operator VkDescriptorPoolInlineUniformBlockCreateInfoEXT &() 
 	{	return *reinterpret_cast<VkDescriptorPoolInlineUniformBlockCreateInfoEXT*>(this);	}
+
+
+S_descriptor_pool_inline_uniform_block_create_info_EXT(){}
+S_descriptor_pool_inline_uniform_block_create_info_EXT(VkDescriptorPoolInlineUniformBlockCreateInfoEXT& rhs)
+	{	memcpy( this, &rhs, sizeof( S_descriptor_pool_inline_uniform_block_create_info_EXT ) );	}
+S_descriptor_pool_inline_uniform_block_create_info_EXT(
+	uint32_t maxInlineUniformBlockBindings_)
+	:maxInlineUniformBlockBindings(maxInlineUniformBlockBindings_)
+{}
 
 friend S_descriptor_pool_create_info;
 };
@@ -9443,10 +10022,21 @@ public:
 	uint32_t poolSizeCount;
 	const S_descriptor_pool_size * pPoolSizes;
 
-VkDescriptorPoolCreateInfo*const get_vkptr(){return reinterpret_cast<VkDescriptorPoolCreateInfo*>(this);}
+operator VkDescriptorPoolCreateInfo*()
+	{	return reinterpret_cast<VkDescriptorPoolCreateInfo*>(this);	}
+operator const VkDescriptorPoolCreateInfo*() const
+	{	return reinterpret_cast<const VkDescriptorPoolCreateInfo*>(this);	}
+S_descriptor_pool_create_info& operator=( VkDescriptorPoolCreateInfo const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_descriptor_pool_create_info ) ); return *this;	}
+operator VkDescriptorPoolCreateInfo const&() const 
+	{	return *reinterpret_cast<const VkDescriptorPoolCreateInfo*>(this);	}
+operator VkDescriptorPoolCreateInfo &() 
+	{	return *reinterpret_cast<VkDescriptorPoolCreateInfo*>(this);	}
+
 
 S_descriptor_pool_create_info(){}
-
+S_descriptor_pool_create_info(VkDescriptorPoolCreateInfo& rhs)
+	{	memcpy( this, &rhs, sizeof( S_descriptor_pool_create_info ) );	}
 S_descriptor_pool_create_info(
 	F_descriptor_pool_create flags_,
 	uint32_t maxSets_,
@@ -9456,17 +10046,7 @@ S_descriptor_pool_create_info(
 	,maxSets(maxSets_)
 	,poolSizeCount(poolSizeCount_)
 	,pPoolSizes(pPoolSizes_)
-{
-}
-
-S_descriptor_pool_create_info( VkDescriptorPoolCreateInfo const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_descriptor_pool_create_info ) );	}
-S_descriptor_pool_create_info& operator=( VkDescriptorPoolCreateInfo const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_descriptor_pool_create_info ) ); return *this;	}
-operator VkDescriptorPoolCreateInfo const&() const 
-	{	return *reinterpret_cast<const VkDescriptorPoolCreateInfo*>(this);	}
-operator VkDescriptorPoolCreateInfo &() 
-	{	return *reinterpret_cast<VkDescriptorPoolCreateInfo*>(this);	}
+{}
 
 S_descriptor_pool_create_info& n_descriptor_pool_inline_uniform_block_create_info_EXT(S_descriptor_pool_inline_uniform_block_create_info_EXT const& next_);
 };
@@ -9478,7 +10058,7 @@ struct N_descriptor_pool_create_info{
 private:
 	void* pNext = nullptr;
 public:
-void* get(){ return pNext; }
+operator void*() { return pNext; }
 N_descriptor_pool_create_info& n_descriptor_pool_inline_uniform_block_create_info_EXT(S_descriptor_pool_inline_uniform_block_create_info_EXT const& next_);
 };
 
@@ -9493,26 +10073,27 @@ public:
 	uint32_t descriptorSetCount;
 	const uint32_t * pDescriptorCounts;
 
-VkDescriptorSetVariableDescriptorCountAllocateInfoEXT*const get_vkptr(){return reinterpret_cast<VkDescriptorSetVariableDescriptorCountAllocateInfoEXT*>(this);}
-
-S_descriptor_set_variable_descriptor_count_allocate_info_EXT(){}
-
-S_descriptor_set_variable_descriptor_count_allocate_info_EXT(
-	uint32_t descriptorSetCount_,
-	const uint32_t * pDescriptorCounts_)
-	:descriptorSetCount(descriptorSetCount_)
-	,pDescriptorCounts(pDescriptorCounts_)
-{
-}
-
-S_descriptor_set_variable_descriptor_count_allocate_info_EXT( VkDescriptorSetVariableDescriptorCountAllocateInfoEXT const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_descriptor_set_variable_descriptor_count_allocate_info_EXT ) );	}
+operator VkDescriptorSetVariableDescriptorCountAllocateInfoEXT*()
+	{	return reinterpret_cast<VkDescriptorSetVariableDescriptorCountAllocateInfoEXT*>(this);	}
+operator const VkDescriptorSetVariableDescriptorCountAllocateInfoEXT*() const
+	{	return reinterpret_cast<const VkDescriptorSetVariableDescriptorCountAllocateInfoEXT*>(this);	}
 S_descriptor_set_variable_descriptor_count_allocate_info_EXT& operator=( VkDescriptorSetVariableDescriptorCountAllocateInfoEXT const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_descriptor_set_variable_descriptor_count_allocate_info_EXT ) ); return *this;	}
 operator VkDescriptorSetVariableDescriptorCountAllocateInfoEXT const&() const 
 	{	return *reinterpret_cast<const VkDescriptorSetVariableDescriptorCountAllocateInfoEXT*>(this);	}
 operator VkDescriptorSetVariableDescriptorCountAllocateInfoEXT &() 
 	{	return *reinterpret_cast<VkDescriptorSetVariableDescriptorCountAllocateInfoEXT*>(this);	}
+
+
+S_descriptor_set_variable_descriptor_count_allocate_info_EXT(){}
+S_descriptor_set_variable_descriptor_count_allocate_info_EXT(VkDescriptorSetVariableDescriptorCountAllocateInfoEXT& rhs)
+	{	memcpy( this, &rhs, sizeof( S_descriptor_set_variable_descriptor_count_allocate_info_EXT ) );	}
+S_descriptor_set_variable_descriptor_count_allocate_info_EXT(
+	uint32_t descriptorSetCount_,
+	const uint32_t * pDescriptorCounts_)
+	:descriptorSetCount(descriptorSetCount_)
+	,pDescriptorCounts(pDescriptorCounts_)
+{}
 
 friend S_descriptor_set_allocate_info;
 };
@@ -9533,10 +10114,21 @@ public:
 	uint32_t descriptorSetCount;
 	const VkDescriptorSetLayout * pSetLayouts;
 
-VkDescriptorSetAllocateInfo*const get_vkptr(){return reinterpret_cast<VkDescriptorSetAllocateInfo*>(this);}
+operator VkDescriptorSetAllocateInfo*()
+	{	return reinterpret_cast<VkDescriptorSetAllocateInfo*>(this);	}
+operator const VkDescriptorSetAllocateInfo*() const
+	{	return reinterpret_cast<const VkDescriptorSetAllocateInfo*>(this);	}
+S_descriptor_set_allocate_info& operator=( VkDescriptorSetAllocateInfo const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_descriptor_set_allocate_info ) ); return *this;	}
+operator VkDescriptorSetAllocateInfo const&() const 
+	{	return *reinterpret_cast<const VkDescriptorSetAllocateInfo*>(this);	}
+operator VkDescriptorSetAllocateInfo &() 
+	{	return *reinterpret_cast<VkDescriptorSetAllocateInfo*>(this);	}
+
 
 S_descriptor_set_allocate_info(){}
-
+S_descriptor_set_allocate_info(VkDescriptorSetAllocateInfo& rhs)
+	{	memcpy( this, &rhs, sizeof( S_descriptor_set_allocate_info ) );	}
 S_descriptor_set_allocate_info(
 	VkDescriptorPool descriptorPool_,
 	uint32_t descriptorSetCount_,
@@ -9544,17 +10136,7 @@ S_descriptor_set_allocate_info(
 	:descriptorPool(descriptorPool_)
 	,descriptorSetCount(descriptorSetCount_)
 	,pSetLayouts(pSetLayouts_)
-{
-}
-
-S_descriptor_set_allocate_info( VkDescriptorSetAllocateInfo const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_descriptor_set_allocate_info ) );	}
-S_descriptor_set_allocate_info& operator=( VkDescriptorSetAllocateInfo const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_descriptor_set_allocate_info ) ); return *this;	}
-operator VkDescriptorSetAllocateInfo const&() const 
-	{	return *reinterpret_cast<const VkDescriptorSetAllocateInfo*>(this);	}
-operator VkDescriptorSetAllocateInfo &() 
-	{	return *reinterpret_cast<VkDescriptorSetAllocateInfo*>(this);	}
+{}
 
 S_descriptor_set_allocate_info& n_descriptor_set_variable_descriptor_count_allocate_info_EXT(S_descriptor_set_variable_descriptor_count_allocate_info_EXT const& next_);
 };
@@ -9566,7 +10148,7 @@ struct N_descriptor_set_allocate_info{
 private:
 	void* pNext = nullptr;
 public:
-void* get(){ return pNext; }
+operator void*() { return pNext; }
 N_descriptor_set_allocate_info& n_descriptor_set_variable_descriptor_count_allocate_info_EXT(S_descriptor_set_variable_descriptor_count_allocate_info_EXT const& next_);
 };
 
@@ -9577,7 +10159,17 @@ struct		S_specialization_map_entry{
 	uint32_t offset;
 	size_t size;
 
-VkSpecializationMapEntry*const get_vkptr(){return reinterpret_cast<VkSpecializationMapEntry*>(this);}
+operator VkSpecializationMapEntry*()
+	{	return reinterpret_cast<VkSpecializationMapEntry*>(this);	}
+operator const VkSpecializationMapEntry*() const
+	{	return reinterpret_cast<const VkSpecializationMapEntry*>(this);	}
+S_specialization_map_entry& operator=( VkSpecializationMapEntry const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_specialization_map_entry ) ); return *this;	}
+operator VkSpecializationMapEntry const&() const 
+	{	return *reinterpret_cast<const VkSpecializationMapEntry*>(this);	}
+operator VkSpecializationMapEntry &() 
+	{	return *reinterpret_cast<VkSpecializationMapEntry*>(this);	}
+
 };
 
 /*	VkSpecializationInfo
@@ -9588,7 +10180,17 @@ struct		S_specialization_info{
 	size_t dataSize;
 	const void * pData;
 
-VkSpecializationInfo*const get_vkptr(){return reinterpret_cast<VkSpecializationInfo*>(this);}
+operator VkSpecializationInfo*()
+	{	return reinterpret_cast<VkSpecializationInfo*>(this);	}
+operator const VkSpecializationInfo*() const
+	{	return reinterpret_cast<const VkSpecializationInfo*>(this);	}
+S_specialization_info& operator=( VkSpecializationInfo const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_specialization_info ) ); return *this;	}
+operator VkSpecializationInfo const&() const 
+	{	return *reinterpret_cast<const VkSpecializationInfo*>(this);	}
+operator VkSpecializationInfo &() 
+	{	return *reinterpret_cast<VkSpecializationInfo*>(this);	}
+
 };
 
 /*	VkPipelineShaderStageCreateInfo
@@ -9604,10 +10206,21 @@ public:
 	const char * pName;
 	const S_specialization_info * pSpecializationInfo;
 
-VkPipelineShaderStageCreateInfo*const get_vkptr(){return reinterpret_cast<VkPipelineShaderStageCreateInfo*>(this);}
+operator VkPipelineShaderStageCreateInfo*()
+	{	return reinterpret_cast<VkPipelineShaderStageCreateInfo*>(this);	}
+operator const VkPipelineShaderStageCreateInfo*() const
+	{	return reinterpret_cast<const VkPipelineShaderStageCreateInfo*>(this);	}
+S_pipeline_shader_stage_create_info& operator=( VkPipelineShaderStageCreateInfo const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_pipeline_shader_stage_create_info ) ); return *this;	}
+operator VkPipelineShaderStageCreateInfo const&() const 
+	{	return *reinterpret_cast<const VkPipelineShaderStageCreateInfo*>(this);	}
+operator VkPipelineShaderStageCreateInfo &() 
+	{	return *reinterpret_cast<VkPipelineShaderStageCreateInfo*>(this);	}
+
 
 S_pipeline_shader_stage_create_info(){}
-
+S_pipeline_shader_stage_create_info(VkPipelineShaderStageCreateInfo& rhs)
+	{	memcpy( this, &rhs, sizeof( S_pipeline_shader_stage_create_info ) );	}
 S_pipeline_shader_stage_create_info(
 	VkPipelineShaderStageCreateFlags flags_,
 	F_shader_stage stage_,
@@ -9619,17 +10232,7 @@ S_pipeline_shader_stage_create_info(
 	,module(module_)
 	,pName(pName_)
 	,pSpecializationInfo(pSpecializationInfo_)
-{
-}
-
-S_pipeline_shader_stage_create_info( VkPipelineShaderStageCreateInfo const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_pipeline_shader_stage_create_info ) );	}
-S_pipeline_shader_stage_create_info& operator=( VkPipelineShaderStageCreateInfo const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_pipeline_shader_stage_create_info ) ); return *this;	}
-operator VkPipelineShaderStageCreateInfo const&() const 
-	{	return *reinterpret_cast<const VkPipelineShaderStageCreateInfo*>(this);	}
-operator VkPipelineShaderStageCreateInfo &() 
-	{	return *reinterpret_cast<VkPipelineShaderStageCreateInfo*>(this);	}
+{}
 };
 static_assert(
 	sizeof(S_pipeline_shader_stage_create_info) == sizeof(VkPipelineShaderStageCreateInfo),
@@ -9648,10 +10251,21 @@ public:
 	VkPipeline basePipelineHandle;
 	int32_t basePipelineIndex;
 
-VkComputePipelineCreateInfo*const get_vkptr(){return reinterpret_cast<VkComputePipelineCreateInfo*>(this);}
+operator VkComputePipelineCreateInfo*()
+	{	return reinterpret_cast<VkComputePipelineCreateInfo*>(this);	}
+operator const VkComputePipelineCreateInfo*() const
+	{	return reinterpret_cast<const VkComputePipelineCreateInfo*>(this);	}
+S_compute_pipeline_create_info& operator=( VkComputePipelineCreateInfo const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_compute_pipeline_create_info ) ); return *this;	}
+operator VkComputePipelineCreateInfo const&() const 
+	{	return *reinterpret_cast<const VkComputePipelineCreateInfo*>(this);	}
+operator VkComputePipelineCreateInfo &() 
+	{	return *reinterpret_cast<VkComputePipelineCreateInfo*>(this);	}
+
 
 S_compute_pipeline_create_info(){}
-
+S_compute_pipeline_create_info(VkComputePipelineCreateInfo& rhs)
+	{	memcpy( this, &rhs, sizeof( S_compute_pipeline_create_info ) );	}
 S_compute_pipeline_create_info(
 	F_pipeline_create flags_,
 	S_pipeline_shader_stage_create_info stage_,
@@ -9663,17 +10277,7 @@ S_compute_pipeline_create_info(
 	,layout(layout_)
 	,basePipelineHandle(basePipelineHandle_)
 	,basePipelineIndex(basePipelineIndex_)
-{
-}
-
-S_compute_pipeline_create_info( VkComputePipelineCreateInfo const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_compute_pipeline_create_info ) );	}
-S_compute_pipeline_create_info& operator=( VkComputePipelineCreateInfo const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_compute_pipeline_create_info ) ); return *this;	}
-operator VkComputePipelineCreateInfo const&() const 
-	{	return *reinterpret_cast<const VkComputePipelineCreateInfo*>(this);	}
-operator VkComputePipelineCreateInfo &() 
-	{	return *reinterpret_cast<VkComputePipelineCreateInfo*>(this);	}
+{}
 };
 static_assert(
 	sizeof(S_compute_pipeline_create_info) == sizeof(VkComputePipelineCreateInfo),
@@ -9686,7 +10290,17 @@ struct		S_vertex_input_binding_description{
 	uint32_t stride;
 	E_vertex_input_rate inputRate;
 
-VkVertexInputBindingDescription*const get_vkptr(){return reinterpret_cast<VkVertexInputBindingDescription*>(this);}
+operator VkVertexInputBindingDescription*()
+	{	return reinterpret_cast<VkVertexInputBindingDescription*>(this);	}
+operator const VkVertexInputBindingDescription*() const
+	{	return reinterpret_cast<const VkVertexInputBindingDescription*>(this);	}
+S_vertex_input_binding_description& operator=( VkVertexInputBindingDescription const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_vertex_input_binding_description ) ); return *this;	}
+operator VkVertexInputBindingDescription const&() const 
+	{	return *reinterpret_cast<const VkVertexInputBindingDescription*>(this);	}
+operator VkVertexInputBindingDescription &() 
+	{	return *reinterpret_cast<VkVertexInputBindingDescription*>(this);	}
+
 };
 
 /*	VkVertexInputAttributeDescription
@@ -9697,7 +10311,17 @@ struct		S_vertex_input_attribute_description{
 	E_format format;
 	uint32_t offset;
 
-VkVertexInputAttributeDescription*const get_vkptr(){return reinterpret_cast<VkVertexInputAttributeDescription*>(this);}
+operator VkVertexInputAttributeDescription*()
+	{	return reinterpret_cast<VkVertexInputAttributeDescription*>(this);	}
+operator const VkVertexInputAttributeDescription*() const
+	{	return reinterpret_cast<const VkVertexInputAttributeDescription*>(this);	}
+S_vertex_input_attribute_description& operator=( VkVertexInputAttributeDescription const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_vertex_input_attribute_description ) ); return *this;	}
+operator VkVertexInputAttributeDescription const&() const 
+	{	return *reinterpret_cast<const VkVertexInputAttributeDescription*>(this);	}
+operator VkVertexInputAttributeDescription &() 
+	{	return *reinterpret_cast<VkVertexInputAttributeDescription*>(this);	}
+
 };
 
 /*	VkVertexInputBindingDivisorDescriptionEXT
@@ -9706,7 +10330,17 @@ struct		S_vertex_input_binding_divisor_description_EXT{
 	uint32_t binding;
 	uint32_t divisor;
 
-VkVertexInputBindingDivisorDescriptionEXT*const get_vkptr(){return reinterpret_cast<VkVertexInputBindingDivisorDescriptionEXT*>(this);}
+operator VkVertexInputBindingDivisorDescriptionEXT*()
+	{	return reinterpret_cast<VkVertexInputBindingDivisorDescriptionEXT*>(this);	}
+operator const VkVertexInputBindingDivisorDescriptionEXT*() const
+	{	return reinterpret_cast<const VkVertexInputBindingDivisorDescriptionEXT*>(this);	}
+S_vertex_input_binding_divisor_description_EXT& operator=( VkVertexInputBindingDivisorDescriptionEXT const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_vertex_input_binding_divisor_description_EXT ) ); return *this;	}
+operator VkVertexInputBindingDivisorDescriptionEXT const&() const 
+	{	return *reinterpret_cast<const VkVertexInputBindingDivisorDescriptionEXT*>(this);	}
+operator VkVertexInputBindingDivisorDescriptionEXT &() 
+	{	return *reinterpret_cast<VkVertexInputBindingDivisorDescriptionEXT*>(this);	}
+
 };
 
 /*	VkPipelineVertexInputDivisorStateCreateInfoEXT
@@ -9720,26 +10354,27 @@ public:
 	uint32_t vertexBindingDivisorCount;
 	const S_vertex_input_binding_divisor_description_EXT * pVertexBindingDivisors;
 
-VkPipelineVertexInputDivisorStateCreateInfoEXT*const get_vkptr(){return reinterpret_cast<VkPipelineVertexInputDivisorStateCreateInfoEXT*>(this);}
-
-S_pipeline_vertex_input_divisor_state_create_info_EXT(){}
-
-S_pipeline_vertex_input_divisor_state_create_info_EXT(
-	uint32_t vertexBindingDivisorCount_,
-	const S_vertex_input_binding_divisor_description_EXT * pVertexBindingDivisors_)
-	:vertexBindingDivisorCount(vertexBindingDivisorCount_)
-	,pVertexBindingDivisors(pVertexBindingDivisors_)
-{
-}
-
-S_pipeline_vertex_input_divisor_state_create_info_EXT( VkPipelineVertexInputDivisorStateCreateInfoEXT const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_pipeline_vertex_input_divisor_state_create_info_EXT ) );	}
+operator VkPipelineVertexInputDivisorStateCreateInfoEXT*()
+	{	return reinterpret_cast<VkPipelineVertexInputDivisorStateCreateInfoEXT*>(this);	}
+operator const VkPipelineVertexInputDivisorStateCreateInfoEXT*() const
+	{	return reinterpret_cast<const VkPipelineVertexInputDivisorStateCreateInfoEXT*>(this);	}
 S_pipeline_vertex_input_divisor_state_create_info_EXT& operator=( VkPipelineVertexInputDivisorStateCreateInfoEXT const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_pipeline_vertex_input_divisor_state_create_info_EXT ) ); return *this;	}
 operator VkPipelineVertexInputDivisorStateCreateInfoEXT const&() const 
 	{	return *reinterpret_cast<const VkPipelineVertexInputDivisorStateCreateInfoEXT*>(this);	}
 operator VkPipelineVertexInputDivisorStateCreateInfoEXT &() 
 	{	return *reinterpret_cast<VkPipelineVertexInputDivisorStateCreateInfoEXT*>(this);	}
+
+
+S_pipeline_vertex_input_divisor_state_create_info_EXT(){}
+S_pipeline_vertex_input_divisor_state_create_info_EXT(VkPipelineVertexInputDivisorStateCreateInfoEXT& rhs)
+	{	memcpy( this, &rhs, sizeof( S_pipeline_vertex_input_divisor_state_create_info_EXT ) );	}
+S_pipeline_vertex_input_divisor_state_create_info_EXT(
+	uint32_t vertexBindingDivisorCount_,
+	const S_vertex_input_binding_divisor_description_EXT * pVertexBindingDivisors_)
+	:vertexBindingDivisorCount(vertexBindingDivisorCount_)
+	,pVertexBindingDivisors(pVertexBindingDivisors_)
+{}
 
 friend S_pipeline_vertex_input_state_create_info;
 };
@@ -9762,10 +10397,21 @@ public:
 	uint32_t vertexAttributeDescriptionCount;
 	const S_vertex_input_attribute_description * pVertexAttributeDescriptions;
 
-VkPipelineVertexInputStateCreateInfo*const get_vkptr(){return reinterpret_cast<VkPipelineVertexInputStateCreateInfo*>(this);}
+operator VkPipelineVertexInputStateCreateInfo*()
+	{	return reinterpret_cast<VkPipelineVertexInputStateCreateInfo*>(this);	}
+operator const VkPipelineVertexInputStateCreateInfo*() const
+	{	return reinterpret_cast<const VkPipelineVertexInputStateCreateInfo*>(this);	}
+S_pipeline_vertex_input_state_create_info& operator=( VkPipelineVertexInputStateCreateInfo const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_pipeline_vertex_input_state_create_info ) ); return *this;	}
+operator VkPipelineVertexInputStateCreateInfo const&() const 
+	{	return *reinterpret_cast<const VkPipelineVertexInputStateCreateInfo*>(this);	}
+operator VkPipelineVertexInputStateCreateInfo &() 
+	{	return *reinterpret_cast<VkPipelineVertexInputStateCreateInfo*>(this);	}
+
 
 S_pipeline_vertex_input_state_create_info(){}
-
+S_pipeline_vertex_input_state_create_info(VkPipelineVertexInputStateCreateInfo& rhs)
+	{	memcpy( this, &rhs, sizeof( S_pipeline_vertex_input_state_create_info ) );	}
 S_pipeline_vertex_input_state_create_info(
 	VkPipelineVertexInputStateCreateFlags flags_,
 	uint32_t vertexBindingDescriptionCount_,
@@ -9777,17 +10423,7 @@ S_pipeline_vertex_input_state_create_info(
 	,pVertexBindingDescriptions(pVertexBindingDescriptions_)
 	,vertexAttributeDescriptionCount(vertexAttributeDescriptionCount_)
 	,pVertexAttributeDescriptions(pVertexAttributeDescriptions_)
-{
-}
-
-S_pipeline_vertex_input_state_create_info( VkPipelineVertexInputStateCreateInfo const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_pipeline_vertex_input_state_create_info ) );	}
-S_pipeline_vertex_input_state_create_info& operator=( VkPipelineVertexInputStateCreateInfo const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_pipeline_vertex_input_state_create_info ) ); return *this;	}
-operator VkPipelineVertexInputStateCreateInfo const&() const 
-	{	return *reinterpret_cast<const VkPipelineVertexInputStateCreateInfo*>(this);	}
-operator VkPipelineVertexInputStateCreateInfo &() 
-	{	return *reinterpret_cast<VkPipelineVertexInputStateCreateInfo*>(this);	}
+{}
 
 S_pipeline_vertex_input_state_create_info& n_pipeline_vertex_input_divisor_state_create_info_EXT(S_pipeline_vertex_input_divisor_state_create_info_EXT const& next_);
 };
@@ -9799,7 +10435,7 @@ struct N_pipeline_vertex_input_state_create_info{
 private:
 	void* pNext = nullptr;
 public:
-void* get(){ return pNext; }
+operator void*() { return pNext; }
 N_pipeline_vertex_input_state_create_info& n_pipeline_vertex_input_divisor_state_create_info_EXT(S_pipeline_vertex_input_divisor_state_create_info_EXT const& next_);
 };
 
@@ -9814,10 +10450,21 @@ public:
 	E_primitive_topology topology;
 	VkBool32 primitiveRestartEnable;
 
-VkPipelineInputAssemblyStateCreateInfo*const get_vkptr(){return reinterpret_cast<VkPipelineInputAssemblyStateCreateInfo*>(this);}
+operator VkPipelineInputAssemblyStateCreateInfo*()
+	{	return reinterpret_cast<VkPipelineInputAssemblyStateCreateInfo*>(this);	}
+operator const VkPipelineInputAssemblyStateCreateInfo*() const
+	{	return reinterpret_cast<const VkPipelineInputAssemblyStateCreateInfo*>(this);	}
+S_pipeline_input_assembly_state_create_info& operator=( VkPipelineInputAssemblyStateCreateInfo const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_pipeline_input_assembly_state_create_info ) ); return *this;	}
+operator VkPipelineInputAssemblyStateCreateInfo const&() const 
+	{	return *reinterpret_cast<const VkPipelineInputAssemblyStateCreateInfo*>(this);	}
+operator VkPipelineInputAssemblyStateCreateInfo &() 
+	{	return *reinterpret_cast<VkPipelineInputAssemblyStateCreateInfo*>(this);	}
+
 
 S_pipeline_input_assembly_state_create_info(){}
-
+S_pipeline_input_assembly_state_create_info(VkPipelineInputAssemblyStateCreateInfo& rhs)
+	{	memcpy( this, &rhs, sizeof( S_pipeline_input_assembly_state_create_info ) );	}
 S_pipeline_input_assembly_state_create_info(
 	VkPipelineInputAssemblyStateCreateFlags flags_,
 	E_primitive_topology topology_,
@@ -9825,17 +10472,7 @@ S_pipeline_input_assembly_state_create_info(
 	:flags(flags_)
 	,topology(topology_)
 	,primitiveRestartEnable(primitiveRestartEnable_)
-{
-}
-
-S_pipeline_input_assembly_state_create_info( VkPipelineInputAssemblyStateCreateInfo const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_pipeline_input_assembly_state_create_info ) );	}
-S_pipeline_input_assembly_state_create_info& operator=( VkPipelineInputAssemblyStateCreateInfo const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_pipeline_input_assembly_state_create_info ) ); return *this;	}
-operator VkPipelineInputAssemblyStateCreateInfo const&() const 
-	{	return *reinterpret_cast<const VkPipelineInputAssemblyStateCreateInfo*>(this);	}
-operator VkPipelineInputAssemblyStateCreateInfo &() 
-	{	return *reinterpret_cast<VkPipelineInputAssemblyStateCreateInfo*>(this);	}
+{}
 };
 static_assert(
 	sizeof(S_pipeline_input_assembly_state_create_info) == sizeof(VkPipelineInputAssemblyStateCreateInfo),
@@ -9851,24 +10488,25 @@ private:
 public:
 	E_tessellation_domain_origin domainOrigin;
 
-VkPipelineTessellationDomainOriginStateCreateInfo*const get_vkptr(){return reinterpret_cast<VkPipelineTessellationDomainOriginStateCreateInfo*>(this);}
-
-S_pipeline_tessellation_domain_origin_state_create_info(){}
-
-S_pipeline_tessellation_domain_origin_state_create_info(
-	E_tessellation_domain_origin domainOrigin_)
-	:domainOrigin(domainOrigin_)
-{
-}
-
-S_pipeline_tessellation_domain_origin_state_create_info( VkPipelineTessellationDomainOriginStateCreateInfo const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_pipeline_tessellation_domain_origin_state_create_info ) );	}
+operator VkPipelineTessellationDomainOriginStateCreateInfo*()
+	{	return reinterpret_cast<VkPipelineTessellationDomainOriginStateCreateInfo*>(this);	}
+operator const VkPipelineTessellationDomainOriginStateCreateInfo*() const
+	{	return reinterpret_cast<const VkPipelineTessellationDomainOriginStateCreateInfo*>(this);	}
 S_pipeline_tessellation_domain_origin_state_create_info& operator=( VkPipelineTessellationDomainOriginStateCreateInfo const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_pipeline_tessellation_domain_origin_state_create_info ) ); return *this;	}
 operator VkPipelineTessellationDomainOriginStateCreateInfo const&() const 
 	{	return *reinterpret_cast<const VkPipelineTessellationDomainOriginStateCreateInfo*>(this);	}
 operator VkPipelineTessellationDomainOriginStateCreateInfo &() 
 	{	return *reinterpret_cast<VkPipelineTessellationDomainOriginStateCreateInfo*>(this);	}
+
+
+S_pipeline_tessellation_domain_origin_state_create_info(){}
+S_pipeline_tessellation_domain_origin_state_create_info(VkPipelineTessellationDomainOriginStateCreateInfo& rhs)
+	{	memcpy( this, &rhs, sizeof( S_pipeline_tessellation_domain_origin_state_create_info ) );	}
+S_pipeline_tessellation_domain_origin_state_create_info(
+	E_tessellation_domain_origin domainOrigin_)
+	:domainOrigin(domainOrigin_)
+{}
 
 friend S_pipeline_tessellation_state_create_info;
 };
@@ -9888,26 +10526,27 @@ public:
 	VkPipelineTessellationStateCreateFlags flags;
 	uint32_t patchControlPoints;
 
-VkPipelineTessellationStateCreateInfo*const get_vkptr(){return reinterpret_cast<VkPipelineTessellationStateCreateInfo*>(this);}
-
-S_pipeline_tessellation_state_create_info(){}
-
-S_pipeline_tessellation_state_create_info(
-	VkPipelineTessellationStateCreateFlags flags_,
-	uint32_t patchControlPoints_)
-	:flags(flags_)
-	,patchControlPoints(patchControlPoints_)
-{
-}
-
-S_pipeline_tessellation_state_create_info( VkPipelineTessellationStateCreateInfo const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_pipeline_tessellation_state_create_info ) );	}
+operator VkPipelineTessellationStateCreateInfo*()
+	{	return reinterpret_cast<VkPipelineTessellationStateCreateInfo*>(this);	}
+operator const VkPipelineTessellationStateCreateInfo*() const
+	{	return reinterpret_cast<const VkPipelineTessellationStateCreateInfo*>(this);	}
 S_pipeline_tessellation_state_create_info& operator=( VkPipelineTessellationStateCreateInfo const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_pipeline_tessellation_state_create_info ) ); return *this;	}
 operator VkPipelineTessellationStateCreateInfo const&() const 
 	{	return *reinterpret_cast<const VkPipelineTessellationStateCreateInfo*>(this);	}
 operator VkPipelineTessellationStateCreateInfo &() 
 	{	return *reinterpret_cast<VkPipelineTessellationStateCreateInfo*>(this);	}
+
+
+S_pipeline_tessellation_state_create_info(){}
+S_pipeline_tessellation_state_create_info(VkPipelineTessellationStateCreateInfo& rhs)
+	{	memcpy( this, &rhs, sizeof( S_pipeline_tessellation_state_create_info ) );	}
+S_pipeline_tessellation_state_create_info(
+	VkPipelineTessellationStateCreateFlags flags_,
+	uint32_t patchControlPoints_)
+	:flags(flags_)
+	,patchControlPoints(patchControlPoints_)
+{}
 
 S_pipeline_tessellation_state_create_info& n_pipeline_tessellation_domain_origin_state_create_info(S_pipeline_tessellation_domain_origin_state_create_info const& next_);
 };
@@ -9919,7 +10558,7 @@ struct N_pipeline_tessellation_state_create_info{
 private:
 	void* pNext = nullptr;
 public:
-void* get(){ return pNext; }
+operator void*() { return pNext; }
 N_pipeline_tessellation_state_create_info& n_pipeline_tessellation_domain_origin_state_create_info(S_pipeline_tessellation_domain_origin_state_create_info const& next_);
 };
 
@@ -9929,7 +10568,17 @@ struct		S_viewport_w_scaling_NV{
 	float xcoeff;
 	float ycoeff;
 
-VkViewportWScalingNV*const get_vkptr(){return reinterpret_cast<VkViewportWScalingNV*>(this);}
+operator VkViewportWScalingNV*()
+	{	return reinterpret_cast<VkViewportWScalingNV*>(this);	}
+operator const VkViewportWScalingNV*() const
+	{	return reinterpret_cast<const VkViewportWScalingNV*>(this);	}
+S_viewport_w_scaling_NV& operator=( VkViewportWScalingNV const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_viewport_w_scaling_NV ) ); return *this;	}
+operator VkViewportWScalingNV const&() const 
+	{	return *reinterpret_cast<const VkViewportWScalingNV*>(this);	}
+operator VkViewportWScalingNV &() 
+	{	return *reinterpret_cast<VkViewportWScalingNV*>(this);	}
+
 };
 
 /*	VkPipelineViewportWScalingStateCreateInfoNV
@@ -9944,10 +10593,21 @@ public:
 	uint32_t viewportCount;
 	const S_viewport_w_scaling_NV * pViewportWScalings;
 
-VkPipelineViewportWScalingStateCreateInfoNV*const get_vkptr(){return reinterpret_cast<VkPipelineViewportWScalingStateCreateInfoNV*>(this);}
+operator VkPipelineViewportWScalingStateCreateInfoNV*()
+	{	return reinterpret_cast<VkPipelineViewportWScalingStateCreateInfoNV*>(this);	}
+operator const VkPipelineViewportWScalingStateCreateInfoNV*() const
+	{	return reinterpret_cast<const VkPipelineViewportWScalingStateCreateInfoNV*>(this);	}
+S_pipeline_viewport_w_scaling_state_create_info_NV& operator=( VkPipelineViewportWScalingStateCreateInfoNV const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_pipeline_viewport_w_scaling_state_create_info_NV ) ); return *this;	}
+operator VkPipelineViewportWScalingStateCreateInfoNV const&() const 
+	{	return *reinterpret_cast<const VkPipelineViewportWScalingStateCreateInfoNV*>(this);	}
+operator VkPipelineViewportWScalingStateCreateInfoNV &() 
+	{	return *reinterpret_cast<VkPipelineViewportWScalingStateCreateInfoNV*>(this);	}
+
 
 S_pipeline_viewport_w_scaling_state_create_info_NV(){}
-
+S_pipeline_viewport_w_scaling_state_create_info_NV(VkPipelineViewportWScalingStateCreateInfoNV& rhs)
+	{	memcpy( this, &rhs, sizeof( S_pipeline_viewport_w_scaling_state_create_info_NV ) );	}
 S_pipeline_viewport_w_scaling_state_create_info_NV(
 	VkBool32 viewportWScalingEnable_,
 	uint32_t viewportCount_,
@@ -9955,17 +10615,7 @@ S_pipeline_viewport_w_scaling_state_create_info_NV(
 	:viewportWScalingEnable(viewportWScalingEnable_)
 	,viewportCount(viewportCount_)
 	,pViewportWScalings(pViewportWScalings_)
-{
-}
-
-S_pipeline_viewport_w_scaling_state_create_info_NV( VkPipelineViewportWScalingStateCreateInfoNV const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_pipeline_viewport_w_scaling_state_create_info_NV ) );	}
-S_pipeline_viewport_w_scaling_state_create_info_NV& operator=( VkPipelineViewportWScalingStateCreateInfoNV const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_pipeline_viewport_w_scaling_state_create_info_NV ) ); return *this;	}
-operator VkPipelineViewportWScalingStateCreateInfoNV const&() const 
-	{	return *reinterpret_cast<const VkPipelineViewportWScalingStateCreateInfoNV*>(this);	}
-operator VkPipelineViewportWScalingStateCreateInfoNV &() 
-	{	return *reinterpret_cast<VkPipelineViewportWScalingStateCreateInfoNV*>(this);	}
+{}
 
 friend S_pipeline_viewport_state_create_info;
 };
@@ -9981,7 +10631,17 @@ struct		S_viewport_swizzle_NV{
 	E_viewport_coordinate_swizzle_NV z;
 	E_viewport_coordinate_swizzle_NV w;
 
-VkViewportSwizzleNV*const get_vkptr(){return reinterpret_cast<VkViewportSwizzleNV*>(this);}
+operator VkViewportSwizzleNV*()
+	{	return reinterpret_cast<VkViewportSwizzleNV*>(this);	}
+operator const VkViewportSwizzleNV*() const
+	{	return reinterpret_cast<const VkViewportSwizzleNV*>(this);	}
+S_viewport_swizzle_NV& operator=( VkViewportSwizzleNV const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_viewport_swizzle_NV ) ); return *this;	}
+operator VkViewportSwizzleNV const&() const 
+	{	return *reinterpret_cast<const VkViewportSwizzleNV*>(this);	}
+operator VkViewportSwizzleNV &() 
+	{	return *reinterpret_cast<VkViewportSwizzleNV*>(this);	}
+
 };
 
 /*	VkPipelineViewportSwizzleStateCreateInfoNV
@@ -9996,10 +10656,21 @@ public:
 	uint32_t viewportCount;
 	const S_viewport_swizzle_NV * pViewportSwizzles;
 
-VkPipelineViewportSwizzleStateCreateInfoNV*const get_vkptr(){return reinterpret_cast<VkPipelineViewportSwizzleStateCreateInfoNV*>(this);}
+operator VkPipelineViewportSwizzleStateCreateInfoNV*()
+	{	return reinterpret_cast<VkPipelineViewportSwizzleStateCreateInfoNV*>(this);	}
+operator const VkPipelineViewportSwizzleStateCreateInfoNV*() const
+	{	return reinterpret_cast<const VkPipelineViewportSwizzleStateCreateInfoNV*>(this);	}
+S_pipeline_viewport_swizzle_state_create_info_NV& operator=( VkPipelineViewportSwizzleStateCreateInfoNV const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_pipeline_viewport_swizzle_state_create_info_NV ) ); return *this;	}
+operator VkPipelineViewportSwizzleStateCreateInfoNV const&() const 
+	{	return *reinterpret_cast<const VkPipelineViewportSwizzleStateCreateInfoNV*>(this);	}
+operator VkPipelineViewportSwizzleStateCreateInfoNV &() 
+	{	return *reinterpret_cast<VkPipelineViewportSwizzleStateCreateInfoNV*>(this);	}
+
 
 S_pipeline_viewport_swizzle_state_create_info_NV(){}
-
+S_pipeline_viewport_swizzle_state_create_info_NV(VkPipelineViewportSwizzleStateCreateInfoNV& rhs)
+	{	memcpy( this, &rhs, sizeof( S_pipeline_viewport_swizzle_state_create_info_NV ) );	}
 S_pipeline_viewport_swizzle_state_create_info_NV(
 	VkPipelineViewportSwizzleStateCreateFlagsNV flags_,
 	uint32_t viewportCount_,
@@ -10007,17 +10678,7 @@ S_pipeline_viewport_swizzle_state_create_info_NV(
 	:flags(flags_)
 	,viewportCount(viewportCount_)
 	,pViewportSwizzles(pViewportSwizzles_)
-{
-}
-
-S_pipeline_viewport_swizzle_state_create_info_NV( VkPipelineViewportSwizzleStateCreateInfoNV const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_pipeline_viewport_swizzle_state_create_info_NV ) );	}
-S_pipeline_viewport_swizzle_state_create_info_NV& operator=( VkPipelineViewportSwizzleStateCreateInfoNV const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_pipeline_viewport_swizzle_state_create_info_NV ) ); return *this;	}
-operator VkPipelineViewportSwizzleStateCreateInfoNV const&() const 
-	{	return *reinterpret_cast<const VkPipelineViewportSwizzleStateCreateInfoNV*>(this);	}
-operator VkPipelineViewportSwizzleStateCreateInfoNV &() 
-	{	return *reinterpret_cast<VkPipelineViewportSwizzleStateCreateInfoNV*>(this);	}
+{}
 
 friend S_pipeline_viewport_state_create_info;
 };
@@ -10036,26 +10697,27 @@ public:
 	uint32_t exclusiveScissorCount;
 	const S_rect_2d * pExclusiveScissors;
 
-VkPipelineViewportExclusiveScissorStateCreateInfoNV*const get_vkptr(){return reinterpret_cast<VkPipelineViewportExclusiveScissorStateCreateInfoNV*>(this);}
-
-S_pipeline_viewport_exclusive_scissor_state_create_info_NV(){}
-
-S_pipeline_viewport_exclusive_scissor_state_create_info_NV(
-	uint32_t exclusiveScissorCount_,
-	const S_rect_2d * pExclusiveScissors_)
-	:exclusiveScissorCount(exclusiveScissorCount_)
-	,pExclusiveScissors(pExclusiveScissors_)
-{
-}
-
-S_pipeline_viewport_exclusive_scissor_state_create_info_NV( VkPipelineViewportExclusiveScissorStateCreateInfoNV const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_pipeline_viewport_exclusive_scissor_state_create_info_NV ) );	}
+operator VkPipelineViewportExclusiveScissorStateCreateInfoNV*()
+	{	return reinterpret_cast<VkPipelineViewportExclusiveScissorStateCreateInfoNV*>(this);	}
+operator const VkPipelineViewportExclusiveScissorStateCreateInfoNV*() const
+	{	return reinterpret_cast<const VkPipelineViewportExclusiveScissorStateCreateInfoNV*>(this);	}
 S_pipeline_viewport_exclusive_scissor_state_create_info_NV& operator=( VkPipelineViewportExclusiveScissorStateCreateInfoNV const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_pipeline_viewport_exclusive_scissor_state_create_info_NV ) ); return *this;	}
 operator VkPipelineViewportExclusiveScissorStateCreateInfoNV const&() const 
 	{	return *reinterpret_cast<const VkPipelineViewportExclusiveScissorStateCreateInfoNV*>(this);	}
 operator VkPipelineViewportExclusiveScissorStateCreateInfoNV &() 
 	{	return *reinterpret_cast<VkPipelineViewportExclusiveScissorStateCreateInfoNV*>(this);	}
+
+
+S_pipeline_viewport_exclusive_scissor_state_create_info_NV(){}
+S_pipeline_viewport_exclusive_scissor_state_create_info_NV(VkPipelineViewportExclusiveScissorStateCreateInfoNV& rhs)
+	{	memcpy( this, &rhs, sizeof( S_pipeline_viewport_exclusive_scissor_state_create_info_NV ) );	}
+S_pipeline_viewport_exclusive_scissor_state_create_info_NV(
+	uint32_t exclusiveScissorCount_,
+	const S_rect_2d * pExclusiveScissors_)
+	:exclusiveScissorCount(exclusiveScissorCount_)
+	,pExclusiveScissors(pExclusiveScissors_)
+{}
 
 friend S_pipeline_viewport_state_create_info;
 };
@@ -10069,7 +10731,17 @@ struct		S_shading_rate_palette_NV{
 	uint32_t shadingRatePaletteEntryCount;
 	const E_shading_rate_palette_entry_NV * pShadingRatePaletteEntries;
 
-VkShadingRatePaletteNV*const get_vkptr(){return reinterpret_cast<VkShadingRatePaletteNV*>(this);}
+operator VkShadingRatePaletteNV*()
+	{	return reinterpret_cast<VkShadingRatePaletteNV*>(this);	}
+operator const VkShadingRatePaletteNV*() const
+	{	return reinterpret_cast<const VkShadingRatePaletteNV*>(this);	}
+S_shading_rate_palette_NV& operator=( VkShadingRatePaletteNV const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_shading_rate_palette_NV ) ); return *this;	}
+operator VkShadingRatePaletteNV const&() const 
+	{	return *reinterpret_cast<const VkShadingRatePaletteNV*>(this);	}
+operator VkShadingRatePaletteNV &() 
+	{	return *reinterpret_cast<VkShadingRatePaletteNV*>(this);	}
+
 };
 
 /*	VkPipelineViewportShadingRateImageStateCreateInfoNV
@@ -10084,10 +10756,21 @@ public:
 	uint32_t viewportCount;
 	const S_shading_rate_palette_NV * pShadingRatePalettes;
 
-VkPipelineViewportShadingRateImageStateCreateInfoNV*const get_vkptr(){return reinterpret_cast<VkPipelineViewportShadingRateImageStateCreateInfoNV*>(this);}
+operator VkPipelineViewportShadingRateImageStateCreateInfoNV*()
+	{	return reinterpret_cast<VkPipelineViewportShadingRateImageStateCreateInfoNV*>(this);	}
+operator const VkPipelineViewportShadingRateImageStateCreateInfoNV*() const
+	{	return reinterpret_cast<const VkPipelineViewportShadingRateImageStateCreateInfoNV*>(this);	}
+S_pipeline_viewport_shading_rate_image_state_create_info_NV& operator=( VkPipelineViewportShadingRateImageStateCreateInfoNV const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_pipeline_viewport_shading_rate_image_state_create_info_NV ) ); return *this;	}
+operator VkPipelineViewportShadingRateImageStateCreateInfoNV const&() const 
+	{	return *reinterpret_cast<const VkPipelineViewportShadingRateImageStateCreateInfoNV*>(this);	}
+operator VkPipelineViewportShadingRateImageStateCreateInfoNV &() 
+	{	return *reinterpret_cast<VkPipelineViewportShadingRateImageStateCreateInfoNV*>(this);	}
+
 
 S_pipeline_viewport_shading_rate_image_state_create_info_NV(){}
-
+S_pipeline_viewport_shading_rate_image_state_create_info_NV(VkPipelineViewportShadingRateImageStateCreateInfoNV& rhs)
+	{	memcpy( this, &rhs, sizeof( S_pipeline_viewport_shading_rate_image_state_create_info_NV ) );	}
 S_pipeline_viewport_shading_rate_image_state_create_info_NV(
 	VkBool32 shadingRateImageEnable_,
 	uint32_t viewportCount_,
@@ -10095,17 +10778,7 @@ S_pipeline_viewport_shading_rate_image_state_create_info_NV(
 	:shadingRateImageEnable(shadingRateImageEnable_)
 	,viewportCount(viewportCount_)
 	,pShadingRatePalettes(pShadingRatePalettes_)
-{
-}
-
-S_pipeline_viewport_shading_rate_image_state_create_info_NV( VkPipelineViewportShadingRateImageStateCreateInfoNV const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_pipeline_viewport_shading_rate_image_state_create_info_NV ) );	}
-S_pipeline_viewport_shading_rate_image_state_create_info_NV& operator=( VkPipelineViewportShadingRateImageStateCreateInfoNV const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_pipeline_viewport_shading_rate_image_state_create_info_NV ) ); return *this;	}
-operator VkPipelineViewportShadingRateImageStateCreateInfoNV const&() const 
-	{	return *reinterpret_cast<const VkPipelineViewportShadingRateImageStateCreateInfoNV*>(this);	}
-operator VkPipelineViewportShadingRateImageStateCreateInfoNV &() 
-	{	return *reinterpret_cast<VkPipelineViewportShadingRateImageStateCreateInfoNV*>(this);	}
+{}
 
 friend S_pipeline_viewport_state_create_info;
 };
@@ -10120,7 +10793,17 @@ struct		S_coarse_sample_location_NV{
 	uint32_t pixelY;
 	uint32_t sample;
 
-VkCoarseSampleLocationNV*const get_vkptr(){return reinterpret_cast<VkCoarseSampleLocationNV*>(this);}
+operator VkCoarseSampleLocationNV*()
+	{	return reinterpret_cast<VkCoarseSampleLocationNV*>(this);	}
+operator const VkCoarseSampleLocationNV*() const
+	{	return reinterpret_cast<const VkCoarseSampleLocationNV*>(this);	}
+S_coarse_sample_location_NV& operator=( VkCoarseSampleLocationNV const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_coarse_sample_location_NV ) ); return *this;	}
+operator VkCoarseSampleLocationNV const&() const 
+	{	return *reinterpret_cast<const VkCoarseSampleLocationNV*>(this);	}
+operator VkCoarseSampleLocationNV &() 
+	{	return *reinterpret_cast<VkCoarseSampleLocationNV*>(this);	}
+
 };
 
 /*	VkCoarseSampleOrderCustomNV
@@ -10131,7 +10814,17 @@ struct		S_coarse_sample_order_custom_NV{
 	uint32_t sampleLocationCount;
 	const S_coarse_sample_location_NV * pSampleLocations;
 
-VkCoarseSampleOrderCustomNV*const get_vkptr(){return reinterpret_cast<VkCoarseSampleOrderCustomNV*>(this);}
+operator VkCoarseSampleOrderCustomNV*()
+	{	return reinterpret_cast<VkCoarseSampleOrderCustomNV*>(this);	}
+operator const VkCoarseSampleOrderCustomNV*() const
+	{	return reinterpret_cast<const VkCoarseSampleOrderCustomNV*>(this);	}
+S_coarse_sample_order_custom_NV& operator=( VkCoarseSampleOrderCustomNV const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_coarse_sample_order_custom_NV ) ); return *this;	}
+operator VkCoarseSampleOrderCustomNV const&() const 
+	{	return *reinterpret_cast<const VkCoarseSampleOrderCustomNV*>(this);	}
+operator VkCoarseSampleOrderCustomNV &() 
+	{	return *reinterpret_cast<VkCoarseSampleOrderCustomNV*>(this);	}
+
 };
 
 /*	VkPipelineViewportCoarseSampleOrderStateCreateInfoNV
@@ -10146,10 +10839,21 @@ public:
 	uint32_t customSampleOrderCount;
 	const S_coarse_sample_order_custom_NV * pCustomSampleOrders;
 
-VkPipelineViewportCoarseSampleOrderStateCreateInfoNV*const get_vkptr(){return reinterpret_cast<VkPipelineViewportCoarseSampleOrderStateCreateInfoNV*>(this);}
+operator VkPipelineViewportCoarseSampleOrderStateCreateInfoNV*()
+	{	return reinterpret_cast<VkPipelineViewportCoarseSampleOrderStateCreateInfoNV*>(this);	}
+operator const VkPipelineViewportCoarseSampleOrderStateCreateInfoNV*() const
+	{	return reinterpret_cast<const VkPipelineViewportCoarseSampleOrderStateCreateInfoNV*>(this);	}
+S_pipeline_viewport_coarse_sample_order_state_create_info_NV& operator=( VkPipelineViewportCoarseSampleOrderStateCreateInfoNV const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_pipeline_viewport_coarse_sample_order_state_create_info_NV ) ); return *this;	}
+operator VkPipelineViewportCoarseSampleOrderStateCreateInfoNV const&() const 
+	{	return *reinterpret_cast<const VkPipelineViewportCoarseSampleOrderStateCreateInfoNV*>(this);	}
+operator VkPipelineViewportCoarseSampleOrderStateCreateInfoNV &() 
+	{	return *reinterpret_cast<VkPipelineViewportCoarseSampleOrderStateCreateInfoNV*>(this);	}
+
 
 S_pipeline_viewport_coarse_sample_order_state_create_info_NV(){}
-
+S_pipeline_viewport_coarse_sample_order_state_create_info_NV(VkPipelineViewportCoarseSampleOrderStateCreateInfoNV& rhs)
+	{	memcpy( this, &rhs, sizeof( S_pipeline_viewport_coarse_sample_order_state_create_info_NV ) );	}
 S_pipeline_viewport_coarse_sample_order_state_create_info_NV(
 	E_coarse_sample_order_type_NV sampleOrderType_,
 	uint32_t customSampleOrderCount_,
@@ -10157,17 +10861,7 @@ S_pipeline_viewport_coarse_sample_order_state_create_info_NV(
 	:sampleOrderType(sampleOrderType_)
 	,customSampleOrderCount(customSampleOrderCount_)
 	,pCustomSampleOrders(pCustomSampleOrders_)
-{
-}
-
-S_pipeline_viewport_coarse_sample_order_state_create_info_NV( VkPipelineViewportCoarseSampleOrderStateCreateInfoNV const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_pipeline_viewport_coarse_sample_order_state_create_info_NV ) );	}
-S_pipeline_viewport_coarse_sample_order_state_create_info_NV& operator=( VkPipelineViewportCoarseSampleOrderStateCreateInfoNV const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_pipeline_viewport_coarse_sample_order_state_create_info_NV ) ); return *this;	}
-operator VkPipelineViewportCoarseSampleOrderStateCreateInfoNV const&() const 
-	{	return *reinterpret_cast<const VkPipelineViewportCoarseSampleOrderStateCreateInfoNV*>(this);	}
-operator VkPipelineViewportCoarseSampleOrderStateCreateInfoNV &() 
-	{	return *reinterpret_cast<VkPipelineViewportCoarseSampleOrderStateCreateInfoNV*>(this);	}
+{}
 
 friend S_pipeline_viewport_state_create_info;
 };
@@ -10194,10 +10888,21 @@ public:
 	uint32_t scissorCount;
 	const S_rect_2d * pScissors;
 
-VkPipelineViewportStateCreateInfo*const get_vkptr(){return reinterpret_cast<VkPipelineViewportStateCreateInfo*>(this);}
+operator VkPipelineViewportStateCreateInfo*()
+	{	return reinterpret_cast<VkPipelineViewportStateCreateInfo*>(this);	}
+operator const VkPipelineViewportStateCreateInfo*() const
+	{	return reinterpret_cast<const VkPipelineViewportStateCreateInfo*>(this);	}
+S_pipeline_viewport_state_create_info& operator=( VkPipelineViewportStateCreateInfo const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_pipeline_viewport_state_create_info ) ); return *this;	}
+operator VkPipelineViewportStateCreateInfo const&() const 
+	{	return *reinterpret_cast<const VkPipelineViewportStateCreateInfo*>(this);	}
+operator VkPipelineViewportStateCreateInfo &() 
+	{	return *reinterpret_cast<VkPipelineViewportStateCreateInfo*>(this);	}
+
 
 S_pipeline_viewport_state_create_info(){}
-
+S_pipeline_viewport_state_create_info(VkPipelineViewportStateCreateInfo& rhs)
+	{	memcpy( this, &rhs, sizeof( S_pipeline_viewport_state_create_info ) );	}
 S_pipeline_viewport_state_create_info(
 	VkPipelineViewportStateCreateFlags flags_,
 	uint32_t viewportCount_,
@@ -10209,17 +10914,7 @@ S_pipeline_viewport_state_create_info(
 	,pViewports(pViewports_)
 	,scissorCount(scissorCount_)
 	,pScissors(pScissors_)
-{
-}
-
-S_pipeline_viewport_state_create_info( VkPipelineViewportStateCreateInfo const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_pipeline_viewport_state_create_info ) );	}
-S_pipeline_viewport_state_create_info& operator=( VkPipelineViewportStateCreateInfo const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_pipeline_viewport_state_create_info ) ); return *this;	}
-operator VkPipelineViewportStateCreateInfo const&() const 
-	{	return *reinterpret_cast<const VkPipelineViewportStateCreateInfo*>(this);	}
-operator VkPipelineViewportStateCreateInfo &() 
-	{	return *reinterpret_cast<VkPipelineViewportStateCreateInfo*>(this);	}
+{}
 
 S_pipeline_viewport_state_create_info& n_pipeline_viewport_w_scaling_state_create_info_NV(S_pipeline_viewport_w_scaling_state_create_info_NV const& next_);
 S_pipeline_viewport_state_create_info& n_pipeline_viewport_swizzle_state_create_info_NV(S_pipeline_viewport_swizzle_state_create_info_NV const& next_);
@@ -10235,7 +10930,7 @@ struct N_pipeline_viewport_state_create_info{
 private:
 	void* pNext = nullptr;
 public:
-void* get(){ return pNext; }
+operator void*() { return pNext; }
 N_pipeline_viewport_state_create_info& n_pipeline_viewport_w_scaling_state_create_info_NV(S_pipeline_viewport_w_scaling_state_create_info_NV const& next_);
 N_pipeline_viewport_state_create_info& n_pipeline_viewport_swizzle_state_create_info_NV(S_pipeline_viewport_swizzle_state_create_info_NV const& next_);
 N_pipeline_viewport_state_create_info& n_pipeline_viewport_exclusive_scissor_state_create_info_NV(S_pipeline_viewport_exclusive_scissor_state_create_info_NV const& next_);
@@ -10253,24 +10948,25 @@ private:
 public:
 	E_rasterization_order_AMD rasterizationOrder;
 
-VkPipelineRasterizationStateRasterizationOrderAMD*const get_vkptr(){return reinterpret_cast<VkPipelineRasterizationStateRasterizationOrderAMD*>(this);}
-
-S_pipeline_rasterization_state_rasterization_order_AMD(){}
-
-S_pipeline_rasterization_state_rasterization_order_AMD(
-	E_rasterization_order_AMD rasterizationOrder_)
-	:rasterizationOrder(rasterizationOrder_)
-{
-}
-
-S_pipeline_rasterization_state_rasterization_order_AMD( VkPipelineRasterizationStateRasterizationOrderAMD const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_pipeline_rasterization_state_rasterization_order_AMD ) );	}
+operator VkPipelineRasterizationStateRasterizationOrderAMD*()
+	{	return reinterpret_cast<VkPipelineRasterizationStateRasterizationOrderAMD*>(this);	}
+operator const VkPipelineRasterizationStateRasterizationOrderAMD*() const
+	{	return reinterpret_cast<const VkPipelineRasterizationStateRasterizationOrderAMD*>(this);	}
 S_pipeline_rasterization_state_rasterization_order_AMD& operator=( VkPipelineRasterizationStateRasterizationOrderAMD const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_pipeline_rasterization_state_rasterization_order_AMD ) ); return *this;	}
 operator VkPipelineRasterizationStateRasterizationOrderAMD const&() const 
 	{	return *reinterpret_cast<const VkPipelineRasterizationStateRasterizationOrderAMD*>(this);	}
 operator VkPipelineRasterizationStateRasterizationOrderAMD &() 
 	{	return *reinterpret_cast<VkPipelineRasterizationStateRasterizationOrderAMD*>(this);	}
+
+
+S_pipeline_rasterization_state_rasterization_order_AMD(){}
+S_pipeline_rasterization_state_rasterization_order_AMD(VkPipelineRasterizationStateRasterizationOrderAMD& rhs)
+	{	memcpy( this, &rhs, sizeof( S_pipeline_rasterization_state_rasterization_order_AMD ) );	}
+S_pipeline_rasterization_state_rasterization_order_AMD(
+	E_rasterization_order_AMD rasterizationOrder_)
+	:rasterizationOrder(rasterizationOrder_)
+{}
 
 friend S_pipeline_rasterization_state_create_info;
 };
@@ -10290,10 +10986,21 @@ public:
 	E_conservative_rasterization_mode_EXT conservativeRasterizationMode;
 	float extraPrimitiveOverestimationSize;
 
-VkPipelineRasterizationConservativeStateCreateInfoEXT*const get_vkptr(){return reinterpret_cast<VkPipelineRasterizationConservativeStateCreateInfoEXT*>(this);}
+operator VkPipelineRasterizationConservativeStateCreateInfoEXT*()
+	{	return reinterpret_cast<VkPipelineRasterizationConservativeStateCreateInfoEXT*>(this);	}
+operator const VkPipelineRasterizationConservativeStateCreateInfoEXT*() const
+	{	return reinterpret_cast<const VkPipelineRasterizationConservativeStateCreateInfoEXT*>(this);	}
+S_pipeline_rasterization_conservative_state_create_info_EXT& operator=( VkPipelineRasterizationConservativeStateCreateInfoEXT const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_pipeline_rasterization_conservative_state_create_info_EXT ) ); return *this;	}
+operator VkPipelineRasterizationConservativeStateCreateInfoEXT const&() const 
+	{	return *reinterpret_cast<const VkPipelineRasterizationConservativeStateCreateInfoEXT*>(this);	}
+operator VkPipelineRasterizationConservativeStateCreateInfoEXT &() 
+	{	return *reinterpret_cast<VkPipelineRasterizationConservativeStateCreateInfoEXT*>(this);	}
+
 
 S_pipeline_rasterization_conservative_state_create_info_EXT(){}
-
+S_pipeline_rasterization_conservative_state_create_info_EXT(VkPipelineRasterizationConservativeStateCreateInfoEXT& rhs)
+	{	memcpy( this, &rhs, sizeof( S_pipeline_rasterization_conservative_state_create_info_EXT ) );	}
 S_pipeline_rasterization_conservative_state_create_info_EXT(
 	VkPipelineRasterizationConservativeStateCreateFlagsEXT flags_,
 	E_conservative_rasterization_mode_EXT conservativeRasterizationMode_,
@@ -10301,17 +11008,7 @@ S_pipeline_rasterization_conservative_state_create_info_EXT(
 	:flags(flags_)
 	,conservativeRasterizationMode(conservativeRasterizationMode_)
 	,extraPrimitiveOverestimationSize(extraPrimitiveOverestimationSize_)
-{
-}
-
-S_pipeline_rasterization_conservative_state_create_info_EXT( VkPipelineRasterizationConservativeStateCreateInfoEXT const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_pipeline_rasterization_conservative_state_create_info_EXT ) );	}
-S_pipeline_rasterization_conservative_state_create_info_EXT& operator=( VkPipelineRasterizationConservativeStateCreateInfoEXT const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_pipeline_rasterization_conservative_state_create_info_EXT ) ); return *this;	}
-operator VkPipelineRasterizationConservativeStateCreateInfoEXT const&() const 
-	{	return *reinterpret_cast<const VkPipelineRasterizationConservativeStateCreateInfoEXT*>(this);	}
-operator VkPipelineRasterizationConservativeStateCreateInfoEXT &() 
-	{	return *reinterpret_cast<VkPipelineRasterizationConservativeStateCreateInfoEXT*>(this);	}
+{}
 
 friend S_pipeline_rasterization_state_create_info;
 };
@@ -10341,10 +11038,21 @@ public:
 	float depthBiasSlopeFactor;
 	float lineWidth;
 
-VkPipelineRasterizationStateCreateInfo*const get_vkptr(){return reinterpret_cast<VkPipelineRasterizationStateCreateInfo*>(this);}
+operator VkPipelineRasterizationStateCreateInfo*()
+	{	return reinterpret_cast<VkPipelineRasterizationStateCreateInfo*>(this);	}
+operator const VkPipelineRasterizationStateCreateInfo*() const
+	{	return reinterpret_cast<const VkPipelineRasterizationStateCreateInfo*>(this);	}
+S_pipeline_rasterization_state_create_info& operator=( VkPipelineRasterizationStateCreateInfo const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_pipeline_rasterization_state_create_info ) ); return *this;	}
+operator VkPipelineRasterizationStateCreateInfo const&() const 
+	{	return *reinterpret_cast<const VkPipelineRasterizationStateCreateInfo*>(this);	}
+operator VkPipelineRasterizationStateCreateInfo &() 
+	{	return *reinterpret_cast<VkPipelineRasterizationStateCreateInfo*>(this);	}
+
 
 S_pipeline_rasterization_state_create_info(){}
-
+S_pipeline_rasterization_state_create_info(VkPipelineRasterizationStateCreateInfo& rhs)
+	{	memcpy( this, &rhs, sizeof( S_pipeline_rasterization_state_create_info ) );	}
 S_pipeline_rasterization_state_create_info(
 	VkPipelineRasterizationStateCreateFlags flags_,
 	VkBool32 depthClampEnable_,
@@ -10368,17 +11076,7 @@ S_pipeline_rasterization_state_create_info(
 	,depthBiasClamp(depthBiasClamp_)
 	,depthBiasSlopeFactor(depthBiasSlopeFactor_)
 	,lineWidth(lineWidth_)
-{
-}
-
-S_pipeline_rasterization_state_create_info( VkPipelineRasterizationStateCreateInfo const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_pipeline_rasterization_state_create_info ) );	}
-S_pipeline_rasterization_state_create_info& operator=( VkPipelineRasterizationStateCreateInfo const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_pipeline_rasterization_state_create_info ) ); return *this;	}
-operator VkPipelineRasterizationStateCreateInfo const&() const 
-	{	return *reinterpret_cast<const VkPipelineRasterizationStateCreateInfo*>(this);	}
-operator VkPipelineRasterizationStateCreateInfo &() 
-	{	return *reinterpret_cast<VkPipelineRasterizationStateCreateInfo*>(this);	}
+{}
 
 S_pipeline_rasterization_state_create_info& n_pipeline_rasterization_state_rasterization_order_AMD(S_pipeline_rasterization_state_rasterization_order_AMD const& next_);
 S_pipeline_rasterization_state_create_info& n_pipeline_rasterization_conservative_state_create_info_EXT(S_pipeline_rasterization_conservative_state_create_info_EXT const& next_);
@@ -10391,7 +11089,7 @@ struct N_pipeline_rasterization_state_create_info{
 private:
 	void* pNext = nullptr;
 public:
-void* get(){ return pNext; }
+operator void*() { return pNext; }
 N_pipeline_rasterization_state_create_info& n_pipeline_rasterization_state_rasterization_order_AMD(S_pipeline_rasterization_state_rasterization_order_AMD const& next_);
 N_pipeline_rasterization_state_create_info& n_pipeline_rasterization_conservative_state_create_info_EXT(S_pipeline_rasterization_conservative_state_create_info_EXT const& next_);
 };
@@ -10408,10 +11106,21 @@ public:
 	VkBool32 coverageToColorEnable;
 	uint32_t coverageToColorLocation;
 
-VkPipelineCoverageToColorStateCreateInfoNV*const get_vkptr(){return reinterpret_cast<VkPipelineCoverageToColorStateCreateInfoNV*>(this);}
+operator VkPipelineCoverageToColorStateCreateInfoNV*()
+	{	return reinterpret_cast<VkPipelineCoverageToColorStateCreateInfoNV*>(this);	}
+operator const VkPipelineCoverageToColorStateCreateInfoNV*() const
+	{	return reinterpret_cast<const VkPipelineCoverageToColorStateCreateInfoNV*>(this);	}
+S_pipeline_coverage_to_color_state_create_info_NV& operator=( VkPipelineCoverageToColorStateCreateInfoNV const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_pipeline_coverage_to_color_state_create_info_NV ) ); return *this;	}
+operator VkPipelineCoverageToColorStateCreateInfoNV const&() const 
+	{	return *reinterpret_cast<const VkPipelineCoverageToColorStateCreateInfoNV*>(this);	}
+operator VkPipelineCoverageToColorStateCreateInfoNV &() 
+	{	return *reinterpret_cast<VkPipelineCoverageToColorStateCreateInfoNV*>(this);	}
+
 
 S_pipeline_coverage_to_color_state_create_info_NV(){}
-
+S_pipeline_coverage_to_color_state_create_info_NV(VkPipelineCoverageToColorStateCreateInfoNV& rhs)
+	{	memcpy( this, &rhs, sizeof( S_pipeline_coverage_to_color_state_create_info_NV ) );	}
 S_pipeline_coverage_to_color_state_create_info_NV(
 	VkPipelineCoverageToColorStateCreateFlagsNV flags_,
 	VkBool32 coverageToColorEnable_,
@@ -10419,17 +11128,7 @@ S_pipeline_coverage_to_color_state_create_info_NV(
 	:flags(flags_)
 	,coverageToColorEnable(coverageToColorEnable_)
 	,coverageToColorLocation(coverageToColorLocation_)
-{
-}
-
-S_pipeline_coverage_to_color_state_create_info_NV( VkPipelineCoverageToColorStateCreateInfoNV const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_pipeline_coverage_to_color_state_create_info_NV ) );	}
-S_pipeline_coverage_to_color_state_create_info_NV& operator=( VkPipelineCoverageToColorStateCreateInfoNV const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_pipeline_coverage_to_color_state_create_info_NV ) ); return *this;	}
-operator VkPipelineCoverageToColorStateCreateInfoNV const&() const 
-	{	return *reinterpret_cast<const VkPipelineCoverageToColorStateCreateInfoNV*>(this);	}
-operator VkPipelineCoverageToColorStateCreateInfoNV &() 
-	{	return *reinterpret_cast<VkPipelineCoverageToColorStateCreateInfoNV*>(this);	}
+{}
 
 friend S_pipeline_multisample_state_create_info;
 };
@@ -10448,26 +11147,27 @@ public:
 	VkBool32 sampleLocationsEnable;
 	S_sample_locations_info_EXT sampleLocationsInfo;
 
-VkPipelineSampleLocationsStateCreateInfoEXT*const get_vkptr(){return reinterpret_cast<VkPipelineSampleLocationsStateCreateInfoEXT*>(this);}
-
-S_pipeline_sample_locations_state_create_info_EXT(){}
-
-S_pipeline_sample_locations_state_create_info_EXT(
-	VkBool32 sampleLocationsEnable_,
-	S_sample_locations_info_EXT sampleLocationsInfo_)
-	:sampleLocationsEnable(sampleLocationsEnable_)
-	,sampleLocationsInfo(sampleLocationsInfo_)
-{
-}
-
-S_pipeline_sample_locations_state_create_info_EXT( VkPipelineSampleLocationsStateCreateInfoEXT const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_pipeline_sample_locations_state_create_info_EXT ) );	}
+operator VkPipelineSampleLocationsStateCreateInfoEXT*()
+	{	return reinterpret_cast<VkPipelineSampleLocationsStateCreateInfoEXT*>(this);	}
+operator const VkPipelineSampleLocationsStateCreateInfoEXT*() const
+	{	return reinterpret_cast<const VkPipelineSampleLocationsStateCreateInfoEXT*>(this);	}
 S_pipeline_sample_locations_state_create_info_EXT& operator=( VkPipelineSampleLocationsStateCreateInfoEXT const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_pipeline_sample_locations_state_create_info_EXT ) ); return *this;	}
 operator VkPipelineSampleLocationsStateCreateInfoEXT const&() const 
 	{	return *reinterpret_cast<const VkPipelineSampleLocationsStateCreateInfoEXT*>(this);	}
 operator VkPipelineSampleLocationsStateCreateInfoEXT &() 
 	{	return *reinterpret_cast<VkPipelineSampleLocationsStateCreateInfoEXT*>(this);	}
+
+
+S_pipeline_sample_locations_state_create_info_EXT(){}
+S_pipeline_sample_locations_state_create_info_EXT(VkPipelineSampleLocationsStateCreateInfoEXT& rhs)
+	{	memcpy( this, &rhs, sizeof( S_pipeline_sample_locations_state_create_info_EXT ) );	}
+S_pipeline_sample_locations_state_create_info_EXT(
+	VkBool32 sampleLocationsEnable_,
+	S_sample_locations_info_EXT sampleLocationsInfo_)
+	:sampleLocationsEnable(sampleLocationsEnable_)
+	,sampleLocationsInfo(sampleLocationsInfo_)
+{}
 
 friend S_pipeline_multisample_state_create_info;
 };
@@ -10489,10 +11189,21 @@ public:
 	uint32_t coverageModulationTableCount;
 	const float * pCoverageModulationTable;
 
-VkPipelineCoverageModulationStateCreateInfoNV*const get_vkptr(){return reinterpret_cast<VkPipelineCoverageModulationStateCreateInfoNV*>(this);}
+operator VkPipelineCoverageModulationStateCreateInfoNV*()
+	{	return reinterpret_cast<VkPipelineCoverageModulationStateCreateInfoNV*>(this);	}
+operator const VkPipelineCoverageModulationStateCreateInfoNV*() const
+	{	return reinterpret_cast<const VkPipelineCoverageModulationStateCreateInfoNV*>(this);	}
+S_pipeline_coverage_modulation_state_create_info_NV& operator=( VkPipelineCoverageModulationStateCreateInfoNV const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_pipeline_coverage_modulation_state_create_info_NV ) ); return *this;	}
+operator VkPipelineCoverageModulationStateCreateInfoNV const&() const 
+	{	return *reinterpret_cast<const VkPipelineCoverageModulationStateCreateInfoNV*>(this);	}
+operator VkPipelineCoverageModulationStateCreateInfoNV &() 
+	{	return *reinterpret_cast<VkPipelineCoverageModulationStateCreateInfoNV*>(this);	}
+
 
 S_pipeline_coverage_modulation_state_create_info_NV(){}
-
+S_pipeline_coverage_modulation_state_create_info_NV(VkPipelineCoverageModulationStateCreateInfoNV& rhs)
+	{	memcpy( this, &rhs, sizeof( S_pipeline_coverage_modulation_state_create_info_NV ) );	}
 S_pipeline_coverage_modulation_state_create_info_NV(
 	VkPipelineCoverageModulationStateCreateFlagsNV flags_,
 	E_coverage_modulation_mode_NV coverageModulationMode_,
@@ -10504,17 +11215,7 @@ S_pipeline_coverage_modulation_state_create_info_NV(
 	,coverageModulationTableEnable(coverageModulationTableEnable_)
 	,coverageModulationTableCount(coverageModulationTableCount_)
 	,pCoverageModulationTable(pCoverageModulationTable_)
-{
-}
-
-S_pipeline_coverage_modulation_state_create_info_NV( VkPipelineCoverageModulationStateCreateInfoNV const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_pipeline_coverage_modulation_state_create_info_NV ) );	}
-S_pipeline_coverage_modulation_state_create_info_NV& operator=( VkPipelineCoverageModulationStateCreateInfoNV const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_pipeline_coverage_modulation_state_create_info_NV ) ); return *this;	}
-operator VkPipelineCoverageModulationStateCreateInfoNV const&() const 
-	{	return *reinterpret_cast<const VkPipelineCoverageModulationStateCreateInfoNV*>(this);	}
-operator VkPipelineCoverageModulationStateCreateInfoNV &() 
-	{	return *reinterpret_cast<VkPipelineCoverageModulationStateCreateInfoNV*>(this);	}
+{}
 
 friend S_pipeline_multisample_state_create_info;
 };
@@ -10541,10 +11242,21 @@ public:
 	VkBool32 alphaToCoverageEnable;
 	VkBool32 alphaToOneEnable;
 
-VkPipelineMultisampleStateCreateInfo*const get_vkptr(){return reinterpret_cast<VkPipelineMultisampleStateCreateInfo*>(this);}
+operator VkPipelineMultisampleStateCreateInfo*()
+	{	return reinterpret_cast<VkPipelineMultisampleStateCreateInfo*>(this);	}
+operator const VkPipelineMultisampleStateCreateInfo*() const
+	{	return reinterpret_cast<const VkPipelineMultisampleStateCreateInfo*>(this);	}
+S_pipeline_multisample_state_create_info& operator=( VkPipelineMultisampleStateCreateInfo const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_pipeline_multisample_state_create_info ) ); return *this;	}
+operator VkPipelineMultisampleStateCreateInfo const&() const 
+	{	return *reinterpret_cast<const VkPipelineMultisampleStateCreateInfo*>(this);	}
+operator VkPipelineMultisampleStateCreateInfo &() 
+	{	return *reinterpret_cast<VkPipelineMultisampleStateCreateInfo*>(this);	}
+
 
 S_pipeline_multisample_state_create_info(){}
-
+S_pipeline_multisample_state_create_info(VkPipelineMultisampleStateCreateInfo& rhs)
+	{	memcpy( this, &rhs, sizeof( S_pipeline_multisample_state_create_info ) );	}
 S_pipeline_multisample_state_create_info(
 	VkPipelineMultisampleStateCreateFlags flags_,
 	F_sample_count rasterizationSamples_,
@@ -10560,17 +11272,7 @@ S_pipeline_multisample_state_create_info(
 	,pSampleMask(pSampleMask_)
 	,alphaToCoverageEnable(alphaToCoverageEnable_)
 	,alphaToOneEnable(alphaToOneEnable_)
-{
-}
-
-S_pipeline_multisample_state_create_info( VkPipelineMultisampleStateCreateInfo const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_pipeline_multisample_state_create_info ) );	}
-S_pipeline_multisample_state_create_info& operator=( VkPipelineMultisampleStateCreateInfo const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_pipeline_multisample_state_create_info ) ); return *this;	}
-operator VkPipelineMultisampleStateCreateInfo const&() const 
-	{	return *reinterpret_cast<const VkPipelineMultisampleStateCreateInfo*>(this);	}
-operator VkPipelineMultisampleStateCreateInfo &() 
-	{	return *reinterpret_cast<VkPipelineMultisampleStateCreateInfo*>(this);	}
+{}
 
 S_pipeline_multisample_state_create_info& n_pipeline_coverage_to_color_state_create_info_NV(S_pipeline_coverage_to_color_state_create_info_NV const& next_);
 S_pipeline_multisample_state_create_info& n_pipeline_sample_locations_state_create_info_EXT(S_pipeline_sample_locations_state_create_info_EXT const& next_);
@@ -10584,7 +11286,7 @@ struct N_pipeline_multisample_state_create_info{
 private:
 	void* pNext = nullptr;
 public:
-void* get(){ return pNext; }
+operator void*() { return pNext; }
 N_pipeline_multisample_state_create_info& n_pipeline_coverage_to_color_state_create_info_NV(S_pipeline_coverage_to_color_state_create_info_NV const& next_);
 N_pipeline_multisample_state_create_info& n_pipeline_sample_locations_state_create_info_EXT(S_pipeline_sample_locations_state_create_info_EXT const& next_);
 N_pipeline_multisample_state_create_info& n_pipeline_coverage_modulation_state_create_info_NV(S_pipeline_coverage_modulation_state_create_info_NV const& next_);
@@ -10602,7 +11304,17 @@ struct		S_pipeline_color_blend_attachment_state{
 	E_blend_op alphaBlendOp;
 	F_color_component colorWriteMask;
 
-VkPipelineColorBlendAttachmentState*const get_vkptr(){return reinterpret_cast<VkPipelineColorBlendAttachmentState*>(this);}
+operator VkPipelineColorBlendAttachmentState*()
+	{	return reinterpret_cast<VkPipelineColorBlendAttachmentState*>(this);	}
+operator const VkPipelineColorBlendAttachmentState*() const
+	{	return reinterpret_cast<const VkPipelineColorBlendAttachmentState*>(this);	}
+S_pipeline_color_blend_attachment_state& operator=( VkPipelineColorBlendAttachmentState const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_pipeline_color_blend_attachment_state ) ); return *this;	}
+operator VkPipelineColorBlendAttachmentState const&() const 
+	{	return *reinterpret_cast<const VkPipelineColorBlendAttachmentState*>(this);	}
+operator VkPipelineColorBlendAttachmentState &() 
+	{	return *reinterpret_cast<VkPipelineColorBlendAttachmentState*>(this);	}
+
 };
 
 /*	VkPipelineColorBlendAdvancedStateCreateInfoEXT
@@ -10617,10 +11329,21 @@ public:
 	VkBool32 dstPremultiplied;
 	E_blend_overlap_EXT blendOverlap;
 
-VkPipelineColorBlendAdvancedStateCreateInfoEXT*const get_vkptr(){return reinterpret_cast<VkPipelineColorBlendAdvancedStateCreateInfoEXT*>(this);}
+operator VkPipelineColorBlendAdvancedStateCreateInfoEXT*()
+	{	return reinterpret_cast<VkPipelineColorBlendAdvancedStateCreateInfoEXT*>(this);	}
+operator const VkPipelineColorBlendAdvancedStateCreateInfoEXT*() const
+	{	return reinterpret_cast<const VkPipelineColorBlendAdvancedStateCreateInfoEXT*>(this);	}
+S_pipeline_color_blend_advanced_state_create_info_EXT& operator=( VkPipelineColorBlendAdvancedStateCreateInfoEXT const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_pipeline_color_blend_advanced_state_create_info_EXT ) ); return *this;	}
+operator VkPipelineColorBlendAdvancedStateCreateInfoEXT const&() const 
+	{	return *reinterpret_cast<const VkPipelineColorBlendAdvancedStateCreateInfoEXT*>(this);	}
+operator VkPipelineColorBlendAdvancedStateCreateInfoEXT &() 
+	{	return *reinterpret_cast<VkPipelineColorBlendAdvancedStateCreateInfoEXT*>(this);	}
+
 
 S_pipeline_color_blend_advanced_state_create_info_EXT(){}
-
+S_pipeline_color_blend_advanced_state_create_info_EXT(VkPipelineColorBlendAdvancedStateCreateInfoEXT& rhs)
+	{	memcpy( this, &rhs, sizeof( S_pipeline_color_blend_advanced_state_create_info_EXT ) );	}
 S_pipeline_color_blend_advanced_state_create_info_EXT(
 	VkBool32 srcPremultiplied_,
 	VkBool32 dstPremultiplied_,
@@ -10628,17 +11351,7 @@ S_pipeline_color_blend_advanced_state_create_info_EXT(
 	:srcPremultiplied(srcPremultiplied_)
 	,dstPremultiplied(dstPremultiplied_)
 	,blendOverlap(blendOverlap_)
-{
-}
-
-S_pipeline_color_blend_advanced_state_create_info_EXT( VkPipelineColorBlendAdvancedStateCreateInfoEXT const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_pipeline_color_blend_advanced_state_create_info_EXT ) );	}
-S_pipeline_color_blend_advanced_state_create_info_EXT& operator=( VkPipelineColorBlendAdvancedStateCreateInfoEXT const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_pipeline_color_blend_advanced_state_create_info_EXT ) ); return *this;	}
-operator VkPipelineColorBlendAdvancedStateCreateInfoEXT const&() const 
-	{	return *reinterpret_cast<const VkPipelineColorBlendAdvancedStateCreateInfoEXT*>(this);	}
-operator VkPipelineColorBlendAdvancedStateCreateInfoEXT &() 
-	{	return *reinterpret_cast<VkPipelineColorBlendAdvancedStateCreateInfoEXT*>(this);	}
+{}
 
 friend S_pipeline_color_blend_state_create_info;
 };
@@ -10662,10 +11375,21 @@ public:
 	const S_pipeline_color_blend_attachment_state * pAttachments;
 	float blendConstants[4];
 
-VkPipelineColorBlendStateCreateInfo*const get_vkptr(){return reinterpret_cast<VkPipelineColorBlendStateCreateInfo*>(this);}
+operator VkPipelineColorBlendStateCreateInfo*()
+	{	return reinterpret_cast<VkPipelineColorBlendStateCreateInfo*>(this);	}
+operator const VkPipelineColorBlendStateCreateInfo*() const
+	{	return reinterpret_cast<const VkPipelineColorBlendStateCreateInfo*>(this);	}
+S_pipeline_color_blend_state_create_info& operator=( VkPipelineColorBlendStateCreateInfo const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_pipeline_color_blend_state_create_info ) ); return *this;	}
+operator VkPipelineColorBlendStateCreateInfo const&() const 
+	{	return *reinterpret_cast<const VkPipelineColorBlendStateCreateInfo*>(this);	}
+operator VkPipelineColorBlendStateCreateInfo &() 
+	{	return *reinterpret_cast<VkPipelineColorBlendStateCreateInfo*>(this);	}
+
 
 S_pipeline_color_blend_state_create_info(){}
-
+S_pipeline_color_blend_state_create_info(VkPipelineColorBlendStateCreateInfo& rhs)
+	{	memcpy( this, &rhs, sizeof( S_pipeline_color_blend_state_create_info ) );	}
 S_pipeline_color_blend_state_create_info(
 	VkPipelineColorBlendStateCreateFlags flags_,
 	VkBool32 logicOpEnable_,
@@ -10682,15 +11406,6 @@ S_pipeline_color_blend_state_create_info(
 memcpy(blendConstants,blendConstants_,sizeof(blendConstants) );
 }
 
-S_pipeline_color_blend_state_create_info( VkPipelineColorBlendStateCreateInfo const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_pipeline_color_blend_state_create_info ) );	}
-S_pipeline_color_blend_state_create_info& operator=( VkPipelineColorBlendStateCreateInfo const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_pipeline_color_blend_state_create_info ) ); return *this;	}
-operator VkPipelineColorBlendStateCreateInfo const&() const 
-	{	return *reinterpret_cast<const VkPipelineColorBlendStateCreateInfo*>(this);	}
-operator VkPipelineColorBlendStateCreateInfo &() 
-	{	return *reinterpret_cast<VkPipelineColorBlendStateCreateInfo*>(this);	}
-
 S_pipeline_color_blend_state_create_info& n_pipeline_color_blend_advanced_state_create_info_EXT(S_pipeline_color_blend_advanced_state_create_info_EXT const& next_);
 };
 static_assert(
@@ -10701,7 +11416,7 @@ struct N_pipeline_color_blend_state_create_info{
 private:
 	void* pNext = nullptr;
 public:
-void* get(){ return pNext; }
+operator void*() { return pNext; }
 N_pipeline_color_blend_state_create_info& n_pipeline_color_blend_advanced_state_create_info_EXT(S_pipeline_color_blend_advanced_state_create_info_EXT const& next_);
 };
 
@@ -10716,10 +11431,21 @@ public:
 	uint32_t dynamicStateCount;
 	const E_dynamic_state * pDynamicStates;
 
-VkPipelineDynamicStateCreateInfo*const get_vkptr(){return reinterpret_cast<VkPipelineDynamicStateCreateInfo*>(this);}
+operator VkPipelineDynamicStateCreateInfo*()
+	{	return reinterpret_cast<VkPipelineDynamicStateCreateInfo*>(this);	}
+operator const VkPipelineDynamicStateCreateInfo*() const
+	{	return reinterpret_cast<const VkPipelineDynamicStateCreateInfo*>(this);	}
+S_pipeline_dynamic_state_create_info& operator=( VkPipelineDynamicStateCreateInfo const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_pipeline_dynamic_state_create_info ) ); return *this;	}
+operator VkPipelineDynamicStateCreateInfo const&() const 
+	{	return *reinterpret_cast<const VkPipelineDynamicStateCreateInfo*>(this);	}
+operator VkPipelineDynamicStateCreateInfo &() 
+	{	return *reinterpret_cast<VkPipelineDynamicStateCreateInfo*>(this);	}
+
 
 S_pipeline_dynamic_state_create_info(){}
-
+S_pipeline_dynamic_state_create_info(VkPipelineDynamicStateCreateInfo& rhs)
+	{	memcpy( this, &rhs, sizeof( S_pipeline_dynamic_state_create_info ) );	}
 S_pipeline_dynamic_state_create_info(
 	VkPipelineDynamicStateCreateFlags flags_,
 	uint32_t dynamicStateCount_,
@@ -10727,17 +11453,7 @@ S_pipeline_dynamic_state_create_info(
 	:flags(flags_)
 	,dynamicStateCount(dynamicStateCount_)
 	,pDynamicStates(pDynamicStates_)
-{
-}
-
-S_pipeline_dynamic_state_create_info( VkPipelineDynamicStateCreateInfo const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_pipeline_dynamic_state_create_info ) );	}
-S_pipeline_dynamic_state_create_info& operator=( VkPipelineDynamicStateCreateInfo const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_pipeline_dynamic_state_create_info ) ); return *this;	}
-operator VkPipelineDynamicStateCreateInfo const&() const 
-	{	return *reinterpret_cast<const VkPipelineDynamicStateCreateInfo*>(this);	}
-operator VkPipelineDynamicStateCreateInfo &() 
-	{	return *reinterpret_cast<VkPipelineDynamicStateCreateInfo*>(this);	}
+{}
 };
 static_assert(
 	sizeof(S_pipeline_dynamic_state_create_info) == sizeof(VkPipelineDynamicStateCreateInfo),
@@ -10754,7 +11470,17 @@ struct		S_stencil_op_state{
 	uint32_t writeMask;
 	uint32_t reference;
 
-VkStencilOpState*const get_vkptr(){return reinterpret_cast<VkStencilOpState*>(this);}
+operator VkStencilOpState*()
+	{	return reinterpret_cast<VkStencilOpState*>(this);	}
+operator const VkStencilOpState*() const
+	{	return reinterpret_cast<const VkStencilOpState*>(this);	}
+S_stencil_op_state& operator=( VkStencilOpState const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_stencil_op_state ) ); return *this;	}
+operator VkStencilOpState const&() const 
+	{	return *reinterpret_cast<const VkStencilOpState*>(this);	}
+operator VkStencilOpState &() 
+	{	return *reinterpret_cast<VkStencilOpState*>(this);	}
+
 };
 
 /*	VkPipelineDepthStencilStateCreateInfo
@@ -10775,10 +11501,21 @@ public:
 	float minDepthBounds;
 	float maxDepthBounds;
 
-VkPipelineDepthStencilStateCreateInfo*const get_vkptr(){return reinterpret_cast<VkPipelineDepthStencilStateCreateInfo*>(this);}
+operator VkPipelineDepthStencilStateCreateInfo*()
+	{	return reinterpret_cast<VkPipelineDepthStencilStateCreateInfo*>(this);	}
+operator const VkPipelineDepthStencilStateCreateInfo*() const
+	{	return reinterpret_cast<const VkPipelineDepthStencilStateCreateInfo*>(this);	}
+S_pipeline_depth_stencil_state_create_info& operator=( VkPipelineDepthStencilStateCreateInfo const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_pipeline_depth_stencil_state_create_info ) ); return *this;	}
+operator VkPipelineDepthStencilStateCreateInfo const&() const 
+	{	return *reinterpret_cast<const VkPipelineDepthStencilStateCreateInfo*>(this);	}
+operator VkPipelineDepthStencilStateCreateInfo &() 
+	{	return *reinterpret_cast<VkPipelineDepthStencilStateCreateInfo*>(this);	}
+
 
 S_pipeline_depth_stencil_state_create_info(){}
-
+S_pipeline_depth_stencil_state_create_info(VkPipelineDepthStencilStateCreateInfo& rhs)
+	{	memcpy( this, &rhs, sizeof( S_pipeline_depth_stencil_state_create_info ) );	}
 S_pipeline_depth_stencil_state_create_info(
 	VkPipelineDepthStencilStateCreateFlags flags_,
 	VkBool32 depthTestEnable_,
@@ -10800,17 +11537,7 @@ S_pipeline_depth_stencil_state_create_info(
 	,back(back_)
 	,minDepthBounds(minDepthBounds_)
 	,maxDepthBounds(maxDepthBounds_)
-{
-}
-
-S_pipeline_depth_stencil_state_create_info( VkPipelineDepthStencilStateCreateInfo const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_pipeline_depth_stencil_state_create_info ) );	}
-S_pipeline_depth_stencil_state_create_info& operator=( VkPipelineDepthStencilStateCreateInfo const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_pipeline_depth_stencil_state_create_info ) ); return *this;	}
-operator VkPipelineDepthStencilStateCreateInfo const&() const 
-	{	return *reinterpret_cast<const VkPipelineDepthStencilStateCreateInfo*>(this);	}
-operator VkPipelineDepthStencilStateCreateInfo &() 
-	{	return *reinterpret_cast<VkPipelineDepthStencilStateCreateInfo*>(this);	}
+{}
 };
 static_assert(
 	sizeof(S_pipeline_depth_stencil_state_create_info) == sizeof(VkPipelineDepthStencilStateCreateInfo),
@@ -10829,10 +11556,21 @@ public:
 	uint32_t discardRectangleCount;
 	const S_rect_2d * pDiscardRectangles;
 
-VkPipelineDiscardRectangleStateCreateInfoEXT*const get_vkptr(){return reinterpret_cast<VkPipelineDiscardRectangleStateCreateInfoEXT*>(this);}
+operator VkPipelineDiscardRectangleStateCreateInfoEXT*()
+	{	return reinterpret_cast<VkPipelineDiscardRectangleStateCreateInfoEXT*>(this);	}
+operator const VkPipelineDiscardRectangleStateCreateInfoEXT*() const
+	{	return reinterpret_cast<const VkPipelineDiscardRectangleStateCreateInfoEXT*>(this);	}
+S_pipeline_discard_rectangle_state_create_info_EXT& operator=( VkPipelineDiscardRectangleStateCreateInfoEXT const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_pipeline_discard_rectangle_state_create_info_EXT ) ); return *this;	}
+operator VkPipelineDiscardRectangleStateCreateInfoEXT const&() const 
+	{	return *reinterpret_cast<const VkPipelineDiscardRectangleStateCreateInfoEXT*>(this);	}
+operator VkPipelineDiscardRectangleStateCreateInfoEXT &() 
+	{	return *reinterpret_cast<VkPipelineDiscardRectangleStateCreateInfoEXT*>(this);	}
+
 
 S_pipeline_discard_rectangle_state_create_info_EXT(){}
-
+S_pipeline_discard_rectangle_state_create_info_EXT(VkPipelineDiscardRectangleStateCreateInfoEXT& rhs)
+	{	memcpy( this, &rhs, sizeof( S_pipeline_discard_rectangle_state_create_info_EXT ) );	}
 S_pipeline_discard_rectangle_state_create_info_EXT(
 	VkPipelineDiscardRectangleStateCreateFlagsEXT flags_,
 	E_discard_rectangle_mode_EXT discardRectangleMode_,
@@ -10842,17 +11580,7 @@ S_pipeline_discard_rectangle_state_create_info_EXT(
 	,discardRectangleMode(discardRectangleMode_)
 	,discardRectangleCount(discardRectangleCount_)
 	,pDiscardRectangles(pDiscardRectangles_)
-{
-}
-
-S_pipeline_discard_rectangle_state_create_info_EXT( VkPipelineDiscardRectangleStateCreateInfoEXT const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_pipeline_discard_rectangle_state_create_info_EXT ) );	}
-S_pipeline_discard_rectangle_state_create_info_EXT& operator=( VkPipelineDiscardRectangleStateCreateInfoEXT const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_pipeline_discard_rectangle_state_create_info_EXT ) ); return *this;	}
-operator VkPipelineDiscardRectangleStateCreateInfoEXT const&() const 
-	{	return *reinterpret_cast<const VkPipelineDiscardRectangleStateCreateInfoEXT*>(this);	}
-operator VkPipelineDiscardRectangleStateCreateInfoEXT &() 
-	{	return *reinterpret_cast<VkPipelineDiscardRectangleStateCreateInfoEXT*>(this);	}
+{}
 
 friend S_graphics_pipeline_create_info;
 };
@@ -10870,24 +11598,25 @@ private:
 public:
 	VkBool32 representativeFragmentTestEnable;
 
-VkPipelineRepresentativeFragmentTestStateCreateInfoNV*const get_vkptr(){return reinterpret_cast<VkPipelineRepresentativeFragmentTestStateCreateInfoNV*>(this);}
-
-S_pipeline_representative_fragment_test_state_create_info_NV(){}
-
-S_pipeline_representative_fragment_test_state_create_info_NV(
-	VkBool32 representativeFragmentTestEnable_)
-	:representativeFragmentTestEnable(representativeFragmentTestEnable_)
-{
-}
-
-S_pipeline_representative_fragment_test_state_create_info_NV( VkPipelineRepresentativeFragmentTestStateCreateInfoNV const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_pipeline_representative_fragment_test_state_create_info_NV ) );	}
+operator VkPipelineRepresentativeFragmentTestStateCreateInfoNV*()
+	{	return reinterpret_cast<VkPipelineRepresentativeFragmentTestStateCreateInfoNV*>(this);	}
+operator const VkPipelineRepresentativeFragmentTestStateCreateInfoNV*() const
+	{	return reinterpret_cast<const VkPipelineRepresentativeFragmentTestStateCreateInfoNV*>(this);	}
 S_pipeline_representative_fragment_test_state_create_info_NV& operator=( VkPipelineRepresentativeFragmentTestStateCreateInfoNV const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_pipeline_representative_fragment_test_state_create_info_NV ) ); return *this;	}
 operator VkPipelineRepresentativeFragmentTestStateCreateInfoNV const&() const 
 	{	return *reinterpret_cast<const VkPipelineRepresentativeFragmentTestStateCreateInfoNV*>(this);	}
 operator VkPipelineRepresentativeFragmentTestStateCreateInfoNV &() 
 	{	return *reinterpret_cast<VkPipelineRepresentativeFragmentTestStateCreateInfoNV*>(this);	}
+
+
+S_pipeline_representative_fragment_test_state_create_info_NV(){}
+S_pipeline_representative_fragment_test_state_create_info_NV(VkPipelineRepresentativeFragmentTestStateCreateInfoNV& rhs)
+	{	memcpy( this, &rhs, sizeof( S_pipeline_representative_fragment_test_state_create_info_NV ) );	}
+S_pipeline_representative_fragment_test_state_create_info_NV(
+	VkBool32 representativeFragmentTestEnable_)
+	:representativeFragmentTestEnable(representativeFragmentTestEnable_)
+{}
 
 friend S_graphics_pipeline_create_info;
 };
@@ -10923,10 +11652,21 @@ public:
 	VkPipeline basePipelineHandle;
 	int32_t basePipelineIndex;
 
-VkGraphicsPipelineCreateInfo*const get_vkptr(){return reinterpret_cast<VkGraphicsPipelineCreateInfo*>(this);}
+operator VkGraphicsPipelineCreateInfo*()
+	{	return reinterpret_cast<VkGraphicsPipelineCreateInfo*>(this);	}
+operator const VkGraphicsPipelineCreateInfo*() const
+	{	return reinterpret_cast<const VkGraphicsPipelineCreateInfo*>(this);	}
+S_graphics_pipeline_create_info& operator=( VkGraphicsPipelineCreateInfo const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_graphics_pipeline_create_info ) ); return *this;	}
+operator VkGraphicsPipelineCreateInfo const&() const 
+	{	return *reinterpret_cast<const VkGraphicsPipelineCreateInfo*>(this);	}
+operator VkGraphicsPipelineCreateInfo &() 
+	{	return *reinterpret_cast<VkGraphicsPipelineCreateInfo*>(this);	}
+
 
 S_graphics_pipeline_create_info(){}
-
+S_graphics_pipeline_create_info(VkGraphicsPipelineCreateInfo& rhs)
+	{	memcpy( this, &rhs, sizeof( S_graphics_pipeline_create_info ) );	}
 S_graphics_pipeline_create_info(
 	F_pipeline_create flags_,
 	uint32_t stageCount_,
@@ -10962,17 +11702,7 @@ S_graphics_pipeline_create_info(
 	,subpass(subpass_)
 	,basePipelineHandle(basePipelineHandle_)
 	,basePipelineIndex(basePipelineIndex_)
-{
-}
-
-S_graphics_pipeline_create_info( VkGraphicsPipelineCreateInfo const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_graphics_pipeline_create_info ) );	}
-S_graphics_pipeline_create_info& operator=( VkGraphicsPipelineCreateInfo const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_graphics_pipeline_create_info ) ); return *this;	}
-operator VkGraphicsPipelineCreateInfo const&() const 
-	{	return *reinterpret_cast<const VkGraphicsPipelineCreateInfo*>(this);	}
-operator VkGraphicsPipelineCreateInfo &() 
-	{	return *reinterpret_cast<VkGraphicsPipelineCreateInfo*>(this);	}
+{}
 
 S_graphics_pipeline_create_info& n_pipeline_discard_rectangle_state_create_info_EXT(S_pipeline_discard_rectangle_state_create_info_EXT const& next_);
 S_graphics_pipeline_create_info& n_pipeline_representative_fragment_test_state_create_info_NV(S_pipeline_representative_fragment_test_state_create_info_NV const& next_);
@@ -10985,7 +11715,7 @@ struct N_graphics_pipeline_create_info{
 private:
 	void* pNext = nullptr;
 public:
-void* get(){ return pNext; }
+operator void*() { return pNext; }
 N_graphics_pipeline_create_info& n_pipeline_discard_rectangle_state_create_info_EXT(S_pipeline_discard_rectangle_state_create_info_EXT const& next_);
 N_graphics_pipeline_create_info& n_pipeline_representative_fragment_test_state_create_info_NV(S_pipeline_representative_fragment_test_state_create_info_NV const& next_);
 };
@@ -11001,10 +11731,21 @@ public:
 	size_t initialDataSize;
 	const void * pInitialData;
 
-VkPipelineCacheCreateInfo*const get_vkptr(){return reinterpret_cast<VkPipelineCacheCreateInfo*>(this);}
+operator VkPipelineCacheCreateInfo*()
+	{	return reinterpret_cast<VkPipelineCacheCreateInfo*>(this);	}
+operator const VkPipelineCacheCreateInfo*() const
+	{	return reinterpret_cast<const VkPipelineCacheCreateInfo*>(this);	}
+S_pipeline_cache_create_info& operator=( VkPipelineCacheCreateInfo const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_pipeline_cache_create_info ) ); return *this;	}
+operator VkPipelineCacheCreateInfo const&() const 
+	{	return *reinterpret_cast<const VkPipelineCacheCreateInfo*>(this);	}
+operator VkPipelineCacheCreateInfo &() 
+	{	return *reinterpret_cast<VkPipelineCacheCreateInfo*>(this);	}
+
 
 S_pipeline_cache_create_info(){}
-
+S_pipeline_cache_create_info(VkPipelineCacheCreateInfo& rhs)
+	{	memcpy( this, &rhs, sizeof( S_pipeline_cache_create_info ) );	}
 S_pipeline_cache_create_info(
 	VkPipelineCacheCreateFlags flags_,
 	size_t initialDataSize_,
@@ -11012,17 +11753,7 @@ S_pipeline_cache_create_info(
 	:flags(flags_)
 	,initialDataSize(initialDataSize_)
 	,pInitialData(pInitialData_)
-{
-}
-
-S_pipeline_cache_create_info( VkPipelineCacheCreateInfo const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_pipeline_cache_create_info ) );	}
-S_pipeline_cache_create_info& operator=( VkPipelineCacheCreateInfo const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_pipeline_cache_create_info ) ); return *this;	}
-operator VkPipelineCacheCreateInfo const&() const 
-	{	return *reinterpret_cast<const VkPipelineCacheCreateInfo*>(this);	}
-operator VkPipelineCacheCreateInfo &() 
-	{	return *reinterpret_cast<VkPipelineCacheCreateInfo*>(this);	}
+{}
 };
 static_assert(
 	sizeof(S_pipeline_cache_create_info) == sizeof(VkPipelineCacheCreateInfo),
@@ -11035,7 +11766,17 @@ struct		S_push_constant_range{
 	uint32_t offset;
 	uint32_t size;
 
-VkPushConstantRange*const get_vkptr(){return reinterpret_cast<VkPushConstantRange*>(this);}
+operator VkPushConstantRange*()
+	{	return reinterpret_cast<VkPushConstantRange*>(this);	}
+operator const VkPushConstantRange*() const
+	{	return reinterpret_cast<const VkPushConstantRange*>(this);	}
+S_push_constant_range& operator=( VkPushConstantRange const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_push_constant_range ) ); return *this;	}
+operator VkPushConstantRange const&() const 
+	{	return *reinterpret_cast<const VkPushConstantRange*>(this);	}
+operator VkPushConstantRange &() 
+	{	return *reinterpret_cast<VkPushConstantRange*>(this);	}
+
 };
 
 /*	VkPipelineLayoutCreateInfo
@@ -11051,10 +11792,21 @@ public:
 	uint32_t pushConstantRangeCount;
 	const S_push_constant_range * pPushConstantRanges;
 
-VkPipelineLayoutCreateInfo*const get_vkptr(){return reinterpret_cast<VkPipelineLayoutCreateInfo*>(this);}
+operator VkPipelineLayoutCreateInfo*()
+	{	return reinterpret_cast<VkPipelineLayoutCreateInfo*>(this);	}
+operator const VkPipelineLayoutCreateInfo*() const
+	{	return reinterpret_cast<const VkPipelineLayoutCreateInfo*>(this);	}
+S_pipeline_layout_create_info& operator=( VkPipelineLayoutCreateInfo const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_pipeline_layout_create_info ) ); return *this;	}
+operator VkPipelineLayoutCreateInfo const&() const 
+	{	return *reinterpret_cast<const VkPipelineLayoutCreateInfo*>(this);	}
+operator VkPipelineLayoutCreateInfo &() 
+	{	return *reinterpret_cast<VkPipelineLayoutCreateInfo*>(this);	}
+
 
 S_pipeline_layout_create_info(){}
-
+S_pipeline_layout_create_info(VkPipelineLayoutCreateInfo& rhs)
+	{	memcpy( this, &rhs, sizeof( S_pipeline_layout_create_info ) );	}
 S_pipeline_layout_create_info(
 	VkPipelineLayoutCreateFlags flags_,
 	uint32_t setLayoutCount_,
@@ -11066,17 +11818,7 @@ S_pipeline_layout_create_info(
 	,pSetLayouts(pSetLayouts_)
 	,pushConstantRangeCount(pushConstantRangeCount_)
 	,pPushConstantRanges(pPushConstantRanges_)
-{
-}
-
-S_pipeline_layout_create_info( VkPipelineLayoutCreateInfo const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_pipeline_layout_create_info ) );	}
-S_pipeline_layout_create_info& operator=( VkPipelineLayoutCreateInfo const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_pipeline_layout_create_info ) ); return *this;	}
-operator VkPipelineLayoutCreateInfo const&() const 
-	{	return *reinterpret_cast<const VkPipelineLayoutCreateInfo*>(this);	}
-operator VkPipelineLayoutCreateInfo &() 
-	{	return *reinterpret_cast<VkPipelineLayoutCreateInfo*>(this);	}
+{}
 };
 static_assert(
 	sizeof(S_pipeline_layout_create_info) == sizeof(VkPipelineLayoutCreateInfo),
@@ -11092,24 +11834,25 @@ private:
 public:
 	E_sampler_reduction_mode_EXT reductionMode;
 
-VkSamplerReductionModeCreateInfoEXT*const get_vkptr(){return reinterpret_cast<VkSamplerReductionModeCreateInfoEXT*>(this);}
-
-S_sampler_reduction_mode_create_info_EXT(){}
-
-S_sampler_reduction_mode_create_info_EXT(
-	E_sampler_reduction_mode_EXT reductionMode_)
-	:reductionMode(reductionMode_)
-{
-}
-
-S_sampler_reduction_mode_create_info_EXT( VkSamplerReductionModeCreateInfoEXT const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_sampler_reduction_mode_create_info_EXT ) );	}
+operator VkSamplerReductionModeCreateInfoEXT*()
+	{	return reinterpret_cast<VkSamplerReductionModeCreateInfoEXT*>(this);	}
+operator const VkSamplerReductionModeCreateInfoEXT*() const
+	{	return reinterpret_cast<const VkSamplerReductionModeCreateInfoEXT*>(this);	}
 S_sampler_reduction_mode_create_info_EXT& operator=( VkSamplerReductionModeCreateInfoEXT const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_sampler_reduction_mode_create_info_EXT ) ); return *this;	}
 operator VkSamplerReductionModeCreateInfoEXT const&() const 
 	{	return *reinterpret_cast<const VkSamplerReductionModeCreateInfoEXT*>(this);	}
 operator VkSamplerReductionModeCreateInfoEXT &() 
 	{	return *reinterpret_cast<VkSamplerReductionModeCreateInfoEXT*>(this);	}
+
+
+S_sampler_reduction_mode_create_info_EXT(){}
+S_sampler_reduction_mode_create_info_EXT(VkSamplerReductionModeCreateInfoEXT& rhs)
+	{	memcpy( this, &rhs, sizeof( S_sampler_reduction_mode_create_info_EXT ) );	}
+S_sampler_reduction_mode_create_info_EXT(
+	E_sampler_reduction_mode_EXT reductionMode_)
+	:reductionMode(reductionMode_)
+{}
 
 friend S_sampler_create_info;
 };
@@ -11144,10 +11887,21 @@ public:
 	E_border_color borderColor;
 	VkBool32 unnormalizedCoordinates;
 
-VkSamplerCreateInfo*const get_vkptr(){return reinterpret_cast<VkSamplerCreateInfo*>(this);}
+operator VkSamplerCreateInfo*()
+	{	return reinterpret_cast<VkSamplerCreateInfo*>(this);	}
+operator const VkSamplerCreateInfo*() const
+	{	return reinterpret_cast<const VkSamplerCreateInfo*>(this);	}
+S_sampler_create_info& operator=( VkSamplerCreateInfo const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_sampler_create_info ) ); return *this;	}
+operator VkSamplerCreateInfo const&() const 
+	{	return *reinterpret_cast<const VkSamplerCreateInfo*>(this);	}
+operator VkSamplerCreateInfo &() 
+	{	return *reinterpret_cast<VkSamplerCreateInfo*>(this);	}
+
 
 S_sampler_create_info(){}
-
+S_sampler_create_info(VkSamplerCreateInfo& rhs)
+	{	memcpy( this, &rhs, sizeof( S_sampler_create_info ) );	}
 S_sampler_create_info(
 	VkSamplerCreateFlags flags_,
 	E_filter magFilter_,
@@ -11181,17 +11935,7 @@ S_sampler_create_info(
 	,maxLod(maxLod_)
 	,borderColor(borderColor_)
 	,unnormalizedCoordinates(unnormalizedCoordinates_)
-{
-}
-
-S_sampler_create_info( VkSamplerCreateInfo const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_sampler_create_info ) );	}
-S_sampler_create_info& operator=( VkSamplerCreateInfo const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_sampler_create_info ) ); return *this;	}
-operator VkSamplerCreateInfo const&() const 
-	{	return *reinterpret_cast<const VkSamplerCreateInfo*>(this);	}
-operator VkSamplerCreateInfo &() 
-	{	return *reinterpret_cast<VkSamplerCreateInfo*>(this);	}
+{}
 
 S_sampler_create_info& n_sampler_ycbcr_conversion_info(S_sampler_ycbcr_conversion_info const& next_);
 S_sampler_create_info& n_sampler_reduction_mode_create_info_EXT(S_sampler_reduction_mode_create_info_EXT const& next_);
@@ -11204,7 +11948,7 @@ struct N_sampler_create_info{
 private:
 	void* pNext = nullptr;
 public:
-void* get(){ return pNext; }
+operator void*() { return pNext; }
 N_sampler_create_info& n_sampler_ycbcr_conversion_info(S_sampler_ycbcr_conversion_info const& next_);
 N_sampler_create_info& n_sampler_reduction_mode_create_info_EXT(S_sampler_reduction_mode_create_info_EXT const& next_);
 };
@@ -11219,26 +11963,27 @@ public:
 	F_command_pool_create flags;
 	uint32_t queueFamilyIndex;
 
-VkCommandPoolCreateInfo*const get_vkptr(){return reinterpret_cast<VkCommandPoolCreateInfo*>(this);}
-
-S_command_pool_create_info(){}
-
-S_command_pool_create_info(
-	F_command_pool_create flags_,
-	uint32_t queueFamilyIndex_)
-	:flags(flags_)
-	,queueFamilyIndex(queueFamilyIndex_)
-{
-}
-
-S_command_pool_create_info( VkCommandPoolCreateInfo const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_command_pool_create_info ) );	}
+operator VkCommandPoolCreateInfo*()
+	{	return reinterpret_cast<VkCommandPoolCreateInfo*>(this);	}
+operator const VkCommandPoolCreateInfo*() const
+	{	return reinterpret_cast<const VkCommandPoolCreateInfo*>(this);	}
 S_command_pool_create_info& operator=( VkCommandPoolCreateInfo const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_command_pool_create_info ) ); return *this;	}
 operator VkCommandPoolCreateInfo const&() const 
 	{	return *reinterpret_cast<const VkCommandPoolCreateInfo*>(this);	}
 operator VkCommandPoolCreateInfo &() 
 	{	return *reinterpret_cast<VkCommandPoolCreateInfo*>(this);	}
+
+
+S_command_pool_create_info(){}
+S_command_pool_create_info(VkCommandPoolCreateInfo& rhs)
+	{	memcpy( this, &rhs, sizeof( S_command_pool_create_info ) );	}
+S_command_pool_create_info(
+	F_command_pool_create flags_,
+	uint32_t queueFamilyIndex_)
+	:flags(flags_)
+	,queueFamilyIndex(queueFamilyIndex_)
+{}
 };
 static_assert(
 	sizeof(S_command_pool_create_info) == sizeof(VkCommandPoolCreateInfo),
@@ -11255,10 +12000,21 @@ public:
 	E_command_buffer_level level;
 	uint32_t commandBufferCount;
 
-VkCommandBufferAllocateInfo*const get_vkptr(){return reinterpret_cast<VkCommandBufferAllocateInfo*>(this);}
+operator VkCommandBufferAllocateInfo*()
+	{	return reinterpret_cast<VkCommandBufferAllocateInfo*>(this);	}
+operator const VkCommandBufferAllocateInfo*() const
+	{	return reinterpret_cast<const VkCommandBufferAllocateInfo*>(this);	}
+S_command_buffer_allocate_info& operator=( VkCommandBufferAllocateInfo const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_command_buffer_allocate_info ) ); return *this;	}
+operator VkCommandBufferAllocateInfo const&() const 
+	{	return *reinterpret_cast<const VkCommandBufferAllocateInfo*>(this);	}
+operator VkCommandBufferAllocateInfo &() 
+	{	return *reinterpret_cast<VkCommandBufferAllocateInfo*>(this);	}
+
 
 S_command_buffer_allocate_info(){}
-
+S_command_buffer_allocate_info(VkCommandBufferAllocateInfo& rhs)
+	{	memcpy( this, &rhs, sizeof( S_command_buffer_allocate_info ) );	}
 S_command_buffer_allocate_info(
 	VkCommandPool commandPool_,
 	E_command_buffer_level level_,
@@ -11266,17 +12022,7 @@ S_command_buffer_allocate_info(
 	:commandPool(commandPool_)
 	,level(level_)
 	,commandBufferCount(commandBufferCount_)
-{
-}
-
-S_command_buffer_allocate_info( VkCommandBufferAllocateInfo const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_command_buffer_allocate_info ) );	}
-S_command_buffer_allocate_info& operator=( VkCommandBufferAllocateInfo const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_command_buffer_allocate_info ) ); return *this;	}
-operator VkCommandBufferAllocateInfo const&() const 
-	{	return *reinterpret_cast<const VkCommandBufferAllocateInfo*>(this);	}
-operator VkCommandBufferAllocateInfo &() 
-	{	return *reinterpret_cast<VkCommandBufferAllocateInfo*>(this);	}
+{}
 };
 static_assert(
 	sizeof(S_command_buffer_allocate_info) == sizeof(VkCommandBufferAllocateInfo),
@@ -11292,24 +12038,25 @@ private:
 public:
 	VkBool32 conditionalRenderingEnable;
 
-VkCommandBufferInheritanceConditionalRenderingInfoEXT*const get_vkptr(){return reinterpret_cast<VkCommandBufferInheritanceConditionalRenderingInfoEXT*>(this);}
-
-S_command_buffer_inheritance_conditional_rendering_info_EXT(){}
-
-S_command_buffer_inheritance_conditional_rendering_info_EXT(
-	VkBool32 conditionalRenderingEnable_)
-	:conditionalRenderingEnable(conditionalRenderingEnable_)
-{
-}
-
-S_command_buffer_inheritance_conditional_rendering_info_EXT( VkCommandBufferInheritanceConditionalRenderingInfoEXT const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_command_buffer_inheritance_conditional_rendering_info_EXT ) );	}
+operator VkCommandBufferInheritanceConditionalRenderingInfoEXT*()
+	{	return reinterpret_cast<VkCommandBufferInheritanceConditionalRenderingInfoEXT*>(this);	}
+operator const VkCommandBufferInheritanceConditionalRenderingInfoEXT*() const
+	{	return reinterpret_cast<const VkCommandBufferInheritanceConditionalRenderingInfoEXT*>(this);	}
 S_command_buffer_inheritance_conditional_rendering_info_EXT& operator=( VkCommandBufferInheritanceConditionalRenderingInfoEXT const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_command_buffer_inheritance_conditional_rendering_info_EXT ) ); return *this;	}
 operator VkCommandBufferInheritanceConditionalRenderingInfoEXT const&() const 
 	{	return *reinterpret_cast<const VkCommandBufferInheritanceConditionalRenderingInfoEXT*>(this);	}
 operator VkCommandBufferInheritanceConditionalRenderingInfoEXT &() 
 	{	return *reinterpret_cast<VkCommandBufferInheritanceConditionalRenderingInfoEXT*>(this);	}
+
+
+S_command_buffer_inheritance_conditional_rendering_info_EXT(){}
+S_command_buffer_inheritance_conditional_rendering_info_EXT(VkCommandBufferInheritanceConditionalRenderingInfoEXT& rhs)
+	{	memcpy( this, &rhs, sizeof( S_command_buffer_inheritance_conditional_rendering_info_EXT ) );	}
+S_command_buffer_inheritance_conditional_rendering_info_EXT(
+	VkBool32 conditionalRenderingEnable_)
+	:conditionalRenderingEnable(conditionalRenderingEnable_)
+{}
 
 friend S_command_buffer_inheritance_info;
 };
@@ -11333,10 +12080,21 @@ public:
 	F_query_control queryFlags;
 	F_query_pipeline_statistic pipelineStatistics;
 
-VkCommandBufferInheritanceInfo*const get_vkptr(){return reinterpret_cast<VkCommandBufferInheritanceInfo*>(this);}
+operator VkCommandBufferInheritanceInfo*()
+	{	return reinterpret_cast<VkCommandBufferInheritanceInfo*>(this);	}
+operator const VkCommandBufferInheritanceInfo*() const
+	{	return reinterpret_cast<const VkCommandBufferInheritanceInfo*>(this);	}
+S_command_buffer_inheritance_info& operator=( VkCommandBufferInheritanceInfo const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_command_buffer_inheritance_info ) ); return *this;	}
+operator VkCommandBufferInheritanceInfo const&() const 
+	{	return *reinterpret_cast<const VkCommandBufferInheritanceInfo*>(this);	}
+operator VkCommandBufferInheritanceInfo &() 
+	{	return *reinterpret_cast<VkCommandBufferInheritanceInfo*>(this);	}
+
 
 S_command_buffer_inheritance_info(){}
-
+S_command_buffer_inheritance_info(VkCommandBufferInheritanceInfo& rhs)
+	{	memcpy( this, &rhs, sizeof( S_command_buffer_inheritance_info ) );	}
 S_command_buffer_inheritance_info(
 	VkRenderPass renderPass_,
 	uint32_t subpass_,
@@ -11350,17 +12108,7 @@ S_command_buffer_inheritance_info(
 	,occlusionQueryEnable(occlusionQueryEnable_)
 	,queryFlags(queryFlags_)
 	,pipelineStatistics(pipelineStatistics_)
-{
-}
-
-S_command_buffer_inheritance_info( VkCommandBufferInheritanceInfo const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_command_buffer_inheritance_info ) );	}
-S_command_buffer_inheritance_info& operator=( VkCommandBufferInheritanceInfo const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_command_buffer_inheritance_info ) ); return *this;	}
-operator VkCommandBufferInheritanceInfo const&() const 
-	{	return *reinterpret_cast<const VkCommandBufferInheritanceInfo*>(this);	}
-operator VkCommandBufferInheritanceInfo &() 
-	{	return *reinterpret_cast<VkCommandBufferInheritanceInfo*>(this);	}
+{}
 
 S_command_buffer_inheritance_info& n_command_buffer_inheritance_conditional_rendering_info_EXT(S_command_buffer_inheritance_conditional_rendering_info_EXT const& next_);
 };
@@ -11372,7 +12120,7 @@ struct N_command_buffer_inheritance_info{
 private:
 	void* pNext = nullptr;
 public:
-void* get(){ return pNext; }
+operator void*() { return pNext; }
 N_command_buffer_inheritance_info& n_command_buffer_inheritance_conditional_rendering_info_EXT(S_command_buffer_inheritance_conditional_rendering_info_EXT const& next_);
 };
 
@@ -11386,24 +12134,25 @@ private:
 public:
 	uint32_t deviceMask;
 
-VkDeviceGroupCommandBufferBeginInfo*const get_vkptr(){return reinterpret_cast<VkDeviceGroupCommandBufferBeginInfo*>(this);}
-
-S_device_group_command_buffer_begin_info(){}
-
-S_device_group_command_buffer_begin_info(
-	uint32_t deviceMask_)
-	:deviceMask(deviceMask_)
-{
-}
-
-S_device_group_command_buffer_begin_info( VkDeviceGroupCommandBufferBeginInfo const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_device_group_command_buffer_begin_info ) );	}
+operator VkDeviceGroupCommandBufferBeginInfo*()
+	{	return reinterpret_cast<VkDeviceGroupCommandBufferBeginInfo*>(this);	}
+operator const VkDeviceGroupCommandBufferBeginInfo*() const
+	{	return reinterpret_cast<const VkDeviceGroupCommandBufferBeginInfo*>(this);	}
 S_device_group_command_buffer_begin_info& operator=( VkDeviceGroupCommandBufferBeginInfo const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_device_group_command_buffer_begin_info ) ); return *this;	}
 operator VkDeviceGroupCommandBufferBeginInfo const&() const 
 	{	return *reinterpret_cast<const VkDeviceGroupCommandBufferBeginInfo*>(this);	}
 operator VkDeviceGroupCommandBufferBeginInfo &() 
 	{	return *reinterpret_cast<VkDeviceGroupCommandBufferBeginInfo*>(this);	}
+
+
+S_device_group_command_buffer_begin_info(){}
+S_device_group_command_buffer_begin_info(VkDeviceGroupCommandBufferBeginInfo& rhs)
+	{	memcpy( this, &rhs, sizeof( S_device_group_command_buffer_begin_info ) );	}
+S_device_group_command_buffer_begin_info(
+	uint32_t deviceMask_)
+	:deviceMask(deviceMask_)
+{}
 
 friend S_command_buffer_begin_info;
 };
@@ -11423,26 +12172,27 @@ public:
 	F_command_buffer_usage flags;
 	const S_command_buffer_inheritance_info * pInheritanceInfo;
 
-VkCommandBufferBeginInfo*const get_vkptr(){return reinterpret_cast<VkCommandBufferBeginInfo*>(this);}
-
-S_command_buffer_begin_info(){}
-
-S_command_buffer_begin_info(
-	F_command_buffer_usage flags_,
-	const S_command_buffer_inheritance_info * pInheritanceInfo_)
-	:flags(flags_)
-	,pInheritanceInfo(pInheritanceInfo_)
-{
-}
-
-S_command_buffer_begin_info( VkCommandBufferBeginInfo const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_command_buffer_begin_info ) );	}
+operator VkCommandBufferBeginInfo*()
+	{	return reinterpret_cast<VkCommandBufferBeginInfo*>(this);	}
+operator const VkCommandBufferBeginInfo*() const
+	{	return reinterpret_cast<const VkCommandBufferBeginInfo*>(this);	}
 S_command_buffer_begin_info& operator=( VkCommandBufferBeginInfo const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_command_buffer_begin_info ) ); return *this;	}
 operator VkCommandBufferBeginInfo const&() const 
 	{	return *reinterpret_cast<const VkCommandBufferBeginInfo*>(this);	}
 operator VkCommandBufferBeginInfo &() 
 	{	return *reinterpret_cast<VkCommandBufferBeginInfo*>(this);	}
+
+
+S_command_buffer_begin_info(){}
+S_command_buffer_begin_info(VkCommandBufferBeginInfo& rhs)
+	{	memcpy( this, &rhs, sizeof( S_command_buffer_begin_info ) );	}
+S_command_buffer_begin_info(
+	F_command_buffer_usage flags_,
+	const S_command_buffer_inheritance_info * pInheritanceInfo_)
+	:flags(flags_)
+	,pInheritanceInfo(pInheritanceInfo_)
+{}
 
 S_command_buffer_begin_info& n_device_group_command_buffer_begin_info(S_device_group_command_buffer_begin_info const& next_);
 };
@@ -11454,7 +12204,7 @@ struct N_command_buffer_begin_info{
 private:
 	void* pNext = nullptr;
 public:
-void* get(){ return pNext; }
+operator void*() { return pNext; }
 N_command_buffer_begin_info& n_device_group_command_buffer_begin_info(S_device_group_command_buffer_begin_info const& next_);
 };
 
@@ -11470,10 +12220,21 @@ public:
 	uint32_t deviceRenderAreaCount;
 	const S_rect_2d * pDeviceRenderAreas;
 
-VkDeviceGroupRenderPassBeginInfo*const get_vkptr(){return reinterpret_cast<VkDeviceGroupRenderPassBeginInfo*>(this);}
+operator VkDeviceGroupRenderPassBeginInfo*()
+	{	return reinterpret_cast<VkDeviceGroupRenderPassBeginInfo*>(this);	}
+operator const VkDeviceGroupRenderPassBeginInfo*() const
+	{	return reinterpret_cast<const VkDeviceGroupRenderPassBeginInfo*>(this);	}
+S_device_group_render_pass_begin_info& operator=( VkDeviceGroupRenderPassBeginInfo const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_device_group_render_pass_begin_info ) ); return *this;	}
+operator VkDeviceGroupRenderPassBeginInfo const&() const 
+	{	return *reinterpret_cast<const VkDeviceGroupRenderPassBeginInfo*>(this);	}
+operator VkDeviceGroupRenderPassBeginInfo &() 
+	{	return *reinterpret_cast<VkDeviceGroupRenderPassBeginInfo*>(this);	}
+
 
 S_device_group_render_pass_begin_info(){}
-
+S_device_group_render_pass_begin_info(VkDeviceGroupRenderPassBeginInfo& rhs)
+	{	memcpy( this, &rhs, sizeof( S_device_group_render_pass_begin_info ) );	}
 S_device_group_render_pass_begin_info(
 	uint32_t deviceMask_,
 	uint32_t deviceRenderAreaCount_,
@@ -11481,17 +12242,7 @@ S_device_group_render_pass_begin_info(
 	:deviceMask(deviceMask_)
 	,deviceRenderAreaCount(deviceRenderAreaCount_)
 	,pDeviceRenderAreas(pDeviceRenderAreas_)
-{
-}
-
-S_device_group_render_pass_begin_info( VkDeviceGroupRenderPassBeginInfo const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_device_group_render_pass_begin_info ) );	}
-S_device_group_render_pass_begin_info& operator=( VkDeviceGroupRenderPassBeginInfo const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_device_group_render_pass_begin_info ) ); return *this;	}
-operator VkDeviceGroupRenderPassBeginInfo const&() const 
-	{	return *reinterpret_cast<const VkDeviceGroupRenderPassBeginInfo*>(this);	}
-operator VkDeviceGroupRenderPassBeginInfo &() 
-	{	return *reinterpret_cast<VkDeviceGroupRenderPassBeginInfo*>(this);	}
+{}
 
 friend S_render_pass_begin_info;
 };
@@ -11505,7 +12256,17 @@ struct		S_attachment_sample_locations_EXT{
 	uint32_t attachmentIndex;
 	S_sample_locations_info_EXT sampleLocationsInfo;
 
-VkAttachmentSampleLocationsEXT*const get_vkptr(){return reinterpret_cast<VkAttachmentSampleLocationsEXT*>(this);}
+operator VkAttachmentSampleLocationsEXT*()
+	{	return reinterpret_cast<VkAttachmentSampleLocationsEXT*>(this);	}
+operator const VkAttachmentSampleLocationsEXT*() const
+	{	return reinterpret_cast<const VkAttachmentSampleLocationsEXT*>(this);	}
+S_attachment_sample_locations_EXT& operator=( VkAttachmentSampleLocationsEXT const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_attachment_sample_locations_EXT ) ); return *this;	}
+operator VkAttachmentSampleLocationsEXT const&() const 
+	{	return *reinterpret_cast<const VkAttachmentSampleLocationsEXT*>(this);	}
+operator VkAttachmentSampleLocationsEXT &() 
+	{	return *reinterpret_cast<VkAttachmentSampleLocationsEXT*>(this);	}
+
 };
 
 /*	VkSubpassSampleLocationsEXT
@@ -11514,7 +12275,17 @@ struct		S_subpass_sample_locations_EXT{
 	uint32_t subpassIndex;
 	S_sample_locations_info_EXT sampleLocationsInfo;
 
-VkSubpassSampleLocationsEXT*const get_vkptr(){return reinterpret_cast<VkSubpassSampleLocationsEXT*>(this);}
+operator VkSubpassSampleLocationsEXT*()
+	{	return reinterpret_cast<VkSubpassSampleLocationsEXT*>(this);	}
+operator const VkSubpassSampleLocationsEXT*() const
+	{	return reinterpret_cast<const VkSubpassSampleLocationsEXT*>(this);	}
+S_subpass_sample_locations_EXT& operator=( VkSubpassSampleLocationsEXT const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_subpass_sample_locations_EXT ) ); return *this;	}
+operator VkSubpassSampleLocationsEXT const&() const 
+	{	return *reinterpret_cast<const VkSubpassSampleLocationsEXT*>(this);	}
+operator VkSubpassSampleLocationsEXT &() 
+	{	return *reinterpret_cast<VkSubpassSampleLocationsEXT*>(this);	}
+
 };
 
 /*	VkRenderPassSampleLocationsBeginInfoEXT
@@ -11530,10 +12301,21 @@ public:
 	uint32_t postSubpassSampleLocationsCount;
 	const S_subpass_sample_locations_EXT * pPostSubpassSampleLocations;
 
-VkRenderPassSampleLocationsBeginInfoEXT*const get_vkptr(){return reinterpret_cast<VkRenderPassSampleLocationsBeginInfoEXT*>(this);}
+operator VkRenderPassSampleLocationsBeginInfoEXT*()
+	{	return reinterpret_cast<VkRenderPassSampleLocationsBeginInfoEXT*>(this);	}
+operator const VkRenderPassSampleLocationsBeginInfoEXT*() const
+	{	return reinterpret_cast<const VkRenderPassSampleLocationsBeginInfoEXT*>(this);	}
+S_render_pass_sample_locations_begin_info_EXT& operator=( VkRenderPassSampleLocationsBeginInfoEXT const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_render_pass_sample_locations_begin_info_EXT ) ); return *this;	}
+operator VkRenderPassSampleLocationsBeginInfoEXT const&() const 
+	{	return *reinterpret_cast<const VkRenderPassSampleLocationsBeginInfoEXT*>(this);	}
+operator VkRenderPassSampleLocationsBeginInfoEXT &() 
+	{	return *reinterpret_cast<VkRenderPassSampleLocationsBeginInfoEXT*>(this);	}
+
 
 S_render_pass_sample_locations_begin_info_EXT(){}
-
+S_render_pass_sample_locations_begin_info_EXT(VkRenderPassSampleLocationsBeginInfoEXT& rhs)
+	{	memcpy( this, &rhs, sizeof( S_render_pass_sample_locations_begin_info_EXT ) );	}
 S_render_pass_sample_locations_begin_info_EXT(
 	uint32_t attachmentInitialSampleLocationsCount_,
 	const S_attachment_sample_locations_EXT * pAttachmentInitialSampleLocations_,
@@ -11543,17 +12325,7 @@ S_render_pass_sample_locations_begin_info_EXT(
 	,pAttachmentInitialSampleLocations(pAttachmentInitialSampleLocations_)
 	,postSubpassSampleLocationsCount(postSubpassSampleLocationsCount_)
 	,pPostSubpassSampleLocations(pPostSubpassSampleLocations_)
-{
-}
-
-S_render_pass_sample_locations_begin_info_EXT( VkRenderPassSampleLocationsBeginInfoEXT const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_render_pass_sample_locations_begin_info_EXT ) );	}
-S_render_pass_sample_locations_begin_info_EXT& operator=( VkRenderPassSampleLocationsBeginInfoEXT const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_render_pass_sample_locations_begin_info_EXT ) ); return *this;	}
-operator VkRenderPassSampleLocationsBeginInfoEXT const&() const 
-	{	return *reinterpret_cast<const VkRenderPassSampleLocationsBeginInfoEXT*>(this);	}
-operator VkRenderPassSampleLocationsBeginInfoEXT &() 
-	{	return *reinterpret_cast<VkRenderPassSampleLocationsBeginInfoEXT*>(this);	}
+{}
 
 friend S_render_pass_begin_info;
 };
@@ -11577,10 +12349,21 @@ public:
 	uint32_t clearValueCount;
 	const VkClearValue * pClearValues;
 
-VkRenderPassBeginInfo*const get_vkptr(){return reinterpret_cast<VkRenderPassBeginInfo*>(this);}
+operator VkRenderPassBeginInfo*()
+	{	return reinterpret_cast<VkRenderPassBeginInfo*>(this);	}
+operator const VkRenderPassBeginInfo*() const
+	{	return reinterpret_cast<const VkRenderPassBeginInfo*>(this);	}
+S_render_pass_begin_info& operator=( VkRenderPassBeginInfo const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_render_pass_begin_info ) ); return *this;	}
+operator VkRenderPassBeginInfo const&() const 
+	{	return *reinterpret_cast<const VkRenderPassBeginInfo*>(this);	}
+operator VkRenderPassBeginInfo &() 
+	{	return *reinterpret_cast<VkRenderPassBeginInfo*>(this);	}
+
 
 S_render_pass_begin_info(){}
-
+S_render_pass_begin_info(VkRenderPassBeginInfo& rhs)
+	{	memcpy( this, &rhs, sizeof( S_render_pass_begin_info ) );	}
 S_render_pass_begin_info(
 	VkRenderPass renderPass_,
 	VkFramebuffer framebuffer_,
@@ -11592,17 +12375,7 @@ S_render_pass_begin_info(
 	,renderArea(renderArea_)
 	,clearValueCount(clearValueCount_)
 	,pClearValues(pClearValues_)
-{
-}
-
-S_render_pass_begin_info( VkRenderPassBeginInfo const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_render_pass_begin_info ) );	}
-S_render_pass_begin_info& operator=( VkRenderPassBeginInfo const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_render_pass_begin_info ) ); return *this;	}
-operator VkRenderPassBeginInfo const&() const 
-	{	return *reinterpret_cast<const VkRenderPassBeginInfo*>(this);	}
-operator VkRenderPassBeginInfo &() 
-	{	return *reinterpret_cast<VkRenderPassBeginInfo*>(this);	}
+{}
 
 S_render_pass_begin_info& n_device_group_render_pass_begin_info(S_device_group_render_pass_begin_info const& next_);
 S_render_pass_begin_info& n_render_pass_sample_locations_begin_info_EXT(S_render_pass_sample_locations_begin_info_EXT const& next_);
@@ -11615,7 +12388,7 @@ struct N_render_pass_begin_info{
 private:
 	void* pNext = nullptr;
 public:
-void* get(){ return pNext; }
+operator void*() { return pNext; }
 N_render_pass_begin_info& n_device_group_render_pass_begin_info(S_device_group_render_pass_begin_info const& next_);
 N_render_pass_begin_info& n_render_pass_sample_locations_begin_info_EXT(S_render_pass_sample_locations_begin_info_EXT const& next_);
 };
@@ -11626,7 +12399,17 @@ struct		S_clear_depth_stencil_value{
 	float depth;
 	uint32_t stencil;
 
-VkClearDepthStencilValue*const get_vkptr(){return reinterpret_cast<VkClearDepthStencilValue*>(this);}
+operator VkClearDepthStencilValue*()
+	{	return reinterpret_cast<VkClearDepthStencilValue*>(this);	}
+operator const VkClearDepthStencilValue*() const
+	{	return reinterpret_cast<const VkClearDepthStencilValue*>(this);	}
+S_clear_depth_stencil_value& operator=( VkClearDepthStencilValue const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_clear_depth_stencil_value ) ); return *this;	}
+operator VkClearDepthStencilValue const&() const 
+	{	return *reinterpret_cast<const VkClearDepthStencilValue*>(this);	}
+operator VkClearDepthStencilValue &() 
+	{	return *reinterpret_cast<VkClearDepthStencilValue*>(this);	}
+
 };
 
 /*	VkClearAttachment
@@ -11636,7 +12419,17 @@ struct		S_clear_attachment{
 	uint32_t colorAttachment;
 	VkClearValue clearValue;
 
-VkClearAttachment*const get_vkptr(){return reinterpret_cast<VkClearAttachment*>(this);}
+operator VkClearAttachment*()
+	{	return reinterpret_cast<VkClearAttachment*>(this);	}
+operator const VkClearAttachment*() const
+	{	return reinterpret_cast<const VkClearAttachment*>(this);	}
+S_clear_attachment& operator=( VkClearAttachment const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_clear_attachment ) ); return *this;	}
+operator VkClearAttachment const&() const 
+	{	return *reinterpret_cast<const VkClearAttachment*>(this);	}
+operator VkClearAttachment &() 
+	{	return *reinterpret_cast<VkClearAttachment*>(this);	}
+
 };
 
 /*	VkAttachmentDescription
@@ -11652,7 +12445,17 @@ struct		S_attachment_description{
 	E_image_layout initialLayout;
 	E_image_layout finalLayout;
 
-VkAttachmentDescription*const get_vkptr(){return reinterpret_cast<VkAttachmentDescription*>(this);}
+operator VkAttachmentDescription*()
+	{	return reinterpret_cast<VkAttachmentDescription*>(this);	}
+operator const VkAttachmentDescription*() const
+	{	return reinterpret_cast<const VkAttachmentDescription*>(this);	}
+S_attachment_description& operator=( VkAttachmentDescription const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_attachment_description ) ); return *this;	}
+operator VkAttachmentDescription const&() const 
+	{	return *reinterpret_cast<const VkAttachmentDescription*>(this);	}
+operator VkAttachmentDescription &() 
+	{	return *reinterpret_cast<VkAttachmentDescription*>(this);	}
+
 };
 
 /*	VkAttachmentReference
@@ -11661,7 +12464,17 @@ struct		S_attachment_reference{
 	uint32_t attachment;
 	E_image_layout layout;
 
-VkAttachmentReference*const get_vkptr(){return reinterpret_cast<VkAttachmentReference*>(this);}
+operator VkAttachmentReference*()
+	{	return reinterpret_cast<VkAttachmentReference*>(this);	}
+operator const VkAttachmentReference*() const
+	{	return reinterpret_cast<const VkAttachmentReference*>(this);	}
+S_attachment_reference& operator=( VkAttachmentReference const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_attachment_reference ) ); return *this;	}
+operator VkAttachmentReference const&() const 
+	{	return *reinterpret_cast<const VkAttachmentReference*>(this);	}
+operator VkAttachmentReference &() 
+	{	return *reinterpret_cast<VkAttachmentReference*>(this);	}
+
 };
 
 /*	VkSubpassDescription
@@ -11678,7 +12491,17 @@ struct		S_subpass_description{
 	uint32_t preserveAttachmentCount;
 	const uint32_t * pPreserveAttachments;
 
-VkSubpassDescription*const get_vkptr(){return reinterpret_cast<VkSubpassDescription*>(this);}
+operator VkSubpassDescription*()
+	{	return reinterpret_cast<VkSubpassDescription*>(this);	}
+operator const VkSubpassDescription*() const
+	{	return reinterpret_cast<const VkSubpassDescription*>(this);	}
+S_subpass_description& operator=( VkSubpassDescription const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_subpass_description ) ); return *this;	}
+operator VkSubpassDescription const&() const 
+	{	return *reinterpret_cast<const VkSubpassDescription*>(this);	}
+operator VkSubpassDescription &() 
+	{	return *reinterpret_cast<VkSubpassDescription*>(this);	}
+
 };
 
 /*	VkSubpassDependency
@@ -11692,7 +12515,17 @@ struct		S_subpass_dependency{
 	F_access dstAccessMask;
 	F_dependency dependencyFlags;
 
-VkSubpassDependency*const get_vkptr(){return reinterpret_cast<VkSubpassDependency*>(this);}
+operator VkSubpassDependency*()
+	{	return reinterpret_cast<VkSubpassDependency*>(this);	}
+operator const VkSubpassDependency*() const
+	{	return reinterpret_cast<const VkSubpassDependency*>(this);	}
+S_subpass_dependency& operator=( VkSubpassDependency const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_subpass_dependency ) ); return *this;	}
+operator VkSubpassDependency const&() const 
+	{	return *reinterpret_cast<const VkSubpassDependency*>(this);	}
+operator VkSubpassDependency &() 
+	{	return *reinterpret_cast<VkSubpassDependency*>(this);	}
+
 };
 
 /*	VkRenderPassMultiviewCreateInfo
@@ -11710,10 +12543,21 @@ public:
 	uint32_t correlationMaskCount;
 	const uint32_t * pCorrelationMasks;
 
-VkRenderPassMultiviewCreateInfo*const get_vkptr(){return reinterpret_cast<VkRenderPassMultiviewCreateInfo*>(this);}
+operator VkRenderPassMultiviewCreateInfo*()
+	{	return reinterpret_cast<VkRenderPassMultiviewCreateInfo*>(this);	}
+operator const VkRenderPassMultiviewCreateInfo*() const
+	{	return reinterpret_cast<const VkRenderPassMultiviewCreateInfo*>(this);	}
+S_render_pass_multiview_create_info& operator=( VkRenderPassMultiviewCreateInfo const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_render_pass_multiview_create_info ) ); return *this;	}
+operator VkRenderPassMultiviewCreateInfo const&() const 
+	{	return *reinterpret_cast<const VkRenderPassMultiviewCreateInfo*>(this);	}
+operator VkRenderPassMultiviewCreateInfo &() 
+	{	return *reinterpret_cast<VkRenderPassMultiviewCreateInfo*>(this);	}
+
 
 S_render_pass_multiview_create_info(){}
-
+S_render_pass_multiview_create_info(VkRenderPassMultiviewCreateInfo& rhs)
+	{	memcpy( this, &rhs, sizeof( S_render_pass_multiview_create_info ) );	}
 S_render_pass_multiview_create_info(
 	uint32_t subpassCount_,
 	const uint32_t * pViewMasks_,
@@ -11727,17 +12571,7 @@ S_render_pass_multiview_create_info(
 	,pViewOffsets(pViewOffsets_)
 	,correlationMaskCount(correlationMaskCount_)
 	,pCorrelationMasks(pCorrelationMasks_)
-{
-}
-
-S_render_pass_multiview_create_info( VkRenderPassMultiviewCreateInfo const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_render_pass_multiview_create_info ) );	}
-S_render_pass_multiview_create_info& operator=( VkRenderPassMultiviewCreateInfo const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_render_pass_multiview_create_info ) ); return *this;	}
-operator VkRenderPassMultiviewCreateInfo const&() const 
-	{	return *reinterpret_cast<const VkRenderPassMultiviewCreateInfo*>(this);	}
-operator VkRenderPassMultiviewCreateInfo &() 
-	{	return *reinterpret_cast<VkRenderPassMultiviewCreateInfo*>(this);	}
+{}
 
 friend S_render_pass_create_info;
 };
@@ -11752,7 +12586,17 @@ struct		S_input_attachment_aspect_reference{
 	uint32_t inputAttachmentIndex;
 	F_image_aspect aspectMask;
 
-VkInputAttachmentAspectReference*const get_vkptr(){return reinterpret_cast<VkInputAttachmentAspectReference*>(this);}
+operator VkInputAttachmentAspectReference*()
+	{	return reinterpret_cast<VkInputAttachmentAspectReference*>(this);	}
+operator const VkInputAttachmentAspectReference*() const
+	{	return reinterpret_cast<const VkInputAttachmentAspectReference*>(this);	}
+S_input_attachment_aspect_reference& operator=( VkInputAttachmentAspectReference const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_input_attachment_aspect_reference ) ); return *this;	}
+operator VkInputAttachmentAspectReference const&() const 
+	{	return *reinterpret_cast<const VkInputAttachmentAspectReference*>(this);	}
+operator VkInputAttachmentAspectReference &() 
+	{	return *reinterpret_cast<VkInputAttachmentAspectReference*>(this);	}
+
 };
 
 /*	VkRenderPassInputAttachmentAspectCreateInfo
@@ -11766,26 +12610,27 @@ public:
 	uint32_t aspectReferenceCount;
 	const S_input_attachment_aspect_reference * pAspectReferences;
 
-VkRenderPassInputAttachmentAspectCreateInfo*const get_vkptr(){return reinterpret_cast<VkRenderPassInputAttachmentAspectCreateInfo*>(this);}
-
-S_render_pass_input_attachment_aspect_create_info(){}
-
-S_render_pass_input_attachment_aspect_create_info(
-	uint32_t aspectReferenceCount_,
-	const S_input_attachment_aspect_reference * pAspectReferences_)
-	:aspectReferenceCount(aspectReferenceCount_)
-	,pAspectReferences(pAspectReferences_)
-{
-}
-
-S_render_pass_input_attachment_aspect_create_info( VkRenderPassInputAttachmentAspectCreateInfo const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_render_pass_input_attachment_aspect_create_info ) );	}
+operator VkRenderPassInputAttachmentAspectCreateInfo*()
+	{	return reinterpret_cast<VkRenderPassInputAttachmentAspectCreateInfo*>(this);	}
+operator const VkRenderPassInputAttachmentAspectCreateInfo*() const
+	{	return reinterpret_cast<const VkRenderPassInputAttachmentAspectCreateInfo*>(this);	}
 S_render_pass_input_attachment_aspect_create_info& operator=( VkRenderPassInputAttachmentAspectCreateInfo const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_render_pass_input_attachment_aspect_create_info ) ); return *this;	}
 operator VkRenderPassInputAttachmentAspectCreateInfo const&() const 
 	{	return *reinterpret_cast<const VkRenderPassInputAttachmentAspectCreateInfo*>(this);	}
 operator VkRenderPassInputAttachmentAspectCreateInfo &() 
 	{	return *reinterpret_cast<VkRenderPassInputAttachmentAspectCreateInfo*>(this);	}
+
+
+S_render_pass_input_attachment_aspect_create_info(){}
+S_render_pass_input_attachment_aspect_create_info(VkRenderPassInputAttachmentAspectCreateInfo& rhs)
+	{	memcpy( this, &rhs, sizeof( S_render_pass_input_attachment_aspect_create_info ) );	}
+S_render_pass_input_attachment_aspect_create_info(
+	uint32_t aspectReferenceCount_,
+	const S_input_attachment_aspect_reference * pAspectReferences_)
+	:aspectReferenceCount(aspectReferenceCount_)
+	,pAspectReferences(pAspectReferences_)
+{}
 
 friend S_render_pass_create_info;
 };
@@ -11811,10 +12656,21 @@ public:
 	uint32_t dependencyCount;
 	const S_subpass_dependency * pDependencies;
 
-VkRenderPassCreateInfo*const get_vkptr(){return reinterpret_cast<VkRenderPassCreateInfo*>(this);}
+operator VkRenderPassCreateInfo*()
+	{	return reinterpret_cast<VkRenderPassCreateInfo*>(this);	}
+operator const VkRenderPassCreateInfo*() const
+	{	return reinterpret_cast<const VkRenderPassCreateInfo*>(this);	}
+S_render_pass_create_info& operator=( VkRenderPassCreateInfo const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_render_pass_create_info ) ); return *this;	}
+operator VkRenderPassCreateInfo const&() const 
+	{	return *reinterpret_cast<const VkRenderPassCreateInfo*>(this);	}
+operator VkRenderPassCreateInfo &() 
+	{	return *reinterpret_cast<VkRenderPassCreateInfo*>(this);	}
+
 
 S_render_pass_create_info(){}
-
+S_render_pass_create_info(VkRenderPassCreateInfo& rhs)
+	{	memcpy( this, &rhs, sizeof( S_render_pass_create_info ) );	}
 S_render_pass_create_info(
 	F_render_pass_create flags_,
 	uint32_t attachmentCount_,
@@ -11830,17 +12686,7 @@ S_render_pass_create_info(
 	,pSubpasses(pSubpasses_)
 	,dependencyCount(dependencyCount_)
 	,pDependencies(pDependencies_)
-{
-}
-
-S_render_pass_create_info( VkRenderPassCreateInfo const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_render_pass_create_info ) );	}
-S_render_pass_create_info& operator=( VkRenderPassCreateInfo const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_render_pass_create_info ) ); return *this;	}
-operator VkRenderPassCreateInfo const&() const 
-	{	return *reinterpret_cast<const VkRenderPassCreateInfo*>(this);	}
-operator VkRenderPassCreateInfo &() 
-	{	return *reinterpret_cast<VkRenderPassCreateInfo*>(this);	}
+{}
 
 S_render_pass_create_info& n_render_pass_multiview_create_info(S_render_pass_multiview_create_info const& next_);
 S_render_pass_create_info& n_render_pass_input_attachment_aspect_create_info(S_render_pass_input_attachment_aspect_create_info const& next_);
@@ -11853,7 +12699,7 @@ struct N_render_pass_create_info{
 private:
 	void* pNext = nullptr;
 public:
-void* get(){ return pNext; }
+operator void*() { return pNext; }
 N_render_pass_create_info& n_render_pass_multiview_create_info(S_render_pass_multiview_create_info const& next_);
 N_render_pass_create_info& n_render_pass_input_attachment_aspect_create_info(S_render_pass_input_attachment_aspect_create_info const& next_);
 };
@@ -11867,24 +12713,25 @@ private:
 public:
 	VkEventCreateFlags flags;
 
-VkEventCreateInfo*const get_vkptr(){return reinterpret_cast<VkEventCreateInfo*>(this);}
-
-S_event_create_info(){}
-
-S_event_create_info(
-	VkEventCreateFlags flags_)
-	:flags(flags_)
-{
-}
-
-S_event_create_info( VkEventCreateInfo const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_event_create_info ) );	}
+operator VkEventCreateInfo*()
+	{	return reinterpret_cast<VkEventCreateInfo*>(this);	}
+operator const VkEventCreateInfo*() const
+	{	return reinterpret_cast<const VkEventCreateInfo*>(this);	}
 S_event_create_info& operator=( VkEventCreateInfo const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_event_create_info ) ); return *this;	}
 operator VkEventCreateInfo const&() const 
 	{	return *reinterpret_cast<const VkEventCreateInfo*>(this);	}
 operator VkEventCreateInfo &() 
 	{	return *reinterpret_cast<VkEventCreateInfo*>(this);	}
+
+
+S_event_create_info(){}
+S_event_create_info(VkEventCreateInfo& rhs)
+	{	memcpy( this, &rhs, sizeof( S_event_create_info ) );	}
+S_event_create_info(
+	VkEventCreateFlags flags_)
+	:flags(flags_)
+{}
 };
 static_assert(
 	sizeof(S_event_create_info) == sizeof(VkEventCreateInfo),
@@ -11900,24 +12747,25 @@ private:
 public:
 	F_external_fence_handle_type handleTypes;
 
-VkExportFenceCreateInfo*const get_vkptr(){return reinterpret_cast<VkExportFenceCreateInfo*>(this);}
-
-S_export_fence_create_info(){}
-
-S_export_fence_create_info(
-	F_external_fence_handle_type handleTypes_)
-	:handleTypes(handleTypes_)
-{
-}
-
-S_export_fence_create_info( VkExportFenceCreateInfo const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_export_fence_create_info ) );	}
+operator VkExportFenceCreateInfo*()
+	{	return reinterpret_cast<VkExportFenceCreateInfo*>(this);	}
+operator const VkExportFenceCreateInfo*() const
+	{	return reinterpret_cast<const VkExportFenceCreateInfo*>(this);	}
 S_export_fence_create_info& operator=( VkExportFenceCreateInfo const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_export_fence_create_info ) ); return *this;	}
 operator VkExportFenceCreateInfo const&() const 
 	{	return *reinterpret_cast<const VkExportFenceCreateInfo*>(this);	}
 operator VkExportFenceCreateInfo &() 
 	{	return *reinterpret_cast<VkExportFenceCreateInfo*>(this);	}
+
+
+S_export_fence_create_info(){}
+S_export_fence_create_info(VkExportFenceCreateInfo& rhs)
+	{	memcpy( this, &rhs, sizeof( S_export_fence_create_info ) );	}
+S_export_fence_create_info(
+	F_external_fence_handle_type handleTypes_)
+	:handleTypes(handleTypes_)
+{}
 
 friend S_fence_create_info;
 };
@@ -11938,10 +12786,21 @@ public:
 	DWORD dwAccess;
 	LPCWSTR name;
 
-VkExportFenceWin32HandleInfoKHR*const get_vkptr(){return reinterpret_cast<VkExportFenceWin32HandleInfoKHR*>(this);}
+operator VkExportFenceWin32HandleInfoKHR*()
+	{	return reinterpret_cast<VkExportFenceWin32HandleInfoKHR*>(this);	}
+operator const VkExportFenceWin32HandleInfoKHR*() const
+	{	return reinterpret_cast<const VkExportFenceWin32HandleInfoKHR*>(this);	}
+S_export_fence_win32_handle_info_KHR& operator=( VkExportFenceWin32HandleInfoKHR const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_export_fence_win32_handle_info_KHR ) ); return *this;	}
+operator VkExportFenceWin32HandleInfoKHR const&() const 
+	{	return *reinterpret_cast<const VkExportFenceWin32HandleInfoKHR*>(this);	}
+operator VkExportFenceWin32HandleInfoKHR &() 
+	{	return *reinterpret_cast<VkExportFenceWin32HandleInfoKHR*>(this);	}
+
 
 S_export_fence_win32_handle_info_KHR(){}
-
+S_export_fence_win32_handle_info_KHR(VkExportFenceWin32HandleInfoKHR& rhs)
+	{	memcpy( this, &rhs, sizeof( S_export_fence_win32_handle_info_KHR ) );	}
 S_export_fence_win32_handle_info_KHR(
 	const SECURITY_ATTRIBUTES * pAttributes_,
 	DWORD dwAccess_,
@@ -11949,17 +12808,7 @@ S_export_fence_win32_handle_info_KHR(
 	:pAttributes(pAttributes_)
 	,dwAccess(dwAccess_)
 	,name(name_)
-{
-}
-
-S_export_fence_win32_handle_info_KHR( VkExportFenceWin32HandleInfoKHR const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_export_fence_win32_handle_info_KHR ) );	}
-S_export_fence_win32_handle_info_KHR& operator=( VkExportFenceWin32HandleInfoKHR const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_export_fence_win32_handle_info_KHR ) ); return *this;	}
-operator VkExportFenceWin32HandleInfoKHR const&() const 
-	{	return *reinterpret_cast<const VkExportFenceWin32HandleInfoKHR*>(this);	}
-operator VkExportFenceWin32HandleInfoKHR &() 
-	{	return *reinterpret_cast<VkExportFenceWin32HandleInfoKHR*>(this);	}
+{}
 
 friend S_fence_create_info;
 };
@@ -11980,24 +12829,25 @@ private:
 public:
 	F_fence_create flags;
 
-VkFenceCreateInfo*const get_vkptr(){return reinterpret_cast<VkFenceCreateInfo*>(this);}
-
-S_fence_create_info(){}
-
-S_fence_create_info(
-	F_fence_create flags_)
-	:flags(flags_)
-{
-}
-
-S_fence_create_info( VkFenceCreateInfo const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_fence_create_info ) );	}
+operator VkFenceCreateInfo*()
+	{	return reinterpret_cast<VkFenceCreateInfo*>(this);	}
+operator const VkFenceCreateInfo*() const
+	{	return reinterpret_cast<const VkFenceCreateInfo*>(this);	}
 S_fence_create_info& operator=( VkFenceCreateInfo const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_fence_create_info ) ); return *this;	}
 operator VkFenceCreateInfo const&() const 
 	{	return *reinterpret_cast<const VkFenceCreateInfo*>(this);	}
 operator VkFenceCreateInfo &() 
 	{	return *reinterpret_cast<VkFenceCreateInfo*>(this);	}
+
+
+S_fence_create_info(){}
+S_fence_create_info(VkFenceCreateInfo& rhs)
+	{	memcpy( this, &rhs, sizeof( S_fence_create_info ) );	}
+S_fence_create_info(
+	F_fence_create flags_)
+	:flags(flags_)
+{}
 
 S_fence_create_info& n_export_fence_create_info(S_export_fence_create_info const& next_);
 #ifdef VK_USE_PLATFORM_WIN32_KHR
@@ -12012,7 +12862,7 @@ struct N_fence_create_info{
 private:
 	void* pNext = nullptr;
 public:
-void* get(){ return pNext; }
+operator void*() { return pNext; }
 N_fence_create_info& n_export_fence_create_info(S_export_fence_create_info const& next_);
 #ifdef VK_USE_PLATFORM_WIN32_KHR
 N_fence_create_info& n_export_fence_win32_handle_info_KHR(S_export_fence_win32_handle_info_KHR const& next_);
@@ -12029,24 +12879,25 @@ private:
 public:
 	F_external_semaphore_handle_type handleTypes;
 
-VkExportSemaphoreCreateInfo*const get_vkptr(){return reinterpret_cast<VkExportSemaphoreCreateInfo*>(this);}
-
-S_export_semaphore_create_info(){}
-
-S_export_semaphore_create_info(
-	F_external_semaphore_handle_type handleTypes_)
-	:handleTypes(handleTypes_)
-{
-}
-
-S_export_semaphore_create_info( VkExportSemaphoreCreateInfo const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_export_semaphore_create_info ) );	}
+operator VkExportSemaphoreCreateInfo*()
+	{	return reinterpret_cast<VkExportSemaphoreCreateInfo*>(this);	}
+operator const VkExportSemaphoreCreateInfo*() const
+	{	return reinterpret_cast<const VkExportSemaphoreCreateInfo*>(this);	}
 S_export_semaphore_create_info& operator=( VkExportSemaphoreCreateInfo const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_export_semaphore_create_info ) ); return *this;	}
 operator VkExportSemaphoreCreateInfo const&() const 
 	{	return *reinterpret_cast<const VkExportSemaphoreCreateInfo*>(this);	}
 operator VkExportSemaphoreCreateInfo &() 
 	{	return *reinterpret_cast<VkExportSemaphoreCreateInfo*>(this);	}
+
+
+S_export_semaphore_create_info(){}
+S_export_semaphore_create_info(VkExportSemaphoreCreateInfo& rhs)
+	{	memcpy( this, &rhs, sizeof( S_export_semaphore_create_info ) );	}
+S_export_semaphore_create_info(
+	F_external_semaphore_handle_type handleTypes_)
+	:handleTypes(handleTypes_)
+{}
 
 friend S_semaphore_create_info;
 };
@@ -12067,10 +12918,21 @@ public:
 	DWORD dwAccess;
 	LPCWSTR name;
 
-VkExportSemaphoreWin32HandleInfoKHR*const get_vkptr(){return reinterpret_cast<VkExportSemaphoreWin32HandleInfoKHR*>(this);}
+operator VkExportSemaphoreWin32HandleInfoKHR*()
+	{	return reinterpret_cast<VkExportSemaphoreWin32HandleInfoKHR*>(this);	}
+operator const VkExportSemaphoreWin32HandleInfoKHR*() const
+	{	return reinterpret_cast<const VkExportSemaphoreWin32HandleInfoKHR*>(this);	}
+S_export_semaphore_win32_handle_info_KHR& operator=( VkExportSemaphoreWin32HandleInfoKHR const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_export_semaphore_win32_handle_info_KHR ) ); return *this;	}
+operator VkExportSemaphoreWin32HandleInfoKHR const&() const 
+	{	return *reinterpret_cast<const VkExportSemaphoreWin32HandleInfoKHR*>(this);	}
+operator VkExportSemaphoreWin32HandleInfoKHR &() 
+	{	return *reinterpret_cast<VkExportSemaphoreWin32HandleInfoKHR*>(this);	}
+
 
 S_export_semaphore_win32_handle_info_KHR(){}
-
+S_export_semaphore_win32_handle_info_KHR(VkExportSemaphoreWin32HandleInfoKHR& rhs)
+	{	memcpy( this, &rhs, sizeof( S_export_semaphore_win32_handle_info_KHR ) );	}
 S_export_semaphore_win32_handle_info_KHR(
 	const SECURITY_ATTRIBUTES * pAttributes_,
 	DWORD dwAccess_,
@@ -12078,17 +12940,7 @@ S_export_semaphore_win32_handle_info_KHR(
 	:pAttributes(pAttributes_)
 	,dwAccess(dwAccess_)
 	,name(name_)
-{
-}
-
-S_export_semaphore_win32_handle_info_KHR( VkExportSemaphoreWin32HandleInfoKHR const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_export_semaphore_win32_handle_info_KHR ) );	}
-S_export_semaphore_win32_handle_info_KHR& operator=( VkExportSemaphoreWin32HandleInfoKHR const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_export_semaphore_win32_handle_info_KHR ) ); return *this;	}
-operator VkExportSemaphoreWin32HandleInfoKHR const&() const 
-	{	return *reinterpret_cast<const VkExportSemaphoreWin32HandleInfoKHR*>(this);	}
-operator VkExportSemaphoreWin32HandleInfoKHR &() 
-	{	return *reinterpret_cast<VkExportSemaphoreWin32HandleInfoKHR*>(this);	}
+{}
 
 friend S_semaphore_create_info;
 };
@@ -12109,24 +12961,25 @@ private:
 public:
 	VkSemaphoreCreateFlags flags;
 
-VkSemaphoreCreateInfo*const get_vkptr(){return reinterpret_cast<VkSemaphoreCreateInfo*>(this);}
-
-S_semaphore_create_info(){}
-
-S_semaphore_create_info(
-	VkSemaphoreCreateFlags flags_)
-	:flags(flags_)
-{
-}
-
-S_semaphore_create_info( VkSemaphoreCreateInfo const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_semaphore_create_info ) );	}
+operator VkSemaphoreCreateInfo*()
+	{	return reinterpret_cast<VkSemaphoreCreateInfo*>(this);	}
+operator const VkSemaphoreCreateInfo*() const
+	{	return reinterpret_cast<const VkSemaphoreCreateInfo*>(this);	}
 S_semaphore_create_info& operator=( VkSemaphoreCreateInfo const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_semaphore_create_info ) ); return *this;	}
 operator VkSemaphoreCreateInfo const&() const 
 	{	return *reinterpret_cast<const VkSemaphoreCreateInfo*>(this);	}
 operator VkSemaphoreCreateInfo &() 
 	{	return *reinterpret_cast<VkSemaphoreCreateInfo*>(this);	}
+
+
+S_semaphore_create_info(){}
+S_semaphore_create_info(VkSemaphoreCreateInfo& rhs)
+	{	memcpy( this, &rhs, sizeof( S_semaphore_create_info ) );	}
+S_semaphore_create_info(
+	VkSemaphoreCreateFlags flags_)
+	:flags(flags_)
+{}
 
 S_semaphore_create_info& n_export_semaphore_create_info(S_export_semaphore_create_info const& next_);
 #ifdef VK_USE_PLATFORM_WIN32_KHR
@@ -12141,7 +12994,7 @@ struct N_semaphore_create_info{
 private:
 	void* pNext = nullptr;
 public:
-void* get(){ return pNext; }
+operator void*() { return pNext; }
 N_semaphore_create_info& n_export_semaphore_create_info(S_export_semaphore_create_info const& next_);
 #ifdef VK_USE_PLATFORM_WIN32_KHR
 N_semaphore_create_info& n_export_semaphore_win32_handle_info_KHR(S_export_semaphore_win32_handle_info_KHR const& next_);
@@ -12160,10 +13013,21 @@ public:
 	uint32_t queryCount;
 	F_query_pipeline_statistic pipelineStatistics;
 
-VkQueryPoolCreateInfo*const get_vkptr(){return reinterpret_cast<VkQueryPoolCreateInfo*>(this);}
+operator VkQueryPoolCreateInfo*()
+	{	return reinterpret_cast<VkQueryPoolCreateInfo*>(this);	}
+operator const VkQueryPoolCreateInfo*() const
+	{	return reinterpret_cast<const VkQueryPoolCreateInfo*>(this);	}
+S_query_pool_create_info& operator=( VkQueryPoolCreateInfo const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_query_pool_create_info ) ); return *this;	}
+operator VkQueryPoolCreateInfo const&() const 
+	{	return *reinterpret_cast<const VkQueryPoolCreateInfo*>(this);	}
+operator VkQueryPoolCreateInfo &() 
+	{	return *reinterpret_cast<VkQueryPoolCreateInfo*>(this);	}
+
 
 S_query_pool_create_info(){}
-
+S_query_pool_create_info(VkQueryPoolCreateInfo& rhs)
+	{	memcpy( this, &rhs, sizeof( S_query_pool_create_info ) );	}
 S_query_pool_create_info(
 	VkQueryPoolCreateFlags flags_,
 	E_query_type queryType_,
@@ -12173,17 +13037,7 @@ S_query_pool_create_info(
 	,queryType(queryType_)
 	,queryCount(queryCount_)
 	,pipelineStatistics(pipelineStatistics_)
-{
-}
-
-S_query_pool_create_info( VkQueryPoolCreateInfo const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_query_pool_create_info ) );	}
-S_query_pool_create_info& operator=( VkQueryPoolCreateInfo const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_query_pool_create_info ) ); return *this;	}
-operator VkQueryPoolCreateInfo const&() const 
-	{	return *reinterpret_cast<const VkQueryPoolCreateInfo*>(this);	}
-operator VkQueryPoolCreateInfo &() 
-	{	return *reinterpret_cast<VkQueryPoolCreateInfo*>(this);	}
+{}
 };
 static_assert(
 	sizeof(S_query_pool_create_info) == sizeof(VkQueryPoolCreateInfo),
@@ -12204,10 +13058,21 @@ public:
 	uint32_t height;
 	uint32_t layers;
 
-VkFramebufferCreateInfo*const get_vkptr(){return reinterpret_cast<VkFramebufferCreateInfo*>(this);}
+operator VkFramebufferCreateInfo*()
+	{	return reinterpret_cast<VkFramebufferCreateInfo*>(this);	}
+operator const VkFramebufferCreateInfo*() const
+	{	return reinterpret_cast<const VkFramebufferCreateInfo*>(this);	}
+S_framebuffer_create_info& operator=( VkFramebufferCreateInfo const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_framebuffer_create_info ) ); return *this;	}
+operator VkFramebufferCreateInfo const&() const 
+	{	return *reinterpret_cast<const VkFramebufferCreateInfo*>(this);	}
+operator VkFramebufferCreateInfo &() 
+	{	return *reinterpret_cast<VkFramebufferCreateInfo*>(this);	}
+
 
 S_framebuffer_create_info(){}
-
+S_framebuffer_create_info(VkFramebufferCreateInfo& rhs)
+	{	memcpy( this, &rhs, sizeof( S_framebuffer_create_info ) );	}
 S_framebuffer_create_info(
 	VkFramebufferCreateFlags flags_,
 	VkRenderPass renderPass_,
@@ -12223,17 +13088,7 @@ S_framebuffer_create_info(
 	,width(width_)
 	,height(height_)
 	,layers(layers_)
-{
-}
-
-S_framebuffer_create_info( VkFramebufferCreateInfo const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_framebuffer_create_info ) );	}
-S_framebuffer_create_info& operator=( VkFramebufferCreateInfo const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_framebuffer_create_info ) ); return *this;	}
-operator VkFramebufferCreateInfo const&() const 
-	{	return *reinterpret_cast<const VkFramebufferCreateInfo*>(this);	}
-operator VkFramebufferCreateInfo &() 
-	{	return *reinterpret_cast<VkFramebufferCreateInfo*>(this);	}
+{}
 };
 static_assert(
 	sizeof(S_framebuffer_create_info) == sizeof(VkFramebufferCreateInfo),
@@ -12247,7 +13102,17 @@ struct		S_draw_indirect_command{
 	uint32_t firstVertex;
 	uint32_t firstInstance;
 
-VkDrawIndirectCommand*const get_vkptr(){return reinterpret_cast<VkDrawIndirectCommand*>(this);}
+operator VkDrawIndirectCommand*()
+	{	return reinterpret_cast<VkDrawIndirectCommand*>(this);	}
+operator const VkDrawIndirectCommand*() const
+	{	return reinterpret_cast<const VkDrawIndirectCommand*>(this);	}
+S_draw_indirect_command& operator=( VkDrawIndirectCommand const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_draw_indirect_command ) ); return *this;	}
+operator VkDrawIndirectCommand const&() const 
+	{	return *reinterpret_cast<const VkDrawIndirectCommand*>(this);	}
+operator VkDrawIndirectCommand &() 
+	{	return *reinterpret_cast<VkDrawIndirectCommand*>(this);	}
+
 };
 
 /*	VkDrawIndexedIndirectCommand
@@ -12259,7 +13124,17 @@ struct		S_draw_indexed_indirect_command{
 	int32_t vertexOffset;
 	uint32_t firstInstance;
 
-VkDrawIndexedIndirectCommand*const get_vkptr(){return reinterpret_cast<VkDrawIndexedIndirectCommand*>(this);}
+operator VkDrawIndexedIndirectCommand*()
+	{	return reinterpret_cast<VkDrawIndexedIndirectCommand*>(this);	}
+operator const VkDrawIndexedIndirectCommand*() const
+	{	return reinterpret_cast<const VkDrawIndexedIndirectCommand*>(this);	}
+S_draw_indexed_indirect_command& operator=( VkDrawIndexedIndirectCommand const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_draw_indexed_indirect_command ) ); return *this;	}
+operator VkDrawIndexedIndirectCommand const&() const 
+	{	return *reinterpret_cast<const VkDrawIndexedIndirectCommand*>(this);	}
+operator VkDrawIndexedIndirectCommand &() 
+	{	return *reinterpret_cast<VkDrawIndexedIndirectCommand*>(this);	}
+
 };
 
 /*	VkDispatchIndirectCommand
@@ -12269,7 +13144,17 @@ struct		S_dispatch_indirect_command{
 	uint32_t y;
 	uint32_t z;
 
-VkDispatchIndirectCommand*const get_vkptr(){return reinterpret_cast<VkDispatchIndirectCommand*>(this);}
+operator VkDispatchIndirectCommand*()
+	{	return reinterpret_cast<VkDispatchIndirectCommand*>(this);	}
+operator const VkDispatchIndirectCommand*() const
+	{	return reinterpret_cast<const VkDispatchIndirectCommand*>(this);	}
+S_dispatch_indirect_command& operator=( VkDispatchIndirectCommand const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_dispatch_indirect_command ) ); return *this;	}
+operator VkDispatchIndirectCommand const&() const 
+	{	return *reinterpret_cast<const VkDispatchIndirectCommand*>(this);	}
+operator VkDispatchIndirectCommand &() 
+	{	return *reinterpret_cast<VkDispatchIndirectCommand*>(this);	}
+
 };
 
 /*	VkWin32KeyedMutexAcquireReleaseInfoNV
@@ -12289,10 +13174,21 @@ public:
 	const VkDeviceMemory * pReleaseSyncs;
 	const uint64_t * pReleaseKeys;
 
-VkWin32KeyedMutexAcquireReleaseInfoNV*const get_vkptr(){return reinterpret_cast<VkWin32KeyedMutexAcquireReleaseInfoNV*>(this);}
+operator VkWin32KeyedMutexAcquireReleaseInfoNV*()
+	{	return reinterpret_cast<VkWin32KeyedMutexAcquireReleaseInfoNV*>(this);	}
+operator const VkWin32KeyedMutexAcquireReleaseInfoNV*() const
+	{	return reinterpret_cast<const VkWin32KeyedMutexAcquireReleaseInfoNV*>(this);	}
+S_win32_keyed_mutex_acquire_release_info_NV& operator=( VkWin32KeyedMutexAcquireReleaseInfoNV const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_win32_keyed_mutex_acquire_release_info_NV ) ); return *this;	}
+operator VkWin32KeyedMutexAcquireReleaseInfoNV const&() const 
+	{	return *reinterpret_cast<const VkWin32KeyedMutexAcquireReleaseInfoNV*>(this);	}
+operator VkWin32KeyedMutexAcquireReleaseInfoNV &() 
+	{	return *reinterpret_cast<VkWin32KeyedMutexAcquireReleaseInfoNV*>(this);	}
+
 
 S_win32_keyed_mutex_acquire_release_info_NV(){}
-
+S_win32_keyed_mutex_acquire_release_info_NV(VkWin32KeyedMutexAcquireReleaseInfoNV& rhs)
+	{	memcpy( this, &rhs, sizeof( S_win32_keyed_mutex_acquire_release_info_NV ) );	}
 S_win32_keyed_mutex_acquire_release_info_NV(
 	uint32_t acquireCount_,
 	const VkDeviceMemory * pAcquireSyncs_,
@@ -12308,17 +13204,7 @@ S_win32_keyed_mutex_acquire_release_info_NV(
 	,releaseCount(releaseCount_)
 	,pReleaseSyncs(pReleaseSyncs_)
 	,pReleaseKeys(pReleaseKeys_)
-{
-}
-
-S_win32_keyed_mutex_acquire_release_info_NV( VkWin32KeyedMutexAcquireReleaseInfoNV const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_win32_keyed_mutex_acquire_release_info_NV ) );	}
-S_win32_keyed_mutex_acquire_release_info_NV& operator=( VkWin32KeyedMutexAcquireReleaseInfoNV const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_win32_keyed_mutex_acquire_release_info_NV ) ); return *this;	}
-operator VkWin32KeyedMutexAcquireReleaseInfoNV const&() const 
-	{	return *reinterpret_cast<const VkWin32KeyedMutexAcquireReleaseInfoNV*>(this);	}
-operator VkWin32KeyedMutexAcquireReleaseInfoNV &() 
-	{	return *reinterpret_cast<VkWin32KeyedMutexAcquireReleaseInfoNV*>(this);	}
+{}
 
 friend S_submit_info;
 };
@@ -12344,10 +13230,21 @@ public:
 	const VkDeviceMemory * pReleaseSyncs;
 	const uint64_t * pReleaseKeys;
 
-VkWin32KeyedMutexAcquireReleaseInfoKHR*const get_vkptr(){return reinterpret_cast<VkWin32KeyedMutexAcquireReleaseInfoKHR*>(this);}
+operator VkWin32KeyedMutexAcquireReleaseInfoKHR*()
+	{	return reinterpret_cast<VkWin32KeyedMutexAcquireReleaseInfoKHR*>(this);	}
+operator const VkWin32KeyedMutexAcquireReleaseInfoKHR*() const
+	{	return reinterpret_cast<const VkWin32KeyedMutexAcquireReleaseInfoKHR*>(this);	}
+S_win32_keyed_mutex_acquire_release_info_KHR& operator=( VkWin32KeyedMutexAcquireReleaseInfoKHR const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_win32_keyed_mutex_acquire_release_info_KHR ) ); return *this;	}
+operator VkWin32KeyedMutexAcquireReleaseInfoKHR const&() const 
+	{	return *reinterpret_cast<const VkWin32KeyedMutexAcquireReleaseInfoKHR*>(this);	}
+operator VkWin32KeyedMutexAcquireReleaseInfoKHR &() 
+	{	return *reinterpret_cast<VkWin32KeyedMutexAcquireReleaseInfoKHR*>(this);	}
+
 
 S_win32_keyed_mutex_acquire_release_info_KHR(){}
-
+S_win32_keyed_mutex_acquire_release_info_KHR(VkWin32KeyedMutexAcquireReleaseInfoKHR& rhs)
+	{	memcpy( this, &rhs, sizeof( S_win32_keyed_mutex_acquire_release_info_KHR ) );	}
 S_win32_keyed_mutex_acquire_release_info_KHR(
 	uint32_t acquireCount_,
 	const VkDeviceMemory * pAcquireSyncs_,
@@ -12363,17 +13260,7 @@ S_win32_keyed_mutex_acquire_release_info_KHR(
 	,releaseCount(releaseCount_)
 	,pReleaseSyncs(pReleaseSyncs_)
 	,pReleaseKeys(pReleaseKeys_)
-{
-}
-
-S_win32_keyed_mutex_acquire_release_info_KHR( VkWin32KeyedMutexAcquireReleaseInfoKHR const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_win32_keyed_mutex_acquire_release_info_KHR ) );	}
-S_win32_keyed_mutex_acquire_release_info_KHR& operator=( VkWin32KeyedMutexAcquireReleaseInfoKHR const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_win32_keyed_mutex_acquire_release_info_KHR ) ); return *this;	}
-operator VkWin32KeyedMutexAcquireReleaseInfoKHR const&() const 
-	{	return *reinterpret_cast<const VkWin32KeyedMutexAcquireReleaseInfoKHR*>(this);	}
-operator VkWin32KeyedMutexAcquireReleaseInfoKHR &() 
-	{	return *reinterpret_cast<VkWin32KeyedMutexAcquireReleaseInfoKHR*>(this);	}
+{}
 
 friend S_submit_info;
 };
@@ -12396,10 +13283,21 @@ public:
 	uint32_t signalSemaphoreValuesCount;
 	const uint64_t * pSignalSemaphoreValues;
 
-VkD3D12FenceSubmitInfoKHR*const get_vkptr(){return reinterpret_cast<VkD3D12FenceSubmitInfoKHR*>(this);}
+operator VkD3D12FenceSubmitInfoKHR*()
+	{	return reinterpret_cast<VkD3D12FenceSubmitInfoKHR*>(this);	}
+operator const VkD3D12FenceSubmitInfoKHR*() const
+	{	return reinterpret_cast<const VkD3D12FenceSubmitInfoKHR*>(this);	}
+S_d_3d12_fence_submit_info_KHR& operator=( VkD3D12FenceSubmitInfoKHR const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_d_3d12_fence_submit_info_KHR ) ); return *this;	}
+operator VkD3D12FenceSubmitInfoKHR const&() const 
+	{	return *reinterpret_cast<const VkD3D12FenceSubmitInfoKHR*>(this);	}
+operator VkD3D12FenceSubmitInfoKHR &() 
+	{	return *reinterpret_cast<VkD3D12FenceSubmitInfoKHR*>(this);	}
+
 
 S_d_3d12_fence_submit_info_KHR(){}
-
+S_d_3d12_fence_submit_info_KHR(VkD3D12FenceSubmitInfoKHR& rhs)
+	{	memcpy( this, &rhs, sizeof( S_d_3d12_fence_submit_info_KHR ) );	}
 S_d_3d12_fence_submit_info_KHR(
 	uint32_t waitSemaphoreValuesCount_,
 	const uint64_t * pWaitSemaphoreValues_,
@@ -12409,17 +13307,7 @@ S_d_3d12_fence_submit_info_KHR(
 	,pWaitSemaphoreValues(pWaitSemaphoreValues_)
 	,signalSemaphoreValuesCount(signalSemaphoreValuesCount_)
 	,pSignalSemaphoreValues(pSignalSemaphoreValues_)
-{
-}
-
-S_d_3d12_fence_submit_info_KHR( VkD3D12FenceSubmitInfoKHR const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_d_3d12_fence_submit_info_KHR ) );	}
-S_d_3d12_fence_submit_info_KHR& operator=( VkD3D12FenceSubmitInfoKHR const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_d_3d12_fence_submit_info_KHR ) ); return *this;	}
-operator VkD3D12FenceSubmitInfoKHR const&() const 
-	{	return *reinterpret_cast<const VkD3D12FenceSubmitInfoKHR*>(this);	}
-operator VkD3D12FenceSubmitInfoKHR &() 
-	{	return *reinterpret_cast<VkD3D12FenceSubmitInfoKHR*>(this);	}
+{}
 
 friend S_submit_info;
 };
@@ -12443,10 +13331,21 @@ public:
 	uint32_t signalSemaphoreCount;
 	const uint32_t * pSignalSemaphoreDeviceIndices;
 
-VkDeviceGroupSubmitInfo*const get_vkptr(){return reinterpret_cast<VkDeviceGroupSubmitInfo*>(this);}
+operator VkDeviceGroupSubmitInfo*()
+	{	return reinterpret_cast<VkDeviceGroupSubmitInfo*>(this);	}
+operator const VkDeviceGroupSubmitInfo*() const
+	{	return reinterpret_cast<const VkDeviceGroupSubmitInfo*>(this);	}
+S_device_group_submit_info& operator=( VkDeviceGroupSubmitInfo const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_device_group_submit_info ) ); return *this;	}
+operator VkDeviceGroupSubmitInfo const&() const 
+	{	return *reinterpret_cast<const VkDeviceGroupSubmitInfo*>(this);	}
+operator VkDeviceGroupSubmitInfo &() 
+	{	return *reinterpret_cast<VkDeviceGroupSubmitInfo*>(this);	}
+
 
 S_device_group_submit_info(){}
-
+S_device_group_submit_info(VkDeviceGroupSubmitInfo& rhs)
+	{	memcpy( this, &rhs, sizeof( S_device_group_submit_info ) );	}
 S_device_group_submit_info(
 	uint32_t waitSemaphoreCount_,
 	const uint32_t * pWaitSemaphoreDeviceIndices_,
@@ -12460,17 +13359,7 @@ S_device_group_submit_info(
 	,pCommandBufferDeviceMasks(pCommandBufferDeviceMasks_)
 	,signalSemaphoreCount(signalSemaphoreCount_)
 	,pSignalSemaphoreDeviceIndices(pSignalSemaphoreDeviceIndices_)
-{
-}
-
-S_device_group_submit_info( VkDeviceGroupSubmitInfo const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_device_group_submit_info ) );	}
-S_device_group_submit_info& operator=( VkDeviceGroupSubmitInfo const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_device_group_submit_info ) ); return *this;	}
-operator VkDeviceGroupSubmitInfo const&() const 
-	{	return *reinterpret_cast<const VkDeviceGroupSubmitInfo*>(this);	}
-operator VkDeviceGroupSubmitInfo &() 
-	{	return *reinterpret_cast<VkDeviceGroupSubmitInfo*>(this);	}
+{}
 
 friend S_submit_info;
 };
@@ -12488,24 +13377,25 @@ private:
 public:
 	VkBool32 protectedSubmit;
 
-VkProtectedSubmitInfo*const get_vkptr(){return reinterpret_cast<VkProtectedSubmitInfo*>(this);}
-
-S_protected_submit_info(){}
-
-S_protected_submit_info(
-	VkBool32 protectedSubmit_)
-	:protectedSubmit(protectedSubmit_)
-{
-}
-
-S_protected_submit_info( VkProtectedSubmitInfo const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_protected_submit_info ) );	}
+operator VkProtectedSubmitInfo*()
+	{	return reinterpret_cast<VkProtectedSubmitInfo*>(this);	}
+operator const VkProtectedSubmitInfo*() const
+	{	return reinterpret_cast<const VkProtectedSubmitInfo*>(this);	}
 S_protected_submit_info& operator=( VkProtectedSubmitInfo const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_protected_submit_info ) ); return *this;	}
 operator VkProtectedSubmitInfo const&() const 
 	{	return *reinterpret_cast<const VkProtectedSubmitInfo*>(this);	}
 operator VkProtectedSubmitInfo &() 
 	{	return *reinterpret_cast<VkProtectedSubmitInfo*>(this);	}
+
+
+S_protected_submit_info(){}
+S_protected_submit_info(VkProtectedSubmitInfo& rhs)
+	{	memcpy( this, &rhs, sizeof( S_protected_submit_info ) );	}
+S_protected_submit_info(
+	VkBool32 protectedSubmit_)
+	:protectedSubmit(protectedSubmit_)
+{}
 
 friend S_submit_info;
 };
@@ -12534,10 +13424,21 @@ public:
 	uint32_t signalSemaphoreCount;
 	const VkSemaphore * pSignalSemaphores;
 
-VkSubmitInfo*const get_vkptr(){return reinterpret_cast<VkSubmitInfo*>(this);}
+operator VkSubmitInfo*()
+	{	return reinterpret_cast<VkSubmitInfo*>(this);	}
+operator const VkSubmitInfo*() const
+	{	return reinterpret_cast<const VkSubmitInfo*>(this);	}
+S_submit_info& operator=( VkSubmitInfo const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_submit_info ) ); return *this;	}
+operator VkSubmitInfo const&() const 
+	{	return *reinterpret_cast<const VkSubmitInfo*>(this);	}
+operator VkSubmitInfo &() 
+	{	return *reinterpret_cast<VkSubmitInfo*>(this);	}
+
 
 S_submit_info(){}
-
+S_submit_info(VkSubmitInfo& rhs)
+	{	memcpy( this, &rhs, sizeof( S_submit_info ) );	}
 S_submit_info(
 	uint32_t waitSemaphoreCount_,
 	const VkSemaphore * pWaitSemaphores_,
@@ -12553,17 +13454,7 @@ S_submit_info(
 	,pCommandBuffers(pCommandBuffers_)
 	,signalSemaphoreCount(signalSemaphoreCount_)
 	,pSignalSemaphores(pSignalSemaphores_)
-{
-}
-
-S_submit_info( VkSubmitInfo const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_submit_info ) );	}
-S_submit_info& operator=( VkSubmitInfo const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_submit_info ) ); return *this;	}
-operator VkSubmitInfo const&() const 
-	{	return *reinterpret_cast<const VkSubmitInfo*>(this);	}
-operator VkSubmitInfo &() 
-	{	return *reinterpret_cast<VkSubmitInfo*>(this);	}
+{}
 
 #ifdef VK_USE_PLATFORM_WIN32_KHR
 S_submit_info& n_win32_keyed_mutex_acquire_release_info_NV(S_win32_keyed_mutex_acquire_release_info_NV const& next_);
@@ -12585,7 +13476,7 @@ struct N_submit_info{
 private:
 	void* pNext = nullptr;
 public:
-void* get(){ return pNext; }
+operator void*() { return pNext; }
 #ifdef VK_USE_PLATFORM_WIN32_KHR
 N_submit_info& n_win32_keyed_mutex_acquire_release_info_NV(S_win32_keyed_mutex_acquire_release_info_NV const& next_);
 #endif
@@ -12611,7 +13502,17 @@ struct		S_display_properties_KHR{
 	VkBool32 planeReorderPossible;
 	VkBool32 persistentContent;
 
-VkDisplayPropertiesKHR*const get_vkptr(){return reinterpret_cast<VkDisplayPropertiesKHR*>(this);}
+operator VkDisplayPropertiesKHR*()
+	{	return reinterpret_cast<VkDisplayPropertiesKHR*>(this);	}
+operator const VkDisplayPropertiesKHR*() const
+	{	return reinterpret_cast<const VkDisplayPropertiesKHR*>(this);	}
+S_display_properties_KHR& operator=( VkDisplayPropertiesKHR const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_display_properties_KHR ) ); return *this;	}
+operator VkDisplayPropertiesKHR const&() const 
+	{	return *reinterpret_cast<const VkDisplayPropertiesKHR*>(this);	}
+operator VkDisplayPropertiesKHR &() 
+	{	return *reinterpret_cast<VkDisplayPropertiesKHR*>(this);	}
+
 };
 
 /*	VkDisplayPlanePropertiesKHR
@@ -12621,7 +13522,17 @@ struct		S_display_plane_properties_KHR{
 	VkDisplayKHR currentDisplay;
 	uint32_t currentStackIndex;
 
-VkDisplayPlanePropertiesKHR*const get_vkptr(){return reinterpret_cast<VkDisplayPlanePropertiesKHR*>(this);}
+operator VkDisplayPlanePropertiesKHR*()
+	{	return reinterpret_cast<VkDisplayPlanePropertiesKHR*>(this);	}
+operator const VkDisplayPlanePropertiesKHR*() const
+	{	return reinterpret_cast<const VkDisplayPlanePropertiesKHR*>(this);	}
+S_display_plane_properties_KHR& operator=( VkDisplayPlanePropertiesKHR const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_display_plane_properties_KHR ) ); return *this;	}
+operator VkDisplayPlanePropertiesKHR const&() const 
+	{	return *reinterpret_cast<const VkDisplayPlanePropertiesKHR*>(this);	}
+operator VkDisplayPlanePropertiesKHR &() 
+	{	return *reinterpret_cast<VkDisplayPlanePropertiesKHR*>(this);	}
+
 };
 
 /*	VkDisplayModeParametersKHR
@@ -12630,7 +13541,17 @@ struct		S_display_mode_parameters_KHR{
 	S_extent_2d visibleRegion;
 	uint32_t refreshRate;
 
-VkDisplayModeParametersKHR*const get_vkptr(){return reinterpret_cast<VkDisplayModeParametersKHR*>(this);}
+operator VkDisplayModeParametersKHR*()
+	{	return reinterpret_cast<VkDisplayModeParametersKHR*>(this);	}
+operator const VkDisplayModeParametersKHR*() const
+	{	return reinterpret_cast<const VkDisplayModeParametersKHR*>(this);	}
+S_display_mode_parameters_KHR& operator=( VkDisplayModeParametersKHR const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_display_mode_parameters_KHR ) ); return *this;	}
+operator VkDisplayModeParametersKHR const&() const 
+	{	return *reinterpret_cast<const VkDisplayModeParametersKHR*>(this);	}
+operator VkDisplayModeParametersKHR &() 
+	{	return *reinterpret_cast<VkDisplayModeParametersKHR*>(this);	}
+
 };
 
 /*	VkDisplayModePropertiesKHR
@@ -12640,7 +13561,17 @@ struct		S_display_mode_properties_KHR{
 	VkDisplayModeKHR displayMode;
 	S_display_mode_parameters_KHR parameters;
 
-VkDisplayModePropertiesKHR*const get_vkptr(){return reinterpret_cast<VkDisplayModePropertiesKHR*>(this);}
+operator VkDisplayModePropertiesKHR*()
+	{	return reinterpret_cast<VkDisplayModePropertiesKHR*>(this);	}
+operator const VkDisplayModePropertiesKHR*() const
+	{	return reinterpret_cast<const VkDisplayModePropertiesKHR*>(this);	}
+S_display_mode_properties_KHR& operator=( VkDisplayModePropertiesKHR const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_display_mode_properties_KHR ) ); return *this;	}
+operator VkDisplayModePropertiesKHR const&() const 
+	{	return *reinterpret_cast<const VkDisplayModePropertiesKHR*>(this);	}
+operator VkDisplayModePropertiesKHR &() 
+	{	return *reinterpret_cast<VkDisplayModePropertiesKHR*>(this);	}
+
 };
 
 /*	VkDisplayModeCreateInfoKHR
@@ -12653,26 +13584,27 @@ public:
 	VkDisplayModeCreateFlagsKHR flags;
 	S_display_mode_parameters_KHR parameters;
 
-VkDisplayModeCreateInfoKHR*const get_vkptr(){return reinterpret_cast<VkDisplayModeCreateInfoKHR*>(this);}
-
-S_display_mode_create_info_KHR(){}
-
-S_display_mode_create_info_KHR(
-	VkDisplayModeCreateFlagsKHR flags_,
-	S_display_mode_parameters_KHR parameters_)
-	:flags(flags_)
-	,parameters(parameters_)
-{
-}
-
-S_display_mode_create_info_KHR( VkDisplayModeCreateInfoKHR const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_display_mode_create_info_KHR ) );	}
+operator VkDisplayModeCreateInfoKHR*()
+	{	return reinterpret_cast<VkDisplayModeCreateInfoKHR*>(this);	}
+operator const VkDisplayModeCreateInfoKHR*() const
+	{	return reinterpret_cast<const VkDisplayModeCreateInfoKHR*>(this);	}
 S_display_mode_create_info_KHR& operator=( VkDisplayModeCreateInfoKHR const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_display_mode_create_info_KHR ) ); return *this;	}
 operator VkDisplayModeCreateInfoKHR const&() const 
 	{	return *reinterpret_cast<const VkDisplayModeCreateInfoKHR*>(this);	}
 operator VkDisplayModeCreateInfoKHR &() 
 	{	return *reinterpret_cast<VkDisplayModeCreateInfoKHR*>(this);	}
+
+
+S_display_mode_create_info_KHR(){}
+S_display_mode_create_info_KHR(VkDisplayModeCreateInfoKHR& rhs)
+	{	memcpy( this, &rhs, sizeof( S_display_mode_create_info_KHR ) );	}
+S_display_mode_create_info_KHR(
+	VkDisplayModeCreateFlagsKHR flags_,
+	S_display_mode_parameters_KHR parameters_)
+	:flags(flags_)
+	,parameters(parameters_)
+{}
 };
 static_assert(
 	sizeof(S_display_mode_create_info_KHR) == sizeof(VkDisplayModeCreateInfoKHR),
@@ -12692,7 +13624,17 @@ struct		S_display_plane_capabilities_KHR{
 	S_extent_2d minDstExtent;
 	S_extent_2d maxDstExtent;
 
-VkDisplayPlaneCapabilitiesKHR*const get_vkptr(){return reinterpret_cast<VkDisplayPlaneCapabilitiesKHR*>(this);}
+operator VkDisplayPlaneCapabilitiesKHR*()
+	{	return reinterpret_cast<VkDisplayPlaneCapabilitiesKHR*>(this);	}
+operator const VkDisplayPlaneCapabilitiesKHR*() const
+	{	return reinterpret_cast<const VkDisplayPlaneCapabilitiesKHR*>(this);	}
+S_display_plane_capabilities_KHR& operator=( VkDisplayPlaneCapabilitiesKHR const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_display_plane_capabilities_KHR ) ); return *this;	}
+operator VkDisplayPlaneCapabilitiesKHR const&() const 
+	{	return *reinterpret_cast<const VkDisplayPlaneCapabilitiesKHR*>(this);	}
+operator VkDisplayPlaneCapabilitiesKHR &() 
+	{	return *reinterpret_cast<VkDisplayPlaneCapabilitiesKHR*>(this);	}
+
 };
 
 /*	VkDisplaySurfaceCreateInfoKHR
@@ -12711,10 +13653,21 @@ public:
 	F_display_plane_alpha_KHR alphaMode;
 	S_extent_2d imageExtent;
 
-VkDisplaySurfaceCreateInfoKHR*const get_vkptr(){return reinterpret_cast<VkDisplaySurfaceCreateInfoKHR*>(this);}
+operator VkDisplaySurfaceCreateInfoKHR*()
+	{	return reinterpret_cast<VkDisplaySurfaceCreateInfoKHR*>(this);	}
+operator const VkDisplaySurfaceCreateInfoKHR*() const
+	{	return reinterpret_cast<const VkDisplaySurfaceCreateInfoKHR*>(this);	}
+S_display_surface_create_info_KHR& operator=( VkDisplaySurfaceCreateInfoKHR const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_display_surface_create_info_KHR ) ); return *this;	}
+operator VkDisplaySurfaceCreateInfoKHR const&() const 
+	{	return *reinterpret_cast<const VkDisplaySurfaceCreateInfoKHR*>(this);	}
+operator VkDisplaySurfaceCreateInfoKHR &() 
+	{	return *reinterpret_cast<VkDisplaySurfaceCreateInfoKHR*>(this);	}
+
 
 S_display_surface_create_info_KHR(){}
-
+S_display_surface_create_info_KHR(VkDisplaySurfaceCreateInfoKHR& rhs)
+	{	memcpy( this, &rhs, sizeof( S_display_surface_create_info_KHR ) );	}
 S_display_surface_create_info_KHR(
 	VkDisplaySurfaceCreateFlagsKHR flags_,
 	VkDisplayModeKHR displayMode_,
@@ -12732,17 +13685,7 @@ S_display_surface_create_info_KHR(
 	,globalAlpha(globalAlpha_)
 	,alphaMode(alphaMode_)
 	,imageExtent(imageExtent_)
-{
-}
-
-S_display_surface_create_info_KHR( VkDisplaySurfaceCreateInfoKHR const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_display_surface_create_info_KHR ) );	}
-S_display_surface_create_info_KHR& operator=( VkDisplaySurfaceCreateInfoKHR const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_display_surface_create_info_KHR ) ); return *this;	}
-operator VkDisplaySurfaceCreateInfoKHR const&() const 
-	{	return *reinterpret_cast<const VkDisplaySurfaceCreateInfoKHR*>(this);	}
-operator VkDisplaySurfaceCreateInfoKHR &() 
-	{	return *reinterpret_cast<VkDisplaySurfaceCreateInfoKHR*>(this);	}
+{}
 };
 static_assert(
 	sizeof(S_display_surface_create_info_KHR) == sizeof(VkDisplaySurfaceCreateInfoKHR),
@@ -12760,10 +13703,21 @@ public:
 	S_rect_2d dstRect;
 	VkBool32 persistent;
 
-VkDisplayPresentInfoKHR*const get_vkptr(){return reinterpret_cast<VkDisplayPresentInfoKHR*>(this);}
+operator VkDisplayPresentInfoKHR*()
+	{	return reinterpret_cast<VkDisplayPresentInfoKHR*>(this);	}
+operator const VkDisplayPresentInfoKHR*() const
+	{	return reinterpret_cast<const VkDisplayPresentInfoKHR*>(this);	}
+S_display_present_info_KHR& operator=( VkDisplayPresentInfoKHR const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_display_present_info_KHR ) ); return *this;	}
+operator VkDisplayPresentInfoKHR const&() const 
+	{	return *reinterpret_cast<const VkDisplayPresentInfoKHR*>(this);	}
+operator VkDisplayPresentInfoKHR &() 
+	{	return *reinterpret_cast<VkDisplayPresentInfoKHR*>(this);	}
+
 
 S_display_present_info_KHR(){}
-
+S_display_present_info_KHR(VkDisplayPresentInfoKHR& rhs)
+	{	memcpy( this, &rhs, sizeof( S_display_present_info_KHR ) );	}
 S_display_present_info_KHR(
 	S_rect_2d srcRect_,
 	S_rect_2d dstRect_,
@@ -12771,17 +13725,7 @@ S_display_present_info_KHR(
 	:srcRect(srcRect_)
 	,dstRect(dstRect_)
 	,persistent(persistent_)
-{
-}
-
-S_display_present_info_KHR( VkDisplayPresentInfoKHR const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_display_present_info_KHR ) );	}
-S_display_present_info_KHR& operator=( VkDisplayPresentInfoKHR const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_display_present_info_KHR ) ); return *this;	}
-operator VkDisplayPresentInfoKHR const&() const 
-	{	return *reinterpret_cast<const VkDisplayPresentInfoKHR*>(this);	}
-operator VkDisplayPresentInfoKHR &() 
-	{	return *reinterpret_cast<VkDisplayPresentInfoKHR*>(this);	}
+{}
 
 friend S_present_info_KHR;
 };
@@ -12804,7 +13748,17 @@ struct		S_surface_capabilities_KHR{
 	F_composite_alpha_KHR supportedCompositeAlpha;
 	F_image_usage supportedUsageFlags;
 
-VkSurfaceCapabilitiesKHR*const get_vkptr(){return reinterpret_cast<VkSurfaceCapabilitiesKHR*>(this);}
+operator VkSurfaceCapabilitiesKHR*()
+	{	return reinterpret_cast<VkSurfaceCapabilitiesKHR*>(this);	}
+operator const VkSurfaceCapabilitiesKHR*() const
+	{	return reinterpret_cast<const VkSurfaceCapabilitiesKHR*>(this);	}
+S_surface_capabilities_KHR& operator=( VkSurfaceCapabilitiesKHR const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_surface_capabilities_KHR ) ); return *this;	}
+operator VkSurfaceCapabilitiesKHR const&() const 
+	{	return *reinterpret_cast<const VkSurfaceCapabilitiesKHR*>(this);	}
+operator VkSurfaceCapabilitiesKHR &() 
+	{	return *reinterpret_cast<VkSurfaceCapabilitiesKHR*>(this);	}
+
 };
 
 /*	VkAndroidSurfaceCreateInfoKHR
@@ -12818,26 +13772,27 @@ public:
 	VkAndroidSurfaceCreateFlagsKHR flags;
 	struct ANativeWindow * window;
 
-VkAndroidSurfaceCreateInfoKHR*const get_vkptr(){return reinterpret_cast<VkAndroidSurfaceCreateInfoKHR*>(this);}
-
-S_android_surface_create_info_KHR(){}
-
-S_android_surface_create_info_KHR(
-	VkAndroidSurfaceCreateFlagsKHR flags_,
-	struct ANativeWindow * window_)
-	:flags(flags_)
-	,window(window_)
-{
-}
-
-S_android_surface_create_info_KHR( VkAndroidSurfaceCreateInfoKHR const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_android_surface_create_info_KHR ) );	}
+operator VkAndroidSurfaceCreateInfoKHR*()
+	{	return reinterpret_cast<VkAndroidSurfaceCreateInfoKHR*>(this);	}
+operator const VkAndroidSurfaceCreateInfoKHR*() const
+	{	return reinterpret_cast<const VkAndroidSurfaceCreateInfoKHR*>(this);	}
 S_android_surface_create_info_KHR& operator=( VkAndroidSurfaceCreateInfoKHR const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_android_surface_create_info_KHR ) ); return *this;	}
 operator VkAndroidSurfaceCreateInfoKHR const&() const 
 	{	return *reinterpret_cast<const VkAndroidSurfaceCreateInfoKHR*>(this);	}
 operator VkAndroidSurfaceCreateInfoKHR &() 
 	{	return *reinterpret_cast<VkAndroidSurfaceCreateInfoKHR*>(this);	}
+
+
+S_android_surface_create_info_KHR(){}
+S_android_surface_create_info_KHR(VkAndroidSurfaceCreateInfoKHR& rhs)
+	{	memcpy( this, &rhs, sizeof( S_android_surface_create_info_KHR ) );	}
+S_android_surface_create_info_KHR(
+	VkAndroidSurfaceCreateFlagsKHR flags_,
+	struct ANativeWindow * window_)
+	:flags(flags_)
+	,window(window_)
+{}
 };
 static_assert(
 	sizeof(S_android_surface_create_info_KHR) == sizeof(VkAndroidSurfaceCreateInfoKHR),
@@ -12856,10 +13811,21 @@ public:
 	MirConnection * connection;
 	MirSurface * mirSurface;
 
-VkMirSurfaceCreateInfoKHR*const get_vkptr(){return reinterpret_cast<VkMirSurfaceCreateInfoKHR*>(this);}
+operator VkMirSurfaceCreateInfoKHR*()
+	{	return reinterpret_cast<VkMirSurfaceCreateInfoKHR*>(this);	}
+operator const VkMirSurfaceCreateInfoKHR*() const
+	{	return reinterpret_cast<const VkMirSurfaceCreateInfoKHR*>(this);	}
+S_mir_surface_create_info_KHR& operator=( VkMirSurfaceCreateInfoKHR const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_mir_surface_create_info_KHR ) ); return *this;	}
+operator VkMirSurfaceCreateInfoKHR const&() const 
+	{	return *reinterpret_cast<const VkMirSurfaceCreateInfoKHR*>(this);	}
+operator VkMirSurfaceCreateInfoKHR &() 
+	{	return *reinterpret_cast<VkMirSurfaceCreateInfoKHR*>(this);	}
+
 
 S_mir_surface_create_info_KHR(){}
-
+S_mir_surface_create_info_KHR(VkMirSurfaceCreateInfoKHR& rhs)
+	{	memcpy( this, &rhs, sizeof( S_mir_surface_create_info_KHR ) );	}
 S_mir_surface_create_info_KHR(
 	VkMirSurfaceCreateFlagsKHR flags_,
 	MirConnection * connection_,
@@ -12867,17 +13833,7 @@ S_mir_surface_create_info_KHR(
 	:flags(flags_)
 	,connection(connection_)
 	,mirSurface(mirSurface_)
-{
-}
-
-S_mir_surface_create_info_KHR( VkMirSurfaceCreateInfoKHR const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_mir_surface_create_info_KHR ) );	}
-S_mir_surface_create_info_KHR& operator=( VkMirSurfaceCreateInfoKHR const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_mir_surface_create_info_KHR ) ); return *this;	}
-operator VkMirSurfaceCreateInfoKHR const&() const 
-	{	return *reinterpret_cast<const VkMirSurfaceCreateInfoKHR*>(this);	}
-operator VkMirSurfaceCreateInfoKHR &() 
-	{	return *reinterpret_cast<VkMirSurfaceCreateInfoKHR*>(this);	}
+{}
 };
 static_assert(
 	sizeof(S_mir_surface_create_info_KHR) == sizeof(VkMirSurfaceCreateInfoKHR),
@@ -12895,26 +13851,27 @@ public:
 	VkViSurfaceCreateFlagsNN flags;
 	void * window;
 
-VkViSurfaceCreateInfoNN*const get_vkptr(){return reinterpret_cast<VkViSurfaceCreateInfoNN*>(this);}
-
-S_vi_surface_create_info_NN(){}
-
-S_vi_surface_create_info_NN(
-	VkViSurfaceCreateFlagsNN flags_,
-	void * window_)
-	:flags(flags_)
-	,window(window_)
-{
-}
-
-S_vi_surface_create_info_NN( VkViSurfaceCreateInfoNN const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_vi_surface_create_info_NN ) );	}
+operator VkViSurfaceCreateInfoNN*()
+	{	return reinterpret_cast<VkViSurfaceCreateInfoNN*>(this);	}
+operator const VkViSurfaceCreateInfoNN*() const
+	{	return reinterpret_cast<const VkViSurfaceCreateInfoNN*>(this);	}
 S_vi_surface_create_info_NN& operator=( VkViSurfaceCreateInfoNN const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_vi_surface_create_info_NN ) ); return *this;	}
 operator VkViSurfaceCreateInfoNN const&() const 
 	{	return *reinterpret_cast<const VkViSurfaceCreateInfoNN*>(this);	}
 operator VkViSurfaceCreateInfoNN &() 
 	{	return *reinterpret_cast<VkViSurfaceCreateInfoNN*>(this);	}
+
+
+S_vi_surface_create_info_NN(){}
+S_vi_surface_create_info_NN(VkViSurfaceCreateInfoNN& rhs)
+	{	memcpy( this, &rhs, sizeof( S_vi_surface_create_info_NN ) );	}
+S_vi_surface_create_info_NN(
+	VkViSurfaceCreateFlagsNN flags_,
+	void * window_)
+	:flags(flags_)
+	,window(window_)
+{}
 };
 static_assert(
 	sizeof(S_vi_surface_create_info_NN) == sizeof(VkViSurfaceCreateInfoNN),
@@ -12933,10 +13890,21 @@ public:
 	struct wl_display * display;
 	struct wl_surface * surface;
 
-VkWaylandSurfaceCreateInfoKHR*const get_vkptr(){return reinterpret_cast<VkWaylandSurfaceCreateInfoKHR*>(this);}
+operator VkWaylandSurfaceCreateInfoKHR*()
+	{	return reinterpret_cast<VkWaylandSurfaceCreateInfoKHR*>(this);	}
+operator const VkWaylandSurfaceCreateInfoKHR*() const
+	{	return reinterpret_cast<const VkWaylandSurfaceCreateInfoKHR*>(this);	}
+S_wayland_surface_create_info_KHR& operator=( VkWaylandSurfaceCreateInfoKHR const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_wayland_surface_create_info_KHR ) ); return *this;	}
+operator VkWaylandSurfaceCreateInfoKHR const&() const 
+	{	return *reinterpret_cast<const VkWaylandSurfaceCreateInfoKHR*>(this);	}
+operator VkWaylandSurfaceCreateInfoKHR &() 
+	{	return *reinterpret_cast<VkWaylandSurfaceCreateInfoKHR*>(this);	}
+
 
 S_wayland_surface_create_info_KHR(){}
-
+S_wayland_surface_create_info_KHR(VkWaylandSurfaceCreateInfoKHR& rhs)
+	{	memcpy( this, &rhs, sizeof( S_wayland_surface_create_info_KHR ) );	}
 S_wayland_surface_create_info_KHR(
 	VkWaylandSurfaceCreateFlagsKHR flags_,
 	struct wl_display * display_,
@@ -12944,17 +13912,7 @@ S_wayland_surface_create_info_KHR(
 	:flags(flags_)
 	,display(display_)
 	,surface(surface_)
-{
-}
-
-S_wayland_surface_create_info_KHR( VkWaylandSurfaceCreateInfoKHR const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_wayland_surface_create_info_KHR ) );	}
-S_wayland_surface_create_info_KHR& operator=( VkWaylandSurfaceCreateInfoKHR const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_wayland_surface_create_info_KHR ) ); return *this;	}
-operator VkWaylandSurfaceCreateInfoKHR const&() const 
-	{	return *reinterpret_cast<const VkWaylandSurfaceCreateInfoKHR*>(this);	}
-operator VkWaylandSurfaceCreateInfoKHR &() 
-	{	return *reinterpret_cast<VkWaylandSurfaceCreateInfoKHR*>(this);	}
+{}
 };
 static_assert(
 	sizeof(S_wayland_surface_create_info_KHR) == sizeof(VkWaylandSurfaceCreateInfoKHR),
@@ -12973,10 +13931,21 @@ public:
 	HINSTANCE hinstance;
 	HWND hwnd;
 
-VkWin32SurfaceCreateInfoKHR*const get_vkptr(){return reinterpret_cast<VkWin32SurfaceCreateInfoKHR*>(this);}
+operator VkWin32SurfaceCreateInfoKHR*()
+	{	return reinterpret_cast<VkWin32SurfaceCreateInfoKHR*>(this);	}
+operator const VkWin32SurfaceCreateInfoKHR*() const
+	{	return reinterpret_cast<const VkWin32SurfaceCreateInfoKHR*>(this);	}
+S_win32_surface_create_info_KHR& operator=( VkWin32SurfaceCreateInfoKHR const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_win32_surface_create_info_KHR ) ); return *this;	}
+operator VkWin32SurfaceCreateInfoKHR const&() const 
+	{	return *reinterpret_cast<const VkWin32SurfaceCreateInfoKHR*>(this);	}
+operator VkWin32SurfaceCreateInfoKHR &() 
+	{	return *reinterpret_cast<VkWin32SurfaceCreateInfoKHR*>(this);	}
+
 
 S_win32_surface_create_info_KHR(){}
-
+S_win32_surface_create_info_KHR(VkWin32SurfaceCreateInfoKHR& rhs)
+	{	memcpy( this, &rhs, sizeof( S_win32_surface_create_info_KHR ) );	}
 S_win32_surface_create_info_KHR(
 	VkWin32SurfaceCreateFlagsKHR flags_,
 	HINSTANCE hinstance_,
@@ -12984,17 +13953,7 @@ S_win32_surface_create_info_KHR(
 	:flags(flags_)
 	,hinstance(hinstance_)
 	,hwnd(hwnd_)
-{
-}
-
-S_win32_surface_create_info_KHR( VkWin32SurfaceCreateInfoKHR const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_win32_surface_create_info_KHR ) );	}
-S_win32_surface_create_info_KHR& operator=( VkWin32SurfaceCreateInfoKHR const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_win32_surface_create_info_KHR ) ); return *this;	}
-operator VkWin32SurfaceCreateInfoKHR const&() const 
-	{	return *reinterpret_cast<const VkWin32SurfaceCreateInfoKHR*>(this);	}
-operator VkWin32SurfaceCreateInfoKHR &() 
-	{	return *reinterpret_cast<VkWin32SurfaceCreateInfoKHR*>(this);	}
+{}
 };
 static_assert(
 	sizeof(S_win32_surface_create_info_KHR) == sizeof(VkWin32SurfaceCreateInfoKHR),
@@ -13013,10 +13972,21 @@ public:
 	Display * dpy;
 	Window window;
 
-VkXlibSurfaceCreateInfoKHR*const get_vkptr(){return reinterpret_cast<VkXlibSurfaceCreateInfoKHR*>(this);}
+operator VkXlibSurfaceCreateInfoKHR*()
+	{	return reinterpret_cast<VkXlibSurfaceCreateInfoKHR*>(this);	}
+operator const VkXlibSurfaceCreateInfoKHR*() const
+	{	return reinterpret_cast<const VkXlibSurfaceCreateInfoKHR*>(this);	}
+S_xlib_surface_create_info_KHR& operator=( VkXlibSurfaceCreateInfoKHR const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_xlib_surface_create_info_KHR ) ); return *this;	}
+operator VkXlibSurfaceCreateInfoKHR const&() const 
+	{	return *reinterpret_cast<const VkXlibSurfaceCreateInfoKHR*>(this);	}
+operator VkXlibSurfaceCreateInfoKHR &() 
+	{	return *reinterpret_cast<VkXlibSurfaceCreateInfoKHR*>(this);	}
+
 
 S_xlib_surface_create_info_KHR(){}
-
+S_xlib_surface_create_info_KHR(VkXlibSurfaceCreateInfoKHR& rhs)
+	{	memcpy( this, &rhs, sizeof( S_xlib_surface_create_info_KHR ) );	}
 S_xlib_surface_create_info_KHR(
 	VkXlibSurfaceCreateFlagsKHR flags_,
 	Display * dpy_,
@@ -13024,17 +13994,7 @@ S_xlib_surface_create_info_KHR(
 	:flags(flags_)
 	,dpy(dpy_)
 	,window(window_)
-{
-}
-
-S_xlib_surface_create_info_KHR( VkXlibSurfaceCreateInfoKHR const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_xlib_surface_create_info_KHR ) );	}
-S_xlib_surface_create_info_KHR& operator=( VkXlibSurfaceCreateInfoKHR const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_xlib_surface_create_info_KHR ) ); return *this;	}
-operator VkXlibSurfaceCreateInfoKHR const&() const 
-	{	return *reinterpret_cast<const VkXlibSurfaceCreateInfoKHR*>(this);	}
-operator VkXlibSurfaceCreateInfoKHR &() 
-	{	return *reinterpret_cast<VkXlibSurfaceCreateInfoKHR*>(this);	}
+{}
 };
 static_assert(
 	sizeof(S_xlib_surface_create_info_KHR) == sizeof(VkXlibSurfaceCreateInfoKHR),
@@ -13053,10 +14013,21 @@ public:
 	xcb_connection_t * connection;
 	xcb_window_t window;
 
-VkXcbSurfaceCreateInfoKHR*const get_vkptr(){return reinterpret_cast<VkXcbSurfaceCreateInfoKHR*>(this);}
+operator VkXcbSurfaceCreateInfoKHR*()
+	{	return reinterpret_cast<VkXcbSurfaceCreateInfoKHR*>(this);	}
+operator const VkXcbSurfaceCreateInfoKHR*() const
+	{	return reinterpret_cast<const VkXcbSurfaceCreateInfoKHR*>(this);	}
+S_xcb_surface_create_info_KHR& operator=( VkXcbSurfaceCreateInfoKHR const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_xcb_surface_create_info_KHR ) ); return *this;	}
+operator VkXcbSurfaceCreateInfoKHR const&() const 
+	{	return *reinterpret_cast<const VkXcbSurfaceCreateInfoKHR*>(this);	}
+operator VkXcbSurfaceCreateInfoKHR &() 
+	{	return *reinterpret_cast<VkXcbSurfaceCreateInfoKHR*>(this);	}
+
 
 S_xcb_surface_create_info_KHR(){}
-
+S_xcb_surface_create_info_KHR(VkXcbSurfaceCreateInfoKHR& rhs)
+	{	memcpy( this, &rhs, sizeof( S_xcb_surface_create_info_KHR ) );	}
 S_xcb_surface_create_info_KHR(
 	VkXcbSurfaceCreateFlagsKHR flags_,
 	xcb_connection_t * connection_,
@@ -13064,17 +14035,7 @@ S_xcb_surface_create_info_KHR(
 	:flags(flags_)
 	,connection(connection_)
 	,window(window_)
-{
-}
-
-S_xcb_surface_create_info_KHR( VkXcbSurfaceCreateInfoKHR const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_xcb_surface_create_info_KHR ) );	}
-S_xcb_surface_create_info_KHR& operator=( VkXcbSurfaceCreateInfoKHR const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_xcb_surface_create_info_KHR ) ); return *this;	}
-operator VkXcbSurfaceCreateInfoKHR const&() const 
-	{	return *reinterpret_cast<const VkXcbSurfaceCreateInfoKHR*>(this);	}
-operator VkXcbSurfaceCreateInfoKHR &() 
-	{	return *reinterpret_cast<VkXcbSurfaceCreateInfoKHR*>(this);	}
+{}
 };
 static_assert(
 	sizeof(S_xcb_surface_create_info_KHR) == sizeof(VkXcbSurfaceCreateInfoKHR),
@@ -13088,7 +14049,17 @@ struct		S_surface_format_KHR{
 	E_format format;
 	E_color_space_KHR colorSpace;
 
-VkSurfaceFormatKHR*const get_vkptr(){return reinterpret_cast<VkSurfaceFormatKHR*>(this);}
+operator VkSurfaceFormatKHR*()
+	{	return reinterpret_cast<VkSurfaceFormatKHR*>(this);	}
+operator const VkSurfaceFormatKHR*() const
+	{	return reinterpret_cast<const VkSurfaceFormatKHR*>(this);	}
+S_surface_format_KHR& operator=( VkSurfaceFormatKHR const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_surface_format_KHR ) ); return *this;	}
+operator VkSurfaceFormatKHR const&() const 
+	{	return *reinterpret_cast<const VkSurfaceFormatKHR*>(this);	}
+operator VkSurfaceFormatKHR &() 
+	{	return *reinterpret_cast<VkSurfaceFormatKHR*>(this);	}
+
 };
 
 /*	VkSwapchainCounterCreateInfoEXT
@@ -13101,24 +14072,25 @@ private:
 public:
 	F_surface_counter_EXT surfaceCounters;
 
-VkSwapchainCounterCreateInfoEXT*const get_vkptr(){return reinterpret_cast<VkSwapchainCounterCreateInfoEXT*>(this);}
-
-S_swapchain_counter_create_info_EXT(){}
-
-S_swapchain_counter_create_info_EXT(
-	F_surface_counter_EXT surfaceCounters_)
-	:surfaceCounters(surfaceCounters_)
-{
-}
-
-S_swapchain_counter_create_info_EXT( VkSwapchainCounterCreateInfoEXT const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_swapchain_counter_create_info_EXT ) );	}
+operator VkSwapchainCounterCreateInfoEXT*()
+	{	return reinterpret_cast<VkSwapchainCounterCreateInfoEXT*>(this);	}
+operator const VkSwapchainCounterCreateInfoEXT*() const
+	{	return reinterpret_cast<const VkSwapchainCounterCreateInfoEXT*>(this);	}
 S_swapchain_counter_create_info_EXT& operator=( VkSwapchainCounterCreateInfoEXT const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_swapchain_counter_create_info_EXT ) ); return *this;	}
 operator VkSwapchainCounterCreateInfoEXT const&() const 
 	{	return *reinterpret_cast<const VkSwapchainCounterCreateInfoEXT*>(this);	}
 operator VkSwapchainCounterCreateInfoEXT &() 
 	{	return *reinterpret_cast<VkSwapchainCounterCreateInfoEXT*>(this);	}
+
+
+S_swapchain_counter_create_info_EXT(){}
+S_swapchain_counter_create_info_EXT(VkSwapchainCounterCreateInfoEXT& rhs)
+	{	memcpy( this, &rhs, sizeof( S_swapchain_counter_create_info_EXT ) );	}
+S_swapchain_counter_create_info_EXT(
+	F_surface_counter_EXT surfaceCounters_)
+	:surfaceCounters(surfaceCounters_)
+{}
 
 friend S_swapchain_create_info_KHR;
 };
@@ -13136,24 +14108,25 @@ private:
 public:
 	F_device_group_present_mode_KHR modes;
 
-VkDeviceGroupSwapchainCreateInfoKHR*const get_vkptr(){return reinterpret_cast<VkDeviceGroupSwapchainCreateInfoKHR*>(this);}
-
-S_device_group_swapchain_create_info_KHR(){}
-
-S_device_group_swapchain_create_info_KHR(
-	F_device_group_present_mode_KHR modes_)
-	:modes(modes_)
-{
-}
-
-S_device_group_swapchain_create_info_KHR( VkDeviceGroupSwapchainCreateInfoKHR const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_device_group_swapchain_create_info_KHR ) );	}
+operator VkDeviceGroupSwapchainCreateInfoKHR*()
+	{	return reinterpret_cast<VkDeviceGroupSwapchainCreateInfoKHR*>(this);	}
+operator const VkDeviceGroupSwapchainCreateInfoKHR*() const
+	{	return reinterpret_cast<const VkDeviceGroupSwapchainCreateInfoKHR*>(this);	}
 S_device_group_swapchain_create_info_KHR& operator=( VkDeviceGroupSwapchainCreateInfoKHR const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_device_group_swapchain_create_info_KHR ) ); return *this;	}
 operator VkDeviceGroupSwapchainCreateInfoKHR const&() const 
 	{	return *reinterpret_cast<const VkDeviceGroupSwapchainCreateInfoKHR*>(this);	}
 operator VkDeviceGroupSwapchainCreateInfoKHR &() 
 	{	return *reinterpret_cast<VkDeviceGroupSwapchainCreateInfoKHR*>(this);	}
+
+
+S_device_group_swapchain_create_info_KHR(){}
+S_device_group_swapchain_create_info_KHR(VkDeviceGroupSwapchainCreateInfoKHR& rhs)
+	{	memcpy( this, &rhs, sizeof( S_device_group_swapchain_create_info_KHR ) );	}
+S_device_group_swapchain_create_info_KHR(
+	F_device_group_present_mode_KHR modes_)
+	:modes(modes_)
+{}
 
 friend S_swapchain_create_info_KHR;
 };
@@ -13188,10 +14161,21 @@ public:
 	VkBool32 clipped;
 	VkSwapchainKHR oldSwapchain;
 
-VkSwapchainCreateInfoKHR*const get_vkptr(){return reinterpret_cast<VkSwapchainCreateInfoKHR*>(this);}
+operator VkSwapchainCreateInfoKHR*()
+	{	return reinterpret_cast<VkSwapchainCreateInfoKHR*>(this);	}
+operator const VkSwapchainCreateInfoKHR*() const
+	{	return reinterpret_cast<const VkSwapchainCreateInfoKHR*>(this);	}
+S_swapchain_create_info_KHR& operator=( VkSwapchainCreateInfoKHR const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_swapchain_create_info_KHR ) ); return *this;	}
+operator VkSwapchainCreateInfoKHR const&() const 
+	{	return *reinterpret_cast<const VkSwapchainCreateInfoKHR*>(this);	}
+operator VkSwapchainCreateInfoKHR &() 
+	{	return *reinterpret_cast<VkSwapchainCreateInfoKHR*>(this);	}
+
 
 S_swapchain_create_info_KHR(){}
-
+S_swapchain_create_info_KHR(VkSwapchainCreateInfoKHR& rhs)
+	{	memcpy( this, &rhs, sizeof( S_swapchain_create_info_KHR ) );	}
 S_swapchain_create_info_KHR(
 	F_swapchain_create_KHR flags_,
 	VkSurfaceKHR surface_,
@@ -13225,17 +14209,7 @@ S_swapchain_create_info_KHR(
 	,presentMode(presentMode_)
 	,clipped(clipped_)
 	,oldSwapchain(oldSwapchain_)
-{
-}
-
-S_swapchain_create_info_KHR( VkSwapchainCreateInfoKHR const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_swapchain_create_info_KHR ) );	}
-S_swapchain_create_info_KHR& operator=( VkSwapchainCreateInfoKHR const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_swapchain_create_info_KHR ) ); return *this;	}
-operator VkSwapchainCreateInfoKHR const&() const 
-	{	return *reinterpret_cast<const VkSwapchainCreateInfoKHR*>(this);	}
-operator VkSwapchainCreateInfoKHR &() 
-	{	return *reinterpret_cast<VkSwapchainCreateInfoKHR*>(this);	}
+{}
 
 S_swapchain_create_info_KHR& n_swapchain_counter_create_info_EXT(S_swapchain_counter_create_info_EXT const& next_);
 S_swapchain_create_info_KHR& n_device_group_swapchain_create_info_KHR(S_device_group_swapchain_create_info_KHR const& next_);
@@ -13248,7 +14222,7 @@ struct N_swapchain_create_info_KHR{
 private:
 	void* pNext = nullptr;
 public:
-void* get(){ return pNext; }
+operator void*() { return pNext; }
 N_swapchain_create_info_KHR& n_swapchain_counter_create_info_EXT(S_swapchain_counter_create_info_EXT const& next_);
 N_swapchain_create_info_KHR& n_device_group_swapchain_create_info_KHR(S_device_group_swapchain_create_info_KHR const& next_);
 };
@@ -13260,7 +14234,17 @@ struct		S_rect_layer_KHR{
 	S_extent_2d extent;
 	uint32_t layer;
 
-VkRectLayerKHR*const get_vkptr(){return reinterpret_cast<VkRectLayerKHR*>(this);}
+operator VkRectLayerKHR*()
+	{	return reinterpret_cast<VkRectLayerKHR*>(this);	}
+operator const VkRectLayerKHR*() const
+	{	return reinterpret_cast<const VkRectLayerKHR*>(this);	}
+S_rect_layer_KHR& operator=( VkRectLayerKHR const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_rect_layer_KHR ) ); return *this;	}
+operator VkRectLayerKHR const&() const 
+	{	return *reinterpret_cast<const VkRectLayerKHR*>(this);	}
+operator VkRectLayerKHR &() 
+	{	return *reinterpret_cast<VkRectLayerKHR*>(this);	}
+
 };
 
 /*	VkPresentRegionKHR
@@ -13269,7 +14253,17 @@ struct		S_present_region_KHR{
 	uint32_t rectangleCount;
 	const S_rect_layer_KHR * pRectangles;
 
-VkPresentRegionKHR*const get_vkptr(){return reinterpret_cast<VkPresentRegionKHR*>(this);}
+operator VkPresentRegionKHR*()
+	{	return reinterpret_cast<VkPresentRegionKHR*>(this);	}
+operator const VkPresentRegionKHR*() const
+	{	return reinterpret_cast<const VkPresentRegionKHR*>(this);	}
+S_present_region_KHR& operator=( VkPresentRegionKHR const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_present_region_KHR ) ); return *this;	}
+operator VkPresentRegionKHR const&() const 
+	{	return *reinterpret_cast<const VkPresentRegionKHR*>(this);	}
+operator VkPresentRegionKHR &() 
+	{	return *reinterpret_cast<VkPresentRegionKHR*>(this);	}
+
 };
 
 /*	VkPresentRegionsKHR
@@ -13283,26 +14277,27 @@ public:
 	uint32_t swapchainCount;
 	const S_present_region_KHR * pRegions;
 
-VkPresentRegionsKHR*const get_vkptr(){return reinterpret_cast<VkPresentRegionsKHR*>(this);}
-
-S_present_regions_KHR(){}
-
-S_present_regions_KHR(
-	uint32_t swapchainCount_,
-	const S_present_region_KHR * pRegions_)
-	:swapchainCount(swapchainCount_)
-	,pRegions(pRegions_)
-{
-}
-
-S_present_regions_KHR( VkPresentRegionsKHR const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_present_regions_KHR ) );	}
+operator VkPresentRegionsKHR*()
+	{	return reinterpret_cast<VkPresentRegionsKHR*>(this);	}
+operator const VkPresentRegionsKHR*() const
+	{	return reinterpret_cast<const VkPresentRegionsKHR*>(this);	}
 S_present_regions_KHR& operator=( VkPresentRegionsKHR const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_present_regions_KHR ) ); return *this;	}
 operator VkPresentRegionsKHR const&() const 
 	{	return *reinterpret_cast<const VkPresentRegionsKHR*>(this);	}
 operator VkPresentRegionsKHR &() 
 	{	return *reinterpret_cast<VkPresentRegionsKHR*>(this);	}
+
+
+S_present_regions_KHR(){}
+S_present_regions_KHR(VkPresentRegionsKHR& rhs)
+	{	memcpy( this, &rhs, sizeof( S_present_regions_KHR ) );	}
+S_present_regions_KHR(
+	uint32_t swapchainCount_,
+	const S_present_region_KHR * pRegions_)
+	:swapchainCount(swapchainCount_)
+	,pRegions(pRegions_)
+{}
 
 friend S_present_info_KHR;
 };
@@ -13322,10 +14317,21 @@ public:
 	const uint32_t * pDeviceMasks;
 	F_device_group_present_mode_KHR mode;
 
-VkDeviceGroupPresentInfoKHR*const get_vkptr(){return reinterpret_cast<VkDeviceGroupPresentInfoKHR*>(this);}
+operator VkDeviceGroupPresentInfoKHR*()
+	{	return reinterpret_cast<VkDeviceGroupPresentInfoKHR*>(this);	}
+operator const VkDeviceGroupPresentInfoKHR*() const
+	{	return reinterpret_cast<const VkDeviceGroupPresentInfoKHR*>(this);	}
+S_device_group_present_info_KHR& operator=( VkDeviceGroupPresentInfoKHR const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_device_group_present_info_KHR ) ); return *this;	}
+operator VkDeviceGroupPresentInfoKHR const&() const 
+	{	return *reinterpret_cast<const VkDeviceGroupPresentInfoKHR*>(this);	}
+operator VkDeviceGroupPresentInfoKHR &() 
+	{	return *reinterpret_cast<VkDeviceGroupPresentInfoKHR*>(this);	}
+
 
 S_device_group_present_info_KHR(){}
-
+S_device_group_present_info_KHR(VkDeviceGroupPresentInfoKHR& rhs)
+	{	memcpy( this, &rhs, sizeof( S_device_group_present_info_KHR ) );	}
 S_device_group_present_info_KHR(
 	uint32_t swapchainCount_,
 	const uint32_t * pDeviceMasks_,
@@ -13333,17 +14339,7 @@ S_device_group_present_info_KHR(
 	:swapchainCount(swapchainCount_)
 	,pDeviceMasks(pDeviceMasks_)
 	,mode(mode_)
-{
-}
-
-S_device_group_present_info_KHR( VkDeviceGroupPresentInfoKHR const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_device_group_present_info_KHR ) );	}
-S_device_group_present_info_KHR& operator=( VkDeviceGroupPresentInfoKHR const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_device_group_present_info_KHR ) ); return *this;	}
-operator VkDeviceGroupPresentInfoKHR const&() const 
-	{	return *reinterpret_cast<const VkDeviceGroupPresentInfoKHR*>(this);	}
-operator VkDeviceGroupPresentInfoKHR &() 
-	{	return *reinterpret_cast<VkDeviceGroupPresentInfoKHR*>(this);	}
+{}
 
 friend S_present_info_KHR;
 };
@@ -13357,7 +14353,17 @@ struct		S_present_time_GOOGLE{
 	uint32_t presentID;
 	uint64_t desiredPresentTime;
 
-VkPresentTimeGOOGLE*const get_vkptr(){return reinterpret_cast<VkPresentTimeGOOGLE*>(this);}
+operator VkPresentTimeGOOGLE*()
+	{	return reinterpret_cast<VkPresentTimeGOOGLE*>(this);	}
+operator const VkPresentTimeGOOGLE*() const
+	{	return reinterpret_cast<const VkPresentTimeGOOGLE*>(this);	}
+S_present_time_GOOGLE& operator=( VkPresentTimeGOOGLE const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_present_time_GOOGLE ) ); return *this;	}
+operator VkPresentTimeGOOGLE const&() const 
+	{	return *reinterpret_cast<const VkPresentTimeGOOGLE*>(this);	}
+operator VkPresentTimeGOOGLE &() 
+	{	return *reinterpret_cast<VkPresentTimeGOOGLE*>(this);	}
+
 };
 
 /*	VkPresentTimesInfoGOOGLE
@@ -13371,26 +14377,27 @@ public:
 	uint32_t swapchainCount;
 	const S_present_time_GOOGLE * pTimes;
 
-VkPresentTimesInfoGOOGLE*const get_vkptr(){return reinterpret_cast<VkPresentTimesInfoGOOGLE*>(this);}
-
-S_present_times_info_GOOGLE(){}
-
-S_present_times_info_GOOGLE(
-	uint32_t swapchainCount_,
-	const S_present_time_GOOGLE * pTimes_)
-	:swapchainCount(swapchainCount_)
-	,pTimes(pTimes_)
-{
-}
-
-S_present_times_info_GOOGLE( VkPresentTimesInfoGOOGLE const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_present_times_info_GOOGLE ) );	}
+operator VkPresentTimesInfoGOOGLE*()
+	{	return reinterpret_cast<VkPresentTimesInfoGOOGLE*>(this);	}
+operator const VkPresentTimesInfoGOOGLE*() const
+	{	return reinterpret_cast<const VkPresentTimesInfoGOOGLE*>(this);	}
 S_present_times_info_GOOGLE& operator=( VkPresentTimesInfoGOOGLE const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_present_times_info_GOOGLE ) ); return *this;	}
 operator VkPresentTimesInfoGOOGLE const&() const 
 	{	return *reinterpret_cast<const VkPresentTimesInfoGOOGLE*>(this);	}
 operator VkPresentTimesInfoGOOGLE &() 
 	{	return *reinterpret_cast<VkPresentTimesInfoGOOGLE*>(this);	}
+
+
+S_present_times_info_GOOGLE(){}
+S_present_times_info_GOOGLE(VkPresentTimesInfoGOOGLE& rhs)
+	{	memcpy( this, &rhs, sizeof( S_present_times_info_GOOGLE ) );	}
+S_present_times_info_GOOGLE(
+	uint32_t swapchainCount_,
+	const S_present_time_GOOGLE * pTimes_)
+	:swapchainCount(swapchainCount_)
+	,pTimes(pTimes_)
+{}
 
 friend S_present_info_KHR;
 };
@@ -13417,10 +14424,21 @@ public:
 	const uint32_t * pImageIndices;
 	E_result * pResults;
 
-VkPresentInfoKHR*const get_vkptr(){return reinterpret_cast<VkPresentInfoKHR*>(this);}
+operator VkPresentInfoKHR*()
+	{	return reinterpret_cast<VkPresentInfoKHR*>(this);	}
+operator const VkPresentInfoKHR*() const
+	{	return reinterpret_cast<const VkPresentInfoKHR*>(this);	}
+S_present_info_KHR& operator=( VkPresentInfoKHR const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_present_info_KHR ) ); return *this;	}
+operator VkPresentInfoKHR const&() const 
+	{	return *reinterpret_cast<const VkPresentInfoKHR*>(this);	}
+operator VkPresentInfoKHR &() 
+	{	return *reinterpret_cast<VkPresentInfoKHR*>(this);	}
+
 
 S_present_info_KHR(){}
-
+S_present_info_KHR(VkPresentInfoKHR& rhs)
+	{	memcpy( this, &rhs, sizeof( S_present_info_KHR ) );	}
 S_present_info_KHR(
 	uint32_t waitSemaphoreCount_,
 	const VkSemaphore * pWaitSemaphores_,
@@ -13434,17 +14452,7 @@ S_present_info_KHR(
 	,pSwapchains(pSwapchains_)
 	,pImageIndices(pImageIndices_)
 	,pResults(pResults_)
-{
-}
-
-S_present_info_KHR( VkPresentInfoKHR const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_present_info_KHR ) );	}
-S_present_info_KHR& operator=( VkPresentInfoKHR const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_present_info_KHR ) ); return *this;	}
-operator VkPresentInfoKHR const&() const 
-	{	return *reinterpret_cast<const VkPresentInfoKHR*>(this);	}
-operator VkPresentInfoKHR &() 
-	{	return *reinterpret_cast<VkPresentInfoKHR*>(this);	}
+{}
 
 S_present_info_KHR& n_display_present_info_KHR(S_display_present_info_KHR const& next_);
 S_present_info_KHR& n_present_regions_KHR(S_present_regions_KHR const& next_);
@@ -13459,7 +14467,7 @@ struct N_present_info_KHR{
 private:
 	void* pNext = nullptr;
 public:
-void* get(){ return pNext; }
+operator void*() { return pNext; }
 N_present_info_KHR& n_display_present_info_KHR(S_display_present_info_KHR const& next_);
 N_present_info_KHR& n_present_regions_KHR(S_present_regions_KHR const& next_);
 N_present_info_KHR& n_device_group_present_info_KHR(S_device_group_present_info_KHR const& next_);
@@ -13477,10 +14485,21 @@ public:
 	uint64_t object;
 	const char * pObjectName;
 
-VkDebugMarkerObjectNameInfoEXT*const get_vkptr(){return reinterpret_cast<VkDebugMarkerObjectNameInfoEXT*>(this);}
+operator VkDebugMarkerObjectNameInfoEXT*()
+	{	return reinterpret_cast<VkDebugMarkerObjectNameInfoEXT*>(this);	}
+operator const VkDebugMarkerObjectNameInfoEXT*() const
+	{	return reinterpret_cast<const VkDebugMarkerObjectNameInfoEXT*>(this);	}
+S_debug_marker_object_name_info_EXT& operator=( VkDebugMarkerObjectNameInfoEXT const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_debug_marker_object_name_info_EXT ) ); return *this;	}
+operator VkDebugMarkerObjectNameInfoEXT const&() const 
+	{	return *reinterpret_cast<const VkDebugMarkerObjectNameInfoEXT*>(this);	}
+operator VkDebugMarkerObjectNameInfoEXT &() 
+	{	return *reinterpret_cast<VkDebugMarkerObjectNameInfoEXT*>(this);	}
+
 
 S_debug_marker_object_name_info_EXT(){}
-
+S_debug_marker_object_name_info_EXT(VkDebugMarkerObjectNameInfoEXT& rhs)
+	{	memcpy( this, &rhs, sizeof( S_debug_marker_object_name_info_EXT ) );	}
 S_debug_marker_object_name_info_EXT(
 	E_debug_report_object_type_EXT objectType_,
 	uint64_t object_,
@@ -13488,17 +14507,7 @@ S_debug_marker_object_name_info_EXT(
 	:objectType(objectType_)
 	,object(object_)
 	,pObjectName(pObjectName_)
-{
-}
-
-S_debug_marker_object_name_info_EXT( VkDebugMarkerObjectNameInfoEXT const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_debug_marker_object_name_info_EXT ) );	}
-S_debug_marker_object_name_info_EXT& operator=( VkDebugMarkerObjectNameInfoEXT const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_debug_marker_object_name_info_EXT ) ); return *this;	}
-operator VkDebugMarkerObjectNameInfoEXT const&() const 
-	{	return *reinterpret_cast<const VkDebugMarkerObjectNameInfoEXT*>(this);	}
-operator VkDebugMarkerObjectNameInfoEXT &() 
-	{	return *reinterpret_cast<VkDebugMarkerObjectNameInfoEXT*>(this);	}
+{}
 };
 static_assert(
 	sizeof(S_debug_marker_object_name_info_EXT) == sizeof(VkDebugMarkerObjectNameInfoEXT),
@@ -13517,10 +14526,21 @@ public:
 	size_t tagSize;
 	const void * pTag;
 
-VkDebugMarkerObjectTagInfoEXT*const get_vkptr(){return reinterpret_cast<VkDebugMarkerObjectTagInfoEXT*>(this);}
+operator VkDebugMarkerObjectTagInfoEXT*()
+	{	return reinterpret_cast<VkDebugMarkerObjectTagInfoEXT*>(this);	}
+operator const VkDebugMarkerObjectTagInfoEXT*() const
+	{	return reinterpret_cast<const VkDebugMarkerObjectTagInfoEXT*>(this);	}
+S_debug_marker_object_tag_info_EXT& operator=( VkDebugMarkerObjectTagInfoEXT const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_debug_marker_object_tag_info_EXT ) ); return *this;	}
+operator VkDebugMarkerObjectTagInfoEXT const&() const 
+	{	return *reinterpret_cast<const VkDebugMarkerObjectTagInfoEXT*>(this);	}
+operator VkDebugMarkerObjectTagInfoEXT &() 
+	{	return *reinterpret_cast<VkDebugMarkerObjectTagInfoEXT*>(this);	}
+
 
 S_debug_marker_object_tag_info_EXT(){}
-
+S_debug_marker_object_tag_info_EXT(VkDebugMarkerObjectTagInfoEXT& rhs)
+	{	memcpy( this, &rhs, sizeof( S_debug_marker_object_tag_info_EXT ) );	}
 S_debug_marker_object_tag_info_EXT(
 	E_debug_report_object_type_EXT objectType_,
 	uint64_t object_,
@@ -13532,17 +14552,7 @@ S_debug_marker_object_tag_info_EXT(
 	,tagName(tagName_)
 	,tagSize(tagSize_)
 	,pTag(pTag_)
-{
-}
-
-S_debug_marker_object_tag_info_EXT( VkDebugMarkerObjectTagInfoEXT const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_debug_marker_object_tag_info_EXT ) );	}
-S_debug_marker_object_tag_info_EXT& operator=( VkDebugMarkerObjectTagInfoEXT const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_debug_marker_object_tag_info_EXT ) ); return *this;	}
-operator VkDebugMarkerObjectTagInfoEXT const&() const 
-	{	return *reinterpret_cast<const VkDebugMarkerObjectTagInfoEXT*>(this);	}
-operator VkDebugMarkerObjectTagInfoEXT &() 
-	{	return *reinterpret_cast<VkDebugMarkerObjectTagInfoEXT*>(this);	}
+{}
 };
 static_assert(
 	sizeof(S_debug_marker_object_tag_info_EXT) == sizeof(VkDebugMarkerObjectTagInfoEXT),
@@ -13558,10 +14568,21 @@ public:
 	const char * pMarkerName;
 	float color[4];
 
-VkDebugMarkerMarkerInfoEXT*const get_vkptr(){return reinterpret_cast<VkDebugMarkerMarkerInfoEXT*>(this);}
+operator VkDebugMarkerMarkerInfoEXT*()
+	{	return reinterpret_cast<VkDebugMarkerMarkerInfoEXT*>(this);	}
+operator const VkDebugMarkerMarkerInfoEXT*() const
+	{	return reinterpret_cast<const VkDebugMarkerMarkerInfoEXT*>(this);	}
+S_debug_marker_marker_info_EXT& operator=( VkDebugMarkerMarkerInfoEXT const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_debug_marker_marker_info_EXT ) ); return *this;	}
+operator VkDebugMarkerMarkerInfoEXT const&() const 
+	{	return *reinterpret_cast<const VkDebugMarkerMarkerInfoEXT*>(this);	}
+operator VkDebugMarkerMarkerInfoEXT &() 
+	{	return *reinterpret_cast<VkDebugMarkerMarkerInfoEXT*>(this);	}
+
 
 S_debug_marker_marker_info_EXT(){}
-
+S_debug_marker_marker_info_EXT(VkDebugMarkerMarkerInfoEXT& rhs)
+	{	memcpy( this, &rhs, sizeof( S_debug_marker_marker_info_EXT ) );	}
 S_debug_marker_marker_info_EXT(
 	const char * pMarkerName_,
 	float color_[4])
@@ -13569,15 +14590,6 @@ S_debug_marker_marker_info_EXT(
 {
 memcpy(color,color_,sizeof(color) );
 }
-
-S_debug_marker_marker_info_EXT( VkDebugMarkerMarkerInfoEXT const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_debug_marker_marker_info_EXT ) );	}
-S_debug_marker_marker_info_EXT& operator=( VkDebugMarkerMarkerInfoEXT const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_debug_marker_marker_info_EXT ) ); return *this;	}
-operator VkDebugMarkerMarkerInfoEXT const&() const 
-	{	return *reinterpret_cast<const VkDebugMarkerMarkerInfoEXT*>(this);	}
-operator VkDebugMarkerMarkerInfoEXT &() 
-	{	return *reinterpret_cast<VkDebugMarkerMarkerInfoEXT*>(this);	}
 };
 static_assert(
 	sizeof(S_debug_marker_marker_info_EXT) == sizeof(VkDebugMarkerMarkerInfoEXT),
@@ -13592,7 +14604,17 @@ struct		S_external_image_format_properties_NV{
 	F_external_memory_handle_type_NV exportFromImportedHandleTypes;
 	F_external_memory_handle_type_NV compatibleHandleTypes;
 
-VkExternalImageFormatPropertiesNV*const get_vkptr(){return reinterpret_cast<VkExternalImageFormatPropertiesNV*>(this);}
+operator VkExternalImageFormatPropertiesNV*()
+	{	return reinterpret_cast<VkExternalImageFormatPropertiesNV*>(this);	}
+operator const VkExternalImageFormatPropertiesNV*() const
+	{	return reinterpret_cast<const VkExternalImageFormatPropertiesNV*>(this);	}
+S_external_image_format_properties_NV& operator=( VkExternalImageFormatPropertiesNV const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_external_image_format_properties_NV ) ); return *this;	}
+operator VkExternalImageFormatPropertiesNV const&() const 
+	{	return *reinterpret_cast<const VkExternalImageFormatPropertiesNV*>(this);	}
+operator VkExternalImageFormatPropertiesNV &() 
+	{	return *reinterpret_cast<VkExternalImageFormatPropertiesNV*>(this);	}
+
 };
 
 /*	VkDeviceGeneratedCommandsFeaturesNVX
@@ -13604,24 +14626,25 @@ private:
 public:
 	VkBool32 computeBindingPointSupport;
 
-VkDeviceGeneratedCommandsFeaturesNVX*const get_vkptr(){return reinterpret_cast<VkDeviceGeneratedCommandsFeaturesNVX*>(this);}
-
-S_device_generated_commands_features_NVX(){}
-
-S_device_generated_commands_features_NVX(
-	VkBool32 computeBindingPointSupport_)
-	:computeBindingPointSupport(computeBindingPointSupport_)
-{
-}
-
-S_device_generated_commands_features_NVX( VkDeviceGeneratedCommandsFeaturesNVX const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_device_generated_commands_features_NVX ) );	}
+operator VkDeviceGeneratedCommandsFeaturesNVX*()
+	{	return reinterpret_cast<VkDeviceGeneratedCommandsFeaturesNVX*>(this);	}
+operator const VkDeviceGeneratedCommandsFeaturesNVX*() const
+	{	return reinterpret_cast<const VkDeviceGeneratedCommandsFeaturesNVX*>(this);	}
 S_device_generated_commands_features_NVX& operator=( VkDeviceGeneratedCommandsFeaturesNVX const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_device_generated_commands_features_NVX ) ); return *this;	}
 operator VkDeviceGeneratedCommandsFeaturesNVX const&() const 
 	{	return *reinterpret_cast<const VkDeviceGeneratedCommandsFeaturesNVX*>(this);	}
 operator VkDeviceGeneratedCommandsFeaturesNVX &() 
 	{	return *reinterpret_cast<VkDeviceGeneratedCommandsFeaturesNVX*>(this);	}
+
+
+S_device_generated_commands_features_NVX(){}
+S_device_generated_commands_features_NVX(VkDeviceGeneratedCommandsFeaturesNVX& rhs)
+	{	memcpy( this, &rhs, sizeof( S_device_generated_commands_features_NVX ) );	}
+S_device_generated_commands_features_NVX(
+	VkBool32 computeBindingPointSupport_)
+	:computeBindingPointSupport(computeBindingPointSupport_)
+{}
 };
 static_assert(
 	sizeof(S_device_generated_commands_features_NVX) == sizeof(VkDeviceGeneratedCommandsFeaturesNVX),
@@ -13640,10 +14663,21 @@ public:
 	uint32_t minSequenceIndexBufferOffsetAlignment;
 	uint32_t minCommandsTokenBufferOffsetAlignment;
 
-VkDeviceGeneratedCommandsLimitsNVX*const get_vkptr(){return reinterpret_cast<VkDeviceGeneratedCommandsLimitsNVX*>(this);}
+operator VkDeviceGeneratedCommandsLimitsNVX*()
+	{	return reinterpret_cast<VkDeviceGeneratedCommandsLimitsNVX*>(this);	}
+operator const VkDeviceGeneratedCommandsLimitsNVX*() const
+	{	return reinterpret_cast<const VkDeviceGeneratedCommandsLimitsNVX*>(this);	}
+S_device_generated_commands_limits_NVX& operator=( VkDeviceGeneratedCommandsLimitsNVX const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_device_generated_commands_limits_NVX ) ); return *this;	}
+operator VkDeviceGeneratedCommandsLimitsNVX const&() const 
+	{	return *reinterpret_cast<const VkDeviceGeneratedCommandsLimitsNVX*>(this);	}
+operator VkDeviceGeneratedCommandsLimitsNVX &() 
+	{	return *reinterpret_cast<VkDeviceGeneratedCommandsLimitsNVX*>(this);	}
+
 
 S_device_generated_commands_limits_NVX(){}
-
+S_device_generated_commands_limits_NVX(VkDeviceGeneratedCommandsLimitsNVX& rhs)
+	{	memcpy( this, &rhs, sizeof( S_device_generated_commands_limits_NVX ) );	}
 S_device_generated_commands_limits_NVX(
 	uint32_t maxIndirectCommandsLayoutTokenCount_,
 	uint32_t maxObjectEntryCounts_,
@@ -13655,17 +14689,7 @@ S_device_generated_commands_limits_NVX(
 	,minSequenceCountBufferOffsetAlignment(minSequenceCountBufferOffsetAlignment_)
 	,minSequenceIndexBufferOffsetAlignment(minSequenceIndexBufferOffsetAlignment_)
 	,minCommandsTokenBufferOffsetAlignment(minCommandsTokenBufferOffsetAlignment_)
-{
-}
-
-S_device_generated_commands_limits_NVX( VkDeviceGeneratedCommandsLimitsNVX const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_device_generated_commands_limits_NVX ) );	}
-S_device_generated_commands_limits_NVX& operator=( VkDeviceGeneratedCommandsLimitsNVX const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_device_generated_commands_limits_NVX ) ); return *this;	}
-operator VkDeviceGeneratedCommandsLimitsNVX const&() const 
-	{	return *reinterpret_cast<const VkDeviceGeneratedCommandsLimitsNVX*>(this);	}
-operator VkDeviceGeneratedCommandsLimitsNVX &() 
-	{	return *reinterpret_cast<VkDeviceGeneratedCommandsLimitsNVX*>(this);	}
+{}
 };
 static_assert(
 	sizeof(S_device_generated_commands_limits_NVX) == sizeof(VkDeviceGeneratedCommandsLimitsNVX),
@@ -13678,7 +14702,17 @@ struct		S_indirect_commands_token_NVX{
 	VkBuffer buffer;
 	VkDeviceSize offset;
 
-VkIndirectCommandsTokenNVX*const get_vkptr(){return reinterpret_cast<VkIndirectCommandsTokenNVX*>(this);}
+operator VkIndirectCommandsTokenNVX*()
+	{	return reinterpret_cast<VkIndirectCommandsTokenNVX*>(this);	}
+operator const VkIndirectCommandsTokenNVX*() const
+	{	return reinterpret_cast<const VkIndirectCommandsTokenNVX*>(this);	}
+S_indirect_commands_token_NVX& operator=( VkIndirectCommandsTokenNVX const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_indirect_commands_token_NVX ) ); return *this;	}
+operator VkIndirectCommandsTokenNVX const&() const 
+	{	return *reinterpret_cast<const VkIndirectCommandsTokenNVX*>(this);	}
+operator VkIndirectCommandsTokenNVX &() 
+	{	return *reinterpret_cast<VkIndirectCommandsTokenNVX*>(this);	}
+
 };
 
 /*	VkIndirectCommandsLayoutTokenNVX
@@ -13689,7 +14723,17 @@ struct		S_indirect_commands_layout_token_NVX{
 	uint32_t dynamicCount;
 	uint32_t divisor;
 
-VkIndirectCommandsLayoutTokenNVX*const get_vkptr(){return reinterpret_cast<VkIndirectCommandsLayoutTokenNVX*>(this);}
+operator VkIndirectCommandsLayoutTokenNVX*()
+	{	return reinterpret_cast<VkIndirectCommandsLayoutTokenNVX*>(this);	}
+operator const VkIndirectCommandsLayoutTokenNVX*() const
+	{	return reinterpret_cast<const VkIndirectCommandsLayoutTokenNVX*>(this);	}
+S_indirect_commands_layout_token_NVX& operator=( VkIndirectCommandsLayoutTokenNVX const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_indirect_commands_layout_token_NVX ) ); return *this;	}
+operator VkIndirectCommandsLayoutTokenNVX const&() const 
+	{	return *reinterpret_cast<const VkIndirectCommandsLayoutTokenNVX*>(this);	}
+operator VkIndirectCommandsLayoutTokenNVX &() 
+	{	return *reinterpret_cast<VkIndirectCommandsLayoutTokenNVX*>(this);	}
+
 };
 
 /*	VkIndirectCommandsLayoutCreateInfoNVX
@@ -13704,10 +14748,21 @@ public:
 	uint32_t tokenCount;
 	const S_indirect_commands_layout_token_NVX * pTokens;
 
-VkIndirectCommandsLayoutCreateInfoNVX*const get_vkptr(){return reinterpret_cast<VkIndirectCommandsLayoutCreateInfoNVX*>(this);}
+operator VkIndirectCommandsLayoutCreateInfoNVX*()
+	{	return reinterpret_cast<VkIndirectCommandsLayoutCreateInfoNVX*>(this);	}
+operator const VkIndirectCommandsLayoutCreateInfoNVX*() const
+	{	return reinterpret_cast<const VkIndirectCommandsLayoutCreateInfoNVX*>(this);	}
+S_indirect_commands_layout_create_info_NVX& operator=( VkIndirectCommandsLayoutCreateInfoNVX const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_indirect_commands_layout_create_info_NVX ) ); return *this;	}
+operator VkIndirectCommandsLayoutCreateInfoNVX const&() const 
+	{	return *reinterpret_cast<const VkIndirectCommandsLayoutCreateInfoNVX*>(this);	}
+operator VkIndirectCommandsLayoutCreateInfoNVX &() 
+	{	return *reinterpret_cast<VkIndirectCommandsLayoutCreateInfoNVX*>(this);	}
+
 
 S_indirect_commands_layout_create_info_NVX(){}
-
+S_indirect_commands_layout_create_info_NVX(VkIndirectCommandsLayoutCreateInfoNVX& rhs)
+	{	memcpy( this, &rhs, sizeof( S_indirect_commands_layout_create_info_NVX ) );	}
 S_indirect_commands_layout_create_info_NVX(
 	E_pipeline_bind_point pipelineBindPoint_,
 	F_indirect_commands_layout_usage_NVX flags_,
@@ -13717,17 +14772,7 @@ S_indirect_commands_layout_create_info_NVX(
 	,flags(flags_)
 	,tokenCount(tokenCount_)
 	,pTokens(pTokens_)
-{
-}
-
-S_indirect_commands_layout_create_info_NVX( VkIndirectCommandsLayoutCreateInfoNVX const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_indirect_commands_layout_create_info_NVX ) );	}
-S_indirect_commands_layout_create_info_NVX& operator=( VkIndirectCommandsLayoutCreateInfoNVX const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_indirect_commands_layout_create_info_NVX ) ); return *this;	}
-operator VkIndirectCommandsLayoutCreateInfoNVX const&() const 
-	{	return *reinterpret_cast<const VkIndirectCommandsLayoutCreateInfoNVX*>(this);	}
-operator VkIndirectCommandsLayoutCreateInfoNVX &() 
-	{	return *reinterpret_cast<VkIndirectCommandsLayoutCreateInfoNVX*>(this);	}
+{}
 };
 static_assert(
 	sizeof(S_indirect_commands_layout_create_info_NVX) == sizeof(VkIndirectCommandsLayoutCreateInfoNVX),
@@ -13751,10 +14796,21 @@ public:
 	VkBuffer sequencesIndexBuffer;
 	VkDeviceSize sequencesIndexOffset;
 
-VkCmdProcessCommandsInfoNVX*const get_vkptr(){return reinterpret_cast<VkCmdProcessCommandsInfoNVX*>(this);}
+operator VkCmdProcessCommandsInfoNVX*()
+	{	return reinterpret_cast<VkCmdProcessCommandsInfoNVX*>(this);	}
+operator const VkCmdProcessCommandsInfoNVX*() const
+	{	return reinterpret_cast<const VkCmdProcessCommandsInfoNVX*>(this);	}
+S_cmd_process_commands_info_NVX& operator=( VkCmdProcessCommandsInfoNVX const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_cmd_process_commands_info_NVX ) ); return *this;	}
+operator VkCmdProcessCommandsInfoNVX const&() const 
+	{	return *reinterpret_cast<const VkCmdProcessCommandsInfoNVX*>(this);	}
+operator VkCmdProcessCommandsInfoNVX &() 
+	{	return *reinterpret_cast<VkCmdProcessCommandsInfoNVX*>(this);	}
+
 
 S_cmd_process_commands_info_NVX(){}
-
+S_cmd_process_commands_info_NVX(VkCmdProcessCommandsInfoNVX& rhs)
+	{	memcpy( this, &rhs, sizeof( S_cmd_process_commands_info_NVX ) );	}
 S_cmd_process_commands_info_NVX(
 	VkObjectTableNVX objectTable_,
 	VkIndirectCommandsLayoutNVX indirectCommandsLayout_,
@@ -13776,17 +14832,7 @@ S_cmd_process_commands_info_NVX(
 	,sequencesCountOffset(sequencesCountOffset_)
 	,sequencesIndexBuffer(sequencesIndexBuffer_)
 	,sequencesIndexOffset(sequencesIndexOffset_)
-{
-}
-
-S_cmd_process_commands_info_NVX( VkCmdProcessCommandsInfoNVX const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_cmd_process_commands_info_NVX ) );	}
-S_cmd_process_commands_info_NVX& operator=( VkCmdProcessCommandsInfoNVX const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_cmd_process_commands_info_NVX ) ); return *this;	}
-operator VkCmdProcessCommandsInfoNVX const&() const 
-	{	return *reinterpret_cast<const VkCmdProcessCommandsInfoNVX*>(this);	}
-operator VkCmdProcessCommandsInfoNVX &() 
-	{	return *reinterpret_cast<VkCmdProcessCommandsInfoNVX*>(this);	}
+{}
 };
 static_assert(
 	sizeof(S_cmd_process_commands_info_NVX) == sizeof(VkCmdProcessCommandsInfoNVX),
@@ -13803,10 +14849,21 @@ public:
 	VkIndirectCommandsLayoutNVX indirectCommandsLayout;
 	uint32_t maxSequencesCount;
 
-VkCmdReserveSpaceForCommandsInfoNVX*const get_vkptr(){return reinterpret_cast<VkCmdReserveSpaceForCommandsInfoNVX*>(this);}
+operator VkCmdReserveSpaceForCommandsInfoNVX*()
+	{	return reinterpret_cast<VkCmdReserveSpaceForCommandsInfoNVX*>(this);	}
+operator const VkCmdReserveSpaceForCommandsInfoNVX*() const
+	{	return reinterpret_cast<const VkCmdReserveSpaceForCommandsInfoNVX*>(this);	}
+S_cmd_reserve_space_for_commands_info_NVX& operator=( VkCmdReserveSpaceForCommandsInfoNVX const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_cmd_reserve_space_for_commands_info_NVX ) ); return *this;	}
+operator VkCmdReserveSpaceForCommandsInfoNVX const&() const 
+	{	return *reinterpret_cast<const VkCmdReserveSpaceForCommandsInfoNVX*>(this);	}
+operator VkCmdReserveSpaceForCommandsInfoNVX &() 
+	{	return *reinterpret_cast<VkCmdReserveSpaceForCommandsInfoNVX*>(this);	}
+
 
 S_cmd_reserve_space_for_commands_info_NVX(){}
-
+S_cmd_reserve_space_for_commands_info_NVX(VkCmdReserveSpaceForCommandsInfoNVX& rhs)
+	{	memcpy( this, &rhs, sizeof( S_cmd_reserve_space_for_commands_info_NVX ) );	}
 S_cmd_reserve_space_for_commands_info_NVX(
 	VkObjectTableNVX objectTable_,
 	VkIndirectCommandsLayoutNVX indirectCommandsLayout_,
@@ -13814,17 +14871,7 @@ S_cmd_reserve_space_for_commands_info_NVX(
 	:objectTable(objectTable_)
 	,indirectCommandsLayout(indirectCommandsLayout_)
 	,maxSequencesCount(maxSequencesCount_)
-{
-}
-
-S_cmd_reserve_space_for_commands_info_NVX( VkCmdReserveSpaceForCommandsInfoNVX const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_cmd_reserve_space_for_commands_info_NVX ) );	}
-S_cmd_reserve_space_for_commands_info_NVX& operator=( VkCmdReserveSpaceForCommandsInfoNVX const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_cmd_reserve_space_for_commands_info_NVX ) ); return *this;	}
-operator VkCmdReserveSpaceForCommandsInfoNVX const&() const 
-	{	return *reinterpret_cast<const VkCmdReserveSpaceForCommandsInfoNVX*>(this);	}
-operator VkCmdReserveSpaceForCommandsInfoNVX &() 
-	{	return *reinterpret_cast<VkCmdReserveSpaceForCommandsInfoNVX*>(this);	}
+{}
 };
 static_assert(
 	sizeof(S_cmd_reserve_space_for_commands_info_NVX) == sizeof(VkCmdReserveSpaceForCommandsInfoNVX),
@@ -13847,10 +14894,21 @@ public:
 	uint32_t maxSampledImagesPerDescriptor;
 	uint32_t maxPipelineLayouts;
 
-VkObjectTableCreateInfoNVX*const get_vkptr(){return reinterpret_cast<VkObjectTableCreateInfoNVX*>(this);}
+operator VkObjectTableCreateInfoNVX*()
+	{	return reinterpret_cast<VkObjectTableCreateInfoNVX*>(this);	}
+operator const VkObjectTableCreateInfoNVX*() const
+	{	return reinterpret_cast<const VkObjectTableCreateInfoNVX*>(this);	}
+S_object_table_create_info_NVX& operator=( VkObjectTableCreateInfoNVX const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_object_table_create_info_NVX ) ); return *this;	}
+operator VkObjectTableCreateInfoNVX const&() const 
+	{	return *reinterpret_cast<const VkObjectTableCreateInfoNVX*>(this);	}
+operator VkObjectTableCreateInfoNVX &() 
+	{	return *reinterpret_cast<VkObjectTableCreateInfoNVX*>(this);	}
+
 
 S_object_table_create_info_NVX(){}
-
+S_object_table_create_info_NVX(VkObjectTableCreateInfoNVX& rhs)
+	{	memcpy( this, &rhs, sizeof( S_object_table_create_info_NVX ) );	}
 S_object_table_create_info_NVX(
 	uint32_t objectCount_,
 	const E_object_entry_type_NVX * pObjectEntryTypes_,
@@ -13870,17 +14928,7 @@ S_object_table_create_info_NVX(
 	,maxStorageImagesPerDescriptor(maxStorageImagesPerDescriptor_)
 	,maxSampledImagesPerDescriptor(maxSampledImagesPerDescriptor_)
 	,maxPipelineLayouts(maxPipelineLayouts_)
-{
-}
-
-S_object_table_create_info_NVX( VkObjectTableCreateInfoNVX const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_object_table_create_info_NVX ) );	}
-S_object_table_create_info_NVX& operator=( VkObjectTableCreateInfoNVX const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_object_table_create_info_NVX ) ); return *this;	}
-operator VkObjectTableCreateInfoNVX const&() const 
-	{	return *reinterpret_cast<const VkObjectTableCreateInfoNVX*>(this);	}
-operator VkObjectTableCreateInfoNVX &() 
-	{	return *reinterpret_cast<VkObjectTableCreateInfoNVX*>(this);	}
+{}
 };
 static_assert(
 	sizeof(S_object_table_create_info_NVX) == sizeof(VkObjectTableCreateInfoNVX),
@@ -13892,7 +14940,17 @@ struct		S_object_table_entry_NVX{
 	E_object_entry_type_NVX type;
 	F_object_entry_usage_NVX flags;
 
-VkObjectTableEntryNVX*const get_vkptr(){return reinterpret_cast<VkObjectTableEntryNVX*>(this);}
+operator VkObjectTableEntryNVX*()
+	{	return reinterpret_cast<VkObjectTableEntryNVX*>(this);	}
+operator const VkObjectTableEntryNVX*() const
+	{	return reinterpret_cast<const VkObjectTableEntryNVX*>(this);	}
+S_object_table_entry_NVX& operator=( VkObjectTableEntryNVX const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_object_table_entry_NVX ) ); return *this;	}
+operator VkObjectTableEntryNVX const&() const 
+	{	return *reinterpret_cast<const VkObjectTableEntryNVX*>(this);	}
+operator VkObjectTableEntryNVX &() 
+	{	return *reinterpret_cast<VkObjectTableEntryNVX*>(this);	}
+
 };
 
 /*	VkObjectTablePipelineEntryNVX
@@ -13902,7 +14960,17 @@ struct		S_object_table_pipeline_entry_NVX{
 	F_object_entry_usage_NVX flags;
 	VkPipeline pipeline;
 
-VkObjectTablePipelineEntryNVX*const get_vkptr(){return reinterpret_cast<VkObjectTablePipelineEntryNVX*>(this);}
+operator VkObjectTablePipelineEntryNVX*()
+	{	return reinterpret_cast<VkObjectTablePipelineEntryNVX*>(this);	}
+operator const VkObjectTablePipelineEntryNVX*() const
+	{	return reinterpret_cast<const VkObjectTablePipelineEntryNVX*>(this);	}
+S_object_table_pipeline_entry_NVX& operator=( VkObjectTablePipelineEntryNVX const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_object_table_pipeline_entry_NVX ) ); return *this;	}
+operator VkObjectTablePipelineEntryNVX const&() const 
+	{	return *reinterpret_cast<const VkObjectTablePipelineEntryNVX*>(this);	}
+operator VkObjectTablePipelineEntryNVX &() 
+	{	return *reinterpret_cast<VkObjectTablePipelineEntryNVX*>(this);	}
+
 };
 
 /*	VkObjectTableDescriptorSetEntryNVX
@@ -13913,7 +14981,17 @@ struct		S_object_table_descriptor_set_entry_NVX{
 	VkPipelineLayout pipelineLayout;
 	VkDescriptorSet descriptorSet;
 
-VkObjectTableDescriptorSetEntryNVX*const get_vkptr(){return reinterpret_cast<VkObjectTableDescriptorSetEntryNVX*>(this);}
+operator VkObjectTableDescriptorSetEntryNVX*()
+	{	return reinterpret_cast<VkObjectTableDescriptorSetEntryNVX*>(this);	}
+operator const VkObjectTableDescriptorSetEntryNVX*() const
+	{	return reinterpret_cast<const VkObjectTableDescriptorSetEntryNVX*>(this);	}
+S_object_table_descriptor_set_entry_NVX& operator=( VkObjectTableDescriptorSetEntryNVX const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_object_table_descriptor_set_entry_NVX ) ); return *this;	}
+operator VkObjectTableDescriptorSetEntryNVX const&() const 
+	{	return *reinterpret_cast<const VkObjectTableDescriptorSetEntryNVX*>(this);	}
+operator VkObjectTableDescriptorSetEntryNVX &() 
+	{	return *reinterpret_cast<VkObjectTableDescriptorSetEntryNVX*>(this);	}
+
 };
 
 /*	VkObjectTableVertexBufferEntryNVX
@@ -13923,7 +15001,17 @@ struct		S_object_table_vertex_buffer_entry_NVX{
 	F_object_entry_usage_NVX flags;
 	VkBuffer buffer;
 
-VkObjectTableVertexBufferEntryNVX*const get_vkptr(){return reinterpret_cast<VkObjectTableVertexBufferEntryNVX*>(this);}
+operator VkObjectTableVertexBufferEntryNVX*()
+	{	return reinterpret_cast<VkObjectTableVertexBufferEntryNVX*>(this);	}
+operator const VkObjectTableVertexBufferEntryNVX*() const
+	{	return reinterpret_cast<const VkObjectTableVertexBufferEntryNVX*>(this);	}
+S_object_table_vertex_buffer_entry_NVX& operator=( VkObjectTableVertexBufferEntryNVX const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_object_table_vertex_buffer_entry_NVX ) ); return *this;	}
+operator VkObjectTableVertexBufferEntryNVX const&() const 
+	{	return *reinterpret_cast<const VkObjectTableVertexBufferEntryNVX*>(this);	}
+operator VkObjectTableVertexBufferEntryNVX &() 
+	{	return *reinterpret_cast<VkObjectTableVertexBufferEntryNVX*>(this);	}
+
 };
 
 /*	VkObjectTableIndexBufferEntryNVX
@@ -13934,7 +15022,17 @@ struct		S_object_table_index_buffer_entry_NVX{
 	VkBuffer buffer;
 	E_index_type indexType;
 
-VkObjectTableIndexBufferEntryNVX*const get_vkptr(){return reinterpret_cast<VkObjectTableIndexBufferEntryNVX*>(this);}
+operator VkObjectTableIndexBufferEntryNVX*()
+	{	return reinterpret_cast<VkObjectTableIndexBufferEntryNVX*>(this);	}
+operator const VkObjectTableIndexBufferEntryNVX*() const
+	{	return reinterpret_cast<const VkObjectTableIndexBufferEntryNVX*>(this);	}
+S_object_table_index_buffer_entry_NVX& operator=( VkObjectTableIndexBufferEntryNVX const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_object_table_index_buffer_entry_NVX ) ); return *this;	}
+operator VkObjectTableIndexBufferEntryNVX const&() const 
+	{	return *reinterpret_cast<const VkObjectTableIndexBufferEntryNVX*>(this);	}
+operator VkObjectTableIndexBufferEntryNVX &() 
+	{	return *reinterpret_cast<VkObjectTableIndexBufferEntryNVX*>(this);	}
+
 };
 
 /*	VkObjectTablePushConstantEntryNVX
@@ -13945,7 +15043,17 @@ struct		S_object_table_push_constant_entry_NVX{
 	VkPipelineLayout pipelineLayout;
 	F_shader_stage stageFlags;
 
-VkObjectTablePushConstantEntryNVX*const get_vkptr(){return reinterpret_cast<VkObjectTablePushConstantEntryNVX*>(this);}
+operator VkObjectTablePushConstantEntryNVX*()
+	{	return reinterpret_cast<VkObjectTablePushConstantEntryNVX*>(this);	}
+operator const VkObjectTablePushConstantEntryNVX*() const
+	{	return reinterpret_cast<const VkObjectTablePushConstantEntryNVX*>(this);	}
+S_object_table_push_constant_entry_NVX& operator=( VkObjectTablePushConstantEntryNVX const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_object_table_push_constant_entry_NVX ) ); return *this;	}
+operator VkObjectTablePushConstantEntryNVX const&() const 
+	{	return *reinterpret_cast<const VkObjectTablePushConstantEntryNVX*>(this);	}
+operator VkObjectTablePushConstantEntryNVX &() 
+	{	return *reinterpret_cast<VkObjectTablePushConstantEntryNVX*>(this);	}
+
 };
 
 /*	VkPhysicalDevicePushDescriptorPropertiesKHR
@@ -13958,24 +15066,25 @@ private:
 public:
 	uint32_t maxPushDescriptors;
 
-VkPhysicalDevicePushDescriptorPropertiesKHR*const get_vkptr(){return reinterpret_cast<VkPhysicalDevicePushDescriptorPropertiesKHR*>(this);}
-
-S_physical_device_push_descriptor_properties_KHR(){}
-
-S_physical_device_push_descriptor_properties_KHR(
-	uint32_t maxPushDescriptors_)
-	:maxPushDescriptors(maxPushDescriptors_)
-{
-}
-
-S_physical_device_push_descriptor_properties_KHR( VkPhysicalDevicePushDescriptorPropertiesKHR const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_physical_device_push_descriptor_properties_KHR ) );	}
+operator VkPhysicalDevicePushDescriptorPropertiesKHR*()
+	{	return reinterpret_cast<VkPhysicalDevicePushDescriptorPropertiesKHR*>(this);	}
+operator const VkPhysicalDevicePushDescriptorPropertiesKHR*() const
+	{	return reinterpret_cast<const VkPhysicalDevicePushDescriptorPropertiesKHR*>(this);	}
 S_physical_device_push_descriptor_properties_KHR& operator=( VkPhysicalDevicePushDescriptorPropertiesKHR const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_physical_device_push_descriptor_properties_KHR ) ); return *this;	}
 operator VkPhysicalDevicePushDescriptorPropertiesKHR const&() const 
 	{	return *reinterpret_cast<const VkPhysicalDevicePushDescriptorPropertiesKHR*>(this);	}
 operator VkPhysicalDevicePushDescriptorPropertiesKHR &() 
 	{	return *reinterpret_cast<VkPhysicalDevicePushDescriptorPropertiesKHR*>(this);	}
+
+
+S_physical_device_push_descriptor_properties_KHR(){}
+S_physical_device_push_descriptor_properties_KHR(VkPhysicalDevicePushDescriptorPropertiesKHR& rhs)
+	{	memcpy( this, &rhs, sizeof( S_physical_device_push_descriptor_properties_KHR ) );	}
+S_physical_device_push_descriptor_properties_KHR(
+	uint32_t maxPushDescriptors_)
+	:maxPushDescriptors(maxPushDescriptors_)
+{}
 
 friend S_physical_device_properties2;
 };
@@ -13992,7 +15101,17 @@ struct		S_conformance_version_KHR{
 	uint8_t subminor;
 	uint8_t patch;
 
-VkConformanceVersionKHR*const get_vkptr(){return reinterpret_cast<VkConformanceVersionKHR*>(this);}
+operator VkConformanceVersionKHR*()
+	{	return reinterpret_cast<VkConformanceVersionKHR*>(this);	}
+operator const VkConformanceVersionKHR*() const
+	{	return reinterpret_cast<const VkConformanceVersionKHR*>(this);	}
+S_conformance_version_KHR& operator=( VkConformanceVersionKHR const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_conformance_version_KHR ) ); return *this;	}
+operator VkConformanceVersionKHR const&() const 
+	{	return *reinterpret_cast<const VkConformanceVersionKHR*>(this);	}
+operator VkConformanceVersionKHR &() 
+	{	return *reinterpret_cast<VkConformanceVersionKHR*>(this);	}
+
 };
 #endif //LAKA_UNKNOW
 
@@ -14011,10 +15130,21 @@ public:
 	char driverInfo[VK_MAX_DRIVER_INFO_SIZE_KHR];
 	S_conformance_version_KHR conformanceVersion;
 
-VkPhysicalDeviceDriverPropertiesKHR*const get_vkptr(){return reinterpret_cast<VkPhysicalDeviceDriverPropertiesKHR*>(this);}
+operator VkPhysicalDeviceDriverPropertiesKHR*()
+	{	return reinterpret_cast<VkPhysicalDeviceDriverPropertiesKHR*>(this);	}
+operator const VkPhysicalDeviceDriverPropertiesKHR*() const
+	{	return reinterpret_cast<const VkPhysicalDeviceDriverPropertiesKHR*>(this);	}
+S_physical_device_driver_properties_KHR& operator=( VkPhysicalDeviceDriverPropertiesKHR const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_physical_device_driver_properties_KHR ) ); return *this;	}
+operator VkPhysicalDeviceDriverPropertiesKHR const&() const 
+	{	return *reinterpret_cast<const VkPhysicalDeviceDriverPropertiesKHR*>(this);	}
+operator VkPhysicalDeviceDriverPropertiesKHR &() 
+	{	return *reinterpret_cast<VkPhysicalDeviceDriverPropertiesKHR*>(this);	}
+
 
 S_physical_device_driver_properties_KHR(){}
-
+S_physical_device_driver_properties_KHR(VkPhysicalDeviceDriverPropertiesKHR& rhs)
+	{	memcpy( this, &rhs, sizeof( S_physical_device_driver_properties_KHR ) );	}
 S_physical_device_driver_properties_KHR(
 	uint32_t driverID_,
 	char driverName_[VK_MAX_DRIVER_NAME_SIZE_KHR],
@@ -14026,15 +15156,6 @@ S_physical_device_driver_properties_KHR(
 memcpy(driverName,driverName_,sizeof(driverName) );
 memcpy(driverInfo,driverInfo_,sizeof(driverInfo) );
 }
-
-S_physical_device_driver_properties_KHR( VkPhysicalDeviceDriverPropertiesKHR const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_physical_device_driver_properties_KHR ) );	}
-S_physical_device_driver_properties_KHR& operator=( VkPhysicalDeviceDriverPropertiesKHR const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_physical_device_driver_properties_KHR ) ); return *this;	}
-operator VkPhysicalDeviceDriverPropertiesKHR const&() const 
-	{	return *reinterpret_cast<const VkPhysicalDeviceDriverPropertiesKHR*>(this);	}
-operator VkPhysicalDeviceDriverPropertiesKHR &() 
-	{	return *reinterpret_cast<VkPhysicalDeviceDriverPropertiesKHR*>(this);	}
 
 friend S_physical_device_properties2;
 };
@@ -14058,10 +15179,21 @@ public:
 	uint32_t deviceNodeMask;
 	VkBool32 deviceLUIDValid;
 
-VkPhysicalDeviceIDProperties*const get_vkptr(){return reinterpret_cast<VkPhysicalDeviceIDProperties*>(this);}
+operator VkPhysicalDeviceIDProperties*()
+	{	return reinterpret_cast<VkPhysicalDeviceIDProperties*>(this);	}
+operator const VkPhysicalDeviceIDProperties*() const
+	{	return reinterpret_cast<const VkPhysicalDeviceIDProperties*>(this);	}
+S_physical_device_id_properties& operator=( VkPhysicalDeviceIDProperties const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_physical_device_id_properties ) ); return *this;	}
+operator VkPhysicalDeviceIDProperties const&() const 
+	{	return *reinterpret_cast<const VkPhysicalDeviceIDProperties*>(this);	}
+operator VkPhysicalDeviceIDProperties &() 
+	{	return *reinterpret_cast<VkPhysicalDeviceIDProperties*>(this);	}
+
 
 S_physical_device_id_properties(){}
-
+S_physical_device_id_properties(VkPhysicalDeviceIDProperties& rhs)
+	{	memcpy( this, &rhs, sizeof( S_physical_device_id_properties ) );	}
 S_physical_device_id_properties(
 	uint8_t deviceUUID_[VK_UUID_SIZE],
 	uint8_t driverUUID_[VK_UUID_SIZE],
@@ -14075,15 +15207,6 @@ memcpy(deviceUUID,deviceUUID_,sizeof(deviceUUID) );
 memcpy(driverUUID,driverUUID_,sizeof(driverUUID) );
 memcpy(deviceLUID,deviceLUID_,sizeof(deviceLUID) );
 }
-
-S_physical_device_id_properties( VkPhysicalDeviceIDProperties const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_physical_device_id_properties ) );	}
-S_physical_device_id_properties& operator=( VkPhysicalDeviceIDProperties const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_physical_device_id_properties ) ); return *this;	}
-operator VkPhysicalDeviceIDProperties const&() const 
-	{	return *reinterpret_cast<const VkPhysicalDeviceIDProperties*>(this);	}
-operator VkPhysicalDeviceIDProperties &() 
-	{	return *reinterpret_cast<VkPhysicalDeviceIDProperties*>(this);	}
 
 friend S_physical_device_properties2;
 };
@@ -14103,26 +15226,27 @@ public:
 	uint32_t maxMultiviewViewCount;
 	uint32_t maxMultiviewInstanceIndex;
 
-VkPhysicalDeviceMultiviewProperties*const get_vkptr(){return reinterpret_cast<VkPhysicalDeviceMultiviewProperties*>(this);}
-
-S_physical_device_multiview_properties(){}
-
-S_physical_device_multiview_properties(
-	uint32_t maxMultiviewViewCount_,
-	uint32_t maxMultiviewInstanceIndex_)
-	:maxMultiviewViewCount(maxMultiviewViewCount_)
-	,maxMultiviewInstanceIndex(maxMultiviewInstanceIndex_)
-{
-}
-
-S_physical_device_multiview_properties( VkPhysicalDeviceMultiviewProperties const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_physical_device_multiview_properties ) );	}
+operator VkPhysicalDeviceMultiviewProperties*()
+	{	return reinterpret_cast<VkPhysicalDeviceMultiviewProperties*>(this);	}
+operator const VkPhysicalDeviceMultiviewProperties*() const
+	{	return reinterpret_cast<const VkPhysicalDeviceMultiviewProperties*>(this);	}
 S_physical_device_multiview_properties& operator=( VkPhysicalDeviceMultiviewProperties const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_physical_device_multiview_properties ) ); return *this;	}
 operator VkPhysicalDeviceMultiviewProperties const&() const 
 	{	return *reinterpret_cast<const VkPhysicalDeviceMultiviewProperties*>(this);	}
 operator VkPhysicalDeviceMultiviewProperties &() 
 	{	return *reinterpret_cast<VkPhysicalDeviceMultiviewProperties*>(this);	}
+
+
+S_physical_device_multiview_properties(){}
+S_physical_device_multiview_properties(VkPhysicalDeviceMultiviewProperties& rhs)
+	{	memcpy( this, &rhs, sizeof( S_physical_device_multiview_properties ) );	}
+S_physical_device_multiview_properties(
+	uint32_t maxMultiviewViewCount_,
+	uint32_t maxMultiviewInstanceIndex_)
+	:maxMultiviewViewCount(maxMultiviewViewCount_)
+	,maxMultiviewInstanceIndex(maxMultiviewInstanceIndex_)
+{}
 
 friend S_physical_device_properties2;
 };
@@ -14140,24 +15264,25 @@ private:
 public:
 	uint32_t maxDiscardRectangles;
 
-VkPhysicalDeviceDiscardRectanglePropertiesEXT*const get_vkptr(){return reinterpret_cast<VkPhysicalDeviceDiscardRectanglePropertiesEXT*>(this);}
-
-S_physical_device_discard_rectangle_properties_EXT(){}
-
-S_physical_device_discard_rectangle_properties_EXT(
-	uint32_t maxDiscardRectangles_)
-	:maxDiscardRectangles(maxDiscardRectangles_)
-{
-}
-
-S_physical_device_discard_rectangle_properties_EXT( VkPhysicalDeviceDiscardRectanglePropertiesEXT const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_physical_device_discard_rectangle_properties_EXT ) );	}
+operator VkPhysicalDeviceDiscardRectanglePropertiesEXT*()
+	{	return reinterpret_cast<VkPhysicalDeviceDiscardRectanglePropertiesEXT*>(this);	}
+operator const VkPhysicalDeviceDiscardRectanglePropertiesEXT*() const
+	{	return reinterpret_cast<const VkPhysicalDeviceDiscardRectanglePropertiesEXT*>(this);	}
 S_physical_device_discard_rectangle_properties_EXT& operator=( VkPhysicalDeviceDiscardRectanglePropertiesEXT const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_physical_device_discard_rectangle_properties_EXT ) ); return *this;	}
 operator VkPhysicalDeviceDiscardRectanglePropertiesEXT const&() const 
 	{	return *reinterpret_cast<const VkPhysicalDeviceDiscardRectanglePropertiesEXT*>(this);	}
 operator VkPhysicalDeviceDiscardRectanglePropertiesEXT &() 
 	{	return *reinterpret_cast<VkPhysicalDeviceDiscardRectanglePropertiesEXT*>(this);	}
+
+
+S_physical_device_discard_rectangle_properties_EXT(){}
+S_physical_device_discard_rectangle_properties_EXT(VkPhysicalDeviceDiscardRectanglePropertiesEXT& rhs)
+	{	memcpy( this, &rhs, sizeof( S_physical_device_discard_rectangle_properties_EXT ) );	}
+S_physical_device_discard_rectangle_properties_EXT(
+	uint32_t maxDiscardRectangles_)
+	:maxDiscardRectangles(maxDiscardRectangles_)
+{}
 
 friend S_physical_device_properties2;
 };
@@ -14176,24 +15301,25 @@ private:
 public:
 	VkBool32 perViewPositionAllComponents;
 
-VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX*const get_vkptr(){return reinterpret_cast<VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX*>(this);}
-
-S_physical_device_multiview_per_view_attributes_properties_NVX(){}
-
-S_physical_device_multiview_per_view_attributes_properties_NVX(
-	VkBool32 perViewPositionAllComponents_)
-	:perViewPositionAllComponents(perViewPositionAllComponents_)
-{
-}
-
-S_physical_device_multiview_per_view_attributes_properties_NVX( VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_physical_device_multiview_per_view_attributes_properties_NVX ) );	}
+operator VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX*()
+	{	return reinterpret_cast<VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX*>(this);	}
+operator const VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX*() const
+	{	return reinterpret_cast<const VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX*>(this);	}
 S_physical_device_multiview_per_view_attributes_properties_NVX& operator=( VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_physical_device_multiview_per_view_attributes_properties_NVX ) ); return *this;	}
 operator VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX const&() const 
 	{	return *reinterpret_cast<const VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX*>(this);	}
 operator VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX &() 
 	{	return *reinterpret_cast<VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX*>(this);	}
+
+
+S_physical_device_multiview_per_view_attributes_properties_NVX(){}
+S_physical_device_multiview_per_view_attributes_properties_NVX(VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX& rhs)
+	{	memcpy( this, &rhs, sizeof( S_physical_device_multiview_per_view_attributes_properties_NVX ) );	}
+S_physical_device_multiview_per_view_attributes_properties_NVX(
+	VkBool32 perViewPositionAllComponents_)
+	:perViewPositionAllComponents(perViewPositionAllComponents_)
+{}
 
 friend S_physical_device_properties2;
 };
@@ -14215,10 +15341,21 @@ public:
 	F_subgroup_feature supportedOperations;
 	VkBool32 quadOperationsInAllStages;
 
-VkPhysicalDeviceSubgroupProperties*const get_vkptr(){return reinterpret_cast<VkPhysicalDeviceSubgroupProperties*>(this);}
+operator VkPhysicalDeviceSubgroupProperties*()
+	{	return reinterpret_cast<VkPhysicalDeviceSubgroupProperties*>(this);	}
+operator const VkPhysicalDeviceSubgroupProperties*() const
+	{	return reinterpret_cast<const VkPhysicalDeviceSubgroupProperties*>(this);	}
+S_physical_device_subgroup_properties& operator=( VkPhysicalDeviceSubgroupProperties const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_physical_device_subgroup_properties ) ); return *this;	}
+operator VkPhysicalDeviceSubgroupProperties const&() const 
+	{	return *reinterpret_cast<const VkPhysicalDeviceSubgroupProperties*>(this);	}
+operator VkPhysicalDeviceSubgroupProperties &() 
+	{	return *reinterpret_cast<VkPhysicalDeviceSubgroupProperties*>(this);	}
+
 
 S_physical_device_subgroup_properties(){}
-
+S_physical_device_subgroup_properties(VkPhysicalDeviceSubgroupProperties& rhs)
+	{	memcpy( this, &rhs, sizeof( S_physical_device_subgroup_properties ) );	}
 S_physical_device_subgroup_properties(
 	uint32_t subgroupSize_,
 	F_shader_stage supportedStages_,
@@ -14228,17 +15365,7 @@ S_physical_device_subgroup_properties(
 	,supportedStages(supportedStages_)
 	,supportedOperations(supportedOperations_)
 	,quadOperationsInAllStages(quadOperationsInAllStages_)
-{
-}
-
-S_physical_device_subgroup_properties( VkPhysicalDeviceSubgroupProperties const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_physical_device_subgroup_properties ) );	}
-S_physical_device_subgroup_properties& operator=( VkPhysicalDeviceSubgroupProperties const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_physical_device_subgroup_properties ) ); return *this;	}
-operator VkPhysicalDeviceSubgroupProperties const&() const 
-	{	return *reinterpret_cast<const VkPhysicalDeviceSubgroupProperties*>(this);	}
-operator VkPhysicalDeviceSubgroupProperties &() 
-	{	return *reinterpret_cast<VkPhysicalDeviceSubgroupProperties*>(this);	}
+{}
 
 friend S_physical_device_properties2;
 };
@@ -14257,24 +15384,25 @@ private:
 public:
 	E_point_clipping_behavior pointClippingBehavior;
 
-VkPhysicalDevicePointClippingProperties*const get_vkptr(){return reinterpret_cast<VkPhysicalDevicePointClippingProperties*>(this);}
-
-S_physical_device_point_clipping_properties(){}
-
-S_physical_device_point_clipping_properties(
-	E_point_clipping_behavior pointClippingBehavior_)
-	:pointClippingBehavior(pointClippingBehavior_)
-{
-}
-
-S_physical_device_point_clipping_properties( VkPhysicalDevicePointClippingProperties const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_physical_device_point_clipping_properties ) );	}
+operator VkPhysicalDevicePointClippingProperties*()
+	{	return reinterpret_cast<VkPhysicalDevicePointClippingProperties*>(this);	}
+operator const VkPhysicalDevicePointClippingProperties*() const
+	{	return reinterpret_cast<const VkPhysicalDevicePointClippingProperties*>(this);	}
 S_physical_device_point_clipping_properties& operator=( VkPhysicalDevicePointClippingProperties const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_physical_device_point_clipping_properties ) ); return *this;	}
 operator VkPhysicalDevicePointClippingProperties const&() const 
 	{	return *reinterpret_cast<const VkPhysicalDevicePointClippingProperties*>(this);	}
 operator VkPhysicalDevicePointClippingProperties &() 
 	{	return *reinterpret_cast<VkPhysicalDevicePointClippingProperties*>(this);	}
+
+
+S_physical_device_point_clipping_properties(){}
+S_physical_device_point_clipping_properties(VkPhysicalDevicePointClippingProperties& rhs)
+	{	memcpy( this, &rhs, sizeof( S_physical_device_point_clipping_properties ) );	}
+S_physical_device_point_clipping_properties(
+	E_point_clipping_behavior pointClippingBehavior_)
+	:pointClippingBehavior(pointClippingBehavior_)
+{}
 
 friend S_physical_device_properties2;
 };
@@ -14292,24 +15420,25 @@ private:
 public:
 	VkBool32 protectedNoFault;
 
-VkPhysicalDeviceProtectedMemoryProperties*const get_vkptr(){return reinterpret_cast<VkPhysicalDeviceProtectedMemoryProperties*>(this);}
-
-S_physical_device_protected_memory_properties(){}
-
-S_physical_device_protected_memory_properties(
-	VkBool32 protectedNoFault_)
-	:protectedNoFault(protectedNoFault_)
-{
-}
-
-S_physical_device_protected_memory_properties( VkPhysicalDeviceProtectedMemoryProperties const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_physical_device_protected_memory_properties ) );	}
+operator VkPhysicalDeviceProtectedMemoryProperties*()
+	{	return reinterpret_cast<VkPhysicalDeviceProtectedMemoryProperties*>(this);	}
+operator const VkPhysicalDeviceProtectedMemoryProperties*() const
+	{	return reinterpret_cast<const VkPhysicalDeviceProtectedMemoryProperties*>(this);	}
 S_physical_device_protected_memory_properties& operator=( VkPhysicalDeviceProtectedMemoryProperties const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_physical_device_protected_memory_properties ) ); return *this;	}
 operator VkPhysicalDeviceProtectedMemoryProperties const&() const 
 	{	return *reinterpret_cast<const VkPhysicalDeviceProtectedMemoryProperties*>(this);	}
 operator VkPhysicalDeviceProtectedMemoryProperties &() 
 	{	return *reinterpret_cast<VkPhysicalDeviceProtectedMemoryProperties*>(this);	}
+
+
+S_physical_device_protected_memory_properties(){}
+S_physical_device_protected_memory_properties(VkPhysicalDeviceProtectedMemoryProperties& rhs)
+	{	memcpy( this, &rhs, sizeof( S_physical_device_protected_memory_properties ) );	}
+S_physical_device_protected_memory_properties(
+	VkBool32 protectedNoFault_)
+	:protectedNoFault(protectedNoFault_)
+{}
 
 friend S_physical_device_properties2;
 };
@@ -14329,26 +15458,27 @@ public:
 	VkBool32 filterMinmaxSingleComponentFormats;
 	VkBool32 filterMinmaxImageComponentMapping;
 
-VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT*const get_vkptr(){return reinterpret_cast<VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT*>(this);}
-
-S_physical_device_sampler_filter_minmax_properties_EXT(){}
-
-S_physical_device_sampler_filter_minmax_properties_EXT(
-	VkBool32 filterMinmaxSingleComponentFormats_,
-	VkBool32 filterMinmaxImageComponentMapping_)
-	:filterMinmaxSingleComponentFormats(filterMinmaxSingleComponentFormats_)
-	,filterMinmaxImageComponentMapping(filterMinmaxImageComponentMapping_)
-{
-}
-
-S_physical_device_sampler_filter_minmax_properties_EXT( VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_physical_device_sampler_filter_minmax_properties_EXT ) );	}
+operator VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT*()
+	{	return reinterpret_cast<VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT*>(this);	}
+operator const VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT*() const
+	{	return reinterpret_cast<const VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT*>(this);	}
 S_physical_device_sampler_filter_minmax_properties_EXT& operator=( VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_physical_device_sampler_filter_minmax_properties_EXT ) ); return *this;	}
 operator VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT const&() const 
 	{	return *reinterpret_cast<const VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT*>(this);	}
 operator VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT &() 
 	{	return *reinterpret_cast<VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT*>(this);	}
+
+
+S_physical_device_sampler_filter_minmax_properties_EXT(){}
+S_physical_device_sampler_filter_minmax_properties_EXT(VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT& rhs)
+	{	memcpy( this, &rhs, sizeof( S_physical_device_sampler_filter_minmax_properties_EXT ) );	}
+S_physical_device_sampler_filter_minmax_properties_EXT(
+	VkBool32 filterMinmaxSingleComponentFormats_,
+	VkBool32 filterMinmaxImageComponentMapping_)
+	:filterMinmaxSingleComponentFormats(filterMinmaxSingleComponentFormats_)
+	,filterMinmaxImageComponentMapping(filterMinmaxImageComponentMapping_)
+{}
 
 friend S_physical_device_properties2;
 };
@@ -14371,10 +15501,21 @@ public:
 	uint32_t sampleLocationSubPixelBits;
 	VkBool32 variableSampleLocations;
 
-VkPhysicalDeviceSampleLocationsPropertiesEXT*const get_vkptr(){return reinterpret_cast<VkPhysicalDeviceSampleLocationsPropertiesEXT*>(this);}
+operator VkPhysicalDeviceSampleLocationsPropertiesEXT*()
+	{	return reinterpret_cast<VkPhysicalDeviceSampleLocationsPropertiesEXT*>(this);	}
+operator const VkPhysicalDeviceSampleLocationsPropertiesEXT*() const
+	{	return reinterpret_cast<const VkPhysicalDeviceSampleLocationsPropertiesEXT*>(this);	}
+S_physical_device_sample_locations_properties_EXT& operator=( VkPhysicalDeviceSampleLocationsPropertiesEXT const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_physical_device_sample_locations_properties_EXT ) ); return *this;	}
+operator VkPhysicalDeviceSampleLocationsPropertiesEXT const&() const 
+	{	return *reinterpret_cast<const VkPhysicalDeviceSampleLocationsPropertiesEXT*>(this);	}
+operator VkPhysicalDeviceSampleLocationsPropertiesEXT &() 
+	{	return *reinterpret_cast<VkPhysicalDeviceSampleLocationsPropertiesEXT*>(this);	}
+
 
 S_physical_device_sample_locations_properties_EXT(){}
-
+S_physical_device_sample_locations_properties_EXT(VkPhysicalDeviceSampleLocationsPropertiesEXT& rhs)
+	{	memcpy( this, &rhs, sizeof( S_physical_device_sample_locations_properties_EXT ) );	}
 S_physical_device_sample_locations_properties_EXT(
 	F_sample_count sampleLocationSampleCounts_,
 	S_extent_2d maxSampleLocationGridSize_,
@@ -14388,15 +15529,6 @@ S_physical_device_sample_locations_properties_EXT(
 {
 memcpy(sampleLocationCoordinateRange,sampleLocationCoordinateRange_,sizeof(sampleLocationCoordinateRange) );
 }
-
-S_physical_device_sample_locations_properties_EXT( VkPhysicalDeviceSampleLocationsPropertiesEXT const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_physical_device_sample_locations_properties_EXT ) );	}
-S_physical_device_sample_locations_properties_EXT& operator=( VkPhysicalDeviceSampleLocationsPropertiesEXT const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_physical_device_sample_locations_properties_EXT ) ); return *this;	}
-operator VkPhysicalDeviceSampleLocationsPropertiesEXT const&() const 
-	{	return *reinterpret_cast<const VkPhysicalDeviceSampleLocationsPropertiesEXT*>(this);	}
-operator VkPhysicalDeviceSampleLocationsPropertiesEXT &() 
-	{	return *reinterpret_cast<VkPhysicalDeviceSampleLocationsPropertiesEXT*>(this);	}
 
 friend S_physical_device_properties2;
 };
@@ -14420,10 +15552,21 @@ public:
 	VkBool32 advancedBlendCorrelatedOverlap;
 	VkBool32 advancedBlendAllOperations;
 
-VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT*const get_vkptr(){return reinterpret_cast<VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT*>(this);}
+operator VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT*()
+	{	return reinterpret_cast<VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT*>(this);	}
+operator const VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT*() const
+	{	return reinterpret_cast<const VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT*>(this);	}
+S_physical_device_blend_operation_advanced_properties_EXT& operator=( VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_physical_device_blend_operation_advanced_properties_EXT ) ); return *this;	}
+operator VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT const&() const 
+	{	return *reinterpret_cast<const VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT*>(this);	}
+operator VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT &() 
+	{	return *reinterpret_cast<VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT*>(this);	}
+
 
 S_physical_device_blend_operation_advanced_properties_EXT(){}
-
+S_physical_device_blend_operation_advanced_properties_EXT(VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT& rhs)
+	{	memcpy( this, &rhs, sizeof( S_physical_device_blend_operation_advanced_properties_EXT ) );	}
 S_physical_device_blend_operation_advanced_properties_EXT(
 	uint32_t advancedBlendMaxColorAttachments_,
 	VkBool32 advancedBlendIndependentBlend_,
@@ -14437,17 +15580,7 @@ S_physical_device_blend_operation_advanced_properties_EXT(
 	,advancedBlendNonPremultipliedDstColor(advancedBlendNonPremultipliedDstColor_)
 	,advancedBlendCorrelatedOverlap(advancedBlendCorrelatedOverlap_)
 	,advancedBlendAllOperations(advancedBlendAllOperations_)
-{
-}
-
-S_physical_device_blend_operation_advanced_properties_EXT( VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_physical_device_blend_operation_advanced_properties_EXT ) );	}
-S_physical_device_blend_operation_advanced_properties_EXT& operator=( VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_physical_device_blend_operation_advanced_properties_EXT ) ); return *this;	}
-operator VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT const&() const 
-	{	return *reinterpret_cast<const VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT*>(this);	}
-operator VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT &() 
-	{	return *reinterpret_cast<VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT*>(this);	}
+{}
 
 friend S_physical_device_properties2;
 };
@@ -14470,10 +15603,21 @@ public:
 	uint32_t maxDescriptorSetInlineUniformBlocks;
 	uint32_t maxDescriptorSetUpdateAfterBindInlineUniformBlocks;
 
-VkPhysicalDeviceInlineUniformBlockPropertiesEXT*const get_vkptr(){return reinterpret_cast<VkPhysicalDeviceInlineUniformBlockPropertiesEXT*>(this);}
+operator VkPhysicalDeviceInlineUniformBlockPropertiesEXT*()
+	{	return reinterpret_cast<VkPhysicalDeviceInlineUniformBlockPropertiesEXT*>(this);	}
+operator const VkPhysicalDeviceInlineUniformBlockPropertiesEXT*() const
+	{	return reinterpret_cast<const VkPhysicalDeviceInlineUniformBlockPropertiesEXT*>(this);	}
+S_physical_device_inline_uniform_block_properties_EXT& operator=( VkPhysicalDeviceInlineUniformBlockPropertiesEXT const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_physical_device_inline_uniform_block_properties_EXT ) ); return *this;	}
+operator VkPhysicalDeviceInlineUniformBlockPropertiesEXT const&() const 
+	{	return *reinterpret_cast<const VkPhysicalDeviceInlineUniformBlockPropertiesEXT*>(this);	}
+operator VkPhysicalDeviceInlineUniformBlockPropertiesEXT &() 
+	{	return *reinterpret_cast<VkPhysicalDeviceInlineUniformBlockPropertiesEXT*>(this);	}
+
 
 S_physical_device_inline_uniform_block_properties_EXT(){}
-
+S_physical_device_inline_uniform_block_properties_EXT(VkPhysicalDeviceInlineUniformBlockPropertiesEXT& rhs)
+	{	memcpy( this, &rhs, sizeof( S_physical_device_inline_uniform_block_properties_EXT ) );	}
 S_physical_device_inline_uniform_block_properties_EXT(
 	uint32_t maxInlineUniformBlockSize_,
 	uint32_t maxPerStageDescriptorInlineUniformBlocks_,
@@ -14485,17 +15629,7 @@ S_physical_device_inline_uniform_block_properties_EXT(
 	,maxPerStageDescriptorUpdateAfterBindInlineUniformBlocks(maxPerStageDescriptorUpdateAfterBindInlineUniformBlocks_)
 	,maxDescriptorSetInlineUniformBlocks(maxDescriptorSetInlineUniformBlocks_)
 	,maxDescriptorSetUpdateAfterBindInlineUniformBlocks(maxDescriptorSetUpdateAfterBindInlineUniformBlocks_)
-{
-}
-
-S_physical_device_inline_uniform_block_properties_EXT( VkPhysicalDeviceInlineUniformBlockPropertiesEXT const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_physical_device_inline_uniform_block_properties_EXT ) );	}
-S_physical_device_inline_uniform_block_properties_EXT& operator=( VkPhysicalDeviceInlineUniformBlockPropertiesEXT const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_physical_device_inline_uniform_block_properties_EXT ) ); return *this;	}
-operator VkPhysicalDeviceInlineUniformBlockPropertiesEXT const&() const 
-	{	return *reinterpret_cast<const VkPhysicalDeviceInlineUniformBlockPropertiesEXT*>(this);	}
-operator VkPhysicalDeviceInlineUniformBlockPropertiesEXT &() 
-	{	return *reinterpret_cast<VkPhysicalDeviceInlineUniformBlockPropertiesEXT*>(this);	}
+{}
 
 friend S_physical_device_properties2;
 };
@@ -14515,26 +15649,27 @@ public:
 	uint32_t maxPerSetDescriptors;
 	VkDeviceSize maxMemoryAllocationSize;
 
-VkPhysicalDeviceMaintenance3Properties*const get_vkptr(){return reinterpret_cast<VkPhysicalDeviceMaintenance3Properties*>(this);}
-
-S_physical_device_maintenance3_properties(){}
-
-S_physical_device_maintenance3_properties(
-	uint32_t maxPerSetDescriptors_,
-	VkDeviceSize maxMemoryAllocationSize_)
-	:maxPerSetDescriptors(maxPerSetDescriptors_)
-	,maxMemoryAllocationSize(maxMemoryAllocationSize_)
-{
-}
-
-S_physical_device_maintenance3_properties( VkPhysicalDeviceMaintenance3Properties const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_physical_device_maintenance3_properties ) );	}
+operator VkPhysicalDeviceMaintenance3Properties*()
+	{	return reinterpret_cast<VkPhysicalDeviceMaintenance3Properties*>(this);	}
+operator const VkPhysicalDeviceMaintenance3Properties*() const
+	{	return reinterpret_cast<const VkPhysicalDeviceMaintenance3Properties*>(this);	}
 S_physical_device_maintenance3_properties& operator=( VkPhysicalDeviceMaintenance3Properties const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_physical_device_maintenance3_properties ) ); return *this;	}
 operator VkPhysicalDeviceMaintenance3Properties const&() const 
 	{	return *reinterpret_cast<const VkPhysicalDeviceMaintenance3Properties*>(this);	}
 operator VkPhysicalDeviceMaintenance3Properties &() 
 	{	return *reinterpret_cast<VkPhysicalDeviceMaintenance3Properties*>(this);	}
+
+
+S_physical_device_maintenance3_properties(){}
+S_physical_device_maintenance3_properties(VkPhysicalDeviceMaintenance3Properties& rhs)
+	{	memcpy( this, &rhs, sizeof( S_physical_device_maintenance3_properties ) );	}
+S_physical_device_maintenance3_properties(
+	uint32_t maxPerSetDescriptors_,
+	VkDeviceSize maxMemoryAllocationSize_)
+	:maxPerSetDescriptors(maxPerSetDescriptors_)
+	,maxMemoryAllocationSize(maxMemoryAllocationSize_)
+{}
 
 friend S_physical_device_properties2;
 };
@@ -14552,24 +15687,25 @@ private:
 public:
 	VkDeviceSize minImportedHostPointerAlignment;
 
-VkPhysicalDeviceExternalMemoryHostPropertiesEXT*const get_vkptr(){return reinterpret_cast<VkPhysicalDeviceExternalMemoryHostPropertiesEXT*>(this);}
-
-S_physical_device_external_memory_host_properties_EXT(){}
-
-S_physical_device_external_memory_host_properties_EXT(
-	VkDeviceSize minImportedHostPointerAlignment_)
-	:minImportedHostPointerAlignment(minImportedHostPointerAlignment_)
-{
-}
-
-S_physical_device_external_memory_host_properties_EXT( VkPhysicalDeviceExternalMemoryHostPropertiesEXT const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_physical_device_external_memory_host_properties_EXT ) );	}
+operator VkPhysicalDeviceExternalMemoryHostPropertiesEXT*()
+	{	return reinterpret_cast<VkPhysicalDeviceExternalMemoryHostPropertiesEXT*>(this);	}
+operator const VkPhysicalDeviceExternalMemoryHostPropertiesEXT*() const
+	{	return reinterpret_cast<const VkPhysicalDeviceExternalMemoryHostPropertiesEXT*>(this);	}
 S_physical_device_external_memory_host_properties_EXT& operator=( VkPhysicalDeviceExternalMemoryHostPropertiesEXT const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_physical_device_external_memory_host_properties_EXT ) ); return *this;	}
 operator VkPhysicalDeviceExternalMemoryHostPropertiesEXT const&() const 
 	{	return *reinterpret_cast<const VkPhysicalDeviceExternalMemoryHostPropertiesEXT*>(this);	}
 operator VkPhysicalDeviceExternalMemoryHostPropertiesEXT &() 
 	{	return *reinterpret_cast<VkPhysicalDeviceExternalMemoryHostPropertiesEXT*>(this);	}
+
+
+S_physical_device_external_memory_host_properties_EXT(){}
+S_physical_device_external_memory_host_properties_EXT(VkPhysicalDeviceExternalMemoryHostPropertiesEXT& rhs)
+	{	memcpy( this, &rhs, sizeof( S_physical_device_external_memory_host_properties_EXT ) );	}
+S_physical_device_external_memory_host_properties_EXT(
+	VkDeviceSize minImportedHostPointerAlignment_)
+	:minImportedHostPointerAlignment(minImportedHostPointerAlignment_)
+{}
 
 friend S_physical_device_properties2;
 };
@@ -14595,10 +15731,21 @@ public:
 	VkBool32 fullyCoveredFragmentShaderInputVariable;
 	VkBool32 conservativeRasterizationPostDepthCoverage;
 
-VkPhysicalDeviceConservativeRasterizationPropertiesEXT*const get_vkptr(){return reinterpret_cast<VkPhysicalDeviceConservativeRasterizationPropertiesEXT*>(this);}
+operator VkPhysicalDeviceConservativeRasterizationPropertiesEXT*()
+	{	return reinterpret_cast<VkPhysicalDeviceConservativeRasterizationPropertiesEXT*>(this);	}
+operator const VkPhysicalDeviceConservativeRasterizationPropertiesEXT*() const
+	{	return reinterpret_cast<const VkPhysicalDeviceConservativeRasterizationPropertiesEXT*>(this);	}
+S_physical_device_conservative_rasterization_properties_EXT& operator=( VkPhysicalDeviceConservativeRasterizationPropertiesEXT const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_physical_device_conservative_rasterization_properties_EXT ) ); return *this;	}
+operator VkPhysicalDeviceConservativeRasterizationPropertiesEXT const&() const 
+	{	return *reinterpret_cast<const VkPhysicalDeviceConservativeRasterizationPropertiesEXT*>(this);	}
+operator VkPhysicalDeviceConservativeRasterizationPropertiesEXT &() 
+	{	return *reinterpret_cast<VkPhysicalDeviceConservativeRasterizationPropertiesEXT*>(this);	}
+
 
 S_physical_device_conservative_rasterization_properties_EXT(){}
-
+S_physical_device_conservative_rasterization_properties_EXT(VkPhysicalDeviceConservativeRasterizationPropertiesEXT& rhs)
+	{	memcpy( this, &rhs, sizeof( S_physical_device_conservative_rasterization_properties_EXT ) );	}
 S_physical_device_conservative_rasterization_properties_EXT(
 	float primitiveOverestimationSize_,
 	float maxExtraPrimitiveOverestimationSize_,
@@ -14618,17 +15765,7 @@ S_physical_device_conservative_rasterization_properties_EXT(
 	,degenerateLinesRasterized(degenerateLinesRasterized_)
 	,fullyCoveredFragmentShaderInputVariable(fullyCoveredFragmentShaderInputVariable_)
 	,conservativeRasterizationPostDepthCoverage(conservativeRasterizationPostDepthCoverage_)
-{
-}
-
-S_physical_device_conservative_rasterization_properties_EXT( VkPhysicalDeviceConservativeRasterizationPropertiesEXT const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_physical_device_conservative_rasterization_properties_EXT ) );	}
-S_physical_device_conservative_rasterization_properties_EXT& operator=( VkPhysicalDeviceConservativeRasterizationPropertiesEXT const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_physical_device_conservative_rasterization_properties_EXT ) ); return *this;	}
-operator VkPhysicalDeviceConservativeRasterizationPropertiesEXT const&() const 
-	{	return *reinterpret_cast<const VkPhysicalDeviceConservativeRasterizationPropertiesEXT*>(this);	}
-operator VkPhysicalDeviceConservativeRasterizationPropertiesEXT &() 
-	{	return *reinterpret_cast<VkPhysicalDeviceConservativeRasterizationPropertiesEXT*>(this);	}
+{}
 
 friend S_physical_device_properties2;
 };
@@ -14660,10 +15797,21 @@ public:
 	uint32_t maxVgprAllocation;
 	uint32_t vgprAllocationGranularity;
 
-VkPhysicalDeviceShaderCorePropertiesAMD*const get_vkptr(){return reinterpret_cast<VkPhysicalDeviceShaderCorePropertiesAMD*>(this);}
+operator VkPhysicalDeviceShaderCorePropertiesAMD*()
+	{	return reinterpret_cast<VkPhysicalDeviceShaderCorePropertiesAMD*>(this);	}
+operator const VkPhysicalDeviceShaderCorePropertiesAMD*() const
+	{	return reinterpret_cast<const VkPhysicalDeviceShaderCorePropertiesAMD*>(this);	}
+S_physical_device_shader_core_properties_AMD& operator=( VkPhysicalDeviceShaderCorePropertiesAMD const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_physical_device_shader_core_properties_AMD ) ); return *this;	}
+operator VkPhysicalDeviceShaderCorePropertiesAMD const&() const 
+	{	return *reinterpret_cast<const VkPhysicalDeviceShaderCorePropertiesAMD*>(this);	}
+operator VkPhysicalDeviceShaderCorePropertiesAMD &() 
+	{	return *reinterpret_cast<VkPhysicalDeviceShaderCorePropertiesAMD*>(this);	}
+
 
 S_physical_device_shader_core_properties_AMD(){}
-
+S_physical_device_shader_core_properties_AMD(VkPhysicalDeviceShaderCorePropertiesAMD& rhs)
+	{	memcpy( this, &rhs, sizeof( S_physical_device_shader_core_properties_AMD ) );	}
 S_physical_device_shader_core_properties_AMD(
 	uint32_t shaderEngineCount_,
 	uint32_t shaderArraysPerEngineCount_,
@@ -14693,17 +15841,7 @@ S_physical_device_shader_core_properties_AMD(
 	,minVgprAllocation(minVgprAllocation_)
 	,maxVgprAllocation(maxVgprAllocation_)
 	,vgprAllocationGranularity(vgprAllocationGranularity_)
-{
-}
-
-S_physical_device_shader_core_properties_AMD( VkPhysicalDeviceShaderCorePropertiesAMD const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_physical_device_shader_core_properties_AMD ) );	}
-S_physical_device_shader_core_properties_AMD& operator=( VkPhysicalDeviceShaderCorePropertiesAMD const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_physical_device_shader_core_properties_AMD ) ); return *this;	}
-operator VkPhysicalDeviceShaderCorePropertiesAMD const&() const 
-	{	return *reinterpret_cast<const VkPhysicalDeviceShaderCorePropertiesAMD*>(this);	}
-operator VkPhysicalDeviceShaderCorePropertiesAMD &() 
-	{	return *reinterpret_cast<VkPhysicalDeviceShaderCorePropertiesAMD*>(this);	}
+{}
 
 friend S_physical_device_properties2;
 };
@@ -14744,10 +15882,21 @@ public:
 	uint32_t maxDescriptorSetUpdateAfterBindStorageImages;
 	uint32_t maxDescriptorSetUpdateAfterBindInputAttachments;
 
-VkPhysicalDeviceDescriptorIndexingPropertiesEXT*const get_vkptr(){return reinterpret_cast<VkPhysicalDeviceDescriptorIndexingPropertiesEXT*>(this);}
+operator VkPhysicalDeviceDescriptorIndexingPropertiesEXT*()
+	{	return reinterpret_cast<VkPhysicalDeviceDescriptorIndexingPropertiesEXT*>(this);	}
+operator const VkPhysicalDeviceDescriptorIndexingPropertiesEXT*() const
+	{	return reinterpret_cast<const VkPhysicalDeviceDescriptorIndexingPropertiesEXT*>(this);	}
+S_physical_device_descriptor_indexing_properties_EXT& operator=( VkPhysicalDeviceDescriptorIndexingPropertiesEXT const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_physical_device_descriptor_indexing_properties_EXT ) ); return *this;	}
+operator VkPhysicalDeviceDescriptorIndexingPropertiesEXT const&() const 
+	{	return *reinterpret_cast<const VkPhysicalDeviceDescriptorIndexingPropertiesEXT*>(this);	}
+operator VkPhysicalDeviceDescriptorIndexingPropertiesEXT &() 
+	{	return *reinterpret_cast<VkPhysicalDeviceDescriptorIndexingPropertiesEXT*>(this);	}
+
 
 S_physical_device_descriptor_indexing_properties_EXT(){}
-
+S_physical_device_descriptor_indexing_properties_EXT(VkPhysicalDeviceDescriptorIndexingPropertiesEXT& rhs)
+	{	memcpy( this, &rhs, sizeof( S_physical_device_descriptor_indexing_properties_EXT ) );	}
 S_physical_device_descriptor_indexing_properties_EXT(
 	uint32_t maxUpdateAfterBindDescriptorsInAllPools_,
 	VkBool32 shaderUniformBufferArrayNonUniformIndexingNative_,
@@ -14795,17 +15944,7 @@ S_physical_device_descriptor_indexing_properties_EXT(
 	,maxDescriptorSetUpdateAfterBindSampledImages(maxDescriptorSetUpdateAfterBindSampledImages_)
 	,maxDescriptorSetUpdateAfterBindStorageImages(maxDescriptorSetUpdateAfterBindStorageImages_)
 	,maxDescriptorSetUpdateAfterBindInputAttachments(maxDescriptorSetUpdateAfterBindInputAttachments_)
-{
-}
-
-S_physical_device_descriptor_indexing_properties_EXT( VkPhysicalDeviceDescriptorIndexingPropertiesEXT const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_physical_device_descriptor_indexing_properties_EXT ) );	}
-S_physical_device_descriptor_indexing_properties_EXT& operator=( VkPhysicalDeviceDescriptorIndexingPropertiesEXT const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_physical_device_descriptor_indexing_properties_EXT ) ); return *this;	}
-operator VkPhysicalDeviceDescriptorIndexingPropertiesEXT const&() const 
-	{	return *reinterpret_cast<const VkPhysicalDeviceDescriptorIndexingPropertiesEXT*>(this);	}
-operator VkPhysicalDeviceDescriptorIndexingPropertiesEXT &() 
-	{	return *reinterpret_cast<VkPhysicalDeviceDescriptorIndexingPropertiesEXT*>(this);	}
+{}
 
 friend S_physical_device_properties2;
 };
@@ -14823,24 +15962,25 @@ private:
 public:
 	uint32_t maxVertexAttribDivisor;
 
-VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT*const get_vkptr(){return reinterpret_cast<VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT*>(this);}
-
-S_physical_device_vertex_attribute_divisor_properties_EXT(){}
-
-S_physical_device_vertex_attribute_divisor_properties_EXT(
-	uint32_t maxVertexAttribDivisor_)
-	:maxVertexAttribDivisor(maxVertexAttribDivisor_)
-{
-}
-
-S_physical_device_vertex_attribute_divisor_properties_EXT( VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_physical_device_vertex_attribute_divisor_properties_EXT ) );	}
+operator VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT*()
+	{	return reinterpret_cast<VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT*>(this);	}
+operator const VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT*() const
+	{	return reinterpret_cast<const VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT*>(this);	}
 S_physical_device_vertex_attribute_divisor_properties_EXT& operator=( VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_physical_device_vertex_attribute_divisor_properties_EXT ) ); return *this;	}
 operator VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT const&() const 
 	{	return *reinterpret_cast<const VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT*>(this);	}
 operator VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT &() 
 	{	return *reinterpret_cast<VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT*>(this);	}
+
+
+S_physical_device_vertex_attribute_divisor_properties_EXT(){}
+S_physical_device_vertex_attribute_divisor_properties_EXT(VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT& rhs)
+	{	memcpy( this, &rhs, sizeof( S_physical_device_vertex_attribute_divisor_properties_EXT ) );	}
+S_physical_device_vertex_attribute_divisor_properties_EXT(
+	uint32_t maxVertexAttribDivisor_)
+	:maxVertexAttribDivisor(maxVertexAttribDivisor_)
+{}
 
 friend S_physical_device_properties2;
 };
@@ -14861,10 +16001,21 @@ public:
 	uint32_t shadingRatePaletteSize;
 	uint32_t shadingRateMaxCoarseSamples;
 
-VkPhysicalDeviceShadingRateImagePropertiesNV*const get_vkptr(){return reinterpret_cast<VkPhysicalDeviceShadingRateImagePropertiesNV*>(this);}
+operator VkPhysicalDeviceShadingRateImagePropertiesNV*()
+	{	return reinterpret_cast<VkPhysicalDeviceShadingRateImagePropertiesNV*>(this);	}
+operator const VkPhysicalDeviceShadingRateImagePropertiesNV*() const
+	{	return reinterpret_cast<const VkPhysicalDeviceShadingRateImagePropertiesNV*>(this);	}
+S_physical_device_shading_rate_image_properties_NV& operator=( VkPhysicalDeviceShadingRateImagePropertiesNV const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_physical_device_shading_rate_image_properties_NV ) ); return *this;	}
+operator VkPhysicalDeviceShadingRateImagePropertiesNV const&() const 
+	{	return *reinterpret_cast<const VkPhysicalDeviceShadingRateImagePropertiesNV*>(this);	}
+operator VkPhysicalDeviceShadingRateImagePropertiesNV &() 
+	{	return *reinterpret_cast<VkPhysicalDeviceShadingRateImagePropertiesNV*>(this);	}
+
 
 S_physical_device_shading_rate_image_properties_NV(){}
-
+S_physical_device_shading_rate_image_properties_NV(VkPhysicalDeviceShadingRateImagePropertiesNV& rhs)
+	{	memcpy( this, &rhs, sizeof( S_physical_device_shading_rate_image_properties_NV ) );	}
 S_physical_device_shading_rate_image_properties_NV(
 	S_extent_2d shadingRateTexelSize_,
 	uint32_t shadingRatePaletteSize_,
@@ -14872,17 +16023,7 @@ S_physical_device_shading_rate_image_properties_NV(
 	:shadingRateTexelSize(shadingRateTexelSize_)
 	,shadingRatePaletteSize(shadingRatePaletteSize_)
 	,shadingRateMaxCoarseSamples(shadingRateMaxCoarseSamples_)
-{
-}
-
-S_physical_device_shading_rate_image_properties_NV( VkPhysicalDeviceShadingRateImagePropertiesNV const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_physical_device_shading_rate_image_properties_NV ) );	}
-S_physical_device_shading_rate_image_properties_NV& operator=( VkPhysicalDeviceShadingRateImagePropertiesNV const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_physical_device_shading_rate_image_properties_NV ) ); return *this;	}
-operator VkPhysicalDeviceShadingRateImagePropertiesNV const&() const 
-	{	return *reinterpret_cast<const VkPhysicalDeviceShadingRateImagePropertiesNV*>(this);	}
-operator VkPhysicalDeviceShadingRateImagePropertiesNV &() 
-	{	return *reinterpret_cast<VkPhysicalDeviceShadingRateImagePropertiesNV*>(this);	}
+{}
 
 friend S_physical_device_properties2;
 };
@@ -14912,10 +16053,21 @@ public:
 	uint32_t meshOutputPerVertexGranularity;
 	uint32_t meshOutputPerPrimitiveGranularity;
 
-VkPhysicalDeviceMeshShaderPropertiesNV*const get_vkptr(){return reinterpret_cast<VkPhysicalDeviceMeshShaderPropertiesNV*>(this);}
+operator VkPhysicalDeviceMeshShaderPropertiesNV*()
+	{	return reinterpret_cast<VkPhysicalDeviceMeshShaderPropertiesNV*>(this);	}
+operator const VkPhysicalDeviceMeshShaderPropertiesNV*() const
+	{	return reinterpret_cast<const VkPhysicalDeviceMeshShaderPropertiesNV*>(this);	}
+S_physical_device_mesh_shader_properties_NV& operator=( VkPhysicalDeviceMeshShaderPropertiesNV const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_physical_device_mesh_shader_properties_NV ) ); return *this;	}
+operator VkPhysicalDeviceMeshShaderPropertiesNV const&() const 
+	{	return *reinterpret_cast<const VkPhysicalDeviceMeshShaderPropertiesNV*>(this);	}
+operator VkPhysicalDeviceMeshShaderPropertiesNV &() 
+	{	return *reinterpret_cast<VkPhysicalDeviceMeshShaderPropertiesNV*>(this);	}
+
 
 S_physical_device_mesh_shader_properties_NV(){}
-
+S_physical_device_mesh_shader_properties_NV(VkPhysicalDeviceMeshShaderPropertiesNV& rhs)
+	{	memcpy( this, &rhs, sizeof( S_physical_device_mesh_shader_properties_NV ) );	}
 S_physical_device_mesh_shader_properties_NV(
 	uint32_t maxDrawMeshTasksCount_,
 	uint32_t maxTaskWorkGroupInvocations_,
@@ -14946,15 +16098,6 @@ memcpy(maxTaskWorkGroupSize,maxTaskWorkGroupSize_,sizeof(maxTaskWorkGroupSize) )
 memcpy(maxMeshWorkGroupSize,maxMeshWorkGroupSize_,sizeof(maxMeshWorkGroupSize) );
 }
 
-S_physical_device_mesh_shader_properties_NV( VkPhysicalDeviceMeshShaderPropertiesNV const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_physical_device_mesh_shader_properties_NV ) );	}
-S_physical_device_mesh_shader_properties_NV& operator=( VkPhysicalDeviceMeshShaderPropertiesNV const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_physical_device_mesh_shader_properties_NV ) ); return *this;	}
-operator VkPhysicalDeviceMeshShaderPropertiesNV const&() const 
-	{	return *reinterpret_cast<const VkPhysicalDeviceMeshShaderPropertiesNV*>(this);	}
-operator VkPhysicalDeviceMeshShaderPropertiesNV &() 
-	{	return *reinterpret_cast<VkPhysicalDeviceMeshShaderPropertiesNV*>(this);	}
-
 friend S_physical_device_properties2;
 };
 static_assert(
@@ -14973,10 +16116,21 @@ public:
 	uint32_t maxRecursionDepth;
 	uint32_t maxGeometryCount;
 
-VkPhysicalDeviceRaytracingPropertiesNVX*const get_vkptr(){return reinterpret_cast<VkPhysicalDeviceRaytracingPropertiesNVX*>(this);}
+operator VkPhysicalDeviceRaytracingPropertiesNVX*()
+	{	return reinterpret_cast<VkPhysicalDeviceRaytracingPropertiesNVX*>(this);	}
+operator const VkPhysicalDeviceRaytracingPropertiesNVX*() const
+	{	return reinterpret_cast<const VkPhysicalDeviceRaytracingPropertiesNVX*>(this);	}
+S_physical_device_raytracing_properties_NVX& operator=( VkPhysicalDeviceRaytracingPropertiesNVX const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_physical_device_raytracing_properties_NVX ) ); return *this;	}
+operator VkPhysicalDeviceRaytracingPropertiesNVX const&() const 
+	{	return *reinterpret_cast<const VkPhysicalDeviceRaytracingPropertiesNVX*>(this);	}
+operator VkPhysicalDeviceRaytracingPropertiesNVX &() 
+	{	return *reinterpret_cast<VkPhysicalDeviceRaytracingPropertiesNVX*>(this);	}
+
 
 S_physical_device_raytracing_properties_NVX(){}
-
+S_physical_device_raytracing_properties_NVX(VkPhysicalDeviceRaytracingPropertiesNVX& rhs)
+	{	memcpy( this, &rhs, sizeof( S_physical_device_raytracing_properties_NVX ) );	}
 S_physical_device_raytracing_properties_NVX(
 	uint32_t shaderHeaderSize_,
 	uint32_t maxRecursionDepth_,
@@ -14984,17 +16138,7 @@ S_physical_device_raytracing_properties_NVX(
 	:shaderHeaderSize(shaderHeaderSize_)
 	,maxRecursionDepth(maxRecursionDepth_)
 	,maxGeometryCount(maxGeometryCount_)
-{
-}
-
-S_physical_device_raytracing_properties_NVX( VkPhysicalDeviceRaytracingPropertiesNVX const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_physical_device_raytracing_properties_NVX ) );	}
-S_physical_device_raytracing_properties_NVX& operator=( VkPhysicalDeviceRaytracingPropertiesNVX const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_physical_device_raytracing_properties_NVX ) ); return *this;	}
-operator VkPhysicalDeviceRaytracingPropertiesNVX const&() const 
-	{	return *reinterpret_cast<const VkPhysicalDeviceRaytracingPropertiesNVX*>(this);	}
-operator VkPhysicalDeviceRaytracingPropertiesNVX &() 
-	{	return *reinterpret_cast<VkPhysicalDeviceRaytracingPropertiesNVX*>(this);	}
+{}
 
 friend S_physical_device_properties2;
 };
@@ -15035,24 +16179,25 @@ private:
 public:
 	S_physical_device_properties properties;
 
-VkPhysicalDeviceProperties2*const get_vkptr(){return reinterpret_cast<VkPhysicalDeviceProperties2*>(this);}
-
-S_physical_device_properties2(){}
-
-S_physical_device_properties2(
-	S_physical_device_properties properties_)
-	:properties(properties_)
-{
-}
-
-S_physical_device_properties2( VkPhysicalDeviceProperties2 const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_physical_device_properties2 ) );	}
+operator VkPhysicalDeviceProperties2*()
+	{	return reinterpret_cast<VkPhysicalDeviceProperties2*>(this);	}
+operator const VkPhysicalDeviceProperties2*() const
+	{	return reinterpret_cast<const VkPhysicalDeviceProperties2*>(this);	}
 S_physical_device_properties2& operator=( VkPhysicalDeviceProperties2 const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_physical_device_properties2 ) ); return *this;	}
 operator VkPhysicalDeviceProperties2 const&() const 
 	{	return *reinterpret_cast<const VkPhysicalDeviceProperties2*>(this);	}
 operator VkPhysicalDeviceProperties2 &() 
 	{	return *reinterpret_cast<VkPhysicalDeviceProperties2*>(this);	}
+
+
+S_physical_device_properties2(){}
+S_physical_device_properties2(VkPhysicalDeviceProperties2& rhs)
+	{	memcpy( this, &rhs, sizeof( S_physical_device_properties2 ) );	}
+S_physical_device_properties2(
+	S_physical_device_properties properties_)
+	:properties(properties_)
+{}
 
 S_physical_device_properties2& n_physical_device_push_descriptor_properties_KHR(S_physical_device_push_descriptor_properties_KHR const& next_);
 #ifdef LAKA_UNKNOW
@@ -15087,7 +16232,7 @@ struct N_physical_device_properties2{
 private:
 	void* pNext = nullptr;
 public:
-void* get(){ return pNext; }
+operator void*() { return pNext; }
 N_physical_device_properties2& n_physical_device_push_descriptor_properties_KHR(S_physical_device_push_descriptor_properties_KHR const& next_);
 #ifdef LAKA_UNKNOW
 N_physical_device_properties2& n_physical_device_driver_properties_KHR(S_physical_device_driver_properties_KHR const& next_);
@@ -15123,7 +16268,17 @@ struct		S_drm_format_modifier_properties_EXT{
 	uint32_t drmFormatModifierPlaneCount;
 	F_format_feature drmFormatModifierTilingFeatures;
 
-VkDrmFormatModifierPropertiesEXT*const get_vkptr(){return reinterpret_cast<VkDrmFormatModifierPropertiesEXT*>(this);}
+operator VkDrmFormatModifierPropertiesEXT*()
+	{	return reinterpret_cast<VkDrmFormatModifierPropertiesEXT*>(this);	}
+operator const VkDrmFormatModifierPropertiesEXT*() const
+	{	return reinterpret_cast<const VkDrmFormatModifierPropertiesEXT*>(this);	}
+S_drm_format_modifier_properties_EXT& operator=( VkDrmFormatModifierPropertiesEXT const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_drm_format_modifier_properties_EXT ) ); return *this;	}
+operator VkDrmFormatModifierPropertiesEXT const&() const 
+	{	return *reinterpret_cast<const VkDrmFormatModifierPropertiesEXT*>(this);	}
+operator VkDrmFormatModifierPropertiesEXT &() 
+	{	return *reinterpret_cast<VkDrmFormatModifierPropertiesEXT*>(this);	}
+
 };
 #endif //LAKA_UNKNOW
 
@@ -15139,26 +16294,27 @@ public:
 	uint32_t drmFormatModifierCount;
 	S_drm_format_modifier_properties_EXT * pDrmFormatModifierProperties;
 
-VkDrmFormatModifierPropertiesListEXT*const get_vkptr(){return reinterpret_cast<VkDrmFormatModifierPropertiesListEXT*>(this);}
-
-S_drm_format_modifier_properties_list_EXT(){}
-
-S_drm_format_modifier_properties_list_EXT(
-	uint32_t drmFormatModifierCount_,
-	S_drm_format_modifier_properties_EXT * pDrmFormatModifierProperties_)
-	:drmFormatModifierCount(drmFormatModifierCount_)
-	,pDrmFormatModifierProperties(pDrmFormatModifierProperties_)
-{
-}
-
-S_drm_format_modifier_properties_list_EXT( VkDrmFormatModifierPropertiesListEXT const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_drm_format_modifier_properties_list_EXT ) );	}
+operator VkDrmFormatModifierPropertiesListEXT*()
+	{	return reinterpret_cast<VkDrmFormatModifierPropertiesListEXT*>(this);	}
+operator const VkDrmFormatModifierPropertiesListEXT*() const
+	{	return reinterpret_cast<const VkDrmFormatModifierPropertiesListEXT*>(this);	}
 S_drm_format_modifier_properties_list_EXT& operator=( VkDrmFormatModifierPropertiesListEXT const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_drm_format_modifier_properties_list_EXT ) ); return *this;	}
 operator VkDrmFormatModifierPropertiesListEXT const&() const 
 	{	return *reinterpret_cast<const VkDrmFormatModifierPropertiesListEXT*>(this);	}
 operator VkDrmFormatModifierPropertiesListEXT &() 
 	{	return *reinterpret_cast<VkDrmFormatModifierPropertiesListEXT*>(this);	}
+
+
+S_drm_format_modifier_properties_list_EXT(){}
+S_drm_format_modifier_properties_list_EXT(VkDrmFormatModifierPropertiesListEXT& rhs)
+	{	memcpy( this, &rhs, sizeof( S_drm_format_modifier_properties_list_EXT ) );	}
+S_drm_format_modifier_properties_list_EXT(
+	uint32_t drmFormatModifierCount_,
+	S_drm_format_modifier_properties_EXT * pDrmFormatModifierProperties_)
+	:drmFormatModifierCount(drmFormatModifierCount_)
+	,pDrmFormatModifierProperties(pDrmFormatModifierProperties_)
+{}
 
 friend S_format_properties2;
 };
@@ -15179,24 +16335,25 @@ private:
 public:
 	S_format_properties formatProperties;
 
-VkFormatProperties2*const get_vkptr(){return reinterpret_cast<VkFormatProperties2*>(this);}
-
-S_format_properties2(){}
-
-S_format_properties2(
-	S_format_properties formatProperties_)
-	:formatProperties(formatProperties_)
-{
-}
-
-S_format_properties2( VkFormatProperties2 const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_format_properties2 ) );	}
+operator VkFormatProperties2*()
+	{	return reinterpret_cast<VkFormatProperties2*>(this);	}
+operator const VkFormatProperties2*() const
+	{	return reinterpret_cast<const VkFormatProperties2*>(this);	}
 S_format_properties2& operator=( VkFormatProperties2 const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_format_properties2 ) ); return *this;	}
 operator VkFormatProperties2 const&() const 
 	{	return *reinterpret_cast<const VkFormatProperties2*>(this);	}
 operator VkFormatProperties2 &() 
 	{	return *reinterpret_cast<VkFormatProperties2*>(this);	}
+
+
+S_format_properties2(){}
+S_format_properties2(VkFormatProperties2& rhs)
+	{	memcpy( this, &rhs, sizeof( S_format_properties2 ) );	}
+S_format_properties2(
+	S_format_properties formatProperties_)
+	:formatProperties(formatProperties_)
+{}
 
 #ifdef LAKA_UNKNOW
 S_format_properties2& n_drm_format_modifier_properties_list_EXT(S_drm_format_modifier_properties_list_EXT const& next_);
@@ -15210,7 +16367,7 @@ struct N_format_properties2{
 private:
 	void* pNext = nullptr;
 public:
-void* get(){ return pNext; }
+operator void*() { return pNext; }
 #ifdef LAKA_UNKNOW
 N_format_properties2& n_drm_format_modifier_properties_list_EXT(S_drm_format_modifier_properties_list_EXT const& next_);
 #endif
@@ -15224,7 +16381,17 @@ struct		S_external_memory_properties{
 	F_external_memory_handle_type exportFromImportedHandleTypes;
 	F_external_memory_handle_type compatibleHandleTypes;
 
-VkExternalMemoryProperties*const get_vkptr(){return reinterpret_cast<VkExternalMemoryProperties*>(this);}
+operator VkExternalMemoryProperties*()
+	{	return reinterpret_cast<VkExternalMemoryProperties*>(this);	}
+operator const VkExternalMemoryProperties*() const
+	{	return reinterpret_cast<const VkExternalMemoryProperties*>(this);	}
+S_external_memory_properties& operator=( VkExternalMemoryProperties const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_external_memory_properties ) ); return *this;	}
+operator VkExternalMemoryProperties const&() const 
+	{	return *reinterpret_cast<const VkExternalMemoryProperties*>(this);	}
+operator VkExternalMemoryProperties &() 
+	{	return *reinterpret_cast<VkExternalMemoryProperties*>(this);	}
+
 };
 
 /*	VkExternalImageFormatProperties
@@ -15238,24 +16405,25 @@ private:
 public:
 	S_external_memory_properties externalMemoryProperties;
 
-VkExternalImageFormatProperties*const get_vkptr(){return reinterpret_cast<VkExternalImageFormatProperties*>(this);}
-
-S_external_image_format_properties(){}
-
-S_external_image_format_properties(
-	S_external_memory_properties externalMemoryProperties_)
-	:externalMemoryProperties(externalMemoryProperties_)
-{
-}
-
-S_external_image_format_properties( VkExternalImageFormatProperties const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_external_image_format_properties ) );	}
+operator VkExternalImageFormatProperties*()
+	{	return reinterpret_cast<VkExternalImageFormatProperties*>(this);	}
+operator const VkExternalImageFormatProperties*() const
+	{	return reinterpret_cast<const VkExternalImageFormatProperties*>(this);	}
 S_external_image_format_properties& operator=( VkExternalImageFormatProperties const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_external_image_format_properties ) ); return *this;	}
 operator VkExternalImageFormatProperties const&() const 
 	{	return *reinterpret_cast<const VkExternalImageFormatProperties*>(this);	}
 operator VkExternalImageFormatProperties &() 
 	{	return *reinterpret_cast<VkExternalImageFormatProperties*>(this);	}
+
+
+S_external_image_format_properties(){}
+S_external_image_format_properties(VkExternalImageFormatProperties& rhs)
+	{	memcpy( this, &rhs, sizeof( S_external_image_format_properties ) );	}
+S_external_image_format_properties(
+	S_external_memory_properties externalMemoryProperties_)
+	:externalMemoryProperties(externalMemoryProperties_)
+{}
 
 friend S_image_format_properties2;
 };
@@ -15274,24 +16442,25 @@ private:
 public:
 	uint32_t combinedImageSamplerDescriptorCount;
 
-VkSamplerYcbcrConversionImageFormatProperties*const get_vkptr(){return reinterpret_cast<VkSamplerYcbcrConversionImageFormatProperties*>(this);}
-
-S_sampler_ycbcr_conversion_image_format_properties(){}
-
-S_sampler_ycbcr_conversion_image_format_properties(
-	uint32_t combinedImageSamplerDescriptorCount_)
-	:combinedImageSamplerDescriptorCount(combinedImageSamplerDescriptorCount_)
-{
-}
-
-S_sampler_ycbcr_conversion_image_format_properties( VkSamplerYcbcrConversionImageFormatProperties const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_sampler_ycbcr_conversion_image_format_properties ) );	}
+operator VkSamplerYcbcrConversionImageFormatProperties*()
+	{	return reinterpret_cast<VkSamplerYcbcrConversionImageFormatProperties*>(this);	}
+operator const VkSamplerYcbcrConversionImageFormatProperties*() const
+	{	return reinterpret_cast<const VkSamplerYcbcrConversionImageFormatProperties*>(this);	}
 S_sampler_ycbcr_conversion_image_format_properties& operator=( VkSamplerYcbcrConversionImageFormatProperties const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_sampler_ycbcr_conversion_image_format_properties ) ); return *this;	}
 operator VkSamplerYcbcrConversionImageFormatProperties const&() const 
 	{	return *reinterpret_cast<const VkSamplerYcbcrConversionImageFormatProperties*>(this);	}
 operator VkSamplerYcbcrConversionImageFormatProperties &() 
 	{	return *reinterpret_cast<VkSamplerYcbcrConversionImageFormatProperties*>(this);	}
+
+
+S_sampler_ycbcr_conversion_image_format_properties(){}
+S_sampler_ycbcr_conversion_image_format_properties(VkSamplerYcbcrConversionImageFormatProperties& rhs)
+	{	memcpy( this, &rhs, sizeof( S_sampler_ycbcr_conversion_image_format_properties ) );	}
+S_sampler_ycbcr_conversion_image_format_properties(
+	uint32_t combinedImageSamplerDescriptorCount_)
+	:combinedImageSamplerDescriptorCount(combinedImageSamplerDescriptorCount_)
+{}
 
 friend S_image_format_properties2;
 };
@@ -15310,24 +16479,25 @@ private:
 public:
 	VkBool32 supportsTextureGatherLODBiasAMD;
 
-VkTextureLODGatherFormatPropertiesAMD*const get_vkptr(){return reinterpret_cast<VkTextureLODGatherFormatPropertiesAMD*>(this);}
-
-S_texture_lod_gather_format_properties_AMD(){}
-
-S_texture_lod_gather_format_properties_AMD(
-	VkBool32 supportsTextureGatherLODBiasAMD_)
-	:supportsTextureGatherLODBiasAMD(supportsTextureGatherLODBiasAMD_)
-{
-}
-
-S_texture_lod_gather_format_properties_AMD( VkTextureLODGatherFormatPropertiesAMD const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_texture_lod_gather_format_properties_AMD ) );	}
+operator VkTextureLODGatherFormatPropertiesAMD*()
+	{	return reinterpret_cast<VkTextureLODGatherFormatPropertiesAMD*>(this);	}
+operator const VkTextureLODGatherFormatPropertiesAMD*() const
+	{	return reinterpret_cast<const VkTextureLODGatherFormatPropertiesAMD*>(this);	}
 S_texture_lod_gather_format_properties_AMD& operator=( VkTextureLODGatherFormatPropertiesAMD const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_texture_lod_gather_format_properties_AMD ) ); return *this;	}
 operator VkTextureLODGatherFormatPropertiesAMD const&() const 
 	{	return *reinterpret_cast<const VkTextureLODGatherFormatPropertiesAMD*>(this);	}
 operator VkTextureLODGatherFormatPropertiesAMD &() 
 	{	return *reinterpret_cast<VkTextureLODGatherFormatPropertiesAMD*>(this);	}
+
+
+S_texture_lod_gather_format_properties_AMD(){}
+S_texture_lod_gather_format_properties_AMD(VkTextureLODGatherFormatPropertiesAMD& rhs)
+	{	memcpy( this, &rhs, sizeof( S_texture_lod_gather_format_properties_AMD ) );	}
+S_texture_lod_gather_format_properties_AMD(
+	VkBool32 supportsTextureGatherLODBiasAMD_)
+	:supportsTextureGatherLODBiasAMD(supportsTextureGatherLODBiasAMD_)
+{}
 
 friend S_image_format_properties2;
 };
@@ -15347,24 +16517,25 @@ private:
 public:
 	uint64_t androidHardwareBufferUsage;
 
-VkAndroidHardwareBufferUsageANDROID*const get_vkptr(){return reinterpret_cast<VkAndroidHardwareBufferUsageANDROID*>(this);}
-
-S_android_hardware_buffer_usage_ANDROID(){}
-
-S_android_hardware_buffer_usage_ANDROID(
-	uint64_t androidHardwareBufferUsage_)
-	:androidHardwareBufferUsage(androidHardwareBufferUsage_)
-{
-}
-
-S_android_hardware_buffer_usage_ANDROID( VkAndroidHardwareBufferUsageANDROID const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_android_hardware_buffer_usage_ANDROID ) );	}
+operator VkAndroidHardwareBufferUsageANDROID*()
+	{	return reinterpret_cast<VkAndroidHardwareBufferUsageANDROID*>(this);	}
+operator const VkAndroidHardwareBufferUsageANDROID*() const
+	{	return reinterpret_cast<const VkAndroidHardwareBufferUsageANDROID*>(this);	}
 S_android_hardware_buffer_usage_ANDROID& operator=( VkAndroidHardwareBufferUsageANDROID const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_android_hardware_buffer_usage_ANDROID ) ); return *this;	}
 operator VkAndroidHardwareBufferUsageANDROID const&() const 
 	{	return *reinterpret_cast<const VkAndroidHardwareBufferUsageANDROID*>(this);	}
 operator VkAndroidHardwareBufferUsageANDROID &() 
 	{	return *reinterpret_cast<VkAndroidHardwareBufferUsageANDROID*>(this);	}
+
+
+S_android_hardware_buffer_usage_ANDROID(){}
+S_android_hardware_buffer_usage_ANDROID(VkAndroidHardwareBufferUsageANDROID& rhs)
+	{	memcpy( this, &rhs, sizeof( S_android_hardware_buffer_usage_ANDROID ) );	}
+S_android_hardware_buffer_usage_ANDROID(
+	uint64_t androidHardwareBufferUsage_)
+	:androidHardwareBufferUsage(androidHardwareBufferUsage_)
+{}
 
 friend S_image_format_properties2;
 };
@@ -15388,24 +16559,25 @@ private:
 public:
 	S_image_format_properties imageFormatProperties;
 
-VkImageFormatProperties2*const get_vkptr(){return reinterpret_cast<VkImageFormatProperties2*>(this);}
-
-S_image_format_properties2(){}
-
-S_image_format_properties2(
-	S_image_format_properties imageFormatProperties_)
-	:imageFormatProperties(imageFormatProperties_)
-{
-}
-
-S_image_format_properties2( VkImageFormatProperties2 const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_image_format_properties2 ) );	}
+operator VkImageFormatProperties2*()
+	{	return reinterpret_cast<VkImageFormatProperties2*>(this);	}
+operator const VkImageFormatProperties2*() const
+	{	return reinterpret_cast<const VkImageFormatProperties2*>(this);	}
 S_image_format_properties2& operator=( VkImageFormatProperties2 const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_image_format_properties2 ) ); return *this;	}
 operator VkImageFormatProperties2 const&() const 
 	{	return *reinterpret_cast<const VkImageFormatProperties2*>(this);	}
 operator VkImageFormatProperties2 &() 
 	{	return *reinterpret_cast<VkImageFormatProperties2*>(this);	}
+
+
+S_image_format_properties2(){}
+S_image_format_properties2(VkImageFormatProperties2& rhs)
+	{	memcpy( this, &rhs, sizeof( S_image_format_properties2 ) );	}
+S_image_format_properties2(
+	S_image_format_properties imageFormatProperties_)
+	:imageFormatProperties(imageFormatProperties_)
+{}
 
 S_image_format_properties2& n_external_image_format_properties(S_external_image_format_properties const& next_);
 S_image_format_properties2& n_sampler_ycbcr_conversion_image_format_properties(S_sampler_ycbcr_conversion_image_format_properties const& next_);
@@ -15422,7 +16594,7 @@ struct N_image_format_properties2{
 private:
 	void* pNext = nullptr;
 public:
-void* get(){ return pNext; }
+operator void*() { return pNext; }
 N_image_format_properties2& n_external_image_format_properties(S_external_image_format_properties const& next_);
 N_image_format_properties2& n_sampler_ycbcr_conversion_image_format_properties(S_sampler_ycbcr_conversion_image_format_properties const& next_);
 N_image_format_properties2& n_texture_lod_gather_format_properties_AMD(S_texture_lod_gather_format_properties_AMD const& next_);
@@ -15441,24 +16613,25 @@ private:
 public:
 	F_external_memory_handle_type handleType;
 
-VkPhysicalDeviceExternalImageFormatInfo*const get_vkptr(){return reinterpret_cast<VkPhysicalDeviceExternalImageFormatInfo*>(this);}
-
-S_physical_device_external_image_format_info(){}
-
-S_physical_device_external_image_format_info(
-	F_external_memory_handle_type handleType_)
-	:handleType(handleType_)
-{
-}
-
-S_physical_device_external_image_format_info( VkPhysicalDeviceExternalImageFormatInfo const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_physical_device_external_image_format_info ) );	}
+operator VkPhysicalDeviceExternalImageFormatInfo*()
+	{	return reinterpret_cast<VkPhysicalDeviceExternalImageFormatInfo*>(this);	}
+operator const VkPhysicalDeviceExternalImageFormatInfo*() const
+	{	return reinterpret_cast<const VkPhysicalDeviceExternalImageFormatInfo*>(this);	}
 S_physical_device_external_image_format_info& operator=( VkPhysicalDeviceExternalImageFormatInfo const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_physical_device_external_image_format_info ) ); return *this;	}
 operator VkPhysicalDeviceExternalImageFormatInfo const&() const 
 	{	return *reinterpret_cast<const VkPhysicalDeviceExternalImageFormatInfo*>(this);	}
 operator VkPhysicalDeviceExternalImageFormatInfo &() 
 	{	return *reinterpret_cast<VkPhysicalDeviceExternalImageFormatInfo*>(this);	}
+
+
+S_physical_device_external_image_format_info(){}
+S_physical_device_external_image_format_info(VkPhysicalDeviceExternalImageFormatInfo& rhs)
+	{	memcpy( this, &rhs, sizeof( S_physical_device_external_image_format_info ) );	}
+S_physical_device_external_image_format_info(
+	F_external_memory_handle_type handleType_)
+	:handleType(handleType_)
+{}
 
 friend S_physical_device_image_format_info2;
 };
@@ -15477,24 +16650,25 @@ private:
 public:
 	uint64_t drmFormatModifier;
 
-VkPhysicalDeviceImageDrmFormatModifierInfoEXT*const get_vkptr(){return reinterpret_cast<VkPhysicalDeviceImageDrmFormatModifierInfoEXT*>(this);}
-
-S_physical_device_image_drm_format_modifier_info_EXT(){}
-
-S_physical_device_image_drm_format_modifier_info_EXT(
-	uint64_t drmFormatModifier_)
-	:drmFormatModifier(drmFormatModifier_)
-{
-}
-
-S_physical_device_image_drm_format_modifier_info_EXT( VkPhysicalDeviceImageDrmFormatModifierInfoEXT const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_physical_device_image_drm_format_modifier_info_EXT ) );	}
+operator VkPhysicalDeviceImageDrmFormatModifierInfoEXT*()
+	{	return reinterpret_cast<VkPhysicalDeviceImageDrmFormatModifierInfoEXT*>(this);	}
+operator const VkPhysicalDeviceImageDrmFormatModifierInfoEXT*() const
+	{	return reinterpret_cast<const VkPhysicalDeviceImageDrmFormatModifierInfoEXT*>(this);	}
 S_physical_device_image_drm_format_modifier_info_EXT& operator=( VkPhysicalDeviceImageDrmFormatModifierInfoEXT const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_physical_device_image_drm_format_modifier_info_EXT ) ); return *this;	}
 operator VkPhysicalDeviceImageDrmFormatModifierInfoEXT const&() const 
 	{	return *reinterpret_cast<const VkPhysicalDeviceImageDrmFormatModifierInfoEXT*>(this);	}
 operator VkPhysicalDeviceImageDrmFormatModifierInfoEXT &() 
 	{	return *reinterpret_cast<VkPhysicalDeviceImageDrmFormatModifierInfoEXT*>(this);	}
+
+
+S_physical_device_image_drm_format_modifier_info_EXT(){}
+S_physical_device_image_drm_format_modifier_info_EXT(VkPhysicalDeviceImageDrmFormatModifierInfoEXT& rhs)
+	{	memcpy( this, &rhs, sizeof( S_physical_device_image_drm_format_modifier_info_EXT ) );	}
+S_physical_device_image_drm_format_modifier_info_EXT(
+	uint64_t drmFormatModifier_)
+	:drmFormatModifier(drmFormatModifier_)
+{}
 
 friend S_physical_device_image_format_info2;
 };
@@ -15519,10 +16693,21 @@ public:
 	F_image_usage usage;
 	F_image_create flags;
 
-VkPhysicalDeviceImageFormatInfo2*const get_vkptr(){return reinterpret_cast<VkPhysicalDeviceImageFormatInfo2*>(this);}
+operator VkPhysicalDeviceImageFormatInfo2*()
+	{	return reinterpret_cast<VkPhysicalDeviceImageFormatInfo2*>(this);	}
+operator const VkPhysicalDeviceImageFormatInfo2*() const
+	{	return reinterpret_cast<const VkPhysicalDeviceImageFormatInfo2*>(this);	}
+S_physical_device_image_format_info2& operator=( VkPhysicalDeviceImageFormatInfo2 const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_physical_device_image_format_info2 ) ); return *this;	}
+operator VkPhysicalDeviceImageFormatInfo2 const&() const 
+	{	return *reinterpret_cast<const VkPhysicalDeviceImageFormatInfo2*>(this);	}
+operator VkPhysicalDeviceImageFormatInfo2 &() 
+	{	return *reinterpret_cast<VkPhysicalDeviceImageFormatInfo2*>(this);	}
+
 
 S_physical_device_image_format_info2(){}
-
+S_physical_device_image_format_info2(VkPhysicalDeviceImageFormatInfo2& rhs)
+	{	memcpy( this, &rhs, sizeof( S_physical_device_image_format_info2 ) );	}
 S_physical_device_image_format_info2(
 	E_format format_,
 	E_image_type type_,
@@ -15534,17 +16719,7 @@ S_physical_device_image_format_info2(
 	,tiling(tiling_)
 	,usage(usage_)
 	,flags(flags_)
-{
-}
-
-S_physical_device_image_format_info2( VkPhysicalDeviceImageFormatInfo2 const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_physical_device_image_format_info2 ) );	}
-S_physical_device_image_format_info2& operator=( VkPhysicalDeviceImageFormatInfo2 const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_physical_device_image_format_info2 ) ); return *this;	}
-operator VkPhysicalDeviceImageFormatInfo2 const&() const 
-	{	return *reinterpret_cast<const VkPhysicalDeviceImageFormatInfo2*>(this);	}
-operator VkPhysicalDeviceImageFormatInfo2 &() 
-	{	return *reinterpret_cast<VkPhysicalDeviceImageFormatInfo2*>(this);	}
+{}
 
 S_physical_device_image_format_info2& n_physical_device_external_image_format_info(S_physical_device_external_image_format_info const& next_);
 #ifdef LAKA_UNKNOW
@@ -15559,7 +16734,7 @@ struct N_physical_device_image_format_info2{
 private:
 	void* pNext = nullptr;
 public:
-void* get(){ return pNext; }
+operator void*() { return pNext; }
 N_physical_device_image_format_info2& n_physical_device_external_image_format_info(S_physical_device_external_image_format_info const& next_);
 #ifdef LAKA_UNKNOW
 N_physical_device_image_format_info2& n_physical_device_image_drm_format_modifier_info_EXT(S_physical_device_image_drm_format_modifier_info_EXT const& next_);
@@ -15577,24 +16752,25 @@ private:
 public:
 	F_pipeline_stage checkpointExecutionStageMask;
 
-VkQueueFamilyCheckpointPropertiesNV*const get_vkptr(){return reinterpret_cast<VkQueueFamilyCheckpointPropertiesNV*>(this);}
-
-S_queue_family_checkpoint_properties_NV(){}
-
-S_queue_family_checkpoint_properties_NV(
-	F_pipeline_stage checkpointExecutionStageMask_)
-	:checkpointExecutionStageMask(checkpointExecutionStageMask_)
-{
-}
-
-S_queue_family_checkpoint_properties_NV( VkQueueFamilyCheckpointPropertiesNV const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_queue_family_checkpoint_properties_NV ) );	}
+operator VkQueueFamilyCheckpointPropertiesNV*()
+	{	return reinterpret_cast<VkQueueFamilyCheckpointPropertiesNV*>(this);	}
+operator const VkQueueFamilyCheckpointPropertiesNV*() const
+	{	return reinterpret_cast<const VkQueueFamilyCheckpointPropertiesNV*>(this);	}
 S_queue_family_checkpoint_properties_NV& operator=( VkQueueFamilyCheckpointPropertiesNV const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_queue_family_checkpoint_properties_NV ) ); return *this;	}
 operator VkQueueFamilyCheckpointPropertiesNV const&() const 
 	{	return *reinterpret_cast<const VkQueueFamilyCheckpointPropertiesNV*>(this);	}
 operator VkQueueFamilyCheckpointPropertiesNV &() 
 	{	return *reinterpret_cast<VkQueueFamilyCheckpointPropertiesNV*>(this);	}
+
+
+S_queue_family_checkpoint_properties_NV(){}
+S_queue_family_checkpoint_properties_NV(VkQueueFamilyCheckpointPropertiesNV& rhs)
+	{	memcpy( this, &rhs, sizeof( S_queue_family_checkpoint_properties_NV ) );	}
+S_queue_family_checkpoint_properties_NV(
+	F_pipeline_stage checkpointExecutionStageMask_)
+	:checkpointExecutionStageMask(checkpointExecutionStageMask_)
+{}
 
 friend S_queue_family_properties2;
 };
@@ -15614,24 +16790,25 @@ private:
 public:
 	S_queue_family_properties queueFamilyProperties;
 
-VkQueueFamilyProperties2*const get_vkptr(){return reinterpret_cast<VkQueueFamilyProperties2*>(this);}
-
-S_queue_family_properties2(){}
-
-S_queue_family_properties2(
-	S_queue_family_properties queueFamilyProperties_)
-	:queueFamilyProperties(queueFamilyProperties_)
-{
-}
-
-S_queue_family_properties2( VkQueueFamilyProperties2 const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_queue_family_properties2 ) );	}
+operator VkQueueFamilyProperties2*()
+	{	return reinterpret_cast<VkQueueFamilyProperties2*>(this);	}
+operator const VkQueueFamilyProperties2*() const
+	{	return reinterpret_cast<const VkQueueFamilyProperties2*>(this);	}
 S_queue_family_properties2& operator=( VkQueueFamilyProperties2 const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_queue_family_properties2 ) ); return *this;	}
 operator VkQueueFamilyProperties2 const&() const 
 	{	return *reinterpret_cast<const VkQueueFamilyProperties2*>(this);	}
 operator VkQueueFamilyProperties2 &() 
 	{	return *reinterpret_cast<VkQueueFamilyProperties2*>(this);	}
+
+
+S_queue_family_properties2(){}
+S_queue_family_properties2(VkQueueFamilyProperties2& rhs)
+	{	memcpy( this, &rhs, sizeof( S_queue_family_properties2 ) );	}
+S_queue_family_properties2(
+	S_queue_family_properties queueFamilyProperties_)
+	:queueFamilyProperties(queueFamilyProperties_)
+{}
 
 S_queue_family_properties2& n_queue_family_checkpoint_properties_NV(S_queue_family_checkpoint_properties_NV const& next_);
 };
@@ -15643,7 +16820,7 @@ struct N_queue_family_properties2{
 private:
 	void* pNext = nullptr;
 public:
-void* get(){ return pNext; }
+operator void*() { return pNext; }
 N_queue_family_properties2& n_queue_family_checkpoint_properties_NV(S_queue_family_checkpoint_properties_NV const& next_);
 };
 
@@ -15657,24 +16834,25 @@ private:
 public:
 	S_physical_device_memory_properties memoryProperties;
 
-VkPhysicalDeviceMemoryProperties2*const get_vkptr(){return reinterpret_cast<VkPhysicalDeviceMemoryProperties2*>(this);}
-
-S_physical_device_memory_properties2(){}
-
-S_physical_device_memory_properties2(
-	S_physical_device_memory_properties memoryProperties_)
-	:memoryProperties(memoryProperties_)
-{
-}
-
-S_physical_device_memory_properties2( VkPhysicalDeviceMemoryProperties2 const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_physical_device_memory_properties2 ) );	}
+operator VkPhysicalDeviceMemoryProperties2*()
+	{	return reinterpret_cast<VkPhysicalDeviceMemoryProperties2*>(this);	}
+operator const VkPhysicalDeviceMemoryProperties2*() const
+	{	return reinterpret_cast<const VkPhysicalDeviceMemoryProperties2*>(this);	}
 S_physical_device_memory_properties2& operator=( VkPhysicalDeviceMemoryProperties2 const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_physical_device_memory_properties2 ) ); return *this;	}
 operator VkPhysicalDeviceMemoryProperties2 const&() const 
 	{	return *reinterpret_cast<const VkPhysicalDeviceMemoryProperties2*>(this);	}
 operator VkPhysicalDeviceMemoryProperties2 &() 
 	{	return *reinterpret_cast<VkPhysicalDeviceMemoryProperties2*>(this);	}
+
+
+S_physical_device_memory_properties2(){}
+S_physical_device_memory_properties2(VkPhysicalDeviceMemoryProperties2& rhs)
+	{	memcpy( this, &rhs, sizeof( S_physical_device_memory_properties2 ) );	}
+S_physical_device_memory_properties2(
+	S_physical_device_memory_properties memoryProperties_)
+	:memoryProperties(memoryProperties_)
+{}
 };
 static_assert(
 	sizeof(S_physical_device_memory_properties2) == sizeof(VkPhysicalDeviceMemoryProperties2),
@@ -15690,24 +16868,25 @@ private:
 public:
 	S_sparse_image_format_properties properties;
 
-VkSparseImageFormatProperties2*const get_vkptr(){return reinterpret_cast<VkSparseImageFormatProperties2*>(this);}
-
-S_sparse_image_format_properties2(){}
-
-S_sparse_image_format_properties2(
-	S_sparse_image_format_properties properties_)
-	:properties(properties_)
-{
-}
-
-S_sparse_image_format_properties2( VkSparseImageFormatProperties2 const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_sparse_image_format_properties2 ) );	}
+operator VkSparseImageFormatProperties2*()
+	{	return reinterpret_cast<VkSparseImageFormatProperties2*>(this);	}
+operator const VkSparseImageFormatProperties2*() const
+	{	return reinterpret_cast<const VkSparseImageFormatProperties2*>(this);	}
 S_sparse_image_format_properties2& operator=( VkSparseImageFormatProperties2 const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_sparse_image_format_properties2 ) ); return *this;	}
 operator VkSparseImageFormatProperties2 const&() const 
 	{	return *reinterpret_cast<const VkSparseImageFormatProperties2*>(this);	}
 operator VkSparseImageFormatProperties2 &() 
 	{	return *reinterpret_cast<VkSparseImageFormatProperties2*>(this);	}
+
+
+S_sparse_image_format_properties2(){}
+S_sparse_image_format_properties2(VkSparseImageFormatProperties2& rhs)
+	{	memcpy( this, &rhs, sizeof( S_sparse_image_format_properties2 ) );	}
+S_sparse_image_format_properties2(
+	S_sparse_image_format_properties properties_)
+	:properties(properties_)
+{}
 };
 static_assert(
 	sizeof(S_sparse_image_format_properties2) == sizeof(VkSparseImageFormatProperties2),
@@ -15726,10 +16905,21 @@ public:
 	F_image_usage usage;
 	E_image_tiling tiling;
 
-VkPhysicalDeviceSparseImageFormatInfo2*const get_vkptr(){return reinterpret_cast<VkPhysicalDeviceSparseImageFormatInfo2*>(this);}
+operator VkPhysicalDeviceSparseImageFormatInfo2*()
+	{	return reinterpret_cast<VkPhysicalDeviceSparseImageFormatInfo2*>(this);	}
+operator const VkPhysicalDeviceSparseImageFormatInfo2*() const
+	{	return reinterpret_cast<const VkPhysicalDeviceSparseImageFormatInfo2*>(this);	}
+S_physical_device_sparse_image_format_info2& operator=( VkPhysicalDeviceSparseImageFormatInfo2 const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_physical_device_sparse_image_format_info2 ) ); return *this;	}
+operator VkPhysicalDeviceSparseImageFormatInfo2 const&() const 
+	{	return *reinterpret_cast<const VkPhysicalDeviceSparseImageFormatInfo2*>(this);	}
+operator VkPhysicalDeviceSparseImageFormatInfo2 &() 
+	{	return *reinterpret_cast<VkPhysicalDeviceSparseImageFormatInfo2*>(this);	}
+
 
 S_physical_device_sparse_image_format_info2(){}
-
+S_physical_device_sparse_image_format_info2(VkPhysicalDeviceSparseImageFormatInfo2& rhs)
+	{	memcpy( this, &rhs, sizeof( S_physical_device_sparse_image_format_info2 ) );	}
 S_physical_device_sparse_image_format_info2(
 	E_format format_,
 	E_image_type type_,
@@ -15741,17 +16931,7 @@ S_physical_device_sparse_image_format_info2(
 	,samples(samples_)
 	,usage(usage_)
 	,tiling(tiling_)
-{
-}
-
-S_physical_device_sparse_image_format_info2( VkPhysicalDeviceSparseImageFormatInfo2 const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_physical_device_sparse_image_format_info2 ) );	}
-S_physical_device_sparse_image_format_info2& operator=( VkPhysicalDeviceSparseImageFormatInfo2 const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_physical_device_sparse_image_format_info2 ) ); return *this;	}
-operator VkPhysicalDeviceSparseImageFormatInfo2 const&() const 
-	{	return *reinterpret_cast<const VkPhysicalDeviceSparseImageFormatInfo2*>(this);	}
-operator VkPhysicalDeviceSparseImageFormatInfo2 &() 
-	{	return *reinterpret_cast<VkPhysicalDeviceSparseImageFormatInfo2*>(this);	}
+{}
 };
 static_assert(
 	sizeof(S_physical_device_sparse_image_format_info2) == sizeof(VkPhysicalDeviceSparseImageFormatInfo2),
@@ -15768,10 +16948,21 @@ public:
 	F_buffer_usage usage;
 	F_external_memory_handle_type handleType;
 
-VkPhysicalDeviceExternalBufferInfo*const get_vkptr(){return reinterpret_cast<VkPhysicalDeviceExternalBufferInfo*>(this);}
+operator VkPhysicalDeviceExternalBufferInfo*()
+	{	return reinterpret_cast<VkPhysicalDeviceExternalBufferInfo*>(this);	}
+operator const VkPhysicalDeviceExternalBufferInfo*() const
+	{	return reinterpret_cast<const VkPhysicalDeviceExternalBufferInfo*>(this);	}
+S_physical_device_external_buffer_info& operator=( VkPhysicalDeviceExternalBufferInfo const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_physical_device_external_buffer_info ) ); return *this;	}
+operator VkPhysicalDeviceExternalBufferInfo const&() const 
+	{	return *reinterpret_cast<const VkPhysicalDeviceExternalBufferInfo*>(this);	}
+operator VkPhysicalDeviceExternalBufferInfo &() 
+	{	return *reinterpret_cast<VkPhysicalDeviceExternalBufferInfo*>(this);	}
+
 
 S_physical_device_external_buffer_info(){}
-
+S_physical_device_external_buffer_info(VkPhysicalDeviceExternalBufferInfo& rhs)
+	{	memcpy( this, &rhs, sizeof( S_physical_device_external_buffer_info ) );	}
 S_physical_device_external_buffer_info(
 	F_buffer_create flags_,
 	F_buffer_usage usage_,
@@ -15779,17 +16970,7 @@ S_physical_device_external_buffer_info(
 	:flags(flags_)
 	,usage(usage_)
 	,handleType(handleType_)
-{
-}
-
-S_physical_device_external_buffer_info( VkPhysicalDeviceExternalBufferInfo const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_physical_device_external_buffer_info ) );	}
-S_physical_device_external_buffer_info& operator=( VkPhysicalDeviceExternalBufferInfo const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_physical_device_external_buffer_info ) ); return *this;	}
-operator VkPhysicalDeviceExternalBufferInfo const&() const 
-	{	return *reinterpret_cast<const VkPhysicalDeviceExternalBufferInfo*>(this);	}
-operator VkPhysicalDeviceExternalBufferInfo &() 
-	{	return *reinterpret_cast<VkPhysicalDeviceExternalBufferInfo*>(this);	}
+{}
 };
 static_assert(
 	sizeof(S_physical_device_external_buffer_info) == sizeof(VkPhysicalDeviceExternalBufferInfo),
@@ -15805,24 +16986,25 @@ private:
 public:
 	S_external_memory_properties externalMemoryProperties;
 
-VkExternalBufferProperties*const get_vkptr(){return reinterpret_cast<VkExternalBufferProperties*>(this);}
-
-S_external_buffer_properties(){}
-
-S_external_buffer_properties(
-	S_external_memory_properties externalMemoryProperties_)
-	:externalMemoryProperties(externalMemoryProperties_)
-{
-}
-
-S_external_buffer_properties( VkExternalBufferProperties const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_external_buffer_properties ) );	}
+operator VkExternalBufferProperties*()
+	{	return reinterpret_cast<VkExternalBufferProperties*>(this);	}
+operator const VkExternalBufferProperties*() const
+	{	return reinterpret_cast<const VkExternalBufferProperties*>(this);	}
 S_external_buffer_properties& operator=( VkExternalBufferProperties const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_external_buffer_properties ) ); return *this;	}
 operator VkExternalBufferProperties const&() const 
 	{	return *reinterpret_cast<const VkExternalBufferProperties*>(this);	}
 operator VkExternalBufferProperties &() 
 	{	return *reinterpret_cast<VkExternalBufferProperties*>(this);	}
+
+
+S_external_buffer_properties(){}
+S_external_buffer_properties(VkExternalBufferProperties& rhs)
+	{	memcpy( this, &rhs, sizeof( S_external_buffer_properties ) );	}
+S_external_buffer_properties(
+	S_external_memory_properties externalMemoryProperties_)
+	:externalMemoryProperties(externalMemoryProperties_)
+{}
 };
 static_assert(
 	sizeof(S_external_buffer_properties) == sizeof(VkExternalBufferProperties),
@@ -15839,24 +17021,25 @@ private:
 public:
 	uint32_t memoryTypeBits;
 
-VkMemoryWin32HandlePropertiesKHR*const get_vkptr(){return reinterpret_cast<VkMemoryWin32HandlePropertiesKHR*>(this);}
-
-S_memory_win32_handle_properties_KHR(){}
-
-S_memory_win32_handle_properties_KHR(
-	uint32_t memoryTypeBits_)
-	:memoryTypeBits(memoryTypeBits_)
-{
-}
-
-S_memory_win32_handle_properties_KHR( VkMemoryWin32HandlePropertiesKHR const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_memory_win32_handle_properties_KHR ) );	}
+operator VkMemoryWin32HandlePropertiesKHR*()
+	{	return reinterpret_cast<VkMemoryWin32HandlePropertiesKHR*>(this);	}
+operator const VkMemoryWin32HandlePropertiesKHR*() const
+	{	return reinterpret_cast<const VkMemoryWin32HandlePropertiesKHR*>(this);	}
 S_memory_win32_handle_properties_KHR& operator=( VkMemoryWin32HandlePropertiesKHR const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_memory_win32_handle_properties_KHR ) ); return *this;	}
 operator VkMemoryWin32HandlePropertiesKHR const&() const 
 	{	return *reinterpret_cast<const VkMemoryWin32HandlePropertiesKHR*>(this);	}
 operator VkMemoryWin32HandlePropertiesKHR &() 
 	{	return *reinterpret_cast<VkMemoryWin32HandlePropertiesKHR*>(this);	}
+
+
+S_memory_win32_handle_properties_KHR(){}
+S_memory_win32_handle_properties_KHR(VkMemoryWin32HandlePropertiesKHR& rhs)
+	{	memcpy( this, &rhs, sizeof( S_memory_win32_handle_properties_KHR ) );	}
+S_memory_win32_handle_properties_KHR(
+	uint32_t memoryTypeBits_)
+	:memoryTypeBits(memoryTypeBits_)
+{}
 };
 static_assert(
 	sizeof(S_memory_win32_handle_properties_KHR) == sizeof(VkMemoryWin32HandlePropertiesKHR),
@@ -15874,26 +17057,27 @@ public:
 	VkDeviceMemory memory;
 	F_external_memory_handle_type handleType;
 
-VkMemoryGetWin32HandleInfoKHR*const get_vkptr(){return reinterpret_cast<VkMemoryGetWin32HandleInfoKHR*>(this);}
-
-S_memory_get_win32_handle_info_KHR(){}
-
-S_memory_get_win32_handle_info_KHR(
-	VkDeviceMemory memory_,
-	F_external_memory_handle_type handleType_)
-	:memory(memory_)
-	,handleType(handleType_)
-{
-}
-
-S_memory_get_win32_handle_info_KHR( VkMemoryGetWin32HandleInfoKHR const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_memory_get_win32_handle_info_KHR ) );	}
+operator VkMemoryGetWin32HandleInfoKHR*()
+	{	return reinterpret_cast<VkMemoryGetWin32HandleInfoKHR*>(this);	}
+operator const VkMemoryGetWin32HandleInfoKHR*() const
+	{	return reinterpret_cast<const VkMemoryGetWin32HandleInfoKHR*>(this);	}
 S_memory_get_win32_handle_info_KHR& operator=( VkMemoryGetWin32HandleInfoKHR const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_memory_get_win32_handle_info_KHR ) ); return *this;	}
 operator VkMemoryGetWin32HandleInfoKHR const&() const 
 	{	return *reinterpret_cast<const VkMemoryGetWin32HandleInfoKHR*>(this);	}
 operator VkMemoryGetWin32HandleInfoKHR &() 
 	{	return *reinterpret_cast<VkMemoryGetWin32HandleInfoKHR*>(this);	}
+
+
+S_memory_get_win32_handle_info_KHR(){}
+S_memory_get_win32_handle_info_KHR(VkMemoryGetWin32HandleInfoKHR& rhs)
+	{	memcpy( this, &rhs, sizeof( S_memory_get_win32_handle_info_KHR ) );	}
+S_memory_get_win32_handle_info_KHR(
+	VkDeviceMemory memory_,
+	F_external_memory_handle_type handleType_)
+	:memory(memory_)
+	,handleType(handleType_)
+{}
 };
 static_assert(
 	sizeof(S_memory_get_win32_handle_info_KHR) == sizeof(VkMemoryGetWin32HandleInfoKHR),
@@ -15910,24 +17094,25 @@ private:
 public:
 	uint32_t memoryTypeBits;
 
-VkMemoryFdPropertiesKHR*const get_vkptr(){return reinterpret_cast<VkMemoryFdPropertiesKHR*>(this);}
-
-S_memory_fd_properties_KHR(){}
-
-S_memory_fd_properties_KHR(
-	uint32_t memoryTypeBits_)
-	:memoryTypeBits(memoryTypeBits_)
-{
-}
-
-S_memory_fd_properties_KHR( VkMemoryFdPropertiesKHR const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_memory_fd_properties_KHR ) );	}
+operator VkMemoryFdPropertiesKHR*()
+	{	return reinterpret_cast<VkMemoryFdPropertiesKHR*>(this);	}
+operator const VkMemoryFdPropertiesKHR*() const
+	{	return reinterpret_cast<const VkMemoryFdPropertiesKHR*>(this);	}
 S_memory_fd_properties_KHR& operator=( VkMemoryFdPropertiesKHR const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_memory_fd_properties_KHR ) ); return *this;	}
 operator VkMemoryFdPropertiesKHR const&() const 
 	{	return *reinterpret_cast<const VkMemoryFdPropertiesKHR*>(this);	}
 operator VkMemoryFdPropertiesKHR &() 
 	{	return *reinterpret_cast<VkMemoryFdPropertiesKHR*>(this);	}
+
+
+S_memory_fd_properties_KHR(){}
+S_memory_fd_properties_KHR(VkMemoryFdPropertiesKHR& rhs)
+	{	memcpy( this, &rhs, sizeof( S_memory_fd_properties_KHR ) );	}
+S_memory_fd_properties_KHR(
+	uint32_t memoryTypeBits_)
+	:memoryTypeBits(memoryTypeBits_)
+{}
 };
 static_assert(
 	sizeof(S_memory_fd_properties_KHR) == sizeof(VkMemoryFdPropertiesKHR),
@@ -15943,26 +17128,27 @@ public:
 	VkDeviceMemory memory;
 	F_external_memory_handle_type handleType;
 
-VkMemoryGetFdInfoKHR*const get_vkptr(){return reinterpret_cast<VkMemoryGetFdInfoKHR*>(this);}
-
-S_memory_get_fd_info_KHR(){}
-
-S_memory_get_fd_info_KHR(
-	VkDeviceMemory memory_,
-	F_external_memory_handle_type handleType_)
-	:memory(memory_)
-	,handleType(handleType_)
-{
-}
-
-S_memory_get_fd_info_KHR( VkMemoryGetFdInfoKHR const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_memory_get_fd_info_KHR ) );	}
+operator VkMemoryGetFdInfoKHR*()
+	{	return reinterpret_cast<VkMemoryGetFdInfoKHR*>(this);	}
+operator const VkMemoryGetFdInfoKHR*() const
+	{	return reinterpret_cast<const VkMemoryGetFdInfoKHR*>(this);	}
 S_memory_get_fd_info_KHR& operator=( VkMemoryGetFdInfoKHR const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_memory_get_fd_info_KHR ) ); return *this;	}
 operator VkMemoryGetFdInfoKHR const&() const 
 	{	return *reinterpret_cast<const VkMemoryGetFdInfoKHR*>(this);	}
 operator VkMemoryGetFdInfoKHR &() 
 	{	return *reinterpret_cast<VkMemoryGetFdInfoKHR*>(this);	}
+
+
+S_memory_get_fd_info_KHR(){}
+S_memory_get_fd_info_KHR(VkMemoryGetFdInfoKHR& rhs)
+	{	memcpy( this, &rhs, sizeof( S_memory_get_fd_info_KHR ) );	}
+S_memory_get_fd_info_KHR(
+	VkDeviceMemory memory_,
+	F_external_memory_handle_type handleType_)
+	:memory(memory_)
+	,handleType(handleType_)
+{}
 };
 static_assert(
 	sizeof(S_memory_get_fd_info_KHR) == sizeof(VkMemoryGetFdInfoKHR),
@@ -15977,24 +17163,25 @@ private:
 public:
 	F_external_semaphore_handle_type handleType;
 
-VkPhysicalDeviceExternalSemaphoreInfo*const get_vkptr(){return reinterpret_cast<VkPhysicalDeviceExternalSemaphoreInfo*>(this);}
-
-S_physical_device_external_semaphore_info(){}
-
-S_physical_device_external_semaphore_info(
-	F_external_semaphore_handle_type handleType_)
-	:handleType(handleType_)
-{
-}
-
-S_physical_device_external_semaphore_info( VkPhysicalDeviceExternalSemaphoreInfo const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_physical_device_external_semaphore_info ) );	}
+operator VkPhysicalDeviceExternalSemaphoreInfo*()
+	{	return reinterpret_cast<VkPhysicalDeviceExternalSemaphoreInfo*>(this);	}
+operator const VkPhysicalDeviceExternalSemaphoreInfo*() const
+	{	return reinterpret_cast<const VkPhysicalDeviceExternalSemaphoreInfo*>(this);	}
 S_physical_device_external_semaphore_info& operator=( VkPhysicalDeviceExternalSemaphoreInfo const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_physical_device_external_semaphore_info ) ); return *this;	}
 operator VkPhysicalDeviceExternalSemaphoreInfo const&() const 
 	{	return *reinterpret_cast<const VkPhysicalDeviceExternalSemaphoreInfo*>(this);	}
 operator VkPhysicalDeviceExternalSemaphoreInfo &() 
 	{	return *reinterpret_cast<VkPhysicalDeviceExternalSemaphoreInfo*>(this);	}
+
+
+S_physical_device_external_semaphore_info(){}
+S_physical_device_external_semaphore_info(VkPhysicalDeviceExternalSemaphoreInfo& rhs)
+	{	memcpy( this, &rhs, sizeof( S_physical_device_external_semaphore_info ) );	}
+S_physical_device_external_semaphore_info(
+	F_external_semaphore_handle_type handleType_)
+	:handleType(handleType_)
+{}
 };
 static_assert(
 	sizeof(S_physical_device_external_semaphore_info) == sizeof(VkPhysicalDeviceExternalSemaphoreInfo),
@@ -16012,10 +17199,21 @@ public:
 	F_external_semaphore_handle_type compatibleHandleTypes;
 	F_external_semaphore_feature externalSemaphoreFeatures;
 
-VkExternalSemaphoreProperties*const get_vkptr(){return reinterpret_cast<VkExternalSemaphoreProperties*>(this);}
+operator VkExternalSemaphoreProperties*()
+	{	return reinterpret_cast<VkExternalSemaphoreProperties*>(this);	}
+operator const VkExternalSemaphoreProperties*() const
+	{	return reinterpret_cast<const VkExternalSemaphoreProperties*>(this);	}
+S_external_semaphore_properties& operator=( VkExternalSemaphoreProperties const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_external_semaphore_properties ) ); return *this;	}
+operator VkExternalSemaphoreProperties const&() const 
+	{	return *reinterpret_cast<const VkExternalSemaphoreProperties*>(this);	}
+operator VkExternalSemaphoreProperties &() 
+	{	return *reinterpret_cast<VkExternalSemaphoreProperties*>(this);	}
+
 
 S_external_semaphore_properties(){}
-
+S_external_semaphore_properties(VkExternalSemaphoreProperties& rhs)
+	{	memcpy( this, &rhs, sizeof( S_external_semaphore_properties ) );	}
 S_external_semaphore_properties(
 	F_external_semaphore_handle_type exportFromImportedHandleTypes_,
 	F_external_semaphore_handle_type compatibleHandleTypes_,
@@ -16023,17 +17221,7 @@ S_external_semaphore_properties(
 	:exportFromImportedHandleTypes(exportFromImportedHandleTypes_)
 	,compatibleHandleTypes(compatibleHandleTypes_)
 	,externalSemaphoreFeatures(externalSemaphoreFeatures_)
-{
-}
-
-S_external_semaphore_properties( VkExternalSemaphoreProperties const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_external_semaphore_properties ) );	}
-S_external_semaphore_properties& operator=( VkExternalSemaphoreProperties const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_external_semaphore_properties ) ); return *this;	}
-operator VkExternalSemaphoreProperties const&() const 
-	{	return *reinterpret_cast<const VkExternalSemaphoreProperties*>(this);	}
-operator VkExternalSemaphoreProperties &() 
-	{	return *reinterpret_cast<VkExternalSemaphoreProperties*>(this);	}
+{}
 };
 static_assert(
 	sizeof(S_external_semaphore_properties) == sizeof(VkExternalSemaphoreProperties),
@@ -16053,10 +17241,21 @@ public:
 	HANDLE handle;
 	LPCWSTR name;
 
-VkImportSemaphoreWin32HandleInfoKHR*const get_vkptr(){return reinterpret_cast<VkImportSemaphoreWin32HandleInfoKHR*>(this);}
+operator VkImportSemaphoreWin32HandleInfoKHR*()
+	{	return reinterpret_cast<VkImportSemaphoreWin32HandleInfoKHR*>(this);	}
+operator const VkImportSemaphoreWin32HandleInfoKHR*() const
+	{	return reinterpret_cast<const VkImportSemaphoreWin32HandleInfoKHR*>(this);	}
+S_import_semaphore_win32_handle_info_KHR& operator=( VkImportSemaphoreWin32HandleInfoKHR const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_import_semaphore_win32_handle_info_KHR ) ); return *this;	}
+operator VkImportSemaphoreWin32HandleInfoKHR const&() const 
+	{	return *reinterpret_cast<const VkImportSemaphoreWin32HandleInfoKHR*>(this);	}
+operator VkImportSemaphoreWin32HandleInfoKHR &() 
+	{	return *reinterpret_cast<VkImportSemaphoreWin32HandleInfoKHR*>(this);	}
+
 
 S_import_semaphore_win32_handle_info_KHR(){}
-
+S_import_semaphore_win32_handle_info_KHR(VkImportSemaphoreWin32HandleInfoKHR& rhs)
+	{	memcpy( this, &rhs, sizeof( S_import_semaphore_win32_handle_info_KHR ) );	}
 S_import_semaphore_win32_handle_info_KHR(
 	VkSemaphore semaphore_,
 	F_semaphore_import flags_,
@@ -16068,17 +17267,7 @@ S_import_semaphore_win32_handle_info_KHR(
 	,handleType(handleType_)
 	,handle(handle_)
 	,name(name_)
-{
-}
-
-S_import_semaphore_win32_handle_info_KHR( VkImportSemaphoreWin32HandleInfoKHR const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_import_semaphore_win32_handle_info_KHR ) );	}
-S_import_semaphore_win32_handle_info_KHR& operator=( VkImportSemaphoreWin32HandleInfoKHR const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_import_semaphore_win32_handle_info_KHR ) ); return *this;	}
-operator VkImportSemaphoreWin32HandleInfoKHR const&() const 
-	{	return *reinterpret_cast<const VkImportSemaphoreWin32HandleInfoKHR*>(this);	}
-operator VkImportSemaphoreWin32HandleInfoKHR &() 
-	{	return *reinterpret_cast<VkImportSemaphoreWin32HandleInfoKHR*>(this);	}
+{}
 };
 static_assert(
 	sizeof(S_import_semaphore_win32_handle_info_KHR) == sizeof(VkImportSemaphoreWin32HandleInfoKHR),
@@ -16096,26 +17285,27 @@ public:
 	VkSemaphore semaphore;
 	F_external_semaphore_handle_type handleType;
 
-VkSemaphoreGetWin32HandleInfoKHR*const get_vkptr(){return reinterpret_cast<VkSemaphoreGetWin32HandleInfoKHR*>(this);}
-
-S_semaphore_get_win32_handle_info_KHR(){}
-
-S_semaphore_get_win32_handle_info_KHR(
-	VkSemaphore semaphore_,
-	F_external_semaphore_handle_type handleType_)
-	:semaphore(semaphore_)
-	,handleType(handleType_)
-{
-}
-
-S_semaphore_get_win32_handle_info_KHR( VkSemaphoreGetWin32HandleInfoKHR const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_semaphore_get_win32_handle_info_KHR ) );	}
+operator VkSemaphoreGetWin32HandleInfoKHR*()
+	{	return reinterpret_cast<VkSemaphoreGetWin32HandleInfoKHR*>(this);	}
+operator const VkSemaphoreGetWin32HandleInfoKHR*() const
+	{	return reinterpret_cast<const VkSemaphoreGetWin32HandleInfoKHR*>(this);	}
 S_semaphore_get_win32_handle_info_KHR& operator=( VkSemaphoreGetWin32HandleInfoKHR const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_semaphore_get_win32_handle_info_KHR ) ); return *this;	}
 operator VkSemaphoreGetWin32HandleInfoKHR const&() const 
 	{	return *reinterpret_cast<const VkSemaphoreGetWin32HandleInfoKHR*>(this);	}
 operator VkSemaphoreGetWin32HandleInfoKHR &() 
 	{	return *reinterpret_cast<VkSemaphoreGetWin32HandleInfoKHR*>(this);	}
+
+
+S_semaphore_get_win32_handle_info_KHR(){}
+S_semaphore_get_win32_handle_info_KHR(VkSemaphoreGetWin32HandleInfoKHR& rhs)
+	{	memcpy( this, &rhs, sizeof( S_semaphore_get_win32_handle_info_KHR ) );	}
+S_semaphore_get_win32_handle_info_KHR(
+	VkSemaphore semaphore_,
+	F_external_semaphore_handle_type handleType_)
+	:semaphore(semaphore_)
+	,handleType(handleType_)
+{}
 };
 static_assert(
 	sizeof(S_semaphore_get_win32_handle_info_KHR) == sizeof(VkSemaphoreGetWin32HandleInfoKHR),
@@ -16134,10 +17324,21 @@ public:
 	F_external_semaphore_handle_type handleType;
 	int fd;
 
-VkImportSemaphoreFdInfoKHR*const get_vkptr(){return reinterpret_cast<VkImportSemaphoreFdInfoKHR*>(this);}
+operator VkImportSemaphoreFdInfoKHR*()
+	{	return reinterpret_cast<VkImportSemaphoreFdInfoKHR*>(this);	}
+operator const VkImportSemaphoreFdInfoKHR*() const
+	{	return reinterpret_cast<const VkImportSemaphoreFdInfoKHR*>(this);	}
+S_import_semaphore_fd_info_KHR& operator=( VkImportSemaphoreFdInfoKHR const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_import_semaphore_fd_info_KHR ) ); return *this;	}
+operator VkImportSemaphoreFdInfoKHR const&() const 
+	{	return *reinterpret_cast<const VkImportSemaphoreFdInfoKHR*>(this);	}
+operator VkImportSemaphoreFdInfoKHR &() 
+	{	return *reinterpret_cast<VkImportSemaphoreFdInfoKHR*>(this);	}
+
 
 S_import_semaphore_fd_info_KHR(){}
-
+S_import_semaphore_fd_info_KHR(VkImportSemaphoreFdInfoKHR& rhs)
+	{	memcpy( this, &rhs, sizeof( S_import_semaphore_fd_info_KHR ) );	}
 S_import_semaphore_fd_info_KHR(
 	VkSemaphore semaphore_,
 	F_semaphore_import flags_,
@@ -16147,17 +17348,7 @@ S_import_semaphore_fd_info_KHR(
 	,flags(flags_)
 	,handleType(handleType_)
 	,fd(fd_)
-{
-}
-
-S_import_semaphore_fd_info_KHR( VkImportSemaphoreFdInfoKHR const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_import_semaphore_fd_info_KHR ) );	}
-S_import_semaphore_fd_info_KHR& operator=( VkImportSemaphoreFdInfoKHR const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_import_semaphore_fd_info_KHR ) ); return *this;	}
-operator VkImportSemaphoreFdInfoKHR const&() const 
-	{	return *reinterpret_cast<const VkImportSemaphoreFdInfoKHR*>(this);	}
-operator VkImportSemaphoreFdInfoKHR &() 
-	{	return *reinterpret_cast<VkImportSemaphoreFdInfoKHR*>(this);	}
+{}
 };
 static_assert(
 	sizeof(S_import_semaphore_fd_info_KHR) == sizeof(VkImportSemaphoreFdInfoKHR),
@@ -16173,26 +17364,27 @@ public:
 	VkSemaphore semaphore;
 	F_external_semaphore_handle_type handleType;
 
-VkSemaphoreGetFdInfoKHR*const get_vkptr(){return reinterpret_cast<VkSemaphoreGetFdInfoKHR*>(this);}
-
-S_semaphore_get_fd_info_KHR(){}
-
-S_semaphore_get_fd_info_KHR(
-	VkSemaphore semaphore_,
-	F_external_semaphore_handle_type handleType_)
-	:semaphore(semaphore_)
-	,handleType(handleType_)
-{
-}
-
-S_semaphore_get_fd_info_KHR( VkSemaphoreGetFdInfoKHR const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_semaphore_get_fd_info_KHR ) );	}
+operator VkSemaphoreGetFdInfoKHR*()
+	{	return reinterpret_cast<VkSemaphoreGetFdInfoKHR*>(this);	}
+operator const VkSemaphoreGetFdInfoKHR*() const
+	{	return reinterpret_cast<const VkSemaphoreGetFdInfoKHR*>(this);	}
 S_semaphore_get_fd_info_KHR& operator=( VkSemaphoreGetFdInfoKHR const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_semaphore_get_fd_info_KHR ) ); return *this;	}
 operator VkSemaphoreGetFdInfoKHR const&() const 
 	{	return *reinterpret_cast<const VkSemaphoreGetFdInfoKHR*>(this);	}
 operator VkSemaphoreGetFdInfoKHR &() 
 	{	return *reinterpret_cast<VkSemaphoreGetFdInfoKHR*>(this);	}
+
+
+S_semaphore_get_fd_info_KHR(){}
+S_semaphore_get_fd_info_KHR(VkSemaphoreGetFdInfoKHR& rhs)
+	{	memcpy( this, &rhs, sizeof( S_semaphore_get_fd_info_KHR ) );	}
+S_semaphore_get_fd_info_KHR(
+	VkSemaphore semaphore_,
+	F_external_semaphore_handle_type handleType_)
+	:semaphore(semaphore_)
+	,handleType(handleType_)
+{}
 };
 static_assert(
 	sizeof(S_semaphore_get_fd_info_KHR) == sizeof(VkSemaphoreGetFdInfoKHR),
@@ -16207,24 +17399,25 @@ private:
 public:
 	F_external_fence_handle_type handleType;
 
-VkPhysicalDeviceExternalFenceInfo*const get_vkptr(){return reinterpret_cast<VkPhysicalDeviceExternalFenceInfo*>(this);}
-
-S_physical_device_external_fence_info(){}
-
-S_physical_device_external_fence_info(
-	F_external_fence_handle_type handleType_)
-	:handleType(handleType_)
-{
-}
-
-S_physical_device_external_fence_info( VkPhysicalDeviceExternalFenceInfo const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_physical_device_external_fence_info ) );	}
+operator VkPhysicalDeviceExternalFenceInfo*()
+	{	return reinterpret_cast<VkPhysicalDeviceExternalFenceInfo*>(this);	}
+operator const VkPhysicalDeviceExternalFenceInfo*() const
+	{	return reinterpret_cast<const VkPhysicalDeviceExternalFenceInfo*>(this);	}
 S_physical_device_external_fence_info& operator=( VkPhysicalDeviceExternalFenceInfo const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_physical_device_external_fence_info ) ); return *this;	}
 operator VkPhysicalDeviceExternalFenceInfo const&() const 
 	{	return *reinterpret_cast<const VkPhysicalDeviceExternalFenceInfo*>(this);	}
 operator VkPhysicalDeviceExternalFenceInfo &() 
 	{	return *reinterpret_cast<VkPhysicalDeviceExternalFenceInfo*>(this);	}
+
+
+S_physical_device_external_fence_info(){}
+S_physical_device_external_fence_info(VkPhysicalDeviceExternalFenceInfo& rhs)
+	{	memcpy( this, &rhs, sizeof( S_physical_device_external_fence_info ) );	}
+S_physical_device_external_fence_info(
+	F_external_fence_handle_type handleType_)
+	:handleType(handleType_)
+{}
 };
 static_assert(
 	sizeof(S_physical_device_external_fence_info) == sizeof(VkPhysicalDeviceExternalFenceInfo),
@@ -16242,10 +17435,21 @@ public:
 	F_external_fence_handle_type compatibleHandleTypes;
 	F_external_fence_feature externalFenceFeatures;
 
-VkExternalFenceProperties*const get_vkptr(){return reinterpret_cast<VkExternalFenceProperties*>(this);}
+operator VkExternalFenceProperties*()
+	{	return reinterpret_cast<VkExternalFenceProperties*>(this);	}
+operator const VkExternalFenceProperties*() const
+	{	return reinterpret_cast<const VkExternalFenceProperties*>(this);	}
+S_external_fence_properties& operator=( VkExternalFenceProperties const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_external_fence_properties ) ); return *this;	}
+operator VkExternalFenceProperties const&() const 
+	{	return *reinterpret_cast<const VkExternalFenceProperties*>(this);	}
+operator VkExternalFenceProperties &() 
+	{	return *reinterpret_cast<VkExternalFenceProperties*>(this);	}
+
 
 S_external_fence_properties(){}
-
+S_external_fence_properties(VkExternalFenceProperties& rhs)
+	{	memcpy( this, &rhs, sizeof( S_external_fence_properties ) );	}
 S_external_fence_properties(
 	F_external_fence_handle_type exportFromImportedHandleTypes_,
 	F_external_fence_handle_type compatibleHandleTypes_,
@@ -16253,17 +17457,7 @@ S_external_fence_properties(
 	:exportFromImportedHandleTypes(exportFromImportedHandleTypes_)
 	,compatibleHandleTypes(compatibleHandleTypes_)
 	,externalFenceFeatures(externalFenceFeatures_)
-{
-}
-
-S_external_fence_properties( VkExternalFenceProperties const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_external_fence_properties ) );	}
-S_external_fence_properties& operator=( VkExternalFenceProperties const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_external_fence_properties ) ); return *this;	}
-operator VkExternalFenceProperties const&() const 
-	{	return *reinterpret_cast<const VkExternalFenceProperties*>(this);	}
-operator VkExternalFenceProperties &() 
-	{	return *reinterpret_cast<VkExternalFenceProperties*>(this);	}
+{}
 };
 static_assert(
 	sizeof(S_external_fence_properties) == sizeof(VkExternalFenceProperties),
@@ -16283,10 +17477,21 @@ public:
 	HANDLE handle;
 	LPCWSTR name;
 
-VkImportFenceWin32HandleInfoKHR*const get_vkptr(){return reinterpret_cast<VkImportFenceWin32HandleInfoKHR*>(this);}
+operator VkImportFenceWin32HandleInfoKHR*()
+	{	return reinterpret_cast<VkImportFenceWin32HandleInfoKHR*>(this);	}
+operator const VkImportFenceWin32HandleInfoKHR*() const
+	{	return reinterpret_cast<const VkImportFenceWin32HandleInfoKHR*>(this);	}
+S_import_fence_win32_handle_info_KHR& operator=( VkImportFenceWin32HandleInfoKHR const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_import_fence_win32_handle_info_KHR ) ); return *this;	}
+operator VkImportFenceWin32HandleInfoKHR const&() const 
+	{	return *reinterpret_cast<const VkImportFenceWin32HandleInfoKHR*>(this);	}
+operator VkImportFenceWin32HandleInfoKHR &() 
+	{	return *reinterpret_cast<VkImportFenceWin32HandleInfoKHR*>(this);	}
+
 
 S_import_fence_win32_handle_info_KHR(){}
-
+S_import_fence_win32_handle_info_KHR(VkImportFenceWin32HandleInfoKHR& rhs)
+	{	memcpy( this, &rhs, sizeof( S_import_fence_win32_handle_info_KHR ) );	}
 S_import_fence_win32_handle_info_KHR(
 	VkFence fence_,
 	F_fence_import flags_,
@@ -16298,17 +17503,7 @@ S_import_fence_win32_handle_info_KHR(
 	,handleType(handleType_)
 	,handle(handle_)
 	,name(name_)
-{
-}
-
-S_import_fence_win32_handle_info_KHR( VkImportFenceWin32HandleInfoKHR const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_import_fence_win32_handle_info_KHR ) );	}
-S_import_fence_win32_handle_info_KHR& operator=( VkImportFenceWin32HandleInfoKHR const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_import_fence_win32_handle_info_KHR ) ); return *this;	}
-operator VkImportFenceWin32HandleInfoKHR const&() const 
-	{	return *reinterpret_cast<const VkImportFenceWin32HandleInfoKHR*>(this);	}
-operator VkImportFenceWin32HandleInfoKHR &() 
-	{	return *reinterpret_cast<VkImportFenceWin32HandleInfoKHR*>(this);	}
+{}
 };
 static_assert(
 	sizeof(S_import_fence_win32_handle_info_KHR) == sizeof(VkImportFenceWin32HandleInfoKHR),
@@ -16326,26 +17521,27 @@ public:
 	VkFence fence;
 	F_external_fence_handle_type handleType;
 
-VkFenceGetWin32HandleInfoKHR*const get_vkptr(){return reinterpret_cast<VkFenceGetWin32HandleInfoKHR*>(this);}
-
-S_fence_get_win32_handle_info_KHR(){}
-
-S_fence_get_win32_handle_info_KHR(
-	VkFence fence_,
-	F_external_fence_handle_type handleType_)
-	:fence(fence_)
-	,handleType(handleType_)
-{
-}
-
-S_fence_get_win32_handle_info_KHR( VkFenceGetWin32HandleInfoKHR const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_fence_get_win32_handle_info_KHR ) );	}
+operator VkFenceGetWin32HandleInfoKHR*()
+	{	return reinterpret_cast<VkFenceGetWin32HandleInfoKHR*>(this);	}
+operator const VkFenceGetWin32HandleInfoKHR*() const
+	{	return reinterpret_cast<const VkFenceGetWin32HandleInfoKHR*>(this);	}
 S_fence_get_win32_handle_info_KHR& operator=( VkFenceGetWin32HandleInfoKHR const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_fence_get_win32_handle_info_KHR ) ); return *this;	}
 operator VkFenceGetWin32HandleInfoKHR const&() const 
 	{	return *reinterpret_cast<const VkFenceGetWin32HandleInfoKHR*>(this);	}
 operator VkFenceGetWin32HandleInfoKHR &() 
 	{	return *reinterpret_cast<VkFenceGetWin32HandleInfoKHR*>(this);	}
+
+
+S_fence_get_win32_handle_info_KHR(){}
+S_fence_get_win32_handle_info_KHR(VkFenceGetWin32HandleInfoKHR& rhs)
+	{	memcpy( this, &rhs, sizeof( S_fence_get_win32_handle_info_KHR ) );	}
+S_fence_get_win32_handle_info_KHR(
+	VkFence fence_,
+	F_external_fence_handle_type handleType_)
+	:fence(fence_)
+	,handleType(handleType_)
+{}
 };
 static_assert(
 	sizeof(S_fence_get_win32_handle_info_KHR) == sizeof(VkFenceGetWin32HandleInfoKHR),
@@ -16364,10 +17560,21 @@ public:
 	F_external_fence_handle_type handleType;
 	int fd;
 
-VkImportFenceFdInfoKHR*const get_vkptr(){return reinterpret_cast<VkImportFenceFdInfoKHR*>(this);}
+operator VkImportFenceFdInfoKHR*()
+	{	return reinterpret_cast<VkImportFenceFdInfoKHR*>(this);	}
+operator const VkImportFenceFdInfoKHR*() const
+	{	return reinterpret_cast<const VkImportFenceFdInfoKHR*>(this);	}
+S_import_fence_fd_info_KHR& operator=( VkImportFenceFdInfoKHR const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_import_fence_fd_info_KHR ) ); return *this;	}
+operator VkImportFenceFdInfoKHR const&() const 
+	{	return *reinterpret_cast<const VkImportFenceFdInfoKHR*>(this);	}
+operator VkImportFenceFdInfoKHR &() 
+	{	return *reinterpret_cast<VkImportFenceFdInfoKHR*>(this);	}
+
 
 S_import_fence_fd_info_KHR(){}
-
+S_import_fence_fd_info_KHR(VkImportFenceFdInfoKHR& rhs)
+	{	memcpy( this, &rhs, sizeof( S_import_fence_fd_info_KHR ) );	}
 S_import_fence_fd_info_KHR(
 	VkFence fence_,
 	F_fence_import flags_,
@@ -16377,17 +17584,7 @@ S_import_fence_fd_info_KHR(
 	,flags(flags_)
 	,handleType(handleType_)
 	,fd(fd_)
-{
-}
-
-S_import_fence_fd_info_KHR( VkImportFenceFdInfoKHR const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_import_fence_fd_info_KHR ) );	}
-S_import_fence_fd_info_KHR& operator=( VkImportFenceFdInfoKHR const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_import_fence_fd_info_KHR ) ); return *this;	}
-operator VkImportFenceFdInfoKHR const&() const 
-	{	return *reinterpret_cast<const VkImportFenceFdInfoKHR*>(this);	}
-operator VkImportFenceFdInfoKHR &() 
-	{	return *reinterpret_cast<VkImportFenceFdInfoKHR*>(this);	}
+{}
 };
 static_assert(
 	sizeof(S_import_fence_fd_info_KHR) == sizeof(VkImportFenceFdInfoKHR),
@@ -16403,26 +17600,27 @@ public:
 	VkFence fence;
 	F_external_fence_handle_type handleType;
 
-VkFenceGetFdInfoKHR*const get_vkptr(){return reinterpret_cast<VkFenceGetFdInfoKHR*>(this);}
-
-S_fence_get_fd_info_KHR(){}
-
-S_fence_get_fd_info_KHR(
-	VkFence fence_,
-	F_external_fence_handle_type handleType_)
-	:fence(fence_)
-	,handleType(handleType_)
-{
-}
-
-S_fence_get_fd_info_KHR( VkFenceGetFdInfoKHR const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_fence_get_fd_info_KHR ) );	}
+operator VkFenceGetFdInfoKHR*()
+	{	return reinterpret_cast<VkFenceGetFdInfoKHR*>(this);	}
+operator const VkFenceGetFdInfoKHR*() const
+	{	return reinterpret_cast<const VkFenceGetFdInfoKHR*>(this);	}
 S_fence_get_fd_info_KHR& operator=( VkFenceGetFdInfoKHR const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_fence_get_fd_info_KHR ) ); return *this;	}
 operator VkFenceGetFdInfoKHR const&() const 
 	{	return *reinterpret_cast<const VkFenceGetFdInfoKHR*>(this);	}
 operator VkFenceGetFdInfoKHR &() 
 	{	return *reinterpret_cast<VkFenceGetFdInfoKHR*>(this);	}
+
+
+S_fence_get_fd_info_KHR(){}
+S_fence_get_fd_info_KHR(VkFenceGetFdInfoKHR& rhs)
+	{	memcpy( this, &rhs, sizeof( S_fence_get_fd_info_KHR ) );	}
+S_fence_get_fd_info_KHR(
+	VkFence fence_,
+	F_external_fence_handle_type handleType_)
+	:fence(fence_)
+	,handleType(handleType_)
+{}
 };
 static_assert(
 	sizeof(S_fence_get_fd_info_KHR) == sizeof(VkFenceGetFdInfoKHR),
@@ -16448,10 +17646,21 @@ public:
 	F_image_usage supportedUsageFlags;
 	F_surface_counter_EXT supportedSurfaceCounters;
 
-VkSurfaceCapabilities2EXT*const get_vkptr(){return reinterpret_cast<VkSurfaceCapabilities2EXT*>(this);}
+operator VkSurfaceCapabilities2EXT*()
+	{	return reinterpret_cast<VkSurfaceCapabilities2EXT*>(this);	}
+operator const VkSurfaceCapabilities2EXT*() const
+	{	return reinterpret_cast<const VkSurfaceCapabilities2EXT*>(this);	}
+S_surface_capabilities2_EXT& operator=( VkSurfaceCapabilities2EXT const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_surface_capabilities2_EXT ) ); return *this;	}
+operator VkSurfaceCapabilities2EXT const&() const 
+	{	return *reinterpret_cast<const VkSurfaceCapabilities2EXT*>(this);	}
+operator VkSurfaceCapabilities2EXT &() 
+	{	return *reinterpret_cast<VkSurfaceCapabilities2EXT*>(this);	}
+
 
 S_surface_capabilities2_EXT(){}
-
+S_surface_capabilities2_EXT(VkSurfaceCapabilities2EXT& rhs)
+	{	memcpy( this, &rhs, sizeof( S_surface_capabilities2_EXT ) );	}
 S_surface_capabilities2_EXT(
 	uint32_t minImageCount_,
 	uint32_t maxImageCount_,
@@ -16475,17 +17684,7 @@ S_surface_capabilities2_EXT(
 	,supportedCompositeAlpha(supportedCompositeAlpha_)
 	,supportedUsageFlags(supportedUsageFlags_)
 	,supportedSurfaceCounters(supportedSurfaceCounters_)
-{
-}
-
-S_surface_capabilities2_EXT( VkSurfaceCapabilities2EXT const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_surface_capabilities2_EXT ) );	}
-S_surface_capabilities2_EXT& operator=( VkSurfaceCapabilities2EXT const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_surface_capabilities2_EXT ) ); return *this;	}
-operator VkSurfaceCapabilities2EXT const&() const 
-	{	return *reinterpret_cast<const VkSurfaceCapabilities2EXT*>(this);	}
-operator VkSurfaceCapabilities2EXT &() 
-	{	return *reinterpret_cast<VkSurfaceCapabilities2EXT*>(this);	}
+{}
 };
 static_assert(
 	sizeof(S_surface_capabilities2_EXT) == sizeof(VkSurfaceCapabilities2EXT),
@@ -16500,24 +17699,25 @@ private:
 public:
 	E_display_power_state_EXT powerState;
 
-VkDisplayPowerInfoEXT*const get_vkptr(){return reinterpret_cast<VkDisplayPowerInfoEXT*>(this);}
-
-S_display_power_info_EXT(){}
-
-S_display_power_info_EXT(
-	E_display_power_state_EXT powerState_)
-	:powerState(powerState_)
-{
-}
-
-S_display_power_info_EXT( VkDisplayPowerInfoEXT const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_display_power_info_EXT ) );	}
+operator VkDisplayPowerInfoEXT*()
+	{	return reinterpret_cast<VkDisplayPowerInfoEXT*>(this);	}
+operator const VkDisplayPowerInfoEXT*() const
+	{	return reinterpret_cast<const VkDisplayPowerInfoEXT*>(this);	}
 S_display_power_info_EXT& operator=( VkDisplayPowerInfoEXT const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_display_power_info_EXT ) ); return *this;	}
 operator VkDisplayPowerInfoEXT const&() const 
 	{	return *reinterpret_cast<const VkDisplayPowerInfoEXT*>(this);	}
 operator VkDisplayPowerInfoEXT &() 
 	{	return *reinterpret_cast<VkDisplayPowerInfoEXT*>(this);	}
+
+
+S_display_power_info_EXT(){}
+S_display_power_info_EXT(VkDisplayPowerInfoEXT& rhs)
+	{	memcpy( this, &rhs, sizeof( S_display_power_info_EXT ) );	}
+S_display_power_info_EXT(
+	E_display_power_state_EXT powerState_)
+	:powerState(powerState_)
+{}
 };
 static_assert(
 	sizeof(S_display_power_info_EXT) == sizeof(VkDisplayPowerInfoEXT),
@@ -16532,24 +17732,25 @@ private:
 public:
 	E_device_event_type_EXT deviceEvent;
 
-VkDeviceEventInfoEXT*const get_vkptr(){return reinterpret_cast<VkDeviceEventInfoEXT*>(this);}
-
-S_device_event_info_EXT(){}
-
-S_device_event_info_EXT(
-	E_device_event_type_EXT deviceEvent_)
-	:deviceEvent(deviceEvent_)
-{
-}
-
-S_device_event_info_EXT( VkDeviceEventInfoEXT const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_device_event_info_EXT ) );	}
+operator VkDeviceEventInfoEXT*()
+	{	return reinterpret_cast<VkDeviceEventInfoEXT*>(this);	}
+operator const VkDeviceEventInfoEXT*() const
+	{	return reinterpret_cast<const VkDeviceEventInfoEXT*>(this);	}
 S_device_event_info_EXT& operator=( VkDeviceEventInfoEXT const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_device_event_info_EXT ) ); return *this;	}
 operator VkDeviceEventInfoEXT const&() const 
 	{	return *reinterpret_cast<const VkDeviceEventInfoEXT*>(this);	}
 operator VkDeviceEventInfoEXT &() 
 	{	return *reinterpret_cast<VkDeviceEventInfoEXT*>(this);	}
+
+
+S_device_event_info_EXT(){}
+S_device_event_info_EXT(VkDeviceEventInfoEXT& rhs)
+	{	memcpy( this, &rhs, sizeof( S_device_event_info_EXT ) );	}
+S_device_event_info_EXT(
+	E_device_event_type_EXT deviceEvent_)
+	:deviceEvent(deviceEvent_)
+{}
 };
 static_assert(
 	sizeof(S_device_event_info_EXT) == sizeof(VkDeviceEventInfoEXT),
@@ -16564,24 +17765,25 @@ private:
 public:
 	E_display_event_type_EXT displayEvent;
 
-VkDisplayEventInfoEXT*const get_vkptr(){return reinterpret_cast<VkDisplayEventInfoEXT*>(this);}
-
-S_display_event_info_EXT(){}
-
-S_display_event_info_EXT(
-	E_display_event_type_EXT displayEvent_)
-	:displayEvent(displayEvent_)
-{
-}
-
-S_display_event_info_EXT( VkDisplayEventInfoEXT const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_display_event_info_EXT ) );	}
+operator VkDisplayEventInfoEXT*()
+	{	return reinterpret_cast<VkDisplayEventInfoEXT*>(this);	}
+operator const VkDisplayEventInfoEXT*() const
+	{	return reinterpret_cast<const VkDisplayEventInfoEXT*>(this);	}
 S_display_event_info_EXT& operator=( VkDisplayEventInfoEXT const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_display_event_info_EXT ) ); return *this;	}
 operator VkDisplayEventInfoEXT const&() const 
 	{	return *reinterpret_cast<const VkDisplayEventInfoEXT*>(this);	}
 operator VkDisplayEventInfoEXT &() 
 	{	return *reinterpret_cast<VkDisplayEventInfoEXT*>(this);	}
+
+
+S_display_event_info_EXT(){}
+S_display_event_info_EXT(VkDisplayEventInfoEXT& rhs)
+	{	memcpy( this, &rhs, sizeof( S_display_event_info_EXT ) );	}
+S_display_event_info_EXT(
+	E_display_event_type_EXT displayEvent_)
+	:displayEvent(displayEvent_)
+{}
 };
 static_assert(
 	sizeof(S_display_event_info_EXT) == sizeof(VkDisplayEventInfoEXT),
@@ -16599,10 +17801,21 @@ public:
 	VkPhysicalDevice physicalDevices[VK_MAX_DEVICE_GROUP_SIZE];
 	VkBool32 subsetAllocation;
 
-VkPhysicalDeviceGroupProperties*const get_vkptr(){return reinterpret_cast<VkPhysicalDeviceGroupProperties*>(this);}
+operator VkPhysicalDeviceGroupProperties*()
+	{	return reinterpret_cast<VkPhysicalDeviceGroupProperties*>(this);	}
+operator const VkPhysicalDeviceGroupProperties*() const
+	{	return reinterpret_cast<const VkPhysicalDeviceGroupProperties*>(this);	}
+S_physical_device_group_properties& operator=( VkPhysicalDeviceGroupProperties const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_physical_device_group_properties ) ); return *this;	}
+operator VkPhysicalDeviceGroupProperties const&() const 
+	{	return *reinterpret_cast<const VkPhysicalDeviceGroupProperties*>(this);	}
+operator VkPhysicalDeviceGroupProperties &() 
+	{	return *reinterpret_cast<VkPhysicalDeviceGroupProperties*>(this);	}
+
 
 S_physical_device_group_properties(){}
-
+S_physical_device_group_properties(VkPhysicalDeviceGroupProperties& rhs)
+	{	memcpy( this, &rhs, sizeof( S_physical_device_group_properties ) );	}
 S_physical_device_group_properties(
 	uint32_t physicalDeviceCount_,
 	VkPhysicalDevice physicalDevices_[VK_MAX_DEVICE_GROUP_SIZE],
@@ -16612,15 +17825,6 @@ S_physical_device_group_properties(
 {
 memcpy(physicalDevices,physicalDevices_,sizeof(physicalDevices) );
 }
-
-S_physical_device_group_properties( VkPhysicalDeviceGroupProperties const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_physical_device_group_properties ) );	}
-S_physical_device_group_properties& operator=( VkPhysicalDeviceGroupProperties const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_physical_device_group_properties ) ); return *this;	}
-operator VkPhysicalDeviceGroupProperties const&() const 
-	{	return *reinterpret_cast<const VkPhysicalDeviceGroupProperties*>(this);	}
-operator VkPhysicalDeviceGroupProperties &() 
-	{	return *reinterpret_cast<VkPhysicalDeviceGroupProperties*>(this);	}
 };
 static_assert(
 	sizeof(S_physical_device_group_properties) == sizeof(VkPhysicalDeviceGroupProperties),
@@ -16637,26 +17841,27 @@ public:
 	uint32_t deviceIndexCount;
 	const uint32_t * pDeviceIndices;
 
-VkBindBufferMemoryDeviceGroupInfo*const get_vkptr(){return reinterpret_cast<VkBindBufferMemoryDeviceGroupInfo*>(this);}
-
-S_bind_buffer_memory_device_group_info(){}
-
-S_bind_buffer_memory_device_group_info(
-	uint32_t deviceIndexCount_,
-	const uint32_t * pDeviceIndices_)
-	:deviceIndexCount(deviceIndexCount_)
-	,pDeviceIndices(pDeviceIndices_)
-{
-}
-
-S_bind_buffer_memory_device_group_info( VkBindBufferMemoryDeviceGroupInfo const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_bind_buffer_memory_device_group_info ) );	}
+operator VkBindBufferMemoryDeviceGroupInfo*()
+	{	return reinterpret_cast<VkBindBufferMemoryDeviceGroupInfo*>(this);	}
+operator const VkBindBufferMemoryDeviceGroupInfo*() const
+	{	return reinterpret_cast<const VkBindBufferMemoryDeviceGroupInfo*>(this);	}
 S_bind_buffer_memory_device_group_info& operator=( VkBindBufferMemoryDeviceGroupInfo const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_bind_buffer_memory_device_group_info ) ); return *this;	}
 operator VkBindBufferMemoryDeviceGroupInfo const&() const 
 	{	return *reinterpret_cast<const VkBindBufferMemoryDeviceGroupInfo*>(this);	}
 operator VkBindBufferMemoryDeviceGroupInfo &() 
 	{	return *reinterpret_cast<VkBindBufferMemoryDeviceGroupInfo*>(this);	}
+
+
+S_bind_buffer_memory_device_group_info(){}
+S_bind_buffer_memory_device_group_info(VkBindBufferMemoryDeviceGroupInfo& rhs)
+	{	memcpy( this, &rhs, sizeof( S_bind_buffer_memory_device_group_info ) );	}
+S_bind_buffer_memory_device_group_info(
+	uint32_t deviceIndexCount_,
+	const uint32_t * pDeviceIndices_)
+	:deviceIndexCount(deviceIndexCount_)
+	,pDeviceIndices(pDeviceIndices_)
+{}
 
 friend S_bind_buffer_memory_info;
 };
@@ -16677,10 +17882,21 @@ public:
 	VkDeviceMemory memory;
 	VkDeviceSize memoryOffset;
 
-VkBindBufferMemoryInfo*const get_vkptr(){return reinterpret_cast<VkBindBufferMemoryInfo*>(this);}
+operator VkBindBufferMemoryInfo*()
+	{	return reinterpret_cast<VkBindBufferMemoryInfo*>(this);	}
+operator const VkBindBufferMemoryInfo*() const
+	{	return reinterpret_cast<const VkBindBufferMemoryInfo*>(this);	}
+S_bind_buffer_memory_info& operator=( VkBindBufferMemoryInfo const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_bind_buffer_memory_info ) ); return *this;	}
+operator VkBindBufferMemoryInfo const&() const 
+	{	return *reinterpret_cast<const VkBindBufferMemoryInfo*>(this);	}
+operator VkBindBufferMemoryInfo &() 
+	{	return *reinterpret_cast<VkBindBufferMemoryInfo*>(this);	}
+
 
 S_bind_buffer_memory_info(){}
-
+S_bind_buffer_memory_info(VkBindBufferMemoryInfo& rhs)
+	{	memcpy( this, &rhs, sizeof( S_bind_buffer_memory_info ) );	}
 S_bind_buffer_memory_info(
 	VkBuffer buffer_,
 	VkDeviceMemory memory_,
@@ -16688,17 +17904,7 @@ S_bind_buffer_memory_info(
 	:buffer(buffer_)
 	,memory(memory_)
 	,memoryOffset(memoryOffset_)
-{
-}
-
-S_bind_buffer_memory_info( VkBindBufferMemoryInfo const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_bind_buffer_memory_info ) );	}
-S_bind_buffer_memory_info& operator=( VkBindBufferMemoryInfo const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_bind_buffer_memory_info ) ); return *this;	}
-operator VkBindBufferMemoryInfo const&() const 
-	{	return *reinterpret_cast<const VkBindBufferMemoryInfo*>(this);	}
-operator VkBindBufferMemoryInfo &() 
-	{	return *reinterpret_cast<VkBindBufferMemoryInfo*>(this);	}
+{}
 
 S_bind_buffer_memory_info& n_bind_buffer_memory_device_group_info(S_bind_buffer_memory_device_group_info const& next_);
 };
@@ -16710,7 +17916,7 @@ struct N_bind_buffer_memory_info{
 private:
 	void* pNext = nullptr;
 public:
-void* get(){ return pNext; }
+operator void*() { return pNext; }
 N_bind_buffer_memory_info& n_bind_buffer_memory_device_group_info(S_bind_buffer_memory_device_group_info const& next_);
 };
 
@@ -16727,10 +17933,21 @@ public:
 	uint32_t splitInstanceBindRegionCount;
 	const S_rect_2d * pSplitInstanceBindRegions;
 
-VkBindImageMemoryDeviceGroupInfo*const get_vkptr(){return reinterpret_cast<VkBindImageMemoryDeviceGroupInfo*>(this);}
+operator VkBindImageMemoryDeviceGroupInfo*()
+	{	return reinterpret_cast<VkBindImageMemoryDeviceGroupInfo*>(this);	}
+operator const VkBindImageMemoryDeviceGroupInfo*() const
+	{	return reinterpret_cast<const VkBindImageMemoryDeviceGroupInfo*>(this);	}
+S_bind_image_memory_device_group_info& operator=( VkBindImageMemoryDeviceGroupInfo const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_bind_image_memory_device_group_info ) ); return *this;	}
+operator VkBindImageMemoryDeviceGroupInfo const&() const 
+	{	return *reinterpret_cast<const VkBindImageMemoryDeviceGroupInfo*>(this);	}
+operator VkBindImageMemoryDeviceGroupInfo &() 
+	{	return *reinterpret_cast<VkBindImageMemoryDeviceGroupInfo*>(this);	}
+
 
 S_bind_image_memory_device_group_info(){}
-
+S_bind_image_memory_device_group_info(VkBindImageMemoryDeviceGroupInfo& rhs)
+	{	memcpy( this, &rhs, sizeof( S_bind_image_memory_device_group_info ) );	}
 S_bind_image_memory_device_group_info(
 	uint32_t deviceIndexCount_,
 	const uint32_t * pDeviceIndices_,
@@ -16740,17 +17957,7 @@ S_bind_image_memory_device_group_info(
 	,pDeviceIndices(pDeviceIndices_)
 	,splitInstanceBindRegionCount(splitInstanceBindRegionCount_)
 	,pSplitInstanceBindRegions(pSplitInstanceBindRegions_)
-{
-}
-
-S_bind_image_memory_device_group_info( VkBindImageMemoryDeviceGroupInfo const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_bind_image_memory_device_group_info ) );	}
-S_bind_image_memory_device_group_info& operator=( VkBindImageMemoryDeviceGroupInfo const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_bind_image_memory_device_group_info ) ); return *this;	}
-operator VkBindImageMemoryDeviceGroupInfo const&() const 
-	{	return *reinterpret_cast<const VkBindImageMemoryDeviceGroupInfo*>(this);	}
-operator VkBindImageMemoryDeviceGroupInfo &() 
-	{	return *reinterpret_cast<VkBindImageMemoryDeviceGroupInfo*>(this);	}
+{}
 
 friend S_bind_image_memory_info;
 };
@@ -16769,26 +17976,27 @@ public:
 	VkSwapchainKHR swapchain;
 	uint32_t imageIndex;
 
-VkBindImageMemorySwapchainInfoKHR*const get_vkptr(){return reinterpret_cast<VkBindImageMemorySwapchainInfoKHR*>(this);}
-
-S_bind_image_memory_swapchain_info_KHR(){}
-
-S_bind_image_memory_swapchain_info_KHR(
-	VkSwapchainKHR swapchain_,
-	uint32_t imageIndex_)
-	:swapchain(swapchain_)
-	,imageIndex(imageIndex_)
-{
-}
-
-S_bind_image_memory_swapchain_info_KHR( VkBindImageMemorySwapchainInfoKHR const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_bind_image_memory_swapchain_info_KHR ) );	}
+operator VkBindImageMemorySwapchainInfoKHR*()
+	{	return reinterpret_cast<VkBindImageMemorySwapchainInfoKHR*>(this);	}
+operator const VkBindImageMemorySwapchainInfoKHR*() const
+	{	return reinterpret_cast<const VkBindImageMemorySwapchainInfoKHR*>(this);	}
 S_bind_image_memory_swapchain_info_KHR& operator=( VkBindImageMemorySwapchainInfoKHR const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_bind_image_memory_swapchain_info_KHR ) ); return *this;	}
 operator VkBindImageMemorySwapchainInfoKHR const&() const 
 	{	return *reinterpret_cast<const VkBindImageMemorySwapchainInfoKHR*>(this);	}
 operator VkBindImageMemorySwapchainInfoKHR &() 
 	{	return *reinterpret_cast<VkBindImageMemorySwapchainInfoKHR*>(this);	}
+
+
+S_bind_image_memory_swapchain_info_KHR(){}
+S_bind_image_memory_swapchain_info_KHR(VkBindImageMemorySwapchainInfoKHR& rhs)
+	{	memcpy( this, &rhs, sizeof( S_bind_image_memory_swapchain_info_KHR ) );	}
+S_bind_image_memory_swapchain_info_KHR(
+	VkSwapchainKHR swapchain_,
+	uint32_t imageIndex_)
+	:swapchain(swapchain_)
+	,imageIndex(imageIndex_)
+{}
 
 friend S_bind_image_memory_info;
 };
@@ -16806,24 +18014,25 @@ private:
 public:
 	F_image_aspect planeAspect;
 
-VkBindImagePlaneMemoryInfo*const get_vkptr(){return reinterpret_cast<VkBindImagePlaneMemoryInfo*>(this);}
-
-S_bind_image_plane_memory_info(){}
-
-S_bind_image_plane_memory_info(
-	F_image_aspect planeAspect_)
-	:planeAspect(planeAspect_)
-{
-}
-
-S_bind_image_plane_memory_info( VkBindImagePlaneMemoryInfo const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_bind_image_plane_memory_info ) );	}
+operator VkBindImagePlaneMemoryInfo*()
+	{	return reinterpret_cast<VkBindImagePlaneMemoryInfo*>(this);	}
+operator const VkBindImagePlaneMemoryInfo*() const
+	{	return reinterpret_cast<const VkBindImagePlaneMemoryInfo*>(this);	}
 S_bind_image_plane_memory_info& operator=( VkBindImagePlaneMemoryInfo const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_bind_image_plane_memory_info ) ); return *this;	}
 operator VkBindImagePlaneMemoryInfo const&() const 
 	{	return *reinterpret_cast<const VkBindImagePlaneMemoryInfo*>(this);	}
 operator VkBindImagePlaneMemoryInfo &() 
 	{	return *reinterpret_cast<VkBindImagePlaneMemoryInfo*>(this);	}
+
+
+S_bind_image_plane_memory_info(){}
+S_bind_image_plane_memory_info(VkBindImagePlaneMemoryInfo& rhs)
+	{	memcpy( this, &rhs, sizeof( S_bind_image_plane_memory_info ) );	}
+S_bind_image_plane_memory_info(
+	F_image_aspect planeAspect_)
+	:planeAspect(planeAspect_)
+{}
 
 friend S_bind_image_memory_info;
 };
@@ -16846,10 +18055,21 @@ public:
 	VkDeviceMemory memory;
 	VkDeviceSize memoryOffset;
 
-VkBindImageMemoryInfo*const get_vkptr(){return reinterpret_cast<VkBindImageMemoryInfo*>(this);}
+operator VkBindImageMemoryInfo*()
+	{	return reinterpret_cast<VkBindImageMemoryInfo*>(this);	}
+operator const VkBindImageMemoryInfo*() const
+	{	return reinterpret_cast<const VkBindImageMemoryInfo*>(this);	}
+S_bind_image_memory_info& operator=( VkBindImageMemoryInfo const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_bind_image_memory_info ) ); return *this;	}
+operator VkBindImageMemoryInfo const&() const 
+	{	return *reinterpret_cast<const VkBindImageMemoryInfo*>(this);	}
+operator VkBindImageMemoryInfo &() 
+	{	return *reinterpret_cast<VkBindImageMemoryInfo*>(this);	}
+
 
 S_bind_image_memory_info(){}
-
+S_bind_image_memory_info(VkBindImageMemoryInfo& rhs)
+	{	memcpy( this, &rhs, sizeof( S_bind_image_memory_info ) );	}
 S_bind_image_memory_info(
 	VkImage image_,
 	VkDeviceMemory memory_,
@@ -16857,17 +18077,7 @@ S_bind_image_memory_info(
 	:image(image_)
 	,memory(memory_)
 	,memoryOffset(memoryOffset_)
-{
-}
-
-S_bind_image_memory_info( VkBindImageMemoryInfo const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_bind_image_memory_info ) );	}
-S_bind_image_memory_info& operator=( VkBindImageMemoryInfo const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_bind_image_memory_info ) ); return *this;	}
-operator VkBindImageMemoryInfo const&() const 
-	{	return *reinterpret_cast<const VkBindImageMemoryInfo*>(this);	}
-operator VkBindImageMemoryInfo &() 
-	{	return *reinterpret_cast<VkBindImageMemoryInfo*>(this);	}
+{}
 
 S_bind_image_memory_info& n_bind_image_memory_device_group_info(S_bind_image_memory_device_group_info const& next_);
 S_bind_image_memory_info& n_bind_image_memory_swapchain_info_KHR(S_bind_image_memory_swapchain_info_KHR const& next_);
@@ -16881,7 +18091,7 @@ struct N_bind_image_memory_info{
 private:
 	void* pNext = nullptr;
 public:
-void* get(){ return pNext; }
+operator void*() { return pNext; }
 N_bind_image_memory_info& n_bind_image_memory_device_group_info(S_bind_image_memory_device_group_info const& next_);
 N_bind_image_memory_info& n_bind_image_memory_swapchain_info_KHR(S_bind_image_memory_swapchain_info_KHR const& next_);
 N_bind_image_memory_info& n_bind_image_plane_memory_info(S_bind_image_plane_memory_info const& next_);
@@ -16898,10 +18108,21 @@ public:
 	uint32_t presentMask[VK_MAX_DEVICE_GROUP_SIZE];
 	F_device_group_present_mode_KHR modes;
 
-VkDeviceGroupPresentCapabilitiesKHR*const get_vkptr(){return reinterpret_cast<VkDeviceGroupPresentCapabilitiesKHR*>(this);}
+operator VkDeviceGroupPresentCapabilitiesKHR*()
+	{	return reinterpret_cast<VkDeviceGroupPresentCapabilitiesKHR*>(this);	}
+operator const VkDeviceGroupPresentCapabilitiesKHR*() const
+	{	return reinterpret_cast<const VkDeviceGroupPresentCapabilitiesKHR*>(this);	}
+S_device_group_present_capabilities_KHR& operator=( VkDeviceGroupPresentCapabilitiesKHR const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_device_group_present_capabilities_KHR ) ); return *this;	}
+operator VkDeviceGroupPresentCapabilitiesKHR const&() const 
+	{	return *reinterpret_cast<const VkDeviceGroupPresentCapabilitiesKHR*>(this);	}
+operator VkDeviceGroupPresentCapabilitiesKHR &() 
+	{	return *reinterpret_cast<VkDeviceGroupPresentCapabilitiesKHR*>(this);	}
+
 
 S_device_group_present_capabilities_KHR(){}
-
+S_device_group_present_capabilities_KHR(VkDeviceGroupPresentCapabilitiesKHR& rhs)
+	{	memcpy( this, &rhs, sizeof( S_device_group_present_capabilities_KHR ) );	}
 S_device_group_present_capabilities_KHR(
 	uint32_t presentMask_[VK_MAX_DEVICE_GROUP_SIZE],
 	F_device_group_present_mode_KHR modes_)
@@ -16909,15 +18130,6 @@ S_device_group_present_capabilities_KHR(
 {
 memcpy(presentMask,presentMask_,sizeof(presentMask) );
 }
-
-S_device_group_present_capabilities_KHR( VkDeviceGroupPresentCapabilitiesKHR const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_device_group_present_capabilities_KHR ) );	}
-S_device_group_present_capabilities_KHR& operator=( VkDeviceGroupPresentCapabilitiesKHR const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_device_group_present_capabilities_KHR ) ); return *this;	}
-operator VkDeviceGroupPresentCapabilitiesKHR const&() const 
-	{	return *reinterpret_cast<const VkDeviceGroupPresentCapabilitiesKHR*>(this);	}
-operator VkDeviceGroupPresentCapabilitiesKHR &() 
-	{	return *reinterpret_cast<VkDeviceGroupPresentCapabilitiesKHR*>(this);	}
 };
 static_assert(
 	sizeof(S_device_group_present_capabilities_KHR) == sizeof(VkDeviceGroupPresentCapabilitiesKHR),
@@ -16936,10 +18148,21 @@ public:
 	VkFence fence;
 	uint32_t deviceMask;
 
-VkAcquireNextImageInfoKHR*const get_vkptr(){return reinterpret_cast<VkAcquireNextImageInfoKHR*>(this);}
+operator VkAcquireNextImageInfoKHR*()
+	{	return reinterpret_cast<VkAcquireNextImageInfoKHR*>(this);	}
+operator const VkAcquireNextImageInfoKHR*() const
+	{	return reinterpret_cast<const VkAcquireNextImageInfoKHR*>(this);	}
+S_acquire_next_image_info_KHR& operator=( VkAcquireNextImageInfoKHR const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_acquire_next_image_info_KHR ) ); return *this;	}
+operator VkAcquireNextImageInfoKHR const&() const 
+	{	return *reinterpret_cast<const VkAcquireNextImageInfoKHR*>(this);	}
+operator VkAcquireNextImageInfoKHR &() 
+	{	return *reinterpret_cast<VkAcquireNextImageInfoKHR*>(this);	}
+
 
 S_acquire_next_image_info_KHR(){}
-
+S_acquire_next_image_info_KHR(VkAcquireNextImageInfoKHR& rhs)
+	{	memcpy( this, &rhs, sizeof( S_acquire_next_image_info_KHR ) );	}
 S_acquire_next_image_info_KHR(
 	VkSwapchainKHR swapchain_,
 	uint64_t timeout_,
@@ -16951,17 +18174,7 @@ S_acquire_next_image_info_KHR(
 	,semaphore(semaphore_)
 	,fence(fence_)
 	,deviceMask(deviceMask_)
-{
-}
-
-S_acquire_next_image_info_KHR( VkAcquireNextImageInfoKHR const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_acquire_next_image_info_KHR ) );	}
-S_acquire_next_image_info_KHR& operator=( VkAcquireNextImageInfoKHR const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_acquire_next_image_info_KHR ) ); return *this;	}
-operator VkAcquireNextImageInfoKHR const&() const 
-	{	return *reinterpret_cast<const VkAcquireNextImageInfoKHR*>(this);	}
-operator VkAcquireNextImageInfoKHR &() 
-	{	return *reinterpret_cast<VkAcquireNextImageInfoKHR*>(this);	}
+{}
 };
 static_assert(
 	sizeof(S_acquire_next_image_info_KHR) == sizeof(VkAcquireNextImageInfoKHR),
@@ -16977,7 +18190,17 @@ struct		S_descriptor_update_template_entry{
 	size_t offset;
 	size_t stride;
 
-VkDescriptorUpdateTemplateEntry*const get_vkptr(){return reinterpret_cast<VkDescriptorUpdateTemplateEntry*>(this);}
+operator VkDescriptorUpdateTemplateEntry*()
+	{	return reinterpret_cast<VkDescriptorUpdateTemplateEntry*>(this);	}
+operator const VkDescriptorUpdateTemplateEntry*() const
+	{	return reinterpret_cast<const VkDescriptorUpdateTemplateEntry*>(this);	}
+S_descriptor_update_template_entry& operator=( VkDescriptorUpdateTemplateEntry const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_descriptor_update_template_entry ) ); return *this;	}
+operator VkDescriptorUpdateTemplateEntry const&() const 
+	{	return *reinterpret_cast<const VkDescriptorUpdateTemplateEntry*>(this);	}
+operator VkDescriptorUpdateTemplateEntry &() 
+	{	return *reinterpret_cast<VkDescriptorUpdateTemplateEntry*>(this);	}
+
 };
 
 /*	VkDescriptorUpdateTemplateCreateInfo
@@ -16996,10 +18219,21 @@ public:
 	VkPipelineLayout pipelineLayout;
 	uint32_t set;
 
-VkDescriptorUpdateTemplateCreateInfo*const get_vkptr(){return reinterpret_cast<VkDescriptorUpdateTemplateCreateInfo*>(this);}
+operator VkDescriptorUpdateTemplateCreateInfo*()
+	{	return reinterpret_cast<VkDescriptorUpdateTemplateCreateInfo*>(this);	}
+operator const VkDescriptorUpdateTemplateCreateInfo*() const
+	{	return reinterpret_cast<const VkDescriptorUpdateTemplateCreateInfo*>(this);	}
+S_descriptor_update_template_create_info& operator=( VkDescriptorUpdateTemplateCreateInfo const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_descriptor_update_template_create_info ) ); return *this;	}
+operator VkDescriptorUpdateTemplateCreateInfo const&() const 
+	{	return *reinterpret_cast<const VkDescriptorUpdateTemplateCreateInfo*>(this);	}
+operator VkDescriptorUpdateTemplateCreateInfo &() 
+	{	return *reinterpret_cast<VkDescriptorUpdateTemplateCreateInfo*>(this);	}
+
 
 S_descriptor_update_template_create_info(){}
-
+S_descriptor_update_template_create_info(VkDescriptorUpdateTemplateCreateInfo& rhs)
+	{	memcpy( this, &rhs, sizeof( S_descriptor_update_template_create_info ) );	}
 S_descriptor_update_template_create_info(
 	VkDescriptorUpdateTemplateCreateFlags flags_,
 	uint32_t descriptorUpdateEntryCount_,
@@ -17017,17 +18251,7 @@ S_descriptor_update_template_create_info(
 	,pipelineBindPoint(pipelineBindPoint_)
 	,pipelineLayout(pipelineLayout_)
 	,set(set_)
-{
-}
-
-S_descriptor_update_template_create_info( VkDescriptorUpdateTemplateCreateInfo const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_descriptor_update_template_create_info ) );	}
-S_descriptor_update_template_create_info& operator=( VkDescriptorUpdateTemplateCreateInfo const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_descriptor_update_template_create_info ) ); return *this;	}
-operator VkDescriptorUpdateTemplateCreateInfo const&() const 
-	{	return *reinterpret_cast<const VkDescriptorUpdateTemplateCreateInfo*>(this);	}
-operator VkDescriptorUpdateTemplateCreateInfo &() 
-	{	return *reinterpret_cast<VkDescriptorUpdateTemplateCreateInfo*>(this);	}
+{}
 };
 static_assert(
 	sizeof(S_descriptor_update_template_create_info) == sizeof(VkDescriptorUpdateTemplateCreateInfo),
@@ -17039,7 +18263,17 @@ struct		S_xy_color_EXT{
 	float x;
 	float y;
 
-VkXYColorEXT*const get_vkptr(){return reinterpret_cast<VkXYColorEXT*>(this);}
+operator VkXYColorEXT*()
+	{	return reinterpret_cast<VkXYColorEXT*>(this);	}
+operator const VkXYColorEXT*() const
+	{	return reinterpret_cast<const VkXYColorEXT*>(this);	}
+S_xy_color_EXT& operator=( VkXYColorEXT const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_xy_color_EXT ) ); return *this;	}
+operator VkXYColorEXT const&() const 
+	{	return *reinterpret_cast<const VkXYColorEXT*>(this);	}
+operator VkXYColorEXT &() 
+	{	return *reinterpret_cast<VkXYColorEXT*>(this);	}
+
 };
 
 /*	VkHdrMetadataEXT
@@ -17058,10 +18292,21 @@ public:
 	float maxContentLightLevel;
 	float maxFrameAverageLightLevel;
 
-VkHdrMetadataEXT*const get_vkptr(){return reinterpret_cast<VkHdrMetadataEXT*>(this);}
+operator VkHdrMetadataEXT*()
+	{	return reinterpret_cast<VkHdrMetadataEXT*>(this);	}
+operator const VkHdrMetadataEXT*() const
+	{	return reinterpret_cast<const VkHdrMetadataEXT*>(this);	}
+S_hdr_metadata_EXT& operator=( VkHdrMetadataEXT const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_hdr_metadata_EXT ) ); return *this;	}
+operator VkHdrMetadataEXT const&() const 
+	{	return *reinterpret_cast<const VkHdrMetadataEXT*>(this);	}
+operator VkHdrMetadataEXT &() 
+	{	return *reinterpret_cast<VkHdrMetadataEXT*>(this);	}
+
 
 S_hdr_metadata_EXT(){}
-
+S_hdr_metadata_EXT(VkHdrMetadataEXT& rhs)
+	{	memcpy( this, &rhs, sizeof( S_hdr_metadata_EXT ) );	}
 S_hdr_metadata_EXT(
 	S_xy_color_EXT displayPrimaryRed_,
 	S_xy_color_EXT displayPrimaryGreen_,
@@ -17079,17 +18324,7 @@ S_hdr_metadata_EXT(
 	,minLuminance(minLuminance_)
 	,maxContentLightLevel(maxContentLightLevel_)
 	,maxFrameAverageLightLevel(maxFrameAverageLightLevel_)
-{
-}
-
-S_hdr_metadata_EXT( VkHdrMetadataEXT const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_hdr_metadata_EXT ) );	}
-S_hdr_metadata_EXT& operator=( VkHdrMetadataEXT const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_hdr_metadata_EXT ) ); return *this;	}
-operator VkHdrMetadataEXT const&() const 
-	{	return *reinterpret_cast<const VkHdrMetadataEXT*>(this);	}
-operator VkHdrMetadataEXT &() 
-	{	return *reinterpret_cast<VkHdrMetadataEXT*>(this);	}
+{}
 };
 static_assert(
 	sizeof(S_hdr_metadata_EXT) == sizeof(VkHdrMetadataEXT),
@@ -17101,7 +18336,17 @@ static_assert(
 struct		S_refresh_cycle_duration_GOOGLE{
 	uint64_t refreshDuration;
 
-VkRefreshCycleDurationGOOGLE*const get_vkptr(){return reinterpret_cast<VkRefreshCycleDurationGOOGLE*>(this);}
+operator VkRefreshCycleDurationGOOGLE*()
+	{	return reinterpret_cast<VkRefreshCycleDurationGOOGLE*>(this);	}
+operator const VkRefreshCycleDurationGOOGLE*() const
+	{	return reinterpret_cast<const VkRefreshCycleDurationGOOGLE*>(this);	}
+S_refresh_cycle_duration_GOOGLE& operator=( VkRefreshCycleDurationGOOGLE const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_refresh_cycle_duration_GOOGLE ) ); return *this;	}
+operator VkRefreshCycleDurationGOOGLE const&() const 
+	{	return *reinterpret_cast<const VkRefreshCycleDurationGOOGLE*>(this);	}
+operator VkRefreshCycleDurationGOOGLE &() 
+	{	return *reinterpret_cast<VkRefreshCycleDurationGOOGLE*>(this);	}
+
 };
 
 /*	VkPastPresentationTimingGOOGLE
@@ -17114,7 +18359,17 @@ struct		S_past_presentation_timing_GOOGLE{
 	uint64_t earliestPresentTime;
 	uint64_t presentMargin;
 
-VkPastPresentationTimingGOOGLE*const get_vkptr(){return reinterpret_cast<VkPastPresentationTimingGOOGLE*>(this);}
+operator VkPastPresentationTimingGOOGLE*()
+	{	return reinterpret_cast<VkPastPresentationTimingGOOGLE*>(this);	}
+operator const VkPastPresentationTimingGOOGLE*() const
+	{	return reinterpret_cast<const VkPastPresentationTimingGOOGLE*>(this);	}
+S_past_presentation_timing_GOOGLE& operator=( VkPastPresentationTimingGOOGLE const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_past_presentation_timing_GOOGLE ) ); return *this;	}
+operator VkPastPresentationTimingGOOGLE const&() const 
+	{	return *reinterpret_cast<const VkPastPresentationTimingGOOGLE*>(this);	}
+operator VkPastPresentationTimingGOOGLE &() 
+	{	return *reinterpret_cast<VkPastPresentationTimingGOOGLE*>(this);	}
+
 };
 
 /*	VkIOSSurfaceCreateInfoMVK
@@ -17128,26 +18383,27 @@ public:
 	VkIOSSurfaceCreateFlagsMVK flags;
 	const void * pView;
 
-VkIOSSurfaceCreateInfoMVK*const get_vkptr(){return reinterpret_cast<VkIOSSurfaceCreateInfoMVK*>(this);}
-
-S_ios_surface_create_info_MVK(){}
-
-S_ios_surface_create_info_MVK(
-	VkIOSSurfaceCreateFlagsMVK flags_,
-	const void * pView_)
-	:flags(flags_)
-	,pView(pView_)
-{
-}
-
-S_ios_surface_create_info_MVK( VkIOSSurfaceCreateInfoMVK const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_ios_surface_create_info_MVK ) );	}
+operator VkIOSSurfaceCreateInfoMVK*()
+	{	return reinterpret_cast<VkIOSSurfaceCreateInfoMVK*>(this);	}
+operator const VkIOSSurfaceCreateInfoMVK*() const
+	{	return reinterpret_cast<const VkIOSSurfaceCreateInfoMVK*>(this);	}
 S_ios_surface_create_info_MVK& operator=( VkIOSSurfaceCreateInfoMVK const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_ios_surface_create_info_MVK ) ); return *this;	}
 operator VkIOSSurfaceCreateInfoMVK const&() const 
 	{	return *reinterpret_cast<const VkIOSSurfaceCreateInfoMVK*>(this);	}
 operator VkIOSSurfaceCreateInfoMVK &() 
 	{	return *reinterpret_cast<VkIOSSurfaceCreateInfoMVK*>(this);	}
+
+
+S_ios_surface_create_info_MVK(){}
+S_ios_surface_create_info_MVK(VkIOSSurfaceCreateInfoMVK& rhs)
+	{	memcpy( this, &rhs, sizeof( S_ios_surface_create_info_MVK ) );	}
+S_ios_surface_create_info_MVK(
+	VkIOSSurfaceCreateFlagsMVK flags_,
+	const void * pView_)
+	:flags(flags_)
+	,pView(pView_)
+{}
 };
 static_assert(
 	sizeof(S_ios_surface_create_info_MVK) == sizeof(VkIOSSurfaceCreateInfoMVK),
@@ -17165,26 +18421,27 @@ public:
 	VkMacOSSurfaceCreateFlagsMVK flags;
 	const void * pView;
 
-VkMacOSSurfaceCreateInfoMVK*const get_vkptr(){return reinterpret_cast<VkMacOSSurfaceCreateInfoMVK*>(this);}
-
-S_mac_os_surface_create_info_MVK(){}
-
-S_mac_os_surface_create_info_MVK(
-	VkMacOSSurfaceCreateFlagsMVK flags_,
-	const void * pView_)
-	:flags(flags_)
-	,pView(pView_)
-{
-}
-
-S_mac_os_surface_create_info_MVK( VkMacOSSurfaceCreateInfoMVK const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_mac_os_surface_create_info_MVK ) );	}
+operator VkMacOSSurfaceCreateInfoMVK*()
+	{	return reinterpret_cast<VkMacOSSurfaceCreateInfoMVK*>(this);	}
+operator const VkMacOSSurfaceCreateInfoMVK*() const
+	{	return reinterpret_cast<const VkMacOSSurfaceCreateInfoMVK*>(this);	}
 S_mac_os_surface_create_info_MVK& operator=( VkMacOSSurfaceCreateInfoMVK const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_mac_os_surface_create_info_MVK ) ); return *this;	}
 operator VkMacOSSurfaceCreateInfoMVK const&() const 
 	{	return *reinterpret_cast<const VkMacOSSurfaceCreateInfoMVK*>(this);	}
 operator VkMacOSSurfaceCreateInfoMVK &() 
 	{	return *reinterpret_cast<VkMacOSSurfaceCreateInfoMVK*>(this);	}
+
+
+S_mac_os_surface_create_info_MVK(){}
+S_mac_os_surface_create_info_MVK(VkMacOSSurfaceCreateInfoMVK& rhs)
+	{	memcpy( this, &rhs, sizeof( S_mac_os_surface_create_info_MVK ) );	}
+S_mac_os_surface_create_info_MVK(
+	VkMacOSSurfaceCreateFlagsMVK flags_,
+	const void * pView_)
+	:flags(flags_)
+	,pView(pView_)
+{}
 };
 static_assert(
 	sizeof(S_mac_os_surface_create_info_MVK) == sizeof(VkMacOSSurfaceCreateInfoMVK),
@@ -17200,24 +18457,25 @@ private:
 public:
 	VkSurfaceKHR surface;
 
-VkPhysicalDeviceSurfaceInfo2KHR*const get_vkptr(){return reinterpret_cast<VkPhysicalDeviceSurfaceInfo2KHR*>(this);}
-
-S_physical_device_surface_info2_KHR(){}
-
-S_physical_device_surface_info2_KHR(
-	VkSurfaceKHR surface_)
-	:surface(surface_)
-{
-}
-
-S_physical_device_surface_info2_KHR( VkPhysicalDeviceSurfaceInfo2KHR const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_physical_device_surface_info2_KHR ) );	}
+operator VkPhysicalDeviceSurfaceInfo2KHR*()
+	{	return reinterpret_cast<VkPhysicalDeviceSurfaceInfo2KHR*>(this);	}
+operator const VkPhysicalDeviceSurfaceInfo2KHR*() const
+	{	return reinterpret_cast<const VkPhysicalDeviceSurfaceInfo2KHR*>(this);	}
 S_physical_device_surface_info2_KHR& operator=( VkPhysicalDeviceSurfaceInfo2KHR const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_physical_device_surface_info2_KHR ) ); return *this;	}
 operator VkPhysicalDeviceSurfaceInfo2KHR const&() const 
 	{	return *reinterpret_cast<const VkPhysicalDeviceSurfaceInfo2KHR*>(this);	}
 operator VkPhysicalDeviceSurfaceInfo2KHR &() 
 	{	return *reinterpret_cast<VkPhysicalDeviceSurfaceInfo2KHR*>(this);	}
+
+
+S_physical_device_surface_info2_KHR(){}
+S_physical_device_surface_info2_KHR(VkPhysicalDeviceSurfaceInfo2KHR& rhs)
+	{	memcpy( this, &rhs, sizeof( S_physical_device_surface_info2_KHR ) );	}
+S_physical_device_surface_info2_KHR(
+	VkSurfaceKHR surface_)
+	:surface(surface_)
+{}
 };
 static_assert(
 	sizeof(S_physical_device_surface_info2_KHR) == sizeof(VkPhysicalDeviceSurfaceInfo2KHR),
@@ -17234,24 +18492,25 @@ private:
 public:
 	F_image_usage sharedPresentSupportedUsageFlags;
 
-VkSharedPresentSurfaceCapabilitiesKHR*const get_vkptr(){return reinterpret_cast<VkSharedPresentSurfaceCapabilitiesKHR*>(this);}
-
-S_shared_present_surface_capabilities_KHR(){}
-
-S_shared_present_surface_capabilities_KHR(
-	F_image_usage sharedPresentSupportedUsageFlags_)
-	:sharedPresentSupportedUsageFlags(sharedPresentSupportedUsageFlags_)
-{
-}
-
-S_shared_present_surface_capabilities_KHR( VkSharedPresentSurfaceCapabilitiesKHR const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_shared_present_surface_capabilities_KHR ) );	}
+operator VkSharedPresentSurfaceCapabilitiesKHR*()
+	{	return reinterpret_cast<VkSharedPresentSurfaceCapabilitiesKHR*>(this);	}
+operator const VkSharedPresentSurfaceCapabilitiesKHR*() const
+	{	return reinterpret_cast<const VkSharedPresentSurfaceCapabilitiesKHR*>(this);	}
 S_shared_present_surface_capabilities_KHR& operator=( VkSharedPresentSurfaceCapabilitiesKHR const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_shared_present_surface_capabilities_KHR ) ); return *this;	}
 operator VkSharedPresentSurfaceCapabilitiesKHR const&() const 
 	{	return *reinterpret_cast<const VkSharedPresentSurfaceCapabilitiesKHR*>(this);	}
 operator VkSharedPresentSurfaceCapabilitiesKHR &() 
 	{	return *reinterpret_cast<VkSharedPresentSurfaceCapabilitiesKHR*>(this);	}
+
+
+S_shared_present_surface_capabilities_KHR(){}
+S_shared_present_surface_capabilities_KHR(VkSharedPresentSurfaceCapabilitiesKHR& rhs)
+	{	memcpy( this, &rhs, sizeof( S_shared_present_surface_capabilities_KHR ) );	}
+S_shared_present_surface_capabilities_KHR(
+	F_image_usage sharedPresentSupportedUsageFlags_)
+	:sharedPresentSupportedUsageFlags(sharedPresentSupportedUsageFlags_)
+{}
 
 friend S_surface_capabilities2_KHR;
 };
@@ -17271,24 +18530,25 @@ private:
 public:
 	S_surface_capabilities_KHR surfaceCapabilities;
 
-VkSurfaceCapabilities2KHR*const get_vkptr(){return reinterpret_cast<VkSurfaceCapabilities2KHR*>(this);}
-
-S_surface_capabilities2_KHR(){}
-
-S_surface_capabilities2_KHR(
-	S_surface_capabilities_KHR surfaceCapabilities_)
-	:surfaceCapabilities(surfaceCapabilities_)
-{
-}
-
-S_surface_capabilities2_KHR( VkSurfaceCapabilities2KHR const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_surface_capabilities2_KHR ) );	}
+operator VkSurfaceCapabilities2KHR*()
+	{	return reinterpret_cast<VkSurfaceCapabilities2KHR*>(this);	}
+operator const VkSurfaceCapabilities2KHR*() const
+	{	return reinterpret_cast<const VkSurfaceCapabilities2KHR*>(this);	}
 S_surface_capabilities2_KHR& operator=( VkSurfaceCapabilities2KHR const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_surface_capabilities2_KHR ) ); return *this;	}
 operator VkSurfaceCapabilities2KHR const&() const 
 	{	return *reinterpret_cast<const VkSurfaceCapabilities2KHR*>(this);	}
 operator VkSurfaceCapabilities2KHR &() 
 	{	return *reinterpret_cast<VkSurfaceCapabilities2KHR*>(this);	}
+
+
+S_surface_capabilities2_KHR(){}
+S_surface_capabilities2_KHR(VkSurfaceCapabilities2KHR& rhs)
+	{	memcpy( this, &rhs, sizeof( S_surface_capabilities2_KHR ) );	}
+S_surface_capabilities2_KHR(
+	S_surface_capabilities_KHR surfaceCapabilities_)
+	:surfaceCapabilities(surfaceCapabilities_)
+{}
 
 S_surface_capabilities2_KHR& n_shared_present_surface_capabilities_KHR(S_shared_present_surface_capabilities_KHR const& next_);
 };
@@ -17300,7 +18560,7 @@ struct N_surface_capabilities2_KHR{
 private:
 	void* pNext = nullptr;
 public:
-void* get(){ return pNext; }
+operator void*() { return pNext; }
 N_surface_capabilities2_KHR& n_shared_present_surface_capabilities_KHR(S_shared_present_surface_capabilities_KHR const& next_);
 };
 
@@ -17314,24 +18574,25 @@ private:
 public:
 	S_surface_format_KHR surfaceFormat;
 
-VkSurfaceFormat2KHR*const get_vkptr(){return reinterpret_cast<VkSurfaceFormat2KHR*>(this);}
-
-S_surface_format2_KHR(){}
-
-S_surface_format2_KHR(
-	S_surface_format_KHR surfaceFormat_)
-	:surfaceFormat(surfaceFormat_)
-{
-}
-
-S_surface_format2_KHR( VkSurfaceFormat2KHR const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_surface_format2_KHR ) );	}
+operator VkSurfaceFormat2KHR*()
+	{	return reinterpret_cast<VkSurfaceFormat2KHR*>(this);	}
+operator const VkSurfaceFormat2KHR*() const
+	{	return reinterpret_cast<const VkSurfaceFormat2KHR*>(this);	}
 S_surface_format2_KHR& operator=( VkSurfaceFormat2KHR const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_surface_format2_KHR ) ); return *this;	}
 operator VkSurfaceFormat2KHR const&() const 
 	{	return *reinterpret_cast<const VkSurfaceFormat2KHR*>(this);	}
 operator VkSurfaceFormat2KHR &() 
 	{	return *reinterpret_cast<VkSurfaceFormat2KHR*>(this);	}
+
+
+S_surface_format2_KHR(){}
+S_surface_format2_KHR(VkSurfaceFormat2KHR& rhs)
+	{	memcpy( this, &rhs, sizeof( S_surface_format2_KHR ) );	}
+S_surface_format2_KHR(
+	S_surface_format_KHR surfaceFormat_)
+	:surfaceFormat(surfaceFormat_)
+{}
 };
 static_assert(
 	sizeof(S_surface_format2_KHR) == sizeof(VkSurfaceFormat2KHR),
@@ -17347,24 +18608,25 @@ private:
 public:
 	S_display_properties_KHR displayProperties;
 
-VkDisplayProperties2KHR*const get_vkptr(){return reinterpret_cast<VkDisplayProperties2KHR*>(this);}
-
-S_display_properties2_KHR(){}
-
-S_display_properties2_KHR(
-	S_display_properties_KHR displayProperties_)
-	:displayProperties(displayProperties_)
-{
-}
-
-S_display_properties2_KHR( VkDisplayProperties2KHR const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_display_properties2_KHR ) );	}
+operator VkDisplayProperties2KHR*()
+	{	return reinterpret_cast<VkDisplayProperties2KHR*>(this);	}
+operator const VkDisplayProperties2KHR*() const
+	{	return reinterpret_cast<const VkDisplayProperties2KHR*>(this);	}
 S_display_properties2_KHR& operator=( VkDisplayProperties2KHR const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_display_properties2_KHR ) ); return *this;	}
 operator VkDisplayProperties2KHR const&() const 
 	{	return *reinterpret_cast<const VkDisplayProperties2KHR*>(this);	}
 operator VkDisplayProperties2KHR &() 
 	{	return *reinterpret_cast<VkDisplayProperties2KHR*>(this);	}
+
+
+S_display_properties2_KHR(){}
+S_display_properties2_KHR(VkDisplayProperties2KHR& rhs)
+	{	memcpy( this, &rhs, sizeof( S_display_properties2_KHR ) );	}
+S_display_properties2_KHR(
+	S_display_properties_KHR displayProperties_)
+	:displayProperties(displayProperties_)
+{}
 };
 static_assert(
 	sizeof(S_display_properties2_KHR) == sizeof(VkDisplayProperties2KHR),
@@ -17380,24 +18642,25 @@ private:
 public:
 	S_display_plane_properties_KHR displayPlaneProperties;
 
-VkDisplayPlaneProperties2KHR*const get_vkptr(){return reinterpret_cast<VkDisplayPlaneProperties2KHR*>(this);}
-
-S_display_plane_properties2_KHR(){}
-
-S_display_plane_properties2_KHR(
-	S_display_plane_properties_KHR displayPlaneProperties_)
-	:displayPlaneProperties(displayPlaneProperties_)
-{
-}
-
-S_display_plane_properties2_KHR( VkDisplayPlaneProperties2KHR const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_display_plane_properties2_KHR ) );	}
+operator VkDisplayPlaneProperties2KHR*()
+	{	return reinterpret_cast<VkDisplayPlaneProperties2KHR*>(this);	}
+operator const VkDisplayPlaneProperties2KHR*() const
+	{	return reinterpret_cast<const VkDisplayPlaneProperties2KHR*>(this);	}
 S_display_plane_properties2_KHR& operator=( VkDisplayPlaneProperties2KHR const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_display_plane_properties2_KHR ) ); return *this;	}
 operator VkDisplayPlaneProperties2KHR const&() const 
 	{	return *reinterpret_cast<const VkDisplayPlaneProperties2KHR*>(this);	}
 operator VkDisplayPlaneProperties2KHR &() 
 	{	return *reinterpret_cast<VkDisplayPlaneProperties2KHR*>(this);	}
+
+
+S_display_plane_properties2_KHR(){}
+S_display_plane_properties2_KHR(VkDisplayPlaneProperties2KHR& rhs)
+	{	memcpy( this, &rhs, sizeof( S_display_plane_properties2_KHR ) );	}
+S_display_plane_properties2_KHR(
+	S_display_plane_properties_KHR displayPlaneProperties_)
+	:displayPlaneProperties(displayPlaneProperties_)
+{}
 };
 static_assert(
 	sizeof(S_display_plane_properties2_KHR) == sizeof(VkDisplayPlaneProperties2KHR),
@@ -17413,24 +18676,25 @@ private:
 public:
 	S_display_mode_properties_KHR displayModeProperties;
 
-VkDisplayModeProperties2KHR*const get_vkptr(){return reinterpret_cast<VkDisplayModeProperties2KHR*>(this);}
-
-S_display_mode_properties2_KHR(){}
-
-S_display_mode_properties2_KHR(
-	S_display_mode_properties_KHR displayModeProperties_)
-	:displayModeProperties(displayModeProperties_)
-{
-}
-
-S_display_mode_properties2_KHR( VkDisplayModeProperties2KHR const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_display_mode_properties2_KHR ) );	}
+operator VkDisplayModeProperties2KHR*()
+	{	return reinterpret_cast<VkDisplayModeProperties2KHR*>(this);	}
+operator const VkDisplayModeProperties2KHR*() const
+	{	return reinterpret_cast<const VkDisplayModeProperties2KHR*>(this);	}
 S_display_mode_properties2_KHR& operator=( VkDisplayModeProperties2KHR const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_display_mode_properties2_KHR ) ); return *this;	}
 operator VkDisplayModeProperties2KHR const&() const 
 	{	return *reinterpret_cast<const VkDisplayModeProperties2KHR*>(this);	}
 operator VkDisplayModeProperties2KHR &() 
 	{	return *reinterpret_cast<VkDisplayModeProperties2KHR*>(this);	}
+
+
+S_display_mode_properties2_KHR(){}
+S_display_mode_properties2_KHR(VkDisplayModeProperties2KHR& rhs)
+	{	memcpy( this, &rhs, sizeof( S_display_mode_properties2_KHR ) );	}
+S_display_mode_properties2_KHR(
+	S_display_mode_properties_KHR displayModeProperties_)
+	:displayModeProperties(displayModeProperties_)
+{}
 };
 static_assert(
 	sizeof(S_display_mode_properties2_KHR) == sizeof(VkDisplayModeProperties2KHR),
@@ -17446,26 +18710,27 @@ public:
 	VkDisplayModeKHR mode;
 	uint32_t planeIndex;
 
-VkDisplayPlaneInfo2KHR*const get_vkptr(){return reinterpret_cast<VkDisplayPlaneInfo2KHR*>(this);}
-
-S_display_plane_info2_KHR(){}
-
-S_display_plane_info2_KHR(
-	VkDisplayModeKHR mode_,
-	uint32_t planeIndex_)
-	:mode(mode_)
-	,planeIndex(planeIndex_)
-{
-}
-
-S_display_plane_info2_KHR( VkDisplayPlaneInfo2KHR const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_display_plane_info2_KHR ) );	}
+operator VkDisplayPlaneInfo2KHR*()
+	{	return reinterpret_cast<VkDisplayPlaneInfo2KHR*>(this);	}
+operator const VkDisplayPlaneInfo2KHR*() const
+	{	return reinterpret_cast<const VkDisplayPlaneInfo2KHR*>(this);	}
 S_display_plane_info2_KHR& operator=( VkDisplayPlaneInfo2KHR const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_display_plane_info2_KHR ) ); return *this;	}
 operator VkDisplayPlaneInfo2KHR const&() const 
 	{	return *reinterpret_cast<const VkDisplayPlaneInfo2KHR*>(this);	}
 operator VkDisplayPlaneInfo2KHR &() 
 	{	return *reinterpret_cast<VkDisplayPlaneInfo2KHR*>(this);	}
+
+
+S_display_plane_info2_KHR(){}
+S_display_plane_info2_KHR(VkDisplayPlaneInfo2KHR& rhs)
+	{	memcpy( this, &rhs, sizeof( S_display_plane_info2_KHR ) );	}
+S_display_plane_info2_KHR(
+	VkDisplayModeKHR mode_,
+	uint32_t planeIndex_)
+	:mode(mode_)
+	,planeIndex(planeIndex_)
+{}
 };
 static_assert(
 	sizeof(S_display_plane_info2_KHR) == sizeof(VkDisplayPlaneInfo2KHR),
@@ -17481,24 +18746,25 @@ private:
 public:
 	S_display_plane_capabilities_KHR capabilities;
 
-VkDisplayPlaneCapabilities2KHR*const get_vkptr(){return reinterpret_cast<VkDisplayPlaneCapabilities2KHR*>(this);}
-
-S_display_plane_capabilities2_KHR(){}
-
-S_display_plane_capabilities2_KHR(
-	S_display_plane_capabilities_KHR capabilities_)
-	:capabilities(capabilities_)
-{
-}
-
-S_display_plane_capabilities2_KHR( VkDisplayPlaneCapabilities2KHR const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_display_plane_capabilities2_KHR ) );	}
+operator VkDisplayPlaneCapabilities2KHR*()
+	{	return reinterpret_cast<VkDisplayPlaneCapabilities2KHR*>(this);	}
+operator const VkDisplayPlaneCapabilities2KHR*() const
+	{	return reinterpret_cast<const VkDisplayPlaneCapabilities2KHR*>(this);	}
 S_display_plane_capabilities2_KHR& operator=( VkDisplayPlaneCapabilities2KHR const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_display_plane_capabilities2_KHR ) ); return *this;	}
 operator VkDisplayPlaneCapabilities2KHR const&() const 
 	{	return *reinterpret_cast<const VkDisplayPlaneCapabilities2KHR*>(this);	}
 operator VkDisplayPlaneCapabilities2KHR &() 
 	{	return *reinterpret_cast<VkDisplayPlaneCapabilities2KHR*>(this);	}
+
+
+S_display_plane_capabilities2_KHR(){}
+S_display_plane_capabilities2_KHR(VkDisplayPlaneCapabilities2KHR& rhs)
+	{	memcpy( this, &rhs, sizeof( S_display_plane_capabilities2_KHR ) );	}
+S_display_plane_capabilities2_KHR(
+	S_display_plane_capabilities_KHR capabilities_)
+	:capabilities(capabilities_)
+{}
 };
 static_assert(
 	sizeof(S_display_plane_capabilities2_KHR) == sizeof(VkDisplayPlaneCapabilities2KHR),
@@ -17513,24 +18779,25 @@ private:
 public:
 	VkBuffer buffer;
 
-VkBufferMemoryRequirementsInfo2*const get_vkptr(){return reinterpret_cast<VkBufferMemoryRequirementsInfo2*>(this);}
-
-S_buffer_memory_requirements_info2(){}
-
-S_buffer_memory_requirements_info2(
-	VkBuffer buffer_)
-	:buffer(buffer_)
-{
-}
-
-S_buffer_memory_requirements_info2( VkBufferMemoryRequirementsInfo2 const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_buffer_memory_requirements_info2 ) );	}
+operator VkBufferMemoryRequirementsInfo2*()
+	{	return reinterpret_cast<VkBufferMemoryRequirementsInfo2*>(this);	}
+operator const VkBufferMemoryRequirementsInfo2*() const
+	{	return reinterpret_cast<const VkBufferMemoryRequirementsInfo2*>(this);	}
 S_buffer_memory_requirements_info2& operator=( VkBufferMemoryRequirementsInfo2 const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_buffer_memory_requirements_info2 ) ); return *this;	}
 operator VkBufferMemoryRequirementsInfo2 const&() const 
 	{	return *reinterpret_cast<const VkBufferMemoryRequirementsInfo2*>(this);	}
 operator VkBufferMemoryRequirementsInfo2 &() 
 	{	return *reinterpret_cast<VkBufferMemoryRequirementsInfo2*>(this);	}
+
+
+S_buffer_memory_requirements_info2(){}
+S_buffer_memory_requirements_info2(VkBufferMemoryRequirementsInfo2& rhs)
+	{	memcpy( this, &rhs, sizeof( S_buffer_memory_requirements_info2 ) );	}
+S_buffer_memory_requirements_info2(
+	VkBuffer buffer_)
+	:buffer(buffer_)
+{}
 };
 static_assert(
 	sizeof(S_buffer_memory_requirements_info2) == sizeof(VkBufferMemoryRequirementsInfo2),
@@ -17546,24 +18813,25 @@ private:
 public:
 	F_image_aspect planeAspect;
 
-VkImagePlaneMemoryRequirementsInfo*const get_vkptr(){return reinterpret_cast<VkImagePlaneMemoryRequirementsInfo*>(this);}
-
-S_image_plane_memory_requirements_info(){}
-
-S_image_plane_memory_requirements_info(
-	F_image_aspect planeAspect_)
-	:planeAspect(planeAspect_)
-{
-}
-
-S_image_plane_memory_requirements_info( VkImagePlaneMemoryRequirementsInfo const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_image_plane_memory_requirements_info ) );	}
+operator VkImagePlaneMemoryRequirementsInfo*()
+	{	return reinterpret_cast<VkImagePlaneMemoryRequirementsInfo*>(this);	}
+operator const VkImagePlaneMemoryRequirementsInfo*() const
+	{	return reinterpret_cast<const VkImagePlaneMemoryRequirementsInfo*>(this);	}
 S_image_plane_memory_requirements_info& operator=( VkImagePlaneMemoryRequirementsInfo const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_image_plane_memory_requirements_info ) ); return *this;	}
 operator VkImagePlaneMemoryRequirementsInfo const&() const 
 	{	return *reinterpret_cast<const VkImagePlaneMemoryRequirementsInfo*>(this);	}
 operator VkImagePlaneMemoryRequirementsInfo &() 
 	{	return *reinterpret_cast<VkImagePlaneMemoryRequirementsInfo*>(this);	}
+
+
+S_image_plane_memory_requirements_info(){}
+S_image_plane_memory_requirements_info(VkImagePlaneMemoryRequirementsInfo& rhs)
+	{	memcpy( this, &rhs, sizeof( S_image_plane_memory_requirements_info ) );	}
+S_image_plane_memory_requirements_info(
+	F_image_aspect planeAspect_)
+	:planeAspect(planeAspect_)
+{}
 
 friend S_image_memory_requirements_info2;
 };
@@ -17582,24 +18850,25 @@ private:
 public:
 	VkImage image;
 
-VkImageMemoryRequirementsInfo2*const get_vkptr(){return reinterpret_cast<VkImageMemoryRequirementsInfo2*>(this);}
-
-S_image_memory_requirements_info2(){}
-
-S_image_memory_requirements_info2(
-	VkImage image_)
-	:image(image_)
-{
-}
-
-S_image_memory_requirements_info2( VkImageMemoryRequirementsInfo2 const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_image_memory_requirements_info2 ) );	}
+operator VkImageMemoryRequirementsInfo2*()
+	{	return reinterpret_cast<VkImageMemoryRequirementsInfo2*>(this);	}
+operator const VkImageMemoryRequirementsInfo2*() const
+	{	return reinterpret_cast<const VkImageMemoryRequirementsInfo2*>(this);	}
 S_image_memory_requirements_info2& operator=( VkImageMemoryRequirementsInfo2 const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_image_memory_requirements_info2 ) ); return *this;	}
 operator VkImageMemoryRequirementsInfo2 const&() const 
 	{	return *reinterpret_cast<const VkImageMemoryRequirementsInfo2*>(this);	}
 operator VkImageMemoryRequirementsInfo2 &() 
 	{	return *reinterpret_cast<VkImageMemoryRequirementsInfo2*>(this);	}
+
+
+S_image_memory_requirements_info2(){}
+S_image_memory_requirements_info2(VkImageMemoryRequirementsInfo2& rhs)
+	{	memcpy( this, &rhs, sizeof( S_image_memory_requirements_info2 ) );	}
+S_image_memory_requirements_info2(
+	VkImage image_)
+	:image(image_)
+{}
 
 S_image_memory_requirements_info2& n_image_plane_memory_requirements_info(S_image_plane_memory_requirements_info const& next_);
 };
@@ -17611,7 +18880,7 @@ struct N_image_memory_requirements_info2{
 private:
 	void* pNext = nullptr;
 public:
-void* get(){ return pNext; }
+operator void*() { return pNext; }
 N_image_memory_requirements_info2& n_image_plane_memory_requirements_info(S_image_plane_memory_requirements_info const& next_);
 };
 
@@ -17624,24 +18893,25 @@ private:
 public:
 	VkImage image;
 
-VkImageSparseMemoryRequirementsInfo2*const get_vkptr(){return reinterpret_cast<VkImageSparseMemoryRequirementsInfo2*>(this);}
-
-S_image_sparse_memory_requirements_info2(){}
-
-S_image_sparse_memory_requirements_info2(
-	VkImage image_)
-	:image(image_)
-{
-}
-
-S_image_sparse_memory_requirements_info2( VkImageSparseMemoryRequirementsInfo2 const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_image_sparse_memory_requirements_info2 ) );	}
+operator VkImageSparseMemoryRequirementsInfo2*()
+	{	return reinterpret_cast<VkImageSparseMemoryRequirementsInfo2*>(this);	}
+operator const VkImageSparseMemoryRequirementsInfo2*() const
+	{	return reinterpret_cast<const VkImageSparseMemoryRequirementsInfo2*>(this);	}
 S_image_sparse_memory_requirements_info2& operator=( VkImageSparseMemoryRequirementsInfo2 const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_image_sparse_memory_requirements_info2 ) ); return *this;	}
 operator VkImageSparseMemoryRequirementsInfo2 const&() const 
 	{	return *reinterpret_cast<const VkImageSparseMemoryRequirementsInfo2*>(this);	}
 operator VkImageSparseMemoryRequirementsInfo2 &() 
 	{	return *reinterpret_cast<VkImageSparseMemoryRequirementsInfo2*>(this);	}
+
+
+S_image_sparse_memory_requirements_info2(){}
+S_image_sparse_memory_requirements_info2(VkImageSparseMemoryRequirementsInfo2& rhs)
+	{	memcpy( this, &rhs, sizeof( S_image_sparse_memory_requirements_info2 ) );	}
+S_image_sparse_memory_requirements_info2(
+	VkImage image_)
+	:image(image_)
+{}
 };
 static_assert(
 	sizeof(S_image_sparse_memory_requirements_info2) == sizeof(VkImageSparseMemoryRequirementsInfo2),
@@ -17659,26 +18929,27 @@ public:
 	VkBool32 prefersDedicatedAllocation;
 	VkBool32 requiresDedicatedAllocation;
 
-VkMemoryDedicatedRequirements*const get_vkptr(){return reinterpret_cast<VkMemoryDedicatedRequirements*>(this);}
-
-S_memory_dedicated_requirements(){}
-
-S_memory_dedicated_requirements(
-	VkBool32 prefersDedicatedAllocation_,
-	VkBool32 requiresDedicatedAllocation_)
-	:prefersDedicatedAllocation(prefersDedicatedAllocation_)
-	,requiresDedicatedAllocation(requiresDedicatedAllocation_)
-{
-}
-
-S_memory_dedicated_requirements( VkMemoryDedicatedRequirements const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_memory_dedicated_requirements ) );	}
+operator VkMemoryDedicatedRequirements*()
+	{	return reinterpret_cast<VkMemoryDedicatedRequirements*>(this);	}
+operator const VkMemoryDedicatedRequirements*() const
+	{	return reinterpret_cast<const VkMemoryDedicatedRequirements*>(this);	}
 S_memory_dedicated_requirements& operator=( VkMemoryDedicatedRequirements const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_memory_dedicated_requirements ) ); return *this;	}
 operator VkMemoryDedicatedRequirements const&() const 
 	{	return *reinterpret_cast<const VkMemoryDedicatedRequirements*>(this);	}
 operator VkMemoryDedicatedRequirements &() 
 	{	return *reinterpret_cast<VkMemoryDedicatedRequirements*>(this);	}
+
+
+S_memory_dedicated_requirements(){}
+S_memory_dedicated_requirements(VkMemoryDedicatedRequirements& rhs)
+	{	memcpy( this, &rhs, sizeof( S_memory_dedicated_requirements ) );	}
+S_memory_dedicated_requirements(
+	VkBool32 prefersDedicatedAllocation_,
+	VkBool32 requiresDedicatedAllocation_)
+	:prefersDedicatedAllocation(prefersDedicatedAllocation_)
+	,requiresDedicatedAllocation(requiresDedicatedAllocation_)
+{}
 
 friend S_memory_requirements2;
 };
@@ -17698,24 +18969,25 @@ private:
 public:
 	S_memory_requirements memoryRequirements;
 
-VkMemoryRequirements2*const get_vkptr(){return reinterpret_cast<VkMemoryRequirements2*>(this);}
-
-S_memory_requirements2(){}
-
-S_memory_requirements2(
-	S_memory_requirements memoryRequirements_)
-	:memoryRequirements(memoryRequirements_)
-{
-}
-
-S_memory_requirements2( VkMemoryRequirements2 const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_memory_requirements2 ) );	}
+operator VkMemoryRequirements2*()
+	{	return reinterpret_cast<VkMemoryRequirements2*>(this);	}
+operator const VkMemoryRequirements2*() const
+	{	return reinterpret_cast<const VkMemoryRequirements2*>(this);	}
 S_memory_requirements2& operator=( VkMemoryRequirements2 const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_memory_requirements2 ) ); return *this;	}
 operator VkMemoryRequirements2 const&() const 
 	{	return *reinterpret_cast<const VkMemoryRequirements2*>(this);	}
 operator VkMemoryRequirements2 &() 
 	{	return *reinterpret_cast<VkMemoryRequirements2*>(this);	}
+
+
+S_memory_requirements2(){}
+S_memory_requirements2(VkMemoryRequirements2& rhs)
+	{	memcpy( this, &rhs, sizeof( S_memory_requirements2 ) );	}
+S_memory_requirements2(
+	S_memory_requirements memoryRequirements_)
+	:memoryRequirements(memoryRequirements_)
+{}
 
 S_memory_requirements2& n_memory_dedicated_requirements(S_memory_dedicated_requirements const& next_);
 };
@@ -17727,7 +18999,7 @@ struct N_memory_requirements2{
 private:
 	void* pNext = nullptr;
 public:
-void* get(){ return pNext; }
+operator void*() { return pNext; }
 N_memory_requirements2& n_memory_dedicated_requirements(S_memory_dedicated_requirements const& next_);
 };
 
@@ -17741,24 +19013,25 @@ private:
 public:
 	S_sparse_image_memory_requirements memoryRequirements;
 
-VkSparseImageMemoryRequirements2*const get_vkptr(){return reinterpret_cast<VkSparseImageMemoryRequirements2*>(this);}
-
-S_sparse_image_memory_requirements2(){}
-
-S_sparse_image_memory_requirements2(
-	S_sparse_image_memory_requirements memoryRequirements_)
-	:memoryRequirements(memoryRequirements_)
-{
-}
-
-S_sparse_image_memory_requirements2( VkSparseImageMemoryRequirements2 const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_sparse_image_memory_requirements2 ) );	}
+operator VkSparseImageMemoryRequirements2*()
+	{	return reinterpret_cast<VkSparseImageMemoryRequirements2*>(this);	}
+operator const VkSparseImageMemoryRequirements2*() const
+	{	return reinterpret_cast<const VkSparseImageMemoryRequirements2*>(this);	}
 S_sparse_image_memory_requirements2& operator=( VkSparseImageMemoryRequirements2 const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_sparse_image_memory_requirements2 ) ); return *this;	}
 operator VkSparseImageMemoryRequirements2 const&() const 
 	{	return *reinterpret_cast<const VkSparseImageMemoryRequirements2*>(this);	}
 operator VkSparseImageMemoryRequirements2 &() 
 	{	return *reinterpret_cast<VkSparseImageMemoryRequirements2*>(this);	}
+
+
+S_sparse_image_memory_requirements2(){}
+S_sparse_image_memory_requirements2(VkSparseImageMemoryRequirements2& rhs)
+	{	memcpy( this, &rhs, sizeof( S_sparse_image_memory_requirements2 ) );	}
+S_sparse_image_memory_requirements2(
+	S_sparse_image_memory_requirements memoryRequirements_)
+	:memoryRequirements(memoryRequirements_)
+{}
 };
 static_assert(
 	sizeof(S_sparse_image_memory_requirements2) == sizeof(VkSparseImageMemoryRequirements2),
@@ -17782,10 +19055,21 @@ public:
 	E_filter chromaFilter;
 	VkBool32 forceExplicitReconstruction;
 
-VkSamplerYcbcrConversionCreateInfo*const get_vkptr(){return reinterpret_cast<VkSamplerYcbcrConversionCreateInfo*>(this);}
+operator VkSamplerYcbcrConversionCreateInfo*()
+	{	return reinterpret_cast<VkSamplerYcbcrConversionCreateInfo*>(this);	}
+operator const VkSamplerYcbcrConversionCreateInfo*() const
+	{	return reinterpret_cast<const VkSamplerYcbcrConversionCreateInfo*>(this);	}
+S_sampler_ycbcr_conversion_create_info& operator=( VkSamplerYcbcrConversionCreateInfo const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_sampler_ycbcr_conversion_create_info ) ); return *this;	}
+operator VkSamplerYcbcrConversionCreateInfo const&() const 
+	{	return *reinterpret_cast<const VkSamplerYcbcrConversionCreateInfo*>(this);	}
+operator VkSamplerYcbcrConversionCreateInfo &() 
+	{	return *reinterpret_cast<VkSamplerYcbcrConversionCreateInfo*>(this);	}
+
 
 S_sampler_ycbcr_conversion_create_info(){}
-
+S_sampler_ycbcr_conversion_create_info(VkSamplerYcbcrConversionCreateInfo& rhs)
+	{	memcpy( this, &rhs, sizeof( S_sampler_ycbcr_conversion_create_info ) );	}
 S_sampler_ycbcr_conversion_create_info(
 	E_format format_,
 	E_sampler_ycbcr_model_conversion ycbcrModel_,
@@ -17803,17 +19087,7 @@ S_sampler_ycbcr_conversion_create_info(
 	,yChromaOffset(yChromaOffset_)
 	,chromaFilter(chromaFilter_)
 	,forceExplicitReconstruction(forceExplicitReconstruction_)
-{
-}
-
-S_sampler_ycbcr_conversion_create_info( VkSamplerYcbcrConversionCreateInfo const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_sampler_ycbcr_conversion_create_info ) );	}
-S_sampler_ycbcr_conversion_create_info& operator=( VkSamplerYcbcrConversionCreateInfo const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_sampler_ycbcr_conversion_create_info ) ); return *this;	}
-operator VkSamplerYcbcrConversionCreateInfo const&() const 
-	{	return *reinterpret_cast<const VkSamplerYcbcrConversionCreateInfo*>(this);	}
-operator VkSamplerYcbcrConversionCreateInfo &() 
-	{	return *reinterpret_cast<VkSamplerYcbcrConversionCreateInfo*>(this);	}
+{}
 
 #ifdef VK_USE_PLATFORM_ANDROID_KHR
 S_sampler_ycbcr_conversion_create_info& n_external_format_ANDROID(S_external_format_ANDROID const& next_);
@@ -17827,7 +19101,7 @@ struct N_sampler_ycbcr_conversion_create_info{
 private:
 	void* pNext = nullptr;
 public:
-void* get(){ return pNext; }
+operator void*() { return pNext; }
 #ifdef VK_USE_PLATFORM_ANDROID_KHR
 N_sampler_ycbcr_conversion_create_info& n_external_format_ANDROID(S_external_format_ANDROID const& next_);
 #endif
@@ -17844,10 +19118,21 @@ public:
 	VkDeviceSize offset;
 	F_conditional_rendering_EXT flags;
 
-VkConditionalRenderingBeginInfoEXT*const get_vkptr(){return reinterpret_cast<VkConditionalRenderingBeginInfoEXT*>(this);}
+operator VkConditionalRenderingBeginInfoEXT*()
+	{	return reinterpret_cast<VkConditionalRenderingBeginInfoEXT*>(this);	}
+operator const VkConditionalRenderingBeginInfoEXT*() const
+	{	return reinterpret_cast<const VkConditionalRenderingBeginInfoEXT*>(this);	}
+S_conditional_rendering_begin_info_EXT& operator=( VkConditionalRenderingBeginInfoEXT const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_conditional_rendering_begin_info_EXT ) ); return *this;	}
+operator VkConditionalRenderingBeginInfoEXT const&() const 
+	{	return *reinterpret_cast<const VkConditionalRenderingBeginInfoEXT*>(this);	}
+operator VkConditionalRenderingBeginInfoEXT &() 
+	{	return *reinterpret_cast<VkConditionalRenderingBeginInfoEXT*>(this);	}
+
 
 S_conditional_rendering_begin_info_EXT(){}
-
+S_conditional_rendering_begin_info_EXT(VkConditionalRenderingBeginInfoEXT& rhs)
+	{	memcpy( this, &rhs, sizeof( S_conditional_rendering_begin_info_EXT ) );	}
 S_conditional_rendering_begin_info_EXT(
 	VkBuffer buffer_,
 	VkDeviceSize offset_,
@@ -17855,17 +19140,7 @@ S_conditional_rendering_begin_info_EXT(
 	:buffer(buffer_)
 	,offset(offset_)
 	,flags(flags_)
-{
-}
-
-S_conditional_rendering_begin_info_EXT( VkConditionalRenderingBeginInfoEXT const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_conditional_rendering_begin_info_EXT ) );	}
-S_conditional_rendering_begin_info_EXT& operator=( VkConditionalRenderingBeginInfoEXT const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_conditional_rendering_begin_info_EXT ) ); return *this;	}
-operator VkConditionalRenderingBeginInfoEXT const&() const 
-	{	return *reinterpret_cast<const VkConditionalRenderingBeginInfoEXT*>(this);	}
-operator VkConditionalRenderingBeginInfoEXT &() 
-	{	return *reinterpret_cast<VkConditionalRenderingBeginInfoEXT*>(this);	}
+{}
 };
 static_assert(
 	sizeof(S_conditional_rendering_begin_info_EXT) == sizeof(VkConditionalRenderingBeginInfoEXT),
@@ -17882,10 +19157,21 @@ public:
 	uint32_t queueFamilyIndex;
 	uint32_t queueIndex;
 
-VkDeviceQueueInfo2*const get_vkptr(){return reinterpret_cast<VkDeviceQueueInfo2*>(this);}
+operator VkDeviceQueueInfo2*()
+	{	return reinterpret_cast<VkDeviceQueueInfo2*>(this);	}
+operator const VkDeviceQueueInfo2*() const
+	{	return reinterpret_cast<const VkDeviceQueueInfo2*>(this);	}
+S_device_queue_info2& operator=( VkDeviceQueueInfo2 const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_device_queue_info2 ) ); return *this;	}
+operator VkDeviceQueueInfo2 const&() const 
+	{	return *reinterpret_cast<const VkDeviceQueueInfo2*>(this);	}
+operator VkDeviceQueueInfo2 &() 
+	{	return *reinterpret_cast<VkDeviceQueueInfo2*>(this);	}
+
 
 S_device_queue_info2(){}
-
+S_device_queue_info2(VkDeviceQueueInfo2& rhs)
+	{	memcpy( this, &rhs, sizeof( S_device_queue_info2 ) );	}
 S_device_queue_info2(
 	F_device_queue_create flags_,
 	uint32_t queueFamilyIndex_,
@@ -17893,17 +19179,7 @@ S_device_queue_info2(
 	:flags(flags_)
 	,queueFamilyIndex(queueFamilyIndex_)
 	,queueIndex(queueIndex_)
-{
-}
-
-S_device_queue_info2( VkDeviceQueueInfo2 const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_device_queue_info2 ) );	}
-S_device_queue_info2& operator=( VkDeviceQueueInfo2 const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_device_queue_info2 ) ); return *this;	}
-operator VkDeviceQueueInfo2 const&() const 
-	{	return *reinterpret_cast<const VkDeviceQueueInfo2*>(this);	}
-operator VkDeviceQueueInfo2 &() 
-	{	return *reinterpret_cast<VkDeviceQueueInfo2*>(this);	}
+{}
 };
 static_assert(
 	sizeof(S_device_queue_info2) == sizeof(VkDeviceQueueInfo2),
@@ -17919,24 +19195,25 @@ private:
 public:
 	S_extent_2d maxSampleLocationGridSize;
 
-VkMultisamplePropertiesEXT*const get_vkptr(){return reinterpret_cast<VkMultisamplePropertiesEXT*>(this);}
-
-S_multisample_properties_EXT(){}
-
-S_multisample_properties_EXT(
-	S_extent_2d maxSampleLocationGridSize_)
-	:maxSampleLocationGridSize(maxSampleLocationGridSize_)
-{
-}
-
-S_multisample_properties_EXT( VkMultisamplePropertiesEXT const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_multisample_properties_EXT ) );	}
+operator VkMultisamplePropertiesEXT*()
+	{	return reinterpret_cast<VkMultisamplePropertiesEXT*>(this);	}
+operator const VkMultisamplePropertiesEXT*() const
+	{	return reinterpret_cast<const VkMultisamplePropertiesEXT*>(this);	}
 S_multisample_properties_EXT& operator=( VkMultisamplePropertiesEXT const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_multisample_properties_EXT ) ); return *this;	}
 operator VkMultisamplePropertiesEXT const&() const 
 	{	return *reinterpret_cast<const VkMultisamplePropertiesEXT*>(this);	}
 operator VkMultisamplePropertiesEXT &() 
 	{	return *reinterpret_cast<VkMultisamplePropertiesEXT*>(this);	}
+
+
+S_multisample_properties_EXT(){}
+S_multisample_properties_EXT(VkMultisamplePropertiesEXT& rhs)
+	{	memcpy( this, &rhs, sizeof( S_multisample_properties_EXT ) );	}
+S_multisample_properties_EXT(
+	S_extent_2d maxSampleLocationGridSize_)
+	:maxSampleLocationGridSize(maxSampleLocationGridSize_)
+{}
 };
 static_assert(
 	sizeof(S_multisample_properties_EXT) == sizeof(VkMultisamplePropertiesEXT),
@@ -17953,10 +19230,21 @@ public:
 	size_t initialDataSize;
 	const void * pInitialData;
 
-VkValidationCacheCreateInfoEXT*const get_vkptr(){return reinterpret_cast<VkValidationCacheCreateInfoEXT*>(this);}
+operator VkValidationCacheCreateInfoEXT*()
+	{	return reinterpret_cast<VkValidationCacheCreateInfoEXT*>(this);	}
+operator const VkValidationCacheCreateInfoEXT*() const
+	{	return reinterpret_cast<const VkValidationCacheCreateInfoEXT*>(this);	}
+S_validation_cache_create_info_EXT& operator=( VkValidationCacheCreateInfoEXT const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_validation_cache_create_info_EXT ) ); return *this;	}
+operator VkValidationCacheCreateInfoEXT const&() const 
+	{	return *reinterpret_cast<const VkValidationCacheCreateInfoEXT*>(this);	}
+operator VkValidationCacheCreateInfoEXT &() 
+	{	return *reinterpret_cast<VkValidationCacheCreateInfoEXT*>(this);	}
+
 
 S_validation_cache_create_info_EXT(){}
-
+S_validation_cache_create_info_EXT(VkValidationCacheCreateInfoEXT& rhs)
+	{	memcpy( this, &rhs, sizeof( S_validation_cache_create_info_EXT ) );	}
 S_validation_cache_create_info_EXT(
 	VkValidationCacheCreateFlagsEXT flags_,
 	size_t initialDataSize_,
@@ -17964,17 +19252,7 @@ S_validation_cache_create_info_EXT(
 	:flags(flags_)
 	,initialDataSize(initialDataSize_)
 	,pInitialData(pInitialData_)
-{
-}
-
-S_validation_cache_create_info_EXT( VkValidationCacheCreateInfoEXT const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_validation_cache_create_info_EXT ) );	}
-S_validation_cache_create_info_EXT& operator=( VkValidationCacheCreateInfoEXT const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_validation_cache_create_info_EXT ) ); return *this;	}
-operator VkValidationCacheCreateInfoEXT const&() const 
-	{	return *reinterpret_cast<const VkValidationCacheCreateInfoEXT*>(this);	}
-operator VkValidationCacheCreateInfoEXT &() 
-	{	return *reinterpret_cast<VkValidationCacheCreateInfoEXT*>(this);	}
+{}
 };
 static_assert(
 	sizeof(S_validation_cache_create_info_EXT) == sizeof(VkValidationCacheCreateInfoEXT),
@@ -17991,24 +19269,25 @@ private:
 public:
 	uint32_t maxVariableDescriptorCount;
 
-VkDescriptorSetVariableDescriptorCountLayoutSupportEXT*const get_vkptr(){return reinterpret_cast<VkDescriptorSetVariableDescriptorCountLayoutSupportEXT*>(this);}
-
-S_descriptor_set_variable_descriptor_count_layout_support_EXT(){}
-
-S_descriptor_set_variable_descriptor_count_layout_support_EXT(
-	uint32_t maxVariableDescriptorCount_)
-	:maxVariableDescriptorCount(maxVariableDescriptorCount_)
-{
-}
-
-S_descriptor_set_variable_descriptor_count_layout_support_EXT( VkDescriptorSetVariableDescriptorCountLayoutSupportEXT const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_descriptor_set_variable_descriptor_count_layout_support_EXT ) );	}
+operator VkDescriptorSetVariableDescriptorCountLayoutSupportEXT*()
+	{	return reinterpret_cast<VkDescriptorSetVariableDescriptorCountLayoutSupportEXT*>(this);	}
+operator const VkDescriptorSetVariableDescriptorCountLayoutSupportEXT*() const
+	{	return reinterpret_cast<const VkDescriptorSetVariableDescriptorCountLayoutSupportEXT*>(this);	}
 S_descriptor_set_variable_descriptor_count_layout_support_EXT& operator=( VkDescriptorSetVariableDescriptorCountLayoutSupportEXT const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_descriptor_set_variable_descriptor_count_layout_support_EXT ) ); return *this;	}
 operator VkDescriptorSetVariableDescriptorCountLayoutSupportEXT const&() const 
 	{	return *reinterpret_cast<const VkDescriptorSetVariableDescriptorCountLayoutSupportEXT*>(this);	}
 operator VkDescriptorSetVariableDescriptorCountLayoutSupportEXT &() 
 	{	return *reinterpret_cast<VkDescriptorSetVariableDescriptorCountLayoutSupportEXT*>(this);	}
+
+
+S_descriptor_set_variable_descriptor_count_layout_support_EXT(){}
+S_descriptor_set_variable_descriptor_count_layout_support_EXT(VkDescriptorSetVariableDescriptorCountLayoutSupportEXT& rhs)
+	{	memcpy( this, &rhs, sizeof( S_descriptor_set_variable_descriptor_count_layout_support_EXT ) );	}
+S_descriptor_set_variable_descriptor_count_layout_support_EXT(
+	uint32_t maxVariableDescriptorCount_)
+	:maxVariableDescriptorCount(maxVariableDescriptorCount_)
+{}
 
 friend S_descriptor_set_layout_support;
 };
@@ -18028,24 +19307,25 @@ private:
 public:
 	VkBool32 supported;
 
-VkDescriptorSetLayoutSupport*const get_vkptr(){return reinterpret_cast<VkDescriptorSetLayoutSupport*>(this);}
-
-S_descriptor_set_layout_support(){}
-
-S_descriptor_set_layout_support(
-	VkBool32 supported_)
-	:supported(supported_)
-{
-}
-
-S_descriptor_set_layout_support( VkDescriptorSetLayoutSupport const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_descriptor_set_layout_support ) );	}
+operator VkDescriptorSetLayoutSupport*()
+	{	return reinterpret_cast<VkDescriptorSetLayoutSupport*>(this);	}
+operator const VkDescriptorSetLayoutSupport*() const
+	{	return reinterpret_cast<const VkDescriptorSetLayoutSupport*>(this);	}
 S_descriptor_set_layout_support& operator=( VkDescriptorSetLayoutSupport const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_descriptor_set_layout_support ) ); return *this;	}
 operator VkDescriptorSetLayoutSupport const&() const 
 	{	return *reinterpret_cast<const VkDescriptorSetLayoutSupport*>(this);	}
 operator VkDescriptorSetLayoutSupport &() 
 	{	return *reinterpret_cast<VkDescriptorSetLayoutSupport*>(this);	}
+
+
+S_descriptor_set_layout_support(){}
+S_descriptor_set_layout_support(VkDescriptorSetLayoutSupport& rhs)
+	{	memcpy( this, &rhs, sizeof( S_descriptor_set_layout_support ) );	}
+S_descriptor_set_layout_support(
+	VkBool32 supported_)
+	:supported(supported_)
+{}
 
 S_descriptor_set_layout_support& n_descriptor_set_variable_descriptor_count_layout_support_EXT(S_descriptor_set_variable_descriptor_count_layout_support_EXT const& next_);
 };
@@ -18057,7 +19337,7 @@ struct N_descriptor_set_layout_support{
 private:
 	void* pNext = nullptr;
 public:
-void* get(){ return pNext; }
+operator void*() { return pNext; }
 N_descriptor_set_layout_support& n_descriptor_set_variable_descriptor_count_layout_support_EXT(S_descriptor_set_variable_descriptor_count_layout_support_EXT const& next_);
 };
 
@@ -18074,10 +19354,21 @@ public:
 	int format;
 	int usage;
 
-VkNativeBufferANDROID*const get_vkptr(){return reinterpret_cast<VkNativeBufferANDROID*>(this);}
+operator VkNativeBufferANDROID*()
+	{	return reinterpret_cast<VkNativeBufferANDROID*>(this);	}
+operator const VkNativeBufferANDROID*() const
+	{	return reinterpret_cast<const VkNativeBufferANDROID*>(this);	}
+S_native_buffer_ANDROID& operator=( VkNativeBufferANDROID const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_native_buffer_ANDROID ) ); return *this;	}
+operator VkNativeBufferANDROID const&() const 
+	{	return *reinterpret_cast<const VkNativeBufferANDROID*>(this);	}
+operator VkNativeBufferANDROID &() 
+	{	return *reinterpret_cast<VkNativeBufferANDROID*>(this);	}
+
 
 S_native_buffer_ANDROID(){}
-
+S_native_buffer_ANDROID(VkNativeBufferANDROID& rhs)
+	{	memcpy( this, &rhs, sizeof( S_native_buffer_ANDROID ) );	}
 S_native_buffer_ANDROID(
 	const void * handle_,
 	int stride_,
@@ -18087,17 +19378,7 @@ S_native_buffer_ANDROID(
 	,stride(stride_)
 	,format(format_)
 	,usage(usage_)
-{
-}
-
-S_native_buffer_ANDROID( VkNativeBufferANDROID const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_native_buffer_ANDROID ) );	}
-S_native_buffer_ANDROID& operator=( VkNativeBufferANDROID const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_native_buffer_ANDROID ) ); return *this;	}
-operator VkNativeBufferANDROID const&() const 
-	{	return *reinterpret_cast<const VkNativeBufferANDROID*>(this);	}
-operator VkNativeBufferANDROID &() 
-	{	return *reinterpret_cast<VkNativeBufferANDROID*>(this);	}
+{}
 };
 static_assert(
 	sizeof(S_native_buffer_ANDROID) == sizeof(VkNativeBufferANDROID),
@@ -18114,7 +19395,17 @@ struct		S_shader_resource_usage_AMD{
 	size_t ldsUsageSizeInBytes;
 	size_t scratchMemUsageInBytes;
 
-VkShaderResourceUsageAMD*const get_vkptr(){return reinterpret_cast<VkShaderResourceUsageAMD*>(this);}
+operator VkShaderResourceUsageAMD*()
+	{	return reinterpret_cast<VkShaderResourceUsageAMD*>(this);	}
+operator const VkShaderResourceUsageAMD*() const
+	{	return reinterpret_cast<const VkShaderResourceUsageAMD*>(this);	}
+S_shader_resource_usage_AMD& operator=( VkShaderResourceUsageAMD const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_shader_resource_usage_AMD ) ); return *this;	}
+operator VkShaderResourceUsageAMD const&() const 
+	{	return *reinterpret_cast<const VkShaderResourceUsageAMD*>(this);	}
+operator VkShaderResourceUsageAMD &() 
+	{	return *reinterpret_cast<VkShaderResourceUsageAMD*>(this);	}
+
 };
 
 /*	VkShaderStatisticsInfoAMD
@@ -18129,7 +19420,17 @@ struct		S_shader_statistics_info_AMD{
 	uint32_t numAvailableSgprs;
 	uint32_t computeWorkGroupSize[3];
 
-VkShaderStatisticsInfoAMD*const get_vkptr(){return reinterpret_cast<VkShaderStatisticsInfoAMD*>(this);}
+operator VkShaderStatisticsInfoAMD*()
+	{	return reinterpret_cast<VkShaderStatisticsInfoAMD*>(this);	}
+operator const VkShaderStatisticsInfoAMD*() const
+	{	return reinterpret_cast<const VkShaderStatisticsInfoAMD*>(this);	}
+S_shader_statistics_info_AMD& operator=( VkShaderStatisticsInfoAMD const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_shader_statistics_info_AMD ) ); return *this;	}
+operator VkShaderStatisticsInfoAMD const&() const 
+	{	return *reinterpret_cast<const VkShaderStatisticsInfoAMD*>(this);	}
+operator VkShaderStatisticsInfoAMD &() 
+	{	return *reinterpret_cast<VkShaderStatisticsInfoAMD*>(this);	}
+
 };
 
 /*	VkDebugUtilsObjectNameInfoEXT
@@ -18143,10 +19444,21 @@ public:
 	uint64_t objectHandle;
 	const char * pObjectName;
 
-VkDebugUtilsObjectNameInfoEXT*const get_vkptr(){return reinterpret_cast<VkDebugUtilsObjectNameInfoEXT*>(this);}
+operator VkDebugUtilsObjectNameInfoEXT*()
+	{	return reinterpret_cast<VkDebugUtilsObjectNameInfoEXT*>(this);	}
+operator const VkDebugUtilsObjectNameInfoEXT*() const
+	{	return reinterpret_cast<const VkDebugUtilsObjectNameInfoEXT*>(this);	}
+S_debug_utils_object_name_info_EXT& operator=( VkDebugUtilsObjectNameInfoEXT const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_debug_utils_object_name_info_EXT ) ); return *this;	}
+operator VkDebugUtilsObjectNameInfoEXT const&() const 
+	{	return *reinterpret_cast<const VkDebugUtilsObjectNameInfoEXT*>(this);	}
+operator VkDebugUtilsObjectNameInfoEXT &() 
+	{	return *reinterpret_cast<VkDebugUtilsObjectNameInfoEXT*>(this);	}
+
 
 S_debug_utils_object_name_info_EXT(){}
-
+S_debug_utils_object_name_info_EXT(VkDebugUtilsObjectNameInfoEXT& rhs)
+	{	memcpy( this, &rhs, sizeof( S_debug_utils_object_name_info_EXT ) );	}
 S_debug_utils_object_name_info_EXT(
 	E_object_type objectType_,
 	uint64_t objectHandle_,
@@ -18154,17 +19466,7 @@ S_debug_utils_object_name_info_EXT(
 	:objectType(objectType_)
 	,objectHandle(objectHandle_)
 	,pObjectName(pObjectName_)
-{
-}
-
-S_debug_utils_object_name_info_EXT( VkDebugUtilsObjectNameInfoEXT const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_debug_utils_object_name_info_EXT ) );	}
-S_debug_utils_object_name_info_EXT& operator=( VkDebugUtilsObjectNameInfoEXT const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_debug_utils_object_name_info_EXT ) ); return *this;	}
-operator VkDebugUtilsObjectNameInfoEXT const&() const 
-	{	return *reinterpret_cast<const VkDebugUtilsObjectNameInfoEXT*>(this);	}
-operator VkDebugUtilsObjectNameInfoEXT &() 
-	{	return *reinterpret_cast<VkDebugUtilsObjectNameInfoEXT*>(this);	}
+{}
 };
 static_assert(
 	sizeof(S_debug_utils_object_name_info_EXT) == sizeof(VkDebugUtilsObjectNameInfoEXT),
@@ -18183,10 +19485,21 @@ public:
 	size_t tagSize;
 	const void * pTag;
 
-VkDebugUtilsObjectTagInfoEXT*const get_vkptr(){return reinterpret_cast<VkDebugUtilsObjectTagInfoEXT*>(this);}
+operator VkDebugUtilsObjectTagInfoEXT*()
+	{	return reinterpret_cast<VkDebugUtilsObjectTagInfoEXT*>(this);	}
+operator const VkDebugUtilsObjectTagInfoEXT*() const
+	{	return reinterpret_cast<const VkDebugUtilsObjectTagInfoEXT*>(this);	}
+S_debug_utils_object_tag_info_EXT& operator=( VkDebugUtilsObjectTagInfoEXT const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_debug_utils_object_tag_info_EXT ) ); return *this;	}
+operator VkDebugUtilsObjectTagInfoEXT const&() const 
+	{	return *reinterpret_cast<const VkDebugUtilsObjectTagInfoEXT*>(this);	}
+operator VkDebugUtilsObjectTagInfoEXT &() 
+	{	return *reinterpret_cast<VkDebugUtilsObjectTagInfoEXT*>(this);	}
+
 
 S_debug_utils_object_tag_info_EXT(){}
-
+S_debug_utils_object_tag_info_EXT(VkDebugUtilsObjectTagInfoEXT& rhs)
+	{	memcpy( this, &rhs, sizeof( S_debug_utils_object_tag_info_EXT ) );	}
 S_debug_utils_object_tag_info_EXT(
 	E_object_type objectType_,
 	uint64_t objectHandle_,
@@ -18198,17 +19511,7 @@ S_debug_utils_object_tag_info_EXT(
 	,tagName(tagName_)
 	,tagSize(tagSize_)
 	,pTag(pTag_)
-{
-}
-
-S_debug_utils_object_tag_info_EXT( VkDebugUtilsObjectTagInfoEXT const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_debug_utils_object_tag_info_EXT ) );	}
-S_debug_utils_object_tag_info_EXT& operator=( VkDebugUtilsObjectTagInfoEXT const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_debug_utils_object_tag_info_EXT ) ); return *this;	}
-operator VkDebugUtilsObjectTagInfoEXT const&() const 
-	{	return *reinterpret_cast<const VkDebugUtilsObjectTagInfoEXT*>(this);	}
-operator VkDebugUtilsObjectTagInfoEXT &() 
-	{	return *reinterpret_cast<VkDebugUtilsObjectTagInfoEXT*>(this);	}
+{}
 };
 static_assert(
 	sizeof(S_debug_utils_object_tag_info_EXT) == sizeof(VkDebugUtilsObjectTagInfoEXT),
@@ -18224,10 +19527,21 @@ public:
 	const char * pLabelName;
 	float color[4];
 
-VkDebugUtilsLabelEXT*const get_vkptr(){return reinterpret_cast<VkDebugUtilsLabelEXT*>(this);}
+operator VkDebugUtilsLabelEXT*()
+	{	return reinterpret_cast<VkDebugUtilsLabelEXT*>(this);	}
+operator const VkDebugUtilsLabelEXT*() const
+	{	return reinterpret_cast<const VkDebugUtilsLabelEXT*>(this);	}
+S_debug_utils_label_EXT& operator=( VkDebugUtilsLabelEXT const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_debug_utils_label_EXT ) ); return *this;	}
+operator VkDebugUtilsLabelEXT const&() const 
+	{	return *reinterpret_cast<const VkDebugUtilsLabelEXT*>(this);	}
+operator VkDebugUtilsLabelEXT &() 
+	{	return *reinterpret_cast<VkDebugUtilsLabelEXT*>(this);	}
+
 
 S_debug_utils_label_EXT(){}
-
+S_debug_utils_label_EXT(VkDebugUtilsLabelEXT& rhs)
+	{	memcpy( this, &rhs, sizeof( S_debug_utils_label_EXT ) );	}
 S_debug_utils_label_EXT(
 	const char * pLabelName_,
 	float color_[4])
@@ -18235,15 +19549,6 @@ S_debug_utils_label_EXT(
 {
 memcpy(color,color_,sizeof(color) );
 }
-
-S_debug_utils_label_EXT( VkDebugUtilsLabelEXT const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_debug_utils_label_EXT ) );	}
-S_debug_utils_label_EXT& operator=( VkDebugUtilsLabelEXT const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_debug_utils_label_EXT ) ); return *this;	}
-operator VkDebugUtilsLabelEXT const&() const 
-	{	return *reinterpret_cast<const VkDebugUtilsLabelEXT*>(this);	}
-operator VkDebugUtilsLabelEXT &() 
-	{	return *reinterpret_cast<VkDebugUtilsLabelEXT*>(this);	}
 };
 static_assert(
 	sizeof(S_debug_utils_label_EXT) == sizeof(VkDebugUtilsLabelEXT),
@@ -18267,10 +19572,21 @@ public:
 	uint32_t objectCount;
 	S_debug_utils_object_name_info_EXT * pObjects;
 
-VkDebugUtilsMessengerCallbackDataEXT*const get_vkptr(){return reinterpret_cast<VkDebugUtilsMessengerCallbackDataEXT*>(this);}
+operator VkDebugUtilsMessengerCallbackDataEXT*()
+	{	return reinterpret_cast<VkDebugUtilsMessengerCallbackDataEXT*>(this);	}
+operator const VkDebugUtilsMessengerCallbackDataEXT*() const
+	{	return reinterpret_cast<const VkDebugUtilsMessengerCallbackDataEXT*>(this);	}
+S_debug_utils_messenger_callback_data_EXT& operator=( VkDebugUtilsMessengerCallbackDataEXT const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_debug_utils_messenger_callback_data_EXT ) ); return *this;	}
+operator VkDebugUtilsMessengerCallbackDataEXT const&() const 
+	{	return *reinterpret_cast<const VkDebugUtilsMessengerCallbackDataEXT*>(this);	}
+operator VkDebugUtilsMessengerCallbackDataEXT &() 
+	{	return *reinterpret_cast<VkDebugUtilsMessengerCallbackDataEXT*>(this);	}
+
 
 S_debug_utils_messenger_callback_data_EXT(){}
-
+S_debug_utils_messenger_callback_data_EXT(VkDebugUtilsMessengerCallbackDataEXT& rhs)
+	{	memcpy( this, &rhs, sizeof( S_debug_utils_messenger_callback_data_EXT ) );	}
 S_debug_utils_messenger_callback_data_EXT(
 	VkDebugUtilsMessengerCallbackDataFlagsEXT flags_,
 	const char * pMessageIdName_,
@@ -18292,17 +19608,7 @@ S_debug_utils_messenger_callback_data_EXT(
 	,pCmdBufLabels(pCmdBufLabels_)
 	,objectCount(objectCount_)
 	,pObjects(pObjects_)
-{
-}
-
-S_debug_utils_messenger_callback_data_EXT( VkDebugUtilsMessengerCallbackDataEXT const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_debug_utils_messenger_callback_data_EXT ) );	}
-S_debug_utils_messenger_callback_data_EXT& operator=( VkDebugUtilsMessengerCallbackDataEXT const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_debug_utils_messenger_callback_data_EXT ) ); return *this;	}
-operator VkDebugUtilsMessengerCallbackDataEXT const&() const 
-	{	return *reinterpret_cast<const VkDebugUtilsMessengerCallbackDataEXT*>(this);	}
-operator VkDebugUtilsMessengerCallbackDataEXT &() 
-	{	return *reinterpret_cast<VkDebugUtilsMessengerCallbackDataEXT*>(this);	}
+{}
 };
 static_assert(
 	sizeof(S_debug_utils_messenger_callback_data_EXT) == sizeof(VkDebugUtilsMessengerCallbackDataEXT),
@@ -18317,24 +19623,25 @@ private:
 public:
 	uint32_t memoryTypeBits;
 
-VkMemoryHostPointerPropertiesEXT*const get_vkptr(){return reinterpret_cast<VkMemoryHostPointerPropertiesEXT*>(this);}
-
-S_memory_host_pointer_properties_EXT(){}
-
-S_memory_host_pointer_properties_EXT(
-	uint32_t memoryTypeBits_)
-	:memoryTypeBits(memoryTypeBits_)
-{
-}
-
-S_memory_host_pointer_properties_EXT( VkMemoryHostPointerPropertiesEXT const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_memory_host_pointer_properties_EXT ) );	}
+operator VkMemoryHostPointerPropertiesEXT*()
+	{	return reinterpret_cast<VkMemoryHostPointerPropertiesEXT*>(this);	}
+operator const VkMemoryHostPointerPropertiesEXT*() const
+	{	return reinterpret_cast<const VkMemoryHostPointerPropertiesEXT*>(this);	}
 S_memory_host_pointer_properties_EXT& operator=( VkMemoryHostPointerPropertiesEXT const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_memory_host_pointer_properties_EXT ) ); return *this;	}
 operator VkMemoryHostPointerPropertiesEXT const&() const 
 	{	return *reinterpret_cast<const VkMemoryHostPointerPropertiesEXT*>(this);	}
 operator VkMemoryHostPointerPropertiesEXT &() 
 	{	return *reinterpret_cast<VkMemoryHostPointerPropertiesEXT*>(this);	}
+
+
+S_memory_host_pointer_properties_EXT(){}
+S_memory_host_pointer_properties_EXT(VkMemoryHostPointerPropertiesEXT& rhs)
+	{	memcpy( this, &rhs, sizeof( S_memory_host_pointer_properties_EXT ) );	}
+S_memory_host_pointer_properties_EXT(
+	uint32_t memoryTypeBits_)
+	:memoryTypeBits(memoryTypeBits_)
+{}
 };
 static_assert(
 	sizeof(S_memory_host_pointer_properties_EXT) == sizeof(VkMemoryHostPointerPropertiesEXT),
@@ -18357,10 +19664,21 @@ public:
 	E_image_layout initialLayout;
 	E_image_layout finalLayout;
 
-VkAttachmentDescription2KHR*const get_vkptr(){return reinterpret_cast<VkAttachmentDescription2KHR*>(this);}
+operator VkAttachmentDescription2KHR*()
+	{	return reinterpret_cast<VkAttachmentDescription2KHR*>(this);	}
+operator const VkAttachmentDescription2KHR*() const
+	{	return reinterpret_cast<const VkAttachmentDescription2KHR*>(this);	}
+S_attachment_description2_KHR& operator=( VkAttachmentDescription2KHR const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_attachment_description2_KHR ) ); return *this;	}
+operator VkAttachmentDescription2KHR const&() const 
+	{	return *reinterpret_cast<const VkAttachmentDescription2KHR*>(this);	}
+operator VkAttachmentDescription2KHR &() 
+	{	return *reinterpret_cast<VkAttachmentDescription2KHR*>(this);	}
+
 
 S_attachment_description2_KHR(){}
-
+S_attachment_description2_KHR(VkAttachmentDescription2KHR& rhs)
+	{	memcpy( this, &rhs, sizeof( S_attachment_description2_KHR ) );	}
 S_attachment_description2_KHR(
 	F_attachment_description flags_,
 	E_format format_,
@@ -18380,17 +19698,7 @@ S_attachment_description2_KHR(
 	,stencilStoreOp(stencilStoreOp_)
 	,initialLayout(initialLayout_)
 	,finalLayout(finalLayout_)
-{
-}
-
-S_attachment_description2_KHR( VkAttachmentDescription2KHR const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_attachment_description2_KHR ) );	}
-S_attachment_description2_KHR& operator=( VkAttachmentDescription2KHR const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_attachment_description2_KHR ) ); return *this;	}
-operator VkAttachmentDescription2KHR const&() const 
-	{	return *reinterpret_cast<const VkAttachmentDescription2KHR*>(this);	}
-operator VkAttachmentDescription2KHR &() 
-	{	return *reinterpret_cast<VkAttachmentDescription2KHR*>(this);	}
+{}
 };
 static_assert(
 	sizeof(S_attachment_description2_KHR) == sizeof(VkAttachmentDescription2KHR),
@@ -18407,10 +19715,21 @@ public:
 	E_image_layout layout;
 	F_image_aspect aspectMask;
 
-VkAttachmentReference2KHR*const get_vkptr(){return reinterpret_cast<VkAttachmentReference2KHR*>(this);}
+operator VkAttachmentReference2KHR*()
+	{	return reinterpret_cast<VkAttachmentReference2KHR*>(this);	}
+operator const VkAttachmentReference2KHR*() const
+	{	return reinterpret_cast<const VkAttachmentReference2KHR*>(this);	}
+S_attachment_reference2_KHR& operator=( VkAttachmentReference2KHR const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_attachment_reference2_KHR ) ); return *this;	}
+operator VkAttachmentReference2KHR const&() const 
+	{	return *reinterpret_cast<const VkAttachmentReference2KHR*>(this);	}
+operator VkAttachmentReference2KHR &() 
+	{	return *reinterpret_cast<VkAttachmentReference2KHR*>(this);	}
+
 
 S_attachment_reference2_KHR(){}
-
+S_attachment_reference2_KHR(VkAttachmentReference2KHR& rhs)
+	{	memcpy( this, &rhs, sizeof( S_attachment_reference2_KHR ) );	}
 S_attachment_reference2_KHR(
 	uint32_t attachment_,
 	E_image_layout layout_,
@@ -18418,17 +19737,7 @@ S_attachment_reference2_KHR(
 	:attachment(attachment_)
 	,layout(layout_)
 	,aspectMask(aspectMask_)
-{
-}
-
-S_attachment_reference2_KHR( VkAttachmentReference2KHR const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_attachment_reference2_KHR ) );	}
-S_attachment_reference2_KHR& operator=( VkAttachmentReference2KHR const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_attachment_reference2_KHR ) ); return *this;	}
-operator VkAttachmentReference2KHR const&() const 
-	{	return *reinterpret_cast<const VkAttachmentReference2KHR*>(this);	}
-operator VkAttachmentReference2KHR &() 
-	{	return *reinterpret_cast<VkAttachmentReference2KHR*>(this);	}
+{}
 };
 static_assert(
 	sizeof(S_attachment_reference2_KHR) == sizeof(VkAttachmentReference2KHR),
@@ -18453,10 +19762,21 @@ public:
 	uint32_t preserveAttachmentCount;
 	const uint32_t * pPreserveAttachments;
 
-VkSubpassDescription2KHR*const get_vkptr(){return reinterpret_cast<VkSubpassDescription2KHR*>(this);}
+operator VkSubpassDescription2KHR*()
+	{	return reinterpret_cast<VkSubpassDescription2KHR*>(this);	}
+operator const VkSubpassDescription2KHR*() const
+	{	return reinterpret_cast<const VkSubpassDescription2KHR*>(this);	}
+S_subpass_description2_KHR& operator=( VkSubpassDescription2KHR const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_subpass_description2_KHR ) ); return *this;	}
+operator VkSubpassDescription2KHR const&() const 
+	{	return *reinterpret_cast<const VkSubpassDescription2KHR*>(this);	}
+operator VkSubpassDescription2KHR &() 
+	{	return *reinterpret_cast<VkSubpassDescription2KHR*>(this);	}
+
 
 S_subpass_description2_KHR(){}
-
+S_subpass_description2_KHR(VkSubpassDescription2KHR& rhs)
+	{	memcpy( this, &rhs, sizeof( S_subpass_description2_KHR ) );	}
 S_subpass_description2_KHR(
 	F_subpass_description flags_,
 	E_pipeline_bind_point pipelineBindPoint_,
@@ -18480,17 +19800,7 @@ S_subpass_description2_KHR(
 	,pDepthStencilAttachment(pDepthStencilAttachment_)
 	,preserveAttachmentCount(preserveAttachmentCount_)
 	,pPreserveAttachments(pPreserveAttachments_)
-{
-}
-
-S_subpass_description2_KHR( VkSubpassDescription2KHR const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_subpass_description2_KHR ) );	}
-S_subpass_description2_KHR& operator=( VkSubpassDescription2KHR const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_subpass_description2_KHR ) ); return *this;	}
-operator VkSubpassDescription2KHR const&() const 
-	{	return *reinterpret_cast<const VkSubpassDescription2KHR*>(this);	}
-operator VkSubpassDescription2KHR &() 
-	{	return *reinterpret_cast<VkSubpassDescription2KHR*>(this);	}
+{}
 };
 static_assert(
 	sizeof(S_subpass_description2_KHR) == sizeof(VkSubpassDescription2KHR),
@@ -18512,10 +19822,21 @@ public:
 	F_dependency dependencyFlags;
 	int32_t viewOffset;
 
-VkSubpassDependency2KHR*const get_vkptr(){return reinterpret_cast<VkSubpassDependency2KHR*>(this);}
+operator VkSubpassDependency2KHR*()
+	{	return reinterpret_cast<VkSubpassDependency2KHR*>(this);	}
+operator const VkSubpassDependency2KHR*() const
+	{	return reinterpret_cast<const VkSubpassDependency2KHR*>(this);	}
+S_subpass_dependency2_KHR& operator=( VkSubpassDependency2KHR const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_subpass_dependency2_KHR ) ); return *this;	}
+operator VkSubpassDependency2KHR const&() const 
+	{	return *reinterpret_cast<const VkSubpassDependency2KHR*>(this);	}
+operator VkSubpassDependency2KHR &() 
+	{	return *reinterpret_cast<VkSubpassDependency2KHR*>(this);	}
+
 
 S_subpass_dependency2_KHR(){}
-
+S_subpass_dependency2_KHR(VkSubpassDependency2KHR& rhs)
+	{	memcpy( this, &rhs, sizeof( S_subpass_dependency2_KHR ) );	}
 S_subpass_dependency2_KHR(
 	uint32_t srcSubpass_,
 	uint32_t dstSubpass_,
@@ -18533,17 +19854,7 @@ S_subpass_dependency2_KHR(
 	,dstAccessMask(dstAccessMask_)
 	,dependencyFlags(dependencyFlags_)
 	,viewOffset(viewOffset_)
-{
-}
-
-S_subpass_dependency2_KHR( VkSubpassDependency2KHR const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_subpass_dependency2_KHR ) );	}
-S_subpass_dependency2_KHR& operator=( VkSubpassDependency2KHR const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_subpass_dependency2_KHR ) ); return *this;	}
-operator VkSubpassDependency2KHR const&() const 
-	{	return *reinterpret_cast<const VkSubpassDependency2KHR*>(this);	}
-operator VkSubpassDependency2KHR &() 
-	{	return *reinterpret_cast<VkSubpassDependency2KHR*>(this);	}
+{}
 };
 static_assert(
 	sizeof(S_subpass_dependency2_KHR) == sizeof(VkSubpassDependency2KHR),
@@ -18566,10 +19877,21 @@ public:
 	uint32_t correlatedViewMaskCount;
 	const uint32_t * pCorrelatedViewMasks;
 
-VkRenderPassCreateInfo2KHR*const get_vkptr(){return reinterpret_cast<VkRenderPassCreateInfo2KHR*>(this);}
+operator VkRenderPassCreateInfo2KHR*()
+	{	return reinterpret_cast<VkRenderPassCreateInfo2KHR*>(this);	}
+operator const VkRenderPassCreateInfo2KHR*() const
+	{	return reinterpret_cast<const VkRenderPassCreateInfo2KHR*>(this);	}
+S_render_pass_create_info2_KHR& operator=( VkRenderPassCreateInfo2KHR const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_render_pass_create_info2_KHR ) ); return *this;	}
+operator VkRenderPassCreateInfo2KHR const&() const 
+	{	return *reinterpret_cast<const VkRenderPassCreateInfo2KHR*>(this);	}
+operator VkRenderPassCreateInfo2KHR &() 
+	{	return *reinterpret_cast<VkRenderPassCreateInfo2KHR*>(this);	}
+
 
 S_render_pass_create_info2_KHR(){}
-
+S_render_pass_create_info2_KHR(VkRenderPassCreateInfo2KHR& rhs)
+	{	memcpy( this, &rhs, sizeof( S_render_pass_create_info2_KHR ) );	}
 S_render_pass_create_info2_KHR(
 	F_render_pass_create flags_,
 	uint32_t attachmentCount_,
@@ -18589,17 +19911,7 @@ S_render_pass_create_info2_KHR(
 	,pDependencies(pDependencies_)
 	,correlatedViewMaskCount(correlatedViewMaskCount_)
 	,pCorrelatedViewMasks(pCorrelatedViewMasks_)
-{
-}
-
-S_render_pass_create_info2_KHR( VkRenderPassCreateInfo2KHR const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_render_pass_create_info2_KHR ) );	}
-S_render_pass_create_info2_KHR& operator=( VkRenderPassCreateInfo2KHR const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_render_pass_create_info2_KHR ) ); return *this;	}
-operator VkRenderPassCreateInfo2KHR const&() const 
-	{	return *reinterpret_cast<const VkRenderPassCreateInfo2KHR*>(this);	}
-operator VkRenderPassCreateInfo2KHR &() 
-	{	return *reinterpret_cast<VkRenderPassCreateInfo2KHR*>(this);	}
+{}
 };
 static_assert(
 	sizeof(S_render_pass_create_info2_KHR) == sizeof(VkRenderPassCreateInfo2KHR),
@@ -18614,24 +19926,25 @@ private:
 public:
 	E_subpass_contents contents;
 
-VkSubpassBeginInfoKHR*const get_vkptr(){return reinterpret_cast<VkSubpassBeginInfoKHR*>(this);}
-
-S_subpass_begin_info_KHR(){}
-
-S_subpass_begin_info_KHR(
-	E_subpass_contents contents_)
-	:contents(contents_)
-{
-}
-
-S_subpass_begin_info_KHR( VkSubpassBeginInfoKHR const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_subpass_begin_info_KHR ) );	}
+operator VkSubpassBeginInfoKHR*()
+	{	return reinterpret_cast<VkSubpassBeginInfoKHR*>(this);	}
+operator const VkSubpassBeginInfoKHR*() const
+	{	return reinterpret_cast<const VkSubpassBeginInfoKHR*>(this);	}
 S_subpass_begin_info_KHR& operator=( VkSubpassBeginInfoKHR const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_subpass_begin_info_KHR ) ); return *this;	}
 operator VkSubpassBeginInfoKHR const&() const 
 	{	return *reinterpret_cast<const VkSubpassBeginInfoKHR*>(this);	}
 operator VkSubpassBeginInfoKHR &() 
 	{	return *reinterpret_cast<VkSubpassBeginInfoKHR*>(this);	}
+
+
+S_subpass_begin_info_KHR(){}
+S_subpass_begin_info_KHR(VkSubpassBeginInfoKHR& rhs)
+	{	memcpy( this, &rhs, sizeof( S_subpass_begin_info_KHR ) );	}
+S_subpass_begin_info_KHR(
+	E_subpass_contents contents_)
+	:contents(contents_)
+{}
 };
 static_assert(
 	sizeof(S_subpass_begin_info_KHR) == sizeof(VkSubpassBeginInfoKHR),
@@ -18644,9 +19957,21 @@ private:
 	VkStructureType sType = VK_STRUCTURE_TYPE_SUBPASS_END_INFO_KHR;
 	 void * pNext = nullptr;
 
-VkSubpassEndInfoKHR*const get_vkptr(){return reinterpret_cast<VkSubpassEndInfoKHR*>(this);}
+operator VkSubpassEndInfoKHR*()
+	{	return reinterpret_cast<VkSubpassEndInfoKHR*>(this);	}
+operator const VkSubpassEndInfoKHR*() const
+	{	return reinterpret_cast<const VkSubpassEndInfoKHR*>(this);	}
+S_subpass_end_info_KHR& operator=( VkSubpassEndInfoKHR const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_subpass_end_info_KHR ) ); return *this;	}
+operator VkSubpassEndInfoKHR const&() const 
+	{	return *reinterpret_cast<const VkSubpassEndInfoKHR*>(this);	}
+operator VkSubpassEndInfoKHR &() 
+	{	return *reinterpret_cast<VkSubpassEndInfoKHR*>(this);	}
+
 
 S_subpass_end_info_KHR(){}
+S_subpass_end_info_KHR(VkSubpassEndInfoKHR& rhs)
+	{	memcpy( this, &rhs, sizeof( S_subpass_end_info_KHR ) );	}
 };
 static_assert(
 	sizeof(S_subpass_end_info_KHR) == sizeof(VkSubpassEndInfoKHR),
@@ -18671,10 +19996,21 @@ public:
 	E_chroma_location suggestedXChromaOffset;
 	E_chroma_location suggestedYChromaOffset;
 
-VkAndroidHardwareBufferFormatPropertiesANDROID*const get_vkptr(){return reinterpret_cast<VkAndroidHardwareBufferFormatPropertiesANDROID*>(this);}
+operator VkAndroidHardwareBufferFormatPropertiesANDROID*()
+	{	return reinterpret_cast<VkAndroidHardwareBufferFormatPropertiesANDROID*>(this);	}
+operator const VkAndroidHardwareBufferFormatPropertiesANDROID*() const
+	{	return reinterpret_cast<const VkAndroidHardwareBufferFormatPropertiesANDROID*>(this);	}
+S_android_hardware_buffer_format_properties_ANDROID& operator=( VkAndroidHardwareBufferFormatPropertiesANDROID const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_android_hardware_buffer_format_properties_ANDROID ) ); return *this;	}
+operator VkAndroidHardwareBufferFormatPropertiesANDROID const&() const 
+	{	return *reinterpret_cast<const VkAndroidHardwareBufferFormatPropertiesANDROID*>(this);	}
+operator VkAndroidHardwareBufferFormatPropertiesANDROID &() 
+	{	return *reinterpret_cast<VkAndroidHardwareBufferFormatPropertiesANDROID*>(this);	}
+
 
 S_android_hardware_buffer_format_properties_ANDROID(){}
-
+S_android_hardware_buffer_format_properties_ANDROID(VkAndroidHardwareBufferFormatPropertiesANDROID& rhs)
+	{	memcpy( this, &rhs, sizeof( S_android_hardware_buffer_format_properties_ANDROID ) );	}
 S_android_hardware_buffer_format_properties_ANDROID(
 	E_format format_,
 	uint64_t externalFormat_,
@@ -18692,17 +20028,7 @@ S_android_hardware_buffer_format_properties_ANDROID(
 	,suggestedYcbcrRange(suggestedYcbcrRange_)
 	,suggestedXChromaOffset(suggestedXChromaOffset_)
 	,suggestedYChromaOffset(suggestedYChromaOffset_)
-{
-}
-
-S_android_hardware_buffer_format_properties_ANDROID( VkAndroidHardwareBufferFormatPropertiesANDROID const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_android_hardware_buffer_format_properties_ANDROID ) );	}
-S_android_hardware_buffer_format_properties_ANDROID& operator=( VkAndroidHardwareBufferFormatPropertiesANDROID const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_android_hardware_buffer_format_properties_ANDROID ) ); return *this;	}
-operator VkAndroidHardwareBufferFormatPropertiesANDROID const&() const 
-	{	return *reinterpret_cast<const VkAndroidHardwareBufferFormatPropertiesANDROID*>(this);	}
-operator VkAndroidHardwareBufferFormatPropertiesANDROID &() 
-	{	return *reinterpret_cast<VkAndroidHardwareBufferFormatPropertiesANDROID*>(this);	}
+{}
 
 #ifdef VK_USE_PLATFORM_ANDROID_KHR
 friend S_android_hardware_buffer_properties_ANDROID;
@@ -18727,26 +20053,27 @@ public:
 	VkDeviceSize allocationSize;
 	uint32_t memoryTypeBits;
 
-VkAndroidHardwareBufferPropertiesANDROID*const get_vkptr(){return reinterpret_cast<VkAndroidHardwareBufferPropertiesANDROID*>(this);}
-
-S_android_hardware_buffer_properties_ANDROID(){}
-
-S_android_hardware_buffer_properties_ANDROID(
-	VkDeviceSize allocationSize_,
-	uint32_t memoryTypeBits_)
-	:allocationSize(allocationSize_)
-	,memoryTypeBits(memoryTypeBits_)
-{
-}
-
-S_android_hardware_buffer_properties_ANDROID( VkAndroidHardwareBufferPropertiesANDROID const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_android_hardware_buffer_properties_ANDROID ) );	}
+operator VkAndroidHardwareBufferPropertiesANDROID*()
+	{	return reinterpret_cast<VkAndroidHardwareBufferPropertiesANDROID*>(this);	}
+operator const VkAndroidHardwareBufferPropertiesANDROID*() const
+	{	return reinterpret_cast<const VkAndroidHardwareBufferPropertiesANDROID*>(this);	}
 S_android_hardware_buffer_properties_ANDROID& operator=( VkAndroidHardwareBufferPropertiesANDROID const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_android_hardware_buffer_properties_ANDROID ) ); return *this;	}
 operator VkAndroidHardwareBufferPropertiesANDROID const&() const 
 	{	return *reinterpret_cast<const VkAndroidHardwareBufferPropertiesANDROID*>(this);	}
 operator VkAndroidHardwareBufferPropertiesANDROID &() 
 	{	return *reinterpret_cast<VkAndroidHardwareBufferPropertiesANDROID*>(this);	}
+
+
+S_android_hardware_buffer_properties_ANDROID(){}
+S_android_hardware_buffer_properties_ANDROID(VkAndroidHardwareBufferPropertiesANDROID& rhs)
+	{	memcpy( this, &rhs, sizeof( S_android_hardware_buffer_properties_ANDROID ) );	}
+S_android_hardware_buffer_properties_ANDROID(
+	VkDeviceSize allocationSize_,
+	uint32_t memoryTypeBits_)
+	:allocationSize(allocationSize_)
+	,memoryTypeBits(memoryTypeBits_)
+{}
 
 #ifdef VK_USE_PLATFORM_ANDROID_KHR
 S_android_hardware_buffer_properties_ANDROID& n_android_hardware_buffer_format_properties_ANDROID(S_android_hardware_buffer_format_properties_ANDROID const& next_);
@@ -18760,7 +20087,7 @@ struct N_android_hardware_buffer_properties_ANDROID{
 private:
 	void* pNext = nullptr;
 public:
-void* get(){ return pNext; }
+operator void*() { return pNext; }
 #ifdef VK_USE_PLATFORM_ANDROID_KHR
 N_android_hardware_buffer_properties_ANDROID& n_android_hardware_buffer_format_properties_ANDROID(S_android_hardware_buffer_format_properties_ANDROID const& next_);
 #endif
@@ -18777,24 +20104,25 @@ private:
 public:
 	VkDeviceMemory memory;
 
-VkMemoryGetAndroidHardwareBufferInfoANDROID*const get_vkptr(){return reinterpret_cast<VkMemoryGetAndroidHardwareBufferInfoANDROID*>(this);}
-
-S_memory_get_android_hardware_buffer_info_ANDROID(){}
-
-S_memory_get_android_hardware_buffer_info_ANDROID(
-	VkDeviceMemory memory_)
-	:memory(memory_)
-{
-}
-
-S_memory_get_android_hardware_buffer_info_ANDROID( VkMemoryGetAndroidHardwareBufferInfoANDROID const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_memory_get_android_hardware_buffer_info_ANDROID ) );	}
+operator VkMemoryGetAndroidHardwareBufferInfoANDROID*()
+	{	return reinterpret_cast<VkMemoryGetAndroidHardwareBufferInfoANDROID*>(this);	}
+operator const VkMemoryGetAndroidHardwareBufferInfoANDROID*() const
+	{	return reinterpret_cast<const VkMemoryGetAndroidHardwareBufferInfoANDROID*>(this);	}
 S_memory_get_android_hardware_buffer_info_ANDROID& operator=( VkMemoryGetAndroidHardwareBufferInfoANDROID const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_memory_get_android_hardware_buffer_info_ANDROID ) ); return *this;	}
 operator VkMemoryGetAndroidHardwareBufferInfoANDROID const&() const 
 	{	return *reinterpret_cast<const VkMemoryGetAndroidHardwareBufferInfoANDROID*>(this);	}
 operator VkMemoryGetAndroidHardwareBufferInfoANDROID &() 
 	{	return *reinterpret_cast<VkMemoryGetAndroidHardwareBufferInfoANDROID*>(this);	}
+
+
+S_memory_get_android_hardware_buffer_info_ANDROID(){}
+S_memory_get_android_hardware_buffer_info_ANDROID(VkMemoryGetAndroidHardwareBufferInfoANDROID& rhs)
+	{	memcpy( this, &rhs, sizeof( S_memory_get_android_hardware_buffer_info_ANDROID ) );	}
+S_memory_get_android_hardware_buffer_info_ANDROID(
+	VkDeviceMemory memory_)
+	:memory(memory_)
+{}
 };
 static_assert(
 	sizeof(S_memory_get_android_hardware_buffer_info_ANDROID) == sizeof(VkMemoryGetAndroidHardwareBufferInfoANDROID),
@@ -18812,26 +20140,27 @@ public:
 	F_pipeline_stage stage;
 	void * pCheckpointMarker;
 
-VkCheckpointDataNV*const get_vkptr(){return reinterpret_cast<VkCheckpointDataNV*>(this);}
-
-S_checkpoint_data_NV(){}
-
-S_checkpoint_data_NV(
-	F_pipeline_stage stage_,
-	void * pCheckpointMarker_)
-	:stage(stage_)
-	,pCheckpointMarker(pCheckpointMarker_)
-{
-}
-
-S_checkpoint_data_NV( VkCheckpointDataNV const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_checkpoint_data_NV ) );	}
+operator VkCheckpointDataNV*()
+	{	return reinterpret_cast<VkCheckpointDataNV*>(this);	}
+operator const VkCheckpointDataNV*() const
+	{	return reinterpret_cast<const VkCheckpointDataNV*>(this);	}
 S_checkpoint_data_NV& operator=( VkCheckpointDataNV const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_checkpoint_data_NV ) ); return *this;	}
 operator VkCheckpointDataNV const&() const 
 	{	return *reinterpret_cast<const VkCheckpointDataNV*>(this);	}
 operator VkCheckpointDataNV &() 
 	{	return *reinterpret_cast<VkCheckpointDataNV*>(this);	}
+
+
+S_checkpoint_data_NV(){}
+S_checkpoint_data_NV(VkCheckpointDataNV& rhs)
+	{	memcpy( this, &rhs, sizeof( S_checkpoint_data_NV ) );	}
+S_checkpoint_data_NV(
+	F_pipeline_stage stage_,
+	void * pCheckpointMarker_)
+	:stage(stage_)
+	,pCheckpointMarker(pCheckpointMarker_)
+{}
 };
 static_assert(
 	sizeof(S_checkpoint_data_NV) == sizeof(VkCheckpointDataNV),
@@ -18843,7 +20172,17 @@ struct		S_draw_mesh_tasks_indirect_command_NV{
 	uint32_t taskCount;
 	uint32_t firstTask;
 
-VkDrawMeshTasksIndirectCommandNV*const get_vkptr(){return reinterpret_cast<VkDrawMeshTasksIndirectCommandNV*>(this);}
+operator VkDrawMeshTasksIndirectCommandNV*()
+	{	return reinterpret_cast<VkDrawMeshTasksIndirectCommandNV*>(this);	}
+operator const VkDrawMeshTasksIndirectCommandNV*() const
+	{	return reinterpret_cast<const VkDrawMeshTasksIndirectCommandNV*>(this);	}
+S_draw_mesh_tasks_indirect_command_NV& operator=( VkDrawMeshTasksIndirectCommandNV const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_draw_mesh_tasks_indirect_command_NV ) ); return *this;	}
+operator VkDrawMeshTasksIndirectCommandNV const&() const 
+	{	return *reinterpret_cast<const VkDrawMeshTasksIndirectCommandNV*>(this);	}
+operator VkDrawMeshTasksIndirectCommandNV &() 
+	{	return *reinterpret_cast<VkDrawMeshTasksIndirectCommandNV*>(this);	}
+
 };
 
 /*	VkRaytracingPipelineCreateInfoNVX
@@ -18862,10 +20201,21 @@ public:
 	VkPipeline basePipelineHandle;
 	int32_t basePipelineIndex;
 
-VkRaytracingPipelineCreateInfoNVX*const get_vkptr(){return reinterpret_cast<VkRaytracingPipelineCreateInfoNVX*>(this);}
+operator VkRaytracingPipelineCreateInfoNVX*()
+	{	return reinterpret_cast<VkRaytracingPipelineCreateInfoNVX*>(this);	}
+operator const VkRaytracingPipelineCreateInfoNVX*() const
+	{	return reinterpret_cast<const VkRaytracingPipelineCreateInfoNVX*>(this);	}
+S_raytracing_pipeline_create_info_NVX& operator=( VkRaytracingPipelineCreateInfoNVX const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_raytracing_pipeline_create_info_NVX ) ); return *this;	}
+operator VkRaytracingPipelineCreateInfoNVX const&() const 
+	{	return *reinterpret_cast<const VkRaytracingPipelineCreateInfoNVX*>(this);	}
+operator VkRaytracingPipelineCreateInfoNVX &() 
+	{	return *reinterpret_cast<VkRaytracingPipelineCreateInfoNVX*>(this);	}
+
 
 S_raytracing_pipeline_create_info_NVX(){}
-
+S_raytracing_pipeline_create_info_NVX(VkRaytracingPipelineCreateInfoNVX& rhs)
+	{	memcpy( this, &rhs, sizeof( S_raytracing_pipeline_create_info_NVX ) );	}
 S_raytracing_pipeline_create_info_NVX(
 	F_pipeline_create flags_,
 	uint32_t stageCount_,
@@ -18883,17 +20233,7 @@ S_raytracing_pipeline_create_info_NVX(
 	,layout(layout_)
 	,basePipelineHandle(basePipelineHandle_)
 	,basePipelineIndex(basePipelineIndex_)
-{
-}
-
-S_raytracing_pipeline_create_info_NVX( VkRaytracingPipelineCreateInfoNVX const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_raytracing_pipeline_create_info_NVX ) );	}
-S_raytracing_pipeline_create_info_NVX& operator=( VkRaytracingPipelineCreateInfoNVX const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_raytracing_pipeline_create_info_NVX ) ); return *this;	}
-operator VkRaytracingPipelineCreateInfoNVX const&() const 
-	{	return *reinterpret_cast<const VkRaytracingPipelineCreateInfoNVX*>(this);	}
-operator VkRaytracingPipelineCreateInfoNVX &() 
-	{	return *reinterpret_cast<VkRaytracingPipelineCreateInfoNVX*>(this);	}
+{}
 };
 static_assert(
 	sizeof(S_raytracing_pipeline_create_info_NVX) == sizeof(VkRaytracingPipelineCreateInfoNVX),
@@ -18918,10 +20258,21 @@ public:
 	VkBuffer transformData;
 	VkDeviceSize transformOffset;
 
-VkGeometryTrianglesNVX*const get_vkptr(){return reinterpret_cast<VkGeometryTrianglesNVX*>(this);}
+operator VkGeometryTrianglesNVX*()
+	{	return reinterpret_cast<VkGeometryTrianglesNVX*>(this);	}
+operator const VkGeometryTrianglesNVX*() const
+	{	return reinterpret_cast<const VkGeometryTrianglesNVX*>(this);	}
+S_geometry_triangles_NVX& operator=( VkGeometryTrianglesNVX const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_geometry_triangles_NVX ) ); return *this;	}
+operator VkGeometryTrianglesNVX const&() const 
+	{	return *reinterpret_cast<const VkGeometryTrianglesNVX*>(this);	}
+operator VkGeometryTrianglesNVX &() 
+	{	return *reinterpret_cast<VkGeometryTrianglesNVX*>(this);	}
+
 
 S_geometry_triangles_NVX(){}
-
+S_geometry_triangles_NVX(VkGeometryTrianglesNVX& rhs)
+	{	memcpy( this, &rhs, sizeof( S_geometry_triangles_NVX ) );	}
 S_geometry_triangles_NVX(
 	VkBuffer vertexData_,
 	VkDeviceSize vertexOffset_,
@@ -18945,17 +20296,7 @@ S_geometry_triangles_NVX(
 	,indexType(indexType_)
 	,transformData(transformData_)
 	,transformOffset(transformOffset_)
-{
-}
-
-S_geometry_triangles_NVX( VkGeometryTrianglesNVX const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_geometry_triangles_NVX ) );	}
-S_geometry_triangles_NVX& operator=( VkGeometryTrianglesNVX const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_geometry_triangles_NVX ) ); return *this;	}
-operator VkGeometryTrianglesNVX const&() const 
-	{	return *reinterpret_cast<const VkGeometryTrianglesNVX*>(this);	}
-operator VkGeometryTrianglesNVX &() 
-	{	return *reinterpret_cast<VkGeometryTrianglesNVX*>(this);	}
+{}
 };
 static_assert(
 	sizeof(S_geometry_triangles_NVX) == sizeof(VkGeometryTrianglesNVX),
@@ -18973,10 +20314,21 @@ public:
 	uint32_t stride;
 	VkDeviceSize offset;
 
-VkGeometryAABBNVX*const get_vkptr(){return reinterpret_cast<VkGeometryAABBNVX*>(this);}
+operator VkGeometryAABBNVX*()
+	{	return reinterpret_cast<VkGeometryAABBNVX*>(this);	}
+operator const VkGeometryAABBNVX*() const
+	{	return reinterpret_cast<const VkGeometryAABBNVX*>(this);	}
+S_geometry_aabb_NVX& operator=( VkGeometryAABBNVX const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_geometry_aabb_NVX ) ); return *this;	}
+operator VkGeometryAABBNVX const&() const 
+	{	return *reinterpret_cast<const VkGeometryAABBNVX*>(this);	}
+operator VkGeometryAABBNVX &() 
+	{	return *reinterpret_cast<VkGeometryAABBNVX*>(this);	}
+
 
 S_geometry_aabb_NVX(){}
-
+S_geometry_aabb_NVX(VkGeometryAABBNVX& rhs)
+	{	memcpy( this, &rhs, sizeof( S_geometry_aabb_NVX ) );	}
 S_geometry_aabb_NVX(
 	VkBuffer aabbData_,
 	uint32_t numAABBs_,
@@ -18986,17 +20338,7 @@ S_geometry_aabb_NVX(
 	,numAABBs(numAABBs_)
 	,stride(stride_)
 	,offset(offset_)
-{
-}
-
-S_geometry_aabb_NVX( VkGeometryAABBNVX const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_geometry_aabb_NVX ) );	}
-S_geometry_aabb_NVX& operator=( VkGeometryAABBNVX const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_geometry_aabb_NVX ) ); return *this;	}
-operator VkGeometryAABBNVX const&() const 
-	{	return *reinterpret_cast<const VkGeometryAABBNVX*>(this);	}
-operator VkGeometryAABBNVX &() 
-	{	return *reinterpret_cast<VkGeometryAABBNVX*>(this);	}
+{}
 };
 static_assert(
 	sizeof(S_geometry_aabb_NVX) == sizeof(VkGeometryAABBNVX),
@@ -19008,7 +20350,17 @@ struct		S_geometry_data_NVX{
 	S_geometry_triangles_NVX triangles;
 	S_geometry_aabb_NVX aabbs;
 
-VkGeometryDataNVX*const get_vkptr(){return reinterpret_cast<VkGeometryDataNVX*>(this);}
+operator VkGeometryDataNVX*()
+	{	return reinterpret_cast<VkGeometryDataNVX*>(this);	}
+operator const VkGeometryDataNVX*() const
+	{	return reinterpret_cast<const VkGeometryDataNVX*>(this);	}
+S_geometry_data_NVX& operator=( VkGeometryDataNVX const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_geometry_data_NVX ) ); return *this;	}
+operator VkGeometryDataNVX const&() const 
+	{	return *reinterpret_cast<const VkGeometryDataNVX*>(this);	}
+operator VkGeometryDataNVX &() 
+	{	return *reinterpret_cast<VkGeometryDataNVX*>(this);	}
+
 };
 
 /*	VkGeometryNVX
@@ -19022,10 +20374,21 @@ public:
 	S_geometry_data_NVX geometry;
 	F_geometry_NVX flags;
 
-VkGeometryNVX*const get_vkptr(){return reinterpret_cast<VkGeometryNVX*>(this);}
+operator VkGeometryNVX*()
+	{	return reinterpret_cast<VkGeometryNVX*>(this);	}
+operator const VkGeometryNVX*() const
+	{	return reinterpret_cast<const VkGeometryNVX*>(this);	}
+S_geometry_NVX& operator=( VkGeometryNVX const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_geometry_NVX ) ); return *this;	}
+operator VkGeometryNVX const&() const 
+	{	return *reinterpret_cast<const VkGeometryNVX*>(this);	}
+operator VkGeometryNVX &() 
+	{	return *reinterpret_cast<VkGeometryNVX*>(this);	}
+
 
 S_geometry_NVX(){}
-
+S_geometry_NVX(VkGeometryNVX& rhs)
+	{	memcpy( this, &rhs, sizeof( S_geometry_NVX ) );	}
 S_geometry_NVX(
 	E_geometry_type_NVX geometryType_,
 	S_geometry_data_NVX geometry_,
@@ -19033,17 +20396,7 @@ S_geometry_NVX(
 	:geometryType(geometryType_)
 	,geometry(geometry_)
 	,flags(flags_)
-{
-}
-
-S_geometry_NVX( VkGeometryNVX const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_geometry_NVX ) );	}
-S_geometry_NVX& operator=( VkGeometryNVX const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_geometry_NVX ) ); return *this;	}
-operator VkGeometryNVX const&() const 
-	{	return *reinterpret_cast<const VkGeometryNVX*>(this);	}
-operator VkGeometryNVX &() 
-	{	return *reinterpret_cast<VkGeometryNVX*>(this);	}
+{}
 };
 static_assert(
 	sizeof(S_geometry_NVX) == sizeof(VkGeometryNVX),
@@ -19063,10 +20416,21 @@ public:
 	uint32_t geometryCount;
 	const S_geometry_NVX * pGeometries;
 
-VkAccelerationStructureCreateInfoNVX*const get_vkptr(){return reinterpret_cast<VkAccelerationStructureCreateInfoNVX*>(this);}
+operator VkAccelerationStructureCreateInfoNVX*()
+	{	return reinterpret_cast<VkAccelerationStructureCreateInfoNVX*>(this);	}
+operator const VkAccelerationStructureCreateInfoNVX*() const
+	{	return reinterpret_cast<const VkAccelerationStructureCreateInfoNVX*>(this);	}
+S_acceleration_structure_create_info_NVX& operator=( VkAccelerationStructureCreateInfoNVX const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_acceleration_structure_create_info_NVX ) ); return *this;	}
+operator VkAccelerationStructureCreateInfoNVX const&() const 
+	{	return *reinterpret_cast<const VkAccelerationStructureCreateInfoNVX*>(this);	}
+operator VkAccelerationStructureCreateInfoNVX &() 
+	{	return *reinterpret_cast<VkAccelerationStructureCreateInfoNVX*>(this);	}
+
 
 S_acceleration_structure_create_info_NVX(){}
-
+S_acceleration_structure_create_info_NVX(VkAccelerationStructureCreateInfoNVX& rhs)
+	{	memcpy( this, &rhs, sizeof( S_acceleration_structure_create_info_NVX ) );	}
 S_acceleration_structure_create_info_NVX(
 	E_acceleration_structure_type_NVX type_,
 	F_build_acceleration_structure_NVX flags_,
@@ -19080,17 +20444,7 @@ S_acceleration_structure_create_info_NVX(
 	,instanceCount(instanceCount_)
 	,geometryCount(geometryCount_)
 	,pGeometries(pGeometries_)
-{
-}
-
-S_acceleration_structure_create_info_NVX( VkAccelerationStructureCreateInfoNVX const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_acceleration_structure_create_info_NVX ) );	}
-S_acceleration_structure_create_info_NVX& operator=( VkAccelerationStructureCreateInfoNVX const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_acceleration_structure_create_info_NVX ) ); return *this;	}
-operator VkAccelerationStructureCreateInfoNVX const&() const 
-	{	return *reinterpret_cast<const VkAccelerationStructureCreateInfoNVX*>(this);	}
-operator VkAccelerationStructureCreateInfoNVX &() 
-	{	return *reinterpret_cast<VkAccelerationStructureCreateInfoNVX*>(this);	}
+{}
 };
 static_assert(
 	sizeof(S_acceleration_structure_create_info_NVX) == sizeof(VkAccelerationStructureCreateInfoNVX),
@@ -19109,10 +20463,21 @@ public:
 	uint32_t deviceIndexCount;
 	const uint32_t * pDeviceIndices;
 
-VkBindAccelerationStructureMemoryInfoNVX*const get_vkptr(){return reinterpret_cast<VkBindAccelerationStructureMemoryInfoNVX*>(this);}
+operator VkBindAccelerationStructureMemoryInfoNVX*()
+	{	return reinterpret_cast<VkBindAccelerationStructureMemoryInfoNVX*>(this);	}
+operator const VkBindAccelerationStructureMemoryInfoNVX*() const
+	{	return reinterpret_cast<const VkBindAccelerationStructureMemoryInfoNVX*>(this);	}
+S_bind_acceleration_structure_memory_info_NVX& operator=( VkBindAccelerationStructureMemoryInfoNVX const & rhs ) 
+	{	memcpy( this, &rhs, sizeof( S_bind_acceleration_structure_memory_info_NVX ) ); return *this;	}
+operator VkBindAccelerationStructureMemoryInfoNVX const&() const 
+	{	return *reinterpret_cast<const VkBindAccelerationStructureMemoryInfoNVX*>(this);	}
+operator VkBindAccelerationStructureMemoryInfoNVX &() 
+	{	return *reinterpret_cast<VkBindAccelerationStructureMemoryInfoNVX*>(this);	}
+
 
 S_bind_acceleration_structure_memory_info_NVX(){}
-
+S_bind_acceleration_structure_memory_info_NVX(VkBindAccelerationStructureMemoryInfoNVX& rhs)
+	{	memcpy( this, &rhs, sizeof( S_bind_acceleration_structure_memory_info_NVX ) );	}
 S_bind_acceleration_structure_memory_info_NVX(
 	VkAccelerationStructureNVX accelerationStructure_,
 	VkDeviceMemory memory_,
@@ -19124,17 +20489,7 @@ S_bind_acceleration_structure_memory_info_NVX(
 	,memoryOffset(memoryOffset_)
 	,deviceIndexCount(deviceIndexCount_)
 	,pDeviceIndices(pDeviceIndices_)
-{
-}
-
-S_bind_acceleration_structure_memory_info_NVX( VkBindAccelerationStructureMemoryInfoNVX const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_bind_acceleration_structure_memory_info_NVX ) );	}
-S_bind_acceleration_structure_memory_info_NVX& operator=( VkBindAccelerationStructureMemoryInfoNVX const & rhs ) 
-	{	memcpy( this, &rhs, sizeof( S_bind_acceleration_structure_memory_info_NVX ) ); return *this;	}
-operator VkBindAccelerationStructureMemoryInfoNVX const&() const 
-	{	return *reinterpret_cast<const VkBindAccelerationStructureMemoryInfoNVX*>(this);	}
-operator VkBindAccelerationStructureMemoryInfoNVX &() 
-	{	return *reinterpret_cast<VkBindAccelerationStructureMemoryInfoNVX*>(this);	}
+{}
 };
 static_assert(
 	sizeof(S_bind_acceleration_structure_memory_info_NVX) == sizeof(VkBindAccelerationStructureMemoryInfoNVX),
@@ -19149,24 +20504,25 @@ private:
 public:
 	VkAccelerationStructureNVX accelerationStructure;
 
-VkAccelerationStructureMemoryRequirementsInfoNVX*const get_vkptr(){return reinterpret_cast<VkAccelerationStructureMemoryRequirementsInfoNVX*>(this);}
-
-S_acceleration_structure_memory_requirements_info_NVX(){}
-
-S_acceleration_structure_memory_requirements_info_NVX(
-	VkAccelerationStructureNVX accelerationStructure_)
-	:accelerationStructure(accelerationStructure_)
-{
-}
-
-S_acceleration_structure_memory_requirements_info_NVX( VkAccelerationStructureMemoryRequirementsInfoNVX const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_acceleration_structure_memory_requirements_info_NVX ) );	}
+operator VkAccelerationStructureMemoryRequirementsInfoNVX*()
+	{	return reinterpret_cast<VkAccelerationStructureMemoryRequirementsInfoNVX*>(this);	}
+operator const VkAccelerationStructureMemoryRequirementsInfoNVX*() const
+	{	return reinterpret_cast<const VkAccelerationStructureMemoryRequirementsInfoNVX*>(this);	}
 S_acceleration_structure_memory_requirements_info_NVX& operator=( VkAccelerationStructureMemoryRequirementsInfoNVX const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_acceleration_structure_memory_requirements_info_NVX ) ); return *this;	}
 operator VkAccelerationStructureMemoryRequirementsInfoNVX const&() const 
 	{	return *reinterpret_cast<const VkAccelerationStructureMemoryRequirementsInfoNVX*>(this);	}
 operator VkAccelerationStructureMemoryRequirementsInfoNVX &() 
 	{	return *reinterpret_cast<VkAccelerationStructureMemoryRequirementsInfoNVX*>(this);	}
+
+
+S_acceleration_structure_memory_requirements_info_NVX(){}
+S_acceleration_structure_memory_requirements_info_NVX(VkAccelerationStructureMemoryRequirementsInfoNVX& rhs)
+	{	memcpy( this, &rhs, sizeof( S_acceleration_structure_memory_requirements_info_NVX ) );	}
+S_acceleration_structure_memory_requirements_info_NVX(
+	VkAccelerationStructureNVX accelerationStructure_)
+	:accelerationStructure(accelerationStructure_)
+{}
 };
 static_assert(
 	sizeof(S_acceleration_structure_memory_requirements_info_NVX) == sizeof(VkAccelerationStructureMemoryRequirementsInfoNVX),
@@ -19183,24 +20539,25 @@ private:
 public:
 	uint64_t drmFormatModifier;
 
-VkImageDrmFormatModifierPropertiesEXT*const get_vkptr(){return reinterpret_cast<VkImageDrmFormatModifierPropertiesEXT*>(this);}
-
-S_image_drm_format_modifier_properties_EXT(){}
-
-S_image_drm_format_modifier_properties_EXT(
-	uint64_t drmFormatModifier_)
-	:drmFormatModifier(drmFormatModifier_)
-{
-}
-
-S_image_drm_format_modifier_properties_EXT( VkImageDrmFormatModifierPropertiesEXT const & rhs )
-	{	memcpy( this, &rhs, sizeof( S_image_drm_format_modifier_properties_EXT ) );	}
+operator VkImageDrmFormatModifierPropertiesEXT*()
+	{	return reinterpret_cast<VkImageDrmFormatModifierPropertiesEXT*>(this);	}
+operator const VkImageDrmFormatModifierPropertiesEXT*() const
+	{	return reinterpret_cast<const VkImageDrmFormatModifierPropertiesEXT*>(this);	}
 S_image_drm_format_modifier_properties_EXT& operator=( VkImageDrmFormatModifierPropertiesEXT const & rhs ) 
 	{	memcpy( this, &rhs, sizeof( S_image_drm_format_modifier_properties_EXT ) ); return *this;	}
 operator VkImageDrmFormatModifierPropertiesEXT const&() const 
 	{	return *reinterpret_cast<const VkImageDrmFormatModifierPropertiesEXT*>(this);	}
 operator VkImageDrmFormatModifierPropertiesEXT &() 
 	{	return *reinterpret_cast<VkImageDrmFormatModifierPropertiesEXT*>(this);	}
+
+
+S_image_drm_format_modifier_properties_EXT(){}
+S_image_drm_format_modifier_properties_EXT(VkImageDrmFormatModifierPropertiesEXT& rhs)
+	{	memcpy( this, &rhs, sizeof( S_image_drm_format_modifier_properties_EXT ) );	}
+S_image_drm_format_modifier_properties_EXT(
+	uint64_t drmFormatModifier_)
+	:drmFormatModifier(drmFormatModifier_)
+{}
 };
 static_assert(
 	sizeof(S_image_drm_format_modifier_properties_EXT) == sizeof(VkImageDrmFormatModifierPropertiesEXT),

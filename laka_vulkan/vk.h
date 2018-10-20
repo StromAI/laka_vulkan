@@ -135,7 +135,7 @@ namespace laka {namespace vk {
                 F_buffer_usage    u_flags_,
                 F_external_memory_handle_type handle_type_);
 
-        std::shared_ptr<S_external_buffer_properties>
+        std::shared_ptr<S_external_fence_properties>
             get_external_fence_properties(
                 F_external_fence_handle_type    handle_type_);
 
