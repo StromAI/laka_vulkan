@@ -3,6 +3,41 @@
 
 using namespace laka::vk;
 
+
+//class Shit {
+//public:
+//    int count;
+//};
+//class Fuck {
+//public:
+//    int count;
+//    operator const Shit *()const
+//    { 
+//        return reinterpret_cast<const Shit*>(this);
+//    }
+//    operator Shit *()
+//    {
+//        return reinterpret_cast<Shit*>(this);
+//    }
+//
+//};
+//
+//void fun(Shit*) {}
+//void fun1(const Shit*) {}
+//
+//void fun2()
+//{
+//    const Fuck f;
+//    Fuck ff;
+//
+//    fun(f);
+//    fun1(f);
+//
+//    fun(ff);
+//    fun1(ff);
+//}
+
+
 int main()
 {
 	init_show;
@@ -45,10 +80,5 @@ int main()
 		VK_FALSE
 	};
 	
-
-	S_device_create_info s0;
-
-
-
-
+    
 }
