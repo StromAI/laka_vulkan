@@ -594,14 +594,6 @@ namespace laka { namespace vk {
         return sptr;
     }
 
-    enum E_fuck {
-        aaaa,
-        bbb,
-        ccc,
-    };
-
-
-
 
 
 
