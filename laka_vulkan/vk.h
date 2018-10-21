@@ -153,9 +153,9 @@ namespace laka {namespace vk {
                 E_image_tiling  tiling_,
                 F_image_usage   usage_,
                 F_image_create  flags_,
-                N_image_format_properties2  next_);
+                N_physical_device_image_format_info2  next_);
 
-        std::shared_ptr<std::vector<S_sparse_image_format_properties2>>
+        std::shared_ptr<std::vector<VkSparseImageFormatProperties2>>
             get_sparse_image_format_properties(
                 const S_physical_device_sparse_image_format_info2& format_info_);
 
@@ -515,11 +515,11 @@ dclr_sclass(Image, VkImage)
         ~Image();
 
         std::shared_ptr<Image_view> get_a_image_view(
-            E_image_type                view_type_,
+            E_image_view_type                view_type_,
             E_format                    format_,
             S_component_mapping         components_,
             S_image_subresource_range   subresourceRange_,
-            N_image_create_info         next_ = {},
+            N_image_view_create_info         next_ = {},
             S_allocation_callbacks*const allocator_ = default_allocation_cb() );
 
         S_memory_requirements get_image_memory_requirements();
@@ -1431,7 +1431,7 @@ dclr_sclass(Image, VkImage)
             std::shared_ptr<Device_creator>         device_creator_,
             std::vector<Physical_device*>&          physical_devices_,
             std::vector<User_choose_queue_info>&    queue_infos_,
-            std::vector<VkQueueFamilyProperties>&   qf_properties_,
+            std::vector<S_queue_family_properties>&   qf_properties_,
             VkDevice                                handle_,
             S_allocation_callbacks*const allocation_callbacks_);
 

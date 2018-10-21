@@ -374,7 +374,7 @@ for enum in flag_bits_list:
     "{0}(B bits_):flag(static_cast<int>(bits_))@$\n" \
     "{0}({0} const& flag_):flag(flag_.flag)@$\n" \
     "{0}(std::initializer_list<B> bit_list)@for (auto&& bit : bit_list)@flag |= static_cast<int>(bit);$$\n" \
-    "operator {0} const &()@return *this;$\n" \
+    "operator {1} const &()@return *this;$\n" \
     "{0}& operator = ({0} flag_)@flag = flag_.flag;return *this;$\n" \
     "{0} operator | (B bit_)@return flag | static_cast<int>(bit_);$\n" \
     "{0}& operator |= (B bit_)@flag |= static_cast<int>(bit_);return *this;$\n" \
@@ -393,7 +393,7 @@ for enum in flag_bits_list:
     "operator bool()@return !!flag;$\n" \
     "{0}& clear()@flag = 0;return *this;$\n" \
     "{0} all_flags()@\nreturn " \
-        .format(fb_obj.my_name).replace("@", "{").replace("$", "}")
+        .format(fb_obj.my_name,fb_obj.vk_name).replace("@", "{").replace("$", "}")
     count = 0
     for m in fb_obj.members:
         if count != 0:
@@ -437,6 +437,7 @@ s_list = []
 
 def out_struct(s,cpp_out_str):
     out = ""
+    temp_h_out = ""
     if s.g == 1 or s.vk_name == "VkBaseOutStructure" or s.vk_name == "VkBaseInStructure":
         return out
 
@@ -456,22 +457,22 @@ def out_struct(s,cpp_out_str):
         out += "#ifdef "+s.wsi_macro+"\n"
 
     have_const = 0
-    out += "struct\t\t" + s.my_name + "{\n"
+    temp_h_out += "struct\t\t" + s.my_name + "{\n"
     count = 0
     for m in s.members:
         if m.name == "sType":
-            out+="private:\n"
+            temp_h_out+="private:\n"
             m.final_text = m.final_text.replace("E_structure_type","VkStructureType")
         if m.comment.lstrip().isspace():
             m.comment+="\t/* "+m.comment.replace("\n","")+" */\n"
 
-        out += "\t"+m.final_text
+        temp_h_out += "\t"+m.final_text
         if m.name == "sType" or m.name == "pNext":
-            out+=" = "+ m.default_value
-        out += ";\n"
+            temp_h_out+=" = "+ m.default_value
+        temp_h_out += ";\n"
 
         if m.name == "pNext" and (count+1) < len(s.members):
-            out += "public:\n"
+            temp_h_out += "public:\n"
 
         if m.final_text.find("const") != -1:
             have_const = 1
@@ -480,11 +481,11 @@ def out_struct(s,cpp_out_str):
 
     #构造函数
 
-    out += \
+    temp_h_out += \
         "\noperator {1}*()\n" \
         "\t@\treturn reinterpret_cast<{1}*>(this);\t$\n" \
         "operator const {1}*() const\n" \
-        "\t@\treturn reinterpret_cast<const {1}*>(this);\t$\n" \
+        "\t@\treturn reinterpret_cast<const {1}*>(const_cast<decltype(this)>(this));\t$\n" \
         "{0}& operator=( {1} const & rhs ) \n" \
         "\t@\tmemcpy( this, &rhs, sizeof( {0} ) ); return *this;\t$\n" \
         "operator {1} const&() const \n" \
@@ -497,63 +498,62 @@ def out_struct(s,cpp_out_str):
     #"\t@\tmemcpy( this, &rhs, sizeof( {0} ) );\t$\n" \
 
     if s.have_sType == 1:
-        out+="\n"+s.my_name+"(){}\n"
-        out+=s.my_name+"("+s.vk_name+"& rhs)\n\t{\tmemcpy( this, &rhs, sizeof( "+s.my_name+" ) );\t}\n"
+        temp_h_out+="\n"+s.my_name+"(){}\n"
+        temp_h_out+=s.my_name+"("+s.vk_name+"& rhs)\n\t{\tmemcpy( this, &rhs, sizeof( "+s.my_name+" ) );\t}\n"
     if s.have_sType == 1 and len(s.members) > 2:
-        out += s.my_name+"("
+        temp_h_out += s.my_name+"("
         count = 0
         for m in s.members:
             if m.name == "sType" or m.name == "pNext":
                 continue
             if count != 0:
-                out+=","
+                temp_h_out+=","
             de_temp = ""
             if m.final_text.find("[") == -1:
                 de_temp+=m.final_text+"_"
             else:
                 de_temp+=m.final_text.replace("[","_[")
-            out+="\n\t"+de_temp
+            temp_h_out+="\n\t"+de_temp
             #if m.default_value != "" and m.default_value != None:
                 #out+=" = "+m.default_value
             count+=1
-        out+=")"
+        temp_h_out+=")"
         count = 0
         for m in s.members:
             if m.name == "sType" or m.name == "pNext" or m.final_text.find('[') != -1:
                 continue
             if count == 0:
-                out+="\n\t:"
+                temp_h_out+="\n\t:"
             else:
-                out+="\n\t,"
-            out+=m.name+"("+m.name+"_)"
+                temp_h_out+="\n\t,"
+            temp_h_out+=m.name+"("+m.name+"_)"
             count+=1
-        out+="\n{"
+        temp_h_out+="\n{"
         count_temp = 0
         for m in s.members:
             if m.final_text.find('[') == -1:
                 continue
             if count_temp == 0:
-                out += "\n"
+                temp_h_out += "\n"
             count_temp += 1
-            out+="memcpy("+m.name+","+m.name+"_,"+"sizeof("+m.name+") );\n"
-        out+="}\n"
+            temp_h_out+="memcpy("+m.name+","+m.name+"_,"+"sizeof("+m.name+") );\n"
+        temp_h_out+="}\n"
 
-        #out += s.vk_name + "*const get_vkptr(){return reinterpret_cast<" + s.vk_name + "*>(this);}\n"
+        #temp_h_out += s.vk_name + "*const get_vkptr(){return reinterpret_cast<" + s.vk_name + "*>(this);}\n"
 
         count = 0
         for ex2 in s.struct_extends_to_array:
             if count == 0:
-                out+="\n"
+                temp_h_out+="\n"
             ex2_s = struct_dict[ex2]
             if ex2_s.is_wsi == 1:
-                out+="#ifdef "+ex2_s.wsi_macro+"\n"
-            out+="friend "+ex2_s.my_name+";\n"
+                temp_h_out+="#ifdef "+ex2_s.wsi_macro+"\n"
+            temp_h_out+="friend "+ex2_s.my_name+";\n"
             if ex2_s.is_wsi == 1:
-                out+="#endif\n"
+                temp_h_out+="#endif\n"
             count+=1
 
 #pNext
-    temp_h_out = ""
     cpp_str = ""
     count = 0
     for ex in s.struct_extends:
@@ -620,8 +620,15 @@ def out_struct(s,cpp_out_str):
                 cpp_str2+="\n"
             count2 += 1
 
+    if count>0:
+        cpp_out_str.append(cpp_str2)
+        out += temp_h_out2 + "};\n"
+
     cpp_out_str.append(cpp_str)
-    out+=temp_h_out+"};\n"
+    out+=temp_h_out
+    if count>0:
+        out+="void set_pNext("+N_name+" n_){pNext = n_;}\n"
+    out+="};\n"
 
     # 处理pNext
     is_ex_to = len(s.struct_extends_to_array) > 0
@@ -629,11 +636,7 @@ def out_struct(s,cpp_out_str):
     is_pNext = is_ex_base or is_ex_to
 
     if s.have_sType==1:
-        out += "static_assert(\n\tsizeof(" + s.my_name + ") == sizeof(" + s.vk_name + "),\n\t\"struct and wrapper have different size!\");\n"
-
-    if count>0:
-        cpp_out_str.append(cpp_str2)
-        out += temp_h_out2 + "};\n"
+        temp_h_out += "static_assert(\n\tsizeof(" + s.my_name + ") == sizeof(" + s.vk_name + "),\n\t\"struct and wrapper have different size!\");\n"
 
     #宏结束
     if s.is_wsi == 1:
