@@ -1690,11 +1690,781 @@ namespace laka { namespace vk {
         return ret;
     }
 
-
 #endif //VkImage
     
+    //VkSampler
+#if 1
+    shared_ptr<Sampler> Device::get_a_sampler(
+        E_filter                magFilter,
+        E_filter                minFilter,
+        E_sampler_mipmap_mode   mipmapMode,
+        E_sampler_address_mode  addressModeU,
+        E_sampler_address_mode  addressModeV,
+        E_sampler_address_mode  addressModeW,
+        float                   mipLodBias,
+        VkBool32                anisotropyEnable,
+        float                   maxAnisotropy,
+        VkBool32                compareEnable,
+        E_compare_op            compareOp,
+        float                   minLod,
+        float                   maxLod,
+        E_border_color          borderColor,
+        VkBool32                unnormalizedCoordinates,
+        N_sampler_create_info   next_ /*= {}*/,
+        S_allocation_callbacks*const allocator_/* = default_allocation_cb*/)
+    {
+        shared_ptr<Sampler> sampler_sptr;
+
+        auto allocator = allocator_ == default_allocation_cb() ?
+            allocation_callbacks : allocator_;
+
+        S_sampler_create_info info{
+            0,
+            magFilter,
+            minFilter,
+            mipmapMode,
+            addressModeU,
+            addressModeV,
+            addressModeW,
+            mipLodBias,
+            anisotropyEnable,
+            maxAnisotropy,
+            compareEnable,
+            compareOp,
+            minLod,
+            maxLod,
+            borderColor,
+            unnormalizedCoordinates
+        };
+        info.set_pNext(next_);
+
+        VkSampler sampler_handle;
+        auto ret = api.vkCreateSampler(handle, info, *allocator, &sampler_handle);
+        show_result(ret);
+
+        if (ret < 0) return sampler_sptr;
+
+        sampler_sptr.reset(new Sampler(shared_from_this(), sampler_handle, allocator));
+
+        return sampler_sptr;
+    }
+
+    Sampler::Sampler(
+        Device::Sptr device_,
+        VkSampler handle_,
+        S_allocation_callbacks*const allocator_)
+        : device(device_)
+        , handle(handle_)
+        , allocation_callbacks(allocator_)
+    {   }
+
+    Sampler::~Sampler()
+    {
+        init_show;
+        show_function_name;
+        device->api.vkDestroySampler(device->handle, handle, *allocation_callbacks);
+    }
+
+#endif //VkSampler
+
+    //VkSamplerYcbcrConversion
+#if 1
+    shared_ptr<Sampler_Ycbcr_conversion> Device::get_a_sampler_ycbcr_conversion(
+        E_format                            format_,
+        E_sampler_ycbcr_model_conversion    ycbcrModel,
+        E_sampler_ycbcr_range               ycbcrRange,
+        S_component_mapping             components,
+        E_chroma_location               xChromaOffset,
+        E_chroma_location               yChromaOffset,
+        E_filter                        chromaFilter,
+        VkBool32                        forceExplicitReconstruction,
+        N_sampler_ycbcr_conversion_create_info next_ /*= {}*/,
+        S_allocation_callbacks*const    allocator_/* = default_allocation_cb*/)
+    {
+        shared_ptr<Sampler_Ycbcr_conversion> sampler_ycbcr_conversion_sptr;
+
+        auto allocator = allocator_ == default_allocation_cb() ?
+            allocation_callbacks : allocator_;
+
+        S_sampler_ycbcr_conversion_create_info info{
+            format_,
+            ycbcrModel,
+            ycbcrRange,
+            components,
+            xChromaOffset,
+            yChromaOffset,
+            chromaFilter,
+            forceExplicitReconstruction
+        };
+        info.set_pNext(next_);
+
+        VkSamplerYcbcrConversion sampler_handle;
+        auto ret = api.vkCreateSamplerYcbcrConversion(
+            handle, info, *allocator, &sampler_handle);
+        show_result(ret);
+
+        if (ret < 0) return sampler_ycbcr_conversion_sptr;
+
+        sampler_ycbcr_conversion_sptr.reset(new Sampler_Ycbcr_conversion(
+            shared_from_this(), sampler_handle, allocator));
+
+        return sampler_ycbcr_conversion_sptr;
+    }
+
+    Sampler_Ycbcr_conversion::Sampler_Ycbcr_conversion(
+        shared_ptr<Device> device_,
+        VkSamplerYcbcrConversion handle_,
+        S_allocation_callbacks*const allocator_)
+        : device(device_)
+        , handle(handle_)
+        , allocation_callbacks(allocator_)
+    {   }
+
+    Sampler_Ycbcr_conversion::~Sampler_Ycbcr_conversion()
+    {
+        init_show;
+        show_function_name;
+        device->api.vkDestroySamplerYcbcrConversion(device->handle, handle, *allocation_callbacks);
+    }
 
 
+#endif  //VkSamplerYcbcrConversion
+
+    //VkCommandBuffer
+#if 1
+    shared_ptr<Command_buffer> 
+        Command_pool::get_a_command_buffer(E_command_buffer_level level)
+    {
+        shared_ptr<Command_buffer> command_buffer_sptr;
+
+        S_command_buffer_allocate_info info{
+            handle,
+            level,
+            1
+        };
+
+        VkCommandBuffer command_buffer_handle;
+        auto ret = device->api.vkAllocateCommandBuffers(
+            device->handle, info, &command_buffer_handle);
+        show_result(ret);
+
+        if (ret < 0) return command_buffer_sptr;
+
+        command_buffer_sptr.reset(
+            new Command_buffer(shared_from_this(), command_buffer_handle));
+
+        return command_buffer_sptr;
+    }
+
+    Command_buffer::Command_buffer(
+        shared_ptr<Command_pool> command_pool_, VkCommandBuffer handle_)
+        :command_pool(command_pool_)
+        ,Command_buffer_base(handle_)
+    {
+        api = &(command_pool->device->api);
+    }
+
+    Command_buffer::~Command_buffer()
+    {
+        init_show;
+        show_function_name;
+        command_pool->device->api.vkFreeCommandBuffers(
+            command_pool->device->handle,
+            command_pool->handle,
+            1,
+            &handle
+        );
+    }
+
+    Command_buffer_base::Command_buffer_base(VkCommandBuffer handle_)
+        :handle(handle_)
+    {}
+
+    VkResult Command_buffer_base::begin(
+        F_command_buffer_usage                  flags_,
+        const S_command_buffer_inheritance_info*pInheritanceInfo_ /*= nullptr*/,
+        N_command_buffer_begin_info             pNext_ /*= {}*/)
+    {
+        S_command_buffer_begin_info info{
+            flags_,
+            pInheritanceInfo_
+        };
+        info.set_pNext(pNext_);
+
+        auto ret = api->vkBeginCommandBuffer(
+            handle,
+            info
+        );
+        show_result(ret);
+
+        return ret;
+    }
+
+    void Command_buffer_base::bind_pipeline(
+        shared_ptr<Compute_pipeline> pipeline_sptr_)
+    {
+        api->vkCmdBindPipeline(
+            handle, 
+            VkPipelineBindPoint::VK_PIPELINE_BIND_POINT_COMPUTE, 
+            pipeline_sptr_->handle
+        );
+    }
+    void Command_buffer_base::bind_pipeline(
+        shared_ptr<Graphics_pipeline> pipeline_sptr_)
+    {
+        api->vkCmdBindPipeline(
+            handle, 
+            static_cast<VkPipelineBindPoint>(E_pipeline_bind_point::e_graphics), 
+            pipeline_sptr_->handle
+        );
+    }
+    
+    void fun(int i) {
+        fun(E_pipeline_bind_point::e_graphics);
+    }
+    void fun2(VkPipelineBindPoint e_) {
+        fun2(static_cast<VkPipelineBindPoint>(E_pipeline_bind_point::e_graphics) );
+    }
+
+    void Command_buffer_base::bind_buffer(
+        shared_ptr<Buffer> buffer_sptr_,
+        VkDeviceSize offset_,
+        E_index_type index_type)
+    {
+        api->vkCmdBindIndexBuffer(handle, buffer_sptr_->handle, offset_, index_type);
+    }
+
+    void Command_buffer_base::bind_buffers(
+        Array_value<shared_ptr<Buffer>> buffer_sptrs_,
+        Array_value<VkDeviceSize> offsets_,
+        uint32_t first_binding_)
+    {
+        vector<VkBuffer> buffer_handles(buffer_sptrs_.size());
+        for (size_t i = 0; i < buffer_sptrs_.size(); ++i)
+        {
+            buffer_handles[i] = (*(buffer_sptrs_.data()+i))->handle;
+        }
+
+        api->vkCmdBindVertexBuffers(
+            handle,
+            first_binding_,
+            static_cast<uint32_t>(buffer_handles.size()),
+            &buffer_handles[0],
+            offsets_.data()
+        );
+    }
+
+    void Command_buffer_base::bind_descriptor_sets(
+        VkPipelineBindPoint                         pipelineBindPoint,
+        Pipeline_layout&                            layout,
+        uint32_t                                    firstSet,
+        Descriptor_set_s&                            descriptor_sets,
+        Array_value<uint32_t>                       dynamic_offsets)
+    {
+        vector<VkDescriptorSet> d_set_handles(descriptor_sets.elements.size());
+        for (size_t i = 0; i < descriptor_sets.elements.size(); i++)
+        {
+            d_set_handles[i] = descriptor_sets.elements[i].handle;
+        }
+
+        api->vkCmdBindDescriptorSets(
+            handle,
+            pipelineBindPoint,
+            layout.handle,
+            firstSet,
+            static_cast<uint32_t>(d_set_handles.size()),
+            &d_set_handles[0],
+            dynamic_offsets.size(),
+            dynamic_offsets.data()
+        );
+    }
+
+    void Command_buffer_base::set_blend_constants(const float blend_[4])
+    {
+        api->vkCmdSetBlendConstants(handle, blend_);
+    }
+
+    void Command_buffer_base::set_depth_bias(
+        float depthBiasConstantFactor,
+        float depthBiasClamp,
+        float depthBiasSlopeFactor)
+    {
+        api->vkCmdSetDepthBias(handle, depthBiasSlopeFactor, depthBiasClamp, depthBiasSlopeFactor);
+    }
+
+    void Command_buffer_base::set_depth_bounds(float minDepthBounds, float maxDepthBounds)
+    {
+        api->vkCmdSetDepthBounds(handle, minDepthBounds, maxDepthBounds);
+    }
+
+    void Command_buffer_base::set_device_mask(uint32_t mask_)
+    {
+        api->vkCmdSetDeviceMask(handle, mask_);
+    }
+
+    void Command_buffer_base::set_line_width(float line_width_)
+    {
+        api->vkCmdSetLineWidth(handle, line_width_);
+    }
+
+    void Command_buffer_base::set_scissor(
+        uint32_t firstScissor,
+        uint32_t scissorCount,
+        const VkRect2D* pScissors)
+    {
+        api->vkCmdSetScissor(handle, firstScissor, scissorCount, pScissors);
+    }
+
+    void Command_buffer_base::set_stencil_compare_mask(VkStencilFaceFlags faceMask, uint32_t compareMask)
+    {
+        api->vkCmdSetStencilCompareMask(handle, faceMask, compareMask);
+    }
+
+    void Command_buffer_base::set_stencil_reference(VkStencilFaceFlags faceMask, uint32_t reference)
+    {
+        api->vkCmdSetStencilReference(handle, faceMask, reference);
+    }
+
+    void Command_buffer_base::set_stencil_write_mask(
+        VkStencilFaceFlags faceMask,
+        uint32_t writeMask)
+    {
+        api->vkCmdSetStencilWriteMask(handle, faceMask, writeMask);
+    }
+
+    void Command_buffer_base::set_viewport(
+        uint32_t firstViewport,
+        Array_value<VkViewport> viewports_)
+    {
+        api->vkCmdSetViewport(
+            handle,
+            firstViewport,
+            viewports_.size(),
+            viewports_.data()
+        );
+    }
+
+    void Command_buffer_base::event_set(Event& event_, VkPipelineStageFlags stageMask)
+    {
+        api->vkCmdSetEvent(handle, event_.handle, stageMask);
+    }
+
+    void Command_buffer_base::event_reset(Event& event_, VkPipelineStageFlags stageMask)
+    {
+        api->vkCmdSetEvent(handle, event_.handle, stageMask);
+    }
+
+    void Command_buffer_base::query_begin(Query_pool& queryPool, uint32_t query, VkQueryControlFlags flags)
+    {
+        api->vkCmdBeginQuery(handle, queryPool.handle, query, flags);
+    }
+
+    void Command_buffer_base::query_reset(
+        Query_pool&                                 queryPool,
+        uint32_t                                    firstQuery,
+        uint32_t                                    queryCount)
+    {
+        api->vkCmdResetQueryPool(handle, queryPool.handle, firstQuery, queryCount);
+    }
+
+    void Command_buffer_base::query_end(
+        Query_pool&    queryPool,
+        uint32_t    query)
+    {
+        api->vkCmdEndQuery(handle, queryPool.handle, query);
+    }
+
+    void Command_buffer_base::query_copy_results(
+        Query_pool&                                 queryPool,
+        uint32_t                                    firstQuery,
+        uint32_t                                    queryCount,
+        Buffer&                                     dstBuffer,
+        VkDeviceSize                                dstOffset,
+        VkDeviceSize                                stride,
+        VkQueryResultFlags                          flags)
+    {
+        api->vkCmdCopyQueryPoolResults(
+            handle,
+            queryPool.handle,
+            firstQuery,
+            queryCount,
+            dstBuffer.handle,
+            dstOffset,
+            stride,
+            flags
+        );
+    }
+
+    void Command_buffer_base::commands_execute(Command_buffer_s& pCommandBuffers)
+    {
+        vector<VkCommandBuffer> buffer_handles(pCommandBuffers.elements.size());
+
+        for (size_t i = 0; i < pCommandBuffers.elements.size(); ++i)
+        {
+            buffer_handles[i] = pCommandBuffers.elements[i].handle;
+        }
+
+        api->vkCmdExecuteCommands(
+            handle,
+            static_cast<uint32_t>(pCommandBuffers.elements.size()),
+            &buffer_handles[0]
+        );
+    }
+
+    void Command_buffer_base::buffer_update(
+        Buffer&                                     dstBuffer,
+        VkDeviceSize                                dstOffset,
+        VkDeviceSize                                dataSize,
+        const void*                                 pData)
+    {
+        api->vkCmdUpdateBuffer(handle, dstBuffer.handle, dstOffset, dataSize, pData);
+    }
+
+    void Command_buffer_base::buffer_fill(
+        Buffer&                                    dstBuffer,
+        VkDeviceSize                                dstOffset,
+        VkDeviceSize                                size,
+        uint32_t                                    data)
+    {
+        api->vkCmdFillBuffer(handle, dstBuffer.handle, dstOffset, size, data);
+    }
+
+    void Command_buffer_base::buffer_copy_to_buffer(
+        Buffer&                                    srcBuffer,
+        Buffer&                                    dstBuffer,
+        Array_value<VkBufferCopy>                  regions)
+    {
+        api->vkCmdCopyBuffer(
+            handle,
+            srcBuffer.handle,
+            dstBuffer.handle,
+            static_cast<uint32_t>(regions.size()),
+            regions.data()
+        );
+    }
+
+    void Command_buffer_base::buffer_copy_to_image(
+        Buffer&                                        srcBuffer,
+        Image&                                        dstImage,
+        VkImageLayout                                dstImage_layout,
+        Array_value<VkBufferImageCopy>                 pRegions)
+    {
+        api->vkCmdCopyBufferToImage(
+            handle,
+            srcBuffer.handle,
+            dstImage.handle,
+            dstImage_layout,
+            static_cast<uint32_t>(pRegions.size()),
+            pRegions.data()
+        );
+    }
+
+    void Command_buffer_base::clear_attachments(
+        Array_value<VkClearAttachment>              pAttachments,
+        Array_value<VkClearRect>                    pRects)
+    {
+        api->vkCmdClearAttachments(
+            handle,
+            static_cast<uint32_t>(pAttachments.size()),
+            pAttachments.data(),
+            static_cast<uint32_t>(pRects.size()),
+            pRects.data()
+        );
+    }
+
+    void Command_buffer_base::image_clear_color(
+        Image&                                      image,
+        VkImageLayout                               imageLayout,
+        const VkClearColorValue*                    pColor,
+        Array_value<VkImageSubresourceRange>        pRanges)
+    {
+        api->vkCmdClearColorImage(
+            handle,
+            image.handle,
+            imageLayout,
+            pColor,
+            static_cast<uint32_t>(pRanges.size()),
+            pRanges.data()
+        );
+    }
+
+    void Command_buffer_base::image_clear_depth_stencil(
+        Image&                                      image,
+        VkImageLayout                               imageLayout,
+        const VkClearDepthStencilValue*             pDepthStencil,
+        Array_value<VkImageSubresourceRange>        pRanges)
+    {
+        api->vkCmdClearDepthStencilImage(
+            handle,
+            image.handle,
+            imageLayout,
+            pDepthStencil,
+            static_cast<uint32_t>(pRanges.size()),
+            pRanges.data()
+        );
+    }
+
+    void Command_buffer_base::image_blit(
+        Image&                                      srcImage,
+        VkImageLayout                               srcImageLayout,
+        Image&                                      dstImage,
+        VkImageLayout                               dstImageLayout,
+        Array_value<VkImageBlit>                    pRegions,
+        VkFilter                                    filter)
+    {
+        api->vkCmdBlitImage(
+            handle,
+            srcImage.handle,
+            srcImageLayout,
+            dstImage.handle,
+            dstImageLayout,
+            static_cast<uint32_t>(pRegions.size()),
+            pRegions.data(),
+            filter
+        );
+    }
+
+    void Command_buffer_base::image_copy(
+        Image&                                     srcImage,
+        VkImageLayout                              srcImageLayout,
+        Image&                                     dstImage,
+        VkImageLayout                              dstImageLayout,
+        Array_value<VkImageCopy>                   pRegions)
+    {
+        api->vkCmdCopyImage(
+            handle,
+            srcImage.handle,
+            srcImageLayout,
+            dstImage.handle,
+            dstImageLayout,
+            static_cast<uint32_t>(pRegions.size()),
+            pRegions.data()
+        );
+    }
+
+    void Command_buffer_base::image_copy_to_buffer(
+        Image&                                      srcImage,
+        VkImageLayout                               srcImageLayout,
+        Buffer&                                     dstBuffer,
+        Array_value<VkBufferImageCopy>            pRegions)
+    {
+        api->vkCmdCopyImageToBuffer(
+            handle,
+            srcImage.handle,
+            srcImageLayout,
+            dstBuffer.handle,
+            static_cast<uint32_t>(pRegions.size()),
+            pRegions.data()
+        );
+    }
+
+    void Command_buffer_base::dispatch(
+        uint32_t                                    groupCountX,
+        uint32_t                                    groupCountY,
+        uint32_t                                    groupCountZ)
+    {
+        api->vkCmdDispatch(handle, groupCountX, groupCountY, groupCountZ);
+    }
+
+    void Command_buffer_base::dispatch_base(
+        uint32_t                                    baseGroupX,
+        uint32_t                                    baseGroupY,
+        uint32_t                                    baseGroupZ,
+        uint32_t                                    groupCountX,
+        uint32_t                                    groupCountY,
+        uint32_t                                    groupCountZ)
+    {
+        api->vkCmdDispatchBase(
+            handle, baseGroupX, baseGroupY, baseGroupZ, groupCountX, groupCountY, groupCountZ);
+    }
+
+    void Command_buffer_base::dispatch_indirect(
+        Buffer&                                    buffer,
+        VkDeviceSize                                offset)
+    {
+        api->vkCmdDispatchIndirect(handle, buffer.handle, offset);
+    }
+
+    void Command_buffer_base::write_timestamp(
+        VkPipelineStageFlagBits                     pipelineStage,
+        Query_pool&                                 queryPool,
+        uint32_t                                    query)
+    {
+        api->vkCmdWriteTimestamp(handle, pipelineStage, queryPool.handle, query);
+    }
+
+    void Command_buffer_base::push_constants(
+        Pipeline_layout&                            layout,
+        VkShaderStageFlags                          stageFlags,
+        uint32_t                                    offset,
+        uint32_t                                    size,
+        const void*                                 pValues)
+    {
+        api->vkCmdPushConstants(handle, layout.handle, stageFlags, offset, size, pValues);
+    }
+
+    void Command_buffer_base::image_resolve(
+        Image&                                      srcImage,
+        VkImageLayout                               srcImageLayout,
+        Image&                                      dstImage,
+        VkImageLayout                               dstImageLayout,
+        Array_value<VkImageResolve>                 pRegions)
+    {
+        api->vkCmdResolveImage(
+            handle,
+            srcImage.handle,
+            srcImageLayout,
+            dstImage.handle,
+            dstImageLayout,
+            static_cast<uint32_t>(pRegions.size()),
+            pRegions.data()
+        );
+    }
+
+    void Command_buffer_base::render_pass_begin(
+        Render_pass&            render_pass,
+        Frame_buffer&            framebuffer,
+        VkRect2D                renderArea,
+        uint32_t                clearValueCount,
+        const VkClearValue*        pClearValues,
+        VkSubpassContents       contents,
+        const void*                pNext/* = nullptr*/)
+    {
+        VkRenderPassBeginInfo info{
+            VK_STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO,
+            pNext,
+            render_pass.handle,
+            framebuffer.handle,
+            renderArea,
+            clearValueCount,
+            pClearValues
+        };
+
+        api->vkCmdBeginRenderPass(handle, &info, contents);
+    }
+
+    void Command_buffer_base::next_subpass(VkSubpassContents contents)
+    {
+        api->vkCmdNextSubpass(handle, contents);
+    }
+
+    void Command_buffer_base::render_pass_end()
+    {
+        api->vkCmdEndRenderPass(handle);
+    }
+
+#define cast_u32(...) static_cast<uint32_t>(__VA_ARGS__)
+
+    void Command_buffer_base::wait_events(
+        Array_value<std::shared_ptr<Event>>            events_,
+        VkPipelineStageFlags                        srcStageMask,
+        VkPipelineStageFlags                        dstStageMask,
+        Array_value<VkMemoryBarrier>                 memory_barriers_,
+        Array_value<VkBufferMemoryBarrier>             buffer_memory_barriers_,
+        Array_value<VkImageMemoryBarrier>             image_memory_barriers_)
+    {
+        vector<VkEvent> event_handels(events_.size());
+        for (size_t i = 0; i < events_.size(); i++)
+        {
+            event_handels[i] = (*(events_.data()+i))->handle;
+        }
+
+        api->vkCmdWaitEvents(
+            handle,
+            cast_u32(events_.size()),
+            &event_handels[0],
+            srcStageMask,
+            dstStageMask,
+            memory_barriers_.size(),
+            memory_barriers_.data(),
+            buffer_memory_barriers_.size(),
+            buffer_memory_barriers_.data(),
+            image_memory_barriers_.size(),
+            image_memory_barriers_.data()
+        );
+    }
+
+    void Command_buffer_base::pipeline_barrier(
+        VkCommandBuffer                             commandBuffer,
+        VkPipelineStageFlags                        srcStageMask,
+        VkPipelineStageFlags                        dstStageMask,
+        VkDependencyFlags                           dependencyFlags,
+        Array_value<VkMemoryBarrier>                memory_barriers_,
+        Array_value<VkBufferMemoryBarrier>             buffer_memory_barriers_,
+        Array_value<VkImageMemoryBarrier>            image_memory_barriers_)
+    {
+        api->vkCmdPipelineBarrier(
+            handle,
+            srcStageMask,
+            dstStageMask,
+            dependencyFlags,
+            memory_barriers_.size(),
+            memory_barriers_.data(),
+            buffer_memory_barriers_.size(),
+            buffer_memory_barriers_.data(),
+            image_memory_barriers_.size(),
+            image_memory_barriers_.data()
+        );
+    }
+
+    void Command_buffer_base::draw(
+        uint32_t                                    vertexCount,
+        uint32_t                                    instanceCount,
+        uint32_t                                    firstVertex,
+        uint32_t                                    firstInstance)
+    {
+        api->vkCmdDraw(
+            handle, vertexCount, instanceCount, firstVertex, firstInstance);
+    }
+
+    void Command_buffer_base::draw_indexed(
+        uint32_t                                    indexCount,
+        uint32_t                                    instanceCount,
+        uint32_t                                    firstIndex,
+        int32_t                                     vertexOffset,
+        uint32_t                                    firstInstance)
+    {
+        api->vkCmdDrawIndexed(
+            handle,
+            indexCount,
+            instanceCount,
+            firstIndex,
+            vertexOffset,
+            firstInstance
+        );
+    }
+
+    void Command_buffer_base::draw_indexed_indirect(
+        Buffer&                                    buffer,
+        VkDeviceSize                                offset,
+        uint32_t                                    drawCount,
+        uint32_t                                    stride)
+    {
+        api->vkCmdDrawIndexedIndirect(
+            handle,
+            buffer.handle,
+            offset,
+            drawCount,
+            stride
+        );
+    }
+
+    void Command_buffer_base::draw_indirect(
+        Buffer&                                     buffer,
+        VkDeviceSize                                offset,
+        uint32_t                                    drawCount,
+        uint32_t                                    stride)
+    {
+        api->vkCmdDrawIndirect(
+            handle,
+            buffer.handle,
+            offset,
+            drawCount,
+            stride
+        );
+    }
+
+#endif  //VkCommandBuffer
 
 
 

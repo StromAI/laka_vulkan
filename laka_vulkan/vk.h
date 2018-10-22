@@ -588,7 +588,7 @@ dclr_sclass(Image, VkImage)
         VkResult begin(
             F_command_buffer_usage                  flags_,
             const S_command_buffer_inheritance_info*pInheritanceInfo_ = nullptr,
-            N_command_buffer_begin_info   pNext_ = {} );
+            N_command_buffer_begin_info             pNext_ = {} );
 
         VkResult reset(F_command_buffer_reset flags_);
         VkResult end();
@@ -838,7 +838,7 @@ dclr_sclass(Image, VkImage)
         const VkCommandBuffer handle;
         Device_api* api;
     protected:
-        Command_buffer_base();
+        Command_buffer_base(VkCommandBuffer handle_);
     };
 
     class Command_buffer:   public Command_buffer_base, 

@@ -19,6 +19,10 @@ Permission is granted to anyone to use this software for any purpose, including 
 #include <stdexcept>
 #include <type_traits>
 
+#include <vector>
+#include <array>
+#include <initializer_list>
+
 #include "spdlog/spdlog.h"
 #include "current_function.hpp"
 #include "assert.h"
@@ -337,6 +341,11 @@ public:
         : value_count(static_cast<uint32_t>(array_.size()))
         , first_value_ptr(array_.data())
     {}
+
+    operator std::vector<T>&& ()
+    {
+
+    }
 
 };
 
