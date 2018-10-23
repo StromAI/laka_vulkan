@@ -13,6 +13,8 @@ Permission is granted to anyone to use this software for any purpose, including 
 
 */
 
+// todo: 整理完这遍就开搞复数对象.
+
 #include "vk.h"
 
 using namespace std;
@@ -621,7 +623,7 @@ namespace laka { namespace vk {
         , allocation_callbacks(allocator_)
     {   }
 
-    //要将队列族信息存入设备对象中.
+    // 要将队列族信息存入设备对象中.
 
     shared_ptr<Device> Device_creator::get_a_device(
         Physical_device& physical_device_,
@@ -645,9 +647,9 @@ namespace laka { namespace vk {
         if (ret < 0) return device_sptr;
 
         vector<Physical_device*> pds;
-        //还需遍历pnext 找出所有物理设备指针放进去.
+        // 还需遍历pnext 找出所有物理设备指针放进去.
 
-        //遍历队列信息 放进去.
+        // 遍历队列信息 放进去.
         vector<User_choose_queue_info> queue_infos(create_info_.queueCreateInfoCount);
         for (size_t i = 0; i < queue_infos.size(); ++i)
         {
@@ -949,8 +951,8 @@ namespace laka { namespace vk {
             return;
         }
 
-        //填写queue_familys    按队列族索引为i 那么就填写到queue_familys[i].
-            //没有用到的qf索引 相应的位置queues.size()为0
+        // 填写queue_familys    按队列族索引为i 那么就填写到queue_familys[i].
+            // 没有用到的qf索引 相应的位置queues.size()为0
 
         for (size_t i = 0; i < qf_properties_.size(); ++i)
         {
@@ -958,7 +960,7 @@ namespace laka { namespace vk {
             queue_familys[i].qf_index = static_cast<uint32_t>(i);
         }
 
-        //假设queue_infos_中的元素 其队列族index不会重复 会的话也不知道vk会怎么处理.待提问.
+        // 假设queue_infos_中的元素 其队列族index不会重复 会的话也不知道vk会怎么处理.待提问.
         for (auto&& qi : queue_infos_)
         {
             auto curr_qf_index = qi.queue_family_index;
@@ -984,7 +986,7 @@ namespace laka { namespace vk {
         api.vkDestroyDevice(handle, *allocation_callbacks);
     }
 
-    //VkSemaphore
+    // VkSemaphore
 #if 1
     shared_ptr <Semaphore> Device::get_a_semaphore(
         N_semaphore_create_info next_/* = nullptr*/,
@@ -1027,9 +1029,9 @@ namespace laka { namespace vk {
         show_function_name;
         device->api.vkDestroySemaphore(device->handle, handle, *allocation_callbacks);
     }
-#endif //VkSemaphore
+#endif // VkSemaphore
 
-    //VkFence
+    // VkFence
 #if 1
     shared_ptr <Fence> Device::get_a_fence(
         N_fence_create_info next_/* = nullptr*/,
@@ -1125,9 +1127,9 @@ namespace laka { namespace vk {
         show_result(ret);
         return ret;
     }
-#endif  //VkFence
+#endif  // VkFence
 
-    //VkEvent
+    // VkEvent
 #if 1
     shared_ptr <Event> Device::get_a_event(
         S_allocation_callbacks*const allocator_/* = default_allocation_cb*/)
@@ -1190,9 +1192,9 @@ namespace laka { namespace vk {
     {
         device->api.vkResetEvent(device->handle, handle);
     }
-#endif //VkEvent
+#endif // VkEvent
 
-    //VkShaderModule
+    // VkShaderModule
 #if 1
     shared_ptr<Shader_module> Device::get_a_shader_module(
         const uint32_t*     code_ptr_,
@@ -1254,9 +1256,9 @@ namespace laka { namespace vk {
         show_function_name;
         device->api.vkDestroyShaderModule(device->handle, handle, *allocation_callbacks);
     }
-#endif //VkShaderModule
+#endif // VkShaderModule
 
-    //VkDeviceMemory
+    // VkDeviceMemory
 #if 1
     shared_ptr<Device_memory> Device::get_a_device_memory(
         VkDeviceSize memory_size_,
@@ -1359,9 +1361,9 @@ namespace laka { namespace vk {
         show_function_name;
         device->api.vkUnmapMemory(device->handle, handle);
     }
-#endif //VkDeviceMemory
+#endif // VkDeviceMemory
 
-    //VkBufferView
+    // VkBufferView
 #if 1
     shared_ptr<Buffer_view> Buffer::get_a_buffer_view(
         E_format        format_,
@@ -1421,9 +1423,9 @@ namespace laka { namespace vk {
             buffer->device->handle, handle, *allocation_callbacks);
     }
 
-#endif //VkBufferView
+#endif // VkBufferView
     
-    //VkBuffer
+    // VkBuffer
 #if 1
     shared_ptr<Buffer> Device::get_a_buffer(
         VkDeviceSize        buffer_size_,
@@ -1503,9 +1505,9 @@ namespace laka { namespace vk {
         return ret;
     }
 
-#endif //VkBuffer
+#endif // VkBuffer
 
-    //VkImageView
+    // VkImageView
 #if 1
     shared_ptr<Image_view> Image::get_a_image_view(
         E_image_view_type                view_type_,
@@ -1567,9 +1569,9 @@ namespace laka { namespace vk {
             image->device->handle, handle, *allocation_callbacks);
     }
 
-#endif //VkImageView
+#endif // VkImageView
 
-    //VkImage
+    // VkImage
 #if 1
     shared_ptr<Image> Device::get_a_image(
         F_image_create          create_fb_,
@@ -1690,9 +1692,9 @@ namespace laka { namespace vk {
         return ret;
     }
 
-#endif //VkImage
+#endif // VkImage
     
-    //VkSampler
+    // VkSampler
 #if 1
     shared_ptr<Sampler> Device::get_a_sampler(
         E_filter                magFilter,
@@ -1765,9 +1767,9 @@ namespace laka { namespace vk {
         device->api.vkDestroySampler(device->handle, handle, *allocation_callbacks);
     }
 
-#endif //VkSampler
+#endif // VkSampler
 
-    //VkSamplerYcbcrConversion
+    // VkSamplerYcbcrConversion
 #if 1
     shared_ptr<Sampler_Ycbcr_conversion> Device::get_a_sampler_ycbcr_conversion(
         E_format                            format_,
@@ -1828,9 +1830,9 @@ namespace laka { namespace vk {
     }
 
 
-#endif  //VkSamplerYcbcrConversion
+#endif  // VkSamplerYcbcrConversion
 
-    //VkCommandBuffer
+    // VkCommandBuffer
 #if 1
     shared_ptr<Command_buffer> 
         Command_pool::get_a_command_buffer(E_command_buffer_level level)
@@ -1900,6 +1902,22 @@ namespace laka { namespace vk {
         return ret;
     }
 
+    VkResult Command_buffer_base::reset(F_command_buffer_reset flags_)
+    {
+        auto ret = api->vkResetCommandBuffer(handle, flags_);
+        show_result(ret);
+
+        return ret;
+    }
+
+    VkResult Command_buffer_base::end()
+    {
+        auto ret = api->vkEndCommandBuffer(handle);
+        show_result(ret);
+
+        return ret;
+    }
+
     void Command_buffer_base::bind_pipeline(
         shared_ptr<Compute_pipeline> pipeline_sptr_)
     {
@@ -1917,13 +1935,6 @@ namespace laka { namespace vk {
             static_cast<VkPipelineBindPoint>(E_pipeline_bind_point::e_graphics), 
             pipeline_sptr_->handle
         );
-    }
-    
-    void fun(int i) {
-        fun(E_pipeline_bind_point::e_graphics);
-    }
-    void fun2(VkPipelineBindPoint e_) {
-        fun2(static_cast<VkPipelineBindPoint>(E_pipeline_bind_point::e_graphics) );
     }
 
     void Command_buffer_base::bind_buffer(
@@ -1944,7 +1955,6 @@ namespace laka { namespace vk {
         {
             buffer_handles[i] = (*(buffer_sptrs_.data()+i))->handle;
         }
-
         api->vkCmdBindVertexBuffers(
             handle,
             first_binding_,
@@ -1955,27 +1965,27 @@ namespace laka { namespace vk {
     }
 
     void Command_buffer_base::bind_descriptor_sets(
-        VkPipelineBindPoint                         pipelineBindPoint,
-        Pipeline_layout&                            layout,
-        uint32_t                                    firstSet,
-        Descriptor_set_s&                            descriptor_sets,
-        Array_value<uint32_t>                       dynamic_offsets)
+        E_pipeline_bind_point   pipelineBindPoint_,
+        Pipeline_layout&        layout_,
+        uint32_t                firstSet_,
+        Descriptor_set_s&       descriptor_sets_,
+        Array_value<uint32_t>   dynamic_offsets_)
     {
-        vector<VkDescriptorSet> d_set_handles(descriptor_sets.elements.size());
-        for (size_t i = 0; i < descriptor_sets.elements.size(); i++)
+        vector<VkDescriptorSet> d_set_handles(descriptor_sets_.elements.size());
+        for (size_t i = 0; i < descriptor_sets_.elements.size(); i++)
         {
-            d_set_handles[i] = descriptor_sets.elements[i].handle;
+            d_set_handles[i] = descriptor_sets_.elements[i].handle;
         }
 
         api->vkCmdBindDescriptorSets(
             handle,
-            pipelineBindPoint,
-            layout.handle,
-            firstSet,
+            pipelineBindPoint_,
+            layout_.handle,
+            firstSet_,
             static_cast<uint32_t>(d_set_handles.size()),
             &d_set_handles[0],
-            dynamic_offsets.size(),
-            dynamic_offsets.data()
+            dynamic_offsets_.size(),
+            dynamic_offsets_.data()
         );
     }
 
@@ -2008,344 +2018,349 @@ namespace laka { namespace vk {
     }
 
     void Command_buffer_base::set_scissor(
-        uint32_t firstScissor,
-        uint32_t scissorCount,
-        const VkRect2D* pScissors)
+        uint32_t            firstScissor_,
+        uint32_t            scissorCount_,
+        const S_rect_2d&    pScissors_)
     {
-        api->vkCmdSetScissor(handle, firstScissor, scissorCount, pScissors);
+        api->vkCmdSetScissor(handle, firstScissor_, scissorCount_, pScissors_);
     }
 
-    void Command_buffer_base::set_stencil_compare_mask(VkStencilFaceFlags faceMask, uint32_t compareMask)
+    void Command_buffer_base::set_stencil_compare_mask(
+        F_stencil_face faceMask_, uint32_t compareMask_)
     {
-        api->vkCmdSetStencilCompareMask(handle, faceMask, compareMask);
+        api->vkCmdSetStencilCompareMask(handle, faceMask_, compareMask_);
     }
 
-    void Command_buffer_base::set_stencil_reference(VkStencilFaceFlags faceMask, uint32_t reference)
+    void Command_buffer_base::set_stencil_reference(
+        F_stencil_face faceMask_, uint32_t reference_)
     {
-        api->vkCmdSetStencilReference(handle, faceMask, reference);
+        api->vkCmdSetStencilReference(handle, faceMask_, reference_);
     }
 
     void Command_buffer_base::set_stencil_write_mask(
-        VkStencilFaceFlags faceMask,
-        uint32_t writeMask)
+        F_stencil_face  faceMask_,
+        uint32_t        writeMask_)
     {
-        api->vkCmdSetStencilWriteMask(handle, faceMask, writeMask);
+        api->vkCmdSetStencilWriteMask(handle, faceMask_, writeMask_);
     }
 
     void Command_buffer_base::set_viewport(
-        uint32_t firstViewport,
-        Array_value<VkViewport> viewports_)
+        uint32_t                firstViewport_,
+        Array_value<S_viewport> viewports_)
     {
         api->vkCmdSetViewport(
             handle,
-            firstViewport,
+            firstViewport_,
             viewports_.size(),
-            viewports_.data()
+            *viewports_.data()
         );
     }
 
-    void Command_buffer_base::event_set(Event& event_, VkPipelineStageFlags stageMask)
+    void Command_buffer_base::event_set(Event& event_, F_pipeline_stage stageMask_)
     {
-        api->vkCmdSetEvent(handle, event_.handle, stageMask);
+        api->vkCmdSetEvent(handle, event_.handle, stageMask_);
     }
 
-    void Command_buffer_base::event_reset(Event& event_, VkPipelineStageFlags stageMask)
+    void Command_buffer_base::event_reset(Event& event_, F_pipeline_stage stageMask_)
     {
-        api->vkCmdSetEvent(handle, event_.handle, stageMask);
+        api->vkCmdSetEvent(handle, event_.handle, stageMask_);
     }
 
-    void Command_buffer_base::query_begin(Query_pool& queryPool, uint32_t query, VkQueryControlFlags flags)
+    void Command_buffer_base::query_begin(
+        Query_pool& queryPool_, uint32_t query_, F_query_control flags_)
     {
-        api->vkCmdBeginQuery(handle, queryPool.handle, query, flags);
+        api->vkCmdBeginQuery(handle, queryPool_.handle, query_, flags_);
     }
 
     void Command_buffer_base::query_reset(
-        Query_pool&                                 queryPool,
-        uint32_t                                    firstQuery,
-        uint32_t                                    queryCount)
+        Query_pool& queryPool_,
+        uint32_t    firstQuery_,
+        uint32_t    queryCount_)
     {
-        api->vkCmdResetQueryPool(handle, queryPool.handle, firstQuery, queryCount);
+        api->vkCmdResetQueryPool(handle, queryPool_.handle, firstQuery_, queryCount_);
     }
 
     void Command_buffer_base::query_end(
-        Query_pool&    queryPool,
-        uint32_t    query)
+        Query_pool& queryPool_,
+        uint32_t    query_)
     {
-        api->vkCmdEndQuery(handle, queryPool.handle, query);
+        api->vkCmdEndQuery(handle, queryPool_.handle, query_);
     }
 
     void Command_buffer_base::query_copy_results(
-        Query_pool&                                 queryPool,
-        uint32_t                                    firstQuery,
-        uint32_t                                    queryCount,
-        Buffer&                                     dstBuffer,
-        VkDeviceSize                                dstOffset,
-        VkDeviceSize                                stride,
-        VkQueryResultFlags                          flags)
+        Query_pool&     queryPool_,
+        uint32_t        firstQuery_,
+        uint32_t        queryCount_,
+        Buffer&         dstBuffer_,
+        VkDeviceSize    dstOffset_,
+        VkDeviceSize    stride_,
+        F_query_result  flags_)
     {
         api->vkCmdCopyQueryPoolResults(
             handle,
-            queryPool.handle,
-            firstQuery,
-            queryCount,
-            dstBuffer.handle,
-            dstOffset,
-            stride,
-            flags
+            queryPool_.handle,
+            firstQuery_,
+            queryCount_,
+            dstBuffer_.handle,
+            dstOffset_,
+            stride_,
+            flags_
         );
     }
 
-    void Command_buffer_base::commands_execute(Command_buffer_s& pCommandBuffers)
+    void Command_buffer_base::commands_execute(Command_buffer_s& pCommandBuffers_)
     {
-        vector<VkCommandBuffer> buffer_handles(pCommandBuffers.elements.size());
+        vector<VkCommandBuffer> buffer_handles(pCommandBuffers_.elements.size());
 
-        for (size_t i = 0; i < pCommandBuffers.elements.size(); ++i)
+        for (size_t i = 0; i < pCommandBuffers_.elements.size(); ++i)
         {
-            buffer_handles[i] = pCommandBuffers.elements[i].handle;
+            buffer_handles[i] = pCommandBuffers_.elements[i].handle;
         }
-
         api->vkCmdExecuteCommands(
             handle,
-            static_cast<uint32_t>(pCommandBuffers.elements.size()),
+            static_cast<uint32_t>(pCommandBuffers_.elements.size()),
             &buffer_handles[0]
         );
     }
 
     void Command_buffer_base::buffer_update(
-        Buffer&                                     dstBuffer,
-        VkDeviceSize                                dstOffset,
-        VkDeviceSize                                dataSize,
-        const void*                                 pData)
+        Buffer&         dstBuffer_,
+        VkDeviceSize    dstOffset_,
+        VkDeviceSize    dataSize_,
+        const void*     pData_)
     {
-        api->vkCmdUpdateBuffer(handle, dstBuffer.handle, dstOffset, dataSize, pData);
+        api->vkCmdUpdateBuffer(handle, dstBuffer_.handle, dstOffset_, dataSize_, pData_);
     }
 
     void Command_buffer_base::buffer_fill(
-        Buffer&                                    dstBuffer,
-        VkDeviceSize                                dstOffset,
-        VkDeviceSize                                size,
-        uint32_t                                    data)
+        Buffer&         dstBuffer_,
+        VkDeviceSize    dstOffset_,
+        VkDeviceSize    size_,
+        uint32_t        data_)
     {
-        api->vkCmdFillBuffer(handle, dstBuffer.handle, dstOffset, size, data);
+        api->vkCmdFillBuffer(handle, dstBuffer_.handle, dstOffset_, size_, data_);
     }
 
     void Command_buffer_base::buffer_copy_to_buffer(
-        Buffer&                                    srcBuffer,
-        Buffer&                                    dstBuffer,
-        Array_value<VkBufferCopy>                  regions)
+        Buffer&                     srcBuffer_,
+        Buffer&                     dstBuffer_,
+        Array_value<S_buffer_copy>   regions_)
     {
         api->vkCmdCopyBuffer(
             handle,
-            srcBuffer.handle,
-            dstBuffer.handle,
-            static_cast<uint32_t>(regions.size()),
-            regions.data()
+            srcBuffer_.handle,
+            dstBuffer_.handle,
+            static_cast<uint32_t>(regions_.size()),
+            *regions_.data()
         );
     }
 
     void Command_buffer_base::buffer_copy_to_image(
-        Buffer&                                        srcBuffer,
-        Image&                                        dstImage,
-        VkImageLayout                                dstImage_layout,
-        Array_value<VkBufferImageCopy>                 pRegions)
+        Buffer&                         srcBuffer_,
+        Image&                          dstImage_,
+        E_image_layout                  dstImage_layout_,
+        Array_value<S_buffer_image_copy>  pRegions_)
     {
         api->vkCmdCopyBufferToImage(
             handle,
-            srcBuffer.handle,
-            dstImage.handle,
-            dstImage_layout,
-            static_cast<uint32_t>(pRegions.size()),
-            pRegions.data()
+            srcBuffer_.handle,
+            dstImage_.handle,
+            dstImage_layout_,
+            static_cast<uint32_t>(pRegions_.size()),
+            *pRegions_.data()
         );
     }
 
     void Command_buffer_base::clear_attachments(
-        Array_value<VkClearAttachment>              pAttachments,
-        Array_value<VkClearRect>                    pRects)
+        Array_value<S_clear_attachment>  pAttachments_,
+        Array_value <S_clear_rect>       pRects_)
     {
         api->vkCmdClearAttachments(
             handle,
-            static_cast<uint32_t>(pAttachments.size()),
-            pAttachments.data(),
-            static_cast<uint32_t>(pRects.size()),
-            pRects.data()
+            static_cast<uint32_t>(pAttachments_.size()),
+            *pAttachments_.data(),
+            static_cast<uint32_t>(pRects_.size()),
+            *pRects_.data()
         );
     }
 
     void Command_buffer_base::image_clear_color(
-        Image&                                      image,
-        VkImageLayout                               imageLayout,
-        const VkClearColorValue*                    pColor,
-        Array_value<VkImageSubresourceRange>        pRanges)
+        Image&                                  image_,
+        E_image_layout                          imageLayout_,
+        const VkClearColorValue*                pColor_,
+        Array_value<S_image_subresource_range>  pRanges_)
     {
         api->vkCmdClearColorImage(
             handle,
-            image.handle,
-            imageLayout,
-            pColor,
-            static_cast<uint32_t>(pRanges.size()),
-            pRanges.data()
+            image_.handle,
+            imageLayout_,
+            pColor_,
+            static_cast<uint32_t>(pRanges_.size()),
+            *pRanges_.data()
         );
     }
 
     void Command_buffer_base::image_clear_depth_stencil(
-        Image&                                      image,
-        VkImageLayout                               imageLayout,
-        const VkClearDepthStencilValue*             pDepthStencil,
-        Array_value<VkImageSubresourceRange>        pRanges)
+        Image&                                  image_,
+        E_image_layout                          imageLayout_,
+        const S_clear_depth_stencil_value*      pDepthStencil_,
+        Array_value<S_image_subresource_range>  pRanges_)
     {
         api->vkCmdClearDepthStencilImage(
             handle,
-            image.handle,
-            imageLayout,
-            pDepthStencil,
-            static_cast<uint32_t>(pRanges.size()),
-            pRanges.data()
+            image_.handle,
+            imageLayout_,
+            *pDepthStencil_,
+            static_cast<uint32_t>(pRanges_.size()),
+            *pRanges_.data()
         );
     }
 
     void Command_buffer_base::image_blit(
-        Image&                                      srcImage,
-        VkImageLayout                               srcImageLayout,
-        Image&                                      dstImage,
-        VkImageLayout                               dstImageLayout,
-        Array_value<VkImageBlit>                    pRegions,
-        VkFilter                                    filter)
+        Image&                      srcImage_,
+        E_image_layout              srcImageLayout_,
+        Image&                      dstImage_,
+        E_image_layout              dstImageLayout_,
+        Array_value<S_image_blit>   pRegions_,
+        E_filter                    filter_)
     {
         api->vkCmdBlitImage(
             handle,
-            srcImage.handle,
-            srcImageLayout,
-            dstImage.handle,
-            dstImageLayout,
-            static_cast<uint32_t>(pRegions.size()),
-            pRegions.data(),
-            filter
+            srcImage_.handle,
+            srcImageLayout_,
+            dstImage_.handle,
+            dstImageLayout_,
+            static_cast<uint32_t>(pRegions_.size()),
+            *pRegions_.data(),
+            filter_
         );
     }
 
     void Command_buffer_base::image_copy(
-        Image&                                     srcImage,
-        VkImageLayout                              srcImageLayout,
-        Image&                                     dstImage,
-        VkImageLayout                              dstImageLayout,
-        Array_value<VkImageCopy>                   pRegions)
+        Image&                      srcImage_,
+        E_image_layout              srcImageLayout_,
+        Image&                      dstImage_,
+        E_image_layout              dstImageLayout_,
+        Array_value<S_image_copy>   pRegions_)
     {
         api->vkCmdCopyImage(
             handle,
-            srcImage.handle,
-            srcImageLayout,
-            dstImage.handle,
-            dstImageLayout,
-            static_cast<uint32_t>(pRegions.size()),
-            pRegions.data()
+            srcImage_.handle,
+            srcImageLayout_,
+            dstImage_.handle,
+            dstImageLayout_,
+            static_cast<uint32_t>(pRegions_.size()),
+            *pRegions_.data()
         );
     }
 
     void Command_buffer_base::image_copy_to_buffer(
-        Image&                                      srcImage,
-        VkImageLayout                               srcImageLayout,
-        Buffer&                                     dstBuffer,
-        Array_value<VkBufferImageCopy>            pRegions)
+        Image&                      srcImage_,
+        E_image_layout              srcImageLayout_,
+        Buffer&                     dstBuffer_,
+        Array_value<S_buffer_image_copy>  pRegions_)
     {
         api->vkCmdCopyImageToBuffer(
             handle,
-            srcImage.handle,
-            srcImageLayout,
-            dstBuffer.handle,
-            static_cast<uint32_t>(pRegions.size()),
-            pRegions.data()
+            srcImage_.handle,
+            srcImageLayout_,
+            dstBuffer_.handle,
+            static_cast<uint32_t>(pRegions_.size()),
+            *pRegions_.data()
         );
     }
 
     void Command_buffer_base::dispatch(
-        uint32_t                                    groupCountX,
-        uint32_t                                    groupCountY,
-        uint32_t                                    groupCountZ)
+        uint32_t    groupCountX_,
+        uint32_t    groupCountY_,
+        uint32_t    groupCountZ_)
     {
-        api->vkCmdDispatch(handle, groupCountX, groupCountY, groupCountZ);
+        api->vkCmdDispatch(handle, groupCountX_, groupCountY_, groupCountZ_);
     }
 
     void Command_buffer_base::dispatch_base(
-        uint32_t                                    baseGroupX,
-        uint32_t                                    baseGroupY,
-        uint32_t                                    baseGroupZ,
-        uint32_t                                    groupCountX,
-        uint32_t                                    groupCountY,
-        uint32_t                                    groupCountZ)
+        uint32_t    baseGroupX_,
+        uint32_t    baseGroupY_,
+        uint32_t    baseGroupZ_,
+        uint32_t    groupCountX_,
+        uint32_t    groupCountY_,
+        uint32_t    groupCountZ_)
     {
         api->vkCmdDispatchBase(
-            handle, baseGroupX, baseGroupY, baseGroupZ, groupCountX, groupCountY, groupCountZ);
+            handle, 
+            baseGroupX_, baseGroupY_, baseGroupZ_, 
+            groupCountX_, groupCountY_, groupCountZ_
+        );
     }
 
     void Command_buffer_base::dispatch_indirect(
-        Buffer&                                    buffer,
-        VkDeviceSize                                offset)
+        Buffer&         buffer_,
+        VkDeviceSize    offset_)
     {
-        api->vkCmdDispatchIndirect(handle, buffer.handle, offset);
+        api->vkCmdDispatchIndirect(handle, buffer_.handle, offset_);
     }
 
     void Command_buffer_base::write_timestamp(
-        VkPipelineStageFlagBits                     pipelineStage,
-        Query_pool&                                 queryPool,
-        uint32_t                                    query)
+        F_pipeline_stage    pipelineStage_,
+        Query_pool&         queryPool_,
+        uint32_t            query_)
     {
-        api->vkCmdWriteTimestamp(handle, pipelineStage, queryPool.handle, query);
+        api->vkCmdWriteTimestamp(handle, pipelineStage_, queryPool_.handle, query_);
     }
 
     void Command_buffer_base::push_constants(
-        Pipeline_layout&                            layout,
-        VkShaderStageFlags                          stageFlags,
-        uint32_t                                    offset,
-        uint32_t                                    size,
-        const void*                                 pValues)
+        Pipeline_layout&    layout_,
+        F_shader_stage      stageFlags_,
+        uint32_t            offset_,
+        uint32_t            size_,
+        const void*         pValues_)
     {
-        api->vkCmdPushConstants(handle, layout.handle, stageFlags, offset, size, pValues);
+        api->vkCmdPushConstants(
+            handle, layout_.handle, stageFlags_, offset_, size_, pValues_);
     }
 
     void Command_buffer_base::image_resolve(
-        Image&                                      srcImage,
-        VkImageLayout                               srcImageLayout,
-        Image&                                      dstImage,
-        VkImageLayout                               dstImageLayout,
-        Array_value<VkImageResolve>                 pRegions)
+        Image&                          srcImage_,
+        E_image_layout                  srcImageLayout_,
+        Image&                          dstImage_,
+        E_image_layout                  dstImageLayout_,
+        Array_value<S_image_resolve>    pRegions_)
     {
         api->vkCmdResolveImage(
             handle,
-            srcImage.handle,
-            srcImageLayout,
-            dstImage.handle,
-            dstImageLayout,
-            static_cast<uint32_t>(pRegions.size()),
-            pRegions.data()
+            srcImage_.handle,
+            srcImageLayout_,
+            dstImage_.handle,
+            dstImageLayout_,
+            static_cast<uint32_t>(pRegions_.size()),
+            *pRegions_.data()
         );
     }
 
     void Command_buffer_base::render_pass_begin(
-        Render_pass&            render_pass,
-        Frame_buffer&            framebuffer,
-        VkRect2D                renderArea,
-        uint32_t                clearValueCount,
-        const VkClearValue*        pClearValues,
-        VkSubpassContents       contents,
-        const void*                pNext/* = nullptr*/)
+        Render_pass&        render_pass_,
+        Frame_buffer&       framebuffer_,
+        S_rect_2d           renderArea_,
+        uint32_t            clearValueCount_,
+        const VkClearValue* pClearValues_,
+        E_subpass_contents  contents_,
+        N_render_pass_begin_info    pNext_ /*= {}*/)
     {
-        VkRenderPassBeginInfo info{
-            VK_STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO,
-            pNext,
-            render_pass.handle,
-            framebuffer.handle,
-            renderArea,
-            clearValueCount,
-            pClearValues
+        S_render_pass_begin_info info{
+            render_pass_.handle,
+            framebuffer_.handle,
+            renderArea_,
+            clearValueCount_,
+            pClearValues_
         };
+        info.set_pNext(pNext_);
 
-        api->vkCmdBeginRenderPass(handle, &info, contents);
+        api->vkCmdBeginRenderPass(handle, info, contents_);
     }
 
-    void Command_buffer_base::next_subpass(VkSubpassContents contents)
+    void Command_buffer_base::next_subpass(E_subpass_contents contents_)
     {
-        api->vkCmdNextSubpass(handle, contents);
+        api->vkCmdNextSubpass(handle, contents_);
     }
 
     void Command_buffer_base::render_pass_end()
@@ -2353,119 +2368,1168 @@ namespace laka { namespace vk {
         api->vkCmdEndRenderPass(handle);
     }
 
-#define cast_u32(...) static_cast<uint32_t>(__VA_ARGS__)
-
     void Command_buffer_base::wait_events(
-        Array_value<std::shared_ptr<Event>>            events_,
-        VkPipelineStageFlags                        srcStageMask,
-        VkPipelineStageFlags                        dstStageMask,
-        Array_value<VkMemoryBarrier>                 memory_barriers_,
-        Array_value<VkBufferMemoryBarrier>             buffer_memory_barriers_,
-        Array_value<VkImageMemoryBarrier>             image_memory_barriers_)
+        Array_value<std::shared_ptr<Event>> events_,
+        F_pipeline_stage                    srcStageMask_,
+        F_pipeline_stage                    dstStageMask_,
+        Array_value<S_memory_barrier>       memory_barriers_,
+        Array_value<S_buffer_memory_barrier>buffer_memory_barriers_,
+        Array_value<S_image_memory_barrier> image_memory_barriers_)
     {
         vector<VkEvent> event_handels(events_.size());
         for (size_t i = 0; i < events_.size(); i++)
         {
             event_handels[i] = (*(events_.data()+i))->handle;
         }
-
         api->vkCmdWaitEvents(
             handle,
-            cast_u32(events_.size()),
+            static_cast<uint32_t>(events_.size()),
             &event_handels[0],
-            srcStageMask,
-            dstStageMask,
+            srcStageMask_,
+            dstStageMask_,
             memory_barriers_.size(),
-            memory_barriers_.data(),
+            *memory_barriers_.data(),
             buffer_memory_barriers_.size(),
-            buffer_memory_barriers_.data(),
+            *buffer_memory_barriers_.data(),
             image_memory_barriers_.size(),
-            image_memory_barriers_.data()
+            *image_memory_barriers_.data()
         );
     }
 
     void Command_buffer_base::pipeline_barrier(
-        VkCommandBuffer                             commandBuffer,
-        VkPipelineStageFlags                        srcStageMask,
-        VkPipelineStageFlags                        dstStageMask,
-        VkDependencyFlags                           dependencyFlags,
-        Array_value<VkMemoryBarrier>                memory_barriers_,
-        Array_value<VkBufferMemoryBarrier>             buffer_memory_barriers_,
-        Array_value<VkImageMemoryBarrier>            image_memory_barriers_)
+        F_pipeline_stage                    srcStageMask_,
+        F_pipeline_stage                    dstStageMask_,
+        F_dependency                        dependencyFlags_,
+        Array_value<S_memory_barrier>       memory_barriers_,
+        Array_value<S_buffer_memory_barrier>buffer_memory_barriers_,
+        Array_value<S_image_memory_barrier> image_memory_barriers_)
     {
         api->vkCmdPipelineBarrier(
             handle,
-            srcStageMask,
-            dstStageMask,
-            dependencyFlags,
+            srcStageMask_,
+            dstStageMask_,
+            dependencyFlags_,
             memory_barriers_.size(),
-            memory_barriers_.data(),
+            *memory_barriers_.data(),
             buffer_memory_barriers_.size(),
-            buffer_memory_barriers_.data(),
+            *buffer_memory_barriers_.data(),
             image_memory_barriers_.size(),
-            image_memory_barriers_.data()
+            *image_memory_barriers_.data()
         );
     }
 
     void Command_buffer_base::draw(
-        uint32_t                                    vertexCount,
-        uint32_t                                    instanceCount,
-        uint32_t                                    firstVertex,
-        uint32_t                                    firstInstance)
+        uint32_t    vertexCount_,
+        uint32_t    instanceCount_,
+        uint32_t    firstVertex_,
+        uint32_t    firstInstance_)
     {
         api->vkCmdDraw(
-            handle, vertexCount, instanceCount, firstVertex, firstInstance);
+            handle, vertexCount_, instanceCount_, firstVertex_, firstInstance_);
     }
 
     void Command_buffer_base::draw_indexed(
-        uint32_t                                    indexCount,
-        uint32_t                                    instanceCount,
-        uint32_t                                    firstIndex,
-        int32_t                                     vertexOffset,
-        uint32_t                                    firstInstance)
+        uint32_t    indexCount_,
+        uint32_t    instanceCount_,
+        uint32_t    firstIndex_,
+        int32_t     vertexOffset_,
+        uint32_t    firstInstance_)
     {
         api->vkCmdDrawIndexed(
             handle,
-            indexCount,
-            instanceCount,
-            firstIndex,
-            vertexOffset,
-            firstInstance
+            indexCount_,
+            instanceCount_,
+            firstIndex_,
+            vertexOffset_,
+            firstInstance_
         );
     }
 
     void Command_buffer_base::draw_indexed_indirect(
-        Buffer&                                    buffer,
-        VkDeviceSize                                offset,
-        uint32_t                                    drawCount,
-        uint32_t                                    stride)
+        Buffer&         buffer_,
+        VkDeviceSize    offset_,
+        uint32_t        drawCount_,
+        uint32_t        stride_)
     {
         api->vkCmdDrawIndexedIndirect(
             handle,
-            buffer.handle,
-            offset,
-            drawCount,
-            stride
+            buffer_.handle,
+            offset_,
+            drawCount_,
+            stride_
         );
     }
 
     void Command_buffer_base::draw_indirect(
-        Buffer&                                     buffer,
-        VkDeviceSize                                offset,
-        uint32_t                                    drawCount,
-        uint32_t                                    stride)
+        Buffer&         buffer_,
+        VkDeviceSize    offset_,
+        uint32_t        drawCount_,
+        uint32_t        stride_)
     {
         api->vkCmdDrawIndirect(
             handle,
-            buffer.handle,
-            offset,
-            drawCount,
-            stride
+            buffer_.handle,
+            offset_,
+            drawCount_,
+            stride_
         );
     }
 
-#endif  //VkCommandBuffer
+    shared_ptr<Command_buffer_s> Command_pool::get_a_command_buffers(
+        uint32_t                command_buffer_count_,
+        E_command_buffer_level  level_)
+    {
+        shared_ptr<Command_buffer_s> sptr;
 
+        S_command_buffer_allocate_info info{
+            handle,
+            level_,
+            command_buffer_count_
+        };
+
+        vector<VkCommandBuffer> buffer_handles(command_buffer_count_);
+
+        auto ret = device->api.vkAllocateCommandBuffers(
+            device->handle, info, &buffer_handles[0]);
+        show_result(ret);
+
+        if (ret < 0)
+        {
+            init_show;
+            show_err("创建 command buffer 失败");
+
+            for (size_t i = 0; i < buffer_handles.size(); ++i)
+            {
+                // 是否应当这样处理???
+                if (buffer_handles[i] != VK_NULL_HANDLE)
+                {
+                    show_err("存在已创建的command buffer,逐个释放掉.");
+                    device->api.vkFreeCommandBuffers(
+                        device->handle, handle, 1, &buffer_handles[i]);
+                }
+            }
+            return sptr;
+        }
+
+        sptr.reset(
+            new Command_buffer_s(shared_from_this(), buffer_handles));
+
+        return sptr;
+    }
+    Command_buffer_s::Command_buffer_s(
+        shared_ptr<Command_pool> comman_pool_, vector<VkCommandBuffer> handles_)
+        :elements(handles_.size())
+    {
+        size_t count = 0;
+        for (auto& command_buffer : elements)
+        {
+            command_buffer.handle = handles_[count];
+            command_buffer.api = &(command_pool->device->api);
+            count++;
+        }
+    }
+    Command_buffer_s::~Command_buffer_s()
+    {
+        init_show;
+        show_function_name;
+
+        vector<VkCommandBuffer> buffer_handles(elements.size());
+
+        size_t count = 0;
+        for (auto&& command_buffer : elements)
+        {
+            buffer_handles[count] = command_buffer.handle;
+            count++;
+        }
+
+        command_pool->device->api.vkFreeCommandBuffers(
+            command_pool->device->handle,
+            command_pool->handle,
+            static_cast<uint32_t>(buffer_handles.size()),
+            &buffer_handles[0]
+        );
+    }
+
+#endif  // VkCommandBuffer
+
+    // VkCommandPool
+#if 1
+    shared_ptr<Command_pool> Device::get_a_command_pool(
+        uint32_t                        queueFamilyIndex_,
+        F_command_pool_create           flags_,
+        S_allocation_callbacks*const   allocator_ /*= default_allocation_cb()*/)
+    {
+        shared_ptr<Command_pool> command_pool_sptr;
+        auto allocator = allocator_ == default_allocation_cb() ?
+            allocation_callbacks : allocator_;
+
+        S_command_pool_create_info info{
+            flags_,
+            queueFamilyIndex_
+        };
+
+        VkCommandPool command_pool_handle;
+        auto ret = api.vkCreateCommandPool(
+            handle, info, *allocator, &command_pool_handle);
+        show_result(ret);
+
+        if (ret < 0)
+        {
+            init_show;
+            show_wrn("创建Command pool 失败");
+            return command_pool_sptr;
+        }
+
+        command_pool_sptr.reset(
+            new Command_pool(shared_from_this(), command_pool_handle, allocator));
+
+        return command_pool_sptr;
+    }
+
+    Command_pool::Command_pool(
+        std::shared_ptr<Device>         device_,
+        VkCommandPool                   handle_,
+        S_allocation_callbacks*const   allocator_)
+        : device(device_)
+        , handle(handle_)
+        , allocation_callbacks(allocator_)
+    {   }
+
+    Command_pool::~Command_pool()
+    {
+        init_show;
+        show_function_name;
+        device->api.vkDestroyCommandPool(device->handle, handle, *allocation_callbacks);
+    }
+
+    VkResult Command_pool::reset(F_command_pool_reset flags_)
+    {
+        auto ret = device->api.vkResetCommandPool(device->handle, handle, flags_);
+        show_result(ret);
+        if (ret < 0)
+        {
+            init_show;
+            show_err("reset command pool 失败");
+        }
+        return ret;
+    }
+
+    void Command_pool::trim(VkCommandPoolTrimFlags flags_)
+    {
+        device->api.vkTrimCommandPool(device->handle, handle, flags_);
+    }
+
+#endif  // VkCommandBuffer
+
+    // VkDescriptorSet
+#if 1
+
+    Descriptor_set_base::Descriptor_set_base(VkDescriptorSet handle_)
+        :handle(handle_) 
+    {}
+
+    shared_ptr<Descriptor_set> Descriptor_pool::get_a_descriptor_set(
+        VkDescriptorSetLayout set_layout,
+        N_descriptor_set_allocate_info next_ /*= {}*/)
+    {
+        shared_ptr<Descriptor_set> descriptor_sets_sptr;
+
+        S_descriptor_set_allocate_info info{
+            handle,
+            1,
+            &set_layout,
+        };
+        info.set_pNext(next_);
+
+        VkDescriptorSet descriptor_sets_handle;
+        auto ret = device->api.vkAllocateDescriptorSets(
+            device->handle, info, &descriptor_sets_handle);
+        show_result(ret);
+
+        if (ret < 0)
+        {
+            init_show;
+            show_err("创建 descriptor set 失败");
+            return descriptor_sets_sptr;
+        }
+        descriptor_sets_sptr.reset(
+            new Descriptor_set(shared_from_this(), descriptor_sets_handle)
+        );
+        return descriptor_sets_sptr;
+    }
+
+    Descriptor_set::Descriptor_set(
+        std::shared_ptr<Descriptor_pool>    descriptor_pool_,
+        VkDescriptorSet                     handle_)
+        :descriptor_pool(descriptor_pool_)
+        , Descriptor_set_base(handle_)
+    {}
+
+    Descriptor_set::~Descriptor_set()
+    {
+        init_show;
+        show_function_name;
+        descriptor_pool->device->api.vkFreeDescriptorSets(
+            descriptor_pool->device->handle,
+            descriptor_pool->handle,
+            1,
+            &handle
+        );
+    }
+
+    void Descriptor_set::update_with_template(
+        Descriptor_update_template& descriptorUpdateTemplate_,
+        const void*                 pData_)
+    {
+        descriptor_pool->device->api.vkUpdateDescriptorSetWithTemplate(
+            descriptor_pool->device->handle,
+            handle,
+            descriptorUpdateTemplate_.handle,
+            pData_
+        );
+    }
+
+    void Descriptor_set::update(
+        S_write_descriptor_set&     pDescriptorWrites_,
+        S_copy_descriptor_set&      pDescriptorCopies_)
+    {
+        descriptor_pool->device->api.vkUpdateDescriptorSets(
+            descriptor_pool->device->handle,
+            1,
+            pDescriptorWrites_,
+            1,
+            pDescriptorCopies_
+        );
+    }
+
+
+    Descriptor_set_s::Descriptor_set_s(
+        shared_ptr<Descriptor_pool> descriptor_pool_,
+        vector<VkDescriptorSet>& handles_)
+        :descriptor_pool(descriptor_pool_)
+        , elements(handles_.size())
+    {
+        for (size_t i = 0; i < elements.size(); ++i)
+        {
+            elements[i].handle = handles_[i];
+        }
+    }
+
+    Descriptor_set_s::~Descriptor_set_s()
+    {
+        vector<VkDescriptorSet> handles(elements.size());
+        for (size_t i = 0; i < elements.size(); ++i)
+        {
+            handles[i] = elements[i].handle;
+        }
+        if (handles.size() <= 0)
+        {
+            return;
+        }
+        descriptor_pool->device->api.vkFreeDescriptorSets(
+            descriptor_pool->device->handle,
+            descriptor_pool->handle,
+            static_cast<uint32_t>(elements.size()),
+            &handles[0]
+        );
+    }
+
+    shared_ptr<Descriptor_set_s> Descriptor_pool::get_descriptor_sets(
+        std::vector<VkDescriptorSetLayout>& set_layouts,
+        N_descriptor_set_allocate_info next_ /*= {}*/)
+    {
+        shared_ptr<Descriptor_set_s> descriptor_sets_sptr;
+        S_descriptor_set_allocate_info info{
+            handle,
+            1,
+            &set_layouts[0]
+        };
+        info.set_pNext(next_);
+
+        vector<VkDescriptorSet> descriptor_sets_handles(set_layouts.size());
+
+        auto ret = device->api.vkAllocateDescriptorSets(
+            device->handle, info, &descriptor_sets_handles[0]);
+        show_result(ret);
+
+        if (ret < 0)
+        {
+            init_show;
+            show_err("创建 descriptor set 失败");
+
+            for (size_t i = 0; i < descriptor_sets_handles.size(); ++i)
+            {
+                if (descriptor_sets_handles[i] != VK_NULL_HANDLE)
+                {
+                    //正确处理方式???
+                    show_err("存在已申请的descriptor set 逐个释放...");
+                    device->api.vkFreeDescriptorSets(
+                        device->handle,
+                        handle,
+                        1,
+                        &descriptor_sets_handles[i]
+                    );
+                }
+            }
+
+            return descriptor_sets_sptr;
+        }
+        descriptor_sets_sptr.reset(
+            new Descriptor_set_s(shared_from_this(), descriptor_sets_handles)
+        );
+        return descriptor_sets_sptr;
+    }
+
+#endif // VkDescriptorSet
+
+    // VkDescriptorPool
+#if 1
+    shared_ptr<Descriptor_pool> Device::get_a_descriptor_pool(
+        uint32_t                            maxSets_,
+        Array_value<S_descriptor_pool_size> poolSizes_,
+        F_command_pool_create               flags_,
+        S_allocation_callbacks*const        allocator_ /*= default_allocation_cb()*/)
+    {
+        shared_ptr<Descriptor_pool> descriptor_pool_sptr;
+        auto allocator = allocator_ == default_allocation_cb() ?
+            allocation_callbacks : allocator_;
+
+        S_descriptor_pool_create_info info{
+            flags_,
+            maxSets_,
+            poolSizes_.size(),
+            *poolSizes_.data()
+        };
+        VkDescriptorPool descriptor_pool_handle;
+        auto ret = api.vkCreateDescriptorPool(
+            handle, info, *allocator, &descriptor_pool_handle);
+        show_result(ret);
+        if (ret < 0)
+        {
+            init_show;
+            show_wrn("创建 descriptor pool 失败");
+            return descriptor_pool_sptr;
+        }
+        descriptor_pool_sptr.reset(
+            new Descriptor_pool(shared_from_this(), descriptor_pool_handle, allocator));
+
+        return descriptor_pool_sptr;
+    }
+
+    Descriptor_pool::Descriptor_pool(
+        shared_ptr<Device>              device_,
+        VkDescriptorPool                handle_,
+        S_allocation_callbacks*const    allocator_)
+        : device(device_)
+        , handle(handle_)
+        , allocation_callbacks(allocator_)
+    {   }
+
+    Descriptor_pool::~Descriptor_pool()
+    {
+        init_show;
+        show_function_name;
+        device->api.vkDestroyDescriptorPool(
+            device->handle, handle, *allocation_callbacks);
+    }
+
+    VkResult Descriptor_pool::reset(VkDescriptorPoolResetFlags flags)
+    {
+        auto ret = device->api.vkResetDescriptorPool(device->handle, handle, flags);
+        show_result(ret);
+
+        return ret;
+    }
+
+#endif // VkDescriptorPool
+
+    // VkDescriptorUpdateTemplate
+#if 1
+    shared_ptr<Descriptor_update_template> 
+        Descriptor_set_layout::get_a_descriptor_update_template(
+            Array_value<VkDescriptorUpdateTemplateEntry> entrys_,
+            S_allocation_callbacks*const allocator_ /*= default_allocation_cb()*/)
+    {
+        shared_ptr<Descriptor_update_template> descriptor_update_template_sptr;
+
+        auto allocator = allocator_ == default_allocation_cb() ?
+            allocation_callbacks : allocator_;
+
+        if (entrys_.size() <= 0)  return descriptor_update_template_sptr;
+        S_descriptor_update_template_create_info info{
+            0,
+            entrys_.size(),
+            entrys_.data(),
+            E_descriptor_update_template_type::e_descriptor_set,
+            handle,
+            /*...*/
+        };
+
+        VkDescriptorUpdateTemplate descriptor_update_template_handle;
+        auto ret = device->api.vkCreateDescriptorUpdateTemplate(
+            device->handle, info, *allocator, &descriptor_update_template_handle);
+        show_result(ret);
+
+        if (ret < 0)
+        {
+            init_show;
+            show_wrn("创建 descriptor update template 失败");
+            return descriptor_update_template_sptr;
+        }
+        descriptor_update_template_sptr.reset(new Descriptor_update_template(
+            shared_from_this(), descriptor_update_template_handle, allocator
+        ));
+        return descriptor_update_template_sptr;
+    }
+
+    Descriptor_update_template::Descriptor_update_template(
+        shared_ptr<Descriptor_set_layout> descriptor_set_layout_,
+        VkDescriptorUpdateTemplate handle_,
+        S_allocation_callbacks*const allocator_)
+        : descriptor_set_layout(descriptor_set_layout_)
+        , handle(handle_)
+        , allocation_callbacks(allocator_)
+    {   }
+    Descriptor_update_template::Descriptor_update_template(
+        shared_ptr< Pipeline_layout> pipeline_layout_,
+        VkDescriptorUpdateTemplate handle_,
+        S_allocation_callbacks*const allocator_)
+        : pipeline_layout(pipeline_layout_)
+        , handle(handle_)
+        , allocation_callbacks(allocator_)
+    {    }
+
+    Descriptor_update_template::~Descriptor_update_template()
+    {
+        init_show;
+        show_function_name;
+        descriptor_set_layout->device->api.vkDestroyDescriptorUpdateTemplate(
+            descriptor_set_layout->device->handle,
+            handle,
+            *allocation_callbacks
+        );
+    }
+
+#endif // VkDescriptorUpdateTemplate
+
+    // VkDescriptorSetLayout
+#if 1
+    shared_ptr<Descriptor_set_layout> Device::get_a_descriptor_set_layout(
+        F_descriptor_set_layout_create                  flags_,
+        Array_value<S_descriptor_set_layout_binding>    bindings_ /*= {}*/,
+        N_descriptor_set_layout_create_info             next_ /*= {}*/,
+        S_allocation_callbacks*const allocator_ /*= default_allocation_cb()*/)
+    {
+        shared_ptr<Descriptor_set_layout> descriptor_set_layout_sptr;
+
+        auto allocator = allocator_ == default_allocation_cb() ?
+            allocation_callbacks : allocator_;
+
+        uint32_t size = bindings_.size();
+
+        S_descriptor_set_layout_create_info info{
+            flags_,
+            size,
+            bindings_.data()
+        };
+        info.set_pNext(next_);
+        /*
+        此处可以使用vkGetDescriptorSetLayoutSupport 检查是否能够创建
+        */
+
+        VkDescriptorSetLayout descriptor_set_layout_handle;
+        auto ret = api.vkCreateDescriptorSetLayout(
+            handle, info, *allocator, &descriptor_set_layout_handle);
+        show_result(ret);
+
+        if (ret < 0)
+        {
+            init_show;
+            show_wrn("创建 descriptor setlayout 失败");
+            return descriptor_set_layout_sptr;
+        }
+        descriptor_set_layout_sptr.reset(
+            new Descriptor_set_layout(shared_from_this(), descriptor_set_layout_handle, allocator));
+        return descriptor_set_layout_sptr;
+    }
+
+    Descriptor_set_layout::Descriptor_set_layout(
+        shared_ptr<Device> device_,
+        VkDescriptorSetLayout handle_,
+        S_allocation_callbacks*const allocator_)
+        : device(device_)
+        , handle(handle_)
+        , allocation_callbacks(allocator_)
+    {   }
+
+    Descriptor_set_layout::~Descriptor_set_layout()
+    {
+        init_show;
+        show_function_name;
+        device->api.vkDestroyDescriptorSetLayout(
+            device->handle, handle, *allocation_callbacks);
+    }
+
+#endif // VkDescriptorSetLayout
+
+    // VkQueryPool
+#if 1
+    shared_ptr<Query_pool> Device::get_a_query_pool(
+        E_query_type                query_type,
+        uint32_t                    query_count,
+        F_query_pipeline_statistic  queue_pipeline_statistic_flags_,
+        S_allocation_callbacks*const allocator_ /*= default_allocation_cb()*/)
+    {
+        shared_ptr<Query_pool> query_pool_sptr;
+
+        auto allocator = allocator_ == default_allocation_cb() ?
+            allocation_callbacks : allocator_;
+
+        S_query_pool_create_info info{
+            0,
+            query_type,
+            query_count,
+            queue_pipeline_statistic_flags_
+        };
+
+        VkQueryPool query_pool_handle;
+        auto ret = api.vkCreateQueryPool(
+            handle, info, *allocator, &query_pool_handle);
+        show_result(ret);
+
+        if (ret < 0)
+        {
+            init_show;
+            show_wrn("创建 Query pool 失败");
+            return query_pool_sptr;
+        }
+
+        query_pool_sptr.reset(
+            new Query_pool(shared_from_this(), query_pool_handle, allocator));
+
+        return query_pool_sptr;
+    }
+
+    Query_pool::Query_pool(
+        shared_ptr<Device> device_, 
+        VkQueryPool handle_, 
+        S_allocation_callbacks*const  allocator_)
+        : device(device_)
+        , handle(handle_)
+        , allocation_callbacks(allocator_)
+    {   }
+
+    Query_pool::~Query_pool()
+    {
+        init_show;
+        show_function_name;
+        device->api.vkDestroyQueryPool(device->handle, handle, *allocation_callbacks);
+    }
+
+    VkResult Query_pool::get_results(
+        uint32_t        firstQuery_,
+        uint32_t        queryCount_,
+        size_t          dataSize_,
+        void*           pData_,
+        VkDeviceSize    stride_,
+        F_query_result  flags_)
+    {
+        auto ret = device->api.vkGetQueryPoolResults(
+            device->handle, 
+            handle, 
+            firstQuery_, queryCount_, dataSize_, pData_, stride_, flags_);
+        show_result(ret);
+
+        return ret;
+    }
+
+#endif // VkQueryPool
+
+    // VkFrameBuffer
+#if 1
+    shared_ptr<Frame_buffer> Render_pass::get_a_frame_buffer(
+        Array_value<VkImageView> attachments_,
+        uint32_t width_,
+        uint32_t height_,
+        uint32_t layers_,
+        S_allocation_callbacks*const allocator_ /*= default_allocation_cb()*/)
+    {
+        shared_ptr<Frame_buffer> frame_buffer_sptr;
+
+        auto allocator = allocator_ == default_allocation_cb() ?
+            allocation_callbacks : allocator_;
+
+        S_framebuffer_create_info info{
+            0,
+            handle,
+            attachments_.size(),
+            attachments_.data(),
+            width_,
+            height_,
+            layers_
+        };
+
+        VkFramebuffer frame_buffer_handle;
+        auto ret = device->api.vkCreateFramebuffer(
+            device->handle, info, *allocator, &frame_buffer_handle);
+        show_result(ret);
+
+        if (ret < 0)
+        {
+            init_show;
+            show_wrn("创建 frame buffer 失败");
+            return frame_buffer_sptr;
+        }
+        frame_buffer_sptr.reset(
+            new Frame_buffer(shared_from_this(), frame_buffer_handle, allocator));
+
+        return frame_buffer_sptr;
+    }
+
+    Frame_buffer::Frame_buffer(
+        shared_ptr<Render_pass> render_pass_,
+        VkFramebuffer handle_,
+        S_allocation_callbacks*const allocator_)
+        : render_pass(render_pass_)
+        , handle(handle_)
+        , allocation_callbacks(allocator_)
+    {   }
+
+    Frame_buffer::~Frame_buffer()
+    {
+        init_show;
+        show_function_name;
+        render_pass->device->api.vkDestroyFramebuffer(
+            render_pass->device->handle, handle, *allocation_callbacks);
+    }
+
+#endif // VkFrameBuffer
+
+    // VkRenderPass
+#if 1
+    shared_ptr<Render_pass> Device::get_a_render_pass(
+        Array_value<S_attachment_description>   attachments /*= {}*/,
+        Array_value<S_subpass_description>      subpasses /*= {}*/,
+        Array_value<S_subpass_dependency>       dependencies /*= {}*/,
+        N_render_pass_create_info               next_ /*= {}*/,
+        S_allocation_callbacks*const allocator_ /*= default_allocation_cb()*/)
+    {
+        shared_ptr<Render_pass> render_pass_sptr;
+
+        auto allocator = allocator_ == default_allocation_cb() ?
+            allocation_callbacks : allocator_;
+
+        S_render_pass_create_info info{
+            0,
+            attachments.size(),
+            attachments.data(),
+
+            subpasses.size(),
+            subpasses.data(),
+
+            dependencies.size(),
+            dependencies.data(),
+        };
+        info.set_pNext(next_);
+
+        VkRenderPass render_pass_handle;
+        auto ret = api.vkCreateRenderPass(
+            handle, info, *allocator, &render_pass_handle);
+        show_result(ret);
+
+        if (ret < 0)
+        {
+            init_show;
+            show_wrn("创建 render pass 失败");
+            return render_pass_sptr;
+        }
+        render_pass_sptr.reset(
+            new Render_pass(shared_from_this(), render_pass_handle, allocator));
+
+        return render_pass_sptr;
+    }
+
+    Render_pass::Render_pass(
+        shared_ptr<Device> device_,
+        VkRenderPass handle_,
+        S_allocation_callbacks*const allocator_)
+        : device(device_)
+        , handle(handle_)
+        , allocation_callbacks(allocator_)
+    {   }
+
+    Render_pass::~Render_pass()
+    {
+        init_show;
+        show_function_name;
+        device->api.vkDestroyRenderPass(device->handle, handle, *allocation_callbacks);
+    }
+
+    S_extent_2d Render_pass::get_area_granularity()
+    {
+        S_extent_2d sult;
+        device->api.vkGetRenderAreaGranularity(device->handle, handle, sult);
+        return sult;
+    }
+
+#endif // VkRenderPass
+
+    // VkPipelineLayout
+#if 1
+    shared_ptr<Pipeline_layout> Device::get_a_pipeline_layout(
+        Array_value<S_push_constant_range>  push_constant_ranges_ /*= {}*/,
+        S_allocation_callbacks*const allocator_ /*= default_allocation_cb()*/)
+    {
+        shared_ptr<Pipeline_layout> pipeline_layout_sptr;
+
+        auto allocator = allocator_ == default_allocation_cb() ?
+            allocation_callbacks : allocator_;
+
+        S_pipeline_layout_create_info info{
+            0,
+            0,
+            NULL,
+            push_constant_ranges_.size(),
+            push_constant_ranges_.data()
+        };
+        VkPipelineLayout pipeline_layout_handle;
+        auto ret = api.vkCreatePipelineLayout(
+            handle, info, *allocator, &pipeline_layout_handle
+        );
+        show_result(ret);
+        if (ret < 0) return pipeline_layout_sptr;
+
+        pipeline_layout_sptr.reset(new Pipeline_layout(
+            shared_from_this(), pipeline_layout_handle, allocator)
+        );
+        return pipeline_layout_sptr;
+    }
+
+    Pipeline_layout::Pipeline_layout(
+        shared_ptr<Device> device_,
+        VkPipelineLayout handle_,
+        S_allocation_callbacks*const allocator_)
+        : device(device_)
+        , handle(handle_)
+        , allocation_callbacks(allocator_)
+    { }
+
+    Pipeline_layout::~Pipeline_layout()
+    {
+        init_show;
+        show_function_name;
+        device->api.vkDestroyPipelineLayout(
+            device->handle, handle, *allocation_callbacks);
+    }
+#endif // VkPipelineLayout
+
+    // VkPipelineCache
+#if 1
+    shared_ptr<Pipeline_cache> Device::get_a_pipeline_cache(
+        size_t      initial_data_size /*= 0*/,
+        const void* initial_data_ /*= nullptr*/,
+        S_allocation_callbacks*const allocator_ /*= default_allocation_cb()*/)
+    {
+        shared_ptr<Pipeline_cache> pipeline_cache_sptr;
+
+        auto allocator = allocator_ == default_allocation_cb() ?
+            allocation_callbacks : allocator_;
+
+        S_pipeline_cache_create_info info{
+            0,
+            initial_data_size,
+            initial_data_
+        };
+        VkPipelineCache pipeline_cache_handle;
+        auto ret = api.vkCreatePipelineCache(
+            handle, info, *allocator, &pipeline_cache_handle);
+        show_result(ret);
+        if (ret < 0) return pipeline_cache_sptr;
+
+        pipeline_cache_sptr.reset(new Pipeline_cache(
+            shared_from_this(), pipeline_cache_handle, allocator));
+
+        pipeline_cache_sptr->device = shared_from_this();
+
+        return pipeline_cache_sptr;
+    }
+
+    Pipeline_cache::Pipeline_cache(
+        shared_ptr<Device> device_,
+        VkPipelineCache handle_,
+        S_allocation_callbacks*const allocator_)
+        : device(device_)
+        , handle(handle_)
+        , allocation_callbacks(allocator_)
+    {   }
+
+    Pipeline_cache::~Pipeline_cache()
+    {
+        init_show;
+        show_function_name;
+        device->api.vkDestroyPipelineCache(
+            device->handle, handle, *allocation_callbacks);
+    }
+
+    VkResult Pipeline_cache::get_data(size_t* pDataSize, void* pData)
+    {
+        auto ret = device->api.vkGetPipelineCacheData(
+            device->handle,
+            handle,
+            pDataSize,
+            pData
+        );
+        show_result(ret);
+
+        return ret;
+    }
+
+    VkResult Pipeline_cache::merge(Pipeline_cache&  srcCache)
+    {
+        auto ret = device->api.vkMergePipelineCaches(device->handle, handle, 1, &srcCache.handle);
+        show_result(ret);
+        return ret;
+    }
+
+#endif // VkPipelineCache
+
+    // VkPipeline - Compute
+#if 1
+    // 需要注意:base_index
+    shared_ptr<Compute_pipeline> Compute_pipeline::get_a_compute_pipeline(
+        F_pipeline_create                   flags,
+        std::shared_ptr<Pipeline_cache>     pipeline_cache_,
+        std::shared_ptr<Shader_module>      module_,
+        const char*                         rukou_name_,
+        F_shader_stage                      stage_flags,
+        std::shared_ptr< Pipeline_layout>   pipeline_layout_ /*= nullptr*/,
+        const S_specialization_info*        pSpecializationInfo /*= nullptr*/,
+        S_allocation_callbacks*const       allocator_ /*= default_allocation_cb()*/)
+    {
+        shared_ptr<Compute_pipeline> sptr;
+
+        auto allocator = allocator_ == default_allocation_cb() ?
+            allocation_callbacks : allocator_;
+
+        S_compute_pipeline_create_info info{
+            flags,
+            {
+                0,
+                stage_flags,
+                module_->handle,
+                rukou_name_,
+                pSpecializationInfo
+            },
+            pipeline_layout_ ? pipeline_layout_->handle : pipeline_layout->handle,
+            handle,
+            index + 1
+        };
+
+        VkPipeline pipeline_handle;
+
+        auto ret = pipeline_layout->device->api.vkCreateComputePipelines(
+            pipeline_layout->device->handle,
+            pipeline_cache_->handle,
+            index,
+            info,
+            *allocator,
+            &pipeline_handle
+        );
+
+        show_result(ret);
+        if (ret < 0)
+        {
+            init_show;
+            show_wrn("创建 compute pipelines 失败");
+            return sptr;
+        }
+
+        sptr.reset(new Compute_pipeline(
+            pipeline_layout_,
+            pipeline_cache_,
+            module_,
+            pipeline_handle,
+            allocator,
+            index + 1,
+            shared_from_this()
+        ));
+
+        return sptr;
+    }
+
+    shared_ptr<Compute_pipeline> Pipeline_layout::get_a_compute_pipeline(
+        F_pipeline_create                   flags_,
+        std::shared_ptr<Pipeline_cache>     pipeline_cache_,
+        std::shared_ptr<Shader_module>      module_,
+        const char*                         pName_,//shader 入口点名称
+        F_shader_stage                      stage_flags_,
+        const S_specialization_info*        pSpecializationInfo_ /*= nullptr*/,
+        S_allocation_callbacks*const        allocator_ /*= default_allocation_cb()*/)
+    {
+        shared_ptr<Compute_pipeline> sptr;
+
+        auto allocator = allocator_ == default_allocation_cb() ?
+            allocation_callbacks : allocator_;
+
+        S_compute_pipeline_create_info info{
+            flags_,
+            {
+                0,
+                stage_flags_,
+                module_->handle,
+                pName_,
+                pSpecializationInfo_
+            },
+            handle,
+            VK_NULL_HANDLE,
+            -1
+        };
+        VkPipeline pipeline_handle;
+
+        auto ret = device->api.vkCreateComputePipelines(
+            device->handle,
+            pipeline_cache_->handle,
+            1,
+            info,
+            *allocator,
+            &pipeline_handle
+        );
+        show_result(ret);
+        if (ret < 0)
+        {
+            init_show;
+            show_wrn("创建 compute pipelines 失败");
+            return sptr;
+        }
+        sptr.reset(new Compute_pipeline(
+            shared_from_this(),
+            pipeline_cache_,
+            module_,
+            pipeline_handle,
+            allocator
+        ));
+        return sptr;
+    }
+
+    Compute_pipeline::Compute_pipeline(
+        std::shared_ptr<Pipeline_layout>    pipeline_layout_,
+        std::shared_ptr<Pipeline_cache>     pipeline_cache_,
+        std::shared_ptr<Shader_module>      shader_module_,
+        VkPipeline                          handle_,
+        S_allocation_callbacks*const        allocation_callbacks_,
+        int32_t                             base_index_ /*= -1*/,
+        std::shared_ptr<Compute_pipeline>   compute_pipeline_ /*= nullptr*/)
+        : pipeline_layout(pipeline_layout_)
+        , pipeline_cache(pipeline_cache_)
+        , shader_module(shader_module_)
+        , handle(handle_)
+        , allocation_callbacks(allocation_callbacks_)
+        , index(base_index_)
+        , base_pipeline(compute_pipeline_)
+    {   }
+
+    Compute_pipeline::~Compute_pipeline()
+    {
+        init_show;
+        show_function_name;
+        pipeline_layout->device->api.vkDestroyPipeline(
+            pipeline_layout->device->handle, handle, *allocation_callbacks);
+    }
+
+#endif // VkPipeline - Compute
+
+    // VkPipeline - Graphcis
+#if 1
+    shared_ptr<Graphics_pipeline> Pipeline_layout::get_a_graphics_pipeline(
+        F_pipeline_create                                   flag_,
+        Render_pass&                                        render_pass_,
+        uint32_t                                            subpass,
+        Pipeline_cache*                                     cache_,
+        Array_value<S_pipeline_shader_stage_create_info>    stages_,
+        const S_pipeline_vertex_input_state_create_info*    vertex_input_state_,
+        const S_pipeline_input_assembly_state_create_info*  input_assembly_state_,
+        const S_pipeline_tessellation_domain_origin_state_create_info*    tessellation_state_,
+        const S_pipeline_viewport_state_create_info*        view_port_state_,
+        const S_pipeline_rasterization_state_create_info*   rasterization_state_,
+        const S_pipeline_multisample_state_create_info*     multi_sample_state_,
+        const S_pipeline_depth_stencil_state_create_info*   depth_stencil_state_,
+        const S_pipeline_color_blend_state_create_info*     color_blend_state_,
+        const S_pipeline_dynamic_state_create_info*         dynamic_satate_,
+        N_graphics_pipeline_create_info                     next_ /*= {}*/,
+        S_allocation_callbacks*const allocator_ /*= default_allocation_cb()*/)
+    {
+        shared_ptr<Graphics_pipeline> sptr;
+
+        auto allocator = allocator_ == default_allocation_cb() ?
+            allocation_callbacks : allocator_;
+
+        VkGraphicsPipelineCreateInfo info_{
+            VK_STRUCTURE_TYPE_GRAPHICS_PIPELINE_CREATE_INFO,
+            next_,
+            flag_,
+            static_cast<uint32_t>(stages_.size()),
+            stages_.data(),
+            vertex_input_state_,
+            input_assembly_state_,
+            tessellation_state_,
+            view_port_state_,
+            rasterization_state_,
+            multi_sample_state_,
+            depth_stencil_state_,
+            color_blend_state_,
+            dynamic_satate_,
+            handle,
+            render_pass_.handle,
+            subpass,
+            VK_NULL_HANDLE,
+            -1
+        };
+        S_graphics_pipeline_create_info info{
+            flag_,
+            stages_.size(),
+            stages_.data(),
+            vertex_input_state_,
+            input_assembly_state_,
+            tessellation_state_,
+            view_port_state_,
+            rasterization_state_,
+            multi_sample_state_,
+            depth_stencil_state_,
+            color_blend_state_,
+            dynamic_satate_,
+            handle,
+            render_pass_.handle,
+            subpass,
+            VK_NULL_HANDLE,
+            -1
+        };
+
+        VkPipeline pipeline_handle;
+
+        auto ret = device->api.vkCreateGraphicsPipelines(
+            device->handle,
+            cache_->handle,
+            1,
+            &info,
+            allocator_,
+            &pipeline_handle
+        );
+        show_result(ret);
+
+        if (ret < 0)
+        {
+            init_show;
+            show_wrn("创建Graphics pipeline 失败");
+            return sptr;
+        }
+
+        //sptr.reset()
+
+        return sptr;
+    }
+
+
+#endif // VkPipeline - Graphcis
 
 
 

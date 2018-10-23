@@ -609,11 +609,11 @@ dclr_sclass(Image, VkImage)
             uint32_t first_binding_);
 
         void bind_descriptor_sets(
-            E_pipeline_bind_point   pipelineBindPoint,
-            Pipeline_layout&        layout,
-            uint32_t                firstSet,
-            Descriptor_set_s&       descriptor_sets,
-            Array_value<uint32_t>   dynamic_offsets);
+            E_pipeline_bind_point   pipelineBindPoint_,
+            Pipeline_layout&        layout_,
+            uint32_t                firstSet_,
+            Descriptor_set_s&       descriptor_sets_,
+            Array_value<uint32_t>   dynamic_offsets_);
 
         void set_blend_constants(const float blend_[4]);
 
@@ -742,7 +742,7 @@ dclr_sclass(Image, VkImage)
             Image&                      srcImage_,
             E_image_layout              srcImageLayout_,
             Buffer&                     dstBuffer_,
-            Array_value<S_buffer_copy>  pRegions_);
+            Array_value<S_buffer_image_copy>  pRegions_);
 
         void dispatch(
             uint32_t    groupCountX_,
@@ -887,9 +887,9 @@ dclr_sclass(Image, VkImage)
             uint32_t                command_buffer_count_,
             E_command_buffer_level  level);
 
-        VkResult reset(F_command_pool_reset flags);
+        VkResult reset(F_command_pool_reset flags_);
 
-        void trim(VkCommandPoolTrimFlags flags = 0);//is a bitmask type for setting a mask, but is currently reserved for future use.
+        void trim(VkCommandPoolTrimFlags flags_ = 0);//is a bitmask type for setting a mask, but is currently reserved for future use.
 
         const VkCommandPool handle;
         std::shared_ptr<Device> device;
@@ -907,7 +907,7 @@ dclr_sclass(Image, VkImage)
     public:
         const VkDescriptorSet handle;
     protected:
-        Descriptor_set_base();
+        Descriptor_set_base(VkDescriptorSet handle_);
     };
 
     class Descriptor_set : public Descriptor_set_base
@@ -1108,10 +1108,10 @@ dclr_sclass(Image, VkImage)
         S_extent_2d get_area_granularity();
 
         std::shared_ptr<Frame_buffer> get_a_frame_buffer(
-            Array_value<VkImageView> attachments,
-            uint32_t width,
-            uint32_t height,
-            uint32_t layers,
+            Array_value<VkImageView> attachments_,
+            uint32_t width_,
+            uint32_t height_,
+            uint32_t layers_,
             S_allocation_callbacks*const allocator_ = default_allocation_cb());
 
         const VkRenderPass handle;
@@ -1143,8 +1143,8 @@ dclr_sclass(Image, VkImage)
             std::shared_ptr<Shader_module>      module_,
             const char*                         pName_,//shader 入口点名称
             F_shader_stage                      stage_flags_,
-            const VkSpecializationInfo*         pSpecializationInfo_ = nullptr,
-            S_allocation_callbacks*const       allocator_ = default_allocation_cb());
+            const S_specialization_info*        pSpecializationInfo_ = nullptr,
+            S_allocation_callbacks*const        allocator_ = default_allocation_cb());
 
         std::shared_ptr<Graphics_pipeline> get_a_graphics_pipeline(
             F_pipeline_create                                   flag_,
@@ -1226,8 +1226,8 @@ dclr_sclass(Image, VkImage)
             std::shared_ptr<Pipeline_cache>     pipeline_cache,
             std::shared_ptr<Shader_module>      shader_module_,
             VkPipeline                          handle_,
-            S_allocation_callbacks*const       allocation_callbacks_,
-            int32_t base_index_ = -1,
+            S_allocation_callbacks*const        allocation_callbacks_,
+            int32_t                             base_index_ = -1,
             std::shared_ptr<Compute_pipeline>   compute_pipeline_ = nullptr);
 
         S_allocation_callbacks*const allocation_callbacks;
@@ -1366,10 +1366,10 @@ dclr_sclass(Image, VkImage)
             S_allocation_callbacks*const   allocator_ = default_allocation_cb());
 
         std::shared_ptr<Descriptor_pool> get_a_descriptor_pool(
-            uint32_t                                maxSets_,
-            Array_value<S_descriptor_pool_size>     poolSizes_,
-            F_command_pool_create                   flags_,
-            S_allocation_callbacks*const           allocator_ = default_allocation_cb());
+            uint32_t                            maxSets_,
+            Array_value<S_descriptor_pool_size> poolSizes_,
+            F_command_pool_create               flags_,
+            S_allocation_callbacks*const        allocator_ = default_allocation_cb());
 
         std::shared_ptr<Query_pool> get_a_query_pool(
             E_query_type                query_type,
@@ -1380,7 +1380,7 @@ dclr_sclass(Image, VkImage)
         std::shared_ptr<Descriptor_set_layout> get_a_descriptor_set_layout(
             F_descriptor_set_layout_create                  flags_,//手册中有但vk.xml中没有
             Array_value<S_descriptor_set_layout_binding>    bindings_ = {},
-            N_descriptor_set_allocate_info                  next_ = {},
+            N_descriptor_set_layout_create_info             next_ = {},
             S_allocation_callbacks*const allocator_ = default_allocation_cb());
 
         std::shared_ptr<Render_pass> get_a_render_pass(

@@ -342,10 +342,11 @@ public:
         , first_value_ptr(array_.data())
     {}
 
-    operator std::vector<T>&& ()
+    /*operator std::vector<T>&& ()
     {
-
-    }
+        std::vector<T> v(value_count);
+        memcpy(&v[0], first_value_ptr, sizeof(T)*value_count);
+    }*/
 
 };
 

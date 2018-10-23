@@ -390,10 +390,10 @@ for enum in flag_bits_list:
     "bool operator == (B bit_)@return flag == static_cast<int>(bit_);$\n" \
     "bool operator != ({0} flag_)@return flag != flag_.flag;$\n" \
     "bool operator != (B bit_)@return flag != static_cast<int>(bit_);$\n" \
-    "operator bool()@return !!flag;$\n" \
     "{0}& clear()@flag = 0;return *this;$\n" \
     "{0} all_flags()@\nreturn " \
         .format(fb_obj.my_name,fb_obj.vk_name).replace("@", "{").replace("$", "}")
+    #"operator bool()@return !!flag;$\n" \
     count = 0
     for m in fb_obj.members:
         if count != 0:

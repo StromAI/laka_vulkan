@@ -1784,7 +1784,6 @@ bool operator == (F_cull_mode flag_){return flag == flag_.flag;}
 bool operator == (B bit_){return flag == static_cast<int>(bit_);}
 bool operator != (F_cull_mode flag_){return flag != flag_.flag;}
 bool operator != (B bit_){return flag != static_cast<int>(bit_);}
-operator bool(){return !!flag;}
 F_cull_mode& clear(){flag = 0;return *this;}
 F_cull_mode all_flags(){
 return b_none | b_front | b_back | b_front_and_back;
@@ -1838,7 +1837,6 @@ bool operator == (F_queue flag_){return flag == flag_.flag;}
 bool operator == (B bit_){return flag == static_cast<int>(bit_);}
 bool operator != (F_queue flag_){return flag != flag_.flag;}
 bool operator != (B bit_){return flag != static_cast<int>(bit_);}
-operator bool(){return !!flag;}
 F_queue& clear(){flag = 0;return *this;}
 F_queue all_flags(){
 return b_graphics | b_compute | b_transfer | b_sparse_binding;
@@ -1901,7 +1899,6 @@ bool operator == (F_memory_property flag_){return flag == flag_.flag;}
 bool operator == (B bit_){return flag == static_cast<int>(bit_);}
 bool operator != (F_memory_property flag_){return flag != flag_.flag;}
 bool operator != (B bit_){return flag != static_cast<int>(bit_);}
-operator bool(){return !!flag;}
 F_memory_property& clear(){flag = 0;return *this;}
 F_memory_property all_flags(){
 return b_device_local | b_host_visible | b_host_coherent | b_host_cached | b_lazily_allocated;
@@ -1951,7 +1948,6 @@ bool operator == (F_memory_heap flag_){return flag == flag_.flag;}
 bool operator == (B bit_){return flag == static_cast<int>(bit_);}
 bool operator != (F_memory_heap flag_){return flag != flag_.flag;}
 bool operator != (B bit_){return flag != static_cast<int>(bit_);}
-operator bool(){return !!flag;}
 F_memory_heap& clear(){flag = 0;return *this;}
 F_memory_heap all_flags(){
 return b_device_local;
@@ -2025,7 +2021,6 @@ bool operator == (F_access flag_){return flag == flag_.flag;}
 bool operator == (B bit_){return flag == static_cast<int>(bit_);}
 bool operator != (F_access flag_){return flag != flag_.flag;}
 bool operator != (B bit_){return flag != static_cast<int>(bit_);}
-operator bool(){return !!flag;}
 F_access& clear(){flag = 0;return *this;}
 F_access all_flags(){
 return b_indirect_command_read | b_index_read | b_vertex_attribute_read | b_uniform_read | b_input_attachment_read | b_shader_read | b_shader_write | b_color_attachment_read | b_color_attachment_write | b_depth_stencil_attachment_read | b_depth_stencil_attachment_write | b_transfer_read | b_transfer_write | b_host_read | b_host_write | b_memory_read | b_memory_write;
@@ -2115,7 +2110,6 @@ bool operator == (F_buffer_usage flag_){return flag == flag_.flag;}
 bool operator == (B bit_){return flag == static_cast<int>(bit_);}
 bool operator != (F_buffer_usage flag_){return flag != flag_.flag;}
 bool operator != (B bit_){return flag != static_cast<int>(bit_);}
-operator bool(){return !!flag;}
 F_buffer_usage& clear(){flag = 0;return *this;}
 F_buffer_usage all_flags(){
 return b_transfer_src | b_transfer_dst | b_uniform_texel_buffer | b_storage_texel_buffer | b_uniform_buffer | b_storage_buffer | b_index_buffer | b_vertex_buffer | b_indirect_buffer;
@@ -2177,7 +2171,6 @@ bool operator == (F_buffer_create flag_){return flag == flag_.flag;}
 bool operator == (B bit_){return flag == static_cast<int>(bit_);}
 bool operator != (F_buffer_create flag_){return flag != flag_.flag;}
 bool operator != (B bit_){return flag != static_cast<int>(bit_);}
-operator bool(){return !!flag;}
 F_buffer_create& clear(){flag = 0;return *this;}
 F_buffer_create all_flags(){
 return b_sparse_binding | b_sparse_residency | b_sparse_aliased;
@@ -2229,7 +2222,6 @@ bool operator == (F_shader_stage flag_){return flag == flag_.flag;}
 bool operator == (B bit_){return flag == static_cast<int>(bit_);}
 bool operator != (F_shader_stage flag_){return flag != flag_.flag;}
 bool operator != (B bit_){return flag != static_cast<int>(bit_);}
-operator bool(){return !!flag;}
 F_shader_stage& clear(){flag = 0;return *this;}
 F_shader_stage all_flags(){
 return b_vertex | b_tessellation_control | b_tessellation_evaluation | b_geometry | b_fragment | b_compute | b_all_graphics | b_all;
@@ -2299,7 +2291,6 @@ bool operator == (F_image_usage flag_){return flag == flag_.flag;}
 bool operator == (B bit_){return flag == static_cast<int>(bit_);}
 bool operator != (F_image_usage flag_){return flag != flag_.flag;}
 bool operator != (B bit_){return flag != static_cast<int>(bit_);}
-operator bool(){return !!flag;}
 F_image_usage& clear(){flag = 0;return *this;}
 F_image_usage all_flags(){
 return b_transfer_src | b_transfer_dst | b_sampled | b_storage | b_color_attachment | b_depth_stencil_attachment | b_transient_attachment | b_input_attachment;
@@ -2363,7 +2354,6 @@ bool operator == (F_image_create flag_){return flag == flag_.flag;}
 bool operator == (B bit_){return flag == static_cast<int>(bit_);}
 bool operator != (F_image_create flag_){return flag != flag_.flag;}
 bool operator != (B bit_){return flag != static_cast<int>(bit_);}
-operator bool(){return !!flag;}
 F_image_create& clear(){flag = 0;return *this;}
 F_image_create all_flags(){
 return b_sparse_binding | b_sparse_residency | b_sparse_aliased | b_mutable_format | b_cube_compatible;
@@ -2414,7 +2404,6 @@ bool operator == (F_pipeline_create flag_){return flag == flag_.flag;}
 bool operator == (B bit_){return flag == static_cast<int>(bit_);}
 bool operator != (F_pipeline_create flag_){return flag != flag_.flag;}
 bool operator != (B bit_){return flag != static_cast<int>(bit_);}
-operator bool(){return !!flag;}
 F_pipeline_create& clear(){flag = 0;return *this;}
 F_pipeline_create all_flags(){
 return b_disable_optimization | b_allow_derivatives | b_derivative;
@@ -2462,7 +2451,6 @@ bool operator == (F_color_component flag_){return flag == flag_.flag;}
 bool operator == (B bit_){return flag == static_cast<int>(bit_);}
 bool operator != (F_color_component flag_){return flag != flag_.flag;}
 bool operator != (B bit_){return flag != static_cast<int>(bit_);}
-operator bool(){return !!flag;}
 F_color_component& clear(){flag = 0;return *this;}
 F_color_component all_flags(){
 return b_r | b_g | b_b | b_a;
@@ -2509,7 +2497,6 @@ bool operator == (F_fence_create flag_){return flag == flag_.flag;}
 bool operator == (B bit_){return flag == static_cast<int>(bit_);}
 bool operator != (F_fence_create flag_){return flag != flag_.flag;}
 bool operator != (B bit_){return flag != static_cast<int>(bit_);}
-operator bool(){return !!flag;}
 F_fence_create& clear(){flag = 0;return *this;}
 F_fence_create all_flags(){
 return b_signaled;
@@ -2575,7 +2562,6 @@ bool operator == (F_format_feature flag_){return flag == flag_.flag;}
 bool operator == (B bit_){return flag == static_cast<int>(bit_);}
 bool operator != (F_format_feature flag_){return flag != flag_.flag;}
 bool operator != (B bit_){return flag != static_cast<int>(bit_);}
-operator bool(){return !!flag;}
 F_format_feature& clear(){flag = 0;return *this;}
 F_format_feature all_flags(){
 return b_sampled_image | b_storage_image | b_storage_image_atomic | b_uniform_texel_buffer | b_storage_texel_buffer | b_storage_texel_buffer_atomic | b_vertex_buffer | b_color_attachment | b_color_attachment_blend | b_depth_stencil_attachment | b_blit_src | b_blit_dst | b_sampled_image_filter_linear;
@@ -2641,7 +2627,6 @@ bool operator == (F_query_control flag_){return flag == flag_.flag;}
 bool operator == (B bit_){return flag == static_cast<int>(bit_);}
 bool operator != (F_query_control flag_){return flag != flag_.flag;}
 bool operator != (B bit_){return flag != static_cast<int>(bit_);}
-operator bool(){return !!flag;}
 F_query_control& clear(){flag = 0;return *this;}
 F_query_control all_flags(){
 return b_precise;
@@ -2689,7 +2674,6 @@ bool operator == (F_query_result flag_){return flag == flag_.flag;}
 bool operator == (B bit_){return flag == static_cast<int>(bit_);}
 bool operator != (F_query_result flag_){return flag != flag_.flag;}
 bool operator != (B bit_){return flag != static_cast<int>(bit_);}
-operator bool(){return !!flag;}
 F_query_result& clear(){flag = 0;return *this;}
 F_query_result all_flags(){
 return b_64 | b_wait | b_with_availability | b_partial;
@@ -2739,7 +2723,6 @@ bool operator == (F_command_buffer_usage flag_){return flag == flag_.flag;}
 bool operator == (B bit_){return flag == static_cast<int>(bit_);}
 bool operator != (F_command_buffer_usage flag_){return flag != flag_.flag;}
 bool operator != (B bit_){return flag != static_cast<int>(bit_);}
-operator bool(){return !!flag;}
 F_command_buffer_usage& clear(){flag = 0;return *this;}
 F_command_buffer_usage all_flags(){
 return b_one_time_submit | b_render_pass_continue | b_simultaneous_use;
@@ -2805,7 +2788,6 @@ bool operator == (F_query_pipeline_statistic flag_){return flag == flag_.flag;}
 bool operator == (B bit_){return flag == static_cast<int>(bit_);}
 bool operator != (F_query_pipeline_statistic flag_){return flag != flag_.flag;}
 bool operator != (B bit_){return flag != static_cast<int>(bit_);}
-operator bool(){return !!flag;}
 F_query_pipeline_statistic& clear(){flag = 0;return *this;}
 F_query_pipeline_statistic all_flags(){
 return b_input_assembly_vertices | b_input_assembly_primitives | b_vertex_shader_invocations | b_geometry_shader_invocations | b_geometry_shader_primitives | b_clipping_invocations | b_clipping_primitives | b_fragment_shader_invocations | b_tessellation_control_shader_patches | b_tessellation_evaluation_shader_invocations | b_compute_shader_invocations;
@@ -2869,7 +2851,6 @@ bool operator == (F_image_aspect flag_){return flag == flag_.flag;}
 bool operator == (B bit_){return flag == static_cast<int>(bit_);}
 bool operator != (F_image_aspect flag_){return flag != flag_.flag;}
 bool operator != (B bit_){return flag != static_cast<int>(bit_);}
-operator bool(){return !!flag;}
 F_image_aspect& clear(){flag = 0;return *this;}
 F_image_aspect all_flags(){
 return b_color | b_depth | b_stencil | b_metadata;
@@ -2921,7 +2902,6 @@ bool operator == (F_sparse_image_format flag_){return flag == flag_.flag;}
 bool operator == (B bit_){return flag == static_cast<int>(bit_);}
 bool operator != (F_sparse_image_format flag_){return flag != flag_.flag;}
 bool operator != (B bit_){return flag != static_cast<int>(bit_);}
-operator bool(){return !!flag;}
 F_sparse_image_format& clear(){flag = 0;return *this;}
 F_sparse_image_format all_flags(){
 return b_single_miptail | b_aligned_mip_size | b_nonstandard_block_size;
@@ -2967,7 +2947,6 @@ bool operator == (F_sparse_memory_bind flag_){return flag == flag_.flag;}
 bool operator == (B bit_){return flag == static_cast<int>(bit_);}
 bool operator != (F_sparse_memory_bind flag_){return flag != flag_.flag;}
 bool operator != (B bit_){return flag != static_cast<int>(bit_);}
-operator bool(){return !!flag;}
 F_sparse_memory_bind& clear(){flag = 0;return *this;}
 F_sparse_memory_bind all_flags(){
 return b_metadata;
@@ -3041,7 +3020,6 @@ bool operator == (F_pipeline_stage flag_){return flag == flag_.flag;}
 bool operator == (B bit_){return flag == static_cast<int>(bit_);}
 bool operator != (F_pipeline_stage flag_){return flag != flag_.flag;}
 bool operator != (B bit_){return flag != static_cast<int>(bit_);}
-operator bool(){return !!flag;}
 F_pipeline_stage& clear(){flag = 0;return *this;}
 F_pipeline_stage all_flags(){
 return b_top_of_pipe | b_draw_indirect | b_vertex_input | b_vertex_shader | b_tessellation_control_shader | b_tessellation_evaluation_shader | b_geometry_shader | b_fragment_shader | b_early_fragment_tests | b_late_fragment_tests | b_color_attachment_output | b_compute_shader | b_transfer | b_bottom_of_pipe | b_host | b_all_graphics | b_all_commands;
@@ -3117,7 +3095,6 @@ bool operator == (F_command_pool_create flag_){return flag == flag_.flag;}
 bool operator == (B bit_){return flag == static_cast<int>(bit_);}
 bool operator != (F_command_pool_create flag_){return flag != flag_.flag;}
 bool operator != (B bit_){return flag != static_cast<int>(bit_);}
-operator bool(){return !!flag;}
 F_command_pool_create& clear(){flag = 0;return *this;}
 F_command_pool_create all_flags(){
 return b_transient | b_reset_command_buffer;
@@ -3161,7 +3138,6 @@ bool operator == (F_command_pool_reset flag_){return flag == flag_.flag;}
 bool operator == (B bit_){return flag == static_cast<int>(bit_);}
 bool operator != (F_command_pool_reset flag_){return flag != flag_.flag;}
 bool operator != (B bit_){return flag != static_cast<int>(bit_);}
-operator bool(){return !!flag;}
 F_command_pool_reset& clear(){flag = 0;return *this;}
 F_command_pool_reset all_flags(){
 return b_release_resources;
@@ -3203,7 +3179,6 @@ bool operator == (F_command_buffer_reset flag_){return flag == flag_.flag;}
 bool operator == (B bit_){return flag == static_cast<int>(bit_);}
 bool operator != (F_command_buffer_reset flag_){return flag != flag_.flag;}
 bool operator != (B bit_){return flag != static_cast<int>(bit_);}
-operator bool(){return !!flag;}
 F_command_buffer_reset& clear(){flag = 0;return *this;}
 F_command_buffer_reset all_flags(){
 return b_release_resources;
@@ -3257,7 +3232,6 @@ bool operator == (F_sample_count flag_){return flag == flag_.flag;}
 bool operator == (B bit_){return flag == static_cast<int>(bit_);}
 bool operator != (F_sample_count flag_){return flag != flag_.flag;}
 bool operator != (B bit_){return flag != static_cast<int>(bit_);}
-operator bool(){return !!flag;}
 F_sample_count& clear(){flag = 0;return *this;}
 F_sample_count all_flags(){
 return b_1 | b_2 | b_4 | b_8 | b_16 | b_32 | b_64;
@@ -3311,7 +3285,6 @@ bool operator == (F_attachment_description flag_){return flag == flag_.flag;}
 bool operator == (B bit_){return flag == static_cast<int>(bit_);}
 bool operator != (F_attachment_description flag_){return flag != flag_.flag;}
 bool operator != (B bit_){return flag != static_cast<int>(bit_);}
-operator bool(){return !!flag;}
 F_attachment_description& clear(){flag = 0;return *this;}
 F_attachment_description all_flags(){
 return b_may_alias;
@@ -3357,7 +3330,6 @@ bool operator == (F_stencil_face flag_){return flag == flag_.flag;}
 bool operator == (B bit_){return flag == static_cast<int>(bit_);}
 bool operator != (F_stencil_face flag_){return flag != flag_.flag;}
 bool operator != (B bit_){return flag != static_cast<int>(bit_);}
-operator bool(){return !!flag;}
 F_stencil_face& clear(){flag = 0;return *this;}
 F_stencil_face all_flags(){
 return b_front | b_back | b_vk_stencil_front_and_back;
@@ -3403,7 +3375,6 @@ bool operator == (F_descriptor_pool_create flag_){return flag == flag_.flag;}
 bool operator == (B bit_){return flag == static_cast<int>(bit_);}
 bool operator != (F_descriptor_pool_create flag_){return flag != flag_.flag;}
 bool operator != (B bit_){return flag != static_cast<int>(bit_);}
-operator bool(){return !!flag;}
 F_descriptor_pool_create& clear(){flag = 0;return *this;}
 F_descriptor_pool_create all_flags(){
 return b_free_descriptor_set;
@@ -3445,7 +3416,6 @@ bool operator == (F_dependency flag_){return flag == flag_.flag;}
 bool operator == (B bit_){return flag == static_cast<int>(bit_);}
 bool operator != (F_dependency flag_){return flag != flag_.flag;}
 bool operator != (B bit_){return flag != static_cast<int>(bit_);}
-operator bool(){return !!flag;}
 F_dependency& clear(){flag = 0;return *this;}
 F_dependency all_flags(){
 return b_by_region;
@@ -3489,7 +3459,6 @@ bool operator == (F_display_plane_alpha_KHR flag_){return flag == flag_.flag;}
 bool operator == (B bit_){return flag == static_cast<int>(bit_);}
 bool operator != (F_display_plane_alpha_KHR flag_){return flag != flag_.flag;}
 bool operator != (B bit_){return flag != static_cast<int>(bit_);}
-operator bool(){return !!flag;}
 F_display_plane_alpha_KHR& clear(){flag = 0;return *this;}
 F_display_plane_alpha_KHR all_flags(){
 return b_opaque_khr | b_global_khr | b_per_pixel_khr | b_per_pixel_premultiplied_khr;
@@ -3539,7 +3508,6 @@ bool operator == (F_composite_alpha_KHR flag_){return flag == flag_.flag;}
 bool operator == (B bit_){return flag == static_cast<int>(bit_);}
 bool operator != (F_composite_alpha_KHR flag_){return flag != flag_.flag;}
 bool operator != (B bit_){return flag != static_cast<int>(bit_);}
-operator bool(){return !!flag;}
 F_composite_alpha_KHR& clear(){flag = 0;return *this;}
 F_composite_alpha_KHR all_flags(){
 return b_opaque_khr | b_pre_multiplied_khr | b_post_multiplied_khr | b_inherit_khr;
@@ -3594,7 +3562,6 @@ bool operator == (F_surface_transform_KHR flag_){return flag == flag_.flag;}
 bool operator == (B bit_){return flag == static_cast<int>(bit_);}
 bool operator != (F_surface_transform_KHR flag_){return flag != flag_.flag;}
 bool operator != (B bit_){return flag != static_cast<int>(bit_);}
-operator bool(){return !!flag;}
 F_surface_transform_KHR& clear(){flag = 0;return *this;}
 F_surface_transform_KHR all_flags(){
 return b_identity_khr | b_rotate_90_khr | b_rotate_180_khr | b_rotate_270_khr | b_horizontal_mirror_khr | b_horizontal_mirror_rotate_90_khr | b_horizontal_mirror_rotate_180_khr | b_horizontal_mirror_rotate_270_khr | b_inherit_khr;
@@ -3655,7 +3622,6 @@ bool operator == (F_debug_report_EXT flag_){return flag == flag_.flag;}
 bool operator == (B bit_){return flag == static_cast<int>(bit_);}
 bool operator != (F_debug_report_EXT flag_){return flag != flag_.flag;}
 bool operator != (B bit_){return flag != static_cast<int>(bit_);}
-operator bool(){return !!flag;}
 F_debug_report_EXT& clear(){flag = 0;return *this;}
 F_debug_report_EXT all_flags(){
 return b_information_ext | b_warning_ext | b_performance_warning_ext | b_error_ext | b_debug_ext;
@@ -3707,7 +3673,6 @@ bool operator == (F_external_memory_handle_type_NV flag_){return flag == flag_.f
 bool operator == (B bit_){return flag == static_cast<int>(bit_);}
 bool operator != (F_external_memory_handle_type_NV flag_){return flag != flag_.flag;}
 bool operator != (B bit_){return flag != static_cast<int>(bit_);}
-operator bool(){return !!flag;}
 F_external_memory_handle_type_NV& clear(){flag = 0;return *this;}
 F_external_memory_handle_type_NV all_flags(){
 return b_opaque_win32_nv | b_opaque_win32_kmt_nv | b_d3d11_image_nv | b_d3d11_image_kmt_nv;
@@ -3756,7 +3721,6 @@ bool operator == (F_external_memory_feature_NV flag_){return flag == flag_.flag;
 bool operator == (B bit_){return flag == static_cast<int>(bit_);}
 bool operator != (F_external_memory_feature_NV flag_){return flag != flag_.flag;}
 bool operator != (B bit_){return flag != static_cast<int>(bit_);}
-operator bool(){return !!flag;}
 F_external_memory_feature_NV& clear(){flag = 0;return *this;}
 F_external_memory_feature_NV all_flags(){
 return b_dedicated_only_nv | b_exportable_nv | b_importable_nv;
@@ -3816,7 +3780,6 @@ bool operator == (F_subgroup_feature flag_){return flag == flag_.flag;}
 bool operator == (B bit_){return flag == static_cast<int>(bit_);}
 bool operator != (F_subgroup_feature flag_){return flag != flag_.flag;}
 bool operator != (B bit_){return flag != static_cast<int>(bit_);}
-operator bool(){return !!flag;}
 F_subgroup_feature& clear(){flag = 0;return *this;}
 F_subgroup_feature all_flags(){
 return b_basic | b_vote | b_arithmetic | b_ballot | b_shuffle | b_shuffle_relative | b_clustered | b_quad;
@@ -3874,7 +3837,6 @@ bool operator == (F_indirect_commands_layout_usage_NVX flag_){return flag == fla
 bool operator == (B bit_){return flag == static_cast<int>(bit_);}
 bool operator != (F_indirect_commands_layout_usage_NVX flag_){return flag != flag_.flag;}
 bool operator != (B bit_){return flag != static_cast<int>(bit_);}
-operator bool(){return !!flag;}
 F_indirect_commands_layout_usage_NVX& clear(){flag = 0;return *this;}
 F_indirect_commands_layout_usage_NVX all_flags(){
 return b_unordered_sequences_nvx | b_sparse_sequences_nvx | b_empty_executions_nvx | b_indexed_sequences_nvx;
@@ -3922,7 +3884,6 @@ bool operator == (F_object_entry_usage_NVX flag_){return flag == flag_.flag;}
 bool operator == (B bit_){return flag == static_cast<int>(bit_);}
 bool operator != (F_object_entry_usage_NVX flag_){return flag != flag_.flag;}
 bool operator != (B bit_){return flag != static_cast<int>(bit_);}
-operator bool(){return !!flag;}
 F_object_entry_usage_NVX& clear(){flag = 0;return *this;}
 F_object_entry_usage_NVX all_flags(){
 return b_graphics_nvx | b_compute_nvx;
@@ -3975,7 +3936,6 @@ bool operator == (F_external_memory_handle_type flag_){return flag == flag_.flag
 bool operator == (B bit_){return flag == static_cast<int>(bit_);}
 bool operator != (F_external_memory_handle_type flag_){return flag != flag_.flag;}
 bool operator != (B bit_){return flag != static_cast<int>(bit_);}
-operator bool(){return !!flag;}
 F_external_memory_handle_type& clear(){flag = 0;return *this;}
 F_external_memory_handle_type all_flags(){
 return b_opaque_fd | b_opaque_win32 | b_opaque_win32_kmt | b_d3d11_texture | b_d3d11_texture_kmt | b_d3d12_heap | b_d3d12_resource;
@@ -4030,7 +3990,6 @@ bool operator == (F_external_memory_feature flag_){return flag == flag_.flag;}
 bool operator == (B bit_){return flag == static_cast<int>(bit_);}
 bool operator != (F_external_memory_feature flag_){return flag != flag_.flag;}
 bool operator != (B bit_){return flag != static_cast<int>(bit_);}
-operator bool(){return !!flag;}
 F_external_memory_feature& clear(){flag = 0;return *this;}
 F_external_memory_feature all_flags(){
 return b_dedicated_only | b_exportable | b_importable;
@@ -4079,7 +4038,6 @@ bool operator == (F_external_semaphore_handle_type flag_){return flag == flag_.f
 bool operator == (B bit_){return flag == static_cast<int>(bit_);}
 bool operator != (F_external_semaphore_handle_type flag_){return flag != flag_.flag;}
 bool operator != (B bit_){return flag != static_cast<int>(bit_);}
-operator bool(){return !!flag;}
 F_external_semaphore_handle_type& clear(){flag = 0;return *this;}
 F_external_semaphore_handle_type all_flags(){
 return b_opaque_fd | b_opaque_win32 | b_opaque_win32_kmt | b_d3d12_fence | b_sync_fd;
@@ -4129,7 +4087,6 @@ bool operator == (F_external_semaphore_feature flag_){return flag == flag_.flag;
 bool operator == (B bit_){return flag == static_cast<int>(bit_);}
 bool operator != (F_external_semaphore_feature flag_){return flag != flag_.flag;}
 bool operator != (B bit_){return flag != static_cast<int>(bit_);}
-operator bool(){return !!flag;}
 F_external_semaphore_feature& clear(){flag = 0;return *this;}
 F_external_semaphore_feature all_flags(){
 return b_exportable | b_importable;
@@ -4172,7 +4129,6 @@ bool operator == (F_semaphore_import flag_){return flag == flag_.flag;}
 bool operator == (B bit_){return flag == static_cast<int>(bit_);}
 bool operator != (F_semaphore_import flag_){return flag != flag_.flag;}
 bool operator != (B bit_){return flag != static_cast<int>(bit_);}
-operator bool(){return !!flag;}
 F_semaphore_import& clear(){flag = 0;return *this;}
 F_semaphore_import all_flags(){
 return b_temporary;
@@ -4216,7 +4172,6 @@ bool operator == (F_external_fence_handle_type flag_){return flag == flag_.flag;
 bool operator == (B bit_){return flag == static_cast<int>(bit_);}
 bool operator != (F_external_fence_handle_type flag_){return flag != flag_.flag;}
 bool operator != (B bit_){return flag != static_cast<int>(bit_);}
-operator bool(){return !!flag;}
 F_external_fence_handle_type& clear(){flag = 0;return *this;}
 F_external_fence_handle_type all_flags(){
 return b_opaque_fd | b_opaque_win32 | b_opaque_win32_kmt | b_sync_fd;
@@ -4264,7 +4219,6 @@ bool operator == (F_external_fence_feature flag_){return flag == flag_.flag;}
 bool operator == (B bit_){return flag == static_cast<int>(bit_);}
 bool operator != (F_external_fence_feature flag_){return flag != flag_.flag;}
 bool operator != (B bit_){return flag != static_cast<int>(bit_);}
-operator bool(){return !!flag;}
 F_external_fence_feature& clear(){flag = 0;return *this;}
 F_external_fence_feature all_flags(){
 return b_exportable | b_importable;
@@ -4307,7 +4261,6 @@ bool operator == (F_fence_import flag_){return flag == flag_.flag;}
 bool operator == (B bit_){return flag == static_cast<int>(bit_);}
 bool operator != (F_fence_import flag_){return flag != flag_.flag;}
 bool operator != (B bit_){return flag != static_cast<int>(bit_);}
-operator bool(){return !!flag;}
 F_fence_import& clear(){flag = 0;return *this;}
 F_fence_import all_flags(){
 return b_temporary;
@@ -4348,7 +4301,6 @@ bool operator == (F_surface_counter_EXT flag_){return flag == flag_.flag;}
 bool operator == (B bit_){return flag == static_cast<int>(bit_);}
 bool operator != (F_surface_counter_EXT flag_){return flag != flag_.flag;}
 bool operator != (B bit_){return flag != static_cast<int>(bit_);}
-operator bool(){return !!flag;}
 F_surface_counter_EXT& clear(){flag = 0;return *this;}
 F_surface_counter_EXT all_flags(){
 return b_vblank_ext;
@@ -4396,7 +4348,6 @@ bool operator == (F_peer_memory_feature flag_){return flag == flag_.flag;}
 bool operator == (B bit_){return flag == static_cast<int>(bit_);}
 bool operator != (F_peer_memory_feature flag_){return flag != flag_.flag;}
 bool operator != (B bit_){return flag != static_cast<int>(bit_);}
-operator bool(){return !!flag;}
 F_peer_memory_feature& clear(){flag = 0;return *this;}
 F_peer_memory_feature all_flags(){
 return b_copy_src | b_copy_dst | b_generic_src | b_generic_dst;
@@ -4444,7 +4395,6 @@ bool operator == (F_memory_allocate flag_){return flag == flag_.flag;}
 bool operator == (B bit_){return flag == static_cast<int>(bit_);}
 bool operator != (F_memory_allocate flag_){return flag != flag_.flag;}
 bool operator != (B bit_){return flag != static_cast<int>(bit_);}
-operator bool(){return !!flag;}
 F_memory_allocate& clear(){flag = 0;return *this;}
 F_memory_allocate all_flags(){
 return b_device_mask;
@@ -4492,7 +4442,6 @@ bool operator == (F_device_group_present_mode_KHR flag_){return flag == flag_.fl
 bool operator == (B bit_){return flag == static_cast<int>(bit_);}
 bool operator != (F_device_group_present_mode_KHR flag_){return flag != flag_.flag;}
 bool operator != (B bit_){return flag != static_cast<int>(bit_);}
-operator bool(){return !!flag;}
 F_device_group_present_mode_KHR& clear(){flag = 0;return *this;}
 F_device_group_present_mode_KHR all_flags(){
 return b_local_khr | b_remote_khr | b_sum_khr | b_local_multi_device_khr;
@@ -4550,7 +4499,6 @@ bool operator == (F_debug_utils_message_severity_EXT flag_){return flag == flag_
 bool operator == (B bit_){return flag == static_cast<int>(bit_);}
 bool operator != (F_debug_utils_message_severity_EXT flag_){return flag != flag_.flag;}
 bool operator != (B bit_){return flag != static_cast<int>(bit_);}
-operator bool(){return !!flag;}
 F_debug_utils_message_severity_EXT& clear(){flag = 0;return *this;}
 F_debug_utils_message_severity_EXT all_flags(){
 return b_verbose_ext | b_info_ext | b_warning_ext | b_error_ext;
@@ -4599,7 +4547,6 @@ bool operator == (F_debug_utils_message_type_EXT flag_){return flag == flag_.fla
 bool operator == (B bit_){return flag == static_cast<int>(bit_);}
 bool operator != (F_debug_utils_message_type_EXT flag_){return flag != flag_.flag;}
 bool operator != (B bit_){return flag != static_cast<int>(bit_);}
-operator bool(){return !!flag;}
 F_debug_utils_message_type_EXT& clear(){flag = 0;return *this;}
 F_debug_utils_message_type_EXT all_flags(){
 return b_general_ext | b_validation_ext | b_performance_ext;
@@ -4647,7 +4594,6 @@ bool operator == (F_descriptor_binding_EXT flag_){return flag == flag_.flag;}
 bool operator == (B bit_){return flag == static_cast<int>(bit_);}
 bool operator != (F_descriptor_binding_EXT flag_){return flag != flag_.flag;}
 bool operator != (B bit_){return flag != static_cast<int>(bit_);}
-operator bool(){return !!flag;}
 F_descriptor_binding_EXT& clear(){flag = 0;return *this;}
 F_descriptor_binding_EXT all_flags(){
 return b_update_after_bind_ext | b_update_unused_while_pending_ext | b_partially_bound_ext | b_variable_descriptor_count_ext;
@@ -4694,7 +4640,6 @@ bool operator == (F_conditional_rendering_EXT flag_){return flag == flag_.flag;}
 bool operator == (B bit_){return flag == static_cast<int>(bit_);}
 bool operator != (F_conditional_rendering_EXT flag_){return flag != flag_.flag;}
 bool operator != (B bit_){return flag != static_cast<int>(bit_);}
-operator bool(){return !!flag;}
 F_conditional_rendering_EXT& clear(){flag = 0;return *this;}
 F_conditional_rendering_EXT all_flags(){
 return b_inverted_ext;
@@ -4738,7 +4683,6 @@ bool operator == (F_geometry_instance_NVX flag_){return flag == flag_.flag;}
 bool operator == (B bit_){return flag == static_cast<int>(bit_);}
 bool operator != (F_geometry_instance_NVX flag_){return flag != flag_.flag;}
 bool operator != (B bit_){return flag != static_cast<int>(bit_);}
-operator bool(){return !!flag;}
 F_geometry_instance_NVX& clear(){flag = 0;return *this;}
 F_geometry_instance_NVX all_flags(){
 return b_triangle_cull_disable_nvx | b_triangle_cull_flip_winding_nvx | b_force_opaque_nvx | b_force_no_opaque_nvx;
@@ -4786,7 +4730,6 @@ bool operator == (F_geometry_NVX flag_){return flag == flag_.flag;}
 bool operator == (B bit_){return flag == static_cast<int>(bit_);}
 bool operator != (F_geometry_NVX flag_){return flag != flag_.flag;}
 bool operator != (B bit_){return flag != static_cast<int>(bit_);}
-operator bool(){return !!flag;}
 F_geometry_NVX& clear(){flag = 0;return *this;}
 F_geometry_NVX all_flags(){
 return b_opaque_nvx | b_no_duplicate_any_hit_invocation_nvx;
@@ -4833,7 +4776,6 @@ bool operator == (F_build_acceleration_structure_NVX flag_){return flag == flag_
 bool operator == (B bit_){return flag == static_cast<int>(bit_);}
 bool operator != (F_build_acceleration_structure_NVX flag_){return flag != flag_.flag;}
 bool operator != (B bit_){return flag != static_cast<int>(bit_);}
-operator bool(){return !!flag;}
 F_build_acceleration_structure_NVX& clear(){flag = 0;return *this;}
 F_build_acceleration_structure_NVX all_flags(){
 return b_allow_update_nvx | b_allow_compaction_nvx | b_prefer_fast_trace_nvx | b_prefer_fast_build_nvx | b_low_memory_nvx;
