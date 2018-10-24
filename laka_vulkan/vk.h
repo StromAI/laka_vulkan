@@ -48,6 +48,35 @@ namespace laka {namespace vk {
 
     uint32_t get_instance_version();
 
+    template <typename Handle_type__, typename Api_ptr_type__>
+    class Group {
+    public:
+        std::vector<Handle_type__> handles;
+        Api_ptr_type__ api;
+
+        Group(
+            Array_value<Handle_type__> handles_,
+            Api_ptr_type__ api_)
+            :api(api_)
+            ,handles(handles_.value_count)
+        {
+            memcpy(
+                &handles_[0], 
+                handles_.data(), 
+                handles_.value_count * sizeof(Handle_type__)
+            );
+        }
+        Group& operator << (Group group_)
+        {
+            handles.insert(
+                handles.end(),
+                group_.handles.begin(),
+                group_.handles.end()
+            );
+            return *this;
+        }
+    };
+
     //默认的S_allocation_callbacks指针
     //使用它作为实参时,vk的子对象创建时就使用父对象的S_allocation_callbacks
     //有更好的建议?
@@ -70,6 +99,7 @@ namespace laka {namespace vk {
     class Instance : public std::enable_shared_from_this<Instance> {
     public:
         using Sptr = std::shared_ptr<Instance>;
+
         ~Instance();
 
         static Sptr get_new(
@@ -146,6 +176,7 @@ namespace laka {namespace vk {
         std::shared_ptr<S_image_format_properties2>
             get_image_format_properties(
                 const S_physical_device_image_format_info2& info_);
+
         std::shared_ptr<S_image_format_properties2>
             get_image_format_properties(
                 E_format        format_,
@@ -185,22 +216,22 @@ namespace laka {namespace vk {
 
     class Queue {
     public:
+        VkResult wait_idle();
+        //...
+        VkResult submit(
+            Array_value<S_submit_info>& pSubmitInfo_,
+            Fence&                      fence_);
+        //...
+        VkResult bind_sparse(
+            Array_value<S_bind_sparse_info>&    pBindInfo_,
+            Fence&                              fence_);
+
         //VkDevice device_handle;
         VkQueue handle;
         uint32_t index;
         uint32_t family_index;
 
         Device_api* api;
-
-        VkResult wait_idle();
-        //...
-        VkResult submit(
-            std::vector<S_submit_info>& pSubmitInfo,
-            Fence&                      fence);
-        //...
-        VkResult bind_sparse(
-            std::vector<S_bind_sparse_info>&    pBindInfo,
-            Fence&                              fence);
     };
 
     class Device_creator : public std::enable_shared_from_this<Device_creator> {
@@ -253,98 +284,11 @@ namespace laka {namespace vk {
     //    Buffer_views& operator+(std::initializer_list<Buffer>);
     //    std::vector<VkBuffer> handles;
     //};
-
-#if 1
-
-#define dclr_sclass( name__, handle_type__) \
-    class name__##s : public std::enable_shared_from_this<name__##s>    {\
-        public:\
-            using Sptr = std::shared_ptr<name__##s>;\
-            \
-            name__##s();\
-            name__##s(std::initializer_list<name__>);\
-            name__##s& operator+(std::initializer_list<name__>);\
-            std::vector<handle_type__> handles;
-
-    dclr_sclass(Buffer_view,VkBufferView)
-        };
-
-        dclr_sclass(Buffer, VkBuffer)
-    };
-
-    dclr_sclass(Image_view, VkImageView)
-};
-
-dclr_sclass(Image, VkImage)
-    };
-
-    dclr_sclass(Sampler, VkSampler)
-    };
-
-    dclr_sclass(Sampler_Ycbcr_conversion, VkSamplerYcbcrConversion)
-    };
-
-    dclr_sclass(Command_buffer, VkCommandBuffer)
-    };
-
-    dclr_sclass(Command_pool, VkCommandPool)
-    };
-
-    dclr_sclass(Descriptor_set_layout, VkDescriptorSetLayout)
-    };
-
-    dclr_sclass(Descriptor_set, VkDescriptorSet)
-    };
-
-    dclr_sclass(Descriptor_pool, VkDescriptorPool)
-    };
-
-    dclr_sclass(Descriptor_update_template, VkDescriptorUpdateTemplate)
-    };
-
-    dclr_sclass(Query_pool, VkQueryPool)
-    };
-
-    dclr_sclass(Frame_buffer, VkFramebuffer)
-    };
-
-    dclr_sclass(Render_pass, VkRenderPass)
-    };
-
-    dclr_sclass(Compute_pipeline, VkPipeline)
-    };
-
-    dclr_sclass(Graphics_pipeline, VkPipeline)
-    };
-
-    dclr_sclass(Pipeline_layout, VkPipelineLayout)
-    };
-
-    dclr_sclass(Pipeline_cache, VkPipelineCache)
-    };
-
-    dclr_sclass(Semaphore, VkSemaphore)
-    };
-
-    dclr_sclass(Fence, VkFence)
-    };
-
-    dclr_sclass(Event, VkEvent)
-    };
-
-    dclr_sclass(Shader_module, VkShaderModule)
-    };
-
-    dclr_sclass(Device_memory, VkDeviceMemory)
-    };
-
-#undef dclr_sclass
-
-#endif
-
+    
     class Semaphore :public std::enable_shared_from_this<Semaphore> {
     public:
         using Sptr = std::shared_ptr<Semaphore>;
+
         ~Semaphore();
 
         const VkSemaphore handle;
@@ -362,13 +306,14 @@ dclr_sclass(Image, VkImage)
     class Fence :public std::enable_shared_from_this<Fence> {
     public:
         using Sptr = std::shared_ptr<Fence>;
-        ~Fence();
 
         VkResult reset();
         VkResult reset(Array_value<VkFence> fences_);
         VkResult get_status();
         VkResult wait(uint64_t timeout_);
         VkResult wait(bool wait_all_, uint64_t timeout_, Array_value<VkFence> fences_);
+
+        ~Fence();
 
         const VkFence handle;
         std::shared_ptr<Device> device;
@@ -385,11 +330,12 @@ dclr_sclass(Image, VkImage)
     class Event :public std::enable_shared_from_this<Event> {
     public:
         using Sptr = std::shared_ptr<Event>;
-        ~Event();
 
         VkResult set();
         VkResult get_event_status();
         void reset();
+
+        ~Event();
 
         const VkEvent handle;
         std::shared_ptr<Device> device;
@@ -423,7 +369,6 @@ dclr_sclass(Image, VkImage)
     class Device_memory : public std::enable_shared_from_this<Device_memory> {
     public:
         using Sptr = std::shared_ptr<Device_memory>;
-        ~Device_memory();
 
         VkDeviceSize get_commitment();
 
@@ -433,6 +378,8 @@ dclr_sclass(Image, VkImage)
             VkMemoryMapFlags    flags_ = 0);//is a bitmask type for setting a mask, but is currently reserved for future use.
 
         void unmap_memory();
+
+        ~Device_memory();
 
         const VkDeviceMemory handle;
         std::shared_ptr<Device> device;
@@ -449,6 +396,7 @@ dclr_sclass(Image, VkImage)
     class Buffer_view : public std::enable_shared_from_this<Buffer_view> {
     public:
         using Sptr = std::shared_ptr<Buffer_view>;
+
         ~Buffer_view();
 
         const VkBufferView handle;
@@ -466,19 +414,20 @@ dclr_sclass(Image, VkImage)
     class Buffer :public std::enable_shared_from_this<Buffer> {
     public:
         using Sptr = std::shared_ptr<Buffer>;
-        ~Buffer();
 
         S_memory_requirements get_memory_requirements();
+
+        VkResult bind(
+            std::shared_ptr<Device_memory> device_memroy_,
+            VkDeviceSize memory_offset_);//绑定后是否会影响生命周期? 待查待提问.
+
+        ~Buffer();
 
         std::shared_ptr<Buffer_view> get_a_buffer_view(
             E_format        format_,
             VkDeviceSize    offset_,
             VkDeviceSize    range_,
             S_allocation_callbacks*const allocator_ = default_allocation_cb() );
-
-        VkResult bind(
-            std::shared_ptr<Device_memory> device_memroy_,
-            VkDeviceSize memory_offset_);//绑定后是否会影响生命周期? 待查待提问.
 
         const VkBuffer handle;
         std::shared_ptr<Device> device;
@@ -495,6 +444,7 @@ dclr_sclass(Image, VkImage)
     class Image_view : public std::enable_shared_from_this<Image_view> {
     public:
         using Sptr = std::shared_ptr<Image_view>;
+
         ~Image_view();
 
         const VkImageView handle;
@@ -512,15 +462,6 @@ dclr_sclass(Image, VkImage)
     class Image : public std::enable_shared_from_this<Image> {
     public:
         using Sptr = std::shared_ptr<Image>;
-        ~Image();
-
-        std::shared_ptr<Image_view> get_a_image_view(
-            E_image_view_type                view_type_,
-            E_format                    format_,
-            S_component_mapping         components_,
-            S_image_subresource_range   subresourceRange_,
-            N_image_view_create_info         next_ = {},
-            S_allocation_callbacks*const allocator_ = default_allocation_cb() );
 
         S_memory_requirements get_image_memory_requirements();
 
@@ -532,6 +473,16 @@ dclr_sclass(Image, VkImage)
         VkResult bind(
             std::shared_ptr<Device_memory> device_memory_,
             VkDeviceSize memory_offset_);
+
+        ~Image();
+
+        std::shared_ptr<Image_view> get_a_image_view(
+            E_image_view_type                view_type_,
+            E_format                    format_,
+            S_component_mapping         components_,
+            S_image_subresource_range   subresourceRange_,
+            N_image_view_create_info         next_ = {},
+            S_allocation_callbacks*const allocator_ = default_allocation_cb());
 
         const VkImage handle;
         std::shared_ptr<Device> device;
@@ -550,6 +501,7 @@ dclr_sclass(Image, VkImage)
     class Sampler : public std::enable_shared_from_this<Sampler> {
     public:
         using Sptr = std::shared_ptr<Sampler>;
+
         ~Sampler();
 
         const VkSampler handle;
@@ -567,6 +519,7 @@ dclr_sclass(Image, VkImage)
     class Sampler_Ycbcr_conversion : public std::enable_shared_from_this<Sampler_Ycbcr_conversion>{
     public:
         using Sptr = std::shared_ptr<Sampler_Ycbcr_conversion>;
+
         ~Sampler_Ycbcr_conversion();
 
         const VkSamplerYcbcrConversion handle;
@@ -580,7 +533,7 @@ dclr_sclass(Image, VkImage)
 
         S_allocation_callbacks*const allocation_callbacks;
     };
-
+    
     //Command_buffer,Descriptor_set
         //是否应当只做成Command_buffers Descriptor_sets.
     class Command_buffer_base {
@@ -607,13 +560,6 @@ dclr_sclass(Image, VkImage)
             Array_value<std::shared_ptr<Buffer>> buffer_sptrs_, //todo:为一些对象提供vector版
             Array_value<VkDeviceSize> offsets_,
             uint32_t first_binding_);
-
-        void bind_descriptor_sets(
-            E_pipeline_bind_point   pipelineBindPoint_,
-            Pipeline_layout&        layout_,
-            uint32_t                firstSet_,
-            Descriptor_set_s&       descriptor_sets_,
-            Array_value<uint32_t>   dynamic_offsets_);
 
         void set_blend_constants(const float blend_[4]);
 
@@ -845,6 +791,7 @@ dclr_sclass(Image, VkImage)
                             public std::enable_shared_from_this<Command_buffer> {
     public:
         using Sptr = std::shared_ptr<Command_buffer>;
+
         ~Command_buffer();
 
         std::shared_ptr<Command_pool>   command_pool;
@@ -855,41 +802,23 @@ dclr_sclass(Image, VkImage)
             VkCommandBuffer                 handle_);
     };
 
-    class Command_buffer_s : public std::enable_shared_from_this<Command_buffer_s> {
-    public:
-        using Sptr = std::shared_ptr<Command_buffer_s>;
-        using Command_buffer = Command_buffer_base;
-
-        ~Command_buffer_s();
-
-        std::vector<Command_buffer> elements;
-        std::shared_ptr<Command_pool> command_pool;
-    private:
-        friend class Command_pool;
-        Command_buffer_s(
-            std::shared_ptr<Command_pool>   comman_pool_,
-            std::vector<VkCommandBuffer>    handles_);
-    };
-
     class Command_pool : public std::enable_shared_from_this<Command_pool> {
     public:
         using Sptr = std::shared_ptr<Command_pool>;
-        ~Command_pool();
-
-        std::shared_ptr<Command_buffer> get_a_command_buffer(E_command_buffer_level  level);
         /*
             vkAllocateCommandBuffers可用于创建多个命令缓冲区。
             如果任何这些命令缓冲区的创建失败，
             则实现必须从此命令中销毁所有成功创建的命令缓冲区对象，
             将pCommandBuffers阵列的所有条目设置为NULL并返回错误。
         */
-        std::shared_ptr<Command_buffer_s> get_a_command_buffers(
-            uint32_t                command_buffer_count_,
-            E_command_buffer_level  level);
 
         VkResult reset(F_command_pool_reset flags_);
 
         void trim(VkCommandPoolTrimFlags flags_ = 0);//is a bitmask type for setting a mask, but is currently reserved for future use.
+
+        ~Command_pool();
+
+        std::shared_ptr<Command_buffer> get_a_command_buffer(E_command_buffer_level  level);
 
         const VkCommandPool handle;
         std::shared_ptr<Device> device;
@@ -914,7 +843,6 @@ dclr_sclass(Image, VkImage)
                          , public std::enable_shared_from_this<Descriptor_set> {
     public:
         using Sptr = std::shared_ptr<Descriptor_set>;
-        ~Descriptor_set();
 
         void update_with_template(
             Descriptor_update_template& descriptorUpdateTemplate,
@@ -924,6 +852,8 @@ dclr_sclass(Image, VkImage)
             S_write_descriptor_set&     pDescriptorWrites,
             S_copy_descriptor_set&      pDescriptorCopies);
 
+        ~Descriptor_set();
+
         std::shared_ptr<Descriptor_pool> descriptor_pool;
     private:
         friend Descriptor_pool;
@@ -932,43 +862,20 @@ dclr_sclass(Image, VkImage)
             VkDescriptorSet                     handle_);
     };
 
-    class Descriptor_set_s :public std::enable_shared_from_this<Descriptor_set_s> {
-    public:
-        using Sptr = std::shared_ptr<Descriptor_set_s>;
-        using Descriptor_set = Descriptor_set_base;
-        ~Descriptor_set_s();
-
-        void update(
-            Array_value<S_write_descriptor_set> pDescriptorWrites,
-            Array_value<S_copy_descriptor_set>  pDescriptorCopies);
-
-        std::vector<Descriptor_set> elements;
-        std::shared_ptr<Descriptor_pool> descriptor_pool;
-    private:
-        friend class Descriptor_pool;
-        Descriptor_set_s(
-            std::shared_ptr<Descriptor_pool>    descriptor_pool_,
-            std::vector<VkDescriptorSet>&       handles_);
-    };
-
     class Descriptor_pool : public std::enable_shared_from_this<Descriptor_pool> {
     public:
         using Sptr = std::shared_ptr<Descriptor_pool>;
+
+        VkResult reset( VkDescriptorPoolResetFlags flags = 0);//is a bitmask type for setting a mask, but is currently reserved for future use.
+
         ~Descriptor_pool();
 
         std::shared_ptr<Descriptor_set> get_a_descriptor_set(
             VkDescriptorSetLayout set_layout,
-            N_descriptor_set_allocate_info next_ = {} );
-
-        std::shared_ptr<Descriptor_set_s> get_descriptor_sets(
-            //...
-            std::vector<VkDescriptorSetLayout>& set_layouts,
             N_descriptor_set_allocate_info next_ = {});
 
-        VkResult reset( VkDescriptorPoolResetFlags flags = 0);//is a bitmask type for setting a mask, but is currently reserved for future use.
-
-        std::shared_ptr<Device> device;
         const VkDescriptorPool handle;
+        std::shared_ptr<Device> device;
     private:
         friend class Device;
         Descriptor_pool(
@@ -1015,12 +922,12 @@ dclr_sclass(Image, VkImage)
     class Descriptor_update_template : public std::enable_shared_from_this<Descriptor_update_template> {
     public:
         using Sptr = std::shared_ptr<Descriptor_update_template>;
+
         ~Descriptor_update_template();
 
+        const VkDescriptorUpdateTemplate handle;
         std::shared_ptr<Descriptor_set_layout> descriptor_set_layout;
         std::shared_ptr<Pipeline_layout> pipeline_layout;
-
-        const VkDescriptorUpdateTemplate handle;
     private:
         friend class Descriptor_set_layout;
         friend class Pipeline_layout;
@@ -1040,14 +947,15 @@ dclr_sclass(Image, VkImage)
     class Descriptor_set_layout : public std::enable_shared_from_this<Descriptor_set_layout> {
     public:
         using Sptr = std::shared_ptr<Descriptor_set_layout>;
+
         ~Descriptor_set_layout();
 
         std::shared_ptr<Descriptor_update_template> get_a_descriptor_update_template(
             Array_value<VkDescriptorUpdateTemplateEntry> entrys_,
-            S_allocation_callbacks*const allocator_ = default_allocation_cb()  );
+            S_allocation_callbacks*const allocator_ = default_allocation_cb());
 
-        std::shared_ptr<Device> device;
         const VkDescriptorSetLayout handle;
+        std::shared_ptr<Device> device;
     private:
         friend class Device;
         Descriptor_set_layout(
@@ -1061,7 +969,6 @@ dclr_sclass(Image, VkImage)
     class Query_pool : public std::enable_shared_from_this<Query_pool> {
     public:
         using Sptr = std::shared_ptr<Query_pool>;
-        ~Query_pool();
 
         VkResult get_results(
             uint32_t        firstQuery_,
@@ -1070,6 +977,8 @@ dclr_sclass(Image, VkImage)
             void*           pData_,
             VkDeviceSize    stride_,
             F_query_result  flags_);
+
+        ~Query_pool();
 
         const VkQueryPool handle;
         std::shared_ptr<Device> device;
@@ -1086,6 +995,7 @@ dclr_sclass(Image, VkImage)
     class Frame_buffer : public std::enable_shared_from_this<Frame_buffer> {
     public:
         using Sptr = std::shared_ptr<Frame_buffer>;
+
         ~Frame_buffer();
 
         const VkFramebuffer handle;
@@ -1103,9 +1013,10 @@ dclr_sclass(Image, VkImage)
     class Render_pass :public std::enable_shared_from_this<Render_pass> {
     public:
         using Sptr = std::shared_ptr<Render_pass>;
-        ~Render_pass();
 
         S_extent_2d get_area_granularity();
+
+        ~Render_pass();
 
         std::shared_ptr<Frame_buffer> get_a_frame_buffer(
             Array_value<VkImageView> attachments_,
@@ -1129,6 +1040,7 @@ dclr_sclass(Image, VkImage)
     class Pipeline_layout : public std::enable_shared_from_this<Pipeline_layout> {
     public:
         using Sptr = std::shared_ptr<Pipeline_layout>;
+
         ~Pipeline_layout();
 
         std::shared_ptr<Descriptor_update_template> get_a_descriptor_update_template(
@@ -1154,7 +1066,7 @@ dclr_sclass(Image, VkImage)
             Array_value<S_pipeline_shader_stage_create_info>    stages_,
             const S_pipeline_vertex_input_state_create_info*    vertex_input_state_,
             const S_pipeline_input_assembly_state_create_info*  input_assembly_state_,
-            const S_pipeline_tessellation_domain_origin_state_create_info*    tessellation_state_,
+            const S_pipeline_tessellation_state_create_info*    tessellation_state_,
             const S_pipeline_viewport_state_create_info*        view_port_state_,
             const S_pipeline_rasterization_state_create_info*   rasterization_state_,
             const S_pipeline_multisample_state_create_info*     multi_sample_state_,
@@ -1180,11 +1092,13 @@ dclr_sclass(Image, VkImage)
     class Pipeline_cache : public std::enable_shared_from_this<Pipeline_cache> {
     public:
         using Sptr = std::shared_ptr<Pipeline_cache>;
-        ~Pipeline_cache();
+
         //std::shared_ptr<std::vector<char>> get_data();
         //对pData这种,大概得用vector<uchar>
         VkResult get_data(size_t* pDataSize, void* pData);
         VkResult merge(Pipeline_cache&  srcCache);
+
+        ~Pipeline_cache();
 
         const VkPipelineCache handle;
         std::shared_ptr<Device> device;
@@ -1201,6 +1115,7 @@ dclr_sclass(Image, VkImage)
     class Compute_pipeline : public std::enable_shared_from_this<Compute_pipeline> {
     public:
         using Sptr = std::shared_ptr<Compute_pipeline>;
+
         ~Compute_pipeline();
 
         std::shared_ptr<Compute_pipeline> get_a_compute_pipeline(
@@ -1277,6 +1192,21 @@ dclr_sclass(Image, VkImage)
     class Device : public std::enable_shared_from_this<Device> {
     public:
         using Sptr = std::shared_ptr<Device>;
+
+        VkResult invalidate_mapped_memory_ranges(
+            Array_value<S_mapped_memory_range> mapped_memory_ranges_);
+
+        F_peer_memory_feature get_peer_memory_feature(
+            uint32_t    heapIndex_,
+            uint32_t    localDeviceIndex_,
+            uint32_t    remoteDeviceIndex_);
+
+        VkResult wait_idle();
+        VkResult wait_for_fences(
+            Array_value<VkFence>    fences_,
+            uint64_t                timeout_,
+            bool wait_all_ = true);
+
         ~Device();
 
         std::shared_ptr <Semaphore> get_a_semaphore(
@@ -1363,12 +1293,12 @@ dclr_sclass(Image, VkImage)
         std::shared_ptr<Command_pool> get_a_command_pool(
             uint32_t                        queueFamilyIndex_,
             F_command_pool_create           flags_,
-            S_allocation_callbacks*const   allocator_ = default_allocation_cb());
+            S_allocation_callbacks*const    allocator_ = default_allocation_cb());
 
         std::shared_ptr<Descriptor_pool> get_a_descriptor_pool(
             uint32_t                            maxSets_,
             Array_value<S_descriptor_pool_size> poolSizes_,
-            F_command_pool_create               flags_,
+            F_descriptor_pool_create            flags_,
             S_allocation_callbacks*const        allocator_ = default_allocation_cb());
 
         std::shared_ptr<Query_pool> get_a_query_pool(
@@ -1399,21 +1329,6 @@ dclr_sclass(Image, VkImage)
             const void* initial_data_ = nullptr,
             S_allocation_callbacks*const allocator_ = default_allocation_cb());
 
-        VkResult invalidate_mapped_memory_ranges(
-            Array_value<S_mapped_memory_range> mapped_memory_ranges_);
-
-        F_peer_memory_feature get_peer_memory_feature(
-            uint32_t    heapIndex_,
-            uint32_t    localDeviceIndex_,
-            uint32_t    remoteDeviceIndex_);
-
-        VkResult wait_idle();
-        VkResult wait_for_fences(
-            Array_value<VkFence>    fences_,
-            uint64_t                timeout_,
-            bool wait_all_ = true);
-
-        Device_api api;
 
         const VkDevice handle;
         S_allocation_callbacks*const allocation_callbacks;
@@ -1423,6 +1338,8 @@ dclr_sclass(Image, VkImage)
         std::shared_ptr<Instance> instance;
         std::shared_ptr<Device_creator> device_creator;
         std::vector<Physical_device*> physical_devices;
+
+        Device_api api;
     private:
         friend class Device_creator;
         friend class Instance;

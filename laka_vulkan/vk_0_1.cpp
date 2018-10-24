@@ -20,7 +20,8 @@ Permission is granted to anyone to use this software for any purpose, including 
 using namespace std;
 
 namespace laka { namespace vk {
-    
+
+#if 1   /*  global */
     static Module_handle vk_module_handle = load_module_must("vulkan-1.dll");
     Module_handle get_vk_module()
     {
@@ -94,6 +95,12 @@ namespace laka { namespace vk {
         }
         return version;
     }
+
+#define static_declare_load_vk_api(api_name__) \
+    static auto api_name__ = \
+    (PFN_ ## api_name__)return_vk_api_must(#api_name__);
+
+    table_vk_api_global(static_declare_load_vk_api ZK, , , YK);
 
     static S_allocation_callbacks acb;
 
@@ -184,190 +191,26 @@ namespace laka { namespace vk {
     };
     static Extension_properties extension_properties;
 
-    Instance::Instance(
-        VkInstance handle_, 
-        S_allocation_callbacks* allocator_callbacks_ptr_)
-        :handle(handle_)
-        ,allocator_callbacks_ptr(&allocator_callbacks)
+    PFN_vkVoidFunction Device::return_api(const char* api_name_)
     {
         init_show;
-
-        if (allocator_callbacks_ptr_ != nullptr)
+        //show_function_name;
+        auto ret = instance->api.vkGetDeviceProcAddr(handle, api_name_);
+    
+        if (ret == nullptr)
         {
-            allocator_callbacks = *allocator_callbacks_ptr_;
-        }
-
-#define load_instance_api(api_name__) \
-    api.api_name__ = \
-        (PFN_##api_name__)return_vk_api_must(handle,#api_name__); \
-    
-        table_vk_api_instance(load_instance_api ZK, , , YK);
-        table_vk_api_physical_device(load_instance_api ZK, , , YK);
-        table_vk_api_physical_device_khr(load_instance_api ZK, , , YK);
-    
-        uint32_t count = 0;
-        auto ret = api.vkEnumeratePhysicalDevices(handle, &count, nullptr);
-        show_result(ret);
-        show_debug("物理设备数量:{}", count);
-        if (count != 0)
-        {
-            physical_devices.resize(count);
-    
-            vector<VkPhysicalDevice> physical_devices_temp;
-            physical_devices_temp.resize(count);
-            ret = api.vkEnumeratePhysicalDevices(handle, &count, &physical_devices_temp[0]);
-            show_result_assert(ret);
-    
-            int i = 0;
-            for (auto&& pd_handle : physical_devices_temp)
-            {
-                physical_devices[i].instance = this;
-                physical_devices[i].handle = pd_handle;
-    
-                auto qf_sptr = physical_devices[i].get_queue_family_properties();
-                physical_devices[i].queue_familys.resize(qf_sptr->size());
-    
-                uint32_t index = 0;
-                for (auto&& qf : *qf_sptr)
-                {
-                    physical_devices[i].queue_familys[index].index = index;
-                    physical_devices[i].queue_familys[index].properties = qf;
-                    index++;
-                }
-    
-                auto pd_info = physical_devices[i].get_properties();
-    
-                show_debug(
-                    "设备{0}  api版本:{1} 驱动版本:{2}",
-                    pd_info->deviceName,
-                    version_str(pd_info->apiVersion),
-                    version_str(pd_info->driverVersion)
-                );
-            }
+            show_wrn("加载{}失败", api_name_);
         }
         else
         {
-            show_wrn("没有枚举到物理设备");
+            show_debug("加载{}成功", api_name_);
         }
-    
-        count = 0;
-        ret = api.vkEnumeratePhysicalDeviceGroups(handle, &count, nullptr);
-        show_result(ret);
-        show_debug("设备组数量:{}", count);
-    
-        vector<VkPhysicalDeviceGroupProperties> physical_device_groups_temp(count);
-        physical_device_groups.resize(count);
-    
-        if (count > 0)
-        {
-            ret = api.vkEnumeratePhysicalDeviceGroups(handle, &count, &physical_device_groups_temp[0]);
-            show_result(ret);
-    
-            int i = 0;
-            for (auto&& current_pg_ppt : physical_device_groups_temp)
-            {
-                auto& current_group = physical_device_groups[i];
-                current_group.properties = current_pg_ppt;
-                current_group.physical_devices.resize(current_pg_ppt.physicalDeviceCount);
-    
-                for (int j = 0; j < current_pg_ppt.physicalDeviceCount; ++j)
-                {
-                    auto& handle_temp = current_pg_ppt.physicalDevices[j];
-                    show_debug("物理设备组中 物理句柄值:{}", (void*)handle_temp);
-    
-                    Physical_device* physical_device_ptr = nullptr;
-                    int x = 0;
-                    for (auto&& current_physical_device : physical_devices)
-                    {
-                        if (current_physical_device.handle == handle_temp)
-                        {
-                            physical_device_ptr = &physical_devices[x];
-                            break;
-                        }
-                        ++x;
-                    }
-    
-                    if (physical_device_ptr != nullptr)
-                    {
-                        current_group.physical_devices[i] = physical_device_ptr;
-                    }
-                    else
-                    {
-                        show_err("!!!!!!!!!!!在设备组中的物理设备的句柄 与枚举全部设备的句柄不一样");
-                    }
-                }
-                ++i;
-            }
-        }
-        else {
-            show_wrn("没有枚举出设备组");
-        }
+        return ret;
     }
 
+#endif  /*  global  */
 
-    Instance::Sptr Instance::get_new(
-        Array_value<const char*> enabled_extension_names_ /*= {}*/,
-        uint32_t                api_version_ /*= VK_MAKE_VERSION(1, 1, 82)*/,
-        N_instance_create_info  next_ /*= {}*/,
-        S_allocation_callbacks*const allocator_ /*= nullptr*/,
-        Array_value<const char*>enabled_layer_names_ /*= {}*/,
-        const char*             app_name_ /*= "laka::vk"*/,
-        uint32_t                app_version_ /*= VK_MAKE_VERSION(0, 0, 1)*/,
-        const char*             engine_name_ /*= "laka::vk::engine"*/,
-        uint32_t                engine_version_ /*= VK_MAKE_VERSION(0, 0, 1)*/ )
-    {
-        Sptr sptr;
-
-        VkApplicationInfo app_info{
-            VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO,
-            nullptr,
-            app_name_,
-            app_version_,
-            engine_name_,
-            engine_version_,
-            api_version_
-        };
-
-        VkInstanceCreateInfo info{
-            VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO,
-            next_,
-            0,
-            &app_info,
-            static_cast<uint32_t>(enabled_layer_names_.size()),
-            enabled_layer_names_.data(),
-            static_cast<uint32_t>(enabled_extension_names_.size()),
-            enabled_extension_names_.data()
-        };
-
-        VkInstance this_handle;
-        auto ret = vkCreateInstance(&info, *allocator_, &this_handle);
-        show_result(ret);
-        if (ret < 0)
-        {
-            init_show;
-            show_wrn("创建Instance失败");
-            return sptr;
-        }
-
-        sptr.reset(new Instance(this_handle, allocator_));
-
-        return sptr;
-    }
-
-    Instance::~Instance()
-    {
-        init_show;
-        show_function_name;
-        api.vkDestroyInstance(handle, *allocator_callbacks_ptr);
-    }
-
-
-#define static_declare_load_vk_api(api_name__) \
-    static auto api_name__ = \
-    (PFN_ ## api_name__)return_vk_api_must(#api_name__);
-
-    table_vk_api_global(static_declare_load_vk_api ZK, , , YK);
-
+#if 1   /*  macro  */
 #define assert_ret(show_some_thing__) \
     show_debug("{0}:{1}",mean(ret)->c_str(),#show_some_thing__);\
     assert(ret>=0 && #show_some_thing__);
@@ -393,7 +236,183 @@ namespace laka { namespace vk {
         function__(handle__,&count,(type__*)(&array__[0]) );\
     }\
 
-    shared_ptr<vector<S_layer_properties>> Physical_device::get_layer_propertiess()
+#endif  /*  macro  */
+
+#if 1   /* VkInstance */
+    Instance::Sptr Instance::get_new(
+        Array_value<const char*> enabled_extension_names_ /*= {}*/,
+        uint32_t                api_version_ /*= VK_MAKE_VERSION(1, 1, 82)*/,
+        N_instance_create_info  next_ /*= {}*/,
+        S_allocation_callbacks*const allocator_ /*= nullptr*/,
+        Array_value<const char*>enabled_layer_names_ /*= {}*/,
+        const char*             app_name_ /*= "laka::vk"*/,
+        uint32_t                app_version_ /*= VK_MAKE_VERSION(0, 0, 1)*/,
+        const char*             engine_name_ /*= "laka::vk::engine"*/,
+        uint32_t                engine_version_ /*= VK_MAKE_VERSION(0, 0, 1)*/ )
+    {
+        Sptr sptr;
+        S_application_info app_info{
+            app_name_,
+            app_version_,
+            engine_name_,
+            engine_version_,
+            api_version_
+        };
+        S_instance_create_info info{
+            0,
+            &app_info,
+            enabled_layer_names_.size(),
+            enabled_layer_names_.data(),
+            enabled_extension_names_.size(),
+            enabled_extension_names_.data()
+        };
+        info.set_pNext(next_);
+
+        VkInstance this_handle;
+        auto ret = vkCreateInstance(info, *allocator_, &this_handle);
+        show_result(ret);
+        if (ret < 0)
+        {
+            init_show;
+            show_wrn("创建Instance失败");
+            return sptr;
+        }
+        sptr.reset(new Instance(this_handle, allocator_));
+
+        return sptr;
+    }
+    
+    Instance::Instance(
+        VkInstance handle_,
+        S_allocation_callbacks* allocator_callbacks_ptr_)
+        :handle(handle_)
+        , allocator_callbacks_ptr(&allocator_callbacks)
+    {
+        init_show;
+
+        if (allocator_callbacks_ptr_ != nullptr)
+        {
+            allocator_callbacks = *allocator_callbacks_ptr_;
+        }
+
+#define load_instance_api(api_name__) \
+    api.api_name__ = \
+        (PFN_##api_name__)return_vk_api_must(handle,#api_name__); \
+
+        table_vk_api_instance(load_instance_api ZK, , , YK);
+        table_vk_api_physical_device(load_instance_api ZK, , , YK);
+        table_vk_api_physical_device_khr(load_instance_api ZK, , , YK);
+
+        uint32_t count = 0;
+        auto ret = api.vkEnumeratePhysicalDevices(handle, &count, nullptr);
+        show_result(ret);
+        show_debug("物理设备数量:{}", count);
+        if (count != 0)
+        {
+            physical_devices.resize(count);
+
+            vector<VkPhysicalDevice> physical_devices_temp;
+            physical_devices_temp.resize(count);
+            ret = api.vkEnumeratePhysicalDevices(handle, &count, &physical_devices_temp[0]);
+            show_result_assert(ret);
+
+            int i = 0;
+            for (auto&& pd_handle : physical_devices_temp)
+            {
+                physical_devices[i].instance = this;
+                physical_devices[i].handle = pd_handle;
+
+                auto qf_sptr = physical_devices[i].get_queue_family_properties();
+                physical_devices[i].queue_familys.resize(qf_sptr->size());
+
+                uint32_t index = 0;
+                for (auto&& qf : *qf_sptr)
+                {
+                    physical_devices[i].queue_familys[index].index = index;
+                    physical_devices[i].queue_familys[index].properties = qf;
+                    index++;
+                }
+
+                auto pd_info = physical_devices[i].get_properties();
+
+                show_debug(
+                    "设备{0}  api版本:{1} 驱动版本:{2}",
+                    pd_info->deviceName,
+                    version_str(pd_info->apiVersion),
+                    version_str(pd_info->driverVersion)
+                );
+            }
+        }
+        else
+        {
+            show_wrn("没有枚举到物理设备");
+        }
+
+        count = 0;
+        ret = api.vkEnumeratePhysicalDeviceGroups(handle, &count, nullptr);
+        show_result(ret);
+        show_debug("设备组数量:{}", count);
+
+        vector<VkPhysicalDeviceGroupProperties> physical_device_groups_temp(count);
+        physical_device_groups.resize(count);
+
+        if (count > 0)
+        {
+            ret = api.vkEnumeratePhysicalDeviceGroups(handle, &count, &physical_device_groups_temp[0]);
+            show_result(ret);
+
+            int i = 0;
+            for (auto&& current_pg_ppt : physical_device_groups_temp)
+            {
+                auto& current_group = physical_device_groups[i];
+                current_group.properties = current_pg_ppt;
+                current_group.physical_devices.resize(current_pg_ppt.physicalDeviceCount);
+
+                for (int j = 0; j < current_pg_ppt.physicalDeviceCount; ++j)
+                {
+                    auto& handle_temp = current_pg_ppt.physicalDevices[j];
+                    show_debug("物理设备组中 物理句柄值:{}", (void*)handle_temp);
+
+                    Physical_device* physical_device_ptr = nullptr;
+                    int x = 0;
+                    for (auto&& current_physical_device : physical_devices)
+                    {
+                        if (current_physical_device.handle == handle_temp)
+                        {
+                            physical_device_ptr = &physical_devices[x];
+                            break;
+                        }
+                        ++x;
+                    }
+
+                    if (physical_device_ptr != nullptr)
+                    {
+                        current_group.physical_devices[i] = physical_device_ptr;
+                    }
+                    else
+                    {
+                        show_err("!!!!!!!!!!!在设备组中的物理设备的句柄 与枚举全部设备的句柄不一样");
+                    }
+                }
+                ++i;
+            }
+        }
+        else {
+            show_wrn("没有枚举出设备组");
+        }
+    }
+
+    Instance::~Instance()
+    {
+        init_show;
+        show_function_name;
+        api.vkDestroyInstance(handle, *allocator_callbacks_ptr);
+    }
+#endif  /*  VkInstance  */
+
+#if 1   /*  VkPhysicalDevice  */
+    shared_ptr<vector<S_layer_properties>> 
+        Physical_device::get_layer_propertiess()
     {
         init_show;
         uint32_t count; VkResult ret;
@@ -429,7 +448,8 @@ namespace laka { namespace vk {
         return sptr;
     }
 
-    shared_ptr<S_physical_device_features>  Physical_device::get_features()
+    shared_ptr<S_physical_device_features>  
+        Physical_device::get_features()
     {
 
         shared_ptr<S_physical_device_features> sptr(new S_physical_device_features);
@@ -438,7 +458,8 @@ namespace laka { namespace vk {
         return sptr;
     }
 
-    shared_ptr<S_physical_device_properties>    Physical_device::get_properties()
+    shared_ptr<S_physical_device_properties>    
+        Physical_device::get_properties()
     {
         shared_ptr<S_physical_device_properties> sptr(new S_physical_device_properties);
         instance->api.vkGetPhysicalDeviceProperties(
@@ -446,7 +467,8 @@ namespace laka { namespace vk {
         return sptr;
     }
 
-    shared_ptr<S_physical_device_memory_properties> Physical_device::get_memory_properties()
+    shared_ptr<S_physical_device_memory_properties> 
+        Physical_device::get_memory_properties()
     {
         shared_ptr<S_physical_device_memory_properties> sptr(new S_physical_device_memory_properties);
         instance->api.vkGetPhysicalDeviceMemoryProperties(
@@ -454,7 +476,8 @@ namespace laka { namespace vk {
         return sptr;
     }
 
-    shared_ptr<vector<S_queue_family_properties>>   Physical_device::get_queue_family_properties()
+    shared_ptr<vector<S_queue_family_properties>>   
+        Physical_device::get_queue_family_properties()
     {
         init_show;
         auto& array = *new vector<S_queue_family_properties>;
@@ -470,7 +493,8 @@ namespace laka { namespace vk {
         return sptr;
     }
 
-    shared_ptr<S_format_properties>  Physical_device::get_format_properties(E_format format_)
+    shared_ptr<S_format_properties>  
+        Physical_device::get_format_properties(E_format format_)
     {
         shared_ptr<S_format_properties> sptr(new S_format_properties);
         instance->api.vkGetPhysicalDeviceFormatProperties(
@@ -481,7 +505,8 @@ namespace laka { namespace vk {
         return sptr;
     }
 
-    shared_ptr<S_external_buffer_properties>  Physical_device::get_external_buffer_properties(
+    shared_ptr<S_external_buffer_properties>  
+        Physical_device::get_external_buffer_properties(
             F_buffer_create c_flags_,
             F_buffer_usage    u_flags_,
             F_external_memory_handle_type    handle_type_)
@@ -596,7 +621,9 @@ namespace laka { namespace vk {
         return sptr;
     }
 
+#endif  /*  VkPhysicalDevice  */
 
+#if 1   /* VkDeviceCreatorInfo  */
     shared_ptr<Device_creator> Instance::get_a_device_creator(
         bool(*choose_physical_device_)(Pramater_choose_physical_device& pramater_),
         bool(*choose_queue_family_)(Pramater_choose_queue_family& pramater_),
@@ -622,9 +649,10 @@ namespace laka { namespace vk {
         , choose_queue_family_function(choose_queue_family_)
         , allocation_callbacks(allocator_)
     {   }
+#endif  /* VkDeviceCreatorInfo  */
 
+#if 1   /*  VkDevice  */
     // 要将队列族信息存入设备对象中.
-
     shared_ptr<Device> Device_creator::get_a_device(
         Physical_device& physical_device_,
         S_device_create_info& create_info_)
@@ -921,7 +949,56 @@ namespace laka { namespace vk {
         return device_sptr;
     }
 
+    VkResult Device::invalidate_mapped_memory_ranges(
+        Array_value<S_mapped_memory_range> mapped_memory_ranges_)
+    {
+        auto ret = api.vkInvalidateMappedMemoryRanges(
+            handle,
+            mapped_memory_ranges_.size(),
+            *mapped_memory_ranges_.data()
+        );
+        show_result(ret);
 
+        return ret;
+    }
+
+    VkResult Device::wait_idle()
+    {
+        auto ret = api.vkDeviceWaitIdle(handle);
+        show_result(ret);
+
+        return ret;
+    }
+
+    F_peer_memory_feature Device::get_peer_memory_feature(
+        uint32_t    heapIndex_,
+        uint32_t    localDeviceIndex_,
+        uint32_t    remoteDeviceIndex_)
+    {
+        VkPeerMemoryFeatureFlags result;
+        api.vkGetDeviceGroupPeerMemoryFeatures(
+            handle, heapIndex_, localDeviceIndex_, remoteDeviceIndex_, &result
+        );
+        F_peer_memory_feature f;
+        f.flag = result;
+        return f;
+    }
+
+    VkResult Device::wait_for_fences(
+        Array_value<VkFence> fences_,
+        uint64_t timeout_,
+        bool wait_all_)
+    {
+        auto ret = api.vkWaitForFences(
+            handle, 
+            fences_.size(), 
+            fences_.data(), 
+            wait_all_ ? VK_TRUE : VK_FALSE, 
+            timeout_
+        );
+        return ret;
+    }
+    
     Device::Device(
         shared_ptr<Instance> instance_,
         shared_ptr<Device_creator> device_creator_,
@@ -985,9 +1062,9 @@ namespace laka { namespace vk {
         show_function_name;
         api.vkDestroyDevice(handle, *allocation_callbacks);
     }
+#endif  /*  VkDevice  */
 
-    // VkSemaphore
-#if 1
+#if 1   /*  VkSemaphore  */
     shared_ptr <Semaphore> Device::get_a_semaphore(
         N_semaphore_create_info next_/* = nullptr*/,
         S_allocation_callbacks*const  allocator_/* = default_allocation_cb*/)
@@ -1029,10 +1106,9 @@ namespace laka { namespace vk {
         show_function_name;
         device->api.vkDestroySemaphore(device->handle, handle, *allocation_callbacks);
     }
-#endif // VkSemaphore
+#endif  /*  VkSemaphore  */
 
-    // VkFence
-#if 1
+#if 1   /*  VkFence  */
     shared_ptr <Fence> Device::get_a_fence(
         N_fence_create_info next_/* = nullptr*/,
         S_allocation_callbacks*const allocator_/* = default_allocation_cb*/)
@@ -1127,10 +1203,9 @@ namespace laka { namespace vk {
         show_result(ret);
         return ret;
     }
-#endif  // VkFence
-
-    // VkEvent
-#if 1
+#endif  /*  VkFence  */
+    
+#if 1   /*  VkEvent  */
     shared_ptr <Event> Device::get_a_event(
         S_allocation_callbacks*const allocator_/* = default_allocation_cb*/)
     {
@@ -1192,10 +1267,9 @@ namespace laka { namespace vk {
     {
         device->api.vkResetEvent(device->handle, handle);
     }
-#endif // VkEvent
+#endif  /*  VkEvent  */
 
-    // VkShaderModule
-#if 1
+#if 1   /*  VkShaderModule  */
     shared_ptr<Shader_module> Device::get_a_shader_module(
         const uint32_t*     code_ptr_,
         size_t              code_size_,
@@ -1256,10 +1330,9 @@ namespace laka { namespace vk {
         show_function_name;
         device->api.vkDestroyShaderModule(device->handle, handle, *allocation_callbacks);
     }
-#endif // VkShaderModule
+#endif  /*  VkShaderModule  */
 
-    // VkDeviceMemory
-#if 1
+#if 1   /*  VkDeviceMemory  */
     shared_ptr<Device_memory> Device::get_a_device_memory(
         VkDeviceSize memory_size_,
         bool(*choose_memory_type_index_)(
@@ -1361,10 +1434,9 @@ namespace laka { namespace vk {
         show_function_name;
         device->api.vkUnmapMemory(device->handle, handle);
     }
-#endif // VkDeviceMemory
+#endif  /*  VkDeviceMemory  */
 
-    // VkBufferView
-#if 1
+#if 1   /*  VkBufferView  */
     shared_ptr<Buffer_view> Buffer::get_a_buffer_view(
         E_format        format_,
         VkDeviceSize    offset_,
@@ -1423,10 +1495,9 @@ namespace laka { namespace vk {
             buffer->device->handle, handle, *allocation_callbacks);
     }
 
-#endif // VkBufferView
+#endif  /*  VkBufferView  */
     
-    // VkBuffer
-#if 1
+#if 1   /*  VkBuffer  */
     shared_ptr<Buffer> Device::get_a_buffer(
         VkDeviceSize        buffer_size_,
         F_buffer_create     create_flags_,
@@ -1505,10 +1576,9 @@ namespace laka { namespace vk {
         return ret;
     }
 
-#endif // VkBuffer
+#endif  /*  VkBuffer  */
 
-    // VkImageView
-#if 1
+#if 1   /*  VkImageView  */
     shared_ptr<Image_view> Image::get_a_image_view(
         E_image_view_type                view_type_,
         E_format                    format_,
@@ -1569,10 +1639,9 @@ namespace laka { namespace vk {
             image->device->handle, handle, *allocation_callbacks);
     }
 
-#endif // VkImageView
+#endif  /*  VkImageView  */
 
-    // VkImage
-#if 1
+#if 1   /*  VkImage  */
     shared_ptr<Image> Device::get_a_image(
         F_image_create          create_fb_,
         E_image_type            imageType_,
@@ -1692,10 +1761,9 @@ namespace laka { namespace vk {
         return ret;
     }
 
-#endif // VkImage
+#endif  /*  VkImage  */
     
-    // VkSampler
-#if 1
+#if 1   /*  VkSampler  */
     shared_ptr<Sampler> Device::get_a_sampler(
         E_filter                magFilter,
         E_filter                minFilter,
@@ -1767,10 +1835,9 @@ namespace laka { namespace vk {
         device->api.vkDestroySampler(device->handle, handle, *allocation_callbacks);
     }
 
-#endif // VkSampler
+#endif  /*  VkSampler  */
 
-    // VkSamplerYcbcrConversion
-#if 1
+#if 1   /*  VkSamplerYcbcrConversion  */
     shared_ptr<Sampler_Ycbcr_conversion> Device::get_a_sampler_ycbcr_conversion(
         E_format                            format_,
         E_sampler_ycbcr_model_conversion    ycbcrModel,
@@ -1830,10 +1897,49 @@ namespace laka { namespace vk {
     }
 
 
-#endif  // VkSamplerYcbcrConversion
+#endif  /*  VkSamplerYcbcrConversion  */
 
-    // VkCommandBuffer
-#if 1
+#if 1   /*  VkQueue  */
+    VkResult Queue::wait_idle()
+    {
+        auto ret = api->vkQueueWaitIdle(handle);
+        show_result(ret);
+        return ret;
+    }
+
+    VkResult Queue::bind_sparse(
+        Array_value<S_bind_sparse_info>&    pBindInfo_,
+        Fence&                              fence_)
+    {
+        auto ret = api->vkQueueBindSparse(
+            handle,
+            pBindInfo_.size(),
+            *pBindInfo_.data(),
+            fence_.handle
+        );
+        show_result(ret);
+
+        return ret;
+    }
+
+    VkResult Queue::submit(
+        Array_value<S_submit_info>& pSubmitInfo_,
+        Fence&                      fence_)
+    {
+        auto ret = api->vkQueueSubmit(
+            handle,
+            pSubmitInfo_.size(),
+            *pSubmitInfo_.data(),
+            fence_.handle
+        );
+        show_result(ret);
+
+        return ret;
+    }
+
+#endif  /*  VkQueue  */
+
+#if 1   /*  VkCommandBuffer  */
     shared_ptr<Command_buffer> 
         Command_pool::get_a_command_buffer(E_command_buffer_level level)
     {
@@ -1976,7 +2082,6 @@ namespace laka { namespace vk {
         {
             d_set_handles[i] = descriptor_sets_.elements[i].handle;
         }
-
         api->vkCmdBindDescriptorSets(
             handle,
             pipelineBindPoint_,
@@ -2475,85 +2580,9 @@ namespace laka { namespace vk {
         );
     }
 
-    shared_ptr<Command_buffer_s> Command_pool::get_a_command_buffers(
-        uint32_t                command_buffer_count_,
-        E_command_buffer_level  level_)
-    {
-        shared_ptr<Command_buffer_s> sptr;
+#endif  /*  VkCommandBuffer  */
 
-        S_command_buffer_allocate_info info{
-            handle,
-            level_,
-            command_buffer_count_
-        };
-
-        vector<VkCommandBuffer> buffer_handles(command_buffer_count_);
-
-        auto ret = device->api.vkAllocateCommandBuffers(
-            device->handle, info, &buffer_handles[0]);
-        show_result(ret);
-
-        if (ret < 0)
-        {
-            init_show;
-            show_err("创建 command buffer 失败");
-
-            for (size_t i = 0; i < buffer_handles.size(); ++i)
-            {
-                // 是否应当这样处理???
-                if (buffer_handles[i] != VK_NULL_HANDLE)
-                {
-                    show_err("存在已创建的command buffer,逐个释放掉.");
-                    device->api.vkFreeCommandBuffers(
-                        device->handle, handle, 1, &buffer_handles[i]);
-                }
-            }
-            return sptr;
-        }
-
-        sptr.reset(
-            new Command_buffer_s(shared_from_this(), buffer_handles));
-
-        return sptr;
-    }
-    Command_buffer_s::Command_buffer_s(
-        shared_ptr<Command_pool> comman_pool_, vector<VkCommandBuffer> handles_)
-        :elements(handles_.size())
-    {
-        size_t count = 0;
-        for (auto& command_buffer : elements)
-        {
-            command_buffer.handle = handles_[count];
-            command_buffer.api = &(command_pool->device->api);
-            count++;
-        }
-    }
-    Command_buffer_s::~Command_buffer_s()
-    {
-        init_show;
-        show_function_name;
-
-        vector<VkCommandBuffer> buffer_handles(elements.size());
-
-        size_t count = 0;
-        for (auto&& command_buffer : elements)
-        {
-            buffer_handles[count] = command_buffer.handle;
-            count++;
-        }
-
-        command_pool->device->api.vkFreeCommandBuffers(
-            command_pool->device->handle,
-            command_pool->handle,
-            static_cast<uint32_t>(buffer_handles.size()),
-            &buffer_handles[0]
-        );
-    }
-
-#endif  // VkCommandBuffer
-
-    // VkCommandPool
-#if 1
+#if 1   /*  VkCommandBuffer  */
     shared_ptr<Command_pool> Device::get_a_command_pool(
         uint32_t                        queueFamilyIndex_,
         F_command_pool_create           flags_,
@@ -2619,10 +2648,9 @@ namespace laka { namespace vk {
         device->api.vkTrimCommandPool(device->handle, handle, flags_);
     }
 
-#endif  // VkCommandBuffer
+#endif  /*  VkCommandBuffer  */
 
-    // VkDescriptorSet
-#if 1
+#if 1   /*  VkDescriptorSet  */
 
     Descriptor_set_base::Descriptor_set_base(VkDescriptorSet handle_)
         :handle(handle_) 
@@ -2702,92 +2730,13 @@ namespace laka { namespace vk {
         );
     }
 
+#endif  /*  VkDescriptorSet  */
 
-    Descriptor_set_s::Descriptor_set_s(
-        shared_ptr<Descriptor_pool> descriptor_pool_,
-        vector<VkDescriptorSet>& handles_)
-        :descriptor_pool(descriptor_pool_)
-        , elements(handles_.size())
-    {
-        for (size_t i = 0; i < elements.size(); ++i)
-        {
-            elements[i].handle = handles_[i];
-        }
-    }
-
-    Descriptor_set_s::~Descriptor_set_s()
-    {
-        vector<VkDescriptorSet> handles(elements.size());
-        for (size_t i = 0; i < elements.size(); ++i)
-        {
-            handles[i] = elements[i].handle;
-        }
-        if (handles.size() <= 0)
-        {
-            return;
-        }
-        descriptor_pool->device->api.vkFreeDescriptorSets(
-            descriptor_pool->device->handle,
-            descriptor_pool->handle,
-            static_cast<uint32_t>(elements.size()),
-            &handles[0]
-        );
-    }
-
-    shared_ptr<Descriptor_set_s> Descriptor_pool::get_descriptor_sets(
-        std::vector<VkDescriptorSetLayout>& set_layouts,
-        N_descriptor_set_allocate_info next_ /*= {}*/)
-    {
-        shared_ptr<Descriptor_set_s> descriptor_sets_sptr;
-        S_descriptor_set_allocate_info info{
-            handle,
-            1,
-            &set_layouts[0]
-        };
-        info.set_pNext(next_);
-
-        vector<VkDescriptorSet> descriptor_sets_handles(set_layouts.size());
-
-        auto ret = device->api.vkAllocateDescriptorSets(
-            device->handle, info, &descriptor_sets_handles[0]);
-        show_result(ret);
-
-        if (ret < 0)
-        {
-            init_show;
-            show_err("创建 descriptor set 失败");
-
-            for (size_t i = 0; i < descriptor_sets_handles.size(); ++i)
-            {
-                if (descriptor_sets_handles[i] != VK_NULL_HANDLE)
-                {
-                    //正确处理方式???
-                    show_err("存在已申请的descriptor set 逐个释放...");
-                    device->api.vkFreeDescriptorSets(
-                        device->handle,
-                        handle,
-                        1,
-                        &descriptor_sets_handles[i]
-                    );
-                }
-            }
-
-            return descriptor_sets_sptr;
-        }
-        descriptor_sets_sptr.reset(
-            new Descriptor_set_s(shared_from_this(), descriptor_sets_handles)
-        );
-        return descriptor_sets_sptr;
-    }
-
-#endif // VkDescriptorSet
-
-    // VkDescriptorPool
-#if 1
+#if 1   /*  VkDescriptorPool  */
     shared_ptr<Descriptor_pool> Device::get_a_descriptor_pool(
         uint32_t                            maxSets_,
         Array_value<S_descriptor_pool_size> poolSizes_,
-        F_command_pool_create               flags_,
+        F_descriptor_pool_create            flags_,
         S_allocation_callbacks*const        allocator_ /*= default_allocation_cb()*/)
     {
         shared_ptr<Descriptor_pool> descriptor_pool_sptr;
@@ -2798,7 +2747,7 @@ namespace laka { namespace vk {
             flags_,
             maxSets_,
             poolSizes_.size(),
-            *poolSizes_.data()
+            poolSizes_.data()
         };
         VkDescriptorPool descriptor_pool_handle;
         auto ret = api.vkCreateDescriptorPool(
@@ -2841,10 +2790,9 @@ namespace laka { namespace vk {
         return ret;
     }
 
-#endif // VkDescriptorPool
+#endif  /*  VkDescriptorPool  */
 
-    // VkDescriptorUpdateTemplate
-#if 1
+#if 1   /*  VkDescriptorUpdateTemplate  */
     shared_ptr<Descriptor_update_template> 
         Descriptor_set_layout::get_a_descriptor_update_template(
             Array_value<VkDescriptorUpdateTemplateEntry> entrys_,
@@ -2882,6 +2830,47 @@ namespace laka { namespace vk {
         return descriptor_update_template_sptr;
     }
 
+    shared_ptr<Descriptor_update_template> 
+        Pipeline_layout::get_a_descriptor_update_template(
+            Array_value<S_descriptor_update_template_entry> entrys_,
+            E_pipeline_bind_point                           bind_point_,
+            uint32_t                                        set_,
+            S_allocation_callbacks*const allocator_ /*= default_allocation_cb()*/)
+    {
+        shared_ptr<Descriptor_update_template> descriptor_update_template_sptr;
+
+        auto allocator = allocator_ == default_allocation_cb() ?
+            allocation_callbacks : allocator_;
+
+        if (entrys_.size() <= 0)  return descriptor_update_template_sptr;
+
+        S_descriptor_update_template_create_info info{
+            0,
+            entrys_.size(),
+            entrys_.data(),
+            VK_DESCRIPTOR_UPDATE_TEMPLATE_TYPE_PUSH_DESCRIPTORS_KHR,
+            VK_NULL_HANDLE,
+            bind_point_,
+            handle,
+            set_
+        };
+        VkDescriptorUpdateTemplate descriptor_update_template_handle;
+        auto ret = device->api.vkCreateDescriptorUpdateTemplate(
+            device->handle, info, *allocator, &descriptor_update_template_handle);
+        show_result(ret);
+
+        if (ret < 0)
+        {
+            init_show;
+            show_wrn("创建 descriptor update template 失败");
+            return descriptor_update_template_sptr;
+        }
+        descriptor_update_template_sptr.reset(new Descriptor_update_template(
+            shared_from_this(), descriptor_update_template_handle, allocator
+        ));
+        return descriptor_update_template_sptr;
+    }
+
     Descriptor_update_template::Descriptor_update_template(
         shared_ptr<Descriptor_set_layout> descriptor_set_layout_,
         VkDescriptorUpdateTemplate handle_,
@@ -2890,6 +2879,7 @@ namespace laka { namespace vk {
         , handle(handle_)
         , allocation_callbacks(allocator_)
     {   }
+
     Descriptor_update_template::Descriptor_update_template(
         shared_ptr< Pipeline_layout> pipeline_layout_,
         VkDescriptorUpdateTemplate handle_,
@@ -2910,10 +2900,9 @@ namespace laka { namespace vk {
         );
     }
 
-#endif // VkDescriptorUpdateTemplate
+#endif  /*  VkDescriptorUpdateTemplate  */
 
-    // VkDescriptorSetLayout
-#if 1
+#if 1   /*  VkDescriptorSetLayout  */
     shared_ptr<Descriptor_set_layout> Device::get_a_descriptor_set_layout(
         F_descriptor_set_layout_create                  flags_,
         Array_value<S_descriptor_set_layout_binding>    bindings_ /*= {}*/,
@@ -2970,10 +2959,9 @@ namespace laka { namespace vk {
             device->handle, handle, *allocation_callbacks);
     }
 
-#endif // VkDescriptorSetLayout
+#endif  /*  VkDescriptorSetLayout  */
 
-    // VkQueryPool
-#if 1
+#if 1   /*  VkQueryPool  */
     shared_ptr<Query_pool> Device::get_a_query_pool(
         E_query_type                query_type,
         uint32_t                    query_count,
@@ -3043,10 +3031,9 @@ namespace laka { namespace vk {
         return ret;
     }
 
-#endif // VkQueryPool
+#endif  /*  VkQueryPool  */
 
-    // VkFrameBuffer
-#if 1
+#if 1   /*  VkFrameBuffer  */
     shared_ptr<Frame_buffer> Render_pass::get_a_frame_buffer(
         Array_value<VkImageView> attachments_,
         uint32_t width_,
@@ -3103,10 +3090,9 @@ namespace laka { namespace vk {
             render_pass->device->handle, handle, *allocation_callbacks);
     }
 
-#endif // VkFrameBuffer
+#endif  /*  VkFrameBuffer  */
 
-    // VkRenderPass
-#if 1
+#if 1   /*  VkRenderPass  */
     shared_ptr<Render_pass> Device::get_a_render_pass(
         Array_value<S_attachment_description>   attachments /*= {}*/,
         Array_value<S_subpass_description>      subpasses /*= {}*/,
@@ -3172,10 +3158,9 @@ namespace laka { namespace vk {
         return sult;
     }
 
-#endif // VkRenderPass
+#endif  /*  VkRenderPass  */
 
-    // VkPipelineLayout
-#if 1
+#if 1   /*  VkPipelineLayout  */
     shared_ptr<Pipeline_layout> Device::get_a_pipeline_layout(
         Array_value<S_push_constant_range>  push_constant_ranges_ /*= {}*/,
         S_allocation_callbacks*const allocator_ /*= default_allocation_cb()*/)
@@ -3221,10 +3206,9 @@ namespace laka { namespace vk {
         device->api.vkDestroyPipelineLayout(
             device->handle, handle, *allocation_callbacks);
     }
-#endif // VkPipelineLayout
+#endif  /*  VkPipelineLayout  */
 
-    // VkPipelineCache
-#if 1
+#if 1   /*  VkPipelineCache  */
     shared_ptr<Pipeline_cache> Device::get_a_pipeline_cache(
         size_t      initial_data_size /*= 0*/,
         const void* initial_data_ /*= nullptr*/,
@@ -3291,10 +3275,9 @@ namespace laka { namespace vk {
         return ret;
     }
 
-#endif // VkPipelineCache
+#endif  /*  VkPipelineCache  */
 
-    // VkPipeline - Compute
-#if 1
+#if 1   /*  VkPipeline - Compute  */
     // 需要注意:base_index
     shared_ptr<Compute_pipeline> Compute_pipeline::get_a_compute_pipeline(
         F_pipeline_create                   flags,
@@ -3436,10 +3419,9 @@ namespace laka { namespace vk {
             pipeline_layout->device->handle, handle, *allocation_callbacks);
     }
 
-#endif // VkPipeline - Compute
+#endif  /*  VkPipeline - Compute  */
 
-    // VkPipeline - Graphcis
-#if 1
+#if 1   /*  VkPipeline - Graphcis  */
     shared_ptr<Graphics_pipeline> Pipeline_layout::get_a_graphics_pipeline(
         F_pipeline_create                                   flag_,
         Render_pass&                                        render_pass_,
@@ -3448,7 +3430,7 @@ namespace laka { namespace vk {
         Array_value<S_pipeline_shader_stage_create_info>    stages_,
         const S_pipeline_vertex_input_state_create_info*    vertex_input_state_,
         const S_pipeline_input_assembly_state_create_info*  input_assembly_state_,
-        const S_pipeline_tessellation_domain_origin_state_create_info*    tessellation_state_,
+        const S_pipeline_tessellation_state_create_info*    tessellation_state_,
         const S_pipeline_viewport_state_create_info*        view_port_state_,
         const S_pipeline_rasterization_state_create_info*   rasterization_state_,
         const S_pipeline_multisample_state_create_info*     multi_sample_state_,
@@ -3463,27 +3445,6 @@ namespace laka { namespace vk {
         auto allocator = allocator_ == default_allocation_cb() ?
             allocation_callbacks : allocator_;
 
-        VkGraphicsPipelineCreateInfo info_{
-            VK_STRUCTURE_TYPE_GRAPHICS_PIPELINE_CREATE_INFO,
-            next_,
-            flag_,
-            static_cast<uint32_t>(stages_.size()),
-            stages_.data(),
-            vertex_input_state_,
-            input_assembly_state_,
-            tessellation_state_,
-            view_port_state_,
-            rasterization_state_,
-            multi_sample_state_,
-            depth_stencil_state_,
-            color_blend_state_,
-            dynamic_satate_,
-            handle,
-            render_pass_.handle,
-            subpass,
-            VK_NULL_HANDLE,
-            -1
-        };
         S_graphics_pipeline_create_info info{
             flag_,
             stages_.size(),
@@ -3503,6 +3464,7 @@ namespace laka { namespace vk {
             VK_NULL_HANDLE,
             -1
         };
+        info.set_pNext(next_);
 
         VkPipeline pipeline_handle;
 
@@ -3510,8 +3472,8 @@ namespace laka { namespace vk {
             device->handle,
             cache_->handle,
             1,
-            &info,
-            allocator_,
+            info,
+            *allocator,
             &pipeline_handle
         );
         show_result(ret);
@@ -3527,10 +3489,25 @@ namespace laka { namespace vk {
 
         return sptr;
     }
+    //忘了怎么写
+    Graphics_pipeline::Graphics_pipeline(
+        std::shared_ptr<Pipeline_cache> pipeline_cache_, 
+        std::shared_ptr<Pipeline_layout> pipeline_layout_, 
+        std::shared_ptr<std::shared_ptr<Shader_module>> shader_modules_, 
+        std::shared_ptr<Render_pass> render_pass_)
+        :pipeline_cache(pipeline_cache_)
+        ,pipeline_layout(pipeline_layout_)
+        ,render_pass(render_pass_)
+    {
 
+    }
 
-#endif // VkPipeline - Graphcis
+    Graphics_pipeline::~Graphics_pipeline()
+    {
 
+    }
+
+#endif  /*  VkPipeline - Graphcis  */
 
 
 }}

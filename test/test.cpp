@@ -4,39 +4,35 @@
 using namespace laka::vk;
 
 
-//class Shit {
-//public:
-//    int count;
-//};
-//class Fuck {
-//public:
-//    int count;
-//    operator const Shit *()const
-//    { 
-//        return reinterpret_cast<const Shit*>(this);
-//    }
-//    operator Shit *()
-//    {
-//        return reinterpret_cast<Shit*>(this);
-//    }
-//
-//};
-//
-//void fun(Shit*) {}
-//void fun1(const Shit*) {}
-//
-//void fun2()
-//{
-//    const Fuck f;
-//    Fuck ff;
-//
-//    fun(f);
-//    fun1(f);
-//
-//    fun(ff);
-//    fun1(ff);
-//}
 
+template <typename Handle_type__, typename Api_ptr_type__>
+class Group {
+public:
+    std::vector<Handle_type__> handles;
+    Api_ptr_type__ api;
+
+    Group(
+        Array_value<Handle_type__> handles_,
+        Api_ptr_type__ api_)
+        :api(api_)
+        , handles(handles_.value_count)
+    {
+        memcpy(
+            &handles_[0],
+            handles_.data(),
+            handles_.value_count * sizeof(Handle_type__)
+        );
+    }
+    Group& operator << (Group group_)
+    {
+        handles.insert(
+            handles.end(),
+            group_.handles.begin(), 
+            group_.handles.end()
+        );
+        return *this;
+    }
+};
 
 int main()
 {
