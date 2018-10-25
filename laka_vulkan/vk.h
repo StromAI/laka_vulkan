@@ -47,26 +47,32 @@ namespace laka {namespace vk {
     std::string version_str(uint32_t version);
 
     uint32_t get_instance_version();
-
-    template <typename Handle_type__, typename Api_ptr_type__>
-    class Group {
+    
+    template <typename Laka_vk_class__, typename Handle_type__, typename Api_ptr_type__>
+    class Group_base {
     public:
         std::vector<Handle_type__> handles;
         Api_ptr_type__ api;
 
-        Group(
-            Array_value<Handle_type__> handles_,
-            Api_ptr_type__ api_)
-            :api(api_)
-            ,handles(handles_.value_count)
+        Group_base() :api(nullptr), handles(0) {}
+        Group_base(Api_ptr_type__ api_) :api(api_), handles(0) {}
+        Group_base(Api_ptr_type__ api_, const Handle_type__ handle_) 
+            : api(api_), handles( 1, const_cast<Handle_type__>(handle_) )
+        {}
+        Group_base(
+            Api_ptr_type__ api_,
+            Array_value<const Handle_type__> handles_)
+            :handles(handles_.size())
+            , api(api_)
         {
+            handles.resize(handles_.size());
             memcpy(
-                &handles_[0], 
-                handles_.data(), 
-                handles_.value_count * sizeof(Handle_type__)
+                &handles[0],
+                handles_.data(),
+                handles_.size() * sizeof(Handle_type__)
             );
         }
-        Group& operator << (Group group_)
+        Group_base& operator << (Group_base& group_)
         {
             handles.insert(
                 handles.end(),
@@ -74,6 +80,40 @@ namespace laka {namespace vk {
                 group_.handles.end()
             );
             return *this;
+        }
+        Group_base& operator << (Laka_vk_class__& obj_)
+        {
+            handles.push_back(const_cast<Handle_type__>(obj_.handle));
+            return *this;
+        }
+        Group_base& operator << (const Handle_type__ handle_)
+        {
+            handles.push_back(const_cast<Handle_type__>(handle_));
+            return *this;
+        }
+        operator Handle_type__*()
+        {
+            if (handles.size() == 0) return nullptr;
+
+            return &handles[0];
+        }
+        operator std::vector<Handle_type__>&()
+        {
+            return handles;
+        }
+        operator Array_value<const Handle_type__>()
+        {
+            Array_value<const Handle_type__> nothing;
+            if (handles.size() == 0)
+            {
+                return nothing;
+            }
+
+            Array_value<const Handle_type__> array_obj(
+                static_cast<uint32_t>(handles.size()),
+                &handles[0]
+            );
+            return array_obj;
         }
     };
 
@@ -94,6 +134,11 @@ namespace laka {namespace vk {
     struct Pramater_choose_queue_family {
         std::vector<Queue_family_info> const& give_you_queue_family_info_;
         std::vector<User_choose_queue_info>& waiting_for_your_filled_info_;
+    };
+    struct Instance_api{
+        table_vk_api_instance(vk_fun ZK, , , YK FH);
+        table_vk_api_physical_device(vk_fun ZK, , , YK FH);
+        table_vk_api_physical_device_khr(vk_fun ZK, , , YK FH);
     };
 
     class Instance : public std::enable_shared_from_this<Instance> {
@@ -123,11 +168,7 @@ namespace laka {namespace vk {
         std::vector<Physical_device_group>  physical_device_groups;
         std::vector<Physical_device>        physical_devices;
 
-        struct {
-            table_vk_api_instance(vk_fun ZK, , , YK FH);
-            table_vk_api_physical_device(vk_fun ZK, , , YK FH);
-            table_vk_api_physical_device_khr(vk_fun ZK, , , YK FH);
-        }api;
+        Instance_api api;
     private:
         Instance(
             VkInstance              handle_,
@@ -193,6 +234,18 @@ namespace laka {namespace vk {
         VkPhysicalDevice                handle;
         Instance*                       instance;
         std::vector<Queue_family_info>  queue_familys;
+
+        class Group :public Group_base<Physical_device, VkPhysicalDevice, Instance_api*>{
+        public:
+            Group(Instance_api* api_,VkPhysicalDevice handle_)
+                :Group_base(api_, handle_)
+            {}
+        };
+
+        Group get_group()
+        {
+            Group group_temp(&(instance->api),handle);
+        }
     };
 
     class Physical_device_group {
