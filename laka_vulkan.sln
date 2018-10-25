@@ -5,7 +5,9 @@ VisualStudioVersion = 15.0.27703.2047
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "laka_vulkan", "laka_vulkan\laka_vulkan.vcxproj", "{A3E654A9-571D-41EE-B008-B1415DE14A94}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "test", "test\test.vcxproj", "{A3B08E6D-B616-4402-9E9D-0856408B57E8}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "tests", "test\test.vcxproj", "{A3B08E6D-B616-4402-9E9D-0856408B57E8}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "0.1", "0.1\0.1.vcxproj", "{C23C1D45-105E-4386-976B-04AB146A49D8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,6 +33,14 @@ Global
 		{A3B08E6D-B616-4402-9E9D-0856408B57E8}.Release|x64.Build.0 = Release|x64
 		{A3B08E6D-B616-4402-9E9D-0856408B57E8}.Release|x86.ActiveCfg = Release|Win32
 		{A3B08E6D-B616-4402-9E9D-0856408B57E8}.Release|x86.Build.0 = Release|Win32
+		{C23C1D45-105E-4386-976B-04AB146A49D8}.Debug|x64.ActiveCfg = Debug|x64
+		{C23C1D45-105E-4386-976B-04AB146A49D8}.Debug|x64.Build.0 = Debug|x64
+		{C23C1D45-105E-4386-976B-04AB146A49D8}.Debug|x86.ActiveCfg = Debug|Win32
+		{C23C1D45-105E-4386-976B-04AB146A49D8}.Debug|x86.Build.0 = Debug|Win32
+		{C23C1D45-105E-4386-976B-04AB146A49D8}.Release|x64.ActiveCfg = Release|x64
+		{C23C1D45-105E-4386-976B-04AB146A49D8}.Release|x64.Build.0 = Release|x64
+		{C23C1D45-105E-4386-976B-04AB146A49D8}.Release|x86.ActiveCfg = Release|Win32
+		{C23C1D45-105E-4386-976B-04AB146A49D8}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

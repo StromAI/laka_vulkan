@@ -852,7 +852,7 @@ for struct in struct_list:
 all_out += enum_out+flagbits_out+struct_out
 all_out += "\n}}\n"
 
-types_file = open("..\\types.h","w")
+types_file = open("..\\include\\types.h","w")
 types_file.write(all_out)
 
 
@@ -862,7 +862,7 @@ for code in cpp:
     cpp_out += code
 cpp_out+="\n}}" \
 
-cpp_file = open("..\\types.cpp","w")
+cpp_file = open("..\\src\\types.cpp","w")
 cpp_file.write(cpp_out)
 
 

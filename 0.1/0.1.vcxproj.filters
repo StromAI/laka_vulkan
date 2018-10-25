@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="主要文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="基础文件">
+      <UniqueIdentifier>{8a95ad0e-0ad8-4b52-bde2-cdd28d8aa574}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\common_files\src\common.cpp">
+      <Filter>基础文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\common_files\src\types.cpp">
+      <Filter>基础文件</Filter>
+    </ClCompile>
+    <ClCompile Include="vk.cpp">
+      <Filter>主要文件</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>主要文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\common_files\src\vk_mean.cpp">
+      <Filter>基础文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\common_files\include\classes.h">
+      <Filter>基础文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common_files\include\common.h">
+      <Filter>基础文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common_files\include\laka_vk_define.h">
+      <Filter>基础文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common_files\include\types.h">
+      <Filter>基础文件</Filter>
+    </ClInclude>
+    <ClInclude Include="vk.h">
+      <Filter>主要文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common_files\include\vk_mean.h">
+      <Filter>基础文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="..\common_files\vk.xml">
+      <Filter>资源文件</Filter>
+    </Xml>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\common_files\code_generation\vk_types.py">
+      <Filter>资源文件</Filter>
+    </None>
+  </ItemGroup>
+</Project>
