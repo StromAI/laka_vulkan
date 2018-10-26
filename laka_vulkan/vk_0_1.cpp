@@ -208,7 +208,7 @@ namespace laka { namespace vk {
         return ret;
     }
 
-#endif  /*  global  */
+#endif  /*  global  *///
 
 #if 1   /*  macro  */
 #define assert_ret(show_some_thing__) \
@@ -236,7 +236,7 @@ namespace laka { namespace vk {
         function__(handle__,&count,(type__*)(&array__[0]) );\
     }\
 
-#endif  /*  macro  */
+#endif  /*  macro  *///
 
 #if 1   /* VkInstance */
     Instance::Sptr Instance::get_new(
@@ -408,7 +408,7 @@ namespace laka { namespace vk {
         show_function_name;
         api.vkDestroyInstance(handle, *allocator_callbacks_ptr);
     }
-#endif  /*  VkInstance  */
+#endif  /*  VkInstance  *///
 
 #if 1   /*  VkPhysicalDevice  */
     shared_ptr<vector<S_layer_properties>> 
@@ -621,7 +621,7 @@ namespace laka { namespace vk {
         return sptr;
     }
 
-#endif  /*  VkPhysicalDevice  */
+#endif  /*  VkPhysicalDevice  *///
 
 #if 1   /* VkDeviceCreatorInfo  */
     shared_ptr<Device_creator> Instance::get_a_device_creator(
@@ -649,7 +649,7 @@ namespace laka { namespace vk {
         , choose_queue_family_function(choose_queue_family_)
         , allocation_callbacks(allocator_)
     {   }
-#endif  /* VkDeviceCreatorInfo  */
+#endif  /* VkDeviceCreatorInfo  *///
 
 #if 1   /*  VkDevice  */
     // 要将队列族信息存入设备对象中.
@@ -1062,7 +1062,7 @@ namespace laka { namespace vk {
         show_function_name;
         api.vkDestroyDevice(handle, *allocation_callbacks);
     }
-#endif  /*  VkDevice  */
+#endif  /*  VkDevice  *///
 
 #if 1   /*  VkSemaphore  */
     shared_ptr <Semaphore> Device::get_a_semaphore(
@@ -1106,7 +1106,7 @@ namespace laka { namespace vk {
         show_function_name;
         device->api.vkDestroySemaphore(device->handle, handle, *allocation_callbacks);
     }
-#endif  /*  VkSemaphore  */
+#endif  /*  VkSemaphore  *///
 
 #if 1   /*  VkFence  */
     shared_ptr <Fence> Device::get_a_fence(
@@ -1203,7 +1203,7 @@ namespace laka { namespace vk {
         show_result(ret);
         return ret;
     }
-#endif  /*  VkFence  */
+#endif  /*  VkFence  *///
     
 #if 1   /*  VkEvent  */
     shared_ptr <Event> Device::get_a_event(
@@ -1267,7 +1267,7 @@ namespace laka { namespace vk {
     {
         device->api.vkResetEvent(device->handle, handle);
     }
-#endif  /*  VkEvent  */
+#endif  /*  VkEvent  *///
 
 #if 1   /*  VkShaderModule  */
     shared_ptr<Shader_module> Device::get_a_shader_module(
@@ -1330,7 +1330,7 @@ namespace laka { namespace vk {
         show_function_name;
         device->api.vkDestroyShaderModule(device->handle, handle, *allocation_callbacks);
     }
-#endif  /*  VkShaderModule  */
+#endif  /*  VkShaderModule  *///
 
 #if 1   /*  VkDeviceMemory  */
     shared_ptr<Device_memory> Device::get_a_device_memory(
@@ -1434,7 +1434,7 @@ namespace laka { namespace vk {
         show_function_name;
         device->api.vkUnmapMemory(device->handle, handle);
     }
-#endif  /*  VkDeviceMemory  */
+#endif  /*  VkDeviceMemory  *///
 
 #if 1   /*  VkBufferView  */
     shared_ptr<Buffer_view> Buffer::get_a_buffer_view(
@@ -1495,7 +1495,7 @@ namespace laka { namespace vk {
             buffer->device->handle, handle, *allocation_callbacks);
     }
 
-#endif  /*  VkBufferView  */
+#endif  /*  VkBufferView  *///
     
 #if 1   /*  VkBuffer  */
     shared_ptr<Buffer> Device::get_a_buffer(
@@ -1576,7 +1576,7 @@ namespace laka { namespace vk {
         return ret;
     }
 
-#endif  /*  VkBuffer  */
+#endif  /*  VkBuffer  *///
 
 #if 1   /*  VkImageView  */
     shared_ptr<Image_view> Image::get_a_image_view(
@@ -1639,7 +1639,7 @@ namespace laka { namespace vk {
             image->device->handle, handle, *allocation_callbacks);
     }
 
-#endif  /*  VkImageView  */
+#endif  /*  VkImageView  *///
 
 #if 1   /*  VkImage  */
     shared_ptr<Image> Device::get_a_image(
@@ -1761,7 +1761,7 @@ namespace laka { namespace vk {
         return ret;
     }
 
-#endif  /*  VkImage  */
+#endif  /*  VkImage  *///
     
 #if 1   /*  VkSampler  */
     shared_ptr<Sampler> Device::get_a_sampler(
@@ -1835,7 +1835,7 @@ namespace laka { namespace vk {
         device->api.vkDestroySampler(device->handle, handle, *allocation_callbacks);
     }
 
-#endif  /*  VkSampler  */
+#endif  /*  VkSampler  *///
 
 #if 1   /*  VkSamplerYcbcrConversion  */
     shared_ptr<Sampler_Ycbcr_conversion> Device::get_a_sampler_ycbcr_conversion(
@@ -1897,7 +1897,7 @@ namespace laka { namespace vk {
     }
 
 
-#endif  /*  VkSamplerYcbcrConversion  */
+#endif  /*  VkSamplerYcbcrConversion  *///
 
 #if 1   /*  VkQueue  */
     VkResult Queue::wait_idle()
@@ -1937,7 +1937,7 @@ namespace laka { namespace vk {
         return ret;
     }
 
-#endif  /*  VkQueue  */
+#endif  /*  VkQueue  *///
 
 #if 1   /*  VkCommandBuffer  */
     shared_ptr<Command_buffer> 
@@ -2582,7 +2582,7 @@ namespace laka { namespace vk {
 
 #endif  /*  VkCommandBuffer  */
 
-#if 1   /*  VkCommandBuffer  */
+#if 1   /*  VkCommandPool  */
     shared_ptr<Command_pool> Device::get_a_command_pool(
         uint32_t                        queueFamilyIndex_,
         F_command_pool_create           flags_,
@@ -2648,7 +2648,7 @@ namespace laka { namespace vk {
         device->api.vkTrimCommandPool(device->handle, handle, flags_);
     }
 
-#endif  /*  VkCommandBuffer  */
+#endif  /*  VkCommandPool  *///
 
 #if 1   /*  VkDescriptorSet  */
 
@@ -2790,7 +2790,7 @@ namespace laka { namespace vk {
         return ret;
     }
 
-#endif  /*  VkDescriptorPool  */
+#endif  /*  VkDescriptorPool  *///
 
 #if 1   /*  VkDescriptorUpdateTemplate  */
     shared_ptr<Descriptor_update_template> 
@@ -2900,7 +2900,7 @@ namespace laka { namespace vk {
         );
     }
 
-#endif  /*  VkDescriptorUpdateTemplate  */
+#endif  /*  VkDescriptorUpdateTemplate  *///
 
 #if 1   /*  VkDescriptorSetLayout  */
     shared_ptr<Descriptor_set_layout> Device::get_a_descriptor_set_layout(
@@ -2959,7 +2959,7 @@ namespace laka { namespace vk {
             device->handle, handle, *allocation_callbacks);
     }
 
-#endif  /*  VkDescriptorSetLayout  */
+#endif  /*  VkDescriptorSetLayout  *///
 
 #if 1   /*  VkQueryPool  */
     shared_ptr<Query_pool> Device::get_a_query_pool(
@@ -3031,7 +3031,7 @@ namespace laka { namespace vk {
         return ret;
     }
 
-#endif  /*  VkQueryPool  */
+#endif  /*  VkQueryPool  *///
 
 #if 1   /*  VkFrameBuffer  */
     shared_ptr<Frame_buffer> Render_pass::get_a_frame_buffer(
@@ -3090,7 +3090,7 @@ namespace laka { namespace vk {
             render_pass->device->handle, handle, *allocation_callbacks);
     }
 
-#endif  /*  VkFrameBuffer  */
+#endif  /*  VkFrameBuffer  *///
 
 #if 1   /*  VkRenderPass  */
     shared_ptr<Render_pass> Device::get_a_render_pass(
@@ -3158,7 +3158,7 @@ namespace laka { namespace vk {
         return sult;
     }
 
-#endif  /*  VkRenderPass  */
+#endif  /*  VkRenderPass  *///
 
 #if 1   /*  VkPipelineLayout  */
     shared_ptr<Pipeline_layout> Device::get_a_pipeline_layout(
@@ -3206,7 +3206,7 @@ namespace laka { namespace vk {
         device->api.vkDestroyPipelineLayout(
             device->handle, handle, *allocation_callbacks);
     }
-#endif  /*  VkPipelineLayout  */
+#endif  /*  VkPipelineLayout  *///
 
 #if 1   /*  VkPipelineCache  */
     shared_ptr<Pipeline_cache> Device::get_a_pipeline_cache(
@@ -3275,7 +3275,7 @@ namespace laka { namespace vk {
         return ret;
     }
 
-#endif  /*  VkPipelineCache  */
+#endif  /*  VkPipelineCache  *///
 
 #if 1   /*  VkPipeline - Compute  */
     // 需要注意:base_index

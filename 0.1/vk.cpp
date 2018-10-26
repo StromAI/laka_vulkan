@@ -1967,65 +1967,6 @@ namespace laka { namespace vk {
 
 #endif  /*  VkSamplerYcbcrConversion  */
 
-#if 1   /*  VkDescriptorSetLayout  */
-    shared_ptr<Descriptor_set_layout> Device::get_a_descriptor_set_layout(
-        F_descriptor_set_layout_create                  flags_,
-        Array_value<S_descriptor_set_layout_binding>    bindings_ /*= {}*/,
-        N_descriptor_set_layout_create_info             next_ /*= {}*/,
-        S_allocation_callbacks*const allocator_ /*= default_allocation_cb()*/)
-    {
-        shared_ptr<Descriptor_set_layout> descriptor_set_layout_sptr;
-
-        auto allocator = allocator_ == default_allocation_cb() ?
-            allocation_callbacks : allocator_;
-
-        uint32_t size = bindings_.size();
-
-        S_descriptor_set_layout_create_info info{
-            flags_,
-            size,
-            bindings_.data()
-        };
-        info.set_pNext(next_);
-        /*
-        此处可以使用vkGetDescriptorSetLayoutSupport 检查是否能够创建
-        */
-
-        VkDescriptorSetLayout descriptor_set_layout_handle;
-        auto ret = api.vkCreateDescriptorSetLayout(
-            handle, info, *allocator, &descriptor_set_layout_handle);
-        show_result(ret);
-
-        if (ret < 0)
-        {
-            init_show;
-            show_wrn("创建 descriptor setlayout 失败");
-            return descriptor_set_layout_sptr;
-        }
-        descriptor_set_layout_sptr.reset(
-            new Descriptor_set_layout(shared_from_this(), descriptor_set_layout_handle, allocator));
-        return descriptor_set_layout_sptr;
-    }
-
-    Descriptor_set_layout::Descriptor_set_layout(
-        shared_ptr<Device> device_,
-        VkDescriptorSetLayout handle_,
-        S_allocation_callbacks*const allocator_)
-        : device(device_)
-        , handle(handle_)
-        , allocation_callbacks(allocator_)
-    {   }
-
-    Descriptor_set_layout::~Descriptor_set_layout()
-    {
-        init_show;
-        show_function_name;
-        device->api.vkDestroyDescriptorSetLayout(
-            device->handle, handle, *allocation_callbacks);
-    }
-
-#endif  /*  VkDescriptorSetLayout  */
-
 #if 1   /*  VkQueryPool  */
     shared_ptr<Query_pool> Device::get_a_query_pool(
         E_query_type                query_type,
@@ -2097,6 +2038,121 @@ namespace laka { namespace vk {
     }
 
 #endif  /*  VkQueryPool  */
+
+#if 1   /*  VkCommandPool  */
+    shared_ptr<Command_pool> Device::get_a_command_pool(
+        uint32_t                        queueFamilyIndex_,
+        F_command_pool_create           flags_,
+        S_allocation_callbacks*const   allocator_ /*= default_allocation_cb()*/)
+    {
+        shared_ptr<Command_pool> command_pool_sptr;
+        auto allocator = allocator_ == default_allocation_cb() ?
+            allocation_callbacks : allocator_;
+
+        S_command_pool_create_info info{
+            flags_,
+            queueFamilyIndex_
+        };
+
+        VkCommandPool command_pool_handle;
+        auto ret = api.vkCreateCommandPool(
+            handle, info, *allocator, &command_pool_handle);
+        show_result(ret);
+
+        if (ret < 0)
+        {
+            init_show;
+            show_wrn("创建Command pool 失败");
+            return command_pool_sptr;
+        }
+
+        command_pool_sptr.reset(
+            new Command_pool(shared_from_this(), command_pool_handle, allocator));
+
+        return command_pool_sptr;
+    }
+
+    Command_pool::Command_pool(
+        std::shared_ptr<Device>         device_,
+        VkCommandPool                   handle_,
+        S_allocation_callbacks*const   allocator_)
+        : device(device_)
+        , handle(handle_)
+        , allocation_callbacks(allocator_)
+    {   }
+
+    Command_pool::~Command_pool()
+    {
+        init_show;
+        show_function_name;
+        device->api.vkDestroyCommandPool(device->handle, handle, *allocation_callbacks);
+    }
+
+    VkResult Command_pool::reset(F_command_pool_reset flags_)
+    {
+        auto ret = device->api.vkResetCommandPool(device->handle, handle, flags_);
+        show_result(ret);
+        if (ret < 0)
+        {
+            init_show;
+            show_err("reset command pool 失败");
+        }
+        return ret;
+    }
+
+    void Command_pool::trim(VkCommandPoolTrimFlags flags_)
+    {
+        device->api.vkTrimCommandPool(device->handle, handle, flags_);
+    }
+
+#endif  /*  VkCommandPool  */
+
+#if 1   /*  VkCommandBuffer  */
+    shared_ptr<Command_buffer>
+        Command_pool::get_a_command_buffer(E_command_buffer_level level)
+    {
+        shared_ptr<Command_buffer> command_buffer_sptr;
+
+        S_command_buffer_allocate_info info{
+            handle,
+            level,
+            1
+        };
+
+        VkCommandBuffer command_buffer_handle;
+        auto ret = device->api.vkAllocateCommandBuffers(
+            device->handle, info, &command_buffer_handle);
+        show_result(ret);
+
+        if (ret < 0) return command_buffer_sptr;
+
+        command_buffer_sptr.reset(
+            new Command_buffer(shared_from_this(), command_buffer_handle));
+
+        return command_buffer_sptr;
+    }
+                                                                                                                                                                              
+    Command_buffer::Command_buffer(
+        Command_pool::Sptr command_pool_,
+        const VkCommandBuffer handle_)
+        :command_pool(command_pool_)
+        ,handle(handle_)
+    {}
+
+    Command_buffer::~Command_buffer()
+    {
+        init_show;
+        show_function_name;
+        command_pool->device->api.vkFreeCommandBuffers(
+            command_pool->device->handle,
+            command_pool->handle,
+            1,
+            &handle
+        );
+    }
+
+
+#endif  /*  VkCommandBuffer  */
 
 #if 1   /*  VkFrameBuffer  */
     shared_ptr<Frame_buffer> Render_pass::get_a_frame_buffer(
@@ -2225,13 +2281,355 @@ namespace laka { namespace vk {
 
 #endif  /*  VkRenderPass  */
 
+#if 1   /*  VkDescriptorPool  */
+    shared_ptr<Descriptor_pool> Device::get_a_descriptor_pool(
+        uint32_t                            maxSets_,
+        Array_value<S_descriptor_pool_size> poolSizes_,
+        F_descriptor_pool_create            flags_,
+        S_allocation_callbacks*const        allocator_ /*= default_allocation_cb()*/)
+    {
+        shared_ptr<Descriptor_pool> descriptor_pool_sptr;
+        auto allocator = allocator_ == default_allocation_cb() ?
+            allocation_callbacks : allocator_;
 
+        S_descriptor_pool_create_info info{
+            flags_,
+            maxSets_,
+            poolSizes_.size(),
+            poolSizes_.data()
+        };
+        VkDescriptorPool descriptor_pool_handle;
+        auto ret = api.vkCreateDescriptorPool(
+            handle, info, *allocator, &descriptor_pool_handle);
+        show_result(ret);
+        if (ret < 0)
+        {
+            init_show;
+            show_wrn("创建 descriptor pool 失败");
+            return descriptor_pool_sptr;
+        }
+        descriptor_pool_sptr.reset(
+            new Descriptor_pool(shared_from_this(), descriptor_pool_handle, allocator));
 
+        return descriptor_pool_sptr;
+    }
 
+    Descriptor_pool::Descriptor_pool(
+        shared_ptr<Device>              device_,
+        VkDescriptorPool                handle_,
+        S_allocation_callbacks*const    allocator_)
+        : device(device_)
+        , handle(handle_)
+        , allocation_callbacks(allocator_)
+    {   }
 
+    Descriptor_pool::~Descriptor_pool()
+    {
+        init_show;
+        show_function_name;
+        device->api.vkDestroyDescriptorPool(
+            device->handle, handle, *allocation_callbacks);
+    }
 
+    VkResult Descriptor_pool::reset(VkDescriptorPoolResetFlags flags)
+    {
+        auto ret = device->api.vkResetDescriptorPool(device->handle, handle, flags);
+        show_result(ret);
 
+        return ret;
+    }
 
+#endif  /*  VkDescriptorPool  */
+
+#if 1   /*  VkDescriptorSetLayout  */
+    shared_ptr<Descriptor_set_layout> Device::get_a_descriptor_set_layout(
+        F_descriptor_set_layout_create                  flags_,
+        Array_value<S_descriptor_set_layout_binding>    bindings_ /*= {}*/,
+        N_descriptor_set_layout_create_info             next_ /*= {}*/,
+        S_allocation_callbacks*const allocator_ /*= default_allocation_cb()*/)
+    {
+        shared_ptr<Descriptor_set_layout> descriptor_set_layout_sptr;
+
+        auto allocator = allocator_ == default_allocation_cb() ?
+            allocation_callbacks : allocator_;
+
+        uint32_t size = bindings_.size();
+
+        S_descriptor_set_layout_create_info info{
+            flags_,
+            size,
+            bindings_.data()
+        };
+        info.set_pNext(next_);
+        /*
+        此处可以使用vkGetDescriptorSetLayoutSupport 检查是否能够创建
+        */
+
+        VkDescriptorSetLayout descriptor_set_layout_handle;
+        auto ret = api.vkCreateDescriptorSetLayout(
+            handle, info, *allocator, &descriptor_set_layout_handle);
+        show_result(ret);
+
+        if (ret < 0)
+        {
+            init_show;
+            show_wrn("创建 descriptor setlayout 失败");
+            return descriptor_set_layout_sptr;
+        }
+        descriptor_set_layout_sptr.reset(
+            new Descriptor_set_layout(shared_from_this(), descriptor_set_layout_handle, allocator));
+        return descriptor_set_layout_sptr;
+    }
+
+    Descriptor_set_layout::Descriptor_set_layout(
+        shared_ptr<Device> device_,
+        VkDescriptorSetLayout handle_,
+        S_allocation_callbacks*const allocator_)
+        : device(device_)
+        , handle(handle_)
+        , allocation_callbacks(allocator_)
+    {   }
+
+    Descriptor_set_layout::~Descriptor_set_layout()
+    {
+        init_show;
+        show_function_name;
+        device->api.vkDestroyDescriptorSetLayout(
+            device->handle, handle, *allocation_callbacks);
+    }
+
+#endif  /*  VkDescriptorSetLayout  */
+
+#if 1   /*  VkDescriptorSet  */
+
+#endif  /*  VkDescriptorSet  */
+
+#if 1   /*  VkDescriptorUpdateTemplate  */
+    shared_ptr<Descriptor_update_template>
+        Descriptor_set_layout::get_a_descriptor_update_template(
+            Array_value<VkDescriptorUpdateTemplateEntry> entrys_,
+            S_allocation_callbacks*const allocator_ /*= default_allocation_cb()*/)
+    {
+        shared_ptr<Descriptor_update_template> descriptor_update_template_sptr;
+
+        auto allocator = allocator_ == default_allocation_cb() ?
+            allocation_callbacks : allocator_;
+
+        if (entrys_.size() <= 0)  return descriptor_update_template_sptr;
+        S_descriptor_update_template_create_info info{
+            //0,
+            //entrys_.size(),
+            //entrys_.data(),
+            //E_descriptor_update_template_type::e_descriptor_set,
+            //handle,
+            ///*...*/
+        };
+
+        VkDescriptorUpdateTemplate descriptor_update_template_handle;
+        auto ret = device->api.vkCreateDescriptorUpdateTemplate(
+            device->handle, info, *allocator, &descriptor_update_template_handle);
+        show_result(ret);
+
+        if (ret < 0)
+        {
+            init_show;
+            show_wrn("创建 descriptor update template 失败");
+            return descriptor_update_template_sptr;
+        }
+        descriptor_update_template_sptr.reset(new Descriptor_update_template(
+            shared_from_this(), descriptor_update_template_handle, allocator
+        ));
+        return descriptor_update_template_sptr;
+    }
+
+    shared_ptr<Descriptor_update_template>
+        Pipeline_layout::get_a_descriptor_update_template(
+            Array_value<S_descriptor_update_template_entry> entrys_,
+            E_pipeline_bind_point                           bind_point_,
+            uint32_t                                        set_,
+            S_allocation_callbacks*const allocator_ /*= default_allocation_cb()*/)
+    {
+        shared_ptr<Descriptor_update_template> descriptor_update_template_sptr;
+
+        auto allocator = allocator_ == default_allocation_cb() ?
+            allocation_callbacks : allocator_;
+
+        if (entrys_.size() <= 0)  return descriptor_update_template_sptr;
+
+        S_descriptor_update_template_create_info info{
+            0,
+            entrys_.size(),
+            entrys_.data(),
+            VK_DESCRIPTOR_UPDATE_TEMPLATE_TYPE_PUSH_DESCRIPTORS_KHR,
+            VK_NULL_HANDLE,
+            bind_point_,
+            handle,
+            set_
+        };
+        VkDescriptorUpdateTemplate descriptor_update_template_handle;
+        auto ret = device->api.vkCreateDescriptorUpdateTemplate(
+            device->handle, info, *allocator, &descriptor_update_template_handle);
+        show_result(ret);
+
+        if (ret < 0)
+        {
+            init_show;
+            show_wrn("创建 descriptor update template 失败");
+            return descriptor_update_template_sptr;
+        }
+        descriptor_update_template_sptr.reset(new Descriptor_update_template(
+            shared_from_this(), descriptor_update_template_handle, allocator
+        ));
+        return descriptor_update_template_sptr;
+    }
+
+    Descriptor_update_template::Descriptor_update_template(
+        shared_ptr<Descriptor_set_layout> descriptor_set_layout_,
+        VkDescriptorUpdateTemplate handle_,
+        S_allocation_callbacks*const allocator_)
+        : descriptor_set_layout(descriptor_set_layout_)
+        , handle(handle_)
+        , allocation_callbacks(allocator_)
+    {   }
+
+    Descriptor_update_template::Descriptor_update_template(
+        shared_ptr< Pipeline_layout> pipeline_layout_,
+        VkDescriptorUpdateTemplate handle_,
+        S_allocation_callbacks*const allocator_)
+        : pipeline_layout(pipeline_layout_)
+        , handle(handle_)
+        , allocation_callbacks(allocator_)
+    {    }
+
+    Descriptor_update_template::~Descriptor_update_template()
+    {
+        init_show;
+        show_function_name;
+        descriptor_set_layout->device->api.vkDestroyDescriptorUpdateTemplate(
+            descriptor_set_layout->device->handle,
+            handle,
+            *allocation_callbacks
+        );
+    }
+
+#endif  /*  VkDescriptorUpdateTemplate  */
+
+#if 1   /*  VkPipelineLayout  */
+    shared_ptr<Pipeline_layout> Device::get_a_pipeline_layout(
+        Array_value<S_push_constant_range>  push_constant_ranges_ /*= {}*/,
+        S_allocation_callbacks*const allocator_ /*= default_allocation_cb()*/)
+    {
+        shared_ptr<Pipeline_layout> pipeline_layout_sptr;
+
+        auto allocator = allocator_ == default_allocation_cb() ?
+            allocation_callbacks : allocator_;
+
+        S_pipeline_layout_create_info info{
+            0,
+            0,
+            NULL,
+            push_constant_ranges_.size(),
+            push_constant_ranges_.data()
+        };
+        VkPipelineLayout pipeline_layout_handle;
+        auto ret = api.vkCreatePipelineLayout(
+            handle, info, *allocator, &pipeline_layout_handle
+        );
+        show_result(ret);
+        if (ret < 0) return pipeline_layout_sptr;
+
+        pipeline_layout_sptr.reset(new Pipeline_layout(
+            shared_from_this(), pipeline_layout_handle, allocator)
+        );
+        return pipeline_layout_sptr;
+    }
+
+    Pipeline_layout::Pipeline_layout(
+        shared_ptr<Device> device_,
+        VkPipelineLayout handle_,
+        S_allocation_callbacks*const allocator_)
+        : device(device_)
+        , handle(handle_)
+        , allocation_callbacks(allocator_)
+    { }
+
+    Pipeline_layout::~Pipeline_layout()
+    {
+        init_show;
+        show_function_name;
+        device->api.vkDestroyPipelineLayout(
+            device->handle, handle, *allocation_callbacks);
+    }
+#endif  /*  VkPipelineLayout  */
+
+#if 1   /*  VkPipelineCache  */
+    shared_ptr<Pipeline_cache> Device::get_a_pipeline_cache(
+        size_t      initial_data_size /*= 0*/,
+        const void* initial_data_ /*= nullptr*/,
+        S_allocation_callbacks*const allocator_ /*= default_allocation_cb()*/)
+    {
+        shared_ptr<Pipeline_cache> pipeline_cache_sptr;
+
+        auto allocator = allocator_ == default_allocation_cb() ?
+            allocation_callbacks : allocator_;
+
+        S_pipeline_cache_create_info info{
+            0,
+            initial_data_size,
+            initial_data_
+        };
+        VkPipelineCache pipeline_cache_handle;
+        auto ret = api.vkCreatePipelineCache(
+            handle, info, *allocator, &pipeline_cache_handle);
+        show_result(ret);
+        if (ret < 0) return pipeline_cache_sptr;
+
+        pipeline_cache_sptr.reset(new Pipeline_cache(
+            shared_from_this(), pipeline_cache_handle, allocator));
+
+        pipeline_cache_sptr->device = shared_from_this();
+
+        return pipeline_cache_sptr;
+    }
+
+    Pipeline_cache::Pipeline_cache(
+        shared_ptr<Device> device_,
+        VkPipelineCache handle_,
+        S_allocation_callbacks*const allocator_)
+        : device(device_)
+        , handle(handle_)
+        , allocation_callbacks(allocator_)
+    {   }
+
+    Pipeline_cache::~Pipeline_cache()
+    {
+        init_show;
+        show_function_name;
+        device->api.vkDestroyPipelineCache(
+            device->handle, handle, *allocation_callbacks);
+    }
+
+    VkResult Pipeline_cache::get_data(size_t* pDataSize, void* pData)
+    {
+        auto ret = device->api.vkGetPipelineCacheData(
+            device->handle,
+            handle,
+            pDataSize,
+            pData
+        );
+        show_result(ret);
+
+        return ret;
+    }
+
+    VkResult Pipeline_cache::merge(Pipeline_cache&  srcCache)
+    {
+        auto ret = device->api.vkMergePipelineCaches(device->handle, handle, 1, &srcCache.handle);
+        show_result(ret);
+        return ret;
+    }
+
+#endif  /*  VkPipelineCache  */
 
 
 }}
