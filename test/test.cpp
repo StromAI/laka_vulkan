@@ -109,7 +109,6 @@ void fun2(Array_value<const VkSemaphore> handles)
 
 int main()
 {
-	init_show;
 
     Semaphore_test a(10), b(20), c(30), d(40), e(50), f(60);
     Semaphore_test a2(11), b2(21), c2(31), d2(41), e2(51), f2(61);

@@ -19,10 +19,8 @@ Permission is granted to anyone to use this software for any purpose, including 
 #include <array>
 #include <type_traits>
 
-#include "common.h"
-#include "laka_vk_define.h"
 #include "types.h"
-
+#include "laka_vk_define.h"
 
 
 namespace laka { namespace vk {
@@ -103,6 +101,24 @@ namespace laka { namespace vk {
         }
     };
 
+#define laka_vk_can_use_group(class_type__,api_ptr_name__)                                          \
+class Group;                                                                                \
+Group get_group() { Group g(&api_ptr_name__, { handle }); return g; }                       \
+class Group                                                                                 \
+    :public Group_base<                                                                     \
+    class_type__,                                                                           \
+    std::remove_cv<decltype(class_type__::handle)>::type,                                   \
+    decltype(&api_ptr_name__)>                                                              \
+{                                                                                           \
+public:                                                                                     \
+    Group() :Group_base() {}                                                                \
+    Group(decltype(&api_ptr_name__) api_) : Group_base(api_) {}                             \
+    Group(decltype(&api_ptr_name__) api_,                                                   \
+        Array_value<const std::remove_cv<decltype(class_type__::handle)>::type> handles_)   \
+        :Group_base(api_, handles_)                                                         \
+    {}                                                                                      \
+
+#define laka_vk_over_group  }
 
     struct User_choose_queue_info {
         uint32_t queue_family_index;//想要从index队列族创建队列
@@ -117,7 +133,6 @@ namespace laka { namespace vk {
         std::vector<Queue_family_info> const& give_you_queue_family_info_;
         std::vector<User_choose_queue_info>& waiting_for_your_filled_info_;
     };
-
     class Instance : public std::enable_shared_from_this<Instance> {
     public:
         using Sptr = std::shared_ptr<Instance>;
@@ -248,26 +263,6 @@ namespace laka { namespace vk {
         std::vector<Queue> queues;
     };
 
-    class Queue {
-    public:
-        VkResult wait_idle();
-        //...
-        VkResult submit(
-            Array_value<S_submit_info>& pSubmitInfo_,
-            Fence&                      fence_);
-        //...
-        VkResult bind_sparse(
-            Array_value<S_bind_sparse_info>&    pBindInfo_,
-            Fence&                              fence_);
-
-        //VkDevice device_handle;
-        VkQueue handle;
-        uint32_t index;
-        uint32_t family_index;
-
-        Device_api* api;
-    };
-
     class Device_creator : public std::enable_shared_from_this<Device_creator> {
     public:
         using Sptr = std::shared_ptr<Device_creator>;
@@ -307,6 +302,769 @@ namespace laka { namespace vk {
         S_allocation_callbacks*const   allocation_callbacks;
     };
 
+    struct Pramater_choose_memory_type {
+        uint32_t        memory_type_count;
+        S_memory_type*   memory_types;
+    };
+    struct Pramater_choose_result
+    {
+        uint32_t memory_type_index;
+    };
+    class Device : public std::enable_shared_from_this<Device> {
+    public:
+        using Sptr = std::shared_ptr<Device>;
+
+        VkResult invalidate_mapped_memory_ranges(
+            Array_value<S_mapped_memory_range> mapped_memory_ranges_);
+
+        F_peer_memory_feature get_peer_memory_feature(
+            uint32_t    heapIndex_,
+            uint32_t    localDeviceIndex_,
+            uint32_t    remoteDeviceIndex_);
+
+        VkResult wait_idle();
+        VkResult wait_for_fences(
+            Array_value<VkFence>    fences_,
+            uint64_t                timeout_,
+            bool wait_all_ = true);
+
+        ~Device();
+
+        std::shared_ptr <Semaphore> get_a_semaphore(
+            N_semaphore_create_info next_ = {},
+            S_allocation_callbacks*const allocator_ = default_allocation_cb());
+
+        std::shared_ptr <Fence> get_a_fence(
+            N_fence_create_info next_ = {},
+            S_allocation_callbacks*const allocator_ = default_allocation_cb());
+
+        std::shared_ptr <Event> get_a_event(
+            S_allocation_callbacks*const allocator_ = default_allocation_cb());
+
+        std::shared_ptr<Shader_module> get_a_shader_module(
+            const uint32_t*     code_ptr_,
+            size_t              code_size_,
+            N_shader_module_create_info next_ = {},
+            S_allocation_callbacks*const allocator_ = default_allocation_cb());
+
+        std::shared_ptr<Device_memory> get_a_device_memory(
+            VkDeviceSize memory_size_,
+            bool(*choose_memory_type_index_)(
+                Pramater_choose_memory_type& pramater_choose_,
+                Pramater_choose_result& choose_result_),
+            N_memory_allocate_info next_ = {},
+            S_allocation_callbacks*const allocation_callbacks_ = default_allocation_cb());
+
+        std::shared_ptr<Buffer> get_a_buffer(
+            VkDeviceSize        buffer_size_,
+            F_buffer_create     create_flags_,
+            F_buffer_usage        usage_flags_,
+            E_sharing_mode        sharing_mode_,
+            Array_value<uint32_t> queue_family_indices_,
+            N_buffer_create_info next_ = {},
+            S_allocation_callbacks*const allocator_ = default_allocation_cb());
+
+        std::shared_ptr<Image> get_a_image(
+            F_image_create          create_fb_,
+            E_image_type            imageType_,
+            E_format                format_,
+            S_extent_3d             extent_,
+            uint32_t                mipLevels_,
+            uint32_t                arrayLayers_,
+            F_sample_count          samples_,
+            F_image_usage           usage_fb_,
+            E_sharing_mode          sharingMode_,
+            E_image_tiling          tiling_,
+            Array_value<uint32_t>   queue_family_indices_,
+            E_image_layout          initialLayout_,
+            N_image_create_info     next_ = {},
+            S_allocation_callbacks*const allocator_ = default_allocation_cb());
+
+        std::shared_ptr<Sampler> get_a_sampler(
+            E_filter                magFilter,
+            E_filter                minFilter,
+            E_sampler_mipmap_mode   mipmapMode,
+            E_sampler_address_mode  addressModeU,
+            E_sampler_address_mode  addressModeV,
+            E_sampler_address_mode  addressModeW,
+            float                   mipLodBias,
+            VkBool32                anisotropyEnable,
+            float                   maxAnisotropy,
+            VkBool32                compareEnable,
+            E_compare_op            compareOp,
+            float                   minLod,
+            float                   maxLod,
+            E_border_color          borderColor,
+            VkBool32                unnormalizedCoordinates,
+            N_sampler_create_info   next_ = {},
+            S_allocation_callbacks*const allocator_ = default_allocation_cb());
+
+        std::shared_ptr<Sampler_Ycbcr_conversion> get_a_sampler_ycbcr_conversion(
+            E_format                            format_,
+            E_sampler_ycbcr_model_conversion    ycbcrModel,
+            E_sampler_ycbcr_range               ycbcrRange,
+            S_component_mapping             components,
+            E_chroma_location               xChromaOffset,
+            E_chroma_location               yChromaOffset,
+            E_filter                        chromaFilter,
+            VkBool32                        forceExplicitReconstruction,
+            N_sampler_ycbcr_conversion_create_info next_ = {},
+            S_allocation_callbacks*const    allocator_ = default_allocation_cb());
+
+        std::shared_ptr<Command_pool> get_a_command_pool(
+            uint32_t                        queueFamilyIndex_,
+            F_command_pool_create           flags_,
+            S_allocation_callbacks*const    allocator_ = default_allocation_cb());
+
+        std::shared_ptr<Descriptor_pool> get_a_descriptor_pool(
+            uint32_t                            maxSets_,
+            Array_value<S_descriptor_pool_size> poolSizes_,
+            F_descriptor_pool_create            flags_,
+            S_allocation_callbacks*const        allocator_ = default_allocation_cb());
+
+        std::shared_ptr<Query_pool> get_a_query_pool(
+            E_query_type                query_type,
+            uint32_t                    query_count,
+            F_query_pipeline_statistic  queue_pipeline_statistic_flags_,
+            S_allocation_callbacks*const allocator_ = default_allocation_cb());
+
+        std::shared_ptr<Descriptor_set_layout> get_a_descriptor_set_layout(
+            F_descriptor_set_layout_create                  flags_,//手册中有但vk.xml中没有
+            Array_value<S_descriptor_set_layout_binding>    bindings_ = {},
+            N_descriptor_set_layout_create_info             next_ = {},
+            S_allocation_callbacks*const allocator_ = default_allocation_cb());
+
+        std::shared_ptr<Render_pass> get_a_render_pass(
+            Array_value<S_attachment_description>   attachments = {},
+            Array_value<S_subpass_description>      subpasses = {},
+            Array_value<S_subpass_dependency>       dependencies = {},
+            N_render_pass_create_info               next_ = {},
+            S_allocation_callbacks*const allocator_ = default_allocation_cb());
+
+        std::shared_ptr<Pipeline_layout> get_a_pipeline_layout(
+            Array_value<S_push_constant_range>  push_constant_ranges_ = {},
+            S_allocation_callbacks*const allocator_ = default_allocation_cb());
+
+        std::shared_ptr<Pipeline_cache> get_a_pipeline_cache(
+            size_t      initial_data_size = 0,
+            const void* initial_data_ = nullptr,
+            S_allocation_callbacks*const allocator_ = default_allocation_cb());
 
 
+        const VkDevice handle;
+        S_allocation_callbacks*const allocation_callbacks;
+        //std::vector<Queue> queues;
+        std::vector<Queue_family> queue_familys;
+
+        std::shared_ptr<Instance> instance;
+        std::shared_ptr<Device_creator> device_creator;
+        std::vector<Physical_device*> physical_devices;
+
+        struct Api{
+            table_vk_api_device(vk_fun ZK, , , YK FH);
+            table_vk_api_cmd(vk_fun ZK, , , YK FH);
+        }api;
+    private:
+        friend class Device_creator;
+        friend class Instance;
+        Device(
+            std::shared_ptr<Instance>               instance_,
+            std::shared_ptr<Device_creator>         device_creator_,
+            std::vector<Physical_device*>&          physical_devices_,
+            std::vector<User_choose_queue_info>&    queue_infos_,
+            std::vector<S_queue_family_properties>&   qf_properties_,
+            VkDevice                                handle_,
+            S_allocation_callbacks*const allocation_callbacks_);
+
+        PFN_vkVoidFunction return_api(const char* api_name_);
+    };
+
+    class Queue {
+    public:
+        VkResult wait_idle();
+        //...
+        VkResult submit(
+            Array_value<S_submit_info>& pSubmitInfo_,
+            Fence&                      fence_);
+        //...
+        VkResult bind_sparse(
+            Array_value<S_bind_sparse_info>&    pBindInfo_,
+            Fence&                              fence_);
+
+        //VkDevice device_handle;
+        VkQueue handle;
+        uint32_t index;
+        uint32_t family_index;
+
+        Device::Api* api;
+
+        class Group 
+            :public Group_base<
+            Queue, 
+            std::remove_cv<decltype(Queue::handle)>::type,
+            decltype(Queue::api)> 
+        {
+        public:
+            Group() :Group_base() {}
+            Group(decltype(api) api_) : Group_base(api_) {}
+            Group(decltype(api) api_,
+                Array_value<const std::remove_cv<decltype(Queue::handle)>::type> handles_)
+                :Group_base(api_,handles_)
+            {}
+        }; 
+        Group get_group() { Group g(api, {handle}); return g; }
+    };
+
+    class Surface {
+        //顺序上放最后边做 暂时不给直接的画面了.
+    };
+
+    class Semaphore :public std::enable_shared_from_this<Semaphore> {
+    public:
+        using Sptr = std::shared_ptr<Semaphore>;
+
+        ~Semaphore();
+
+        const VkSemaphore handle;
+        std::shared_ptr<Device> device;
+
+        laka_vk_can_use_group(Semaphore, device->api)
+        laka_vk_over_group;
+    private:
+        friend class Device;
+        Semaphore(
+            std::shared_ptr<Device>         device_,
+            VkSemaphore                     handle_,
+            S_allocation_callbacks*const   allocator_);
+
+        S_allocation_callbacks*const   allocation_callbacks;
+    };
+
+    class Fence :public std::enable_shared_from_this<Fence> {
+    public:
+        using Sptr = std::shared_ptr<Fence>;
+
+        VkResult reset();
+        VkResult reset(Array_value<VkFence> fences_);
+        VkResult get_status();
+        VkResult wait(uint64_t timeout_);
+        VkResult wait(bool wait_all_, uint64_t timeout_, Array_value<VkFence> fences_);
+
+        ~Fence();
+
+        const VkFence handle;
+        std::shared_ptr<Device> device;
+
+        laka_vk_can_use_group(Fence, device->api)
+        laka_vk_over_group;
+    private:
+        friend class Device;
+        Fence(
+            std::shared_ptr<Device>         device_,
+            VkFence                         handle_,
+            S_allocation_callbacks*const   allocator_);
+
+        S_allocation_callbacks*const allocation_callbacks;
+    };
+
+    class Event :public std::enable_shared_from_this<Event> {
+    public:
+        using Sptr = std::shared_ptr<Event>;
+
+        VkResult set();
+        VkResult get_event_status();
+        void reset();
+
+        ~Event();
+
+        const VkEvent handle;
+        std::shared_ptr<Device> device;
+
+        laka_vk_can_use_group(Event, device->api)
+        laka_vk_over_group;
+    private:
+        friend class Device;
+        Event(
+            std::shared_ptr<Device>         device_,
+            VkEvent                         handle_,
+            S_allocation_callbacks*const   allocator_);
+
+        S_allocation_callbacks*const allocation_callbacks;
+    };
+
+    class Shader_module :public std::enable_shared_from_this<Shader_module> {
+    public:
+        using Sptr = std::shared_ptr<Shader_module>;
+        ~Shader_module();
+
+        const VkShaderModule handle;
+        std::shared_ptr<Device> device;
+    private:
+        friend class Device;
+        Shader_module(
+            std::shared_ptr<Device>         device_,
+            VkShaderModule                  handle_,
+            S_allocation_callbacks*const   allocator_);
+
+        S_allocation_callbacks*const allocation_callbacks;
+    };
+
+    class Device_memory : public std::enable_shared_from_this<Device_memory> {
+    public:
+        using Sptr = std::shared_ptr<Device_memory>;
+
+        VkDeviceSize get_commitment();
+
+        void* map_memory(
+            VkDeviceSize        offset_,
+            VkDeviceSize        size_,
+            VkMemoryMapFlags    flags_ = 0);//is a bitmask type for setting a mask, but is currently reserved for future use.
+
+        void unmap_memory();
+
+        ~Device_memory();
+
+        const VkDeviceMemory handle;
+        std::shared_ptr<Device> device;
+    private:
+        friend class Device;
+        Device_memory(
+            std::shared_ptr<Device>         device_,
+            VkDeviceMemory                  handle_,
+            S_allocation_callbacks*const   allocation_callbacks_);
+
+        S_allocation_callbacks*const allocation_callbacks;
+    };
+
+    class Buffer :public std::enable_shared_from_this<Buffer> {
+    public:
+        using Sptr = std::shared_ptr<Buffer>;
+
+        S_memory_requirements get_memory_requirements();
+
+        VkResult bind(
+            std::shared_ptr<Device_memory> device_memroy_,
+            VkDeviceSize memory_offset_);//绑定后是否会影响生命周期? 待查待提问.
+
+        ~Buffer();
+
+        std::shared_ptr<Buffer_view> get_a_buffer_view(
+            E_format        format_,
+            VkDeviceSize    offset_,
+            VkDeviceSize    range_,
+            S_allocation_callbacks*const allocator_ = default_allocation_cb());
+
+        const VkBuffer handle;
+        std::shared_ptr<Device> device;
+    private:
+        friend class Device;
+        Buffer(
+            std::shared_ptr<Device>         device_,
+            VkBuffer                        handle_,
+            S_allocation_callbacks*const   allocator_);
+
+        S_allocation_callbacks*const allocation_callbacks;
+    };
+
+    class Buffer_view : public std::enable_shared_from_this<Buffer_view> {
+    public:
+        using Sptr = std::shared_ptr<Buffer_view>;
+
+        ~Buffer_view();
+
+        const VkBufferView handle;
+        std::shared_ptr<Buffer> buffer;
+    private:
+        friend class Buffer;
+        Buffer_view(
+            std::shared_ptr<Buffer>         buffer_,
+            VkBufferView                    handle_,
+            S_allocation_callbacks*const   allocator_);
+
+        S_allocation_callbacks*const allocation_callbacks;
+    };
+
+    class Image : public std::enable_shared_from_this<Image> {
+    public:
+        using Sptr = std::shared_ptr<Image>;
+
+        S_memory_requirements get_image_memory_requirements();
+
+        S_subresource_layout get_subresource_layout(const S_image_subresource*);
+        //...
+        std::shared_ptr<std::vector<S_sparse_image_memory_requirements>>
+            get_sparse_memory_requirements();
+
+        VkResult bind(
+            std::shared_ptr<Device_memory> device_memory_,
+            VkDeviceSize memory_offset_);
+
+        ~Image();
+
+        std::shared_ptr<Image_view> get_a_image_view(
+            E_image_view_type                view_type_,
+            E_format                    format_,
+            S_component_mapping         components_,
+            S_image_subresource_range   subresourceRange_,
+            N_image_view_create_info         next_ = {},
+            S_allocation_callbacks*const allocator_ = default_allocation_cb());
+
+        const VkImage handle;
+        std::shared_ptr<Device> device;
+        E_image_layout layout;
+    private:
+        friend class Device;
+        Image(
+            std::shared_ptr<Device> device_,
+            VkImage handle_,
+            E_image_layout layout_,
+            S_allocation_callbacks*const allocator_);
+
+        S_allocation_callbacks*const allocation_callbacks;
+    };
+
+    class Image_view : public std::enable_shared_from_this<Image_view> {
+    public:
+        using Sptr = std::shared_ptr<Image_view>;
+
+        ~Image_view();
+
+        const VkImageView handle;
+        std::shared_ptr<Image> image;
+    private:
+        friend class Image;
+        Image_view(
+            std::shared_ptr<Image>          image_,
+            VkImageView                     handle_,
+            S_allocation_callbacks*const   allocator_);
+
+        S_allocation_callbacks*const allocation_callbacks;
+    };
+
+    class Sampler : public std::enable_shared_from_this<Sampler> {
+    public:
+        using Sptr = std::shared_ptr<Sampler>;
+
+        ~Sampler();
+
+        const VkSampler handle;
+        std::shared_ptr<Device> device;
+    private:
+        friend class Device;
+        Sampler(
+            std::shared_ptr<Device>         device_,
+            VkSampler                       handle_,
+            S_allocation_callbacks*const   allocator_);
+
+        S_allocation_callbacks*const allocation_callbacks;
+    };
+
+    class Sampler_Ycbcr_conversion : public std::enable_shared_from_this<Sampler_Ycbcr_conversion> {
+    public:
+        using Sptr = std::shared_ptr<Sampler_Ycbcr_conversion>;
+
+        ~Sampler_Ycbcr_conversion();
+
+        const VkSamplerYcbcrConversion handle;
+        std::shared_ptr<Device> device;
+    private:
+        friend class Device;
+        Sampler_Ycbcr_conversion(
+            std::shared_ptr<Device>         device_,
+            VkSamplerYcbcrConversion        handle_,
+            S_allocation_callbacks*const   allocator_);
+
+        S_allocation_callbacks*const allocation_callbacks;
+    };
+
+    class Query_pool : public std::enable_shared_from_this<Query_pool> {
+    public:
+        using Sptr = std::shared_ptr<Query_pool>;
+
+        VkResult get_results(
+            uint32_t        firstQuery_,
+            uint32_t        queryCount_,
+            size_t          dataSize_,
+            void*           pData_,
+            VkDeviceSize    stride_,
+            F_query_result  flags_);
+
+        ~Query_pool();
+
+        const VkQueryPool handle;
+        std::shared_ptr<Device> device;
+    private:
+        friend class Device;
+        Query_pool(
+            std::shared_ptr<Device>         device_,
+            VkQueryPool                     handle_,
+            S_allocation_callbacks*const   allocator_);
+
+        S_allocation_callbacks*const allocation_callbacks;
+    };
+
+    class Frame_buffer : public std::enable_shared_from_this<Frame_buffer> {
+    public:
+        using Sptr = std::shared_ptr<Frame_buffer>;
+
+        ~Frame_buffer();
+
+        const VkFramebuffer handle;
+        std::shared_ptr<Render_pass> render_pass;
+    private:
+        friend class Render_pass;
+        Frame_buffer(
+            std::shared_ptr<Render_pass>    render_pass_,
+            VkFramebuffer                   handle_,
+            S_allocation_callbacks*const   allocator_);
+
+        S_allocation_callbacks*const allocation_callbacks;
+    };
+
+    class Render_pass :public std::enable_shared_from_this<Render_pass> {
+    public:
+        using Sptr = std::shared_ptr<Render_pass>;
+
+        S_extent_2d get_area_granularity();
+
+        ~Render_pass();
+
+        std::shared_ptr<Frame_buffer> get_a_frame_buffer(
+            Array_value<VkImageView> attachments_,
+            uint32_t width_,
+            uint32_t height_,
+            uint32_t layers_,
+            S_allocation_callbacks*const allocator_ = default_allocation_cb());
+
+        const VkRenderPass handle;
+        std::shared_ptr<Device> device;
+    private:
+        friend class Device;
+        Render_pass(
+            std::shared_ptr<Device>         device_,
+            VkRenderPass                    handle_,
+            S_allocation_callbacks*const   allocator_);
+
+        S_allocation_callbacks*const allocation_callbacks;
+    };
+
+    class Command_pool : public std::enable_shared_from_this<Command_pool> {
+    public:
+        using Sptr = std::shared_ptr<Command_pool>;
+        /*
+            vkAllocateCommandBuffers可用于创建多个命令缓冲区。
+            如果任何这些命令缓冲区的创建失败，
+            则实现必须从此命令中销毁所有成功创建的命令缓冲区对象，
+            将pCommandBuffers阵列的所有条目设置为NULL并返回错误。
+        */
+
+        VkResult reset(F_command_pool_reset flags_);
+
+        void trim(VkCommandPoolTrimFlags flags_ = 0);//is a bitmask type for setting a mask, but is currently reserved for future use.
+
+        ~Command_pool();
+
+        std::shared_ptr<Command_buffer> get_a_command_buffer(E_command_buffer_level  level);
+
+        const VkCommandPool handle;
+        std::shared_ptr<Device> device;
+    private:
+        friend class Device;
+        Command_pool(
+            std::shared_ptr<Device>         device_,
+            VkCommandPool                   handle_,
+            S_allocation_callbacks*const   allocator_);
+
+        S_allocation_callbacks*const allocation_callbacks;
+    };
+
+
+
+    class Descriptor_pool : public std::enable_shared_from_this<Descriptor_pool> {
+    public:
+        using Sptr = std::shared_ptr<Descriptor_pool>;
+
+        VkResult reset(VkDescriptorPoolResetFlags flags = 0);//is a bitmask type for setting a mask, but is currently reserved for future use.
+
+        ~Descriptor_pool();
+
+        std::shared_ptr<Descriptor_set> get_a_descriptor_set(
+            VkDescriptorSetLayout set_layout,
+            N_descriptor_set_allocate_info next_ = {});
+
+        const VkDescriptorPool handle;
+        std::shared_ptr<Device> device;
+    private:
+        friend class Device;
+        Descriptor_pool(
+            std::shared_ptr<Device>         device_,
+            VkDescriptorPool                handle_,
+            S_allocation_callbacks*const   allocator_);
+
+        S_allocation_callbacks*const allocation_callbacks;
+    };
+
+    class Descriptor_set_layout : public std::enable_shared_from_this<Descriptor_set_layout> {
+    public:
+        using Sptr = std::shared_ptr<Descriptor_set_layout>;
+
+        ~Descriptor_set_layout();
+
+        std::shared_ptr<Descriptor_update_template> get_a_descriptor_update_template(
+            Array_value<VkDescriptorUpdateTemplateEntry> entrys_,
+            S_allocation_callbacks*const allocator_ = default_allocation_cb());
+
+        const VkDescriptorSetLayout handle;
+        std::shared_ptr<Device> device;
+    private:
+        friend class Device;
+        Descriptor_set_layout(
+            std::shared_ptr<Device>         device_,
+            VkDescriptorSetLayout           handle_,
+            S_allocation_callbacks*const   allocator_);
+
+        S_allocation_callbacks*const allocation_callbacks;
+    };
+
+
+
+    class Pipeline_layout : public std::enable_shared_from_this<Pipeline_layout> {
+    public:
+        using Sptr = std::shared_ptr<Pipeline_layout>;
+
+        ~Pipeline_layout();
+
+        std::shared_ptr<Descriptor_update_template> get_a_descriptor_update_template(
+            Array_value<S_descriptor_update_template_entry> entrys_,
+            E_pipeline_bind_point                           bind_point_,
+            uint32_t                                        set_,
+            S_allocation_callbacks*const allocator_ = default_allocation_cb());
+
+        std::shared_ptr<Compute_pipeline> get_a_compute_pipeline(
+            F_pipeline_create                   flags_,
+            std::shared_ptr<Pipeline_cache>     pipeline_cache_,
+            std::shared_ptr<Shader_module>      module_,
+            const char*                         pName_,//shader 入口点名称
+            F_shader_stage                      stage_flags_,
+            const S_specialization_info*        pSpecializationInfo_ = nullptr,
+            S_allocation_callbacks*const        allocator_ = default_allocation_cb());
+
+        std::shared_ptr<Graphics_pipeline> get_a_graphics_pipeline(
+            F_pipeline_create                                   flag_,
+            Render_pass&                                        render_pass_,
+            uint32_t                                            subpass,
+            Pipeline_cache*                                     cache_,
+            Array_value<S_pipeline_shader_stage_create_info>    stages_,
+            const S_pipeline_vertex_input_state_create_info*    vertex_input_state_,
+            const S_pipeline_input_assembly_state_create_info*  input_assembly_state_,
+            const S_pipeline_tessellation_state_create_info*    tessellation_state_,
+            const S_pipeline_viewport_state_create_info*        view_port_state_,
+            const S_pipeline_rasterization_state_create_info*   rasterization_state_,
+            const S_pipeline_multisample_state_create_info*     multi_sample_state_,
+            const S_pipeline_depth_stencil_state_create_info*   depth_stencil_state_,
+            const S_pipeline_color_blend_state_create_info*     color_blend_state_,
+            const S_pipeline_dynamic_state_create_info*         dynamic_satate_,
+            N_graphics_pipeline_create_info                     next_ = {},
+            S_allocation_callbacks*const allocator_ = default_allocation_cb());
+
+        const VkPipelineLayout handle;
+        std::shared_ptr<Device> device;
+    private:
+        friend class Device;
+        friend class Descriptor_set_layout;
+        Pipeline_layout(
+            std::shared_ptr<Device>         device_,
+            VkPipelineLayout                handle_,
+            S_allocation_callbacks*const   allocator_);
+
+        S_allocation_callbacks*const allocation_callbacks;
+    };
+
+    class Pipeline_cache : public std::enable_shared_from_this<Pipeline_cache> {
+    public:
+        using Sptr = std::shared_ptr<Pipeline_cache>;
+
+        //std::shared_ptr<std::vector<char>> get_data();
+        //对pData这种,大概得用vector<uchar>
+        VkResult get_data(size_t* pDataSize, void* pData);
+        VkResult merge(Pipeline_cache&  srcCache);
+
+        ~Pipeline_cache();
+
+        const VkPipelineCache handle;
+        std::shared_ptr<Device> device;
+    private:
+        friend  class Device;
+        Pipeline_cache(
+            std::shared_ptr<Device>         device_,
+            VkPipelineCache                 handle_,
+            S_allocation_callbacks*const   allocator_);
+
+        S_allocation_callbacks*const allocation_callbacks;
+    };
+
+    //还要做批量创建pipeline
+    class Compute_pipeline : public std::enable_shared_from_this<Compute_pipeline> {
+    public:
+        using Sptr = std::shared_ptr<Compute_pipeline>;
+
+        ~Compute_pipeline();
+
+        std::shared_ptr<Compute_pipeline> get_a_compute_pipeline(
+            F_pipeline_create                   flags,
+            std::shared_ptr<Pipeline_cache>     pipeline_cache_,
+            std::shared_ptr<Shader_module>      module_,
+            const char*                         rukou_name_,
+            F_shader_stage                      stage_flags,
+            std::shared_ptr< Pipeline_layout>   pipeline_layout_ = nullptr,
+            const S_specialization_info*        pSpecializationInfo = nullptr,
+            S_allocation_callbacks*const       allocator_ = default_allocation_cb());
+
+        const VkPipeline  handle;
+
+        std::shared_ptr<Pipeline_layout>    pipeline_layout;
+        std::shared_ptr<Pipeline_cache>     pipeline_cache;
+        std::shared_ptr<Shader_module>      shader_module;
+        std::shared_ptr<Compute_pipeline>   base_pipeline;
+    private:
+        friend class Pipeline_layout;
+        Compute_pipeline(
+            std::shared_ptr<Pipeline_layout>    pipeline_layout_,
+            std::shared_ptr<Pipeline_cache>     pipeline_cache,
+            std::shared_ptr<Shader_module>      shader_module_,
+            VkPipeline                          handle_,
+            S_allocation_callbacks*const        allocation_callbacks_,
+            int32_t                             base_index_ = -1,
+            std::shared_ptr<Compute_pipeline>   compute_pipeline_ = nullptr);
+
+        S_allocation_callbacks*const allocation_callbacks;
+        int32_t index;
+    };
+
+    class Graphics_pipeline : public std::enable_shared_from_this<Graphics_pipeline> {
+    public:
+        using Sptr = std::shared_ptr<Graphics_pipeline>;
+        ~Graphics_pipeline();
+
+        const VkPipeline handle;
+
+        std::shared_ptr<Pipeline_cache>                 pipeline_cache;
+        std::shared_ptr<Pipeline_layout>                pipeline_layout;
+        std::shared_ptr<Render_pass>                    render_pass;
+        std::vector<std::shared_ptr<Shader_module>>     shader_modules;
+    private:
+        friend class Pipeline_layout;
+        Graphics_pipeline(
+            std::shared_ptr<Pipeline_cache>     pipeline_cache_,
+            std::shared_ptr<Pipeline_layout>    pipeline_layout_,
+            std::shared_ptr<std::shared_ptr<Shader_module>> shader_modules_,
+            std::shared_ptr<Render_pass>        render_pass_);
+
+        S_allocation_callbacks*const allocation_callbacks;
+    };
+
+
+
+#undef laka_vk_can_use_group
+#undef laka_vk_over_group
 }}

@@ -343,7 +343,7 @@ for enum in flag_bits_list:
         "private:\n" + \
         fb_obj.my_name + "(int flag_):flag(flag_){};\n" + \
         "public:\n" \
-        "int flag;\n" \
+        "uint32_t flag;\n" \
         "enum B{\n"
 
     fb_obj.members = list()

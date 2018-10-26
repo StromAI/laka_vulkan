@@ -1757,7 +1757,7 @@ class F_cull_mode {
 private:
 F_cull_mode(int flag_):flag(flag_){};
 public:
-int flag;
+uint32_t flag;
 enum B{
 	b_none = VK_CULL_MODE_NONE,
 	b_front = VK_CULL_MODE_FRONT_BIT,
@@ -1806,7 +1806,7 @@ class F_queue {
 private:
 F_queue(int flag_):flag(flag_){};
 public:
-int flag;
+uint32_t flag;
 enum B{
 /*Queue supports graphics operations*/
 	b_graphics = VK_QUEUE_GRAPHICS_BIT,
@@ -1866,7 +1866,7 @@ class F_memory_property {
 private:
 F_memory_property(int flag_):flag(flag_){};
 public:
-int flag;
+uint32_t flag;
 enum B{
 /*If otherwise stated, then allocate memory on device*/
 	b_device_local = VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT,
@@ -1923,7 +1923,7 @@ class F_memory_heap {
 private:
 F_memory_heap(int flag_):flag(flag_){};
 public:
-int flag;
+uint32_t flag;
 enum B{
 /*If set, heap represents device memory*/
 	b_device_local = VK_MEMORY_HEAP_DEVICE_LOCAL_BIT,
@@ -1964,7 +1964,7 @@ class F_access {
 private:
 F_access(int flag_):flag(flag_){};
 public:
-int flag;
+uint32_t flag;
 enum B{
 /*Controls coherency of indirect command reads*/
 	b_indirect_command_read = VK_ACCESS_INDIRECT_COMMAND_READ_BIT,
@@ -2069,7 +2069,7 @@ class F_buffer_usage {
 private:
 F_buffer_usage(int flag_):flag(flag_){};
 public:
-int flag;
+uint32_t flag;
 enum B{
 /*Can be used as a source of transfer operations*/
 	b_transfer_src = VK_BUFFER_USAGE_TRANSFER_SRC_BIT,
@@ -2142,7 +2142,7 @@ class F_buffer_create {
 private:
 F_buffer_create(int flag_):flag(flag_){};
 public:
-int flag;
+uint32_t flag;
 enum B{
 /*Buffer should support sparse backing*/
 	b_sparse_binding = VK_BUFFER_CREATE_SPARSE_BINDING_BIT,
@@ -2191,7 +2191,7 @@ class F_shader_stage {
 private:
 F_shader_stage(int flag_):flag(flag_){};
 public:
-int flag;
+uint32_t flag;
 enum B{
 	b_vertex = VK_SHADER_STAGE_VERTEX_BIT,
 	b_tessellation_control = VK_SHADER_STAGE_TESSELLATION_CONTROL_BIT,
@@ -2252,7 +2252,7 @@ class F_image_usage {
 private:
 F_image_usage(int flag_):flag(flag_){};
 public:
-int flag;
+uint32_t flag;
 enum B{
 /*Can be used as a source of transfer operations*/
 	b_transfer_src = VK_IMAGE_USAGE_TRANSFER_SRC_BIT,
@@ -2321,7 +2321,7 @@ class F_image_create {
 private:
 F_image_create(int flag_):flag(flag_){};
 public:
-int flag;
+uint32_t flag;
 enum B{
 /*Image should support sparse backing*/
 	b_sparse_binding = VK_IMAGE_CREATE_SPARSE_BINDING_BIT,
@@ -2378,7 +2378,7 @@ class F_pipeline_create {
 private:
 F_pipeline_create(int flag_):flag(flag_){};
 public:
-int flag;
+uint32_t flag;
 enum B{
 	b_disable_optimization = VK_PIPELINE_CREATE_DISABLE_OPTIMIZATION_BIT,
 	b_allow_derivatives = VK_PIPELINE_CREATE_ALLOW_DERIVATIVES_BIT,
@@ -2424,7 +2424,7 @@ class F_color_component {
 private:
 F_color_component(int flag_):flag(flag_){};
 public:
-int flag;
+uint32_t flag;
 enum B{
 	b_r = VK_COLOR_COMPONENT_R_BIT,
 	b_g = VK_COLOR_COMPONENT_G_BIT,
@@ -2473,7 +2473,7 @@ class F_fence_create {
 private:
 F_fence_create(int flag_):flag(flag_){};
 public:
-int flag;
+uint32_t flag;
 enum B{
 	b_signaled = VK_FENCE_CREATE_SIGNALED_BIT,
 };
@@ -2513,7 +2513,7 @@ class F_format_feature {
 private:
 F_format_feature(int flag_):flag(flag_){};
 public:
-int flag;
+uint32_t flag;
 enum B{
 /*Format can be used for sampled images (SAMPLED_IMAGE and COMBINED_IMAGE_SAMPLER descriptor types)*/
 	b_sampled_image = VK_FORMAT_FEATURE_SAMPLED_IMAGE_BIT,
@@ -2602,7 +2602,7 @@ class F_query_control {
 private:
 F_query_control(int flag_):flag(flag_){};
 public:
-int flag;
+uint32_t flag;
 enum B{
 /*Require precise results to be collected by the query*/
 	b_precise = VK_QUERY_CONTROL_PRECISE_BIT,
@@ -2643,7 +2643,7 @@ class F_query_result {
 private:
 F_query_result(int flag_):flag(flag_){};
 public:
-int flag;
+uint32_t flag;
 enum B{
 /*Results of the queries are written to the destination buffer as 64-bit values*/
 	b_64 = VK_QUERY_RESULT_64_BIT,
@@ -2696,7 +2696,7 @@ class F_command_buffer_usage {
 private:
 F_command_buffer_usage(int flag_):flag(flag_){};
 public:
-int flag;
+uint32_t flag;
 enum B{
 	b_one_time_submit = VK_COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT,
 	b_render_pass_continue = VK_COMMAND_BUFFER_USAGE_RENDER_PASS_CONTINUE_BIT,
@@ -2743,7 +2743,7 @@ class F_query_pipeline_statistic {
 private:
 F_query_pipeline_statistic(int flag_):flag(flag_){};
 public:
-int flag;
+uint32_t flag;
 enum B{
 /*Optional*/
 	b_input_assembly_vertices = VK_QUERY_PIPELINE_STATISTIC_INPUT_ASSEMBLY_VERTICES_BIT,
@@ -2824,7 +2824,7 @@ class F_image_aspect {
 private:
 F_image_aspect(int flag_):flag(flag_){};
 public:
-int flag;
+uint32_t flag;
 enum B{
 	b_color = VK_IMAGE_ASPECT_COLOR_BIT,
 	b_depth = VK_IMAGE_ASPECT_DEPTH_BIT,
@@ -2873,7 +2873,7 @@ class F_sparse_image_format {
 private:
 F_sparse_image_format(int flag_):flag(flag_){};
 public:
-int flag;
+uint32_t flag;
 enum B{
 /*Image uses a single mip tail region for all array layers*/
 	b_single_miptail = VK_SPARSE_IMAGE_FORMAT_SINGLE_MIPTAIL_BIT,
@@ -2922,7 +2922,7 @@ class F_sparse_memory_bind {
 private:
 F_sparse_memory_bind(int flag_):flag(flag_){};
 public:
-int flag;
+uint32_t flag;
 enum B{
 /*Operation binds resource metadata to memory*/
 	b_metadata = VK_SPARSE_MEMORY_BIND_METADATA_BIT,
@@ -2963,7 +2963,7 @@ class F_pipeline_stage {
 private:
 F_pipeline_stage(int flag_):flag(flag_){};
 public:
-int flag;
+uint32_t flag;
 enum B{
 /*Before subsequent commands are processed*/
 	b_top_of_pipe = VK_PIPELINE_STAGE_TOP_OF_PIPE_BIT,
@@ -3068,7 +3068,7 @@ class F_command_pool_create {
 private:
 F_command_pool_create(int flag_):flag(flag_){};
 public:
-int flag;
+uint32_t flag;
 enum B{
 /*Command buffers have a short lifetime*/
 	b_transient = VK_COMMAND_POOL_CREATE_TRANSIENT_BIT,
@@ -3113,7 +3113,7 @@ class F_command_pool_reset {
 private:
 F_command_pool_reset(int flag_):flag(flag_){};
 public:
-int flag;
+uint32_t flag;
 enum B{
 /*Release resources owned by the pool*/
 	b_release_resources = VK_COMMAND_POOL_RESET_RELEASE_RESOURCES_BIT,
@@ -3154,7 +3154,7 @@ class F_command_buffer_reset {
 private:
 F_command_buffer_reset(int flag_):flag(flag_){};
 public:
-int flag;
+uint32_t flag;
 enum B{
 /*Release resources owned by the buffer*/
 	b_release_resources = VK_COMMAND_BUFFER_RESET_RELEASE_RESOURCES_BIT,
@@ -3195,7 +3195,7 @@ class F_sample_count {
 private:
 F_sample_count(int flag_):flag(flag_){};
 public:
-int flag;
+uint32_t flag;
 enum B{
 /*Sample count 1 supported*/
 	b_1 = VK_SAMPLE_COUNT_1_BIT,
@@ -3260,7 +3260,7 @@ class F_attachment_description {
 private:
 F_attachment_description(int flag_):flag(flag_){};
 public:
-int flag;
+uint32_t flag;
 enum B{
 /*The attachment may alias physical memory of another attachment in the same render pass*/
 	b_may_alias = VK_ATTACHMENT_DESCRIPTION_MAY_ALIAS_BIT,
@@ -3301,7 +3301,7 @@ class F_stencil_face {
 private:
 F_stencil_face(int flag_):flag(flag_){};
 public:
-int flag;
+uint32_t flag;
 enum B{
 /*Front face*/
 	b_front = VK_STENCIL_FACE_FRONT_BIT,
@@ -3350,7 +3350,7 @@ class F_descriptor_pool_create {
 private:
 F_descriptor_pool_create(int flag_):flag(flag_){};
 public:
-int flag;
+uint32_t flag;
 enum B{
 /*Descriptor sets may be freed individually*/
 	b_free_descriptor_set = VK_DESCRIPTOR_POOL_CREATE_FREE_DESCRIPTOR_SET_BIT,
@@ -3391,7 +3391,7 @@ class F_dependency {
 private:
 F_dependency(int flag_):flag(flag_){};
 public:
-int flag;
+uint32_t flag;
 enum B{
 /*Dependency is per pixel region */
 	b_by_region = VK_DEPENDENCY_BY_REGION_BIT,
@@ -3432,7 +3432,7 @@ class F_display_plane_alpha_KHR {
 private:
 F_display_plane_alpha_KHR(int flag_):flag(flag_){};
 public:
-int flag;
+uint32_t flag;
 enum B{
 	b_opaque_khr = VK_DISPLAY_PLANE_ALPHA_OPAQUE_BIT_KHR,
 	b_global_khr = VK_DISPLAY_PLANE_ALPHA_GLOBAL_BIT_KHR,
@@ -3481,7 +3481,7 @@ class F_composite_alpha_KHR {
 private:
 F_composite_alpha_KHR(int flag_):flag(flag_){};
 public:
-int flag;
+uint32_t flag;
 enum B{
 	b_opaque_khr = VK_COMPOSITE_ALPHA_OPAQUE_BIT_KHR,
 	b_pre_multiplied_khr = VK_COMPOSITE_ALPHA_PRE_MULTIPLIED_BIT_KHR,
@@ -3530,7 +3530,7 @@ class F_surface_transform_KHR {
 private:
 F_surface_transform_KHR(int flag_):flag(flag_){};
 public:
-int flag;
+uint32_t flag;
 enum B{
 	b_identity_khr = VK_SURFACE_TRANSFORM_IDENTITY_BIT_KHR,
 	b_rotate_90_khr = VK_SURFACE_TRANSFORM_ROTATE_90_BIT_KHR,
@@ -3594,7 +3594,7 @@ class F_debug_report_EXT {
 private:
 F_debug_report_EXT(int flag_):flag(flag_){};
 public:
-int flag;
+uint32_t flag;
 enum B{
 	b_information_ext = VK_DEBUG_REPORT_INFORMATION_BIT_EXT,
 	b_warning_ext = VK_DEBUG_REPORT_WARNING_BIT_EXT,
@@ -3646,7 +3646,7 @@ class F_external_memory_handle_type_NV {
 private:
 F_external_memory_handle_type_NV(int flag_):flag(flag_){};
 public:
-int flag;
+uint32_t flag;
 enum B{
 	b_opaque_win32_nv = VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_BIT_NV,
 	b_opaque_win32_kmt_nv = VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT_NV,
@@ -3695,7 +3695,7 @@ class F_external_memory_feature_NV {
 private:
 F_external_memory_feature_NV(int flag_):flag(flag_){};
 public:
-int flag;
+uint32_t flag;
 enum B{
 	b_dedicated_only_nv = VK_EXTERNAL_MEMORY_FEATURE_DEDICATED_ONLY_BIT_NV,
 	b_exportable_nv = VK_EXTERNAL_MEMORY_FEATURE_EXPORTABLE_BIT_NV,
@@ -3741,7 +3741,7 @@ class F_subgroup_feature {
 private:
 F_subgroup_feature(int flag_):flag(flag_){};
 public:
-int flag;
+uint32_t flag;
 enum B{
 /*Basic subgroup operations*/
 	b_basic = VK_SUBGROUP_FEATURE_BASIC_BIT,
@@ -3810,7 +3810,7 @@ class F_indirect_commands_layout_usage_NVX {
 private:
 F_indirect_commands_layout_usage_NVX(int flag_):flag(flag_){};
 public:
-int flag;
+uint32_t flag;
 enum B{
 	b_unordered_sequences_nvx = VK_INDIRECT_COMMANDS_LAYOUT_USAGE_UNORDERED_SEQUENCES_BIT_NVX,
 	b_sparse_sequences_nvx = VK_INDIRECT_COMMANDS_LAYOUT_USAGE_SPARSE_SEQUENCES_BIT_NVX,
@@ -3859,7 +3859,7 @@ class F_object_entry_usage_NVX {
 private:
 F_object_entry_usage_NVX(int flag_):flag(flag_){};
 public:
-int flag;
+uint32_t flag;
 enum B{
 	b_graphics_nvx = VK_OBJECT_ENTRY_USAGE_GRAPHICS_BIT_NVX,
 	b_compute_nvx = VK_OBJECT_ENTRY_USAGE_COMPUTE_BIT_NVX,
@@ -3906,7 +3906,7 @@ class F_external_memory_handle_type {
 private:
 F_external_memory_handle_type(int flag_):flag(flag_){};
 public:
-int flag;
+uint32_t flag;
 enum B{
 	b_opaque_fd = VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_FD_BIT,
 	b_opaque_win32 = VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_BIT,
@@ -3964,7 +3964,7 @@ class F_external_memory_feature {
 private:
 F_external_memory_feature(int flag_):flag(flag_){};
 public:
-int flag;
+uint32_t flag;
 enum B{
 	b_dedicated_only = VK_EXTERNAL_MEMORY_FEATURE_DEDICATED_ONLY_BIT,
 	b_exportable = VK_EXTERNAL_MEMORY_FEATURE_EXPORTABLE_BIT,
@@ -4010,7 +4010,7 @@ class F_external_semaphore_handle_type {
 private:
 F_external_semaphore_handle_type(int flag_):flag(flag_){};
 public:
-int flag;
+uint32_t flag;
 enum B{
 	b_opaque_fd = VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_FD_BIT,
 	b_opaque_win32 = VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_BIT,
@@ -4062,7 +4062,7 @@ class F_external_semaphore_feature {
 private:
 F_external_semaphore_feature(int flag_):flag(flag_){};
 public:
-int flag;
+uint32_t flag;
 enum B{
 	b_exportable = VK_EXTERNAL_SEMAPHORE_FEATURE_EXPORTABLE_BIT,
 	b_importable = VK_EXTERNAL_SEMAPHORE_FEATURE_IMPORTABLE_BIT,
@@ -4105,7 +4105,7 @@ class F_semaphore_import {
 private:
 F_semaphore_import(int flag_):flag(flag_){};
 public:
-int flag;
+uint32_t flag;
 enum B{
 	b_temporary = VK_SEMAPHORE_IMPORT_TEMPORARY_BIT,
 };
@@ -4145,7 +4145,7 @@ class F_external_fence_handle_type {
 private:
 F_external_fence_handle_type(int flag_):flag(flag_){};
 public:
-int flag;
+uint32_t flag;
 enum B{
 	b_opaque_fd = VK_EXTERNAL_FENCE_HANDLE_TYPE_OPAQUE_FD_BIT,
 	b_opaque_win32 = VK_EXTERNAL_FENCE_HANDLE_TYPE_OPAQUE_WIN32_BIT,
@@ -4194,7 +4194,7 @@ class F_external_fence_feature {
 private:
 F_external_fence_feature(int flag_):flag(flag_){};
 public:
-int flag;
+uint32_t flag;
 enum B{
 	b_exportable = VK_EXTERNAL_FENCE_FEATURE_EXPORTABLE_BIT,
 	b_importable = VK_EXTERNAL_FENCE_FEATURE_IMPORTABLE_BIT,
@@ -4237,7 +4237,7 @@ class F_fence_import {
 private:
 F_fence_import(int flag_):flag(flag_){};
 public:
-int flag;
+uint32_t flag;
 enum B{
 	b_temporary = VK_FENCE_IMPORT_TEMPORARY_BIT,
 };
@@ -4277,7 +4277,7 @@ class F_surface_counter_EXT {
 private:
 F_surface_counter_EXT(int flag_):flag(flag_){};
 public:
-int flag;
+uint32_t flag;
 enum B{
 	b_vblank_ext = VK_SURFACE_COUNTER_VBLANK_EXT,
 };
@@ -4317,7 +4317,7 @@ class F_peer_memory_feature {
 private:
 F_peer_memory_feature(int flag_):flag(flag_){};
 public:
-int flag;
+uint32_t flag;
 enum B{
 /*Can read with vkCmdCopy commands*/
 	b_copy_src = VK_PEER_MEMORY_FEATURE_COPY_SRC_BIT,
@@ -4370,7 +4370,7 @@ class F_memory_allocate {
 private:
 F_memory_allocate(int flag_):flag(flag_){};
 public:
-int flag;
+uint32_t flag;
 enum B{
 /*Force allocation on specific devices*/
 	b_device_mask = VK_MEMORY_ALLOCATE_DEVICE_MASK_BIT,
@@ -4411,7 +4411,7 @@ class F_device_group_present_mode_KHR {
 private:
 F_device_group_present_mode_KHR(int flag_):flag(flag_){};
 public:
-int flag;
+uint32_t flag;
 enum B{
 /*Present from local memory*/
 	b_local_khr = VK_DEVICE_GROUP_PRESENT_MODE_LOCAL_BIT_KHR,
@@ -4472,7 +4472,7 @@ class F_debug_utils_message_severity_EXT {
 private:
 F_debug_utils_message_severity_EXT(int flag_):flag(flag_){};
 public:
-int flag;
+uint32_t flag;
 enum B{
 	b_verbose_ext = VK_DEBUG_UTILS_MESSAGE_SEVERITY_VERBOSE_BIT_EXT,
 	b_info_ext = VK_DEBUG_UTILS_MESSAGE_SEVERITY_INFO_BIT_EXT,
@@ -4521,7 +4521,7 @@ class F_debug_utils_message_type_EXT {
 private:
 F_debug_utils_message_type_EXT(int flag_):flag(flag_){};
 public:
-int flag;
+uint32_t flag;
 enum B{
 	b_general_ext = VK_DEBUG_UTILS_MESSAGE_TYPE_GENERAL_BIT_EXT,
 	b_validation_ext = VK_DEBUG_UTILS_MESSAGE_TYPE_VALIDATION_BIT_EXT,
@@ -4567,7 +4567,7 @@ class F_descriptor_binding_EXT {
 private:
 F_descriptor_binding_EXT(int flag_):flag(flag_){};
 public:
-int flag;
+uint32_t flag;
 enum B{
 	b_update_after_bind_ext = VK_DESCRIPTOR_BINDING_UPDATE_AFTER_BIND_BIT_EXT,
 	b_update_unused_while_pending_ext = VK_DESCRIPTOR_BINDING_UPDATE_UNUSED_WHILE_PENDING_BIT_EXT,
@@ -4616,7 +4616,7 @@ class F_conditional_rendering_EXT {
 private:
 F_conditional_rendering_EXT(int flag_):flag(flag_){};
 public:
-int flag;
+uint32_t flag;
 enum B{
 	b_inverted_ext = VK_CONDITIONAL_RENDERING_INVERTED_BIT_EXT,
 };
@@ -4656,7 +4656,7 @@ class F_geometry_instance_NVX {
 private:
 F_geometry_instance_NVX(int flag_):flag(flag_){};
 public:
-int flag;
+uint32_t flag;
 enum B{
 	b_triangle_cull_disable_nvx = VK_GEOMETRY_INSTANCE_TRIANGLE_CULL_DISABLE_BIT_NVX,
 	b_triangle_cull_flip_winding_nvx = VK_GEOMETRY_INSTANCE_TRIANGLE_CULL_FLIP_WINDING_BIT_NVX,
@@ -4705,7 +4705,7 @@ class F_geometry_NVX {
 private:
 F_geometry_NVX(int flag_):flag(flag_){};
 public:
-int flag;
+uint32_t flag;
 enum B{
 	b_opaque_nvx = VK_GEOMETRY_OPAQUE_BIT_NVX,
 	b_no_duplicate_any_hit_invocation_nvx = VK_GEOMETRY_NO_DUPLICATE_ANY_HIT_INVOCATION_BIT_NVX,
@@ -4748,7 +4748,7 @@ class F_build_acceleration_structure_NVX {
 private:
 F_build_acceleration_structure_NVX(int flag_):flag(flag_){};
 public:
-int flag;
+uint32_t flag;
 enum B{
 	b_allow_update_nvx = VK_BUILD_ACCELERATION_STRUCTURE_ALLOW_UPDATE_BIT_NVX,
 	b_allow_compaction_nvx = VK_BUILD_ACCELERATION_STRUCTURE_ALLOW_COMPACTION_BIT_NVX,
