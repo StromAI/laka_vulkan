@@ -52,16 +52,12 @@ class Descriptor_update_template;
 
 class Command_buffer_base;
 class Command_buffer;
-class Command_buffer_s;
-
 class Frame_buffer;
 struct Queue_family_info;
 
 struct Pramater_choose_physical_device;
 struct Pramater_choose_queue_family;
 
-class Command_buffer_old;
-class Command_buffers_old;
 
 //class Buffer_views;
 //class Buffers;

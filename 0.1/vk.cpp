@@ -2109,14 +2109,14 @@ namespace laka { namespace vk {
 
 #if 1   /*  VkCommandBuffer  */
     shared_ptr<Command_buffer>
-        Command_pool::get_a_command_buffer(E_command_buffer_level level)
+        Command_pool::get_a_command_buffer(size_t count_, E_command_buffer_level level)
     {
-        shared_ptr<Command_buffer> command_buffer_sptr;
+        shared_ptr<Command_buffer::Group> command_buffer_sptr;
 
         S_command_buffer_allocate_info info{
             handle,
             level,
-            1
+            count_
         };
 
         VkCommandBuffer command_buffer_handle;
@@ -2127,29 +2127,12 @@ namespace laka { namespace vk {
         if (ret < 0) return command_buffer_sptr;
 
         command_buffer_sptr.reset(
-            new Command_buffer(shared_from_this(), command_buffer_handle));
+            new Command_buffer::Group(shared_from_this(),);
 
         return command_buffer_sptr;
     }
                                                                                                                                                                               
-    Command_buffer::Command_buffer(
-        Command_pool::Sptr command_pool_,
-        const VkCommandBuffer handle_)
-        :command_pool(command_pool_)
-        ,handle(handle_)
-    {}
 
-    Command_buffer::~Command_buffer()
-    {
-        init_show;
-        show_function_name;
-        command_pool->device->api.vkFreeCommandBuffers(
-            command_pool->device->handle,
-            command_pool->handle,
-            1,
-            &handle
-        );
-    }
 
 
 #endif  /*  VkCommandBuffer  */

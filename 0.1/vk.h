@@ -834,40 +834,8 @@ public:                                                                         
         S_allocation_callbacks*const allocation_callbacks;
     };
 
-    class Command_pool : public std::enable_shared_from_this<Command_pool> {
+    class Command_buffer_base {
     public:
-        using Sptr = std::shared_ptr<Command_pool>;
-        /*
-            vkAllocateCommandBuffers可用于创建多个命令缓冲区。
-            如果任何这些命令缓冲区的创建失败，
-            则实现必须从此命令中销毁所有成功创建的命令缓冲区对象，
-            将pCommandBuffers阵列的所有条目设置为NULL并返回错误。
-        */
-
-        VkResult reset(F_command_pool_reset flags_);
-
-        void trim(VkCommandPoolTrimFlags flags_ = 0);//is a bitmask type for setting a mask, but is currently reserved for future use.
-
-        ~Command_pool();
-
-        std::shared_ptr<Command_buffer> get_a_command_buffer(E_command_buffer_level  level);
-
-        const VkCommandPool handle;
-        std::shared_ptr<Device> device;
-    private:
-        friend class Device;
-        Command_pool(
-            std::shared_ptr<Device>         device_,
-            VkCommandPool                   handle_,
-            S_allocation_callbacks*const   allocator_);
-
-        S_allocation_callbacks*const allocation_callbacks;
-    };
-
-    class Command_buffer : public std::enable_shared_from_this<Command_buffer> {
-    public:
-        using Sptr = std::shared_ptr<Command_buffer>;
-
         VkResult begin(
             F_command_buffer_usage                  flags_,
             const S_command_buffer_inheritance_info*pInheritanceInfo_ = nullptr,
@@ -875,6 +843,8 @@ public:                                                                         
 
         VkResult reset(F_command_buffer_reset flags_);
         VkResult end();
+
+        //如果cmd的api都是void返回值 那么可以用它来返回Commd_buffer自身.设个语法糖.
 
         void bind_pipeline(std::shared_ptr<Compute_pipeline> pipeline_sptr_); //需要修正生命周期
         void bind_pipeline(std::shared_ptr<Graphics_pipeline> pipeline_sptr_);
@@ -885,7 +855,7 @@ public:                                                                         
             E_index_type index_type);
 
         void bind_buffers(
-            Array_value<Buffer::Sptr> buffer_sptrs_, //todo:为一些对象提供vector版
+            Array_value<std::shared_ptr<Buffer>> buffer_sptrs_, //todo:为一些对象提供vector版
             Array_value<VkDeviceSize> offsets_,
             uint32_t first_binding_);
 
@@ -956,7 +926,7 @@ public:                                                                         
             VkDeviceSize    stride_,
             F_query_result  flags_);
 
-        void commands_execute(Command_buffer_s& pCommandBuffers_);
+        void commands_execute();
 
         void buffer_update(
             Buffer&         dstBuffer_,
@@ -1110,15 +1080,77 @@ public:                                                                         
             uint32_t        drawCount_,
             uint32_t        stride_);
 
-        ~Command_buffer();
         const VkCommandBuffer handle;
-        Command_pool::Sptr      command_pool;
-        Device::Api* api;
+        Device::Api& api;
+        Command_buffer_base(const VkCommandBuffer handle_, Device::Api& api_)
+            :handle(handle_)
+            , api(api_)
+        {}
+    };
+
+    class Command_buffer :  public std::enable_shared_from_this<Command_buffer>{
+    public:
+        using Sptr = std::shared_ptr<Command_buffer>;
+
+        ~Command_buffer();
+
+        std::shared_ptr<Command_pool>  command_pool;
+
+        class Group : public std::enable_shared_from_this<Group>{
+        public:
+            using Sptr = std::shared_ptr<Group>;
+
+            std::vector<VkCommandBuffer> handles;
+            std::shared_ptr<Command_pool>  command_pool;
+            Device::Api& api;
+            Command_buffer_base operator[](size_t index_) 
+                { return Command_buffer_base(handles[index_], api); }
+            Command_buffer::Sptr extract(size_t index_)
+            {
+                return Command_buffer::Sptr(new Command_buffer(command_pool, handles[index_]));
+            }
+        private:
+            friend class Command_pool;
+            Group(std::shared_ptr<Command_pool> command_pool_,
+                Array_value<VkCommandBuffer> command_buffer_handles);
+        };
+
     private:
-        friend class Command_pool;
+        friend class Group;
         Command_buffer(
-            Command_pool::Sptr  command_pool_,
-            const VkCommandBuffer     handle_ );
+            std::shared_ptr<Command_pool>      command_pool_,
+            const VkCommandBuffer   handle_);
+    };
+
+    class Command_pool : public std::enable_shared_from_this<Command_pool> {
+    public:
+        using Sptr = std::shared_ptr<Command_pool>;
+        /*
+            vkAllocateCommandBuffers可用于创建多个命令缓冲区。
+            如果任何这些命令缓冲区的创建失败，
+            则实现必须从此命令中销毁所有成功创建的命令缓冲区对象，
+            将pCommandBuffers阵列的所有条目设置为NULL并返回错误。
+        */
+
+        VkResult reset(F_command_pool_reset flags_);
+
+        void trim(VkCommandPoolTrimFlags flags_ = 0);//is a bitmask type for setting a mask, but is currently reserved for future use.
+
+        ~Command_pool();
+
+        std::shared_ptr<Command_buffer> 
+            get_a_command_buffer(size_t count_,E_command_buffer_level level);
+
+        const VkCommandPool handle;
+        std::shared_ptr<Device> device;
+    private:
+        friend class Device;
+        Command_pool(
+            std::shared_ptr<Device>         device_,
+            VkCommandPool                   handle_,
+            S_allocation_callbacks*const   allocator_);
+
+        S_allocation_callbacks*const allocation_callbacks;
     };
 
     class Frame_buffer : public std::enable_shared_from_this<Frame_buffer> {
