@@ -102,15 +102,14 @@ namespace laka { namespace vk {
         }
     };
 
-#define laka_vk_can_use_group(class_type__,api_ptr_name__)                                          \
+#define laka_vk_can_use_group(class_type__,api_ptr_name__)                                  \
 class Group;                                                                                \
 Group get_group() { Group g(&api_ptr_name__, { handle }); return g; }                       \
 class Group                                                                                 \
     :public Group_base<                                                                     \
-    class_type__,                                                                           \
-    std::remove_cv<decltype(class_type__::handle)>::type,                                   \
-    decltype(&api_ptr_name__)>                                                              \
-{                                                                                           \
+        class_type__,                                                                       \
+        std::remove_cv<decltype(class_type__::handle)>::type,                               \
+        decltype(&api_ptr_name__)>{                                                         \
 public:                                                                                     \
     Group() :Group_base() {}                                                                \
     Group(decltype(&api_ptr_name__) api_) : Group_base(api_) {}                             \
@@ -489,7 +488,7 @@ public:                                                                         
         //...
         VkResult submit(
             Array_value<S_submit_info>& pSubmitInfo_,
-            Fence&                      fence_);
+            Fence*                      fence_ = nullptr);
         //...
         VkResult bind_sparse(
             Array_value<S_bind_sparse_info>&    pBindInfo_,
@@ -504,10 +503,9 @@ public:                                                                         
 
         class Group 
             :public Group_base<
-            Queue, 
-            std::remove_cv<decltype(Queue::handle)>::type,
-            decltype(Queue::api)> 
-        {
+                Queue,
+                std::remove_cv<decltype(Queue::handle)>::type,
+                decltype(Queue::api)>{
         public:
             Group() :Group_base() {}
             Group(decltype(api) api_) : Group_base(api_) {}

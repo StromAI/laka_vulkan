@@ -196,23 +196,6 @@ namespace laka { namespace vk {
     };
     static Extension_properties extension_properties;
 
-    //PFN_vkVoidFunction Device::return_api(const char* api_name_)
-    //{
-    //    init_show;
-    //    //show_function_name;
-    //    auto ret = instance->api.vkGetDeviceProcAddr(handle, api_name_);
-
-    //    if (ret == nullptr)
-    //    {
-    //        show_wrn("加载{}失败", api_name_);
-    //    }
-    //    else
-    //    {
-    //        show_debug("加载{}成功", api_name_);
-    //    }
-    //    return ret;
-    //}
-
 #endif  /*  global  */
 
 #if 1   /*  macro  */
@@ -654,13 +637,15 @@ namespace laka { namespace vk {
 
     VkResult Queue::submit(
         Array_value<S_submit_info>& pSubmitInfo_,
-        Fence&                      fence_)
+        Fence*                      fence_)
     {
+        VkFence fence_handle = 
+            fence_ != nullptr ? fence_->handle : VK_NULL_HANDLE;
         auto ret = api->vkQueueSubmit(
             handle,
             pSubmitInfo_.size(),
             *pSubmitInfo_.data(),
-            fence_.handle
+            fence_handle
         );
         show_result(ret);
 
