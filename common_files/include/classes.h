@@ -46,11 +46,13 @@ class Graphics_pipelines;
 class Buffer_view;
 class Image_view;
 
+class Descriptor_set_base;
+class Descriptor_set_group;
 class Descriptor_set;
-class Descriptor_set_s;
 class Descriptor_update_template;
 
 class Command_buffer_base;
+class Command_buffer_group;
 class Command_buffer;
 class Frame_buffer;
 struct Queue_family_info;

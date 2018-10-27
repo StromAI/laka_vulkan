@@ -688,6 +688,24 @@ public:                                                                         
         S_allocation_callbacks*const allocation_callbacks;
     };
 
+    class Frame_buffer : public std::enable_shared_from_this<Frame_buffer> {
+    public:
+        using Sptr = std::shared_ptr<Frame_buffer>;
+
+        ~Frame_buffer();
+
+        const VkFramebuffer handle;
+        std::shared_ptr<Render_pass> render_pass;
+    private:
+        friend class Render_pass;
+        Frame_buffer(
+            std::shared_ptr<Render_pass>    render_pass_,
+            VkFramebuffer                   handle_,
+            S_allocation_callbacks*const   allocator_);
+
+        S_allocation_callbacks*const allocation_callbacks;
+    };
+
     class Image : public std::enable_shared_from_this<Image> {
     public:
         using Sptr = std::shared_ptr<Image>;
@@ -834,6 +852,223 @@ public:                                                                         
         S_allocation_callbacks*const allocation_callbacks;
     };
 
+    class Descriptor_pool : public std::enable_shared_from_this<Descriptor_pool> {
+    public:
+        using Sptr = std::shared_ptr<Descriptor_pool>;
+
+        VkResult reset(VkDescriptorPoolResetFlags flags = 0);//is a bitmask type for setting a mask, but is currently reserved for future use.
+
+        ~Descriptor_pool();
+
+        std::shared_ptr<Descriptor_set_group> get_a_descriptor_set_group(
+            VkDescriptorSetLayout   set_layout_,
+            uint32_t                count_,
+            N_descriptor_set_allocate_info next_ = {});
+
+        const VkDescriptorPool handle;
+        std::shared_ptr<Device> device;
+    private:
+        friend class Device;
+        Descriptor_pool(
+            std::shared_ptr<Device>         device_,
+            VkDescriptorPool                handle_,
+            S_allocation_callbacks*const   allocator_);
+
+        S_allocation_callbacks*const allocation_callbacks;
+    };
+
+    class Descriptor_set_base {
+    public:
+        void update_with_template(
+            Descriptor_update_template& descriptorUpdateTemplate,
+            const void*                 pData);
+
+        void update(
+            S_write_descriptor_set&     pDescriptorWrites,
+            S_copy_descriptor_set&      pDescriptorCopies);
+
+        const VkDescriptorSet   handle;
+        const VkDevice          device_handle;
+        Device::Api& api;
+        Descriptor_set_base(
+            const VkDevice device_handle_,
+            const VkDescriptorSet handle_, 
+            Device::Api& api_)
+            :handle(handle_)
+            ,api(api_)
+            ,device_handle(device_handle_)
+        {}
+    };
+
+    class Descriptor_set_group : public std::enable_shared_from_this<Descriptor_set_group>{
+    public:
+        using Sptr = std::shared_ptr<Descriptor_set_group>;
+
+        Descriptor_set_base operator[](size_t index_)
+        {
+            return Descriptor_set_base(device_handle,handles[index_], api);
+        }
+        std::shared_ptr<Descriptor_set> extract(uint32_t index_);
+
+        ~Descriptor_set_group()
+        {
+            api.vkFreeDescriptorSets(descriptor_pool->device->handle,
+                descriptor_pool->handle, static_cast<uint32_t>(handles.size()), &handles[0]
+            );
+        }
+        std::vector<VkDescriptorSet>        handles;
+        std::shared_ptr<Descriptor_pool>    descriptor_pool;
+        const VkDevice                      device_handle;
+        Device::Api& api;
+    private:
+        friend class Descriptor_pool;
+        Descriptor_set_group(std::shared_ptr<Descriptor_pool> descriptor_pool_,
+            std::vector<VkDescriptorSet>& handles_)
+            :descriptor_pool(descriptor_pool_)
+            ,api(descriptor_pool_->device->api)
+            ,device_handle(descriptor_pool_->device->handle)
+        {
+            handles = std::move(handles_);
+        }
+    };
+
+    class Descriptor_set : public std::enable_shared_from_this<Descriptor_set>
+                         , public Descriptor_set_base{
+    public:
+        using Sptr = std::shared_ptr<Descriptor_set>;
+        using Group = Descriptor_set_group;
+
+        ~Descriptor_set()
+        {
+            api.vkFreeDescriptorSets(descriptor_pool->device->handle,
+                descriptor_pool->handle, 1, &handle
+            );
+        }
+        std::shared_ptr<Descriptor_pool>    descriptor_pool;
+    private:
+        friend class Descriptor_pool;
+        friend class Descriptor_set_group;
+        Descriptor_set(
+            std::shared_ptr<Descriptor_pool>    descriptor_pool_,
+            const VkDescriptorSet   handle_ )
+            :Descriptor_set_base(
+                descriptor_pool_->device->handle,
+                handle_,
+                descriptor_pool_->device->api)
+        {}
+    };
+
+    class Descriptor_set_layout : public std::enable_shared_from_this<Descriptor_set_layout> {
+    public:
+        using Sptr = std::shared_ptr<Descriptor_set_layout>;
+
+        ~Descriptor_set_layout();
+
+        std::shared_ptr<Descriptor_update_template> get_a_descriptor_update_template(
+            Array_value<VkDescriptorUpdateTemplateEntry> entrys_,
+            S_allocation_callbacks*const allocator_ = default_allocation_cb());
+
+        const VkDescriptorSetLayout handle;
+        std::shared_ptr<Device> device;
+    private:
+        friend class Device;
+        Descriptor_set_layout(
+            std::shared_ptr<Device>         device_,
+            VkDescriptorSetLayout           handle_,
+            S_allocation_callbacks*const   allocator_);
+
+        S_allocation_callbacks*const allocation_callbacks;
+    };
+
+    /*
+    typedef struct VkDescriptorUpdateTemplateCreateInfo {
+    uint32_t                                  descriptorUpdateEntryCount;
+    const VkDescriptorUpdateTemplateEntry*    pDescriptorUpdateEntries;
+
+    VkDescriptorUpdateTemplateType            templateType;
+        如果设置为VK_DESCRIPTOR_UPDATE_TEMPLATE_TYPE_DESCRIPTOR_SET，
+            则它只能用于使用固定的descriptorSetLayout更新描述符集。
+        如果设置为VK_DESCRIPTOR_UPDATE_TEMPLATE_TYPE_PUSH_DESCRIPTORS_KHR，
+            则它只能用于使用提供的pipelineBindPoint，pipelineLayout和
+            set number推送描述符集。
+
+    VkDescriptorSetLayout                     descriptorSetLayout;
+        如果templateType不是VK_DESCRIPTOR_UPDATE_TEMPLATE_TYPE_DESCRIPTOR_SET，则忽略此参数。
+        参数更新模板将使用的描述符集布局。
+        必须使用此布局创建将通过新创建的描述符更新模板更新的所有描述符集。
+        descriptorSetLayout是用于构建描述符更新模板的描述符集布局。
+        将通过新创建的描述符更新模板更新的所有描述符集必须使用与
+        此布局匹配（与其相同或定义相同）的布局来创建。
+
+    VkPipelineBindPoint                       pipelineBindPoint;
+        如果templateType不是VK_DESCRIPTOR_UPDATE_TEMPLATE_TYPE_PUSH_DESCRIPTORS_KHR，则忽略此参数
+        pipelineBindPoint是一个VkPipelineBindPoint，指示描述符是由图形管道还是计算管道使用。
+
+    VkPipelineLayout                          pipelineLayout;
+        如果templateType不是VK_DESCRIPTOR_UPDATE_TEMPLATE_TYPE_PUSH_DESCRIPTORS_KHR，则忽略此参数
+        pipelineLayout是一个VkPipelineLayout对象，用于对绑定进行编程。
+
+    uint32_t                                  set;
+        如果templateType不是VK_DESCRIPTOR_UPDATE_TEMPLATE_TYPE_PUSH_DESCRIPTORS_KHR，则忽略此参数
+        set是将更新的管道布局中设置的描述符的集合编号。
+    } VkDescriptorUpdateTemplateCreateInfo;
+*/
+    class Descriptor_update_template : public std::enable_shared_from_this<Descriptor_update_template> {
+    public:
+        using Sptr = std::shared_ptr<Descriptor_update_template>;
+
+        ~Descriptor_update_template();
+
+        const VkDescriptorUpdateTemplate handle;
+        std::shared_ptr<Descriptor_set_layout> descriptor_set_layout;
+        std::shared_ptr<Pipeline_layout> pipeline_layout;
+    private:
+        friend class Descriptor_set_layout;
+        friend class Pipeline_layout;
+        Descriptor_update_template(
+            std::shared_ptr<Descriptor_set_layout>  descriptor_set_layout_,
+            VkDescriptorUpdateTemplate              handle_,
+            S_allocation_callbacks*const           allocator_);
+
+        Descriptor_update_template(
+            std::shared_ptr< Pipeline_layout>   pipeline_layout_,
+            VkDescriptorUpdateTemplate          handle_,
+            S_allocation_callbacks*const       allocator_);
+
+        S_allocation_callbacks*const allocation_callbacks;
+    };
+
+    class Command_pool : public std::enable_shared_from_this<Command_pool> {
+    public:
+        using Sptr = std::shared_ptr<Command_pool>;
+        /*
+            vkAllocateCommandBuffers可用于创建多个命令缓冲区。
+            如果任何这些命令缓冲区的创建失败，
+            则实现必须从此命令中销毁所有成功创建的命令缓冲区对象，
+            将pCommandBuffers阵列的所有条目设置为NULL并返回错误。
+        */
+
+        VkResult reset(F_command_pool_reset flags_);
+
+        void trim(VkCommandPoolTrimFlags flags_ = 0);//is a bitmask type for setting a mask, but is currently reserved for future use.
+
+        ~Command_pool();
+
+        std::shared_ptr<Command_buffer_group>
+            get_a_command_buffer_group(uint32_t count_, E_command_buffer_level level);
+
+        const VkCommandPool handle;
+        std::shared_ptr<Device> device;
+    private:
+        friend class Device;
+        Command_pool(
+            std::shared_ptr<Device>         device_,
+            VkCommandPool                   handle_,
+            S_allocation_callbacks*const   allocator_);
+
+        S_allocation_callbacks*const allocation_callbacks;
+    };
+
     class Command_buffer_base {
     public:
         VkResult begin(
@@ -925,8 +1160,6 @@ public:                                                                         
             VkDeviceSize    dstOffset_,
             VkDeviceSize    stride_,
             F_query_result  flags_);
-
-        void commands_execute();
 
         void buffer_update(
             Buffer&         dstBuffer_,
@@ -1045,6 +1278,13 @@ public:                                                                         
             Array_value<S_buffer_memory_barrier>buffer_memory_barriers_,
             Array_value<S_image_memory_barrier> image_memory_barriers_);
 
+        void bind_descriptor_sets(
+            E_pipeline_bind_point   pipelineBindPoint_,
+            Pipeline_layout&        layout_,
+            uint32_t                firstSet_,
+            Descriptor_set_group&   descriptor_sets_,
+            Array_value<uint32_t>   dynamic_offsets_);
+
         //屏障可以用更形象的方式来使用.
 
         void pipeline_barrier(
@@ -1080,6 +1320,8 @@ public:                                                                         
             uint32_t        drawCount_,
             uint32_t        stride_);
 
+        void commands_execute();
+
         const VkCommandBuffer handle;
         Device::Api& api;
         Command_buffer_base(const VkCommandBuffer handle_, Device::Api& api_)
@@ -1088,191 +1330,57 @@ public:                                                                         
         {}
     };
 
-    class Command_buffer :  public std::enable_shared_from_this<Command_buffer>{
+    class Command_buffer_group : public std::enable_shared_from_this<Command_buffer_group> {
+    public:
+        using Sptr = std::shared_ptr<Command_buffer_group>;
+
+        Command_buffer_base operator[](size_t index_)
+        {
+            return Command_buffer_base(handles[index_], api);
+        }
+        std::shared_ptr<Command_buffer> extract(uint32_t index_);
+
+        ~Command_buffer_group()
+        {
+            api.vkFreeCommandBuffers(command_pool->device->handle,
+                command_pool->handle, static_cast<uint32_t>(handles.size()),
+                &handles[0]);
+        };
+        std::vector<VkCommandBuffer> handles;
+        std::shared_ptr<Command_pool>  command_pool;
+        Device::Api& api;
+    private:
+        friend class Command_pool;
+        Command_buffer_group(std::shared_ptr<Command_pool> command_pool_,
+            std::vector<VkCommandBuffer>& command_buffer_handles)
+            :command_pool(command_pool_)
+            , api(command_pool_->device->api)
+        {
+            handles = std::move(command_buffer_handles);
+        }
+    };
+
+    class Command_buffer :  public std::enable_shared_from_this<Command_buffer>
+                         ,  public Command_buffer_base{
     public:
         using Sptr = std::shared_ptr<Command_buffer>;
+        using Group = Command_buffer_group;
 
-        ~Command_buffer();
+        ~Command_buffer()
+        {
+            api.vkFreeCommandBuffers(command_pool->device->handle,
+                command_pool->handle, 1,&handle
+            );
+        }
 
         std::shared_ptr<Command_pool>  command_pool;
-
-        class Group : public std::enable_shared_from_this<Group>{
-        public:
-            using Sptr = std::shared_ptr<Group>;
-
-            std::vector<VkCommandBuffer> handles;
-            std::shared_ptr<Command_pool>  command_pool;
-            Device::Api& api;
-            Command_buffer_base operator[](size_t index_) 
-                { return Command_buffer_base(handles[index_], api); }
-            Command_buffer::Sptr extract(size_t index_)
-            {
-                return Command_buffer::Sptr(new Command_buffer(command_pool, handles[index_]));
-            }
-        private:
-            friend class Command_pool;
-            Group(std::shared_ptr<Command_pool> command_pool_,
-                Array_value<VkCommandBuffer> command_buffer_handles);
-        };
-
     private:
-        friend class Group;
+        friend class Command_buffer_group;
         Command_buffer(
             std::shared_ptr<Command_pool>      command_pool_,
-            const VkCommandBuffer   handle_);
-    };
-
-    class Command_pool : public std::enable_shared_from_this<Command_pool> {
-    public:
-        using Sptr = std::shared_ptr<Command_pool>;
-        /*
-            vkAllocateCommandBuffers可用于创建多个命令缓冲区。
-            如果任何这些命令缓冲区的创建失败，
-            则实现必须从此命令中销毁所有成功创建的命令缓冲区对象，
-            将pCommandBuffers阵列的所有条目设置为NULL并返回错误。
-        */
-
-        VkResult reset(F_command_pool_reset flags_);
-
-        void trim(VkCommandPoolTrimFlags flags_ = 0);//is a bitmask type for setting a mask, but is currently reserved for future use.
-
-        ~Command_pool();
-
-        std::shared_ptr<Command_buffer> 
-            get_a_command_buffer(size_t count_,E_command_buffer_level level);
-
-        const VkCommandPool handle;
-        std::shared_ptr<Device> device;
-    private:
-        friend class Device;
-        Command_pool(
-            std::shared_ptr<Device>         device_,
-            VkCommandPool                   handle_,
-            S_allocation_callbacks*const   allocator_);
-
-        S_allocation_callbacks*const allocation_callbacks;
-    };
-
-    class Frame_buffer : public std::enable_shared_from_this<Frame_buffer> {
-    public:
-        using Sptr = std::shared_ptr<Frame_buffer>;
-
-        ~Frame_buffer();
-
-        const VkFramebuffer handle;
-        std::shared_ptr<Render_pass> render_pass;
-    private:
-        friend class Render_pass;
-        Frame_buffer(
-            std::shared_ptr<Render_pass>    render_pass_,
-            VkFramebuffer                   handle_,
-            S_allocation_callbacks*const   allocator_);
-
-        S_allocation_callbacks*const allocation_callbacks;
-    };
-
-    class Descriptor_pool : public std::enable_shared_from_this<Descriptor_pool> {
-    public:
-        using Sptr = std::shared_ptr<Descriptor_pool>;
-
-        VkResult reset(VkDescriptorPoolResetFlags flags = 0);//is a bitmask type for setting a mask, but is currently reserved for future use.
-
-        ~Descriptor_pool();
-
-        std::shared_ptr<Descriptor_set> get_a_descriptor_set(
-            VkDescriptorSetLayout set_layout,
-            N_descriptor_set_allocate_info next_ = {});
-
-        const VkDescriptorPool handle;
-        std::shared_ptr<Device> device;
-    private:
-        friend class Device;
-        Descriptor_pool(
-            std::shared_ptr<Device>         device_,
-            VkDescriptorPool                handle_,
-            S_allocation_callbacks*const   allocator_);
-
-        S_allocation_callbacks*const allocation_callbacks;
-    };
-
-    class Descriptor_set_layout : public std::enable_shared_from_this<Descriptor_set_layout> {
-    public:
-        using Sptr = std::shared_ptr<Descriptor_set_layout>;
-
-        ~Descriptor_set_layout();
-
-        std::shared_ptr<Descriptor_update_template> get_a_descriptor_update_template(
-            Array_value<VkDescriptorUpdateTemplateEntry> entrys_,
-            S_allocation_callbacks*const allocator_ = default_allocation_cb());
-
-        const VkDescriptorSetLayout handle;
-        std::shared_ptr<Device> device;
-    private:
-        friend class Device;
-        Descriptor_set_layout(
-            std::shared_ptr<Device>         device_,
-            VkDescriptorSetLayout           handle_,
-            S_allocation_callbacks*const   allocator_);
-
-        S_allocation_callbacks*const allocation_callbacks;
-    };
-
-    /*
-    typedef struct VkDescriptorUpdateTemplateCreateInfo {
-    uint32_t                                  descriptorUpdateEntryCount;
-    const VkDescriptorUpdateTemplateEntry*    pDescriptorUpdateEntries;
-
-    VkDescriptorUpdateTemplateType            templateType;
-        如果设置为VK_DESCRIPTOR_UPDATE_TEMPLATE_TYPE_DESCRIPTOR_SET，
-            则它只能用于使用固定的descriptorSetLayout更新描述符集。
-        如果设置为VK_DESCRIPTOR_UPDATE_TEMPLATE_TYPE_PUSH_DESCRIPTORS_KHR，
-            则它只能用于使用提供的pipelineBindPoint，pipelineLayout和
-            set number推送描述符集。
-
-    VkDescriptorSetLayout                     descriptorSetLayout;
-        如果templateType不是VK_DESCRIPTOR_UPDATE_TEMPLATE_TYPE_DESCRIPTOR_SET，则忽略此参数。
-        参数更新模板将使用的描述符集布局。
-        必须使用此布局创建将通过新创建的描述符更新模板更新的所有描述符集。
-        descriptorSetLayout是用于构建描述符更新模板的描述符集布局。
-        将通过新创建的描述符更新模板更新的所有描述符集必须使用与
-        此布局匹配（与其相同或定义相同）的布局来创建。
-
-    VkPipelineBindPoint                       pipelineBindPoint;
-        如果templateType不是VK_DESCRIPTOR_UPDATE_TEMPLATE_TYPE_PUSH_DESCRIPTORS_KHR，则忽略此参数
-        pipelineBindPoint是一个VkPipelineBindPoint，指示描述符是由图形管道还是计算管道使用。
-
-    VkPipelineLayout                          pipelineLayout;
-        如果templateType不是VK_DESCRIPTOR_UPDATE_TEMPLATE_TYPE_PUSH_DESCRIPTORS_KHR，则忽略此参数
-        pipelineLayout是一个VkPipelineLayout对象，用于对绑定进行编程。
-
-    uint32_t                                  set;
-        如果templateType不是VK_DESCRIPTOR_UPDATE_TEMPLATE_TYPE_PUSH_DESCRIPTORS_KHR，则忽略此参数
-        set是将更新的管道布局中设置的描述符的集合编号。
-    } VkDescriptorUpdateTemplateCreateInfo;
-*/
-    class Descriptor_update_template : public std::enable_shared_from_this<Descriptor_update_template> {
-    public:
-        using Sptr = std::shared_ptr<Descriptor_update_template>;
-
-        ~Descriptor_update_template();
-
-        const VkDescriptorUpdateTemplate handle;
-        std::shared_ptr<Descriptor_set_layout> descriptor_set_layout;
-        std::shared_ptr<Pipeline_layout> pipeline_layout;
-    private:
-        friend class Descriptor_set_layout;
-        friend class Pipeline_layout;
-        Descriptor_update_template(
-            std::shared_ptr<Descriptor_set_layout>  descriptor_set_layout_,
-            VkDescriptorUpdateTemplate              handle_,
-            S_allocation_callbacks*const           allocator_);
-
-        Descriptor_update_template(
-            std::shared_ptr< Pipeline_layout>   pipeline_layout_,
-            VkDescriptorUpdateTemplate          handle_,
-            S_allocation_callbacks*const       allocator_);
-
-        S_allocation_callbacks*const allocation_callbacks;
+            const VkCommandBuffer   handle_)
+            :Command_buffer_base(handle_,command_pool_->device->api)
+        {}
     };
 
     class Pipeline_layout : public std::enable_shared_from_this<Pipeline_layout> {
