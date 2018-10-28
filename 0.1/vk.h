@@ -23,9 +23,10 @@ Permission is granted to anyone to use this software for any purpose, including 
 #include "laka_vk_define.h"
 
 
+//如何为使用者提供生命周期管理?
+
 namespace laka { namespace vk {
 #include "classes.h"
-
 #if 1   /*  global  */
     void show_result(VkResult ret_);
     void show_result_assert(VkResult ret_);
@@ -120,6 +121,53 @@ public:                                                                         
 
 #define laka_vk_over_group  }
 
+
+    //用于免除使用者填写参数时 手动写共享指针到原始指针的显示转换
+    template <typename T__>
+    class Aptr {
+    public:
+        T__* ptr;
+
+        Aptr(std::shared_ptr<T__> sptr_) :ptr(sptr_.get()) {}
+        Aptr(T__* ptr_) :ptr(ptr_) {}
+        constexpr Aptr(std::nullptr_t) noexcept : ptr(nullptr) {}
+
+        operator T__*() { return const_cast<T__*>(ptr); }
+        operator const T__*() { return const_cast<const T__*>(ptr); }
+
+        T__* operator ->() { return ptr; }
+
+        bool operator == (std::nullptr_t) { return ptr == nullptr; }
+        bool operator != (std::nullptr_t) { return ptr != nullptr; }
+        bool operator == (T__* p_) { return ptr == p_; }
+        bool operator != (T__* p_) { return ptr != p_; }
+        bool operator == (std::shared_ptr<T__> p_) { return ptr == p_.get(); }
+        bool operator != (std::shared_ptr<T__> p_) { return ptr != p_.get(); }
+    };
+
+    template <typename T__>
+    class Aref {
+    public:
+        T__& ref;
+
+        Aref(std::shared_ptr<T__> sptr_) : ref( *(sptr_.get()) ) {}
+        Aref(T__* ptr_) : ref(*ptr_) {}
+
+        operator T__*() { return &ref; }
+        operator const T__*() { return &ref; }
+        operator T__&() { return ref; }
+        operator const T__&() { return ref; }
+
+        T__* operator ->() { return &ref; }
+
+        bool operator == (T__* p_) { return &ref == p_; }
+        bool operator != (T__* p_) { return &ref != p_; }
+        bool operator == (std::shared_ptr<T__> p_) { return &ref == p_.get(); }
+        bool operator != (std::shared_ptr<T__> p_) { return &ref != p_.get(); }
+    };
+
+
+
 #endif  /*  global  */
 
     struct User_choose_queue_info {
@@ -199,10 +247,7 @@ public:                                                                         
             get_format_properties(E_format format_);
 
         std::shared_ptr<S_external_buffer_properties>
-            get_external_buffer_properties(
-                F_buffer_create c_flags_,
-                F_buffer_usage    u_flags_,
-                F_external_memory_handle_type handle_type_);
+            get_external_buffer_properties(S_physical_device_external_buffer_info info_);
 
         std::shared_ptr<S_external_fence_properties>
             get_external_fence_properties(
@@ -215,15 +260,6 @@ public:                                                                         
         std::shared_ptr<S_image_format_properties2>
             get_image_format_properties(
                 const S_physical_device_image_format_info2& info_);
-
-        std::shared_ptr<S_image_format_properties2>
-            get_image_format_properties(
-                E_format        format_,
-                E_image_type    type_,
-                E_image_tiling  tiling_,
-                F_image_usage   usage_,
-                F_image_create  flags_,
-                N_physical_device_image_format_info2  next_);
 
         std::shared_ptr<std::vector<VkSparseImageFormatProperties2>>
             get_sparse_image_format_properties(
@@ -265,9 +301,9 @@ public:                                                                         
         std::vector<Queue> queues;
     };
 
+    //为帮助创建Device而存在
     class Device_creator : public std::enable_shared_from_this<Device_creator> {
     public:
-
         using Sptr = std::shared_ptr<Device_creator>;
 
         std::shared_ptr<Device> get_a_device(
@@ -384,33 +420,33 @@ public:                                                                         
             S_allocation_callbacks*const allocator_ = default_allocation_cb());
 
         std::shared_ptr<Sampler> get_a_sampler(
-            E_filter                magFilter,
-            E_filter                minFilter,
-            E_sampler_mipmap_mode   mipmapMode,
-            E_sampler_address_mode  addressModeU,
-            E_sampler_address_mode  addressModeV,
-            E_sampler_address_mode  addressModeW,
-            float                   mipLodBias,
-            VkBool32                anisotropyEnable,
-            float                   maxAnisotropy,
-            VkBool32                compareEnable,
-            E_compare_op            compareOp,
-            float                   minLod,
-            float                   maxLod,
-            E_border_color          borderColor,
-            VkBool32                unnormalizedCoordinates,
+            E_filter                magFilter_,
+            E_filter                minFilter_,
+            E_sampler_mipmap_mode   mipmapMode_,
+            E_sampler_address_mode  addressModeU_,
+            E_sampler_address_mode  addressModeV_,
+            E_sampler_address_mode  addressModeW_,
+            float                   mipLodBias_,
+            VkBool32                anisotropyEnable_,
+            float                   maxAnisotropy_,
+            VkBool32                compareEnable_,
+            E_compare_op            compareOp_,
+            float                   minLod_,
+            float                   maxLod_,
+            E_border_color          borderColor_,
+            VkBool32                unnormalizedCoordinates_,
             N_sampler_create_info   next_ = {},
             S_allocation_callbacks*const allocator_ = default_allocation_cb());
 
         std::shared_ptr<Sampler_Ycbcr_conversion> get_a_sampler_ycbcr_conversion(
             E_format                            format_,
-            E_sampler_ycbcr_model_conversion    ycbcrModel,
-            E_sampler_ycbcr_range               ycbcrRange,
-            S_component_mapping             components,
-            E_chroma_location               xChromaOffset,
-            E_chroma_location               yChromaOffset,
-            E_filter                        chromaFilter,
-            VkBool32                        forceExplicitReconstruction,
+            E_sampler_ycbcr_model_conversion    ycbcrModel_,
+            E_sampler_ycbcr_range               ycbcrRange_,
+            S_component_mapping             components_,
+            E_chroma_location               xChromaOffset_,
+            E_chroma_location               yChromaOffset_,
+            E_filter                        chromaFilter_,
+            VkBool32                        forceExplicitReconstruction_,
             N_sampler_ycbcr_conversion_create_info next_ = {},
             S_allocation_callbacks*const    allocator_ = default_allocation_cb());
 
@@ -426,8 +462,8 @@ public:                                                                         
             S_allocation_callbacks*const        allocator_ = default_allocation_cb());
 
         std::shared_ptr<Query_pool> get_a_query_pool(
-            E_query_type                query_type,
-            uint32_t                    query_count,
+            E_query_type                query_type_,
+            uint32_t                    query_count_,
             F_query_pipeline_statistic  queue_pipeline_statistic_flags_,
             S_allocation_callbacks*const allocator_ = default_allocation_cb());
 
@@ -475,7 +511,7 @@ public:                                                                         
             std::shared_ptr<Device_creator>         device_creator_,
             std::vector<Physical_device*>&          physical_devices_,
             std::vector<User_choose_queue_info>&    queue_infos_,
-            std::vector<S_queue_family_properties>&   qf_properties_,
+            std::vector<S_queue_family_properties>& qf_properties_,
             VkDevice                                handle_,
             S_allocation_callbacks*const allocation_callbacks_);
 
@@ -488,11 +524,11 @@ public:                                                                         
         //...
         VkResult submit(
             Array_value<S_submit_info>& pSubmitInfo_,
-            Fence*                      fence_ = nullptr);
+            Aptr<Fence>                 fence_ = nullptr);
         //...
         VkResult bind_sparse(
             Array_value<S_bind_sparse_info>&    pBindInfo_,
-            Fence&                              fence_);
+            Aptr < Fence >                      fence_ = nullptr);
 
         //VkDevice device_handle;
         VkQueue handle;
@@ -510,7 +546,7 @@ public:                                                                         
             Group() :Group_base() {}
             Group(decltype(api) api_) : Group_base(api_) {}
             Group(decltype(api) api_,
-                Array_value<const std::remove_cv<decltype(Queue::handle)>::type> handles_)
+            Array_value<const std::remove_cv<decltype(Queue::handle)>::type> handles_)
                 :Group_base(api_,handles_)
             {}
         }; 
@@ -521,6 +557,7 @@ public:                                                                         
         //顺序上放最后边做 暂时不给直接的画面了.
     };
 
+    //没有功能函数
     class Semaphore :public std::enable_shared_from_this<Semaphore> {
     public:
         using Sptr = std::shared_ptr<Semaphore>;
@@ -546,9 +583,8 @@ public:                                                                         
     public:
         using Sptr = std::shared_ptr<Fence>;
 
-        VkResult reset();
-        VkResult reset(Array_value<VkFence> fences_);
         VkResult get_status();
+        VkResult reset(Array_value<VkFence> fences_);
         VkResult wait(uint64_t timeout_);
         VkResult wait(bool wait_all_, uint64_t timeout_, Array_value<VkFence> fences_);
 
@@ -658,6 +694,9 @@ public:                                                                         
 
         const VkBuffer handle;
         std::shared_ptr<Device> device;
+
+        laka_vk_can_use_group(Buffer, device->api)
+        laka_vk_over_group;
     private:
         friend class Device;
         Buffer(
@@ -668,6 +707,7 @@ public:                                                                         
         S_allocation_callbacks*const allocation_callbacks;
     };
 
+    //没有功能函数
     class Buffer_view : public std::enable_shared_from_this<Buffer_view> {
     public:
         using Sptr = std::shared_ptr<Buffer_view>;
@@ -676,29 +716,14 @@ public:                                                                         
 
         const VkBufferView handle;
         std::shared_ptr<Buffer> buffer;
+
+        laka_vk_can_use_group(Buffer_view, buffer->device->api)
+        laka_vk_over_group;
     private:
         friend class Buffer;
         Buffer_view(
             std::shared_ptr<Buffer>         buffer_,
             VkBufferView                    handle_,
-            S_allocation_callbacks*const   allocator_);
-
-        S_allocation_callbacks*const allocation_callbacks;
-    };
-
-    class Frame_buffer : public std::enable_shared_from_this<Frame_buffer> {
-    public:
-        using Sptr = std::shared_ptr<Frame_buffer>;
-
-        ~Frame_buffer();
-
-        const VkFramebuffer handle;
-        std::shared_ptr<Render_pass> render_pass;
-    private:
-        friend class Render_pass;
-        Frame_buffer(
-            std::shared_ptr<Render_pass>    render_pass_,
-            VkFramebuffer                   handle_,
             S_allocation_callbacks*const   allocator_);
 
         S_allocation_callbacks*const allocation_callbacks;
@@ -710,23 +735,23 @@ public:                                                                         
 
         S_memory_requirements get_image_memory_requirements();
 
-        S_subresource_layout get_subresource_layout(const S_image_subresource*);
+        S_subresource_layout get_subresource_layout(const S_image_subresource&);
         //...
         std::shared_ptr<std::vector<S_sparse_image_memory_requirements>>
             get_sparse_memory_requirements();
 
         VkResult bind(
-            std::shared_ptr<Device_memory> device_memory_,
-            VkDeviceSize memory_offset_);
+            Aptr<Device_memory> device_memory_,
+            VkDeviceSize        memory_offset_);
 
         ~Image();
 
         std::shared_ptr<Image_view> get_a_image_view(
-            E_image_view_type                view_type_,
+            E_image_view_type           view_type_,
             E_format                    format_,
             S_component_mapping         components_,
             S_image_subresource_range   subresourceRange_,
-            N_image_view_create_info         next_ = {},
+            N_image_view_create_info    next_ = {},
             S_allocation_callbacks*const allocator_ = default_allocation_cb());
 
         const VkImage handle;
@@ -743,6 +768,7 @@ public:                                                                         
         S_allocation_callbacks*const allocation_callbacks;
     };
 
+    //没有功能函数
     class Image_view : public std::enable_shared_from_this<Image_view> {
     public:
         using Sptr = std::shared_ptr<Image_view>;
@@ -761,6 +787,7 @@ public:                                                                         
         S_allocation_callbacks*const allocation_callbacks;
     };
 
+    //没有功能函数
     class Sampler : public std::enable_shared_from_this<Sampler> {
     public:
         using Sptr = std::shared_ptr<Sampler>;
@@ -779,6 +806,7 @@ public:                                                                         
         S_allocation_callbacks*const allocation_callbacks;
     };
 
+    //没有功能函数
     class Sampler_Ycbcr_conversion : public std::enable_shared_from_this<Sampler_Ycbcr_conversion> {
     public:
         using Sptr = std::shared_ptr<Sampler_Ycbcr_conversion>;
@@ -850,6 +878,28 @@ public:                                                                         
         S_allocation_callbacks*const allocation_callbacks;
     };
 
+    //没有功能函数
+    class Frame_buffer : public std::enable_shared_from_this<Frame_buffer> {
+    public:
+        using Sptr = std::shared_ptr<Frame_buffer>;
+
+        ~Frame_buffer();
+
+        const VkFramebuffer handle;
+        std::shared_ptr<Render_pass> render_pass;
+
+        laka_vk_can_use_group(Frame_buffer, render_pass->device->api)
+            laka_vk_over_group;
+    private:
+        friend class Render_pass;
+        Frame_buffer(
+            std::shared_ptr<Render_pass>    render_pass_,
+            VkFramebuffer                   handle_,
+            S_allocation_callbacks*const    allocator_);
+
+        S_allocation_callbacks*const allocation_callbacks;
+    };
+
     class Descriptor_pool : public std::enable_shared_from_this<Descriptor_pool> {
     public:
         using Sptr = std::shared_ptr<Descriptor_pool>;
@@ -859,8 +909,8 @@ public:                                                                         
         ~Descriptor_pool();
 
         std::shared_ptr<Descriptor_set_group> get_a_descriptor_set_group(
-            VkDescriptorSetLayout   set_layout_,
-            uint32_t                count_,
+            Aref<Descriptor_set_layout> set_layout_,
+            uint32_t                    count_,
             N_descriptor_set_allocate_info next_ = {});
 
         const VkDescriptorPool handle;
@@ -956,6 +1006,7 @@ public:                                                                         
         {}
     };
 
+    //没有功能函数
     class Descriptor_set_layout : public std::enable_shared_from_this<Descriptor_set_layout> {
     public:
         using Sptr = std::shared_ptr<Descriptor_set_layout>;
@@ -964,7 +1015,7 @@ public:                                                                         
 
         std::shared_ptr<Descriptor_update_template> get_a_descriptor_update_template(
             Array_value<VkDescriptorUpdateTemplateEntry> entrys_,
-            S_allocation_callbacks*const allocator_ = default_allocation_cb());
+            S_allocation_callbacks*const allocator_ = default_allocation_cb()   );
 
         const VkDescriptorSetLayout handle;
         std::shared_ptr<Device> device;
@@ -978,6 +1029,7 @@ public:                                                                         
         S_allocation_callbacks*const allocation_callbacks;
     };
 
+    //没有功能函数
     /*
     typedef struct VkDescriptorUpdateTemplateCreateInfo {
     uint32_t                                  descriptorUpdateEntryCount;
@@ -1440,7 +1492,7 @@ public:                                                                         
         //std::shared_ptr<std::vector<char>> get_data();
         //对pData这种,大概得用vector<uchar>
         VkResult get_data(size_t* pDataSize, void* pData);
-        VkResult merge(Pipeline_cache&  srcCache);
+        VkResult merge(Aref<Pipeline_cache>  srcCache);
 
         ~Pipeline_cache();
 

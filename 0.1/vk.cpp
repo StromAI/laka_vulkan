@@ -496,21 +496,13 @@ namespace laka { namespace vk {
 
     shared_ptr<S_external_buffer_properties>
         Physical_device::get_external_buffer_properties(
-            F_buffer_create c_flags_,
-            F_buffer_usage    u_flags_,
-            F_external_memory_handle_type    handle_type_)
+            S_physical_device_external_buffer_info info_)
     {
         shared_ptr<S_external_buffer_properties> sptr(new S_external_buffer_properties);
 
-        S_physical_device_external_buffer_info external_buffer_info{
-            c_flags_,
-            u_flags_,
-            handle_type_
-        };
-
         instance->api.vkGetPhysicalDeviceExternalBufferProperties(
             handle,
-            external_buffer_info,
+            info_,
             *sptr
         );
         return sptr;
@@ -562,34 +554,6 @@ namespace laka { namespace vk {
         return sptr;
     }
 
-    shared_ptr<S_image_format_properties2>
-        Physical_device::get_image_format_properties(
-            E_format        format_,
-            E_image_type    type_,
-            E_image_tiling  tiling_,
-            F_image_usage   usage_,
-            F_image_create  flags_,
-            N_physical_device_image_format_info2  next_)
-    {
-        shared_ptr<S_image_format_properties2> sptr(new S_image_format_properties2);
-
-        S_physical_device_image_format_info2 image_format_info{
-            format_,
-            type_,
-            tiling_,
-            usage_,
-            flags_
-        };
-        image_format_info.set_pNext(next_);
-
-        instance->api.vkGetPhysicalDeviceImageFormatProperties2(
-            handle,
-            image_format_info,
-            *sptr
-        );
-        return sptr;
-    }
-
     shared_ptr<vector<VkSparseImageFormatProperties2>>
         Physical_device::get_sparse_image_format_properties(
             const S_physical_device_sparse_image_format_info2& format_info_)
@@ -622,13 +586,13 @@ namespace laka { namespace vk {
 
     VkResult Queue::bind_sparse(
         Array_value<S_bind_sparse_info>&    pBindInfo_,
-        Fence&                              fence_)
+        Aptr<Fence>                         fence_)
     {
         auto ret = api->vkQueueBindSparse(
             handle,
             pBindInfo_.size(),
             *pBindInfo_.data(),
-            fence_.handle
+            fence_== nullptr? nullptr : fence_->handle
         );
         show_result(ret);
 
@@ -637,7 +601,7 @@ namespace laka { namespace vk {
 
     VkResult Queue::submit(
         Array_value<S_submit_info>& pSubmitInfo_,
-        Fence*                      fence_)
+        Aptr<Fence>                 fence_)
     {
         VkFence fence_handle = 
             fence_ != nullptr ? fence_->handle : VK_NULL_HANDLE;
@@ -1204,12 +1168,6 @@ namespace laka { namespace vk {
         device->api.vkDestroyFence(device->handle, handle, *allocation_callbacks);
     }
 
-    VkResult Fence::reset()
-    {
-        auto ret = device->api.vkResetFences(device->handle, 1, &handle);
-        show_result(ret);
-        return ret;
-    }
     VkResult Fence::reset(Array_value<VkFence> fences_)
     {
         auto ret = device->api.vkResetFences(
@@ -1468,7 +1426,8 @@ namespace laka { namespace vk {
         VkMemoryMapFlags flags_)
     {
         void* p;
-        auto ret = device->api.vkMapMemory(device->handle, handle, offset_, size_, flags_, &p);
+        auto ret = device->api.vkMapMemory(
+            device->handle, handle, offset_, size_, flags_, &p);
         show_result(ret);
 
         if (ret < 0)
@@ -1664,7 +1623,7 @@ namespace laka { namespace vk {
             tiling_,
             usage_fb_,
             sharingMode_,
-            static_cast<uint32_t>(queue_family_indices_.size()),
+            queue_family_indices_.size(),
             queue_family_indices_.data(),
             initialLayout_
         };
@@ -1723,10 +1682,12 @@ namespace laka { namespace vk {
         return sult;
     }
 
-    S_subresource_layout Image::get_subresource_layout(const S_image_subresource* subresource_)
+    S_subresource_layout Image::get_subresource_layout(
+        const S_image_subresource& subresource_)
     {
         S_subresource_layout sult;
-        device->api.vkGetImageSubresourceLayout(device->handle, handle, *subresource_, sult);
+        device->api.vkGetImageSubresourceLayout(
+            device->handle, handle, subresource_, sult);
         return sult;
     }
 
@@ -1738,7 +1699,7 @@ namespace laka { namespace vk {
     }
 
     VkResult Image::bind(
-        shared_ptr<Device_memory> device_memory_,
+        Aptr<Device_memory> device_memory_,
         VkDeviceSize memory_offset_)
     {
         auto ret = device->api.vkBindImageMemory(
@@ -1818,21 +1779,21 @@ namespace laka { namespace vk {
 
 #if 1   /*  VkSampler  */
     shared_ptr<Sampler> Device::get_a_sampler(
-        E_filter                magFilter,
-        E_filter                minFilter,
-        E_sampler_mipmap_mode   mipmapMode,
-        E_sampler_address_mode  addressModeU,
-        E_sampler_address_mode  addressModeV,
-        E_sampler_address_mode  addressModeW,
-        float                   mipLodBias,
-        VkBool32                anisotropyEnable,
-        float                   maxAnisotropy,
-        VkBool32                compareEnable,
-        E_compare_op            compareOp,
-        float                   minLod,
-        float                   maxLod,
-        E_border_color          borderColor,
-        VkBool32                unnormalizedCoordinates,
+        E_filter                magFilter_,
+        E_filter                minFilter_,
+        E_sampler_mipmap_mode   mipmapMode_,
+        E_sampler_address_mode  addressModeU_,
+        E_sampler_address_mode  addressModeV_,
+        E_sampler_address_mode  addressModeW_,
+        float                   mipLodBias_,
+        VkBool32                anisotropyEnable_,
+        float                   maxAnisotropy_,
+        VkBool32                compareEnable_,
+        E_compare_op            compareOp_,
+        float                   minLod_,
+        float                   maxLod_,
+        E_border_color          borderColor_,
+        VkBool32                unnormalizedCoordinates_,
         N_sampler_create_info   next_ /*= {}*/,
         S_allocation_callbacks*const allocator_/* = default_allocation_cb*/)
     {
@@ -1843,21 +1804,21 @@ namespace laka { namespace vk {
 
         S_sampler_create_info info{
             0,
-            magFilter,
-            minFilter,
-            mipmapMode,
-            addressModeU,
-            addressModeV,
-            addressModeW,
-            mipLodBias,
-            anisotropyEnable,
-            maxAnisotropy,
-            compareEnable,
-            compareOp,
-            minLod,
-            maxLod,
-            borderColor,
-            unnormalizedCoordinates
+            magFilter_,
+            minFilter_,
+            mipmapMode_,
+            addressModeU_,
+            addressModeV_,
+            addressModeW_,
+            mipLodBias_,
+            anisotropyEnable_,
+            maxAnisotropy_,
+            compareEnable_,
+            compareOp_,
+            minLod_,
+            maxLod_,
+            borderColor_,
+            unnormalizedCoordinates_
         };
         info.set_pNext(next_);
 
@@ -1893,13 +1854,13 @@ namespace laka { namespace vk {
 #if 1   /*  VkSamplerYcbcrConversion  */
     shared_ptr<Sampler_Ycbcr_conversion> Device::get_a_sampler_ycbcr_conversion(
         E_format                            format_,
-        E_sampler_ycbcr_model_conversion    ycbcrModel,
-        E_sampler_ycbcr_range               ycbcrRange,
-        S_component_mapping             components,
-        E_chroma_location               xChromaOffset,
-        E_chroma_location               yChromaOffset,
-        E_filter                        chromaFilter,
-        VkBool32                        forceExplicitReconstruction,
+        E_sampler_ycbcr_model_conversion    ycbcrModel_,
+        E_sampler_ycbcr_range               ycbcrRange_,
+        S_component_mapping             components_,
+        E_chroma_location               xChromaOffset_,
+        E_chroma_location               yChromaOffset_,
+        E_filter                        chromaFilter_,
+        VkBool32                        forceExplicitReconstruction_,
         N_sampler_ycbcr_conversion_create_info next_ /*= {}*/,
         S_allocation_callbacks*const    allocator_/* = default_allocation_cb*/)
     {
@@ -1910,13 +1871,13 @@ namespace laka { namespace vk {
 
         S_sampler_ycbcr_conversion_create_info info{
             format_,
-            ycbcrModel,
-            ycbcrRange,
-            components,
-            xChromaOffset,
-            yChromaOffset,
-            chromaFilter,
-            forceExplicitReconstruction
+            ycbcrModel_,
+            ycbcrRange_,
+            components_,
+            xChromaOffset_,
+            yChromaOffset_,
+            chromaFilter_,
+            forceExplicitReconstruction_
         };
         info.set_pNext(next_);
 
@@ -1954,8 +1915,8 @@ namespace laka { namespace vk {
 
 #if 1   /*  VkQueryPool  */
     shared_ptr<Query_pool> Device::get_a_query_pool(
-        E_query_type                query_type,
-        uint32_t                    query_count,
+        E_query_type                query_type_,
+        uint32_t                    query_count_,
         F_query_pipeline_statistic  queue_pipeline_statistic_flags_,
         S_allocation_callbacks*const allocator_ /*= default_allocation_cb()*/)
     {
@@ -1966,8 +1927,8 @@ namespace laka { namespace vk {
 
         S_query_pool_create_info info{
             0,
-            query_type,
-            query_count,
+            query_type_,
+            query_count_,
             queue_pipeline_statistic_flags_
         };
 
@@ -2065,9 +2026,9 @@ namespace laka { namespace vk {
     }
 
     Frame_buffer::Frame_buffer(
-        shared_ptr<Render_pass> render_pass_,
-        VkFramebuffer handle_,
-        S_allocation_callbacks*const allocator_)
+        shared_ptr<Render_pass>         render_pass_,
+        VkFramebuffer                   handle_,
+        S_allocation_callbacks*const    allocator_)
         : render_pass(render_pass_)
         , handle(handle_)
         , allocation_callbacks(allocator_)
@@ -2272,8 +2233,8 @@ namespace laka { namespace vk {
 
 #if 1   /*  VkDescriptorSet  */
     std::shared_ptr<Descriptor_set_group> Descriptor_pool::get_a_descriptor_set_group(
-        VkDescriptorSetLayout   set_layout_,
-        uint32_t                count_,
+        Aref<Descriptor_set_layout> set_layout_,
+        uint32_t                    count_,
         N_descriptor_set_allocate_info next_ /*= {}*/)
     {
         shared_ptr<Descriptor_set_group> descriptor_set_group_sptr;
@@ -2281,7 +2242,7 @@ namespace laka { namespace vk {
         S_descriptor_set_allocate_info info{
             handle,
             count_,
-            &set_layout_
+            &set_layout_->handle
         };
         info.set_pNext(next_);
 
@@ -3270,9 +3231,9 @@ namespace laka { namespace vk {
         return ret;
     }
 
-    VkResult Pipeline_cache::merge(Pipeline_cache&  srcCache)
+    VkResult Pipeline_cache::merge(Aref<Pipeline_cache>  srcCache)
     {
-        auto ret = device->api.vkMergePipelineCaches(device->handle, handle, 1, &srcCache.handle);
+        auto ret = device->api.vkMergePipelineCaches(device->handle, handle, 1, &srcCache->handle);
         show_result(ret);
         return ret;
     }
