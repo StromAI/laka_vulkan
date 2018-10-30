@@ -274,8 +274,8 @@ namespace laka { namespace vk {
     Instance::Instance(
         VkInstance handle_,
         S_allocation_callbacks* allocator_callbacks_ptr_)
-        :handle(handle_)
-        , allocator_callbacks_ptr(&allocator_callbacks)
+        : handle(handle_)
+        , allocator_callbacks_ptr(allocator_callbacks_ptr_==nullptr?nullptr:&allocator_callbacks)
     {
         init_show;
 
@@ -330,6 +330,7 @@ namespace laka { namespace vk {
                     version_str(pd_info->apiVersion),
                     version_str(pd_info->driverVersion)
                 );
+                ++i;
             }
         }
         else
@@ -351,15 +352,15 @@ namespace laka { namespace vk {
             show_result(ret);
 
             int i = 0;
-            for (auto&& current_pg_ppt : physical_device_groups_temp)
+            for (auto&& current_pgp : physical_device_groups_temp)
             {
                 auto& current_group = physical_device_groups[i];
-                current_group.properties = current_pg_ppt;
-                current_group.physical_devices.resize(current_pg_ppt.physicalDeviceCount);
+                current_group.properties = current_pgp;
+                current_group.physical_devices.resize(current_pgp.physicalDeviceCount);
 
-                for (int j = 0; j < current_pg_ppt.physicalDeviceCount; ++j)
+                for (int j = 0; j < current_pgp.physicalDeviceCount; ++j)
                 {
-                    auto& handle_temp = current_pg_ppt.physicalDevices[j];
+                    auto& handle_temp = current_pgp.physicalDevices[j];
                     show_debug("物理设备组中 物理句柄值:{}", (void*)handle_temp);
 
                     Physical_device* physical_device_ptr = nullptr;
@@ -376,7 +377,7 @@ namespace laka { namespace vk {
 
                     if (physical_device_ptr != nullptr)
                     {
-                        current_group.physical_devices[i] = physical_device_ptr;
+                        current_group.physical_devices[j] = physical_device_ptr;
                     }
                     else
                     {
@@ -395,7 +396,10 @@ namespace laka { namespace vk {
     {
         init_show;
         show_function_name;
-        api.vkDestroyInstance(handle, *allocator_callbacks_ptr);
+        api.vkDestroyInstance(
+            handle, 
+            allocator_callbacks_ptr == nullptr? nullptr:*allocator_callbacks_ptr
+        );
     }
 #endif  /*  VkInstance  */
 
@@ -618,6 +622,248 @@ namespace laka { namespace vk {
 
 
 #endif  /*  VkQueue  */
+
+#if 1   /*  VkSurface  */
+
+
+#if defined(VK_USE_PLATFORM_WIN32_KHR)
+
+    bool Surface::get_physical_device_presentation_support(
+        Ahandle<Physical_device>    physical_device_,
+        uint32_t                    queuefamily_index_)
+    {
+        return VK_TRUE == api.vkGetPhysicalDeviceWin32PresentationSupportKHR(
+            physical_device_,
+            queuefamily_index_
+        );
+    }
+
+    HANDLE Surface::get_memory_handle(
+        Ahandle<Device>                            device_,
+        Aref<S_memory_get_win32_handle_info_KHR>info_)
+    {
+        HANDLE result;
+        auto ret = api.vkGetMemoryWin32HandleKHR(device_, *info_, &result);
+        show_result(ret);
+
+        return result;
+    }
+
+    shared_ptr<VkMemoryWin32HandlePropertiesKHR> Surface::get_memory_handle_proerties(
+        Ahandle<Device>                 device_,
+        F_external_memory_handle_type   handle_type_,
+        HANDLE                          handle_)
+    {
+        shared_ptr<VkMemoryWin32HandlePropertiesKHR> result(new VkMemoryWin32HandlePropertiesKHR);
+        auto ret = api.vkGetMemoryWin32HandlePropertiesKHR(
+            device_,
+            handle_type_,
+            handle_,
+            result.get()
+        );
+        show_result(ret);
+        return result;
+    }
+
+    VkResult Surface::import_semaphore_handle(
+        Ahandle<Device>                                 device_,
+        Aref<S_import_semaphore_win32_handle_info_KHR>  pImportSemaphoreWin32HandleInfo_)
+    {
+        auto ret = api.vkImportSemaphoreWin32HandleKHR(
+            device_,
+            *pImportSemaphoreWin32HandleInfo_
+        );
+        show_result(ret);
+        return ret;
+    }
+
+    HANDLE Surface::get_Semaphore_handle(
+        Ahandle<Device>                             device_,
+        Aref<S_semaphore_get_win32_handle_info_KHR> semaphore_get_win32_handle_info_)
+    {
+        HANDLE result;
+        auto ret = api.vkGetSemaphoreWin32HandleKHR(
+            device_,
+            *semaphore_get_win32_handle_info_,
+            &result
+        );
+        show_result(ret);
+        return result;
+    }
+
+    VkResult Surface::import_fence_handle(
+        Ahandle<Device>                             device_,
+        Aref<S_import_fence_win32_handle_info_KHR> info_)
+    {
+        auto ret = api.vkImportFenceWin32HandleKHR(
+            device_,
+            *info_
+        );
+        show_result(ret);
+        return ret;
+    }
+
+    HANDLE Surface::get_fence_handle(
+        Ahandle<Device>                             device_,
+        Aref<S_fence_get_win32_handle_info_KHR>     pGetWin32HandleInfo_)
+    {
+        HANDLE result;
+        auto ret = api.vkGetFenceWin32HandleKHR(
+            device_,
+            *pGetWin32HandleInfo_,
+            &result
+        );
+        show_result(ret);
+        return result;
+    }
+
+#elif defined(VK_USE_PLATFORM_ANDROID_KHR)
+
+    shared_ptr<S_android_hardware_buffer_format_properties_ANDROID>
+        Surface::get_hardware_buffer_properties(
+            Ahandle<Device>         device_,
+            Aref<AHardwareBuffer>   buffer_)
+    {
+        shared_ptr<S_android_hardware_buffer_format_properties_ANDROID> 
+            result(new S_android_hardware_buffer_format_properties_ANDROID);
+        auto ret = api.vkGetAndroidHardwareBufferPropertiesANDROID(
+            device_,
+            buffer_,
+            result.get()
+        );
+        show_result(ret);
+        return result;
+    }
+
+    struct AHardwareBuffer* Surface::get_memory_hardware_buffer(
+        Ahandle<Device>                                         device_,
+        Aref<S_memory_get_android_hardware_buffer_info_ANDROID> pInfo_)
+    {
+        struct AHardwareBuffer* result;
+        auto ret = api.vkGetMemoryAndroidHardwareBufferANDROID(
+            device_,
+            pInfo_,
+            &result
+        );
+        show_result(ret);
+        return result;
+    }
+
+#elif defined(VK_USE_PLATFORM_IOS_MVK)
+
+#elif defined(VK_USE_PLATFORM_MACOS_MVK)
+
+#elif defined(VK_USE_PLATFORM_MIR_KHR)
+
+    shared_ptr<MirConnection> Surface::get_physical_device_presentation_support(
+        Ahandle<Physical_device>    physical_device_,
+        uint32_t                    queueFamilyIndex_)
+    {
+        shared_ptr<MirConnection> result(new MirConnection);
+        auto ret = api.vkGetPhysicalDeviceMirPresentationSupportKHR(
+            physical_device_,
+            queueFamilyIndex_,
+            MirConnection.get()
+        );
+        show_result(ret);
+        return result;
+    }
+
+#elif defined(VK_USE_PLATFORM_VI_NN)
+
+#elif defined(VK_USE_PLATFORM_WAYLAND_KHR)
+
+    shared_ptr<struct wl_display> Surface::get_physical_device_presentation_support(
+        Ahandle<Physical_device>    physical_device_,
+        uint32_t                    queueFamilyIndex_)
+    {
+        shared_ptr<struct wl_display> result(new struct wl_display);
+        auto ret = api.vkGetPhysicalDeviceWaylandPresentationSupportKHR(
+            physical_device_,
+            queueFamilyIndex_,
+            result.get()
+        );
+        show_result(ret);
+        return result;
+    }
+    
+#elif defined(VK_USE_PLATFORM_XCB_KHR)
+
+    shared_ptr<xcb_connection_t> Surface::get_physical_device_presentation_support(
+        Ahandle<Physical_device>    physical_device_,
+        uint32_t                    queueFamilyIndex_,
+        xcb_visualid_t              visual_id_)
+    {
+        shared_ptr<struct xcb_connection_t> result(new struct xcb_connection_t);
+        auto ret = api.vkGetPhysicalDeviceXcbPresentationSupportKHR(
+            physical_device_,
+            queueFamilyIndex_,
+            result.get(),
+            visual_id_
+        );
+        show_result(ret);
+        return result;
+    }
+
+#elif defined(VK_USE_PLATFORM_XLIB_KHR)
+
+    shared_ptr<Display> Surface::get_physical_device_presentation_support(
+        Ahandle<Physical_device>    physical_device_,
+        uint32_t                    queueFamilyIndex_,
+        VisualID                    visualID_)
+    {
+        shared_ptr<Display> result(new Display);
+        auto ret = api.vkGetPhysicalDeviceXlibPresentationSupportKHR(
+            physical_device_,
+            queueFamilyIndex_,
+            result.get(),
+            visualID_
+        );
+        show_result(ret);
+        return result;
+    }
+
+#elif defined(VK_USE_PLATFORM_XLIB_XRANDR_EXT)
+
+#endif
+
+shared_ptr<Surface> Instance::get_a_surface(
+    surface_create_info&            create_info_,
+    S_allocation_callbacks*const    allocator_ /*= default_allocation_cb()*/)
+{
+    shared_ptr<Surface> sptr;
+    auto allocator = allocator_ == default_allocation_cb() ?
+        allocator_callbacks_ptr : allocator_;
+
+    VkSurfaceKHR surface_handle;
+    auto ret = surface_create_fun(handle, create_info_, *allocator, &surface_handle);
+
+    if (ret < 0)
+    {
+        init_show;
+        show_wrn("创建Surface失败");
+        return sptr;
+    }
+    sptr.reset(new Surface(shared_from_this(), surface_handle, allocator));
+    return sptr;
+}
+
+    Surface::Surface(
+        Instance::Sptr instance_,
+        VkSurfaceKHR handle_,
+        S_allocation_callbacks*const   allocator_)
+        : instance(instance_)
+        , handle(handle_)
+        , allocation_callbacks(allocator_)
+        , api(instance_->api)
+    {}
+
+    Surface::~Surface()
+    {
+        surface_destroy_fun(instance->handle, handle, *allocation_callbacks);
+    }
+
+#endif  /*  VkSurface  */
 
 #if 1   /* VkDeviceCreatorInfo  */
     shared_ptr<Device_creator> Instance::get_a_device_creator(

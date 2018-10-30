@@ -25,7 +25,7 @@ Permission is granted to anyone to use this software for any purpose, including 
 
 /*
 todo:
-    很多Vk对象都会有放在一个数组中处理的情况 需要有一种新方式来处理
+
 
 */
 

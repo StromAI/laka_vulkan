@@ -19,9 +19,8 @@ Permission is granted to anyone to use this software for any purpose, including 
 #include <array>
 #include <type_traits>
 
-#include "types.h"
 #include "laka_vk_define.h"
-
+#include "types.h"
 
 //如何为使用者提供生命周期管理?
 
@@ -121,7 +120,6 @@ public:                                                                         
 
 #define laka_vk_over_group  }
 
-
     //用于免除使用者填写参数时 手动写共享指针到原始指针的显示转换
     template <typename T__>
     class Aptr {
@@ -159,6 +157,7 @@ public:                                                                         
         operator const T__&() { return ref; }
 
         T__* operator ->() { return &ref; }
+        T__& operator *() { return ref; }
 
         bool operator == (T__* p_) { return &ref == p_; }
         bool operator != (T__* p_) { return &ref != p_; }
@@ -166,6 +165,18 @@ public:                                                                         
         bool operator != (std::shared_ptr<T__> p_) { return &ref != p_.get(); }
     };
 
+    template <typename T__>
+    class Ahandle {
+    public:
+        using Handle_type = std::remove_cv_t<decltype(T__::handle)>;
+        Handle_type handle;
+
+        Ahandle(std::shared_ptr<T__> sptr_) :handle(sptr_->handle) {}
+        Ahandle(T__& ref_) :handle(ref_.ref.handle) {}
+        Ahandle(const Handle_type handle_) :handle(handle_) {}
+
+        operator Handle_type(){ return handle;  }
+    };
 
 
 #endif  /*  global  */
@@ -190,20 +201,24 @@ public:                                                                         
         ~Instance();
 
         static Sptr get_new(
-            Array_value<const char*> enabled_extension_names_ = {},
-            uint32_t                api_version_ = VK_MAKE_VERSION(1, 1, 82),
-            N_instance_create_info  next_ = {},
-            S_allocation_callbacks*const allocator_ = nullptr,
-            Array_value<const char*>enabled_layer_names_ = {},
-            const char*             app_name_ = "laka::vk",
-            uint32_t                app_version_ = VK_MAKE_VERSION(0, 0, 1),
-            const char*             engine_name_ = "laka::vk::engine",
-            uint32_t                engine_version_ = VK_MAKE_VERSION(0, 0, 1));
+            Array_value<const char*>        enabled_extension_names_ = {},
+            uint32_t                        api_version_ = VK_MAKE_VERSION(1, 1, 82),
+            N_instance_create_info          next_ = {},
+            S_allocation_callbacks*const    allocator_ = nullptr,
+            Array_value<const char*>        enabled_layer_names_ = {},
+            const char*                     app_name_ = "laka::vk",
+            uint32_t                        app_version_ = VK_MAKE_VERSION(0, 0, 1),
+            const char*                     engine_name_ = "laka::vk::engine",
+            uint32_t                        engine_version_ = VK_MAKE_VERSION(0, 0, 1));
 
         std::shared_ptr<Device_creator> get_a_device_creator(
             bool(*choose_physical_device_)(Pramater_choose_physical_device& pramater_),
             bool(*choose_queue_family_)(Pramater_choose_queue_family& pramater_),
             S_allocation_callbacks*const allocator_ = default_allocation_cb());
+
+        std::shared_ptr<Surface> get_a_surface(
+            surface_create_info&            create_info_,
+            S_allocation_callbacks*const    allocator_ = default_allocation_cb());
 
         const VkInstance                    handle;
         S_allocation_callbacks*const        allocator_callbacks_ptr;
@@ -211,14 +226,15 @@ public:                                                                         
         std::vector<Physical_device>        physical_devices;
 
         struct Api {
-            table_vk_api_instance(vk_fun ZK, , , YK FH);
-            table_vk_api_physical_device(vk_fun ZK, , , YK FH);
-            table_vk_api_physical_device_khr(vk_fun ZK, , , YK FH);
+            table_vk_api_instance(vk_fun ZK, , , YK FH)
+                table_vk_api_physical_device(vk_fun ZK, , , YK FH)
+                table_vk_api_physical_device_khr(vk_fun ZK, , , YK FH)
+                table_vk_api_platform(vk_fun ZK, , , YK FH)
         }api;
     private:
         Instance(
-            VkInstance              handle_,
-            S_allocation_callbacks*const allocator_callbacks_ptr_);
+            VkInstance                      handle_,
+            S_allocation_callbacks*const    allocator_callbacks_ptr_);
 
         S_allocation_callbacks allocator_callbacks;
     };
@@ -299,6 +315,102 @@ public:                                                                         
         uint32_t qf_index;
         S_queue_family_properties properties;
         std::vector<Queue> queues;
+    };
+
+    class Surface : public std::enable_shared_from_this<Surface> {
+    public:
+        using Sptr = std::shared_ptr<Surface>;
+
+#if defined(VK_USE_PLATFORM_WIN32_KHR)
+
+        bool get_physical_device_presentation_support(
+            Ahandle<Physical_device>    physical_device_,
+            uint32_t                    queuefamily_index_);
+
+        HANDLE get_memory_handle(
+            Ahandle<Device>                            device_,
+            Aref<S_memory_get_win32_handle_info_KHR>info_);
+
+        std::shared_ptr<VkMemoryWin32HandlePropertiesKHR> get_memory_handle_proerties(
+            Ahandle<Device>                 device_,
+            F_external_memory_handle_type   handle_type_,
+            HANDLE                          handle_);
+
+        VkResult import_semaphore_handle(
+            Ahandle<Device>                                 device_,
+            Aref<S_import_semaphore_win32_handle_info_KHR>  pImportSemaphoreWin32HandleInfo_);
+
+        HANDLE get_Semaphore_handle(
+            Ahandle<Device>                             device_,
+            Aref<S_semaphore_get_win32_handle_info_KHR> semaphore_get_win32_handle_info_);
+
+        VkResult import_fence_handle(
+            Ahandle<Device>                             device_,
+            Aref <S_import_fence_win32_handle_info_KHR> info_);
+
+        HANDLE get_fence_handle(
+            Ahandle<Device>                             device_,
+            Aref<S_fence_get_win32_handle_info_KHR>     pGetWin32HandleInfo_);
+
+#elif defined(VK_USE_PLATFORM_ANDROID_KHR)
+
+        std::shared_ptr<S_android_hardware_buffer_format_properties_ANDROID>
+            get_hardware_buffer_properties(
+                Ahandle<Device>         device_,
+                Aref<AHardwareBuffer>   buffer_);
+
+        struct AHardwareBuffer* get_memory_hardware_buffer(
+            Ahandle<Device>                                         device_,
+            Aref<S_memory_get_android_hardware_buffer_info_ANDROID> pInfo_);
+
+#elif defined(VK_USE_PLATFORM_IOS_MVK)
+
+#elif defined(VK_USE_PLATFORM_MACOS_MVK)
+
+#elif defined(VK_USE_PLATFORM_MIR_KHR)
+
+        shared_ptr<MirConnection> get_physical_device_presentation_support(
+            Ahandle<Physical_device>    physical_device_,
+            uint32_t                    queueFamilyIndex_);
+
+#elif defined(VK_USE_PLATFORM_VI_NN)
+
+#elif defined(VK_USE_PLATFORM_WAYLAND_KHR)
+        
+        shared_ptr<struct wl_display> get_physical_device_presentation_support(
+            Ahandle<Physical_device>    physical_device_,
+            uint32_t                    queueFamilyIndex_);
+
+#elif defined(VK_USE_PLATFORM_XCB_KHR)
+
+        shared_ptr<xcb_connection_t> get_physical_device_presentation_support(
+            Ahandle<Physical_device>    physical_device_,
+            uint32_t                    queueFamilyIndex_,
+            xcb_visualid_t              visual_id_  );
+
+#elif defined(VK_USE_PLATFORM_XLIB_KHR)
+
+        shared_ptr<Display> get_physical_device_presentation_support(
+            Ahandle<Physical_device>    physical_device_,
+            uint32_t                    queueFamilyIndex_,
+            VisualID                    visualID_   );
+
+#elif defined(VK_USE_PLATFORM_XLIB_XRANDR_EXT)
+
+#endif
+        ~Surface();
+
+        VkSurfaceKHR handle;
+        Instance::Sptr instance;
+        Instance::Api& api;
+    private:
+        friend Instance;
+        Surface(
+            Instance::Sptr  instance_,
+            VkSurfaceKHR    handle_,
+            S_allocation_callbacks*const   allocator_);
+
+        S_allocation_callbacks*const   allocation_callbacks;
     };
 
     //为帮助创建Device而存在
@@ -500,8 +612,8 @@ public:                                                                         
         std::vector<Physical_device*> physical_devices;
 
         struct Api{
-            table_vk_api_device(vk_fun ZK, , , YK FH);
-            table_vk_api_cmd(vk_fun ZK, , , YK FH);
+            table_vk_api_device(vk_fun ZK, , , YK FH)
+            table_vk_api_cmd(vk_fun ZK, , , YK FH)
         }api;
     private:
         friend class Device_creator;
@@ -551,10 +663,6 @@ public:                                                                         
             {}
         }; 
         Group get_group() { Group g(api, {handle}); return g; }
-    };
-
-    class Surface {
-        //顺序上放最后边做 暂时不给直接的画面了.
     };
 
     //没有功能函数

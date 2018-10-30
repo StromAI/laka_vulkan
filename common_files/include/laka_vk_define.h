@@ -309,14 +309,15 @@ a aa## vkCmdSetDeviceMask ##bb b \
 #   define external_memory_extension_name VK_KHR_EXTERNAL_MEMORY_WIN32_EXTENSION_NAME
 
 #   define table_vk_api_platform(a, aa, bb, b) \
-a aa## vkCreateWin32SurfaceKHR #bb b \
-a aa## vkGetPhysicalDeviceWin32PresentationSupportKHR #bb b \
-a aa## vkGetMemoryWin32HandleKHR #bb b \
-a aa## vkGetMemoryWin32HandlePropertiesKHR #bb b \
-a aa## vkImportSemaphoreWin32HandleKHR #bb b \
-a aa## vkGetSemaphoreWin32HandleKHR #bb b \
-a aa## vkImportFenceWin32HandleKHR #bb b \
-a aa## vkGetFenceWin32HandleKHR #bb b \
+a aa## vkCreateWin32SurfaceKHR ##bb b \
+a aa## vkGetPhysicalDeviceWin32PresentationSupportKHR ##bb b \
+a aa## vkGetMemoryWin32HandleKHR ##bb b \
+a aa## vkGetMemoryWin32HandlePropertiesKHR ##bb b \
+a aa## vkImportSemaphoreWin32HandleKHR ##bb b \
+a aa## vkGetSemaphoreWin32HandleKHR ##bb b \
+a aa## vkImportFenceWin32HandleKHR ##bb b \
+a aa## vkGetFenceWin32HandleKHR ##bb b \
+a aa## vkDestroySurfaceKHR ##bb b \
 
 #   define table_vk_api_device_platform(a, aa, bb, b)\
 a aa## vkGetMemoryWin32HandleNV #bb b \
@@ -324,73 +325,93 @@ a aa## vkGetMemoryWin32HandleNV #bb b \
 //副作用 无法使用WIN32宏
 //#undef WIN32
 
-#define platform_Name   win32
-#define Platform_Name   Win32
-#define WRITER_NAME     KHR
-#define PLATFORM_NAME   WIN32
+#define platform_name win32
+#define Platform_Name Win32
+#define WRITER_NAME KHR
+#define PLATFORM_NAME WIN##32
 
-#define wsi_info_T1(a, b) a HINSTANCE b 
-#define wsi_info_T2(a, b) a HWND b 
-#define wsi_info_V1(a, b) a hinstance b
-#define wsi_info_V2(a, b) a hwnd b
+#define wsi_info_T1(a, b)  a HINSTANCE b 
+#define wsi_info_T2(a, b)  a HWND b 
+#define wsi_info_V1(a, b)  a hinstance b 
+#define wsi_info_V2(a, b)  a hwnd b 
 
 #define surface_spec_version VK_KHR_WIN32_SURFACE_SPEC_VERSION
 #define surface_extension_name VK_KHR_WIN32_SURFACE_EXTENSION_NAME
 
-#endif
+#define surface_create_info S_win32_surface_create_info_KHR
 
-#if defined(VK_USE_PLATFORM_ANDROID_KHR)
-#define platform_Name   android
+#define surface_create_fun(...) api.vkCreateWin32SurfaceKHR(__VA_ARGS__)
+
+#define surface_destroy_fun(...) api.vkDestroySurfaceKHR(__VA_ARGS__)
+
+#elif defined(VK_USE_PLATFORM_ANDROID_KHR)
+#define platform_name   android
 #define Platform_Name   Android
 #define WRITER_NAME     KHR
 #define PLATFORM_NAME   ANDROID
 
 #   define table_vk_api_platform(a, aa, bb, b) \
-a aa## vkCreateAndroidSurfaceKHR #bb b \
-a aa## vkGetAndroidHardwareBufferPropertiesANDROID #bb b \
-a aa## vkGetMemoryAndroidHardwareBufferANDROID #bb b \
+a aa## vkCreateAndroidSurfaceKHR ##bb b \
+a aa## vkGetAndroidHardwareBufferPropertiesANDROID ##bb b \
+a aa## vkGetMemoryAndroidHardwareBufferANDROID ##bb b \
+a aa## vkDestroySurfaceKHR ##bb b \
 
 #define wsi_info_T1(a, b)  a ANativeWindow* b 
 #define wsi_info_T2(a, b)    
-#define wsi_info_V1(a, b) a window b
+#define wsi_info_V1(a, b) a window b 
 #define wsi_info_V2(a, b) 
 
-#endif
+#define surface_create_info S_android_surface_create_info_KHR
 
-#if defined(VK_USE_PLATFORM_IOS_MVK)
-#define platform_Name   ios
+#define surface_create_fun(...) api.vkCreateAndroidSurfaceKHR(__VA_ARGS__)
+
+#define surface_destroy_fun(...) api.vkDestroySurfaceKHR(__VA_ARGS__)
+
+#elif defined(VK_USE_PLATFORM_IOS_MVK)
+#define platform_name   ios
 #define Platform_Name   Ios
 #define WRITER_NAME     MVK
 #define PLATFORM_NAME   IOS
 
 #   define table_vk_api_platform(a, aa, bb, b) \
 a aa## vkCreateIOSSurfaceMVK ##bb b \
+a aa## vkDestroySurfaceKHR ##bb b \
 
 #define wsi_info_T1(a, b) a void* b 
 #define wsi_info_T2(a, b) 
 #define wsi_info_V1(a, b) a pView b 
 #define wsi_info_V2(a, b) 
 
-#endif
+#define surface_create_info S_ios_surface_create_info_MVK
 
-#if defined(VK_USE_PLATFORM_MACOS_MVK)
-#define platform_Name   macos
+#define surface_create_fun(...) api.vkCreateIOSSurfaceMVK(__VA_ARGS__)
+
+#define surface_destroy_fun(...) api.vkDestroySurfaceKHR(__VA_ARGS__)
+
+#elif defined(VK_USE_PLATFORM_MACOS_MVK)
+#define platform_name   macos
 #define Platform_Name   Macos
 #define WRITER_NAME     MVK
 #define PLATFORM_NAME   MACOS
 
 #   define table_vk_api_platform(a, aa, bb, b) \
 a aa## vkCreateMacOSSurfaceMVK ##bb b \
+a aa## vkDestroySurfaceKHR ##bb b \
 
 #define wsi_info_T1(a, b) a void* b 
 #define wsi_info_T2(a, b) 
 #define wsi_info_V1(a, b) a pView b 
 #define wsi_info_V2(a, b) 
 
-#endif
+#define surface_create_info S_mac_os_surface_create_info_MVK
 
-#if defined(VK_USE_PLATFORM_MIR_KHR)
-#define platform_Name   mir
+#define surface_create_fun(...) api.vkCreateMacOSSurfaceMVK(__VA_ARGS__)
+
+#define surface_destroy_fun(...) api.vkDestroySurfaceKHR(__VA_ARGS__)
+
+
+#elif defined(VK_USE_PLATFORM_MIR_KHR)
+#define platform_name   mir
 #define Platform_Name   Mir
 #define WRITER_NAME     KHR
 #define PLATFORM_NAME   MIR
@@ -398,32 +419,44 @@ a aa## vkCreateMacOSSurfaceMVK ##bb b \
 #   define table_vk_api_platform(a, aa, bb, b) \
 a aa## vkCreateMirSurfaceKHR ##bb b \
 a aa## vkGetPhysicalDeviceMirPresentationSupportKHR ##bb b \
+a aa## vkDestroySurfaceKHR ##bb b \
 
 #define wsi_info_T1(a, b) a MirConnection* b 
 #define wsi_info_T2(a, b) a MirSurface* b 
 #define wsi_info_1(a, b) a connection b 
 #define wsi_info_2(a, b) a mirSurface b 
 
-#endif
+#define surface_create_info S_mir_surface_create_info_KHR
 
-#if defined(VK_USE_PLATFORM_VI_NN)
-#define platform_Name   vi
+#define surface_create_fun(...) api.vkCreateMirSurfaceKHR(__VA_ARGS__)
+
+#define surface_destroy_fun(...) api.vkDestroySurfaceKHR(__VA_ARGS__)
+
+
+#elif defined(VK_USE_PLATFORM_VI_NN)
+#define platform_name   vi
 #define Platform_Name   Vi
 #define WRITER_NAME     NN
 #define PLATFORM_NAME   VI
 
 #   define table_vk_api_platform(a, aa, bb, b) \
 a aa## vkCreateViSurfaceNN ##bb b \
+a aa## vkDestroySurfaceKHR ##bb b \
 
 #define wsi_info_T1(a, b) a void* b 
 #define wsi_info_T2(a, b) 
 #define wsi_info_V1(a, b) a window b 
 #define wsi_info_V2(a, b) 
 
-#endif
+#define surface_create_info S_vi_surface_create_info_NN
 
-#if defined(VK_USE_PLATFORM_WAYLAND_KHR)
-#define platform_Name   wayland
+#define surface_create_fun(...) api.vkCreateViSurfaceNN(__VA_ARGS__)
+
+#define surface_destroy_fun(...) api.vkDestroySurfaceKHR(__VA_ARGS__)
+
+
+#elif defined(VK_USE_PLATFORM_WAYLAND_KHR)
+#define platform_name   wayland
 #define Platform_Name   Wayland
 #define WRITER_NAME     KHR
 #define PLATFORM_NAME   WAYLAND
@@ -431,16 +464,22 @@ a aa## vkCreateViSurfaceNN ##bb b \
 #   define table_vk_api_platform(a, aa, bb, b) \
 a aa## vkCreateWaylandSurfaceKHR ##bb b \
 a aa## vkGetPhysicalDeviceWaylandPresentationSupportKHR ##bb b \
+a aa## vkDestroySurfaceKHR ##bb b \
 
 #define wsi_info_T1(a, b) a struct wl_display* b 
-#define wsi_info_T2(a, b) a struct wl_surface* b  
+#define wsi_info_T2(a, b) a struct wl_surface* b 
 #define wsi_info_V1(a, b) a display b 
 #define wsi_info_V2(a, b) a surface b 
 
-#endif
+#define surface_create_info S_wayland_surface_create_info_KHR
 
-#if defined(VK_USE_PLATFORM_XCB_KHR)
-#define platform_Name   xcb
+#define surface_create_fun(...) api.vkCreateWaylandSurfaceKHR(__VA_ARGS__)
+
+#define surface_destroy_fun(...) api.vkDestroySurfaceKHR(__VA_ARGS__)
+
+
+#elif defined(VK_USE_PLATFORM_XCB_KHR)
+#define platform_name   xcb
 #define Platform_Name   Xcb
 #define WRITER_NAME     KHR
 #define PLATFORM_NAME   XCB
@@ -448,16 +487,22 @@ a aa## vkGetPhysicalDeviceWaylandPresentationSupportKHR ##bb b \
 #   define table_vk_api_platform(a, aa, bb, b) \
 a aa## vkCreateXcbSurfaceKHR ##bb b \
 a aa## vkGetPhysicalDeviceXcbPresentationSupportKHR ##bb b \
+a aa## vkDestroySurfaceKHR ##bb b \
 
 #define wsi_info_T1(a, b) a xcb_connection_t* b 
 #define wsi_info_T2(a, b) a xcb_window_t b 
 #define wsi_info_V1(a, b) a connection b 
 #define wsi_info_V2(a, b) a window b 
 
-#endif
+#define surface_create_info S_xcb_surface_create_info_KHR
 
-#if defined(VK_USE_PLATFORM_XLIB_KHR)
-#define platform_Name   xlib
+#define surface_create_fun(...) api.vkCreateXcbSurfaceKHR(__VA_ARGS__)
+
+#define surface_destroy_fun(...) api.vkDestroySurfaceKHR(__VA_ARGS__)
+
+
+#elif defined(VK_USE_PLATFORM_XLIB_KHR)
+#define platform_name   xlib
 #define Platform_Name   Xlib
 #define WRITER_NAME     KHR
 #define PLATFORM_NAME   XLIB
@@ -465,16 +510,22 @@ a aa## vkGetPhysicalDeviceXcbPresentationSupportKHR ##bb b \
 #   define table_vk_api_platform(a, aa, bb, b) \
 a aa## vkCreateXlibSurfaceKHR ##bb b \
 a aa## vkGetPhysicalDeviceXlibPresentationSupportKHR ##bb b \
+a aa## vkDestroySurfaceKHR ##bb b \
 
 #define wsi_info_T1(a, b) a Display* b 
 #define wsi_info_T2(a, b) a Window b 
 #define wsi_info_V1(a, b) a dpy b 
 #define wsi_info_V2(a, b) a window b 
 
-#endif
+#define surface_create_info S_xlib_surface_create_info_KHR
 
-#if defined(VK_USE_PLATFORM_XLIB_XRANDR_EXT)
-#define platform_Name   xlib_display
+#define surface_create_fun(...) api.vkCreateXlibSurfaceKHR(__VA_ARGS__)
+
+#define surface_destroy_fun(...) api.vkDestroySurfaceKHR(__VA_ARGS__)
+
+
+#elif defined(VK_USE_PLATFORM_XLIB_XRANDR_EXT)
+#define platform_name   xlib_display
 #define Platform_Name   Xlib_display
 #define WRITER_NAME     EXT
 #define PLATFORM_NAME   XLIB_DISPLAY
@@ -482,6 +533,15 @@ a aa## vkGetPhysicalDeviceXlibPresentationSupportKHR ##bb b \
 #   define table_vk_api_platform(a, aa, bb, b) \
 a aa## vkAcquireXlibDisplayEXT ##bb b \
 a aa## vkGetRandROutputDisplayEXT ##bb b \
+a aa## vkDestroySurfaceKHR ##bb b \
+
+//????
+
+#define surface_create_info ????
+
+#define surface_create_fun 
+
+#define surface_destroy_fun(...) api.vkDestroySurfaceKHR(__VA_ARGS__)
 
 
 //????
@@ -494,7 +554,11 @@ a aa## vkGetRandROutputDisplayEXT ##bb b \
 
 #else
 
+#define table_vk_api_platform(...) 
 
+#define surface_create_fun(...) (VkResult::VK_ERROR_INITIALIZATION_FAILED)
+
+#define surface_destroy_fun(...) 
 
 #endif
 
@@ -750,6 +814,6 @@ a aa## VkMemoryDedicatedAllocateInfo ##bb b \
 //a aa## VkImportAndroidHardwareBufferInfoANDROID ##bb b \
 
 
-#define vk_fun(name) PFN_##name name
+#define vk_fun(name__) PFN_##name__ name__
 
 #include "vulkan/vulkan.h"

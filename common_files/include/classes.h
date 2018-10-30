@@ -17,6 +17,8 @@ Permission is granted to anyone to use this software for any purpose, including 
 class Instance;
 class Physical_device;
 class Physical_device_group;
+class Surface;
+
 class Device_creator;
 
 struct Device_api;
