@@ -352,6 +352,58 @@ public:                                                                         
             Ahandle<Device>                             device_,
             Aref<S_fence_get_win32_handle_info_KHR>     pGetWin32HandleInfo_);
 
+        
+
+        class Wnd_class : public WNDCLASSEX{
+        public:
+            struct F_style{
+                enum B{
+                    b_vre_draw = CS_VREDRAW,
+                    b_hre_draw = CS_HREDRAW,
+                    b_dbl_clks = CS_DBLCLKS,
+                    b_own_dc = CS_OWNDC,
+                    b_parent_dc = CS_PARENTDC,
+                    b_no_close = CS_NOCLOSE,
+                    b_save_bits = CS_SAVEBITS,
+                    b_byte_align_client = CS_BYTEALIGNCLIENT,
+                    b_byte_align_window = CS_BYTEALIGNWINDOW,
+                    b_global_class = CS_GLOBALCLASS,
+                    b_ime = CS_IME,
+#if(_WIN32_WINNT >= 0x0501)
+                    b_drop_shadow = CS_DROPSHADOW,
+#endif /* _WIN32_WINNT >= 0x0501 */
+                };
+
+            };
+            Wnd_class(
+                HINSTANCE   hinstance_,
+                WNDPROC     wndproc_,
+                F_style     style_ = F_style::b_hre_draw | F_style::b_vre_draw,
+                LPCSTR      class_name_ = "laka_vk_wnd_class",
+                HBRUSH      hbrBackground_ = (HBRUSH)GetStockObject(BLACK_BRUSH),
+                HICON       hIconSm_ = LoadIcon(NULL, IDI_WINLOGO),
+                HICON       icon_ = LoadIcon(NULL, IDI_APPLICATION),
+                HCURSOR     cursor_ = LoadCursor(NULL, IDC_ARROW),
+                LPCSTR      menu_name_ = NULL,
+                int         cbClsExtra_ = 0,
+                int         cbWndExtra_ = 0)
+                : WNDCLASSEX{
+                    sizeof(WNDCLASSEX),
+                    static_cast<UINT>(style_),
+                    wndproc_,
+                    cbClsExtra_,
+                    cbWndExtra_,
+                    hinstance_,
+                    icon_,
+                    cursor_,
+                    hbrBackground_,
+                    menu_name_,
+                    class_name_,
+                    hIconSm_ 
+                    }
+            {}
+        };
+
 #elif defined(VK_USE_PLATFORM_ANDROID_KHR)
 
         std::shared_ptr<S_android_hardware_buffer_format_properties_ANDROID>
