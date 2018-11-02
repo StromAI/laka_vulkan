@@ -625,7 +625,6 @@ namespace laka { namespace vk {
 
 #if 1   /*  VkSurface  */
 
-
 #if defined(VK_USE_PLATFORM_WIN32_KHR)
 
     bool Surface::get_physical_device_presentation_support(
@@ -717,6 +716,43 @@ namespace laka { namespace vk {
         return result;
     }
 
+    S_wnd_class::S_wnd_class(
+        HINSTANCE           hInstance_,
+        LPCSTR              lpszClassName_,
+        WNDPROC             wnd_process_,
+        F_wnd_class_style   style_ /*= F_wnd_class_style::b_h_redraw | F_wnd_class_style::b_v_redraw*/,
+        HBRUSH              hbrBackground_ /*= (HBRUSH)GetStockObject(BLACK_BRUSH)*/,
+        HICON               hIcon_ /*= LoadIcon(NULL, IDI_APPLICATION)*/,
+        HCURSOR             hCursor_ /*= LoadCursor(NULL, IDC_ARROW)*/,
+        HICON               hIconSm_ /*= LoadIcon(NULL, IDI_WINLOGO)*/,
+        LPCSTR              lpszMenuName_ /*= NULL*/,
+        int                 cls_extra_ /*= 0*/,
+        int                 wnd_extra_ /*= 0*/) 
+        :WNDCLASSEX{
+            sizeof(WNDCLASSEX),
+            style_,
+            wnd_process_,
+            cls_extra_,
+            wnd_extra_,
+            hInstance_,
+            hIcon_,
+            hCursor_,
+            hbrBackground_,
+            lpszMenuName_,
+            lpszClassName_,
+            hIconSm_ }
+    {
+        auto ret = RegisterClassEx(this);
+        if (!ret)
+        {
+            init_show;
+            show_err("×¢²á´°¿ÚÀàÊ§°Ü");
+        }
+    }
+
+
+
+
 #elif defined(VK_USE_PLATFORM_ANDROID_KHR)
 
     shared_ptr<S_android_hardware_buffer_format_properties_ANDROID>
@@ -755,18 +791,16 @@ namespace laka { namespace vk {
 
 #elif defined(VK_USE_PLATFORM_MIR_KHR)
 
-    shared_ptr<MirConnection> Surface::get_physical_device_presentation_support(
+    bool Surface::get_physical_device_presentation_support(
         Ahandle<Physical_device>    physical_device_,
-        uint32_t                    queueFamilyIndex_)
+        uint32_t                    queueFamilyIndex_,
+        MirConnection*              connection_)
     {
-        shared_ptr<MirConnection> result(new MirConnection);
-        auto ret = api.vkGetPhysicalDeviceMirPresentationSupportKHR(
+        return VK_TRUE == api.vkGetPhysicalDeviceMirPresentationSupportKHR(
             physical_device_,
             queueFamilyIndex_,
-            MirConnection.get()
+            connection_
         );
-        show_result(ret);
-        return result;
     }
 
 #elif defined(VK_USE_PLATFORM_VI_NN)
@@ -775,16 +809,14 @@ namespace laka { namespace vk {
 
     shared_ptr<struct wl_display> Surface::get_physical_device_presentation_support(
         Ahandle<Physical_device>    physical_device_,
-        uint32_t                    queueFamilyIndex_)
+        uint32_t                    queueFamilyIndex_,
+        struct wl_display*          wl_display_)
     {
-        shared_ptr<struct wl_display> result(new struct wl_display);
-        auto ret = api.vkGetPhysicalDeviceWaylandPresentationSupportKHR(
+        return VK_TRUE == api.vkGetPhysicalDeviceWaylandPresentationSupportKHR(
             physical_device_,
             queueFamilyIndex_,
-            result.get()
+            wl_display_
         );
-        show_result(ret);
-        return result;
     }
     
 #elif defined(VK_USE_PLATFORM_XCB_KHR)
@@ -792,17 +824,15 @@ namespace laka { namespace vk {
     shared_ptr<xcb_connection_t> Surface::get_physical_device_presentation_support(
         Ahandle<Physical_device>    physical_device_,
         uint32_t                    queueFamilyIndex_,
+        xcb_connection_t*           connection_,
         xcb_visualid_t              visual_id_)
     {
-        shared_ptr<struct xcb_connection_t> result(new struct xcb_connection_t);
-        auto ret = api.vkGetPhysicalDeviceXcbPresentationSupportKHR(
+        return VK_TRUE == api.vkGetPhysicalDeviceXcbPresentationSupportKHR(
             physical_device_,
             queueFamilyIndex_,
-            result.get(),
+            connection_,
             visual_id_
         );
-        show_result(ret);
-        return result;
     }
 
 #elif defined(VK_USE_PLATFORM_XLIB_KHR)
@@ -810,17 +840,15 @@ namespace laka { namespace vk {
     shared_ptr<Display> Surface::get_physical_device_presentation_support(
         Ahandle<Physical_device>    physical_device_,
         uint32_t                    queueFamilyIndex_,
+        Display*                    display_,
         VisualID                    visualID_)
     {
-        shared_ptr<Display> result(new Display);
-        auto ret = api.vkGetPhysicalDeviceXlibPresentationSupportKHR(
+        return VK_TRUE == api.vkGetPhysicalDeviceXlibPresentationSupportKHR(
             physical_device_,
             queueFamilyIndex_,
-            result.get(),
+            display_,
             visualID_
         );
-        show_result(ret);
-        return result;
     }
 
 #elif defined(VK_USE_PLATFORM_XLIB_XRANDR_EXT)
@@ -1322,11 +1350,7 @@ shared_ptr<Surface> Instance::get_a_surface(
         api.vkDestroyDevice(handle, *allocation_callbacks);
     }
 #endif  /*  VkDevice  */
-
-#if 1   /*  VkSurface  */
-
-#endif  /*  VkSurface  */
-
+    
 #if 1   /*  VkSemaphore  */
     shared_ptr <Semaphore> Device::get_a_semaphore(
         N_semaphore_create_info next_/* = nullptr*/,

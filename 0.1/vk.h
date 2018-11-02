@@ -328,8 +328,8 @@ public:                                                                         
             uint32_t                    queuefamily_index_);
 
         HANDLE get_memory_handle(
-            Ahandle<Device>                            device_,
-            Aref<S_memory_get_win32_handle_info_KHR>info_);
+            Ahandle<Device>                             device_,
+            Aref<S_memory_get_win32_handle_info_KHR>    info_);
 
         std::shared_ptr<VkMemoryWin32HandlePropertiesKHR> get_memory_handle_proerties(
             Ahandle<Device>                 device_,
@@ -354,55 +354,6 @@ public:                                                                         
 
         
 
-        class Wnd_class : public WNDCLASSEX{
-        public:
-            struct F_style{
-                enum B{
-                    b_vre_draw = CS_VREDRAW,
-                    b_hre_draw = CS_HREDRAW,
-                    b_dbl_clks = CS_DBLCLKS,
-                    b_own_dc = CS_OWNDC,
-                    b_parent_dc = CS_PARENTDC,
-                    b_no_close = CS_NOCLOSE,
-                    b_save_bits = CS_SAVEBITS,
-                    b_byte_align_client = CS_BYTEALIGNCLIENT,
-                    b_byte_align_window = CS_BYTEALIGNWINDOW,
-                    b_global_class = CS_GLOBALCLASS,
-                    b_ime = CS_IME,
-#if(_WIN32_WINNT >= 0x0501)
-                    b_drop_shadow = CS_DROPSHADOW,
-#endif /* _WIN32_WINNT >= 0x0501 */
-                };
-
-            };
-            Wnd_class(
-                HINSTANCE   hinstance_,
-                WNDPROC     wndproc_,
-                F_style     style_ = F_style::b_hre_draw | F_style::b_vre_draw,
-                LPCSTR      class_name_ = "laka_vk_wnd_class",
-                HBRUSH      hbrBackground_ = (HBRUSH)GetStockObject(BLACK_BRUSH),
-                HICON       hIconSm_ = LoadIcon(NULL, IDI_WINLOGO),
-                HICON       icon_ = LoadIcon(NULL, IDI_APPLICATION),
-                HCURSOR     cursor_ = LoadCursor(NULL, IDC_ARROW),
-                LPCSTR      menu_name_ = NULL,
-                int         cbClsExtra_ = 0,
-                int         cbWndExtra_ = 0)
-                : WNDCLASSEX{
-                    sizeof(WNDCLASSEX),
-                    static_cast<UINT>(style_),
-                    wndproc_,
-                    cbClsExtra_,
-                    cbWndExtra_,
-                    hinstance_,
-                    icon_,
-                    cursor_,
-                    hbrBackground_,
-                    menu_name_,
-                    class_name_,
-                    hIconSm_ 
-                    }
-            {}
-        };
 
 #elif defined(VK_USE_PLATFORM_ANDROID_KHR)
 
@@ -421,38 +372,42 @@ public:                                                                         
 
 #elif defined(VK_USE_PLATFORM_MIR_KHR)
 
-        shared_ptr<MirConnection> get_physical_device_presentation_support(
+        bool get_physical_device_presentation_support(
             Ahandle<Physical_device>    physical_device_,
-            uint32_t                    queueFamilyIndex_);
+            uint32_t                    queueFamilyIndex_,
+            MirConnection*              connection_);
 
 #elif defined(VK_USE_PLATFORM_VI_NN)
 
 #elif defined(VK_USE_PLATFORM_WAYLAND_KHR)
         
-        shared_ptr<struct wl_display> get_physical_device_presentation_support(
+        bool get_physical_device_presentation_support(
             Ahandle<Physical_device>    physical_device_,
-            uint32_t                    queueFamilyIndex_);
+            uint32_t                    queueFamilyIndex_,
+            struct wl_display*          wl_display_);
 
 #elif defined(VK_USE_PLATFORM_XCB_KHR)
 
-        shared_ptr<xcb_connection_t> get_physical_device_presentation_support(
+        bool get_physical_device_presentation_support(
             Ahandle<Physical_device>    physical_device_,
             uint32_t                    queueFamilyIndex_,
-            xcb_visualid_t              visual_id_  );
+            xcb_connection_t*           connection_,
+            xcb_visualid_t              visual_id_);
 
 #elif defined(VK_USE_PLATFORM_XLIB_KHR)
 
-        shared_ptr<Display> get_physical_device_presentation_support(
+        bool get_physical_device_presentation_support(
             Ahandle<Physical_device>    physical_device_,
             uint32_t                    queueFamilyIndex_,
-            VisualID                    visualID_   );
+            Display*                    display_,
+            VisualID                    visualID_);
 
 #elif defined(VK_USE_PLATFORM_XLIB_XRANDR_EXT)
 
 #endif
         ~Surface();
 
-        VkSurfaceKHR handle;
+        const VkSurfaceKHR handle;
         Instance::Sptr instance;
         Instance::Api& api;
     private:

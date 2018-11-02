@@ -15,13 +15,28 @@ void fun1(Ahandle<Instance> i_)
 }
 
 
+LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
+{
+    
+    return (DefWindowProc(hWnd, uMsg, wParam, lParam));
+}
 
+//int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR pCmdLine, int nCmdShow)
 int main()
 {
     init_show;
     show_info("以下一条为测试信息 不是真的");
+
     VkResult test_r = VkResult::VK_NOT_READY;
     show_result(test_r);
+
+    HINSTANCE hInst = GetModuleHandle(0);
+
+    S_wnd_class wc{ hInst,"fuck",WndProc };
+
+    auto wnd = wc.create_a_window("shit");
+
+    ShowWindow(wnd, 9);
 
     auto vk_ist = Instance::get_new({ VK_KHR_SURFACE_EXTENSION_NAME,surface_extension_name });
 
@@ -39,8 +54,6 @@ int main()
 
     show_info("physical device properties count: {}", count);
 
-
-    system("pause");
 }
 
 
