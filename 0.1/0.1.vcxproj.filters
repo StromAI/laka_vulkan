@@ -31,9 +31,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\common_files\include\classes.h">
-      <Filter>基础文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\common_files\include\common.h">
       <Filter>基础文件</Filter>
     </ClInclude>

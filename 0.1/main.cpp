@@ -3,21 +3,8 @@
 
 using namespace laka::vk;
 
-void fun(VkInstance i_handle_)
-{
-    init_show;
-    show_info("i_handle_ : {}\n", (uint64_t)i_handle_);
-}
-
-void fun1(Ahandle<Instance> i_)
-{
-    fun(i_);
-}
-
-
 LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
-{
-    
+{ 
     return (DefWindowProc(hWnd, uMsg, wParam, lParam));
 }
 
@@ -26,33 +13,76 @@ int main()
 {
     init_show;
     show_info("以下一条为测试信息 不是真的");
-
     VkResult test_r = VkResult::VK_NOT_READY;
     show_result(test_r);
-
-    HINSTANCE hInst = GetModuleHandle(0);
-
-    S_wnd_class wc{ hInst,"fuck",WndProc };
-
+    
+    // 创建windows窗口类
+    S_wnd_class wc{ GetModuleHandle(0),"fuck",WndProc };
+    
+    // 创建窗口
     auto wnd = wc.create_a_window("shit");
+    std::string err_temp("创建窗口失败");
+    expect_if(wnd == NULL, err_temp+std::to_string((int)wnd) );
+    
+    // 创建Vulkan实例
+    auto vk_instance = Instance::get_new({ VK_KHR_SURFACE_EXTENSION_NAME,surface_extension_name });
+    
+    // 创建设备创建器
+    auto vk_dc = vk_instance->get_a_device_creator(
+        // 挑选设备的回调函数. 
+        // 你将通过参数,得到一个物理设备对象,该函数负责判断一个设备是否符合要求.
+        [](Pramater_choose_physical_device& p_)->bool{
+            auto phsical_device = p_.if_you_feel_the_physical_device_not_ok_so_return_false;
+            
+            // 找出通过设备的条件 例如:
+            auto p1 = phsical_device.get_properties();
+            init_show;
+            show_info("discreteQueuePriorities:{}",p1->limits.discreteQueuePriorities);
 
-    ShowWindow(wnd, 9);
+            // 设定挑选设备的条件 例如:
+            if (p1->limits.maxCullDistances == 0)
+            {
+                return false;
+            }
+            return true;
+        },
+        // 设置逻辑设备队列的回调函数
+        // 你将通过参数,得到所挑选设备的所有队列信息,如不满意则返回false.laka将跳过此设备
+        // 满意的话,就填写waiting_for_your_filled_info_,并且返回true;
+        [](Pramater_choose_queue_family& pramater_)->bool{
+            init_show;
+            bool is_ok = false;
 
-    auto vk_ist = Instance::get_new({ VK_KHR_SURFACE_EXTENSION_NAME,surface_extension_name });
-
-    VkPhysicalDeviceGroupProperties pd_properties;
-    uint32_t count = 0;
-    vk_ist->api.vkEnumeratePhysicalDeviceGroups(
-        vk_ist->handle,
-        &count,
-        nullptr
+            for (auto&& qf_info : pramater_.give_you_queue_family_info_)
+            {
+                auto qf_index = qf_info.index;
+                // 判断是否是一个带图形功能的队列族
+                if(qf_info.properties.queueFlags != F_queue::b_graphics)
+                    continue;
+                
+                pramater_.waiting_for_your_filled_info_.push_back(User_choose_queue_info{
+                    qf_info.index,
+                    {1.0f,1.0f,1.0f,1.0f},      // 多少个元素就代表多少个队列 每个元素就是相应位置的队列的优先级
+                    (F_device_queue_create)0,   // 最新版本才有作用和说明 暂时设为0
+                    E_queue_global_priority_EXT::e_medium_ext
+                });
+                
+                is_ok = true;
+                break;
+            }
+            return is_ok;
+        }
     );
+    surface_create_info s_ci{
+        0,
+        wc.hInstance,
+        wnd
+    };
+    auto surface = vk_instance->get_a_surface(s_ci);
 
-    show_info("vk_ist.handle:{}", (uint64_t)vk_ist->handle);
 
-    fun1(vk_ist);
+    
 
-    show_info("physical device properties count: {}", count);
 
 }
 

@@ -24,7 +24,7 @@ namespace laka { namespace vk {
         Execute_function excute_)
     {
         init_show;
-        show_debug("加载vulkan函数:{0}", function_name_);
+        show_debug("加载Vulkan函数:{0}", function_name_);
         auto fp = get_instance_proc_address(instance_, function_name_);
         if (fp != NULL)
         {

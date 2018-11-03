@@ -13,9 +13,9 @@ Permission is granted to anyone to use this software for any purpose, including 
 
 */
 
-#include    "common.h"
+#include "common.h"
 
-using    namespace    spdlog;
+using namespace  spdlog;
 
 class    My_init {
 public:

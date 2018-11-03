@@ -127,7 +127,6 @@
     <ClCompile Include="vk.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\common_files\include\classes.h" />
     <ClInclude Include="..\common_files\include\common.h" />
     <ClInclude Include="..\common_files\include\laka_vk_define.h" />
     <ClInclude Include="..\common_files\include\types.h" />

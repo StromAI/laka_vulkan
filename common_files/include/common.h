@@ -66,11 +66,12 @@ auto file_log = spdlog::get("file_log");
 if( exp__ ) {show_debug(__VA_ARGS__);} else { show_wrn(__VA_ARGS__ );}
 
 #define expect_if(expect_if_exp__,expect_if_msg__)\
-if(!(expect_if_exp__))\
+if(expect_if_exp__)\
 {\
 	std::string expect_if_s__; \
 	expect_if_s__ += (expect_if_msg__); \
-	expect_if_s__ += code_location();\
+	expect_if_s__ += code_location;\
+    show_err(expect_if_s__);\
 	throw std::runtime_error(expect_if_s__);\
 }
 

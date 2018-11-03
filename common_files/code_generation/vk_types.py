@@ -386,10 +386,6 @@ for enum in flag_bits_list:
     "{0}& operator ^= ({0} flag_)@flag ^= flag_.flag;return *this;$\n" \
     "{0} operator ~ ()@return all_flags().flag^flag;$\n" \
     "bool operator !()@return !flag;$\n" \
-    "bool operator == ({0} flag_)@return flag == flag_.flag;$\n" \
-    "bool operator == (B bit_)@return flag == static_cast<int>(bit_);$\n" \
-    "bool operator != ({0} flag_)@return flag != flag_.flag;$\n" \
-    "bool operator != (B bit_)@return flag != static_cast<int>(bit_);$\n" \
     "{0}& clear()@flag = 0;return *this;$\n" \
     "{0} all_flags()@\nreturn " \
         .format(fb_obj.my_name,fb_obj.vk_name).replace("@", "{").replace("$", "}")
@@ -412,7 +408,9 @@ for enum in flag_bits_list:
     flagbits_out+="};\n"
 
 
-    flagbits_out+="{0} inline operator|({0}::B bit1_, {0}::B bit2_)@{0} flags(bit1_);return flags | bit2_;$\nbool inline operator==({0} f1_, {0} f2_) @ return f1_.flag== f2_.flag; $\n\n"\
+    flagbits_out+="{0} inline operator|(const {0}::B bit1_, const {0}::B bit2_)@{0} flags(bit1_);return flags | bit2_;$\n" \
+                  "bool inline operator==(const {0} f1_, const {0} f2_) @ return f1_.flag == f2_.flag; $\n" \
+                  "bool inline operator!=(const {0} f1_, const {0} f2_) @ return f1_.flag != f2_.flag; $\n" \
         .format(fb_obj.my_name).replace("@","{").replace("$","}")
 
     all_type_dict[fb_obj.vk_name] = fb_obj
