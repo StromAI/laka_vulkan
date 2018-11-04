@@ -222,7 +222,7 @@ if (!(exp))\
 typedef HMODULE Module_handle;
 
 template <typename	Execute_function>
-Module_handle load_moudule(const char* module_name_, Execute_function execute_function_)
+Module_handle load_module(const char* module_name_, Execute_function execute_function_)
 {
     init_show;
     show_debug("╪сть{}дё©И", module_name_);
@@ -258,7 +258,7 @@ void* load_module_function(Module_handle module_handle_, const char* function_na
 }
 
 
-Module_handle load_moudule(const char* module_name_);
+Module_handle load_module(const char* module_name_);
 
 Module_handle load_module_must(const char* module_name_);
 

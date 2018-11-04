@@ -813,6 +813,10 @@ public:                                                                         
             Array_value<char*> enabled_extensions_ = {},
             S_physical_device_features* features_ = nullptr);//todo:这里可以接收匿名函数回调
 
+        std::shared_ptr<Device> get_a_device(
+            Array_value<char*> enabled_extensions_ = {},
+            S_physical_device_features* features_ = nullptr);
+
         //std::shared_ptr<Device> get_a_device(
         //    std::list<Physical_device>& physical_devices_,
         //    std::vector<char*>* enabled_extensions_ = nullptr,

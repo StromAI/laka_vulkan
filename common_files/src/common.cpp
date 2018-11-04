@@ -55,14 +55,14 @@ public:
 
 static My_init init;
 
-Module_handle load_moudule(const char* module_name_)
+Module_handle load_module(const char* module_name_)
 {
-    return load_moudule(module_name_, []() {});
+    return load_module(module_name_, []() {});
 }
 
 Module_handle load_module_must(const char* module_name_)
 {
-    return load_moudule(module_name_, []() {abort(); });
+    return load_module(module_name_, []() {abort(); });
 }
 
 void* load_module_function(Module_handle    module_handle_, const    char*    function_name_)

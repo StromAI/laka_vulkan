@@ -291,6 +291,7 @@ namespace laka { namespace vk {
         table_vk_api_instance(load_instance_api ZK, , , YK);
         table_vk_api_physical_device(load_instance_api ZK, , , YK);
         table_vk_api_physical_device_khr(load_instance_api ZK, , , YK);
+        table_vk_api_platform(load_instance_api ZK, , , YK);
 
         uint32_t count = 0;
         auto ret = api.vkEnumeratePhysicalDevices(handle, &count, nullptr);
@@ -596,7 +597,7 @@ namespace laka { namespace vk {
             handle,
             pBindInfo_.size(),
             *pBindInfo_.data(),
-            fence_== nullptr? nullptr : fence_->handle
+            fence_== nullptr? VK_NULL_HANDLE : fence_->handle
         );
         show_result(ret);
 
@@ -608,7 +609,7 @@ namespace laka { namespace vk {
         Aptr<Fence>                 fence_)
     {
         VkFence fence_handle = 
-            fence_ != nullptr ? fence_->handle : VK_NULL_HANDLE;
+            fence_ == nullptr ? VK_NULL_HANDLE:fence_->handle;
         auto ret = api->vkQueueSubmit(
             handle,
             pSubmitInfo_.size(),
@@ -1217,6 +1218,48 @@ shared_ptr<Surface> Instance::get_a_surface(
         ));
 
         return device_sptr;
+    }
+
+    std::shared_ptr<Device> Device_creator::get_a_device(
+        Array_value<char*> enabled_extensions_/* = {}*/,
+        S_physical_device_features* features_/* = nullptr*/)
+    {
+        init_show;
+        show_debug("遍历所有设备 - 创建逻辑设备");
+
+        shared_ptr<Device> device_sptr;
+        for (auto&& phy:instance->physical_devices)
+        {
+            Pramater_choose_physical_device p{ phy };
+            if (choose_physical_device_function(p) == false)
+            {
+                show_wrn("一个设备不合适:{}", (void*)p.if_you_feel_the_physical_device_not_ok_so_return_false.handle);
+                continue;
+            }
+
+            auto queue_familys = p.if_you_feel_the_physical_device_not_ok_so_return_false.get_queue_family_properties();
+
+            vector<Queue_family_info> my_queue_familys(queue_familys->size());
+
+            for (size_t i = 0; i < my_queue_familys.size(); ++i)
+            {
+                my_queue_familys[i].index = static_cast<uint32_t>(i);
+                my_queue_familys[i].properties = (*queue_familys)[i];
+            }
+            vector<User_choose_queue_info> user_choosed_q_create_infos;
+
+            Pramater_choose_queue_family choose_qf_parmater{ my_queue_familys, user_choosed_q_create_infos };
+            if (choose_queue_family_function(choose_qf_parmater) == false)
+            {
+                show_wrn("设备的队列族均不合适");
+                continue;
+            }
+            show_info("选取了合适的设备与队列");
+
+        }
+
+
+        shared_ptr<Device> device_sptr;
     }
 
     VkResult Device::invalidate_mapped_memory_ranges(

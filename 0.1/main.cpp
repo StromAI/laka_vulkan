@@ -1,5 +1,6 @@
 #include <common.h>
 #include "vk.h"
+#include <ShellScalingAPI.h>
 
 using namespace laka::vk;
 
@@ -23,7 +24,17 @@ int main()
     auto wnd = wc.create_a_window("shit");
     std::string err_temp("创建窗口失败");
     expect_if(wnd == NULL, err_temp+std::to_string((int)wnd) );
-    
+
+    auto sh_core_moudle = load_module_must("Shcore.dll");
+
+    using PFN_set_process_dpi_awareness = HRESULT(*)(PROCESS_DPI_AWARENESS);
+    auto setProcessDpiAwareness =
+        (PFN_set_process_dpi_awareness)load_module_function_must(sh_core_moudle, "SetProcessDpiAwareness");
+
+    if (setProcessDpiAwareness != nullptr)
+        setProcessDpiAwareness(PROCESS_DPI_AWARENESS::PROCESS_PER_MONITOR_DPI_AWARE);
+    FreeLibrary(sh_core_moudle);
+
     // 创建Vulkan实例
     auto vk_instance = Instance::get_new({ VK_KHR_SURFACE_EXTENSION_NAME,surface_extension_name });
     
@@ -80,8 +91,8 @@ int main()
     };
     auto surface = vk_instance->get_a_surface(s_ci);
 
+    auto vk_dev = vk_dc->get_a_device();
 
-    
 
 
 }
