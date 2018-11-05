@@ -68,7 +68,7 @@ int main()
             {
                 auto qf_index = qf_info.index;
                 // 判断是否是一个带图形功能的队列族
-                if(qf_info.properties.queueFlags != F_queue::b_graphics)
+                if(qf_info.properties.queueFlags & F_queue::b_graphics)
                     continue;
                 
                 pramater_.waiting_for_your_filled_info_.push_back(User_choose_queue_info{

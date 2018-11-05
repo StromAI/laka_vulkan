@@ -339,13 +339,18 @@ for enum in flag_bits_list:
 
         continue
     flagbits_out+=\
+        "union "+fb_obj.my_name+" {\n"+\
+        "\tuint32_t flag;\n"\
+        "\t"+fb_obj.vk_name+" vk_flag;\n"\
+        "\tenum B{\n"
+    '''
         "class " + fb_obj.my_name + " {\n" + \
         "private:\n" + \
         fb_obj.my_name + "(int flag_):flag(flag_){};\n" + \
         "public:\n" \
         "uint32_t flag;\n" \
         "enum B{\n"
-
+    '''
     fb_obj.members = list()
     for member in member_list:
         m_vk_name = member.get('name')
@@ -360,16 +365,42 @@ for enum in flag_bits_list:
 
         if comment_temp != None:
             m_obj.o_comment = comment_temp
-            flagbits_out += "/*"+comment_temp+"*/\n"
+            flagbits_out += "\t\t\t/* "+comment_temp+" */\n"
 
-        m_obj.final_text = "\t"+m_obj.name+" = "+m_obj.vk_name+",\n"
+        m_obj.final_text = "\t\t"+m_obj.name+" = "+m_obj.vk_name+",\n"
         flagbits_out += m_obj.final_text
 
         fb_obj.members.append(m_obj)
 
-    flagbits_out += "};\n"
+    flagbits_out += "\t};\n"
 
     flagbits_out += \
+        "\t{0}():flag(0)#$\n"\
+        "\t{0}(int i_):flag(static_cast<uint32_t>(i_))#$\n" \
+        "\t{0}(uint32_t flag_):flag(flag_)#$\n" \
+        "\t{0}(const B flag_):flag(flag_)#$\n" \
+        "\t{0}({1} flag_):vk_flag(flag_)#$\n" \
+        "\toperator uint32_t()#return flag;$\n" \
+        "\toperator int()#return static_cast<int>(flag);$\n" \
+        "\toperator {1} const&()#return vk_flag;$\n" \
+        "\toperator bool()#return !!flag;$\n" \
+        "\t{0}& operator=(const {0} flag_)#flag=flag_.flag; return *this;$\n" \
+        "\t{0}& operator|=(const {0} flag_)#flag|=flag_.flag; return *this;$\n" \
+        "\t{0}& operator&=(const {0} flag_)#flag&=flag_.flag; return *this;$\n" \
+        "\t{0}& operator^=(const {0} flag_)#flag^=flag_.flag;return *this;$\n" \
+        "\t{0} operator~()#return ~flag;$\n" \
+        "\tbool operator==(const {0} flag_)#return flag==flag_.flag;$\n" \
+        "\tbool operator!=(const {0} flag_)#return !(*this==flag_);$\n" \
+        "\t{0}& clear()#flag = 0;return *this;$\n" \
+        "\t{0} all_flags()# return " \
+        .format(fb_obj.my_name, fb_obj.vk_name).replace("#", "{").replace("$", "}")
+
+    '''
+    
+        "\t{0} operator&(const {0} flag_)#return flag&flag_.flag;$\n" \
+        "\t{0} operator|(const {0} flag_)#return flag|flag_.flag;$\n" \
+        "\t{0} operator^(const {0} flag_)#return flag^flag_.flag;$\n" \
+    
     "{0}():flag(0)@$\n" \
     "{0}(B bits_):flag(static_cast<int>(bits_))@$\n" \
     "{0}({0} const& flag_):flag(flag_.flag)@$\n" \
@@ -389,6 +420,8 @@ for enum in flag_bits_list:
     "{0}& clear()@flag = 0;return *this;$\n" \
     "{0} all_flags()@\nreturn " \
         .format(fb_obj.my_name,fb_obj.vk_name).replace("@", "{").replace("$", "}")
+    '''
+
     #"operator bool()@return !!flag;$\n" \
     count = 0
     for m in fb_obj.members:
@@ -396,22 +429,38 @@ for enum in flag_bits_list:
             flagbits_out+=" | "
         flagbits_out += m.name
         count+=1
-    flagbits_out+=";\n}\n"
+    flagbits_out+=";}\n"
 
     for m in fb_obj.members:
-        flagbits_out += fb_obj.my_name+"& on_"+m.name.replace("b_","")+"()" \
+        flagbits_out += "\t"+fb_obj.my_name+"& on_"+m.name.replace("b_","")+"()" \
                           "{ flag |= "+m.name+"; return *this; }\n"
-        flagbits_out += fb_obj.my_name + "& off_"+m.name.replace("b_","")+"()"\
+        flagbits_out += "\t"+fb_obj.my_name + "& off_"+m.name.replace("b_","")+"()"\
                           "{ flag &= ~" + m.name+"; return *this; }\n"
 
-    flagbits_out+=fb_obj.vk_name+" get_vkfb(){ return "+fb_obj.vk_name+"(flag); }\n"
+    #flagbits_out+="\t"+fb_obj.vk_name+" get_vkfb(){ return "+fb_obj.vk_name+"(flag); }\n"
     flagbits_out+="};\n"
 
+    flagbits_out+=\
+        "inline {0} operator&(const {0} f1_, const {0} f2_)#return f1_.flag&f2_.flag;$\n" \
+        "inline {0} operator|(const {0} f1_, const {0} f2_)#return f1_.flag|f2_.flag;$\n" \
+        "inline {0} operator^(const {0} f1_, const {0} f2_)#return f1_.flag^f2_.flag;$\n" \
+            .format(fb_obj.my_name).replace("#","{").replace("$","}")
 
+    '''
+    
+        "{0} inline operator|(const {0}::B bit1_, const {0}::B bit2_)@{0} flags(bit1_);return flags | bit2_;$\n" \
+        "{0} inline operator|(const {0}::B bit1_, const {0}::B bit2_)@{0} flags(bit1_);return flags | bit2_;$\n" \
+                  "bool inline operator==(const {0} f1_, const {0} f2_) @ return f1_.flag == f2_.flag; $\n" \
+                  "bool inline operator!=(const {0} f1_, const {0} f2_) @ return f1_.flag != f2_.flag; $\n" \
+                  "uint32_t inline operator&(const {0} f1_, const {0} f2_) @ return f1_.flag & f2_.flag; $\n" \
+        .format(fb_obj.my_name).replace("@","{").replace("$","}")
+        
     flagbits_out+="{0} inline operator|(const {0}::B bit1_, const {0}::B bit2_)@{0} flags(bit1_);return flags | bit2_;$\n" \
                   "bool inline operator==(const {0} f1_, const {0} f2_) @ return f1_.flag == f2_.flag; $\n" \
                   "bool inline operator!=(const {0} f1_, const {0} f2_) @ return f1_.flag != f2_.flag; $\n" \
+                  "uint32_t inline operator&(const {0} f1_, const {0} f2_) @ return f1_.flag & f2_.flag; $\n" \
         .format(fb_obj.my_name).replace("@","{").replace("$","}")
+    '''
 
     all_type_dict[fb_obj.vk_name] = fb_obj
     fb_obj_list.append(fb_obj)

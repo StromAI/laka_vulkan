@@ -1236,7 +1236,6 @@ shared_ptr<Surface> Instance::get_a_surface(
                 show_wrn("一个设备不合适:{}", (void*)p.if_you_feel_the_physical_device_not_ok_so_return_false.handle);
                 continue;
             }
-
             auto queue_familys = p.if_you_feel_the_physical_device_not_ok_so_return_false.get_queue_family_properties();
 
             vector<Queue_family_info> my_queue_familys(queue_familys->size());
@@ -1255,11 +1254,77 @@ shared_ptr<Surface> Instance::get_a_surface(
                 continue;
             }
             show_info("选取了合适的设备与队列");
+            vector<VkDeviceQueueCreateInfo> q_create_infos(user_choosed_q_create_infos.size());
+            vector<VkDeviceQueueGlobalPriorityCreateInfoEXT> q_gpci_ext(user_choosed_q_create_infos.size());
+            for (size_t i = 0; i < user_choosed_q_create_infos.size(); ++i)
+            {
+                void* pnext;
+                if (user_choosed_q_create_infos[i].global_priority == 0)
+                {
+                    pnext = nullptr;
+                }
+                else
+                {
+                    pnext = &q_gpci_ext[i];
+                    q_gpci_ext[i] =
+                    {
+                        VK_STRUCTURE_TYPE_DEVICE_QUEUE_GLOBAL_PRIORITY_CREATE_INFO_EXT,
+                        nullptr,
+                        user_choosed_q_create_infos[i].global_priority
+                    };
+                }
+                q_create_infos[i] = {
+                    VK_STRUCTURE_TYPE_DEVICE_QUEUE_CREATE_INFO,
+                    pnext,
+                    (VkFlags)(user_choosed_q_create_infos[i].create_flags),
+                    user_choosed_q_create_infos[i].queue_family_index,
+                    static_cast<uint32_t>(user_choosed_q_create_infos[i].queue_priorities.size()),
+                    &user_choosed_q_create_infos[i].queue_priorities[0]
+                };
+            }
+            VkDevice device_handle;
+            VkDeviceCreateInfo device_create_info = {
+                VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO,
+                nullptr,
+                0,
+                static_cast<uint32_t>(q_create_infos.size()),
+                &q_create_infos[0],
+                0,
+                nullptr,
+                enabled_extensions_.size() ,
+                enabled_extensions_.data(),
+                *features_
+            };
 
+            auto ret = instance->api.vkCreateDevice(
+                phy.handle,
+                &device_create_info,
+                *allocation_callbacks,
+                &device_handle
+            );
+            show_result(ret);
+            if (ret < 0)
+            {
+                show_wrn("创建设备失败");
+                return device_sptr;
+            }
+            vector<Physical_device*> pds{ &phy };
+            device_sptr.reset(new Device(
+                instance,
+                shared_from_this(),
+                pds,
+                user_choosed_q_create_infos,
+                *queue_familys,
+                device_handle,
+                allocation_callbacks
+            ));
+            break;
         }
-
-
-        shared_ptr<Device> device_sptr;
+        if (device_sptr.get() == nullptr)
+        {
+            show_wrn("此机器没有用户满意的设备");
+        }
+        return device_sptr;
     }
 
     VkResult Device::invalidate_mapped_memory_ranges(

@@ -1753,99 +1753,89 @@ bool operator!= (VkGeometryTypeNVX e_) { return !(*this == e_); }
 };
 
 /*	VkCullModeFlagBits*/
-class F_cull_mode {
-private:
-F_cull_mode(int flag_):flag(flag_){};
-public:
-uint32_t flag;
-enum B{
-	b_none = VK_CULL_MODE_NONE,
-	b_front = VK_CULL_MODE_FRONT_BIT,
-	b_back = VK_CULL_MODE_BACK_BIT,
-	b_front_and_back = VK_CULL_MODE_FRONT_AND_BACK,
+union F_cull_mode {
+	uint32_t flag;
+	VkCullModeFlagBits vk_flag;
+	enum B{
+		b_none = VK_CULL_MODE_NONE,
+		b_front = VK_CULL_MODE_FRONT_BIT,
+		b_back = VK_CULL_MODE_BACK_BIT,
+		b_front_and_back = VK_CULL_MODE_FRONT_AND_BACK,
+	};
+	F_cull_mode():flag(0){}
+	F_cull_mode(int i_):flag(static_cast<uint32_t>(i_)){}
+	F_cull_mode(uint32_t flag_):flag(flag_){}
+	F_cull_mode(const B flag_):flag(flag_){}
+	F_cull_mode(VkCullModeFlagBits flag_):vk_flag(flag_){}
+	operator uint32_t(){return flag;}
+	operator int(){return static_cast<int>(flag);}
+	operator VkCullModeFlagBits const&(){return vk_flag;}
+	operator bool(){return !!flag;}
+	F_cull_mode& operator=(const F_cull_mode flag_){flag=flag_.flag; return *this;}
+	F_cull_mode& operator|=(const F_cull_mode flag_){flag|=flag_.flag; return *this;}
+	F_cull_mode& operator&=(const F_cull_mode flag_){flag&=flag_.flag; return *this;}
+	F_cull_mode& operator^=(const F_cull_mode flag_){flag^=flag_.flag;return *this;}
+	F_cull_mode operator~(){return ~flag;}
+	bool operator==(const F_cull_mode flag_){return flag==flag_.flag;}
+	bool operator!=(const F_cull_mode flag_){return !(*this==flag_);}
+	F_cull_mode& clear(){flag = 0;return *this;}
+	F_cull_mode all_flags(){ return b_none | b_front | b_back | b_front_and_back;}
+	F_cull_mode& on_none(){ flag |= b_none; return *this; }
+	F_cull_mode& off_none(){ flag &= ~b_none; return *this; }
+	F_cull_mode& on_front(){ flag |= b_front; return *this; }
+	F_cull_mode& off_front(){ flag &= ~b_front; return *this; }
+	F_cull_mode& on_back(){ flag |= b_back; return *this; }
+	F_cull_mode& off_back(){ flag &= ~b_back; return *this; }
+	F_cull_mode& on_front_and_back(){ flag |= b_front_and_back; return *this; }
+	F_cull_mode& off_front_and_back(){ flag &= ~b_front_and_back; return *this; }
 };
-F_cull_mode():flag(0){}
-F_cull_mode(B bits_):flag(static_cast<int>(bits_)){}
-F_cull_mode(F_cull_mode const& flag_):flag(flag_.flag){}
-F_cull_mode(std::initializer_list<B> bit_list){for (auto&& bit : bit_list){flag |= static_cast<int>(bit);}}
-operator VkCullModeFlagBits const &(){return *this;}
-F_cull_mode& operator = (F_cull_mode flag_){flag = flag_.flag;return *this;}
-F_cull_mode operator | (B bit_){return flag | static_cast<int>(bit_);}
-F_cull_mode& operator |= (B bit_){flag |= static_cast<int>(bit_);return *this;}
-F_cull_mode operator | (F_cull_mode flag_){return flag | flag_.flag;}
-F_cull_mode& operator |= (F_cull_mode flag_){flag |= flag_.flag;return *this;}
-F_cull_mode operator & (F_cull_mode flag_){return flag & flag_.flag;}
-F_cull_mode& operator &= (F_cull_mode flag_){flag &= flag_.flag;return *this;}
-F_cull_mode operator ^ (F_cull_mode flag_){return flag ^ flag_.flag;}
-F_cull_mode& operator ^= (F_cull_mode flag_){flag ^= flag_.flag;return *this;}
-F_cull_mode operator ~ (){return all_flags().flag^flag;}
-bool operator !(){return !flag;}
-F_cull_mode& clear(){flag = 0;return *this;}
-F_cull_mode all_flags(){
-return b_none | b_front | b_back | b_front_and_back;
-}
-F_cull_mode& on_none(){ flag |= b_none; return *this; }
-F_cull_mode& off_none(){ flag &= ~b_none; return *this; }
-F_cull_mode& on_front(){ flag |= b_front; return *this; }
-F_cull_mode& off_front(){ flag &= ~b_front; return *this; }
-F_cull_mode& on_back(){ flag |= b_back; return *this; }
-F_cull_mode& off_back(){ flag &= ~b_back; return *this; }
-F_cull_mode& on_front_and_back(){ flag |= b_front_and_back; return *this; }
-F_cull_mode& off_front_and_back(){ flag &= ~b_front_and_back; return *this; }
-VkCullModeFlagBits get_vkfb(){ return VkCullModeFlagBits(flag); }
-};
-F_cull_mode inline operator|(const F_cull_mode::B bit1_, const F_cull_mode::B bit2_){F_cull_mode flags(bit1_);return flags | bit2_;}
-bool inline operator==(const F_cull_mode f1_, const F_cull_mode f2_) { return f1_.flag == f2_.flag; }
-bool inline operator!=(const F_cull_mode f1_, const F_cull_mode f2_) { return f1_.flag != f2_.flag; }
+inline F_cull_mode operator&(const F_cull_mode f1_, const F_cull_mode f2_){return f1_.flag&f2_.flag;}
+inline F_cull_mode operator|(const F_cull_mode f1_, const F_cull_mode f2_){return f1_.flag|f2_.flag;}
+inline F_cull_mode operator^(const F_cull_mode f1_, const F_cull_mode f2_){return f1_.flag^f2_.flag;}
 /*	VkQueueFlagBits*/
-class F_queue {
-private:
-F_queue(int flag_):flag(flag_){};
-public:
-uint32_t flag;
-enum B{
-/*Queue supports graphics operations*/
-	b_graphics = VK_QUEUE_GRAPHICS_BIT,
-/*Queue supports compute operations*/
-	b_compute = VK_QUEUE_COMPUTE_BIT,
-/*Queue supports transfer operations*/
-	b_transfer = VK_QUEUE_TRANSFER_BIT,
-/*Queue supports sparse resource memory management operations*/
-	b_sparse_binding = VK_QUEUE_SPARSE_BINDING_BIT,
+union F_queue {
+	uint32_t flag;
+	VkQueueFlagBits vk_flag;
+	enum B{
+			/* Queue supports graphics operations */
+		b_graphics = VK_QUEUE_GRAPHICS_BIT,
+			/* Queue supports compute operations */
+		b_compute = VK_QUEUE_COMPUTE_BIT,
+			/* Queue supports transfer operations */
+		b_transfer = VK_QUEUE_TRANSFER_BIT,
+			/* Queue supports sparse resource memory management operations */
+		b_sparse_binding = VK_QUEUE_SPARSE_BINDING_BIT,
+	};
+	F_queue():flag(0){}
+	F_queue(int i_):flag(static_cast<uint32_t>(i_)){}
+	F_queue(uint32_t flag_):flag(flag_){}
+	F_queue(const B flag_):flag(flag_){}
+	F_queue(VkQueueFlagBits flag_):vk_flag(flag_){}
+	operator uint32_t(){return flag;}
+	operator int(){return static_cast<int>(flag);}
+	operator VkQueueFlagBits const&(){return vk_flag;}
+	operator bool(){return !!flag;}
+	F_queue& operator=(const F_queue flag_){flag=flag_.flag; return *this;}
+	F_queue& operator|=(const F_queue flag_){flag|=flag_.flag; return *this;}
+	F_queue& operator&=(const F_queue flag_){flag&=flag_.flag; return *this;}
+	F_queue& operator^=(const F_queue flag_){flag^=flag_.flag;return *this;}
+	F_queue operator~(){return ~flag;}
+	bool operator==(const F_queue flag_){return flag==flag_.flag;}
+	bool operator!=(const F_queue flag_){return !(*this==flag_);}
+	F_queue& clear(){flag = 0;return *this;}
+	F_queue all_flags(){ return b_graphics | b_compute | b_transfer | b_sparse_binding;}
+	F_queue& on_graphics(){ flag |= b_graphics; return *this; }
+	F_queue& off_graphics(){ flag &= ~b_graphics; return *this; }
+	F_queue& on_compute(){ flag |= b_compute; return *this; }
+	F_queue& off_compute(){ flag &= ~b_compute; return *this; }
+	F_queue& on_transfer(){ flag |= b_transfer; return *this; }
+	F_queue& off_transfer(){ flag &= ~b_transfer; return *this; }
+	F_queue& on_sparse_binding(){ flag |= b_sparse_binding; return *this; }
+	F_queue& off_sparse_binding(){ flag &= ~b_sparse_binding; return *this; }
 };
-F_queue():flag(0){}
-F_queue(B bits_):flag(static_cast<int>(bits_)){}
-F_queue(F_queue const& flag_):flag(flag_.flag){}
-F_queue(std::initializer_list<B> bit_list){for (auto&& bit : bit_list){flag |= static_cast<int>(bit);}}
-operator VkQueueFlagBits const &(){return *this;}
-F_queue& operator = (F_queue flag_){flag = flag_.flag;return *this;}
-F_queue operator | (B bit_){return flag | static_cast<int>(bit_);}
-F_queue& operator |= (B bit_){flag |= static_cast<int>(bit_);return *this;}
-F_queue operator | (F_queue flag_){return flag | flag_.flag;}
-F_queue& operator |= (F_queue flag_){flag |= flag_.flag;return *this;}
-F_queue operator & (F_queue flag_){return flag & flag_.flag;}
-F_queue& operator &= (F_queue flag_){flag &= flag_.flag;return *this;}
-F_queue operator ^ (F_queue flag_){return flag ^ flag_.flag;}
-F_queue& operator ^= (F_queue flag_){flag ^= flag_.flag;return *this;}
-F_queue operator ~ (){return all_flags().flag^flag;}
-bool operator !(){return !flag;}
-F_queue& clear(){flag = 0;return *this;}
-F_queue all_flags(){
-return b_graphics | b_compute | b_transfer | b_sparse_binding;
-}
-F_queue& on_graphics(){ flag |= b_graphics; return *this; }
-F_queue& off_graphics(){ flag &= ~b_graphics; return *this; }
-F_queue& on_compute(){ flag |= b_compute; return *this; }
-F_queue& off_compute(){ flag &= ~b_compute; return *this; }
-F_queue& on_transfer(){ flag |= b_transfer; return *this; }
-F_queue& off_transfer(){ flag &= ~b_transfer; return *this; }
-F_queue& on_sparse_binding(){ flag |= b_sparse_binding; return *this; }
-F_queue& off_sparse_binding(){ flag &= ~b_sparse_binding; return *this; }
-VkQueueFlagBits get_vkfb(){ return VkQueueFlagBits(flag); }
-};
-F_queue inline operator|(const F_queue::B bit1_, const F_queue::B bit2_){F_queue flags(bit1_);return flags | bit2_;}
-bool inline operator==(const F_queue f1_, const F_queue f2_) { return f1_.flag == f2_.flag; }
-bool inline operator!=(const F_queue f1_, const F_queue f2_) { return f1_.flag != f2_.flag; }
+inline F_queue operator&(const F_queue f1_, const F_queue f2_){return f1_.flag&f2_.flag;}
+inline F_queue operator|(const F_queue f1_, const F_queue f2_){return f1_.flag|f2_.flag;}
+inline F_queue operator^(const F_queue f1_, const F_queue f2_){return f1_.flag^f2_.flag;}
 /*	VkRenderPassCreateFlagBits*/
 using F_render_pass_create = VkFlags;
 
@@ -1854,2407 +1844,2162 @@ using F_device_queue_create =
 			VkDeviceQueueCreateFlagBits;
 
 /*	VkMemoryPropertyFlagBits*/
-class F_memory_property {
-private:
-F_memory_property(int flag_):flag(flag_){};
-public:
-uint32_t flag;
-enum B{
-/*If otherwise stated, then allocate memory on device*/
-	b_device_local = VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT,
-/*Memory is mappable by host*/
-	b_host_visible = VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT,
-/*Memory will have i/o coherency. If not set, application may need to use vkFlushMappedMemoryRanges and vkInvalidateMappedMemoryRanges to flush/invalidate host cache*/
-	b_host_coherent = VK_MEMORY_PROPERTY_HOST_COHERENT_BIT,
-/*Memory will be cached by the host*/
-	b_host_cached = VK_MEMORY_PROPERTY_HOST_CACHED_BIT,
-/*Memory may be allocated by the driver when it is required*/
-	b_lazily_allocated = VK_MEMORY_PROPERTY_LAZILY_ALLOCATED_BIT,
+union F_memory_property {
+	uint32_t flag;
+	VkMemoryPropertyFlagBits vk_flag;
+	enum B{
+			/* If otherwise stated, then allocate memory on device */
+		b_device_local = VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT,
+			/* Memory is mappable by host */
+		b_host_visible = VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT,
+			/* Memory will have i/o coherency. If not set, application may need to use vkFlushMappedMemoryRanges and vkInvalidateMappedMemoryRanges to flush/invalidate host cache */
+		b_host_coherent = VK_MEMORY_PROPERTY_HOST_COHERENT_BIT,
+			/* Memory will be cached by the host */
+		b_host_cached = VK_MEMORY_PROPERTY_HOST_CACHED_BIT,
+			/* Memory may be allocated by the driver when it is required */
+		b_lazily_allocated = VK_MEMORY_PROPERTY_LAZILY_ALLOCATED_BIT,
+	};
+	F_memory_property():flag(0){}
+	F_memory_property(int i_):flag(static_cast<uint32_t>(i_)){}
+	F_memory_property(uint32_t flag_):flag(flag_){}
+	F_memory_property(const B flag_):flag(flag_){}
+	F_memory_property(VkMemoryPropertyFlagBits flag_):vk_flag(flag_){}
+	operator uint32_t(){return flag;}
+	operator int(){return static_cast<int>(flag);}
+	operator VkMemoryPropertyFlagBits const&(){return vk_flag;}
+	operator bool(){return !!flag;}
+	F_memory_property& operator=(const F_memory_property flag_){flag=flag_.flag; return *this;}
+	F_memory_property& operator|=(const F_memory_property flag_){flag|=flag_.flag; return *this;}
+	F_memory_property& operator&=(const F_memory_property flag_){flag&=flag_.flag; return *this;}
+	F_memory_property& operator^=(const F_memory_property flag_){flag^=flag_.flag;return *this;}
+	F_memory_property operator~(){return ~flag;}
+	bool operator==(const F_memory_property flag_){return flag==flag_.flag;}
+	bool operator!=(const F_memory_property flag_){return !(*this==flag_);}
+	F_memory_property& clear(){flag = 0;return *this;}
+	F_memory_property all_flags(){ return b_device_local | b_host_visible | b_host_coherent | b_host_cached | b_lazily_allocated;}
+	F_memory_property& on_device_local(){ flag |= b_device_local; return *this; }
+	F_memory_property& off_device_local(){ flag &= ~b_device_local; return *this; }
+	F_memory_property& on_host_visible(){ flag |= b_host_visible; return *this; }
+	F_memory_property& off_host_visible(){ flag &= ~b_host_visible; return *this; }
+	F_memory_property& on_host_coherent(){ flag |= b_host_coherent; return *this; }
+	F_memory_property& off_host_coherent(){ flag &= ~b_host_coherent; return *this; }
+	F_memory_property& on_host_cached(){ flag |= b_host_cached; return *this; }
+	F_memory_property& off_host_cached(){ flag &= ~b_host_cached; return *this; }
+	F_memory_property& on_lazily_allocated(){ flag |= b_lazily_allocated; return *this; }
+	F_memory_property& off_lazily_allocated(){ flag &= ~b_lazily_allocated; return *this; }
 };
-F_memory_property():flag(0){}
-F_memory_property(B bits_):flag(static_cast<int>(bits_)){}
-F_memory_property(F_memory_property const& flag_):flag(flag_.flag){}
-F_memory_property(std::initializer_list<B> bit_list){for (auto&& bit : bit_list){flag |= static_cast<int>(bit);}}
-operator VkMemoryPropertyFlagBits const &(){return *this;}
-F_memory_property& operator = (F_memory_property flag_){flag = flag_.flag;return *this;}
-F_memory_property operator | (B bit_){return flag | static_cast<int>(bit_);}
-F_memory_property& operator |= (B bit_){flag |= static_cast<int>(bit_);return *this;}
-F_memory_property operator | (F_memory_property flag_){return flag | flag_.flag;}
-F_memory_property& operator |= (F_memory_property flag_){flag |= flag_.flag;return *this;}
-F_memory_property operator & (F_memory_property flag_){return flag & flag_.flag;}
-F_memory_property& operator &= (F_memory_property flag_){flag &= flag_.flag;return *this;}
-F_memory_property operator ^ (F_memory_property flag_){return flag ^ flag_.flag;}
-F_memory_property& operator ^= (F_memory_property flag_){flag ^= flag_.flag;return *this;}
-F_memory_property operator ~ (){return all_flags().flag^flag;}
-bool operator !(){return !flag;}
-F_memory_property& clear(){flag = 0;return *this;}
-F_memory_property all_flags(){
-return b_device_local | b_host_visible | b_host_coherent | b_host_cached | b_lazily_allocated;
-}
-F_memory_property& on_device_local(){ flag |= b_device_local; return *this; }
-F_memory_property& off_device_local(){ flag &= ~b_device_local; return *this; }
-F_memory_property& on_host_visible(){ flag |= b_host_visible; return *this; }
-F_memory_property& off_host_visible(){ flag &= ~b_host_visible; return *this; }
-F_memory_property& on_host_coherent(){ flag |= b_host_coherent; return *this; }
-F_memory_property& off_host_coherent(){ flag &= ~b_host_coherent; return *this; }
-F_memory_property& on_host_cached(){ flag |= b_host_cached; return *this; }
-F_memory_property& off_host_cached(){ flag &= ~b_host_cached; return *this; }
-F_memory_property& on_lazily_allocated(){ flag |= b_lazily_allocated; return *this; }
-F_memory_property& off_lazily_allocated(){ flag &= ~b_lazily_allocated; return *this; }
-VkMemoryPropertyFlagBits get_vkfb(){ return VkMemoryPropertyFlagBits(flag); }
-};
-F_memory_property inline operator|(const F_memory_property::B bit1_, const F_memory_property::B bit2_){F_memory_property flags(bit1_);return flags | bit2_;}
-bool inline operator==(const F_memory_property f1_, const F_memory_property f2_) { return f1_.flag == f2_.flag; }
-bool inline operator!=(const F_memory_property f1_, const F_memory_property f2_) { return f1_.flag != f2_.flag; }
+inline F_memory_property operator&(const F_memory_property f1_, const F_memory_property f2_){return f1_.flag&f2_.flag;}
+inline F_memory_property operator|(const F_memory_property f1_, const F_memory_property f2_){return f1_.flag|f2_.flag;}
+inline F_memory_property operator^(const F_memory_property f1_, const F_memory_property f2_){return f1_.flag^f2_.flag;}
 /*	VkMemoryHeapFlagBits*/
-class F_memory_heap {
-private:
-F_memory_heap(int flag_):flag(flag_){};
-public:
-uint32_t flag;
-enum B{
-/*If set, heap represents device memory*/
-	b_device_local = VK_MEMORY_HEAP_DEVICE_LOCAL_BIT,
+union F_memory_heap {
+	uint32_t flag;
+	VkMemoryHeapFlagBits vk_flag;
+	enum B{
+			/* If set, heap represents device memory */
+		b_device_local = VK_MEMORY_HEAP_DEVICE_LOCAL_BIT,
+	};
+	F_memory_heap():flag(0){}
+	F_memory_heap(int i_):flag(static_cast<uint32_t>(i_)){}
+	F_memory_heap(uint32_t flag_):flag(flag_){}
+	F_memory_heap(const B flag_):flag(flag_){}
+	F_memory_heap(VkMemoryHeapFlagBits flag_):vk_flag(flag_){}
+	operator uint32_t(){return flag;}
+	operator int(){return static_cast<int>(flag);}
+	operator VkMemoryHeapFlagBits const&(){return vk_flag;}
+	operator bool(){return !!flag;}
+	F_memory_heap& operator=(const F_memory_heap flag_){flag=flag_.flag; return *this;}
+	F_memory_heap& operator|=(const F_memory_heap flag_){flag|=flag_.flag; return *this;}
+	F_memory_heap& operator&=(const F_memory_heap flag_){flag&=flag_.flag; return *this;}
+	F_memory_heap& operator^=(const F_memory_heap flag_){flag^=flag_.flag;return *this;}
+	F_memory_heap operator~(){return ~flag;}
+	bool operator==(const F_memory_heap flag_){return flag==flag_.flag;}
+	bool operator!=(const F_memory_heap flag_){return !(*this==flag_);}
+	F_memory_heap& clear(){flag = 0;return *this;}
+	F_memory_heap all_flags(){ return b_device_local;}
+	F_memory_heap& on_device_local(){ flag |= b_device_local; return *this; }
+	F_memory_heap& off_device_local(){ flag &= ~b_device_local; return *this; }
 };
-F_memory_heap():flag(0){}
-F_memory_heap(B bits_):flag(static_cast<int>(bits_)){}
-F_memory_heap(F_memory_heap const& flag_):flag(flag_.flag){}
-F_memory_heap(std::initializer_list<B> bit_list){for (auto&& bit : bit_list){flag |= static_cast<int>(bit);}}
-operator VkMemoryHeapFlagBits const &(){return *this;}
-F_memory_heap& operator = (F_memory_heap flag_){flag = flag_.flag;return *this;}
-F_memory_heap operator | (B bit_){return flag | static_cast<int>(bit_);}
-F_memory_heap& operator |= (B bit_){flag |= static_cast<int>(bit_);return *this;}
-F_memory_heap operator | (F_memory_heap flag_){return flag | flag_.flag;}
-F_memory_heap& operator |= (F_memory_heap flag_){flag |= flag_.flag;return *this;}
-F_memory_heap operator & (F_memory_heap flag_){return flag & flag_.flag;}
-F_memory_heap& operator &= (F_memory_heap flag_){flag &= flag_.flag;return *this;}
-F_memory_heap operator ^ (F_memory_heap flag_){return flag ^ flag_.flag;}
-F_memory_heap& operator ^= (F_memory_heap flag_){flag ^= flag_.flag;return *this;}
-F_memory_heap operator ~ (){return all_flags().flag^flag;}
-bool operator !(){return !flag;}
-F_memory_heap& clear(){flag = 0;return *this;}
-F_memory_heap all_flags(){
-return b_device_local;
-}
-F_memory_heap& on_device_local(){ flag |= b_device_local; return *this; }
-F_memory_heap& off_device_local(){ flag &= ~b_device_local; return *this; }
-VkMemoryHeapFlagBits get_vkfb(){ return VkMemoryHeapFlagBits(flag); }
-};
-F_memory_heap inline operator|(const F_memory_heap::B bit1_, const F_memory_heap::B bit2_){F_memory_heap flags(bit1_);return flags | bit2_;}
-bool inline operator==(const F_memory_heap f1_, const F_memory_heap f2_) { return f1_.flag == f2_.flag; }
-bool inline operator!=(const F_memory_heap f1_, const F_memory_heap f2_) { return f1_.flag != f2_.flag; }
+inline F_memory_heap operator&(const F_memory_heap f1_, const F_memory_heap f2_){return f1_.flag&f2_.flag;}
+inline F_memory_heap operator|(const F_memory_heap f1_, const F_memory_heap f2_){return f1_.flag|f2_.flag;}
+inline F_memory_heap operator^(const F_memory_heap f1_, const F_memory_heap f2_){return f1_.flag^f2_.flag;}
 /*	VkAccessFlagBits*/
-class F_access {
-private:
-F_access(int flag_):flag(flag_){};
-public:
-uint32_t flag;
-enum B{
-/*Controls coherency of indirect command reads*/
-	b_indirect_command_read = VK_ACCESS_INDIRECT_COMMAND_READ_BIT,
-/*Controls coherency of index reads*/
-	b_index_read = VK_ACCESS_INDEX_READ_BIT,
-/*Controls coherency of vertex attribute reads*/
-	b_vertex_attribute_read = VK_ACCESS_VERTEX_ATTRIBUTE_READ_BIT,
-/*Controls coherency of uniform buffer reads*/
-	b_uniform_read = VK_ACCESS_UNIFORM_READ_BIT,
-/*Controls coherency of input attachment reads*/
-	b_input_attachment_read = VK_ACCESS_INPUT_ATTACHMENT_READ_BIT,
-/*Controls coherency of shader reads*/
-	b_shader_read = VK_ACCESS_SHADER_READ_BIT,
-/*Controls coherency of shader writes*/
-	b_shader_write = VK_ACCESS_SHADER_WRITE_BIT,
-/*Controls coherency of color attachment reads*/
-	b_color_attachment_read = VK_ACCESS_COLOR_ATTACHMENT_READ_BIT,
-/*Controls coherency of color attachment writes*/
-	b_color_attachment_write = VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT,
-/*Controls coherency of depth/stencil attachment reads*/
-	b_depth_stencil_attachment_read = VK_ACCESS_DEPTH_STENCIL_ATTACHMENT_READ_BIT,
-/*Controls coherency of depth/stencil attachment writes*/
-	b_depth_stencil_attachment_write = VK_ACCESS_DEPTH_STENCIL_ATTACHMENT_WRITE_BIT,
-/*Controls coherency of transfer reads*/
-	b_transfer_read = VK_ACCESS_TRANSFER_READ_BIT,
-/*Controls coherency of transfer writes*/
-	b_transfer_write = VK_ACCESS_TRANSFER_WRITE_BIT,
-/*Controls coherency of host reads*/
-	b_host_read = VK_ACCESS_HOST_READ_BIT,
-/*Controls coherency of host writes*/
-	b_host_write = VK_ACCESS_HOST_WRITE_BIT,
-/*Controls coherency of memory reads*/
-	b_memory_read = VK_ACCESS_MEMORY_READ_BIT,
-/*Controls coherency of memory writes*/
-	b_memory_write = VK_ACCESS_MEMORY_WRITE_BIT,
+union F_access {
+	uint32_t flag;
+	VkAccessFlagBits vk_flag;
+	enum B{
+			/* Controls coherency of indirect command reads */
+		b_indirect_command_read = VK_ACCESS_INDIRECT_COMMAND_READ_BIT,
+			/* Controls coherency of index reads */
+		b_index_read = VK_ACCESS_INDEX_READ_BIT,
+			/* Controls coherency of vertex attribute reads */
+		b_vertex_attribute_read = VK_ACCESS_VERTEX_ATTRIBUTE_READ_BIT,
+			/* Controls coherency of uniform buffer reads */
+		b_uniform_read = VK_ACCESS_UNIFORM_READ_BIT,
+			/* Controls coherency of input attachment reads */
+		b_input_attachment_read = VK_ACCESS_INPUT_ATTACHMENT_READ_BIT,
+			/* Controls coherency of shader reads */
+		b_shader_read = VK_ACCESS_SHADER_READ_BIT,
+			/* Controls coherency of shader writes */
+		b_shader_write = VK_ACCESS_SHADER_WRITE_BIT,
+			/* Controls coherency of color attachment reads */
+		b_color_attachment_read = VK_ACCESS_COLOR_ATTACHMENT_READ_BIT,
+			/* Controls coherency of color attachment writes */
+		b_color_attachment_write = VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT,
+			/* Controls coherency of depth/stencil attachment reads */
+		b_depth_stencil_attachment_read = VK_ACCESS_DEPTH_STENCIL_ATTACHMENT_READ_BIT,
+			/* Controls coherency of depth/stencil attachment writes */
+		b_depth_stencil_attachment_write = VK_ACCESS_DEPTH_STENCIL_ATTACHMENT_WRITE_BIT,
+			/* Controls coherency of transfer reads */
+		b_transfer_read = VK_ACCESS_TRANSFER_READ_BIT,
+			/* Controls coherency of transfer writes */
+		b_transfer_write = VK_ACCESS_TRANSFER_WRITE_BIT,
+			/* Controls coherency of host reads */
+		b_host_read = VK_ACCESS_HOST_READ_BIT,
+			/* Controls coherency of host writes */
+		b_host_write = VK_ACCESS_HOST_WRITE_BIT,
+			/* Controls coherency of memory reads */
+		b_memory_read = VK_ACCESS_MEMORY_READ_BIT,
+			/* Controls coherency of memory writes */
+		b_memory_write = VK_ACCESS_MEMORY_WRITE_BIT,
+	};
+	F_access():flag(0){}
+	F_access(int i_):flag(static_cast<uint32_t>(i_)){}
+	F_access(uint32_t flag_):flag(flag_){}
+	F_access(const B flag_):flag(flag_){}
+	F_access(VkAccessFlagBits flag_):vk_flag(flag_){}
+	operator uint32_t(){return flag;}
+	operator int(){return static_cast<int>(flag);}
+	operator VkAccessFlagBits const&(){return vk_flag;}
+	operator bool(){return !!flag;}
+	F_access& operator=(const F_access flag_){flag=flag_.flag; return *this;}
+	F_access& operator|=(const F_access flag_){flag|=flag_.flag; return *this;}
+	F_access& operator&=(const F_access flag_){flag&=flag_.flag; return *this;}
+	F_access& operator^=(const F_access flag_){flag^=flag_.flag;return *this;}
+	F_access operator~(){return ~flag;}
+	bool operator==(const F_access flag_){return flag==flag_.flag;}
+	bool operator!=(const F_access flag_){return !(*this==flag_);}
+	F_access& clear(){flag = 0;return *this;}
+	F_access all_flags(){ return b_indirect_command_read | b_index_read | b_vertex_attribute_read | b_uniform_read | b_input_attachment_read | b_shader_read | b_shader_write | b_color_attachment_read | b_color_attachment_write | b_depth_stencil_attachment_read | b_depth_stencil_attachment_write | b_transfer_read | b_transfer_write | b_host_read | b_host_write | b_memory_read | b_memory_write;}
+	F_access& on_indirect_command_read(){ flag |= b_indirect_command_read; return *this; }
+	F_access& off_indirect_command_read(){ flag &= ~b_indirect_command_read; return *this; }
+	F_access& on_index_read(){ flag |= b_index_read; return *this; }
+	F_access& off_index_read(){ flag &= ~b_index_read; return *this; }
+	F_access& on_vertex_attribute_read(){ flag |= b_vertex_attribute_read; return *this; }
+	F_access& off_vertex_attribute_read(){ flag &= ~b_vertex_attribute_read; return *this; }
+	F_access& on_uniform_read(){ flag |= b_uniform_read; return *this; }
+	F_access& off_uniform_read(){ flag &= ~b_uniform_read; return *this; }
+	F_access& on_input_attachment_read(){ flag |= b_input_attachment_read; return *this; }
+	F_access& off_input_attachment_read(){ flag &= ~b_input_attachment_read; return *this; }
+	F_access& on_shader_read(){ flag |= b_shader_read; return *this; }
+	F_access& off_shader_read(){ flag &= ~b_shader_read; return *this; }
+	F_access& on_shader_write(){ flag |= b_shader_write; return *this; }
+	F_access& off_shader_write(){ flag &= ~b_shader_write; return *this; }
+	F_access& on_color_attachment_read(){ flag |= b_color_attachment_read; return *this; }
+	F_access& off_color_attachment_read(){ flag &= ~b_color_attachment_read; return *this; }
+	F_access& on_color_attachment_write(){ flag |= b_color_attachment_write; return *this; }
+	F_access& off_color_attachment_write(){ flag &= ~b_color_attachment_write; return *this; }
+	F_access& on_depth_stencil_attachment_read(){ flag |= b_depth_stencil_attachment_read; return *this; }
+	F_access& off_depth_stencil_attachment_read(){ flag &= ~b_depth_stencil_attachment_read; return *this; }
+	F_access& on_depth_stencil_attachment_write(){ flag |= b_depth_stencil_attachment_write; return *this; }
+	F_access& off_depth_stencil_attachment_write(){ flag &= ~b_depth_stencil_attachment_write; return *this; }
+	F_access& on_transfer_read(){ flag |= b_transfer_read; return *this; }
+	F_access& off_transfer_read(){ flag &= ~b_transfer_read; return *this; }
+	F_access& on_transfer_write(){ flag |= b_transfer_write; return *this; }
+	F_access& off_transfer_write(){ flag &= ~b_transfer_write; return *this; }
+	F_access& on_host_read(){ flag |= b_host_read; return *this; }
+	F_access& off_host_read(){ flag &= ~b_host_read; return *this; }
+	F_access& on_host_write(){ flag |= b_host_write; return *this; }
+	F_access& off_host_write(){ flag &= ~b_host_write; return *this; }
+	F_access& on_memory_read(){ flag |= b_memory_read; return *this; }
+	F_access& off_memory_read(){ flag &= ~b_memory_read; return *this; }
+	F_access& on_memory_write(){ flag |= b_memory_write; return *this; }
+	F_access& off_memory_write(){ flag &= ~b_memory_write; return *this; }
 };
-F_access():flag(0){}
-F_access(B bits_):flag(static_cast<int>(bits_)){}
-F_access(F_access const& flag_):flag(flag_.flag){}
-F_access(std::initializer_list<B> bit_list){for (auto&& bit : bit_list){flag |= static_cast<int>(bit);}}
-operator VkAccessFlagBits const &(){return *this;}
-F_access& operator = (F_access flag_){flag = flag_.flag;return *this;}
-F_access operator | (B bit_){return flag | static_cast<int>(bit_);}
-F_access& operator |= (B bit_){flag |= static_cast<int>(bit_);return *this;}
-F_access operator | (F_access flag_){return flag | flag_.flag;}
-F_access& operator |= (F_access flag_){flag |= flag_.flag;return *this;}
-F_access operator & (F_access flag_){return flag & flag_.flag;}
-F_access& operator &= (F_access flag_){flag &= flag_.flag;return *this;}
-F_access operator ^ (F_access flag_){return flag ^ flag_.flag;}
-F_access& operator ^= (F_access flag_){flag ^= flag_.flag;return *this;}
-F_access operator ~ (){return all_flags().flag^flag;}
-bool operator !(){return !flag;}
-F_access& clear(){flag = 0;return *this;}
-F_access all_flags(){
-return b_indirect_command_read | b_index_read | b_vertex_attribute_read | b_uniform_read | b_input_attachment_read | b_shader_read | b_shader_write | b_color_attachment_read | b_color_attachment_write | b_depth_stencil_attachment_read | b_depth_stencil_attachment_write | b_transfer_read | b_transfer_write | b_host_read | b_host_write | b_memory_read | b_memory_write;
-}
-F_access& on_indirect_command_read(){ flag |= b_indirect_command_read; return *this; }
-F_access& off_indirect_command_read(){ flag &= ~b_indirect_command_read; return *this; }
-F_access& on_index_read(){ flag |= b_index_read; return *this; }
-F_access& off_index_read(){ flag &= ~b_index_read; return *this; }
-F_access& on_vertex_attribute_read(){ flag |= b_vertex_attribute_read; return *this; }
-F_access& off_vertex_attribute_read(){ flag &= ~b_vertex_attribute_read; return *this; }
-F_access& on_uniform_read(){ flag |= b_uniform_read; return *this; }
-F_access& off_uniform_read(){ flag &= ~b_uniform_read; return *this; }
-F_access& on_input_attachment_read(){ flag |= b_input_attachment_read; return *this; }
-F_access& off_input_attachment_read(){ flag &= ~b_input_attachment_read; return *this; }
-F_access& on_shader_read(){ flag |= b_shader_read; return *this; }
-F_access& off_shader_read(){ flag &= ~b_shader_read; return *this; }
-F_access& on_shader_write(){ flag |= b_shader_write; return *this; }
-F_access& off_shader_write(){ flag &= ~b_shader_write; return *this; }
-F_access& on_color_attachment_read(){ flag |= b_color_attachment_read; return *this; }
-F_access& off_color_attachment_read(){ flag &= ~b_color_attachment_read; return *this; }
-F_access& on_color_attachment_write(){ flag |= b_color_attachment_write; return *this; }
-F_access& off_color_attachment_write(){ flag &= ~b_color_attachment_write; return *this; }
-F_access& on_depth_stencil_attachment_read(){ flag |= b_depth_stencil_attachment_read; return *this; }
-F_access& off_depth_stencil_attachment_read(){ flag &= ~b_depth_stencil_attachment_read; return *this; }
-F_access& on_depth_stencil_attachment_write(){ flag |= b_depth_stencil_attachment_write; return *this; }
-F_access& off_depth_stencil_attachment_write(){ flag &= ~b_depth_stencil_attachment_write; return *this; }
-F_access& on_transfer_read(){ flag |= b_transfer_read; return *this; }
-F_access& off_transfer_read(){ flag &= ~b_transfer_read; return *this; }
-F_access& on_transfer_write(){ flag |= b_transfer_write; return *this; }
-F_access& off_transfer_write(){ flag &= ~b_transfer_write; return *this; }
-F_access& on_host_read(){ flag |= b_host_read; return *this; }
-F_access& off_host_read(){ flag &= ~b_host_read; return *this; }
-F_access& on_host_write(){ flag |= b_host_write; return *this; }
-F_access& off_host_write(){ flag &= ~b_host_write; return *this; }
-F_access& on_memory_read(){ flag |= b_memory_read; return *this; }
-F_access& off_memory_read(){ flag &= ~b_memory_read; return *this; }
-F_access& on_memory_write(){ flag |= b_memory_write; return *this; }
-F_access& off_memory_write(){ flag &= ~b_memory_write; return *this; }
-VkAccessFlagBits get_vkfb(){ return VkAccessFlagBits(flag); }
-};
-F_access inline operator|(const F_access::B bit1_, const F_access::B bit2_){F_access flags(bit1_);return flags | bit2_;}
-bool inline operator==(const F_access f1_, const F_access f2_) { return f1_.flag == f2_.flag; }
-bool inline operator!=(const F_access f1_, const F_access f2_) { return f1_.flag != f2_.flag; }
+inline F_access operator&(const F_access f1_, const F_access f2_){return f1_.flag&f2_.flag;}
+inline F_access operator|(const F_access f1_, const F_access f2_){return f1_.flag|f2_.flag;}
+inline F_access operator^(const F_access f1_, const F_access f2_){return f1_.flag^f2_.flag;}
 /*	VkBufferUsageFlagBits*/
-class F_buffer_usage {
-private:
-F_buffer_usage(int flag_):flag(flag_){};
-public:
-uint32_t flag;
-enum B{
-/*Can be used as a source of transfer operations*/
-	b_transfer_src = VK_BUFFER_USAGE_TRANSFER_SRC_BIT,
-/*Can be used as a destination of transfer operations*/
-	b_transfer_dst = VK_BUFFER_USAGE_TRANSFER_DST_BIT,
-/*Can be used as TBO*/
-	b_uniform_texel_buffer = VK_BUFFER_USAGE_UNIFORM_TEXEL_BUFFER_BIT,
-/*Can be used as IBO*/
-	b_storage_texel_buffer = VK_BUFFER_USAGE_STORAGE_TEXEL_BUFFER_BIT,
-/*Can be used as UBO*/
-	b_uniform_buffer = VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT,
-/*Can be used as SSBO*/
-	b_storage_buffer = VK_BUFFER_USAGE_STORAGE_BUFFER_BIT,
-/*Can be used as source of fixed-function index fetch (index buffer)*/
-	b_index_buffer = VK_BUFFER_USAGE_INDEX_BUFFER_BIT,
-/*Can be used as source of fixed-function vertex fetch (VBO)*/
-	b_vertex_buffer = VK_BUFFER_USAGE_VERTEX_BUFFER_BIT,
-/*Can be the source of indirect parameters (e.g. indirect buffer, parameter buffer)*/
-	b_indirect_buffer = VK_BUFFER_USAGE_INDIRECT_BUFFER_BIT,
+union F_buffer_usage {
+	uint32_t flag;
+	VkBufferUsageFlagBits vk_flag;
+	enum B{
+			/* Can be used as a source of transfer operations */
+		b_transfer_src = VK_BUFFER_USAGE_TRANSFER_SRC_BIT,
+			/* Can be used as a destination of transfer operations */
+		b_transfer_dst = VK_BUFFER_USAGE_TRANSFER_DST_BIT,
+			/* Can be used as TBO */
+		b_uniform_texel_buffer = VK_BUFFER_USAGE_UNIFORM_TEXEL_BUFFER_BIT,
+			/* Can be used as IBO */
+		b_storage_texel_buffer = VK_BUFFER_USAGE_STORAGE_TEXEL_BUFFER_BIT,
+			/* Can be used as UBO */
+		b_uniform_buffer = VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT,
+			/* Can be used as SSBO */
+		b_storage_buffer = VK_BUFFER_USAGE_STORAGE_BUFFER_BIT,
+			/* Can be used as source of fixed-function index fetch (index buffer) */
+		b_index_buffer = VK_BUFFER_USAGE_INDEX_BUFFER_BIT,
+			/* Can be used as source of fixed-function vertex fetch (VBO) */
+		b_vertex_buffer = VK_BUFFER_USAGE_VERTEX_BUFFER_BIT,
+			/* Can be the source of indirect parameters (e.g. indirect buffer, parameter buffer) */
+		b_indirect_buffer = VK_BUFFER_USAGE_INDIRECT_BUFFER_BIT,
+	};
+	F_buffer_usage():flag(0){}
+	F_buffer_usage(int i_):flag(static_cast<uint32_t>(i_)){}
+	F_buffer_usage(uint32_t flag_):flag(flag_){}
+	F_buffer_usage(const B flag_):flag(flag_){}
+	F_buffer_usage(VkBufferUsageFlagBits flag_):vk_flag(flag_){}
+	operator uint32_t(){return flag;}
+	operator int(){return static_cast<int>(flag);}
+	operator VkBufferUsageFlagBits const&(){return vk_flag;}
+	operator bool(){return !!flag;}
+	F_buffer_usage& operator=(const F_buffer_usage flag_){flag=flag_.flag; return *this;}
+	F_buffer_usage& operator|=(const F_buffer_usage flag_){flag|=flag_.flag; return *this;}
+	F_buffer_usage& operator&=(const F_buffer_usage flag_){flag&=flag_.flag; return *this;}
+	F_buffer_usage& operator^=(const F_buffer_usage flag_){flag^=flag_.flag;return *this;}
+	F_buffer_usage operator~(){return ~flag;}
+	bool operator==(const F_buffer_usage flag_){return flag==flag_.flag;}
+	bool operator!=(const F_buffer_usage flag_){return !(*this==flag_);}
+	F_buffer_usage& clear(){flag = 0;return *this;}
+	F_buffer_usage all_flags(){ return b_transfer_src | b_transfer_dst | b_uniform_texel_buffer | b_storage_texel_buffer | b_uniform_buffer | b_storage_buffer | b_index_buffer | b_vertex_buffer | b_indirect_buffer;}
+	F_buffer_usage& on_transfer_src(){ flag |= b_transfer_src; return *this; }
+	F_buffer_usage& off_transfer_src(){ flag &= ~b_transfer_src; return *this; }
+	F_buffer_usage& on_transfer_dst(){ flag |= b_transfer_dst; return *this; }
+	F_buffer_usage& off_transfer_dst(){ flag &= ~b_transfer_dst; return *this; }
+	F_buffer_usage& on_uniform_texel_buffer(){ flag |= b_uniform_texel_buffer; return *this; }
+	F_buffer_usage& off_uniform_texel_buffer(){ flag &= ~b_uniform_texel_buffer; return *this; }
+	F_buffer_usage& on_storage_texel_buffer(){ flag |= b_storage_texel_buffer; return *this; }
+	F_buffer_usage& off_storage_texel_buffer(){ flag &= ~b_storage_texel_buffer; return *this; }
+	F_buffer_usage& on_uniform_buffer(){ flag |= b_uniform_buffer; return *this; }
+	F_buffer_usage& off_uniform_buffer(){ flag &= ~b_uniform_buffer; return *this; }
+	F_buffer_usage& on_storage_buffer(){ flag |= b_storage_buffer; return *this; }
+	F_buffer_usage& off_storage_buffer(){ flag &= ~b_storage_buffer; return *this; }
+	F_buffer_usage& on_index_buffer(){ flag |= b_index_buffer; return *this; }
+	F_buffer_usage& off_index_buffer(){ flag &= ~b_index_buffer; return *this; }
+	F_buffer_usage& on_vertex_buffer(){ flag |= b_vertex_buffer; return *this; }
+	F_buffer_usage& off_vertex_buffer(){ flag &= ~b_vertex_buffer; return *this; }
+	F_buffer_usage& on_indirect_buffer(){ flag |= b_indirect_buffer; return *this; }
+	F_buffer_usage& off_indirect_buffer(){ flag &= ~b_indirect_buffer; return *this; }
 };
-F_buffer_usage():flag(0){}
-F_buffer_usage(B bits_):flag(static_cast<int>(bits_)){}
-F_buffer_usage(F_buffer_usage const& flag_):flag(flag_.flag){}
-F_buffer_usage(std::initializer_list<B> bit_list){for (auto&& bit : bit_list){flag |= static_cast<int>(bit);}}
-operator VkBufferUsageFlagBits const &(){return *this;}
-F_buffer_usage& operator = (F_buffer_usage flag_){flag = flag_.flag;return *this;}
-F_buffer_usage operator | (B bit_){return flag | static_cast<int>(bit_);}
-F_buffer_usage& operator |= (B bit_){flag |= static_cast<int>(bit_);return *this;}
-F_buffer_usage operator | (F_buffer_usage flag_){return flag | flag_.flag;}
-F_buffer_usage& operator |= (F_buffer_usage flag_){flag |= flag_.flag;return *this;}
-F_buffer_usage operator & (F_buffer_usage flag_){return flag & flag_.flag;}
-F_buffer_usage& operator &= (F_buffer_usage flag_){flag &= flag_.flag;return *this;}
-F_buffer_usage operator ^ (F_buffer_usage flag_){return flag ^ flag_.flag;}
-F_buffer_usage& operator ^= (F_buffer_usage flag_){flag ^= flag_.flag;return *this;}
-F_buffer_usage operator ~ (){return all_flags().flag^flag;}
-bool operator !(){return !flag;}
-F_buffer_usage& clear(){flag = 0;return *this;}
-F_buffer_usage all_flags(){
-return b_transfer_src | b_transfer_dst | b_uniform_texel_buffer | b_storage_texel_buffer | b_uniform_buffer | b_storage_buffer | b_index_buffer | b_vertex_buffer | b_indirect_buffer;
-}
-F_buffer_usage& on_transfer_src(){ flag |= b_transfer_src; return *this; }
-F_buffer_usage& off_transfer_src(){ flag &= ~b_transfer_src; return *this; }
-F_buffer_usage& on_transfer_dst(){ flag |= b_transfer_dst; return *this; }
-F_buffer_usage& off_transfer_dst(){ flag &= ~b_transfer_dst; return *this; }
-F_buffer_usage& on_uniform_texel_buffer(){ flag |= b_uniform_texel_buffer; return *this; }
-F_buffer_usage& off_uniform_texel_buffer(){ flag &= ~b_uniform_texel_buffer; return *this; }
-F_buffer_usage& on_storage_texel_buffer(){ flag |= b_storage_texel_buffer; return *this; }
-F_buffer_usage& off_storage_texel_buffer(){ flag &= ~b_storage_texel_buffer; return *this; }
-F_buffer_usage& on_uniform_buffer(){ flag |= b_uniform_buffer; return *this; }
-F_buffer_usage& off_uniform_buffer(){ flag &= ~b_uniform_buffer; return *this; }
-F_buffer_usage& on_storage_buffer(){ flag |= b_storage_buffer; return *this; }
-F_buffer_usage& off_storage_buffer(){ flag &= ~b_storage_buffer; return *this; }
-F_buffer_usage& on_index_buffer(){ flag |= b_index_buffer; return *this; }
-F_buffer_usage& off_index_buffer(){ flag &= ~b_index_buffer; return *this; }
-F_buffer_usage& on_vertex_buffer(){ flag |= b_vertex_buffer; return *this; }
-F_buffer_usage& off_vertex_buffer(){ flag &= ~b_vertex_buffer; return *this; }
-F_buffer_usage& on_indirect_buffer(){ flag |= b_indirect_buffer; return *this; }
-F_buffer_usage& off_indirect_buffer(){ flag &= ~b_indirect_buffer; return *this; }
-VkBufferUsageFlagBits get_vkfb(){ return VkBufferUsageFlagBits(flag); }
-};
-F_buffer_usage inline operator|(const F_buffer_usage::B bit1_, const F_buffer_usage::B bit2_){F_buffer_usage flags(bit1_);return flags | bit2_;}
-bool inline operator==(const F_buffer_usage f1_, const F_buffer_usage f2_) { return f1_.flag == f2_.flag; }
-bool inline operator!=(const F_buffer_usage f1_, const F_buffer_usage f2_) { return f1_.flag != f2_.flag; }
+inline F_buffer_usage operator&(const F_buffer_usage f1_, const F_buffer_usage f2_){return f1_.flag&f2_.flag;}
+inline F_buffer_usage operator|(const F_buffer_usage f1_, const F_buffer_usage f2_){return f1_.flag|f2_.flag;}
+inline F_buffer_usage operator^(const F_buffer_usage f1_, const F_buffer_usage f2_){return f1_.flag^f2_.flag;}
 /*	VkBufferCreateFlagBits*/
-class F_buffer_create {
-private:
-F_buffer_create(int flag_):flag(flag_){};
-public:
-uint32_t flag;
-enum B{
-/*Buffer should support sparse backing*/
-	b_sparse_binding = VK_BUFFER_CREATE_SPARSE_BINDING_BIT,
-/*Buffer should support sparse backing with partial residency*/
-	b_sparse_residency = VK_BUFFER_CREATE_SPARSE_RESIDENCY_BIT,
-/*Buffer should support constent data access to physical memory ranges mapped into multiple locations of sparse buffers*/
-	b_sparse_aliased = VK_BUFFER_CREATE_SPARSE_ALIASED_BIT,
+union F_buffer_create {
+	uint32_t flag;
+	VkBufferCreateFlagBits vk_flag;
+	enum B{
+			/* Buffer should support sparse backing */
+		b_sparse_binding = VK_BUFFER_CREATE_SPARSE_BINDING_BIT,
+			/* Buffer should support sparse backing with partial residency */
+		b_sparse_residency = VK_BUFFER_CREATE_SPARSE_RESIDENCY_BIT,
+			/* Buffer should support constent data access to physical memory ranges mapped into multiple locations of sparse buffers */
+		b_sparse_aliased = VK_BUFFER_CREATE_SPARSE_ALIASED_BIT,
+	};
+	F_buffer_create():flag(0){}
+	F_buffer_create(int i_):flag(static_cast<uint32_t>(i_)){}
+	F_buffer_create(uint32_t flag_):flag(flag_){}
+	F_buffer_create(const B flag_):flag(flag_){}
+	F_buffer_create(VkBufferCreateFlagBits flag_):vk_flag(flag_){}
+	operator uint32_t(){return flag;}
+	operator int(){return static_cast<int>(flag);}
+	operator VkBufferCreateFlagBits const&(){return vk_flag;}
+	operator bool(){return !!flag;}
+	F_buffer_create& operator=(const F_buffer_create flag_){flag=flag_.flag; return *this;}
+	F_buffer_create& operator|=(const F_buffer_create flag_){flag|=flag_.flag; return *this;}
+	F_buffer_create& operator&=(const F_buffer_create flag_){flag&=flag_.flag; return *this;}
+	F_buffer_create& operator^=(const F_buffer_create flag_){flag^=flag_.flag;return *this;}
+	F_buffer_create operator~(){return ~flag;}
+	bool operator==(const F_buffer_create flag_){return flag==flag_.flag;}
+	bool operator!=(const F_buffer_create flag_){return !(*this==flag_);}
+	F_buffer_create& clear(){flag = 0;return *this;}
+	F_buffer_create all_flags(){ return b_sparse_binding | b_sparse_residency | b_sparse_aliased;}
+	F_buffer_create& on_sparse_binding(){ flag |= b_sparse_binding; return *this; }
+	F_buffer_create& off_sparse_binding(){ flag &= ~b_sparse_binding; return *this; }
+	F_buffer_create& on_sparse_residency(){ flag |= b_sparse_residency; return *this; }
+	F_buffer_create& off_sparse_residency(){ flag &= ~b_sparse_residency; return *this; }
+	F_buffer_create& on_sparse_aliased(){ flag |= b_sparse_aliased; return *this; }
+	F_buffer_create& off_sparse_aliased(){ flag &= ~b_sparse_aliased; return *this; }
 };
-F_buffer_create():flag(0){}
-F_buffer_create(B bits_):flag(static_cast<int>(bits_)){}
-F_buffer_create(F_buffer_create const& flag_):flag(flag_.flag){}
-F_buffer_create(std::initializer_list<B> bit_list){for (auto&& bit : bit_list){flag |= static_cast<int>(bit);}}
-operator VkBufferCreateFlagBits const &(){return *this;}
-F_buffer_create& operator = (F_buffer_create flag_){flag = flag_.flag;return *this;}
-F_buffer_create operator | (B bit_){return flag | static_cast<int>(bit_);}
-F_buffer_create& operator |= (B bit_){flag |= static_cast<int>(bit_);return *this;}
-F_buffer_create operator | (F_buffer_create flag_){return flag | flag_.flag;}
-F_buffer_create& operator |= (F_buffer_create flag_){flag |= flag_.flag;return *this;}
-F_buffer_create operator & (F_buffer_create flag_){return flag & flag_.flag;}
-F_buffer_create& operator &= (F_buffer_create flag_){flag &= flag_.flag;return *this;}
-F_buffer_create operator ^ (F_buffer_create flag_){return flag ^ flag_.flag;}
-F_buffer_create& operator ^= (F_buffer_create flag_){flag ^= flag_.flag;return *this;}
-F_buffer_create operator ~ (){return all_flags().flag^flag;}
-bool operator !(){return !flag;}
-F_buffer_create& clear(){flag = 0;return *this;}
-F_buffer_create all_flags(){
-return b_sparse_binding | b_sparse_residency | b_sparse_aliased;
-}
-F_buffer_create& on_sparse_binding(){ flag |= b_sparse_binding; return *this; }
-F_buffer_create& off_sparse_binding(){ flag &= ~b_sparse_binding; return *this; }
-F_buffer_create& on_sparse_residency(){ flag |= b_sparse_residency; return *this; }
-F_buffer_create& off_sparse_residency(){ flag &= ~b_sparse_residency; return *this; }
-F_buffer_create& on_sparse_aliased(){ flag |= b_sparse_aliased; return *this; }
-F_buffer_create& off_sparse_aliased(){ flag &= ~b_sparse_aliased; return *this; }
-VkBufferCreateFlagBits get_vkfb(){ return VkBufferCreateFlagBits(flag); }
-};
-F_buffer_create inline operator|(const F_buffer_create::B bit1_, const F_buffer_create::B bit2_){F_buffer_create flags(bit1_);return flags | bit2_;}
-bool inline operator==(const F_buffer_create f1_, const F_buffer_create f2_) { return f1_.flag == f2_.flag; }
-bool inline operator!=(const F_buffer_create f1_, const F_buffer_create f2_) { return f1_.flag != f2_.flag; }
+inline F_buffer_create operator&(const F_buffer_create f1_, const F_buffer_create f2_){return f1_.flag&f2_.flag;}
+inline F_buffer_create operator|(const F_buffer_create f1_, const F_buffer_create f2_){return f1_.flag|f2_.flag;}
+inline F_buffer_create operator^(const F_buffer_create f1_, const F_buffer_create f2_){return f1_.flag^f2_.flag;}
 /*	VkShaderStageFlagBits*/
-class F_shader_stage {
-private:
-F_shader_stage(int flag_):flag(flag_){};
-public:
-uint32_t flag;
-enum B{
-	b_vertex = VK_SHADER_STAGE_VERTEX_BIT,
-	b_tessellation_control = VK_SHADER_STAGE_TESSELLATION_CONTROL_BIT,
-	b_tessellation_evaluation = VK_SHADER_STAGE_TESSELLATION_EVALUATION_BIT,
-	b_geometry = VK_SHADER_STAGE_GEOMETRY_BIT,
-	b_fragment = VK_SHADER_STAGE_FRAGMENT_BIT,
-	b_compute = VK_SHADER_STAGE_COMPUTE_BIT,
-	b_all_graphics = VK_SHADER_STAGE_ALL_GRAPHICS,
-	b_all = VK_SHADER_STAGE_ALL,
+union F_shader_stage {
+	uint32_t flag;
+	VkShaderStageFlagBits vk_flag;
+	enum B{
+		b_vertex = VK_SHADER_STAGE_VERTEX_BIT,
+		b_tessellation_control = VK_SHADER_STAGE_TESSELLATION_CONTROL_BIT,
+		b_tessellation_evaluation = VK_SHADER_STAGE_TESSELLATION_EVALUATION_BIT,
+		b_geometry = VK_SHADER_STAGE_GEOMETRY_BIT,
+		b_fragment = VK_SHADER_STAGE_FRAGMENT_BIT,
+		b_compute = VK_SHADER_STAGE_COMPUTE_BIT,
+		b_all_graphics = VK_SHADER_STAGE_ALL_GRAPHICS,
+		b_all = VK_SHADER_STAGE_ALL,
+	};
+	F_shader_stage():flag(0){}
+	F_shader_stage(int i_):flag(static_cast<uint32_t>(i_)){}
+	F_shader_stage(uint32_t flag_):flag(flag_){}
+	F_shader_stage(const B flag_):flag(flag_){}
+	F_shader_stage(VkShaderStageFlagBits flag_):vk_flag(flag_){}
+	operator uint32_t(){return flag;}
+	operator int(){return static_cast<int>(flag);}
+	operator VkShaderStageFlagBits const&(){return vk_flag;}
+	operator bool(){return !!flag;}
+	F_shader_stage& operator=(const F_shader_stage flag_){flag=flag_.flag; return *this;}
+	F_shader_stage& operator|=(const F_shader_stage flag_){flag|=flag_.flag; return *this;}
+	F_shader_stage& operator&=(const F_shader_stage flag_){flag&=flag_.flag; return *this;}
+	F_shader_stage& operator^=(const F_shader_stage flag_){flag^=flag_.flag;return *this;}
+	F_shader_stage operator~(){return ~flag;}
+	bool operator==(const F_shader_stage flag_){return flag==flag_.flag;}
+	bool operator!=(const F_shader_stage flag_){return !(*this==flag_);}
+	F_shader_stage& clear(){flag = 0;return *this;}
+	F_shader_stage all_flags(){ return b_vertex | b_tessellation_control | b_tessellation_evaluation | b_geometry | b_fragment | b_compute | b_all_graphics | b_all;}
+	F_shader_stage& on_vertex(){ flag |= b_vertex; return *this; }
+	F_shader_stage& off_vertex(){ flag &= ~b_vertex; return *this; }
+	F_shader_stage& on_tessellation_control(){ flag |= b_tessellation_control; return *this; }
+	F_shader_stage& off_tessellation_control(){ flag &= ~b_tessellation_control; return *this; }
+	F_shader_stage& on_tessellation_evaluation(){ flag |= b_tessellation_evaluation; return *this; }
+	F_shader_stage& off_tessellation_evaluation(){ flag &= ~b_tessellation_evaluation; return *this; }
+	F_shader_stage& on_geometry(){ flag |= b_geometry; return *this; }
+	F_shader_stage& off_geometry(){ flag &= ~b_geometry; return *this; }
+	F_shader_stage& on_fragment(){ flag |= b_fragment; return *this; }
+	F_shader_stage& off_fragment(){ flag &= ~b_fragment; return *this; }
+	F_shader_stage& on_compute(){ flag |= b_compute; return *this; }
+	F_shader_stage& off_compute(){ flag &= ~b_compute; return *this; }
+	F_shader_stage& on_all_graphics(){ flag |= b_all_graphics; return *this; }
+	F_shader_stage& off_all_graphics(){ flag &= ~b_all_graphics; return *this; }
+	F_shader_stage& on_all(){ flag |= b_all; return *this; }
+	F_shader_stage& off_all(){ flag &= ~b_all; return *this; }
 };
-F_shader_stage():flag(0){}
-F_shader_stage(B bits_):flag(static_cast<int>(bits_)){}
-F_shader_stage(F_shader_stage const& flag_):flag(flag_.flag){}
-F_shader_stage(std::initializer_list<B> bit_list){for (auto&& bit : bit_list){flag |= static_cast<int>(bit);}}
-operator VkShaderStageFlagBits const &(){return *this;}
-F_shader_stage& operator = (F_shader_stage flag_){flag = flag_.flag;return *this;}
-F_shader_stage operator | (B bit_){return flag | static_cast<int>(bit_);}
-F_shader_stage& operator |= (B bit_){flag |= static_cast<int>(bit_);return *this;}
-F_shader_stage operator | (F_shader_stage flag_){return flag | flag_.flag;}
-F_shader_stage& operator |= (F_shader_stage flag_){flag |= flag_.flag;return *this;}
-F_shader_stage operator & (F_shader_stage flag_){return flag & flag_.flag;}
-F_shader_stage& operator &= (F_shader_stage flag_){flag &= flag_.flag;return *this;}
-F_shader_stage operator ^ (F_shader_stage flag_){return flag ^ flag_.flag;}
-F_shader_stage& operator ^= (F_shader_stage flag_){flag ^= flag_.flag;return *this;}
-F_shader_stage operator ~ (){return all_flags().flag^flag;}
-bool operator !(){return !flag;}
-F_shader_stage& clear(){flag = 0;return *this;}
-F_shader_stage all_flags(){
-return b_vertex | b_tessellation_control | b_tessellation_evaluation | b_geometry | b_fragment | b_compute | b_all_graphics | b_all;
-}
-F_shader_stage& on_vertex(){ flag |= b_vertex; return *this; }
-F_shader_stage& off_vertex(){ flag &= ~b_vertex; return *this; }
-F_shader_stage& on_tessellation_control(){ flag |= b_tessellation_control; return *this; }
-F_shader_stage& off_tessellation_control(){ flag &= ~b_tessellation_control; return *this; }
-F_shader_stage& on_tessellation_evaluation(){ flag |= b_tessellation_evaluation; return *this; }
-F_shader_stage& off_tessellation_evaluation(){ flag &= ~b_tessellation_evaluation; return *this; }
-F_shader_stage& on_geometry(){ flag |= b_geometry; return *this; }
-F_shader_stage& off_geometry(){ flag &= ~b_geometry; return *this; }
-F_shader_stage& on_fragment(){ flag |= b_fragment; return *this; }
-F_shader_stage& off_fragment(){ flag &= ~b_fragment; return *this; }
-F_shader_stage& on_compute(){ flag |= b_compute; return *this; }
-F_shader_stage& off_compute(){ flag &= ~b_compute; return *this; }
-F_shader_stage& on_all_graphics(){ flag |= b_all_graphics; return *this; }
-F_shader_stage& off_all_graphics(){ flag &= ~b_all_graphics; return *this; }
-F_shader_stage& on_all(){ flag |= b_all; return *this; }
-F_shader_stage& off_all(){ flag &= ~b_all; return *this; }
-VkShaderStageFlagBits get_vkfb(){ return VkShaderStageFlagBits(flag); }
-};
-F_shader_stage inline operator|(const F_shader_stage::B bit1_, const F_shader_stage::B bit2_){F_shader_stage flags(bit1_);return flags | bit2_;}
-bool inline operator==(const F_shader_stage f1_, const F_shader_stage f2_) { return f1_.flag == f2_.flag; }
-bool inline operator!=(const F_shader_stage f1_, const F_shader_stage f2_) { return f1_.flag != f2_.flag; }
+inline F_shader_stage operator&(const F_shader_stage f1_, const F_shader_stage f2_){return f1_.flag&f2_.flag;}
+inline F_shader_stage operator|(const F_shader_stage f1_, const F_shader_stage f2_){return f1_.flag|f2_.flag;}
+inline F_shader_stage operator^(const F_shader_stage f1_, const F_shader_stage f2_){return f1_.flag^f2_.flag;}
 /*	VkImageUsageFlagBits*/
-class F_image_usage {
-private:
-F_image_usage(int flag_):flag(flag_){};
-public:
-uint32_t flag;
-enum B{
-/*Can be used as a source of transfer operations*/
-	b_transfer_src = VK_IMAGE_USAGE_TRANSFER_SRC_BIT,
-/*Can be used as a destination of transfer operations*/
-	b_transfer_dst = VK_IMAGE_USAGE_TRANSFER_DST_BIT,
-/*Can be sampled from (SAMPLED_IMAGE and COMBINED_IMAGE_SAMPLER descriptor types)*/
-	b_sampled = VK_IMAGE_USAGE_SAMPLED_BIT,
-/*Can be used as storage image (STORAGE_IMAGE descriptor type)*/
-	b_storage = VK_IMAGE_USAGE_STORAGE_BIT,
-/*Can be used as framebuffer color attachment*/
-	b_color_attachment = VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT,
-/*Can be used as framebuffer depth/stencil attachment*/
-	b_depth_stencil_attachment = VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT,
-/*Image data not needed outside of rendering*/
-	b_transient_attachment = VK_IMAGE_USAGE_TRANSIENT_ATTACHMENT_BIT,
-/*Can be used as framebuffer input attachment*/
-	b_input_attachment = VK_IMAGE_USAGE_INPUT_ATTACHMENT_BIT,
+union F_image_usage {
+	uint32_t flag;
+	VkImageUsageFlagBits vk_flag;
+	enum B{
+			/* Can be used as a source of transfer operations */
+		b_transfer_src = VK_IMAGE_USAGE_TRANSFER_SRC_BIT,
+			/* Can be used as a destination of transfer operations */
+		b_transfer_dst = VK_IMAGE_USAGE_TRANSFER_DST_BIT,
+			/* Can be sampled from (SAMPLED_IMAGE and COMBINED_IMAGE_SAMPLER descriptor types) */
+		b_sampled = VK_IMAGE_USAGE_SAMPLED_BIT,
+			/* Can be used as storage image (STORAGE_IMAGE descriptor type) */
+		b_storage = VK_IMAGE_USAGE_STORAGE_BIT,
+			/* Can be used as framebuffer color attachment */
+		b_color_attachment = VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT,
+			/* Can be used as framebuffer depth/stencil attachment */
+		b_depth_stencil_attachment = VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT,
+			/* Image data not needed outside of rendering */
+		b_transient_attachment = VK_IMAGE_USAGE_TRANSIENT_ATTACHMENT_BIT,
+			/* Can be used as framebuffer input attachment */
+		b_input_attachment = VK_IMAGE_USAGE_INPUT_ATTACHMENT_BIT,
+	};
+	F_image_usage():flag(0){}
+	F_image_usage(int i_):flag(static_cast<uint32_t>(i_)){}
+	F_image_usage(uint32_t flag_):flag(flag_){}
+	F_image_usage(const B flag_):flag(flag_){}
+	F_image_usage(VkImageUsageFlagBits flag_):vk_flag(flag_){}
+	operator uint32_t(){return flag;}
+	operator int(){return static_cast<int>(flag);}
+	operator VkImageUsageFlagBits const&(){return vk_flag;}
+	operator bool(){return !!flag;}
+	F_image_usage& operator=(const F_image_usage flag_){flag=flag_.flag; return *this;}
+	F_image_usage& operator|=(const F_image_usage flag_){flag|=flag_.flag; return *this;}
+	F_image_usage& operator&=(const F_image_usage flag_){flag&=flag_.flag; return *this;}
+	F_image_usage& operator^=(const F_image_usage flag_){flag^=flag_.flag;return *this;}
+	F_image_usage operator~(){return ~flag;}
+	bool operator==(const F_image_usage flag_){return flag==flag_.flag;}
+	bool operator!=(const F_image_usage flag_){return !(*this==flag_);}
+	F_image_usage& clear(){flag = 0;return *this;}
+	F_image_usage all_flags(){ return b_transfer_src | b_transfer_dst | b_sampled | b_storage | b_color_attachment | b_depth_stencil_attachment | b_transient_attachment | b_input_attachment;}
+	F_image_usage& on_transfer_src(){ flag |= b_transfer_src; return *this; }
+	F_image_usage& off_transfer_src(){ flag &= ~b_transfer_src; return *this; }
+	F_image_usage& on_transfer_dst(){ flag |= b_transfer_dst; return *this; }
+	F_image_usage& off_transfer_dst(){ flag &= ~b_transfer_dst; return *this; }
+	F_image_usage& on_sampled(){ flag |= b_sampled; return *this; }
+	F_image_usage& off_sampled(){ flag &= ~b_sampled; return *this; }
+	F_image_usage& on_storage(){ flag |= b_storage; return *this; }
+	F_image_usage& off_storage(){ flag &= ~b_storage; return *this; }
+	F_image_usage& on_color_attachment(){ flag |= b_color_attachment; return *this; }
+	F_image_usage& off_color_attachment(){ flag &= ~b_color_attachment; return *this; }
+	F_image_usage& on_depth_stencil_attachment(){ flag |= b_depth_stencil_attachment; return *this; }
+	F_image_usage& off_depth_stencil_attachment(){ flag &= ~b_depth_stencil_attachment; return *this; }
+	F_image_usage& on_transient_attachment(){ flag |= b_transient_attachment; return *this; }
+	F_image_usage& off_transient_attachment(){ flag &= ~b_transient_attachment; return *this; }
+	F_image_usage& on_input_attachment(){ flag |= b_input_attachment; return *this; }
+	F_image_usage& off_input_attachment(){ flag &= ~b_input_attachment; return *this; }
 };
-F_image_usage():flag(0){}
-F_image_usage(B bits_):flag(static_cast<int>(bits_)){}
-F_image_usage(F_image_usage const& flag_):flag(flag_.flag){}
-F_image_usage(std::initializer_list<B> bit_list){for (auto&& bit : bit_list){flag |= static_cast<int>(bit);}}
-operator VkImageUsageFlagBits const &(){return *this;}
-F_image_usage& operator = (F_image_usage flag_){flag = flag_.flag;return *this;}
-F_image_usage operator | (B bit_){return flag | static_cast<int>(bit_);}
-F_image_usage& operator |= (B bit_){flag |= static_cast<int>(bit_);return *this;}
-F_image_usage operator | (F_image_usage flag_){return flag | flag_.flag;}
-F_image_usage& operator |= (F_image_usage flag_){flag |= flag_.flag;return *this;}
-F_image_usage operator & (F_image_usage flag_){return flag & flag_.flag;}
-F_image_usage& operator &= (F_image_usage flag_){flag &= flag_.flag;return *this;}
-F_image_usage operator ^ (F_image_usage flag_){return flag ^ flag_.flag;}
-F_image_usage& operator ^= (F_image_usage flag_){flag ^= flag_.flag;return *this;}
-F_image_usage operator ~ (){return all_flags().flag^flag;}
-bool operator !(){return !flag;}
-F_image_usage& clear(){flag = 0;return *this;}
-F_image_usage all_flags(){
-return b_transfer_src | b_transfer_dst | b_sampled | b_storage | b_color_attachment | b_depth_stencil_attachment | b_transient_attachment | b_input_attachment;
-}
-F_image_usage& on_transfer_src(){ flag |= b_transfer_src; return *this; }
-F_image_usage& off_transfer_src(){ flag &= ~b_transfer_src; return *this; }
-F_image_usage& on_transfer_dst(){ flag |= b_transfer_dst; return *this; }
-F_image_usage& off_transfer_dst(){ flag &= ~b_transfer_dst; return *this; }
-F_image_usage& on_sampled(){ flag |= b_sampled; return *this; }
-F_image_usage& off_sampled(){ flag &= ~b_sampled; return *this; }
-F_image_usage& on_storage(){ flag |= b_storage; return *this; }
-F_image_usage& off_storage(){ flag &= ~b_storage; return *this; }
-F_image_usage& on_color_attachment(){ flag |= b_color_attachment; return *this; }
-F_image_usage& off_color_attachment(){ flag &= ~b_color_attachment; return *this; }
-F_image_usage& on_depth_stencil_attachment(){ flag |= b_depth_stencil_attachment; return *this; }
-F_image_usage& off_depth_stencil_attachment(){ flag &= ~b_depth_stencil_attachment; return *this; }
-F_image_usage& on_transient_attachment(){ flag |= b_transient_attachment; return *this; }
-F_image_usage& off_transient_attachment(){ flag &= ~b_transient_attachment; return *this; }
-F_image_usage& on_input_attachment(){ flag |= b_input_attachment; return *this; }
-F_image_usage& off_input_attachment(){ flag &= ~b_input_attachment; return *this; }
-VkImageUsageFlagBits get_vkfb(){ return VkImageUsageFlagBits(flag); }
-};
-F_image_usage inline operator|(const F_image_usage::B bit1_, const F_image_usage::B bit2_){F_image_usage flags(bit1_);return flags | bit2_;}
-bool inline operator==(const F_image_usage f1_, const F_image_usage f2_) { return f1_.flag == f2_.flag; }
-bool inline operator!=(const F_image_usage f1_, const F_image_usage f2_) { return f1_.flag != f2_.flag; }
+inline F_image_usage operator&(const F_image_usage f1_, const F_image_usage f2_){return f1_.flag&f2_.flag;}
+inline F_image_usage operator|(const F_image_usage f1_, const F_image_usage f2_){return f1_.flag|f2_.flag;}
+inline F_image_usage operator^(const F_image_usage f1_, const F_image_usage f2_){return f1_.flag^f2_.flag;}
 /*	VkImageCreateFlagBits*/
-class F_image_create {
-private:
-F_image_create(int flag_):flag(flag_){};
-public:
-uint32_t flag;
-enum B{
-/*Image should support sparse backing*/
-	b_sparse_binding = VK_IMAGE_CREATE_SPARSE_BINDING_BIT,
-/*Image should support sparse backing with partial residency*/
-	b_sparse_residency = VK_IMAGE_CREATE_SPARSE_RESIDENCY_BIT,
-/*Image should support constent data access to physical memory ranges mapped into multiple locations of sparse images*/
-	b_sparse_aliased = VK_IMAGE_CREATE_SPARSE_ALIASED_BIT,
-/*Allows image views to have different format than the base image*/
-	b_mutable_format = VK_IMAGE_CREATE_MUTABLE_FORMAT_BIT,
-/*Allows creating image views with cube type from the created image*/
-	b_cube_compatible = VK_IMAGE_CREATE_CUBE_COMPATIBLE_BIT,
+union F_image_create {
+	uint32_t flag;
+	VkImageCreateFlagBits vk_flag;
+	enum B{
+			/* Image should support sparse backing */
+		b_sparse_binding = VK_IMAGE_CREATE_SPARSE_BINDING_BIT,
+			/* Image should support sparse backing with partial residency */
+		b_sparse_residency = VK_IMAGE_CREATE_SPARSE_RESIDENCY_BIT,
+			/* Image should support constent data access to physical memory ranges mapped into multiple locations of sparse images */
+		b_sparse_aliased = VK_IMAGE_CREATE_SPARSE_ALIASED_BIT,
+			/* Allows image views to have different format than the base image */
+		b_mutable_format = VK_IMAGE_CREATE_MUTABLE_FORMAT_BIT,
+			/* Allows creating image views with cube type from the created image */
+		b_cube_compatible = VK_IMAGE_CREATE_CUBE_COMPATIBLE_BIT,
+	};
+	F_image_create():flag(0){}
+	F_image_create(int i_):flag(static_cast<uint32_t>(i_)){}
+	F_image_create(uint32_t flag_):flag(flag_){}
+	F_image_create(const B flag_):flag(flag_){}
+	F_image_create(VkImageCreateFlagBits flag_):vk_flag(flag_){}
+	operator uint32_t(){return flag;}
+	operator int(){return static_cast<int>(flag);}
+	operator VkImageCreateFlagBits const&(){return vk_flag;}
+	operator bool(){return !!flag;}
+	F_image_create& operator=(const F_image_create flag_){flag=flag_.flag; return *this;}
+	F_image_create& operator|=(const F_image_create flag_){flag|=flag_.flag; return *this;}
+	F_image_create& operator&=(const F_image_create flag_){flag&=flag_.flag; return *this;}
+	F_image_create& operator^=(const F_image_create flag_){flag^=flag_.flag;return *this;}
+	F_image_create operator~(){return ~flag;}
+	bool operator==(const F_image_create flag_){return flag==flag_.flag;}
+	bool operator!=(const F_image_create flag_){return !(*this==flag_);}
+	F_image_create& clear(){flag = 0;return *this;}
+	F_image_create all_flags(){ return b_sparse_binding | b_sparse_residency | b_sparse_aliased | b_mutable_format | b_cube_compatible;}
+	F_image_create& on_sparse_binding(){ flag |= b_sparse_binding; return *this; }
+	F_image_create& off_sparse_binding(){ flag &= ~b_sparse_binding; return *this; }
+	F_image_create& on_sparse_residency(){ flag |= b_sparse_residency; return *this; }
+	F_image_create& off_sparse_residency(){ flag &= ~b_sparse_residency; return *this; }
+	F_image_create& on_sparse_aliased(){ flag |= b_sparse_aliased; return *this; }
+	F_image_create& off_sparse_aliased(){ flag &= ~b_sparse_aliased; return *this; }
+	F_image_create& on_mutable_format(){ flag |= b_mutable_format; return *this; }
+	F_image_create& off_mutable_format(){ flag &= ~b_mutable_format; return *this; }
+	F_image_create& on_cube_compatible(){ flag |= b_cube_compatible; return *this; }
+	F_image_create& off_cube_compatible(){ flag &= ~b_cube_compatible; return *this; }
 };
-F_image_create():flag(0){}
-F_image_create(B bits_):flag(static_cast<int>(bits_)){}
-F_image_create(F_image_create const& flag_):flag(flag_.flag){}
-F_image_create(std::initializer_list<B> bit_list){for (auto&& bit : bit_list){flag |= static_cast<int>(bit);}}
-operator VkImageCreateFlagBits const &(){return *this;}
-F_image_create& operator = (F_image_create flag_){flag = flag_.flag;return *this;}
-F_image_create operator | (B bit_){return flag | static_cast<int>(bit_);}
-F_image_create& operator |= (B bit_){flag |= static_cast<int>(bit_);return *this;}
-F_image_create operator | (F_image_create flag_){return flag | flag_.flag;}
-F_image_create& operator |= (F_image_create flag_){flag |= flag_.flag;return *this;}
-F_image_create operator & (F_image_create flag_){return flag & flag_.flag;}
-F_image_create& operator &= (F_image_create flag_){flag &= flag_.flag;return *this;}
-F_image_create operator ^ (F_image_create flag_){return flag ^ flag_.flag;}
-F_image_create& operator ^= (F_image_create flag_){flag ^= flag_.flag;return *this;}
-F_image_create operator ~ (){return all_flags().flag^flag;}
-bool operator !(){return !flag;}
-F_image_create& clear(){flag = 0;return *this;}
-F_image_create all_flags(){
-return b_sparse_binding | b_sparse_residency | b_sparse_aliased | b_mutable_format | b_cube_compatible;
-}
-F_image_create& on_sparse_binding(){ flag |= b_sparse_binding; return *this; }
-F_image_create& off_sparse_binding(){ flag &= ~b_sparse_binding; return *this; }
-F_image_create& on_sparse_residency(){ flag |= b_sparse_residency; return *this; }
-F_image_create& off_sparse_residency(){ flag &= ~b_sparse_residency; return *this; }
-F_image_create& on_sparse_aliased(){ flag |= b_sparse_aliased; return *this; }
-F_image_create& off_sparse_aliased(){ flag &= ~b_sparse_aliased; return *this; }
-F_image_create& on_mutable_format(){ flag |= b_mutable_format; return *this; }
-F_image_create& off_mutable_format(){ flag &= ~b_mutable_format; return *this; }
-F_image_create& on_cube_compatible(){ flag |= b_cube_compatible; return *this; }
-F_image_create& off_cube_compatible(){ flag &= ~b_cube_compatible; return *this; }
-VkImageCreateFlagBits get_vkfb(){ return VkImageCreateFlagBits(flag); }
-};
-F_image_create inline operator|(const F_image_create::B bit1_, const F_image_create::B bit2_){F_image_create flags(bit1_);return flags | bit2_;}
-bool inline operator==(const F_image_create f1_, const F_image_create f2_) { return f1_.flag == f2_.flag; }
-bool inline operator!=(const F_image_create f1_, const F_image_create f2_) { return f1_.flag != f2_.flag; }
+inline F_image_create operator&(const F_image_create f1_, const F_image_create f2_){return f1_.flag&f2_.flag;}
+inline F_image_create operator|(const F_image_create f1_, const F_image_create f2_){return f1_.flag|f2_.flag;}
+inline F_image_create operator^(const F_image_create f1_, const F_image_create f2_){return f1_.flag^f2_.flag;}
 /*	VkPipelineCreateFlagBits*/
-class F_pipeline_create {
-private:
-F_pipeline_create(int flag_):flag(flag_){};
-public:
-uint32_t flag;
-enum B{
-	b_disable_optimization = VK_PIPELINE_CREATE_DISABLE_OPTIMIZATION_BIT,
-	b_allow_derivatives = VK_PIPELINE_CREATE_ALLOW_DERIVATIVES_BIT,
-	b_derivative = VK_PIPELINE_CREATE_DERIVATIVE_BIT,
+union F_pipeline_create {
+	uint32_t flag;
+	VkPipelineCreateFlagBits vk_flag;
+	enum B{
+		b_disable_optimization = VK_PIPELINE_CREATE_DISABLE_OPTIMIZATION_BIT,
+		b_allow_derivatives = VK_PIPELINE_CREATE_ALLOW_DERIVATIVES_BIT,
+		b_derivative = VK_PIPELINE_CREATE_DERIVATIVE_BIT,
+	};
+	F_pipeline_create():flag(0){}
+	F_pipeline_create(int i_):flag(static_cast<uint32_t>(i_)){}
+	F_pipeline_create(uint32_t flag_):flag(flag_){}
+	F_pipeline_create(const B flag_):flag(flag_){}
+	F_pipeline_create(VkPipelineCreateFlagBits flag_):vk_flag(flag_){}
+	operator uint32_t(){return flag;}
+	operator int(){return static_cast<int>(flag);}
+	operator VkPipelineCreateFlagBits const&(){return vk_flag;}
+	operator bool(){return !!flag;}
+	F_pipeline_create& operator=(const F_pipeline_create flag_){flag=flag_.flag; return *this;}
+	F_pipeline_create& operator|=(const F_pipeline_create flag_){flag|=flag_.flag; return *this;}
+	F_pipeline_create& operator&=(const F_pipeline_create flag_){flag&=flag_.flag; return *this;}
+	F_pipeline_create& operator^=(const F_pipeline_create flag_){flag^=flag_.flag;return *this;}
+	F_pipeline_create operator~(){return ~flag;}
+	bool operator==(const F_pipeline_create flag_){return flag==flag_.flag;}
+	bool operator!=(const F_pipeline_create flag_){return !(*this==flag_);}
+	F_pipeline_create& clear(){flag = 0;return *this;}
+	F_pipeline_create all_flags(){ return b_disable_optimization | b_allow_derivatives | b_derivative;}
+	F_pipeline_create& on_disable_optimization(){ flag |= b_disable_optimization; return *this; }
+	F_pipeline_create& off_disable_optimization(){ flag &= ~b_disable_optimization; return *this; }
+	F_pipeline_create& on_allow_derivatives(){ flag |= b_allow_derivatives; return *this; }
+	F_pipeline_create& off_allow_derivatives(){ flag &= ~b_allow_derivatives; return *this; }
+	F_pipeline_create& on_derivative(){ flag |= b_derivative; return *this; }
+	F_pipeline_create& off_derivative(){ flag &= ~b_derivative; return *this; }
 };
-F_pipeline_create():flag(0){}
-F_pipeline_create(B bits_):flag(static_cast<int>(bits_)){}
-F_pipeline_create(F_pipeline_create const& flag_):flag(flag_.flag){}
-F_pipeline_create(std::initializer_list<B> bit_list){for (auto&& bit : bit_list){flag |= static_cast<int>(bit);}}
-operator VkPipelineCreateFlagBits const &(){return *this;}
-F_pipeline_create& operator = (F_pipeline_create flag_){flag = flag_.flag;return *this;}
-F_pipeline_create operator | (B bit_){return flag | static_cast<int>(bit_);}
-F_pipeline_create& operator |= (B bit_){flag |= static_cast<int>(bit_);return *this;}
-F_pipeline_create operator | (F_pipeline_create flag_){return flag | flag_.flag;}
-F_pipeline_create& operator |= (F_pipeline_create flag_){flag |= flag_.flag;return *this;}
-F_pipeline_create operator & (F_pipeline_create flag_){return flag & flag_.flag;}
-F_pipeline_create& operator &= (F_pipeline_create flag_){flag &= flag_.flag;return *this;}
-F_pipeline_create operator ^ (F_pipeline_create flag_){return flag ^ flag_.flag;}
-F_pipeline_create& operator ^= (F_pipeline_create flag_){flag ^= flag_.flag;return *this;}
-F_pipeline_create operator ~ (){return all_flags().flag^flag;}
-bool operator !(){return !flag;}
-F_pipeline_create& clear(){flag = 0;return *this;}
-F_pipeline_create all_flags(){
-return b_disable_optimization | b_allow_derivatives | b_derivative;
-}
-F_pipeline_create& on_disable_optimization(){ flag |= b_disable_optimization; return *this; }
-F_pipeline_create& off_disable_optimization(){ flag &= ~b_disable_optimization; return *this; }
-F_pipeline_create& on_allow_derivatives(){ flag |= b_allow_derivatives; return *this; }
-F_pipeline_create& off_allow_derivatives(){ flag &= ~b_allow_derivatives; return *this; }
-F_pipeline_create& on_derivative(){ flag |= b_derivative; return *this; }
-F_pipeline_create& off_derivative(){ flag &= ~b_derivative; return *this; }
-VkPipelineCreateFlagBits get_vkfb(){ return VkPipelineCreateFlagBits(flag); }
-};
-F_pipeline_create inline operator|(const F_pipeline_create::B bit1_, const F_pipeline_create::B bit2_){F_pipeline_create flags(bit1_);return flags | bit2_;}
-bool inline operator==(const F_pipeline_create f1_, const F_pipeline_create f2_) { return f1_.flag == f2_.flag; }
-bool inline operator!=(const F_pipeline_create f1_, const F_pipeline_create f2_) { return f1_.flag != f2_.flag; }
+inline F_pipeline_create operator&(const F_pipeline_create f1_, const F_pipeline_create f2_){return f1_.flag&f2_.flag;}
+inline F_pipeline_create operator|(const F_pipeline_create f1_, const F_pipeline_create f2_){return f1_.flag|f2_.flag;}
+inline F_pipeline_create operator^(const F_pipeline_create f1_, const F_pipeline_create f2_){return f1_.flag^f2_.flag;}
 /*	VkColorComponentFlagBits*/
-class F_color_component {
-private:
-F_color_component(int flag_):flag(flag_){};
-public:
-uint32_t flag;
-enum B{
-	b_r = VK_COLOR_COMPONENT_R_BIT,
-	b_g = VK_COLOR_COMPONENT_G_BIT,
-	b_b = VK_COLOR_COMPONENT_B_BIT,
-	b_a = VK_COLOR_COMPONENT_A_BIT,
+union F_color_component {
+	uint32_t flag;
+	VkColorComponentFlagBits vk_flag;
+	enum B{
+		b_r = VK_COLOR_COMPONENT_R_BIT,
+		b_g = VK_COLOR_COMPONENT_G_BIT,
+		b_b = VK_COLOR_COMPONENT_B_BIT,
+		b_a = VK_COLOR_COMPONENT_A_BIT,
+	};
+	F_color_component():flag(0){}
+	F_color_component(int i_):flag(static_cast<uint32_t>(i_)){}
+	F_color_component(uint32_t flag_):flag(flag_){}
+	F_color_component(const B flag_):flag(flag_){}
+	F_color_component(VkColorComponentFlagBits flag_):vk_flag(flag_){}
+	operator uint32_t(){return flag;}
+	operator int(){return static_cast<int>(flag);}
+	operator VkColorComponentFlagBits const&(){return vk_flag;}
+	operator bool(){return !!flag;}
+	F_color_component& operator=(const F_color_component flag_){flag=flag_.flag; return *this;}
+	F_color_component& operator|=(const F_color_component flag_){flag|=flag_.flag; return *this;}
+	F_color_component& operator&=(const F_color_component flag_){flag&=flag_.flag; return *this;}
+	F_color_component& operator^=(const F_color_component flag_){flag^=flag_.flag;return *this;}
+	F_color_component operator~(){return ~flag;}
+	bool operator==(const F_color_component flag_){return flag==flag_.flag;}
+	bool operator!=(const F_color_component flag_){return !(*this==flag_);}
+	F_color_component& clear(){flag = 0;return *this;}
+	F_color_component all_flags(){ return b_r | b_g | b_b | b_a;}
+	F_color_component& on_r(){ flag |= b_r; return *this; }
+	F_color_component& off_r(){ flag &= ~b_r; return *this; }
+	F_color_component& on_g(){ flag |= b_g; return *this; }
+	F_color_component& off_g(){ flag &= ~b_g; return *this; }
+	F_color_component& on_b(){ flag |= b_b; return *this; }
+	F_color_component& off_b(){ flag &= ~b_b; return *this; }
+	F_color_component& on_a(){ flag |= b_a; return *this; }
+	F_color_component& off_a(){ flag &= ~b_a; return *this; }
 };
-F_color_component():flag(0){}
-F_color_component(B bits_):flag(static_cast<int>(bits_)){}
-F_color_component(F_color_component const& flag_):flag(flag_.flag){}
-F_color_component(std::initializer_list<B> bit_list){for (auto&& bit : bit_list){flag |= static_cast<int>(bit);}}
-operator VkColorComponentFlagBits const &(){return *this;}
-F_color_component& operator = (F_color_component flag_){flag = flag_.flag;return *this;}
-F_color_component operator | (B bit_){return flag | static_cast<int>(bit_);}
-F_color_component& operator |= (B bit_){flag |= static_cast<int>(bit_);return *this;}
-F_color_component operator | (F_color_component flag_){return flag | flag_.flag;}
-F_color_component& operator |= (F_color_component flag_){flag |= flag_.flag;return *this;}
-F_color_component operator & (F_color_component flag_){return flag & flag_.flag;}
-F_color_component& operator &= (F_color_component flag_){flag &= flag_.flag;return *this;}
-F_color_component operator ^ (F_color_component flag_){return flag ^ flag_.flag;}
-F_color_component& operator ^= (F_color_component flag_){flag ^= flag_.flag;return *this;}
-F_color_component operator ~ (){return all_flags().flag^flag;}
-bool operator !(){return !flag;}
-F_color_component& clear(){flag = 0;return *this;}
-F_color_component all_flags(){
-return b_r | b_g | b_b | b_a;
-}
-F_color_component& on_r(){ flag |= b_r; return *this; }
-F_color_component& off_r(){ flag &= ~b_r; return *this; }
-F_color_component& on_g(){ flag |= b_g; return *this; }
-F_color_component& off_g(){ flag &= ~b_g; return *this; }
-F_color_component& on_b(){ flag |= b_b; return *this; }
-F_color_component& off_b(){ flag &= ~b_b; return *this; }
-F_color_component& on_a(){ flag |= b_a; return *this; }
-F_color_component& off_a(){ flag &= ~b_a; return *this; }
-VkColorComponentFlagBits get_vkfb(){ return VkColorComponentFlagBits(flag); }
-};
-F_color_component inline operator|(const F_color_component::B bit1_, const F_color_component::B bit2_){F_color_component flags(bit1_);return flags | bit2_;}
-bool inline operator==(const F_color_component f1_, const F_color_component f2_) { return f1_.flag == f2_.flag; }
-bool inline operator!=(const F_color_component f1_, const F_color_component f2_) { return f1_.flag != f2_.flag; }
+inline F_color_component operator&(const F_color_component f1_, const F_color_component f2_){return f1_.flag&f2_.flag;}
+inline F_color_component operator|(const F_color_component f1_, const F_color_component f2_){return f1_.flag|f2_.flag;}
+inline F_color_component operator^(const F_color_component f1_, const F_color_component f2_){return f1_.flag^f2_.flag;}
 /*	VkFenceCreateFlagBits*/
-class F_fence_create {
-private:
-F_fence_create(int flag_):flag(flag_){};
-public:
-uint32_t flag;
-enum B{
-	b_signaled = VK_FENCE_CREATE_SIGNALED_BIT,
+union F_fence_create {
+	uint32_t flag;
+	VkFenceCreateFlagBits vk_flag;
+	enum B{
+		b_signaled = VK_FENCE_CREATE_SIGNALED_BIT,
+	};
+	F_fence_create():flag(0){}
+	F_fence_create(int i_):flag(static_cast<uint32_t>(i_)){}
+	F_fence_create(uint32_t flag_):flag(flag_){}
+	F_fence_create(const B flag_):flag(flag_){}
+	F_fence_create(VkFenceCreateFlagBits flag_):vk_flag(flag_){}
+	operator uint32_t(){return flag;}
+	operator int(){return static_cast<int>(flag);}
+	operator VkFenceCreateFlagBits const&(){return vk_flag;}
+	operator bool(){return !!flag;}
+	F_fence_create& operator=(const F_fence_create flag_){flag=flag_.flag; return *this;}
+	F_fence_create& operator|=(const F_fence_create flag_){flag|=flag_.flag; return *this;}
+	F_fence_create& operator&=(const F_fence_create flag_){flag&=flag_.flag; return *this;}
+	F_fence_create& operator^=(const F_fence_create flag_){flag^=flag_.flag;return *this;}
+	F_fence_create operator~(){return ~flag;}
+	bool operator==(const F_fence_create flag_){return flag==flag_.flag;}
+	bool operator!=(const F_fence_create flag_){return !(*this==flag_);}
+	F_fence_create& clear(){flag = 0;return *this;}
+	F_fence_create all_flags(){ return b_signaled;}
+	F_fence_create& on_signaled(){ flag |= b_signaled; return *this; }
+	F_fence_create& off_signaled(){ flag &= ~b_signaled; return *this; }
 };
-F_fence_create():flag(0){}
-F_fence_create(B bits_):flag(static_cast<int>(bits_)){}
-F_fence_create(F_fence_create const& flag_):flag(flag_.flag){}
-F_fence_create(std::initializer_list<B> bit_list){for (auto&& bit : bit_list){flag |= static_cast<int>(bit);}}
-operator VkFenceCreateFlagBits const &(){return *this;}
-F_fence_create& operator = (F_fence_create flag_){flag = flag_.flag;return *this;}
-F_fence_create operator | (B bit_){return flag | static_cast<int>(bit_);}
-F_fence_create& operator |= (B bit_){flag |= static_cast<int>(bit_);return *this;}
-F_fence_create operator | (F_fence_create flag_){return flag | flag_.flag;}
-F_fence_create& operator |= (F_fence_create flag_){flag |= flag_.flag;return *this;}
-F_fence_create operator & (F_fence_create flag_){return flag & flag_.flag;}
-F_fence_create& operator &= (F_fence_create flag_){flag &= flag_.flag;return *this;}
-F_fence_create operator ^ (F_fence_create flag_){return flag ^ flag_.flag;}
-F_fence_create& operator ^= (F_fence_create flag_){flag ^= flag_.flag;return *this;}
-F_fence_create operator ~ (){return all_flags().flag^flag;}
-bool operator !(){return !flag;}
-F_fence_create& clear(){flag = 0;return *this;}
-F_fence_create all_flags(){
-return b_signaled;
-}
-F_fence_create& on_signaled(){ flag |= b_signaled; return *this; }
-F_fence_create& off_signaled(){ flag &= ~b_signaled; return *this; }
-VkFenceCreateFlagBits get_vkfb(){ return VkFenceCreateFlagBits(flag); }
-};
-F_fence_create inline operator|(const F_fence_create::B bit1_, const F_fence_create::B bit2_){F_fence_create flags(bit1_);return flags | bit2_;}
-bool inline operator==(const F_fence_create f1_, const F_fence_create f2_) { return f1_.flag == f2_.flag; }
-bool inline operator!=(const F_fence_create f1_, const F_fence_create f2_) { return f1_.flag != f2_.flag; }
+inline F_fence_create operator&(const F_fence_create f1_, const F_fence_create f2_){return f1_.flag&f2_.flag;}
+inline F_fence_create operator|(const F_fence_create f1_, const F_fence_create f2_){return f1_.flag|f2_.flag;}
+inline F_fence_create operator^(const F_fence_create f1_, const F_fence_create f2_){return f1_.flag^f2_.flag;}
 /*	VkFormatFeatureFlagBits*/
-class F_format_feature {
-private:
-F_format_feature(int flag_):flag(flag_){};
-public:
-uint32_t flag;
-enum B{
-/*Format can be used for sampled images (SAMPLED_IMAGE and COMBINED_IMAGE_SAMPLER descriptor types)*/
-	b_sampled_image = VK_FORMAT_FEATURE_SAMPLED_IMAGE_BIT,
-/*Format can be used for storage images (STORAGE_IMAGE descriptor type)*/
-	b_storage_image = VK_FORMAT_FEATURE_STORAGE_IMAGE_BIT,
-/*Format supports atomic operations in case it is used for storage images*/
-	b_storage_image_atomic = VK_FORMAT_FEATURE_STORAGE_IMAGE_ATOMIC_BIT,
-/*Format can be used for uniform texel buffers (TBOs)*/
-	b_uniform_texel_buffer = VK_FORMAT_FEATURE_UNIFORM_TEXEL_BUFFER_BIT,
-/*Format can be used for storage texel buffers (IBOs)*/
-	b_storage_texel_buffer = VK_FORMAT_FEATURE_STORAGE_TEXEL_BUFFER_BIT,
-/*Format supports atomic operations in case it is used for storage texel buffers*/
-	b_storage_texel_buffer_atomic = VK_FORMAT_FEATURE_STORAGE_TEXEL_BUFFER_ATOMIC_BIT,
-/*Format can be used for vertex buffers (VBOs)*/
-	b_vertex_buffer = VK_FORMAT_FEATURE_VERTEX_BUFFER_BIT,
-/*Format can be used for color attachment images*/
-	b_color_attachment = VK_FORMAT_FEATURE_COLOR_ATTACHMENT_BIT,
-/*Format supports blending in case it is used for color attachment images*/
-	b_color_attachment_blend = VK_FORMAT_FEATURE_COLOR_ATTACHMENT_BLEND_BIT,
-/*Format can be used for depth/stencil attachment images*/
-	b_depth_stencil_attachment = VK_FORMAT_FEATURE_DEPTH_STENCIL_ATTACHMENT_BIT,
-/*Format can be used as the source image of blits with vkCmdBlitImage*/
-	b_blit_src = VK_FORMAT_FEATURE_BLIT_SRC_BIT,
-/*Format can be used as the destination image of blits with vkCmdBlitImage*/
-	b_blit_dst = VK_FORMAT_FEATURE_BLIT_DST_BIT,
-/*Format can be filtered with VK_FILTER_LINEAR when being sampled*/
-	b_sampled_image_filter_linear = VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT,
+union F_format_feature {
+	uint32_t flag;
+	VkFormatFeatureFlagBits vk_flag;
+	enum B{
+			/* Format can be used for sampled images (SAMPLED_IMAGE and COMBINED_IMAGE_SAMPLER descriptor types) */
+		b_sampled_image = VK_FORMAT_FEATURE_SAMPLED_IMAGE_BIT,
+			/* Format can be used for storage images (STORAGE_IMAGE descriptor type) */
+		b_storage_image = VK_FORMAT_FEATURE_STORAGE_IMAGE_BIT,
+			/* Format supports atomic operations in case it is used for storage images */
+		b_storage_image_atomic = VK_FORMAT_FEATURE_STORAGE_IMAGE_ATOMIC_BIT,
+			/* Format can be used for uniform texel buffers (TBOs) */
+		b_uniform_texel_buffer = VK_FORMAT_FEATURE_UNIFORM_TEXEL_BUFFER_BIT,
+			/* Format can be used for storage texel buffers (IBOs) */
+		b_storage_texel_buffer = VK_FORMAT_FEATURE_STORAGE_TEXEL_BUFFER_BIT,
+			/* Format supports atomic operations in case it is used for storage texel buffers */
+		b_storage_texel_buffer_atomic = VK_FORMAT_FEATURE_STORAGE_TEXEL_BUFFER_ATOMIC_BIT,
+			/* Format can be used for vertex buffers (VBOs) */
+		b_vertex_buffer = VK_FORMAT_FEATURE_VERTEX_BUFFER_BIT,
+			/* Format can be used for color attachment images */
+		b_color_attachment = VK_FORMAT_FEATURE_COLOR_ATTACHMENT_BIT,
+			/* Format supports blending in case it is used for color attachment images */
+		b_color_attachment_blend = VK_FORMAT_FEATURE_COLOR_ATTACHMENT_BLEND_BIT,
+			/* Format can be used for depth/stencil attachment images */
+		b_depth_stencil_attachment = VK_FORMAT_FEATURE_DEPTH_STENCIL_ATTACHMENT_BIT,
+			/* Format can be used as the source image of blits with vkCmdBlitImage */
+		b_blit_src = VK_FORMAT_FEATURE_BLIT_SRC_BIT,
+			/* Format can be used as the destination image of blits with vkCmdBlitImage */
+		b_blit_dst = VK_FORMAT_FEATURE_BLIT_DST_BIT,
+			/* Format can be filtered with VK_FILTER_LINEAR when being sampled */
+		b_sampled_image_filter_linear = VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT,
+	};
+	F_format_feature():flag(0){}
+	F_format_feature(int i_):flag(static_cast<uint32_t>(i_)){}
+	F_format_feature(uint32_t flag_):flag(flag_){}
+	F_format_feature(const B flag_):flag(flag_){}
+	F_format_feature(VkFormatFeatureFlagBits flag_):vk_flag(flag_){}
+	operator uint32_t(){return flag;}
+	operator int(){return static_cast<int>(flag);}
+	operator VkFormatFeatureFlagBits const&(){return vk_flag;}
+	operator bool(){return !!flag;}
+	F_format_feature& operator=(const F_format_feature flag_){flag=flag_.flag; return *this;}
+	F_format_feature& operator|=(const F_format_feature flag_){flag|=flag_.flag; return *this;}
+	F_format_feature& operator&=(const F_format_feature flag_){flag&=flag_.flag; return *this;}
+	F_format_feature& operator^=(const F_format_feature flag_){flag^=flag_.flag;return *this;}
+	F_format_feature operator~(){return ~flag;}
+	bool operator==(const F_format_feature flag_){return flag==flag_.flag;}
+	bool operator!=(const F_format_feature flag_){return !(*this==flag_);}
+	F_format_feature& clear(){flag = 0;return *this;}
+	F_format_feature all_flags(){ return b_sampled_image | b_storage_image | b_storage_image_atomic | b_uniform_texel_buffer | b_storage_texel_buffer | b_storage_texel_buffer_atomic | b_vertex_buffer | b_color_attachment | b_color_attachment_blend | b_depth_stencil_attachment | b_blit_src | b_blit_dst | b_sampled_image_filter_linear;}
+	F_format_feature& on_sampled_image(){ flag |= b_sampled_image; return *this; }
+	F_format_feature& off_sampled_image(){ flag &= ~b_sampled_image; return *this; }
+	F_format_feature& on_storage_image(){ flag |= b_storage_image; return *this; }
+	F_format_feature& off_storage_image(){ flag &= ~b_storage_image; return *this; }
+	F_format_feature& on_storage_image_atomic(){ flag |= b_storage_image_atomic; return *this; }
+	F_format_feature& off_storage_image_atomic(){ flag &= ~b_storage_image_atomic; return *this; }
+	F_format_feature& on_uniform_texel_buffer(){ flag |= b_uniform_texel_buffer; return *this; }
+	F_format_feature& off_uniform_texel_buffer(){ flag &= ~b_uniform_texel_buffer; return *this; }
+	F_format_feature& on_storage_texel_buffer(){ flag |= b_storage_texel_buffer; return *this; }
+	F_format_feature& off_storage_texel_buffer(){ flag &= ~b_storage_texel_buffer; return *this; }
+	F_format_feature& on_storage_texel_buffer_atomic(){ flag |= b_storage_texel_buffer_atomic; return *this; }
+	F_format_feature& off_storage_texel_buffer_atomic(){ flag &= ~b_storage_texel_buffer_atomic; return *this; }
+	F_format_feature& on_vertex_buffer(){ flag |= b_vertex_buffer; return *this; }
+	F_format_feature& off_vertex_buffer(){ flag &= ~b_vertex_buffer; return *this; }
+	F_format_feature& on_color_attachment(){ flag |= b_color_attachment; return *this; }
+	F_format_feature& off_color_attachment(){ flag &= ~b_color_attachment; return *this; }
+	F_format_feature& on_color_attachment_blend(){ flag |= b_color_attachment_blend; return *this; }
+	F_format_feature& off_color_attachment_blend(){ flag &= ~b_color_attachment_blend; return *this; }
+	F_format_feature& on_depth_stencil_attachment(){ flag |= b_depth_stencil_attachment; return *this; }
+	F_format_feature& off_depth_stencil_attachment(){ flag &= ~b_depth_stencil_attachment; return *this; }
+	F_format_feature& on_blit_src(){ flag |= b_blit_src; return *this; }
+	F_format_feature& off_blit_src(){ flag &= ~b_blit_src; return *this; }
+	F_format_feature& on_blit_dst(){ flag |= b_blit_dst; return *this; }
+	F_format_feature& off_blit_dst(){ flag &= ~b_blit_dst; return *this; }
+	F_format_feature& on_sampled_image_filter_linear(){ flag |= b_sampled_image_filter_linear; return *this; }
+	F_format_feature& off_sampled_image_filter_linear(){ flag &= ~b_sampled_image_filter_linear; return *this; }
 };
-F_format_feature():flag(0){}
-F_format_feature(B bits_):flag(static_cast<int>(bits_)){}
-F_format_feature(F_format_feature const& flag_):flag(flag_.flag){}
-F_format_feature(std::initializer_list<B> bit_list){for (auto&& bit : bit_list){flag |= static_cast<int>(bit);}}
-operator VkFormatFeatureFlagBits const &(){return *this;}
-F_format_feature& operator = (F_format_feature flag_){flag = flag_.flag;return *this;}
-F_format_feature operator | (B bit_){return flag | static_cast<int>(bit_);}
-F_format_feature& operator |= (B bit_){flag |= static_cast<int>(bit_);return *this;}
-F_format_feature operator | (F_format_feature flag_){return flag | flag_.flag;}
-F_format_feature& operator |= (F_format_feature flag_){flag |= flag_.flag;return *this;}
-F_format_feature operator & (F_format_feature flag_){return flag & flag_.flag;}
-F_format_feature& operator &= (F_format_feature flag_){flag &= flag_.flag;return *this;}
-F_format_feature operator ^ (F_format_feature flag_){return flag ^ flag_.flag;}
-F_format_feature& operator ^= (F_format_feature flag_){flag ^= flag_.flag;return *this;}
-F_format_feature operator ~ (){return all_flags().flag^flag;}
-bool operator !(){return !flag;}
-F_format_feature& clear(){flag = 0;return *this;}
-F_format_feature all_flags(){
-return b_sampled_image | b_storage_image | b_storage_image_atomic | b_uniform_texel_buffer | b_storage_texel_buffer | b_storage_texel_buffer_atomic | b_vertex_buffer | b_color_attachment | b_color_attachment_blend | b_depth_stencil_attachment | b_blit_src | b_blit_dst | b_sampled_image_filter_linear;
-}
-F_format_feature& on_sampled_image(){ flag |= b_sampled_image; return *this; }
-F_format_feature& off_sampled_image(){ flag &= ~b_sampled_image; return *this; }
-F_format_feature& on_storage_image(){ flag |= b_storage_image; return *this; }
-F_format_feature& off_storage_image(){ flag &= ~b_storage_image; return *this; }
-F_format_feature& on_storage_image_atomic(){ flag |= b_storage_image_atomic; return *this; }
-F_format_feature& off_storage_image_atomic(){ flag &= ~b_storage_image_atomic; return *this; }
-F_format_feature& on_uniform_texel_buffer(){ flag |= b_uniform_texel_buffer; return *this; }
-F_format_feature& off_uniform_texel_buffer(){ flag &= ~b_uniform_texel_buffer; return *this; }
-F_format_feature& on_storage_texel_buffer(){ flag |= b_storage_texel_buffer; return *this; }
-F_format_feature& off_storage_texel_buffer(){ flag &= ~b_storage_texel_buffer; return *this; }
-F_format_feature& on_storage_texel_buffer_atomic(){ flag |= b_storage_texel_buffer_atomic; return *this; }
-F_format_feature& off_storage_texel_buffer_atomic(){ flag &= ~b_storage_texel_buffer_atomic; return *this; }
-F_format_feature& on_vertex_buffer(){ flag |= b_vertex_buffer; return *this; }
-F_format_feature& off_vertex_buffer(){ flag &= ~b_vertex_buffer; return *this; }
-F_format_feature& on_color_attachment(){ flag |= b_color_attachment; return *this; }
-F_format_feature& off_color_attachment(){ flag &= ~b_color_attachment; return *this; }
-F_format_feature& on_color_attachment_blend(){ flag |= b_color_attachment_blend; return *this; }
-F_format_feature& off_color_attachment_blend(){ flag &= ~b_color_attachment_blend; return *this; }
-F_format_feature& on_depth_stencil_attachment(){ flag |= b_depth_stencil_attachment; return *this; }
-F_format_feature& off_depth_stencil_attachment(){ flag &= ~b_depth_stencil_attachment; return *this; }
-F_format_feature& on_blit_src(){ flag |= b_blit_src; return *this; }
-F_format_feature& off_blit_src(){ flag &= ~b_blit_src; return *this; }
-F_format_feature& on_blit_dst(){ flag |= b_blit_dst; return *this; }
-F_format_feature& off_blit_dst(){ flag &= ~b_blit_dst; return *this; }
-F_format_feature& on_sampled_image_filter_linear(){ flag |= b_sampled_image_filter_linear; return *this; }
-F_format_feature& off_sampled_image_filter_linear(){ flag &= ~b_sampled_image_filter_linear; return *this; }
-VkFormatFeatureFlagBits get_vkfb(){ return VkFormatFeatureFlagBits(flag); }
-};
-F_format_feature inline operator|(const F_format_feature::B bit1_, const F_format_feature::B bit2_){F_format_feature flags(bit1_);return flags | bit2_;}
-bool inline operator==(const F_format_feature f1_, const F_format_feature f2_) { return f1_.flag == f2_.flag; }
-bool inline operator!=(const F_format_feature f1_, const F_format_feature f2_) { return f1_.flag != f2_.flag; }
+inline F_format_feature operator&(const F_format_feature f1_, const F_format_feature f2_){return f1_.flag&f2_.flag;}
+inline F_format_feature operator|(const F_format_feature f1_, const F_format_feature f2_){return f1_.flag|f2_.flag;}
+inline F_format_feature operator^(const F_format_feature f1_, const F_format_feature f2_){return f1_.flag^f2_.flag;}
 /*	VkQueryControlFlagBits*/
-class F_query_control {
-private:
-F_query_control(int flag_):flag(flag_){};
-public:
-uint32_t flag;
-enum B{
-/*Require precise results to be collected by the query*/
-	b_precise = VK_QUERY_CONTROL_PRECISE_BIT,
+union F_query_control {
+	uint32_t flag;
+	VkQueryControlFlagBits vk_flag;
+	enum B{
+			/* Require precise results to be collected by the query */
+		b_precise = VK_QUERY_CONTROL_PRECISE_BIT,
+	};
+	F_query_control():flag(0){}
+	F_query_control(int i_):flag(static_cast<uint32_t>(i_)){}
+	F_query_control(uint32_t flag_):flag(flag_){}
+	F_query_control(const B flag_):flag(flag_){}
+	F_query_control(VkQueryControlFlagBits flag_):vk_flag(flag_){}
+	operator uint32_t(){return flag;}
+	operator int(){return static_cast<int>(flag);}
+	operator VkQueryControlFlagBits const&(){return vk_flag;}
+	operator bool(){return !!flag;}
+	F_query_control& operator=(const F_query_control flag_){flag=flag_.flag; return *this;}
+	F_query_control& operator|=(const F_query_control flag_){flag|=flag_.flag; return *this;}
+	F_query_control& operator&=(const F_query_control flag_){flag&=flag_.flag; return *this;}
+	F_query_control& operator^=(const F_query_control flag_){flag^=flag_.flag;return *this;}
+	F_query_control operator~(){return ~flag;}
+	bool operator==(const F_query_control flag_){return flag==flag_.flag;}
+	bool operator!=(const F_query_control flag_){return !(*this==flag_);}
+	F_query_control& clear(){flag = 0;return *this;}
+	F_query_control all_flags(){ return b_precise;}
+	F_query_control& on_precise(){ flag |= b_precise; return *this; }
+	F_query_control& off_precise(){ flag &= ~b_precise; return *this; }
 };
-F_query_control():flag(0){}
-F_query_control(B bits_):flag(static_cast<int>(bits_)){}
-F_query_control(F_query_control const& flag_):flag(flag_.flag){}
-F_query_control(std::initializer_list<B> bit_list){for (auto&& bit : bit_list){flag |= static_cast<int>(bit);}}
-operator VkQueryControlFlagBits const &(){return *this;}
-F_query_control& operator = (F_query_control flag_){flag = flag_.flag;return *this;}
-F_query_control operator | (B bit_){return flag | static_cast<int>(bit_);}
-F_query_control& operator |= (B bit_){flag |= static_cast<int>(bit_);return *this;}
-F_query_control operator | (F_query_control flag_){return flag | flag_.flag;}
-F_query_control& operator |= (F_query_control flag_){flag |= flag_.flag;return *this;}
-F_query_control operator & (F_query_control flag_){return flag & flag_.flag;}
-F_query_control& operator &= (F_query_control flag_){flag &= flag_.flag;return *this;}
-F_query_control operator ^ (F_query_control flag_){return flag ^ flag_.flag;}
-F_query_control& operator ^= (F_query_control flag_){flag ^= flag_.flag;return *this;}
-F_query_control operator ~ (){return all_flags().flag^flag;}
-bool operator !(){return !flag;}
-F_query_control& clear(){flag = 0;return *this;}
-F_query_control all_flags(){
-return b_precise;
-}
-F_query_control& on_precise(){ flag |= b_precise; return *this; }
-F_query_control& off_precise(){ flag &= ~b_precise; return *this; }
-VkQueryControlFlagBits get_vkfb(){ return VkQueryControlFlagBits(flag); }
-};
-F_query_control inline operator|(const F_query_control::B bit1_, const F_query_control::B bit2_){F_query_control flags(bit1_);return flags | bit2_;}
-bool inline operator==(const F_query_control f1_, const F_query_control f2_) { return f1_.flag == f2_.flag; }
-bool inline operator!=(const F_query_control f1_, const F_query_control f2_) { return f1_.flag != f2_.flag; }
+inline F_query_control operator&(const F_query_control f1_, const F_query_control f2_){return f1_.flag&f2_.flag;}
+inline F_query_control operator|(const F_query_control f1_, const F_query_control f2_){return f1_.flag|f2_.flag;}
+inline F_query_control operator^(const F_query_control f1_, const F_query_control f2_){return f1_.flag^f2_.flag;}
 /*	VkQueryResultFlagBits*/
-class F_query_result {
-private:
-F_query_result(int flag_):flag(flag_){};
-public:
-uint32_t flag;
-enum B{
-/*Results of the queries are written to the destination buffer as 64-bit values*/
-	b_64 = VK_QUERY_RESULT_64_BIT,
-/*Results of the queries are waited on before proceeding with the result copy*/
-	b_wait = VK_QUERY_RESULT_WAIT_BIT,
-/*Besides the results of the query, the availability of the results is also written*/
-	b_with_availability = VK_QUERY_RESULT_WITH_AVAILABILITY_BIT,
-/*Copy the partial results of the query even if the final results are not available*/
-	b_partial = VK_QUERY_RESULT_PARTIAL_BIT,
+union F_query_result {
+	uint32_t flag;
+	VkQueryResultFlagBits vk_flag;
+	enum B{
+			/* Results of the queries are written to the destination buffer as 64-bit values */
+		b_64 = VK_QUERY_RESULT_64_BIT,
+			/* Results of the queries are waited on before proceeding with the result copy */
+		b_wait = VK_QUERY_RESULT_WAIT_BIT,
+			/* Besides the results of the query, the availability of the results is also written */
+		b_with_availability = VK_QUERY_RESULT_WITH_AVAILABILITY_BIT,
+			/* Copy the partial results of the query even if the final results are not available */
+		b_partial = VK_QUERY_RESULT_PARTIAL_BIT,
+	};
+	F_query_result():flag(0){}
+	F_query_result(int i_):flag(static_cast<uint32_t>(i_)){}
+	F_query_result(uint32_t flag_):flag(flag_){}
+	F_query_result(const B flag_):flag(flag_){}
+	F_query_result(VkQueryResultFlagBits flag_):vk_flag(flag_){}
+	operator uint32_t(){return flag;}
+	operator int(){return static_cast<int>(flag);}
+	operator VkQueryResultFlagBits const&(){return vk_flag;}
+	operator bool(){return !!flag;}
+	F_query_result& operator=(const F_query_result flag_){flag=flag_.flag; return *this;}
+	F_query_result& operator|=(const F_query_result flag_){flag|=flag_.flag; return *this;}
+	F_query_result& operator&=(const F_query_result flag_){flag&=flag_.flag; return *this;}
+	F_query_result& operator^=(const F_query_result flag_){flag^=flag_.flag;return *this;}
+	F_query_result operator~(){return ~flag;}
+	bool operator==(const F_query_result flag_){return flag==flag_.flag;}
+	bool operator!=(const F_query_result flag_){return !(*this==flag_);}
+	F_query_result& clear(){flag = 0;return *this;}
+	F_query_result all_flags(){ return b_64 | b_wait | b_with_availability | b_partial;}
+	F_query_result& on_64(){ flag |= b_64; return *this; }
+	F_query_result& off_64(){ flag &= ~b_64; return *this; }
+	F_query_result& on_wait(){ flag |= b_wait; return *this; }
+	F_query_result& off_wait(){ flag &= ~b_wait; return *this; }
+	F_query_result& on_with_availability(){ flag |= b_with_availability; return *this; }
+	F_query_result& off_with_availability(){ flag &= ~b_with_availability; return *this; }
+	F_query_result& on_partial(){ flag |= b_partial; return *this; }
+	F_query_result& off_partial(){ flag &= ~b_partial; return *this; }
 };
-F_query_result():flag(0){}
-F_query_result(B bits_):flag(static_cast<int>(bits_)){}
-F_query_result(F_query_result const& flag_):flag(flag_.flag){}
-F_query_result(std::initializer_list<B> bit_list){for (auto&& bit : bit_list){flag |= static_cast<int>(bit);}}
-operator VkQueryResultFlagBits const &(){return *this;}
-F_query_result& operator = (F_query_result flag_){flag = flag_.flag;return *this;}
-F_query_result operator | (B bit_){return flag | static_cast<int>(bit_);}
-F_query_result& operator |= (B bit_){flag |= static_cast<int>(bit_);return *this;}
-F_query_result operator | (F_query_result flag_){return flag | flag_.flag;}
-F_query_result& operator |= (F_query_result flag_){flag |= flag_.flag;return *this;}
-F_query_result operator & (F_query_result flag_){return flag & flag_.flag;}
-F_query_result& operator &= (F_query_result flag_){flag &= flag_.flag;return *this;}
-F_query_result operator ^ (F_query_result flag_){return flag ^ flag_.flag;}
-F_query_result& operator ^= (F_query_result flag_){flag ^= flag_.flag;return *this;}
-F_query_result operator ~ (){return all_flags().flag^flag;}
-bool operator !(){return !flag;}
-F_query_result& clear(){flag = 0;return *this;}
-F_query_result all_flags(){
-return b_64 | b_wait | b_with_availability | b_partial;
-}
-F_query_result& on_64(){ flag |= b_64; return *this; }
-F_query_result& off_64(){ flag &= ~b_64; return *this; }
-F_query_result& on_wait(){ flag |= b_wait; return *this; }
-F_query_result& off_wait(){ flag &= ~b_wait; return *this; }
-F_query_result& on_with_availability(){ flag |= b_with_availability; return *this; }
-F_query_result& off_with_availability(){ flag &= ~b_with_availability; return *this; }
-F_query_result& on_partial(){ flag |= b_partial; return *this; }
-F_query_result& off_partial(){ flag &= ~b_partial; return *this; }
-VkQueryResultFlagBits get_vkfb(){ return VkQueryResultFlagBits(flag); }
-};
-F_query_result inline operator|(const F_query_result::B bit1_, const F_query_result::B bit2_){F_query_result flags(bit1_);return flags | bit2_;}
-bool inline operator==(const F_query_result f1_, const F_query_result f2_) { return f1_.flag == f2_.flag; }
-bool inline operator!=(const F_query_result f1_, const F_query_result f2_) { return f1_.flag != f2_.flag; }
+inline F_query_result operator&(const F_query_result f1_, const F_query_result f2_){return f1_.flag&f2_.flag;}
+inline F_query_result operator|(const F_query_result f1_, const F_query_result f2_){return f1_.flag|f2_.flag;}
+inline F_query_result operator^(const F_query_result f1_, const F_query_result f2_){return f1_.flag^f2_.flag;}
 /*	VkCommandBufferUsageFlagBits*/
-class F_command_buffer_usage {
-private:
-F_command_buffer_usage(int flag_):flag(flag_){};
-public:
-uint32_t flag;
-enum B{
-	b_one_time_submit = VK_COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT,
-	b_render_pass_continue = VK_COMMAND_BUFFER_USAGE_RENDER_PASS_CONTINUE_BIT,
-/*Command buffer may be submitted/executed more than once simultaneously*/
-	b_simultaneous_use = VK_COMMAND_BUFFER_USAGE_SIMULTANEOUS_USE_BIT,
+union F_command_buffer_usage {
+	uint32_t flag;
+	VkCommandBufferUsageFlagBits vk_flag;
+	enum B{
+		b_one_time_submit = VK_COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT,
+		b_render_pass_continue = VK_COMMAND_BUFFER_USAGE_RENDER_PASS_CONTINUE_BIT,
+			/* Command buffer may be submitted/executed more than once simultaneously */
+		b_simultaneous_use = VK_COMMAND_BUFFER_USAGE_SIMULTANEOUS_USE_BIT,
+	};
+	F_command_buffer_usage():flag(0){}
+	F_command_buffer_usage(int i_):flag(static_cast<uint32_t>(i_)){}
+	F_command_buffer_usage(uint32_t flag_):flag(flag_){}
+	F_command_buffer_usage(const B flag_):flag(flag_){}
+	F_command_buffer_usage(VkCommandBufferUsageFlagBits flag_):vk_flag(flag_){}
+	operator uint32_t(){return flag;}
+	operator int(){return static_cast<int>(flag);}
+	operator VkCommandBufferUsageFlagBits const&(){return vk_flag;}
+	operator bool(){return !!flag;}
+	F_command_buffer_usage& operator=(const F_command_buffer_usage flag_){flag=flag_.flag; return *this;}
+	F_command_buffer_usage& operator|=(const F_command_buffer_usage flag_){flag|=flag_.flag; return *this;}
+	F_command_buffer_usage& operator&=(const F_command_buffer_usage flag_){flag&=flag_.flag; return *this;}
+	F_command_buffer_usage& operator^=(const F_command_buffer_usage flag_){flag^=flag_.flag;return *this;}
+	F_command_buffer_usage operator~(){return ~flag;}
+	bool operator==(const F_command_buffer_usage flag_){return flag==flag_.flag;}
+	bool operator!=(const F_command_buffer_usage flag_){return !(*this==flag_);}
+	F_command_buffer_usage& clear(){flag = 0;return *this;}
+	F_command_buffer_usage all_flags(){ return b_one_time_submit | b_render_pass_continue | b_simultaneous_use;}
+	F_command_buffer_usage& on_one_time_submit(){ flag |= b_one_time_submit; return *this; }
+	F_command_buffer_usage& off_one_time_submit(){ flag &= ~b_one_time_submit; return *this; }
+	F_command_buffer_usage& on_render_pass_continue(){ flag |= b_render_pass_continue; return *this; }
+	F_command_buffer_usage& off_render_pass_continue(){ flag &= ~b_render_pass_continue; return *this; }
+	F_command_buffer_usage& on_simultaneous_use(){ flag |= b_simultaneous_use; return *this; }
+	F_command_buffer_usage& off_simultaneous_use(){ flag &= ~b_simultaneous_use; return *this; }
 };
-F_command_buffer_usage():flag(0){}
-F_command_buffer_usage(B bits_):flag(static_cast<int>(bits_)){}
-F_command_buffer_usage(F_command_buffer_usage const& flag_):flag(flag_.flag){}
-F_command_buffer_usage(std::initializer_list<B> bit_list){for (auto&& bit : bit_list){flag |= static_cast<int>(bit);}}
-operator VkCommandBufferUsageFlagBits const &(){return *this;}
-F_command_buffer_usage& operator = (F_command_buffer_usage flag_){flag = flag_.flag;return *this;}
-F_command_buffer_usage operator | (B bit_){return flag | static_cast<int>(bit_);}
-F_command_buffer_usage& operator |= (B bit_){flag |= static_cast<int>(bit_);return *this;}
-F_command_buffer_usage operator | (F_command_buffer_usage flag_){return flag | flag_.flag;}
-F_command_buffer_usage& operator |= (F_command_buffer_usage flag_){flag |= flag_.flag;return *this;}
-F_command_buffer_usage operator & (F_command_buffer_usage flag_){return flag & flag_.flag;}
-F_command_buffer_usage& operator &= (F_command_buffer_usage flag_){flag &= flag_.flag;return *this;}
-F_command_buffer_usage operator ^ (F_command_buffer_usage flag_){return flag ^ flag_.flag;}
-F_command_buffer_usage& operator ^= (F_command_buffer_usage flag_){flag ^= flag_.flag;return *this;}
-F_command_buffer_usage operator ~ (){return all_flags().flag^flag;}
-bool operator !(){return !flag;}
-F_command_buffer_usage& clear(){flag = 0;return *this;}
-F_command_buffer_usage all_flags(){
-return b_one_time_submit | b_render_pass_continue | b_simultaneous_use;
-}
-F_command_buffer_usage& on_one_time_submit(){ flag |= b_one_time_submit; return *this; }
-F_command_buffer_usage& off_one_time_submit(){ flag &= ~b_one_time_submit; return *this; }
-F_command_buffer_usage& on_render_pass_continue(){ flag |= b_render_pass_continue; return *this; }
-F_command_buffer_usage& off_render_pass_continue(){ flag &= ~b_render_pass_continue; return *this; }
-F_command_buffer_usage& on_simultaneous_use(){ flag |= b_simultaneous_use; return *this; }
-F_command_buffer_usage& off_simultaneous_use(){ flag &= ~b_simultaneous_use; return *this; }
-VkCommandBufferUsageFlagBits get_vkfb(){ return VkCommandBufferUsageFlagBits(flag); }
-};
-F_command_buffer_usage inline operator|(const F_command_buffer_usage::B bit1_, const F_command_buffer_usage::B bit2_){F_command_buffer_usage flags(bit1_);return flags | bit2_;}
-bool inline operator==(const F_command_buffer_usage f1_, const F_command_buffer_usage f2_) { return f1_.flag == f2_.flag; }
-bool inline operator!=(const F_command_buffer_usage f1_, const F_command_buffer_usage f2_) { return f1_.flag != f2_.flag; }
+inline F_command_buffer_usage operator&(const F_command_buffer_usage f1_, const F_command_buffer_usage f2_){return f1_.flag&f2_.flag;}
+inline F_command_buffer_usage operator|(const F_command_buffer_usage f1_, const F_command_buffer_usage f2_){return f1_.flag|f2_.flag;}
+inline F_command_buffer_usage operator^(const F_command_buffer_usage f1_, const F_command_buffer_usage f2_){return f1_.flag^f2_.flag;}
 /*	VkQueryPipelineStatisticFlagBits*/
-class F_query_pipeline_statistic {
-private:
-F_query_pipeline_statistic(int flag_):flag(flag_){};
-public:
-uint32_t flag;
-enum B{
-/*Optional*/
-	b_input_assembly_vertices = VK_QUERY_PIPELINE_STATISTIC_INPUT_ASSEMBLY_VERTICES_BIT,
-/*Optional*/
-	b_input_assembly_primitives = VK_QUERY_PIPELINE_STATISTIC_INPUT_ASSEMBLY_PRIMITIVES_BIT,
-/*Optional*/
-	b_vertex_shader_invocations = VK_QUERY_PIPELINE_STATISTIC_VERTEX_SHADER_INVOCATIONS_BIT,
-/*Optional*/
-	b_geometry_shader_invocations = VK_QUERY_PIPELINE_STATISTIC_GEOMETRY_SHADER_INVOCATIONS_BIT,
-/*Optional*/
-	b_geometry_shader_primitives = VK_QUERY_PIPELINE_STATISTIC_GEOMETRY_SHADER_PRIMITIVES_BIT,
-/*Optional*/
-	b_clipping_invocations = VK_QUERY_PIPELINE_STATISTIC_CLIPPING_INVOCATIONS_BIT,
-/*Optional*/
-	b_clipping_primitives = VK_QUERY_PIPELINE_STATISTIC_CLIPPING_PRIMITIVES_BIT,
-/*Optional*/
-	b_fragment_shader_invocations = VK_QUERY_PIPELINE_STATISTIC_FRAGMENT_SHADER_INVOCATIONS_BIT,
-/*Optional*/
-	b_tessellation_control_shader_patches = VK_QUERY_PIPELINE_STATISTIC_TESSELLATION_CONTROL_SHADER_PATCHES_BIT,
-/*Optional*/
-	b_tessellation_evaluation_shader_invocations = VK_QUERY_PIPELINE_STATISTIC_TESSELLATION_EVALUATION_SHADER_INVOCATIONS_BIT,
-/*Optional*/
-	b_compute_shader_invocations = VK_QUERY_PIPELINE_STATISTIC_COMPUTE_SHADER_INVOCATIONS_BIT,
+union F_query_pipeline_statistic {
+	uint32_t flag;
+	VkQueryPipelineStatisticFlagBits vk_flag;
+	enum B{
+			/* Optional */
+		b_input_assembly_vertices = VK_QUERY_PIPELINE_STATISTIC_INPUT_ASSEMBLY_VERTICES_BIT,
+			/* Optional */
+		b_input_assembly_primitives = VK_QUERY_PIPELINE_STATISTIC_INPUT_ASSEMBLY_PRIMITIVES_BIT,
+			/* Optional */
+		b_vertex_shader_invocations = VK_QUERY_PIPELINE_STATISTIC_VERTEX_SHADER_INVOCATIONS_BIT,
+			/* Optional */
+		b_geometry_shader_invocations = VK_QUERY_PIPELINE_STATISTIC_GEOMETRY_SHADER_INVOCATIONS_BIT,
+			/* Optional */
+		b_geometry_shader_primitives = VK_QUERY_PIPELINE_STATISTIC_GEOMETRY_SHADER_PRIMITIVES_BIT,
+			/* Optional */
+		b_clipping_invocations = VK_QUERY_PIPELINE_STATISTIC_CLIPPING_INVOCATIONS_BIT,
+			/* Optional */
+		b_clipping_primitives = VK_QUERY_PIPELINE_STATISTIC_CLIPPING_PRIMITIVES_BIT,
+			/* Optional */
+		b_fragment_shader_invocations = VK_QUERY_PIPELINE_STATISTIC_FRAGMENT_SHADER_INVOCATIONS_BIT,
+			/* Optional */
+		b_tessellation_control_shader_patches = VK_QUERY_PIPELINE_STATISTIC_TESSELLATION_CONTROL_SHADER_PATCHES_BIT,
+			/* Optional */
+		b_tessellation_evaluation_shader_invocations = VK_QUERY_PIPELINE_STATISTIC_TESSELLATION_EVALUATION_SHADER_INVOCATIONS_BIT,
+			/* Optional */
+		b_compute_shader_invocations = VK_QUERY_PIPELINE_STATISTIC_COMPUTE_SHADER_INVOCATIONS_BIT,
+	};
+	F_query_pipeline_statistic():flag(0){}
+	F_query_pipeline_statistic(int i_):flag(static_cast<uint32_t>(i_)){}
+	F_query_pipeline_statistic(uint32_t flag_):flag(flag_){}
+	F_query_pipeline_statistic(const B flag_):flag(flag_){}
+	F_query_pipeline_statistic(VkQueryPipelineStatisticFlagBits flag_):vk_flag(flag_){}
+	operator uint32_t(){return flag;}
+	operator int(){return static_cast<int>(flag);}
+	operator VkQueryPipelineStatisticFlagBits const&(){return vk_flag;}
+	operator bool(){return !!flag;}
+	F_query_pipeline_statistic& operator=(const F_query_pipeline_statistic flag_){flag=flag_.flag; return *this;}
+	F_query_pipeline_statistic& operator|=(const F_query_pipeline_statistic flag_){flag|=flag_.flag; return *this;}
+	F_query_pipeline_statistic& operator&=(const F_query_pipeline_statistic flag_){flag&=flag_.flag; return *this;}
+	F_query_pipeline_statistic& operator^=(const F_query_pipeline_statistic flag_){flag^=flag_.flag;return *this;}
+	F_query_pipeline_statistic operator~(){return ~flag;}
+	bool operator==(const F_query_pipeline_statistic flag_){return flag==flag_.flag;}
+	bool operator!=(const F_query_pipeline_statistic flag_){return !(*this==flag_);}
+	F_query_pipeline_statistic& clear(){flag = 0;return *this;}
+	F_query_pipeline_statistic all_flags(){ return b_input_assembly_vertices | b_input_assembly_primitives | b_vertex_shader_invocations | b_geometry_shader_invocations | b_geometry_shader_primitives | b_clipping_invocations | b_clipping_primitives | b_fragment_shader_invocations | b_tessellation_control_shader_patches | b_tessellation_evaluation_shader_invocations | b_compute_shader_invocations;}
+	F_query_pipeline_statistic& on_input_assembly_vertices(){ flag |= b_input_assembly_vertices; return *this; }
+	F_query_pipeline_statistic& off_input_assembly_vertices(){ flag &= ~b_input_assembly_vertices; return *this; }
+	F_query_pipeline_statistic& on_input_assembly_primitives(){ flag |= b_input_assembly_primitives; return *this; }
+	F_query_pipeline_statistic& off_input_assembly_primitives(){ flag &= ~b_input_assembly_primitives; return *this; }
+	F_query_pipeline_statistic& on_vertex_shader_invocations(){ flag |= b_vertex_shader_invocations; return *this; }
+	F_query_pipeline_statistic& off_vertex_shader_invocations(){ flag &= ~b_vertex_shader_invocations; return *this; }
+	F_query_pipeline_statistic& on_geometry_shader_invocations(){ flag |= b_geometry_shader_invocations; return *this; }
+	F_query_pipeline_statistic& off_geometry_shader_invocations(){ flag &= ~b_geometry_shader_invocations; return *this; }
+	F_query_pipeline_statistic& on_geometry_shader_primitives(){ flag |= b_geometry_shader_primitives; return *this; }
+	F_query_pipeline_statistic& off_geometry_shader_primitives(){ flag &= ~b_geometry_shader_primitives; return *this; }
+	F_query_pipeline_statistic& on_clipping_invocations(){ flag |= b_clipping_invocations; return *this; }
+	F_query_pipeline_statistic& off_clipping_invocations(){ flag &= ~b_clipping_invocations; return *this; }
+	F_query_pipeline_statistic& on_clipping_primitives(){ flag |= b_clipping_primitives; return *this; }
+	F_query_pipeline_statistic& off_clipping_primitives(){ flag &= ~b_clipping_primitives; return *this; }
+	F_query_pipeline_statistic& on_fragment_shader_invocations(){ flag |= b_fragment_shader_invocations; return *this; }
+	F_query_pipeline_statistic& off_fragment_shader_invocations(){ flag &= ~b_fragment_shader_invocations; return *this; }
+	F_query_pipeline_statistic& on_tessellation_control_shader_patches(){ flag |= b_tessellation_control_shader_patches; return *this; }
+	F_query_pipeline_statistic& off_tessellation_control_shader_patches(){ flag &= ~b_tessellation_control_shader_patches; return *this; }
+	F_query_pipeline_statistic& on_tessellation_evaluation_shader_invocations(){ flag |= b_tessellation_evaluation_shader_invocations; return *this; }
+	F_query_pipeline_statistic& off_tessellation_evaluation_shader_invocations(){ flag &= ~b_tessellation_evaluation_shader_invocations; return *this; }
+	F_query_pipeline_statistic& on_compute_shader_invocations(){ flag |= b_compute_shader_invocations; return *this; }
+	F_query_pipeline_statistic& off_compute_shader_invocations(){ flag &= ~b_compute_shader_invocations; return *this; }
 };
-F_query_pipeline_statistic():flag(0){}
-F_query_pipeline_statistic(B bits_):flag(static_cast<int>(bits_)){}
-F_query_pipeline_statistic(F_query_pipeline_statistic const& flag_):flag(flag_.flag){}
-F_query_pipeline_statistic(std::initializer_list<B> bit_list){for (auto&& bit : bit_list){flag |= static_cast<int>(bit);}}
-operator VkQueryPipelineStatisticFlagBits const &(){return *this;}
-F_query_pipeline_statistic& operator = (F_query_pipeline_statistic flag_){flag = flag_.flag;return *this;}
-F_query_pipeline_statistic operator | (B bit_){return flag | static_cast<int>(bit_);}
-F_query_pipeline_statistic& operator |= (B bit_){flag |= static_cast<int>(bit_);return *this;}
-F_query_pipeline_statistic operator | (F_query_pipeline_statistic flag_){return flag | flag_.flag;}
-F_query_pipeline_statistic& operator |= (F_query_pipeline_statistic flag_){flag |= flag_.flag;return *this;}
-F_query_pipeline_statistic operator & (F_query_pipeline_statistic flag_){return flag & flag_.flag;}
-F_query_pipeline_statistic& operator &= (F_query_pipeline_statistic flag_){flag &= flag_.flag;return *this;}
-F_query_pipeline_statistic operator ^ (F_query_pipeline_statistic flag_){return flag ^ flag_.flag;}
-F_query_pipeline_statistic& operator ^= (F_query_pipeline_statistic flag_){flag ^= flag_.flag;return *this;}
-F_query_pipeline_statistic operator ~ (){return all_flags().flag^flag;}
-bool operator !(){return !flag;}
-F_query_pipeline_statistic& clear(){flag = 0;return *this;}
-F_query_pipeline_statistic all_flags(){
-return b_input_assembly_vertices | b_input_assembly_primitives | b_vertex_shader_invocations | b_geometry_shader_invocations | b_geometry_shader_primitives | b_clipping_invocations | b_clipping_primitives | b_fragment_shader_invocations | b_tessellation_control_shader_patches | b_tessellation_evaluation_shader_invocations | b_compute_shader_invocations;
-}
-F_query_pipeline_statistic& on_input_assembly_vertices(){ flag |= b_input_assembly_vertices; return *this; }
-F_query_pipeline_statistic& off_input_assembly_vertices(){ flag &= ~b_input_assembly_vertices; return *this; }
-F_query_pipeline_statistic& on_input_assembly_primitives(){ flag |= b_input_assembly_primitives; return *this; }
-F_query_pipeline_statistic& off_input_assembly_primitives(){ flag &= ~b_input_assembly_primitives; return *this; }
-F_query_pipeline_statistic& on_vertex_shader_invocations(){ flag |= b_vertex_shader_invocations; return *this; }
-F_query_pipeline_statistic& off_vertex_shader_invocations(){ flag &= ~b_vertex_shader_invocations; return *this; }
-F_query_pipeline_statistic& on_geometry_shader_invocations(){ flag |= b_geometry_shader_invocations; return *this; }
-F_query_pipeline_statistic& off_geometry_shader_invocations(){ flag &= ~b_geometry_shader_invocations; return *this; }
-F_query_pipeline_statistic& on_geometry_shader_primitives(){ flag |= b_geometry_shader_primitives; return *this; }
-F_query_pipeline_statistic& off_geometry_shader_primitives(){ flag &= ~b_geometry_shader_primitives; return *this; }
-F_query_pipeline_statistic& on_clipping_invocations(){ flag |= b_clipping_invocations; return *this; }
-F_query_pipeline_statistic& off_clipping_invocations(){ flag &= ~b_clipping_invocations; return *this; }
-F_query_pipeline_statistic& on_clipping_primitives(){ flag |= b_clipping_primitives; return *this; }
-F_query_pipeline_statistic& off_clipping_primitives(){ flag &= ~b_clipping_primitives; return *this; }
-F_query_pipeline_statistic& on_fragment_shader_invocations(){ flag |= b_fragment_shader_invocations; return *this; }
-F_query_pipeline_statistic& off_fragment_shader_invocations(){ flag &= ~b_fragment_shader_invocations; return *this; }
-F_query_pipeline_statistic& on_tessellation_control_shader_patches(){ flag |= b_tessellation_control_shader_patches; return *this; }
-F_query_pipeline_statistic& off_tessellation_control_shader_patches(){ flag &= ~b_tessellation_control_shader_patches; return *this; }
-F_query_pipeline_statistic& on_tessellation_evaluation_shader_invocations(){ flag |= b_tessellation_evaluation_shader_invocations; return *this; }
-F_query_pipeline_statistic& off_tessellation_evaluation_shader_invocations(){ flag &= ~b_tessellation_evaluation_shader_invocations; return *this; }
-F_query_pipeline_statistic& on_compute_shader_invocations(){ flag |= b_compute_shader_invocations; return *this; }
-F_query_pipeline_statistic& off_compute_shader_invocations(){ flag &= ~b_compute_shader_invocations; return *this; }
-VkQueryPipelineStatisticFlagBits get_vkfb(){ return VkQueryPipelineStatisticFlagBits(flag); }
-};
-F_query_pipeline_statistic inline operator|(const F_query_pipeline_statistic::B bit1_, const F_query_pipeline_statistic::B bit2_){F_query_pipeline_statistic flags(bit1_);return flags | bit2_;}
-bool inline operator==(const F_query_pipeline_statistic f1_, const F_query_pipeline_statistic f2_) { return f1_.flag == f2_.flag; }
-bool inline operator!=(const F_query_pipeline_statistic f1_, const F_query_pipeline_statistic f2_) { return f1_.flag != f2_.flag; }
+inline F_query_pipeline_statistic operator&(const F_query_pipeline_statistic f1_, const F_query_pipeline_statistic f2_){return f1_.flag&f2_.flag;}
+inline F_query_pipeline_statistic operator|(const F_query_pipeline_statistic f1_, const F_query_pipeline_statistic f2_){return f1_.flag|f2_.flag;}
+inline F_query_pipeline_statistic operator^(const F_query_pipeline_statistic f1_, const F_query_pipeline_statistic f2_){return f1_.flag^f2_.flag;}
 /*	VkImageAspectFlagBits*/
-class F_image_aspect {
-private:
-F_image_aspect(int flag_):flag(flag_){};
-public:
-uint32_t flag;
-enum B{
-	b_color = VK_IMAGE_ASPECT_COLOR_BIT,
-	b_depth = VK_IMAGE_ASPECT_DEPTH_BIT,
-	b_stencil = VK_IMAGE_ASPECT_STENCIL_BIT,
-	b_metadata = VK_IMAGE_ASPECT_METADATA_BIT,
+union F_image_aspect {
+	uint32_t flag;
+	VkImageAspectFlagBits vk_flag;
+	enum B{
+		b_color = VK_IMAGE_ASPECT_COLOR_BIT,
+		b_depth = VK_IMAGE_ASPECT_DEPTH_BIT,
+		b_stencil = VK_IMAGE_ASPECT_STENCIL_BIT,
+		b_metadata = VK_IMAGE_ASPECT_METADATA_BIT,
+	};
+	F_image_aspect():flag(0){}
+	F_image_aspect(int i_):flag(static_cast<uint32_t>(i_)){}
+	F_image_aspect(uint32_t flag_):flag(flag_){}
+	F_image_aspect(const B flag_):flag(flag_){}
+	F_image_aspect(VkImageAspectFlagBits flag_):vk_flag(flag_){}
+	operator uint32_t(){return flag;}
+	operator int(){return static_cast<int>(flag);}
+	operator VkImageAspectFlagBits const&(){return vk_flag;}
+	operator bool(){return !!flag;}
+	F_image_aspect& operator=(const F_image_aspect flag_){flag=flag_.flag; return *this;}
+	F_image_aspect& operator|=(const F_image_aspect flag_){flag|=flag_.flag; return *this;}
+	F_image_aspect& operator&=(const F_image_aspect flag_){flag&=flag_.flag; return *this;}
+	F_image_aspect& operator^=(const F_image_aspect flag_){flag^=flag_.flag;return *this;}
+	F_image_aspect operator~(){return ~flag;}
+	bool operator==(const F_image_aspect flag_){return flag==flag_.flag;}
+	bool operator!=(const F_image_aspect flag_){return !(*this==flag_);}
+	F_image_aspect& clear(){flag = 0;return *this;}
+	F_image_aspect all_flags(){ return b_color | b_depth | b_stencil | b_metadata;}
+	F_image_aspect& on_color(){ flag |= b_color; return *this; }
+	F_image_aspect& off_color(){ flag &= ~b_color; return *this; }
+	F_image_aspect& on_depth(){ flag |= b_depth; return *this; }
+	F_image_aspect& off_depth(){ flag &= ~b_depth; return *this; }
+	F_image_aspect& on_stencil(){ flag |= b_stencil; return *this; }
+	F_image_aspect& off_stencil(){ flag &= ~b_stencil; return *this; }
+	F_image_aspect& on_metadata(){ flag |= b_metadata; return *this; }
+	F_image_aspect& off_metadata(){ flag &= ~b_metadata; return *this; }
 };
-F_image_aspect():flag(0){}
-F_image_aspect(B bits_):flag(static_cast<int>(bits_)){}
-F_image_aspect(F_image_aspect const& flag_):flag(flag_.flag){}
-F_image_aspect(std::initializer_list<B> bit_list){for (auto&& bit : bit_list){flag |= static_cast<int>(bit);}}
-operator VkImageAspectFlagBits const &(){return *this;}
-F_image_aspect& operator = (F_image_aspect flag_){flag = flag_.flag;return *this;}
-F_image_aspect operator | (B bit_){return flag | static_cast<int>(bit_);}
-F_image_aspect& operator |= (B bit_){flag |= static_cast<int>(bit_);return *this;}
-F_image_aspect operator | (F_image_aspect flag_){return flag | flag_.flag;}
-F_image_aspect& operator |= (F_image_aspect flag_){flag |= flag_.flag;return *this;}
-F_image_aspect operator & (F_image_aspect flag_){return flag & flag_.flag;}
-F_image_aspect& operator &= (F_image_aspect flag_){flag &= flag_.flag;return *this;}
-F_image_aspect operator ^ (F_image_aspect flag_){return flag ^ flag_.flag;}
-F_image_aspect& operator ^= (F_image_aspect flag_){flag ^= flag_.flag;return *this;}
-F_image_aspect operator ~ (){return all_flags().flag^flag;}
-bool operator !(){return !flag;}
-F_image_aspect& clear(){flag = 0;return *this;}
-F_image_aspect all_flags(){
-return b_color | b_depth | b_stencil | b_metadata;
-}
-F_image_aspect& on_color(){ flag |= b_color; return *this; }
-F_image_aspect& off_color(){ flag &= ~b_color; return *this; }
-F_image_aspect& on_depth(){ flag |= b_depth; return *this; }
-F_image_aspect& off_depth(){ flag &= ~b_depth; return *this; }
-F_image_aspect& on_stencil(){ flag |= b_stencil; return *this; }
-F_image_aspect& off_stencil(){ flag &= ~b_stencil; return *this; }
-F_image_aspect& on_metadata(){ flag |= b_metadata; return *this; }
-F_image_aspect& off_metadata(){ flag &= ~b_metadata; return *this; }
-VkImageAspectFlagBits get_vkfb(){ return VkImageAspectFlagBits(flag); }
-};
-F_image_aspect inline operator|(const F_image_aspect::B bit1_, const F_image_aspect::B bit2_){F_image_aspect flags(bit1_);return flags | bit2_;}
-bool inline operator==(const F_image_aspect f1_, const F_image_aspect f2_) { return f1_.flag == f2_.flag; }
-bool inline operator!=(const F_image_aspect f1_, const F_image_aspect f2_) { return f1_.flag != f2_.flag; }
+inline F_image_aspect operator&(const F_image_aspect f1_, const F_image_aspect f2_){return f1_.flag&f2_.flag;}
+inline F_image_aspect operator|(const F_image_aspect f1_, const F_image_aspect f2_){return f1_.flag|f2_.flag;}
+inline F_image_aspect operator^(const F_image_aspect f1_, const F_image_aspect f2_){return f1_.flag^f2_.flag;}
 /*	VkSparseImageFormatFlagBits*/
-class F_sparse_image_format {
-private:
-F_sparse_image_format(int flag_):flag(flag_){};
-public:
-uint32_t flag;
-enum B{
-/*Image uses a single mip tail region for all array layers*/
-	b_single_miptail = VK_SPARSE_IMAGE_FORMAT_SINGLE_MIPTAIL_BIT,
-/*Image requires mip level dimensions to be an integer multiple of the sparse image block dimensions for non-tail mip levels.*/
-	b_aligned_mip_size = VK_SPARSE_IMAGE_FORMAT_ALIGNED_MIP_SIZE_BIT,
-/*Image uses a non-standard sparse image block dimensions*/
-	b_nonstandard_block_size = VK_SPARSE_IMAGE_FORMAT_NONSTANDARD_BLOCK_SIZE_BIT,
+union F_sparse_image_format {
+	uint32_t flag;
+	VkSparseImageFormatFlagBits vk_flag;
+	enum B{
+			/* Image uses a single mip tail region for all array layers */
+		b_single_miptail = VK_SPARSE_IMAGE_FORMAT_SINGLE_MIPTAIL_BIT,
+			/* Image requires mip level dimensions to be an integer multiple of the sparse image block dimensions for non-tail mip levels. */
+		b_aligned_mip_size = VK_SPARSE_IMAGE_FORMAT_ALIGNED_MIP_SIZE_BIT,
+			/* Image uses a non-standard sparse image block dimensions */
+		b_nonstandard_block_size = VK_SPARSE_IMAGE_FORMAT_NONSTANDARD_BLOCK_SIZE_BIT,
+	};
+	F_sparse_image_format():flag(0){}
+	F_sparse_image_format(int i_):flag(static_cast<uint32_t>(i_)){}
+	F_sparse_image_format(uint32_t flag_):flag(flag_){}
+	F_sparse_image_format(const B flag_):flag(flag_){}
+	F_sparse_image_format(VkSparseImageFormatFlagBits flag_):vk_flag(flag_){}
+	operator uint32_t(){return flag;}
+	operator int(){return static_cast<int>(flag);}
+	operator VkSparseImageFormatFlagBits const&(){return vk_flag;}
+	operator bool(){return !!flag;}
+	F_sparse_image_format& operator=(const F_sparse_image_format flag_){flag=flag_.flag; return *this;}
+	F_sparse_image_format& operator|=(const F_sparse_image_format flag_){flag|=flag_.flag; return *this;}
+	F_sparse_image_format& operator&=(const F_sparse_image_format flag_){flag&=flag_.flag; return *this;}
+	F_sparse_image_format& operator^=(const F_sparse_image_format flag_){flag^=flag_.flag;return *this;}
+	F_sparse_image_format operator~(){return ~flag;}
+	bool operator==(const F_sparse_image_format flag_){return flag==flag_.flag;}
+	bool operator!=(const F_sparse_image_format flag_){return !(*this==flag_);}
+	F_sparse_image_format& clear(){flag = 0;return *this;}
+	F_sparse_image_format all_flags(){ return b_single_miptail | b_aligned_mip_size | b_nonstandard_block_size;}
+	F_sparse_image_format& on_single_miptail(){ flag |= b_single_miptail; return *this; }
+	F_sparse_image_format& off_single_miptail(){ flag &= ~b_single_miptail; return *this; }
+	F_sparse_image_format& on_aligned_mip_size(){ flag |= b_aligned_mip_size; return *this; }
+	F_sparse_image_format& off_aligned_mip_size(){ flag &= ~b_aligned_mip_size; return *this; }
+	F_sparse_image_format& on_nonstandard_block_size(){ flag |= b_nonstandard_block_size; return *this; }
+	F_sparse_image_format& off_nonstandard_block_size(){ flag &= ~b_nonstandard_block_size; return *this; }
 };
-F_sparse_image_format():flag(0){}
-F_sparse_image_format(B bits_):flag(static_cast<int>(bits_)){}
-F_sparse_image_format(F_sparse_image_format const& flag_):flag(flag_.flag){}
-F_sparse_image_format(std::initializer_list<B> bit_list){for (auto&& bit : bit_list){flag |= static_cast<int>(bit);}}
-operator VkSparseImageFormatFlagBits const &(){return *this;}
-F_sparse_image_format& operator = (F_sparse_image_format flag_){flag = flag_.flag;return *this;}
-F_sparse_image_format operator | (B bit_){return flag | static_cast<int>(bit_);}
-F_sparse_image_format& operator |= (B bit_){flag |= static_cast<int>(bit_);return *this;}
-F_sparse_image_format operator | (F_sparse_image_format flag_){return flag | flag_.flag;}
-F_sparse_image_format& operator |= (F_sparse_image_format flag_){flag |= flag_.flag;return *this;}
-F_sparse_image_format operator & (F_sparse_image_format flag_){return flag & flag_.flag;}
-F_sparse_image_format& operator &= (F_sparse_image_format flag_){flag &= flag_.flag;return *this;}
-F_sparse_image_format operator ^ (F_sparse_image_format flag_){return flag ^ flag_.flag;}
-F_sparse_image_format& operator ^= (F_sparse_image_format flag_){flag ^= flag_.flag;return *this;}
-F_sparse_image_format operator ~ (){return all_flags().flag^flag;}
-bool operator !(){return !flag;}
-F_sparse_image_format& clear(){flag = 0;return *this;}
-F_sparse_image_format all_flags(){
-return b_single_miptail | b_aligned_mip_size | b_nonstandard_block_size;
-}
-F_sparse_image_format& on_single_miptail(){ flag |= b_single_miptail; return *this; }
-F_sparse_image_format& off_single_miptail(){ flag &= ~b_single_miptail; return *this; }
-F_sparse_image_format& on_aligned_mip_size(){ flag |= b_aligned_mip_size; return *this; }
-F_sparse_image_format& off_aligned_mip_size(){ flag &= ~b_aligned_mip_size; return *this; }
-F_sparse_image_format& on_nonstandard_block_size(){ flag |= b_nonstandard_block_size; return *this; }
-F_sparse_image_format& off_nonstandard_block_size(){ flag &= ~b_nonstandard_block_size; return *this; }
-VkSparseImageFormatFlagBits get_vkfb(){ return VkSparseImageFormatFlagBits(flag); }
-};
-F_sparse_image_format inline operator|(const F_sparse_image_format::B bit1_, const F_sparse_image_format::B bit2_){F_sparse_image_format flags(bit1_);return flags | bit2_;}
-bool inline operator==(const F_sparse_image_format f1_, const F_sparse_image_format f2_) { return f1_.flag == f2_.flag; }
-bool inline operator!=(const F_sparse_image_format f1_, const F_sparse_image_format f2_) { return f1_.flag != f2_.flag; }
+inline F_sparse_image_format operator&(const F_sparse_image_format f1_, const F_sparse_image_format f2_){return f1_.flag&f2_.flag;}
+inline F_sparse_image_format operator|(const F_sparse_image_format f1_, const F_sparse_image_format f2_){return f1_.flag|f2_.flag;}
+inline F_sparse_image_format operator^(const F_sparse_image_format f1_, const F_sparse_image_format f2_){return f1_.flag^f2_.flag;}
 /*	VkSparseMemoryBindFlagBits*/
-class F_sparse_memory_bind {
-private:
-F_sparse_memory_bind(int flag_):flag(flag_){};
-public:
-uint32_t flag;
-enum B{
-/*Operation binds resource metadata to memory*/
-	b_metadata = VK_SPARSE_MEMORY_BIND_METADATA_BIT,
+union F_sparse_memory_bind {
+	uint32_t flag;
+	VkSparseMemoryBindFlagBits vk_flag;
+	enum B{
+			/* Operation binds resource metadata to memory */
+		b_metadata = VK_SPARSE_MEMORY_BIND_METADATA_BIT,
+	};
+	F_sparse_memory_bind():flag(0){}
+	F_sparse_memory_bind(int i_):flag(static_cast<uint32_t>(i_)){}
+	F_sparse_memory_bind(uint32_t flag_):flag(flag_){}
+	F_sparse_memory_bind(const B flag_):flag(flag_){}
+	F_sparse_memory_bind(VkSparseMemoryBindFlagBits flag_):vk_flag(flag_){}
+	operator uint32_t(){return flag;}
+	operator int(){return static_cast<int>(flag);}
+	operator VkSparseMemoryBindFlagBits const&(){return vk_flag;}
+	operator bool(){return !!flag;}
+	F_sparse_memory_bind& operator=(const F_sparse_memory_bind flag_){flag=flag_.flag; return *this;}
+	F_sparse_memory_bind& operator|=(const F_sparse_memory_bind flag_){flag|=flag_.flag; return *this;}
+	F_sparse_memory_bind& operator&=(const F_sparse_memory_bind flag_){flag&=flag_.flag; return *this;}
+	F_sparse_memory_bind& operator^=(const F_sparse_memory_bind flag_){flag^=flag_.flag;return *this;}
+	F_sparse_memory_bind operator~(){return ~flag;}
+	bool operator==(const F_sparse_memory_bind flag_){return flag==flag_.flag;}
+	bool operator!=(const F_sparse_memory_bind flag_){return !(*this==flag_);}
+	F_sparse_memory_bind& clear(){flag = 0;return *this;}
+	F_sparse_memory_bind all_flags(){ return b_metadata;}
+	F_sparse_memory_bind& on_metadata(){ flag |= b_metadata; return *this; }
+	F_sparse_memory_bind& off_metadata(){ flag &= ~b_metadata; return *this; }
 };
-F_sparse_memory_bind():flag(0){}
-F_sparse_memory_bind(B bits_):flag(static_cast<int>(bits_)){}
-F_sparse_memory_bind(F_sparse_memory_bind const& flag_):flag(flag_.flag){}
-F_sparse_memory_bind(std::initializer_list<B> bit_list){for (auto&& bit : bit_list){flag |= static_cast<int>(bit);}}
-operator VkSparseMemoryBindFlagBits const &(){return *this;}
-F_sparse_memory_bind& operator = (F_sparse_memory_bind flag_){flag = flag_.flag;return *this;}
-F_sparse_memory_bind operator | (B bit_){return flag | static_cast<int>(bit_);}
-F_sparse_memory_bind& operator |= (B bit_){flag |= static_cast<int>(bit_);return *this;}
-F_sparse_memory_bind operator | (F_sparse_memory_bind flag_){return flag | flag_.flag;}
-F_sparse_memory_bind& operator |= (F_sparse_memory_bind flag_){flag |= flag_.flag;return *this;}
-F_sparse_memory_bind operator & (F_sparse_memory_bind flag_){return flag & flag_.flag;}
-F_sparse_memory_bind& operator &= (F_sparse_memory_bind flag_){flag &= flag_.flag;return *this;}
-F_sparse_memory_bind operator ^ (F_sparse_memory_bind flag_){return flag ^ flag_.flag;}
-F_sparse_memory_bind& operator ^= (F_sparse_memory_bind flag_){flag ^= flag_.flag;return *this;}
-F_sparse_memory_bind operator ~ (){return all_flags().flag^flag;}
-bool operator !(){return !flag;}
-F_sparse_memory_bind& clear(){flag = 0;return *this;}
-F_sparse_memory_bind all_flags(){
-return b_metadata;
-}
-F_sparse_memory_bind& on_metadata(){ flag |= b_metadata; return *this; }
-F_sparse_memory_bind& off_metadata(){ flag &= ~b_metadata; return *this; }
-VkSparseMemoryBindFlagBits get_vkfb(){ return VkSparseMemoryBindFlagBits(flag); }
-};
-F_sparse_memory_bind inline operator|(const F_sparse_memory_bind::B bit1_, const F_sparse_memory_bind::B bit2_){F_sparse_memory_bind flags(bit1_);return flags | bit2_;}
-bool inline operator==(const F_sparse_memory_bind f1_, const F_sparse_memory_bind f2_) { return f1_.flag == f2_.flag; }
-bool inline operator!=(const F_sparse_memory_bind f1_, const F_sparse_memory_bind f2_) { return f1_.flag != f2_.flag; }
+inline F_sparse_memory_bind operator&(const F_sparse_memory_bind f1_, const F_sparse_memory_bind f2_){return f1_.flag&f2_.flag;}
+inline F_sparse_memory_bind operator|(const F_sparse_memory_bind f1_, const F_sparse_memory_bind f2_){return f1_.flag|f2_.flag;}
+inline F_sparse_memory_bind operator^(const F_sparse_memory_bind f1_, const F_sparse_memory_bind f2_){return f1_.flag^f2_.flag;}
 /*	VkPipelineStageFlagBits*/
-class F_pipeline_stage {
-private:
-F_pipeline_stage(int flag_):flag(flag_){};
-public:
-uint32_t flag;
-enum B{
-/*Before subsequent commands are processed*/
-	b_top_of_pipe = VK_PIPELINE_STAGE_TOP_OF_PIPE_BIT,
-/*Draw/DispatchIndirect command fetch*/
-	b_draw_indirect = VK_PIPELINE_STAGE_DRAW_INDIRECT_BIT,
-/*Vertex/index fetch*/
-	b_vertex_input = VK_PIPELINE_STAGE_VERTEX_INPUT_BIT,
-/*Vertex shading*/
-	b_vertex_shader = VK_PIPELINE_STAGE_VERTEX_SHADER_BIT,
-/*Tessellation control shading*/
-	b_tessellation_control_shader = VK_PIPELINE_STAGE_TESSELLATION_CONTROL_SHADER_BIT,
-/*Tessellation evaluation shading*/
-	b_tessellation_evaluation_shader = VK_PIPELINE_STAGE_TESSELLATION_EVALUATION_SHADER_BIT,
-/*Geometry shading*/
-	b_geometry_shader = VK_PIPELINE_STAGE_GEOMETRY_SHADER_BIT,
-/*Fragment shading*/
-	b_fragment_shader = VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT,
-/*Early fragment (depth and stencil) tests*/
-	b_early_fragment_tests = VK_PIPELINE_STAGE_EARLY_FRAGMENT_TESTS_BIT,
-/*Late fragment (depth and stencil) tests*/
-	b_late_fragment_tests = VK_PIPELINE_STAGE_LATE_FRAGMENT_TESTS_BIT,
-/*Color attachment writes*/
-	b_color_attachment_output = VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT,
-/*Compute shading*/
-	b_compute_shader = VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,
-/*Transfer/copy operations*/
-	b_transfer = VK_PIPELINE_STAGE_TRANSFER_BIT,
-/*After previous commands have completed*/
-	b_bottom_of_pipe = VK_PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT,
-/*Indicates host (CPU) is a source/sink of the dependency*/
-	b_host = VK_PIPELINE_STAGE_HOST_BIT,
-/*All stages of the graphics pipeline*/
-	b_all_graphics = VK_PIPELINE_STAGE_ALL_GRAPHICS_BIT,
-/*All stages supported on the queue*/
-	b_all_commands = VK_PIPELINE_STAGE_ALL_COMMANDS_BIT,
+union F_pipeline_stage {
+	uint32_t flag;
+	VkPipelineStageFlagBits vk_flag;
+	enum B{
+			/* Before subsequent commands are processed */
+		b_top_of_pipe = VK_PIPELINE_STAGE_TOP_OF_PIPE_BIT,
+			/* Draw/DispatchIndirect command fetch */
+		b_draw_indirect = VK_PIPELINE_STAGE_DRAW_INDIRECT_BIT,
+			/* Vertex/index fetch */
+		b_vertex_input = VK_PIPELINE_STAGE_VERTEX_INPUT_BIT,
+			/* Vertex shading */
+		b_vertex_shader = VK_PIPELINE_STAGE_VERTEX_SHADER_BIT,
+			/* Tessellation control shading */
+		b_tessellation_control_shader = VK_PIPELINE_STAGE_TESSELLATION_CONTROL_SHADER_BIT,
+			/* Tessellation evaluation shading */
+		b_tessellation_evaluation_shader = VK_PIPELINE_STAGE_TESSELLATION_EVALUATION_SHADER_BIT,
+			/* Geometry shading */
+		b_geometry_shader = VK_PIPELINE_STAGE_GEOMETRY_SHADER_BIT,
+			/* Fragment shading */
+		b_fragment_shader = VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT,
+			/* Early fragment (depth and stencil) tests */
+		b_early_fragment_tests = VK_PIPELINE_STAGE_EARLY_FRAGMENT_TESTS_BIT,
+			/* Late fragment (depth and stencil) tests */
+		b_late_fragment_tests = VK_PIPELINE_STAGE_LATE_FRAGMENT_TESTS_BIT,
+			/* Color attachment writes */
+		b_color_attachment_output = VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT,
+			/* Compute shading */
+		b_compute_shader = VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT,
+			/* Transfer/copy operations */
+		b_transfer = VK_PIPELINE_STAGE_TRANSFER_BIT,
+			/* After previous commands have completed */
+		b_bottom_of_pipe = VK_PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT,
+			/* Indicates host (CPU) is a source/sink of the dependency */
+		b_host = VK_PIPELINE_STAGE_HOST_BIT,
+			/* All stages of the graphics pipeline */
+		b_all_graphics = VK_PIPELINE_STAGE_ALL_GRAPHICS_BIT,
+			/* All stages supported on the queue */
+		b_all_commands = VK_PIPELINE_STAGE_ALL_COMMANDS_BIT,
+	};
+	F_pipeline_stage():flag(0){}
+	F_pipeline_stage(int i_):flag(static_cast<uint32_t>(i_)){}
+	F_pipeline_stage(uint32_t flag_):flag(flag_){}
+	F_pipeline_stage(const B flag_):flag(flag_){}
+	F_pipeline_stage(VkPipelineStageFlagBits flag_):vk_flag(flag_){}
+	operator uint32_t(){return flag;}
+	operator int(){return static_cast<int>(flag);}
+	operator VkPipelineStageFlagBits const&(){return vk_flag;}
+	operator bool(){return !!flag;}
+	F_pipeline_stage& operator=(const F_pipeline_stage flag_){flag=flag_.flag; return *this;}
+	F_pipeline_stage& operator|=(const F_pipeline_stage flag_){flag|=flag_.flag; return *this;}
+	F_pipeline_stage& operator&=(const F_pipeline_stage flag_){flag&=flag_.flag; return *this;}
+	F_pipeline_stage& operator^=(const F_pipeline_stage flag_){flag^=flag_.flag;return *this;}
+	F_pipeline_stage operator~(){return ~flag;}
+	bool operator==(const F_pipeline_stage flag_){return flag==flag_.flag;}
+	bool operator!=(const F_pipeline_stage flag_){return !(*this==flag_);}
+	F_pipeline_stage& clear(){flag = 0;return *this;}
+	F_pipeline_stage all_flags(){ return b_top_of_pipe | b_draw_indirect | b_vertex_input | b_vertex_shader | b_tessellation_control_shader | b_tessellation_evaluation_shader | b_geometry_shader | b_fragment_shader | b_early_fragment_tests | b_late_fragment_tests | b_color_attachment_output | b_compute_shader | b_transfer | b_bottom_of_pipe | b_host | b_all_graphics | b_all_commands;}
+	F_pipeline_stage& on_top_of_pipe(){ flag |= b_top_of_pipe; return *this; }
+	F_pipeline_stage& off_top_of_pipe(){ flag &= ~b_top_of_pipe; return *this; }
+	F_pipeline_stage& on_draw_indirect(){ flag |= b_draw_indirect; return *this; }
+	F_pipeline_stage& off_draw_indirect(){ flag &= ~b_draw_indirect; return *this; }
+	F_pipeline_stage& on_vertex_input(){ flag |= b_vertex_input; return *this; }
+	F_pipeline_stage& off_vertex_input(){ flag &= ~b_vertex_input; return *this; }
+	F_pipeline_stage& on_vertex_shader(){ flag |= b_vertex_shader; return *this; }
+	F_pipeline_stage& off_vertex_shader(){ flag &= ~b_vertex_shader; return *this; }
+	F_pipeline_stage& on_tessellation_control_shader(){ flag |= b_tessellation_control_shader; return *this; }
+	F_pipeline_stage& off_tessellation_control_shader(){ flag &= ~b_tessellation_control_shader; return *this; }
+	F_pipeline_stage& on_tessellation_evaluation_shader(){ flag |= b_tessellation_evaluation_shader; return *this; }
+	F_pipeline_stage& off_tessellation_evaluation_shader(){ flag &= ~b_tessellation_evaluation_shader; return *this; }
+	F_pipeline_stage& on_geometry_shader(){ flag |= b_geometry_shader; return *this; }
+	F_pipeline_stage& off_geometry_shader(){ flag &= ~b_geometry_shader; return *this; }
+	F_pipeline_stage& on_fragment_shader(){ flag |= b_fragment_shader; return *this; }
+	F_pipeline_stage& off_fragment_shader(){ flag &= ~b_fragment_shader; return *this; }
+	F_pipeline_stage& on_early_fragment_tests(){ flag |= b_early_fragment_tests; return *this; }
+	F_pipeline_stage& off_early_fragment_tests(){ flag &= ~b_early_fragment_tests; return *this; }
+	F_pipeline_stage& on_late_fragment_tests(){ flag |= b_late_fragment_tests; return *this; }
+	F_pipeline_stage& off_late_fragment_tests(){ flag &= ~b_late_fragment_tests; return *this; }
+	F_pipeline_stage& on_color_attachment_output(){ flag |= b_color_attachment_output; return *this; }
+	F_pipeline_stage& off_color_attachment_output(){ flag &= ~b_color_attachment_output; return *this; }
+	F_pipeline_stage& on_compute_shader(){ flag |= b_compute_shader; return *this; }
+	F_pipeline_stage& off_compute_shader(){ flag &= ~b_compute_shader; return *this; }
+	F_pipeline_stage& on_transfer(){ flag |= b_transfer; return *this; }
+	F_pipeline_stage& off_transfer(){ flag &= ~b_transfer; return *this; }
+	F_pipeline_stage& on_bottom_of_pipe(){ flag |= b_bottom_of_pipe; return *this; }
+	F_pipeline_stage& off_bottom_of_pipe(){ flag &= ~b_bottom_of_pipe; return *this; }
+	F_pipeline_stage& on_host(){ flag |= b_host; return *this; }
+	F_pipeline_stage& off_host(){ flag &= ~b_host; return *this; }
+	F_pipeline_stage& on_all_graphics(){ flag |= b_all_graphics; return *this; }
+	F_pipeline_stage& off_all_graphics(){ flag &= ~b_all_graphics; return *this; }
+	F_pipeline_stage& on_all_commands(){ flag |= b_all_commands; return *this; }
+	F_pipeline_stage& off_all_commands(){ flag &= ~b_all_commands; return *this; }
 };
-F_pipeline_stage():flag(0){}
-F_pipeline_stage(B bits_):flag(static_cast<int>(bits_)){}
-F_pipeline_stage(F_pipeline_stage const& flag_):flag(flag_.flag){}
-F_pipeline_stage(std::initializer_list<B> bit_list){for (auto&& bit : bit_list){flag |= static_cast<int>(bit);}}
-operator VkPipelineStageFlagBits const &(){return *this;}
-F_pipeline_stage& operator = (F_pipeline_stage flag_){flag = flag_.flag;return *this;}
-F_pipeline_stage operator | (B bit_){return flag | static_cast<int>(bit_);}
-F_pipeline_stage& operator |= (B bit_){flag |= static_cast<int>(bit_);return *this;}
-F_pipeline_stage operator | (F_pipeline_stage flag_){return flag | flag_.flag;}
-F_pipeline_stage& operator |= (F_pipeline_stage flag_){flag |= flag_.flag;return *this;}
-F_pipeline_stage operator & (F_pipeline_stage flag_){return flag & flag_.flag;}
-F_pipeline_stage& operator &= (F_pipeline_stage flag_){flag &= flag_.flag;return *this;}
-F_pipeline_stage operator ^ (F_pipeline_stage flag_){return flag ^ flag_.flag;}
-F_pipeline_stage& operator ^= (F_pipeline_stage flag_){flag ^= flag_.flag;return *this;}
-F_pipeline_stage operator ~ (){return all_flags().flag^flag;}
-bool operator !(){return !flag;}
-F_pipeline_stage& clear(){flag = 0;return *this;}
-F_pipeline_stage all_flags(){
-return b_top_of_pipe | b_draw_indirect | b_vertex_input | b_vertex_shader | b_tessellation_control_shader | b_tessellation_evaluation_shader | b_geometry_shader | b_fragment_shader | b_early_fragment_tests | b_late_fragment_tests | b_color_attachment_output | b_compute_shader | b_transfer | b_bottom_of_pipe | b_host | b_all_graphics | b_all_commands;
-}
-F_pipeline_stage& on_top_of_pipe(){ flag |= b_top_of_pipe; return *this; }
-F_pipeline_stage& off_top_of_pipe(){ flag &= ~b_top_of_pipe; return *this; }
-F_pipeline_stage& on_draw_indirect(){ flag |= b_draw_indirect; return *this; }
-F_pipeline_stage& off_draw_indirect(){ flag &= ~b_draw_indirect; return *this; }
-F_pipeline_stage& on_vertex_input(){ flag |= b_vertex_input; return *this; }
-F_pipeline_stage& off_vertex_input(){ flag &= ~b_vertex_input; return *this; }
-F_pipeline_stage& on_vertex_shader(){ flag |= b_vertex_shader; return *this; }
-F_pipeline_stage& off_vertex_shader(){ flag &= ~b_vertex_shader; return *this; }
-F_pipeline_stage& on_tessellation_control_shader(){ flag |= b_tessellation_control_shader; return *this; }
-F_pipeline_stage& off_tessellation_control_shader(){ flag &= ~b_tessellation_control_shader; return *this; }
-F_pipeline_stage& on_tessellation_evaluation_shader(){ flag |= b_tessellation_evaluation_shader; return *this; }
-F_pipeline_stage& off_tessellation_evaluation_shader(){ flag &= ~b_tessellation_evaluation_shader; return *this; }
-F_pipeline_stage& on_geometry_shader(){ flag |= b_geometry_shader; return *this; }
-F_pipeline_stage& off_geometry_shader(){ flag &= ~b_geometry_shader; return *this; }
-F_pipeline_stage& on_fragment_shader(){ flag |= b_fragment_shader; return *this; }
-F_pipeline_stage& off_fragment_shader(){ flag &= ~b_fragment_shader; return *this; }
-F_pipeline_stage& on_early_fragment_tests(){ flag |= b_early_fragment_tests; return *this; }
-F_pipeline_stage& off_early_fragment_tests(){ flag &= ~b_early_fragment_tests; return *this; }
-F_pipeline_stage& on_late_fragment_tests(){ flag |= b_late_fragment_tests; return *this; }
-F_pipeline_stage& off_late_fragment_tests(){ flag &= ~b_late_fragment_tests; return *this; }
-F_pipeline_stage& on_color_attachment_output(){ flag |= b_color_attachment_output; return *this; }
-F_pipeline_stage& off_color_attachment_output(){ flag &= ~b_color_attachment_output; return *this; }
-F_pipeline_stage& on_compute_shader(){ flag |= b_compute_shader; return *this; }
-F_pipeline_stage& off_compute_shader(){ flag &= ~b_compute_shader; return *this; }
-F_pipeline_stage& on_transfer(){ flag |= b_transfer; return *this; }
-F_pipeline_stage& off_transfer(){ flag &= ~b_transfer; return *this; }
-F_pipeline_stage& on_bottom_of_pipe(){ flag |= b_bottom_of_pipe; return *this; }
-F_pipeline_stage& off_bottom_of_pipe(){ flag &= ~b_bottom_of_pipe; return *this; }
-F_pipeline_stage& on_host(){ flag |= b_host; return *this; }
-F_pipeline_stage& off_host(){ flag &= ~b_host; return *this; }
-F_pipeline_stage& on_all_graphics(){ flag |= b_all_graphics; return *this; }
-F_pipeline_stage& off_all_graphics(){ flag &= ~b_all_graphics; return *this; }
-F_pipeline_stage& on_all_commands(){ flag |= b_all_commands; return *this; }
-F_pipeline_stage& off_all_commands(){ flag &= ~b_all_commands; return *this; }
-VkPipelineStageFlagBits get_vkfb(){ return VkPipelineStageFlagBits(flag); }
-};
-F_pipeline_stage inline operator|(const F_pipeline_stage::B bit1_, const F_pipeline_stage::B bit2_){F_pipeline_stage flags(bit1_);return flags | bit2_;}
-bool inline operator==(const F_pipeline_stage f1_, const F_pipeline_stage f2_) { return f1_.flag == f2_.flag; }
-bool inline operator!=(const F_pipeline_stage f1_, const F_pipeline_stage f2_) { return f1_.flag != f2_.flag; }
+inline F_pipeline_stage operator&(const F_pipeline_stage f1_, const F_pipeline_stage f2_){return f1_.flag&f2_.flag;}
+inline F_pipeline_stage operator|(const F_pipeline_stage f1_, const F_pipeline_stage f2_){return f1_.flag|f2_.flag;}
+inline F_pipeline_stage operator^(const F_pipeline_stage f1_, const F_pipeline_stage f2_){return f1_.flag^f2_.flag;}
 /*	VkCommandPoolCreateFlagBits*/
-class F_command_pool_create {
-private:
-F_command_pool_create(int flag_):flag(flag_){};
-public:
-uint32_t flag;
-enum B{
-/*Command buffers have a short lifetime*/
-	b_transient = VK_COMMAND_POOL_CREATE_TRANSIENT_BIT,
-/*Command buffers may release their memory individually*/
-	b_reset_command_buffer = VK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT,
+union F_command_pool_create {
+	uint32_t flag;
+	VkCommandPoolCreateFlagBits vk_flag;
+	enum B{
+			/* Command buffers have a short lifetime */
+		b_transient = VK_COMMAND_POOL_CREATE_TRANSIENT_BIT,
+			/* Command buffers may release their memory individually */
+		b_reset_command_buffer = VK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT,
+	};
+	F_command_pool_create():flag(0){}
+	F_command_pool_create(int i_):flag(static_cast<uint32_t>(i_)){}
+	F_command_pool_create(uint32_t flag_):flag(flag_){}
+	F_command_pool_create(const B flag_):flag(flag_){}
+	F_command_pool_create(VkCommandPoolCreateFlagBits flag_):vk_flag(flag_){}
+	operator uint32_t(){return flag;}
+	operator int(){return static_cast<int>(flag);}
+	operator VkCommandPoolCreateFlagBits const&(){return vk_flag;}
+	operator bool(){return !!flag;}
+	F_command_pool_create& operator=(const F_command_pool_create flag_){flag=flag_.flag; return *this;}
+	F_command_pool_create& operator|=(const F_command_pool_create flag_){flag|=flag_.flag; return *this;}
+	F_command_pool_create& operator&=(const F_command_pool_create flag_){flag&=flag_.flag; return *this;}
+	F_command_pool_create& operator^=(const F_command_pool_create flag_){flag^=flag_.flag;return *this;}
+	F_command_pool_create operator~(){return ~flag;}
+	bool operator==(const F_command_pool_create flag_){return flag==flag_.flag;}
+	bool operator!=(const F_command_pool_create flag_){return !(*this==flag_);}
+	F_command_pool_create& clear(){flag = 0;return *this;}
+	F_command_pool_create all_flags(){ return b_transient | b_reset_command_buffer;}
+	F_command_pool_create& on_transient(){ flag |= b_transient; return *this; }
+	F_command_pool_create& off_transient(){ flag &= ~b_transient; return *this; }
+	F_command_pool_create& on_reset_command_buffer(){ flag |= b_reset_command_buffer; return *this; }
+	F_command_pool_create& off_reset_command_buffer(){ flag &= ~b_reset_command_buffer; return *this; }
 };
-F_command_pool_create():flag(0){}
-F_command_pool_create(B bits_):flag(static_cast<int>(bits_)){}
-F_command_pool_create(F_command_pool_create const& flag_):flag(flag_.flag){}
-F_command_pool_create(std::initializer_list<B> bit_list){for (auto&& bit : bit_list){flag |= static_cast<int>(bit);}}
-operator VkCommandPoolCreateFlagBits const &(){return *this;}
-F_command_pool_create& operator = (F_command_pool_create flag_){flag = flag_.flag;return *this;}
-F_command_pool_create operator | (B bit_){return flag | static_cast<int>(bit_);}
-F_command_pool_create& operator |= (B bit_){flag |= static_cast<int>(bit_);return *this;}
-F_command_pool_create operator | (F_command_pool_create flag_){return flag | flag_.flag;}
-F_command_pool_create& operator |= (F_command_pool_create flag_){flag |= flag_.flag;return *this;}
-F_command_pool_create operator & (F_command_pool_create flag_){return flag & flag_.flag;}
-F_command_pool_create& operator &= (F_command_pool_create flag_){flag &= flag_.flag;return *this;}
-F_command_pool_create operator ^ (F_command_pool_create flag_){return flag ^ flag_.flag;}
-F_command_pool_create& operator ^= (F_command_pool_create flag_){flag ^= flag_.flag;return *this;}
-F_command_pool_create operator ~ (){return all_flags().flag^flag;}
-bool operator !(){return !flag;}
-F_command_pool_create& clear(){flag = 0;return *this;}
-F_command_pool_create all_flags(){
-return b_transient | b_reset_command_buffer;
-}
-F_command_pool_create& on_transient(){ flag |= b_transient; return *this; }
-F_command_pool_create& off_transient(){ flag &= ~b_transient; return *this; }
-F_command_pool_create& on_reset_command_buffer(){ flag |= b_reset_command_buffer; return *this; }
-F_command_pool_create& off_reset_command_buffer(){ flag &= ~b_reset_command_buffer; return *this; }
-VkCommandPoolCreateFlagBits get_vkfb(){ return VkCommandPoolCreateFlagBits(flag); }
-};
-F_command_pool_create inline operator|(const F_command_pool_create::B bit1_, const F_command_pool_create::B bit2_){F_command_pool_create flags(bit1_);return flags | bit2_;}
-bool inline operator==(const F_command_pool_create f1_, const F_command_pool_create f2_) { return f1_.flag == f2_.flag; }
-bool inline operator!=(const F_command_pool_create f1_, const F_command_pool_create f2_) { return f1_.flag != f2_.flag; }
+inline F_command_pool_create operator&(const F_command_pool_create f1_, const F_command_pool_create f2_){return f1_.flag&f2_.flag;}
+inline F_command_pool_create operator|(const F_command_pool_create f1_, const F_command_pool_create f2_){return f1_.flag|f2_.flag;}
+inline F_command_pool_create operator^(const F_command_pool_create f1_, const F_command_pool_create f2_){return f1_.flag^f2_.flag;}
 /*	VkCommandPoolResetFlagBits*/
-class F_command_pool_reset {
-private:
-F_command_pool_reset(int flag_):flag(flag_){};
-public:
-uint32_t flag;
-enum B{
-/*Release resources owned by the pool*/
-	b_release_resources = VK_COMMAND_POOL_RESET_RELEASE_RESOURCES_BIT,
+union F_command_pool_reset {
+	uint32_t flag;
+	VkCommandPoolResetFlagBits vk_flag;
+	enum B{
+			/* Release resources owned by the pool */
+		b_release_resources = VK_COMMAND_POOL_RESET_RELEASE_RESOURCES_BIT,
+	};
+	F_command_pool_reset():flag(0){}
+	F_command_pool_reset(int i_):flag(static_cast<uint32_t>(i_)){}
+	F_command_pool_reset(uint32_t flag_):flag(flag_){}
+	F_command_pool_reset(const B flag_):flag(flag_){}
+	F_command_pool_reset(VkCommandPoolResetFlagBits flag_):vk_flag(flag_){}
+	operator uint32_t(){return flag;}
+	operator int(){return static_cast<int>(flag);}
+	operator VkCommandPoolResetFlagBits const&(){return vk_flag;}
+	operator bool(){return !!flag;}
+	F_command_pool_reset& operator=(const F_command_pool_reset flag_){flag=flag_.flag; return *this;}
+	F_command_pool_reset& operator|=(const F_command_pool_reset flag_){flag|=flag_.flag; return *this;}
+	F_command_pool_reset& operator&=(const F_command_pool_reset flag_){flag&=flag_.flag; return *this;}
+	F_command_pool_reset& operator^=(const F_command_pool_reset flag_){flag^=flag_.flag;return *this;}
+	F_command_pool_reset operator~(){return ~flag;}
+	bool operator==(const F_command_pool_reset flag_){return flag==flag_.flag;}
+	bool operator!=(const F_command_pool_reset flag_){return !(*this==flag_);}
+	F_command_pool_reset& clear(){flag = 0;return *this;}
+	F_command_pool_reset all_flags(){ return b_release_resources;}
+	F_command_pool_reset& on_release_resources(){ flag |= b_release_resources; return *this; }
+	F_command_pool_reset& off_release_resources(){ flag &= ~b_release_resources; return *this; }
 };
-F_command_pool_reset():flag(0){}
-F_command_pool_reset(B bits_):flag(static_cast<int>(bits_)){}
-F_command_pool_reset(F_command_pool_reset const& flag_):flag(flag_.flag){}
-F_command_pool_reset(std::initializer_list<B> bit_list){for (auto&& bit : bit_list){flag |= static_cast<int>(bit);}}
-operator VkCommandPoolResetFlagBits const &(){return *this;}
-F_command_pool_reset& operator = (F_command_pool_reset flag_){flag = flag_.flag;return *this;}
-F_command_pool_reset operator | (B bit_){return flag | static_cast<int>(bit_);}
-F_command_pool_reset& operator |= (B bit_){flag |= static_cast<int>(bit_);return *this;}
-F_command_pool_reset operator | (F_command_pool_reset flag_){return flag | flag_.flag;}
-F_command_pool_reset& operator |= (F_command_pool_reset flag_){flag |= flag_.flag;return *this;}
-F_command_pool_reset operator & (F_command_pool_reset flag_){return flag & flag_.flag;}
-F_command_pool_reset& operator &= (F_command_pool_reset flag_){flag &= flag_.flag;return *this;}
-F_command_pool_reset operator ^ (F_command_pool_reset flag_){return flag ^ flag_.flag;}
-F_command_pool_reset& operator ^= (F_command_pool_reset flag_){flag ^= flag_.flag;return *this;}
-F_command_pool_reset operator ~ (){return all_flags().flag^flag;}
-bool operator !(){return !flag;}
-F_command_pool_reset& clear(){flag = 0;return *this;}
-F_command_pool_reset all_flags(){
-return b_release_resources;
-}
-F_command_pool_reset& on_release_resources(){ flag |= b_release_resources; return *this; }
-F_command_pool_reset& off_release_resources(){ flag &= ~b_release_resources; return *this; }
-VkCommandPoolResetFlagBits get_vkfb(){ return VkCommandPoolResetFlagBits(flag); }
-};
-F_command_pool_reset inline operator|(const F_command_pool_reset::B bit1_, const F_command_pool_reset::B bit2_){F_command_pool_reset flags(bit1_);return flags | bit2_;}
-bool inline operator==(const F_command_pool_reset f1_, const F_command_pool_reset f2_) { return f1_.flag == f2_.flag; }
-bool inline operator!=(const F_command_pool_reset f1_, const F_command_pool_reset f2_) { return f1_.flag != f2_.flag; }
+inline F_command_pool_reset operator&(const F_command_pool_reset f1_, const F_command_pool_reset f2_){return f1_.flag&f2_.flag;}
+inline F_command_pool_reset operator|(const F_command_pool_reset f1_, const F_command_pool_reset f2_){return f1_.flag|f2_.flag;}
+inline F_command_pool_reset operator^(const F_command_pool_reset f1_, const F_command_pool_reset f2_){return f1_.flag^f2_.flag;}
 /*	VkCommandBufferResetFlagBits*/
-class F_command_buffer_reset {
-private:
-F_command_buffer_reset(int flag_):flag(flag_){};
-public:
-uint32_t flag;
-enum B{
-/*Release resources owned by the buffer*/
-	b_release_resources = VK_COMMAND_BUFFER_RESET_RELEASE_RESOURCES_BIT,
+union F_command_buffer_reset {
+	uint32_t flag;
+	VkCommandBufferResetFlagBits vk_flag;
+	enum B{
+			/* Release resources owned by the buffer */
+		b_release_resources = VK_COMMAND_BUFFER_RESET_RELEASE_RESOURCES_BIT,
+	};
+	F_command_buffer_reset():flag(0){}
+	F_command_buffer_reset(int i_):flag(static_cast<uint32_t>(i_)){}
+	F_command_buffer_reset(uint32_t flag_):flag(flag_){}
+	F_command_buffer_reset(const B flag_):flag(flag_){}
+	F_command_buffer_reset(VkCommandBufferResetFlagBits flag_):vk_flag(flag_){}
+	operator uint32_t(){return flag;}
+	operator int(){return static_cast<int>(flag);}
+	operator VkCommandBufferResetFlagBits const&(){return vk_flag;}
+	operator bool(){return !!flag;}
+	F_command_buffer_reset& operator=(const F_command_buffer_reset flag_){flag=flag_.flag; return *this;}
+	F_command_buffer_reset& operator|=(const F_command_buffer_reset flag_){flag|=flag_.flag; return *this;}
+	F_command_buffer_reset& operator&=(const F_command_buffer_reset flag_){flag&=flag_.flag; return *this;}
+	F_command_buffer_reset& operator^=(const F_command_buffer_reset flag_){flag^=flag_.flag;return *this;}
+	F_command_buffer_reset operator~(){return ~flag;}
+	bool operator==(const F_command_buffer_reset flag_){return flag==flag_.flag;}
+	bool operator!=(const F_command_buffer_reset flag_){return !(*this==flag_);}
+	F_command_buffer_reset& clear(){flag = 0;return *this;}
+	F_command_buffer_reset all_flags(){ return b_release_resources;}
+	F_command_buffer_reset& on_release_resources(){ flag |= b_release_resources; return *this; }
+	F_command_buffer_reset& off_release_resources(){ flag &= ~b_release_resources; return *this; }
 };
-F_command_buffer_reset():flag(0){}
-F_command_buffer_reset(B bits_):flag(static_cast<int>(bits_)){}
-F_command_buffer_reset(F_command_buffer_reset const& flag_):flag(flag_.flag){}
-F_command_buffer_reset(std::initializer_list<B> bit_list){for (auto&& bit : bit_list){flag |= static_cast<int>(bit);}}
-operator VkCommandBufferResetFlagBits const &(){return *this;}
-F_command_buffer_reset& operator = (F_command_buffer_reset flag_){flag = flag_.flag;return *this;}
-F_command_buffer_reset operator | (B bit_){return flag | static_cast<int>(bit_);}
-F_command_buffer_reset& operator |= (B bit_){flag |= static_cast<int>(bit_);return *this;}
-F_command_buffer_reset operator | (F_command_buffer_reset flag_){return flag | flag_.flag;}
-F_command_buffer_reset& operator |= (F_command_buffer_reset flag_){flag |= flag_.flag;return *this;}
-F_command_buffer_reset operator & (F_command_buffer_reset flag_){return flag & flag_.flag;}
-F_command_buffer_reset& operator &= (F_command_buffer_reset flag_){flag &= flag_.flag;return *this;}
-F_command_buffer_reset operator ^ (F_command_buffer_reset flag_){return flag ^ flag_.flag;}
-F_command_buffer_reset& operator ^= (F_command_buffer_reset flag_){flag ^= flag_.flag;return *this;}
-F_command_buffer_reset operator ~ (){return all_flags().flag^flag;}
-bool operator !(){return !flag;}
-F_command_buffer_reset& clear(){flag = 0;return *this;}
-F_command_buffer_reset all_flags(){
-return b_release_resources;
-}
-F_command_buffer_reset& on_release_resources(){ flag |= b_release_resources; return *this; }
-F_command_buffer_reset& off_release_resources(){ flag &= ~b_release_resources; return *this; }
-VkCommandBufferResetFlagBits get_vkfb(){ return VkCommandBufferResetFlagBits(flag); }
-};
-F_command_buffer_reset inline operator|(const F_command_buffer_reset::B bit1_, const F_command_buffer_reset::B bit2_){F_command_buffer_reset flags(bit1_);return flags | bit2_;}
-bool inline operator==(const F_command_buffer_reset f1_, const F_command_buffer_reset f2_) { return f1_.flag == f2_.flag; }
-bool inline operator!=(const F_command_buffer_reset f1_, const F_command_buffer_reset f2_) { return f1_.flag != f2_.flag; }
+inline F_command_buffer_reset operator&(const F_command_buffer_reset f1_, const F_command_buffer_reset f2_){return f1_.flag&f2_.flag;}
+inline F_command_buffer_reset operator|(const F_command_buffer_reset f1_, const F_command_buffer_reset f2_){return f1_.flag|f2_.flag;}
+inline F_command_buffer_reset operator^(const F_command_buffer_reset f1_, const F_command_buffer_reset f2_){return f1_.flag^f2_.flag;}
 /*	VkSampleCountFlagBits*/
-class F_sample_count {
-private:
-F_sample_count(int flag_):flag(flag_){};
-public:
-uint32_t flag;
-enum B{
-/*Sample count 1 supported*/
-	b_1 = VK_SAMPLE_COUNT_1_BIT,
-/*Sample count 2 supported*/
-	b_2 = VK_SAMPLE_COUNT_2_BIT,
-/*Sample count 4 supported*/
-	b_4 = VK_SAMPLE_COUNT_4_BIT,
-/*Sample count 8 supported*/
-	b_8 = VK_SAMPLE_COUNT_8_BIT,
-/*Sample count 16 supported*/
-	b_16 = VK_SAMPLE_COUNT_16_BIT,
-/*Sample count 32 supported*/
-	b_32 = VK_SAMPLE_COUNT_32_BIT,
-/*Sample count 64 supported*/
-	b_64 = VK_SAMPLE_COUNT_64_BIT,
+union F_sample_count {
+	uint32_t flag;
+	VkSampleCountFlagBits vk_flag;
+	enum B{
+			/* Sample count 1 supported */
+		b_1 = VK_SAMPLE_COUNT_1_BIT,
+			/* Sample count 2 supported */
+		b_2 = VK_SAMPLE_COUNT_2_BIT,
+			/* Sample count 4 supported */
+		b_4 = VK_SAMPLE_COUNT_4_BIT,
+			/* Sample count 8 supported */
+		b_8 = VK_SAMPLE_COUNT_8_BIT,
+			/* Sample count 16 supported */
+		b_16 = VK_SAMPLE_COUNT_16_BIT,
+			/* Sample count 32 supported */
+		b_32 = VK_SAMPLE_COUNT_32_BIT,
+			/* Sample count 64 supported */
+		b_64 = VK_SAMPLE_COUNT_64_BIT,
+	};
+	F_sample_count():flag(0){}
+	F_sample_count(int i_):flag(static_cast<uint32_t>(i_)){}
+	F_sample_count(uint32_t flag_):flag(flag_){}
+	F_sample_count(const B flag_):flag(flag_){}
+	F_sample_count(VkSampleCountFlagBits flag_):vk_flag(flag_){}
+	operator uint32_t(){return flag;}
+	operator int(){return static_cast<int>(flag);}
+	operator VkSampleCountFlagBits const&(){return vk_flag;}
+	operator bool(){return !!flag;}
+	F_sample_count& operator=(const F_sample_count flag_){flag=flag_.flag; return *this;}
+	F_sample_count& operator|=(const F_sample_count flag_){flag|=flag_.flag; return *this;}
+	F_sample_count& operator&=(const F_sample_count flag_){flag&=flag_.flag; return *this;}
+	F_sample_count& operator^=(const F_sample_count flag_){flag^=flag_.flag;return *this;}
+	F_sample_count operator~(){return ~flag;}
+	bool operator==(const F_sample_count flag_){return flag==flag_.flag;}
+	bool operator!=(const F_sample_count flag_){return !(*this==flag_);}
+	F_sample_count& clear(){flag = 0;return *this;}
+	F_sample_count all_flags(){ return b_1 | b_2 | b_4 | b_8 | b_16 | b_32 | b_64;}
+	F_sample_count& on_1(){ flag |= b_1; return *this; }
+	F_sample_count& off_1(){ flag &= ~b_1; return *this; }
+	F_sample_count& on_2(){ flag |= b_2; return *this; }
+	F_sample_count& off_2(){ flag &= ~b_2; return *this; }
+	F_sample_count& on_4(){ flag |= b_4; return *this; }
+	F_sample_count& off_4(){ flag &= ~b_4; return *this; }
+	F_sample_count& on_8(){ flag |= b_8; return *this; }
+	F_sample_count& off_8(){ flag &= ~b_8; return *this; }
+	F_sample_count& on_16(){ flag |= b_16; return *this; }
+	F_sample_count& off_16(){ flag &= ~b_16; return *this; }
+	F_sample_count& on_32(){ flag |= b_32; return *this; }
+	F_sample_count& off_32(){ flag &= ~b_32; return *this; }
+	F_sample_count& on_64(){ flag |= b_64; return *this; }
+	F_sample_count& off_64(){ flag &= ~b_64; return *this; }
 };
-F_sample_count():flag(0){}
-F_sample_count(B bits_):flag(static_cast<int>(bits_)){}
-F_sample_count(F_sample_count const& flag_):flag(flag_.flag){}
-F_sample_count(std::initializer_list<B> bit_list){for (auto&& bit : bit_list){flag |= static_cast<int>(bit);}}
-operator VkSampleCountFlagBits const &(){return *this;}
-F_sample_count& operator = (F_sample_count flag_){flag = flag_.flag;return *this;}
-F_sample_count operator | (B bit_){return flag | static_cast<int>(bit_);}
-F_sample_count& operator |= (B bit_){flag |= static_cast<int>(bit_);return *this;}
-F_sample_count operator | (F_sample_count flag_){return flag | flag_.flag;}
-F_sample_count& operator |= (F_sample_count flag_){flag |= flag_.flag;return *this;}
-F_sample_count operator & (F_sample_count flag_){return flag & flag_.flag;}
-F_sample_count& operator &= (F_sample_count flag_){flag &= flag_.flag;return *this;}
-F_sample_count operator ^ (F_sample_count flag_){return flag ^ flag_.flag;}
-F_sample_count& operator ^= (F_sample_count flag_){flag ^= flag_.flag;return *this;}
-F_sample_count operator ~ (){return all_flags().flag^flag;}
-bool operator !(){return !flag;}
-F_sample_count& clear(){flag = 0;return *this;}
-F_sample_count all_flags(){
-return b_1 | b_2 | b_4 | b_8 | b_16 | b_32 | b_64;
-}
-F_sample_count& on_1(){ flag |= b_1; return *this; }
-F_sample_count& off_1(){ flag &= ~b_1; return *this; }
-F_sample_count& on_2(){ flag |= b_2; return *this; }
-F_sample_count& off_2(){ flag &= ~b_2; return *this; }
-F_sample_count& on_4(){ flag |= b_4; return *this; }
-F_sample_count& off_4(){ flag &= ~b_4; return *this; }
-F_sample_count& on_8(){ flag |= b_8; return *this; }
-F_sample_count& off_8(){ flag &= ~b_8; return *this; }
-F_sample_count& on_16(){ flag |= b_16; return *this; }
-F_sample_count& off_16(){ flag &= ~b_16; return *this; }
-F_sample_count& on_32(){ flag |= b_32; return *this; }
-F_sample_count& off_32(){ flag &= ~b_32; return *this; }
-F_sample_count& on_64(){ flag |= b_64; return *this; }
-F_sample_count& off_64(){ flag &= ~b_64; return *this; }
-VkSampleCountFlagBits get_vkfb(){ return VkSampleCountFlagBits(flag); }
-};
-F_sample_count inline operator|(const F_sample_count::B bit1_, const F_sample_count::B bit2_){F_sample_count flags(bit1_);return flags | bit2_;}
-bool inline operator==(const F_sample_count f1_, const F_sample_count f2_) { return f1_.flag == f2_.flag; }
-bool inline operator!=(const F_sample_count f1_, const F_sample_count f2_) { return f1_.flag != f2_.flag; }
+inline F_sample_count operator&(const F_sample_count f1_, const F_sample_count f2_){return f1_.flag&f2_.flag;}
+inline F_sample_count operator|(const F_sample_count f1_, const F_sample_count f2_){return f1_.flag|f2_.flag;}
+inline F_sample_count operator^(const F_sample_count f1_, const F_sample_count f2_){return f1_.flag^f2_.flag;}
 /*	VkAttachmentDescriptionFlagBits*/
-class F_attachment_description {
-private:
-F_attachment_description(int flag_):flag(flag_){};
-public:
-uint32_t flag;
-enum B{
-/*The attachment may alias physical memory of another attachment in the same render pass*/
-	b_may_alias = VK_ATTACHMENT_DESCRIPTION_MAY_ALIAS_BIT,
+union F_attachment_description {
+	uint32_t flag;
+	VkAttachmentDescriptionFlagBits vk_flag;
+	enum B{
+			/* The attachment may alias physical memory of another attachment in the same render pass */
+		b_may_alias = VK_ATTACHMENT_DESCRIPTION_MAY_ALIAS_BIT,
+	};
+	F_attachment_description():flag(0){}
+	F_attachment_description(int i_):flag(static_cast<uint32_t>(i_)){}
+	F_attachment_description(uint32_t flag_):flag(flag_){}
+	F_attachment_description(const B flag_):flag(flag_){}
+	F_attachment_description(VkAttachmentDescriptionFlagBits flag_):vk_flag(flag_){}
+	operator uint32_t(){return flag;}
+	operator int(){return static_cast<int>(flag);}
+	operator VkAttachmentDescriptionFlagBits const&(){return vk_flag;}
+	operator bool(){return !!flag;}
+	F_attachment_description& operator=(const F_attachment_description flag_){flag=flag_.flag; return *this;}
+	F_attachment_description& operator|=(const F_attachment_description flag_){flag|=flag_.flag; return *this;}
+	F_attachment_description& operator&=(const F_attachment_description flag_){flag&=flag_.flag; return *this;}
+	F_attachment_description& operator^=(const F_attachment_description flag_){flag^=flag_.flag;return *this;}
+	F_attachment_description operator~(){return ~flag;}
+	bool operator==(const F_attachment_description flag_){return flag==flag_.flag;}
+	bool operator!=(const F_attachment_description flag_){return !(*this==flag_);}
+	F_attachment_description& clear(){flag = 0;return *this;}
+	F_attachment_description all_flags(){ return b_may_alias;}
+	F_attachment_description& on_may_alias(){ flag |= b_may_alias; return *this; }
+	F_attachment_description& off_may_alias(){ flag &= ~b_may_alias; return *this; }
 };
-F_attachment_description():flag(0){}
-F_attachment_description(B bits_):flag(static_cast<int>(bits_)){}
-F_attachment_description(F_attachment_description const& flag_):flag(flag_.flag){}
-F_attachment_description(std::initializer_list<B> bit_list){for (auto&& bit : bit_list){flag |= static_cast<int>(bit);}}
-operator VkAttachmentDescriptionFlagBits const &(){return *this;}
-F_attachment_description& operator = (F_attachment_description flag_){flag = flag_.flag;return *this;}
-F_attachment_description operator | (B bit_){return flag | static_cast<int>(bit_);}
-F_attachment_description& operator |= (B bit_){flag |= static_cast<int>(bit_);return *this;}
-F_attachment_description operator | (F_attachment_description flag_){return flag | flag_.flag;}
-F_attachment_description& operator |= (F_attachment_description flag_){flag |= flag_.flag;return *this;}
-F_attachment_description operator & (F_attachment_description flag_){return flag & flag_.flag;}
-F_attachment_description& operator &= (F_attachment_description flag_){flag &= flag_.flag;return *this;}
-F_attachment_description operator ^ (F_attachment_description flag_){return flag ^ flag_.flag;}
-F_attachment_description& operator ^= (F_attachment_description flag_){flag ^= flag_.flag;return *this;}
-F_attachment_description operator ~ (){return all_flags().flag^flag;}
-bool operator !(){return !flag;}
-F_attachment_description& clear(){flag = 0;return *this;}
-F_attachment_description all_flags(){
-return b_may_alias;
-}
-F_attachment_description& on_may_alias(){ flag |= b_may_alias; return *this; }
-F_attachment_description& off_may_alias(){ flag &= ~b_may_alias; return *this; }
-VkAttachmentDescriptionFlagBits get_vkfb(){ return VkAttachmentDescriptionFlagBits(flag); }
-};
-F_attachment_description inline operator|(const F_attachment_description::B bit1_, const F_attachment_description::B bit2_){F_attachment_description flags(bit1_);return flags | bit2_;}
-bool inline operator==(const F_attachment_description f1_, const F_attachment_description f2_) { return f1_.flag == f2_.flag; }
-bool inline operator!=(const F_attachment_description f1_, const F_attachment_description f2_) { return f1_.flag != f2_.flag; }
+inline F_attachment_description operator&(const F_attachment_description f1_, const F_attachment_description f2_){return f1_.flag&f2_.flag;}
+inline F_attachment_description operator|(const F_attachment_description f1_, const F_attachment_description f2_){return f1_.flag|f2_.flag;}
+inline F_attachment_description operator^(const F_attachment_description f1_, const F_attachment_description f2_){return f1_.flag^f2_.flag;}
 /*	VkStencilFaceFlagBits*/
-class F_stencil_face {
-private:
-F_stencil_face(int flag_):flag(flag_){};
-public:
-uint32_t flag;
-enum B{
-/*Front face*/
-	b_front = VK_STENCIL_FACE_FRONT_BIT,
-/*Back face*/
-	b_back = VK_STENCIL_FACE_BACK_BIT,
-/*Front and back faces*/
-	b_vk_stencil_front_and_back = VK_STENCIL_FRONT_AND_BACK,
+union F_stencil_face {
+	uint32_t flag;
+	VkStencilFaceFlagBits vk_flag;
+	enum B{
+			/* Front face */
+		b_front = VK_STENCIL_FACE_FRONT_BIT,
+			/* Back face */
+		b_back = VK_STENCIL_FACE_BACK_BIT,
+			/* Front and back faces */
+		b_vk_stencil_front_and_back = VK_STENCIL_FRONT_AND_BACK,
+	};
+	F_stencil_face():flag(0){}
+	F_stencil_face(int i_):flag(static_cast<uint32_t>(i_)){}
+	F_stencil_face(uint32_t flag_):flag(flag_){}
+	F_stencil_face(const B flag_):flag(flag_){}
+	F_stencil_face(VkStencilFaceFlagBits flag_):vk_flag(flag_){}
+	operator uint32_t(){return flag;}
+	operator int(){return static_cast<int>(flag);}
+	operator VkStencilFaceFlagBits const&(){return vk_flag;}
+	operator bool(){return !!flag;}
+	F_stencil_face& operator=(const F_stencil_face flag_){flag=flag_.flag; return *this;}
+	F_stencil_face& operator|=(const F_stencil_face flag_){flag|=flag_.flag; return *this;}
+	F_stencil_face& operator&=(const F_stencil_face flag_){flag&=flag_.flag; return *this;}
+	F_stencil_face& operator^=(const F_stencil_face flag_){flag^=flag_.flag;return *this;}
+	F_stencil_face operator~(){return ~flag;}
+	bool operator==(const F_stencil_face flag_){return flag==flag_.flag;}
+	bool operator!=(const F_stencil_face flag_){return !(*this==flag_);}
+	F_stencil_face& clear(){flag = 0;return *this;}
+	F_stencil_face all_flags(){ return b_front | b_back | b_vk_stencil_front_and_back;}
+	F_stencil_face& on_front(){ flag |= b_front; return *this; }
+	F_stencil_face& off_front(){ flag &= ~b_front; return *this; }
+	F_stencil_face& on_back(){ flag |= b_back; return *this; }
+	F_stencil_face& off_back(){ flag &= ~b_back; return *this; }
+	F_stencil_face& on_vk_stencil_front_and_back(){ flag |= b_vk_stencil_front_and_back; return *this; }
+	F_stencil_face& off_vk_stencil_front_and_back(){ flag &= ~b_vk_stencil_front_and_back; return *this; }
 };
-F_stencil_face():flag(0){}
-F_stencil_face(B bits_):flag(static_cast<int>(bits_)){}
-F_stencil_face(F_stencil_face const& flag_):flag(flag_.flag){}
-F_stencil_face(std::initializer_list<B> bit_list){for (auto&& bit : bit_list){flag |= static_cast<int>(bit);}}
-operator VkStencilFaceFlagBits const &(){return *this;}
-F_stencil_face& operator = (F_stencil_face flag_){flag = flag_.flag;return *this;}
-F_stencil_face operator | (B bit_){return flag | static_cast<int>(bit_);}
-F_stencil_face& operator |= (B bit_){flag |= static_cast<int>(bit_);return *this;}
-F_stencil_face operator | (F_stencil_face flag_){return flag | flag_.flag;}
-F_stencil_face& operator |= (F_stencil_face flag_){flag |= flag_.flag;return *this;}
-F_stencil_face operator & (F_stencil_face flag_){return flag & flag_.flag;}
-F_stencil_face& operator &= (F_stencil_face flag_){flag &= flag_.flag;return *this;}
-F_stencil_face operator ^ (F_stencil_face flag_){return flag ^ flag_.flag;}
-F_stencil_face& operator ^= (F_stencil_face flag_){flag ^= flag_.flag;return *this;}
-F_stencil_face operator ~ (){return all_flags().flag^flag;}
-bool operator !(){return !flag;}
-F_stencil_face& clear(){flag = 0;return *this;}
-F_stencil_face all_flags(){
-return b_front | b_back | b_vk_stencil_front_and_back;
-}
-F_stencil_face& on_front(){ flag |= b_front; return *this; }
-F_stencil_face& off_front(){ flag &= ~b_front; return *this; }
-F_stencil_face& on_back(){ flag |= b_back; return *this; }
-F_stencil_face& off_back(){ flag &= ~b_back; return *this; }
-F_stencil_face& on_vk_stencil_front_and_back(){ flag |= b_vk_stencil_front_and_back; return *this; }
-F_stencil_face& off_vk_stencil_front_and_back(){ flag &= ~b_vk_stencil_front_and_back; return *this; }
-VkStencilFaceFlagBits get_vkfb(){ return VkStencilFaceFlagBits(flag); }
-};
-F_stencil_face inline operator|(const F_stencil_face::B bit1_, const F_stencil_face::B bit2_){F_stencil_face flags(bit1_);return flags | bit2_;}
-bool inline operator==(const F_stencil_face f1_, const F_stencil_face f2_) { return f1_.flag == f2_.flag; }
-bool inline operator!=(const F_stencil_face f1_, const F_stencil_face f2_) { return f1_.flag != f2_.flag; }
+inline F_stencil_face operator&(const F_stencil_face f1_, const F_stencil_face f2_){return f1_.flag&f2_.flag;}
+inline F_stencil_face operator|(const F_stencil_face f1_, const F_stencil_face f2_){return f1_.flag|f2_.flag;}
+inline F_stencil_face operator^(const F_stencil_face f1_, const F_stencil_face f2_){return f1_.flag^f2_.flag;}
 /*	VkDescriptorPoolCreateFlagBits*/
-class F_descriptor_pool_create {
-private:
-F_descriptor_pool_create(int flag_):flag(flag_){};
-public:
-uint32_t flag;
-enum B{
-/*Descriptor sets may be freed individually*/
-	b_free_descriptor_set = VK_DESCRIPTOR_POOL_CREATE_FREE_DESCRIPTOR_SET_BIT,
+union F_descriptor_pool_create {
+	uint32_t flag;
+	VkDescriptorPoolCreateFlagBits vk_flag;
+	enum B{
+			/* Descriptor sets may be freed individually */
+		b_free_descriptor_set = VK_DESCRIPTOR_POOL_CREATE_FREE_DESCRIPTOR_SET_BIT,
+	};
+	F_descriptor_pool_create():flag(0){}
+	F_descriptor_pool_create(int i_):flag(static_cast<uint32_t>(i_)){}
+	F_descriptor_pool_create(uint32_t flag_):flag(flag_){}
+	F_descriptor_pool_create(const B flag_):flag(flag_){}
+	F_descriptor_pool_create(VkDescriptorPoolCreateFlagBits flag_):vk_flag(flag_){}
+	operator uint32_t(){return flag;}
+	operator int(){return static_cast<int>(flag);}
+	operator VkDescriptorPoolCreateFlagBits const&(){return vk_flag;}
+	operator bool(){return !!flag;}
+	F_descriptor_pool_create& operator=(const F_descriptor_pool_create flag_){flag=flag_.flag; return *this;}
+	F_descriptor_pool_create& operator|=(const F_descriptor_pool_create flag_){flag|=flag_.flag; return *this;}
+	F_descriptor_pool_create& operator&=(const F_descriptor_pool_create flag_){flag&=flag_.flag; return *this;}
+	F_descriptor_pool_create& operator^=(const F_descriptor_pool_create flag_){flag^=flag_.flag;return *this;}
+	F_descriptor_pool_create operator~(){return ~flag;}
+	bool operator==(const F_descriptor_pool_create flag_){return flag==flag_.flag;}
+	bool operator!=(const F_descriptor_pool_create flag_){return !(*this==flag_);}
+	F_descriptor_pool_create& clear(){flag = 0;return *this;}
+	F_descriptor_pool_create all_flags(){ return b_free_descriptor_set;}
+	F_descriptor_pool_create& on_free_descriptor_set(){ flag |= b_free_descriptor_set; return *this; }
+	F_descriptor_pool_create& off_free_descriptor_set(){ flag &= ~b_free_descriptor_set; return *this; }
 };
-F_descriptor_pool_create():flag(0){}
-F_descriptor_pool_create(B bits_):flag(static_cast<int>(bits_)){}
-F_descriptor_pool_create(F_descriptor_pool_create const& flag_):flag(flag_.flag){}
-F_descriptor_pool_create(std::initializer_list<B> bit_list){for (auto&& bit : bit_list){flag |= static_cast<int>(bit);}}
-operator VkDescriptorPoolCreateFlagBits const &(){return *this;}
-F_descriptor_pool_create& operator = (F_descriptor_pool_create flag_){flag = flag_.flag;return *this;}
-F_descriptor_pool_create operator | (B bit_){return flag | static_cast<int>(bit_);}
-F_descriptor_pool_create& operator |= (B bit_){flag |= static_cast<int>(bit_);return *this;}
-F_descriptor_pool_create operator | (F_descriptor_pool_create flag_){return flag | flag_.flag;}
-F_descriptor_pool_create& operator |= (F_descriptor_pool_create flag_){flag |= flag_.flag;return *this;}
-F_descriptor_pool_create operator & (F_descriptor_pool_create flag_){return flag & flag_.flag;}
-F_descriptor_pool_create& operator &= (F_descriptor_pool_create flag_){flag &= flag_.flag;return *this;}
-F_descriptor_pool_create operator ^ (F_descriptor_pool_create flag_){return flag ^ flag_.flag;}
-F_descriptor_pool_create& operator ^= (F_descriptor_pool_create flag_){flag ^= flag_.flag;return *this;}
-F_descriptor_pool_create operator ~ (){return all_flags().flag^flag;}
-bool operator !(){return !flag;}
-F_descriptor_pool_create& clear(){flag = 0;return *this;}
-F_descriptor_pool_create all_flags(){
-return b_free_descriptor_set;
-}
-F_descriptor_pool_create& on_free_descriptor_set(){ flag |= b_free_descriptor_set; return *this; }
-F_descriptor_pool_create& off_free_descriptor_set(){ flag &= ~b_free_descriptor_set; return *this; }
-VkDescriptorPoolCreateFlagBits get_vkfb(){ return VkDescriptorPoolCreateFlagBits(flag); }
-};
-F_descriptor_pool_create inline operator|(const F_descriptor_pool_create::B bit1_, const F_descriptor_pool_create::B bit2_){F_descriptor_pool_create flags(bit1_);return flags | bit2_;}
-bool inline operator==(const F_descriptor_pool_create f1_, const F_descriptor_pool_create f2_) { return f1_.flag == f2_.flag; }
-bool inline operator!=(const F_descriptor_pool_create f1_, const F_descriptor_pool_create f2_) { return f1_.flag != f2_.flag; }
+inline F_descriptor_pool_create operator&(const F_descriptor_pool_create f1_, const F_descriptor_pool_create f2_){return f1_.flag&f2_.flag;}
+inline F_descriptor_pool_create operator|(const F_descriptor_pool_create f1_, const F_descriptor_pool_create f2_){return f1_.flag|f2_.flag;}
+inline F_descriptor_pool_create operator^(const F_descriptor_pool_create f1_, const F_descriptor_pool_create f2_){return f1_.flag^f2_.flag;}
 /*	VkDependencyFlagBits*/
-class F_dependency {
-private:
-F_dependency(int flag_):flag(flag_){};
-public:
-uint32_t flag;
-enum B{
-/*Dependency is per pixel region */
-	b_by_region = VK_DEPENDENCY_BY_REGION_BIT,
+union F_dependency {
+	uint32_t flag;
+	VkDependencyFlagBits vk_flag;
+	enum B{
+			/* Dependency is per pixel region  */
+		b_by_region = VK_DEPENDENCY_BY_REGION_BIT,
+	};
+	F_dependency():flag(0){}
+	F_dependency(int i_):flag(static_cast<uint32_t>(i_)){}
+	F_dependency(uint32_t flag_):flag(flag_){}
+	F_dependency(const B flag_):flag(flag_){}
+	F_dependency(VkDependencyFlagBits flag_):vk_flag(flag_){}
+	operator uint32_t(){return flag;}
+	operator int(){return static_cast<int>(flag);}
+	operator VkDependencyFlagBits const&(){return vk_flag;}
+	operator bool(){return !!flag;}
+	F_dependency& operator=(const F_dependency flag_){flag=flag_.flag; return *this;}
+	F_dependency& operator|=(const F_dependency flag_){flag|=flag_.flag; return *this;}
+	F_dependency& operator&=(const F_dependency flag_){flag&=flag_.flag; return *this;}
+	F_dependency& operator^=(const F_dependency flag_){flag^=flag_.flag;return *this;}
+	F_dependency operator~(){return ~flag;}
+	bool operator==(const F_dependency flag_){return flag==flag_.flag;}
+	bool operator!=(const F_dependency flag_){return !(*this==flag_);}
+	F_dependency& clear(){flag = 0;return *this;}
+	F_dependency all_flags(){ return b_by_region;}
+	F_dependency& on_by_region(){ flag |= b_by_region; return *this; }
+	F_dependency& off_by_region(){ flag &= ~b_by_region; return *this; }
 };
-F_dependency():flag(0){}
-F_dependency(B bits_):flag(static_cast<int>(bits_)){}
-F_dependency(F_dependency const& flag_):flag(flag_.flag){}
-F_dependency(std::initializer_list<B> bit_list){for (auto&& bit : bit_list){flag |= static_cast<int>(bit);}}
-operator VkDependencyFlagBits const &(){return *this;}
-F_dependency& operator = (F_dependency flag_){flag = flag_.flag;return *this;}
-F_dependency operator | (B bit_){return flag | static_cast<int>(bit_);}
-F_dependency& operator |= (B bit_){flag |= static_cast<int>(bit_);return *this;}
-F_dependency operator | (F_dependency flag_){return flag | flag_.flag;}
-F_dependency& operator |= (F_dependency flag_){flag |= flag_.flag;return *this;}
-F_dependency operator & (F_dependency flag_){return flag & flag_.flag;}
-F_dependency& operator &= (F_dependency flag_){flag &= flag_.flag;return *this;}
-F_dependency operator ^ (F_dependency flag_){return flag ^ flag_.flag;}
-F_dependency& operator ^= (F_dependency flag_){flag ^= flag_.flag;return *this;}
-F_dependency operator ~ (){return all_flags().flag^flag;}
-bool operator !(){return !flag;}
-F_dependency& clear(){flag = 0;return *this;}
-F_dependency all_flags(){
-return b_by_region;
-}
-F_dependency& on_by_region(){ flag |= b_by_region; return *this; }
-F_dependency& off_by_region(){ flag &= ~b_by_region; return *this; }
-VkDependencyFlagBits get_vkfb(){ return VkDependencyFlagBits(flag); }
-};
-F_dependency inline operator|(const F_dependency::B bit1_, const F_dependency::B bit2_){F_dependency flags(bit1_);return flags | bit2_;}
-bool inline operator==(const F_dependency f1_, const F_dependency f2_) { return f1_.flag == f2_.flag; }
-bool inline operator!=(const F_dependency f1_, const F_dependency f2_) { return f1_.flag != f2_.flag; }
+inline F_dependency operator&(const F_dependency f1_, const F_dependency f2_){return f1_.flag&f2_.flag;}
+inline F_dependency operator|(const F_dependency f1_, const F_dependency f2_){return f1_.flag|f2_.flag;}
+inline F_dependency operator^(const F_dependency f1_, const F_dependency f2_){return f1_.flag^f2_.flag;}
 /*	VkDisplayPlaneAlphaFlagBitsKHR*/
-class F_display_plane_alpha_KHR {
-private:
-F_display_plane_alpha_KHR(int flag_):flag(flag_){};
-public:
-uint32_t flag;
-enum B{
-	b_opaque_khr = VK_DISPLAY_PLANE_ALPHA_OPAQUE_BIT_KHR,
-	b_global_khr = VK_DISPLAY_PLANE_ALPHA_GLOBAL_BIT_KHR,
-	b_per_pixel_khr = VK_DISPLAY_PLANE_ALPHA_PER_PIXEL_BIT_KHR,
-	b_per_pixel_premultiplied_khr = VK_DISPLAY_PLANE_ALPHA_PER_PIXEL_PREMULTIPLIED_BIT_KHR,
+union F_display_plane_alpha_KHR {
+	uint32_t flag;
+	VkDisplayPlaneAlphaFlagBitsKHR vk_flag;
+	enum B{
+		b_opaque_khr = VK_DISPLAY_PLANE_ALPHA_OPAQUE_BIT_KHR,
+		b_global_khr = VK_DISPLAY_PLANE_ALPHA_GLOBAL_BIT_KHR,
+		b_per_pixel_khr = VK_DISPLAY_PLANE_ALPHA_PER_PIXEL_BIT_KHR,
+		b_per_pixel_premultiplied_khr = VK_DISPLAY_PLANE_ALPHA_PER_PIXEL_PREMULTIPLIED_BIT_KHR,
+	};
+	F_display_plane_alpha_KHR():flag(0){}
+	F_display_plane_alpha_KHR(int i_):flag(static_cast<uint32_t>(i_)){}
+	F_display_plane_alpha_KHR(uint32_t flag_):flag(flag_){}
+	F_display_plane_alpha_KHR(const B flag_):flag(flag_){}
+	F_display_plane_alpha_KHR(VkDisplayPlaneAlphaFlagBitsKHR flag_):vk_flag(flag_){}
+	operator uint32_t(){return flag;}
+	operator int(){return static_cast<int>(flag);}
+	operator VkDisplayPlaneAlphaFlagBitsKHR const&(){return vk_flag;}
+	operator bool(){return !!flag;}
+	F_display_plane_alpha_KHR& operator=(const F_display_plane_alpha_KHR flag_){flag=flag_.flag; return *this;}
+	F_display_plane_alpha_KHR& operator|=(const F_display_plane_alpha_KHR flag_){flag|=flag_.flag; return *this;}
+	F_display_plane_alpha_KHR& operator&=(const F_display_plane_alpha_KHR flag_){flag&=flag_.flag; return *this;}
+	F_display_plane_alpha_KHR& operator^=(const F_display_plane_alpha_KHR flag_){flag^=flag_.flag;return *this;}
+	F_display_plane_alpha_KHR operator~(){return ~flag;}
+	bool operator==(const F_display_plane_alpha_KHR flag_){return flag==flag_.flag;}
+	bool operator!=(const F_display_plane_alpha_KHR flag_){return !(*this==flag_);}
+	F_display_plane_alpha_KHR& clear(){flag = 0;return *this;}
+	F_display_plane_alpha_KHR all_flags(){ return b_opaque_khr | b_global_khr | b_per_pixel_khr | b_per_pixel_premultiplied_khr;}
+	F_display_plane_alpha_KHR& on_opaque_khr(){ flag |= b_opaque_khr; return *this; }
+	F_display_plane_alpha_KHR& off_opaque_khr(){ flag &= ~b_opaque_khr; return *this; }
+	F_display_plane_alpha_KHR& on_global_khr(){ flag |= b_global_khr; return *this; }
+	F_display_plane_alpha_KHR& off_global_khr(){ flag &= ~b_global_khr; return *this; }
+	F_display_plane_alpha_KHR& on_per_pixel_khr(){ flag |= b_per_pixel_khr; return *this; }
+	F_display_plane_alpha_KHR& off_per_pixel_khr(){ flag &= ~b_per_pixel_khr; return *this; }
+	F_display_plane_alpha_KHR& on_per_pixel_premultiplied_khr(){ flag |= b_per_pixel_premultiplied_khr; return *this; }
+	F_display_plane_alpha_KHR& off_per_pixel_premultiplied_khr(){ flag &= ~b_per_pixel_premultiplied_khr; return *this; }
 };
-F_display_plane_alpha_KHR():flag(0){}
-F_display_plane_alpha_KHR(B bits_):flag(static_cast<int>(bits_)){}
-F_display_plane_alpha_KHR(F_display_plane_alpha_KHR const& flag_):flag(flag_.flag){}
-F_display_plane_alpha_KHR(std::initializer_list<B> bit_list){for (auto&& bit : bit_list){flag |= static_cast<int>(bit);}}
-operator VkDisplayPlaneAlphaFlagBitsKHR const &(){return *this;}
-F_display_plane_alpha_KHR& operator = (F_display_plane_alpha_KHR flag_){flag = flag_.flag;return *this;}
-F_display_plane_alpha_KHR operator | (B bit_){return flag | static_cast<int>(bit_);}
-F_display_plane_alpha_KHR& operator |= (B bit_){flag |= static_cast<int>(bit_);return *this;}
-F_display_plane_alpha_KHR operator | (F_display_plane_alpha_KHR flag_){return flag | flag_.flag;}
-F_display_plane_alpha_KHR& operator |= (F_display_plane_alpha_KHR flag_){flag |= flag_.flag;return *this;}
-F_display_plane_alpha_KHR operator & (F_display_plane_alpha_KHR flag_){return flag & flag_.flag;}
-F_display_plane_alpha_KHR& operator &= (F_display_plane_alpha_KHR flag_){flag &= flag_.flag;return *this;}
-F_display_plane_alpha_KHR operator ^ (F_display_plane_alpha_KHR flag_){return flag ^ flag_.flag;}
-F_display_plane_alpha_KHR& operator ^= (F_display_plane_alpha_KHR flag_){flag ^= flag_.flag;return *this;}
-F_display_plane_alpha_KHR operator ~ (){return all_flags().flag^flag;}
-bool operator !(){return !flag;}
-F_display_plane_alpha_KHR& clear(){flag = 0;return *this;}
-F_display_plane_alpha_KHR all_flags(){
-return b_opaque_khr | b_global_khr | b_per_pixel_khr | b_per_pixel_premultiplied_khr;
-}
-F_display_plane_alpha_KHR& on_opaque_khr(){ flag |= b_opaque_khr; return *this; }
-F_display_plane_alpha_KHR& off_opaque_khr(){ flag &= ~b_opaque_khr; return *this; }
-F_display_plane_alpha_KHR& on_global_khr(){ flag |= b_global_khr; return *this; }
-F_display_plane_alpha_KHR& off_global_khr(){ flag &= ~b_global_khr; return *this; }
-F_display_plane_alpha_KHR& on_per_pixel_khr(){ flag |= b_per_pixel_khr; return *this; }
-F_display_plane_alpha_KHR& off_per_pixel_khr(){ flag &= ~b_per_pixel_khr; return *this; }
-F_display_plane_alpha_KHR& on_per_pixel_premultiplied_khr(){ flag |= b_per_pixel_premultiplied_khr; return *this; }
-F_display_plane_alpha_KHR& off_per_pixel_premultiplied_khr(){ flag &= ~b_per_pixel_premultiplied_khr; return *this; }
-VkDisplayPlaneAlphaFlagBitsKHR get_vkfb(){ return VkDisplayPlaneAlphaFlagBitsKHR(flag); }
-};
-F_display_plane_alpha_KHR inline operator|(const F_display_plane_alpha_KHR::B bit1_, const F_display_plane_alpha_KHR::B bit2_){F_display_plane_alpha_KHR flags(bit1_);return flags | bit2_;}
-bool inline operator==(const F_display_plane_alpha_KHR f1_, const F_display_plane_alpha_KHR f2_) { return f1_.flag == f2_.flag; }
-bool inline operator!=(const F_display_plane_alpha_KHR f1_, const F_display_plane_alpha_KHR f2_) { return f1_.flag != f2_.flag; }
+inline F_display_plane_alpha_KHR operator&(const F_display_plane_alpha_KHR f1_, const F_display_plane_alpha_KHR f2_){return f1_.flag&f2_.flag;}
+inline F_display_plane_alpha_KHR operator|(const F_display_plane_alpha_KHR f1_, const F_display_plane_alpha_KHR f2_){return f1_.flag|f2_.flag;}
+inline F_display_plane_alpha_KHR operator^(const F_display_plane_alpha_KHR f1_, const F_display_plane_alpha_KHR f2_){return f1_.flag^f2_.flag;}
 /*	VkCompositeAlphaFlagBitsKHR*/
-class F_composite_alpha_KHR {
-private:
-F_composite_alpha_KHR(int flag_):flag(flag_){};
-public:
-uint32_t flag;
-enum B{
-	b_opaque_khr = VK_COMPOSITE_ALPHA_OPAQUE_BIT_KHR,
-	b_pre_multiplied_khr = VK_COMPOSITE_ALPHA_PRE_MULTIPLIED_BIT_KHR,
-	b_post_multiplied_khr = VK_COMPOSITE_ALPHA_POST_MULTIPLIED_BIT_KHR,
-	b_inherit_khr = VK_COMPOSITE_ALPHA_INHERIT_BIT_KHR,
+union F_composite_alpha_KHR {
+	uint32_t flag;
+	VkCompositeAlphaFlagBitsKHR vk_flag;
+	enum B{
+		b_opaque_khr = VK_COMPOSITE_ALPHA_OPAQUE_BIT_KHR,
+		b_pre_multiplied_khr = VK_COMPOSITE_ALPHA_PRE_MULTIPLIED_BIT_KHR,
+		b_post_multiplied_khr = VK_COMPOSITE_ALPHA_POST_MULTIPLIED_BIT_KHR,
+		b_inherit_khr = VK_COMPOSITE_ALPHA_INHERIT_BIT_KHR,
+	};
+	F_composite_alpha_KHR():flag(0){}
+	F_composite_alpha_KHR(int i_):flag(static_cast<uint32_t>(i_)){}
+	F_composite_alpha_KHR(uint32_t flag_):flag(flag_){}
+	F_composite_alpha_KHR(const B flag_):flag(flag_){}
+	F_composite_alpha_KHR(VkCompositeAlphaFlagBitsKHR flag_):vk_flag(flag_){}
+	operator uint32_t(){return flag;}
+	operator int(){return static_cast<int>(flag);}
+	operator VkCompositeAlphaFlagBitsKHR const&(){return vk_flag;}
+	operator bool(){return !!flag;}
+	F_composite_alpha_KHR& operator=(const F_composite_alpha_KHR flag_){flag=flag_.flag; return *this;}
+	F_composite_alpha_KHR& operator|=(const F_composite_alpha_KHR flag_){flag|=flag_.flag; return *this;}
+	F_composite_alpha_KHR& operator&=(const F_composite_alpha_KHR flag_){flag&=flag_.flag; return *this;}
+	F_composite_alpha_KHR& operator^=(const F_composite_alpha_KHR flag_){flag^=flag_.flag;return *this;}
+	F_composite_alpha_KHR operator~(){return ~flag;}
+	bool operator==(const F_composite_alpha_KHR flag_){return flag==flag_.flag;}
+	bool operator!=(const F_composite_alpha_KHR flag_){return !(*this==flag_);}
+	F_composite_alpha_KHR& clear(){flag = 0;return *this;}
+	F_composite_alpha_KHR all_flags(){ return b_opaque_khr | b_pre_multiplied_khr | b_post_multiplied_khr | b_inherit_khr;}
+	F_composite_alpha_KHR& on_opaque_khr(){ flag |= b_opaque_khr; return *this; }
+	F_composite_alpha_KHR& off_opaque_khr(){ flag &= ~b_opaque_khr; return *this; }
+	F_composite_alpha_KHR& on_pre_multiplied_khr(){ flag |= b_pre_multiplied_khr; return *this; }
+	F_composite_alpha_KHR& off_pre_multiplied_khr(){ flag &= ~b_pre_multiplied_khr; return *this; }
+	F_composite_alpha_KHR& on_post_multiplied_khr(){ flag |= b_post_multiplied_khr; return *this; }
+	F_composite_alpha_KHR& off_post_multiplied_khr(){ flag &= ~b_post_multiplied_khr; return *this; }
+	F_composite_alpha_KHR& on_inherit_khr(){ flag |= b_inherit_khr; return *this; }
+	F_composite_alpha_KHR& off_inherit_khr(){ flag &= ~b_inherit_khr; return *this; }
 };
-F_composite_alpha_KHR():flag(0){}
-F_composite_alpha_KHR(B bits_):flag(static_cast<int>(bits_)){}
-F_composite_alpha_KHR(F_composite_alpha_KHR const& flag_):flag(flag_.flag){}
-F_composite_alpha_KHR(std::initializer_list<B> bit_list){for (auto&& bit : bit_list){flag |= static_cast<int>(bit);}}
-operator VkCompositeAlphaFlagBitsKHR const &(){return *this;}
-F_composite_alpha_KHR& operator = (F_composite_alpha_KHR flag_){flag = flag_.flag;return *this;}
-F_composite_alpha_KHR operator | (B bit_){return flag | static_cast<int>(bit_);}
-F_composite_alpha_KHR& operator |= (B bit_){flag |= static_cast<int>(bit_);return *this;}
-F_composite_alpha_KHR operator | (F_composite_alpha_KHR flag_){return flag | flag_.flag;}
-F_composite_alpha_KHR& operator |= (F_composite_alpha_KHR flag_){flag |= flag_.flag;return *this;}
-F_composite_alpha_KHR operator & (F_composite_alpha_KHR flag_){return flag & flag_.flag;}
-F_composite_alpha_KHR& operator &= (F_composite_alpha_KHR flag_){flag &= flag_.flag;return *this;}
-F_composite_alpha_KHR operator ^ (F_composite_alpha_KHR flag_){return flag ^ flag_.flag;}
-F_composite_alpha_KHR& operator ^= (F_composite_alpha_KHR flag_){flag ^= flag_.flag;return *this;}
-F_composite_alpha_KHR operator ~ (){return all_flags().flag^flag;}
-bool operator !(){return !flag;}
-F_composite_alpha_KHR& clear(){flag = 0;return *this;}
-F_composite_alpha_KHR all_flags(){
-return b_opaque_khr | b_pre_multiplied_khr | b_post_multiplied_khr | b_inherit_khr;
-}
-F_composite_alpha_KHR& on_opaque_khr(){ flag |= b_opaque_khr; return *this; }
-F_composite_alpha_KHR& off_opaque_khr(){ flag &= ~b_opaque_khr; return *this; }
-F_composite_alpha_KHR& on_pre_multiplied_khr(){ flag |= b_pre_multiplied_khr; return *this; }
-F_composite_alpha_KHR& off_pre_multiplied_khr(){ flag &= ~b_pre_multiplied_khr; return *this; }
-F_composite_alpha_KHR& on_post_multiplied_khr(){ flag |= b_post_multiplied_khr; return *this; }
-F_composite_alpha_KHR& off_post_multiplied_khr(){ flag &= ~b_post_multiplied_khr; return *this; }
-F_composite_alpha_KHR& on_inherit_khr(){ flag |= b_inherit_khr; return *this; }
-F_composite_alpha_KHR& off_inherit_khr(){ flag &= ~b_inherit_khr; return *this; }
-VkCompositeAlphaFlagBitsKHR get_vkfb(){ return VkCompositeAlphaFlagBitsKHR(flag); }
-};
-F_composite_alpha_KHR inline operator|(const F_composite_alpha_KHR::B bit1_, const F_composite_alpha_KHR::B bit2_){F_composite_alpha_KHR flags(bit1_);return flags | bit2_;}
-bool inline operator==(const F_composite_alpha_KHR f1_, const F_composite_alpha_KHR f2_) { return f1_.flag == f2_.flag; }
-bool inline operator!=(const F_composite_alpha_KHR f1_, const F_composite_alpha_KHR f2_) { return f1_.flag != f2_.flag; }
+inline F_composite_alpha_KHR operator&(const F_composite_alpha_KHR f1_, const F_composite_alpha_KHR f2_){return f1_.flag&f2_.flag;}
+inline F_composite_alpha_KHR operator|(const F_composite_alpha_KHR f1_, const F_composite_alpha_KHR f2_){return f1_.flag|f2_.flag;}
+inline F_composite_alpha_KHR operator^(const F_composite_alpha_KHR f1_, const F_composite_alpha_KHR f2_){return f1_.flag^f2_.flag;}
 /*	VkSurfaceTransformFlagBitsKHR*/
-class F_surface_transform_KHR {
-private:
-F_surface_transform_KHR(int flag_):flag(flag_){};
-public:
-uint32_t flag;
-enum B{
-	b_identity_khr = VK_SURFACE_TRANSFORM_IDENTITY_BIT_KHR,
-	b_rotate_90_khr = VK_SURFACE_TRANSFORM_ROTATE_90_BIT_KHR,
-	b_rotate_180_khr = VK_SURFACE_TRANSFORM_ROTATE_180_BIT_KHR,
-	b_rotate_270_khr = VK_SURFACE_TRANSFORM_ROTATE_270_BIT_KHR,
-	b_horizontal_mirror_khr = VK_SURFACE_TRANSFORM_HORIZONTAL_MIRROR_BIT_KHR,
-	b_horizontal_mirror_rotate_90_khr = VK_SURFACE_TRANSFORM_HORIZONTAL_MIRROR_ROTATE_90_BIT_KHR,
-	b_horizontal_mirror_rotate_180_khr = VK_SURFACE_TRANSFORM_HORIZONTAL_MIRROR_ROTATE_180_BIT_KHR,
-	b_horizontal_mirror_rotate_270_khr = VK_SURFACE_TRANSFORM_HORIZONTAL_MIRROR_ROTATE_270_BIT_KHR,
-	b_inherit_khr = VK_SURFACE_TRANSFORM_INHERIT_BIT_KHR,
+union F_surface_transform_KHR {
+	uint32_t flag;
+	VkSurfaceTransformFlagBitsKHR vk_flag;
+	enum B{
+		b_identity_khr = VK_SURFACE_TRANSFORM_IDENTITY_BIT_KHR,
+		b_rotate_90_khr = VK_SURFACE_TRANSFORM_ROTATE_90_BIT_KHR,
+		b_rotate_180_khr = VK_SURFACE_TRANSFORM_ROTATE_180_BIT_KHR,
+		b_rotate_270_khr = VK_SURFACE_TRANSFORM_ROTATE_270_BIT_KHR,
+		b_horizontal_mirror_khr = VK_SURFACE_TRANSFORM_HORIZONTAL_MIRROR_BIT_KHR,
+		b_horizontal_mirror_rotate_90_khr = VK_SURFACE_TRANSFORM_HORIZONTAL_MIRROR_ROTATE_90_BIT_KHR,
+		b_horizontal_mirror_rotate_180_khr = VK_SURFACE_TRANSFORM_HORIZONTAL_MIRROR_ROTATE_180_BIT_KHR,
+		b_horizontal_mirror_rotate_270_khr = VK_SURFACE_TRANSFORM_HORIZONTAL_MIRROR_ROTATE_270_BIT_KHR,
+		b_inherit_khr = VK_SURFACE_TRANSFORM_INHERIT_BIT_KHR,
+	};
+	F_surface_transform_KHR():flag(0){}
+	F_surface_transform_KHR(int i_):flag(static_cast<uint32_t>(i_)){}
+	F_surface_transform_KHR(uint32_t flag_):flag(flag_){}
+	F_surface_transform_KHR(const B flag_):flag(flag_){}
+	F_surface_transform_KHR(VkSurfaceTransformFlagBitsKHR flag_):vk_flag(flag_){}
+	operator uint32_t(){return flag;}
+	operator int(){return static_cast<int>(flag);}
+	operator VkSurfaceTransformFlagBitsKHR const&(){return vk_flag;}
+	operator bool(){return !!flag;}
+	F_surface_transform_KHR& operator=(const F_surface_transform_KHR flag_){flag=flag_.flag; return *this;}
+	F_surface_transform_KHR& operator|=(const F_surface_transform_KHR flag_){flag|=flag_.flag; return *this;}
+	F_surface_transform_KHR& operator&=(const F_surface_transform_KHR flag_){flag&=flag_.flag; return *this;}
+	F_surface_transform_KHR& operator^=(const F_surface_transform_KHR flag_){flag^=flag_.flag;return *this;}
+	F_surface_transform_KHR operator~(){return ~flag;}
+	bool operator==(const F_surface_transform_KHR flag_){return flag==flag_.flag;}
+	bool operator!=(const F_surface_transform_KHR flag_){return !(*this==flag_);}
+	F_surface_transform_KHR& clear(){flag = 0;return *this;}
+	F_surface_transform_KHR all_flags(){ return b_identity_khr | b_rotate_90_khr | b_rotate_180_khr | b_rotate_270_khr | b_horizontal_mirror_khr | b_horizontal_mirror_rotate_90_khr | b_horizontal_mirror_rotate_180_khr | b_horizontal_mirror_rotate_270_khr | b_inherit_khr;}
+	F_surface_transform_KHR& on_identity_khr(){ flag |= b_identity_khr; return *this; }
+	F_surface_transform_KHR& off_identity_khr(){ flag &= ~b_identity_khr; return *this; }
+	F_surface_transform_KHR& on_rotate_90_khr(){ flag |= b_rotate_90_khr; return *this; }
+	F_surface_transform_KHR& off_rotate_90_khr(){ flag &= ~b_rotate_90_khr; return *this; }
+	F_surface_transform_KHR& on_rotate_180_khr(){ flag |= b_rotate_180_khr; return *this; }
+	F_surface_transform_KHR& off_rotate_180_khr(){ flag &= ~b_rotate_180_khr; return *this; }
+	F_surface_transform_KHR& on_rotate_270_khr(){ flag |= b_rotate_270_khr; return *this; }
+	F_surface_transform_KHR& off_rotate_270_khr(){ flag &= ~b_rotate_270_khr; return *this; }
+	F_surface_transform_KHR& on_horizontal_mirror_khr(){ flag |= b_horizontal_mirror_khr; return *this; }
+	F_surface_transform_KHR& off_horizontal_mirror_khr(){ flag &= ~b_horizontal_mirror_khr; return *this; }
+	F_surface_transform_KHR& on_horizontal_mirror_rotate_90_khr(){ flag |= b_horizontal_mirror_rotate_90_khr; return *this; }
+	F_surface_transform_KHR& off_horizontal_mirror_rotate_90_khr(){ flag &= ~b_horizontal_mirror_rotate_90_khr; return *this; }
+	F_surface_transform_KHR& on_horizontal_mirror_rotate_180_khr(){ flag |= b_horizontal_mirror_rotate_180_khr; return *this; }
+	F_surface_transform_KHR& off_horizontal_mirror_rotate_180_khr(){ flag &= ~b_horizontal_mirror_rotate_180_khr; return *this; }
+	F_surface_transform_KHR& on_horizontal_mirror_rotate_270_khr(){ flag |= b_horizontal_mirror_rotate_270_khr; return *this; }
+	F_surface_transform_KHR& off_horizontal_mirror_rotate_270_khr(){ flag &= ~b_horizontal_mirror_rotate_270_khr; return *this; }
+	F_surface_transform_KHR& on_inherit_khr(){ flag |= b_inherit_khr; return *this; }
+	F_surface_transform_KHR& off_inherit_khr(){ flag &= ~b_inherit_khr; return *this; }
 };
-F_surface_transform_KHR():flag(0){}
-F_surface_transform_KHR(B bits_):flag(static_cast<int>(bits_)){}
-F_surface_transform_KHR(F_surface_transform_KHR const& flag_):flag(flag_.flag){}
-F_surface_transform_KHR(std::initializer_list<B> bit_list){for (auto&& bit : bit_list){flag |= static_cast<int>(bit);}}
-operator VkSurfaceTransformFlagBitsKHR const &(){return *this;}
-F_surface_transform_KHR& operator = (F_surface_transform_KHR flag_){flag = flag_.flag;return *this;}
-F_surface_transform_KHR operator | (B bit_){return flag | static_cast<int>(bit_);}
-F_surface_transform_KHR& operator |= (B bit_){flag |= static_cast<int>(bit_);return *this;}
-F_surface_transform_KHR operator | (F_surface_transform_KHR flag_){return flag | flag_.flag;}
-F_surface_transform_KHR& operator |= (F_surface_transform_KHR flag_){flag |= flag_.flag;return *this;}
-F_surface_transform_KHR operator & (F_surface_transform_KHR flag_){return flag & flag_.flag;}
-F_surface_transform_KHR& operator &= (F_surface_transform_KHR flag_){flag &= flag_.flag;return *this;}
-F_surface_transform_KHR operator ^ (F_surface_transform_KHR flag_){return flag ^ flag_.flag;}
-F_surface_transform_KHR& operator ^= (F_surface_transform_KHR flag_){flag ^= flag_.flag;return *this;}
-F_surface_transform_KHR operator ~ (){return all_flags().flag^flag;}
-bool operator !(){return !flag;}
-F_surface_transform_KHR& clear(){flag = 0;return *this;}
-F_surface_transform_KHR all_flags(){
-return b_identity_khr | b_rotate_90_khr | b_rotate_180_khr | b_rotate_270_khr | b_horizontal_mirror_khr | b_horizontal_mirror_rotate_90_khr | b_horizontal_mirror_rotate_180_khr | b_horizontal_mirror_rotate_270_khr | b_inherit_khr;
-}
-F_surface_transform_KHR& on_identity_khr(){ flag |= b_identity_khr; return *this; }
-F_surface_transform_KHR& off_identity_khr(){ flag &= ~b_identity_khr; return *this; }
-F_surface_transform_KHR& on_rotate_90_khr(){ flag |= b_rotate_90_khr; return *this; }
-F_surface_transform_KHR& off_rotate_90_khr(){ flag &= ~b_rotate_90_khr; return *this; }
-F_surface_transform_KHR& on_rotate_180_khr(){ flag |= b_rotate_180_khr; return *this; }
-F_surface_transform_KHR& off_rotate_180_khr(){ flag &= ~b_rotate_180_khr; return *this; }
-F_surface_transform_KHR& on_rotate_270_khr(){ flag |= b_rotate_270_khr; return *this; }
-F_surface_transform_KHR& off_rotate_270_khr(){ flag &= ~b_rotate_270_khr; return *this; }
-F_surface_transform_KHR& on_horizontal_mirror_khr(){ flag |= b_horizontal_mirror_khr; return *this; }
-F_surface_transform_KHR& off_horizontal_mirror_khr(){ flag &= ~b_horizontal_mirror_khr; return *this; }
-F_surface_transform_KHR& on_horizontal_mirror_rotate_90_khr(){ flag |= b_horizontal_mirror_rotate_90_khr; return *this; }
-F_surface_transform_KHR& off_horizontal_mirror_rotate_90_khr(){ flag &= ~b_horizontal_mirror_rotate_90_khr; return *this; }
-F_surface_transform_KHR& on_horizontal_mirror_rotate_180_khr(){ flag |= b_horizontal_mirror_rotate_180_khr; return *this; }
-F_surface_transform_KHR& off_horizontal_mirror_rotate_180_khr(){ flag &= ~b_horizontal_mirror_rotate_180_khr; return *this; }
-F_surface_transform_KHR& on_horizontal_mirror_rotate_270_khr(){ flag |= b_horizontal_mirror_rotate_270_khr; return *this; }
-F_surface_transform_KHR& off_horizontal_mirror_rotate_270_khr(){ flag &= ~b_horizontal_mirror_rotate_270_khr; return *this; }
-F_surface_transform_KHR& on_inherit_khr(){ flag |= b_inherit_khr; return *this; }
-F_surface_transform_KHR& off_inherit_khr(){ flag &= ~b_inherit_khr; return *this; }
-VkSurfaceTransformFlagBitsKHR get_vkfb(){ return VkSurfaceTransformFlagBitsKHR(flag); }
-};
-F_surface_transform_KHR inline operator|(const F_surface_transform_KHR::B bit1_, const F_surface_transform_KHR::B bit2_){F_surface_transform_KHR flags(bit1_);return flags | bit2_;}
-bool inline operator==(const F_surface_transform_KHR f1_, const F_surface_transform_KHR f2_) { return f1_.flag == f2_.flag; }
-bool inline operator!=(const F_surface_transform_KHR f1_, const F_surface_transform_KHR f2_) { return f1_.flag != f2_.flag; }
+inline F_surface_transform_KHR operator&(const F_surface_transform_KHR f1_, const F_surface_transform_KHR f2_){return f1_.flag&f2_.flag;}
+inline F_surface_transform_KHR operator|(const F_surface_transform_KHR f1_, const F_surface_transform_KHR f2_){return f1_.flag|f2_.flag;}
+inline F_surface_transform_KHR operator^(const F_surface_transform_KHR f1_, const F_surface_transform_KHR f2_){return f1_.flag^f2_.flag;}
 /*	VkDebugReportFlagBitsEXT*/
-class F_debug_report_EXT {
-private:
-F_debug_report_EXT(int flag_):flag(flag_){};
-public:
-uint32_t flag;
-enum B{
-	b_information_ext = VK_DEBUG_REPORT_INFORMATION_BIT_EXT,
-	b_warning_ext = VK_DEBUG_REPORT_WARNING_BIT_EXT,
-	b_performance_warning_ext = VK_DEBUG_REPORT_PERFORMANCE_WARNING_BIT_EXT,
-	b_error_ext = VK_DEBUG_REPORT_ERROR_BIT_EXT,
-	b_debug_ext = VK_DEBUG_REPORT_DEBUG_BIT_EXT,
+union F_debug_report_EXT {
+	uint32_t flag;
+	VkDebugReportFlagBitsEXT vk_flag;
+	enum B{
+		b_information_ext = VK_DEBUG_REPORT_INFORMATION_BIT_EXT,
+		b_warning_ext = VK_DEBUG_REPORT_WARNING_BIT_EXT,
+		b_performance_warning_ext = VK_DEBUG_REPORT_PERFORMANCE_WARNING_BIT_EXT,
+		b_error_ext = VK_DEBUG_REPORT_ERROR_BIT_EXT,
+		b_debug_ext = VK_DEBUG_REPORT_DEBUG_BIT_EXT,
+	};
+	F_debug_report_EXT():flag(0){}
+	F_debug_report_EXT(int i_):flag(static_cast<uint32_t>(i_)){}
+	F_debug_report_EXT(uint32_t flag_):flag(flag_){}
+	F_debug_report_EXT(const B flag_):flag(flag_){}
+	F_debug_report_EXT(VkDebugReportFlagBitsEXT flag_):vk_flag(flag_){}
+	operator uint32_t(){return flag;}
+	operator int(){return static_cast<int>(flag);}
+	operator VkDebugReportFlagBitsEXT const&(){return vk_flag;}
+	operator bool(){return !!flag;}
+	F_debug_report_EXT& operator=(const F_debug_report_EXT flag_){flag=flag_.flag; return *this;}
+	F_debug_report_EXT& operator|=(const F_debug_report_EXT flag_){flag|=flag_.flag; return *this;}
+	F_debug_report_EXT& operator&=(const F_debug_report_EXT flag_){flag&=flag_.flag; return *this;}
+	F_debug_report_EXT& operator^=(const F_debug_report_EXT flag_){flag^=flag_.flag;return *this;}
+	F_debug_report_EXT operator~(){return ~flag;}
+	bool operator==(const F_debug_report_EXT flag_){return flag==flag_.flag;}
+	bool operator!=(const F_debug_report_EXT flag_){return !(*this==flag_);}
+	F_debug_report_EXT& clear(){flag = 0;return *this;}
+	F_debug_report_EXT all_flags(){ return b_information_ext | b_warning_ext | b_performance_warning_ext | b_error_ext | b_debug_ext;}
+	F_debug_report_EXT& on_information_ext(){ flag |= b_information_ext; return *this; }
+	F_debug_report_EXT& off_information_ext(){ flag &= ~b_information_ext; return *this; }
+	F_debug_report_EXT& on_warning_ext(){ flag |= b_warning_ext; return *this; }
+	F_debug_report_EXT& off_warning_ext(){ flag &= ~b_warning_ext; return *this; }
+	F_debug_report_EXT& on_performance_warning_ext(){ flag |= b_performance_warning_ext; return *this; }
+	F_debug_report_EXT& off_performance_warning_ext(){ flag &= ~b_performance_warning_ext; return *this; }
+	F_debug_report_EXT& on_error_ext(){ flag |= b_error_ext; return *this; }
+	F_debug_report_EXT& off_error_ext(){ flag &= ~b_error_ext; return *this; }
+	F_debug_report_EXT& on_debug_ext(){ flag |= b_debug_ext; return *this; }
+	F_debug_report_EXT& off_debug_ext(){ flag &= ~b_debug_ext; return *this; }
 };
-F_debug_report_EXT():flag(0){}
-F_debug_report_EXT(B bits_):flag(static_cast<int>(bits_)){}
-F_debug_report_EXT(F_debug_report_EXT const& flag_):flag(flag_.flag){}
-F_debug_report_EXT(std::initializer_list<B> bit_list){for (auto&& bit : bit_list){flag |= static_cast<int>(bit);}}
-operator VkDebugReportFlagBitsEXT const &(){return *this;}
-F_debug_report_EXT& operator = (F_debug_report_EXT flag_){flag = flag_.flag;return *this;}
-F_debug_report_EXT operator | (B bit_){return flag | static_cast<int>(bit_);}
-F_debug_report_EXT& operator |= (B bit_){flag |= static_cast<int>(bit_);return *this;}
-F_debug_report_EXT operator | (F_debug_report_EXT flag_){return flag | flag_.flag;}
-F_debug_report_EXT& operator |= (F_debug_report_EXT flag_){flag |= flag_.flag;return *this;}
-F_debug_report_EXT operator & (F_debug_report_EXT flag_){return flag & flag_.flag;}
-F_debug_report_EXT& operator &= (F_debug_report_EXT flag_){flag &= flag_.flag;return *this;}
-F_debug_report_EXT operator ^ (F_debug_report_EXT flag_){return flag ^ flag_.flag;}
-F_debug_report_EXT& operator ^= (F_debug_report_EXT flag_){flag ^= flag_.flag;return *this;}
-F_debug_report_EXT operator ~ (){return all_flags().flag^flag;}
-bool operator !(){return !flag;}
-F_debug_report_EXT& clear(){flag = 0;return *this;}
-F_debug_report_EXT all_flags(){
-return b_information_ext | b_warning_ext | b_performance_warning_ext | b_error_ext | b_debug_ext;
-}
-F_debug_report_EXT& on_information_ext(){ flag |= b_information_ext; return *this; }
-F_debug_report_EXT& off_information_ext(){ flag &= ~b_information_ext; return *this; }
-F_debug_report_EXT& on_warning_ext(){ flag |= b_warning_ext; return *this; }
-F_debug_report_EXT& off_warning_ext(){ flag &= ~b_warning_ext; return *this; }
-F_debug_report_EXT& on_performance_warning_ext(){ flag |= b_performance_warning_ext; return *this; }
-F_debug_report_EXT& off_performance_warning_ext(){ flag &= ~b_performance_warning_ext; return *this; }
-F_debug_report_EXT& on_error_ext(){ flag |= b_error_ext; return *this; }
-F_debug_report_EXT& off_error_ext(){ flag &= ~b_error_ext; return *this; }
-F_debug_report_EXT& on_debug_ext(){ flag |= b_debug_ext; return *this; }
-F_debug_report_EXT& off_debug_ext(){ flag &= ~b_debug_ext; return *this; }
-VkDebugReportFlagBitsEXT get_vkfb(){ return VkDebugReportFlagBitsEXT(flag); }
-};
-F_debug_report_EXT inline operator|(const F_debug_report_EXT::B bit1_, const F_debug_report_EXT::B bit2_){F_debug_report_EXT flags(bit1_);return flags | bit2_;}
-bool inline operator==(const F_debug_report_EXT f1_, const F_debug_report_EXT f2_) { return f1_.flag == f2_.flag; }
-bool inline operator!=(const F_debug_report_EXT f1_, const F_debug_report_EXT f2_) { return f1_.flag != f2_.flag; }
+inline F_debug_report_EXT operator&(const F_debug_report_EXT f1_, const F_debug_report_EXT f2_){return f1_.flag&f2_.flag;}
+inline F_debug_report_EXT operator|(const F_debug_report_EXT f1_, const F_debug_report_EXT f2_){return f1_.flag|f2_.flag;}
+inline F_debug_report_EXT operator^(const F_debug_report_EXT f1_, const F_debug_report_EXT f2_){return f1_.flag^f2_.flag;}
 /*	VkExternalMemoryHandleTypeFlagBitsNV*/
-class F_external_memory_handle_type_NV {
-private:
-F_external_memory_handle_type_NV(int flag_):flag(flag_){};
-public:
-uint32_t flag;
-enum B{
-	b_opaque_win32_nv = VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_BIT_NV,
-	b_opaque_win32_kmt_nv = VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT_NV,
-	b_d3d11_image_nv = VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_IMAGE_BIT_NV,
-	b_d3d11_image_kmt_nv = VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_IMAGE_KMT_BIT_NV,
+union F_external_memory_handle_type_NV {
+	uint32_t flag;
+	VkExternalMemoryHandleTypeFlagBitsNV vk_flag;
+	enum B{
+		b_opaque_win32_nv = VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_BIT_NV,
+		b_opaque_win32_kmt_nv = VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT_NV,
+		b_d3d11_image_nv = VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_IMAGE_BIT_NV,
+		b_d3d11_image_kmt_nv = VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_IMAGE_KMT_BIT_NV,
+	};
+	F_external_memory_handle_type_NV():flag(0){}
+	F_external_memory_handle_type_NV(int i_):flag(static_cast<uint32_t>(i_)){}
+	F_external_memory_handle_type_NV(uint32_t flag_):flag(flag_){}
+	F_external_memory_handle_type_NV(const B flag_):flag(flag_){}
+	F_external_memory_handle_type_NV(VkExternalMemoryHandleTypeFlagBitsNV flag_):vk_flag(flag_){}
+	operator uint32_t(){return flag;}
+	operator int(){return static_cast<int>(flag);}
+	operator VkExternalMemoryHandleTypeFlagBitsNV const&(){return vk_flag;}
+	operator bool(){return !!flag;}
+	F_external_memory_handle_type_NV& operator=(const F_external_memory_handle_type_NV flag_){flag=flag_.flag; return *this;}
+	F_external_memory_handle_type_NV& operator|=(const F_external_memory_handle_type_NV flag_){flag|=flag_.flag; return *this;}
+	F_external_memory_handle_type_NV& operator&=(const F_external_memory_handle_type_NV flag_){flag&=flag_.flag; return *this;}
+	F_external_memory_handle_type_NV& operator^=(const F_external_memory_handle_type_NV flag_){flag^=flag_.flag;return *this;}
+	F_external_memory_handle_type_NV operator~(){return ~flag;}
+	bool operator==(const F_external_memory_handle_type_NV flag_){return flag==flag_.flag;}
+	bool operator!=(const F_external_memory_handle_type_NV flag_){return !(*this==flag_);}
+	F_external_memory_handle_type_NV& clear(){flag = 0;return *this;}
+	F_external_memory_handle_type_NV all_flags(){ return b_opaque_win32_nv | b_opaque_win32_kmt_nv | b_d3d11_image_nv | b_d3d11_image_kmt_nv;}
+	F_external_memory_handle_type_NV& on_opaque_win32_nv(){ flag |= b_opaque_win32_nv; return *this; }
+	F_external_memory_handle_type_NV& off_opaque_win32_nv(){ flag &= ~b_opaque_win32_nv; return *this; }
+	F_external_memory_handle_type_NV& on_opaque_win32_kmt_nv(){ flag |= b_opaque_win32_kmt_nv; return *this; }
+	F_external_memory_handle_type_NV& off_opaque_win32_kmt_nv(){ flag &= ~b_opaque_win32_kmt_nv; return *this; }
+	F_external_memory_handle_type_NV& on_d3d11_image_nv(){ flag |= b_d3d11_image_nv; return *this; }
+	F_external_memory_handle_type_NV& off_d3d11_image_nv(){ flag &= ~b_d3d11_image_nv; return *this; }
+	F_external_memory_handle_type_NV& on_d3d11_image_kmt_nv(){ flag |= b_d3d11_image_kmt_nv; return *this; }
+	F_external_memory_handle_type_NV& off_d3d11_image_kmt_nv(){ flag &= ~b_d3d11_image_kmt_nv; return *this; }
 };
-F_external_memory_handle_type_NV():flag(0){}
-F_external_memory_handle_type_NV(B bits_):flag(static_cast<int>(bits_)){}
-F_external_memory_handle_type_NV(F_external_memory_handle_type_NV const& flag_):flag(flag_.flag){}
-F_external_memory_handle_type_NV(std::initializer_list<B> bit_list){for (auto&& bit : bit_list){flag |= static_cast<int>(bit);}}
-operator VkExternalMemoryHandleTypeFlagBitsNV const &(){return *this;}
-F_external_memory_handle_type_NV& operator = (F_external_memory_handle_type_NV flag_){flag = flag_.flag;return *this;}
-F_external_memory_handle_type_NV operator | (B bit_){return flag | static_cast<int>(bit_);}
-F_external_memory_handle_type_NV& operator |= (B bit_){flag |= static_cast<int>(bit_);return *this;}
-F_external_memory_handle_type_NV operator | (F_external_memory_handle_type_NV flag_){return flag | flag_.flag;}
-F_external_memory_handle_type_NV& operator |= (F_external_memory_handle_type_NV flag_){flag |= flag_.flag;return *this;}
-F_external_memory_handle_type_NV operator & (F_external_memory_handle_type_NV flag_){return flag & flag_.flag;}
-F_external_memory_handle_type_NV& operator &= (F_external_memory_handle_type_NV flag_){flag &= flag_.flag;return *this;}
-F_external_memory_handle_type_NV operator ^ (F_external_memory_handle_type_NV flag_){return flag ^ flag_.flag;}
-F_external_memory_handle_type_NV& operator ^= (F_external_memory_handle_type_NV flag_){flag ^= flag_.flag;return *this;}
-F_external_memory_handle_type_NV operator ~ (){return all_flags().flag^flag;}
-bool operator !(){return !flag;}
-F_external_memory_handle_type_NV& clear(){flag = 0;return *this;}
-F_external_memory_handle_type_NV all_flags(){
-return b_opaque_win32_nv | b_opaque_win32_kmt_nv | b_d3d11_image_nv | b_d3d11_image_kmt_nv;
-}
-F_external_memory_handle_type_NV& on_opaque_win32_nv(){ flag |= b_opaque_win32_nv; return *this; }
-F_external_memory_handle_type_NV& off_opaque_win32_nv(){ flag &= ~b_opaque_win32_nv; return *this; }
-F_external_memory_handle_type_NV& on_opaque_win32_kmt_nv(){ flag |= b_opaque_win32_kmt_nv; return *this; }
-F_external_memory_handle_type_NV& off_opaque_win32_kmt_nv(){ flag &= ~b_opaque_win32_kmt_nv; return *this; }
-F_external_memory_handle_type_NV& on_d3d11_image_nv(){ flag |= b_d3d11_image_nv; return *this; }
-F_external_memory_handle_type_NV& off_d3d11_image_nv(){ flag &= ~b_d3d11_image_nv; return *this; }
-F_external_memory_handle_type_NV& on_d3d11_image_kmt_nv(){ flag |= b_d3d11_image_kmt_nv; return *this; }
-F_external_memory_handle_type_NV& off_d3d11_image_kmt_nv(){ flag &= ~b_d3d11_image_kmt_nv; return *this; }
-VkExternalMemoryHandleTypeFlagBitsNV get_vkfb(){ return VkExternalMemoryHandleTypeFlagBitsNV(flag); }
-};
-F_external_memory_handle_type_NV inline operator|(const F_external_memory_handle_type_NV::B bit1_, const F_external_memory_handle_type_NV::B bit2_){F_external_memory_handle_type_NV flags(bit1_);return flags | bit2_;}
-bool inline operator==(const F_external_memory_handle_type_NV f1_, const F_external_memory_handle_type_NV f2_) { return f1_.flag == f2_.flag; }
-bool inline operator!=(const F_external_memory_handle_type_NV f1_, const F_external_memory_handle_type_NV f2_) { return f1_.flag != f2_.flag; }
+inline F_external_memory_handle_type_NV operator&(const F_external_memory_handle_type_NV f1_, const F_external_memory_handle_type_NV f2_){return f1_.flag&f2_.flag;}
+inline F_external_memory_handle_type_NV operator|(const F_external_memory_handle_type_NV f1_, const F_external_memory_handle_type_NV f2_){return f1_.flag|f2_.flag;}
+inline F_external_memory_handle_type_NV operator^(const F_external_memory_handle_type_NV f1_, const F_external_memory_handle_type_NV f2_){return f1_.flag^f2_.flag;}
 /*	VkExternalMemoryFeatureFlagBitsNV*/
-class F_external_memory_feature_NV {
-private:
-F_external_memory_feature_NV(int flag_):flag(flag_){};
-public:
-uint32_t flag;
-enum B{
-	b_dedicated_only_nv = VK_EXTERNAL_MEMORY_FEATURE_DEDICATED_ONLY_BIT_NV,
-	b_exportable_nv = VK_EXTERNAL_MEMORY_FEATURE_EXPORTABLE_BIT_NV,
-	b_importable_nv = VK_EXTERNAL_MEMORY_FEATURE_IMPORTABLE_BIT_NV,
+union F_external_memory_feature_NV {
+	uint32_t flag;
+	VkExternalMemoryFeatureFlagBitsNV vk_flag;
+	enum B{
+		b_dedicated_only_nv = VK_EXTERNAL_MEMORY_FEATURE_DEDICATED_ONLY_BIT_NV,
+		b_exportable_nv = VK_EXTERNAL_MEMORY_FEATURE_EXPORTABLE_BIT_NV,
+		b_importable_nv = VK_EXTERNAL_MEMORY_FEATURE_IMPORTABLE_BIT_NV,
+	};
+	F_external_memory_feature_NV():flag(0){}
+	F_external_memory_feature_NV(int i_):flag(static_cast<uint32_t>(i_)){}
+	F_external_memory_feature_NV(uint32_t flag_):flag(flag_){}
+	F_external_memory_feature_NV(const B flag_):flag(flag_){}
+	F_external_memory_feature_NV(VkExternalMemoryFeatureFlagBitsNV flag_):vk_flag(flag_){}
+	operator uint32_t(){return flag;}
+	operator int(){return static_cast<int>(flag);}
+	operator VkExternalMemoryFeatureFlagBitsNV const&(){return vk_flag;}
+	operator bool(){return !!flag;}
+	F_external_memory_feature_NV& operator=(const F_external_memory_feature_NV flag_){flag=flag_.flag; return *this;}
+	F_external_memory_feature_NV& operator|=(const F_external_memory_feature_NV flag_){flag|=flag_.flag; return *this;}
+	F_external_memory_feature_NV& operator&=(const F_external_memory_feature_NV flag_){flag&=flag_.flag; return *this;}
+	F_external_memory_feature_NV& operator^=(const F_external_memory_feature_NV flag_){flag^=flag_.flag;return *this;}
+	F_external_memory_feature_NV operator~(){return ~flag;}
+	bool operator==(const F_external_memory_feature_NV flag_){return flag==flag_.flag;}
+	bool operator!=(const F_external_memory_feature_NV flag_){return !(*this==flag_);}
+	F_external_memory_feature_NV& clear(){flag = 0;return *this;}
+	F_external_memory_feature_NV all_flags(){ return b_dedicated_only_nv | b_exportable_nv | b_importable_nv;}
+	F_external_memory_feature_NV& on_dedicated_only_nv(){ flag |= b_dedicated_only_nv; return *this; }
+	F_external_memory_feature_NV& off_dedicated_only_nv(){ flag &= ~b_dedicated_only_nv; return *this; }
+	F_external_memory_feature_NV& on_exportable_nv(){ flag |= b_exportable_nv; return *this; }
+	F_external_memory_feature_NV& off_exportable_nv(){ flag &= ~b_exportable_nv; return *this; }
+	F_external_memory_feature_NV& on_importable_nv(){ flag |= b_importable_nv; return *this; }
+	F_external_memory_feature_NV& off_importable_nv(){ flag &= ~b_importable_nv; return *this; }
 };
-F_external_memory_feature_NV():flag(0){}
-F_external_memory_feature_NV(B bits_):flag(static_cast<int>(bits_)){}
-F_external_memory_feature_NV(F_external_memory_feature_NV const& flag_):flag(flag_.flag){}
-F_external_memory_feature_NV(std::initializer_list<B> bit_list){for (auto&& bit : bit_list){flag |= static_cast<int>(bit);}}
-operator VkExternalMemoryFeatureFlagBitsNV const &(){return *this;}
-F_external_memory_feature_NV& operator = (F_external_memory_feature_NV flag_){flag = flag_.flag;return *this;}
-F_external_memory_feature_NV operator | (B bit_){return flag | static_cast<int>(bit_);}
-F_external_memory_feature_NV& operator |= (B bit_){flag |= static_cast<int>(bit_);return *this;}
-F_external_memory_feature_NV operator | (F_external_memory_feature_NV flag_){return flag | flag_.flag;}
-F_external_memory_feature_NV& operator |= (F_external_memory_feature_NV flag_){flag |= flag_.flag;return *this;}
-F_external_memory_feature_NV operator & (F_external_memory_feature_NV flag_){return flag & flag_.flag;}
-F_external_memory_feature_NV& operator &= (F_external_memory_feature_NV flag_){flag &= flag_.flag;return *this;}
-F_external_memory_feature_NV operator ^ (F_external_memory_feature_NV flag_){return flag ^ flag_.flag;}
-F_external_memory_feature_NV& operator ^= (F_external_memory_feature_NV flag_){flag ^= flag_.flag;return *this;}
-F_external_memory_feature_NV operator ~ (){return all_flags().flag^flag;}
-bool operator !(){return !flag;}
-F_external_memory_feature_NV& clear(){flag = 0;return *this;}
-F_external_memory_feature_NV all_flags(){
-return b_dedicated_only_nv | b_exportable_nv | b_importable_nv;
-}
-F_external_memory_feature_NV& on_dedicated_only_nv(){ flag |= b_dedicated_only_nv; return *this; }
-F_external_memory_feature_NV& off_dedicated_only_nv(){ flag &= ~b_dedicated_only_nv; return *this; }
-F_external_memory_feature_NV& on_exportable_nv(){ flag |= b_exportable_nv; return *this; }
-F_external_memory_feature_NV& off_exportable_nv(){ flag &= ~b_exportable_nv; return *this; }
-F_external_memory_feature_NV& on_importable_nv(){ flag |= b_importable_nv; return *this; }
-F_external_memory_feature_NV& off_importable_nv(){ flag &= ~b_importable_nv; return *this; }
-VkExternalMemoryFeatureFlagBitsNV get_vkfb(){ return VkExternalMemoryFeatureFlagBitsNV(flag); }
-};
-F_external_memory_feature_NV inline operator|(const F_external_memory_feature_NV::B bit1_, const F_external_memory_feature_NV::B bit2_){F_external_memory_feature_NV flags(bit1_);return flags | bit2_;}
-bool inline operator==(const F_external_memory_feature_NV f1_, const F_external_memory_feature_NV f2_) { return f1_.flag == f2_.flag; }
-bool inline operator!=(const F_external_memory_feature_NV f1_, const F_external_memory_feature_NV f2_) { return f1_.flag != f2_.flag; }
+inline F_external_memory_feature_NV operator&(const F_external_memory_feature_NV f1_, const F_external_memory_feature_NV f2_){return f1_.flag&f2_.flag;}
+inline F_external_memory_feature_NV operator|(const F_external_memory_feature_NV f1_, const F_external_memory_feature_NV f2_){return f1_.flag|f2_.flag;}
+inline F_external_memory_feature_NV operator^(const F_external_memory_feature_NV f1_, const F_external_memory_feature_NV f2_){return f1_.flag^f2_.flag;}
 /*	VkSubgroupFeatureFlagBits*/
-class F_subgroup_feature {
-private:
-F_subgroup_feature(int flag_):flag(flag_){};
-public:
-uint32_t flag;
-enum B{
-/*Basic subgroup operations*/
-	b_basic = VK_SUBGROUP_FEATURE_BASIC_BIT,
-/*Vote subgroup operations*/
-	b_vote = VK_SUBGROUP_FEATURE_VOTE_BIT,
-/*Arithmetic subgroup operations*/
-	b_arithmetic = VK_SUBGROUP_FEATURE_ARITHMETIC_BIT,
-/*Ballot subgroup operations*/
-	b_ballot = VK_SUBGROUP_FEATURE_BALLOT_BIT,
-/*Shuffle subgroup operations*/
-	b_shuffle = VK_SUBGROUP_FEATURE_SHUFFLE_BIT,
-/*Shuffle relative subgroup operations*/
-	b_shuffle_relative = VK_SUBGROUP_FEATURE_SHUFFLE_RELATIVE_BIT,
-/*Clustered subgroup operations*/
-	b_clustered = VK_SUBGROUP_FEATURE_CLUSTERED_BIT,
-/*Quad subgroup operations*/
-	b_quad = VK_SUBGROUP_FEATURE_QUAD_BIT,
+union F_subgroup_feature {
+	uint32_t flag;
+	VkSubgroupFeatureFlagBits vk_flag;
+	enum B{
+			/* Basic subgroup operations */
+		b_basic = VK_SUBGROUP_FEATURE_BASIC_BIT,
+			/* Vote subgroup operations */
+		b_vote = VK_SUBGROUP_FEATURE_VOTE_BIT,
+			/* Arithmetic subgroup operations */
+		b_arithmetic = VK_SUBGROUP_FEATURE_ARITHMETIC_BIT,
+			/* Ballot subgroup operations */
+		b_ballot = VK_SUBGROUP_FEATURE_BALLOT_BIT,
+			/* Shuffle subgroup operations */
+		b_shuffle = VK_SUBGROUP_FEATURE_SHUFFLE_BIT,
+			/* Shuffle relative subgroup operations */
+		b_shuffle_relative = VK_SUBGROUP_FEATURE_SHUFFLE_RELATIVE_BIT,
+			/* Clustered subgroup operations */
+		b_clustered = VK_SUBGROUP_FEATURE_CLUSTERED_BIT,
+			/* Quad subgroup operations */
+		b_quad = VK_SUBGROUP_FEATURE_QUAD_BIT,
+	};
+	F_subgroup_feature():flag(0){}
+	F_subgroup_feature(int i_):flag(static_cast<uint32_t>(i_)){}
+	F_subgroup_feature(uint32_t flag_):flag(flag_){}
+	F_subgroup_feature(const B flag_):flag(flag_){}
+	F_subgroup_feature(VkSubgroupFeatureFlagBits flag_):vk_flag(flag_){}
+	operator uint32_t(){return flag;}
+	operator int(){return static_cast<int>(flag);}
+	operator VkSubgroupFeatureFlagBits const&(){return vk_flag;}
+	operator bool(){return !!flag;}
+	F_subgroup_feature& operator=(const F_subgroup_feature flag_){flag=flag_.flag; return *this;}
+	F_subgroup_feature& operator|=(const F_subgroup_feature flag_){flag|=flag_.flag; return *this;}
+	F_subgroup_feature& operator&=(const F_subgroup_feature flag_){flag&=flag_.flag; return *this;}
+	F_subgroup_feature& operator^=(const F_subgroup_feature flag_){flag^=flag_.flag;return *this;}
+	F_subgroup_feature operator~(){return ~flag;}
+	bool operator==(const F_subgroup_feature flag_){return flag==flag_.flag;}
+	bool operator!=(const F_subgroup_feature flag_){return !(*this==flag_);}
+	F_subgroup_feature& clear(){flag = 0;return *this;}
+	F_subgroup_feature all_flags(){ return b_basic | b_vote | b_arithmetic | b_ballot | b_shuffle | b_shuffle_relative | b_clustered | b_quad;}
+	F_subgroup_feature& on_basic(){ flag |= b_basic; return *this; }
+	F_subgroup_feature& off_basic(){ flag &= ~b_basic; return *this; }
+	F_subgroup_feature& on_vote(){ flag |= b_vote; return *this; }
+	F_subgroup_feature& off_vote(){ flag &= ~b_vote; return *this; }
+	F_subgroup_feature& on_arithmetic(){ flag |= b_arithmetic; return *this; }
+	F_subgroup_feature& off_arithmetic(){ flag &= ~b_arithmetic; return *this; }
+	F_subgroup_feature& on_ballot(){ flag |= b_ballot; return *this; }
+	F_subgroup_feature& off_ballot(){ flag &= ~b_ballot; return *this; }
+	F_subgroup_feature& on_shuffle(){ flag |= b_shuffle; return *this; }
+	F_subgroup_feature& off_shuffle(){ flag &= ~b_shuffle; return *this; }
+	F_subgroup_feature& on_shuffle_relative(){ flag |= b_shuffle_relative; return *this; }
+	F_subgroup_feature& off_shuffle_relative(){ flag &= ~b_shuffle_relative; return *this; }
+	F_subgroup_feature& on_clustered(){ flag |= b_clustered; return *this; }
+	F_subgroup_feature& off_clustered(){ flag &= ~b_clustered; return *this; }
+	F_subgroup_feature& on_quad(){ flag |= b_quad; return *this; }
+	F_subgroup_feature& off_quad(){ flag &= ~b_quad; return *this; }
 };
-F_subgroup_feature():flag(0){}
-F_subgroup_feature(B bits_):flag(static_cast<int>(bits_)){}
-F_subgroup_feature(F_subgroup_feature const& flag_):flag(flag_.flag){}
-F_subgroup_feature(std::initializer_list<B> bit_list){for (auto&& bit : bit_list){flag |= static_cast<int>(bit);}}
-operator VkSubgroupFeatureFlagBits const &(){return *this;}
-F_subgroup_feature& operator = (F_subgroup_feature flag_){flag = flag_.flag;return *this;}
-F_subgroup_feature operator | (B bit_){return flag | static_cast<int>(bit_);}
-F_subgroup_feature& operator |= (B bit_){flag |= static_cast<int>(bit_);return *this;}
-F_subgroup_feature operator | (F_subgroup_feature flag_){return flag | flag_.flag;}
-F_subgroup_feature& operator |= (F_subgroup_feature flag_){flag |= flag_.flag;return *this;}
-F_subgroup_feature operator & (F_subgroup_feature flag_){return flag & flag_.flag;}
-F_subgroup_feature& operator &= (F_subgroup_feature flag_){flag &= flag_.flag;return *this;}
-F_subgroup_feature operator ^ (F_subgroup_feature flag_){return flag ^ flag_.flag;}
-F_subgroup_feature& operator ^= (F_subgroup_feature flag_){flag ^= flag_.flag;return *this;}
-F_subgroup_feature operator ~ (){return all_flags().flag^flag;}
-bool operator !(){return !flag;}
-F_subgroup_feature& clear(){flag = 0;return *this;}
-F_subgroup_feature all_flags(){
-return b_basic | b_vote | b_arithmetic | b_ballot | b_shuffle | b_shuffle_relative | b_clustered | b_quad;
-}
-F_subgroup_feature& on_basic(){ flag |= b_basic; return *this; }
-F_subgroup_feature& off_basic(){ flag &= ~b_basic; return *this; }
-F_subgroup_feature& on_vote(){ flag |= b_vote; return *this; }
-F_subgroup_feature& off_vote(){ flag &= ~b_vote; return *this; }
-F_subgroup_feature& on_arithmetic(){ flag |= b_arithmetic; return *this; }
-F_subgroup_feature& off_arithmetic(){ flag &= ~b_arithmetic; return *this; }
-F_subgroup_feature& on_ballot(){ flag |= b_ballot; return *this; }
-F_subgroup_feature& off_ballot(){ flag &= ~b_ballot; return *this; }
-F_subgroup_feature& on_shuffle(){ flag |= b_shuffle; return *this; }
-F_subgroup_feature& off_shuffle(){ flag &= ~b_shuffle; return *this; }
-F_subgroup_feature& on_shuffle_relative(){ flag |= b_shuffle_relative; return *this; }
-F_subgroup_feature& off_shuffle_relative(){ flag &= ~b_shuffle_relative; return *this; }
-F_subgroup_feature& on_clustered(){ flag |= b_clustered; return *this; }
-F_subgroup_feature& off_clustered(){ flag &= ~b_clustered; return *this; }
-F_subgroup_feature& on_quad(){ flag |= b_quad; return *this; }
-F_subgroup_feature& off_quad(){ flag &= ~b_quad; return *this; }
-VkSubgroupFeatureFlagBits get_vkfb(){ return VkSubgroupFeatureFlagBits(flag); }
-};
-F_subgroup_feature inline operator|(const F_subgroup_feature::B bit1_, const F_subgroup_feature::B bit2_){F_subgroup_feature flags(bit1_);return flags | bit2_;}
-bool inline operator==(const F_subgroup_feature f1_, const F_subgroup_feature f2_) { return f1_.flag == f2_.flag; }
-bool inline operator!=(const F_subgroup_feature f1_, const F_subgroup_feature f2_) { return f1_.flag != f2_.flag; }
+inline F_subgroup_feature operator&(const F_subgroup_feature f1_, const F_subgroup_feature f2_){return f1_.flag&f2_.flag;}
+inline F_subgroup_feature operator|(const F_subgroup_feature f1_, const F_subgroup_feature f2_){return f1_.flag|f2_.flag;}
+inline F_subgroup_feature operator^(const F_subgroup_feature f1_, const F_subgroup_feature f2_){return f1_.flag^f2_.flag;}
 /*	VkIndirectCommandsLayoutUsageFlagBitsNVX*/
-class F_indirect_commands_layout_usage_NVX {
-private:
-F_indirect_commands_layout_usage_NVX(int flag_):flag(flag_){};
-public:
-uint32_t flag;
-enum B{
-	b_unordered_sequences_nvx = VK_INDIRECT_COMMANDS_LAYOUT_USAGE_UNORDERED_SEQUENCES_BIT_NVX,
-	b_sparse_sequences_nvx = VK_INDIRECT_COMMANDS_LAYOUT_USAGE_SPARSE_SEQUENCES_BIT_NVX,
-	b_empty_executions_nvx = VK_INDIRECT_COMMANDS_LAYOUT_USAGE_EMPTY_EXECUTIONS_BIT_NVX,
-	b_indexed_sequences_nvx = VK_INDIRECT_COMMANDS_LAYOUT_USAGE_INDEXED_SEQUENCES_BIT_NVX,
+union F_indirect_commands_layout_usage_NVX {
+	uint32_t flag;
+	VkIndirectCommandsLayoutUsageFlagBitsNVX vk_flag;
+	enum B{
+		b_unordered_sequences_nvx = VK_INDIRECT_COMMANDS_LAYOUT_USAGE_UNORDERED_SEQUENCES_BIT_NVX,
+		b_sparse_sequences_nvx = VK_INDIRECT_COMMANDS_LAYOUT_USAGE_SPARSE_SEQUENCES_BIT_NVX,
+		b_empty_executions_nvx = VK_INDIRECT_COMMANDS_LAYOUT_USAGE_EMPTY_EXECUTIONS_BIT_NVX,
+		b_indexed_sequences_nvx = VK_INDIRECT_COMMANDS_LAYOUT_USAGE_INDEXED_SEQUENCES_BIT_NVX,
+	};
+	F_indirect_commands_layout_usage_NVX():flag(0){}
+	F_indirect_commands_layout_usage_NVX(int i_):flag(static_cast<uint32_t>(i_)){}
+	F_indirect_commands_layout_usage_NVX(uint32_t flag_):flag(flag_){}
+	F_indirect_commands_layout_usage_NVX(const B flag_):flag(flag_){}
+	F_indirect_commands_layout_usage_NVX(VkIndirectCommandsLayoutUsageFlagBitsNVX flag_):vk_flag(flag_){}
+	operator uint32_t(){return flag;}
+	operator int(){return static_cast<int>(flag);}
+	operator VkIndirectCommandsLayoutUsageFlagBitsNVX const&(){return vk_flag;}
+	operator bool(){return !!flag;}
+	F_indirect_commands_layout_usage_NVX& operator=(const F_indirect_commands_layout_usage_NVX flag_){flag=flag_.flag; return *this;}
+	F_indirect_commands_layout_usage_NVX& operator|=(const F_indirect_commands_layout_usage_NVX flag_){flag|=flag_.flag; return *this;}
+	F_indirect_commands_layout_usage_NVX& operator&=(const F_indirect_commands_layout_usage_NVX flag_){flag&=flag_.flag; return *this;}
+	F_indirect_commands_layout_usage_NVX& operator^=(const F_indirect_commands_layout_usage_NVX flag_){flag^=flag_.flag;return *this;}
+	F_indirect_commands_layout_usage_NVX operator~(){return ~flag;}
+	bool operator==(const F_indirect_commands_layout_usage_NVX flag_){return flag==flag_.flag;}
+	bool operator!=(const F_indirect_commands_layout_usage_NVX flag_){return !(*this==flag_);}
+	F_indirect_commands_layout_usage_NVX& clear(){flag = 0;return *this;}
+	F_indirect_commands_layout_usage_NVX all_flags(){ return b_unordered_sequences_nvx | b_sparse_sequences_nvx | b_empty_executions_nvx | b_indexed_sequences_nvx;}
+	F_indirect_commands_layout_usage_NVX& on_unordered_sequences_nvx(){ flag |= b_unordered_sequences_nvx; return *this; }
+	F_indirect_commands_layout_usage_NVX& off_unordered_sequences_nvx(){ flag &= ~b_unordered_sequences_nvx; return *this; }
+	F_indirect_commands_layout_usage_NVX& on_sparse_sequences_nvx(){ flag |= b_sparse_sequences_nvx; return *this; }
+	F_indirect_commands_layout_usage_NVX& off_sparse_sequences_nvx(){ flag &= ~b_sparse_sequences_nvx; return *this; }
+	F_indirect_commands_layout_usage_NVX& on_empty_executions_nvx(){ flag |= b_empty_executions_nvx; return *this; }
+	F_indirect_commands_layout_usage_NVX& off_empty_executions_nvx(){ flag &= ~b_empty_executions_nvx; return *this; }
+	F_indirect_commands_layout_usage_NVX& on_indexed_sequences_nvx(){ flag |= b_indexed_sequences_nvx; return *this; }
+	F_indirect_commands_layout_usage_NVX& off_indexed_sequences_nvx(){ flag &= ~b_indexed_sequences_nvx; return *this; }
 };
-F_indirect_commands_layout_usage_NVX():flag(0){}
-F_indirect_commands_layout_usage_NVX(B bits_):flag(static_cast<int>(bits_)){}
-F_indirect_commands_layout_usage_NVX(F_indirect_commands_layout_usage_NVX const& flag_):flag(flag_.flag){}
-F_indirect_commands_layout_usage_NVX(std::initializer_list<B> bit_list){for (auto&& bit : bit_list){flag |= static_cast<int>(bit);}}
-operator VkIndirectCommandsLayoutUsageFlagBitsNVX const &(){return *this;}
-F_indirect_commands_layout_usage_NVX& operator = (F_indirect_commands_layout_usage_NVX flag_){flag = flag_.flag;return *this;}
-F_indirect_commands_layout_usage_NVX operator | (B bit_){return flag | static_cast<int>(bit_);}
-F_indirect_commands_layout_usage_NVX& operator |= (B bit_){flag |= static_cast<int>(bit_);return *this;}
-F_indirect_commands_layout_usage_NVX operator | (F_indirect_commands_layout_usage_NVX flag_){return flag | flag_.flag;}
-F_indirect_commands_layout_usage_NVX& operator |= (F_indirect_commands_layout_usage_NVX flag_){flag |= flag_.flag;return *this;}
-F_indirect_commands_layout_usage_NVX operator & (F_indirect_commands_layout_usage_NVX flag_){return flag & flag_.flag;}
-F_indirect_commands_layout_usage_NVX& operator &= (F_indirect_commands_layout_usage_NVX flag_){flag &= flag_.flag;return *this;}
-F_indirect_commands_layout_usage_NVX operator ^ (F_indirect_commands_layout_usage_NVX flag_){return flag ^ flag_.flag;}
-F_indirect_commands_layout_usage_NVX& operator ^= (F_indirect_commands_layout_usage_NVX flag_){flag ^= flag_.flag;return *this;}
-F_indirect_commands_layout_usage_NVX operator ~ (){return all_flags().flag^flag;}
-bool operator !(){return !flag;}
-F_indirect_commands_layout_usage_NVX& clear(){flag = 0;return *this;}
-F_indirect_commands_layout_usage_NVX all_flags(){
-return b_unordered_sequences_nvx | b_sparse_sequences_nvx | b_empty_executions_nvx | b_indexed_sequences_nvx;
-}
-F_indirect_commands_layout_usage_NVX& on_unordered_sequences_nvx(){ flag |= b_unordered_sequences_nvx; return *this; }
-F_indirect_commands_layout_usage_NVX& off_unordered_sequences_nvx(){ flag &= ~b_unordered_sequences_nvx; return *this; }
-F_indirect_commands_layout_usage_NVX& on_sparse_sequences_nvx(){ flag |= b_sparse_sequences_nvx; return *this; }
-F_indirect_commands_layout_usage_NVX& off_sparse_sequences_nvx(){ flag &= ~b_sparse_sequences_nvx; return *this; }
-F_indirect_commands_layout_usage_NVX& on_empty_executions_nvx(){ flag |= b_empty_executions_nvx; return *this; }
-F_indirect_commands_layout_usage_NVX& off_empty_executions_nvx(){ flag &= ~b_empty_executions_nvx; return *this; }
-F_indirect_commands_layout_usage_NVX& on_indexed_sequences_nvx(){ flag |= b_indexed_sequences_nvx; return *this; }
-F_indirect_commands_layout_usage_NVX& off_indexed_sequences_nvx(){ flag &= ~b_indexed_sequences_nvx; return *this; }
-VkIndirectCommandsLayoutUsageFlagBitsNVX get_vkfb(){ return VkIndirectCommandsLayoutUsageFlagBitsNVX(flag); }
-};
-F_indirect_commands_layout_usage_NVX inline operator|(const F_indirect_commands_layout_usage_NVX::B bit1_, const F_indirect_commands_layout_usage_NVX::B bit2_){F_indirect_commands_layout_usage_NVX flags(bit1_);return flags | bit2_;}
-bool inline operator==(const F_indirect_commands_layout_usage_NVX f1_, const F_indirect_commands_layout_usage_NVX f2_) { return f1_.flag == f2_.flag; }
-bool inline operator!=(const F_indirect_commands_layout_usage_NVX f1_, const F_indirect_commands_layout_usage_NVX f2_) { return f1_.flag != f2_.flag; }
+inline F_indirect_commands_layout_usage_NVX operator&(const F_indirect_commands_layout_usage_NVX f1_, const F_indirect_commands_layout_usage_NVX f2_){return f1_.flag&f2_.flag;}
+inline F_indirect_commands_layout_usage_NVX operator|(const F_indirect_commands_layout_usage_NVX f1_, const F_indirect_commands_layout_usage_NVX f2_){return f1_.flag|f2_.flag;}
+inline F_indirect_commands_layout_usage_NVX operator^(const F_indirect_commands_layout_usage_NVX f1_, const F_indirect_commands_layout_usage_NVX f2_){return f1_.flag^f2_.flag;}
 /*	VkObjectEntryUsageFlagBitsNVX*/
-class F_object_entry_usage_NVX {
-private:
-F_object_entry_usage_NVX(int flag_):flag(flag_){};
-public:
-uint32_t flag;
-enum B{
-	b_graphics_nvx = VK_OBJECT_ENTRY_USAGE_GRAPHICS_BIT_NVX,
-	b_compute_nvx = VK_OBJECT_ENTRY_USAGE_COMPUTE_BIT_NVX,
+union F_object_entry_usage_NVX {
+	uint32_t flag;
+	VkObjectEntryUsageFlagBitsNVX vk_flag;
+	enum B{
+		b_graphics_nvx = VK_OBJECT_ENTRY_USAGE_GRAPHICS_BIT_NVX,
+		b_compute_nvx = VK_OBJECT_ENTRY_USAGE_COMPUTE_BIT_NVX,
+	};
+	F_object_entry_usage_NVX():flag(0){}
+	F_object_entry_usage_NVX(int i_):flag(static_cast<uint32_t>(i_)){}
+	F_object_entry_usage_NVX(uint32_t flag_):flag(flag_){}
+	F_object_entry_usage_NVX(const B flag_):flag(flag_){}
+	F_object_entry_usage_NVX(VkObjectEntryUsageFlagBitsNVX flag_):vk_flag(flag_){}
+	operator uint32_t(){return flag;}
+	operator int(){return static_cast<int>(flag);}
+	operator VkObjectEntryUsageFlagBitsNVX const&(){return vk_flag;}
+	operator bool(){return !!flag;}
+	F_object_entry_usage_NVX& operator=(const F_object_entry_usage_NVX flag_){flag=flag_.flag; return *this;}
+	F_object_entry_usage_NVX& operator|=(const F_object_entry_usage_NVX flag_){flag|=flag_.flag; return *this;}
+	F_object_entry_usage_NVX& operator&=(const F_object_entry_usage_NVX flag_){flag&=flag_.flag; return *this;}
+	F_object_entry_usage_NVX& operator^=(const F_object_entry_usage_NVX flag_){flag^=flag_.flag;return *this;}
+	F_object_entry_usage_NVX operator~(){return ~flag;}
+	bool operator==(const F_object_entry_usage_NVX flag_){return flag==flag_.flag;}
+	bool operator!=(const F_object_entry_usage_NVX flag_){return !(*this==flag_);}
+	F_object_entry_usage_NVX& clear(){flag = 0;return *this;}
+	F_object_entry_usage_NVX all_flags(){ return b_graphics_nvx | b_compute_nvx;}
+	F_object_entry_usage_NVX& on_graphics_nvx(){ flag |= b_graphics_nvx; return *this; }
+	F_object_entry_usage_NVX& off_graphics_nvx(){ flag &= ~b_graphics_nvx; return *this; }
+	F_object_entry_usage_NVX& on_compute_nvx(){ flag |= b_compute_nvx; return *this; }
+	F_object_entry_usage_NVX& off_compute_nvx(){ flag &= ~b_compute_nvx; return *this; }
 };
-F_object_entry_usage_NVX():flag(0){}
-F_object_entry_usage_NVX(B bits_):flag(static_cast<int>(bits_)){}
-F_object_entry_usage_NVX(F_object_entry_usage_NVX const& flag_):flag(flag_.flag){}
-F_object_entry_usage_NVX(std::initializer_list<B> bit_list){for (auto&& bit : bit_list){flag |= static_cast<int>(bit);}}
-operator VkObjectEntryUsageFlagBitsNVX const &(){return *this;}
-F_object_entry_usage_NVX& operator = (F_object_entry_usage_NVX flag_){flag = flag_.flag;return *this;}
-F_object_entry_usage_NVX operator | (B bit_){return flag | static_cast<int>(bit_);}
-F_object_entry_usage_NVX& operator |= (B bit_){flag |= static_cast<int>(bit_);return *this;}
-F_object_entry_usage_NVX operator | (F_object_entry_usage_NVX flag_){return flag | flag_.flag;}
-F_object_entry_usage_NVX& operator |= (F_object_entry_usage_NVX flag_){flag |= flag_.flag;return *this;}
-F_object_entry_usage_NVX operator & (F_object_entry_usage_NVX flag_){return flag & flag_.flag;}
-F_object_entry_usage_NVX& operator &= (F_object_entry_usage_NVX flag_){flag &= flag_.flag;return *this;}
-F_object_entry_usage_NVX operator ^ (F_object_entry_usage_NVX flag_){return flag ^ flag_.flag;}
-F_object_entry_usage_NVX& operator ^= (F_object_entry_usage_NVX flag_){flag ^= flag_.flag;return *this;}
-F_object_entry_usage_NVX operator ~ (){return all_flags().flag^flag;}
-bool operator !(){return !flag;}
-F_object_entry_usage_NVX& clear(){flag = 0;return *this;}
-F_object_entry_usage_NVX all_flags(){
-return b_graphics_nvx | b_compute_nvx;
-}
-F_object_entry_usage_NVX& on_graphics_nvx(){ flag |= b_graphics_nvx; return *this; }
-F_object_entry_usage_NVX& off_graphics_nvx(){ flag &= ~b_graphics_nvx; return *this; }
-F_object_entry_usage_NVX& on_compute_nvx(){ flag |= b_compute_nvx; return *this; }
-F_object_entry_usage_NVX& off_compute_nvx(){ flag &= ~b_compute_nvx; return *this; }
-VkObjectEntryUsageFlagBitsNVX get_vkfb(){ return VkObjectEntryUsageFlagBitsNVX(flag); }
-};
-F_object_entry_usage_NVX inline operator|(const F_object_entry_usage_NVX::B bit1_, const F_object_entry_usage_NVX::B bit2_){F_object_entry_usage_NVX flags(bit1_);return flags | bit2_;}
-bool inline operator==(const F_object_entry_usage_NVX f1_, const F_object_entry_usage_NVX f2_) { return f1_.flag == f2_.flag; }
-bool inline operator!=(const F_object_entry_usage_NVX f1_, const F_object_entry_usage_NVX f2_) { return f1_.flag != f2_.flag; }
+inline F_object_entry_usage_NVX operator&(const F_object_entry_usage_NVX f1_, const F_object_entry_usage_NVX f2_){return f1_.flag&f2_.flag;}
+inline F_object_entry_usage_NVX operator|(const F_object_entry_usage_NVX f1_, const F_object_entry_usage_NVX f2_){return f1_.flag|f2_.flag;}
+inline F_object_entry_usage_NVX operator^(const F_object_entry_usage_NVX f1_, const F_object_entry_usage_NVX f2_){return f1_.flag^f2_.flag;}
 /*	VkDescriptorSetLayoutCreateFlagBits*/
 using F_descriptor_set_layout_create = 
 			VkDescriptorSetLayoutCreateFlagBits;
 
 /*	VkExternalMemoryHandleTypeFlagBits*/
-class F_external_memory_handle_type {
-private:
-F_external_memory_handle_type(int flag_):flag(flag_){};
-public:
-uint32_t flag;
-enum B{
-	b_opaque_fd = VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_FD_BIT,
-	b_opaque_win32 = VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_BIT,
-	b_opaque_win32_kmt = VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT,
-	b_d3d11_texture = VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_TEXTURE_BIT,
-	b_d3d11_texture_kmt = VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_TEXTURE_KMT_BIT,
-	b_d3d12_heap = VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_HEAP_BIT,
-	b_d3d12_resource = VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_RESOURCE_BIT,
+union F_external_memory_handle_type {
+	uint32_t flag;
+	VkExternalMemoryHandleTypeFlagBits vk_flag;
+	enum B{
+		b_opaque_fd = VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_FD_BIT,
+		b_opaque_win32 = VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_BIT,
+		b_opaque_win32_kmt = VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT,
+		b_d3d11_texture = VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_TEXTURE_BIT,
+		b_d3d11_texture_kmt = VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_TEXTURE_KMT_BIT,
+		b_d3d12_heap = VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_HEAP_BIT,
+		b_d3d12_resource = VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_RESOURCE_BIT,
+	};
+	F_external_memory_handle_type():flag(0){}
+	F_external_memory_handle_type(int i_):flag(static_cast<uint32_t>(i_)){}
+	F_external_memory_handle_type(uint32_t flag_):flag(flag_){}
+	F_external_memory_handle_type(const B flag_):flag(flag_){}
+	F_external_memory_handle_type(VkExternalMemoryHandleTypeFlagBits flag_):vk_flag(flag_){}
+	operator uint32_t(){return flag;}
+	operator int(){return static_cast<int>(flag);}
+	operator VkExternalMemoryHandleTypeFlagBits const&(){return vk_flag;}
+	operator bool(){return !!flag;}
+	F_external_memory_handle_type& operator=(const F_external_memory_handle_type flag_){flag=flag_.flag; return *this;}
+	F_external_memory_handle_type& operator|=(const F_external_memory_handle_type flag_){flag|=flag_.flag; return *this;}
+	F_external_memory_handle_type& operator&=(const F_external_memory_handle_type flag_){flag&=flag_.flag; return *this;}
+	F_external_memory_handle_type& operator^=(const F_external_memory_handle_type flag_){flag^=flag_.flag;return *this;}
+	F_external_memory_handle_type operator~(){return ~flag;}
+	bool operator==(const F_external_memory_handle_type flag_){return flag==flag_.flag;}
+	bool operator!=(const F_external_memory_handle_type flag_){return !(*this==flag_);}
+	F_external_memory_handle_type& clear(){flag = 0;return *this;}
+	F_external_memory_handle_type all_flags(){ return b_opaque_fd | b_opaque_win32 | b_opaque_win32_kmt | b_d3d11_texture | b_d3d11_texture_kmt | b_d3d12_heap | b_d3d12_resource;}
+	F_external_memory_handle_type& on_opaque_fd(){ flag |= b_opaque_fd; return *this; }
+	F_external_memory_handle_type& off_opaque_fd(){ flag &= ~b_opaque_fd; return *this; }
+	F_external_memory_handle_type& on_opaque_win32(){ flag |= b_opaque_win32; return *this; }
+	F_external_memory_handle_type& off_opaque_win32(){ flag &= ~b_opaque_win32; return *this; }
+	F_external_memory_handle_type& on_opaque_win32_kmt(){ flag |= b_opaque_win32_kmt; return *this; }
+	F_external_memory_handle_type& off_opaque_win32_kmt(){ flag &= ~b_opaque_win32_kmt; return *this; }
+	F_external_memory_handle_type& on_d3d11_texture(){ flag |= b_d3d11_texture; return *this; }
+	F_external_memory_handle_type& off_d3d11_texture(){ flag &= ~b_d3d11_texture; return *this; }
+	F_external_memory_handle_type& on_d3d11_texture_kmt(){ flag |= b_d3d11_texture_kmt; return *this; }
+	F_external_memory_handle_type& off_d3d11_texture_kmt(){ flag &= ~b_d3d11_texture_kmt; return *this; }
+	F_external_memory_handle_type& on_d3d12_heap(){ flag |= b_d3d12_heap; return *this; }
+	F_external_memory_handle_type& off_d3d12_heap(){ flag &= ~b_d3d12_heap; return *this; }
+	F_external_memory_handle_type& on_d3d12_resource(){ flag |= b_d3d12_resource; return *this; }
+	F_external_memory_handle_type& off_d3d12_resource(){ flag &= ~b_d3d12_resource; return *this; }
 };
-F_external_memory_handle_type():flag(0){}
-F_external_memory_handle_type(B bits_):flag(static_cast<int>(bits_)){}
-F_external_memory_handle_type(F_external_memory_handle_type const& flag_):flag(flag_.flag){}
-F_external_memory_handle_type(std::initializer_list<B> bit_list){for (auto&& bit : bit_list){flag |= static_cast<int>(bit);}}
-operator VkExternalMemoryHandleTypeFlagBits const &(){return *this;}
-F_external_memory_handle_type& operator = (F_external_memory_handle_type flag_){flag = flag_.flag;return *this;}
-F_external_memory_handle_type operator | (B bit_){return flag | static_cast<int>(bit_);}
-F_external_memory_handle_type& operator |= (B bit_){flag |= static_cast<int>(bit_);return *this;}
-F_external_memory_handle_type operator | (F_external_memory_handle_type flag_){return flag | flag_.flag;}
-F_external_memory_handle_type& operator |= (F_external_memory_handle_type flag_){flag |= flag_.flag;return *this;}
-F_external_memory_handle_type operator & (F_external_memory_handle_type flag_){return flag & flag_.flag;}
-F_external_memory_handle_type& operator &= (F_external_memory_handle_type flag_){flag &= flag_.flag;return *this;}
-F_external_memory_handle_type operator ^ (F_external_memory_handle_type flag_){return flag ^ flag_.flag;}
-F_external_memory_handle_type& operator ^= (F_external_memory_handle_type flag_){flag ^= flag_.flag;return *this;}
-F_external_memory_handle_type operator ~ (){return all_flags().flag^flag;}
-bool operator !(){return !flag;}
-F_external_memory_handle_type& clear(){flag = 0;return *this;}
-F_external_memory_handle_type all_flags(){
-return b_opaque_fd | b_opaque_win32 | b_opaque_win32_kmt | b_d3d11_texture | b_d3d11_texture_kmt | b_d3d12_heap | b_d3d12_resource;
-}
-F_external_memory_handle_type& on_opaque_fd(){ flag |= b_opaque_fd; return *this; }
-F_external_memory_handle_type& off_opaque_fd(){ flag &= ~b_opaque_fd; return *this; }
-F_external_memory_handle_type& on_opaque_win32(){ flag |= b_opaque_win32; return *this; }
-F_external_memory_handle_type& off_opaque_win32(){ flag &= ~b_opaque_win32; return *this; }
-F_external_memory_handle_type& on_opaque_win32_kmt(){ flag |= b_opaque_win32_kmt; return *this; }
-F_external_memory_handle_type& off_opaque_win32_kmt(){ flag &= ~b_opaque_win32_kmt; return *this; }
-F_external_memory_handle_type& on_d3d11_texture(){ flag |= b_d3d11_texture; return *this; }
-F_external_memory_handle_type& off_d3d11_texture(){ flag &= ~b_d3d11_texture; return *this; }
-F_external_memory_handle_type& on_d3d11_texture_kmt(){ flag |= b_d3d11_texture_kmt; return *this; }
-F_external_memory_handle_type& off_d3d11_texture_kmt(){ flag &= ~b_d3d11_texture_kmt; return *this; }
-F_external_memory_handle_type& on_d3d12_heap(){ flag |= b_d3d12_heap; return *this; }
-F_external_memory_handle_type& off_d3d12_heap(){ flag &= ~b_d3d12_heap; return *this; }
-F_external_memory_handle_type& on_d3d12_resource(){ flag |= b_d3d12_resource; return *this; }
-F_external_memory_handle_type& off_d3d12_resource(){ flag &= ~b_d3d12_resource; return *this; }
-VkExternalMemoryHandleTypeFlagBits get_vkfb(){ return VkExternalMemoryHandleTypeFlagBits(flag); }
-};
-F_external_memory_handle_type inline operator|(const F_external_memory_handle_type::B bit1_, const F_external_memory_handle_type::B bit2_){F_external_memory_handle_type flags(bit1_);return flags | bit2_;}
-bool inline operator==(const F_external_memory_handle_type f1_, const F_external_memory_handle_type f2_) { return f1_.flag == f2_.flag; }
-bool inline operator!=(const F_external_memory_handle_type f1_, const F_external_memory_handle_type f2_) { return f1_.flag != f2_.flag; }
+inline F_external_memory_handle_type operator&(const F_external_memory_handle_type f1_, const F_external_memory_handle_type f2_){return f1_.flag&f2_.flag;}
+inline F_external_memory_handle_type operator|(const F_external_memory_handle_type f1_, const F_external_memory_handle_type f2_){return f1_.flag|f2_.flag;}
+inline F_external_memory_handle_type operator^(const F_external_memory_handle_type f1_, const F_external_memory_handle_type f2_){return f1_.flag^f2_.flag;}
 /*	VkExternalMemoryFeatureFlagBits*/
-class F_external_memory_feature {
-private:
-F_external_memory_feature(int flag_):flag(flag_){};
-public:
-uint32_t flag;
-enum B{
-	b_dedicated_only = VK_EXTERNAL_MEMORY_FEATURE_DEDICATED_ONLY_BIT,
-	b_exportable = VK_EXTERNAL_MEMORY_FEATURE_EXPORTABLE_BIT,
-	b_importable = VK_EXTERNAL_MEMORY_FEATURE_IMPORTABLE_BIT,
+union F_external_memory_feature {
+	uint32_t flag;
+	VkExternalMemoryFeatureFlagBits vk_flag;
+	enum B{
+		b_dedicated_only = VK_EXTERNAL_MEMORY_FEATURE_DEDICATED_ONLY_BIT,
+		b_exportable = VK_EXTERNAL_MEMORY_FEATURE_EXPORTABLE_BIT,
+		b_importable = VK_EXTERNAL_MEMORY_FEATURE_IMPORTABLE_BIT,
+	};
+	F_external_memory_feature():flag(0){}
+	F_external_memory_feature(int i_):flag(static_cast<uint32_t>(i_)){}
+	F_external_memory_feature(uint32_t flag_):flag(flag_){}
+	F_external_memory_feature(const B flag_):flag(flag_){}
+	F_external_memory_feature(VkExternalMemoryFeatureFlagBits flag_):vk_flag(flag_){}
+	operator uint32_t(){return flag;}
+	operator int(){return static_cast<int>(flag);}
+	operator VkExternalMemoryFeatureFlagBits const&(){return vk_flag;}
+	operator bool(){return !!flag;}
+	F_external_memory_feature& operator=(const F_external_memory_feature flag_){flag=flag_.flag; return *this;}
+	F_external_memory_feature& operator|=(const F_external_memory_feature flag_){flag|=flag_.flag; return *this;}
+	F_external_memory_feature& operator&=(const F_external_memory_feature flag_){flag&=flag_.flag; return *this;}
+	F_external_memory_feature& operator^=(const F_external_memory_feature flag_){flag^=flag_.flag;return *this;}
+	F_external_memory_feature operator~(){return ~flag;}
+	bool operator==(const F_external_memory_feature flag_){return flag==flag_.flag;}
+	bool operator!=(const F_external_memory_feature flag_){return !(*this==flag_);}
+	F_external_memory_feature& clear(){flag = 0;return *this;}
+	F_external_memory_feature all_flags(){ return b_dedicated_only | b_exportable | b_importable;}
+	F_external_memory_feature& on_dedicated_only(){ flag |= b_dedicated_only; return *this; }
+	F_external_memory_feature& off_dedicated_only(){ flag &= ~b_dedicated_only; return *this; }
+	F_external_memory_feature& on_exportable(){ flag |= b_exportable; return *this; }
+	F_external_memory_feature& off_exportable(){ flag &= ~b_exportable; return *this; }
+	F_external_memory_feature& on_importable(){ flag |= b_importable; return *this; }
+	F_external_memory_feature& off_importable(){ flag &= ~b_importable; return *this; }
 };
-F_external_memory_feature():flag(0){}
-F_external_memory_feature(B bits_):flag(static_cast<int>(bits_)){}
-F_external_memory_feature(F_external_memory_feature const& flag_):flag(flag_.flag){}
-F_external_memory_feature(std::initializer_list<B> bit_list){for (auto&& bit : bit_list){flag |= static_cast<int>(bit);}}
-operator VkExternalMemoryFeatureFlagBits const &(){return *this;}
-F_external_memory_feature& operator = (F_external_memory_feature flag_){flag = flag_.flag;return *this;}
-F_external_memory_feature operator | (B bit_){return flag | static_cast<int>(bit_);}
-F_external_memory_feature& operator |= (B bit_){flag |= static_cast<int>(bit_);return *this;}
-F_external_memory_feature operator | (F_external_memory_feature flag_){return flag | flag_.flag;}
-F_external_memory_feature& operator |= (F_external_memory_feature flag_){flag |= flag_.flag;return *this;}
-F_external_memory_feature operator & (F_external_memory_feature flag_){return flag & flag_.flag;}
-F_external_memory_feature& operator &= (F_external_memory_feature flag_){flag &= flag_.flag;return *this;}
-F_external_memory_feature operator ^ (F_external_memory_feature flag_){return flag ^ flag_.flag;}
-F_external_memory_feature& operator ^= (F_external_memory_feature flag_){flag ^= flag_.flag;return *this;}
-F_external_memory_feature operator ~ (){return all_flags().flag^flag;}
-bool operator !(){return !flag;}
-F_external_memory_feature& clear(){flag = 0;return *this;}
-F_external_memory_feature all_flags(){
-return b_dedicated_only | b_exportable | b_importable;
-}
-F_external_memory_feature& on_dedicated_only(){ flag |= b_dedicated_only; return *this; }
-F_external_memory_feature& off_dedicated_only(){ flag &= ~b_dedicated_only; return *this; }
-F_external_memory_feature& on_exportable(){ flag |= b_exportable; return *this; }
-F_external_memory_feature& off_exportable(){ flag &= ~b_exportable; return *this; }
-F_external_memory_feature& on_importable(){ flag |= b_importable; return *this; }
-F_external_memory_feature& off_importable(){ flag &= ~b_importable; return *this; }
-VkExternalMemoryFeatureFlagBits get_vkfb(){ return VkExternalMemoryFeatureFlagBits(flag); }
-};
-F_external_memory_feature inline operator|(const F_external_memory_feature::B bit1_, const F_external_memory_feature::B bit2_){F_external_memory_feature flags(bit1_);return flags | bit2_;}
-bool inline operator==(const F_external_memory_feature f1_, const F_external_memory_feature f2_) { return f1_.flag == f2_.flag; }
-bool inline operator!=(const F_external_memory_feature f1_, const F_external_memory_feature f2_) { return f1_.flag != f2_.flag; }
+inline F_external_memory_feature operator&(const F_external_memory_feature f1_, const F_external_memory_feature f2_){return f1_.flag&f2_.flag;}
+inline F_external_memory_feature operator|(const F_external_memory_feature f1_, const F_external_memory_feature f2_){return f1_.flag|f2_.flag;}
+inline F_external_memory_feature operator^(const F_external_memory_feature f1_, const F_external_memory_feature f2_){return f1_.flag^f2_.flag;}
 /*	VkExternalSemaphoreHandleTypeFlagBits*/
-class F_external_semaphore_handle_type {
-private:
-F_external_semaphore_handle_type(int flag_):flag(flag_){};
-public:
-uint32_t flag;
-enum B{
-	b_opaque_fd = VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_FD_BIT,
-	b_opaque_win32 = VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_BIT,
-	b_opaque_win32_kmt = VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT,
-	b_d3d12_fence = VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_D3D12_FENCE_BIT,
-	b_sync_fd = VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_SYNC_FD_BIT,
+union F_external_semaphore_handle_type {
+	uint32_t flag;
+	VkExternalSemaphoreHandleTypeFlagBits vk_flag;
+	enum B{
+		b_opaque_fd = VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_FD_BIT,
+		b_opaque_win32 = VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_BIT,
+		b_opaque_win32_kmt = VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT,
+		b_d3d12_fence = VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_D3D12_FENCE_BIT,
+		b_sync_fd = VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_SYNC_FD_BIT,
+	};
+	F_external_semaphore_handle_type():flag(0){}
+	F_external_semaphore_handle_type(int i_):flag(static_cast<uint32_t>(i_)){}
+	F_external_semaphore_handle_type(uint32_t flag_):flag(flag_){}
+	F_external_semaphore_handle_type(const B flag_):flag(flag_){}
+	F_external_semaphore_handle_type(VkExternalSemaphoreHandleTypeFlagBits flag_):vk_flag(flag_){}
+	operator uint32_t(){return flag;}
+	operator int(){return static_cast<int>(flag);}
+	operator VkExternalSemaphoreHandleTypeFlagBits const&(){return vk_flag;}
+	operator bool(){return !!flag;}
+	F_external_semaphore_handle_type& operator=(const F_external_semaphore_handle_type flag_){flag=flag_.flag; return *this;}
+	F_external_semaphore_handle_type& operator|=(const F_external_semaphore_handle_type flag_){flag|=flag_.flag; return *this;}
+	F_external_semaphore_handle_type& operator&=(const F_external_semaphore_handle_type flag_){flag&=flag_.flag; return *this;}
+	F_external_semaphore_handle_type& operator^=(const F_external_semaphore_handle_type flag_){flag^=flag_.flag;return *this;}
+	F_external_semaphore_handle_type operator~(){return ~flag;}
+	bool operator==(const F_external_semaphore_handle_type flag_){return flag==flag_.flag;}
+	bool operator!=(const F_external_semaphore_handle_type flag_){return !(*this==flag_);}
+	F_external_semaphore_handle_type& clear(){flag = 0;return *this;}
+	F_external_semaphore_handle_type all_flags(){ return b_opaque_fd | b_opaque_win32 | b_opaque_win32_kmt | b_d3d12_fence | b_sync_fd;}
+	F_external_semaphore_handle_type& on_opaque_fd(){ flag |= b_opaque_fd; return *this; }
+	F_external_semaphore_handle_type& off_opaque_fd(){ flag &= ~b_opaque_fd; return *this; }
+	F_external_semaphore_handle_type& on_opaque_win32(){ flag |= b_opaque_win32; return *this; }
+	F_external_semaphore_handle_type& off_opaque_win32(){ flag &= ~b_opaque_win32; return *this; }
+	F_external_semaphore_handle_type& on_opaque_win32_kmt(){ flag |= b_opaque_win32_kmt; return *this; }
+	F_external_semaphore_handle_type& off_opaque_win32_kmt(){ flag &= ~b_opaque_win32_kmt; return *this; }
+	F_external_semaphore_handle_type& on_d3d12_fence(){ flag |= b_d3d12_fence; return *this; }
+	F_external_semaphore_handle_type& off_d3d12_fence(){ flag &= ~b_d3d12_fence; return *this; }
+	F_external_semaphore_handle_type& on_sync_fd(){ flag |= b_sync_fd; return *this; }
+	F_external_semaphore_handle_type& off_sync_fd(){ flag &= ~b_sync_fd; return *this; }
 };
-F_external_semaphore_handle_type():flag(0){}
-F_external_semaphore_handle_type(B bits_):flag(static_cast<int>(bits_)){}
-F_external_semaphore_handle_type(F_external_semaphore_handle_type const& flag_):flag(flag_.flag){}
-F_external_semaphore_handle_type(std::initializer_list<B> bit_list){for (auto&& bit : bit_list){flag |= static_cast<int>(bit);}}
-operator VkExternalSemaphoreHandleTypeFlagBits const &(){return *this;}
-F_external_semaphore_handle_type& operator = (F_external_semaphore_handle_type flag_){flag = flag_.flag;return *this;}
-F_external_semaphore_handle_type operator | (B bit_){return flag | static_cast<int>(bit_);}
-F_external_semaphore_handle_type& operator |= (B bit_){flag |= static_cast<int>(bit_);return *this;}
-F_external_semaphore_handle_type operator | (F_external_semaphore_handle_type flag_){return flag | flag_.flag;}
-F_external_semaphore_handle_type& operator |= (F_external_semaphore_handle_type flag_){flag |= flag_.flag;return *this;}
-F_external_semaphore_handle_type operator & (F_external_semaphore_handle_type flag_){return flag & flag_.flag;}
-F_external_semaphore_handle_type& operator &= (F_external_semaphore_handle_type flag_){flag &= flag_.flag;return *this;}
-F_external_semaphore_handle_type operator ^ (F_external_semaphore_handle_type flag_){return flag ^ flag_.flag;}
-F_external_semaphore_handle_type& operator ^= (F_external_semaphore_handle_type flag_){flag ^= flag_.flag;return *this;}
-F_external_semaphore_handle_type operator ~ (){return all_flags().flag^flag;}
-bool operator !(){return !flag;}
-F_external_semaphore_handle_type& clear(){flag = 0;return *this;}
-F_external_semaphore_handle_type all_flags(){
-return b_opaque_fd | b_opaque_win32 | b_opaque_win32_kmt | b_d3d12_fence | b_sync_fd;
-}
-F_external_semaphore_handle_type& on_opaque_fd(){ flag |= b_opaque_fd; return *this; }
-F_external_semaphore_handle_type& off_opaque_fd(){ flag &= ~b_opaque_fd; return *this; }
-F_external_semaphore_handle_type& on_opaque_win32(){ flag |= b_opaque_win32; return *this; }
-F_external_semaphore_handle_type& off_opaque_win32(){ flag &= ~b_opaque_win32; return *this; }
-F_external_semaphore_handle_type& on_opaque_win32_kmt(){ flag |= b_opaque_win32_kmt; return *this; }
-F_external_semaphore_handle_type& off_opaque_win32_kmt(){ flag &= ~b_opaque_win32_kmt; return *this; }
-F_external_semaphore_handle_type& on_d3d12_fence(){ flag |= b_d3d12_fence; return *this; }
-F_external_semaphore_handle_type& off_d3d12_fence(){ flag &= ~b_d3d12_fence; return *this; }
-F_external_semaphore_handle_type& on_sync_fd(){ flag |= b_sync_fd; return *this; }
-F_external_semaphore_handle_type& off_sync_fd(){ flag &= ~b_sync_fd; return *this; }
-VkExternalSemaphoreHandleTypeFlagBits get_vkfb(){ return VkExternalSemaphoreHandleTypeFlagBits(flag); }
-};
-F_external_semaphore_handle_type inline operator|(const F_external_semaphore_handle_type::B bit1_, const F_external_semaphore_handle_type::B bit2_){F_external_semaphore_handle_type flags(bit1_);return flags | bit2_;}
-bool inline operator==(const F_external_semaphore_handle_type f1_, const F_external_semaphore_handle_type f2_) { return f1_.flag == f2_.flag; }
-bool inline operator!=(const F_external_semaphore_handle_type f1_, const F_external_semaphore_handle_type f2_) { return f1_.flag != f2_.flag; }
+inline F_external_semaphore_handle_type operator&(const F_external_semaphore_handle_type f1_, const F_external_semaphore_handle_type f2_){return f1_.flag&f2_.flag;}
+inline F_external_semaphore_handle_type operator|(const F_external_semaphore_handle_type f1_, const F_external_semaphore_handle_type f2_){return f1_.flag|f2_.flag;}
+inline F_external_semaphore_handle_type operator^(const F_external_semaphore_handle_type f1_, const F_external_semaphore_handle_type f2_){return f1_.flag^f2_.flag;}
 /*	VkExternalSemaphoreFeatureFlagBits*/
-class F_external_semaphore_feature {
-private:
-F_external_semaphore_feature(int flag_):flag(flag_){};
-public:
-uint32_t flag;
-enum B{
-	b_exportable = VK_EXTERNAL_SEMAPHORE_FEATURE_EXPORTABLE_BIT,
-	b_importable = VK_EXTERNAL_SEMAPHORE_FEATURE_IMPORTABLE_BIT,
+union F_external_semaphore_feature {
+	uint32_t flag;
+	VkExternalSemaphoreFeatureFlagBits vk_flag;
+	enum B{
+		b_exportable = VK_EXTERNAL_SEMAPHORE_FEATURE_EXPORTABLE_BIT,
+		b_importable = VK_EXTERNAL_SEMAPHORE_FEATURE_IMPORTABLE_BIT,
+	};
+	F_external_semaphore_feature():flag(0){}
+	F_external_semaphore_feature(int i_):flag(static_cast<uint32_t>(i_)){}
+	F_external_semaphore_feature(uint32_t flag_):flag(flag_){}
+	F_external_semaphore_feature(const B flag_):flag(flag_){}
+	F_external_semaphore_feature(VkExternalSemaphoreFeatureFlagBits flag_):vk_flag(flag_){}
+	operator uint32_t(){return flag;}
+	operator int(){return static_cast<int>(flag);}
+	operator VkExternalSemaphoreFeatureFlagBits const&(){return vk_flag;}
+	operator bool(){return !!flag;}
+	F_external_semaphore_feature& operator=(const F_external_semaphore_feature flag_){flag=flag_.flag; return *this;}
+	F_external_semaphore_feature& operator|=(const F_external_semaphore_feature flag_){flag|=flag_.flag; return *this;}
+	F_external_semaphore_feature& operator&=(const F_external_semaphore_feature flag_){flag&=flag_.flag; return *this;}
+	F_external_semaphore_feature& operator^=(const F_external_semaphore_feature flag_){flag^=flag_.flag;return *this;}
+	F_external_semaphore_feature operator~(){return ~flag;}
+	bool operator==(const F_external_semaphore_feature flag_){return flag==flag_.flag;}
+	bool operator!=(const F_external_semaphore_feature flag_){return !(*this==flag_);}
+	F_external_semaphore_feature& clear(){flag = 0;return *this;}
+	F_external_semaphore_feature all_flags(){ return b_exportable | b_importable;}
+	F_external_semaphore_feature& on_exportable(){ flag |= b_exportable; return *this; }
+	F_external_semaphore_feature& off_exportable(){ flag &= ~b_exportable; return *this; }
+	F_external_semaphore_feature& on_importable(){ flag |= b_importable; return *this; }
+	F_external_semaphore_feature& off_importable(){ flag &= ~b_importable; return *this; }
 };
-F_external_semaphore_feature():flag(0){}
-F_external_semaphore_feature(B bits_):flag(static_cast<int>(bits_)){}
-F_external_semaphore_feature(F_external_semaphore_feature const& flag_):flag(flag_.flag){}
-F_external_semaphore_feature(std::initializer_list<B> bit_list){for (auto&& bit : bit_list){flag |= static_cast<int>(bit);}}
-operator VkExternalSemaphoreFeatureFlagBits const &(){return *this;}
-F_external_semaphore_feature& operator = (F_external_semaphore_feature flag_){flag = flag_.flag;return *this;}
-F_external_semaphore_feature operator | (B bit_){return flag | static_cast<int>(bit_);}
-F_external_semaphore_feature& operator |= (B bit_){flag |= static_cast<int>(bit_);return *this;}
-F_external_semaphore_feature operator | (F_external_semaphore_feature flag_){return flag | flag_.flag;}
-F_external_semaphore_feature& operator |= (F_external_semaphore_feature flag_){flag |= flag_.flag;return *this;}
-F_external_semaphore_feature operator & (F_external_semaphore_feature flag_){return flag & flag_.flag;}
-F_external_semaphore_feature& operator &= (F_external_semaphore_feature flag_){flag &= flag_.flag;return *this;}
-F_external_semaphore_feature operator ^ (F_external_semaphore_feature flag_){return flag ^ flag_.flag;}
-F_external_semaphore_feature& operator ^= (F_external_semaphore_feature flag_){flag ^= flag_.flag;return *this;}
-F_external_semaphore_feature operator ~ (){return all_flags().flag^flag;}
-bool operator !(){return !flag;}
-F_external_semaphore_feature& clear(){flag = 0;return *this;}
-F_external_semaphore_feature all_flags(){
-return b_exportable | b_importable;
-}
-F_external_semaphore_feature& on_exportable(){ flag |= b_exportable; return *this; }
-F_external_semaphore_feature& off_exportable(){ flag &= ~b_exportable; return *this; }
-F_external_semaphore_feature& on_importable(){ flag |= b_importable; return *this; }
-F_external_semaphore_feature& off_importable(){ flag &= ~b_importable; return *this; }
-VkExternalSemaphoreFeatureFlagBits get_vkfb(){ return VkExternalSemaphoreFeatureFlagBits(flag); }
-};
-F_external_semaphore_feature inline operator|(const F_external_semaphore_feature::B bit1_, const F_external_semaphore_feature::B bit2_){F_external_semaphore_feature flags(bit1_);return flags | bit2_;}
-bool inline operator==(const F_external_semaphore_feature f1_, const F_external_semaphore_feature f2_) { return f1_.flag == f2_.flag; }
-bool inline operator!=(const F_external_semaphore_feature f1_, const F_external_semaphore_feature f2_) { return f1_.flag != f2_.flag; }
+inline F_external_semaphore_feature operator&(const F_external_semaphore_feature f1_, const F_external_semaphore_feature f2_){return f1_.flag&f2_.flag;}
+inline F_external_semaphore_feature operator|(const F_external_semaphore_feature f1_, const F_external_semaphore_feature f2_){return f1_.flag|f2_.flag;}
+inline F_external_semaphore_feature operator^(const F_external_semaphore_feature f1_, const F_external_semaphore_feature f2_){return f1_.flag^f2_.flag;}
 /*	VkSemaphoreImportFlagBits*/
-class F_semaphore_import {
-private:
-F_semaphore_import(int flag_):flag(flag_){};
-public:
-uint32_t flag;
-enum B{
-	b_temporary = VK_SEMAPHORE_IMPORT_TEMPORARY_BIT,
+union F_semaphore_import {
+	uint32_t flag;
+	VkSemaphoreImportFlagBits vk_flag;
+	enum B{
+		b_temporary = VK_SEMAPHORE_IMPORT_TEMPORARY_BIT,
+	};
+	F_semaphore_import():flag(0){}
+	F_semaphore_import(int i_):flag(static_cast<uint32_t>(i_)){}
+	F_semaphore_import(uint32_t flag_):flag(flag_){}
+	F_semaphore_import(const B flag_):flag(flag_){}
+	F_semaphore_import(VkSemaphoreImportFlagBits flag_):vk_flag(flag_){}
+	operator uint32_t(){return flag;}
+	operator int(){return static_cast<int>(flag);}
+	operator VkSemaphoreImportFlagBits const&(){return vk_flag;}
+	operator bool(){return !!flag;}
+	F_semaphore_import& operator=(const F_semaphore_import flag_){flag=flag_.flag; return *this;}
+	F_semaphore_import& operator|=(const F_semaphore_import flag_){flag|=flag_.flag; return *this;}
+	F_semaphore_import& operator&=(const F_semaphore_import flag_){flag&=flag_.flag; return *this;}
+	F_semaphore_import& operator^=(const F_semaphore_import flag_){flag^=flag_.flag;return *this;}
+	F_semaphore_import operator~(){return ~flag;}
+	bool operator==(const F_semaphore_import flag_){return flag==flag_.flag;}
+	bool operator!=(const F_semaphore_import flag_){return !(*this==flag_);}
+	F_semaphore_import& clear(){flag = 0;return *this;}
+	F_semaphore_import all_flags(){ return b_temporary;}
+	F_semaphore_import& on_temporary(){ flag |= b_temporary; return *this; }
+	F_semaphore_import& off_temporary(){ flag &= ~b_temporary; return *this; }
 };
-F_semaphore_import():flag(0){}
-F_semaphore_import(B bits_):flag(static_cast<int>(bits_)){}
-F_semaphore_import(F_semaphore_import const& flag_):flag(flag_.flag){}
-F_semaphore_import(std::initializer_list<B> bit_list){for (auto&& bit : bit_list){flag |= static_cast<int>(bit);}}
-operator VkSemaphoreImportFlagBits const &(){return *this;}
-F_semaphore_import& operator = (F_semaphore_import flag_){flag = flag_.flag;return *this;}
-F_semaphore_import operator | (B bit_){return flag | static_cast<int>(bit_);}
-F_semaphore_import& operator |= (B bit_){flag |= static_cast<int>(bit_);return *this;}
-F_semaphore_import operator | (F_semaphore_import flag_){return flag | flag_.flag;}
-F_semaphore_import& operator |= (F_semaphore_import flag_){flag |= flag_.flag;return *this;}
-F_semaphore_import operator & (F_semaphore_import flag_){return flag & flag_.flag;}
-F_semaphore_import& operator &= (F_semaphore_import flag_){flag &= flag_.flag;return *this;}
-F_semaphore_import operator ^ (F_semaphore_import flag_){return flag ^ flag_.flag;}
-F_semaphore_import& operator ^= (F_semaphore_import flag_){flag ^= flag_.flag;return *this;}
-F_semaphore_import operator ~ (){return all_flags().flag^flag;}
-bool operator !(){return !flag;}
-F_semaphore_import& clear(){flag = 0;return *this;}
-F_semaphore_import all_flags(){
-return b_temporary;
-}
-F_semaphore_import& on_temporary(){ flag |= b_temporary; return *this; }
-F_semaphore_import& off_temporary(){ flag &= ~b_temporary; return *this; }
-VkSemaphoreImportFlagBits get_vkfb(){ return VkSemaphoreImportFlagBits(flag); }
-};
-F_semaphore_import inline operator|(const F_semaphore_import::B bit1_, const F_semaphore_import::B bit2_){F_semaphore_import flags(bit1_);return flags | bit2_;}
-bool inline operator==(const F_semaphore_import f1_, const F_semaphore_import f2_) { return f1_.flag == f2_.flag; }
-bool inline operator!=(const F_semaphore_import f1_, const F_semaphore_import f2_) { return f1_.flag != f2_.flag; }
+inline F_semaphore_import operator&(const F_semaphore_import f1_, const F_semaphore_import f2_){return f1_.flag&f2_.flag;}
+inline F_semaphore_import operator|(const F_semaphore_import f1_, const F_semaphore_import f2_){return f1_.flag|f2_.flag;}
+inline F_semaphore_import operator^(const F_semaphore_import f1_, const F_semaphore_import f2_){return f1_.flag^f2_.flag;}
 /*	VkExternalFenceHandleTypeFlagBits*/
-class F_external_fence_handle_type {
-private:
-F_external_fence_handle_type(int flag_):flag(flag_){};
-public:
-uint32_t flag;
-enum B{
-	b_opaque_fd = VK_EXTERNAL_FENCE_HANDLE_TYPE_OPAQUE_FD_BIT,
-	b_opaque_win32 = VK_EXTERNAL_FENCE_HANDLE_TYPE_OPAQUE_WIN32_BIT,
-	b_opaque_win32_kmt = VK_EXTERNAL_FENCE_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT,
-	b_sync_fd = VK_EXTERNAL_FENCE_HANDLE_TYPE_SYNC_FD_BIT,
+union F_external_fence_handle_type {
+	uint32_t flag;
+	VkExternalFenceHandleTypeFlagBits vk_flag;
+	enum B{
+		b_opaque_fd = VK_EXTERNAL_FENCE_HANDLE_TYPE_OPAQUE_FD_BIT,
+		b_opaque_win32 = VK_EXTERNAL_FENCE_HANDLE_TYPE_OPAQUE_WIN32_BIT,
+		b_opaque_win32_kmt = VK_EXTERNAL_FENCE_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT,
+		b_sync_fd = VK_EXTERNAL_FENCE_HANDLE_TYPE_SYNC_FD_BIT,
+	};
+	F_external_fence_handle_type():flag(0){}
+	F_external_fence_handle_type(int i_):flag(static_cast<uint32_t>(i_)){}
+	F_external_fence_handle_type(uint32_t flag_):flag(flag_){}
+	F_external_fence_handle_type(const B flag_):flag(flag_){}
+	F_external_fence_handle_type(VkExternalFenceHandleTypeFlagBits flag_):vk_flag(flag_){}
+	operator uint32_t(){return flag;}
+	operator int(){return static_cast<int>(flag);}
+	operator VkExternalFenceHandleTypeFlagBits const&(){return vk_flag;}
+	operator bool(){return !!flag;}
+	F_external_fence_handle_type& operator=(const F_external_fence_handle_type flag_){flag=flag_.flag; return *this;}
+	F_external_fence_handle_type& operator|=(const F_external_fence_handle_type flag_){flag|=flag_.flag; return *this;}
+	F_external_fence_handle_type& operator&=(const F_external_fence_handle_type flag_){flag&=flag_.flag; return *this;}
+	F_external_fence_handle_type& operator^=(const F_external_fence_handle_type flag_){flag^=flag_.flag;return *this;}
+	F_external_fence_handle_type operator~(){return ~flag;}
+	bool operator==(const F_external_fence_handle_type flag_){return flag==flag_.flag;}
+	bool operator!=(const F_external_fence_handle_type flag_){return !(*this==flag_);}
+	F_external_fence_handle_type& clear(){flag = 0;return *this;}
+	F_external_fence_handle_type all_flags(){ return b_opaque_fd | b_opaque_win32 | b_opaque_win32_kmt | b_sync_fd;}
+	F_external_fence_handle_type& on_opaque_fd(){ flag |= b_opaque_fd; return *this; }
+	F_external_fence_handle_type& off_opaque_fd(){ flag &= ~b_opaque_fd; return *this; }
+	F_external_fence_handle_type& on_opaque_win32(){ flag |= b_opaque_win32; return *this; }
+	F_external_fence_handle_type& off_opaque_win32(){ flag &= ~b_opaque_win32; return *this; }
+	F_external_fence_handle_type& on_opaque_win32_kmt(){ flag |= b_opaque_win32_kmt; return *this; }
+	F_external_fence_handle_type& off_opaque_win32_kmt(){ flag &= ~b_opaque_win32_kmt; return *this; }
+	F_external_fence_handle_type& on_sync_fd(){ flag |= b_sync_fd; return *this; }
+	F_external_fence_handle_type& off_sync_fd(){ flag &= ~b_sync_fd; return *this; }
 };
-F_external_fence_handle_type():flag(0){}
-F_external_fence_handle_type(B bits_):flag(static_cast<int>(bits_)){}
-F_external_fence_handle_type(F_external_fence_handle_type const& flag_):flag(flag_.flag){}
-F_external_fence_handle_type(std::initializer_list<B> bit_list){for (auto&& bit : bit_list){flag |= static_cast<int>(bit);}}
-operator VkExternalFenceHandleTypeFlagBits const &(){return *this;}
-F_external_fence_handle_type& operator = (F_external_fence_handle_type flag_){flag = flag_.flag;return *this;}
-F_external_fence_handle_type operator | (B bit_){return flag | static_cast<int>(bit_);}
-F_external_fence_handle_type& operator |= (B bit_){flag |= static_cast<int>(bit_);return *this;}
-F_external_fence_handle_type operator | (F_external_fence_handle_type flag_){return flag | flag_.flag;}
-F_external_fence_handle_type& operator |= (F_external_fence_handle_type flag_){flag |= flag_.flag;return *this;}
-F_external_fence_handle_type operator & (F_external_fence_handle_type flag_){return flag & flag_.flag;}
-F_external_fence_handle_type& operator &= (F_external_fence_handle_type flag_){flag &= flag_.flag;return *this;}
-F_external_fence_handle_type operator ^ (F_external_fence_handle_type flag_){return flag ^ flag_.flag;}
-F_external_fence_handle_type& operator ^= (F_external_fence_handle_type flag_){flag ^= flag_.flag;return *this;}
-F_external_fence_handle_type operator ~ (){return all_flags().flag^flag;}
-bool operator !(){return !flag;}
-F_external_fence_handle_type& clear(){flag = 0;return *this;}
-F_external_fence_handle_type all_flags(){
-return b_opaque_fd | b_opaque_win32 | b_opaque_win32_kmt | b_sync_fd;
-}
-F_external_fence_handle_type& on_opaque_fd(){ flag |= b_opaque_fd; return *this; }
-F_external_fence_handle_type& off_opaque_fd(){ flag &= ~b_opaque_fd; return *this; }
-F_external_fence_handle_type& on_opaque_win32(){ flag |= b_opaque_win32; return *this; }
-F_external_fence_handle_type& off_opaque_win32(){ flag &= ~b_opaque_win32; return *this; }
-F_external_fence_handle_type& on_opaque_win32_kmt(){ flag |= b_opaque_win32_kmt; return *this; }
-F_external_fence_handle_type& off_opaque_win32_kmt(){ flag &= ~b_opaque_win32_kmt; return *this; }
-F_external_fence_handle_type& on_sync_fd(){ flag |= b_sync_fd; return *this; }
-F_external_fence_handle_type& off_sync_fd(){ flag &= ~b_sync_fd; return *this; }
-VkExternalFenceHandleTypeFlagBits get_vkfb(){ return VkExternalFenceHandleTypeFlagBits(flag); }
-};
-F_external_fence_handle_type inline operator|(const F_external_fence_handle_type::B bit1_, const F_external_fence_handle_type::B bit2_){F_external_fence_handle_type flags(bit1_);return flags | bit2_;}
-bool inline operator==(const F_external_fence_handle_type f1_, const F_external_fence_handle_type f2_) { return f1_.flag == f2_.flag; }
-bool inline operator!=(const F_external_fence_handle_type f1_, const F_external_fence_handle_type f2_) { return f1_.flag != f2_.flag; }
+inline F_external_fence_handle_type operator&(const F_external_fence_handle_type f1_, const F_external_fence_handle_type f2_){return f1_.flag&f2_.flag;}
+inline F_external_fence_handle_type operator|(const F_external_fence_handle_type f1_, const F_external_fence_handle_type f2_){return f1_.flag|f2_.flag;}
+inline F_external_fence_handle_type operator^(const F_external_fence_handle_type f1_, const F_external_fence_handle_type f2_){return f1_.flag^f2_.flag;}
 /*	VkExternalFenceFeatureFlagBits*/
-class F_external_fence_feature {
-private:
-F_external_fence_feature(int flag_):flag(flag_){};
-public:
-uint32_t flag;
-enum B{
-	b_exportable = VK_EXTERNAL_FENCE_FEATURE_EXPORTABLE_BIT,
-	b_importable = VK_EXTERNAL_FENCE_FEATURE_IMPORTABLE_BIT,
+union F_external_fence_feature {
+	uint32_t flag;
+	VkExternalFenceFeatureFlagBits vk_flag;
+	enum B{
+		b_exportable = VK_EXTERNAL_FENCE_FEATURE_EXPORTABLE_BIT,
+		b_importable = VK_EXTERNAL_FENCE_FEATURE_IMPORTABLE_BIT,
+	};
+	F_external_fence_feature():flag(0){}
+	F_external_fence_feature(int i_):flag(static_cast<uint32_t>(i_)){}
+	F_external_fence_feature(uint32_t flag_):flag(flag_){}
+	F_external_fence_feature(const B flag_):flag(flag_){}
+	F_external_fence_feature(VkExternalFenceFeatureFlagBits flag_):vk_flag(flag_){}
+	operator uint32_t(){return flag;}
+	operator int(){return static_cast<int>(flag);}
+	operator VkExternalFenceFeatureFlagBits const&(){return vk_flag;}
+	operator bool(){return !!flag;}
+	F_external_fence_feature& operator=(const F_external_fence_feature flag_){flag=flag_.flag; return *this;}
+	F_external_fence_feature& operator|=(const F_external_fence_feature flag_){flag|=flag_.flag; return *this;}
+	F_external_fence_feature& operator&=(const F_external_fence_feature flag_){flag&=flag_.flag; return *this;}
+	F_external_fence_feature& operator^=(const F_external_fence_feature flag_){flag^=flag_.flag;return *this;}
+	F_external_fence_feature operator~(){return ~flag;}
+	bool operator==(const F_external_fence_feature flag_){return flag==flag_.flag;}
+	bool operator!=(const F_external_fence_feature flag_){return !(*this==flag_);}
+	F_external_fence_feature& clear(){flag = 0;return *this;}
+	F_external_fence_feature all_flags(){ return b_exportable | b_importable;}
+	F_external_fence_feature& on_exportable(){ flag |= b_exportable; return *this; }
+	F_external_fence_feature& off_exportable(){ flag &= ~b_exportable; return *this; }
+	F_external_fence_feature& on_importable(){ flag |= b_importable; return *this; }
+	F_external_fence_feature& off_importable(){ flag &= ~b_importable; return *this; }
 };
-F_external_fence_feature():flag(0){}
-F_external_fence_feature(B bits_):flag(static_cast<int>(bits_)){}
-F_external_fence_feature(F_external_fence_feature const& flag_):flag(flag_.flag){}
-F_external_fence_feature(std::initializer_list<B> bit_list){for (auto&& bit : bit_list){flag |= static_cast<int>(bit);}}
-operator VkExternalFenceFeatureFlagBits const &(){return *this;}
-F_external_fence_feature& operator = (F_external_fence_feature flag_){flag = flag_.flag;return *this;}
-F_external_fence_feature operator | (B bit_){return flag | static_cast<int>(bit_);}
-F_external_fence_feature& operator |= (B bit_){flag |= static_cast<int>(bit_);return *this;}
-F_external_fence_feature operator | (F_external_fence_feature flag_){return flag | flag_.flag;}
-F_external_fence_feature& operator |= (F_external_fence_feature flag_){flag |= flag_.flag;return *this;}
-F_external_fence_feature operator & (F_external_fence_feature flag_){return flag & flag_.flag;}
-F_external_fence_feature& operator &= (F_external_fence_feature flag_){flag &= flag_.flag;return *this;}
-F_external_fence_feature operator ^ (F_external_fence_feature flag_){return flag ^ flag_.flag;}
-F_external_fence_feature& operator ^= (F_external_fence_feature flag_){flag ^= flag_.flag;return *this;}
-F_external_fence_feature operator ~ (){return all_flags().flag^flag;}
-bool operator !(){return !flag;}
-F_external_fence_feature& clear(){flag = 0;return *this;}
-F_external_fence_feature all_flags(){
-return b_exportable | b_importable;
-}
-F_external_fence_feature& on_exportable(){ flag |= b_exportable; return *this; }
-F_external_fence_feature& off_exportable(){ flag &= ~b_exportable; return *this; }
-F_external_fence_feature& on_importable(){ flag |= b_importable; return *this; }
-F_external_fence_feature& off_importable(){ flag &= ~b_importable; return *this; }
-VkExternalFenceFeatureFlagBits get_vkfb(){ return VkExternalFenceFeatureFlagBits(flag); }
-};
-F_external_fence_feature inline operator|(const F_external_fence_feature::B bit1_, const F_external_fence_feature::B bit2_){F_external_fence_feature flags(bit1_);return flags | bit2_;}
-bool inline operator==(const F_external_fence_feature f1_, const F_external_fence_feature f2_) { return f1_.flag == f2_.flag; }
-bool inline operator!=(const F_external_fence_feature f1_, const F_external_fence_feature f2_) { return f1_.flag != f2_.flag; }
+inline F_external_fence_feature operator&(const F_external_fence_feature f1_, const F_external_fence_feature f2_){return f1_.flag&f2_.flag;}
+inline F_external_fence_feature operator|(const F_external_fence_feature f1_, const F_external_fence_feature f2_){return f1_.flag|f2_.flag;}
+inline F_external_fence_feature operator^(const F_external_fence_feature f1_, const F_external_fence_feature f2_){return f1_.flag^f2_.flag;}
 /*	VkFenceImportFlagBits*/
-class F_fence_import {
-private:
-F_fence_import(int flag_):flag(flag_){};
-public:
-uint32_t flag;
-enum B{
-	b_temporary = VK_FENCE_IMPORT_TEMPORARY_BIT,
+union F_fence_import {
+	uint32_t flag;
+	VkFenceImportFlagBits vk_flag;
+	enum B{
+		b_temporary = VK_FENCE_IMPORT_TEMPORARY_BIT,
+	};
+	F_fence_import():flag(0){}
+	F_fence_import(int i_):flag(static_cast<uint32_t>(i_)){}
+	F_fence_import(uint32_t flag_):flag(flag_){}
+	F_fence_import(const B flag_):flag(flag_){}
+	F_fence_import(VkFenceImportFlagBits flag_):vk_flag(flag_){}
+	operator uint32_t(){return flag;}
+	operator int(){return static_cast<int>(flag);}
+	operator VkFenceImportFlagBits const&(){return vk_flag;}
+	operator bool(){return !!flag;}
+	F_fence_import& operator=(const F_fence_import flag_){flag=flag_.flag; return *this;}
+	F_fence_import& operator|=(const F_fence_import flag_){flag|=flag_.flag; return *this;}
+	F_fence_import& operator&=(const F_fence_import flag_){flag&=flag_.flag; return *this;}
+	F_fence_import& operator^=(const F_fence_import flag_){flag^=flag_.flag;return *this;}
+	F_fence_import operator~(){return ~flag;}
+	bool operator==(const F_fence_import flag_){return flag==flag_.flag;}
+	bool operator!=(const F_fence_import flag_){return !(*this==flag_);}
+	F_fence_import& clear(){flag = 0;return *this;}
+	F_fence_import all_flags(){ return b_temporary;}
+	F_fence_import& on_temporary(){ flag |= b_temporary; return *this; }
+	F_fence_import& off_temporary(){ flag &= ~b_temporary; return *this; }
 };
-F_fence_import():flag(0){}
-F_fence_import(B bits_):flag(static_cast<int>(bits_)){}
-F_fence_import(F_fence_import const& flag_):flag(flag_.flag){}
-F_fence_import(std::initializer_list<B> bit_list){for (auto&& bit : bit_list){flag |= static_cast<int>(bit);}}
-operator VkFenceImportFlagBits const &(){return *this;}
-F_fence_import& operator = (F_fence_import flag_){flag = flag_.flag;return *this;}
-F_fence_import operator | (B bit_){return flag | static_cast<int>(bit_);}
-F_fence_import& operator |= (B bit_){flag |= static_cast<int>(bit_);return *this;}
-F_fence_import operator | (F_fence_import flag_){return flag | flag_.flag;}
-F_fence_import& operator |= (F_fence_import flag_){flag |= flag_.flag;return *this;}
-F_fence_import operator & (F_fence_import flag_){return flag & flag_.flag;}
-F_fence_import& operator &= (F_fence_import flag_){flag &= flag_.flag;return *this;}
-F_fence_import operator ^ (F_fence_import flag_){return flag ^ flag_.flag;}
-F_fence_import& operator ^= (F_fence_import flag_){flag ^= flag_.flag;return *this;}
-F_fence_import operator ~ (){return all_flags().flag^flag;}
-bool operator !(){return !flag;}
-F_fence_import& clear(){flag = 0;return *this;}
-F_fence_import all_flags(){
-return b_temporary;
-}
-F_fence_import& on_temporary(){ flag |= b_temporary; return *this; }
-F_fence_import& off_temporary(){ flag &= ~b_temporary; return *this; }
-VkFenceImportFlagBits get_vkfb(){ return VkFenceImportFlagBits(flag); }
-};
-F_fence_import inline operator|(const F_fence_import::B bit1_, const F_fence_import::B bit2_){F_fence_import flags(bit1_);return flags | bit2_;}
-bool inline operator==(const F_fence_import f1_, const F_fence_import f2_) { return f1_.flag == f2_.flag; }
-bool inline operator!=(const F_fence_import f1_, const F_fence_import f2_) { return f1_.flag != f2_.flag; }
+inline F_fence_import operator&(const F_fence_import f1_, const F_fence_import f2_){return f1_.flag&f2_.flag;}
+inline F_fence_import operator|(const F_fence_import f1_, const F_fence_import f2_){return f1_.flag|f2_.flag;}
+inline F_fence_import operator^(const F_fence_import f1_, const F_fence_import f2_){return f1_.flag^f2_.flag;}
 /*	VkSurfaceCounterFlagBitsEXT*/
-class F_surface_counter_EXT {
-private:
-F_surface_counter_EXT(int flag_):flag(flag_){};
-public:
-uint32_t flag;
-enum B{
-	b_vblank_ext = VK_SURFACE_COUNTER_VBLANK_EXT,
+union F_surface_counter_EXT {
+	uint32_t flag;
+	VkSurfaceCounterFlagBitsEXT vk_flag;
+	enum B{
+		b_vblank_ext = VK_SURFACE_COUNTER_VBLANK_EXT,
+	};
+	F_surface_counter_EXT():flag(0){}
+	F_surface_counter_EXT(int i_):flag(static_cast<uint32_t>(i_)){}
+	F_surface_counter_EXT(uint32_t flag_):flag(flag_){}
+	F_surface_counter_EXT(const B flag_):flag(flag_){}
+	F_surface_counter_EXT(VkSurfaceCounterFlagBitsEXT flag_):vk_flag(flag_){}
+	operator uint32_t(){return flag;}
+	operator int(){return static_cast<int>(flag);}
+	operator VkSurfaceCounterFlagBitsEXT const&(){return vk_flag;}
+	operator bool(){return !!flag;}
+	F_surface_counter_EXT& operator=(const F_surface_counter_EXT flag_){flag=flag_.flag; return *this;}
+	F_surface_counter_EXT& operator|=(const F_surface_counter_EXT flag_){flag|=flag_.flag; return *this;}
+	F_surface_counter_EXT& operator&=(const F_surface_counter_EXT flag_){flag&=flag_.flag; return *this;}
+	F_surface_counter_EXT& operator^=(const F_surface_counter_EXT flag_){flag^=flag_.flag;return *this;}
+	F_surface_counter_EXT operator~(){return ~flag;}
+	bool operator==(const F_surface_counter_EXT flag_){return flag==flag_.flag;}
+	bool operator!=(const F_surface_counter_EXT flag_){return !(*this==flag_);}
+	F_surface_counter_EXT& clear(){flag = 0;return *this;}
+	F_surface_counter_EXT all_flags(){ return b_vblank_ext;}
+	F_surface_counter_EXT& on_vblank_ext(){ flag |= b_vblank_ext; return *this; }
+	F_surface_counter_EXT& off_vblank_ext(){ flag &= ~b_vblank_ext; return *this; }
 };
-F_surface_counter_EXT():flag(0){}
-F_surface_counter_EXT(B bits_):flag(static_cast<int>(bits_)){}
-F_surface_counter_EXT(F_surface_counter_EXT const& flag_):flag(flag_.flag){}
-F_surface_counter_EXT(std::initializer_list<B> bit_list){for (auto&& bit : bit_list){flag |= static_cast<int>(bit);}}
-operator VkSurfaceCounterFlagBitsEXT const &(){return *this;}
-F_surface_counter_EXT& operator = (F_surface_counter_EXT flag_){flag = flag_.flag;return *this;}
-F_surface_counter_EXT operator | (B bit_){return flag | static_cast<int>(bit_);}
-F_surface_counter_EXT& operator |= (B bit_){flag |= static_cast<int>(bit_);return *this;}
-F_surface_counter_EXT operator | (F_surface_counter_EXT flag_){return flag | flag_.flag;}
-F_surface_counter_EXT& operator |= (F_surface_counter_EXT flag_){flag |= flag_.flag;return *this;}
-F_surface_counter_EXT operator & (F_surface_counter_EXT flag_){return flag & flag_.flag;}
-F_surface_counter_EXT& operator &= (F_surface_counter_EXT flag_){flag &= flag_.flag;return *this;}
-F_surface_counter_EXT operator ^ (F_surface_counter_EXT flag_){return flag ^ flag_.flag;}
-F_surface_counter_EXT& operator ^= (F_surface_counter_EXT flag_){flag ^= flag_.flag;return *this;}
-F_surface_counter_EXT operator ~ (){return all_flags().flag^flag;}
-bool operator !(){return !flag;}
-F_surface_counter_EXT& clear(){flag = 0;return *this;}
-F_surface_counter_EXT all_flags(){
-return b_vblank_ext;
-}
-F_surface_counter_EXT& on_vblank_ext(){ flag |= b_vblank_ext; return *this; }
-F_surface_counter_EXT& off_vblank_ext(){ flag &= ~b_vblank_ext; return *this; }
-VkSurfaceCounterFlagBitsEXT get_vkfb(){ return VkSurfaceCounterFlagBitsEXT(flag); }
-};
-F_surface_counter_EXT inline operator|(const F_surface_counter_EXT::B bit1_, const F_surface_counter_EXT::B bit2_){F_surface_counter_EXT flags(bit1_);return flags | bit2_;}
-bool inline operator==(const F_surface_counter_EXT f1_, const F_surface_counter_EXT f2_) { return f1_.flag == f2_.flag; }
-bool inline operator!=(const F_surface_counter_EXT f1_, const F_surface_counter_EXT f2_) { return f1_.flag != f2_.flag; }
+inline F_surface_counter_EXT operator&(const F_surface_counter_EXT f1_, const F_surface_counter_EXT f2_){return f1_.flag&f2_.flag;}
+inline F_surface_counter_EXT operator|(const F_surface_counter_EXT f1_, const F_surface_counter_EXT f2_){return f1_.flag|f2_.flag;}
+inline F_surface_counter_EXT operator^(const F_surface_counter_EXT f1_, const F_surface_counter_EXT f2_){return f1_.flag^f2_.flag;}
 /*	VkPeerMemoryFeatureFlagBits*/
-class F_peer_memory_feature {
-private:
-F_peer_memory_feature(int flag_):flag(flag_){};
-public:
-uint32_t flag;
-enum B{
-/*Can read with vkCmdCopy commands*/
-	b_copy_src = VK_PEER_MEMORY_FEATURE_COPY_SRC_BIT,
-/*Can write with vkCmdCopy commands*/
-	b_copy_dst = VK_PEER_MEMORY_FEATURE_COPY_DST_BIT,
-/*Can read with any access type/command*/
-	b_generic_src = VK_PEER_MEMORY_FEATURE_GENERIC_SRC_BIT,
-/*Can write with and access type/command*/
-	b_generic_dst = VK_PEER_MEMORY_FEATURE_GENERIC_DST_BIT,
+union F_peer_memory_feature {
+	uint32_t flag;
+	VkPeerMemoryFeatureFlagBits vk_flag;
+	enum B{
+			/* Can read with vkCmdCopy commands */
+		b_copy_src = VK_PEER_MEMORY_FEATURE_COPY_SRC_BIT,
+			/* Can write with vkCmdCopy commands */
+		b_copy_dst = VK_PEER_MEMORY_FEATURE_COPY_DST_BIT,
+			/* Can read with any access type/command */
+		b_generic_src = VK_PEER_MEMORY_FEATURE_GENERIC_SRC_BIT,
+			/* Can write with and access type/command */
+		b_generic_dst = VK_PEER_MEMORY_FEATURE_GENERIC_DST_BIT,
+	};
+	F_peer_memory_feature():flag(0){}
+	F_peer_memory_feature(int i_):flag(static_cast<uint32_t>(i_)){}
+	F_peer_memory_feature(uint32_t flag_):flag(flag_){}
+	F_peer_memory_feature(const B flag_):flag(flag_){}
+	F_peer_memory_feature(VkPeerMemoryFeatureFlagBits flag_):vk_flag(flag_){}
+	operator uint32_t(){return flag;}
+	operator int(){return static_cast<int>(flag);}
+	operator VkPeerMemoryFeatureFlagBits const&(){return vk_flag;}
+	operator bool(){return !!flag;}
+	F_peer_memory_feature& operator=(const F_peer_memory_feature flag_){flag=flag_.flag; return *this;}
+	F_peer_memory_feature& operator|=(const F_peer_memory_feature flag_){flag|=flag_.flag; return *this;}
+	F_peer_memory_feature& operator&=(const F_peer_memory_feature flag_){flag&=flag_.flag; return *this;}
+	F_peer_memory_feature& operator^=(const F_peer_memory_feature flag_){flag^=flag_.flag;return *this;}
+	F_peer_memory_feature operator~(){return ~flag;}
+	bool operator==(const F_peer_memory_feature flag_){return flag==flag_.flag;}
+	bool operator!=(const F_peer_memory_feature flag_){return !(*this==flag_);}
+	F_peer_memory_feature& clear(){flag = 0;return *this;}
+	F_peer_memory_feature all_flags(){ return b_copy_src | b_copy_dst | b_generic_src | b_generic_dst;}
+	F_peer_memory_feature& on_copy_src(){ flag |= b_copy_src; return *this; }
+	F_peer_memory_feature& off_copy_src(){ flag &= ~b_copy_src; return *this; }
+	F_peer_memory_feature& on_copy_dst(){ flag |= b_copy_dst; return *this; }
+	F_peer_memory_feature& off_copy_dst(){ flag &= ~b_copy_dst; return *this; }
+	F_peer_memory_feature& on_generic_src(){ flag |= b_generic_src; return *this; }
+	F_peer_memory_feature& off_generic_src(){ flag &= ~b_generic_src; return *this; }
+	F_peer_memory_feature& on_generic_dst(){ flag |= b_generic_dst; return *this; }
+	F_peer_memory_feature& off_generic_dst(){ flag &= ~b_generic_dst; return *this; }
 };
-F_peer_memory_feature():flag(0){}
-F_peer_memory_feature(B bits_):flag(static_cast<int>(bits_)){}
-F_peer_memory_feature(F_peer_memory_feature const& flag_):flag(flag_.flag){}
-F_peer_memory_feature(std::initializer_list<B> bit_list){for (auto&& bit : bit_list){flag |= static_cast<int>(bit);}}
-operator VkPeerMemoryFeatureFlagBits const &(){return *this;}
-F_peer_memory_feature& operator = (F_peer_memory_feature flag_){flag = flag_.flag;return *this;}
-F_peer_memory_feature operator | (B bit_){return flag | static_cast<int>(bit_);}
-F_peer_memory_feature& operator |= (B bit_){flag |= static_cast<int>(bit_);return *this;}
-F_peer_memory_feature operator | (F_peer_memory_feature flag_){return flag | flag_.flag;}
-F_peer_memory_feature& operator |= (F_peer_memory_feature flag_){flag |= flag_.flag;return *this;}
-F_peer_memory_feature operator & (F_peer_memory_feature flag_){return flag & flag_.flag;}
-F_peer_memory_feature& operator &= (F_peer_memory_feature flag_){flag &= flag_.flag;return *this;}
-F_peer_memory_feature operator ^ (F_peer_memory_feature flag_){return flag ^ flag_.flag;}
-F_peer_memory_feature& operator ^= (F_peer_memory_feature flag_){flag ^= flag_.flag;return *this;}
-F_peer_memory_feature operator ~ (){return all_flags().flag^flag;}
-bool operator !(){return !flag;}
-F_peer_memory_feature& clear(){flag = 0;return *this;}
-F_peer_memory_feature all_flags(){
-return b_copy_src | b_copy_dst | b_generic_src | b_generic_dst;
-}
-F_peer_memory_feature& on_copy_src(){ flag |= b_copy_src; return *this; }
-F_peer_memory_feature& off_copy_src(){ flag &= ~b_copy_src; return *this; }
-F_peer_memory_feature& on_copy_dst(){ flag |= b_copy_dst; return *this; }
-F_peer_memory_feature& off_copy_dst(){ flag &= ~b_copy_dst; return *this; }
-F_peer_memory_feature& on_generic_src(){ flag |= b_generic_src; return *this; }
-F_peer_memory_feature& off_generic_src(){ flag &= ~b_generic_src; return *this; }
-F_peer_memory_feature& on_generic_dst(){ flag |= b_generic_dst; return *this; }
-F_peer_memory_feature& off_generic_dst(){ flag &= ~b_generic_dst; return *this; }
-VkPeerMemoryFeatureFlagBits get_vkfb(){ return VkPeerMemoryFeatureFlagBits(flag); }
-};
-F_peer_memory_feature inline operator|(const F_peer_memory_feature::B bit1_, const F_peer_memory_feature::B bit2_){F_peer_memory_feature flags(bit1_);return flags | bit2_;}
-bool inline operator==(const F_peer_memory_feature f1_, const F_peer_memory_feature f2_) { return f1_.flag == f2_.flag; }
-bool inline operator!=(const F_peer_memory_feature f1_, const F_peer_memory_feature f2_) { return f1_.flag != f2_.flag; }
+inline F_peer_memory_feature operator&(const F_peer_memory_feature f1_, const F_peer_memory_feature f2_){return f1_.flag&f2_.flag;}
+inline F_peer_memory_feature operator|(const F_peer_memory_feature f1_, const F_peer_memory_feature f2_){return f1_.flag|f2_.flag;}
+inline F_peer_memory_feature operator^(const F_peer_memory_feature f1_, const F_peer_memory_feature f2_){return f1_.flag^f2_.flag;}
 /*	VkMemoryAllocateFlagBits*/
-class F_memory_allocate {
-private:
-F_memory_allocate(int flag_):flag(flag_){};
-public:
-uint32_t flag;
-enum B{
-/*Force allocation on specific devices*/
-	b_device_mask = VK_MEMORY_ALLOCATE_DEVICE_MASK_BIT,
+union F_memory_allocate {
+	uint32_t flag;
+	VkMemoryAllocateFlagBits vk_flag;
+	enum B{
+			/* Force allocation on specific devices */
+		b_device_mask = VK_MEMORY_ALLOCATE_DEVICE_MASK_BIT,
+	};
+	F_memory_allocate():flag(0){}
+	F_memory_allocate(int i_):flag(static_cast<uint32_t>(i_)){}
+	F_memory_allocate(uint32_t flag_):flag(flag_){}
+	F_memory_allocate(const B flag_):flag(flag_){}
+	F_memory_allocate(VkMemoryAllocateFlagBits flag_):vk_flag(flag_){}
+	operator uint32_t(){return flag;}
+	operator int(){return static_cast<int>(flag);}
+	operator VkMemoryAllocateFlagBits const&(){return vk_flag;}
+	operator bool(){return !!flag;}
+	F_memory_allocate& operator=(const F_memory_allocate flag_){flag=flag_.flag; return *this;}
+	F_memory_allocate& operator|=(const F_memory_allocate flag_){flag|=flag_.flag; return *this;}
+	F_memory_allocate& operator&=(const F_memory_allocate flag_){flag&=flag_.flag; return *this;}
+	F_memory_allocate& operator^=(const F_memory_allocate flag_){flag^=flag_.flag;return *this;}
+	F_memory_allocate operator~(){return ~flag;}
+	bool operator==(const F_memory_allocate flag_){return flag==flag_.flag;}
+	bool operator!=(const F_memory_allocate flag_){return !(*this==flag_);}
+	F_memory_allocate& clear(){flag = 0;return *this;}
+	F_memory_allocate all_flags(){ return b_device_mask;}
+	F_memory_allocate& on_device_mask(){ flag |= b_device_mask; return *this; }
+	F_memory_allocate& off_device_mask(){ flag &= ~b_device_mask; return *this; }
 };
-F_memory_allocate():flag(0){}
-F_memory_allocate(B bits_):flag(static_cast<int>(bits_)){}
-F_memory_allocate(F_memory_allocate const& flag_):flag(flag_.flag){}
-F_memory_allocate(std::initializer_list<B> bit_list){for (auto&& bit : bit_list){flag |= static_cast<int>(bit);}}
-operator VkMemoryAllocateFlagBits const &(){return *this;}
-F_memory_allocate& operator = (F_memory_allocate flag_){flag = flag_.flag;return *this;}
-F_memory_allocate operator | (B bit_){return flag | static_cast<int>(bit_);}
-F_memory_allocate& operator |= (B bit_){flag |= static_cast<int>(bit_);return *this;}
-F_memory_allocate operator | (F_memory_allocate flag_){return flag | flag_.flag;}
-F_memory_allocate& operator |= (F_memory_allocate flag_){flag |= flag_.flag;return *this;}
-F_memory_allocate operator & (F_memory_allocate flag_){return flag & flag_.flag;}
-F_memory_allocate& operator &= (F_memory_allocate flag_){flag &= flag_.flag;return *this;}
-F_memory_allocate operator ^ (F_memory_allocate flag_){return flag ^ flag_.flag;}
-F_memory_allocate& operator ^= (F_memory_allocate flag_){flag ^= flag_.flag;return *this;}
-F_memory_allocate operator ~ (){return all_flags().flag^flag;}
-bool operator !(){return !flag;}
-F_memory_allocate& clear(){flag = 0;return *this;}
-F_memory_allocate all_flags(){
-return b_device_mask;
-}
-F_memory_allocate& on_device_mask(){ flag |= b_device_mask; return *this; }
-F_memory_allocate& off_device_mask(){ flag &= ~b_device_mask; return *this; }
-VkMemoryAllocateFlagBits get_vkfb(){ return VkMemoryAllocateFlagBits(flag); }
-};
-F_memory_allocate inline operator|(const F_memory_allocate::B bit1_, const F_memory_allocate::B bit2_){F_memory_allocate flags(bit1_);return flags | bit2_;}
-bool inline operator==(const F_memory_allocate f1_, const F_memory_allocate f2_) { return f1_.flag == f2_.flag; }
-bool inline operator!=(const F_memory_allocate f1_, const F_memory_allocate f2_) { return f1_.flag != f2_.flag; }
+inline F_memory_allocate operator&(const F_memory_allocate f1_, const F_memory_allocate f2_){return f1_.flag&f2_.flag;}
+inline F_memory_allocate operator|(const F_memory_allocate f1_, const F_memory_allocate f2_){return f1_.flag|f2_.flag;}
+inline F_memory_allocate operator^(const F_memory_allocate f1_, const F_memory_allocate f2_){return f1_.flag^f2_.flag;}
 /*	VkDeviceGroupPresentModeFlagBitsKHR*/
-class F_device_group_present_mode_KHR {
-private:
-F_device_group_present_mode_KHR(int flag_):flag(flag_){};
-public:
-uint32_t flag;
-enum B{
-/*Present from local memory*/
-	b_local_khr = VK_DEVICE_GROUP_PRESENT_MODE_LOCAL_BIT_KHR,
-/*Present from remote memory*/
-	b_remote_khr = VK_DEVICE_GROUP_PRESENT_MODE_REMOTE_BIT_KHR,
-/*Present sum of local and/or remote memory*/
-	b_sum_khr = VK_DEVICE_GROUP_PRESENT_MODE_SUM_BIT_KHR,
-/*Each physical device presents from local memory*/
-	b_local_multi_device_khr = VK_DEVICE_GROUP_PRESENT_MODE_LOCAL_MULTI_DEVICE_BIT_KHR,
+union F_device_group_present_mode_KHR {
+	uint32_t flag;
+	VkDeviceGroupPresentModeFlagBitsKHR vk_flag;
+	enum B{
+			/* Present from local memory */
+		b_local_khr = VK_DEVICE_GROUP_PRESENT_MODE_LOCAL_BIT_KHR,
+			/* Present from remote memory */
+		b_remote_khr = VK_DEVICE_GROUP_PRESENT_MODE_REMOTE_BIT_KHR,
+			/* Present sum of local and/or remote memory */
+		b_sum_khr = VK_DEVICE_GROUP_PRESENT_MODE_SUM_BIT_KHR,
+			/* Each physical device presents from local memory */
+		b_local_multi_device_khr = VK_DEVICE_GROUP_PRESENT_MODE_LOCAL_MULTI_DEVICE_BIT_KHR,
+	};
+	F_device_group_present_mode_KHR():flag(0){}
+	F_device_group_present_mode_KHR(int i_):flag(static_cast<uint32_t>(i_)){}
+	F_device_group_present_mode_KHR(uint32_t flag_):flag(flag_){}
+	F_device_group_present_mode_KHR(const B flag_):flag(flag_){}
+	F_device_group_present_mode_KHR(VkDeviceGroupPresentModeFlagBitsKHR flag_):vk_flag(flag_){}
+	operator uint32_t(){return flag;}
+	operator int(){return static_cast<int>(flag);}
+	operator VkDeviceGroupPresentModeFlagBitsKHR const&(){return vk_flag;}
+	operator bool(){return !!flag;}
+	F_device_group_present_mode_KHR& operator=(const F_device_group_present_mode_KHR flag_){flag=flag_.flag; return *this;}
+	F_device_group_present_mode_KHR& operator|=(const F_device_group_present_mode_KHR flag_){flag|=flag_.flag; return *this;}
+	F_device_group_present_mode_KHR& operator&=(const F_device_group_present_mode_KHR flag_){flag&=flag_.flag; return *this;}
+	F_device_group_present_mode_KHR& operator^=(const F_device_group_present_mode_KHR flag_){flag^=flag_.flag;return *this;}
+	F_device_group_present_mode_KHR operator~(){return ~flag;}
+	bool operator==(const F_device_group_present_mode_KHR flag_){return flag==flag_.flag;}
+	bool operator!=(const F_device_group_present_mode_KHR flag_){return !(*this==flag_);}
+	F_device_group_present_mode_KHR& clear(){flag = 0;return *this;}
+	F_device_group_present_mode_KHR all_flags(){ return b_local_khr | b_remote_khr | b_sum_khr | b_local_multi_device_khr;}
+	F_device_group_present_mode_KHR& on_local_khr(){ flag |= b_local_khr; return *this; }
+	F_device_group_present_mode_KHR& off_local_khr(){ flag &= ~b_local_khr; return *this; }
+	F_device_group_present_mode_KHR& on_remote_khr(){ flag |= b_remote_khr; return *this; }
+	F_device_group_present_mode_KHR& off_remote_khr(){ flag &= ~b_remote_khr; return *this; }
+	F_device_group_present_mode_KHR& on_sum_khr(){ flag |= b_sum_khr; return *this; }
+	F_device_group_present_mode_KHR& off_sum_khr(){ flag &= ~b_sum_khr; return *this; }
+	F_device_group_present_mode_KHR& on_local_multi_device_khr(){ flag |= b_local_multi_device_khr; return *this; }
+	F_device_group_present_mode_KHR& off_local_multi_device_khr(){ flag &= ~b_local_multi_device_khr; return *this; }
 };
-F_device_group_present_mode_KHR():flag(0){}
-F_device_group_present_mode_KHR(B bits_):flag(static_cast<int>(bits_)){}
-F_device_group_present_mode_KHR(F_device_group_present_mode_KHR const& flag_):flag(flag_.flag){}
-F_device_group_present_mode_KHR(std::initializer_list<B> bit_list){for (auto&& bit : bit_list){flag |= static_cast<int>(bit);}}
-operator VkDeviceGroupPresentModeFlagBitsKHR const &(){return *this;}
-F_device_group_present_mode_KHR& operator = (F_device_group_present_mode_KHR flag_){flag = flag_.flag;return *this;}
-F_device_group_present_mode_KHR operator | (B bit_){return flag | static_cast<int>(bit_);}
-F_device_group_present_mode_KHR& operator |= (B bit_){flag |= static_cast<int>(bit_);return *this;}
-F_device_group_present_mode_KHR operator | (F_device_group_present_mode_KHR flag_){return flag | flag_.flag;}
-F_device_group_present_mode_KHR& operator |= (F_device_group_present_mode_KHR flag_){flag |= flag_.flag;return *this;}
-F_device_group_present_mode_KHR operator & (F_device_group_present_mode_KHR flag_){return flag & flag_.flag;}
-F_device_group_present_mode_KHR& operator &= (F_device_group_present_mode_KHR flag_){flag &= flag_.flag;return *this;}
-F_device_group_present_mode_KHR operator ^ (F_device_group_present_mode_KHR flag_){return flag ^ flag_.flag;}
-F_device_group_present_mode_KHR& operator ^= (F_device_group_present_mode_KHR flag_){flag ^= flag_.flag;return *this;}
-F_device_group_present_mode_KHR operator ~ (){return all_flags().flag^flag;}
-bool operator !(){return !flag;}
-F_device_group_present_mode_KHR& clear(){flag = 0;return *this;}
-F_device_group_present_mode_KHR all_flags(){
-return b_local_khr | b_remote_khr | b_sum_khr | b_local_multi_device_khr;
-}
-F_device_group_present_mode_KHR& on_local_khr(){ flag |= b_local_khr; return *this; }
-F_device_group_present_mode_KHR& off_local_khr(){ flag &= ~b_local_khr; return *this; }
-F_device_group_present_mode_KHR& on_remote_khr(){ flag |= b_remote_khr; return *this; }
-F_device_group_present_mode_KHR& off_remote_khr(){ flag &= ~b_remote_khr; return *this; }
-F_device_group_present_mode_KHR& on_sum_khr(){ flag |= b_sum_khr; return *this; }
-F_device_group_present_mode_KHR& off_sum_khr(){ flag &= ~b_sum_khr; return *this; }
-F_device_group_present_mode_KHR& on_local_multi_device_khr(){ flag |= b_local_multi_device_khr; return *this; }
-F_device_group_present_mode_KHR& off_local_multi_device_khr(){ flag &= ~b_local_multi_device_khr; return *this; }
-VkDeviceGroupPresentModeFlagBitsKHR get_vkfb(){ return VkDeviceGroupPresentModeFlagBitsKHR(flag); }
-};
-F_device_group_present_mode_KHR inline operator|(const F_device_group_present_mode_KHR::B bit1_, const F_device_group_present_mode_KHR::B bit2_){F_device_group_present_mode_KHR flags(bit1_);return flags | bit2_;}
-bool inline operator==(const F_device_group_present_mode_KHR f1_, const F_device_group_present_mode_KHR f2_) { return f1_.flag == f2_.flag; }
-bool inline operator!=(const F_device_group_present_mode_KHR f1_, const F_device_group_present_mode_KHR f2_) { return f1_.flag != f2_.flag; }
+inline F_device_group_present_mode_KHR operator&(const F_device_group_present_mode_KHR f1_, const F_device_group_present_mode_KHR f2_){return f1_.flag&f2_.flag;}
+inline F_device_group_present_mode_KHR operator|(const F_device_group_present_mode_KHR f1_, const F_device_group_present_mode_KHR f2_){return f1_.flag|f2_.flag;}
+inline F_device_group_present_mode_KHR operator^(const F_device_group_present_mode_KHR f1_, const F_device_group_present_mode_KHR f2_){return f1_.flag^f2_.flag;}
 /*	VkSwapchainCreateFlagBitsKHR*/
 using F_swapchain_create_KHR = 
 			VkSwapchainCreateFlagBitsKHR;
@@ -4264,305 +4009,270 @@ using F_subpass_description =
 			VkSubpassDescriptionFlagBits;
 
 /*	VkDebugUtilsMessageSeverityFlagBitsEXT*/
-class F_debug_utils_message_severity_EXT {
-private:
-F_debug_utils_message_severity_EXT(int flag_):flag(flag_){};
-public:
-uint32_t flag;
-enum B{
-	b_verbose_ext = VK_DEBUG_UTILS_MESSAGE_SEVERITY_VERBOSE_BIT_EXT,
-	b_info_ext = VK_DEBUG_UTILS_MESSAGE_SEVERITY_INFO_BIT_EXT,
-	b_warning_ext = VK_DEBUG_UTILS_MESSAGE_SEVERITY_WARNING_BIT_EXT,
-	b_error_ext = VK_DEBUG_UTILS_MESSAGE_SEVERITY_ERROR_BIT_EXT,
+union F_debug_utils_message_severity_EXT {
+	uint32_t flag;
+	VkDebugUtilsMessageSeverityFlagBitsEXT vk_flag;
+	enum B{
+		b_verbose_ext = VK_DEBUG_UTILS_MESSAGE_SEVERITY_VERBOSE_BIT_EXT,
+		b_info_ext = VK_DEBUG_UTILS_MESSAGE_SEVERITY_INFO_BIT_EXT,
+		b_warning_ext = VK_DEBUG_UTILS_MESSAGE_SEVERITY_WARNING_BIT_EXT,
+		b_error_ext = VK_DEBUG_UTILS_MESSAGE_SEVERITY_ERROR_BIT_EXT,
+	};
+	F_debug_utils_message_severity_EXT():flag(0){}
+	F_debug_utils_message_severity_EXT(int i_):flag(static_cast<uint32_t>(i_)){}
+	F_debug_utils_message_severity_EXT(uint32_t flag_):flag(flag_){}
+	F_debug_utils_message_severity_EXT(const B flag_):flag(flag_){}
+	F_debug_utils_message_severity_EXT(VkDebugUtilsMessageSeverityFlagBitsEXT flag_):vk_flag(flag_){}
+	operator uint32_t(){return flag;}
+	operator int(){return static_cast<int>(flag);}
+	operator VkDebugUtilsMessageSeverityFlagBitsEXT const&(){return vk_flag;}
+	operator bool(){return !!flag;}
+	F_debug_utils_message_severity_EXT& operator=(const F_debug_utils_message_severity_EXT flag_){flag=flag_.flag; return *this;}
+	F_debug_utils_message_severity_EXT& operator|=(const F_debug_utils_message_severity_EXT flag_){flag|=flag_.flag; return *this;}
+	F_debug_utils_message_severity_EXT& operator&=(const F_debug_utils_message_severity_EXT flag_){flag&=flag_.flag; return *this;}
+	F_debug_utils_message_severity_EXT& operator^=(const F_debug_utils_message_severity_EXT flag_){flag^=flag_.flag;return *this;}
+	F_debug_utils_message_severity_EXT operator~(){return ~flag;}
+	bool operator==(const F_debug_utils_message_severity_EXT flag_){return flag==flag_.flag;}
+	bool operator!=(const F_debug_utils_message_severity_EXT flag_){return !(*this==flag_);}
+	F_debug_utils_message_severity_EXT& clear(){flag = 0;return *this;}
+	F_debug_utils_message_severity_EXT all_flags(){ return b_verbose_ext | b_info_ext | b_warning_ext | b_error_ext;}
+	F_debug_utils_message_severity_EXT& on_verbose_ext(){ flag |= b_verbose_ext; return *this; }
+	F_debug_utils_message_severity_EXT& off_verbose_ext(){ flag &= ~b_verbose_ext; return *this; }
+	F_debug_utils_message_severity_EXT& on_info_ext(){ flag |= b_info_ext; return *this; }
+	F_debug_utils_message_severity_EXT& off_info_ext(){ flag &= ~b_info_ext; return *this; }
+	F_debug_utils_message_severity_EXT& on_warning_ext(){ flag |= b_warning_ext; return *this; }
+	F_debug_utils_message_severity_EXT& off_warning_ext(){ flag &= ~b_warning_ext; return *this; }
+	F_debug_utils_message_severity_EXT& on_error_ext(){ flag |= b_error_ext; return *this; }
+	F_debug_utils_message_severity_EXT& off_error_ext(){ flag &= ~b_error_ext; return *this; }
 };
-F_debug_utils_message_severity_EXT():flag(0){}
-F_debug_utils_message_severity_EXT(B bits_):flag(static_cast<int>(bits_)){}
-F_debug_utils_message_severity_EXT(F_debug_utils_message_severity_EXT const& flag_):flag(flag_.flag){}
-F_debug_utils_message_severity_EXT(std::initializer_list<B> bit_list){for (auto&& bit : bit_list){flag |= static_cast<int>(bit);}}
-operator VkDebugUtilsMessageSeverityFlagBitsEXT const &(){return *this;}
-F_debug_utils_message_severity_EXT& operator = (F_debug_utils_message_severity_EXT flag_){flag = flag_.flag;return *this;}
-F_debug_utils_message_severity_EXT operator | (B bit_){return flag | static_cast<int>(bit_);}
-F_debug_utils_message_severity_EXT& operator |= (B bit_){flag |= static_cast<int>(bit_);return *this;}
-F_debug_utils_message_severity_EXT operator | (F_debug_utils_message_severity_EXT flag_){return flag | flag_.flag;}
-F_debug_utils_message_severity_EXT& operator |= (F_debug_utils_message_severity_EXT flag_){flag |= flag_.flag;return *this;}
-F_debug_utils_message_severity_EXT operator & (F_debug_utils_message_severity_EXT flag_){return flag & flag_.flag;}
-F_debug_utils_message_severity_EXT& operator &= (F_debug_utils_message_severity_EXT flag_){flag &= flag_.flag;return *this;}
-F_debug_utils_message_severity_EXT operator ^ (F_debug_utils_message_severity_EXT flag_){return flag ^ flag_.flag;}
-F_debug_utils_message_severity_EXT& operator ^= (F_debug_utils_message_severity_EXT flag_){flag ^= flag_.flag;return *this;}
-F_debug_utils_message_severity_EXT operator ~ (){return all_flags().flag^flag;}
-bool operator !(){return !flag;}
-F_debug_utils_message_severity_EXT& clear(){flag = 0;return *this;}
-F_debug_utils_message_severity_EXT all_flags(){
-return b_verbose_ext | b_info_ext | b_warning_ext | b_error_ext;
-}
-F_debug_utils_message_severity_EXT& on_verbose_ext(){ flag |= b_verbose_ext; return *this; }
-F_debug_utils_message_severity_EXT& off_verbose_ext(){ flag &= ~b_verbose_ext; return *this; }
-F_debug_utils_message_severity_EXT& on_info_ext(){ flag |= b_info_ext; return *this; }
-F_debug_utils_message_severity_EXT& off_info_ext(){ flag &= ~b_info_ext; return *this; }
-F_debug_utils_message_severity_EXT& on_warning_ext(){ flag |= b_warning_ext; return *this; }
-F_debug_utils_message_severity_EXT& off_warning_ext(){ flag &= ~b_warning_ext; return *this; }
-F_debug_utils_message_severity_EXT& on_error_ext(){ flag |= b_error_ext; return *this; }
-F_debug_utils_message_severity_EXT& off_error_ext(){ flag &= ~b_error_ext; return *this; }
-VkDebugUtilsMessageSeverityFlagBitsEXT get_vkfb(){ return VkDebugUtilsMessageSeverityFlagBitsEXT(flag); }
-};
-F_debug_utils_message_severity_EXT inline operator|(const F_debug_utils_message_severity_EXT::B bit1_, const F_debug_utils_message_severity_EXT::B bit2_){F_debug_utils_message_severity_EXT flags(bit1_);return flags | bit2_;}
-bool inline operator==(const F_debug_utils_message_severity_EXT f1_, const F_debug_utils_message_severity_EXT f2_) { return f1_.flag == f2_.flag; }
-bool inline operator!=(const F_debug_utils_message_severity_EXT f1_, const F_debug_utils_message_severity_EXT f2_) { return f1_.flag != f2_.flag; }
+inline F_debug_utils_message_severity_EXT operator&(const F_debug_utils_message_severity_EXT f1_, const F_debug_utils_message_severity_EXT f2_){return f1_.flag&f2_.flag;}
+inline F_debug_utils_message_severity_EXT operator|(const F_debug_utils_message_severity_EXT f1_, const F_debug_utils_message_severity_EXT f2_){return f1_.flag|f2_.flag;}
+inline F_debug_utils_message_severity_EXT operator^(const F_debug_utils_message_severity_EXT f1_, const F_debug_utils_message_severity_EXT f2_){return f1_.flag^f2_.flag;}
 /*	VkDebugUtilsMessageTypeFlagBitsEXT*/
-class F_debug_utils_message_type_EXT {
-private:
-F_debug_utils_message_type_EXT(int flag_):flag(flag_){};
-public:
-uint32_t flag;
-enum B{
-	b_general_ext = VK_DEBUG_UTILS_MESSAGE_TYPE_GENERAL_BIT_EXT,
-	b_validation_ext = VK_DEBUG_UTILS_MESSAGE_TYPE_VALIDATION_BIT_EXT,
-	b_performance_ext = VK_DEBUG_UTILS_MESSAGE_TYPE_PERFORMANCE_BIT_EXT,
+union F_debug_utils_message_type_EXT {
+	uint32_t flag;
+	VkDebugUtilsMessageTypeFlagBitsEXT vk_flag;
+	enum B{
+		b_general_ext = VK_DEBUG_UTILS_MESSAGE_TYPE_GENERAL_BIT_EXT,
+		b_validation_ext = VK_DEBUG_UTILS_MESSAGE_TYPE_VALIDATION_BIT_EXT,
+		b_performance_ext = VK_DEBUG_UTILS_MESSAGE_TYPE_PERFORMANCE_BIT_EXT,
+	};
+	F_debug_utils_message_type_EXT():flag(0){}
+	F_debug_utils_message_type_EXT(int i_):flag(static_cast<uint32_t>(i_)){}
+	F_debug_utils_message_type_EXT(uint32_t flag_):flag(flag_){}
+	F_debug_utils_message_type_EXT(const B flag_):flag(flag_){}
+	F_debug_utils_message_type_EXT(VkDebugUtilsMessageTypeFlagBitsEXT flag_):vk_flag(flag_){}
+	operator uint32_t(){return flag;}
+	operator int(){return static_cast<int>(flag);}
+	operator VkDebugUtilsMessageTypeFlagBitsEXT const&(){return vk_flag;}
+	operator bool(){return !!flag;}
+	F_debug_utils_message_type_EXT& operator=(const F_debug_utils_message_type_EXT flag_){flag=flag_.flag; return *this;}
+	F_debug_utils_message_type_EXT& operator|=(const F_debug_utils_message_type_EXT flag_){flag|=flag_.flag; return *this;}
+	F_debug_utils_message_type_EXT& operator&=(const F_debug_utils_message_type_EXT flag_){flag&=flag_.flag; return *this;}
+	F_debug_utils_message_type_EXT& operator^=(const F_debug_utils_message_type_EXT flag_){flag^=flag_.flag;return *this;}
+	F_debug_utils_message_type_EXT operator~(){return ~flag;}
+	bool operator==(const F_debug_utils_message_type_EXT flag_){return flag==flag_.flag;}
+	bool operator!=(const F_debug_utils_message_type_EXT flag_){return !(*this==flag_);}
+	F_debug_utils_message_type_EXT& clear(){flag = 0;return *this;}
+	F_debug_utils_message_type_EXT all_flags(){ return b_general_ext | b_validation_ext | b_performance_ext;}
+	F_debug_utils_message_type_EXT& on_general_ext(){ flag |= b_general_ext; return *this; }
+	F_debug_utils_message_type_EXT& off_general_ext(){ flag &= ~b_general_ext; return *this; }
+	F_debug_utils_message_type_EXT& on_validation_ext(){ flag |= b_validation_ext; return *this; }
+	F_debug_utils_message_type_EXT& off_validation_ext(){ flag &= ~b_validation_ext; return *this; }
+	F_debug_utils_message_type_EXT& on_performance_ext(){ flag |= b_performance_ext; return *this; }
+	F_debug_utils_message_type_EXT& off_performance_ext(){ flag &= ~b_performance_ext; return *this; }
 };
-F_debug_utils_message_type_EXT():flag(0){}
-F_debug_utils_message_type_EXT(B bits_):flag(static_cast<int>(bits_)){}
-F_debug_utils_message_type_EXT(F_debug_utils_message_type_EXT const& flag_):flag(flag_.flag){}
-F_debug_utils_message_type_EXT(std::initializer_list<B> bit_list){for (auto&& bit : bit_list){flag |= static_cast<int>(bit);}}
-operator VkDebugUtilsMessageTypeFlagBitsEXT const &(){return *this;}
-F_debug_utils_message_type_EXT& operator = (F_debug_utils_message_type_EXT flag_){flag = flag_.flag;return *this;}
-F_debug_utils_message_type_EXT operator | (B bit_){return flag | static_cast<int>(bit_);}
-F_debug_utils_message_type_EXT& operator |= (B bit_){flag |= static_cast<int>(bit_);return *this;}
-F_debug_utils_message_type_EXT operator | (F_debug_utils_message_type_EXT flag_){return flag | flag_.flag;}
-F_debug_utils_message_type_EXT& operator |= (F_debug_utils_message_type_EXT flag_){flag |= flag_.flag;return *this;}
-F_debug_utils_message_type_EXT operator & (F_debug_utils_message_type_EXT flag_){return flag & flag_.flag;}
-F_debug_utils_message_type_EXT& operator &= (F_debug_utils_message_type_EXT flag_){flag &= flag_.flag;return *this;}
-F_debug_utils_message_type_EXT operator ^ (F_debug_utils_message_type_EXT flag_){return flag ^ flag_.flag;}
-F_debug_utils_message_type_EXT& operator ^= (F_debug_utils_message_type_EXT flag_){flag ^= flag_.flag;return *this;}
-F_debug_utils_message_type_EXT operator ~ (){return all_flags().flag^flag;}
-bool operator !(){return !flag;}
-F_debug_utils_message_type_EXT& clear(){flag = 0;return *this;}
-F_debug_utils_message_type_EXT all_flags(){
-return b_general_ext | b_validation_ext | b_performance_ext;
-}
-F_debug_utils_message_type_EXT& on_general_ext(){ flag |= b_general_ext; return *this; }
-F_debug_utils_message_type_EXT& off_general_ext(){ flag &= ~b_general_ext; return *this; }
-F_debug_utils_message_type_EXT& on_validation_ext(){ flag |= b_validation_ext; return *this; }
-F_debug_utils_message_type_EXT& off_validation_ext(){ flag &= ~b_validation_ext; return *this; }
-F_debug_utils_message_type_EXT& on_performance_ext(){ flag |= b_performance_ext; return *this; }
-F_debug_utils_message_type_EXT& off_performance_ext(){ flag &= ~b_performance_ext; return *this; }
-VkDebugUtilsMessageTypeFlagBitsEXT get_vkfb(){ return VkDebugUtilsMessageTypeFlagBitsEXT(flag); }
-};
-F_debug_utils_message_type_EXT inline operator|(const F_debug_utils_message_type_EXT::B bit1_, const F_debug_utils_message_type_EXT::B bit2_){F_debug_utils_message_type_EXT flags(bit1_);return flags | bit2_;}
-bool inline operator==(const F_debug_utils_message_type_EXT f1_, const F_debug_utils_message_type_EXT f2_) { return f1_.flag == f2_.flag; }
-bool inline operator!=(const F_debug_utils_message_type_EXT f1_, const F_debug_utils_message_type_EXT f2_) { return f1_.flag != f2_.flag; }
+inline F_debug_utils_message_type_EXT operator&(const F_debug_utils_message_type_EXT f1_, const F_debug_utils_message_type_EXT f2_){return f1_.flag&f2_.flag;}
+inline F_debug_utils_message_type_EXT operator|(const F_debug_utils_message_type_EXT f1_, const F_debug_utils_message_type_EXT f2_){return f1_.flag|f2_.flag;}
+inline F_debug_utils_message_type_EXT operator^(const F_debug_utils_message_type_EXT f1_, const F_debug_utils_message_type_EXT f2_){return f1_.flag^f2_.flag;}
 /*	VkDescriptorBindingFlagBitsEXT*/
-class F_descriptor_binding_EXT {
-private:
-F_descriptor_binding_EXT(int flag_):flag(flag_){};
-public:
-uint32_t flag;
-enum B{
-	b_update_after_bind_ext = VK_DESCRIPTOR_BINDING_UPDATE_AFTER_BIND_BIT_EXT,
-	b_update_unused_while_pending_ext = VK_DESCRIPTOR_BINDING_UPDATE_UNUSED_WHILE_PENDING_BIT_EXT,
-	b_partially_bound_ext = VK_DESCRIPTOR_BINDING_PARTIALLY_BOUND_BIT_EXT,
-	b_variable_descriptor_count_ext = VK_DESCRIPTOR_BINDING_VARIABLE_DESCRIPTOR_COUNT_BIT_EXT,
+union F_descriptor_binding_EXT {
+	uint32_t flag;
+	VkDescriptorBindingFlagBitsEXT vk_flag;
+	enum B{
+		b_update_after_bind_ext = VK_DESCRIPTOR_BINDING_UPDATE_AFTER_BIND_BIT_EXT,
+		b_update_unused_while_pending_ext = VK_DESCRIPTOR_BINDING_UPDATE_UNUSED_WHILE_PENDING_BIT_EXT,
+		b_partially_bound_ext = VK_DESCRIPTOR_BINDING_PARTIALLY_BOUND_BIT_EXT,
+		b_variable_descriptor_count_ext = VK_DESCRIPTOR_BINDING_VARIABLE_DESCRIPTOR_COUNT_BIT_EXT,
+	};
+	F_descriptor_binding_EXT():flag(0){}
+	F_descriptor_binding_EXT(int i_):flag(static_cast<uint32_t>(i_)){}
+	F_descriptor_binding_EXT(uint32_t flag_):flag(flag_){}
+	F_descriptor_binding_EXT(const B flag_):flag(flag_){}
+	F_descriptor_binding_EXT(VkDescriptorBindingFlagBitsEXT flag_):vk_flag(flag_){}
+	operator uint32_t(){return flag;}
+	operator int(){return static_cast<int>(flag);}
+	operator VkDescriptorBindingFlagBitsEXT const&(){return vk_flag;}
+	operator bool(){return !!flag;}
+	F_descriptor_binding_EXT& operator=(const F_descriptor_binding_EXT flag_){flag=flag_.flag; return *this;}
+	F_descriptor_binding_EXT& operator|=(const F_descriptor_binding_EXT flag_){flag|=flag_.flag; return *this;}
+	F_descriptor_binding_EXT& operator&=(const F_descriptor_binding_EXT flag_){flag&=flag_.flag; return *this;}
+	F_descriptor_binding_EXT& operator^=(const F_descriptor_binding_EXT flag_){flag^=flag_.flag;return *this;}
+	F_descriptor_binding_EXT operator~(){return ~flag;}
+	bool operator==(const F_descriptor_binding_EXT flag_){return flag==flag_.flag;}
+	bool operator!=(const F_descriptor_binding_EXT flag_){return !(*this==flag_);}
+	F_descriptor_binding_EXT& clear(){flag = 0;return *this;}
+	F_descriptor_binding_EXT all_flags(){ return b_update_after_bind_ext | b_update_unused_while_pending_ext | b_partially_bound_ext | b_variable_descriptor_count_ext;}
+	F_descriptor_binding_EXT& on_update_after_bind_ext(){ flag |= b_update_after_bind_ext; return *this; }
+	F_descriptor_binding_EXT& off_update_after_bind_ext(){ flag &= ~b_update_after_bind_ext; return *this; }
+	F_descriptor_binding_EXT& on_update_unused_while_pending_ext(){ flag |= b_update_unused_while_pending_ext; return *this; }
+	F_descriptor_binding_EXT& off_update_unused_while_pending_ext(){ flag &= ~b_update_unused_while_pending_ext; return *this; }
+	F_descriptor_binding_EXT& on_partially_bound_ext(){ flag |= b_partially_bound_ext; return *this; }
+	F_descriptor_binding_EXT& off_partially_bound_ext(){ flag &= ~b_partially_bound_ext; return *this; }
+	F_descriptor_binding_EXT& on_variable_descriptor_count_ext(){ flag |= b_variable_descriptor_count_ext; return *this; }
+	F_descriptor_binding_EXT& off_variable_descriptor_count_ext(){ flag &= ~b_variable_descriptor_count_ext; return *this; }
 };
-F_descriptor_binding_EXT():flag(0){}
-F_descriptor_binding_EXT(B bits_):flag(static_cast<int>(bits_)){}
-F_descriptor_binding_EXT(F_descriptor_binding_EXT const& flag_):flag(flag_.flag){}
-F_descriptor_binding_EXT(std::initializer_list<B> bit_list){for (auto&& bit : bit_list){flag |= static_cast<int>(bit);}}
-operator VkDescriptorBindingFlagBitsEXT const &(){return *this;}
-F_descriptor_binding_EXT& operator = (F_descriptor_binding_EXT flag_){flag = flag_.flag;return *this;}
-F_descriptor_binding_EXT operator | (B bit_){return flag | static_cast<int>(bit_);}
-F_descriptor_binding_EXT& operator |= (B bit_){flag |= static_cast<int>(bit_);return *this;}
-F_descriptor_binding_EXT operator | (F_descriptor_binding_EXT flag_){return flag | flag_.flag;}
-F_descriptor_binding_EXT& operator |= (F_descriptor_binding_EXT flag_){flag |= flag_.flag;return *this;}
-F_descriptor_binding_EXT operator & (F_descriptor_binding_EXT flag_){return flag & flag_.flag;}
-F_descriptor_binding_EXT& operator &= (F_descriptor_binding_EXT flag_){flag &= flag_.flag;return *this;}
-F_descriptor_binding_EXT operator ^ (F_descriptor_binding_EXT flag_){return flag ^ flag_.flag;}
-F_descriptor_binding_EXT& operator ^= (F_descriptor_binding_EXT flag_){flag ^= flag_.flag;return *this;}
-F_descriptor_binding_EXT operator ~ (){return all_flags().flag^flag;}
-bool operator !(){return !flag;}
-F_descriptor_binding_EXT& clear(){flag = 0;return *this;}
-F_descriptor_binding_EXT all_flags(){
-return b_update_after_bind_ext | b_update_unused_while_pending_ext | b_partially_bound_ext | b_variable_descriptor_count_ext;
-}
-F_descriptor_binding_EXT& on_update_after_bind_ext(){ flag |= b_update_after_bind_ext; return *this; }
-F_descriptor_binding_EXT& off_update_after_bind_ext(){ flag &= ~b_update_after_bind_ext; return *this; }
-F_descriptor_binding_EXT& on_update_unused_while_pending_ext(){ flag |= b_update_unused_while_pending_ext; return *this; }
-F_descriptor_binding_EXT& off_update_unused_while_pending_ext(){ flag &= ~b_update_unused_while_pending_ext; return *this; }
-F_descriptor_binding_EXT& on_partially_bound_ext(){ flag |= b_partially_bound_ext; return *this; }
-F_descriptor_binding_EXT& off_partially_bound_ext(){ flag &= ~b_partially_bound_ext; return *this; }
-F_descriptor_binding_EXT& on_variable_descriptor_count_ext(){ flag |= b_variable_descriptor_count_ext; return *this; }
-F_descriptor_binding_EXT& off_variable_descriptor_count_ext(){ flag &= ~b_variable_descriptor_count_ext; return *this; }
-VkDescriptorBindingFlagBitsEXT get_vkfb(){ return VkDescriptorBindingFlagBitsEXT(flag); }
-};
-F_descriptor_binding_EXT inline operator|(const F_descriptor_binding_EXT::B bit1_, const F_descriptor_binding_EXT::B bit2_){F_descriptor_binding_EXT flags(bit1_);return flags | bit2_;}
-bool inline operator==(const F_descriptor_binding_EXT f1_, const F_descriptor_binding_EXT f2_) { return f1_.flag == f2_.flag; }
-bool inline operator!=(const F_descriptor_binding_EXT f1_, const F_descriptor_binding_EXT f2_) { return f1_.flag != f2_.flag; }
+inline F_descriptor_binding_EXT operator&(const F_descriptor_binding_EXT f1_, const F_descriptor_binding_EXT f2_){return f1_.flag&f2_.flag;}
+inline F_descriptor_binding_EXT operator|(const F_descriptor_binding_EXT f1_, const F_descriptor_binding_EXT f2_){return f1_.flag|f2_.flag;}
+inline F_descriptor_binding_EXT operator^(const F_descriptor_binding_EXT f1_, const F_descriptor_binding_EXT f2_){return f1_.flag^f2_.flag;}
 /*	VkConditionalRenderingFlagBitsEXT*/
-class F_conditional_rendering_EXT {
-private:
-F_conditional_rendering_EXT(int flag_):flag(flag_){};
-public:
-uint32_t flag;
-enum B{
-	b_inverted_ext = VK_CONDITIONAL_RENDERING_INVERTED_BIT_EXT,
+union F_conditional_rendering_EXT {
+	uint32_t flag;
+	VkConditionalRenderingFlagBitsEXT vk_flag;
+	enum B{
+		b_inverted_ext = VK_CONDITIONAL_RENDERING_INVERTED_BIT_EXT,
+	};
+	F_conditional_rendering_EXT():flag(0){}
+	F_conditional_rendering_EXT(int i_):flag(static_cast<uint32_t>(i_)){}
+	F_conditional_rendering_EXT(uint32_t flag_):flag(flag_){}
+	F_conditional_rendering_EXT(const B flag_):flag(flag_){}
+	F_conditional_rendering_EXT(VkConditionalRenderingFlagBitsEXT flag_):vk_flag(flag_){}
+	operator uint32_t(){return flag;}
+	operator int(){return static_cast<int>(flag);}
+	operator VkConditionalRenderingFlagBitsEXT const&(){return vk_flag;}
+	operator bool(){return !!flag;}
+	F_conditional_rendering_EXT& operator=(const F_conditional_rendering_EXT flag_){flag=flag_.flag; return *this;}
+	F_conditional_rendering_EXT& operator|=(const F_conditional_rendering_EXT flag_){flag|=flag_.flag; return *this;}
+	F_conditional_rendering_EXT& operator&=(const F_conditional_rendering_EXT flag_){flag&=flag_.flag; return *this;}
+	F_conditional_rendering_EXT& operator^=(const F_conditional_rendering_EXT flag_){flag^=flag_.flag;return *this;}
+	F_conditional_rendering_EXT operator~(){return ~flag;}
+	bool operator==(const F_conditional_rendering_EXT flag_){return flag==flag_.flag;}
+	bool operator!=(const F_conditional_rendering_EXT flag_){return !(*this==flag_);}
+	F_conditional_rendering_EXT& clear(){flag = 0;return *this;}
+	F_conditional_rendering_EXT all_flags(){ return b_inverted_ext;}
+	F_conditional_rendering_EXT& on_inverted_ext(){ flag |= b_inverted_ext; return *this; }
+	F_conditional_rendering_EXT& off_inverted_ext(){ flag &= ~b_inverted_ext; return *this; }
 };
-F_conditional_rendering_EXT():flag(0){}
-F_conditional_rendering_EXT(B bits_):flag(static_cast<int>(bits_)){}
-F_conditional_rendering_EXT(F_conditional_rendering_EXT const& flag_):flag(flag_.flag){}
-F_conditional_rendering_EXT(std::initializer_list<B> bit_list){for (auto&& bit : bit_list){flag |= static_cast<int>(bit);}}
-operator VkConditionalRenderingFlagBitsEXT const &(){return *this;}
-F_conditional_rendering_EXT& operator = (F_conditional_rendering_EXT flag_){flag = flag_.flag;return *this;}
-F_conditional_rendering_EXT operator | (B bit_){return flag | static_cast<int>(bit_);}
-F_conditional_rendering_EXT& operator |= (B bit_){flag |= static_cast<int>(bit_);return *this;}
-F_conditional_rendering_EXT operator | (F_conditional_rendering_EXT flag_){return flag | flag_.flag;}
-F_conditional_rendering_EXT& operator |= (F_conditional_rendering_EXT flag_){flag |= flag_.flag;return *this;}
-F_conditional_rendering_EXT operator & (F_conditional_rendering_EXT flag_){return flag & flag_.flag;}
-F_conditional_rendering_EXT& operator &= (F_conditional_rendering_EXT flag_){flag &= flag_.flag;return *this;}
-F_conditional_rendering_EXT operator ^ (F_conditional_rendering_EXT flag_){return flag ^ flag_.flag;}
-F_conditional_rendering_EXT& operator ^= (F_conditional_rendering_EXT flag_){flag ^= flag_.flag;return *this;}
-F_conditional_rendering_EXT operator ~ (){return all_flags().flag^flag;}
-bool operator !(){return !flag;}
-F_conditional_rendering_EXT& clear(){flag = 0;return *this;}
-F_conditional_rendering_EXT all_flags(){
-return b_inverted_ext;
-}
-F_conditional_rendering_EXT& on_inverted_ext(){ flag |= b_inverted_ext; return *this; }
-F_conditional_rendering_EXT& off_inverted_ext(){ flag &= ~b_inverted_ext; return *this; }
-VkConditionalRenderingFlagBitsEXT get_vkfb(){ return VkConditionalRenderingFlagBitsEXT(flag); }
-};
-F_conditional_rendering_EXT inline operator|(const F_conditional_rendering_EXT::B bit1_, const F_conditional_rendering_EXT::B bit2_){F_conditional_rendering_EXT flags(bit1_);return flags | bit2_;}
-bool inline operator==(const F_conditional_rendering_EXT f1_, const F_conditional_rendering_EXT f2_) { return f1_.flag == f2_.flag; }
-bool inline operator!=(const F_conditional_rendering_EXT f1_, const F_conditional_rendering_EXT f2_) { return f1_.flag != f2_.flag; }
+inline F_conditional_rendering_EXT operator&(const F_conditional_rendering_EXT f1_, const F_conditional_rendering_EXT f2_){return f1_.flag&f2_.flag;}
+inline F_conditional_rendering_EXT operator|(const F_conditional_rendering_EXT f1_, const F_conditional_rendering_EXT f2_){return f1_.flag|f2_.flag;}
+inline F_conditional_rendering_EXT operator^(const F_conditional_rendering_EXT f1_, const F_conditional_rendering_EXT f2_){return f1_.flag^f2_.flag;}
 /*	VkGeometryInstanceFlagBitsNVX*/
-class F_geometry_instance_NVX {
-private:
-F_geometry_instance_NVX(int flag_):flag(flag_){};
-public:
-uint32_t flag;
-enum B{
-	b_triangle_cull_disable_nvx = VK_GEOMETRY_INSTANCE_TRIANGLE_CULL_DISABLE_BIT_NVX,
-	b_triangle_cull_flip_winding_nvx = VK_GEOMETRY_INSTANCE_TRIANGLE_CULL_FLIP_WINDING_BIT_NVX,
-	b_force_opaque_nvx = VK_GEOMETRY_INSTANCE_FORCE_OPAQUE_BIT_NVX,
-	b_force_no_opaque_nvx = VK_GEOMETRY_INSTANCE_FORCE_NO_OPAQUE_BIT_NVX,
+union F_geometry_instance_NVX {
+	uint32_t flag;
+	VkGeometryInstanceFlagBitsNVX vk_flag;
+	enum B{
+		b_triangle_cull_disable_nvx = VK_GEOMETRY_INSTANCE_TRIANGLE_CULL_DISABLE_BIT_NVX,
+		b_triangle_cull_flip_winding_nvx = VK_GEOMETRY_INSTANCE_TRIANGLE_CULL_FLIP_WINDING_BIT_NVX,
+		b_force_opaque_nvx = VK_GEOMETRY_INSTANCE_FORCE_OPAQUE_BIT_NVX,
+		b_force_no_opaque_nvx = VK_GEOMETRY_INSTANCE_FORCE_NO_OPAQUE_BIT_NVX,
+	};
+	F_geometry_instance_NVX():flag(0){}
+	F_geometry_instance_NVX(int i_):flag(static_cast<uint32_t>(i_)){}
+	F_geometry_instance_NVX(uint32_t flag_):flag(flag_){}
+	F_geometry_instance_NVX(const B flag_):flag(flag_){}
+	F_geometry_instance_NVX(VkGeometryInstanceFlagBitsNVX flag_):vk_flag(flag_){}
+	operator uint32_t(){return flag;}
+	operator int(){return static_cast<int>(flag);}
+	operator VkGeometryInstanceFlagBitsNVX const&(){return vk_flag;}
+	operator bool(){return !!flag;}
+	F_geometry_instance_NVX& operator=(const F_geometry_instance_NVX flag_){flag=flag_.flag; return *this;}
+	F_geometry_instance_NVX& operator|=(const F_geometry_instance_NVX flag_){flag|=flag_.flag; return *this;}
+	F_geometry_instance_NVX& operator&=(const F_geometry_instance_NVX flag_){flag&=flag_.flag; return *this;}
+	F_geometry_instance_NVX& operator^=(const F_geometry_instance_NVX flag_){flag^=flag_.flag;return *this;}
+	F_geometry_instance_NVX operator~(){return ~flag;}
+	bool operator==(const F_geometry_instance_NVX flag_){return flag==flag_.flag;}
+	bool operator!=(const F_geometry_instance_NVX flag_){return !(*this==flag_);}
+	F_geometry_instance_NVX& clear(){flag = 0;return *this;}
+	F_geometry_instance_NVX all_flags(){ return b_triangle_cull_disable_nvx | b_triangle_cull_flip_winding_nvx | b_force_opaque_nvx | b_force_no_opaque_nvx;}
+	F_geometry_instance_NVX& on_triangle_cull_disable_nvx(){ flag |= b_triangle_cull_disable_nvx; return *this; }
+	F_geometry_instance_NVX& off_triangle_cull_disable_nvx(){ flag &= ~b_triangle_cull_disable_nvx; return *this; }
+	F_geometry_instance_NVX& on_triangle_cull_flip_winding_nvx(){ flag |= b_triangle_cull_flip_winding_nvx; return *this; }
+	F_geometry_instance_NVX& off_triangle_cull_flip_winding_nvx(){ flag &= ~b_triangle_cull_flip_winding_nvx; return *this; }
+	F_geometry_instance_NVX& on_force_opaque_nvx(){ flag |= b_force_opaque_nvx; return *this; }
+	F_geometry_instance_NVX& off_force_opaque_nvx(){ flag &= ~b_force_opaque_nvx; return *this; }
+	F_geometry_instance_NVX& on_force_no_opaque_nvx(){ flag |= b_force_no_opaque_nvx; return *this; }
+	F_geometry_instance_NVX& off_force_no_opaque_nvx(){ flag &= ~b_force_no_opaque_nvx; return *this; }
 };
-F_geometry_instance_NVX():flag(0){}
-F_geometry_instance_NVX(B bits_):flag(static_cast<int>(bits_)){}
-F_geometry_instance_NVX(F_geometry_instance_NVX const& flag_):flag(flag_.flag){}
-F_geometry_instance_NVX(std::initializer_list<B> bit_list){for (auto&& bit : bit_list){flag |= static_cast<int>(bit);}}
-operator VkGeometryInstanceFlagBitsNVX const &(){return *this;}
-F_geometry_instance_NVX& operator = (F_geometry_instance_NVX flag_){flag = flag_.flag;return *this;}
-F_geometry_instance_NVX operator | (B bit_){return flag | static_cast<int>(bit_);}
-F_geometry_instance_NVX& operator |= (B bit_){flag |= static_cast<int>(bit_);return *this;}
-F_geometry_instance_NVX operator | (F_geometry_instance_NVX flag_){return flag | flag_.flag;}
-F_geometry_instance_NVX& operator |= (F_geometry_instance_NVX flag_){flag |= flag_.flag;return *this;}
-F_geometry_instance_NVX operator & (F_geometry_instance_NVX flag_){return flag & flag_.flag;}
-F_geometry_instance_NVX& operator &= (F_geometry_instance_NVX flag_){flag &= flag_.flag;return *this;}
-F_geometry_instance_NVX operator ^ (F_geometry_instance_NVX flag_){return flag ^ flag_.flag;}
-F_geometry_instance_NVX& operator ^= (F_geometry_instance_NVX flag_){flag ^= flag_.flag;return *this;}
-F_geometry_instance_NVX operator ~ (){return all_flags().flag^flag;}
-bool operator !(){return !flag;}
-F_geometry_instance_NVX& clear(){flag = 0;return *this;}
-F_geometry_instance_NVX all_flags(){
-return b_triangle_cull_disable_nvx | b_triangle_cull_flip_winding_nvx | b_force_opaque_nvx | b_force_no_opaque_nvx;
-}
-F_geometry_instance_NVX& on_triangle_cull_disable_nvx(){ flag |= b_triangle_cull_disable_nvx; return *this; }
-F_geometry_instance_NVX& off_triangle_cull_disable_nvx(){ flag &= ~b_triangle_cull_disable_nvx; return *this; }
-F_geometry_instance_NVX& on_triangle_cull_flip_winding_nvx(){ flag |= b_triangle_cull_flip_winding_nvx; return *this; }
-F_geometry_instance_NVX& off_triangle_cull_flip_winding_nvx(){ flag &= ~b_triangle_cull_flip_winding_nvx; return *this; }
-F_geometry_instance_NVX& on_force_opaque_nvx(){ flag |= b_force_opaque_nvx; return *this; }
-F_geometry_instance_NVX& off_force_opaque_nvx(){ flag &= ~b_force_opaque_nvx; return *this; }
-F_geometry_instance_NVX& on_force_no_opaque_nvx(){ flag |= b_force_no_opaque_nvx; return *this; }
-F_geometry_instance_NVX& off_force_no_opaque_nvx(){ flag &= ~b_force_no_opaque_nvx; return *this; }
-VkGeometryInstanceFlagBitsNVX get_vkfb(){ return VkGeometryInstanceFlagBitsNVX(flag); }
-};
-F_geometry_instance_NVX inline operator|(const F_geometry_instance_NVX::B bit1_, const F_geometry_instance_NVX::B bit2_){F_geometry_instance_NVX flags(bit1_);return flags | bit2_;}
-bool inline operator==(const F_geometry_instance_NVX f1_, const F_geometry_instance_NVX f2_) { return f1_.flag == f2_.flag; }
-bool inline operator!=(const F_geometry_instance_NVX f1_, const F_geometry_instance_NVX f2_) { return f1_.flag != f2_.flag; }
+inline F_geometry_instance_NVX operator&(const F_geometry_instance_NVX f1_, const F_geometry_instance_NVX f2_){return f1_.flag&f2_.flag;}
+inline F_geometry_instance_NVX operator|(const F_geometry_instance_NVX f1_, const F_geometry_instance_NVX f2_){return f1_.flag|f2_.flag;}
+inline F_geometry_instance_NVX operator^(const F_geometry_instance_NVX f1_, const F_geometry_instance_NVX f2_){return f1_.flag^f2_.flag;}
 /*	VkGeometryFlagBitsNVX*/
-class F_geometry_NVX {
-private:
-F_geometry_NVX(int flag_):flag(flag_){};
-public:
-uint32_t flag;
-enum B{
-	b_opaque_nvx = VK_GEOMETRY_OPAQUE_BIT_NVX,
-	b_no_duplicate_any_hit_invocation_nvx = VK_GEOMETRY_NO_DUPLICATE_ANY_HIT_INVOCATION_BIT_NVX,
+union F_geometry_NVX {
+	uint32_t flag;
+	VkGeometryFlagBitsNVX vk_flag;
+	enum B{
+		b_opaque_nvx = VK_GEOMETRY_OPAQUE_BIT_NVX,
+		b_no_duplicate_any_hit_invocation_nvx = VK_GEOMETRY_NO_DUPLICATE_ANY_HIT_INVOCATION_BIT_NVX,
+	};
+	F_geometry_NVX():flag(0){}
+	F_geometry_NVX(int i_):flag(static_cast<uint32_t>(i_)){}
+	F_geometry_NVX(uint32_t flag_):flag(flag_){}
+	F_geometry_NVX(const B flag_):flag(flag_){}
+	F_geometry_NVX(VkGeometryFlagBitsNVX flag_):vk_flag(flag_){}
+	operator uint32_t(){return flag;}
+	operator int(){return static_cast<int>(flag);}
+	operator VkGeometryFlagBitsNVX const&(){return vk_flag;}
+	operator bool(){return !!flag;}
+	F_geometry_NVX& operator=(const F_geometry_NVX flag_){flag=flag_.flag; return *this;}
+	F_geometry_NVX& operator|=(const F_geometry_NVX flag_){flag|=flag_.flag; return *this;}
+	F_geometry_NVX& operator&=(const F_geometry_NVX flag_){flag&=flag_.flag; return *this;}
+	F_geometry_NVX& operator^=(const F_geometry_NVX flag_){flag^=flag_.flag;return *this;}
+	F_geometry_NVX operator~(){return ~flag;}
+	bool operator==(const F_geometry_NVX flag_){return flag==flag_.flag;}
+	bool operator!=(const F_geometry_NVX flag_){return !(*this==flag_);}
+	F_geometry_NVX& clear(){flag = 0;return *this;}
+	F_geometry_NVX all_flags(){ return b_opaque_nvx | b_no_duplicate_any_hit_invocation_nvx;}
+	F_geometry_NVX& on_opaque_nvx(){ flag |= b_opaque_nvx; return *this; }
+	F_geometry_NVX& off_opaque_nvx(){ flag &= ~b_opaque_nvx; return *this; }
+	F_geometry_NVX& on_no_duplicate_any_hit_invocation_nvx(){ flag |= b_no_duplicate_any_hit_invocation_nvx; return *this; }
+	F_geometry_NVX& off_no_duplicate_any_hit_invocation_nvx(){ flag &= ~b_no_duplicate_any_hit_invocation_nvx; return *this; }
 };
-F_geometry_NVX():flag(0){}
-F_geometry_NVX(B bits_):flag(static_cast<int>(bits_)){}
-F_geometry_NVX(F_geometry_NVX const& flag_):flag(flag_.flag){}
-F_geometry_NVX(std::initializer_list<B> bit_list){for (auto&& bit : bit_list){flag |= static_cast<int>(bit);}}
-operator VkGeometryFlagBitsNVX const &(){return *this;}
-F_geometry_NVX& operator = (F_geometry_NVX flag_){flag = flag_.flag;return *this;}
-F_geometry_NVX operator | (B bit_){return flag | static_cast<int>(bit_);}
-F_geometry_NVX& operator |= (B bit_){flag |= static_cast<int>(bit_);return *this;}
-F_geometry_NVX operator | (F_geometry_NVX flag_){return flag | flag_.flag;}
-F_geometry_NVX& operator |= (F_geometry_NVX flag_){flag |= flag_.flag;return *this;}
-F_geometry_NVX operator & (F_geometry_NVX flag_){return flag & flag_.flag;}
-F_geometry_NVX& operator &= (F_geometry_NVX flag_){flag &= flag_.flag;return *this;}
-F_geometry_NVX operator ^ (F_geometry_NVX flag_){return flag ^ flag_.flag;}
-F_geometry_NVX& operator ^= (F_geometry_NVX flag_){flag ^= flag_.flag;return *this;}
-F_geometry_NVX operator ~ (){return all_flags().flag^flag;}
-bool operator !(){return !flag;}
-F_geometry_NVX& clear(){flag = 0;return *this;}
-F_geometry_NVX all_flags(){
-return b_opaque_nvx | b_no_duplicate_any_hit_invocation_nvx;
-}
-F_geometry_NVX& on_opaque_nvx(){ flag |= b_opaque_nvx; return *this; }
-F_geometry_NVX& off_opaque_nvx(){ flag &= ~b_opaque_nvx; return *this; }
-F_geometry_NVX& on_no_duplicate_any_hit_invocation_nvx(){ flag |= b_no_duplicate_any_hit_invocation_nvx; return *this; }
-F_geometry_NVX& off_no_duplicate_any_hit_invocation_nvx(){ flag &= ~b_no_duplicate_any_hit_invocation_nvx; return *this; }
-VkGeometryFlagBitsNVX get_vkfb(){ return VkGeometryFlagBitsNVX(flag); }
-};
-F_geometry_NVX inline operator|(const F_geometry_NVX::B bit1_, const F_geometry_NVX::B bit2_){F_geometry_NVX flags(bit1_);return flags | bit2_;}
-bool inline operator==(const F_geometry_NVX f1_, const F_geometry_NVX f2_) { return f1_.flag == f2_.flag; }
-bool inline operator!=(const F_geometry_NVX f1_, const F_geometry_NVX f2_) { return f1_.flag != f2_.flag; }
+inline F_geometry_NVX operator&(const F_geometry_NVX f1_, const F_geometry_NVX f2_){return f1_.flag&f2_.flag;}
+inline F_geometry_NVX operator|(const F_geometry_NVX f1_, const F_geometry_NVX f2_){return f1_.flag|f2_.flag;}
+inline F_geometry_NVX operator^(const F_geometry_NVX f1_, const F_geometry_NVX f2_){return f1_.flag^f2_.flag;}
 /*	VkBuildAccelerationStructureFlagBitsNVX*/
-class F_build_acceleration_structure_NVX {
-private:
-F_build_acceleration_structure_NVX(int flag_):flag(flag_){};
-public:
-uint32_t flag;
-enum B{
-	b_allow_update_nvx = VK_BUILD_ACCELERATION_STRUCTURE_ALLOW_UPDATE_BIT_NVX,
-	b_allow_compaction_nvx = VK_BUILD_ACCELERATION_STRUCTURE_ALLOW_COMPACTION_BIT_NVX,
-	b_prefer_fast_trace_nvx = VK_BUILD_ACCELERATION_STRUCTURE_PREFER_FAST_TRACE_BIT_NVX,
-	b_prefer_fast_build_nvx = VK_BUILD_ACCELERATION_STRUCTURE_PREFER_FAST_BUILD_BIT_NVX,
-	b_low_memory_nvx = VK_BUILD_ACCELERATION_STRUCTURE_LOW_MEMORY_BIT_NVX,
+union F_build_acceleration_structure_NVX {
+	uint32_t flag;
+	VkBuildAccelerationStructureFlagBitsNVX vk_flag;
+	enum B{
+		b_allow_update_nvx = VK_BUILD_ACCELERATION_STRUCTURE_ALLOW_UPDATE_BIT_NVX,
+		b_allow_compaction_nvx = VK_BUILD_ACCELERATION_STRUCTURE_ALLOW_COMPACTION_BIT_NVX,
+		b_prefer_fast_trace_nvx = VK_BUILD_ACCELERATION_STRUCTURE_PREFER_FAST_TRACE_BIT_NVX,
+		b_prefer_fast_build_nvx = VK_BUILD_ACCELERATION_STRUCTURE_PREFER_FAST_BUILD_BIT_NVX,
+		b_low_memory_nvx = VK_BUILD_ACCELERATION_STRUCTURE_LOW_MEMORY_BIT_NVX,
+	};
+	F_build_acceleration_structure_NVX():flag(0){}
+	F_build_acceleration_structure_NVX(int i_):flag(static_cast<uint32_t>(i_)){}
+	F_build_acceleration_structure_NVX(uint32_t flag_):flag(flag_){}
+	F_build_acceleration_structure_NVX(const B flag_):flag(flag_){}
+	F_build_acceleration_structure_NVX(VkBuildAccelerationStructureFlagBitsNVX flag_):vk_flag(flag_){}
+	operator uint32_t(){return flag;}
+	operator int(){return static_cast<int>(flag);}
+	operator VkBuildAccelerationStructureFlagBitsNVX const&(){return vk_flag;}
+	operator bool(){return !!flag;}
+	F_build_acceleration_structure_NVX& operator=(const F_build_acceleration_structure_NVX flag_){flag=flag_.flag; return *this;}
+	F_build_acceleration_structure_NVX& operator|=(const F_build_acceleration_structure_NVX flag_){flag|=flag_.flag; return *this;}
+	F_build_acceleration_structure_NVX& operator&=(const F_build_acceleration_structure_NVX flag_){flag&=flag_.flag; return *this;}
+	F_build_acceleration_structure_NVX& operator^=(const F_build_acceleration_structure_NVX flag_){flag^=flag_.flag;return *this;}
+	F_build_acceleration_structure_NVX operator~(){return ~flag;}
+	bool operator==(const F_build_acceleration_structure_NVX flag_){return flag==flag_.flag;}
+	bool operator!=(const F_build_acceleration_structure_NVX flag_){return !(*this==flag_);}
+	F_build_acceleration_structure_NVX& clear(){flag = 0;return *this;}
+	F_build_acceleration_structure_NVX all_flags(){ return b_allow_update_nvx | b_allow_compaction_nvx | b_prefer_fast_trace_nvx | b_prefer_fast_build_nvx | b_low_memory_nvx;}
+	F_build_acceleration_structure_NVX& on_allow_update_nvx(){ flag |= b_allow_update_nvx; return *this; }
+	F_build_acceleration_structure_NVX& off_allow_update_nvx(){ flag &= ~b_allow_update_nvx; return *this; }
+	F_build_acceleration_structure_NVX& on_allow_compaction_nvx(){ flag |= b_allow_compaction_nvx; return *this; }
+	F_build_acceleration_structure_NVX& off_allow_compaction_nvx(){ flag &= ~b_allow_compaction_nvx; return *this; }
+	F_build_acceleration_structure_NVX& on_prefer_fast_trace_nvx(){ flag |= b_prefer_fast_trace_nvx; return *this; }
+	F_build_acceleration_structure_NVX& off_prefer_fast_trace_nvx(){ flag &= ~b_prefer_fast_trace_nvx; return *this; }
+	F_build_acceleration_structure_NVX& on_prefer_fast_build_nvx(){ flag |= b_prefer_fast_build_nvx; return *this; }
+	F_build_acceleration_structure_NVX& off_prefer_fast_build_nvx(){ flag &= ~b_prefer_fast_build_nvx; return *this; }
+	F_build_acceleration_structure_NVX& on_low_memory_nvx(){ flag |= b_low_memory_nvx; return *this; }
+	F_build_acceleration_structure_NVX& off_low_memory_nvx(){ flag &= ~b_low_memory_nvx; return *this; }
 };
-F_build_acceleration_structure_NVX():flag(0){}
-F_build_acceleration_structure_NVX(B bits_):flag(static_cast<int>(bits_)){}
-F_build_acceleration_structure_NVX(F_build_acceleration_structure_NVX const& flag_):flag(flag_.flag){}
-F_build_acceleration_structure_NVX(std::initializer_list<B> bit_list){for (auto&& bit : bit_list){flag |= static_cast<int>(bit);}}
-operator VkBuildAccelerationStructureFlagBitsNVX const &(){return *this;}
-F_build_acceleration_structure_NVX& operator = (F_build_acceleration_structure_NVX flag_){flag = flag_.flag;return *this;}
-F_build_acceleration_structure_NVX operator | (B bit_){return flag | static_cast<int>(bit_);}
-F_build_acceleration_structure_NVX& operator |= (B bit_){flag |= static_cast<int>(bit_);return *this;}
-F_build_acceleration_structure_NVX operator | (F_build_acceleration_structure_NVX flag_){return flag | flag_.flag;}
-F_build_acceleration_structure_NVX& operator |= (F_build_acceleration_structure_NVX flag_){flag |= flag_.flag;return *this;}
-F_build_acceleration_structure_NVX operator & (F_build_acceleration_structure_NVX flag_){return flag & flag_.flag;}
-F_build_acceleration_structure_NVX& operator &= (F_build_acceleration_structure_NVX flag_){flag &= flag_.flag;return *this;}
-F_build_acceleration_structure_NVX operator ^ (F_build_acceleration_structure_NVX flag_){return flag ^ flag_.flag;}
-F_build_acceleration_structure_NVX& operator ^= (F_build_acceleration_structure_NVX flag_){flag ^= flag_.flag;return *this;}
-F_build_acceleration_structure_NVX operator ~ (){return all_flags().flag^flag;}
-bool operator !(){return !flag;}
-F_build_acceleration_structure_NVX& clear(){flag = 0;return *this;}
-F_build_acceleration_structure_NVX all_flags(){
-return b_allow_update_nvx | b_allow_compaction_nvx | b_prefer_fast_trace_nvx | b_prefer_fast_build_nvx | b_low_memory_nvx;
-}
-F_build_acceleration_structure_NVX& on_allow_update_nvx(){ flag |= b_allow_update_nvx; return *this; }
-F_build_acceleration_structure_NVX& off_allow_update_nvx(){ flag &= ~b_allow_update_nvx; return *this; }
-F_build_acceleration_structure_NVX& on_allow_compaction_nvx(){ flag |= b_allow_compaction_nvx; return *this; }
-F_build_acceleration_structure_NVX& off_allow_compaction_nvx(){ flag &= ~b_allow_compaction_nvx; return *this; }
-F_build_acceleration_structure_NVX& on_prefer_fast_trace_nvx(){ flag |= b_prefer_fast_trace_nvx; return *this; }
-F_build_acceleration_structure_NVX& off_prefer_fast_trace_nvx(){ flag &= ~b_prefer_fast_trace_nvx; return *this; }
-F_build_acceleration_structure_NVX& on_prefer_fast_build_nvx(){ flag |= b_prefer_fast_build_nvx; return *this; }
-F_build_acceleration_structure_NVX& off_prefer_fast_build_nvx(){ flag &= ~b_prefer_fast_build_nvx; return *this; }
-F_build_acceleration_structure_NVX& on_low_memory_nvx(){ flag |= b_low_memory_nvx; return *this; }
-F_build_acceleration_structure_NVX& off_low_memory_nvx(){ flag &= ~b_low_memory_nvx; return *this; }
-VkBuildAccelerationStructureFlagBitsNVX get_vkfb(){ return VkBuildAccelerationStructureFlagBitsNVX(flag); }
-};
-F_build_acceleration_structure_NVX inline operator|(const F_build_acceleration_structure_NVX::B bit1_, const F_build_acceleration_structure_NVX::B bit2_){F_build_acceleration_structure_NVX flags(bit1_);return flags | bit2_;}
-bool inline operator==(const F_build_acceleration_structure_NVX f1_, const F_build_acceleration_structure_NVX f2_) { return f1_.flag == f2_.flag; }
-bool inline operator!=(const F_build_acceleration_structure_NVX f1_, const F_build_acceleration_structure_NVX f2_) { return f1_.flag != f2_.flag; }
+inline F_build_acceleration_structure_NVX operator&(const F_build_acceleration_structure_NVX f1_, const F_build_acceleration_structure_NVX f2_){return f1_.flag&f2_.flag;}
+inline F_build_acceleration_structure_NVX operator|(const F_build_acceleration_structure_NVX f1_, const F_build_acceleration_structure_NVX f2_){return f1_.flag|f2_.flag;}
+inline F_build_acceleration_structure_NVX operator^(const F_build_acceleration_structure_NVX f1_, const F_build_acceleration_structure_NVX f2_){return f1_.flag^f2_.flag;}
 struct S_base_structure
 {VkStructureType sType; void * pNext = nullptr;};
 
