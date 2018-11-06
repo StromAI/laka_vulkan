@@ -111,8 +111,8 @@ namespace laka { namespace vk {
         return version;
     }
 
-    static S_allocation_callbacks acb;
-    S_allocation_callbacks* default_allocation_cb() { return &acb; }
+    static S_allocation_callbacks s_acb;
+    Alloc_callback_ptr default_allocation_cb() { return &s_acb; }
 
     class Layer_properties {
     public:
@@ -232,7 +232,7 @@ namespace laka { namespace vk {
         Array_value<const char*> enabled_extension_names_ /*= {}*/,
         uint32_t                api_version_ /*= VK_MAKE_VERSION(1, 1, 82)*/,
         N_instance_create_info  next_ /*= {}*/,
-        S_allocation_callbacks*const allocator_ /*= nullptr*/,
+        Alloc_callback_ptr          allocator_ /*= nullptr*/,
         Array_value<const char*>enabled_layer_names_ /*= {}*/,
         const char*             app_name_ /*= "laka::vk"*/,
         uint32_t                app_version_ /*= VK_MAKE_VERSION(0, 0, 1)*/,
@@ -258,7 +258,7 @@ namespace laka { namespace vk {
         info.set_pNext(next_);
 
         VkInstance this_handle;
-        auto ret = vkCreateInstance(info, *allocator_, &this_handle);
+        auto ret = vkCreateInstance(info, allocator_, &this_handle);
         show_result(ret);
         if (ret < 0)
         {
@@ -273,7 +273,7 @@ namespace laka { namespace vk {
 
     Instance::Instance(
         VkInstance handle_,
-        S_allocation_callbacks* allocator_callbacks_ptr_)
+        Alloc_callback_ptr* allocator_callbacks_ptr_)
         : handle(handle_)
         , allocator_callbacks_ptr(allocator_callbacks_ptr_==nullptr?nullptr:&allocator_callbacks)
     {
@@ -858,7 +858,7 @@ namespace laka { namespace vk {
 
 shared_ptr<Surface> Instance::get_a_surface(
     surface_create_info&            create_info_,
-    S_allocation_callbacks*const    allocator_ /*= default_allocation_cb()*/)
+    Alloc_callback_ptr*const    allocator_ /*= default_allocation_cb()*/)
 {
     shared_ptr<Surface> sptr;
     auto allocator = allocator_ == default_allocation_cb() ?
@@ -880,7 +880,7 @@ shared_ptr<Surface> Instance::get_a_surface(
     Surface::Surface(
         Instance::Sptr instance_,
         VkSurfaceKHR handle_,
-        S_allocation_callbacks*const   allocator_)
+        Alloc_callback_ptr*const   allocator_)
         : instance(instance_)
         , handle(handle_)
         , allocation_callbacks(allocator_)
@@ -898,7 +898,7 @@ shared_ptr<Surface> Instance::get_a_surface(
     shared_ptr<Device_creator> Instance::get_a_device_creator(
         bool(*choose_physical_device_)(Pramater_choose_physical_device& pramater_),
         bool(*choose_queue_family_)(Pramater_choose_queue_family& pramater_),
-        S_allocation_callbacks*const allocator_/* = default_allocation_cb*/)
+        Alloc_callback_ptr*const allocator_/* = default_allocation_cb*/)
     {
         shared_ptr<Device_creator> sptr(
             new Device_creator(
@@ -914,7 +914,7 @@ shared_ptr<Surface> Instance::get_a_surface(
         shared_ptr<Instance> instance_,
         bool(*choose_physical_device_)(Pramater_choose_physical_device& physical_device_),
         bool(*choose_queue_family_)(Pramater_choose_queue_family& parmatwr_),
-        S_allocation_callbacks*const allocator_)
+        Alloc_callback_ptr*const allocator_)
         : instance(instance_)
         , choose_physical_device_function(choose_physical_device_)
         , choose_queue_family_function(choose_queue_family_)
@@ -1401,7 +1401,7 @@ shared_ptr<Surface> Instance::get_a_surface(
         vector<User_choose_queue_info>& queue_infos_,
         vector<S_queue_family_properties>& qf_properties_,
         VkDevice handle_,
-        S_allocation_callbacks*const allocation_callbacks_)
+        Alloc_callback_ptr*const allocation_callbacks_)
         : instance(instance_)
         , handle(handle_)
         , device_creator(device_creator_)
@@ -1462,7 +1462,7 @@ shared_ptr<Surface> Instance::get_a_surface(
 #if 1   /*  VkSemaphore  */
     shared_ptr <Semaphore> Device::get_a_semaphore(
         N_semaphore_create_info next_/* = nullptr*/,
-        S_allocation_callbacks*const  allocator_/* = default_allocation_cb*/)
+        Alloc_callback_ptr*const  allocator_/* = default_allocation_cb*/)
     {
         shared_ptr<Semaphore> semaphore_sptr;
         auto allocator = allocator_ == default_allocation_cb() ?
@@ -1489,7 +1489,7 @@ shared_ptr<Surface> Instance::get_a_surface(
     Semaphore::Semaphore(
         shared_ptr<Device> device_,
         VkSemaphore handle_,
-        S_allocation_callbacks*const allocator_)
+        Alloc_callback_ptr*const allocator_)
         : device(device_)
         , handle(handle_)
         , allocation_callbacks(allocator_)
@@ -1506,7 +1506,7 @@ shared_ptr<Surface> Instance::get_a_surface(
 #if 1   /*  VkFence  */
     shared_ptr <Fence> Device::get_a_fence(
         N_fence_create_info next_/* = nullptr*/,
-        S_allocation_callbacks*const allocator_/* = default_allocation_cb*/)
+        Alloc_callback_ptr*const allocator_/* = default_allocation_cb*/)
     {
         shared_ptr<Fence> fence_sptr;
         auto allocator = allocator_ == default_allocation_cb() ?
@@ -1533,7 +1533,7 @@ shared_ptr<Surface> Instance::get_a_surface(
     Fence::Fence(
         shared_ptr<Device> device_,
         VkFence handle_,
-        S_allocation_callbacks*const allocator_)
+        Alloc_callback_ptr*const allocator_)
         : device(device_)
         , handle(handle_)
         , allocation_callbacks(allocator_)
@@ -1596,7 +1596,7 @@ shared_ptr<Surface> Instance::get_a_surface(
 
 #if 1   /*  VkEvent  */
     shared_ptr <Event> Device::get_a_event(
-        S_allocation_callbacks*const allocator_/* = default_allocation_cb*/)
+        Alloc_callback_ptr*const allocator_/* = default_allocation_cb*/)
     {
         shared_ptr<Event> event_sptr;
         auto allocator = allocator_ == default_allocation_cb() ?
@@ -1625,7 +1625,7 @@ shared_ptr<Surface> Instance::get_a_surface(
     Event::Event(
         Device::Sptr device_,
         VkEvent handle_,
-        S_allocation_callbacks*const allocator_)
+        Alloc_callback_ptr*const allocator_)
         : device(device_)
         , handle(handle_)
         , allocation_callbacks(allocator_)
@@ -1663,7 +1663,7 @@ shared_ptr<Surface> Instance::get_a_surface(
         const uint32_t*     code_ptr_,
         size_t              code_size_,
         N_shader_module_create_info next_,
-        S_allocation_callbacks*const allocator_)
+        Alloc_callback_ptr*const allocator_)
     {
         shared_ptr<Shader_module> shader_module_sptr;
         auto allocator = allocator_ == default_allocation_cb() ?
@@ -1707,7 +1707,7 @@ shared_ptr<Surface> Instance::get_a_surface(
     Shader_module::Shader_module(
         Device::Sptr device_,
         VkShaderModule handle_,
-        S_allocation_callbacks*const allocator_)
+        Alloc_callback_ptr*const allocator_)
         : device(device_)
         , handle(handle_)
         , allocation_callbacks(allocator_)
@@ -1728,7 +1728,7 @@ shared_ptr<Surface> Instance::get_a_surface(
             Pramater_choose_memory_type& pramater_choose_,
             Pramater_choose_result& choose_result_),
         N_memory_allocate_info next_ /* = nullptr */,
-        S_allocation_callbacks*const allocator_ /* = default_allocation_cb */)
+        Alloc_callback_ptr*const allocator_ /* = default_allocation_cb */)
     {
         shared_ptr<Device_memory> device_memroy_sptr;
 
@@ -1775,7 +1775,7 @@ shared_ptr<Surface> Instance::get_a_surface(
     Device_memory::Device_memory(
         Device::Sptr device_,
         VkDeviceMemory handle_,
-        S_allocation_callbacks*const allocation_callbacks_)
+        Alloc_callback_ptr*const allocation_callbacks_)
         :device(device_)
         , handle(handle_)
         , allocation_callbacks(allocation_callbacks_)
@@ -1834,7 +1834,7 @@ shared_ptr<Surface> Instance::get_a_surface(
         E_sharing_mode        sharing_mode_,
         Array_value<uint32_t> queue_family_indices_,
         N_buffer_create_info next_ /*= {}*/,
-        S_allocation_callbacks*const allocator_/* = default_allocator_cb*/)
+        Alloc_callback_ptr*const allocator_/* = default_allocator_cb*/)
     {
         shared_ptr<Buffer> buffer_sptr;
         auto allocator = allocator_ == default_allocation_cb() ?
@@ -1872,7 +1872,7 @@ shared_ptr<Surface> Instance::get_a_surface(
     Buffer::Buffer(
         Device::Sptr device_,
         VkBuffer handle_,
-        S_allocation_callbacks*const allocator_)
+        Alloc_callback_ptr*const allocator_)
         : device(device_)
         , handle(handle_)
         , allocation_callbacks(allocator_)
@@ -1912,7 +1912,7 @@ shared_ptr<Surface> Instance::get_a_surface(
         E_format        format_,
         VkDeviceSize    offset_,
         VkDeviceSize    range_,
-        S_allocation_callbacks*const allocator_/* =default_allocation_cb()*/)
+        Alloc_callback_ptr*const allocator_/* =default_allocation_cb()*/)
     {
         shared_ptr<Buffer_view> buffer_view_sptr;
 
@@ -1952,7 +1952,7 @@ shared_ptr<Surface> Instance::get_a_surface(
     Buffer_view::Buffer_view(
         shared_ptr<Buffer> buffer_,
         VkBufferView handle_,
-        S_allocation_callbacks*const allocator_)
+        Alloc_callback_ptr*const allocator_)
         : buffer(buffer_)
         , handle(handle_)
         , allocation_callbacks(allocator_)
@@ -1983,7 +1983,7 @@ shared_ptr<Surface> Instance::get_a_surface(
         Array_value<uint32_t>   queue_family_indices_,
         E_image_layout          initialLayout_,
         N_image_create_info     next_ /*= {}*/,
-        S_allocation_callbacks*const allocator_/* = default_allocation_cb*/)
+        Alloc_callback_ptr*const allocator_/* = default_allocation_cb*/)
     {
         shared_ptr<Image> image_sptr;
 
@@ -2027,7 +2027,7 @@ shared_ptr<Surface> Instance::get_a_surface(
         Device::Sptr device_,
         VkImage handle_,
         E_image_layout layout_,
-        S_allocation_callbacks*const allocator_)
+        Alloc_callback_ptr*const allocator_)
         : device(device_)
         , handle(handle_)
         , layout(layout_)
@@ -2099,7 +2099,7 @@ shared_ptr<Surface> Instance::get_a_surface(
         S_component_mapping         components_,
         S_image_subresource_range   subresourceRange_,
         N_image_view_create_info         next_ /*= {}*/,
-        S_allocation_callbacks*const allocator_ /*= default_allocation_cb()*/)
+        Alloc_callback_ptr*const allocator_ /*= default_allocation_cb()*/)
     {
         shared_ptr<Image_view> image_view_sptr;
 
@@ -2139,7 +2139,7 @@ shared_ptr<Surface> Instance::get_a_surface(
     Image_view::Image_view(
         shared_ptr<Image> image_,
         VkImageView handle_,
-        S_allocation_callbacks*const allocator_)
+        Alloc_callback_ptr*const allocator_)
         : image(image_)
         , handle(handle_)
         , allocation_callbacks(allocator_)
@@ -2173,7 +2173,7 @@ shared_ptr<Surface> Instance::get_a_surface(
         E_border_color          borderColor_,
         VkBool32                unnormalizedCoordinates_,
         N_sampler_create_info   next_ /*= {}*/,
-        S_allocation_callbacks*const allocator_/* = default_allocation_cb*/)
+        Alloc_callback_ptr*const allocator_/* = default_allocation_cb*/)
     {
         shared_ptr<Sampler> sampler_sptr;
 
@@ -2214,7 +2214,7 @@ shared_ptr<Surface> Instance::get_a_surface(
     Sampler::Sampler(
         Device::Sptr device_,
         VkSampler handle_,
-        S_allocation_callbacks*const allocator_)
+        Alloc_callback_ptr*const allocator_)
         : device(device_)
         , handle(handle_)
         , allocation_callbacks(allocator_)
@@ -2240,7 +2240,7 @@ shared_ptr<Surface> Instance::get_a_surface(
         E_filter                        chromaFilter_,
         VkBool32                        forceExplicitReconstruction_,
         N_sampler_ycbcr_conversion_create_info next_ /*= {}*/,
-        S_allocation_callbacks*const    allocator_/* = default_allocation_cb*/)
+        Alloc_callback_ptr*const    allocator_/* = default_allocation_cb*/)
     {
         shared_ptr<Sampler_Ycbcr_conversion> sampler_ycbcr_conversion_sptr;
 
@@ -2275,7 +2275,7 @@ shared_ptr<Surface> Instance::get_a_surface(
     Sampler_Ycbcr_conversion::Sampler_Ycbcr_conversion(
         shared_ptr<Device> device_,
         VkSamplerYcbcrConversion handle_,
-        S_allocation_callbacks*const allocator_)
+        Alloc_callback_ptr*const allocator_)
         : device(device_)
         , handle(handle_)
         , allocation_callbacks(allocator_)
@@ -2296,7 +2296,7 @@ shared_ptr<Surface> Instance::get_a_surface(
         E_query_type                query_type_,
         uint32_t                    query_count_,
         F_query_pipeline_statistic  queue_pipeline_statistic_flags_,
-        S_allocation_callbacks*const allocator_ /*= default_allocation_cb()*/)
+        Alloc_callback_ptr*const allocator_ /*= default_allocation_cb()*/)
     {
         shared_ptr<Query_pool> query_pool_sptr;
 
@@ -2331,7 +2331,7 @@ shared_ptr<Surface> Instance::get_a_surface(
     Query_pool::Query_pool(
         shared_ptr<Device> device_,
         VkQueryPool handle_,
-        S_allocation_callbacks*const  allocator_)
+        Alloc_callback_ptr*const  allocator_)
         : device(device_)
         , handle(handle_)
         , allocation_callbacks(allocator_)
@@ -2369,7 +2369,7 @@ shared_ptr<Surface> Instance::get_a_surface(
         uint32_t width_,
         uint32_t height_,
         uint32_t layers_,
-        S_allocation_callbacks*const allocator_ /*= default_allocation_cb()*/)
+        Alloc_callback_ptr*const allocator_ /*= default_allocation_cb()*/)
     {
         shared_ptr<Frame_buffer> frame_buffer_sptr;
 
@@ -2406,7 +2406,7 @@ shared_ptr<Surface> Instance::get_a_surface(
     Frame_buffer::Frame_buffer(
         shared_ptr<Render_pass>         render_pass_,
         VkFramebuffer                   handle_,
-        S_allocation_callbacks*const    allocator_)
+        Alloc_callback_ptr*const    allocator_)
         : render_pass(render_pass_)
         , handle(handle_)
         , allocation_callbacks(allocator_)
@@ -2428,7 +2428,7 @@ shared_ptr<Surface> Instance::get_a_surface(
         Array_value<S_subpass_description>      subpasses /*= {}*/,
         Array_value<S_subpass_dependency>       dependencies /*= {}*/,
         N_render_pass_create_info               next_ /*= {}*/,
-        S_allocation_callbacks*const allocator_ /*= default_allocation_cb()*/)
+        Alloc_callback_ptr*const allocator_ /*= default_allocation_cb()*/)
     {
         shared_ptr<Render_pass> render_pass_sptr;
 
@@ -2468,7 +2468,7 @@ shared_ptr<Surface> Instance::get_a_surface(
     Render_pass::Render_pass(
         shared_ptr<Device> device_,
         VkRenderPass handle_,
-        S_allocation_callbacks*const allocator_)
+        Alloc_callback_ptr*const allocator_)
         : device(device_)
         , handle(handle_)
         , allocation_callbacks(allocator_)
@@ -2495,7 +2495,7 @@ shared_ptr<Surface> Instance::get_a_surface(
         uint32_t                            maxSets_,
         Array_value<S_descriptor_pool_size> poolSizes_,
         F_descriptor_pool_create            flags_,
-        S_allocation_callbacks*const        allocator_ /*= default_allocation_cb()*/)
+        Alloc_callback_ptr*const        allocator_ /*= default_allocation_cb()*/)
     {
         shared_ptr<Descriptor_pool> descriptor_pool_sptr;
         auto allocator = allocator_ == default_allocation_cb() ?
@@ -2526,7 +2526,7 @@ shared_ptr<Surface> Instance::get_a_surface(
     Descriptor_pool::Descriptor_pool(
         shared_ptr<Device>              device_,
         VkDescriptorPool                handle_,
-        S_allocation_callbacks*const    allocator_)
+        Alloc_callback_ptr*const    allocator_)
         : device(device_)
         , handle(handle_)
         , allocation_callbacks(allocator_)
@@ -2555,7 +2555,7 @@ shared_ptr<Surface> Instance::get_a_surface(
         F_descriptor_set_layout_create                  flags_,
         Array_value<S_descriptor_set_layout_binding>    bindings_ /*= {}*/,
         N_descriptor_set_layout_create_info             next_ /*= {}*/,
-        S_allocation_callbacks*const allocator_ /*= default_allocation_cb()*/)
+        Alloc_callback_ptr*const allocator_ /*= default_allocation_cb()*/)
     {
         shared_ptr<Descriptor_set_layout> descriptor_set_layout_sptr;
 
@@ -2593,7 +2593,7 @@ shared_ptr<Surface> Instance::get_a_surface(
     Descriptor_set_layout::Descriptor_set_layout(
         shared_ptr<Device> device_,
         VkDescriptorSetLayout handle_,
-        S_allocation_callbacks*const allocator_)
+        Alloc_callback_ptr*const allocator_)
         : device(device_)
         , handle(handle_)
         , allocation_callbacks(allocator_)
@@ -2690,7 +2690,7 @@ shared_ptr<Surface> Instance::get_a_surface(
     shared_ptr<Descriptor_update_template>
         Descriptor_set_layout::get_a_descriptor_update_template(
             Array_value<VkDescriptorUpdateTemplateEntry> entrys_,
-            S_allocation_callbacks*const allocator_ /*= default_allocation_cb()*/)
+            Alloc_callback_ptr*const allocator_ /*= default_allocation_cb()*/)
     {
         shared_ptr<Descriptor_update_template> descriptor_update_template_sptr;
 
@@ -2729,7 +2729,7 @@ shared_ptr<Surface> Instance::get_a_surface(
             Array_value<S_descriptor_update_template_entry> entrys_,
             E_pipeline_bind_point                           bind_point_,
             uint32_t                                        set_,
-            S_allocation_callbacks*const allocator_ /*= default_allocation_cb()*/)
+            Alloc_callback_ptr*const allocator_ /*= default_allocation_cb()*/)
     {
         shared_ptr<Descriptor_update_template> descriptor_update_template_sptr;
 
@@ -2768,7 +2768,7 @@ shared_ptr<Surface> Instance::get_a_surface(
     Descriptor_update_template::Descriptor_update_template(
         shared_ptr<Descriptor_set_layout> descriptor_set_layout_,
         VkDescriptorUpdateTemplate handle_,
-        S_allocation_callbacks*const allocator_)
+        Alloc_callback_ptr*const allocator_)
         : descriptor_set_layout(descriptor_set_layout_)
         , handle(handle_)
         , allocation_callbacks(allocator_)
@@ -2777,7 +2777,7 @@ shared_ptr<Surface> Instance::get_a_surface(
     Descriptor_update_template::Descriptor_update_template(
         shared_ptr< Pipeline_layout> pipeline_layout_,
         VkDescriptorUpdateTemplate handle_,
-        S_allocation_callbacks*const allocator_)
+        Alloc_callback_ptr*const allocator_)
         : pipeline_layout(pipeline_layout_)
         , handle(handle_)
         , allocation_callbacks(allocator_)
@@ -2800,7 +2800,7 @@ shared_ptr<Surface> Instance::get_a_surface(
     shared_ptr<Command_pool> Device::get_a_command_pool(
         uint32_t                        queueFamilyIndex_,
         F_command_pool_create           flags_,
-        S_allocation_callbacks*const   allocator_ /*= default_allocation_cb()*/)
+        Alloc_callback_ptr*const   allocator_ /*= default_allocation_cb()*/)
     {
         shared_ptr<Command_pool> command_pool_sptr;
         auto allocator = allocator_ == default_allocation_cb() ?
@@ -2832,7 +2832,7 @@ shared_ptr<Surface> Instance::get_a_surface(
     Command_pool::Command_pool(
         std::shared_ptr<Device>         device_,
         VkCommandPool                   handle_,
-        S_allocation_callbacks*const   allocator_)
+        Alloc_callback_ptr*const   allocator_)
         : device(device_)
         , handle(handle_)
         , allocation_callbacks(allocator_)
@@ -3504,7 +3504,7 @@ shared_ptr<Surface> Instance::get_a_surface(
 #if 1   /*  VkPipelineLayout  */
     shared_ptr<Pipeline_layout> Device::get_a_pipeline_layout(
         Array_value<S_push_constant_range>  push_constant_ranges_ /*= {}*/,
-        S_allocation_callbacks*const allocator_ /*= default_allocation_cb()*/)
+        Alloc_callback_ptr*const allocator_ /*= default_allocation_cb()*/)
     {
         shared_ptr<Pipeline_layout> pipeline_layout_sptr;
 
@@ -3534,7 +3534,7 @@ shared_ptr<Surface> Instance::get_a_surface(
     Pipeline_layout::Pipeline_layout(
         shared_ptr<Device> device_,
         VkPipelineLayout handle_,
-        S_allocation_callbacks*const allocator_)
+        Alloc_callback_ptr*const allocator_)
         : device(device_)
         , handle(handle_)
         , allocation_callbacks(allocator_)
@@ -3553,7 +3553,7 @@ shared_ptr<Surface> Instance::get_a_surface(
     shared_ptr<Pipeline_cache> Device::get_a_pipeline_cache(
         size_t      initial_data_size /*= 0*/,
         const void* initial_data_ /*= nullptr*/,
-        S_allocation_callbacks*const allocator_ /*= default_allocation_cb()*/)
+        Alloc_callback_ptr*const allocator_ /*= default_allocation_cb()*/)
     {
         shared_ptr<Pipeline_cache> pipeline_cache_sptr;
 
@@ -3582,7 +3582,7 @@ shared_ptr<Surface> Instance::get_a_surface(
     Pipeline_cache::Pipeline_cache(
         shared_ptr<Device> device_,
         VkPipelineCache handle_,
-        S_allocation_callbacks*const allocator_)
+        Alloc_callback_ptr*const allocator_)
         : device(device_)
         , handle(handle_)
         , allocation_callbacks(allocator_)

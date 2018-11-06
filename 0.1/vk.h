@@ -402,7 +402,6 @@ namespace laka { namespace vk {
     void show_result_assert(VkResult ret_);
     std::string version_str(uint32_t version);
     uint32_t get_instance_version();
-    S_allocation_callbacks* default_allocation_cb();
 
     template <typename Laka_vk_class__, typename Handle_type__, typename Api_ptr_type__>
     class Group_base {
@@ -549,6 +548,23 @@ public:                                                                         
         operator Handle_type(){ return handle;  }
     };
 
+    union Alloc_callback_ptr{
+    private:
+        S_allocation_callbacks* s;
+        VkAllocationCallbacks* vks;
+    public:
+        Alloc_callback_ptr(std::nullptr_t n_) :s(n_) {}
+        Alloc_callback_ptr(Alloc_callback_ptr& acb_) :s(acb_.s) {}
+        Alloc_callback_ptr(S_allocation_callbacks* cb_) :s(cb_) {}
+
+        operator S_allocation_callbacks*() { return s; }
+        operator VkAllocationCallbacks*() { return vks; }
+
+        Alloc_callback_ptr& operator=(Alloc_callback_ptr& acb_) { s = acb_.s; }
+        bool operator==(Alloc_callback_ptr& acb_) { return s == acb_.s; }
+    };
+
+    Alloc_callback_ptr default_allocation_cb();
 
 #endif  /*  global  */
 
@@ -575,27 +591,27 @@ public:                                                                         
         ~Instance();
 
         static Sptr get_new(
-            Array_value<const char*>        enabled_extension_names_ = {},
-            uint32_t                        api_version_ = VK_MAKE_VERSION(1, 1, 82),
-            N_instance_create_info          next_ = {},
-            S_allocation_callbacks*const    allocator_ = nullptr,
-            Array_value<const char*>        enabled_layer_names_ = {},
-            const char*                     app_name_ = "laka::vk",
-            uint32_t                        app_version_ = VK_MAKE_VERSION(0, 0, 1),
-            const char*                     engine_name_ = "laka::vk::engine",
-            uint32_t                        engine_version_ = VK_MAKE_VERSION(0, 0, 1));
+            Array_value<const char*>    enabled_extension_names_ = {},
+            uint32_t                    api_version_ = VK_MAKE_VERSION(1, 1, 82),
+            N_instance_create_info      next_ = {},
+            Alloc_callback_ptr          allocator_ = nullptr,
+            Array_value<const char*>    enabled_layer_names_ = {},
+            const char*                 app_name_ = "laka::vk",
+            uint32_t                    app_version_ = VK_MAKE_VERSION(0, 0, 1),
+            const char*                 engine_name_ = "laka::vk::engine",
+            uint32_t                    engine_version_ = VK_MAKE_VERSION(0, 0, 1));
 
         std::shared_ptr<Device_creator> get_a_device_creator(
             bool(*choose_physical_device_)(Pramater_choose_physical_device& pramater_),
             bool(*choose_queue_family_)(Pramater_choose_queue_family& pramater_),
-            S_allocation_callbacks*const allocator_ = default_allocation_cb());
+            Alloc_callback_ptr allocator_ = default_allocation_cb() );
 
         std::shared_ptr<Surface> get_a_surface(
             surface_create_info&            create_info_,
-            S_allocation_callbacks*const    allocator_ = default_allocation_cb());
+            Alloc_callback_ptr allocator_ = default_allocation_cb() );
 
         const VkInstance                    handle;
-        S_allocation_callbacks*const        allocator_callbacks_ptr;
+        Alloc_callback_ptr                  allocator_callbacks_ptr;
         std::vector<Physical_device_group>  physical_device_groups;
         std::vector<Physical_device>        physical_devices;
 
@@ -605,10 +621,11 @@ public:                                                                         
                 table_vk_api_physical_device_khr(vk_fun ZK, , , YK FH)
                 table_vk_api_platform(vk_fun ZK, , , YK FH)
         }api;
+
     private:
         Instance(
-            VkInstance                      handle_,
-            S_allocation_callbacks*const    allocator_callbacks_ptr_);
+            VkInstance          handle_,
+            Alloc_callback_ptr  allocator_callbacks_ptr_);
 
         S_allocation_callbacks allocator_callbacks;
     };
@@ -789,9 +806,9 @@ public:                                                                         
         Surface(
             Instance::Sptr  instance_,
             VkSurfaceKHR    handle_,
-            S_allocation_callbacks*const   allocator_);
+            Alloc_callback_ptr  allocator_);
 
-        S_allocation_callbacks*const   allocation_callbacks;
+        Alloc_callback_ptr  allocation_callbacks;
     };
 
     //为帮助创建Device而存在
@@ -833,9 +850,9 @@ public:                                                                         
             std::shared_ptr<Instance>       instance_,
             bool(*choose_physical_device_)(Pramater_choose_physical_device&),
             bool(*choose_queue_family_)(Pramater_choose_queue_family&),
-            S_allocation_callbacks*const   allocator_);
+            Alloc_callback_ptr allocator_);
 
-        S_allocation_callbacks*const   allocation_callbacks;
+        Alloc_callback_ptr  allocation_callbacks;
     };
 
     struct Pramater_choose_memory_type {
@@ -868,20 +885,20 @@ public:                                                                         
 
         std::shared_ptr <Semaphore> get_a_semaphore(
             N_semaphore_create_info next_ = {},
-            S_allocation_callbacks*const allocator_ = default_allocation_cb());
+            Alloc_callback_ptr allocator_ = default_allocation_cb());
 
         std::shared_ptr <Fence> get_a_fence(
             N_fence_create_info next_ = {},
-            S_allocation_callbacks*const allocator_ = default_allocation_cb());
+            Alloc_callback_ptr allocator_ = default_allocation_cb());
 
         std::shared_ptr <Event> get_a_event(
-            S_allocation_callbacks*const allocator_ = default_allocation_cb());
+            Alloc_callback_ptr allocator_ = default_allocation_cb());
 
         std::shared_ptr<Shader_module> get_a_shader_module(
             const uint32_t*     code_ptr_,
             size_t              code_size_,
             N_shader_module_create_info next_ = {},
-            S_allocation_callbacks*const allocator_ = default_allocation_cb());
+            Alloc_callback_ptr allocator_ = default_allocation_cb());
 
         std::shared_ptr<Device_memory> get_a_device_memory(
             VkDeviceSize memory_size_,
@@ -889,16 +906,16 @@ public:                                                                         
                 Pramater_choose_memory_type& pramater_choose_,
                 Pramater_choose_result& choose_result_),
             N_memory_allocate_info next_ = {},
-            S_allocation_callbacks*const allocation_callbacks_ = default_allocation_cb());
+            Alloc_callback_ptr allocation_callbacks_ = default_allocation_cb());
 
         std::shared_ptr<Buffer> get_a_buffer(
-            VkDeviceSize        buffer_size_,
-            F_buffer_create     create_flags_,
-            F_buffer_usage        usage_flags_,
-            E_sharing_mode        sharing_mode_,
-            Array_value<uint32_t> queue_family_indices_,
-            N_buffer_create_info next_ = {},
-            S_allocation_callbacks*const allocator_ = default_allocation_cb());
+            VkDeviceSize            buffer_size_,
+            F_buffer_create         create_flags_,
+            F_buffer_usage          usage_flags_,
+            E_sharing_mode          sharing_mode_,
+            Array_value<uint32_t>   queue_family_indices_,
+            N_buffer_create_info    next_ = {},
+            Alloc_callback_ptr allocator_ = default_allocation_cb());
 
         std::shared_ptr<Image> get_a_image(
             F_image_create          create_fb_,
@@ -914,7 +931,7 @@ public:                                                                         
             Array_value<uint32_t>   queue_family_indices_,
             E_image_layout          initialLayout_,
             N_image_create_info     next_ = {},
-            S_allocation_callbacks*const allocator_ = default_allocation_cb());
+            Alloc_callback_ptr allocator_ = default_allocation_cb());
 
         std::shared_ptr<Sampler> get_a_sampler(
             E_filter                magFilter_,
@@ -933,7 +950,7 @@ public:                                                                         
             E_border_color          borderColor_,
             VkBool32                unnormalizedCoordinates_,
             N_sampler_create_info   next_ = {},
-            S_allocation_callbacks*const allocator_ = default_allocation_cb());
+            Alloc_callback_ptr allocator_ = default_allocation_cb());
 
         std::shared_ptr<Sampler_Ycbcr_conversion> get_a_sampler_ycbcr_conversion(
             E_format                            format_,
@@ -945,50 +962,50 @@ public:                                                                         
             E_filter                        chromaFilter_,
             VkBool32                        forceExplicitReconstruction_,
             N_sampler_ycbcr_conversion_create_info next_ = {},
-            S_allocation_callbacks*const    allocator_ = default_allocation_cb());
+            Alloc_callback_ptr allocator_ = default_allocation_cb());
 
         std::shared_ptr<Command_pool> get_a_command_pool(
             uint32_t                        queueFamilyIndex_,
             F_command_pool_create           flags_,
-            S_allocation_callbacks*const    allocator_ = default_allocation_cb());
+            Alloc_callback_ptr allocator_ = default_allocation_cb());
 
         std::shared_ptr<Descriptor_pool> get_a_descriptor_pool(
             uint32_t                            maxSets_,
             Array_value<S_descriptor_pool_size> poolSizes_,
             F_descriptor_pool_create            flags_,
-            S_allocation_callbacks*const        allocator_ = default_allocation_cb());
+            Alloc_callback_ptr allocator_ = default_allocation_cb());
 
         std::shared_ptr<Query_pool> get_a_query_pool(
             E_query_type                query_type_,
             uint32_t                    query_count_,
             F_query_pipeline_statistic  queue_pipeline_statistic_flags_,
-            S_allocation_callbacks*const allocator_ = default_allocation_cb());
+            Alloc_callback_ptr allocator_ = default_allocation_cb());
 
         std::shared_ptr<Descriptor_set_layout> get_a_descriptor_set_layout(
             F_descriptor_set_layout_create                  flags_,//手册中有但vk.xml中没有
             Array_value<S_descriptor_set_layout_binding>    bindings_ = {},
             N_descriptor_set_layout_create_info             next_ = {},
-            S_allocation_callbacks*const allocator_ = default_allocation_cb());
+            Alloc_callback_ptr allocator_ = default_allocation_cb());
 
         std::shared_ptr<Render_pass> get_a_render_pass(
             Array_value<S_attachment_description>   attachments = {},
             Array_value<S_subpass_description>      subpasses = {},
             Array_value<S_subpass_dependency>       dependencies = {},
             N_render_pass_create_info               next_ = {},
-            S_allocation_callbacks*const allocator_ = default_allocation_cb());
+            Alloc_callback_ptr allocator_ = default_allocation_cb());
 
         std::shared_ptr<Pipeline_layout> get_a_pipeline_layout(
             Array_value<S_push_constant_range>  push_constant_ranges_ = {},
-            S_allocation_callbacks*const allocator_ = default_allocation_cb());
+            Alloc_callback_ptr allocator_ = default_allocation_cb());
 
         std::shared_ptr<Pipeline_cache> get_a_pipeline_cache(
             size_t      initial_data_size = 0,
             const void* initial_data_ = nullptr,
-            S_allocation_callbacks*const allocator_ = default_allocation_cb());
+            Alloc_callback_ptr allocator_ = default_allocation_cb());
 
 
         const VkDevice handle;
-        S_allocation_callbacks*const allocation_callbacks;
+        Alloc_callback_ptr*const allocation_callbacks;
         //std::vector<Queue> queues;
         std::vector<Queue_family> queue_familys;
 
@@ -1010,7 +1027,7 @@ public:                                                                         
             std::vector<User_choose_queue_info>&    queue_infos_,
             std::vector<S_queue_family_properties>& qf_properties_,
             VkDevice                                handle_,
-            S_allocation_callbacks*const allocation_callbacks_);
+            Alloc_callback_ptr allocation_callbacks_    );
 
         PFN_vkVoidFunction return_api(const char* api_name_);
     };
@@ -1067,9 +1084,9 @@ public:                                                                         
         Semaphore(
             std::shared_ptr<Device>         device_,
             VkSemaphore                     handle_,
-            S_allocation_callbacks*const   allocator_);
+            Alloc_callback_ptr allocator_);
 
-        S_allocation_callbacks*const   allocation_callbacks;
+        Alloc_callback_ptr allocation_callbacks;
     };
 
     class Fence :public std::enable_shared_from_this<Fence> {
@@ -1093,9 +1110,9 @@ public:                                                                         
         Fence(
             std::shared_ptr<Device>         device_,
             VkFence                         handle_,
-            S_allocation_callbacks*const   allocator_);
+            Alloc_callback_ptr allocator_);
 
-        S_allocation_callbacks*const allocation_callbacks;
+        Alloc_callback_ptr allocation_callbacks;
     };
 
     class Event :public std::enable_shared_from_this<Event> {
@@ -1118,9 +1135,9 @@ public:                                                                         
         Event(
             std::shared_ptr<Device>         device_,
             VkEvent                         handle_,
-            S_allocation_callbacks*const   allocator_);
+            Alloc_callback_ptr allocator_);
 
-        S_allocation_callbacks*const allocation_callbacks;
+        Alloc_callback_ptr allocation_callbacks;
     };
 
     class Shader_module :public std::enable_shared_from_this<Shader_module> {
@@ -1135,9 +1152,9 @@ public:                                                                         
         Shader_module(
             std::shared_ptr<Device>         device_,
             VkShaderModule                  handle_,
-            S_allocation_callbacks*const   allocator_);
+            Alloc_callback_ptr allocator_);
 
-        S_allocation_callbacks*const allocation_callbacks;
+        Alloc_callback_ptr allocation_callbacks;
     };
 
     class Device_memory : public std::enable_shared_from_this<Device_memory> {
@@ -1162,9 +1179,9 @@ public:                                                                         
         Device_memory(
             std::shared_ptr<Device>         device_,
             VkDeviceMemory                  handle_,
-            S_allocation_callbacks*const   allocation_callbacks_);
+            Alloc_callback_ptr allocation_callbacks_);
 
-        S_allocation_callbacks*const allocation_callbacks;
+        Alloc_callback_ptr allocation_callbacks;
     };
 
     class Buffer :public std::enable_shared_from_this<Buffer> {
@@ -1183,7 +1200,7 @@ public:                                                                         
             E_format        format_,
             VkDeviceSize    offset_,
             VkDeviceSize    range_,
-            S_allocation_callbacks*const allocator_ = default_allocation_cb());
+            Alloc_callback_ptr allocator_ = default_allocation_cb());
 
         const VkBuffer handle;
         std::shared_ptr<Device> device;
@@ -1195,9 +1212,9 @@ public:                                                                         
         Buffer(
             std::shared_ptr<Device>         device_,
             VkBuffer                        handle_,
-            S_allocation_callbacks*const   allocator_);
+            Alloc_callback_ptr allocator_);
 
-        S_allocation_callbacks*const allocation_callbacks;
+        Alloc_callback_ptr allocation_callbacks;
     };
 
     //没有功能函数
@@ -1217,9 +1234,9 @@ public:                                                                         
         Buffer_view(
             std::shared_ptr<Buffer>         buffer_,
             VkBufferView                    handle_,
-            S_allocation_callbacks*const   allocator_);
+            Alloc_callback_ptr allocator_);
 
-        S_allocation_callbacks*const allocation_callbacks;
+        Alloc_callback_ptr allocation_callbacks;
     };
 
     class Image : public std::enable_shared_from_this<Image> {
@@ -1245,7 +1262,7 @@ public:                                                                         
             S_component_mapping         components_,
             S_image_subresource_range   subresourceRange_,
             N_image_view_create_info    next_ = {},
-            S_allocation_callbacks*const allocator_ = default_allocation_cb());
+            Alloc_callback_ptr allocator_ = default_allocation_cb());
 
         const VkImage handle;
         std::shared_ptr<Device> device;
@@ -1256,9 +1273,9 @@ public:                                                                         
             std::shared_ptr<Device> device_,
             VkImage handle_,
             E_image_layout layout_,
-            S_allocation_callbacks*const allocator_);
+            Alloc_callback_ptr allocator_);
 
-        S_allocation_callbacks*const allocation_callbacks;
+        Alloc_callback_ptr allocation_callbacks;
     };
 
     //没有功能函数
@@ -1275,9 +1292,9 @@ public:                                                                         
         Image_view(
             std::shared_ptr<Image>          image_,
             VkImageView                     handle_,
-            S_allocation_callbacks*const   allocator_);
+            Alloc_callback_ptr allocator_);
 
-        S_allocation_callbacks*const allocation_callbacks;
+        Alloc_callback_ptr allocation_callbacks;
     };
 
     //没有功能函数
@@ -1294,9 +1311,9 @@ public:                                                                         
         Sampler(
             std::shared_ptr<Device>         device_,
             VkSampler                       handle_,
-            S_allocation_callbacks*const   allocator_);
+            Alloc_callback_ptr allocator_);
 
-        S_allocation_callbacks*const allocation_callbacks;
+        Alloc_callback_ptr allocation_callbacks;
     };
 
     //没有功能函数
@@ -1313,9 +1330,9 @@ public:                                                                         
         Sampler_Ycbcr_conversion(
             std::shared_ptr<Device>         device_,
             VkSamplerYcbcrConversion        handle_,
-            S_allocation_callbacks*const   allocator_);
+            Alloc_callback_ptr allocator_);
 
-        S_allocation_callbacks*const allocation_callbacks;
+        Alloc_callback_ptr allocation_callbacks;
     };
 
     class Query_pool : public std::enable_shared_from_this<Query_pool> {
@@ -1339,9 +1356,9 @@ public:                                                                         
         Query_pool(
             std::shared_ptr<Device>         device_,
             VkQueryPool                     handle_,
-            S_allocation_callbacks*const   allocator_);
+            Alloc_callback_ptr allocator_);
 
-        S_allocation_callbacks*const allocation_callbacks;
+        Alloc_callback_ptr allocation_callbacks;
     };
 
     class Render_pass :public std::enable_shared_from_this<Render_pass> {
@@ -1357,7 +1374,7 @@ public:                                                                         
             uint32_t width_,
             uint32_t height_,
             uint32_t layers_,
-            S_allocation_callbacks*const allocator_ = default_allocation_cb());
+            Alloc_callback_ptr allocator_ = default_allocation_cb());
 
         const VkRenderPass handle;
         std::shared_ptr<Device> device;
@@ -1366,9 +1383,9 @@ public:                                                                         
         Render_pass(
             std::shared_ptr<Device>         device_,
             VkRenderPass                    handle_,
-            S_allocation_callbacks*const   allocator_);
+            Alloc_callback_ptr allocator_);
 
-        S_allocation_callbacks*const allocation_callbacks;
+        Alloc_callback_ptr allocation_callbacks;
     };
 
     //没有功能函数
@@ -1388,9 +1405,9 @@ public:                                                                         
         Frame_buffer(
             std::shared_ptr<Render_pass>    render_pass_,
             VkFramebuffer                   handle_,
-            S_allocation_callbacks*const    allocator_);
+            Alloc_callback_ptr allocator_);
 
-        S_allocation_callbacks*const allocation_callbacks;
+        Alloc_callback_ptr allocation_callbacks;
     };
 
     class Descriptor_pool : public std::enable_shared_from_this<Descriptor_pool> {
@@ -1413,9 +1430,9 @@ public:                                                                         
         Descriptor_pool(
             std::shared_ptr<Device>         device_,
             VkDescriptorPool                handle_,
-            S_allocation_callbacks*const   allocator_);
+            Alloc_callback_ptr allocator_);
 
-        S_allocation_callbacks*const allocation_callbacks;
+        Alloc_callback_ptr allocation_callbacks;
     };
 
     class Descriptor_set_base {
@@ -1508,7 +1525,7 @@ public:                                                                         
 
         std::shared_ptr<Descriptor_update_template> get_a_descriptor_update_template(
             Array_value<VkDescriptorUpdateTemplateEntry> entrys_,
-            S_allocation_callbacks*const allocator_ = default_allocation_cb()   );
+            Alloc_callback_ptr allocator_ = default_allocation_cb()   );
 
         const VkDescriptorSetLayout handle;
         std::shared_ptr<Device> device;
@@ -1517,9 +1534,9 @@ public:                                                                         
         Descriptor_set_layout(
             std::shared_ptr<Device>         device_,
             VkDescriptorSetLayout           handle_,
-            S_allocation_callbacks*const   allocator_);
+            Alloc_callback_ptr allocator_);
 
-        S_allocation_callbacks*const allocation_callbacks;
+        Alloc_callback_ptr allocation_callbacks;
     };
 
     //没有功能函数
@@ -1571,14 +1588,14 @@ public:                                                                         
         Descriptor_update_template(
             std::shared_ptr<Descriptor_set_layout>  descriptor_set_layout_,
             VkDescriptorUpdateTemplate              handle_,
-            S_allocation_callbacks*const           allocator_);
+            Alloc_callback_ptr*const           allocator_);
 
         Descriptor_update_template(
             std::shared_ptr< Pipeline_layout>   pipeline_layout_,
             VkDescriptorUpdateTemplate          handle_,
-            S_allocation_callbacks*const       allocator_);
+            Alloc_callback_ptr*const       allocator_);
 
-        S_allocation_callbacks*const allocation_callbacks;
+        Alloc_callback_ptr*const allocation_callbacks;
     };
 
     class Command_pool : public std::enable_shared_from_this<Command_pool> {
@@ -1607,9 +1624,9 @@ public:                                                                         
         Command_pool(
             std::shared_ptr<Device>         device_,
             VkCommandPool                   handle_,
-            S_allocation_callbacks*const   allocator_);
+            Alloc_callback_ptr allocator_);
 
-        S_allocation_callbacks*const allocation_callbacks;
+        Alloc_callback_ptr allocation_callbacks;
     };
 
     class Command_buffer_base {
@@ -1936,7 +1953,7 @@ public:                                                                         
             Array_value<S_descriptor_update_template_entry> entrys_,
             E_pipeline_bind_point                           bind_point_,
             uint32_t                                        set_,
-            S_allocation_callbacks*const allocator_ = default_allocation_cb());
+            Alloc_callback_ptr*const allocator_ = default_allocation_cb());
 
         std::shared_ptr<Compute_pipeline> get_a_compute_pipeline(
             F_pipeline_create                   flags_,
@@ -1945,7 +1962,7 @@ public:                                                                         
             const char*                         pName_,//shader 入口点名称
             F_shader_stage                      stage_flags_,
             const S_specialization_info*        pSpecializationInfo_ = nullptr,
-            S_allocation_callbacks*const        allocator_ = default_allocation_cb());
+            Alloc_callback_ptr*const        allocator_ = default_allocation_cb());
 
         std::shared_ptr<Graphics_pipeline> get_a_graphics_pipeline(
             F_pipeline_create                                   flag_,
@@ -1963,7 +1980,7 @@ public:                                                                         
             const S_pipeline_color_blend_state_create_info*     color_blend_state_,
             const S_pipeline_dynamic_state_create_info*         dynamic_satate_,
             N_graphics_pipeline_create_info                     next_ = {},
-            S_allocation_callbacks*const allocator_ = default_allocation_cb());
+            Alloc_callback_ptr*const allocator_ = default_allocation_cb());
 
         const VkPipelineLayout handle;
         std::shared_ptr<Device> device;
@@ -1973,9 +1990,9 @@ public:                                                                         
         Pipeline_layout(
             std::shared_ptr<Device>         device_,
             VkPipelineLayout                handle_,
-            S_allocation_callbacks*const   allocator_);
+            Alloc_callback_ptr*const   allocator_);
 
-        S_allocation_callbacks*const allocation_callbacks;
+        Alloc_callback_ptr*const allocation_callbacks;
     };
 
     class Pipeline_cache : public std::enable_shared_from_this<Pipeline_cache> {
@@ -1996,9 +2013,9 @@ public:                                                                         
         Pipeline_cache(
             std::shared_ptr<Device>         device_,
             VkPipelineCache                 handle_,
-            S_allocation_callbacks*const   allocator_);
+            Alloc_callback_ptr*const   allocator_);
 
-        S_allocation_callbacks*const allocation_callbacks;
+        Alloc_callback_ptr*const allocation_callbacks;
     };
 
     //还要做批量创建pipeline
@@ -2016,7 +2033,7 @@ public:                                                                         
             F_shader_stage                      stage_flags,
             std::shared_ptr< Pipeline_layout>   pipeline_layout_ = nullptr,
             const S_specialization_info*        pSpecializationInfo = nullptr,
-            S_allocation_callbacks*const       allocator_ = default_allocation_cb());
+            Alloc_callback_ptr*const       allocator_ = default_allocation_cb());
 
         const VkPipeline  handle;
 
@@ -2031,11 +2048,11 @@ public:                                                                         
             std::shared_ptr<Pipeline_cache>     pipeline_cache,
             std::shared_ptr<Shader_module>      shader_module_,
             VkPipeline                          handle_,
-            S_allocation_callbacks*const        allocation_callbacks_,
+            Alloc_callback_ptr*const        allocation_callbacks_,
             int32_t                             base_index_ = -1,
             std::shared_ptr<Compute_pipeline>   compute_pipeline_ = nullptr);
 
-        S_allocation_callbacks*const allocation_callbacks;
+        Alloc_callback_ptr*const allocation_callbacks;
         int32_t index;
     };
 
@@ -2058,7 +2075,7 @@ public:                                                                         
             std::shared_ptr<std::shared_ptr<Shader_module>> shader_modules_,
             std::shared_ptr<Render_pass>        render_pass_);
 
-        S_allocation_callbacks*const allocation_callbacks;
+        Alloc_callback_ptr*const allocation_callbacks;
     };
 
 
