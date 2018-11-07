@@ -275,7 +275,7 @@ namespace laka { namespace vk {
         VkInstance handle_,
         Alloc_callback_ptr allocator_callbacks_ptr_)
         : handle(handle_)
-        , allocator_callbacks_ptr(allocator_callbacks_ptr_==nullptr?nullptr:&allocator_callbacks)
+        , allocator_callbacks_ptr(allocator_callbacks_ptr_== nullptr?nullptr:&allocator_callbacks)
     {
         init_show;
 
@@ -1298,7 +1298,7 @@ shared_ptr<Surface> Instance::get_a_surface(
             auto ret = instance->api.vkCreateDevice(
                 phy.handle,
                 &device_create_info,
-                allocation_callbacks,
+                instance->allocator_callbacks_ptr,
                 &device_handle
             );
             show_result(ret);

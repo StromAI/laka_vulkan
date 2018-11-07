@@ -13,7 +13,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 int main()
 {
     init_show;
-    show_info("以下一条为测试信息 不是真的");
+    show_info("测试VkResult::VK_NOT_READY的解释 不是真的");
     VkResult test_r = VkResult::VK_NOT_READY;
     show_result(test_r);
     
@@ -32,7 +32,9 @@ int main()
         (PFN_set_process_dpi_awareness)load_module_function_must(sh_core_moudle, "SetProcessDpiAwareness");
 
     if (setProcessDpiAwareness != nullptr)
+    {
         setProcessDpiAwareness(PROCESS_DPI_AWARENESS::PROCESS_PER_MONITOR_DPI_AWARE);
+    }
     FreeLibrary(sh_core_moudle);
 
     // 创建Vulkan实例
@@ -68,16 +70,16 @@ int main()
             {
                 auto qf_index = qf_info.index;
                 // 判断是否是一个带图形功能的队列族
-                if(qf_info.properties.queueFlags & F_queue::b_graphics)
+                if (qf_info.properties.queueFlags & F_queue::b_graphics)
+                {
                     continue;
-                
+                }
                 pramater_.waiting_for_your_filled_info_.push_back(User_choose_queue_info{
                     qf_info.index,
                     {1.0f,1.0f,1.0f,1.0f},      // 多少个元素就代表多少个队列 每个元素就是相应位置的队列的优先级
                     (F_device_queue_create)0,   // 最新版本才有作用和说明 暂时设为0
                     E_queue_global_priority_EXT::e_medium_ext
                 });
-                
                 is_ok = true;
                 break;
             }
@@ -92,6 +94,9 @@ int main()
     auto surface = vk_instance->get_a_surface(s_ci);
 
     auto vk_dev = vk_dc->get_a_device();
+
+    auto cmd_pool = vk_dev->get_a_command_pool(
+        vk_dev->queue_familys[0].qf_index,F_command_pool_create::b_reset_command_buffer);
 
 
 

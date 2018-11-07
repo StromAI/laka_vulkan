@@ -580,16 +580,13 @@ public:                                                                         
         F_device_queue_create create_flags;
         E_queue_global_priority_EXT global_priority;
     };
-
     struct Pramater_choose_physical_device {
         Physical_device& if_you_feel_the_physical_device_not_ok_so_return_false;
     };
-    
     struct Pramater_choose_queue_family {
         std::vector<Queue_family_info> const& give_you_queue_family_info_;
         std::vector<User_choose_queue_info>& waiting_for_your_filled_info_;
     };
-    
     class Instance : public std::enable_shared_from_this<Instance> {
     public:
         using Sptr = std::shared_ptr<Instance>;
@@ -605,7 +602,7 @@ public:                                                                         
             const char*                 app_name_ = "laka::vk",
             uint32_t                    app_version_ = VK_MAKE_VERSION(0, 0, 1),
             const char*                 engine_name_ = "laka::vk::engine",
-            uint32_t                    engine_version_ = VK_MAKE_VERSION(0, 0, 1));
+            uint32_t                    engine_version_ = VK_MAKE_VERSION(0, 0, 1)  );
 
         std::shared_ptr<Device_creator> get_a_device_creator(
             bool(*choose_physical_device_)(Pramater_choose_physical_device& pramater_),
