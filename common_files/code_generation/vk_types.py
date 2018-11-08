@@ -285,12 +285,13 @@ for enum in enum_list:
         "{0}(decltype(flag) flag_):flag(flag_) @#\n"\
         "{0}({0} const& e_):flag(e_.flag) @#\n"\
         "{0}({1} flag_) :flag(static_cast<decltype(flag)>(flag_) ) @#\n"\
-        "operator {1}&() @ return reinterpret_cast<{1}&>(*this); #\n"\
+        "//operator {1}*()@ return reinterpret_cast<{1}*>(this); #\n"\
+        "operator {1}&()@ return reinterpret_cast<{1}&>(*this); #\n"\
         "{0}& operator = ({0} e_) @ flag = e_.flag; return *this; #\n"\
         "bool operator== ({0} e_) @ return flag == e_.flag; #\n"\
         "bool operator== ({1} e_) @ return flag == static_cast<decltype(flag)>(e_); #\n"\
         "bool operator!= ({0} e_) @ return !(*this == e_); #\n"\
-        "bool operator!= ({1} e_) @ return !(*this == e_); #\n"\
+        "bool operator!= ({1} e_) @ return !(*this == e_); #\n" \
         "#;\n\n"\
             .format(my_name.my_name,my_name.vk_name).replace("@","{").replace("#","}")
 
@@ -376,14 +377,12 @@ for enum in flag_bits_list:
 
     flagbits_out += \
         "\t{0}():flag(0)#$\n"\
-        "\t{0}(int i_):flag(static_cast<uint32_t>(i_))#$\n" \
-        "\t{0}(uint32_t flag_):flag(flag_)#$\n" \
-        "\t{0}(const B flag_):flag(flag_)#$\n" \
-        "\t{0}({1} flag_):vk_flag(flag_)#$\n" \
+        "\t{0}(const uint32_t flag_):flag(flag_)#$\n" \
+        "\t//{0}(const B flag_):flag(flag_)#$\n" \
+        "\t//{0}(const {1} flag_):vk_flag(flag_)#$\n" \
         "\toperator uint32_t()#return flag;$\n" \
-        "\toperator int()#return static_cast<int>(flag);$\n" \
-        "\toperator {1} const&()#return vk_flag;$\n" \
-        "\toperator bool()#return !!flag;$\n" \
+        "\toperator {1}*()# return reinterpret_cast<{1}*>(this); $\n" \
+        "\t//operator {1}&()#return vk_flag;$\n" \
         "\t{0}& operator=(const {0} flag_)#flag=flag_.flag; return *this;$\n" \
         "\t{0}& operator|=(const {0} flag_)#flag|=flag_.flag; return *this;$\n" \
         "\t{0}& operator&=(const {0} flag_)#flag&=flag_.flag; return *this;$\n" \
@@ -397,8 +396,8 @@ for enum in flag_bits_list:
 
     '''
     
-        "\t{0} operator&(const {0} flag_)#return flag&flag_.flag;$\n" \
-        "\t{0} operator|(const {0} flag_)#return flag|flag_.flag;$\n" \
+        "\t{0} explicit operator&(const {0} flag_)#return flag&flag_.flag;$\n" \
+        "\t{0} explicit operator|(const {0} flag_)#return flag|flag_.flag;$\n" \
         "\t{0} operator^(const {0} flag_)#return flag^flag_.flag;$\n" \
     
     "{0}():flag(0)@$\n" \
@@ -442,11 +441,16 @@ for enum in flag_bits_list:
 
     flagbits_out+=\
         "inline {0} operator&(const {0} f1_, const {0} f2_)#return f1_.flag&f2_.flag;$\n" \
+        "inline {0} operator&(const {0} f1_, const {0}::B f2_)#return f1_.flag&uint32_t(f2_);$\n" \
+        "inline {0} operator&(const {0}::B f1_, const {0} f2_)#return uint32_t(f1_)&f2_.flag;$\n" \
+        "inline {0} operator&(const {0} f1_, const {1} f2_)#return f1_.flag&uint32_t(f2_);$\n" \
+        "inline {0} operator&(const {1} f1_, const {0} f2_)#return uint32_t(f1_)&f2_.flag;$\n" \
         "inline {0} operator|(const {0} f1_, const {0} f2_)#return f1_.flag|f2_.flag;$\n" \
         "inline {0} operator^(const {0} f1_, const {0} f2_)#return f1_.flag^f2_.flag;$\n" \
-            .format(fb_obj.my_name).replace("#","{").replace("$","}")
+            .format(fb_obj.my_name,fb_obj.vk_name).replace("#","{").replace("$","}")
 
-    '''
+
+    '''    
     
         "{0} inline operator|(const {0}::B bit1_, const {0}::B bit2_)@{0} flags(bit1_);return flags | bit2_;$\n" \
         "{0} inline operator|(const {0}::B bit1_, const {0}::B bit2_)@{0} flags(bit1_);return flags | bit2_;$\n" \

@@ -93,12 +93,49 @@ int main()
     };
     auto surface = vk_instance->get_a_surface(s_ci);
 
-    auto vk_dev = vk_dc->get_a_device();
+    auto vk_dev = vk_dc->get_a_device({ VK_KHR_SWAPCHAIN_EXTENSION_NAME });
 
     auto cmd_pool = vk_dev->get_a_command_pool(
         vk_dev->queue_familys[0].qf_index,F_command_pool_create::b_reset_command_buffer);
+    
 
+    std::vector<E_format> depthFormats{
+        E_format::e_d32_sfloat_s8_uint,
+        E_format::e_d32_sfloat,
+        E_format::e_d24_unorm_s8_uint,
+        E_format::e_d16_unorm_s8_uint,
+        E_format::e_d16_unorm,
+    };
 
+    bool finded_format = false;
+    E_format format;
+    for (auto&& f:depthFormats)
+    {
+        auto fmt_ppt = vk_dev->physical_devices[0]->get_format_properties(f);
+        VkFormatFeatureFlagBits x = VK_FORMAT_FEATURE_DEPTH_STENCIL_ATTACHMENT_BIT;
+        if ( x & fmt_ppt->optimalTilingFeatures )
+        {
+            format = f;
+            finded_format = true;
+            break;
+        }
+    }
+
+    auto semaphore_present = vk_dev->get_a_semaphore();
+    auto semaphore_render = vk_dev->get_a_semaphore();
+    F_pipeline_stage pipeline_stage = F_pipeline_stage::b_color_attachment_output;
+
+    S_submit_info submit_info(
+        1,
+        *semaphore_present,
+        &pipeline_stage,
+        0,
+        nullptr,
+        1,
+        *semaphore_render
+    );
+
+    
 
 }
 

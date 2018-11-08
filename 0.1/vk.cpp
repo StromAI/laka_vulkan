@@ -657,7 +657,7 @@ namespace laka { namespace vk {
         shared_ptr<VkMemoryWin32HandlePropertiesKHR> result(new VkMemoryWin32HandlePropertiesKHR);
         auto ret = api.vkGetMemoryWin32HandlePropertiesKHR(
             device_,
-            handle_type_,
+            handle_type_.vk_flag,
             handle_,
             result.get()
         );
@@ -972,7 +972,7 @@ shared_ptr<Surface> Instance::get_a_surface(
 
     shared_ptr<Device> Device_creator::get_a_device(
         Physical_device& physical_device_,
-        Array_value<char*> enabled_extensions_ /* = { } */,
+        Array_value<const char*> enabled_extensions_ /* = { } */,
         S_physical_device_features* features_ /* = nullptr */)
     {
         init_show;
@@ -1082,7 +1082,7 @@ shared_ptr<Surface> Instance::get_a_surface(
 
     shared_ptr<Device> Device_creator::get_a_device(
         Physical_device_group& physica_device_group_,
-        Array_value<char*> enabled_extensions_ /* = {} */,
+        Array_value<const char*> enabled_extensions_ /* = {} */,
         S_physical_device_features* features_ /* = nullptr */)
     {
         init_show;
@@ -1220,7 +1220,7 @@ shared_ptr<Surface> Instance::get_a_surface(
     }
 
     std::shared_ptr<Device> Device_creator::get_a_device(
-        Array_value<char*> enabled_extensions_/* = {}*/,
+        Array_value<const char*> enabled_extensions_/* = {}*/,
         S_physical_device_features* features_/* = nullptr*/)
     {
         init_show;
@@ -3310,7 +3310,7 @@ shared_ptr<Surface> Instance::get_a_surface(
         Query_pool&         queryPool_,
         uint32_t            query_)
     {
-        api.vkCmdWriteTimestamp(handle, pipelineStage_, queryPool_.handle, query_);
+        api.vkCmdWriteTimestamp(handle, pipelineStage_.vk_flag, queryPool_.handle, query_);
     }
 
     void Command_buffer_base::push_constants(

@@ -618,6 +618,8 @@ public:                                                                         
         std::vector<Physical_device_group>  physical_device_groups;
         std::vector<Physical_device>        physical_devices;
 
+        operator VkInstance*() { return const_cast<VkInstance*>(&handle); }
+
         struct Api {
             table_vk_api_instance(vk_fun ZK, , , YK FH)
                 table_vk_api_physical_device(vk_fun ZK, , , YK FH)
@@ -678,6 +680,8 @@ public:                                                                         
         VkPhysicalDevice                handle;
         Instance*                       instance;
         std::vector<Queue_family_info>  queue_familys;
+
+        operator VkPhysicalDevice*() { return const_cast<VkPhysicalDevice*>(&handle); }
 
         class Group :public Group_base<Physical_device, VkPhysicalDevice, Instance::Api*> {
         public:
@@ -804,6 +808,9 @@ public:                                                                         
         const VkSurfaceKHR handle;
         Instance::Sptr instance;
         Instance::Api& api;
+
+        operator VkSurfaceKHR*() { return const_cast<VkSurfaceKHR*>(&handle); }
+
     private:
         friend Instance;
         Surface(
@@ -825,16 +832,16 @@ public:                                                                         
 
         std::shared_ptr<Device> get_a_device(
             Physical_device& physical_device_,
-            Array_value<char*> enabled_extensions_ = {},
+            Array_value<const char*> enabled_extensions_ = {},
             S_physical_device_features* features_ = nullptr);//todo:这里可以接收匿名函数回调
 
         std::shared_ptr<Device> get_a_device(
             Physical_device_group& physica_device_group_,
-            Array_value<char*> enabled_extensions_ = {},
+            Array_value<const char*> enabled_extensions_ = {},
             S_physical_device_features* features_ = nullptr);//todo:这里可以接收匿名函数回调
 
         std::shared_ptr<Device> get_a_device(
-            Array_value<char*> enabled_extensions_ = {},
+            Array_value<const char*> enabled_extensions_ = {},
             S_physical_device_features* features_ = nullptr);
 
         //std::shared_ptr<Device> get_a_device(
@@ -1008,6 +1015,9 @@ public:                                                                         
 
 
         const VkDevice handle;
+
+        operator VkDevice*() { return const_cast<VkDevice*>(&handle); }
+
         Alloc_callback_ptr allocation_callbacks;
         //std::vector<Queue> queues;
         std::vector<Queue_family> queue_familys;
@@ -1054,6 +1064,8 @@ public:                                                                         
 
         Device::Api* api;
 
+        operator VkQueue*() { return const_cast<VkQueue*>(&handle); }
+
         class Group 
             :public Group_base<
                 Queue,
@@ -1082,6 +1094,9 @@ public:                                                                         
 
         laka_vk_can_use_group(Semaphore, device->api)
         laka_vk_over_group;
+
+        operator VkSemaphore*() { return const_cast<VkSemaphore*>(&handle); }
+
     private:
         friend class Device;
         Semaphore(
@@ -1105,6 +1120,8 @@ public:                                                                         
 
         const VkFence handle;
         std::shared_ptr<Device> device;
+
+        operator VkFence*() { return const_cast<VkFence*>(&handle); }
 
         laka_vk_can_use_group(Fence, device->api)
         laka_vk_over_group;
@@ -1131,6 +1148,8 @@ public:                                                                         
         const VkEvent handle;
         std::shared_ptr<Device> device;
 
+        operator VkEvent*() { return const_cast<VkEvent*>(&handle); }
+
         laka_vk_can_use_group(Event, device->api)
         laka_vk_over_group;
     private:
@@ -1150,6 +1169,9 @@ public:                                                                         
 
         const VkShaderModule handle;
         std::shared_ptr<Device> device;
+
+        operator VkShaderModule*() { return const_cast<VkShaderModule*>(&handle); }
+
     private:
         friend class Device;
         Shader_module(
@@ -1174,6 +1196,8 @@ public:                                                                         
         void unmap_memory();
 
         ~Device_memory();
+
+        operator VkDeviceMemory*() { return const_cast<VkDeviceMemory*>(&handle); }
 
         const VkDeviceMemory handle;
         std::shared_ptr<Device> device;
@@ -1208,6 +1232,8 @@ public:                                                                         
         const VkBuffer handle;
         std::shared_ptr<Device> device;
 
+        operator VkBuffer*() { return const_cast<VkBuffer*>(&handle); }
+
         laka_vk_can_use_group(Buffer, device->api)
         laka_vk_over_group;
     private:
@@ -1229,6 +1255,8 @@ public:                                                                         
 
         const VkBufferView handle;
         std::shared_ptr<Buffer> buffer;
+
+        operator VkBufferView*() { return const_cast<VkBufferView*>(&handle); }
 
         laka_vk_can_use_group(Buffer_view, buffer->device->api)
         laka_vk_over_group;
@@ -1267,6 +1295,8 @@ public:                                                                         
             N_image_view_create_info    next_ = {},
             Alloc_callback_ptr allocator_ = default_allocation_cb());
 
+        operator VkImage*() { return const_cast<VkImage*>(&handle); }
+
         const VkImage handle;
         std::shared_ptr<Device> device;
         E_image_layout layout;
@@ -1290,6 +1320,9 @@ public:                                                                         
 
         const VkImageView handle;
         std::shared_ptr<Image> image;
+
+        operator VkImageView*() { return const_cast<VkImageView*>(&handle); }
+
     private:
         friend class Image;
         Image_view(
@@ -1309,6 +1342,9 @@ public:                                                                         
 
         const VkSampler handle;
         std::shared_ptr<Device> device;
+
+        operator VkSampler*() { return const_cast<VkSampler*>(&handle); }
+
     private:
         friend class Device;
         Sampler(
@@ -1328,6 +1364,9 @@ public:                                                                         
 
         const VkSamplerYcbcrConversion handle;
         std::shared_ptr<Device> device;
+
+        operator VkSamplerYcbcrConversion*() { return const_cast<VkSamplerYcbcrConversion*>(&handle); }
+
     private:
         friend class Device;
         Sampler_Ycbcr_conversion(
@@ -1354,6 +1393,9 @@ public:                                                                         
 
         const VkQueryPool handle;
         std::shared_ptr<Device> device;
+
+        operator VkQueryPool*() { return const_cast<VkQueryPool*>(&handle); }
+
     private:
         friend class Device;
         Query_pool(
@@ -1381,6 +1423,9 @@ public:                                                                         
 
         const VkRenderPass handle;
         std::shared_ptr<Device> device;
+
+        operator VkRenderPass*() { return const_cast<VkRenderPass*>(&handle); }
+
     private:
         friend class Device;
         Render_pass(
@@ -1403,6 +1448,9 @@ public:                                                                         
 
         laka_vk_can_use_group(Frame_buffer, render_pass->device->api)
             laka_vk_over_group;
+
+        operator VkFramebuffer*() { return const_cast<VkFramebuffer*>(&handle); }
+
     private:
         friend class Render_pass;
         Frame_buffer(
@@ -1428,6 +1476,9 @@ public:                                                                         
 
         const VkDescriptorPool handle;
         std::shared_ptr<Device> device;
+
+        operator VkDescriptorPool*() { return const_cast<VkDescriptorPool*>(&handle); }
+
     private:
         friend class Device;
         Descriptor_pool(
@@ -1459,6 +1510,9 @@ public:                                                                         
             ,api(api_)
             ,device_handle(device_handle_)
         {}
+
+        operator VkDescriptorSet*() { return const_cast<VkDescriptorSet*>(&handle); }
+
     };
 
     class Descriptor_set_group : public std::enable_shared_from_this<Descriptor_set_group>{
@@ -1532,6 +1586,9 @@ public:                                                                         
 
         const VkDescriptorSetLayout handle;
         std::shared_ptr<Device> device;
+
+        operator VkDescriptorSetLayout*() { return const_cast<VkDescriptorSetLayout*>(&handle); }
+
     private:
         friend class Device;
         Descriptor_set_layout(
@@ -1585,6 +1642,9 @@ public:                                                                         
         const VkDescriptorUpdateTemplate handle;
         std::shared_ptr<Descriptor_set_layout> descriptor_set_layout;
         std::shared_ptr<Pipeline_layout> pipeline_layout;
+
+        operator VkDescriptorUpdateTemplate*() { return const_cast<VkDescriptorUpdateTemplate*>(&handle); }
+
     private:
         friend class Descriptor_set_layout;
         friend class Pipeline_layout;
@@ -1619,6 +1679,8 @@ public:                                                                         
 
         std::shared_ptr<Command_buffer_group>
             get_a_command_buffer_group(uint32_t count_, E_command_buffer_level level);
+
+        operator VkCommandPool*() { return const_cast<VkCommandPool*>(&handle); }
 
         const VkCommandPool handle;
         std::shared_ptr<Device> device;
@@ -1887,6 +1949,9 @@ public:                                                                         
 
         const VkCommandBuffer handle;
         Device::Api& api;
+
+        operator VkCommandBuffer*() { return const_cast<VkCommandBuffer*>(&handle); }
+
         Command_buffer_base(const VkCommandBuffer handle_, Device::Api& api_)
             :handle(handle_)
             , api(api_)
@@ -1987,6 +2052,9 @@ public:                                                                         
 
         const VkPipelineLayout handle;
         std::shared_ptr<Device> device;
+
+        operator VkPipelineLayout*() { return const_cast<VkPipelineLayout*>(&handle); }
+
     private:
         friend class Device;
         friend class Descriptor_set_layout;
@@ -2011,6 +2079,9 @@ public:                                                                         
 
         const VkPipelineCache handle;
         std::shared_ptr<Device> device;
+
+        operator VkPipelineCache*() { return const_cast<VkPipelineCache*>(&handle); }
+
     private:
         friend  class Device;
         Pipeline_cache(
@@ -2044,6 +2115,9 @@ public:                                                                         
         std::shared_ptr<Pipeline_cache>     pipeline_cache;
         std::shared_ptr<Shader_module>      shader_module;
         std::shared_ptr<Compute_pipeline>   base_pipeline;
+
+        operator VkPipeline*() { return const_cast<VkPipeline*>(&handle); }
+
     private:
         friend class Pipeline_layout;
         Compute_pipeline(
@@ -2070,6 +2144,9 @@ public:                                                                         
         std::shared_ptr<Pipeline_layout>                pipeline_layout;
         std::shared_ptr<Render_pass>                    render_pass;
         std::vector<std::shared_ptr<Shader_module>>     shader_modules;
+
+        operator VkPipeline*() { return const_cast<VkPipeline*>(&handle); }
+
     private:
         friend class Pipeline_layout;
         Graphics_pipeline(
