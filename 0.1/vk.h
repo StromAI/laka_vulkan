@@ -544,6 +544,8 @@ public:                                                                         
         Ahandle(std::shared_ptr<T__> sptr_) :handle(sptr_->handle) {}
         Ahandle(T__& ref_) :handle(ref_.ref.handle) {}
         Ahandle(const Handle_type handle_) :handle(handle_) {}
+        Ahandle(std::nullptr_t nullptr_) :handle(VK_NULL_HANDLE) {}
+        Ahandle() :handle(VK_NULL_HANDLE) {}
 
         operator Handle_type(){ return handle;  }
     };
@@ -706,6 +708,7 @@ public:                                                                         
     struct Queue_family_info {
         uint32_t index;
         S_queue_family_properties properties;
+        std::vector<bool> is_support_your_surface;
     };
 
     class Queue_family {
@@ -841,6 +844,7 @@ public:                                                                         
             S_physical_device_features* features_ = nullptr);//todo:这里可以接收匿名函数回调
 
         std::shared_ptr<Device> get_a_device(
+            Array_value<Ahandle<Surface>> surfaces_ = {},
             Array_value<const char*> enabled_extensions_ = {},
             S_physical_device_features* features_ = nullptr);
 

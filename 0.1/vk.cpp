@@ -1220,6 +1220,7 @@ shared_ptr<Surface> Instance::get_a_surface(
     }
 
     std::shared_ptr<Device> Device_creator::get_a_device(
+        Array_value<Ahandle<Surface>> surfaces_ /*= nullptr*/,
         Array_value<const char*> enabled_extensions_/* = {}*/,
         S_physical_device_features* features_/* = nullptr*/)
     {
@@ -1247,6 +1248,9 @@ shared_ptr<Surface> Instance::get_a_surface(
             vector<User_choose_queue_info> user_choosed_q_create_infos;
 
             Pramater_choose_queue_family choose_qf_parmater{ my_queue_familys, user_choosed_q_create_infos };
+            
+
+
             if (choose_queue_family_function(choose_qf_parmater) == false)
             {
                 show_wrn("设备的队列族均不合适");
