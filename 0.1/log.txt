@@ -18550,3 +18550,2022 @@
 [2018-11-08 19:39:30 线程:14600] __cdecl laka::vk::Command_pool::~Command_pool(void)
 [2018-11-08 19:39:30 线程:14600] __cdecl laka::vk::Device::~Device(void)
 [2018-11-08 19:39:30 线程:14600] __cdecl laka::vk::Instance::~Instance(void)
+[2018-11-09 09:24:25 线程:14272] debug
+[2018-11-09 09:24:25 线程:14272] info
+[2018-11-09 09:24:25 线程:14272] warring
+[2018-11-09 09:24:25 线程:14272] error
+[2018-11-09 09:24:25 线程:14272] critical
+[2018-11-09 09:24:25 线程:14272] 加载vulkan-1.dll模块
+[2018-11-09 09:24:25 线程:14272] 加载成功:140709995347968
+[2018-11-09 09:24:25 线程:14272] 从模块:140709995347968 加载函数:vkGetInstanceProcAddr
+[2018-11-09 09:24:25 线程:14272] 成功获得函数地址:140709995356448
+[2018-11-09 09:24:25 线程:14272] 加载Vulkan函数:vkEnumerateInstanceLayerProperties
+[2018-11-09 09:24:25 线程:14272] 	成功获得函数地址:140709995392304
+[2018-11-09 09:24:25 线程:14272] 加载Vulkan函数:vkEnumerateInstanceExtensionProperties
+[2018-11-09 09:24:25 线程:14272] 	成功获得函数地址:140709995360496
+[2018-11-09 09:24:25 线程:14272] 加载Vulkan函数:vkCreateInstance
+[2018-11-09 09:24:25 线程:14272] 	成功获得函数地址:140709995368352
+[2018-11-09 09:24:25 线程:14272] 加载Vulkan函数:vkEnumerateInstanceVersion
+[2018-11-09 09:24:25 线程:14272] 	成功获得函数地址:140709995394240
+[2018-11-09 09:24:25 线程:14272] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:24:25 线程:14272] vulkan支持的层的数量为:15
+[2018-11-09 09:24:25 线程:14272] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:24:25 线程:14272] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:24:25 线程:14272] VK_LAYER_NV_optimus层扩展属性数量:0
+[2018-11-09 09:24:25 线程:14272] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:24:25 线程:14272] VK_LAYER_RENDERDOC_Capture层扩展属性数量:1
+[2018-11-09 09:24:25 线程:14272] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:24:25 线程:14272] VK_LAYER_RENDERDOC_Capture层所有扩展:
+[2018-11-09 09:24:25 线程:14272] 	VK_EXT_debug_utils
+[2018-11-09 09:24:25 线程:14272] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:24:25 线程:14272] VK_LAYER_NV_nsight层扩展属性数量:0
+[2018-11-09 09:24:25 线程:14272] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:24:25 线程:14272] VK_LAYER_LUNARG_api_dump层扩展属性数量:0
+[2018-11-09 09:24:25 线程:14272] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:24:25 线程:14272] VK_LAYER_LUNARG_assistant_layer层扩展属性数量:1
+[2018-11-09 09:24:25 线程:14272] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:24:25 线程:14272] VK_LAYER_LUNARG_assistant_layer层所有扩展:
+[2018-11-09 09:24:25 线程:14272] 	VK_EXT_debug_report
+[2018-11-09 09:24:25 线程:14272] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:24:25 线程:14272] VK_LAYER_LUNARG_core_validation层扩展属性数量:1
+[2018-11-09 09:24:25 线程:14272] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:24:25 线程:14272] VK_LAYER_LUNARG_core_validation层所有扩展:
+[2018-11-09 09:24:25 线程:14272] 	VK_EXT_debug_report
+[2018-11-09 09:24:25 线程:14272] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:24:25 线程:14272] VK_LAYER_LUNARG_device_simulation层扩展属性数量:0
+[2018-11-09 09:24:25 线程:14272] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:24:25 线程:14272] VK_LAYER_LUNARG_monitor层扩展属性数量:0
+[2018-11-09 09:24:25 线程:14272] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:24:25 线程:14272] VK_LAYER_LUNARG_object_tracker层扩展属性数量:1
+[2018-11-09 09:24:25 线程:14272] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:24:25 线程:14272] VK_LAYER_LUNARG_object_tracker层所有扩展:
+[2018-11-09 09:24:25 线程:14272] 	VK_EXT_debug_report
+[2018-11-09 09:24:25 线程:14272] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:24:25 线程:14272] VK_LAYER_LUNARG_parameter_validation层扩展属性数量:1
+[2018-11-09 09:24:25 线程:14272] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:24:25 线程:14272] VK_LAYER_LUNARG_parameter_validation层所有扩展:
+[2018-11-09 09:24:25 线程:14272] 	VK_EXT_debug_report
+[2018-11-09 09:24:25 线程:14272] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:24:25 线程:14272] VK_LAYER_LUNARG_screenshot层扩展属性数量:0
+[2018-11-09 09:24:25 线程:14272] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:24:25 线程:14272] VK_LAYER_LUNARG_standard_validation层扩展属性数量:1
+[2018-11-09 09:24:25 线程:14272] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:24:25 线程:14272] VK_LAYER_LUNARG_standard_validation层所有扩展:
+[2018-11-09 09:24:25 线程:14272] 	VK_EXT_debug_report
+[2018-11-09 09:24:25 线程:14272] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:24:25 线程:14272] VK_LAYER_GOOGLE_threading层扩展属性数量:1
+[2018-11-09 09:24:25 线程:14272] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:24:25 线程:14272] VK_LAYER_GOOGLE_threading层所有扩展:
+[2018-11-09 09:24:25 线程:14272] 	VK_EXT_debug_report
+[2018-11-09 09:24:25 线程:14272] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:24:25 线程:14272] VK_LAYER_GOOGLE_unique_objects层扩展属性数量:0
+[2018-11-09 09:24:25 线程:14272] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:24:25 线程:14272] VK_LAYER_LUNARG_vktrace层扩展属性数量:0
+[2018-11-09 09:24:26 线程:14272] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:24:26 线程:14272] 总扩展属性数量:12
+[2018-11-09 09:24:26 线程:14272] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:24:26 线程:14272] 所有扩展属性:
+[2018-11-09 09:24:26 线程:14272] 	名称:VK_KHR_device_group_creation 版本:1
+[2018-11-09 09:24:26 线程:14272] 	名称:VK_KHR_external_fence_capabilities 版本:1
+[2018-11-09 09:24:26 线程:14272] 	名称:VK_KHR_external_memory_capabilities 版本:1
+[2018-11-09 09:24:26 线程:14272] 	名称:VK_KHR_external_semaphore_capabilities 版本:1
+[2018-11-09 09:24:26 线程:14272] 	名称:VK_KHR_get_physical_device_properties2 版本:1
+[2018-11-09 09:24:26 线程:14272] 	名称:VK_KHR_get_surface_capabilities2 版本:1
+[2018-11-09 09:24:26 线程:14272] 	名称:VK_KHR_surface 版本:25
+[2018-11-09 09:24:26 线程:14272] 	名称:VK_KHR_win32_surface 版本:6
+[2018-11-09 09:24:26 线程:14272] 	名称:VK_EXT_debug_report 版本:9
+[2018-11-09 09:24:26 线程:14272] 	名称:VK_EXT_swapchain_colorspace 版本:3
+[2018-11-09 09:24:26 线程:14272] 	名称:VK_NV_external_memory_capabilities 版本:1
+[2018-11-09 09:24:26 线程:14272] 	名称:VK_EXT_debug_utils 版本:1
+[2018-11-09 09:24:26 线程:14272] 测试VkResult::VK_NOT_READY的解释 不是真的
+[2018-11-09 09:24:26 线程:14272] VK_NOT_READY: 栅栏或查询尚未完成
+[2018-11-09 09:24:26 线程:14272] 加载Shcore.dll模块
+[2018-11-09 09:24:26 线程:14272] 加载成功:140710979698688
+[2018-11-09 09:24:26 线程:14272] 从模块:140710979698688 加载函数:SetProcessDpiAwareness
+[2018-11-09 09:24:26 线程:14272] 成功获得函数地址:140710979931088
+[2018-11-09 09:24:26 线程:14272] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:24:26 线程:14272] 加载Vulkan函数:vkDestroyInstance
+[2018-11-09 09:24:26 线程:14272] 	成功获得函数地址:140709995369040
+[2018-11-09 09:24:26 线程:14272] 加载Vulkan函数:vkGetDeviceProcAddr
+[2018-11-09 09:24:26 线程:14272] 	成功获得函数地址:140709995376320
+[2018-11-09 09:24:26 线程:14272] 加载Vulkan函数:vkEnumeratePhysicalDevices
+[2018-11-09 09:24:26 线程:14272] 	成功获得函数地址:140709995366928
+[2018-11-09 09:24:26 线程:14272] 加载Vulkan函数:vkCreateDevice
+[2018-11-09 09:24:26 线程:14272] 	成功获得函数地址:140709995384704
+[2018-11-09 09:24:26 线程:14272] 加载Vulkan函数:vkEnumeratePhysicalDeviceGroups
+[2018-11-09 09:24:26 线程:14272] 	成功获得函数地址:140709995377728
+[2018-11-09 09:24:26 线程:14272] 加载Vulkan函数:vkEnumerateDeviceLayerProperties
+[2018-11-09 09:24:26 线程:14272] 	成功获得函数地址:140709995391344
+[2018-11-09 09:24:26 线程:14272] 加载Vulkan函数:vkEnumerateDeviceExtensionProperties
+[2018-11-09 09:24:26 线程:14272] 	成功获得函数地址:140709995393040
+[2018-11-09 09:24:26 线程:14272] 加载Vulkan函数:vkGetPhysicalDeviceFeatures
+[2018-11-09 09:24:26 线程:14272] 	成功获得函数地址:140709995388032
+[2018-11-09 09:24:26 线程:14272] 加载Vulkan函数:vkGetPhysicalDeviceProperties
+[2018-11-09 09:24:26 线程:14272] 	成功获得函数地址:140709995391232
+[2018-11-09 09:24:26 线程:14272] 加载Vulkan函数:vkGetPhysicalDeviceMemoryProperties
+[2018-11-09 09:24:26 线程:14272] 	成功获得函数地址:140709995378768
+[2018-11-09 09:24:26 线程:14272] 加载Vulkan函数:vkGetPhysicalDeviceFormatProperties
+[2018-11-09 09:24:26 线程:14272] 	成功获得函数地址:140709995357456
+[2018-11-09 09:24:26 线程:14272] 加载Vulkan函数:vkGetPhysicalDeviceQueueFamilyProperties
+[2018-11-09 09:24:26 线程:14272] 	成功获得函数地址:140709995372688
+[2018-11-09 09:24:26 线程:14272] 加载Vulkan函数:vkGetPhysicalDeviceImageFormatProperties
+[2018-11-09 09:24:26 线程:14272] 	成功获得函数地址:140709995355728
+[2018-11-09 09:24:26 线程:14272] 加载Vulkan函数:vkGetPhysicalDeviceSparseImageFormatProperties
+[2018-11-09 09:24:26 线程:14272] 	成功获得函数地址:140709995362832
+[2018-11-09 09:24:26 线程:14272] 加载Vulkan函数:vkGetPhysicalDeviceExternalBufferProperties
+[2018-11-09 09:24:26 线程:14272] 	成功获得函数地址:140709995375024
+[2018-11-09 09:24:26 线程:14272] 加载Vulkan函数:vkGetPhysicalDeviceExternalFenceProperties
+[2018-11-09 09:24:26 线程:14272] 	成功获得函数地址:140709995371856
+[2018-11-09 09:24:26 线程:14272] 加载Vulkan函数:vkGetPhysicalDeviceExternalSemaphoreProperties
+[2018-11-09 09:24:26 线程:14272] 	成功获得函数地址:140709995394400
+[2018-11-09 09:24:26 线程:14272] 加载Vulkan函数:vkGetPhysicalDeviceFeatures2
+[2018-11-09 09:24:26 线程:14272] 	成功获得函数地址:140709995373072
+[2018-11-09 09:24:26 线程:14272] 加载Vulkan函数:vkGetPhysicalDeviceProperties2
+[2018-11-09 09:24:26 线程:14272] 	成功获得函数地址:140709995377264
+[2018-11-09 09:24:26 线程:14272] 加载Vulkan函数:vkGetPhysicalDeviceMemoryProperties2
+[2018-11-09 09:24:26 线程:14272] 	成功获得函数地址:140709995395024
+[2018-11-09 09:24:26 线程:14272] 加载Vulkan函数:vkGetPhysicalDeviceFormatProperties2
+[2018-11-09 09:24:26 线程:14272] 	成功获得函数地址:140709995382400
+[2018-11-09 09:24:26 线程:14272] 加载Vulkan函数:vkGetPhysicalDeviceImageFormatProperties2
+[2018-11-09 09:24:26 线程:14272] 	成功获得函数地址:140709995383440
+[2018-11-09 09:24:26 线程:14272] 加载Vulkan函数:vkGetPhysicalDeviceQueueFamilyProperties2
+[2018-11-09 09:24:26 线程:14272] 	成功获得函数地址:140709995362960
+[2018-11-09 09:24:26 线程:14272] 加载Vulkan函数:vkGetPhysicalDeviceSparseImageFormatProperties2
+[2018-11-09 09:24:26 线程:14272] 	成功获得函数地址:140709995379936
+[2018-11-09 09:24:26 线程:14272] 加载Vulkan函数:vkGetPhysicalDeviceSurfaceSupportKHR
+[2018-11-09 09:24:26 线程:14272] 	成功获得函数地址:140709995371552
+[2018-11-09 09:24:26 线程:14272] 加载Vulkan函数:vkCreateWin32SurfaceKHR
+[2018-11-09 09:24:26 线程:14272] 	成功获得函数地址:140709995371568
+[2018-11-09 09:24:26 线程:14272] 加载Vulkan函数:vkGetPhysicalDeviceWin32PresentationSupportKHR
+[2018-11-09 09:24:26 线程:14272] 	成功获得函数地址:140709995365712
+[2018-11-09 09:24:26 线程:14272] 加载Vulkan函数:vkGetMemoryWin32HandleKHR
+[2018-11-09 09:24:26 线程:14272] 	成功获得函数地址:140709995360480
+[2018-11-09 09:24:26 线程:14272] 加载Vulkan函数:vkGetMemoryWin32HandlePropertiesKHR
+[2018-11-09 09:24:26 线程:14272] 	成功获得函数地址:140709995359600
+[2018-11-09 09:24:26 线程:14272] 加载Vulkan函数:vkImportSemaphoreWin32HandleKHR
+[2018-11-09 09:24:26 线程:14272] 	成功获得函数地址:140709995396576
+[2018-11-09 09:24:26 线程:14272] 加载Vulkan函数:vkGetSemaphoreWin32HandleKHR
+[2018-11-09 09:24:26 线程:14272] 	成功获得函数地址:140709995362208
+[2018-11-09 09:24:26 线程:14272] 加载Vulkan函数:vkImportFenceWin32HandleKHR
+[2018-11-09 09:24:26 线程:14272] 	成功获得函数地址:140709995369920
+[2018-11-09 09:24:26 线程:14272] 加载Vulkan函数:vkGetFenceWin32HandleKHR
+[2018-11-09 09:24:26 线程:14272] 	成功获得函数地址:140709995365856
+[2018-11-09 09:24:26 线程:14272] 加载Vulkan函数:vkDestroySurfaceKHR
+[2018-11-09 09:24:26 线程:14272] 	成功获得函数地址:140709995361920
+[2018-11-09 09:24:26 线程:14272] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:24:26 线程:14272] 物理设备数量:2
+[2018-11-09 09:24:26 线程:14272] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:24:26 线程:14272] 物理设备 0x158ec0ba9a0 的队列族数量为 3
+[2018-11-09 09:24:26 线程:14272] 设备GeForce GTX 1060 6GB  api版本:1.1.84 驱动版本:416.136.0
+[2018-11-09 09:24:26 线程:14272] 物理设备 0x158ec0bac00 的队列族数量为 1
+[2018-11-09 09:24:26 线程:14272] 设备Intel(R) UHD Graphics 630  api版本:1.0.50 驱动版本:0.16.2
+[2018-11-09 09:24:26 线程:14272] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:24:26 线程:14272] 设备组数量:2
+[2018-11-09 09:24:26 线程:14272] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:24:26 线程:14272] 物理设备组中 物理句柄值:0x158ec0ba9a0
+[2018-11-09 09:24:26 线程:14272] 物理设备组中 物理句柄值:0x158ec0bac00
+[2018-11-09 09:24:26 线程:14272] 遍历所有设备 - 创建逻辑设备
+[2018-11-09 09:24:26 线程:14272] discreteQueuePriorities:2
+[2018-11-09 09:24:26 线程:14272] 物理设备 0x158ec0ba9a0 的队列族数量为 3
+[2018-11-09 09:24:26 线程:14272] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:24:26 线程:14272] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:24:26 线程:14272] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:24:26 线程:14272] 选取了合适的设备与队列
+[2018-11-09 09:24:26 线程:14272] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:24:26 线程:14272] 加载vkDestroyDevice成功
+[2018-11-09 09:24:26 线程:14272] 加载vkGetDeviceQueue成功
+[2018-11-09 09:24:26 线程:14272] 加载vkAllocateMemory成功
+[2018-11-09 09:24:26 线程:14272] 加载vkFreeMemory成功
+[2018-11-09 09:24:26 线程:14272] 加载vkMapMemory成功
+[2018-11-09 09:24:26 线程:14272] 加载vkUnmapMemory成功
+[2018-11-09 09:24:26 线程:14272] 加载vkFlushMappedMemoryRanges成功
+[2018-11-09 09:24:26 线程:14272] 加载vkInvalidateMappedMemoryRanges成功
+[2018-11-09 09:24:26 线程:14272] 加载vkGetDeviceMemoryCommitment成功
+[2018-11-09 09:24:26 线程:14272] 加载vkCreateBuffer成功
+[2018-11-09 09:24:26 线程:14272] 加载vkDestroyBuffer成功
+[2018-11-09 09:24:26 线程:14272] 加载vkCreateBufferView成功
+[2018-11-09 09:24:26 线程:14272] 加载vkDestroyBufferView成功
+[2018-11-09 09:24:26 线程:14272] 加载vkBindBufferMemory成功
+[2018-11-09 09:24:26 线程:14272] 加载vkCreateCommandPool成功
+[2018-11-09 09:24:26 线程:14272] 加载vkResetCommandPool成功
+[2018-11-09 09:24:26 线程:14272] 加载vkDestroyCommandPool成功
+[2018-11-09 09:24:26 线程:14272] 加载vkAllocateCommandBuffers成功
+[2018-11-09 09:24:26 线程:14272] 加载vkResetCommandBuffer成功
+[2018-11-09 09:24:26 线程:14272] 加载vkFreeCommandBuffers成功
+[2018-11-09 09:24:26 线程:14272] 加载vkQueueSubmit成功
+[2018-11-09 09:24:26 线程:14272] 加载vkCreateEvent成功
+[2018-11-09 09:24:26 线程:14272] 加载vkGetEventStatus成功
+[2018-11-09 09:24:26 线程:14272] 加载vkResetEvent成功
+[2018-11-09 09:24:26 线程:14272] 加载vkSetEvent成功
+[2018-11-09 09:24:26 线程:14272] 加载vkDestroyEvent成功
+[2018-11-09 09:24:26 线程:14272] 加载vkCreateFence成功
+[2018-11-09 09:24:26 线程:14272] 加载vkResetFences成功
+[2018-11-09 09:24:26 线程:14272] 加载vkGetFenceStatus成功
+[2018-11-09 09:24:26 线程:14272] 加载vkWaitForFences成功
+[2018-11-09 09:24:26 线程:14272] 加载vkDestroyFence成功
+[2018-11-09 09:24:26 线程:14272] 加载vkCreateSemaphore成功
+[2018-11-09 09:24:26 线程:14272] 加载vkDestroySemaphore成功
+[2018-11-09 09:24:26 线程:14272] 加载vkQueueWaitIdle成功
+[2018-11-09 09:24:26 线程:14272] 加载vkDeviceWaitIdle成功
+[2018-11-09 09:24:26 线程:14272] 加载vkBeginCommandBuffer成功
+[2018-11-09 09:24:26 线程:14272] 加载vkEndCommandBuffer成功
+[2018-11-09 09:24:26 线程:14272] 加载vkCreateQueryPool成功
+[2018-11-09 09:24:26 线程:14272] 加载vkGetQueryPoolResults成功
+[2018-11-09 09:24:26 线程:14272] 加载vkDestroyQueryPool成功
+[2018-11-09 09:24:26 线程:14272] 加载vkCreateFramebuffer成功
+[2018-11-09 09:24:26 线程:14272] 加载vkDestroyFramebuffer成功
+[2018-11-09 09:24:26 线程:14272] 加载vkCreateSampler成功
+[2018-11-09 09:24:26 线程:14272] 加载vkDestroySampler成功
+[2018-11-09 09:24:26 线程:14272] 加载vkCreateShaderModule成功
+[2018-11-09 09:24:26 线程:14272] 加载vkDestroyShaderModule成功
+[2018-11-09 09:24:26 线程:14272] 加载vkGetRenderAreaGranularity成功
+[2018-11-09 09:24:26 线程:14272] 加载vkCreateRenderPass成功
+[2018-11-09 09:24:26 线程:14272] 加载vkDestroyRenderPass成功
+[2018-11-09 09:24:26 线程:14272] 加载vkCreateImage成功
+[2018-11-09 09:24:26 线程:14272] 加载vkDestroyImage成功
+[2018-11-09 09:24:26 线程:14272] 加载vkCreateImageView成功
+[2018-11-09 09:24:26 线程:14272] 加载vkDestroyImageView成功
+[2018-11-09 09:24:26 线程:14272] 加载vkBindImageMemory成功
+[2018-11-09 09:24:26 线程:14272] 加载vkCreateComputePipelines成功
+[2018-11-09 09:24:26 线程:14272] 加载vkCreateGraphicsPipelines成功
+[2018-11-09 09:24:26 线程:14272] 加载vkDestroyPipeline成功
+[2018-11-09 09:24:26 线程:14272] 加载vkCreatePipelineCache成功
+[2018-11-09 09:24:26 线程:14272] 加载vkDestroyPipelineCache成功
+[2018-11-09 09:24:26 线程:14272] 加载vkCreatePipelineLayout成功
+[2018-11-09 09:24:26 线程:14272] 加载vkDestroyPipelineLayout成功
+[2018-11-09 09:24:26 线程:14272] 加载vkGetPipelineCacheData成功
+[2018-11-09 09:24:26 线程:14272] 加载vkMergePipelineCaches成功
+[2018-11-09 09:24:26 线程:14272] 加载vkCreateDescriptorPool成功
+[2018-11-09 09:24:26 线程:14272] 加载vkResetDescriptorPool成功
+[2018-11-09 09:24:26 线程:14272] 加载vkDestroyDescriptorPool成功
+[2018-11-09 09:24:26 线程:14272] 加载vkAllocateDescriptorSets成功
+[2018-11-09 09:24:26 线程:14272] 加载vkUpdateDescriptorSets成功
+[2018-11-09 09:24:26 线程:14272] 加载vkFreeDescriptorSets成功
+[2018-11-09 09:24:26 线程:14272] 加载vkCreateDescriptorSetLayout成功
+[2018-11-09 09:24:26 线程:14272] 加载vkDestroyDescriptorSetLayout成功
+[2018-11-09 09:24:26 线程:14272] 加载vkGetBufferMemoryRequirements成功
+[2018-11-09 09:24:26 线程:14272] 加载vkGetImageMemoryRequirements成功
+[2018-11-09 09:24:26 线程:14272] 加载vkQueueBindSparse成功
+[2018-11-09 09:24:26 线程:14272] 加载vkGetImageSparseMemoryRequirements成功
+[2018-11-09 09:24:26 线程:14272] 加载vkGetImageSubresourceLayout成功
+[2018-11-09 09:24:26 线程:14272] 加载vkGetDeviceQueue2成功
+[2018-11-09 09:24:26 线程:14272] 加载vkBindBufferMemory2成功
+[2018-11-09 09:24:26 线程:14272] 加载vkBindImageMemory2成功
+[2018-11-09 09:24:26 线程:14272] 加载vkCreateDescriptorUpdateTemplate成功
+[2018-11-09 09:24:26 线程:14272] 加载vkUpdateDescriptorSetWithTemplate成功
+[2018-11-09 09:24:26 线程:14272] 加载vkDestroyDescriptorUpdateTemplate成功
+[2018-11-09 09:24:26 线程:14272] 加载vkCreateSamplerYcbcrConversion成功
+[2018-11-09 09:24:26 线程:14272] 加载vkDestroySamplerYcbcrConversion成功
+[2018-11-09 09:24:26 线程:14272] 加载vkGetBufferMemoryRequirements2成功
+[2018-11-09 09:24:26 线程:14272] 加载vkGetDescriptorSetLayoutSupport成功
+[2018-11-09 09:24:26 线程:14272] 加载vkGetDeviceGroupPeerMemoryFeatures成功
+[2018-11-09 09:24:26 线程:14272] 加载vkGetImageMemoryRequirements2成功
+[2018-11-09 09:24:26 线程:14272] 加载vkGetImageSparseMemoryRequirements2成功
+[2018-11-09 09:24:26 线程:14272] 加载vkTrimCommandPool成功
+[2018-11-09 09:24:26 线程:14272] 加载vkCmdDispatch成功
+[2018-11-09 09:24:26 线程:14272] 加载vkCmdDispatchIndirect成功
+[2018-11-09 09:24:26 线程:14272] 加载vkCmdExecuteCommands成功
+[2018-11-09 09:24:26 线程:14272] 加载vkCmdWaitEvents成功
+[2018-11-09 09:24:26 线程:14272] 加载vkCmdSetEvent成功
+[2018-11-09 09:24:26 线程:14272] 加载vkCmdResetEvent成功
+[2018-11-09 09:24:26 线程:14272] 加载vkCmdPipelineBarrier成功
+[2018-11-09 09:24:26 线程:14272] 加载vkCmdCopyBuffer成功
+[2018-11-09 09:24:26 线程:14272] 加载vkCmdFillBuffer成功
+[2018-11-09 09:24:26 线程:14272] 加载vkCmdUpdateBuffer成功
+[2018-11-09 09:24:26 线程:14272] 加载vkCmdBindDescriptorSets成功
+[2018-11-09 09:24:26 线程:14272] 加载vkCmdBindIndexBuffer成功
+[2018-11-09 09:24:26 线程:14272] 加载vkCmdBindPipeline成功
+[2018-11-09 09:24:26 线程:14272] 加载vkCmdBindVertexBuffers成功
+[2018-11-09 09:24:26 线程:14272] 加载vkCmdBeginRenderPass成功
+[2018-11-09 09:24:26 线程:14272] 加载vkCmdNextSubpass成功
+[2018-11-09 09:24:26 线程:14272] 加载vkCmdEndRenderPass成功
+[2018-11-09 09:24:26 线程:14272] 加载vkCmdDraw成功
+[2018-11-09 09:24:26 线程:14272] 加载vkCmdDrawIndexed成功
+[2018-11-09 09:24:26 线程:14272] 加载vkCmdDrawIndexedIndirect成功
+[2018-11-09 09:24:26 线程:14272] 加载vkCmdDrawIndirect成功
+[2018-11-09 09:24:26 线程:14272] 加载vkCmdCopyBufferToImage成功
+[2018-11-09 09:24:26 线程:14272] 加载vkCmdCopyImageToBuffer成功
+[2018-11-09 09:24:26 线程:14272] 加载vkCmdCopyImage成功
+[2018-11-09 09:24:26 线程:14272] 加载vkCmdBlitImage成功
+[2018-11-09 09:24:26 线程:14272] 加载vkCmdClearDepthStencilImage成功
+[2018-11-09 09:24:26 线程:14272] 加载vkCmdClearColorImage成功
+[2018-11-09 09:24:26 线程:14272] 加载vkCmdPushConstants成功
+[2018-11-09 09:24:26 线程:14272] 加载vkCmdResolveImage成功
+[2018-11-09 09:24:26 线程:14272] 加载vkCmdClearAttachments成功
+[2018-11-09 09:24:26 线程:14272] 加载vkCmdSetViewport成功
+[2018-11-09 09:24:26 线程:14272] 加载vkCmdSetScissor成功
+[2018-11-09 09:24:26 线程:14272] 加载vkCmdSetStencilCompareMask成功
+[2018-11-09 09:24:26 线程:14272] 加载vkCmdSetStencilWriteMask成功
+[2018-11-09 09:24:26 线程:14272] 加载vkCmdSetStencilReference成功
+[2018-11-09 09:24:26 线程:14272] 加载vkCmdSetLineWidth成功
+[2018-11-09 09:24:26 线程:14272] 加载vkCmdSetDepthBounds成功
+[2018-11-09 09:24:26 线程:14272] 加载vkCmdSetBlendConstants成功
+[2018-11-09 09:24:26 线程:14272] 加载vkCmdSetDepthBias成功
+[2018-11-09 09:24:26 线程:14272] 加载vkCmdBeginQuery成功
+[2018-11-09 09:24:26 线程:14272] 加载vkCmdResetQueryPool成功
+[2018-11-09 09:24:26 线程:14272] 加载vkCmdCopyQueryPoolResults成功
+[2018-11-09 09:24:26 线程:14272] 加载vkCmdWriteTimestamp成功
+[2018-11-09 09:24:26 线程:14272] 加载vkCmdEndQuery成功
+[2018-11-09 09:24:26 线程:14272] 加载vkCmdDispatchBase成功
+[2018-11-09 09:24:26 线程:14272] 加载vkCmdSetDeviceMask成功
+[2018-11-09 09:24:26 线程:14272] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:24:26 线程:14272] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:24:26 线程:14272] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:24:26 线程:14272] __cdecl laka::vk::Semaphore::~Semaphore(void)
+[2018-11-09 09:24:26 线程:14272] __cdecl laka::vk::Semaphore::~Semaphore(void)
+[2018-11-09 09:24:26 线程:14272] __cdecl laka::vk::Command_pool::~Command_pool(void)
+[2018-11-09 09:24:26 线程:14272] __cdecl laka::vk::Device::~Device(void)
+[2018-11-09 09:24:26 线程:14272] __cdecl laka::vk::Instance::~Instance(void)
+[2018-11-09 09:34:26 线程:2772] debug
+[2018-11-09 09:34:26 线程:2772] info
+[2018-11-09 09:34:26 线程:2772] warring
+[2018-11-09 09:34:26 线程:2772] error
+[2018-11-09 09:34:26 线程:2772] critical
+[2018-11-09 09:34:26 线程:2772] 加载vulkan-1.dll模块
+[2018-11-09 09:34:26 线程:2772] 加载成功:140709995347968
+[2018-11-09 09:34:26 线程:2772] 从模块:140709995347968 加载函数:vkGetInstanceProcAddr
+[2018-11-09 09:34:26 线程:2772] 成功获得函数地址:140709995356448
+[2018-11-09 09:34:26 线程:2772] 加载Vulkan函数:vkEnumerateInstanceLayerProperties
+[2018-11-09 09:34:26 线程:2772] 	成功获得函数地址:140709995392304
+[2018-11-09 09:34:26 线程:2772] 加载Vulkan函数:vkEnumerateInstanceExtensionProperties
+[2018-11-09 09:34:26 线程:2772] 	成功获得函数地址:140709995360496
+[2018-11-09 09:34:26 线程:2772] 加载Vulkan函数:vkCreateInstance
+[2018-11-09 09:34:26 线程:2772] 	成功获得函数地址:140709995368352
+[2018-11-09 09:34:26 线程:2772] 加载Vulkan函数:vkEnumerateInstanceVersion
+[2018-11-09 09:34:26 线程:2772] 	成功获得函数地址:140709995394240
+[2018-11-09 09:34:26 线程:2772] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:34:26 线程:2772] vulkan支持的层的数量为:15
+[2018-11-09 09:34:26 线程:2772] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:34:26 线程:2772] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:34:26 线程:2772] VK_LAYER_NV_optimus层扩展属性数量:0
+[2018-11-09 09:34:26 线程:2772] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:34:26 线程:2772] VK_LAYER_RENDERDOC_Capture层扩展属性数量:1
+[2018-11-09 09:34:26 线程:2772] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:34:26 线程:2772] VK_LAYER_RENDERDOC_Capture层所有扩展:
+[2018-11-09 09:34:26 线程:2772] 	VK_EXT_debug_utils
+[2018-11-09 09:34:26 线程:2772] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:34:26 线程:2772] VK_LAYER_NV_nsight层扩展属性数量:0
+[2018-11-09 09:34:26 线程:2772] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:34:26 线程:2772] VK_LAYER_LUNARG_api_dump层扩展属性数量:0
+[2018-11-09 09:34:26 线程:2772] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:34:26 线程:2772] VK_LAYER_LUNARG_assistant_layer层扩展属性数量:1
+[2018-11-09 09:34:26 线程:2772] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:34:26 线程:2772] VK_LAYER_LUNARG_assistant_layer层所有扩展:
+[2018-11-09 09:34:26 线程:2772] 	VK_EXT_debug_report
+[2018-11-09 09:34:26 线程:2772] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:34:26 线程:2772] VK_LAYER_LUNARG_core_validation层扩展属性数量:1
+[2018-11-09 09:34:26 线程:2772] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:34:26 线程:2772] VK_LAYER_LUNARG_core_validation层所有扩展:
+[2018-11-09 09:34:26 线程:2772] 	VK_EXT_debug_report
+[2018-11-09 09:34:26 线程:2772] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:34:26 线程:2772] VK_LAYER_LUNARG_device_simulation层扩展属性数量:0
+[2018-11-09 09:34:26 线程:2772] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:34:26 线程:2772] VK_LAYER_LUNARG_monitor层扩展属性数量:0
+[2018-11-09 09:34:26 线程:2772] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:34:26 线程:2772] VK_LAYER_LUNARG_object_tracker层扩展属性数量:1
+[2018-11-09 09:34:26 线程:2772] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:34:26 线程:2772] VK_LAYER_LUNARG_object_tracker层所有扩展:
+[2018-11-09 09:34:26 线程:2772] 	VK_EXT_debug_report
+[2018-11-09 09:34:26 线程:2772] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:34:26 线程:2772] VK_LAYER_LUNARG_parameter_validation层扩展属性数量:1
+[2018-11-09 09:34:26 线程:2772] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:34:26 线程:2772] VK_LAYER_LUNARG_parameter_validation层所有扩展:
+[2018-11-09 09:34:26 线程:2772] 	VK_EXT_debug_report
+[2018-11-09 09:34:26 线程:2772] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:34:26 线程:2772] VK_LAYER_LUNARG_screenshot层扩展属性数量:0
+[2018-11-09 09:34:26 线程:2772] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:34:26 线程:2772] VK_LAYER_LUNARG_standard_validation层扩展属性数量:1
+[2018-11-09 09:34:26 线程:2772] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:34:26 线程:2772] VK_LAYER_LUNARG_standard_validation层所有扩展:
+[2018-11-09 09:34:26 线程:2772] 	VK_EXT_debug_report
+[2018-11-09 09:34:26 线程:2772] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:34:26 线程:2772] VK_LAYER_GOOGLE_threading层扩展属性数量:1
+[2018-11-09 09:34:26 线程:2772] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:34:26 线程:2772] VK_LAYER_GOOGLE_threading层所有扩展:
+[2018-11-09 09:34:26 线程:2772] 	VK_EXT_debug_report
+[2018-11-09 09:34:26 线程:2772] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:34:26 线程:2772] VK_LAYER_GOOGLE_unique_objects层扩展属性数量:0
+[2018-11-09 09:34:26 线程:2772] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:34:26 线程:2772] VK_LAYER_LUNARG_vktrace层扩展属性数量:0
+[2018-11-09 09:34:26 线程:2772] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:34:26 线程:2772] 总扩展属性数量:12
+[2018-11-09 09:34:26 线程:2772] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:34:26 线程:2772] 所有扩展属性:
+[2018-11-09 09:34:26 线程:2772] 	名称:VK_KHR_device_group_creation 版本:1
+[2018-11-09 09:34:26 线程:2772] 	名称:VK_KHR_external_fence_capabilities 版本:1
+[2018-11-09 09:34:26 线程:2772] 	名称:VK_KHR_external_memory_capabilities 版本:1
+[2018-11-09 09:34:26 线程:2772] 	名称:VK_KHR_external_semaphore_capabilities 版本:1
+[2018-11-09 09:34:26 线程:2772] 	名称:VK_KHR_get_physical_device_properties2 版本:1
+[2018-11-09 09:34:26 线程:2772] 	名称:VK_KHR_get_surface_capabilities2 版本:1
+[2018-11-09 09:34:26 线程:2772] 	名称:VK_KHR_surface 版本:25
+[2018-11-09 09:34:26 线程:2772] 	名称:VK_KHR_win32_surface 版本:6
+[2018-11-09 09:34:26 线程:2772] 	名称:VK_EXT_debug_report 版本:9
+[2018-11-09 09:34:26 线程:2772] 	名称:VK_EXT_swapchain_colorspace 版本:3
+[2018-11-09 09:34:26 线程:2772] 	名称:VK_NV_external_memory_capabilities 版本:1
+[2018-11-09 09:34:26 线程:2772] 	名称:VK_EXT_debug_utils 版本:1
+[2018-11-09 09:34:26 线程:2772] 测试VkResult::VK_NOT_READY的解释 不是真的
+[2018-11-09 09:34:26 线程:2772] VK_NOT_READY: 栅栏或查询尚未完成
+[2018-11-09 09:34:26 线程:2772] 加载Shcore.dll模块
+[2018-11-09 09:34:26 线程:2772] 加载成功:140710979698688
+[2018-11-09 09:34:26 线程:2772] 从模块:140710979698688 加载函数:SetProcessDpiAwareness
+[2018-11-09 09:34:26 线程:2772] 成功获得函数地址:140710979931088
+[2018-11-09 09:34:26 线程:2772] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:34:26 线程:2772] 加载Vulkan函数:vkDestroyInstance
+[2018-11-09 09:34:26 线程:2772] 	成功获得函数地址:140709995369040
+[2018-11-09 09:34:26 线程:2772] 加载Vulkan函数:vkGetDeviceProcAddr
+[2018-11-09 09:34:26 线程:2772] 	成功获得函数地址:140709995376320
+[2018-11-09 09:34:26 线程:2772] 加载Vulkan函数:vkEnumeratePhysicalDevices
+[2018-11-09 09:34:26 线程:2772] 	成功获得函数地址:140709995366928
+[2018-11-09 09:34:26 线程:2772] 加载Vulkan函数:vkCreateDevice
+[2018-11-09 09:34:26 线程:2772] 	成功获得函数地址:140709995384704
+[2018-11-09 09:34:26 线程:2772] 加载Vulkan函数:vkEnumeratePhysicalDeviceGroups
+[2018-11-09 09:34:26 线程:2772] 	成功获得函数地址:140709995377728
+[2018-11-09 09:34:26 线程:2772] 加载Vulkan函数:vkEnumerateDeviceLayerProperties
+[2018-11-09 09:34:26 线程:2772] 	成功获得函数地址:140709995391344
+[2018-11-09 09:34:26 线程:2772] 加载Vulkan函数:vkEnumerateDeviceExtensionProperties
+[2018-11-09 09:34:26 线程:2772] 	成功获得函数地址:140709995393040
+[2018-11-09 09:34:26 线程:2772] 加载Vulkan函数:vkGetPhysicalDeviceFeatures
+[2018-11-09 09:34:26 线程:2772] 	成功获得函数地址:140709995388032
+[2018-11-09 09:34:26 线程:2772] 加载Vulkan函数:vkGetPhysicalDeviceProperties
+[2018-11-09 09:34:26 线程:2772] 	成功获得函数地址:140709995391232
+[2018-11-09 09:34:26 线程:2772] 加载Vulkan函数:vkGetPhysicalDeviceMemoryProperties
+[2018-11-09 09:34:26 线程:2772] 	成功获得函数地址:140709995378768
+[2018-11-09 09:34:26 线程:2772] 加载Vulkan函数:vkGetPhysicalDeviceFormatProperties
+[2018-11-09 09:34:26 线程:2772] 	成功获得函数地址:140709995357456
+[2018-11-09 09:34:26 线程:2772] 加载Vulkan函数:vkGetPhysicalDeviceQueueFamilyProperties
+[2018-11-09 09:34:26 线程:2772] 	成功获得函数地址:140709995372688
+[2018-11-09 09:34:26 线程:2772] 加载Vulkan函数:vkGetPhysicalDeviceImageFormatProperties
+[2018-11-09 09:34:26 线程:2772] 	成功获得函数地址:140709995355728
+[2018-11-09 09:34:26 线程:2772] 加载Vulkan函数:vkGetPhysicalDeviceSparseImageFormatProperties
+[2018-11-09 09:34:26 线程:2772] 	成功获得函数地址:140709995362832
+[2018-11-09 09:34:26 线程:2772] 加载Vulkan函数:vkGetPhysicalDeviceExternalBufferProperties
+[2018-11-09 09:34:26 线程:2772] 	成功获得函数地址:140709995375024
+[2018-11-09 09:34:26 线程:2772] 加载Vulkan函数:vkGetPhysicalDeviceExternalFenceProperties
+[2018-11-09 09:34:26 线程:2772] 	成功获得函数地址:140709995371856
+[2018-11-09 09:34:26 线程:2772] 加载Vulkan函数:vkGetPhysicalDeviceExternalSemaphoreProperties
+[2018-11-09 09:34:26 线程:2772] 	成功获得函数地址:140709995394400
+[2018-11-09 09:34:26 线程:2772] 加载Vulkan函数:vkGetPhysicalDeviceFeatures2
+[2018-11-09 09:34:26 线程:2772] 	成功获得函数地址:140709995373072
+[2018-11-09 09:34:26 线程:2772] 加载Vulkan函数:vkGetPhysicalDeviceProperties2
+[2018-11-09 09:34:26 线程:2772] 	成功获得函数地址:140709995377264
+[2018-11-09 09:34:26 线程:2772] 加载Vulkan函数:vkGetPhysicalDeviceMemoryProperties2
+[2018-11-09 09:34:26 线程:2772] 	成功获得函数地址:140709995395024
+[2018-11-09 09:34:26 线程:2772] 加载Vulkan函数:vkGetPhysicalDeviceFormatProperties2
+[2018-11-09 09:34:26 线程:2772] 	成功获得函数地址:140709995382400
+[2018-11-09 09:34:26 线程:2772] 加载Vulkan函数:vkGetPhysicalDeviceImageFormatProperties2
+[2018-11-09 09:34:26 线程:2772] 	成功获得函数地址:140709995383440
+[2018-11-09 09:34:26 线程:2772] 加载Vulkan函数:vkGetPhysicalDeviceQueueFamilyProperties2
+[2018-11-09 09:34:26 线程:2772] 	成功获得函数地址:140709995362960
+[2018-11-09 09:34:26 线程:2772] 加载Vulkan函数:vkGetPhysicalDeviceSparseImageFormatProperties2
+[2018-11-09 09:34:26 线程:2772] 	成功获得函数地址:140709995379936
+[2018-11-09 09:34:26 线程:2772] 加载Vulkan函数:vkGetPhysicalDeviceSurfaceSupportKHR
+[2018-11-09 09:34:26 线程:2772] 	成功获得函数地址:140709995371552
+[2018-11-09 09:34:26 线程:2772] 加载Vulkan函数:vkCreateWin32SurfaceKHR
+[2018-11-09 09:34:26 线程:2772] 	成功获得函数地址:140709995371568
+[2018-11-09 09:34:26 线程:2772] 加载Vulkan函数:vkGetPhysicalDeviceWin32PresentationSupportKHR
+[2018-11-09 09:34:26 线程:2772] 	成功获得函数地址:140709995365712
+[2018-11-09 09:34:26 线程:2772] 加载Vulkan函数:vkGetMemoryWin32HandleKHR
+[2018-11-09 09:34:26 线程:2772] 	成功获得函数地址:140709995360480
+[2018-11-09 09:34:26 线程:2772] 加载Vulkan函数:vkGetMemoryWin32HandlePropertiesKHR
+[2018-11-09 09:34:26 线程:2772] 	成功获得函数地址:140709995359600
+[2018-11-09 09:34:26 线程:2772] 加载Vulkan函数:vkImportSemaphoreWin32HandleKHR
+[2018-11-09 09:34:26 线程:2772] 	成功获得函数地址:140709995396576
+[2018-11-09 09:34:26 线程:2772] 加载Vulkan函数:vkGetSemaphoreWin32HandleKHR
+[2018-11-09 09:34:26 线程:2772] 	成功获得函数地址:140709995362208
+[2018-11-09 09:34:26 线程:2772] 加载Vulkan函数:vkImportFenceWin32HandleKHR
+[2018-11-09 09:34:26 线程:2772] 	成功获得函数地址:140709995369920
+[2018-11-09 09:34:26 线程:2772] 加载Vulkan函数:vkGetFenceWin32HandleKHR
+[2018-11-09 09:34:26 线程:2772] 	成功获得函数地址:140709995365856
+[2018-11-09 09:34:26 线程:2772] 加载Vulkan函数:vkDestroySurfaceKHR
+[2018-11-09 09:34:26 线程:2772] 	成功获得函数地址:140709995361920
+[2018-11-09 09:34:26 线程:2772] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:34:26 线程:2772] 物理设备数量:2
+[2018-11-09 09:34:26 线程:2772] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:34:26 线程:2772] 物理设备 0x173b738a880 的队列族数量为 3
+[2018-11-09 09:34:26 线程:2772] 设备GeForce GTX 1060 6GB  api版本:1.1.84 驱动版本:416.136.0
+[2018-11-09 09:34:26 线程:2772] 物理设备 0x173b738ade0 的队列族数量为 1
+[2018-11-09 09:34:26 线程:2772] 设备Intel(R) UHD Graphics 630  api版本:1.0.50 驱动版本:0.16.2
+[2018-11-09 09:34:26 线程:2772] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:34:26 线程:2772] 设备组数量:2
+[2018-11-09 09:34:26 线程:2772] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:34:26 线程:2772] 物理设备组中 物理句柄值:0x173b738a880
+[2018-11-09 09:34:26 线程:2772] 物理设备组中 物理句柄值:0x173b738ade0
+[2018-11-09 09:34:26 线程:2772] 遍历所有设备 - 创建逻辑设备
+[2018-11-09 09:34:26 线程:2772] discreteQueuePriorities:2
+[2018-11-09 09:34:26 线程:2772] 物理设备 0x173b738a880 的队列族数量为 3
+[2018-11-09 09:34:26 线程:2772] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:34:26 线程:2772] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:34:26 线程:2772] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:34:26 线程:2772] 一个队列族不支持我的surface
+[2018-11-09 09:34:26 线程:2772] 选取了合适的设备与队列
+[2018-11-09 09:34:27 线程:2772] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:34:27 线程:2772] 加载vkDestroyDevice成功
+[2018-11-09 09:34:27 线程:2772] 加载vkGetDeviceQueue成功
+[2018-11-09 09:34:27 线程:2772] 加载vkAllocateMemory成功
+[2018-11-09 09:34:27 线程:2772] 加载vkFreeMemory成功
+[2018-11-09 09:34:27 线程:2772] 加载vkMapMemory成功
+[2018-11-09 09:34:27 线程:2772] 加载vkUnmapMemory成功
+[2018-11-09 09:34:27 线程:2772] 加载vkFlushMappedMemoryRanges成功
+[2018-11-09 09:34:27 线程:2772] 加载vkInvalidateMappedMemoryRanges成功
+[2018-11-09 09:34:27 线程:2772] 加载vkGetDeviceMemoryCommitment成功
+[2018-11-09 09:34:27 线程:2772] 加载vkCreateBuffer成功
+[2018-11-09 09:34:27 线程:2772] 加载vkDestroyBuffer成功
+[2018-11-09 09:34:27 线程:2772] 加载vkCreateBufferView成功
+[2018-11-09 09:34:27 线程:2772] 加载vkDestroyBufferView成功
+[2018-11-09 09:34:27 线程:2772] 加载vkBindBufferMemory成功
+[2018-11-09 09:34:27 线程:2772] 加载vkCreateCommandPool成功
+[2018-11-09 09:34:27 线程:2772] 加载vkResetCommandPool成功
+[2018-11-09 09:34:27 线程:2772] 加载vkDestroyCommandPool成功
+[2018-11-09 09:34:27 线程:2772] 加载vkAllocateCommandBuffers成功
+[2018-11-09 09:34:27 线程:2772] 加载vkResetCommandBuffer成功
+[2018-11-09 09:34:27 线程:2772] 加载vkFreeCommandBuffers成功
+[2018-11-09 09:34:27 线程:2772] 加载vkQueueSubmit成功
+[2018-11-09 09:34:27 线程:2772] 加载vkCreateEvent成功
+[2018-11-09 09:34:27 线程:2772] 加载vkGetEventStatus成功
+[2018-11-09 09:34:27 线程:2772] 加载vkResetEvent成功
+[2018-11-09 09:34:27 线程:2772] 加载vkSetEvent成功
+[2018-11-09 09:34:27 线程:2772] 加载vkDestroyEvent成功
+[2018-11-09 09:34:27 线程:2772] 加载vkCreateFence成功
+[2018-11-09 09:34:27 线程:2772] 加载vkResetFences成功
+[2018-11-09 09:34:27 线程:2772] 加载vkGetFenceStatus成功
+[2018-11-09 09:34:27 线程:2772] 加载vkWaitForFences成功
+[2018-11-09 09:34:27 线程:2772] 加载vkDestroyFence成功
+[2018-11-09 09:34:27 线程:2772] 加载vkCreateSemaphore成功
+[2018-11-09 09:34:27 线程:2772] 加载vkDestroySemaphore成功
+[2018-11-09 09:34:27 线程:2772] 加载vkQueueWaitIdle成功
+[2018-11-09 09:34:27 线程:2772] 加载vkDeviceWaitIdle成功
+[2018-11-09 09:34:27 线程:2772] 加载vkBeginCommandBuffer成功
+[2018-11-09 09:34:27 线程:2772] 加载vkEndCommandBuffer成功
+[2018-11-09 09:34:27 线程:2772] 加载vkCreateQueryPool成功
+[2018-11-09 09:34:27 线程:2772] 加载vkGetQueryPoolResults成功
+[2018-11-09 09:34:27 线程:2772] 加载vkDestroyQueryPool成功
+[2018-11-09 09:34:27 线程:2772] 加载vkCreateFramebuffer成功
+[2018-11-09 09:34:27 线程:2772] 加载vkDestroyFramebuffer成功
+[2018-11-09 09:34:27 线程:2772] 加载vkCreateSampler成功
+[2018-11-09 09:34:27 线程:2772] 加载vkDestroySampler成功
+[2018-11-09 09:34:27 线程:2772] 加载vkCreateShaderModule成功
+[2018-11-09 09:34:27 线程:2772] 加载vkDestroyShaderModule成功
+[2018-11-09 09:34:27 线程:2772] 加载vkGetRenderAreaGranularity成功
+[2018-11-09 09:34:27 线程:2772] 加载vkCreateRenderPass成功
+[2018-11-09 09:34:27 线程:2772] 加载vkDestroyRenderPass成功
+[2018-11-09 09:34:27 线程:2772] 加载vkCreateImage成功
+[2018-11-09 09:34:27 线程:2772] 加载vkDestroyImage成功
+[2018-11-09 09:34:27 线程:2772] 加载vkCreateImageView成功
+[2018-11-09 09:34:27 线程:2772] 加载vkDestroyImageView成功
+[2018-11-09 09:34:27 线程:2772] 加载vkBindImageMemory成功
+[2018-11-09 09:34:27 线程:2772] 加载vkCreateComputePipelines成功
+[2018-11-09 09:34:27 线程:2772] 加载vkCreateGraphicsPipelines成功
+[2018-11-09 09:34:27 线程:2772] 加载vkDestroyPipeline成功
+[2018-11-09 09:34:27 线程:2772] 加载vkCreatePipelineCache成功
+[2018-11-09 09:34:27 线程:2772] 加载vkDestroyPipelineCache成功
+[2018-11-09 09:34:27 线程:2772] 加载vkCreatePipelineLayout成功
+[2018-11-09 09:34:27 线程:2772] 加载vkDestroyPipelineLayout成功
+[2018-11-09 09:34:27 线程:2772] 加载vkGetPipelineCacheData成功
+[2018-11-09 09:34:27 线程:2772] 加载vkMergePipelineCaches成功
+[2018-11-09 09:34:27 线程:2772] 加载vkCreateDescriptorPool成功
+[2018-11-09 09:34:27 线程:2772] 加载vkResetDescriptorPool成功
+[2018-11-09 09:34:27 线程:2772] 加载vkDestroyDescriptorPool成功
+[2018-11-09 09:34:27 线程:2772] 加载vkAllocateDescriptorSets成功
+[2018-11-09 09:34:27 线程:2772] 加载vkUpdateDescriptorSets成功
+[2018-11-09 09:34:27 线程:2772] 加载vkFreeDescriptorSets成功
+[2018-11-09 09:34:27 线程:2772] 加载vkCreateDescriptorSetLayout成功
+[2018-11-09 09:34:27 线程:2772] 加载vkDestroyDescriptorSetLayout成功
+[2018-11-09 09:34:27 线程:2772] 加载vkGetBufferMemoryRequirements成功
+[2018-11-09 09:34:27 线程:2772] 加载vkGetImageMemoryRequirements成功
+[2018-11-09 09:34:27 线程:2772] 加载vkQueueBindSparse成功
+[2018-11-09 09:34:27 线程:2772] 加载vkGetImageSparseMemoryRequirements成功
+[2018-11-09 09:34:27 线程:2772] 加载vkGetImageSubresourceLayout成功
+[2018-11-09 09:34:27 线程:2772] 加载vkGetDeviceQueue2成功
+[2018-11-09 09:34:27 线程:2772] 加载vkBindBufferMemory2成功
+[2018-11-09 09:34:27 线程:2772] 加载vkBindImageMemory2成功
+[2018-11-09 09:34:27 线程:2772] 加载vkCreateDescriptorUpdateTemplate成功
+[2018-11-09 09:34:27 线程:2772] 加载vkUpdateDescriptorSetWithTemplate成功
+[2018-11-09 09:34:27 线程:2772] 加载vkDestroyDescriptorUpdateTemplate成功
+[2018-11-09 09:34:27 线程:2772] 加载vkCreateSamplerYcbcrConversion成功
+[2018-11-09 09:34:27 线程:2772] 加载vkDestroySamplerYcbcrConversion成功
+[2018-11-09 09:34:27 线程:2772] 加载vkGetBufferMemoryRequirements2成功
+[2018-11-09 09:34:27 线程:2772] 加载vkGetDescriptorSetLayoutSupport成功
+[2018-11-09 09:34:27 线程:2772] 加载vkGetDeviceGroupPeerMemoryFeatures成功
+[2018-11-09 09:34:27 线程:2772] 加载vkGetImageMemoryRequirements2成功
+[2018-11-09 09:34:27 线程:2772] 加载vkGetImageSparseMemoryRequirements2成功
+[2018-11-09 09:34:27 线程:2772] 加载vkTrimCommandPool成功
+[2018-11-09 09:34:27 线程:2772] 加载vkCmdDispatch成功
+[2018-11-09 09:34:27 线程:2772] 加载vkCmdDispatchIndirect成功
+[2018-11-09 09:34:27 线程:2772] 加载vkCmdExecuteCommands成功
+[2018-11-09 09:34:27 线程:2772] 加载vkCmdWaitEvents成功
+[2018-11-09 09:34:27 线程:2772] 加载vkCmdSetEvent成功
+[2018-11-09 09:34:27 线程:2772] 加载vkCmdResetEvent成功
+[2018-11-09 09:34:27 线程:2772] 加载vkCmdPipelineBarrier成功
+[2018-11-09 09:34:27 线程:2772] 加载vkCmdCopyBuffer成功
+[2018-11-09 09:34:27 线程:2772] 加载vkCmdFillBuffer成功
+[2018-11-09 09:34:27 线程:2772] 加载vkCmdUpdateBuffer成功
+[2018-11-09 09:34:27 线程:2772] 加载vkCmdBindDescriptorSets成功
+[2018-11-09 09:34:27 线程:2772] 加载vkCmdBindIndexBuffer成功
+[2018-11-09 09:34:27 线程:2772] 加载vkCmdBindPipeline成功
+[2018-11-09 09:34:27 线程:2772] 加载vkCmdBindVertexBuffers成功
+[2018-11-09 09:34:27 线程:2772] 加载vkCmdBeginRenderPass成功
+[2018-11-09 09:34:27 线程:2772] 加载vkCmdNextSubpass成功
+[2018-11-09 09:34:27 线程:2772] 加载vkCmdEndRenderPass成功
+[2018-11-09 09:34:27 线程:2772] 加载vkCmdDraw成功
+[2018-11-09 09:34:27 线程:2772] 加载vkCmdDrawIndexed成功
+[2018-11-09 09:34:27 线程:2772] 加载vkCmdDrawIndexedIndirect成功
+[2018-11-09 09:34:27 线程:2772] 加载vkCmdDrawIndirect成功
+[2018-11-09 09:34:27 线程:2772] 加载vkCmdCopyBufferToImage成功
+[2018-11-09 09:34:27 线程:2772] 加载vkCmdCopyImageToBuffer成功
+[2018-11-09 09:34:27 线程:2772] 加载vkCmdCopyImage成功
+[2018-11-09 09:34:27 线程:2772] 加载vkCmdBlitImage成功
+[2018-11-09 09:34:27 线程:2772] 加载vkCmdClearDepthStencilImage成功
+[2018-11-09 09:34:27 线程:2772] 加载vkCmdClearColorImage成功
+[2018-11-09 09:34:27 线程:2772] 加载vkCmdPushConstants成功
+[2018-11-09 09:34:27 线程:2772] 加载vkCmdResolveImage成功
+[2018-11-09 09:34:27 线程:2772] 加载vkCmdClearAttachments成功
+[2018-11-09 09:34:27 线程:2772] 加载vkCmdSetViewport成功
+[2018-11-09 09:34:27 线程:2772] 加载vkCmdSetScissor成功
+[2018-11-09 09:34:27 线程:2772] 加载vkCmdSetStencilCompareMask成功
+[2018-11-09 09:34:27 线程:2772] 加载vkCmdSetStencilWriteMask成功
+[2018-11-09 09:34:27 线程:2772] 加载vkCmdSetStencilReference成功
+[2018-11-09 09:34:27 线程:2772] 加载vkCmdSetLineWidth成功
+[2018-11-09 09:34:27 线程:2772] 加载vkCmdSetDepthBounds成功
+[2018-11-09 09:34:27 线程:2772] 加载vkCmdSetBlendConstants成功
+[2018-11-09 09:34:27 线程:2772] 加载vkCmdSetDepthBias成功
+[2018-11-09 09:34:27 线程:2772] 加载vkCmdBeginQuery成功
+[2018-11-09 09:34:27 线程:2772] 加载vkCmdResetQueryPool成功
+[2018-11-09 09:34:27 线程:2772] 加载vkCmdCopyQueryPoolResults成功
+[2018-11-09 09:34:27 线程:2772] 加载vkCmdWriteTimestamp成功
+[2018-11-09 09:34:27 线程:2772] 加载vkCmdEndQuery成功
+[2018-11-09 09:34:27 线程:2772] 加载vkCmdDispatchBase成功
+[2018-11-09 09:34:27 线程:2772] 加载vkCmdSetDeviceMask成功
+[2018-11-09 09:34:27 线程:2772] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:34:27 线程:2772] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:34:27 线程:2772] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:34:27 线程:2772] __cdecl laka::vk::Semaphore::~Semaphore(void)
+[2018-11-09 09:34:27 线程:2772] __cdecl laka::vk::Semaphore::~Semaphore(void)
+[2018-11-09 09:34:27 线程:2772] __cdecl laka::vk::Command_pool::~Command_pool(void)
+[2018-11-09 09:34:27 线程:2772] __cdecl laka::vk::Device::~Device(void)
+[2018-11-09 09:34:27 线程:2772] __cdecl laka::vk::Instance::~Instance(void)
+[2018-11-09 09:35:28 线程:9764] debug
+[2018-11-09 09:35:28 线程:9764] info
+[2018-11-09 09:35:28 线程:9764] warring
+[2018-11-09 09:35:28 线程:9764] error
+[2018-11-09 09:35:28 线程:9764] critical
+[2018-11-09 09:35:28 线程:9764] 加载vulkan-1.dll模块
+[2018-11-09 09:35:28 线程:9764] 加载成功:140709995347968
+[2018-11-09 09:35:28 线程:9764] 从模块:140709995347968 加载函数:vkGetInstanceProcAddr
+[2018-11-09 09:35:28 线程:9764] 成功获得函数地址:140709995356448
+[2018-11-09 09:35:28 线程:9764] 加载Vulkan函数:vkEnumerateInstanceLayerProperties
+[2018-11-09 09:35:28 线程:9764] 	成功获得函数地址:140709995392304
+[2018-11-09 09:35:28 线程:9764] 加载Vulkan函数:vkEnumerateInstanceExtensionProperties
+[2018-11-09 09:35:28 线程:9764] 	成功获得函数地址:140709995360496
+[2018-11-09 09:35:28 线程:9764] 加载Vulkan函数:vkCreateInstance
+[2018-11-09 09:35:28 线程:9764] 	成功获得函数地址:140709995368352
+[2018-11-09 09:35:28 线程:9764] 加载Vulkan函数:vkEnumerateInstanceVersion
+[2018-11-09 09:35:28 线程:9764] 	成功获得函数地址:140709995394240
+[2018-11-09 09:35:28 线程:9764] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:35:28 线程:9764] vulkan支持的层的数量为:15
+[2018-11-09 09:35:28 线程:9764] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:35:28 线程:9764] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:35:28 线程:9764] VK_LAYER_NV_optimus层扩展属性数量:0
+[2018-11-09 09:35:28 线程:9764] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:35:28 线程:9764] VK_LAYER_RENDERDOC_Capture层扩展属性数量:1
+[2018-11-09 09:35:28 线程:9764] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:35:28 线程:9764] VK_LAYER_RENDERDOC_Capture层所有扩展:
+[2018-11-09 09:35:28 线程:9764] 	VK_EXT_debug_utils
+[2018-11-09 09:35:28 线程:9764] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:35:28 线程:9764] VK_LAYER_NV_nsight层扩展属性数量:0
+[2018-11-09 09:35:28 线程:9764] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:35:28 线程:9764] VK_LAYER_LUNARG_api_dump层扩展属性数量:0
+[2018-11-09 09:35:28 线程:9764] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:35:28 线程:9764] VK_LAYER_LUNARG_assistant_layer层扩展属性数量:1
+[2018-11-09 09:35:28 线程:9764] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:35:28 线程:9764] VK_LAYER_LUNARG_assistant_layer层所有扩展:
+[2018-11-09 09:35:28 线程:9764] 	VK_EXT_debug_report
+[2018-11-09 09:35:28 线程:9764] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:35:28 线程:9764] VK_LAYER_LUNARG_core_validation层扩展属性数量:1
+[2018-11-09 09:35:28 线程:9764] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:35:28 线程:9764] VK_LAYER_LUNARG_core_validation层所有扩展:
+[2018-11-09 09:35:28 线程:9764] 	VK_EXT_debug_report
+[2018-11-09 09:35:28 线程:9764] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:35:28 线程:9764] VK_LAYER_LUNARG_device_simulation层扩展属性数量:0
+[2018-11-09 09:35:28 线程:9764] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:35:28 线程:9764] VK_LAYER_LUNARG_monitor层扩展属性数量:0
+[2018-11-09 09:35:28 线程:9764] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:35:28 线程:9764] VK_LAYER_LUNARG_object_tracker层扩展属性数量:1
+[2018-11-09 09:35:28 线程:9764] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:35:28 线程:9764] VK_LAYER_LUNARG_object_tracker层所有扩展:
+[2018-11-09 09:35:28 线程:9764] 	VK_EXT_debug_report
+[2018-11-09 09:35:28 线程:9764] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:35:28 线程:9764] VK_LAYER_LUNARG_parameter_validation层扩展属性数量:1
+[2018-11-09 09:35:28 线程:9764] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:35:28 线程:9764] VK_LAYER_LUNARG_parameter_validation层所有扩展:
+[2018-11-09 09:35:28 线程:9764] 	VK_EXT_debug_report
+[2018-11-09 09:35:28 线程:9764] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:35:28 线程:9764] VK_LAYER_LUNARG_screenshot层扩展属性数量:0
+[2018-11-09 09:35:28 线程:9764] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:35:28 线程:9764] VK_LAYER_LUNARG_standard_validation层扩展属性数量:1
+[2018-11-09 09:35:28 线程:9764] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:35:28 线程:9764] VK_LAYER_LUNARG_standard_validation层所有扩展:
+[2018-11-09 09:35:28 线程:9764] 	VK_EXT_debug_report
+[2018-11-09 09:35:28 线程:9764] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:35:28 线程:9764] VK_LAYER_GOOGLE_threading层扩展属性数量:1
+[2018-11-09 09:35:28 线程:9764] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:35:28 线程:9764] VK_LAYER_GOOGLE_threading层所有扩展:
+[2018-11-09 09:35:28 线程:9764] 	VK_EXT_debug_report
+[2018-11-09 09:35:28 线程:9764] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:35:28 线程:9764] VK_LAYER_GOOGLE_unique_objects层扩展属性数量:0
+[2018-11-09 09:35:28 线程:9764] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:35:28 线程:9764] VK_LAYER_LUNARG_vktrace层扩展属性数量:0
+[2018-11-09 09:35:28 线程:9764] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:35:28 线程:9764] 总扩展属性数量:12
+[2018-11-09 09:35:28 线程:9764] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:35:28 线程:9764] 所有扩展属性:
+[2018-11-09 09:35:28 线程:9764] 	名称:VK_KHR_device_group_creation 版本:1
+[2018-11-09 09:35:28 线程:9764] 	名称:VK_KHR_external_fence_capabilities 版本:1
+[2018-11-09 09:35:28 线程:9764] 	名称:VK_KHR_external_memory_capabilities 版本:1
+[2018-11-09 09:35:28 线程:9764] 	名称:VK_KHR_external_semaphore_capabilities 版本:1
+[2018-11-09 09:35:28 线程:9764] 	名称:VK_KHR_get_physical_device_properties2 版本:1
+[2018-11-09 09:35:28 线程:9764] 	名称:VK_KHR_get_surface_capabilities2 版本:1
+[2018-11-09 09:35:28 线程:9764] 	名称:VK_KHR_surface 版本:25
+[2018-11-09 09:35:28 线程:9764] 	名称:VK_KHR_win32_surface 版本:6
+[2018-11-09 09:35:28 线程:9764] 	名称:VK_EXT_debug_report 版本:9
+[2018-11-09 09:35:28 线程:9764] 	名称:VK_EXT_swapchain_colorspace 版本:3
+[2018-11-09 09:35:28 线程:9764] 	名称:VK_NV_external_memory_capabilities 版本:1
+[2018-11-09 09:35:28 线程:9764] 	名称:VK_EXT_debug_utils 版本:1
+[2018-11-09 09:35:28 线程:9764] 测试VkResult::VK_NOT_READY的解释 不是真的
+[2018-11-09 09:35:28 线程:9764] VK_NOT_READY: 栅栏或查询尚未完成
+[2018-11-09 09:35:28 线程:9764] 加载Shcore.dll模块
+[2018-11-09 09:35:28 线程:9764] 加载成功:140710979698688
+[2018-11-09 09:35:28 线程:9764] 从模块:140710979698688 加载函数:SetProcessDpiAwareness
+[2018-11-09 09:35:28 线程:9764] 成功获得函数地址:140710979931088
+[2018-11-09 09:35:29 线程:9764] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:35:29 线程:9764] 加载Vulkan函数:vkDestroyInstance
+[2018-11-09 09:35:29 线程:9764] 	成功获得函数地址:140709995369040
+[2018-11-09 09:35:29 线程:9764] 加载Vulkan函数:vkGetDeviceProcAddr
+[2018-11-09 09:35:29 线程:9764] 	成功获得函数地址:140709995376320
+[2018-11-09 09:35:29 线程:9764] 加载Vulkan函数:vkEnumeratePhysicalDevices
+[2018-11-09 09:35:29 线程:9764] 	成功获得函数地址:140709995366928
+[2018-11-09 09:35:29 线程:9764] 加载Vulkan函数:vkCreateDevice
+[2018-11-09 09:35:29 线程:9764] 	成功获得函数地址:140709995384704
+[2018-11-09 09:35:29 线程:9764] 加载Vulkan函数:vkEnumeratePhysicalDeviceGroups
+[2018-11-09 09:35:29 线程:9764] 	成功获得函数地址:140709995377728
+[2018-11-09 09:35:29 线程:9764] 加载Vulkan函数:vkEnumerateDeviceLayerProperties
+[2018-11-09 09:35:29 线程:9764] 	成功获得函数地址:140709995391344
+[2018-11-09 09:35:29 线程:9764] 加载Vulkan函数:vkEnumerateDeviceExtensionProperties
+[2018-11-09 09:35:29 线程:9764] 	成功获得函数地址:140709995393040
+[2018-11-09 09:35:29 线程:9764] 加载Vulkan函数:vkGetPhysicalDeviceFeatures
+[2018-11-09 09:35:29 线程:9764] 	成功获得函数地址:140709995388032
+[2018-11-09 09:35:29 线程:9764] 加载Vulkan函数:vkGetPhysicalDeviceProperties
+[2018-11-09 09:35:29 线程:9764] 	成功获得函数地址:140709995391232
+[2018-11-09 09:35:29 线程:9764] 加载Vulkan函数:vkGetPhysicalDeviceMemoryProperties
+[2018-11-09 09:35:29 线程:9764] 	成功获得函数地址:140709995378768
+[2018-11-09 09:35:29 线程:9764] 加载Vulkan函数:vkGetPhysicalDeviceFormatProperties
+[2018-11-09 09:35:29 线程:9764] 	成功获得函数地址:140709995357456
+[2018-11-09 09:35:29 线程:9764] 加载Vulkan函数:vkGetPhysicalDeviceQueueFamilyProperties
+[2018-11-09 09:35:29 线程:9764] 	成功获得函数地址:140709995372688
+[2018-11-09 09:35:29 线程:9764] 加载Vulkan函数:vkGetPhysicalDeviceImageFormatProperties
+[2018-11-09 09:35:29 线程:9764] 	成功获得函数地址:140709995355728
+[2018-11-09 09:35:29 线程:9764] 加载Vulkan函数:vkGetPhysicalDeviceSparseImageFormatProperties
+[2018-11-09 09:35:29 线程:9764] 	成功获得函数地址:140709995362832
+[2018-11-09 09:35:29 线程:9764] 加载Vulkan函数:vkGetPhysicalDeviceExternalBufferProperties
+[2018-11-09 09:35:29 线程:9764] 	成功获得函数地址:140709995375024
+[2018-11-09 09:35:29 线程:9764] 加载Vulkan函数:vkGetPhysicalDeviceExternalFenceProperties
+[2018-11-09 09:35:29 线程:9764] 	成功获得函数地址:140709995371856
+[2018-11-09 09:35:29 线程:9764] 加载Vulkan函数:vkGetPhysicalDeviceExternalSemaphoreProperties
+[2018-11-09 09:35:29 线程:9764] 	成功获得函数地址:140709995394400
+[2018-11-09 09:35:29 线程:9764] 加载Vulkan函数:vkGetPhysicalDeviceFeatures2
+[2018-11-09 09:35:29 线程:9764] 	成功获得函数地址:140709995373072
+[2018-11-09 09:35:29 线程:9764] 加载Vulkan函数:vkGetPhysicalDeviceProperties2
+[2018-11-09 09:35:29 线程:9764] 	成功获得函数地址:140709995377264
+[2018-11-09 09:35:29 线程:9764] 加载Vulkan函数:vkGetPhysicalDeviceMemoryProperties2
+[2018-11-09 09:35:29 线程:9764] 	成功获得函数地址:140709995395024
+[2018-11-09 09:35:29 线程:9764] 加载Vulkan函数:vkGetPhysicalDeviceFormatProperties2
+[2018-11-09 09:35:29 线程:9764] 	成功获得函数地址:140709995382400
+[2018-11-09 09:35:29 线程:9764] 加载Vulkan函数:vkGetPhysicalDeviceImageFormatProperties2
+[2018-11-09 09:35:29 线程:9764] 	成功获得函数地址:140709995383440
+[2018-11-09 09:35:29 线程:9764] 加载Vulkan函数:vkGetPhysicalDeviceQueueFamilyProperties2
+[2018-11-09 09:35:29 线程:9764] 	成功获得函数地址:140709995362960
+[2018-11-09 09:35:29 线程:9764] 加载Vulkan函数:vkGetPhysicalDeviceSparseImageFormatProperties2
+[2018-11-09 09:35:29 线程:9764] 	成功获得函数地址:140709995379936
+[2018-11-09 09:35:29 线程:9764] 加载Vulkan函数:vkGetPhysicalDeviceSurfaceSupportKHR
+[2018-11-09 09:35:29 线程:9764] 	成功获得函数地址:140709995371552
+[2018-11-09 09:35:29 线程:9764] 加载Vulkan函数:vkCreateWin32SurfaceKHR
+[2018-11-09 09:35:29 线程:9764] 	成功获得函数地址:140709995371568
+[2018-11-09 09:35:29 线程:9764] 加载Vulkan函数:vkGetPhysicalDeviceWin32PresentationSupportKHR
+[2018-11-09 09:35:29 线程:9764] 	成功获得函数地址:140709995365712
+[2018-11-09 09:35:29 线程:9764] 加载Vulkan函数:vkGetMemoryWin32HandleKHR
+[2018-11-09 09:35:29 线程:9764] 	成功获得函数地址:140709995360480
+[2018-11-09 09:35:29 线程:9764] 加载Vulkan函数:vkGetMemoryWin32HandlePropertiesKHR
+[2018-11-09 09:35:29 线程:9764] 	成功获得函数地址:140709995359600
+[2018-11-09 09:35:29 线程:9764] 加载Vulkan函数:vkImportSemaphoreWin32HandleKHR
+[2018-11-09 09:35:29 线程:9764] 	成功获得函数地址:140709995396576
+[2018-11-09 09:35:29 线程:9764] 加载Vulkan函数:vkGetSemaphoreWin32HandleKHR
+[2018-11-09 09:35:29 线程:9764] 	成功获得函数地址:140709995362208
+[2018-11-09 09:35:29 线程:9764] 加载Vulkan函数:vkImportFenceWin32HandleKHR
+[2018-11-09 09:35:29 线程:9764] 	成功获得函数地址:140709995369920
+[2018-11-09 09:35:29 线程:9764] 加载Vulkan函数:vkGetFenceWin32HandleKHR
+[2018-11-09 09:35:29 线程:9764] 	成功获得函数地址:140709995365856
+[2018-11-09 09:35:29 线程:9764] 加载Vulkan函数:vkDestroySurfaceKHR
+[2018-11-09 09:35:29 线程:9764] 	成功获得函数地址:140709995361920
+[2018-11-09 09:35:29 线程:9764] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:35:29 线程:9764] 物理设备数量:2
+[2018-11-09 09:35:29 线程:9764] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:35:29 线程:9764] 物理设备 0x1aae3e9db60 的队列族数量为 3
+[2018-11-09 09:35:29 线程:9764] 设备GeForce GTX 1060 6GB  api版本:1.1.84 驱动版本:416.136.0
+[2018-11-09 09:35:29 线程:9764] 物理设备 0x1aae3e9dcc0 的队列族数量为 1
+[2018-11-09 09:35:29 线程:9764] 设备Intel(R) UHD Graphics 630  api版本:1.0.50 驱动版本:0.16.2
+[2018-11-09 09:35:29 线程:9764] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:35:29 线程:9764] 设备组数量:2
+[2018-11-09 09:35:29 线程:9764] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:35:29 线程:9764] 物理设备组中 物理句柄值:0x1aae3e9db60
+[2018-11-09 09:35:29 线程:9764] 物理设备组中 物理句柄值:0x1aae3e9dcc0
+[2018-11-09 09:35:29 线程:9764] 遍历所有设备 - 创建逻辑设备
+[2018-11-09 09:35:29 线程:9764] discreteQueuePriorities:2
+[2018-11-09 09:35:29 线程:9764] 物理设备 0x1aae3e9db60 的队列族数量为 3
+[2018-11-09 09:35:29 线程:9764] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:35:29 线程:9764] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:35:29 线程:9764] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:35:29 线程:9764] 一个队列族不支持我的surface
+[2018-11-09 09:35:29 线程:9764] 选择了一个既有图形功能 又支持我的surface的队列族
+[2018-11-09 09:35:29 线程:9764] 选取了合适的设备与队列
+[2018-11-09 09:35:29 线程:9764] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:35:29 线程:9764] 加载vkDestroyDevice成功
+[2018-11-09 09:35:29 线程:9764] 加载vkGetDeviceQueue成功
+[2018-11-09 09:35:29 线程:9764] 加载vkAllocateMemory成功
+[2018-11-09 09:35:29 线程:9764] 加载vkFreeMemory成功
+[2018-11-09 09:35:29 线程:9764] 加载vkMapMemory成功
+[2018-11-09 09:35:29 线程:9764] 加载vkUnmapMemory成功
+[2018-11-09 09:35:29 线程:9764] 加载vkFlushMappedMemoryRanges成功
+[2018-11-09 09:35:29 线程:9764] 加载vkInvalidateMappedMemoryRanges成功
+[2018-11-09 09:35:29 线程:9764] 加载vkGetDeviceMemoryCommitment成功
+[2018-11-09 09:35:29 线程:9764] 加载vkCreateBuffer成功
+[2018-11-09 09:35:29 线程:9764] 加载vkDestroyBuffer成功
+[2018-11-09 09:35:29 线程:9764] 加载vkCreateBufferView成功
+[2018-11-09 09:35:29 线程:9764] 加载vkDestroyBufferView成功
+[2018-11-09 09:35:29 线程:9764] 加载vkBindBufferMemory成功
+[2018-11-09 09:35:29 线程:9764] 加载vkCreateCommandPool成功
+[2018-11-09 09:35:29 线程:9764] 加载vkResetCommandPool成功
+[2018-11-09 09:35:29 线程:9764] 加载vkDestroyCommandPool成功
+[2018-11-09 09:35:29 线程:9764] 加载vkAllocateCommandBuffers成功
+[2018-11-09 09:35:29 线程:9764] 加载vkResetCommandBuffer成功
+[2018-11-09 09:35:29 线程:9764] 加载vkFreeCommandBuffers成功
+[2018-11-09 09:35:29 线程:9764] 加载vkQueueSubmit成功
+[2018-11-09 09:35:29 线程:9764] 加载vkCreateEvent成功
+[2018-11-09 09:35:29 线程:9764] 加载vkGetEventStatus成功
+[2018-11-09 09:35:29 线程:9764] 加载vkResetEvent成功
+[2018-11-09 09:35:29 线程:9764] 加载vkSetEvent成功
+[2018-11-09 09:35:29 线程:9764] 加载vkDestroyEvent成功
+[2018-11-09 09:35:29 线程:9764] 加载vkCreateFence成功
+[2018-11-09 09:35:29 线程:9764] 加载vkResetFences成功
+[2018-11-09 09:35:29 线程:9764] 加载vkGetFenceStatus成功
+[2018-11-09 09:35:29 线程:9764] 加载vkWaitForFences成功
+[2018-11-09 09:35:29 线程:9764] 加载vkDestroyFence成功
+[2018-11-09 09:35:29 线程:9764] 加载vkCreateSemaphore成功
+[2018-11-09 09:35:29 线程:9764] 加载vkDestroySemaphore成功
+[2018-11-09 09:35:29 线程:9764] 加载vkQueueWaitIdle成功
+[2018-11-09 09:35:29 线程:9764] 加载vkDeviceWaitIdle成功
+[2018-11-09 09:35:29 线程:9764] 加载vkBeginCommandBuffer成功
+[2018-11-09 09:35:29 线程:9764] 加载vkEndCommandBuffer成功
+[2018-11-09 09:35:29 线程:9764] 加载vkCreateQueryPool成功
+[2018-11-09 09:35:29 线程:9764] 加载vkGetQueryPoolResults成功
+[2018-11-09 09:35:29 线程:9764] 加载vkDestroyQueryPool成功
+[2018-11-09 09:35:29 线程:9764] 加载vkCreateFramebuffer成功
+[2018-11-09 09:35:29 线程:9764] 加载vkDestroyFramebuffer成功
+[2018-11-09 09:35:29 线程:9764] 加载vkCreateSampler成功
+[2018-11-09 09:35:29 线程:9764] 加载vkDestroySampler成功
+[2018-11-09 09:35:29 线程:9764] 加载vkCreateShaderModule成功
+[2018-11-09 09:35:29 线程:9764] 加载vkDestroyShaderModule成功
+[2018-11-09 09:35:29 线程:9764] 加载vkGetRenderAreaGranularity成功
+[2018-11-09 09:35:29 线程:9764] 加载vkCreateRenderPass成功
+[2018-11-09 09:35:29 线程:9764] 加载vkDestroyRenderPass成功
+[2018-11-09 09:35:29 线程:9764] 加载vkCreateImage成功
+[2018-11-09 09:35:29 线程:9764] 加载vkDestroyImage成功
+[2018-11-09 09:35:29 线程:9764] 加载vkCreateImageView成功
+[2018-11-09 09:35:29 线程:9764] 加载vkDestroyImageView成功
+[2018-11-09 09:35:29 线程:9764] 加载vkBindImageMemory成功
+[2018-11-09 09:35:29 线程:9764] 加载vkCreateComputePipelines成功
+[2018-11-09 09:35:29 线程:9764] 加载vkCreateGraphicsPipelines成功
+[2018-11-09 09:35:29 线程:9764] 加载vkDestroyPipeline成功
+[2018-11-09 09:35:29 线程:9764] 加载vkCreatePipelineCache成功
+[2018-11-09 09:35:29 线程:9764] 加载vkDestroyPipelineCache成功
+[2018-11-09 09:35:29 线程:9764] 加载vkCreatePipelineLayout成功
+[2018-11-09 09:35:29 线程:9764] 加载vkDestroyPipelineLayout成功
+[2018-11-09 09:35:29 线程:9764] 加载vkGetPipelineCacheData成功
+[2018-11-09 09:35:29 线程:9764] 加载vkMergePipelineCaches成功
+[2018-11-09 09:35:29 线程:9764] 加载vkCreateDescriptorPool成功
+[2018-11-09 09:35:29 线程:9764] 加载vkResetDescriptorPool成功
+[2018-11-09 09:35:29 线程:9764] 加载vkDestroyDescriptorPool成功
+[2018-11-09 09:35:29 线程:9764] 加载vkAllocateDescriptorSets成功
+[2018-11-09 09:35:29 线程:9764] 加载vkUpdateDescriptorSets成功
+[2018-11-09 09:35:29 线程:9764] 加载vkFreeDescriptorSets成功
+[2018-11-09 09:35:29 线程:9764] 加载vkCreateDescriptorSetLayout成功
+[2018-11-09 09:35:29 线程:9764] 加载vkDestroyDescriptorSetLayout成功
+[2018-11-09 09:35:29 线程:9764] 加载vkGetBufferMemoryRequirements成功
+[2018-11-09 09:35:29 线程:9764] 加载vkGetImageMemoryRequirements成功
+[2018-11-09 09:35:29 线程:9764] 加载vkQueueBindSparse成功
+[2018-11-09 09:35:29 线程:9764] 加载vkGetImageSparseMemoryRequirements成功
+[2018-11-09 09:35:29 线程:9764] 加载vkGetImageSubresourceLayout成功
+[2018-11-09 09:35:29 线程:9764] 加载vkGetDeviceQueue2成功
+[2018-11-09 09:35:29 线程:9764] 加载vkBindBufferMemory2成功
+[2018-11-09 09:35:29 线程:9764] 加载vkBindImageMemory2成功
+[2018-11-09 09:35:29 线程:9764] 加载vkCreateDescriptorUpdateTemplate成功
+[2018-11-09 09:35:29 线程:9764] 加载vkUpdateDescriptorSetWithTemplate成功
+[2018-11-09 09:35:29 线程:9764] 加载vkDestroyDescriptorUpdateTemplate成功
+[2018-11-09 09:35:29 线程:9764] 加载vkCreateSamplerYcbcrConversion成功
+[2018-11-09 09:35:29 线程:9764] 加载vkDestroySamplerYcbcrConversion成功
+[2018-11-09 09:35:29 线程:9764] 加载vkGetBufferMemoryRequirements2成功
+[2018-11-09 09:35:29 线程:9764] 加载vkGetDescriptorSetLayoutSupport成功
+[2018-11-09 09:35:29 线程:9764] 加载vkGetDeviceGroupPeerMemoryFeatures成功
+[2018-11-09 09:35:29 线程:9764] 加载vkGetImageMemoryRequirements2成功
+[2018-11-09 09:35:29 线程:9764] 加载vkGetImageSparseMemoryRequirements2成功
+[2018-11-09 09:35:29 线程:9764] 加载vkTrimCommandPool成功
+[2018-11-09 09:35:29 线程:9764] 加载vkCmdDispatch成功
+[2018-11-09 09:35:29 线程:9764] 加载vkCmdDispatchIndirect成功
+[2018-11-09 09:35:29 线程:9764] 加载vkCmdExecuteCommands成功
+[2018-11-09 09:35:29 线程:9764] 加载vkCmdWaitEvents成功
+[2018-11-09 09:35:29 线程:9764] 加载vkCmdSetEvent成功
+[2018-11-09 09:35:29 线程:9764] 加载vkCmdResetEvent成功
+[2018-11-09 09:35:29 线程:9764] 加载vkCmdPipelineBarrier成功
+[2018-11-09 09:35:29 线程:9764] 加载vkCmdCopyBuffer成功
+[2018-11-09 09:35:29 线程:9764] 加载vkCmdFillBuffer成功
+[2018-11-09 09:35:29 线程:9764] 加载vkCmdUpdateBuffer成功
+[2018-11-09 09:35:29 线程:9764] 加载vkCmdBindDescriptorSets成功
+[2018-11-09 09:35:29 线程:9764] 加载vkCmdBindIndexBuffer成功
+[2018-11-09 09:35:29 线程:9764] 加载vkCmdBindPipeline成功
+[2018-11-09 09:35:29 线程:9764] 加载vkCmdBindVertexBuffers成功
+[2018-11-09 09:35:29 线程:9764] 加载vkCmdBeginRenderPass成功
+[2018-11-09 09:35:29 线程:9764] 加载vkCmdNextSubpass成功
+[2018-11-09 09:35:29 线程:9764] 加载vkCmdEndRenderPass成功
+[2018-11-09 09:35:29 线程:9764] 加载vkCmdDraw成功
+[2018-11-09 09:35:29 线程:9764] 加载vkCmdDrawIndexed成功
+[2018-11-09 09:35:29 线程:9764] 加载vkCmdDrawIndexedIndirect成功
+[2018-11-09 09:35:29 线程:9764] 加载vkCmdDrawIndirect成功
+[2018-11-09 09:35:29 线程:9764] 加载vkCmdCopyBufferToImage成功
+[2018-11-09 09:35:29 线程:9764] 加载vkCmdCopyImageToBuffer成功
+[2018-11-09 09:35:29 线程:9764] 加载vkCmdCopyImage成功
+[2018-11-09 09:35:29 线程:9764] 加载vkCmdBlitImage成功
+[2018-11-09 09:35:29 线程:9764] 加载vkCmdClearDepthStencilImage成功
+[2018-11-09 09:35:29 线程:9764] 加载vkCmdClearColorImage成功
+[2018-11-09 09:35:29 线程:9764] 加载vkCmdPushConstants成功
+[2018-11-09 09:35:29 线程:9764] 加载vkCmdResolveImage成功
+[2018-11-09 09:35:29 线程:9764] 加载vkCmdClearAttachments成功
+[2018-11-09 09:35:29 线程:9764] 加载vkCmdSetViewport成功
+[2018-11-09 09:35:29 线程:9764] 加载vkCmdSetScissor成功
+[2018-11-09 09:35:29 线程:9764] 加载vkCmdSetStencilCompareMask成功
+[2018-11-09 09:35:29 线程:9764] 加载vkCmdSetStencilWriteMask成功
+[2018-11-09 09:35:29 线程:9764] 加载vkCmdSetStencilReference成功
+[2018-11-09 09:35:29 线程:9764] 加载vkCmdSetLineWidth成功
+[2018-11-09 09:35:29 线程:9764] 加载vkCmdSetDepthBounds成功
+[2018-11-09 09:35:29 线程:9764] 加载vkCmdSetBlendConstants成功
+[2018-11-09 09:35:29 线程:9764] 加载vkCmdSetDepthBias成功
+[2018-11-09 09:35:29 线程:9764] 加载vkCmdBeginQuery成功
+[2018-11-09 09:35:29 线程:9764] 加载vkCmdResetQueryPool成功
+[2018-11-09 09:35:29 线程:9764] 加载vkCmdCopyQueryPoolResults成功
+[2018-11-09 09:35:29 线程:9764] 加载vkCmdWriteTimestamp成功
+[2018-11-09 09:35:29 线程:9764] 加载vkCmdEndQuery成功
+[2018-11-09 09:35:29 线程:9764] 加载vkCmdDispatchBase成功
+[2018-11-09 09:35:29 线程:9764] 加载vkCmdSetDeviceMask成功
+[2018-11-09 09:35:29 线程:9764] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:35:29 线程:9764] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:35:29 线程:9764] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:35:29 线程:9764] __cdecl laka::vk::Semaphore::~Semaphore(void)
+[2018-11-09 09:35:29 线程:9764] __cdecl laka::vk::Semaphore::~Semaphore(void)
+[2018-11-09 09:35:29 线程:9764] __cdecl laka::vk::Command_pool::~Command_pool(void)
+[2018-11-09 09:35:29 线程:9764] __cdecl laka::vk::Device::~Device(void)
+[2018-11-09 09:35:29 线程:9764] __cdecl laka::vk::Instance::~Instance(void)
+[2018-11-09 09:36:43 线程:8492] debug
+[2018-11-09 09:36:43 线程:8492] info
+[2018-11-09 09:36:43 线程:8492] warring
+[2018-11-09 09:36:43 线程:8492] error
+[2018-11-09 09:36:43 线程:8492] critical
+[2018-11-09 09:36:43 线程:8492] 加载vulkan-1.dll模块
+[2018-11-09 09:36:44 线程:8492] 加载成功:140709995347968
+[2018-11-09 09:36:44 线程:8492] 从模块:140709995347968 加载函数:vkGetInstanceProcAddr
+[2018-11-09 09:36:44 线程:8492] 成功获得函数地址:140709995356448
+[2018-11-09 09:36:44 线程:8492] 加载Vulkan函数:vkEnumerateInstanceLayerProperties
+[2018-11-09 09:36:44 线程:8492] 	成功获得函数地址:140709995392304
+[2018-11-09 09:36:44 线程:8492] 加载Vulkan函数:vkEnumerateInstanceExtensionProperties
+[2018-11-09 09:36:44 线程:8492] 	成功获得函数地址:140709995360496
+[2018-11-09 09:36:44 线程:8492] 加载Vulkan函数:vkCreateInstance
+[2018-11-09 09:36:44 线程:8492] 	成功获得函数地址:140709995368352
+[2018-11-09 09:36:44 线程:8492] 加载Vulkan函数:vkEnumerateInstanceVersion
+[2018-11-09 09:36:44 线程:8492] 	成功获得函数地址:140709995394240
+[2018-11-09 09:36:44 线程:8492] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:36:44 线程:8492] vulkan支持的层的数量为:15
+[2018-11-09 09:36:44 线程:8492] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:36:44 线程:8492] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:36:44 线程:8492] VK_LAYER_NV_optimus层扩展属性数量:0
+[2018-11-09 09:36:44 线程:8492] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:36:44 线程:8492] VK_LAYER_RENDERDOC_Capture层扩展属性数量:1
+[2018-11-09 09:36:44 线程:8492] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:36:44 线程:8492] VK_LAYER_RENDERDOC_Capture层所有扩展:
+[2018-11-09 09:36:44 线程:8492] 	VK_EXT_debug_utils
+[2018-11-09 09:36:44 线程:8492] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:36:44 线程:8492] VK_LAYER_NV_nsight层扩展属性数量:0
+[2018-11-09 09:36:44 线程:8492] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:36:44 线程:8492] VK_LAYER_LUNARG_api_dump层扩展属性数量:0
+[2018-11-09 09:36:44 线程:8492] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:36:44 线程:8492] VK_LAYER_LUNARG_assistant_layer层扩展属性数量:1
+[2018-11-09 09:36:44 线程:8492] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:36:44 线程:8492] VK_LAYER_LUNARG_assistant_layer层所有扩展:
+[2018-11-09 09:36:44 线程:8492] 	VK_EXT_debug_report
+[2018-11-09 09:36:44 线程:8492] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:36:44 线程:8492] VK_LAYER_LUNARG_core_validation层扩展属性数量:1
+[2018-11-09 09:36:44 线程:8492] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:36:44 线程:8492] VK_LAYER_LUNARG_core_validation层所有扩展:
+[2018-11-09 09:36:44 线程:8492] 	VK_EXT_debug_report
+[2018-11-09 09:36:44 线程:8492] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:36:44 线程:8492] VK_LAYER_LUNARG_device_simulation层扩展属性数量:0
+[2018-11-09 09:36:44 线程:8492] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:36:44 线程:8492] VK_LAYER_LUNARG_monitor层扩展属性数量:0
+[2018-11-09 09:36:44 线程:8492] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:36:44 线程:8492] VK_LAYER_LUNARG_object_tracker层扩展属性数量:1
+[2018-11-09 09:36:44 线程:8492] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:36:44 线程:8492] VK_LAYER_LUNARG_object_tracker层所有扩展:
+[2018-11-09 09:36:44 线程:8492] 	VK_EXT_debug_report
+[2018-11-09 09:36:44 线程:8492] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:36:44 线程:8492] VK_LAYER_LUNARG_parameter_validation层扩展属性数量:1
+[2018-11-09 09:36:44 线程:8492] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:36:44 线程:8492] VK_LAYER_LUNARG_parameter_validation层所有扩展:
+[2018-11-09 09:36:44 线程:8492] 	VK_EXT_debug_report
+[2018-11-09 09:36:44 线程:8492] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:36:44 线程:8492] VK_LAYER_LUNARG_screenshot层扩展属性数量:0
+[2018-11-09 09:36:44 线程:8492] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:36:44 线程:8492] VK_LAYER_LUNARG_standard_validation层扩展属性数量:1
+[2018-11-09 09:36:44 线程:8492] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:36:44 线程:8492] VK_LAYER_LUNARG_standard_validation层所有扩展:
+[2018-11-09 09:36:44 线程:8492] 	VK_EXT_debug_report
+[2018-11-09 09:36:44 线程:8492] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:36:44 线程:8492] VK_LAYER_GOOGLE_threading层扩展属性数量:1
+[2018-11-09 09:36:44 线程:8492] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:36:44 线程:8492] VK_LAYER_GOOGLE_threading层所有扩展:
+[2018-11-09 09:36:44 线程:8492] 	VK_EXT_debug_report
+[2018-11-09 09:36:44 线程:8492] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:36:44 线程:8492] VK_LAYER_GOOGLE_unique_objects层扩展属性数量:0
+[2018-11-09 09:36:44 线程:8492] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:36:44 线程:8492] VK_LAYER_LUNARG_vktrace层扩展属性数量:0
+[2018-11-09 09:36:44 线程:8492] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:36:44 线程:8492] 总扩展属性数量:12
+[2018-11-09 09:36:44 线程:8492] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:36:44 线程:8492] 所有扩展属性:
+[2018-11-09 09:36:44 线程:8492] 	名称:VK_KHR_device_group_creation 版本:1
+[2018-11-09 09:36:44 线程:8492] 	名称:VK_KHR_external_fence_capabilities 版本:1
+[2018-11-09 09:36:44 线程:8492] 	名称:VK_KHR_external_memory_capabilities 版本:1
+[2018-11-09 09:36:44 线程:8492] 	名称:VK_KHR_external_semaphore_capabilities 版本:1
+[2018-11-09 09:36:44 线程:8492] 	名称:VK_KHR_get_physical_device_properties2 版本:1
+[2018-11-09 09:36:44 线程:8492] 	名称:VK_KHR_get_surface_capabilities2 版本:1
+[2018-11-09 09:36:44 线程:8492] 	名称:VK_KHR_surface 版本:25
+[2018-11-09 09:36:44 线程:8492] 	名称:VK_KHR_win32_surface 版本:6
+[2018-11-09 09:36:44 线程:8492] 	名称:VK_EXT_debug_report 版本:9
+[2018-11-09 09:36:44 线程:8492] 	名称:VK_EXT_swapchain_colorspace 版本:3
+[2018-11-09 09:36:44 线程:8492] 	名称:VK_NV_external_memory_capabilities 版本:1
+[2018-11-09 09:36:44 线程:8492] 	名称:VK_EXT_debug_utils 版本:1
+[2018-11-09 09:36:44 线程:8492] 测试VkResult::VK_NOT_READY的解释 不是真的
+[2018-11-09 09:36:44 线程:8492] VK_NOT_READY: 栅栏或查询尚未完成
+[2018-11-09 09:36:44 线程:8492] 加载Shcore.dll模块
+[2018-11-09 09:36:44 线程:8492] 加载成功:140710979698688
+[2018-11-09 09:36:44 线程:8492] 从模块:140710979698688 加载函数:SetProcessDpiAwareness
+[2018-11-09 09:36:44 线程:8492] 成功获得函数地址:140710979931088
+[2018-11-09 09:36:44 线程:8492] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:36:44 线程:8492] 加载Vulkan函数:vkDestroyInstance
+[2018-11-09 09:36:44 线程:8492] 	成功获得函数地址:140709995369040
+[2018-11-09 09:36:44 线程:8492] 加载Vulkan函数:vkGetDeviceProcAddr
+[2018-11-09 09:36:44 线程:8492] 	成功获得函数地址:140709995376320
+[2018-11-09 09:36:44 线程:8492] 加载Vulkan函数:vkEnumeratePhysicalDevices
+[2018-11-09 09:36:44 线程:8492] 	成功获得函数地址:140709995366928
+[2018-11-09 09:36:44 线程:8492] 加载Vulkan函数:vkCreateDevice
+[2018-11-09 09:36:44 线程:8492] 	成功获得函数地址:140709995384704
+[2018-11-09 09:36:44 线程:8492] 加载Vulkan函数:vkEnumeratePhysicalDeviceGroups
+[2018-11-09 09:36:44 线程:8492] 	成功获得函数地址:140709995377728
+[2018-11-09 09:36:44 线程:8492] 加载Vulkan函数:vkEnumerateDeviceLayerProperties
+[2018-11-09 09:36:44 线程:8492] 	成功获得函数地址:140709995391344
+[2018-11-09 09:36:44 线程:8492] 加载Vulkan函数:vkEnumerateDeviceExtensionProperties
+[2018-11-09 09:36:44 线程:8492] 	成功获得函数地址:140709995393040
+[2018-11-09 09:36:44 线程:8492] 加载Vulkan函数:vkGetPhysicalDeviceFeatures
+[2018-11-09 09:36:44 线程:8492] 	成功获得函数地址:140709995388032
+[2018-11-09 09:36:44 线程:8492] 加载Vulkan函数:vkGetPhysicalDeviceProperties
+[2018-11-09 09:36:44 线程:8492] 	成功获得函数地址:140709995391232
+[2018-11-09 09:36:44 线程:8492] 加载Vulkan函数:vkGetPhysicalDeviceMemoryProperties
+[2018-11-09 09:36:44 线程:8492] 	成功获得函数地址:140709995378768
+[2018-11-09 09:36:44 线程:8492] 加载Vulkan函数:vkGetPhysicalDeviceFormatProperties
+[2018-11-09 09:36:44 线程:8492] 	成功获得函数地址:140709995357456
+[2018-11-09 09:36:44 线程:8492] 加载Vulkan函数:vkGetPhysicalDeviceQueueFamilyProperties
+[2018-11-09 09:36:44 线程:8492] 	成功获得函数地址:140709995372688
+[2018-11-09 09:36:44 线程:8492] 加载Vulkan函数:vkGetPhysicalDeviceImageFormatProperties
+[2018-11-09 09:36:44 线程:8492] 	成功获得函数地址:140709995355728
+[2018-11-09 09:36:44 线程:8492] 加载Vulkan函数:vkGetPhysicalDeviceSparseImageFormatProperties
+[2018-11-09 09:36:44 线程:8492] 	成功获得函数地址:140709995362832
+[2018-11-09 09:36:44 线程:8492] 加载Vulkan函数:vkGetPhysicalDeviceExternalBufferProperties
+[2018-11-09 09:36:44 线程:8492] 	成功获得函数地址:140709995375024
+[2018-11-09 09:36:44 线程:8492] 加载Vulkan函数:vkGetPhysicalDeviceExternalFenceProperties
+[2018-11-09 09:36:44 线程:8492] 	成功获得函数地址:140709995371856
+[2018-11-09 09:36:44 线程:8492] 加载Vulkan函数:vkGetPhysicalDeviceExternalSemaphoreProperties
+[2018-11-09 09:36:44 线程:8492] 	成功获得函数地址:140709995394400
+[2018-11-09 09:36:44 线程:8492] 加载Vulkan函数:vkGetPhysicalDeviceFeatures2
+[2018-11-09 09:36:44 线程:8492] 	成功获得函数地址:140709995373072
+[2018-11-09 09:36:44 线程:8492] 加载Vulkan函数:vkGetPhysicalDeviceProperties2
+[2018-11-09 09:36:44 线程:8492] 	成功获得函数地址:140709995377264
+[2018-11-09 09:36:44 线程:8492] 加载Vulkan函数:vkGetPhysicalDeviceMemoryProperties2
+[2018-11-09 09:36:44 线程:8492] 	成功获得函数地址:140709995395024
+[2018-11-09 09:36:44 线程:8492] 加载Vulkan函数:vkGetPhysicalDeviceFormatProperties2
+[2018-11-09 09:36:44 线程:8492] 	成功获得函数地址:140709995382400
+[2018-11-09 09:36:44 线程:8492] 加载Vulkan函数:vkGetPhysicalDeviceImageFormatProperties2
+[2018-11-09 09:36:44 线程:8492] 	成功获得函数地址:140709995383440
+[2018-11-09 09:36:44 线程:8492] 加载Vulkan函数:vkGetPhysicalDeviceQueueFamilyProperties2
+[2018-11-09 09:36:44 线程:8492] 	成功获得函数地址:140709995362960
+[2018-11-09 09:36:44 线程:8492] 加载Vulkan函数:vkGetPhysicalDeviceSparseImageFormatProperties2
+[2018-11-09 09:36:44 线程:8492] 	成功获得函数地址:140709995379936
+[2018-11-09 09:36:44 线程:8492] 加载Vulkan函数:vkGetPhysicalDeviceSurfaceSupportKHR
+[2018-11-09 09:36:44 线程:8492] 	成功获得函数地址:140709995371552
+[2018-11-09 09:36:44 线程:8492] 加载Vulkan函数:vkCreateWin32SurfaceKHR
+[2018-11-09 09:36:44 线程:8492] 	成功获得函数地址:140709995371568
+[2018-11-09 09:36:44 线程:8492] 加载Vulkan函数:vkGetPhysicalDeviceWin32PresentationSupportKHR
+[2018-11-09 09:36:44 线程:8492] 	成功获得函数地址:140709995365712
+[2018-11-09 09:36:44 线程:8492] 加载Vulkan函数:vkGetMemoryWin32HandleKHR
+[2018-11-09 09:36:44 线程:8492] 	成功获得函数地址:140709995360480
+[2018-11-09 09:36:44 线程:8492] 加载Vulkan函数:vkGetMemoryWin32HandlePropertiesKHR
+[2018-11-09 09:36:44 线程:8492] 	成功获得函数地址:140709995359600
+[2018-11-09 09:36:44 线程:8492] 加载Vulkan函数:vkImportSemaphoreWin32HandleKHR
+[2018-11-09 09:36:44 线程:8492] 	成功获得函数地址:140709995396576
+[2018-11-09 09:36:44 线程:8492] 加载Vulkan函数:vkGetSemaphoreWin32HandleKHR
+[2018-11-09 09:36:44 线程:8492] 	成功获得函数地址:140709995362208
+[2018-11-09 09:36:44 线程:8492] 加载Vulkan函数:vkImportFenceWin32HandleKHR
+[2018-11-09 09:36:44 线程:8492] 	成功获得函数地址:140709995369920
+[2018-11-09 09:36:44 线程:8492] 加载Vulkan函数:vkGetFenceWin32HandleKHR
+[2018-11-09 09:36:44 线程:8492] 	成功获得函数地址:140709995365856
+[2018-11-09 09:36:44 线程:8492] 加载Vulkan函数:vkDestroySurfaceKHR
+[2018-11-09 09:36:44 线程:8492] 	成功获得函数地址:140709995361920
+[2018-11-09 09:36:44 线程:8492] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:36:44 线程:8492] 物理设备数量:2
+[2018-11-09 09:36:44 线程:8492] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:36:44 线程:8492] 物理设备 0x10a63ff2b00 的队列族数量为 3
+[2018-11-09 09:36:44 线程:8492] 设备GeForce GTX 1060 6GB  api版本:1.1.84 驱动版本:416.136.0
+[2018-11-09 09:36:44 线程:8492] 物理设备 0x10a63ff2c00 的队列族数量为 1
+[2018-11-09 09:36:44 线程:8492] 设备Intel(R) UHD Graphics 630  api版本:1.0.50 驱动版本:0.16.2
+[2018-11-09 09:36:44 线程:8492] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:36:44 线程:8492] 设备组数量:2
+[2018-11-09 09:36:44 线程:8492] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:36:44 线程:8492] 物理设备组中 物理句柄值:0x10a63ff2b00
+[2018-11-09 09:36:44 线程:8492] 物理设备组中 物理句柄值:0x10a63ff2c00
+[2018-11-09 09:36:44 线程:8492] 遍历所有设备 - 创建逻辑设备
+[2018-11-09 09:36:44 线程:8492] discreteQueuePriorities:2
+[2018-11-09 09:36:44 线程:8492] 物理设备 0x10a63ff2b00 的队列族数量为 3
+[2018-11-09 09:36:44 线程:8492] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:36:44 线程:8492] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:36:44 线程:8492] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:36:44 线程:8492] 判断是否是一个带图形功能的队列族
+[2018-11-09 09:36:44 线程:8492] 判断是否是一个带图形功能的队列族
+[2018-11-09 09:36:44 线程:8492] 判断是否支持本surface
+[2018-11-09 09:36:44 线程:8492] 一个队列族不支持我的surface
+[2018-11-09 09:36:44 线程:8492] 判断是否是一个带图形功能的队列族
+[2018-11-09 09:36:44 线程:8492] 判断是否支持本surface
+[2018-11-09 09:36:44 线程:8492] 选择了一个既有图形功能 又支持我的surface的队列族
+[2018-11-09 09:36:44 线程:8492] 选取了合适的设备与队列
+[2018-11-09 09:36:44 线程:8492] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:36:44 线程:8492] 加载vkDestroyDevice成功
+[2018-11-09 09:36:44 线程:8492] 加载vkGetDeviceQueue成功
+[2018-11-09 09:36:44 线程:8492] 加载vkAllocateMemory成功
+[2018-11-09 09:36:44 线程:8492] 加载vkFreeMemory成功
+[2018-11-09 09:36:44 线程:8492] 加载vkMapMemory成功
+[2018-11-09 09:36:44 线程:8492] 加载vkUnmapMemory成功
+[2018-11-09 09:36:44 线程:8492] 加载vkFlushMappedMemoryRanges成功
+[2018-11-09 09:36:44 线程:8492] 加载vkInvalidateMappedMemoryRanges成功
+[2018-11-09 09:36:44 线程:8492] 加载vkGetDeviceMemoryCommitment成功
+[2018-11-09 09:36:44 线程:8492] 加载vkCreateBuffer成功
+[2018-11-09 09:36:44 线程:8492] 加载vkDestroyBuffer成功
+[2018-11-09 09:36:44 线程:8492] 加载vkCreateBufferView成功
+[2018-11-09 09:36:44 线程:8492] 加载vkDestroyBufferView成功
+[2018-11-09 09:36:44 线程:8492] 加载vkBindBufferMemory成功
+[2018-11-09 09:36:44 线程:8492] 加载vkCreateCommandPool成功
+[2018-11-09 09:36:44 线程:8492] 加载vkResetCommandPool成功
+[2018-11-09 09:36:44 线程:8492] 加载vkDestroyCommandPool成功
+[2018-11-09 09:36:44 线程:8492] 加载vkAllocateCommandBuffers成功
+[2018-11-09 09:36:44 线程:8492] 加载vkResetCommandBuffer成功
+[2018-11-09 09:36:44 线程:8492] 加载vkFreeCommandBuffers成功
+[2018-11-09 09:36:44 线程:8492] 加载vkQueueSubmit成功
+[2018-11-09 09:36:44 线程:8492] 加载vkCreateEvent成功
+[2018-11-09 09:36:44 线程:8492] 加载vkGetEventStatus成功
+[2018-11-09 09:36:44 线程:8492] 加载vkResetEvent成功
+[2018-11-09 09:36:44 线程:8492] 加载vkSetEvent成功
+[2018-11-09 09:36:44 线程:8492] 加载vkDestroyEvent成功
+[2018-11-09 09:36:44 线程:8492] 加载vkCreateFence成功
+[2018-11-09 09:36:44 线程:8492] 加载vkResetFences成功
+[2018-11-09 09:36:44 线程:8492] 加载vkGetFenceStatus成功
+[2018-11-09 09:36:44 线程:8492] 加载vkWaitForFences成功
+[2018-11-09 09:36:44 线程:8492] 加载vkDestroyFence成功
+[2018-11-09 09:36:44 线程:8492] 加载vkCreateSemaphore成功
+[2018-11-09 09:36:44 线程:8492] 加载vkDestroySemaphore成功
+[2018-11-09 09:36:44 线程:8492] 加载vkQueueWaitIdle成功
+[2018-11-09 09:36:44 线程:8492] 加载vkDeviceWaitIdle成功
+[2018-11-09 09:36:44 线程:8492] 加载vkBeginCommandBuffer成功
+[2018-11-09 09:36:44 线程:8492] 加载vkEndCommandBuffer成功
+[2018-11-09 09:36:44 线程:8492] 加载vkCreateQueryPool成功
+[2018-11-09 09:36:44 线程:8492] 加载vkGetQueryPoolResults成功
+[2018-11-09 09:36:44 线程:8492] 加载vkDestroyQueryPool成功
+[2018-11-09 09:36:44 线程:8492] 加载vkCreateFramebuffer成功
+[2018-11-09 09:36:44 线程:8492] 加载vkDestroyFramebuffer成功
+[2018-11-09 09:36:44 线程:8492] 加载vkCreateSampler成功
+[2018-11-09 09:36:44 线程:8492] 加载vkDestroySampler成功
+[2018-11-09 09:36:44 线程:8492] 加载vkCreateShaderModule成功
+[2018-11-09 09:36:44 线程:8492] 加载vkDestroyShaderModule成功
+[2018-11-09 09:36:44 线程:8492] 加载vkGetRenderAreaGranularity成功
+[2018-11-09 09:36:44 线程:8492] 加载vkCreateRenderPass成功
+[2018-11-09 09:36:44 线程:8492] 加载vkDestroyRenderPass成功
+[2018-11-09 09:36:44 线程:8492] 加载vkCreateImage成功
+[2018-11-09 09:36:44 线程:8492] 加载vkDestroyImage成功
+[2018-11-09 09:36:44 线程:8492] 加载vkCreateImageView成功
+[2018-11-09 09:36:44 线程:8492] 加载vkDestroyImageView成功
+[2018-11-09 09:36:44 线程:8492] 加载vkBindImageMemory成功
+[2018-11-09 09:36:44 线程:8492] 加载vkCreateComputePipelines成功
+[2018-11-09 09:36:44 线程:8492] 加载vkCreateGraphicsPipelines成功
+[2018-11-09 09:36:44 线程:8492] 加载vkDestroyPipeline成功
+[2018-11-09 09:36:44 线程:8492] 加载vkCreatePipelineCache成功
+[2018-11-09 09:36:44 线程:8492] 加载vkDestroyPipelineCache成功
+[2018-11-09 09:36:44 线程:8492] 加载vkCreatePipelineLayout成功
+[2018-11-09 09:36:44 线程:8492] 加载vkDestroyPipelineLayout成功
+[2018-11-09 09:36:44 线程:8492] 加载vkGetPipelineCacheData成功
+[2018-11-09 09:36:44 线程:8492] 加载vkMergePipelineCaches成功
+[2018-11-09 09:36:44 线程:8492] 加载vkCreateDescriptorPool成功
+[2018-11-09 09:36:44 线程:8492] 加载vkResetDescriptorPool成功
+[2018-11-09 09:36:44 线程:8492] 加载vkDestroyDescriptorPool成功
+[2018-11-09 09:36:44 线程:8492] 加载vkAllocateDescriptorSets成功
+[2018-11-09 09:36:44 线程:8492] 加载vkUpdateDescriptorSets成功
+[2018-11-09 09:36:44 线程:8492] 加载vkFreeDescriptorSets成功
+[2018-11-09 09:36:44 线程:8492] 加载vkCreateDescriptorSetLayout成功
+[2018-11-09 09:36:44 线程:8492] 加载vkDestroyDescriptorSetLayout成功
+[2018-11-09 09:36:44 线程:8492] 加载vkGetBufferMemoryRequirements成功
+[2018-11-09 09:36:44 线程:8492] 加载vkGetImageMemoryRequirements成功
+[2018-11-09 09:36:44 线程:8492] 加载vkQueueBindSparse成功
+[2018-11-09 09:36:44 线程:8492] 加载vkGetImageSparseMemoryRequirements成功
+[2018-11-09 09:36:44 线程:8492] 加载vkGetImageSubresourceLayout成功
+[2018-11-09 09:36:44 线程:8492] 加载vkGetDeviceQueue2成功
+[2018-11-09 09:36:44 线程:8492] 加载vkBindBufferMemory2成功
+[2018-11-09 09:36:44 线程:8492] 加载vkBindImageMemory2成功
+[2018-11-09 09:36:44 线程:8492] 加载vkCreateDescriptorUpdateTemplate成功
+[2018-11-09 09:36:44 线程:8492] 加载vkUpdateDescriptorSetWithTemplate成功
+[2018-11-09 09:36:44 线程:8492] 加载vkDestroyDescriptorUpdateTemplate成功
+[2018-11-09 09:36:44 线程:8492] 加载vkCreateSamplerYcbcrConversion成功
+[2018-11-09 09:36:44 线程:8492] 加载vkDestroySamplerYcbcrConversion成功
+[2018-11-09 09:36:44 线程:8492] 加载vkGetBufferMemoryRequirements2成功
+[2018-11-09 09:36:44 线程:8492] 加载vkGetDescriptorSetLayoutSupport成功
+[2018-11-09 09:36:44 线程:8492] 加载vkGetDeviceGroupPeerMemoryFeatures成功
+[2018-11-09 09:36:44 线程:8492] 加载vkGetImageMemoryRequirements2成功
+[2018-11-09 09:36:44 线程:8492] 加载vkGetImageSparseMemoryRequirements2成功
+[2018-11-09 09:36:44 线程:8492] 加载vkTrimCommandPool成功
+[2018-11-09 09:36:44 线程:8492] 加载vkCmdDispatch成功
+[2018-11-09 09:36:44 线程:8492] 加载vkCmdDispatchIndirect成功
+[2018-11-09 09:36:44 线程:8492] 加载vkCmdExecuteCommands成功
+[2018-11-09 09:36:44 线程:8492] 加载vkCmdWaitEvents成功
+[2018-11-09 09:36:44 线程:8492] 加载vkCmdSetEvent成功
+[2018-11-09 09:36:44 线程:8492] 加载vkCmdResetEvent成功
+[2018-11-09 09:36:44 线程:8492] 加载vkCmdPipelineBarrier成功
+[2018-11-09 09:36:44 线程:8492] 加载vkCmdCopyBuffer成功
+[2018-11-09 09:36:44 线程:8492] 加载vkCmdFillBuffer成功
+[2018-11-09 09:36:44 线程:8492] 加载vkCmdUpdateBuffer成功
+[2018-11-09 09:36:44 线程:8492] 加载vkCmdBindDescriptorSets成功
+[2018-11-09 09:36:44 线程:8492] 加载vkCmdBindIndexBuffer成功
+[2018-11-09 09:36:44 线程:8492] 加载vkCmdBindPipeline成功
+[2018-11-09 09:36:44 线程:8492] 加载vkCmdBindVertexBuffers成功
+[2018-11-09 09:36:44 线程:8492] 加载vkCmdBeginRenderPass成功
+[2018-11-09 09:36:44 线程:8492] 加载vkCmdNextSubpass成功
+[2018-11-09 09:36:44 线程:8492] 加载vkCmdEndRenderPass成功
+[2018-11-09 09:36:44 线程:8492] 加载vkCmdDraw成功
+[2018-11-09 09:36:44 线程:8492] 加载vkCmdDrawIndexed成功
+[2018-11-09 09:36:44 线程:8492] 加载vkCmdDrawIndexedIndirect成功
+[2018-11-09 09:36:44 线程:8492] 加载vkCmdDrawIndirect成功
+[2018-11-09 09:36:44 线程:8492] 加载vkCmdCopyBufferToImage成功
+[2018-11-09 09:36:44 线程:8492] 加载vkCmdCopyImageToBuffer成功
+[2018-11-09 09:36:44 线程:8492] 加载vkCmdCopyImage成功
+[2018-11-09 09:36:44 线程:8492] 加载vkCmdBlitImage成功
+[2018-11-09 09:36:44 线程:8492] 加载vkCmdClearDepthStencilImage成功
+[2018-11-09 09:36:44 线程:8492] 加载vkCmdClearColorImage成功
+[2018-11-09 09:36:44 线程:8492] 加载vkCmdPushConstants成功
+[2018-11-09 09:36:44 线程:8492] 加载vkCmdResolveImage成功
+[2018-11-09 09:36:44 线程:8492] 加载vkCmdClearAttachments成功
+[2018-11-09 09:36:44 线程:8492] 加载vkCmdSetViewport成功
+[2018-11-09 09:36:44 线程:8492] 加载vkCmdSetScissor成功
+[2018-11-09 09:36:44 线程:8492] 加载vkCmdSetStencilCompareMask成功
+[2018-11-09 09:36:44 线程:8492] 加载vkCmdSetStencilWriteMask成功
+[2018-11-09 09:36:44 线程:8492] 加载vkCmdSetStencilReference成功
+[2018-11-09 09:36:44 线程:8492] 加载vkCmdSetLineWidth成功
+[2018-11-09 09:36:44 线程:8492] 加载vkCmdSetDepthBounds成功
+[2018-11-09 09:36:44 线程:8492] 加载vkCmdSetBlendConstants成功
+[2018-11-09 09:36:44 线程:8492] 加载vkCmdSetDepthBias成功
+[2018-11-09 09:36:44 线程:8492] 加载vkCmdBeginQuery成功
+[2018-11-09 09:36:44 线程:8492] 加载vkCmdResetQueryPool成功
+[2018-11-09 09:36:44 线程:8492] 加载vkCmdCopyQueryPoolResults成功
+[2018-11-09 09:36:44 线程:8492] 加载vkCmdWriteTimestamp成功
+[2018-11-09 09:36:44 线程:8492] 加载vkCmdEndQuery成功
+[2018-11-09 09:36:44 线程:8492] 加载vkCmdDispatchBase成功
+[2018-11-09 09:36:44 线程:8492] 加载vkCmdSetDeviceMask成功
+[2018-11-09 09:36:44 线程:8492] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:36:44 线程:8492] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:36:44 线程:8492] VK_SUCCESS: 命令成功完成
+[2018-11-09 09:36:44 线程:8492] __cdecl laka::vk::Semaphore::~Semaphore(void)
+[2018-11-09 09:36:44 线程:8492] __cdecl laka::vk::Semaphore::~Semaphore(void)
+[2018-11-09 09:36:44 线程:8492] __cdecl laka::vk::Command_pool::~Command_pool(void)
+[2018-11-09 09:36:44 线程:8492] __cdecl laka::vk::Device::~Device(void)
+[2018-11-09 09:36:45 线程:8492] __cdecl laka::vk::Instance::~Instance(void)
+[2018-11-09 11:17:51 线程:7372] debug
+[2018-11-09 11:17:51 线程:7372] info
+[2018-11-09 11:17:51 线程:7372] warring
+[2018-11-09 11:17:51 线程:7372] error
+[2018-11-09 11:17:51 线程:7372] critical
+[2018-11-09 11:17:51 线程:7372] 加载vulkan-1.dll模块
+[2018-11-09 11:17:51 线程:7372] 加载成功:140709996658688
+[2018-11-09 11:17:51 线程:7372] 从模块:140709996658688 加载函数:vkGetInstanceProcAddr
+[2018-11-09 11:17:51 线程:7372] 成功获得函数地址:140709996667168
+[2018-11-09 11:17:51 线程:7372] 加载Vulkan函数:vkEnumerateInstanceLayerProperties
+[2018-11-09 11:17:51 线程:7372] 	成功获得函数地址:140709996703024
+[2018-11-09 11:17:51 线程:7372] 加载Vulkan函数:vkEnumerateInstanceExtensionProperties
+[2018-11-09 11:17:51 线程:7372] 	成功获得函数地址:140709996671216
+[2018-11-09 11:17:51 线程:7372] 加载Vulkan函数:vkCreateInstance
+[2018-11-09 11:17:51 线程:7372] 	成功获得函数地址:140709996679072
+[2018-11-09 11:17:51 线程:7372] 加载Vulkan函数:vkEnumerateInstanceVersion
+[2018-11-09 11:17:51 线程:7372] 	成功获得函数地址:140709996704960
+[2018-11-09 11:17:51 线程:7372] VK_SUCCESS: 命令成功完成
+[2018-11-09 11:17:51 线程:7372] vulkan支持的层的数量为:15
+[2018-11-09 11:17:51 线程:7372] VK_SUCCESS: 命令成功完成
+[2018-11-09 11:17:51 线程:7372] VK_SUCCESS: 命令成功完成
+[2018-11-09 11:17:51 线程:7372] VK_LAYER_NV_optimus层扩展属性数量:0
+[2018-11-09 11:17:51 线程:7372] VK_SUCCESS: 命令成功完成
+[2018-11-09 11:17:51 线程:7372] VK_LAYER_RENDERDOC_Capture层扩展属性数量:1
+[2018-11-09 11:17:51 线程:7372] VK_SUCCESS: 命令成功完成
+[2018-11-09 11:17:51 线程:7372] VK_LAYER_RENDERDOC_Capture层所有扩展:
+[2018-11-09 11:17:51 线程:7372] 	VK_EXT_debug_utils
+[2018-11-09 11:17:51 线程:7372] VK_SUCCESS: 命令成功完成
+[2018-11-09 11:17:51 线程:7372] VK_LAYER_NV_nsight层扩展属性数量:0
+[2018-11-09 11:17:51 线程:7372] VK_SUCCESS: 命令成功完成
+[2018-11-09 11:17:51 线程:7372] VK_LAYER_LUNARG_api_dump层扩展属性数量:0
+[2018-11-09 11:17:51 线程:7372] VK_SUCCESS: 命令成功完成
+[2018-11-09 11:17:51 线程:7372] VK_LAYER_LUNARG_assistant_layer层扩展属性数量:1
+[2018-11-09 11:17:51 线程:7372] VK_SUCCESS: 命令成功完成
+[2018-11-09 11:17:51 线程:7372] VK_LAYER_LUNARG_assistant_layer层所有扩展:
+[2018-11-09 11:17:51 线程:7372] 	VK_EXT_debug_report
+[2018-11-09 11:17:51 线程:7372] VK_SUCCESS: 命令成功完成
+[2018-11-09 11:17:51 线程:7372] VK_LAYER_LUNARG_core_validation层扩展属性数量:1
+[2018-11-09 11:17:51 线程:7372] VK_SUCCESS: 命令成功完成
+[2018-11-09 11:17:51 线程:7372] VK_LAYER_LUNARG_core_validation层所有扩展:
+[2018-11-09 11:17:51 线程:7372] 	VK_EXT_debug_report
+[2018-11-09 11:17:51 线程:7372] VK_SUCCESS: 命令成功完成
+[2018-11-09 11:17:51 线程:7372] VK_LAYER_LUNARG_device_simulation层扩展属性数量:0
+[2018-11-09 11:17:51 线程:7372] VK_SUCCESS: 命令成功完成
+[2018-11-09 11:17:51 线程:7372] VK_LAYER_LUNARG_monitor层扩展属性数量:0
+[2018-11-09 11:17:51 线程:7372] VK_SUCCESS: 命令成功完成
+[2018-11-09 11:17:51 线程:7372] VK_LAYER_LUNARG_object_tracker层扩展属性数量:1
+[2018-11-09 11:17:51 线程:7372] VK_SUCCESS: 命令成功完成
+[2018-11-09 11:17:51 线程:7372] VK_LAYER_LUNARG_object_tracker层所有扩展:
+[2018-11-09 11:17:51 线程:7372] 	VK_EXT_debug_report
+[2018-11-09 11:17:51 线程:7372] VK_SUCCESS: 命令成功完成
+[2018-11-09 11:17:51 线程:7372] VK_LAYER_LUNARG_parameter_validation层扩展属性数量:1
+[2018-11-09 11:17:51 线程:7372] VK_SUCCESS: 命令成功完成
+[2018-11-09 11:17:51 线程:7372] VK_LAYER_LUNARG_parameter_validation层所有扩展:
+[2018-11-09 11:17:51 线程:7372] 	VK_EXT_debug_report
+[2018-11-09 11:17:51 线程:7372] VK_SUCCESS: 命令成功完成
+[2018-11-09 11:17:51 线程:7372] VK_LAYER_LUNARG_screenshot层扩展属性数量:0
+[2018-11-09 11:17:51 线程:7372] VK_SUCCESS: 命令成功完成
+[2018-11-09 11:17:51 线程:7372] VK_LAYER_LUNARG_standard_validation层扩展属性数量:1
+[2018-11-09 11:17:51 线程:7372] VK_SUCCESS: 命令成功完成
+[2018-11-09 11:17:51 线程:7372] VK_LAYER_LUNARG_standard_validation层所有扩展:
+[2018-11-09 11:17:51 线程:7372] 	VK_EXT_debug_report
+[2018-11-09 11:17:51 线程:7372] VK_SUCCESS: 命令成功完成
+[2018-11-09 11:17:51 线程:7372] VK_LAYER_GOOGLE_threading层扩展属性数量:1
+[2018-11-09 11:17:51 线程:7372] VK_SUCCESS: 命令成功完成
+[2018-11-09 11:17:51 线程:7372] VK_LAYER_GOOGLE_threading层所有扩展:
+[2018-11-09 11:17:51 线程:7372] 	VK_EXT_debug_report
+[2018-11-09 11:17:51 线程:7372] VK_SUCCESS: 命令成功完成
+[2018-11-09 11:17:51 线程:7372] VK_LAYER_GOOGLE_unique_objects层扩展属性数量:0
+[2018-11-09 11:17:51 线程:7372] VK_SUCCESS: 命令成功完成
+[2018-11-09 11:17:51 线程:7372] VK_LAYER_LUNARG_vktrace层扩展属性数量:0
+[2018-11-09 11:17:51 线程:7372] VK_SUCCESS: 命令成功完成
+[2018-11-09 11:17:51 线程:7372] 总扩展属性数量:12
+[2018-11-09 11:17:51 线程:7372] VK_SUCCESS: 命令成功完成
+[2018-11-09 11:17:51 线程:7372] 所有扩展属性:
+[2018-11-09 11:17:51 线程:7372] 	名称:VK_KHR_device_group_creation 版本:1
+[2018-11-09 11:17:51 线程:7372] 	名称:VK_KHR_external_fence_capabilities 版本:1
+[2018-11-09 11:17:51 线程:7372] 	名称:VK_KHR_external_memory_capabilities 版本:1
+[2018-11-09 11:17:51 线程:7372] 	名称:VK_KHR_external_semaphore_capabilities 版本:1
+[2018-11-09 11:17:51 线程:7372] 	名称:VK_KHR_get_physical_device_properties2 版本:1
+[2018-11-09 11:17:51 线程:7372] 	名称:VK_KHR_get_surface_capabilities2 版本:1
+[2018-11-09 11:17:51 线程:7372] 	名称:VK_KHR_surface 版本:25
+[2018-11-09 11:17:51 线程:7372] 	名称:VK_KHR_win32_surface 版本:6
+[2018-11-09 11:17:51 线程:7372] 	名称:VK_EXT_debug_report 版本:9
+[2018-11-09 11:17:51 线程:7372] 	名称:VK_EXT_swapchain_colorspace 版本:3
+[2018-11-09 11:17:51 线程:7372] 	名称:VK_NV_external_memory_capabilities 版本:1
+[2018-11-09 11:17:51 线程:7372] 	名称:VK_EXT_debug_utils 版本:1
+[2018-11-09 11:17:51 线程:7372] 测试VkResult::VK_NOT_READY的解释 不是真的
+[2018-11-09 11:17:51 线程:7372] VK_NOT_READY: 栅栏或查询尚未完成
+[2018-11-09 11:17:51 线程:7372] 加载Shcore.dll模块
+[2018-11-09 11:17:51 线程:7372] 加载成功:140710979698688
+[2018-11-09 11:17:51 线程:7372] 从模块:140710979698688 加载函数:SetProcessDpiAwareness
+[2018-11-09 11:17:51 线程:7372] 成功获得函数地址:140710979931088
+[2018-11-09 11:17:51 线程:7372] VK_SUCCESS: 命令成功完成
+[2018-11-09 11:17:51 线程:7372] 加载Vulkan函数:vkDestroyInstance
+[2018-11-09 11:17:51 线程:7372] 	成功获得函数地址:140709996679760
+[2018-11-09 11:17:51 线程:7372] 加载Vulkan函数:vkGetDeviceProcAddr
+[2018-11-09 11:17:51 线程:7372] 	成功获得函数地址:140709996687040
+[2018-11-09 11:17:51 线程:7372] 加载Vulkan函数:vkEnumeratePhysicalDevices
+[2018-11-09 11:17:51 线程:7372] 	成功获得函数地址:140709996677648
+[2018-11-09 11:17:51 线程:7372] 加载Vulkan函数:vkCreateDevice
+[2018-11-09 11:17:51 线程:7372] 	成功获得函数地址:140709996695424
+[2018-11-09 11:17:51 线程:7372] 加载Vulkan函数:vkEnumeratePhysicalDeviceGroups
+[2018-11-09 11:17:51 线程:7372] 	成功获得函数地址:140709996688448
+[2018-11-09 11:17:51 线程:7372] 加载Vulkan函数:vkEnumerateDeviceLayerProperties
+[2018-11-09 11:17:51 线程:7372] 	成功获得函数地址:140709996702064
+[2018-11-09 11:17:51 线程:7372] 加载Vulkan函数:vkEnumerateDeviceExtensionProperties
+[2018-11-09 11:17:51 线程:7372] 	成功获得函数地址:140709996703760
+[2018-11-09 11:17:51 线程:7372] 加载Vulkan函数:vkGetPhysicalDeviceFeatures
+[2018-11-09 11:17:51 线程:7372] 	成功获得函数地址:140709996698752
+[2018-11-09 11:17:51 线程:7372] 加载Vulkan函数:vkGetPhysicalDeviceProperties
+[2018-11-09 11:17:51 线程:7372] 	成功获得函数地址:140709996701952
+[2018-11-09 11:17:51 线程:7372] 加载Vulkan函数:vkGetPhysicalDeviceMemoryProperties
+[2018-11-09 11:17:51 线程:7372] 	成功获得函数地址:140709996689488
+[2018-11-09 11:17:51 线程:7372] 加载Vulkan函数:vkGetPhysicalDeviceFormatProperties
+[2018-11-09 11:17:51 线程:7372] 	成功获得函数地址:140709996668176
+[2018-11-09 11:17:51 线程:7372] 加载Vulkan函数:vkGetPhysicalDeviceQueueFamilyProperties
+[2018-11-09 11:17:51 线程:7372] 	成功获得函数地址:140709996683408
+[2018-11-09 11:17:51 线程:7372] 加载Vulkan函数:vkGetPhysicalDeviceImageFormatProperties
+[2018-11-09 11:17:51 线程:7372] 	成功获得函数地址:140709996666448
+[2018-11-09 11:17:51 线程:7372] 加载Vulkan函数:vkGetPhysicalDeviceSparseImageFormatProperties
+[2018-11-09 11:17:51 线程:7372] 	成功获得函数地址:140709996673552
+[2018-11-09 11:17:51 线程:7372] 加载Vulkan函数:vkGetPhysicalDeviceExternalBufferProperties
+[2018-11-09 11:17:51 线程:7372] 	成功获得函数地址:140709996685744
+[2018-11-09 11:17:51 线程:7372] 加载Vulkan函数:vkGetPhysicalDeviceExternalFenceProperties
+[2018-11-09 11:17:51 线程:7372] 	成功获得函数地址:140709996682576
+[2018-11-09 11:17:51 线程:7372] 加载Vulkan函数:vkGetPhysicalDeviceExternalSemaphoreProperties
+[2018-11-09 11:17:51 线程:7372] 	成功获得函数地址:140709996705120
+[2018-11-09 11:17:51 线程:7372] 加载Vulkan函数:vkGetPhysicalDeviceFeatures2
+[2018-11-09 11:17:51 线程:7372] 	成功获得函数地址:140709996683792
+[2018-11-09 11:17:51 线程:7372] 加载Vulkan函数:vkGetPhysicalDeviceProperties2
+[2018-11-09 11:17:51 线程:7372] 	成功获得函数地址:140709996687984
+[2018-11-09 11:17:51 线程:7372] 加载Vulkan函数:vkGetPhysicalDeviceMemoryProperties2
+[2018-11-09 11:17:51 线程:7372] 	成功获得函数地址:140709996705744
+[2018-11-09 11:17:51 线程:7372] 加载Vulkan函数:vkGetPhysicalDeviceFormatProperties2
+[2018-11-09 11:17:51 线程:7372] 	成功获得函数地址:140709996693120
+[2018-11-09 11:17:51 线程:7372] 加载Vulkan函数:vkGetPhysicalDeviceImageFormatProperties2
+[2018-11-09 11:17:51 线程:7372] 	成功获得函数地址:140709996694160
+[2018-11-09 11:17:51 线程:7372] 加载Vulkan函数:vkGetPhysicalDeviceQueueFamilyProperties2
+[2018-11-09 11:17:51 线程:7372] 	成功获得函数地址:140709996673680
+[2018-11-09 11:17:51 线程:7372] 加载Vulkan函数:vkGetPhysicalDeviceSparseImageFormatProperties2
+[2018-11-09 11:17:51 线程:7372] 	成功获得函数地址:140709996690656
+[2018-11-09 11:17:51 线程:7372] 加载Vulkan函数:vkCreateWin32SurfaceKHR
+[2018-11-09 11:17:51 线程:7372] 	成功获得函数地址:140709996682288
+[2018-11-09 11:17:51 线程:7372] 加载Vulkan函数:vkGetPhysicalDeviceWin32PresentationSupportKHR
+[2018-11-09 11:17:51 线程:7372] 	成功获得函数地址:140709996676432
+[2018-11-09 11:17:51 线程:7372] 加载Vulkan函数:vkGetMemoryWin32HandleKHR
+[2018-11-09 11:17:51 线程:7372] 	成功获得函数地址:140709996671200
+[2018-11-09 11:17:51 线程:7372] 加载Vulkan函数:vkGetMemoryWin32HandlePropertiesKHR
+[2018-11-09 11:17:51 线程:7372] 	成功获得函数地址:140709996670320
+[2018-11-09 11:17:51 线程:7372] 加载Vulkan函数:vkImportSemaphoreWin32HandleKHR
+[2018-11-09 11:17:51 线程:7372] 	成功获得函数地址:140709996707296
+[2018-11-09 11:17:51 线程:7372] 加载Vulkan函数:vkGetSemaphoreWin32HandleKHR
+[2018-11-09 11:17:51 线程:7372] 	成功获得函数地址:140709996672928
+[2018-11-09 11:17:51 线程:7372] 加载Vulkan函数:vkImportFenceWin32HandleKHR
+[2018-11-09 11:17:51 线程:7372] 	成功获得函数地址:140709996680640
+[2018-11-09 11:17:51 线程:7372] 加载Vulkan函数:vkGetFenceWin32HandleKHR
+[2018-11-09 11:17:51 线程:7372] 	成功获得函数地址:140709996676576
+[2018-11-09 11:17:51 线程:7372] 加载Vulkan函数:vkDestroySurfaceKHR
+[2018-11-09 11:17:51 线程:7372] 	成功获得函数地址:140709996672640
+[2018-11-09 11:17:51 线程:7372] 加载Vulkan函数:vkGetPhysicalDeviceSurfaceSupportKHR
+[2018-11-09 11:17:51 线程:7372] 	成功获得函数地址:140709996682272
+[2018-11-09 11:17:51 线程:7372] 加载Vulkan函数:vkGetPhysicalDeviceSurfaceCapabilitiesKHR
+[2018-11-09 11:17:51 线程:7372] 	成功获得函数地址:140709996696016
+[2018-11-09 11:17:51 线程:7372] 加载Vulkan函数:vkGetPhysicalDeviceSurfaceFormatsKHR
+[2018-11-09 11:17:51 线程:7372] 	成功获得函数地址:140709996676688
+[2018-11-09 11:17:51 线程:7372] 加载Vulkan函数:vkGetPhysicalDeviceSurfacePresentModesKHR
+[2018-11-09 11:17:51 线程:7372] 	成功获得函数地址:140709996670720
+[2018-11-09 11:17:51 线程:7372] 加载Vulkan函数:vkCreateSwapchainKHR
+[2018-11-09 11:17:51 线程:7372] 	成功获得函数地址:140709996697280
+[2018-11-09 11:17:51 线程:7372] 加载Vulkan函数:vkDestroySwapchainKHR
+[2018-11-09 11:17:51 线程:7372] 	成功获得函数地址:140709996666320
+[2018-11-09 11:17:51 线程:7372] 加载Vulkan函数:vkGetSwapchainImagesKHR
+[2018-11-09 11:17:51 线程:7372] 	成功获得函数地址:140709996686480
+[2018-11-09 11:17:51 线程:7372] 加载Vulkan函数:vkAcquireNextImageKHR
+[2018-11-09 11:17:51 线程:7372] 	成功获得函数地址:140709996695152
+[2018-11-09 11:17:51 线程:7372] 加载Vulkan函数:vkQueuePresentKHR
+[2018-11-09 11:17:51 线程:7372] 	成功获得函数地址:140709996701280
+[2018-11-09 11:17:51 线程:7372] 加载Vulkan函数:vkGetDeviceGroupPresentCapabilitiesKHR
+[2018-11-09 11:17:51 线程:7372] 	成功获得函数地址:140709996691024
+[2018-11-09 11:17:51 线程:7372] 加载Vulkan函数:vkGetDeviceGroupSurfacePresentModesKHR
+[2018-11-09 11:17:51 线程:7372] 	成功获得函数地址:140709996700288
+[2018-11-09 11:17:51 线程:7372] 加载Vulkan函数:vkGetPhysicalDevicePresentRectanglesKHR
+[2018-11-09 11:17:51 线程:7372] 	成功获得函数地址:140709996665392
+[2018-11-09 11:17:51 线程:7372] 加载Vulkan函数:vkAcquireNextImage2KHR
+[2018-11-09 11:17:51 线程:7372] 	成功获得函数地址:140709996690608
+[2018-11-09 11:17:51 线程:7372] VK_SUCCESS: 命令成功完成
+[2018-11-09 11:17:51 线程:7372] 物理设备数量:2
+[2018-11-09 11:17:51 线程:7372] VK_SUCCESS: 命令成功完成
+[2018-11-09 11:17:51 线程:7372] 物理设备 0x19aecc2ad20 的队列族数量为 3
+[2018-11-09 11:17:51 线程:7372] 设备GeForce GTX 1060 6GB  api版本:1.1.84 驱动版本:416.136.0
+[2018-11-09 11:17:51 线程:7372] 物理设备 0x19aecc2aa60 的队列族数量为 1
+[2018-11-09 11:17:51 线程:7372] 设备Intel(R) UHD Graphics 630  api版本:1.0.50 驱动版本:0.16.2
+[2018-11-09 11:17:51 线程:7372] VK_SUCCESS: 命令成功完成
+[2018-11-09 11:17:51 线程:7372] 设备组数量:2
+[2018-11-09 11:17:51 线程:7372] VK_SUCCESS: 命令成功完成
+[2018-11-09 11:17:51 线程:7372] 物理设备组中 物理句柄值:0x19aecc2ad20
+[2018-11-09 11:17:51 线程:7372] 物理设备组中 物理句柄值:0x19aecc2aa60
+[2018-11-09 11:17:51 线程:7372] 遍历所有设备 - 创建逻辑设备
+[2018-11-09 11:17:51 线程:7372] discreteQueuePriorities:2
+[2018-11-09 11:17:51 线程:7372] 物理设备 0x19aecc2ad20 的队列族数量为 3
+[2018-11-09 11:17:51 线程:7372] VK_SUCCESS: 命令成功完成
+[2018-11-09 11:17:51 线程:7372] VK_SUCCESS: 命令成功完成
+[2018-11-09 11:17:51 线程:7372] VK_SUCCESS: 命令成功完成
+[2018-11-09 11:17:51 线程:7372] 判断是否是一个带图形功能的队列族
+[2018-11-09 11:17:51 线程:7372] 判断是否是一个带图形功能的队列族
+[2018-11-09 11:17:51 线程:7372] 判断是否支持本surface
+[2018-11-09 11:17:51 线程:7372] 一个队列族不支持我的surface
+[2018-11-09 11:17:51 线程:7372] 判断是否是一个带图形功能的队列族
+[2018-11-09 11:17:51 线程:7372] 判断是否支持本surface
+[2018-11-09 11:17:51 线程:7372] 选择了一个既有图形功能 又支持我的surface的队列族
+[2018-11-09 11:17:51 线程:7372] 选取了合适的设备与队列
+[2018-11-09 11:17:52 线程:7372] VK_SUCCESS: 命令成功完成
+[2018-11-09 11:17:52 线程:7372] 加载vkDestroyDevice成功
+[2018-11-09 11:17:52 线程:7372] 加载vkGetDeviceQueue成功
+[2018-11-09 11:17:52 线程:7372] 加载vkAllocateMemory成功
+[2018-11-09 11:17:52 线程:7372] 加载vkFreeMemory成功
+[2018-11-09 11:17:52 线程:7372] 加载vkMapMemory成功
+[2018-11-09 11:17:52 线程:7372] 加载vkUnmapMemory成功
+[2018-11-09 11:17:52 线程:7372] 加载vkFlushMappedMemoryRanges成功
+[2018-11-09 11:17:52 线程:7372] 加载vkInvalidateMappedMemoryRanges成功
+[2018-11-09 11:17:52 线程:7372] 加载vkGetDeviceMemoryCommitment成功
+[2018-11-09 11:17:52 线程:7372] 加载vkCreateBuffer成功
+[2018-11-09 11:17:52 线程:7372] 加载vkDestroyBuffer成功
+[2018-11-09 11:17:52 线程:7372] 加载vkCreateBufferView成功
+[2018-11-09 11:17:52 线程:7372] 加载vkDestroyBufferView成功
+[2018-11-09 11:17:52 线程:7372] 加载vkBindBufferMemory成功
+[2018-11-09 11:17:52 线程:7372] 加载vkCreateCommandPool成功
+[2018-11-09 11:17:52 线程:7372] 加载vkResetCommandPool成功
+[2018-11-09 11:17:52 线程:7372] 加载vkDestroyCommandPool成功
+[2018-11-09 11:17:52 线程:7372] 加载vkAllocateCommandBuffers成功
+[2018-11-09 11:17:52 线程:7372] 加载vkResetCommandBuffer成功
+[2018-11-09 11:17:52 线程:7372] 加载vkFreeCommandBuffers成功
+[2018-11-09 11:17:52 线程:7372] 加载vkQueueSubmit成功
+[2018-11-09 11:17:52 线程:7372] 加载vkCreateEvent成功
+[2018-11-09 11:17:52 线程:7372] 加载vkGetEventStatus成功
+[2018-11-09 11:17:52 线程:7372] 加载vkResetEvent成功
+[2018-11-09 11:17:52 线程:7372] 加载vkSetEvent成功
+[2018-11-09 11:17:52 线程:7372] 加载vkDestroyEvent成功
+[2018-11-09 11:17:52 线程:7372] 加载vkCreateFence成功
+[2018-11-09 11:17:52 线程:7372] 加载vkResetFences成功
+[2018-11-09 11:17:52 线程:7372] 加载vkGetFenceStatus成功
+[2018-11-09 11:17:52 线程:7372] 加载vkWaitForFences成功
+[2018-11-09 11:17:52 线程:7372] 加载vkDestroyFence成功
+[2018-11-09 11:17:52 线程:7372] 加载vkCreateSemaphore成功
+[2018-11-09 11:17:52 线程:7372] 加载vkDestroySemaphore成功
+[2018-11-09 11:17:52 线程:7372] 加载vkQueueWaitIdle成功
+[2018-11-09 11:17:52 线程:7372] 加载vkDeviceWaitIdle成功
+[2018-11-09 11:17:52 线程:7372] 加载vkBeginCommandBuffer成功
+[2018-11-09 11:17:52 线程:7372] 加载vkEndCommandBuffer成功
+[2018-11-09 11:17:52 线程:7372] 加载vkCreateQueryPool成功
+[2018-11-09 11:17:52 线程:7372] 加载vkGetQueryPoolResults成功
+[2018-11-09 11:17:52 线程:7372] 加载vkDestroyQueryPool成功
+[2018-11-09 11:17:52 线程:7372] 加载vkCreateFramebuffer成功
+[2018-11-09 11:17:52 线程:7372] 加载vkDestroyFramebuffer成功
+[2018-11-09 11:17:52 线程:7372] 加载vkCreateSampler成功
+[2018-11-09 11:17:52 线程:7372] 加载vkDestroySampler成功
+[2018-11-09 11:17:52 线程:7372] 加载vkCreateShaderModule成功
+[2018-11-09 11:17:52 线程:7372] 加载vkDestroyShaderModule成功
+[2018-11-09 11:17:52 线程:7372] 加载vkGetRenderAreaGranularity成功
+[2018-11-09 11:17:52 线程:7372] 加载vkCreateRenderPass成功
+[2018-11-09 11:17:52 线程:7372] 加载vkDestroyRenderPass成功
+[2018-11-09 11:17:52 线程:7372] 加载vkCreateImage成功
+[2018-11-09 11:17:52 线程:7372] 加载vkDestroyImage成功
+[2018-11-09 11:17:52 线程:7372] 加载vkCreateImageView成功
+[2018-11-09 11:17:52 线程:7372] 加载vkDestroyImageView成功
+[2018-11-09 11:17:52 线程:7372] 加载vkBindImageMemory成功
+[2018-11-09 11:17:52 线程:7372] 加载vkCreateComputePipelines成功
+[2018-11-09 11:17:52 线程:7372] 加载vkCreateGraphicsPipelines成功
+[2018-11-09 11:17:52 线程:7372] 加载vkDestroyPipeline成功
+[2018-11-09 11:17:52 线程:7372] 加载vkCreatePipelineCache成功
+[2018-11-09 11:17:52 线程:7372] 加载vkDestroyPipelineCache成功
+[2018-11-09 11:17:52 线程:7372] 加载vkCreatePipelineLayout成功
+[2018-11-09 11:17:52 线程:7372] 加载vkDestroyPipelineLayout成功
+[2018-11-09 11:17:52 线程:7372] 加载vkGetPipelineCacheData成功
+[2018-11-09 11:17:52 线程:7372] 加载vkMergePipelineCaches成功
+[2018-11-09 11:17:52 线程:7372] 加载vkCreateDescriptorPool成功
+[2018-11-09 11:17:52 线程:7372] 加载vkResetDescriptorPool成功
+[2018-11-09 11:17:52 线程:7372] 加载vkDestroyDescriptorPool成功
+[2018-11-09 11:17:52 线程:7372] 加载vkAllocateDescriptorSets成功
+[2018-11-09 11:17:52 线程:7372] 加载vkUpdateDescriptorSets成功
+[2018-11-09 11:17:52 线程:7372] 加载vkFreeDescriptorSets成功
+[2018-11-09 11:17:52 线程:7372] 加载vkCreateDescriptorSetLayout成功
+[2018-11-09 11:17:52 线程:7372] 加载vkDestroyDescriptorSetLayout成功
+[2018-11-09 11:17:52 线程:7372] 加载vkGetBufferMemoryRequirements成功
+[2018-11-09 11:17:52 线程:7372] 加载vkGetImageMemoryRequirements成功
+[2018-11-09 11:17:52 线程:7372] 加载vkQueueBindSparse成功
+[2018-11-09 11:17:52 线程:7372] 加载vkGetImageSparseMemoryRequirements成功
+[2018-11-09 11:17:52 线程:7372] 加载vkGetImageSubresourceLayout成功
+[2018-11-09 11:17:52 线程:7372] 加载vkGetDeviceQueue2成功
+[2018-11-09 11:17:52 线程:7372] 加载vkBindBufferMemory2成功
+[2018-11-09 11:17:52 线程:7372] 加载vkBindImageMemory2成功
+[2018-11-09 11:17:52 线程:7372] 加载vkCreateDescriptorUpdateTemplate成功
+[2018-11-09 11:17:52 线程:7372] 加载vkUpdateDescriptorSetWithTemplate成功
+[2018-11-09 11:17:52 线程:7372] 加载vkDestroyDescriptorUpdateTemplate成功
+[2018-11-09 11:17:52 线程:7372] 加载vkCreateSamplerYcbcrConversion成功
+[2018-11-09 11:17:52 线程:7372] 加载vkDestroySamplerYcbcrConversion成功
+[2018-11-09 11:17:52 线程:7372] 加载vkGetBufferMemoryRequirements2成功
+[2018-11-09 11:17:52 线程:7372] 加载vkGetDescriptorSetLayoutSupport成功
+[2018-11-09 11:17:52 线程:7372] 加载vkGetDeviceGroupPeerMemoryFeatures成功
+[2018-11-09 11:17:52 线程:7372] 加载vkGetImageMemoryRequirements2成功
+[2018-11-09 11:17:52 线程:7372] 加载vkGetImageSparseMemoryRequirements2成功
+[2018-11-09 11:17:52 线程:7372] 加载vkTrimCommandPool成功
+[2018-11-09 11:17:52 线程:7372] 加载vkCmdDispatch成功
+[2018-11-09 11:17:52 线程:7372] 加载vkCmdDispatchIndirect成功
+[2018-11-09 11:17:52 线程:7372] 加载vkCmdExecuteCommands成功
+[2018-11-09 11:17:52 线程:7372] 加载vkCmdWaitEvents成功
+[2018-11-09 11:17:52 线程:7372] 加载vkCmdSetEvent成功
+[2018-11-09 11:17:52 线程:7372] 加载vkCmdResetEvent成功
+[2018-11-09 11:17:52 线程:7372] 加载vkCmdPipelineBarrier成功
+[2018-11-09 11:17:52 线程:7372] 加载vkCmdCopyBuffer成功
+[2018-11-09 11:17:52 线程:7372] 加载vkCmdFillBuffer成功
+[2018-11-09 11:17:52 线程:7372] 加载vkCmdUpdateBuffer成功
+[2018-11-09 11:17:52 线程:7372] 加载vkCmdBindDescriptorSets成功
+[2018-11-09 11:17:52 线程:7372] 加载vkCmdBindIndexBuffer成功
+[2018-11-09 11:17:52 线程:7372] 加载vkCmdBindPipeline成功
+[2018-11-09 11:17:52 线程:7372] 加载vkCmdBindVertexBuffers成功
+[2018-11-09 11:17:52 线程:7372] 加载vkCmdBeginRenderPass成功
+[2018-11-09 11:17:52 线程:7372] 加载vkCmdNextSubpass成功
+[2018-11-09 11:17:52 线程:7372] 加载vkCmdEndRenderPass成功
+[2018-11-09 11:17:52 线程:7372] 加载vkCmdDraw成功
+[2018-11-09 11:17:52 线程:7372] 加载vkCmdDrawIndexed成功
+[2018-11-09 11:17:52 线程:7372] 加载vkCmdDrawIndexedIndirect成功
+[2018-11-09 11:17:52 线程:7372] 加载vkCmdDrawIndirect成功
+[2018-11-09 11:17:52 线程:7372] 加载vkCmdCopyBufferToImage成功
+[2018-11-09 11:17:52 线程:7372] 加载vkCmdCopyImageToBuffer成功
+[2018-11-09 11:17:52 线程:7372] 加载vkCmdCopyImage成功
+[2018-11-09 11:17:52 线程:7372] 加载vkCmdBlitImage成功
+[2018-11-09 11:17:52 线程:7372] 加载vkCmdClearDepthStencilImage成功
+[2018-11-09 11:17:52 线程:7372] 加载vkCmdClearColorImage成功
+[2018-11-09 11:17:52 线程:7372] 加载vkCmdPushConstants成功
+[2018-11-09 11:17:52 线程:7372] 加载vkCmdResolveImage成功
+[2018-11-09 11:17:52 线程:7372] 加载vkCmdClearAttachments成功
+[2018-11-09 11:17:52 线程:7372] 加载vkCmdSetViewport成功
+[2018-11-09 11:17:52 线程:7372] 加载vkCmdSetScissor成功
+[2018-11-09 11:17:52 线程:7372] 加载vkCmdSetStencilCompareMask成功
+[2018-11-09 11:17:52 线程:7372] 加载vkCmdSetStencilWriteMask成功
+[2018-11-09 11:17:52 线程:7372] 加载vkCmdSetStencilReference成功
+[2018-11-09 11:17:52 线程:7372] 加载vkCmdSetLineWidth成功
+[2018-11-09 11:17:52 线程:7372] 加载vkCmdSetDepthBounds成功
+[2018-11-09 11:17:52 线程:7372] 加载vkCmdSetBlendConstants成功
+[2018-11-09 11:17:52 线程:7372] 加载vkCmdSetDepthBias成功
+[2018-11-09 11:17:52 线程:7372] 加载vkCmdBeginQuery成功
+[2018-11-09 11:17:52 线程:7372] 加载vkCmdResetQueryPool成功
+[2018-11-09 11:17:52 线程:7372] 加载vkCmdCopyQueryPoolResults成功
+[2018-11-09 11:17:52 线程:7372] 加载vkCmdWriteTimestamp成功
+[2018-11-09 11:17:52 线程:7372] 加载vkCmdEndQuery成功
+[2018-11-09 11:17:52 线程:7372] 加载vkCmdDispatchBase成功
+[2018-11-09 11:17:52 线程:7372] 加载vkCmdSetDeviceMask成功
+[2018-11-09 11:17:52 线程:7372] VK_SUCCESS: 命令成功完成
+[2018-11-09 11:17:52 线程:7372] VK_SUCCESS: 命令成功完成
+[2018-11-09 11:17:52 线程:7372] VK_SUCCESS: 命令成功完成
+[2018-11-09 11:17:52 线程:7372] __cdecl laka::vk::Semaphore::~Semaphore(void)
+[2018-11-09 11:17:52 线程:7372] __cdecl laka::vk::Semaphore::~Semaphore(void)
+[2018-11-09 11:17:52 线程:7372] __cdecl laka::vk::Command_pool::~Command_pool(void)
+[2018-11-09 11:17:52 线程:7372] __cdecl laka::vk::Device::~Device(void)
+[2018-11-09 11:17:52 线程:7372] __cdecl laka::vk::Instance::~Instance(void)
+[2018-11-09 17:48:59 线程:4564] debug
+[2018-11-09 17:48:59 线程:4564] info
+[2018-11-09 17:48:59 线程:4564] warring
+[2018-11-09 17:48:59 线程:4564] error
+[2018-11-09 17:48:59 线程:4564] critical
+[2018-11-09 17:48:59 线程:4564] 加载vulkan-1.dll模块
+[2018-11-09 17:48:59 线程:4564] 加载成功:140709967822848
+[2018-11-09 17:48:59 线程:4564] 从模块:140709967822848 加载函数:vkGetInstanceProcAddr
+[2018-11-09 17:48:59 线程:4564] 成功获得函数地址:140709967831328
+[2018-11-09 17:48:59 线程:4564] 加载Vulkan函数:vkEnumerateInstanceLayerProperties
+[2018-11-09 17:48:59 线程:4564] 	成功获得函数地址:140709967867184
+[2018-11-09 17:48:59 线程:4564] 加载Vulkan函数:vkEnumerateInstanceExtensionProperties
+[2018-11-09 17:48:59 线程:4564] 	成功获得函数地址:140709967835376
+[2018-11-09 17:48:59 线程:4564] 加载Vulkan函数:vkCreateInstance
+[2018-11-09 17:48:59 线程:4564] 	成功获得函数地址:140709967843232
+[2018-11-09 17:48:59 线程:4564] 加载Vulkan函数:vkEnumerateInstanceVersion
+[2018-11-09 17:48:59 线程:4564] 	成功获得函数地址:140709967869120
+[2018-11-09 17:48:59 线程:4564] VK_SUCCESS: 命令成功完成
+[2018-11-09 17:48:59 线程:4564] vulkan支持的层的数量为:15
+[2018-11-09 17:48:59 线程:4564] VK_SUCCESS: 命令成功完成
+[2018-11-09 17:48:59 线程:4564] VK_SUCCESS: 命令成功完成
+[2018-11-09 17:48:59 线程:4564] VK_LAYER_NV_optimus层扩展属性数量:0
+[2018-11-09 17:48:59 线程:4564] VK_SUCCESS: 命令成功完成
+[2018-11-09 17:48:59 线程:4564] VK_LAYER_RENDERDOC_Capture层扩展属性数量:1
+[2018-11-09 17:48:59 线程:4564] VK_SUCCESS: 命令成功完成
+[2018-11-09 17:48:59 线程:4564] VK_LAYER_RENDERDOC_Capture层所有扩展:
+[2018-11-09 17:48:59 线程:4564] 	VK_EXT_debug_utils
+[2018-11-09 17:48:59 线程:4564] VK_SUCCESS: 命令成功完成
+[2018-11-09 17:48:59 线程:4564] VK_LAYER_NV_nsight层扩展属性数量:0
+[2018-11-09 17:48:59 线程:4564] VK_SUCCESS: 命令成功完成
+[2018-11-09 17:48:59 线程:4564] VK_LAYER_LUNARG_api_dump层扩展属性数量:0
+[2018-11-09 17:48:59 线程:4564] VK_SUCCESS: 命令成功完成
+[2018-11-09 17:48:59 线程:4564] VK_LAYER_LUNARG_assistant_layer层扩展属性数量:1
+[2018-11-09 17:48:59 线程:4564] VK_SUCCESS: 命令成功完成
+[2018-11-09 17:48:59 线程:4564] VK_LAYER_LUNARG_assistant_layer层所有扩展:
+[2018-11-09 17:48:59 线程:4564] 	VK_EXT_debug_report
+[2018-11-09 17:48:59 线程:4564] VK_SUCCESS: 命令成功完成
+[2018-11-09 17:48:59 线程:4564] VK_LAYER_LUNARG_core_validation层扩展属性数量:1
+[2018-11-09 17:48:59 线程:4564] VK_SUCCESS: 命令成功完成
+[2018-11-09 17:48:59 线程:4564] VK_LAYER_LUNARG_core_validation层所有扩展:
+[2018-11-09 17:48:59 线程:4564] 	VK_EXT_debug_report
+[2018-11-09 17:48:59 线程:4564] VK_SUCCESS: 命令成功完成
+[2018-11-09 17:48:59 线程:4564] VK_LAYER_LUNARG_device_simulation层扩展属性数量:0
+[2018-11-09 17:48:59 线程:4564] VK_SUCCESS: 命令成功完成
+[2018-11-09 17:48:59 线程:4564] VK_LAYER_LUNARG_monitor层扩展属性数量:0
+[2018-11-09 17:48:59 线程:4564] VK_SUCCESS: 命令成功完成
+[2018-11-09 17:48:59 线程:4564] VK_LAYER_LUNARG_object_tracker层扩展属性数量:1
+[2018-11-09 17:48:59 线程:4564] VK_SUCCESS: 命令成功完成
+[2018-11-09 17:48:59 线程:4564] VK_LAYER_LUNARG_object_tracker层所有扩展:
+[2018-11-09 17:48:59 线程:4564] 	VK_EXT_debug_report
+[2018-11-09 17:48:59 线程:4564] VK_SUCCESS: 命令成功完成
+[2018-11-09 17:48:59 线程:4564] VK_LAYER_LUNARG_parameter_validation层扩展属性数量:1
+[2018-11-09 17:48:59 线程:4564] VK_SUCCESS: 命令成功完成
+[2018-11-09 17:48:59 线程:4564] VK_LAYER_LUNARG_parameter_validation层所有扩展:
+[2018-11-09 17:48:59 线程:4564] 	VK_EXT_debug_report
+[2018-11-09 17:48:59 线程:4564] VK_SUCCESS: 命令成功完成
+[2018-11-09 17:48:59 线程:4564] VK_LAYER_LUNARG_screenshot层扩展属性数量:0
+[2018-11-09 17:48:59 线程:4564] VK_SUCCESS: 命令成功完成
+[2018-11-09 17:48:59 线程:4564] VK_LAYER_LUNARG_standard_validation层扩展属性数量:1
+[2018-11-09 17:48:59 线程:4564] VK_SUCCESS: 命令成功完成
+[2018-11-09 17:48:59 线程:4564] VK_LAYER_LUNARG_standard_validation层所有扩展:
+[2018-11-09 17:48:59 线程:4564] 	VK_EXT_debug_report
+[2018-11-09 17:48:59 线程:4564] VK_SUCCESS: 命令成功完成
+[2018-11-09 17:48:59 线程:4564] VK_LAYER_GOOGLE_threading层扩展属性数量:1
+[2018-11-09 17:48:59 线程:4564] VK_SUCCESS: 命令成功完成
+[2018-11-09 17:48:59 线程:4564] VK_LAYER_GOOGLE_threading层所有扩展:
+[2018-11-09 17:48:59 线程:4564] 	VK_EXT_debug_report
+[2018-11-09 17:48:59 线程:4564] VK_SUCCESS: 命令成功完成
+[2018-11-09 17:48:59 线程:4564] VK_LAYER_GOOGLE_unique_objects层扩展属性数量:0
+[2018-11-09 17:48:59 线程:4564] VK_SUCCESS: 命令成功完成
+[2018-11-09 17:48:59 线程:4564] VK_LAYER_LUNARG_vktrace层扩展属性数量:0
+[2018-11-09 17:49:00 线程:4564] VK_SUCCESS: 命令成功完成
+[2018-11-09 17:49:00 线程:4564] 总扩展属性数量:12
+[2018-11-09 17:49:00 线程:4564] VK_SUCCESS: 命令成功完成
+[2018-11-09 17:49:00 线程:4564] 所有扩展属性:
+[2018-11-09 17:49:00 线程:4564] 	名称:VK_KHR_device_group_creation 版本:1
+[2018-11-09 17:49:00 线程:4564] 	名称:VK_KHR_external_fence_capabilities 版本:1
+[2018-11-09 17:49:00 线程:4564] 	名称:VK_KHR_external_memory_capabilities 版本:1
+[2018-11-09 17:49:00 线程:4564] 	名称:VK_KHR_external_semaphore_capabilities 版本:1
+[2018-11-09 17:49:00 线程:4564] 	名称:VK_KHR_get_physical_device_properties2 版本:1
+[2018-11-09 17:49:00 线程:4564] 	名称:VK_KHR_get_surface_capabilities2 版本:1
+[2018-11-09 17:49:00 线程:4564] 	名称:VK_KHR_surface 版本:25
+[2018-11-09 17:49:00 线程:4564] 	名称:VK_KHR_win32_surface 版本:6
+[2018-11-09 17:49:00 线程:4564] 	名称:VK_EXT_debug_report 版本:9
+[2018-11-09 17:49:00 线程:4564] 	名称:VK_EXT_swapchain_colorspace 版本:3
+[2018-11-09 17:49:00 线程:4564] 	名称:VK_NV_external_memory_capabilities 版本:1
+[2018-11-09 17:49:00 线程:4564] 	名称:VK_EXT_debug_utils 版本:1
+[2018-11-09 17:49:00 线程:4564] 测试VkResult::VK_NOT_READY的解释 不是真的
+[2018-11-09 17:49:00 线程:4564] VK_NOT_READY: 栅栏或查询尚未完成
+[2018-11-09 17:49:00 线程:4564] 加载Shcore.dll模块
+[2018-11-09 17:49:00 线程:4564] 加载成功:140710979698688
+[2018-11-09 17:49:00 线程:4564] 从模块:140710979698688 加载函数:SetProcessDpiAwareness
+[2018-11-09 17:49:00 线程:4564] 成功获得函数地址:140710979931088
+[2018-11-09 17:49:00 线程:4564] VK_SUCCESS: 命令成功完成
+[2018-11-09 17:49:00 线程:4564] 加载Vulkan函数:vkDestroyInstance
+[2018-11-09 17:49:00 线程:4564] 	成功获得函数地址:140709967843920
+[2018-11-09 17:49:00 线程:4564] 加载Vulkan函数:vkGetDeviceProcAddr
+[2018-11-09 17:49:00 线程:4564] 	成功获得函数地址:140709967851200
+[2018-11-09 17:49:00 线程:4564] 加载Vulkan函数:vkEnumeratePhysicalDevices
+[2018-11-09 17:49:00 线程:4564] 	成功获得函数地址:140709967841808
+[2018-11-09 17:49:00 线程:4564] 加载Vulkan函数:vkCreateDevice
+[2018-11-09 17:49:00 线程:4564] 	成功获得函数地址:140709967859584
+[2018-11-09 17:49:00 线程:4564] 加载Vulkan函数:vkEnumeratePhysicalDeviceGroups
+[2018-11-09 17:49:00 线程:4564] 	成功获得函数地址:140709967852608
+[2018-11-09 17:49:00 线程:4564] 加载Vulkan函数:vkEnumerateDeviceLayerProperties
+[2018-11-09 17:49:00 线程:4564] 	成功获得函数地址:140709967866224
+[2018-11-09 17:49:00 线程:4564] 加载Vulkan函数:vkEnumerateDeviceExtensionProperties
+[2018-11-09 17:49:00 线程:4564] 	成功获得函数地址:140709967867920
+[2018-11-09 17:49:00 线程:4564] 加载Vulkan函数:vkGetPhysicalDeviceFeatures
+[2018-11-09 17:49:00 线程:4564] 	成功获得函数地址:140709967862912
+[2018-11-09 17:49:00 线程:4564] 加载Vulkan函数:vkGetPhysicalDeviceProperties
+[2018-11-09 17:49:00 线程:4564] 	成功获得函数地址:140709967866112
+[2018-11-09 17:49:00 线程:4564] 加载Vulkan函数:vkGetPhysicalDeviceMemoryProperties
+[2018-11-09 17:49:00 线程:4564] 	成功获得函数地址:140709967853648
+[2018-11-09 17:49:00 线程:4564] 加载Vulkan函数:vkGetPhysicalDeviceFormatProperties
+[2018-11-09 17:49:00 线程:4564] 	成功获得函数地址:140709967832336
+[2018-11-09 17:49:00 线程:4564] 加载Vulkan函数:vkGetPhysicalDeviceQueueFamilyProperties
+[2018-11-09 17:49:00 线程:4564] 	成功获得函数地址:140709967847568
+[2018-11-09 17:49:00 线程:4564] 加载Vulkan函数:vkGetPhysicalDeviceImageFormatProperties
+[2018-11-09 17:49:00 线程:4564] 	成功获得函数地址:140709967830608
+[2018-11-09 17:49:00 线程:4564] 加载Vulkan函数:vkGetPhysicalDeviceSparseImageFormatProperties
+[2018-11-09 17:49:00 线程:4564] 	成功获得函数地址:140709967837712
+[2018-11-09 17:49:00 线程:4564] 加载Vulkan函数:vkGetPhysicalDeviceExternalBufferProperties
+[2018-11-09 17:49:00 线程:4564] 	成功获得函数地址:140709967849904
+[2018-11-09 17:49:00 线程:4564] 加载Vulkan函数:vkGetPhysicalDeviceExternalFenceProperties
+[2018-11-09 17:49:00 线程:4564] 	成功获得函数地址:140709967846736
+[2018-11-09 17:49:00 线程:4564] 加载Vulkan函数:vkGetPhysicalDeviceExternalSemaphoreProperties
+[2018-11-09 17:49:00 线程:4564] 	成功获得函数地址:140709967869280
+[2018-11-09 17:49:00 线程:4564] 加载Vulkan函数:vkGetPhysicalDeviceFeatures2
+[2018-11-09 17:49:00 线程:4564] 	成功获得函数地址:140709967847952
+[2018-11-09 17:49:00 线程:4564] 加载Vulkan函数:vkGetPhysicalDeviceProperties2
+[2018-11-09 17:49:00 线程:4564] 	成功获得函数地址:140709967852144
+[2018-11-09 17:49:00 线程:4564] 加载Vulkan函数:vkGetPhysicalDeviceMemoryProperties2
+[2018-11-09 17:49:00 线程:4564] 	成功获得函数地址:140709967869904
+[2018-11-09 17:49:00 线程:4564] 加载Vulkan函数:vkGetPhysicalDeviceFormatProperties2
+[2018-11-09 17:49:00 线程:4564] 	成功获得函数地址:140709967857280
+[2018-11-09 17:49:00 线程:4564] 加载Vulkan函数:vkGetPhysicalDeviceImageFormatProperties2
+[2018-11-09 17:49:00 线程:4564] 	成功获得函数地址:140709967858320
+[2018-11-09 17:49:00 线程:4564] 加载Vulkan函数:vkGetPhysicalDeviceQueueFamilyProperties2
+[2018-11-09 17:49:00 线程:4564] 	成功获得函数地址:140709967837840
+[2018-11-09 17:49:00 线程:4564] 加载Vulkan函数:vkGetPhysicalDeviceSparseImageFormatProperties2
+[2018-11-09 17:49:00 线程:4564] 	成功获得函数地址:140709967854816
+[2018-11-09 17:49:00 线程:4564] 加载Vulkan函数:vkCreateWin32SurfaceKHR
+[2018-11-09 17:49:00 线程:4564] 	成功获得函数地址:140709967846448
+[2018-11-09 17:49:00 线程:4564] 加载Vulkan函数:vkGetPhysicalDeviceWin32PresentationSupportKHR
+[2018-11-09 17:49:00 线程:4564] 	成功获得函数地址:140709967840592
+[2018-11-09 17:49:00 线程:4564] 加载Vulkan函数:vkGetMemoryWin32HandleKHR
+[2018-11-09 17:49:00 线程:4564] 	成功获得函数地址:140709967835360
+[2018-11-09 17:49:00 线程:4564] 加载Vulkan函数:vkGetMemoryWin32HandlePropertiesKHR
+[2018-11-09 17:49:00 线程:4564] 	成功获得函数地址:140709967834480
+[2018-11-09 17:49:00 线程:4564] 加载Vulkan函数:vkImportSemaphoreWin32HandleKHR
+[2018-11-09 17:49:00 线程:4564] 	成功获得函数地址:140709967871456
+[2018-11-09 17:49:00 线程:4564] 加载Vulkan函数:vkGetSemaphoreWin32HandleKHR
+[2018-11-09 17:49:00 线程:4564] 	成功获得函数地址:140709967837088
+[2018-11-09 17:49:00 线程:4564] 加载Vulkan函数:vkImportFenceWin32HandleKHR
+[2018-11-09 17:49:00 线程:4564] 	成功获得函数地址:140709967844800
+[2018-11-09 17:49:00 线程:4564] 加载Vulkan函数:vkGetFenceWin32HandleKHR
+[2018-11-09 17:49:00 线程:4564] 	成功获得函数地址:140709967840736
+[2018-11-09 17:49:00 线程:4564] 加载Vulkan函数:vkDestroySurfaceKHR
+[2018-11-09 17:49:00 线程:4564] 	成功获得函数地址:140709967836800
+[2018-11-09 17:49:00 线程:4564] 加载Vulkan函数:vkGetPhysicalDeviceSurfaceSupportKHR
+[2018-11-09 17:49:00 线程:4564] 	成功获得函数地址:140709967846432
+[2018-11-09 17:49:00 线程:4564] 加载Vulkan函数:vkGetPhysicalDeviceSurfaceCapabilitiesKHR
+[2018-11-09 17:49:00 线程:4564] 	成功获得函数地址:140709967860176
+[2018-11-09 17:49:00 线程:4564] 加载Vulkan函数:vkGetPhysicalDeviceSurfaceFormatsKHR
+[2018-11-09 17:49:00 线程:4564] 	成功获得函数地址:140709967840848
+[2018-11-09 17:49:00 线程:4564] 加载Vulkan函数:vkGetPhysicalDeviceSurfacePresentModesKHR
+[2018-11-09 17:49:00 线程:4564] 	成功获得函数地址:140709967834880
+[2018-11-09 17:49:00 线程:4564] 加载Vulkan函数:vkGetPhysicalDevicePresentRectanglesKHR
+[2018-11-09 17:49:00 线程:4564] 	成功获得函数地址:140709967829552
+[2018-11-09 17:49:00 线程:4564] VK_SUCCESS: 命令成功完成
+[2018-11-09 17:49:00 线程:4564] 物理设备数量:2
+[2018-11-09 17:49:00 线程:4564] VK_SUCCESS: 命令成功完成
+[2018-11-09 17:49:00 线程:4564] 物理设备 0x22a22b5a880 的队列族数量为 3
+[2018-11-09 17:49:00 线程:4564] 设备GeForce GTX 1060 6GB  api版本:1.1.84 驱动版本:416.136.0
+[2018-11-09 17:49:00 线程:4564] 物理设备 0x22a22b5a860 的队列族数量为 1
+[2018-11-09 17:49:00 线程:4564] 设备Intel(R) UHD Graphics 630  api版本:1.0.50 驱动版本:0.16.2
+[2018-11-09 17:49:00 线程:4564] VK_SUCCESS: 命令成功完成
+[2018-11-09 17:49:00 线程:4564] 设备组数量:2
+[2018-11-09 17:49:00 线程:4564] VK_SUCCESS: 命令成功完成
+[2018-11-09 17:49:00 线程:4564] 物理设备组中 物理句柄值:0x22a22b5a880
+[2018-11-09 17:49:00 线程:4564] 物理设备组中 物理句柄值:0x22a22b5a860
+[2018-11-09 17:49:00 线程:4564] 遍历所有设备 - 创建逻辑设备
+[2018-11-09 17:49:00 线程:4564] discreteQueuePriorities:2
+[2018-11-09 17:49:00 线程:4564] 物理设备 0x22a22b5a880 的队列族数量为 3
+[2018-11-09 17:49:00 线程:4564] VK_SUCCESS: 命令成功完成
+[2018-11-09 17:49:00 线程:4564] VK_SUCCESS: 命令成功完成
+[2018-11-09 17:49:00 线程:4564] VK_SUCCESS: 命令成功完成
+[2018-11-09 17:49:00 线程:4564] 判断是否是一个带图形功能的队列族
+[2018-11-09 17:49:00 线程:4564] 判断是否是一个带图形功能的队列族
+[2018-11-09 17:49:00 线程:4564] 判断是否支持本surface
+[2018-11-09 17:49:00 线程:4564] 一个队列族不支持我的surface
+[2018-11-09 17:49:00 线程:4564] 判断是否是一个带图形功能的队列族
+[2018-11-09 17:49:00 线程:4564] 判断是否支持本surface
+[2018-11-09 17:49:00 线程:4564] 选择了一个既有图形功能 又支持我的surface的队列族
+[2018-11-09 17:49:00 线程:4564] 选取了合适的设备与队列
+[2018-11-09 17:49:00 线程:4564] VK_SUCCESS: 命令成功完成
+[2018-11-09 17:49:00 线程:4564] 加载vkDestroyDevice成功
+[2018-11-09 17:49:00 线程:4564] 加载vkGetDeviceQueue成功
+[2018-11-09 17:49:00 线程:4564] 加载vkAllocateMemory成功
+[2018-11-09 17:49:00 线程:4564] 加载vkFreeMemory成功
+[2018-11-09 17:49:00 线程:4564] 加载vkMapMemory成功
+[2018-11-09 17:49:00 线程:4564] 加载vkUnmapMemory成功
+[2018-11-09 17:49:00 线程:4564] 加载vkFlushMappedMemoryRanges成功
+[2018-11-09 17:49:00 线程:4564] 加载vkInvalidateMappedMemoryRanges成功
+[2018-11-09 17:49:00 线程:4564] 加载vkGetDeviceMemoryCommitment成功
+[2018-11-09 17:49:00 线程:4564] 加载vkCreateBuffer成功
+[2018-11-09 17:49:00 线程:4564] 加载vkDestroyBuffer成功
+[2018-11-09 17:49:00 线程:4564] 加载vkCreateBufferView成功
+[2018-11-09 17:49:00 线程:4564] 加载vkDestroyBufferView成功
+[2018-11-09 17:49:00 线程:4564] 加载vkBindBufferMemory成功
+[2018-11-09 17:49:00 线程:4564] 加载vkCreateCommandPool成功
+[2018-11-09 17:49:00 线程:4564] 加载vkResetCommandPool成功
+[2018-11-09 17:49:00 线程:4564] 加载vkDestroyCommandPool成功
+[2018-11-09 17:49:00 线程:4564] 加载vkAllocateCommandBuffers成功
+[2018-11-09 17:49:00 线程:4564] 加载vkResetCommandBuffer成功
+[2018-11-09 17:49:00 线程:4564] 加载vkFreeCommandBuffers成功
+[2018-11-09 17:49:00 线程:4564] 加载vkQueueSubmit成功
+[2018-11-09 17:49:00 线程:4564] 加载vkCreateEvent成功
+[2018-11-09 17:49:00 线程:4564] 加载vkGetEventStatus成功
+[2018-11-09 17:49:00 线程:4564] 加载vkResetEvent成功
+[2018-11-09 17:49:00 线程:4564] 加载vkSetEvent成功
+[2018-11-09 17:49:00 线程:4564] 加载vkDestroyEvent成功
+[2018-11-09 17:49:00 线程:4564] 加载vkCreateFence成功
+[2018-11-09 17:49:00 线程:4564] 加载vkResetFences成功
+[2018-11-09 17:49:00 线程:4564] 加载vkGetFenceStatus成功
+[2018-11-09 17:49:00 线程:4564] 加载vkWaitForFences成功
+[2018-11-09 17:49:00 线程:4564] 加载vkDestroyFence成功
+[2018-11-09 17:49:00 线程:4564] 加载vkCreateSemaphore成功
+[2018-11-09 17:49:00 线程:4564] 加载vkDestroySemaphore成功
+[2018-11-09 17:49:00 线程:4564] 加载vkQueueWaitIdle成功
+[2018-11-09 17:49:00 线程:4564] 加载vkDeviceWaitIdle成功
+[2018-11-09 17:49:00 线程:4564] 加载vkBeginCommandBuffer成功
+[2018-11-09 17:49:00 线程:4564] 加载vkEndCommandBuffer成功
+[2018-11-09 17:49:00 线程:4564] 加载vkCreateQueryPool成功
+[2018-11-09 17:49:00 线程:4564] 加载vkGetQueryPoolResults成功
+[2018-11-09 17:49:00 线程:4564] 加载vkDestroyQueryPool成功
+[2018-11-09 17:49:00 线程:4564] 加载vkCreateFramebuffer成功
+[2018-11-09 17:49:00 线程:4564] 加载vkDestroyFramebuffer成功
+[2018-11-09 17:49:00 线程:4564] 加载vkCreateSampler成功
+[2018-11-09 17:49:00 线程:4564] 加载vkDestroySampler成功
+[2018-11-09 17:49:00 线程:4564] 加载vkCreateShaderModule成功
+[2018-11-09 17:49:00 线程:4564] 加载vkDestroyShaderModule成功
+[2018-11-09 17:49:00 线程:4564] 加载vkGetRenderAreaGranularity成功
+[2018-11-09 17:49:00 线程:4564] 加载vkCreateRenderPass成功
+[2018-11-09 17:49:00 线程:4564] 加载vkDestroyRenderPass成功
+[2018-11-09 17:49:00 线程:4564] 加载vkCreateImage成功
+[2018-11-09 17:49:00 线程:4564] 加载vkDestroyImage成功
+[2018-11-09 17:49:00 线程:4564] 加载vkCreateImageView成功
+[2018-11-09 17:49:00 线程:4564] 加载vkDestroyImageView成功
+[2018-11-09 17:49:00 线程:4564] 加载vkBindImageMemory成功
+[2018-11-09 17:49:00 线程:4564] 加载vkCreateComputePipelines成功
+[2018-11-09 17:49:00 线程:4564] 加载vkCreateGraphicsPipelines成功
+[2018-11-09 17:49:00 线程:4564] 加载vkDestroyPipeline成功
+[2018-11-09 17:49:00 线程:4564] 加载vkCreatePipelineCache成功
+[2018-11-09 17:49:00 线程:4564] 加载vkDestroyPipelineCache成功
+[2018-11-09 17:49:00 线程:4564] 加载vkCreatePipelineLayout成功
+[2018-11-09 17:49:00 线程:4564] 加载vkDestroyPipelineLayout成功
+[2018-11-09 17:49:00 线程:4564] 加载vkGetPipelineCacheData成功
+[2018-11-09 17:49:00 线程:4564] 加载vkMergePipelineCaches成功
+[2018-11-09 17:49:00 线程:4564] 加载vkCreateDescriptorPool成功
+[2018-11-09 17:49:00 线程:4564] 加载vkResetDescriptorPool成功
+[2018-11-09 17:49:00 线程:4564] 加载vkDestroyDescriptorPool成功
+[2018-11-09 17:49:00 线程:4564] 加载vkAllocateDescriptorSets成功
+[2018-11-09 17:49:00 线程:4564] 加载vkUpdateDescriptorSets成功
+[2018-11-09 17:49:00 线程:4564] 加载vkFreeDescriptorSets成功
+[2018-11-09 17:49:00 线程:4564] 加载vkCreateDescriptorSetLayout成功
+[2018-11-09 17:49:00 线程:4564] 加载vkDestroyDescriptorSetLayout成功
+[2018-11-09 17:49:00 线程:4564] 加载vkGetBufferMemoryRequirements成功
+[2018-11-09 17:49:00 线程:4564] 加载vkGetImageMemoryRequirements成功
+[2018-11-09 17:49:00 线程:4564] 加载vkQueueBindSparse成功
+[2018-11-09 17:49:00 线程:4564] 加载vkGetImageSparseMemoryRequirements成功
+[2018-11-09 17:49:00 线程:4564] 加载vkGetImageSubresourceLayout成功
+[2018-11-09 17:49:00 线程:4564] 加载vkGetDeviceQueue2成功
+[2018-11-09 17:49:00 线程:4564] 加载vkBindBufferMemory2成功
+[2018-11-09 17:49:00 线程:4564] 加载vkBindImageMemory2成功
+[2018-11-09 17:49:00 线程:4564] 加载vkCreateDescriptorUpdateTemplate成功
+[2018-11-09 17:49:00 线程:4564] 加载vkUpdateDescriptorSetWithTemplate成功
+[2018-11-09 17:49:00 线程:4564] 加载vkDestroyDescriptorUpdateTemplate成功
+[2018-11-09 17:49:00 线程:4564] 加载vkCreateSamplerYcbcrConversion成功
+[2018-11-09 17:49:00 线程:4564] 加载vkDestroySamplerYcbcrConversion成功
+[2018-11-09 17:49:00 线程:4564] 加载vkGetBufferMemoryRequirements2成功
+[2018-11-09 17:49:00 线程:4564] 加载vkGetDescriptorSetLayoutSupport成功
+[2018-11-09 17:49:00 线程:4564] 加载vkGetDeviceGroupPeerMemoryFeatures成功
+[2018-11-09 17:49:00 线程:4564] 加载vkGetImageMemoryRequirements2成功
+[2018-11-09 17:49:00 线程:4564] 加载vkGetImageSparseMemoryRequirements2成功
+[2018-11-09 17:49:00 线程:4564] 加载vkTrimCommandPool成功
+[2018-11-09 17:49:00 线程:4564] 加载vkCmdDispatch成功
+[2018-11-09 17:49:00 线程:4564] 加载vkCmdDispatchIndirect成功
+[2018-11-09 17:49:00 线程:4564] 加载vkCmdExecuteCommands成功
+[2018-11-09 17:49:00 线程:4564] 加载vkCmdWaitEvents成功
+[2018-11-09 17:49:00 线程:4564] 加载vkCmdSetEvent成功
+[2018-11-09 17:49:00 线程:4564] 加载vkCmdResetEvent成功
+[2018-11-09 17:49:00 线程:4564] 加载vkCmdPipelineBarrier成功
+[2018-11-09 17:49:00 线程:4564] 加载vkCmdCopyBuffer成功
+[2018-11-09 17:49:00 线程:4564] 加载vkCmdFillBuffer成功
+[2018-11-09 17:49:00 线程:4564] 加载vkCmdUpdateBuffer成功
+[2018-11-09 17:49:00 线程:4564] 加载vkCmdBindDescriptorSets成功
+[2018-11-09 17:49:00 线程:4564] 加载vkCmdBindIndexBuffer成功
+[2018-11-09 17:49:00 线程:4564] 加载vkCmdBindPipeline成功
+[2018-11-09 17:49:00 线程:4564] 加载vkCmdBindVertexBuffers成功
+[2018-11-09 17:49:00 线程:4564] 加载vkCmdBeginRenderPass成功
+[2018-11-09 17:49:00 线程:4564] 加载vkCmdNextSubpass成功
+[2018-11-09 17:49:00 线程:4564] 加载vkCmdEndRenderPass成功
+[2018-11-09 17:49:00 线程:4564] 加载vkCmdDraw成功
+[2018-11-09 17:49:00 线程:4564] 加载vkCmdDrawIndexed成功
+[2018-11-09 17:49:00 线程:4564] 加载vkCmdDrawIndexedIndirect成功
+[2018-11-09 17:49:00 线程:4564] 加载vkCmdDrawIndirect成功
+[2018-11-09 17:49:00 线程:4564] 加载vkCmdCopyBufferToImage成功
+[2018-11-09 17:49:00 线程:4564] 加载vkCmdCopyImageToBuffer成功
+[2018-11-09 17:49:00 线程:4564] 加载vkCmdCopyImage成功
+[2018-11-09 17:49:00 线程:4564] 加载vkCmdBlitImage成功
+[2018-11-09 17:49:00 线程:4564] 加载vkCmdClearDepthStencilImage成功
+[2018-11-09 17:49:00 线程:4564] 加载vkCmdClearColorImage成功
+[2018-11-09 17:49:00 线程:4564] 加载vkCmdPushConstants成功
+[2018-11-09 17:49:00 线程:4564] 加载vkCmdResolveImage成功
+[2018-11-09 17:49:00 线程:4564] 加载vkCmdClearAttachments成功
+[2018-11-09 17:49:00 线程:4564] 加载vkCmdSetViewport成功
+[2018-11-09 17:49:00 线程:4564] 加载vkCmdSetScissor成功
+[2018-11-09 17:49:00 线程:4564] 加载vkCmdSetStencilCompareMask成功
+[2018-11-09 17:49:00 线程:4564] 加载vkCmdSetStencilWriteMask成功
+[2018-11-09 17:49:00 线程:4564] 加载vkCmdSetStencilReference成功
+[2018-11-09 17:49:00 线程:4564] 加载vkCmdSetLineWidth成功
+[2018-11-09 17:49:00 线程:4564] 加载vkCmdSetDepthBounds成功
+[2018-11-09 17:49:00 线程:4564] 加载vkCmdSetBlendConstants成功
+[2018-11-09 17:49:00 线程:4564] 加载vkCmdSetDepthBias成功
+[2018-11-09 17:49:00 线程:4564] 加载vkCmdBeginQuery成功
+[2018-11-09 17:49:00 线程:4564] 加载vkCmdResetQueryPool成功
+[2018-11-09 17:49:00 线程:4564] 加载vkCmdCopyQueryPoolResults成功
+[2018-11-09 17:49:00 线程:4564] 加载vkCmdWriteTimestamp成功
+[2018-11-09 17:49:00 线程:4564] 加载vkCmdEndQuery成功
+[2018-11-09 17:49:00 线程:4564] 加载vkCmdDispatchBase成功
+[2018-11-09 17:49:00 线程:4564] 加载vkCmdSetDeviceMask成功
+[2018-11-09 17:49:00 线程:4564] 加载vkCreateSwapchainKHR成功
+[2018-11-09 17:49:00 线程:4564] 加载vkDestroySwapchainKHR成功
+[2018-11-09 17:49:00 线程:4564] 加载vkGetSwapchainImagesKHR成功
+[2018-11-09 17:49:00 线程:4564] 加载vkAcquireNextImageKHR成功
+[2018-11-09 17:49:00 线程:4564] 加载vkAcquireNextImage2KHR成功
+[2018-11-09 17:49:00 线程:4564] 加载vkGetDeviceGroupSurfacePresentModesKHR成功
+[2018-11-09 17:49:00 线程:4564] 加载vkGetDeviceGroupPresentCapabilitiesKHR成功
+[2018-11-09 17:49:00 线程:4564] VK_SUCCESS: 命令成功完成
+[2018-11-09 17:49:00 线程:4564] VK_SUCCESS: 命令成功完成
+[2018-11-09 17:49:00 线程:4564] VK_SUCCESS: 命令成功完成
+[2018-11-09 17:49:00 线程:4564] __cdecl laka::vk::Semaphore::~Semaphore(void)
+[2018-11-09 17:49:00 线程:4564] __cdecl laka::vk::Semaphore::~Semaphore(void)
+[2018-11-09 17:49:00 线程:4564] __cdecl laka::vk::Command_pool::~Command_pool(void)
+[2018-11-09 17:49:00 线程:4564] __cdecl laka::vk::Device::~Device(void)
+[2018-11-09 17:49:00 线程:4564] __cdecl laka::vk::Instance::~Instance(void)

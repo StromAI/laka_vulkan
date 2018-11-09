@@ -89,8 +89,6 @@ a aa## vkGetPhysicalDeviceImageFormatProperties2 ##bb b \
 a aa## vkGetPhysicalDeviceQueueFamilyProperties2 ##bb b \
 a aa## vkGetPhysicalDeviceSparseImageFormatProperties2 ##bb b \
 
-#define table_vk_api_physical_device_khr(a, aa, bb, b) \
-a aa## vkGetPhysicalDeviceSurfaceSupportKHR ##bb b \
 
 #define table_vk_struct_physical_device(a,aa,bb,b) \
 a aa## VkLayerProperties ##bb b \
@@ -317,7 +315,7 @@ a aa## vkImportSemaphoreWin32HandleKHR ##bb b \
 a aa## vkGetSemaphoreWin32HandleKHR ##bb b \
 a aa## vkImportFenceWin32HandleKHR ##bb b \
 a aa## vkGetFenceWin32HandleKHR ##bb b \
-a aa## vkDestroySurfaceKHR ##bb b \
+
 
 #   define table_vk_api_device_platform(a, aa, bb, b)\
 a aa## vkGetMemoryWin32HandleNV #bb b \
@@ -354,7 +352,7 @@ a aa## vkGetMemoryWin32HandleNV #bb b \
 a aa## vkCreateAndroidSurfaceKHR ##bb b \
 a aa## vkGetAndroidHardwareBufferPropertiesANDROID ##bb b \
 a aa## vkGetMemoryAndroidHardwareBufferANDROID ##bb b \
-a aa## vkDestroySurfaceKHR ##bb b \
+
 
 #define wsi_info_T1(a, b)  a ANativeWindow* b 
 #define wsi_info_T2(a, b)    
@@ -375,7 +373,7 @@ a aa## vkDestroySurfaceKHR ##bb b \
 
 #   define table_vk_api_platform(a, aa, bb, b) \
 a aa## vkCreateIOSSurfaceMVK ##bb b \
-a aa## vkDestroySurfaceKHR ##bb b \
+
 
 #define wsi_info_T1(a, b) a void* b 
 #define wsi_info_T2(a, b) 
@@ -396,7 +394,7 @@ a aa## vkDestroySurfaceKHR ##bb b \
 
 #   define table_vk_api_platform(a, aa, bb, b) \
 a aa## vkCreateMacOSSurfaceMVK ##bb b \
-a aa## vkDestroySurfaceKHR ##bb b \
+
 
 #define wsi_info_T1(a, b) a void* b 
 #define wsi_info_T2(a, b) 
@@ -419,7 +417,7 @@ a aa## vkDestroySurfaceKHR ##bb b \
 #   define table_vk_api_platform(a, aa, bb, b) \
 a aa## vkCreateMirSurfaceKHR ##bb b \
 a aa## vkGetPhysicalDeviceMirPresentationSupportKHR ##bb b \
-a aa## vkDestroySurfaceKHR ##bb b \
+
 
 #define wsi_info_T1(a, b) a MirConnection* b 
 #define wsi_info_T2(a, b) a MirSurface* b 
@@ -441,7 +439,7 @@ a aa## vkDestroySurfaceKHR ##bb b \
 
 #   define table_vk_api_platform(a, aa, bb, b) \
 a aa## vkCreateViSurfaceNN ##bb b \
-a aa## vkDestroySurfaceKHR ##bb b \
+
 
 #define wsi_info_T1(a, b) a void* b 
 #define wsi_info_T2(a, b) 
@@ -464,7 +462,7 @@ a aa## vkDestroySurfaceKHR ##bb b \
 #   define table_vk_api_platform(a, aa, bb, b) \
 a aa## vkCreateWaylandSurfaceKHR ##bb b \
 a aa## vkGetPhysicalDeviceWaylandPresentationSupportKHR ##bb b \
-a aa## vkDestroySurfaceKHR ##bb b \
+
 
 #define wsi_info_T1(a, b) a struct wl_display* b 
 #define wsi_info_T2(a, b) a struct wl_surface* b 
@@ -487,7 +485,7 @@ a aa## vkDestroySurfaceKHR ##bb b \
 #   define table_vk_api_platform(a, aa, bb, b) \
 a aa## vkCreateXcbSurfaceKHR ##bb b \
 a aa## vkGetPhysicalDeviceXcbPresentationSupportKHR ##bb b \
-a aa## vkDestroySurfaceKHR ##bb b \
+
 
 #define wsi_info_T1(a, b) a xcb_connection_t* b 
 #define wsi_info_T2(a, b) a xcb_window_t b 
@@ -510,7 +508,7 @@ a aa## vkDestroySurfaceKHR ##bb b \
 #   define table_vk_api_platform(a, aa, bb, b) \
 a aa## vkCreateXlibSurfaceKHR ##bb b \
 a aa## vkGetPhysicalDeviceXlibPresentationSupportKHR ##bb b \
-a aa## vkDestroySurfaceKHR ##bb b \
+
 
 #define wsi_info_T1(a, b) a Display* b 
 #define wsi_info_T2(a, b) a Window b 
@@ -533,7 +531,7 @@ a aa## vkDestroySurfaceKHR ##bb b \
 #   define table_vk_api_platform(a, aa, bb, b) \
 a aa## vkAcquireXlibDisplayEXT ##bb b \
 a aa## vkGetRandROutputDisplayEXT ##bb b \
-a aa## vkDestroySurfaceKHR ##bb b \
+
 
 //????
 
@@ -549,8 +547,6 @@ a aa## vkDestroySurfaceKHR ##bb b \
 #endif
 
 #if defined(table_vk_api_platform)
-
-
 
 #else
 
@@ -817,3 +813,45 @@ a aa## VkMemoryDedicatedAllocateInfo ##bb b \
 #define vk_fun(name__) PFN_##name__ name__
 
 #include "vulkan/vulkan.h"
+
+#ifdef VK_KHR_surface
+
+#define table_vk_api_khr_surface(a,aa,bb,b) \
+a aa## vkDestroySurfaceKHR ##bb b \
+a aa## vkGetPhysicalDeviceSurfaceSupportKHR ##bb b \
+a aa## vkGetPhysicalDeviceSurfaceCapabilitiesKHR ##bb b \
+a aa## vkGetPhysicalDeviceSurfaceFormatsKHR ##bb b \
+a aa## vkGetPhysicalDeviceSurfacePresentModesKHR ##bb b \
+
+#else
+
+#define table_vk_api_khr_surface(a,aa,bb,b)
+
+#endif
+
+#ifdef VK_KHR_swapchain
+
+#define table_vk_api_khr_swapchain(a,aa,bb,b) \
+a aa## vkCreateSwapchainKHR ##bb b \
+a aa## vkDestroySwapchainKHR ##bb b \
+a aa## vkGetSwapchainImagesKHR ##bb b \
+a aa## vkAcquireNextImageKHR ##bb b \
+a aa## vkAcquireNextImage2KHR ##bb b \
+a aa## vkGetDeviceGroupSurfacePresentModesKHR ##bb b \
+a aa## vkGetDeviceGroupPresentCapabilitiesKHR ##bb b \
+
+#define table_vk_api_instance_khr_swapchain(a,aa,bb,b) \
+a aa## vkGetPhysicalDevicePresentRectanglesKHR ##bb b \
+
+#define table_vk_api_device_khr_swapchain(a,aa,bb,b) \
+a aa## vkQueuePresentKHR ##bb b \
+
+#else
+
+#define table_vk_api_khr_swapchain(a,aa,bb,b)
+#define table_vk_api_instance_khr_swapchain(a,aa,bb,b)
+#define table_vk_api_device_khr_swapchain(a,aa,bb,b)
+
+#endif 
+
+

@@ -31,6 +31,7 @@ namespace laka { namespace vk {
     class Physical_device;
     class Physical_device_group;
     class Surface;
+    class Swapchain;
 
     class Device_creator;
     struct Device_api;
@@ -625,8 +626,9 @@ public:                                                                         
         struct Api {
             table_vk_api_instance(vk_fun ZK, , , YK FH)
                 table_vk_api_physical_device(vk_fun ZK, , , YK FH)
-                table_vk_api_physical_device_khr(vk_fun ZK, , , YK FH)
                 table_vk_api_platform(vk_fun ZK, , , YK FH)
+                table_vk_api_khr_surface(vk_fun ZK, , , YK FH)
+                table_vk_api_instance_khr_swapchain(vk_fun ZK, , , YK FH)
         }api;
 
     private:
@@ -678,6 +680,27 @@ public:                                                                         
         std::shared_ptr<std::vector<VkSparseImageFormatProperties2>>
             get_sparse_image_format_properties(
                 const S_physical_device_sparse_image_format_info2& format_info_);
+
+#ifdef VK_KHR_surface
+        
+        bool get_surface_support(Ahandle<Surface> surface_,uint32_t queue_index_);
+
+        std::shared_ptr< std::vector<VkSurfaceFormatKHR> >
+            get_surface_formats(Ahandle<Surface> surface_);
+
+        std::shared_ptr< VkSurfaceCapabilitiesKHR >
+            get_surface_capabilities(Ahandle<Surface> surface_);
+
+        std::shared_ptr< std::vector< VkPresentModeKHR>>
+            get_surface_present_modes(Ahandle<Surface> surface_);
+
+#endif
+#ifdef VK_KHR_swapchain
+
+        std::shared_ptr< std::vector<VkRect2D> >
+            get_present_rectangles(Ahandle<Surface> surface_);
+
+#endif 
 
         VkPhysicalDevice                handle;
         Instance*                       instance;
@@ -806,6 +829,7 @@ public:                                                                         
 #elif defined(VK_USE_PLATFORM_XLIB_XRANDR_EXT)
 
 #endif
+
         ~Surface();
 
         const VkSurfaceKHR handle;
@@ -824,6 +848,41 @@ public:                                                                         
         Alloc_callback_ptr  allocation_callbacks;
     };
 
+#ifdef VK_KHR_swapchain
+    class Swapchain : public std::enable_shared_from_this<Swapchain>{
+    public:
+        using Sptr = std::shared_ptr<Swapchain>;
+
+        // vkGetSwapchainImagesKHR 
+        /*
+            todo: 像这种能批量创建的对象,复数形式会有点不一样
+            todo: 提供重载函数用于返回VkResult值
+            todo: 参数,我自己设置的自动转换类型 需要规划一下
+        */
+
+        // 获取要使用的可用可呈现图像，并检索该图像的索引
+        uint32_t acquire_next_image(
+            uint64_t            timeout_,
+            Ahandle<Semaphore>  semaphore_,
+            Ahandle<Fence>      fence_);
+
+        ~Swapchain();
+        
+        const VkSwapchainKHR handle;
+        std::shared_ptr<Device> device;
+        
+        operator VkSwapchainKHR*() { return const_cast<VkSwapchainKHR*>(&handle); }
+    private:
+        friend Device;
+        Swapchain(
+            std::shared_ptr<Device> device_,
+            VkSwapchainKHR          handle_,
+            Alloc_callback_ptr      allocator_);
+
+        Alloc_callback_ptr allocation_callbacks;
+    };
+#endif
+
     //为帮助创建Device而存在
     class Device_creator : public std::enable_shared_from_this<Device_creator> {
     public:
@@ -835,11 +894,13 @@ public:                                                                         
 
         std::shared_ptr<Device> get_a_device(
             Physical_device& physical_device_,
+            Array_value<Ahandle<Surface>> surfaces_ = {},
             Array_value<const char*> enabled_extensions_ = {},
             S_physical_device_features* features_ = nullptr);//todo:这里可以接收匿名函数回调
 
         std::shared_ptr<Device> get_a_device(
             Physical_device_group& physica_device_group_,
+            Array_value<Ahandle<Surface>> surfaces_ = {},
             Array_value<const char*> enabled_extensions_ = {},
             S_physical_device_features* features_ = nullptr);//todo:这里可以接收匿名函数回调
 
@@ -1017,6 +1078,19 @@ public:                                                                         
             const void* initial_data_ = nullptr,
             Alloc_callback_ptr allocator_ = default_allocation_cb());
 
+#ifdef VK_KHR_swapchain
+
+        std::shared_ptr<Swapchain> get_a_swapchain(
+            S_swapchain_create_info_KHR info_,
+            Alloc_callback_ptr allocator_ = default_allocation_cb());
+
+        VkDeviceGroupPresentModeFlagsKHR get_present_modes(Ahandle<Surface> surface_);
+
+        std::shared_ptr<VkDeviceGroupPresentCapabilitiesKHR> get_present_capabilities();
+
+#endif 
+
+
 
         const VkDevice handle;
 
@@ -1033,6 +1107,8 @@ public:                                                                         
         struct Api{
             table_vk_api_device(vk_fun ZK, , , YK FH)
             table_vk_api_cmd(vk_fun ZK, , , YK FH)
+            table_vk_api_khr_swapchain(vk_fun ZK, , , YK FH)
+            table_vk_api_device_khr_swapchain(vk_fun ZK, , , YK FH)
         }api;
     private:
         friend class Device_creator;
@@ -1060,6 +1136,11 @@ public:                                                                         
         VkResult bind_sparse(
             Array_value<S_bind_sparse_info>&    pBindInfo_,
             Aptr < Fence >                      fence_ = nullptr);
+
+#ifdef VK_KHR_swapchain
+        // 排队所有渲染命令并将图像转换为正确的布局后，排队图像以进行演示
+        VkResult present(Aref<S_present_info_KHR> present_info_);
+#endif
 
         //VkDevice device_handle;
         VkQueue handle;

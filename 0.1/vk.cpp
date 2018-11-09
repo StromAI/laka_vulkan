@@ -290,8 +290,9 @@ namespace laka { namespace vk {
 
         table_vk_api_instance(load_instance_api ZK, , , YK);
         table_vk_api_physical_device(load_instance_api ZK, , , YK);
-        table_vk_api_physical_device_khr(load_instance_api ZK, , , YK);
         table_vk_api_platform(load_instance_api ZK, , , YK);
+        table_vk_api_khr_surface(load_instance_api ZK, , , YK FH);
+        table_vk_api_instance_khr_swapchain(load_instance_api ZK, , , YK FH);
 
         uint32_t count = 0;
         auto ret = api.vkEnumeratePhysicalDevices(handle, &count, nullptr);
@@ -579,6 +580,115 @@ namespace laka { namespace vk {
         return sptr;
     }
 
+#ifdef VK_KHR_surface
+    bool Physical_device::get_surface_support(Ahandle<Surface> surface_, uint32_t queue_index_)
+    {
+        VkBool32 sult;
+        auto ret = instance->api.vkGetPhysicalDeviceSurfaceSupportKHR(handle, queue_index_, surface_,&sult);
+        show_result(ret);
+        if (ret < 0)
+        {
+            return false;
+        }
+        return sult == VK_TRUE;
+    }
+    
+    shared_ptr< std::vector<VkSurfaceFormatKHR> >
+        Physical_device::get_surface_formats(Ahandle<Surface> surface_)
+    {
+        shared_ptr<vector<VkSurfaceFormatKHR>> sptr;
+        uint32_t count = 0;
+        auto ret = instance->api.vkGetPhysicalDeviceSurfaceFormatsKHR(handle, surface_, &count, nullptr);
+        show_result(ret);
+        if (ret < 0)
+        {
+            return sptr;
+        }
+        sptr.reset(new vector<VkSurfaceFormatKHR>(count));
+        ret = instance->api.vkGetPhysicalDeviceSurfaceFormatsKHR(handle, surface_, &count, sptr->data());
+        show_result(ret);
+        if (ret < 0)
+        {
+            sptr.reset();
+        }
+        return sptr;
+    }
+
+    std::shared_ptr< VkSurfaceCapabilitiesKHR >
+        Physical_device::get_surface_capabilities(Ahandle<Surface> surface_)
+    {
+        shared_ptr<VkSurfaceCapabilitiesKHR> sptr(new VkSurfaceCapabilitiesKHR);
+        auto ret = instance->api.
+            vkGetPhysicalDeviceSurfaceCapabilitiesKHR(handle, surface_, sptr.get());
+        show_result(ret);
+        if (ret < 0)
+        {
+            sptr.reset();
+        }
+        return sptr;
+    }
+
+    std::shared_ptr< std::vector< VkPresentModeKHR>>
+        Physical_device::get_surface_present_modes(Ahandle<Surface> surface_)
+    {
+        shared_ptr< vector<VkPresentModeKHR> > sptr;
+        uint32_t count = 0;
+        auto ret = instance->api.
+            vkGetPhysicalDeviceSurfacePresentModesKHR(handle, surface_, &count, nullptr);
+        show_result(ret);
+        if (ret < 0)
+        {
+            return sptr;
+        }
+        sptr.reset(new vector<VkPresentModeKHR>(count));
+        ret = instance->api.
+            vkGetPhysicalDeviceSurfacePresentModesKHR(handle, surface_, &count, sptr->data());
+        show_result(ret);
+        if (ret < 0)
+        {
+            sptr.reset();
+        }
+        return sptr;
+    }
+
+
+
+#endif
+#ifdef VK_KHR_swapchain
+
+    std::shared_ptr< std::vector<VkRect2D> >
+        Physical_device::get_present_rectangles(Ahandle<Surface> surface_)
+    {
+        shared_ptr<vector<VkRect2D>> sptr;
+
+        uint32_t count;
+        auto ret = instance->api.vkGetPhysicalDevicePresentRectanglesKHR(
+            handle,
+            surface_,
+            &count,
+            nullptr
+        );
+        show_result(ret);
+        if (ret < 0)
+        {
+            return sptr;
+        }
+        sptr.reset(new vector<VkRect2D>(count));
+        if (count == 0)
+        {
+            return sptr;
+        }
+        ret = instance->api.vkGetPhysicalDevicePresentRectanglesKHR(
+            handle,
+            surface_,
+            &count,
+            sptr->data()
+        );
+        return sptr;
+    }
+
+#endif 
+
 #endif  /*  VkPhysicalDevice  */
 
 #if 1   /*  VkQueue  */
@@ -621,6 +731,13 @@ namespace laka { namespace vk {
         return ret;
     }
 
+#ifdef VK_KHR_swapchain
+    // 排队所有渲染命令并将图像转换为正确的布局后，排队图像以进行演示
+    VkResult Queue::present(Aref<S_present_info_KHR> present_info_)
+    {
+        return api->vkQueuePresentKHR(handle, present_info_.ref);
+    }
+#endif
 
 #endif  /*  VkQueue  */
 
@@ -888,10 +1005,75 @@ shared_ptr<Surface> Instance::get_a_surface(
 
     Surface::~Surface()
     {
+#ifdef VK_KHR_surface
         surface_destroy_fun(instance->handle, handle, allocation_callbacks);
+#endif 
     }
 
 #endif  /*  VkSurface  */
+
+#if 1   /*  VkSwapchainKHR  */
+#ifdef VK_KHR_swapchain
+
+
+
+    uint32_t Swapchain::acquire_next_image(
+        uint64_t            timeout_,
+        Ahandle<Semaphore>  semaphore_,
+        Ahandle<Fence>      fence_)
+    {
+        uint32_t index;
+        auto ret = device->api.vkAcquireNextImageKHR(
+            device->handle,
+            handle,
+            timeout_,
+            semaphore_,
+            fence_,
+            &index
+        );
+        show_result(ret);
+        if (ret < 0)
+        {
+            
+        }
+        return index;
+    }
+
+    std::shared_ptr<Swapchain> Device::get_a_swapchain(
+        S_swapchain_create_info_KHR info_,
+        Alloc_callback_ptr allocator_ /*= default_allocation_cb()*/)
+    {
+        init_show;
+        shared_ptr<Swapchain> sptr;
+        auto allocator = allocator_ == &s_acb ? allocation_callbacks : allocator_;
+        VkSwapchainKHR swapchain;
+        auto ret = api.vkCreateSwapchainKHR(handle, info_, allocator, &swapchain);
+        show_result(ret);
+        if (ret < 0)
+        {
+            show_err("创建 交换链 失败");
+            return sptr;
+        }
+        sptr.reset(new Swapchain(shared_from_this(),swapchain,allocator));
+        return sptr;
+    }
+
+    Swapchain::Swapchain(
+        std::shared_ptr<Device> device_,
+        VkSwapchainKHR handle_, 
+        Alloc_callback_ptr allocator_)
+        :device(device_)
+        ,handle(handle_)
+        ,allocation_callbacks(allocator_)
+    {}
+
+    Swapchain::~Swapchain()
+    {
+        device->api.vkDestroySwapchainKHR(device->handle, handle, allocation_callbacks);
+    }
+
+#endif 
+#endif  /*  VkSwapchainKHR  */
 
 #if 1   /* VkDeviceCreatorInfo  */
     shared_ptr<Device_creator> Instance::get_a_device_creator(
@@ -972,6 +1154,7 @@ shared_ptr<Surface> Instance::get_a_surface(
 
     shared_ptr<Device> Device_creator::get_a_device(
         Physical_device& physical_device_,
+        Array_value<Ahandle<Surface>> surfaces_ /*= {}*/,
         Array_value<const char*> enabled_extensions_ /* = { } */,
         S_physical_device_features* features_ /* = nullptr */)
     {
@@ -996,6 +1179,13 @@ shared_ptr<Surface> Instance::get_a_surface(
         {
             my_queue_familys[i].index = static_cast<uint32_t>(i);
             my_queue_familys[i].properties = (*queue_familys)[i];
+            my_queue_familys[i].is_support_your_surface.resize(surfaces_.size());
+            for (int j = 0; j < surfaces_.size(); ++j)
+            {
+                auto&& surface = surfaces_.data()[j];
+                my_queue_familys[i].is_support_your_surface[j] =
+                    physical_device_.get_surface_support(surface, static_cast<uint32_t>(i));
+            }
         }
         vector<User_choose_queue_info> user_choosed_q_create_infos;
 
@@ -1082,6 +1272,7 @@ shared_ptr<Surface> Instance::get_a_surface(
 
     shared_ptr<Device> Device_creator::get_a_device(
         Physical_device_group& physica_device_group_,
+        Array_value<Ahandle<Surface>> surfaces_/* = {}*/,
         Array_value<const char*> enabled_extensions_ /* = {} */,
         S_physical_device_features* features_ /* = nullptr */)
     {
@@ -1113,6 +1304,7 @@ shared_ptr<Surface> Instance::get_a_surface(
         {
             ok_physical_devices_handle[count++] = physical_device->handle;
         }
+
         auto queue_familys = ok_physical_device_list.front()->get_queue_family_properties();
 
         vector<Queue_family_info> my_queue_familys;
@@ -1122,6 +1314,14 @@ shared_ptr<Surface> Instance::get_a_surface(
         {
             my_queue_familys[i].index = static_cast<uint32_t>(i);
             my_queue_familys[i].properties = (*queue_familys)[i];
+
+            my_queue_familys[i].is_support_your_surface.resize(surfaces_.size());
+            for (int j = 0; j < surfaces_.size(); ++j)
+            {
+                auto&& surface = surfaces_.data()[j];
+                my_queue_familys[i].is_support_your_surface[j] =
+                    ok_physical_device_list.front()->get_surface_support(surface, static_cast<uint32_t>(i));
+            }
         }
         vector<User_choose_queue_info> user_choosed_q_create_infos;
 
@@ -1244,12 +1444,18 @@ shared_ptr<Surface> Instance::get_a_surface(
             {
                 my_queue_familys[i].index = static_cast<uint32_t>(i);
                 my_queue_familys[i].properties = (*queue_familys)[i];
+                
+                my_queue_familys[i].is_support_your_surface.resize(surfaces_.size());
+                for (int j = 0; j < surfaces_.size(); ++j)
+                {
+                    auto&& surface = surfaces_.data()[j];
+                    my_queue_familys[i].is_support_your_surface[j] = 
+                        phy.get_surface_support(surface, static_cast<uint32_t>(i));
+                }
             }
             vector<User_choose_queue_info> user_choosed_q_create_infos;
 
             Pramater_choose_queue_family choose_qf_parmater{ my_queue_familys, user_choosed_q_create_infos };
-            
-
 
             if (choose_queue_family_function(choose_qf_parmater) == false)
             {
@@ -1380,6 +1586,40 @@ shared_ptr<Surface> Instance::get_a_surface(
         return ret;
     }
 
+#ifdef VK_KHR_swapchain
+
+    VkDeviceGroupPresentModeFlagsKHR Device::get_present_modes(Ahandle<Surface> surface_)
+    {
+        VkDeviceGroupPresentModeFlagsKHR sult;
+        auto ret = api.vkGetDeviceGroupSurfacePresentModesKHR(
+            handle,
+            surface_,
+            &sult
+        );
+        show_result(ret);
+        return sult;
+    }
+
+    std::shared_ptr<VkDeviceGroupPresentCapabilitiesKHR> 
+        Device::get_present_capabilities()
+    {
+        std::shared_ptr<VkDeviceGroupPresentCapabilitiesKHR> 
+            sptr(new VkDeviceGroupPresentCapabilitiesKHR);
+
+        auto ret = api.vkGetDeviceGroupPresentCapabilitiesKHR(
+            handle,
+            sptr.get()
+        );
+        show_result(ret);
+        if (ret < 0)
+        {
+            sptr.reset();
+        }
+        return sptr;
+    }
+
+#endif
+
     PFN_vkVoidFunction Device::return_api(const char* api_name_)
     {
         init_show;
@@ -1419,6 +1659,7 @@ shared_ptr<Surface> Instance::get_a_surface(
 
         table_vk_api_device(load_vk_device_api ZK, , , YK FH);
         table_vk_api_cmd(load_vk_device_api ZK, , , YK FH);
+        table_vk_api_khr_swapchain(load_vk_device_api ZK, , , YK FH);
 
         if (queue_infos_.size() < 0)
         {

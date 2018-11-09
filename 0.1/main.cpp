@@ -39,7 +39,14 @@ int main()
 
     // 创建Vulkan实例
     auto vk_instance = Instance::get_new({ VK_KHR_SURFACE_EXTENSION_NAME,surface_extension_name });
-    
+
+    surface_create_info s_ci{
+        0,
+        wc.hInstance,
+        wnd
+    };
+    auto surface = vk_instance->get_a_surface(s_ci);
+
     // 创建设备创建器
     auto vk_dc = vk_instance->get_a_device_creator(
         // 挑选设备的回调函数. 
@@ -69,11 +76,18 @@ int main()
             for (auto&& qf_info : pramater_.give_you_queue_family_info_)
             {
                 auto qf_index = qf_info.index;
-                // 判断是否是一个带图形功能的队列族
+                show_debug("判断是否是一个带图形功能的队列族");
                 if (qf_info.properties.queueFlags & F_queue::b_graphics)
                 {
                     continue;
                 }
+                show_debug("判断是否支持本surface");
+                if (qf_info.is_support_your_surface[0] == false)
+                {
+                    show_info("一个队列族不支持我的surface");
+                    continue;
+                }
+                show_info("选择了一个既有图形功能 又支持我的surface的队列族");
                 pramater_.waiting_for_your_filled_info_.push_back(User_choose_queue_info{
                     qf_info.index,
                     {1.0f,1.0f,1.0f,1.0f},      // 多少个元素就代表多少个队列 每个元素就是相应位置的队列的优先级
@@ -86,56 +100,55 @@ int main()
             return is_ok;
         }
     );
-    surface_create_info s_ci{
-        0,
-        wc.hInstance,
-        wnd
+
+    auto vk_dev = vk_dc->get_a_device({ surface }, { VK_KHR_SWAPCHAIN_EXTENSION_NAME });
+
+    auto cmd_pool = vk_dev->get_a_command_pool(
+        vk_dev->queue_familys[0].qf_index, F_command_pool_create::b_reset_command_buffer);
+
+
+    std::vector<E_format> depthFormats{
+        E_format::e_d32_sfloat_s8_uint,
+        E_format::e_d32_sfloat,
+        E_format::e_d24_unorm_s8_uint,
+        E_format::e_d16_unorm_s8_uint,
+        E_format::e_d16_unorm,
     };
-    auto surface = vk_instance->get_a_surface(s_ci);
 
-    /*
-        auto vk_dev = vk_dc->get_a_device({ VK_KHR_SWAPCHAIN_EXTENSION_NAME });
-
-        auto cmd_pool = vk_dev->get_a_command_pool(
-            vk_dev->queue_familys[0].qf_index,F_command_pool_create::b_reset_command_buffer);
-
-
-        std::vector<E_format> depthFormats{
-            E_format::e_d32_sfloat_s8_uint,
-            E_format::e_d32_sfloat,
-            E_format::e_d24_unorm_s8_uint,
-            E_format::e_d16_unorm_s8_uint,
-            E_format::e_d16_unorm,
-        };
-
-        bool finded_format = false;
-        E_format format;
-        for (auto&& f:depthFormats)
+    bool finded_format = false;
+    E_format format;
+    for (auto&& f : depthFormats)
+    {
+        auto fmt_ppt = vk_dev->physical_devices[0]->get_format_properties(f);
+        VkFormatFeatureFlagBits x = VK_FORMAT_FEATURE_DEPTH_STENCIL_ATTACHMENT_BIT;
+        if (x & fmt_ppt->optimalTilingFeatures)
         {
-            auto fmt_ppt = vk_dev->physical_devices[0]->get_format_properties(f);
-            VkFormatFeatureFlagBits x = VK_FORMAT_FEATURE_DEPTH_STENCIL_ATTACHMENT_BIT;
-            if ( x & fmt_ppt->optimalTilingFeatures )
-            {
-                format = f;
-                finded_format = true;
-                break;
-            }
+            format = f;
+            finded_format = true;
+            break;
         }
+    }
 
-        auto semaphore_present = vk_dev->get_a_semaphore();
-        auto semaphore_render = vk_dev->get_a_semaphore();
-        F_pipeline_stage pipeline_stage = F_pipeline_stage::b_color_attachment_output;
+    auto semaphore_present = vk_dev->get_a_semaphore();
+    auto semaphore_render = vk_dev->get_a_semaphore();
+    F_pipeline_stage pipeline_stage = F_pipeline_stage::b_color_attachment_output;
 
-        S_submit_info submit_info(
-            1,
-            *semaphore_present,
-            &pipeline_stage,
-            0,
-            nullptr,
-            1,
-            *semaphore_render
-        );*/
-
+    S_submit_info submit_info(
+        1,
+        *semaphore_present,
+        &pipeline_stage,
+        0,
+        nullptr,
+        1,
+        *semaphore_render
+    );
+    
+    E_format color_format;
+    auto surface_formats = vk_dev->physical_devices[0]->get_surface_formats(surface);
+    for (auto&& sf:*surface_formats)
+    {
+        if(sf == E_format::e_b8g8r8a8_unorm)
+    }
 
 
 }

@@ -275,25 +275,36 @@ for enum in enum_list:
         mobj.name = m_my_name
         mobj.vk_name = m_my_name.vk_name
 
-        mobj.final_text = m_my_name.my_name + " = " + m_vk_name + ",\n"
+        mobj.final_text = "\t"+m_my_name.my_name + " = " + m_vk_name + ",\n"
         enum_out += mobj.final_text
         e_obj.members.append(mobj)
 
     enum_out += \
         "#flag;\n"\
-        "{0}()@#\n"\
-        "{0}(decltype(flag) flag_):flag(flag_) @#\n"\
-        "{0}({0} const& e_):flag(e_.flag) @#\n"\
-        "{0}({1} flag_) :flag(static_cast<decltype(flag)>(flag_) ) @#\n"\
-        "//operator {1}*()@ return reinterpret_cast<{1}*>(this); #\n"\
-        "operator {1}&()@ return reinterpret_cast<{1}&>(*this); #\n"\
-        "{0}& operator = ({0} e_) @ flag = e_.flag; return *this; #\n"\
-        "bool operator== ({0} e_) @ return flag == e_.flag; #\n"\
-        "bool operator== ({1} e_) @ return flag == static_cast<decltype(flag)>(e_); #\n"\
-        "bool operator!= ({0} e_) @ return !(*this == e_); #\n"\
-        "bool operator!= ({1} e_) @ return !(*this == e_); #\n" \
-        "#;\n\n"\
-            .format(my_name.my_name,my_name.vk_name).replace("@","{").replace("#","}")
+        "\t{0}()@#\n"\
+        "\t{0}(const decltype(flag) flag_):flag(flag_) @#\n"\
+        "\t{0}(const {0}& e_):flag(e_.flag) @#\n"\
+        "\t{0}(const {1} flag_) :flag(static_cast<decltype(flag)>(flag_) ) @#\n"\
+        "\t//operator {1}*()@ return reinterpret_cast<{1}*>(this); #\n"\
+        "\toperator {1}&()@ return reinterpret_cast<{1}&>(*this); #\n"\
+        "\t{0}& operator = ({0} e_) @ flag = e_.flag; return *this; #\n"\
+        "#;\n" \
+        "inline bool operator == (const {0} e1_,const {0} e2_)@return e1_.flag == e2_.flag; #\n"\
+        "inline bool operator != (const {0} e1_,const {0} e2_)@return e1_.flag != e2_.flag; #\n"\
+        .format(my_name.my_name,my_name.vk_name).replace("@","{").replace("#","}")
+
+    '''
+    
+        "inline bool operator == (const decltype({0}::flag) e1_,const {1} e2_)@return e1_ == e2_; #\n"\
+        "inline bool operator == (const {1} e2_,const decltype({0}::flag) e1_)@return e1_ == e2_; #\n"\
+        "inline bool operator != (const decltype({0}::flag) e1_,const {1} e2_)@return e1_ != e2_; #\n"\
+        "inline bool operator != (const {1} e2_,const decltype({0}::flag) e1_)@return e1_ != e2_; #\n"\
+    
+    "bool operator== ({0} e_) @ return flag == e_.flag; #\n"\
+    "bool operator== ({1} e_) @ return flag == static_cast<decltype(flag)>(e_); #\n"\
+    "bool operator!= ({0} e_) @ return !(*this == e_); #\n"\
+    "bool operator!= ({1} e_) @ return !(*this == e_); #\n" \
+    '''
 
     if de == 1:
         enum_out +=  "#endif \n\n"
