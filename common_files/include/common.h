@@ -270,7 +270,6 @@ void* load_module_function_must(Module_handle module_handle_, const char* functi
 
 
 
-
 /*
 https://zh.cppreference.com/w/cpp/utility/initializer_list
 (C++14 前)
@@ -352,9 +351,50 @@ public:
 
 };
 
+//用于免除使用者填写参数时 手动写共享指针到原始指针的显示转换
+template <typename T__>
+class Aptr {
+public:
+    T__* ptr;
 
+    Aptr(std::shared_ptr<T__> sptr_) :ptr(sptr_.get()) {}
+    Aptr(const T__ const* ptr_) :ptr(const_cast<T__*>(ptr_) ) {}
+    constexpr Aptr(std::nullptr_t) noexcept : ptr(nullptr) {}
 
+    operator T__*() { return ptr; }
+    operator const T__*() { return const_cast<const T__*>(ptr); }
 
+    T__* operator ->() { return ptr; }
+
+    bool operator == (std::nullptr_t) { return ptr == nullptr; }
+    bool operator != (std::nullptr_t) { return ptr != nullptr; }
+    bool operator == (T__* p_) { return ptr == p_; }
+    bool operator != (T__* p_) { return ptr != p_; }
+    bool operator == (std::shared_ptr<T__> p_) { return ptr == p_.get(); }
+    bool operator != (std::shared_ptr<T__> p_) { return ptr != p_.get(); }
+};
+
+template <typename T__>
+class Aref {
+public:
+    T__& ref;
+
+    Aref(std::shared_ptr<T__> sptr_) : ref(*(sptr_.get())) {}
+    Aref(T__* ptr_) : ref(*ptr_) {}
+
+    operator T__*() { return &ref; }
+    operator const T__*() { return &ref; }
+    operator T__&() { return ref; }
+    operator const T__&() { return ref; }
+
+    T__* operator ->() { return &ref; }
+    T__& operator *() { return ref; }
+
+    bool operator == (T__* p_) { return &ref == p_; }
+    bool operator != (T__* p_) { return &ref != p_; }
+    bool operator == (std::shared_ptr<T__> p_) { return &ref == p_.get(); }
+    bool operator != (std::shared_ptr<T__> p_) { return &ref != p_.get(); }
+};
 
 
 

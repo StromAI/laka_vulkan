@@ -2,6 +2,8 @@
 #include "vk.h"
 #include <ShellScalingAPI.h>
 
+#include <iostream>
+
 using namespace laka::vk;
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
@@ -144,11 +146,32 @@ int main()
     );
     
     E_format color_format;
+    E_color_space_KHR color_space;
+    bool found_B8G8R8A8_UNORM = false;
     auto surface_formats = vk_dev->physical_devices[0]->get_surface_formats(surface);
     for (auto&& sf:*surface_formats)
     {
-        if(sf == E_format::e_b8g8r8a8_unorm)
+        if (sf.format == E_format::e_b8g8r8a8_unorm) 
+        {
+            color_format = sf.format;
+            color_space = sf.colorSpace;
+            bool found_B8G8R8A8_UNORM = true;
+            break;
+        }
     }
+    if (found_B8G8R8A8_UNORM == false)
+    {
+        color_format = (*surface_formats)[0].format;
+        color_space = (*surface_formats)[0].colorSpace;
+    }
+
+    auto surface_capabilities = vk_dev->physical_devices[0]->get_surface_capabilities(surface);
+
+    auto present_mode = vk_dev->physical_devices[0]->get_surface_present_modes(surface);
+
+    S_extent_2d swapchain_extent;
+    swapchain_extent = surface_capabilities->currentExtent;
+
 
 
 }

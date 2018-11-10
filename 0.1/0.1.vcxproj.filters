@@ -46,6 +46,9 @@
     <ClInclude Include="..\common_files\include\vk_mean.h">
       <Filter>基础文件</Filter>
     </ClInclude>
+    <ClInclude Include="class_convert_table.h">
+      <Filter>基础文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Xml Include="..\common_files\vk.xml">

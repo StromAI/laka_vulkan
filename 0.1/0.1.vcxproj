@@ -132,6 +132,7 @@
     <ClInclude Include="..\common_files\include\laka_vk_define.h" />
     <ClInclude Include="..\common_files\include\types.h" />
     <ClInclude Include="..\common_files\include\vk_mean.h" />
+    <ClInclude Include="class_convert_table.h" />
     <ClInclude Include="vk.h" />
   </ItemGroup>
   <ItemGroup>
