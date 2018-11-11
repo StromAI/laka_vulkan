@@ -204,9 +204,9 @@ all_type_dict = dict([])
 name_dict = dict([])
 disable_names = ["VkDriverIdKHR"]
 
-convert_table = "/*原型 == my_class_convert<我提供的类型>::type \n我提供的类型 == my_class_convert<原型>::type*/\n"\
+convert_table = ["/*原型 == my_class_convert<我提供的类型>::type \n我提供的类型 == my_class_convert<原型>::type*/\n"\
 "template<typename T__> struct my_class_convert;\n"\
-"template< typename T__ > using  my_class_convert_t = typename  my_class_convert<T__>::type;\n"
+"template< typename T__ > using  my_class_convert_t = typename  my_class_convert<T__>::type;\n"]
 
 all_out = \
 "#pragma once\n"\
@@ -246,16 +246,13 @@ for enum in enum_list:
         enum_out+= "using " + my_name.my_name + " = " + enum_vk_name + ";\n\n"
         continue
 
-    convert_table+= "template<> struct my_class_convert<"+my_name.my_name+"> { using type = "+my_name.vk_name+";};\n"
-    convert_table+= "template<> struct my_class_convert<"+my_name.vk_name+"> { using type = "+my_name.my_name+";};\n"
+    convert_table.append("template<> struct my_class_convert<"+my_name.my_name+"> { using type = "+my_name.vk_name+";};\n")
+    convert_table.append("template<> struct my_class_convert<"+my_name.vk_name+"> { using type = "+my_name.my_name+";};\n")
     #template<> struct my_class_convert<S_validation_flags_EXT> { using type = VkValidationFlagsEXT; };
 
 
     enum_out += \
-        "struct "+my_name.my_name+"{\nenum{\n"
-    #"enum class " + my_name.my_name + "{\n"
-
-
+        "union "+my_name.my_name+"{\n\tenum{\n"
     e_obj = Struct()
     e_obj.vk_name = my_name.vk_name
     e_obj.my_name = my_name.my_name
@@ -284,17 +281,31 @@ for enum in enum_list:
         mobj.name = m_my_name
         mobj.vk_name = m_my_name.vk_name
 
-        mobj.final_text = "\t"+m_my_name.my_name + " = " + m_vk_name + ",\n"
+        mobj.final_text = "\t\t"+m_my_name.my_name + " = " + m_vk_name + ",\n"
         enum_out += mobj.final_text
         e_obj.members.append(mobj)
+    enum_out += "\t}flag;\n"
 
     enum_out += \
-        "#flag;\n"\
+        "\t{1} vk_flag;\n" \
+        "\n" \
+        "\t{0}()#$\n" \
+        "\t{0}(const {1} flag_):flag(static_cast<decltype(flag)>(flag_) )#$\n" \
+        "\t{0}(const decltype(flag) flag_):flag(flag_)#$\n" \
+        "\n" \
+        "\toperator {1}&()#return vk_flag;$\n" \
+        "\toperator {1}*()const#return const_cast<{1}*const>(&vk_flag);$\n" \
+        "\toperator {1}*()#return &vk_flag;$\n" \
+        "\n" \
+        "\tbool operator==(int flag_)#return flag==flag_;$\n" \
+        "$;\n".format(my_name.my_name, my_name.vk_name).replace("#", "{").replace("$", "}")
+    '''
         "\t{0}()@#\n"\
         "\t{0}(const decltype(flag) flag_):flag(flag_) @#\n"\
         "\t{0}(const {0}& e_):flag(e_.flag) @#\n"\
         "\t{0}(const {1} flag_) :flag(static_cast<decltype(flag)>(flag_) ) @#\n"\
         "\toperator {1}*()@ return reinterpret_cast<{1}*>(this); #\n"\
+        "\toperator {1}*()const@ return reinterpret_cast<{1}* const >(this); #\n"\
         "\toperator {1}&()@ return reinterpret_cast<{1}&>(*this); #\n" \
         "\t{0}& operator = ({0} e_) @ flag = e_.flag; return *this; #\n"\
         "#;\n" \
@@ -302,7 +313,6 @@ for enum in enum_list:
         "inline bool operator != (const {0} e1_,const {0} e2_)@return e1_.flag != e2_.flag; #\n\n" \
         .format(my_name.my_name,my_name.vk_name).replace("@","{").replace("#","}")
 
-    '''
     
         "inline bool operator == (const decltype({0}::flag) e1_,const {1} e2_)@return e1_ == e2_; #\n"\
         "inline bool operator == (const {1} e2_,const decltype({0}::flag) e1_)@return e1_ == e2_; #\n"\
@@ -360,19 +370,19 @@ for enum in flag_bits_list:
 
         continue
 
-    convert_table+= "template<> struct my_class_convert<"+fb_obj.my_name+"> { using type = "+fb_obj.vk_name+";};\n"
-    convert_table+= "template<> struct my_class_convert<"+fb_obj.vk_name+"> { using type = "+fb_obj.my_name+";};\n"
+    convert_table.append("template<> struct my_class_convert<"+fb_obj.my_name+"> { using type = "+fb_obj.vk_name+";};\n")
+    convert_table.append("template<> struct my_class_convert<"+fb_obj.vk_name+"> { using type = "+fb_obj.my_name+";};\n")
 
     flagbits_out+=\
         "union "+fb_obj.my_name+" {\n"+\
-        "\tuint32_t flag;\n"\
+        "\t"+my_name.vk_name.replace("FlagBits", "Flags")+" flags;\n"\
         "\t"+fb_obj.vk_name+" vk_flag;\n"\
-        "\tenum B{\n"
+        "\tenum {\n"
     '''
         "class " + fb_obj.my_name + " {\n" + \
         "private:\n" + \
         fb_obj.my_name + "(int flag_):flag(flag_){};\n" + \
-        "public:\n" \
+        "public:\n" +\
         "uint32_t flag;\n" \
         "enum B{\n"
     '''
@@ -397,25 +407,30 @@ for enum in flag_bits_list:
 
         fb_obj.members.append(m_obj)
 
-    flagbits_out += "\t};\n"
+    flagbits_out += "\t}flag;\n\n"
 
     flagbits_out += \
-        "\t{0}():flag(0)#$\n"\
-        "\t{0}(const uint32_t flag_):flag(flag_)#$\n" \
-        "\t//{0}(const B flag_):flag(flag_)#$\n" \
-        "\t//{0}(const {1} flag_):vk_flag(flag_)#$\n" \
-        "\t//operator uint32_t()#return flag;$\n" \
-        "\toperator {1}*()# return reinterpret_cast<{1}*>(this); $\n" \
-        "\toperator {1}()#return vk_flag;$\n" \
-        "\toperator {2}&()# return flag; $\n" \
-        "\t{0}& operator=(const {0} flag_)#flag=flag_.flag; return *this;$\n" \
-        "\t{0}& operator|=(const {0} flag_)#flag|=flag_.flag; return *this;$\n" \
-        "\t{0}& operator&=(const {0} flag_)#flag&=flag_.flag; return *this;$\n" \
-        "\t{0}& operator^=(const {0} flag_)#flag^=flag_.flag;return *this;$\n" \
-        "\t{0} operator~()#return ~flag;$\n" \
-        "\tbool operator==(const {0} flag_)#return flag==flag_.flag;$\n" \
+        "\t{0}():flags(0)#$\n"\
+        "\t{0}(const uint32_t flag_):flags(flag_)#$\n" \
+        "\n" \
+        "\toperator {1}&()#return vk_flag;$\n" \
+        "\toperator {1}*()#return &vk_flag; $\n" \
+        "\toperator {1}*()const#return const_cast<{1}*const>(&vk_flag); $\n" \
+        "\n" \
+        "\toperator {2}&()#return flags; $\n" \
+        "\toperator {2}*()const#return const_cast<{2}*const>(&flags); $\n" \
+        "\toperator {2}*()#return &flags; $\n" \
+        "\n" \
+        "\t{0}& operator=(const {0} flag_)#flags=flag_.flags; return *this;$\n" \
+        "\t{0}& operator|=(const {0} flag_)#flags|=flag_.flags; return *this;$\n" \
+        "\t{0}& operator&=(const {0} flag_)#flags&=flag_.flags; return *this;$\n" \
+        "\t{0}& operator^=(const {0} flag_)#flags^=flag_.flags;return *this;$\n" \
+        "\t{0} operator~()#return ~flags;$\n" \
+        "\n" \
+        "\tbool operator==(const {0} flag_)#return flags==flag_.flags;$\n" \
         "\tbool operator!=(const {0} flag_)#return !(*this==flag_);$\n" \
-        "\t{0}& clear()#flag = 0;return *this;$\n" \
+        "\n" \
+        "\t{0}& clear()#flags = 0;return *this;$\n" \
         "\t{0} all_flags()# return " \
         .format(fb_obj.my_name, fb_obj.vk_name,my_name.vk_name.replace("FlagBits", "Flags")).replace("#", "{").replace("$", "}")
 
@@ -456,25 +471,26 @@ for enum in flag_bits_list:
 
     for m in fb_obj.members:
         flagbits_out += "\t"+fb_obj.my_name+"& on_"+m.name.replace("b_","")+"()" \
-                          "{ flag |= "+m.name+"; return *this; }\n"
+                          "{ flags |= "+m.name+"; return *this; }\n"
         flagbits_out += "\t"+fb_obj.my_name + "& off_"+m.name.replace("b_","")+"()"\
-                          "{ flag &= ~" + m.name+"; return *this; }\n"
+                          "{ flags &= ~" + m.name+"; return *this; }\n"
 
     #flagbits_out+="\t"+fb_obj.vk_name+" get_vkfb(){ return "+fb_obj.vk_name+"(flag); }\n"
     flagbits_out+="};\n"
 
+    '''  
     flagbits_out+=\
-        "inline {0} operator&(const {0} f1_, const {0} f2_)#return f1_.flag&f2_.flag;$\n" \
-        "inline {0} operator&(const {0} f1_, const {0}::B f2_)#return f1_.flag&uint32_t(f2_);$\n" \
-        "inline {0} operator&(const {0}::B f1_, const {0} f2_)#return uint32_t(f1_)&f2_.flag;$\n" \
-        "inline {0} operator&(const {0} f1_, const {1} f2_)#return f1_.flag&uint32_t(f2_);$\n" \
-        "inline {0} operator&(const {1} f1_, const {0} f2_)#return uint32_t(f1_)&f2_.flag;$\n" \
-        "inline {0} operator|(const {0} f1_, const {0} f2_)#return f1_.flag|f2_.flag;$\n" \
-        "inline {0} operator^(const {0} f1_, const {0} f2_)#return f1_.flag^f2_.flag;$\n" \
+        "inline {0} operator&(const {0} f1_, const {0} f2_)#return f1_.flags&f2_.flags;$\n" \
+        "inline {0} operator&(const {0} f1_, const decltype({0}::flag) f2_)#return f1_.flags&uint32_t(f2_);$\n" \
+        "inline {0} operator&(const decltype({0}::flag) f1_, const {0} f2_)#return uint32_t(f1_)&f2_.flags;$\n" \
+        "inline {0} operator&(const {0} f1_, const {1} f2_)#return f1_.flags&uint32_t(f2_);$\n" \
+        "inline {0} operator&(const {1} f1_, const {0} f2_)#return uint32_t(f1_)&f2_.flags;$\n" \
+        "inline {0} operator|(const {0} f1_, const {0} f2_)#return f1_.flags|f2_.flags;$\n" \
+        "inline {0} operator^(const {0} f1_, const {0} f2_)#return f1_.flags^f2_.flags;$\n" \
+        "\n" \
             .format(fb_obj.my_name,fb_obj.vk_name).replace("#","{").replace("$","}")
 
-
-    '''    
+  
     
         "{0} inline operator|(const {0}::B bit1_, const {0}::B bit2_)@{0} flags(bit1_);return flags | bit2_;$\n" \
         "{0} inline operator|(const {0}::B bit1_, const {0}::B bit2_)@{0} flags(bit1_);return flags | bit2_;$\n" \
@@ -525,17 +541,17 @@ def out_struct(s,cpp_out_str):
         temp = struct_dict.get(ex)
         if temp != None:
             out+=out_struct(temp,cpp_out_str)
-    print(s.my_name)
+    #print(s.my_name)
     out += "/*"+s.comment+"*/\n"
     #平台相关struct用宏包起
     if s.is_wsi == 1:
         out += "#ifdef "+s.wsi_macro+"\n"
 
-    convert_table+= "template<> struct my_class_convert<"+s.my_name+"> { using type = "+s.vk_name+";};\n"
-    convert_table+= "template<> struct my_class_convert<"+s.vk_name+"> { using type = "+s.my_name+";};\n"
+    convert_table.append("template<> struct my_class_convert<"+s.my_name+"> { using type = "+s.vk_name+";};\n")
+    convert_table.append("template<> struct my_class_convert<"+s.vk_name+"> { using type = "+s.my_name+";};\n")
 
     have_const = 0
-    temp_h_out += "struct\t\t" + s.my_name + ":"+s.vk_name+"{\n"
+    temp_h_out += "struct\t" + s.my_name + ":"+s.vk_name+"{\n"
     count = 0
     sType_value = ""
     for m in s.members:
@@ -612,6 +628,7 @@ def out_struct(s,cpp_out_str):
                 #out+=" = "+m.default_value
             count+=1
         temp_h_out+=")"
+        array_memcpy = ""
         count = 0
         for m in s.members:
             #if m.name == "sType" or m.name == "pNext" or m.final_text.find('[') != -1:
@@ -623,13 +640,29 @@ def out_struct(s,cpp_out_str):
                     temp_h_out+=sType_value+"\n\t,nullptr\n\t,"
             else:
                 temp_h_out+="\n\t,"
-            qianzhui = all_type_dict.get(m.type_only,name_dict["VkValidationFlagsEXT"]).my_name[:2]
-            print(qianzhui)
-            if (qianzhui == "E_" or qianzhui == "F_") and m.final_text.find("*")!=-1:
+            #qianzhui = all_type_dict.get(m.type_only,name_dict["VkValidationFlagsEXT"]).my_name[:8].replace("const ","")
+            qianzhui = m.final_text[:8].replace("const ","")
+            #print(m.type_only)
+            if (qianzhui[:2] == "E_" or qianzhui[:2] == "F_") and m.final_text.find("*") != -1:
                 temp_h_out+="*"
-            temp_h_out+=m.name+"_"
+            youkuohao = ""
+            if  m.final_text.find("F_descriptor_set_layout_create") != -1 or \
+                m.final_text.find("F_device_queue_create") != -1 or \
+                m.final_text.find("F_swapchain_create_KHR") != -1 or \
+                m.final_text.find("F_subpass_description") != -1:
+                youkuohao = ")"
+                temp_h_out+="static_cast<VkFlags>("
+            print(m.type_only)
+
+            if m.final_text.find("[")!=-1:
+                temp_h_out+="{}"
+                array_memcpy+="\n\t\tmemcpy("+m.name+","+m.name+"_,sizeof("+m.name+"_) );"
+            else:
+                temp_h_out+=m.name+"_"
+            temp_h_out+=youkuohao
             count+=1
-        temp_h_out+="}\n\t{\t}\n"
+        temp_h_out+="}\n\t{" \
+                    +array_memcpy+"\n\t}\n"
         '''
         count_temp = 0
         for m in s.members:
@@ -654,6 +687,12 @@ def out_struct(s,cpp_out_str):
             if ex2_s.is_wsi == 1:
                 temp_h_out+="#endif\n"
             count+=1
+
+    temp_h_out+=\
+        "\n"\
+        "\t{0}& operator=(const {1}& rhs)#static_cast<{1}&>(*this)=rhs; return *this;$\n" \
+        "\toperator {1}*()const#return const_cast<{1}*>(static_cast<const {1}*>(this));$\n" \
+        .format(s.my_name, s.vk_name).replace("#", "{").replace("$", "}")
 
 #pNext
     cpp_str = ""
@@ -708,14 +747,14 @@ def out_struct(s,cpp_out_str):
             if ex_s.is_wsi==1:
                 cpp_str2+="#ifdef "+ex_s.wsi_macro+"\n"
             cpp_str2 += N_name + "& "+N_name+"::\nn_"+ex_s.my_name.replace("S_","")+"("+ex_s.my_name+" const& next_)\n{\n"+\
-                            "void* next = (void*)&next_;void* tail;\n" \
-                            "if (pNext != nullptr){\n" \
-                            "do {tail = next;next = ((S_base_structure*)next)->pNext;} \n" \
-                            "while (next != nullptr);\n" \
-                            "((S_base_structure*)tail)->pNext = (void*)pNext;\n" \
-                            "}\n" \
-                            "pNext = (void*)&next_;\n"\
-                            "return *this;\n}\n"
+                "void* next = (void*)&next_;void* tail;\n" \
+                "if (pNext != nullptr){\n" \
+                "do {tail = next;next = ((S_base_structure*)next)->pNext;} \n" \
+                "while (next != nullptr);\n" \
+                "((S_base_structure*)tail)->pNext = (void*)pNext;\n" \
+                "}\n" \
+                "pNext = (void*)&next_;\n"\
+                "return *this;\n}\n"
             if ex_s.is_wsi==1:
                 cpp_str2+="#endif\n"
             else:
@@ -967,7 +1006,12 @@ cpp_out+="\n}}" \
 cpp_file = open("..\\src\\types.cpp","w")
 cpp_file.write(cpp_out)
 
-convert_table_file = open("..\\include\\class_convert_table.h")
-convert_table_file.write(convert_table)
+convert_table_str = ""
+for str in convert_table:
+    convert_table_str+=str
+
+
+#convert_table_file = open("..\\include\\class_convert_table.h","w")
+#convert_table_file.write(convert_table_str)
 
 

@@ -258,7 +258,7 @@ namespace laka { namespace vk {
         info.set_pNext(next_);
 
         VkInstance this_handle;
-        auto ret = vkCreateInstance(info, allocator_, &this_handle);
+        auto ret = vkCreateInstance(&info, allocator_, &this_handle);
         show_result(ret);
         if (ret < 0)
         {
@@ -978,7 +978,7 @@ shared_ptr<Surface> Instance::get_a_surface(
     Alloc_callback_ptr              allocator_ /*= default_allocation_cb()*/)
 {
     shared_ptr<Surface> sptr;
-    auto allocator = allocator_ == s_acb ? allocator_callbacks_ptr : allocator_;
+    auto allocator = allocator_ == &s_acb ? allocator_callbacks_ptr : allocator_;
 
     VkSurfaceKHR surface_handle;
     auto ret = surface_create_fun(handle, create_info_, allocator, &surface_handle);
@@ -1567,7 +1567,7 @@ shared_ptr<Surface> Instance::get_a_surface(
             handle, heapIndex_, localDeviceIndex_, remoteDeviceIndex_, &result
         );
         F_peer_memory_feature f;
-        f.flag = result;
+        f = result;
         return f;
     }
 
@@ -1983,7 +1983,7 @@ shared_ptr<Surface> Instance::get_a_surface(
         auto pdev_memory_properties = physical_devices[0]->get_memory_properties();
         Pramater_choose_memory_type memory_properties{
             pdev_memory_properties->memoryTypeCount,
-            &pdev_memory_properties->memoryTypes[0]
+            static_cast<S_memory_type*>(&pdev_memory_properties->memoryTypes[0])
         };
         Pramater_choose_result choose_result{ 0 };
 

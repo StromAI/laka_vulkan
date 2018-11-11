@@ -132,11 +132,12 @@
     <ClInclude Include="..\common_files\include\laka_vk_define.h" />
     <ClInclude Include="..\common_files\include\types.h" />
     <ClInclude Include="..\common_files\include\vk_mean.h" />
-    <ClInclude Include="class_convert_table.h" />
     <ClInclude Include="vk.h" />
   </ItemGroup>
   <ItemGroup>
-    <Xml Include="..\common_files\vk.xml" />
+    <Xml Include="..\common_files\vk.xml">
+      <SubType>Designer</SubType>
+    </Xml>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\common_files\code_generation\vk_types.py" />

@@ -8,1730 +8,1661 @@
 namespace laka { namespace vk {
 /*	VkImageLayout
 */
-template<> struct my_class_convert<E_image_layout> { using type = VkImageLayout;};template<> struct my_class_convert<VkImageLayout> { using type = E_image_layout;};struct E_image_layout{
-enum{
-	e_undefined = VK_IMAGE_LAYOUT_UNDEFINED,
-	e_general = VK_IMAGE_LAYOUT_GENERAL,
-	e_color_attachment_optimal = VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL,
-	e_depth_stencil_attachment_optimal = VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL,
-	e_depth_stencil_read_only_optimal = VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL,
-	e_shader_read_only_optimal = VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,
-	e_transfer_src_optimal = VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL,
-	e_transfer_dst_optimal = VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL,
-	e_preinitialized = VK_IMAGE_LAYOUT_PREINITIALIZED,
-}flag;
-	E_image_layout(){}
-	E_image_layout(const decltype(flag) flag_):flag(flag_) {}
-	E_image_layout(const E_image_layout& e_):flag(e_.flag) {}
-	E_image_layout(const VkImageLayout flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
-	operator VkImageLayout*(){ return reinterpret_cast<VkImageLayout*>(this); }
-	operator VkImageLayout&(){ return reinterpret_cast<VkImageLayout&>(*this); }
-	E_image_layout& operator = (E_image_layout e_) { flag = e_.flag; return *this; }
-};
-inline bool operator == (const E_image_layout e1_,const E_image_layout e2_){return e1_.flag == e2_.flag; }
-inline bool operator != (const E_image_layout e1_,const E_image_layout e2_){return e1_.flag != e2_.flag; }
+union E_image_layout{
+	enum{
+		e_undefined = VK_IMAGE_LAYOUT_UNDEFINED,
+		e_general = VK_IMAGE_LAYOUT_GENERAL,
+		e_color_attachment_optimal = VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL,
+		e_depth_stencil_attachment_optimal = VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL,
+		e_depth_stencil_read_only_optimal = VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL,
+		e_shader_read_only_optimal = VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL,
+		e_transfer_src_optimal = VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL,
+		e_transfer_dst_optimal = VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL,
+		e_preinitialized = VK_IMAGE_LAYOUT_PREINITIALIZED,
+	}flag;
+	VkImageLayout vk_flag;
 
+	E_image_layout(){}
+	E_image_layout(const VkImageLayout flag_):flag(static_cast<decltype(flag)>(flag_) ){}
+	E_image_layout(const decltype(flag) flag_):flag(flag_){}
+
+	operator VkImageLayout&(){return vk_flag;}
+	operator VkImageLayout*()const{return const_cast<VkImageLayout*const>(&vk_flag);}
+	operator VkImageLayout*(){return &vk_flag;}
+
+	bool operator==(int flag_){return flag==flag_;}
+};
 /*	VkAttachmentLoadOp
 */
-template<> struct my_class_convert<E_attachment_load_op> { using type = VkAttachmentLoadOp;};template<> struct my_class_convert<VkAttachmentLoadOp> { using type = E_attachment_load_op;};struct E_attachment_load_op{
-enum{
-	e_load = VK_ATTACHMENT_LOAD_OP_LOAD,
-	e_clear = VK_ATTACHMENT_LOAD_OP_CLEAR,
-	e_dont_care = VK_ATTACHMENT_LOAD_OP_DONT_CARE,
-}flag;
-	E_attachment_load_op(){}
-	E_attachment_load_op(const decltype(flag) flag_):flag(flag_) {}
-	E_attachment_load_op(const E_attachment_load_op& e_):flag(e_.flag) {}
-	E_attachment_load_op(const VkAttachmentLoadOp flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
-	operator VkAttachmentLoadOp*(){ return reinterpret_cast<VkAttachmentLoadOp*>(this); }
-	operator VkAttachmentLoadOp&(){ return reinterpret_cast<VkAttachmentLoadOp&>(*this); }
-	E_attachment_load_op& operator = (E_attachment_load_op e_) { flag = e_.flag; return *this; }
-};
-inline bool operator == (const E_attachment_load_op e1_,const E_attachment_load_op e2_){return e1_.flag == e2_.flag; }
-inline bool operator != (const E_attachment_load_op e1_,const E_attachment_load_op e2_){return e1_.flag != e2_.flag; }
+union E_attachment_load_op{
+	enum{
+		e_load = VK_ATTACHMENT_LOAD_OP_LOAD,
+		e_clear = VK_ATTACHMENT_LOAD_OP_CLEAR,
+		e_dont_care = VK_ATTACHMENT_LOAD_OP_DONT_CARE,
+	}flag;
+	VkAttachmentLoadOp vk_flag;
 
+	E_attachment_load_op(){}
+	E_attachment_load_op(const VkAttachmentLoadOp flag_):flag(static_cast<decltype(flag)>(flag_) ){}
+	E_attachment_load_op(const decltype(flag) flag_):flag(flag_){}
+
+	operator VkAttachmentLoadOp&(){return vk_flag;}
+	operator VkAttachmentLoadOp*()const{return const_cast<VkAttachmentLoadOp*const>(&vk_flag);}
+	operator VkAttachmentLoadOp*(){return &vk_flag;}
+
+	bool operator==(int flag_){return flag==flag_;}
+};
 /*	VkAttachmentStoreOp
 */
-template<> struct my_class_convert<E_attachment_store_op> { using type = VkAttachmentStoreOp;};template<> struct my_class_convert<VkAttachmentStoreOp> { using type = E_attachment_store_op;};struct E_attachment_store_op{
-enum{
-	e_store = VK_ATTACHMENT_STORE_OP_STORE,
-	e_dont_care = VK_ATTACHMENT_STORE_OP_DONT_CARE,
-}flag;
-	E_attachment_store_op(){}
-	E_attachment_store_op(const decltype(flag) flag_):flag(flag_) {}
-	E_attachment_store_op(const E_attachment_store_op& e_):flag(e_.flag) {}
-	E_attachment_store_op(const VkAttachmentStoreOp flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
-	operator VkAttachmentStoreOp*(){ return reinterpret_cast<VkAttachmentStoreOp*>(this); }
-	operator VkAttachmentStoreOp&(){ return reinterpret_cast<VkAttachmentStoreOp&>(*this); }
-	E_attachment_store_op& operator = (E_attachment_store_op e_) { flag = e_.flag; return *this; }
-};
-inline bool operator == (const E_attachment_store_op e1_,const E_attachment_store_op e2_){return e1_.flag == e2_.flag; }
-inline bool operator != (const E_attachment_store_op e1_,const E_attachment_store_op e2_){return e1_.flag != e2_.flag; }
+union E_attachment_store_op{
+	enum{
+		e_store = VK_ATTACHMENT_STORE_OP_STORE,
+		e_dont_care = VK_ATTACHMENT_STORE_OP_DONT_CARE,
+	}flag;
+	VkAttachmentStoreOp vk_flag;
 
+	E_attachment_store_op(){}
+	E_attachment_store_op(const VkAttachmentStoreOp flag_):flag(static_cast<decltype(flag)>(flag_) ){}
+	E_attachment_store_op(const decltype(flag) flag_):flag(flag_){}
+
+	operator VkAttachmentStoreOp&(){return vk_flag;}
+	operator VkAttachmentStoreOp*()const{return const_cast<VkAttachmentStoreOp*const>(&vk_flag);}
+	operator VkAttachmentStoreOp*(){return &vk_flag;}
+
+	bool operator==(int flag_){return flag==flag_;}
+};
 /*	VkImageType
 */
-template<> struct my_class_convert<E_image_type> { using type = VkImageType;};template<> struct my_class_convert<VkImageType> { using type = E_image_type;};struct E_image_type{
-enum{
-	e_1d = VK_IMAGE_TYPE_1D,
-	e_2d = VK_IMAGE_TYPE_2D,
-	e_3d = VK_IMAGE_TYPE_3D,
-}flag;
-	E_image_type(){}
-	E_image_type(const decltype(flag) flag_):flag(flag_) {}
-	E_image_type(const E_image_type& e_):flag(e_.flag) {}
-	E_image_type(const VkImageType flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
-	operator VkImageType*(){ return reinterpret_cast<VkImageType*>(this); }
-	operator VkImageType&(){ return reinterpret_cast<VkImageType&>(*this); }
-	E_image_type& operator = (E_image_type e_) { flag = e_.flag; return *this; }
-};
-inline bool operator == (const E_image_type e1_,const E_image_type e2_){return e1_.flag == e2_.flag; }
-inline bool operator != (const E_image_type e1_,const E_image_type e2_){return e1_.flag != e2_.flag; }
+union E_image_type{
+	enum{
+		e_1d = VK_IMAGE_TYPE_1D,
+		e_2d = VK_IMAGE_TYPE_2D,
+		e_3d = VK_IMAGE_TYPE_3D,
+	}flag;
+	VkImageType vk_flag;
 
+	E_image_type(){}
+	E_image_type(const VkImageType flag_):flag(static_cast<decltype(flag)>(flag_) ){}
+	E_image_type(const decltype(flag) flag_):flag(flag_){}
+
+	operator VkImageType&(){return vk_flag;}
+	operator VkImageType*()const{return const_cast<VkImageType*const>(&vk_flag);}
+	operator VkImageType*(){return &vk_flag;}
+
+	bool operator==(int flag_){return flag==flag_;}
+};
 /*	VkImageTiling
 */
-template<> struct my_class_convert<E_image_tiling> { using type = VkImageTiling;};template<> struct my_class_convert<VkImageTiling> { using type = E_image_tiling;};struct E_image_tiling{
-enum{
-	e_optimal = VK_IMAGE_TILING_OPTIMAL,
-	e_linear = VK_IMAGE_TILING_LINEAR,
-}flag;
-	E_image_tiling(){}
-	E_image_tiling(const decltype(flag) flag_):flag(flag_) {}
-	E_image_tiling(const E_image_tiling& e_):flag(e_.flag) {}
-	E_image_tiling(const VkImageTiling flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
-	operator VkImageTiling*(){ return reinterpret_cast<VkImageTiling*>(this); }
-	operator VkImageTiling&(){ return reinterpret_cast<VkImageTiling&>(*this); }
-	E_image_tiling& operator = (E_image_tiling e_) { flag = e_.flag; return *this; }
-};
-inline bool operator == (const E_image_tiling e1_,const E_image_tiling e2_){return e1_.flag == e2_.flag; }
-inline bool operator != (const E_image_tiling e1_,const E_image_tiling e2_){return e1_.flag != e2_.flag; }
+union E_image_tiling{
+	enum{
+		e_optimal = VK_IMAGE_TILING_OPTIMAL,
+		e_linear = VK_IMAGE_TILING_LINEAR,
+	}flag;
+	VkImageTiling vk_flag;
 
+	E_image_tiling(){}
+	E_image_tiling(const VkImageTiling flag_):flag(static_cast<decltype(flag)>(flag_) ){}
+	E_image_tiling(const decltype(flag) flag_):flag(flag_){}
+
+	operator VkImageTiling&(){return vk_flag;}
+	operator VkImageTiling*()const{return const_cast<VkImageTiling*const>(&vk_flag);}
+	operator VkImageTiling*(){return &vk_flag;}
+
+	bool operator==(int flag_){return flag==flag_;}
+};
 /*	VkImageViewType
 */
-template<> struct my_class_convert<E_image_view_type> { using type = VkImageViewType;};template<> struct my_class_convert<VkImageViewType> { using type = E_image_view_type;};struct E_image_view_type{
-enum{
-	e_1d = VK_IMAGE_VIEW_TYPE_1D,
-	e_2d = VK_IMAGE_VIEW_TYPE_2D,
-	e_3d = VK_IMAGE_VIEW_TYPE_3D,
-	e_cube = VK_IMAGE_VIEW_TYPE_CUBE,
-	e_1d_array = VK_IMAGE_VIEW_TYPE_1D_ARRAY,
-	e_2d_array = VK_IMAGE_VIEW_TYPE_2D_ARRAY,
-	e_cube_array = VK_IMAGE_VIEW_TYPE_CUBE_ARRAY,
-}flag;
-	E_image_view_type(){}
-	E_image_view_type(const decltype(flag) flag_):flag(flag_) {}
-	E_image_view_type(const E_image_view_type& e_):flag(e_.flag) {}
-	E_image_view_type(const VkImageViewType flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
-	operator VkImageViewType*(){ return reinterpret_cast<VkImageViewType*>(this); }
-	operator VkImageViewType&(){ return reinterpret_cast<VkImageViewType&>(*this); }
-	E_image_view_type& operator = (E_image_view_type e_) { flag = e_.flag; return *this; }
-};
-inline bool operator == (const E_image_view_type e1_,const E_image_view_type e2_){return e1_.flag == e2_.flag; }
-inline bool operator != (const E_image_view_type e1_,const E_image_view_type e2_){return e1_.flag != e2_.flag; }
+union E_image_view_type{
+	enum{
+		e_1d = VK_IMAGE_VIEW_TYPE_1D,
+		e_2d = VK_IMAGE_VIEW_TYPE_2D,
+		e_3d = VK_IMAGE_VIEW_TYPE_3D,
+		e_cube = VK_IMAGE_VIEW_TYPE_CUBE,
+		e_1d_array = VK_IMAGE_VIEW_TYPE_1D_ARRAY,
+		e_2d_array = VK_IMAGE_VIEW_TYPE_2D_ARRAY,
+		e_cube_array = VK_IMAGE_VIEW_TYPE_CUBE_ARRAY,
+	}flag;
+	VkImageViewType vk_flag;
 
+	E_image_view_type(){}
+	E_image_view_type(const VkImageViewType flag_):flag(static_cast<decltype(flag)>(flag_) ){}
+	E_image_view_type(const decltype(flag) flag_):flag(flag_){}
+
+	operator VkImageViewType&(){return vk_flag;}
+	operator VkImageViewType*()const{return const_cast<VkImageViewType*const>(&vk_flag);}
+	operator VkImageViewType*(){return &vk_flag;}
+
+	bool operator==(int flag_){return flag==flag_;}
+};
 /*	VkCommandBufferLevel
 */
-template<> struct my_class_convert<E_command_buffer_level> { using type = VkCommandBufferLevel;};template<> struct my_class_convert<VkCommandBufferLevel> { using type = E_command_buffer_level;};struct E_command_buffer_level{
-enum{
-	e_primary = VK_COMMAND_BUFFER_LEVEL_PRIMARY,
-	e_secondary = VK_COMMAND_BUFFER_LEVEL_SECONDARY,
-}flag;
-	E_command_buffer_level(){}
-	E_command_buffer_level(const decltype(flag) flag_):flag(flag_) {}
-	E_command_buffer_level(const E_command_buffer_level& e_):flag(e_.flag) {}
-	E_command_buffer_level(const VkCommandBufferLevel flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
-	operator VkCommandBufferLevel*(){ return reinterpret_cast<VkCommandBufferLevel*>(this); }
-	operator VkCommandBufferLevel&(){ return reinterpret_cast<VkCommandBufferLevel&>(*this); }
-	E_command_buffer_level& operator = (E_command_buffer_level e_) { flag = e_.flag; return *this; }
-};
-inline bool operator == (const E_command_buffer_level e1_,const E_command_buffer_level e2_){return e1_.flag == e2_.flag; }
-inline bool operator != (const E_command_buffer_level e1_,const E_command_buffer_level e2_){return e1_.flag != e2_.flag; }
+union E_command_buffer_level{
+	enum{
+		e_primary = VK_COMMAND_BUFFER_LEVEL_PRIMARY,
+		e_secondary = VK_COMMAND_BUFFER_LEVEL_SECONDARY,
+	}flag;
+	VkCommandBufferLevel vk_flag;
 
+	E_command_buffer_level(){}
+	E_command_buffer_level(const VkCommandBufferLevel flag_):flag(static_cast<decltype(flag)>(flag_) ){}
+	E_command_buffer_level(const decltype(flag) flag_):flag(flag_){}
+
+	operator VkCommandBufferLevel&(){return vk_flag;}
+	operator VkCommandBufferLevel*()const{return const_cast<VkCommandBufferLevel*const>(&vk_flag);}
+	operator VkCommandBufferLevel*(){return &vk_flag;}
+
+	bool operator==(int flag_){return flag==flag_;}
+};
 /*	VkComponentSwizzle
 */
-template<> struct my_class_convert<E_component_swizzle> { using type = VkComponentSwizzle;};template<> struct my_class_convert<VkComponentSwizzle> { using type = E_component_swizzle;};struct E_component_swizzle{
-enum{
-	e_identity = VK_COMPONENT_SWIZZLE_IDENTITY,
-	e_zero = VK_COMPONENT_SWIZZLE_ZERO,
-	e_one = VK_COMPONENT_SWIZZLE_ONE,
-	e_r = VK_COMPONENT_SWIZZLE_R,
-	e_g = VK_COMPONENT_SWIZZLE_G,
-	e_b = VK_COMPONENT_SWIZZLE_B,
-	e_a = VK_COMPONENT_SWIZZLE_A,
-}flag;
-	E_component_swizzle(){}
-	E_component_swizzle(const decltype(flag) flag_):flag(flag_) {}
-	E_component_swizzle(const E_component_swizzle& e_):flag(e_.flag) {}
-	E_component_swizzle(const VkComponentSwizzle flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
-	operator VkComponentSwizzle*(){ return reinterpret_cast<VkComponentSwizzle*>(this); }
-	operator VkComponentSwizzle&(){ return reinterpret_cast<VkComponentSwizzle&>(*this); }
-	E_component_swizzle& operator = (E_component_swizzle e_) { flag = e_.flag; return *this; }
-};
-inline bool operator == (const E_component_swizzle e1_,const E_component_swizzle e2_){return e1_.flag == e2_.flag; }
-inline bool operator != (const E_component_swizzle e1_,const E_component_swizzle e2_){return e1_.flag != e2_.flag; }
+union E_component_swizzle{
+	enum{
+		e_identity = VK_COMPONENT_SWIZZLE_IDENTITY,
+		e_zero = VK_COMPONENT_SWIZZLE_ZERO,
+		e_one = VK_COMPONENT_SWIZZLE_ONE,
+		e_r = VK_COMPONENT_SWIZZLE_R,
+		e_g = VK_COMPONENT_SWIZZLE_G,
+		e_b = VK_COMPONENT_SWIZZLE_B,
+		e_a = VK_COMPONENT_SWIZZLE_A,
+	}flag;
+	VkComponentSwizzle vk_flag;
 
+	E_component_swizzle(){}
+	E_component_swizzle(const VkComponentSwizzle flag_):flag(static_cast<decltype(flag)>(flag_) ){}
+	E_component_swizzle(const decltype(flag) flag_):flag(flag_){}
+
+	operator VkComponentSwizzle&(){return vk_flag;}
+	operator VkComponentSwizzle*()const{return const_cast<VkComponentSwizzle*const>(&vk_flag);}
+	operator VkComponentSwizzle*(){return &vk_flag;}
+
+	bool operator==(int flag_){return flag==flag_;}
+};
 /*	VkDescriptorType
 */
-template<> struct my_class_convert<E_descriptor_type> { using type = VkDescriptorType;};template<> struct my_class_convert<VkDescriptorType> { using type = E_descriptor_type;};struct E_descriptor_type{
-enum{
-	e_sampler = VK_DESCRIPTOR_TYPE_SAMPLER,
-	e_combined_image_sampler = VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,
-	e_sampled_image = VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE,
-	e_storage_image = VK_DESCRIPTOR_TYPE_STORAGE_IMAGE,
-	e_uniform_texel_buffer = VK_DESCRIPTOR_TYPE_UNIFORM_TEXEL_BUFFER,
-	e_storage_texel_buffer = VK_DESCRIPTOR_TYPE_STORAGE_TEXEL_BUFFER,
-	e_uniform_buffer = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER,
-	e_storage_buffer = VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,
-	e_uniform_buffer_dynamic = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER_DYNAMIC,
-	e_storage_buffer_dynamic = VK_DESCRIPTOR_TYPE_STORAGE_BUFFER_DYNAMIC,
-	e_input_attachment = VK_DESCRIPTOR_TYPE_INPUT_ATTACHMENT,
-}flag;
-	E_descriptor_type(){}
-	E_descriptor_type(const decltype(flag) flag_):flag(flag_) {}
-	E_descriptor_type(const E_descriptor_type& e_):flag(e_.flag) {}
-	E_descriptor_type(const VkDescriptorType flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
-	operator VkDescriptorType*(){ return reinterpret_cast<VkDescriptorType*>(this); }
-	operator VkDescriptorType&(){ return reinterpret_cast<VkDescriptorType&>(*this); }
-	E_descriptor_type& operator = (E_descriptor_type e_) { flag = e_.flag; return *this; }
-};
-inline bool operator == (const E_descriptor_type e1_,const E_descriptor_type e2_){return e1_.flag == e2_.flag; }
-inline bool operator != (const E_descriptor_type e1_,const E_descriptor_type e2_){return e1_.flag != e2_.flag; }
+union E_descriptor_type{
+	enum{
+		e_sampler = VK_DESCRIPTOR_TYPE_SAMPLER,
+		e_combined_image_sampler = VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER,
+		e_sampled_image = VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE,
+		e_storage_image = VK_DESCRIPTOR_TYPE_STORAGE_IMAGE,
+		e_uniform_texel_buffer = VK_DESCRIPTOR_TYPE_UNIFORM_TEXEL_BUFFER,
+		e_storage_texel_buffer = VK_DESCRIPTOR_TYPE_STORAGE_TEXEL_BUFFER,
+		e_uniform_buffer = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER,
+		e_storage_buffer = VK_DESCRIPTOR_TYPE_STORAGE_BUFFER,
+		e_uniform_buffer_dynamic = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER_DYNAMIC,
+		e_storage_buffer_dynamic = VK_DESCRIPTOR_TYPE_STORAGE_BUFFER_DYNAMIC,
+		e_input_attachment = VK_DESCRIPTOR_TYPE_INPUT_ATTACHMENT,
+	}flag;
+	VkDescriptorType vk_flag;
 
+	E_descriptor_type(){}
+	E_descriptor_type(const VkDescriptorType flag_):flag(static_cast<decltype(flag)>(flag_) ){}
+	E_descriptor_type(const decltype(flag) flag_):flag(flag_){}
+
+	operator VkDescriptorType&(){return vk_flag;}
+	operator VkDescriptorType*()const{return const_cast<VkDescriptorType*const>(&vk_flag);}
+	operator VkDescriptorType*(){return &vk_flag;}
+
+	bool operator==(int flag_){return flag==flag_;}
+};
 /*	VkQueryType
 */
-template<> struct my_class_convert<E_query_type> { using type = VkQueryType;};template<> struct my_class_convert<VkQueryType> { using type = E_query_type;};struct E_query_type{
-enum{
-	e_occlusion = VK_QUERY_TYPE_OCCLUSION,
-	e_pipeline_statistics = VK_QUERY_TYPE_PIPELINE_STATISTICS,
-	e_timestamp = VK_QUERY_TYPE_TIMESTAMP,
-}flag;
-	E_query_type(){}
-	E_query_type(const decltype(flag) flag_):flag(flag_) {}
-	E_query_type(const E_query_type& e_):flag(e_.flag) {}
-	E_query_type(const VkQueryType flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
-	operator VkQueryType*(){ return reinterpret_cast<VkQueryType*>(this); }
-	operator VkQueryType&(){ return reinterpret_cast<VkQueryType&>(*this); }
-	E_query_type& operator = (E_query_type e_) { flag = e_.flag; return *this; }
-};
-inline bool operator == (const E_query_type e1_,const E_query_type e2_){return e1_.flag == e2_.flag; }
-inline bool operator != (const E_query_type e1_,const E_query_type e2_){return e1_.flag != e2_.flag; }
+union E_query_type{
+	enum{
+		e_occlusion = VK_QUERY_TYPE_OCCLUSION,
+		e_pipeline_statistics = VK_QUERY_TYPE_PIPELINE_STATISTICS,
+		e_timestamp = VK_QUERY_TYPE_TIMESTAMP,
+	}flag;
+	VkQueryType vk_flag;
 
+	E_query_type(){}
+	E_query_type(const VkQueryType flag_):flag(static_cast<decltype(flag)>(flag_) ){}
+	E_query_type(const decltype(flag) flag_):flag(flag_){}
+
+	operator VkQueryType&(){return vk_flag;}
+	operator VkQueryType*()const{return const_cast<VkQueryType*const>(&vk_flag);}
+	operator VkQueryType*(){return &vk_flag;}
+
+	bool operator==(int flag_){return flag==flag_;}
+};
 /*	VkBorderColor
 */
-template<> struct my_class_convert<E_border_color> { using type = VkBorderColor;};template<> struct my_class_convert<VkBorderColor> { using type = E_border_color;};struct E_border_color{
-enum{
-	e_float_transparent_black = VK_BORDER_COLOR_FLOAT_TRANSPARENT_BLACK,
-	e_int_transparent_black = VK_BORDER_COLOR_INT_TRANSPARENT_BLACK,
-	e_float_opaque_black = VK_BORDER_COLOR_FLOAT_OPAQUE_BLACK,
-	e_int_opaque_black = VK_BORDER_COLOR_INT_OPAQUE_BLACK,
-	e_float_opaque_white = VK_BORDER_COLOR_FLOAT_OPAQUE_WHITE,
-	e_int_opaque_white = VK_BORDER_COLOR_INT_OPAQUE_WHITE,
-}flag;
-	E_border_color(){}
-	E_border_color(const decltype(flag) flag_):flag(flag_) {}
-	E_border_color(const E_border_color& e_):flag(e_.flag) {}
-	E_border_color(const VkBorderColor flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
-	operator VkBorderColor*(){ return reinterpret_cast<VkBorderColor*>(this); }
-	operator VkBorderColor&(){ return reinterpret_cast<VkBorderColor&>(*this); }
-	E_border_color& operator = (E_border_color e_) { flag = e_.flag; return *this; }
-};
-inline bool operator == (const E_border_color e1_,const E_border_color e2_){return e1_.flag == e2_.flag; }
-inline bool operator != (const E_border_color e1_,const E_border_color e2_){return e1_.flag != e2_.flag; }
+union E_border_color{
+	enum{
+		e_float_transparent_black = VK_BORDER_COLOR_FLOAT_TRANSPARENT_BLACK,
+		e_int_transparent_black = VK_BORDER_COLOR_INT_TRANSPARENT_BLACK,
+		e_float_opaque_black = VK_BORDER_COLOR_FLOAT_OPAQUE_BLACK,
+		e_int_opaque_black = VK_BORDER_COLOR_INT_OPAQUE_BLACK,
+		e_float_opaque_white = VK_BORDER_COLOR_FLOAT_OPAQUE_WHITE,
+		e_int_opaque_white = VK_BORDER_COLOR_INT_OPAQUE_WHITE,
+	}flag;
+	VkBorderColor vk_flag;
 
+	E_border_color(){}
+	E_border_color(const VkBorderColor flag_):flag(static_cast<decltype(flag)>(flag_) ){}
+	E_border_color(const decltype(flag) flag_):flag(flag_){}
+
+	operator VkBorderColor&(){return vk_flag;}
+	operator VkBorderColor*()const{return const_cast<VkBorderColor*const>(&vk_flag);}
+	operator VkBorderColor*(){return &vk_flag;}
+
+	bool operator==(int flag_){return flag==flag_;}
+};
 /*	VkPipelineBindPoint
 */
-template<> struct my_class_convert<E_pipeline_bind_point> { using type = VkPipelineBindPoint;};template<> struct my_class_convert<VkPipelineBindPoint> { using type = E_pipeline_bind_point;};struct E_pipeline_bind_point{
-enum{
-	e_graphics = VK_PIPELINE_BIND_POINT_GRAPHICS,
-	e_compute = VK_PIPELINE_BIND_POINT_COMPUTE,
-}flag;
-	E_pipeline_bind_point(){}
-	E_pipeline_bind_point(const decltype(flag) flag_):flag(flag_) {}
-	E_pipeline_bind_point(const E_pipeline_bind_point& e_):flag(e_.flag) {}
-	E_pipeline_bind_point(const VkPipelineBindPoint flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
-	operator VkPipelineBindPoint*(){ return reinterpret_cast<VkPipelineBindPoint*>(this); }
-	operator VkPipelineBindPoint&(){ return reinterpret_cast<VkPipelineBindPoint&>(*this); }
-	E_pipeline_bind_point& operator = (E_pipeline_bind_point e_) { flag = e_.flag; return *this; }
-};
-inline bool operator == (const E_pipeline_bind_point e1_,const E_pipeline_bind_point e2_){return e1_.flag == e2_.flag; }
-inline bool operator != (const E_pipeline_bind_point e1_,const E_pipeline_bind_point e2_){return e1_.flag != e2_.flag; }
+union E_pipeline_bind_point{
+	enum{
+		e_graphics = VK_PIPELINE_BIND_POINT_GRAPHICS,
+		e_compute = VK_PIPELINE_BIND_POINT_COMPUTE,
+	}flag;
+	VkPipelineBindPoint vk_flag;
 
+	E_pipeline_bind_point(){}
+	E_pipeline_bind_point(const VkPipelineBindPoint flag_):flag(static_cast<decltype(flag)>(flag_) ){}
+	E_pipeline_bind_point(const decltype(flag) flag_):flag(flag_){}
+
+	operator VkPipelineBindPoint&(){return vk_flag;}
+	operator VkPipelineBindPoint*()const{return const_cast<VkPipelineBindPoint*const>(&vk_flag);}
+	operator VkPipelineBindPoint*(){return &vk_flag;}
+
+	bool operator==(int flag_){return flag==flag_;}
+};
 /*	VkPipelineCacheHeaderVersion
 */
-template<> struct my_class_convert<E_pipeline_cache_header_version> { using type = VkPipelineCacheHeaderVersion;};template<> struct my_class_convert<VkPipelineCacheHeaderVersion> { using type = E_pipeline_cache_header_version;};struct E_pipeline_cache_header_version{
-enum{
-	e_one = VK_PIPELINE_CACHE_HEADER_VERSION_ONE,
-}flag;
-	E_pipeline_cache_header_version(){}
-	E_pipeline_cache_header_version(const decltype(flag) flag_):flag(flag_) {}
-	E_pipeline_cache_header_version(const E_pipeline_cache_header_version& e_):flag(e_.flag) {}
-	E_pipeline_cache_header_version(const VkPipelineCacheHeaderVersion flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
-	operator VkPipelineCacheHeaderVersion*(){ return reinterpret_cast<VkPipelineCacheHeaderVersion*>(this); }
-	operator VkPipelineCacheHeaderVersion&(){ return reinterpret_cast<VkPipelineCacheHeaderVersion&>(*this); }
-	E_pipeline_cache_header_version& operator = (E_pipeline_cache_header_version e_) { flag = e_.flag; return *this; }
-};
-inline bool operator == (const E_pipeline_cache_header_version e1_,const E_pipeline_cache_header_version e2_){return e1_.flag == e2_.flag; }
-inline bool operator != (const E_pipeline_cache_header_version e1_,const E_pipeline_cache_header_version e2_){return e1_.flag != e2_.flag; }
+union E_pipeline_cache_header_version{
+	enum{
+		e_one = VK_PIPELINE_CACHE_HEADER_VERSION_ONE,
+	}flag;
+	VkPipelineCacheHeaderVersion vk_flag;
 
+	E_pipeline_cache_header_version(){}
+	E_pipeline_cache_header_version(const VkPipelineCacheHeaderVersion flag_):flag(static_cast<decltype(flag)>(flag_) ){}
+	E_pipeline_cache_header_version(const decltype(flag) flag_):flag(flag_){}
+
+	operator VkPipelineCacheHeaderVersion&(){return vk_flag;}
+	operator VkPipelineCacheHeaderVersion*()const{return const_cast<VkPipelineCacheHeaderVersion*const>(&vk_flag);}
+	operator VkPipelineCacheHeaderVersion*(){return &vk_flag;}
+
+	bool operator==(int flag_){return flag==flag_;}
+};
 /*	VkPrimitiveTopology
 */
-template<> struct my_class_convert<E_primitive_topology> { using type = VkPrimitiveTopology;};template<> struct my_class_convert<VkPrimitiveTopology> { using type = E_primitive_topology;};struct E_primitive_topology{
-enum{
-	e_point_list = VK_PRIMITIVE_TOPOLOGY_POINT_LIST,
-	e_line_list = VK_PRIMITIVE_TOPOLOGY_LINE_LIST,
-	e_line_strip = VK_PRIMITIVE_TOPOLOGY_LINE_STRIP,
-	e_triangle_list = VK_PRIMITIVE_TOPOLOGY_TRIANGLE_LIST,
-	e_triangle_strip = VK_PRIMITIVE_TOPOLOGY_TRIANGLE_STRIP,
-	e_triangle_fan = VK_PRIMITIVE_TOPOLOGY_TRIANGLE_FAN,
-	e_line_list_with_adjacency = VK_PRIMITIVE_TOPOLOGY_LINE_LIST_WITH_ADJACENCY,
-	e_line_strip_with_adjacency = VK_PRIMITIVE_TOPOLOGY_LINE_STRIP_WITH_ADJACENCY,
-	e_triangle_list_with_adjacency = VK_PRIMITIVE_TOPOLOGY_TRIANGLE_LIST_WITH_ADJACENCY,
-	e_triangle_strip_with_adjacency = VK_PRIMITIVE_TOPOLOGY_TRIANGLE_STRIP_WITH_ADJACENCY,
-	e_patch_list = VK_PRIMITIVE_TOPOLOGY_PATCH_LIST,
-}flag;
-	E_primitive_topology(){}
-	E_primitive_topology(const decltype(flag) flag_):flag(flag_) {}
-	E_primitive_topology(const E_primitive_topology& e_):flag(e_.flag) {}
-	E_primitive_topology(const VkPrimitiveTopology flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
-	operator VkPrimitiveTopology*(){ return reinterpret_cast<VkPrimitiveTopology*>(this); }
-	operator VkPrimitiveTopology&(){ return reinterpret_cast<VkPrimitiveTopology&>(*this); }
-	E_primitive_topology& operator = (E_primitive_topology e_) { flag = e_.flag; return *this; }
-};
-inline bool operator == (const E_primitive_topology e1_,const E_primitive_topology e2_){return e1_.flag == e2_.flag; }
-inline bool operator != (const E_primitive_topology e1_,const E_primitive_topology e2_){return e1_.flag != e2_.flag; }
+union E_primitive_topology{
+	enum{
+		e_point_list = VK_PRIMITIVE_TOPOLOGY_POINT_LIST,
+		e_line_list = VK_PRIMITIVE_TOPOLOGY_LINE_LIST,
+		e_line_strip = VK_PRIMITIVE_TOPOLOGY_LINE_STRIP,
+		e_triangle_list = VK_PRIMITIVE_TOPOLOGY_TRIANGLE_LIST,
+		e_triangle_strip = VK_PRIMITIVE_TOPOLOGY_TRIANGLE_STRIP,
+		e_triangle_fan = VK_PRIMITIVE_TOPOLOGY_TRIANGLE_FAN,
+		e_line_list_with_adjacency = VK_PRIMITIVE_TOPOLOGY_LINE_LIST_WITH_ADJACENCY,
+		e_line_strip_with_adjacency = VK_PRIMITIVE_TOPOLOGY_LINE_STRIP_WITH_ADJACENCY,
+		e_triangle_list_with_adjacency = VK_PRIMITIVE_TOPOLOGY_TRIANGLE_LIST_WITH_ADJACENCY,
+		e_triangle_strip_with_adjacency = VK_PRIMITIVE_TOPOLOGY_TRIANGLE_STRIP_WITH_ADJACENCY,
+		e_patch_list = VK_PRIMITIVE_TOPOLOGY_PATCH_LIST,
+	}flag;
+	VkPrimitiveTopology vk_flag;
 
+	E_primitive_topology(){}
+	E_primitive_topology(const VkPrimitiveTopology flag_):flag(static_cast<decltype(flag)>(flag_) ){}
+	E_primitive_topology(const decltype(flag) flag_):flag(flag_){}
+
+	operator VkPrimitiveTopology&(){return vk_flag;}
+	operator VkPrimitiveTopology*()const{return const_cast<VkPrimitiveTopology*const>(&vk_flag);}
+	operator VkPrimitiveTopology*(){return &vk_flag;}
+
+	bool operator==(int flag_){return flag==flag_;}
+};
 /*	VkSharingMode
 */
-template<> struct my_class_convert<E_sharing_mode> { using type = VkSharingMode;};template<> struct my_class_convert<VkSharingMode> { using type = E_sharing_mode;};struct E_sharing_mode{
-enum{
-	e_exclusive = VK_SHARING_MODE_EXCLUSIVE,
-	e_concurrent = VK_SHARING_MODE_CONCURRENT,
-}flag;
-	E_sharing_mode(){}
-	E_sharing_mode(const decltype(flag) flag_):flag(flag_) {}
-	E_sharing_mode(const E_sharing_mode& e_):flag(e_.flag) {}
-	E_sharing_mode(const VkSharingMode flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
-	operator VkSharingMode*(){ return reinterpret_cast<VkSharingMode*>(this); }
-	operator VkSharingMode&(){ return reinterpret_cast<VkSharingMode&>(*this); }
-	E_sharing_mode& operator = (E_sharing_mode e_) { flag = e_.flag; return *this; }
-};
-inline bool operator == (const E_sharing_mode e1_,const E_sharing_mode e2_){return e1_.flag == e2_.flag; }
-inline bool operator != (const E_sharing_mode e1_,const E_sharing_mode e2_){return e1_.flag != e2_.flag; }
+union E_sharing_mode{
+	enum{
+		e_exclusive = VK_SHARING_MODE_EXCLUSIVE,
+		e_concurrent = VK_SHARING_MODE_CONCURRENT,
+	}flag;
+	VkSharingMode vk_flag;
 
+	E_sharing_mode(){}
+	E_sharing_mode(const VkSharingMode flag_):flag(static_cast<decltype(flag)>(flag_) ){}
+	E_sharing_mode(const decltype(flag) flag_):flag(flag_){}
+
+	operator VkSharingMode&(){return vk_flag;}
+	operator VkSharingMode*()const{return const_cast<VkSharingMode*const>(&vk_flag);}
+	operator VkSharingMode*(){return &vk_flag;}
+
+	bool operator==(int flag_){return flag==flag_;}
+};
 /*	VkIndexType
 */
-template<> struct my_class_convert<E_index_type> { using type = VkIndexType;};template<> struct my_class_convert<VkIndexType> { using type = E_index_type;};struct E_index_type{
-enum{
-	e_uint16 = VK_INDEX_TYPE_UINT16,
-	e_uint32 = VK_INDEX_TYPE_UINT32,
-}flag;
-	E_index_type(){}
-	E_index_type(const decltype(flag) flag_):flag(flag_) {}
-	E_index_type(const E_index_type& e_):flag(e_.flag) {}
-	E_index_type(const VkIndexType flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
-	operator VkIndexType*(){ return reinterpret_cast<VkIndexType*>(this); }
-	operator VkIndexType&(){ return reinterpret_cast<VkIndexType&>(*this); }
-	E_index_type& operator = (E_index_type e_) { flag = e_.flag; return *this; }
-};
-inline bool operator == (const E_index_type e1_,const E_index_type e2_){return e1_.flag == e2_.flag; }
-inline bool operator != (const E_index_type e1_,const E_index_type e2_){return e1_.flag != e2_.flag; }
+union E_index_type{
+	enum{
+		e_uint16 = VK_INDEX_TYPE_UINT16,
+		e_uint32 = VK_INDEX_TYPE_UINT32,
+	}flag;
+	VkIndexType vk_flag;
 
+	E_index_type(){}
+	E_index_type(const VkIndexType flag_):flag(static_cast<decltype(flag)>(flag_) ){}
+	E_index_type(const decltype(flag) flag_):flag(flag_){}
+
+	operator VkIndexType&(){return vk_flag;}
+	operator VkIndexType*()const{return const_cast<VkIndexType*const>(&vk_flag);}
+	operator VkIndexType*(){return &vk_flag;}
+
+	bool operator==(int flag_){return flag==flag_;}
+};
 /*	VkFilter
 */
-template<> struct my_class_convert<E_filter> { using type = VkFilter;};template<> struct my_class_convert<VkFilter> { using type = E_filter;};struct E_filter{
-enum{
-	e_nearest = VK_FILTER_NEAREST,
-	e_linear = VK_FILTER_LINEAR,
-}flag;
-	E_filter(){}
-	E_filter(const decltype(flag) flag_):flag(flag_) {}
-	E_filter(const E_filter& e_):flag(e_.flag) {}
-	E_filter(const VkFilter flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
-	operator VkFilter*(){ return reinterpret_cast<VkFilter*>(this); }
-	operator VkFilter&(){ return reinterpret_cast<VkFilter&>(*this); }
-	E_filter& operator = (E_filter e_) { flag = e_.flag; return *this; }
-};
-inline bool operator == (const E_filter e1_,const E_filter e2_){return e1_.flag == e2_.flag; }
-inline bool operator != (const E_filter e1_,const E_filter e2_){return e1_.flag != e2_.flag; }
+union E_filter{
+	enum{
+		e_nearest = VK_FILTER_NEAREST,
+		e_linear = VK_FILTER_LINEAR,
+	}flag;
+	VkFilter vk_flag;
 
+	E_filter(){}
+	E_filter(const VkFilter flag_):flag(static_cast<decltype(flag)>(flag_) ){}
+	E_filter(const decltype(flag) flag_):flag(flag_){}
+
+	operator VkFilter&(){return vk_flag;}
+	operator VkFilter*()const{return const_cast<VkFilter*const>(&vk_flag);}
+	operator VkFilter*(){return &vk_flag;}
+
+	bool operator==(int flag_){return flag==flag_;}
+};
 /*	VkSamplerMipmapMode
 */
-template<> struct my_class_convert<E_sampler_mipmap_mode> { using type = VkSamplerMipmapMode;};template<> struct my_class_convert<VkSamplerMipmapMode> { using type = E_sampler_mipmap_mode;};struct E_sampler_mipmap_mode{
-enum{
-	e_nearest = VK_SAMPLER_MIPMAP_MODE_NEAREST,
-	e_linear = VK_SAMPLER_MIPMAP_MODE_LINEAR,
-}flag;
-	E_sampler_mipmap_mode(){}
-	E_sampler_mipmap_mode(const decltype(flag) flag_):flag(flag_) {}
-	E_sampler_mipmap_mode(const E_sampler_mipmap_mode& e_):flag(e_.flag) {}
-	E_sampler_mipmap_mode(const VkSamplerMipmapMode flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
-	operator VkSamplerMipmapMode*(){ return reinterpret_cast<VkSamplerMipmapMode*>(this); }
-	operator VkSamplerMipmapMode&(){ return reinterpret_cast<VkSamplerMipmapMode&>(*this); }
-	E_sampler_mipmap_mode& operator = (E_sampler_mipmap_mode e_) { flag = e_.flag; return *this; }
-};
-inline bool operator == (const E_sampler_mipmap_mode e1_,const E_sampler_mipmap_mode e2_){return e1_.flag == e2_.flag; }
-inline bool operator != (const E_sampler_mipmap_mode e1_,const E_sampler_mipmap_mode e2_){return e1_.flag != e2_.flag; }
+union E_sampler_mipmap_mode{
+	enum{
+		e_nearest = VK_SAMPLER_MIPMAP_MODE_NEAREST,
+		e_linear = VK_SAMPLER_MIPMAP_MODE_LINEAR,
+	}flag;
+	VkSamplerMipmapMode vk_flag;
 
+	E_sampler_mipmap_mode(){}
+	E_sampler_mipmap_mode(const VkSamplerMipmapMode flag_):flag(static_cast<decltype(flag)>(flag_) ){}
+	E_sampler_mipmap_mode(const decltype(flag) flag_):flag(flag_){}
+
+	operator VkSamplerMipmapMode&(){return vk_flag;}
+	operator VkSamplerMipmapMode*()const{return const_cast<VkSamplerMipmapMode*const>(&vk_flag);}
+	operator VkSamplerMipmapMode*(){return &vk_flag;}
+
+	bool operator==(int flag_){return flag==flag_;}
+};
 /*	VkSamplerAddressMode
 */
-template<> struct my_class_convert<E_sampler_address_mode> { using type = VkSamplerAddressMode;};template<> struct my_class_convert<VkSamplerAddressMode> { using type = E_sampler_address_mode;};struct E_sampler_address_mode{
-enum{
-	e_repeat = VK_SAMPLER_ADDRESS_MODE_REPEAT,
-	e_mirrored_repeat = VK_SAMPLER_ADDRESS_MODE_MIRRORED_REPEAT,
-	e_clamp_to_edge = VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE,
-	e_clamp_to_border = VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_BORDER,
-}flag;
-	E_sampler_address_mode(){}
-	E_sampler_address_mode(const decltype(flag) flag_):flag(flag_) {}
-	E_sampler_address_mode(const E_sampler_address_mode& e_):flag(e_.flag) {}
-	E_sampler_address_mode(const VkSamplerAddressMode flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
-	operator VkSamplerAddressMode*(){ return reinterpret_cast<VkSamplerAddressMode*>(this); }
-	operator VkSamplerAddressMode&(){ return reinterpret_cast<VkSamplerAddressMode&>(*this); }
-	E_sampler_address_mode& operator = (E_sampler_address_mode e_) { flag = e_.flag; return *this; }
-};
-inline bool operator == (const E_sampler_address_mode e1_,const E_sampler_address_mode e2_){return e1_.flag == e2_.flag; }
-inline bool operator != (const E_sampler_address_mode e1_,const E_sampler_address_mode e2_){return e1_.flag != e2_.flag; }
+union E_sampler_address_mode{
+	enum{
+		e_repeat = VK_SAMPLER_ADDRESS_MODE_REPEAT,
+		e_mirrored_repeat = VK_SAMPLER_ADDRESS_MODE_MIRRORED_REPEAT,
+		e_clamp_to_edge = VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE,
+		e_clamp_to_border = VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_BORDER,
+	}flag;
+	VkSamplerAddressMode vk_flag;
 
+	E_sampler_address_mode(){}
+	E_sampler_address_mode(const VkSamplerAddressMode flag_):flag(static_cast<decltype(flag)>(flag_) ){}
+	E_sampler_address_mode(const decltype(flag) flag_):flag(flag_){}
+
+	operator VkSamplerAddressMode&(){return vk_flag;}
+	operator VkSamplerAddressMode*()const{return const_cast<VkSamplerAddressMode*const>(&vk_flag);}
+	operator VkSamplerAddressMode*(){return &vk_flag;}
+
+	bool operator==(int flag_){return flag==flag_;}
+};
 /*	VkCompareOp
 */
-template<> struct my_class_convert<E_compare_op> { using type = VkCompareOp;};template<> struct my_class_convert<VkCompareOp> { using type = E_compare_op;};struct E_compare_op{
-enum{
-	e_never = VK_COMPARE_OP_NEVER,
-	e_less = VK_COMPARE_OP_LESS,
-	e_equal = VK_COMPARE_OP_EQUAL,
-	e_less_or_equal = VK_COMPARE_OP_LESS_OR_EQUAL,
-	e_greater = VK_COMPARE_OP_GREATER,
-	e_not_equal = VK_COMPARE_OP_NOT_EQUAL,
-	e_greater_or_equal = VK_COMPARE_OP_GREATER_OR_EQUAL,
-	e_always = VK_COMPARE_OP_ALWAYS,
-}flag;
-	E_compare_op(){}
-	E_compare_op(const decltype(flag) flag_):flag(flag_) {}
-	E_compare_op(const E_compare_op& e_):flag(e_.flag) {}
-	E_compare_op(const VkCompareOp flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
-	operator VkCompareOp*(){ return reinterpret_cast<VkCompareOp*>(this); }
-	operator VkCompareOp&(){ return reinterpret_cast<VkCompareOp&>(*this); }
-	E_compare_op& operator = (E_compare_op e_) { flag = e_.flag; return *this; }
-};
-inline bool operator == (const E_compare_op e1_,const E_compare_op e2_){return e1_.flag == e2_.flag; }
-inline bool operator != (const E_compare_op e1_,const E_compare_op e2_){return e1_.flag != e2_.flag; }
+union E_compare_op{
+	enum{
+		e_never = VK_COMPARE_OP_NEVER,
+		e_less = VK_COMPARE_OP_LESS,
+		e_equal = VK_COMPARE_OP_EQUAL,
+		e_less_or_equal = VK_COMPARE_OP_LESS_OR_EQUAL,
+		e_greater = VK_COMPARE_OP_GREATER,
+		e_not_equal = VK_COMPARE_OP_NOT_EQUAL,
+		e_greater_or_equal = VK_COMPARE_OP_GREATER_OR_EQUAL,
+		e_always = VK_COMPARE_OP_ALWAYS,
+	}flag;
+	VkCompareOp vk_flag;
 
+	E_compare_op(){}
+	E_compare_op(const VkCompareOp flag_):flag(static_cast<decltype(flag)>(flag_) ){}
+	E_compare_op(const decltype(flag) flag_):flag(flag_){}
+
+	operator VkCompareOp&(){return vk_flag;}
+	operator VkCompareOp*()const{return const_cast<VkCompareOp*const>(&vk_flag);}
+	operator VkCompareOp*(){return &vk_flag;}
+
+	bool operator==(int flag_){return flag==flag_;}
+};
 /*	VkPolygonMode
 */
-template<> struct my_class_convert<E_polygon_mode> { using type = VkPolygonMode;};template<> struct my_class_convert<VkPolygonMode> { using type = E_polygon_mode;};struct E_polygon_mode{
-enum{
-	e_fill = VK_POLYGON_MODE_FILL,
-	e_line = VK_POLYGON_MODE_LINE,
-	e_point = VK_POLYGON_MODE_POINT,
-}flag;
-	E_polygon_mode(){}
-	E_polygon_mode(const decltype(flag) flag_):flag(flag_) {}
-	E_polygon_mode(const E_polygon_mode& e_):flag(e_.flag) {}
-	E_polygon_mode(const VkPolygonMode flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
-	operator VkPolygonMode*(){ return reinterpret_cast<VkPolygonMode*>(this); }
-	operator VkPolygonMode&(){ return reinterpret_cast<VkPolygonMode&>(*this); }
-	E_polygon_mode& operator = (E_polygon_mode e_) { flag = e_.flag; return *this; }
-};
-inline bool operator == (const E_polygon_mode e1_,const E_polygon_mode e2_){return e1_.flag == e2_.flag; }
-inline bool operator != (const E_polygon_mode e1_,const E_polygon_mode e2_){return e1_.flag != e2_.flag; }
+union E_polygon_mode{
+	enum{
+		e_fill = VK_POLYGON_MODE_FILL,
+		e_line = VK_POLYGON_MODE_LINE,
+		e_point = VK_POLYGON_MODE_POINT,
+	}flag;
+	VkPolygonMode vk_flag;
 
+	E_polygon_mode(){}
+	E_polygon_mode(const VkPolygonMode flag_):flag(static_cast<decltype(flag)>(flag_) ){}
+	E_polygon_mode(const decltype(flag) flag_):flag(flag_){}
+
+	operator VkPolygonMode&(){return vk_flag;}
+	operator VkPolygonMode*()const{return const_cast<VkPolygonMode*const>(&vk_flag);}
+	operator VkPolygonMode*(){return &vk_flag;}
+
+	bool operator==(int flag_){return flag==flag_;}
+};
 /*	VkFrontFace
 */
-template<> struct my_class_convert<E_front_face> { using type = VkFrontFace;};template<> struct my_class_convert<VkFrontFace> { using type = E_front_face;};struct E_front_face{
-enum{
-	e_counter_clockwise = VK_FRONT_FACE_COUNTER_CLOCKWISE,
-	e_clockwise = VK_FRONT_FACE_CLOCKWISE,
-}flag;
-	E_front_face(){}
-	E_front_face(const decltype(flag) flag_):flag(flag_) {}
-	E_front_face(const E_front_face& e_):flag(e_.flag) {}
-	E_front_face(const VkFrontFace flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
-	operator VkFrontFace*(){ return reinterpret_cast<VkFrontFace*>(this); }
-	operator VkFrontFace&(){ return reinterpret_cast<VkFrontFace&>(*this); }
-	E_front_face& operator = (E_front_face e_) { flag = e_.flag; return *this; }
-};
-inline bool operator == (const E_front_face e1_,const E_front_face e2_){return e1_.flag == e2_.flag; }
-inline bool operator != (const E_front_face e1_,const E_front_face e2_){return e1_.flag != e2_.flag; }
+union E_front_face{
+	enum{
+		e_counter_clockwise = VK_FRONT_FACE_COUNTER_CLOCKWISE,
+		e_clockwise = VK_FRONT_FACE_CLOCKWISE,
+	}flag;
+	VkFrontFace vk_flag;
 
+	E_front_face(){}
+	E_front_face(const VkFrontFace flag_):flag(static_cast<decltype(flag)>(flag_) ){}
+	E_front_face(const decltype(flag) flag_):flag(flag_){}
+
+	operator VkFrontFace&(){return vk_flag;}
+	operator VkFrontFace*()const{return const_cast<VkFrontFace*const>(&vk_flag);}
+	operator VkFrontFace*(){return &vk_flag;}
+
+	bool operator==(int flag_){return flag==flag_;}
+};
 /*	VkBlendFactor
 */
-template<> struct my_class_convert<E_blend_factor> { using type = VkBlendFactor;};template<> struct my_class_convert<VkBlendFactor> { using type = E_blend_factor;};struct E_blend_factor{
-enum{
-	e_zero = VK_BLEND_FACTOR_ZERO,
-	e_one = VK_BLEND_FACTOR_ONE,
-	e_src_color = VK_BLEND_FACTOR_SRC_COLOR,
-	e_one_minus_src_color = VK_BLEND_FACTOR_ONE_MINUS_SRC_COLOR,
-	e_dst_color = VK_BLEND_FACTOR_DST_COLOR,
-	e_one_minus_dst_color = VK_BLEND_FACTOR_ONE_MINUS_DST_COLOR,
-	e_src_alpha = VK_BLEND_FACTOR_SRC_ALPHA,
-	e_one_minus_src_alpha = VK_BLEND_FACTOR_ONE_MINUS_SRC_ALPHA,
-	e_dst_alpha = VK_BLEND_FACTOR_DST_ALPHA,
-	e_one_minus_dst_alpha = VK_BLEND_FACTOR_ONE_MINUS_DST_ALPHA,
-	e_constant_color = VK_BLEND_FACTOR_CONSTANT_COLOR,
-	e_one_minus_constant_color = VK_BLEND_FACTOR_ONE_MINUS_CONSTANT_COLOR,
-	e_constant_alpha = VK_BLEND_FACTOR_CONSTANT_ALPHA,
-	e_one_minus_constant_alpha = VK_BLEND_FACTOR_ONE_MINUS_CONSTANT_ALPHA,
-	e_src_alpha_saturate = VK_BLEND_FACTOR_SRC_ALPHA_SATURATE,
-	e_src1_color = VK_BLEND_FACTOR_SRC1_COLOR,
-	e_one_minus_src1_color = VK_BLEND_FACTOR_ONE_MINUS_SRC1_COLOR,
-	e_src1_alpha = VK_BLEND_FACTOR_SRC1_ALPHA,
-	e_one_minus_src1_alpha = VK_BLEND_FACTOR_ONE_MINUS_SRC1_ALPHA,
-}flag;
-	E_blend_factor(){}
-	E_blend_factor(const decltype(flag) flag_):flag(flag_) {}
-	E_blend_factor(const E_blend_factor& e_):flag(e_.flag) {}
-	E_blend_factor(const VkBlendFactor flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
-	operator VkBlendFactor*(){ return reinterpret_cast<VkBlendFactor*>(this); }
-	operator VkBlendFactor&(){ return reinterpret_cast<VkBlendFactor&>(*this); }
-	E_blend_factor& operator = (E_blend_factor e_) { flag = e_.flag; return *this; }
-};
-inline bool operator == (const E_blend_factor e1_,const E_blend_factor e2_){return e1_.flag == e2_.flag; }
-inline bool operator != (const E_blend_factor e1_,const E_blend_factor e2_){return e1_.flag != e2_.flag; }
+union E_blend_factor{
+	enum{
+		e_zero = VK_BLEND_FACTOR_ZERO,
+		e_one = VK_BLEND_FACTOR_ONE,
+		e_src_color = VK_BLEND_FACTOR_SRC_COLOR,
+		e_one_minus_src_color = VK_BLEND_FACTOR_ONE_MINUS_SRC_COLOR,
+		e_dst_color = VK_BLEND_FACTOR_DST_COLOR,
+		e_one_minus_dst_color = VK_BLEND_FACTOR_ONE_MINUS_DST_COLOR,
+		e_src_alpha = VK_BLEND_FACTOR_SRC_ALPHA,
+		e_one_minus_src_alpha = VK_BLEND_FACTOR_ONE_MINUS_SRC_ALPHA,
+		e_dst_alpha = VK_BLEND_FACTOR_DST_ALPHA,
+		e_one_minus_dst_alpha = VK_BLEND_FACTOR_ONE_MINUS_DST_ALPHA,
+		e_constant_color = VK_BLEND_FACTOR_CONSTANT_COLOR,
+		e_one_minus_constant_color = VK_BLEND_FACTOR_ONE_MINUS_CONSTANT_COLOR,
+		e_constant_alpha = VK_BLEND_FACTOR_CONSTANT_ALPHA,
+		e_one_minus_constant_alpha = VK_BLEND_FACTOR_ONE_MINUS_CONSTANT_ALPHA,
+		e_src_alpha_saturate = VK_BLEND_FACTOR_SRC_ALPHA_SATURATE,
+		e_src1_color = VK_BLEND_FACTOR_SRC1_COLOR,
+		e_one_minus_src1_color = VK_BLEND_FACTOR_ONE_MINUS_SRC1_COLOR,
+		e_src1_alpha = VK_BLEND_FACTOR_SRC1_ALPHA,
+		e_one_minus_src1_alpha = VK_BLEND_FACTOR_ONE_MINUS_SRC1_ALPHA,
+	}flag;
+	VkBlendFactor vk_flag;
 
+	E_blend_factor(){}
+	E_blend_factor(const VkBlendFactor flag_):flag(static_cast<decltype(flag)>(flag_) ){}
+	E_blend_factor(const decltype(flag) flag_):flag(flag_){}
+
+	operator VkBlendFactor&(){return vk_flag;}
+	operator VkBlendFactor*()const{return const_cast<VkBlendFactor*const>(&vk_flag);}
+	operator VkBlendFactor*(){return &vk_flag;}
+
+	bool operator==(int flag_){return flag==flag_;}
+};
 /*	VkBlendOp
 */
-template<> struct my_class_convert<E_blend_op> { using type = VkBlendOp;};template<> struct my_class_convert<VkBlendOp> { using type = E_blend_op;};struct E_blend_op{
-enum{
-	e_add = VK_BLEND_OP_ADD,
-	e_subtract = VK_BLEND_OP_SUBTRACT,
-	e_reverse_subtract = VK_BLEND_OP_REVERSE_SUBTRACT,
-	e_min = VK_BLEND_OP_MIN,
-	e_max = VK_BLEND_OP_MAX,
-}flag;
-	E_blend_op(){}
-	E_blend_op(const decltype(flag) flag_):flag(flag_) {}
-	E_blend_op(const E_blend_op& e_):flag(e_.flag) {}
-	E_blend_op(const VkBlendOp flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
-	operator VkBlendOp*(){ return reinterpret_cast<VkBlendOp*>(this); }
-	operator VkBlendOp&(){ return reinterpret_cast<VkBlendOp&>(*this); }
-	E_blend_op& operator = (E_blend_op e_) { flag = e_.flag; return *this; }
-};
-inline bool operator == (const E_blend_op e1_,const E_blend_op e2_){return e1_.flag == e2_.flag; }
-inline bool operator != (const E_blend_op e1_,const E_blend_op e2_){return e1_.flag != e2_.flag; }
+union E_blend_op{
+	enum{
+		e_add = VK_BLEND_OP_ADD,
+		e_subtract = VK_BLEND_OP_SUBTRACT,
+		e_reverse_subtract = VK_BLEND_OP_REVERSE_SUBTRACT,
+		e_min = VK_BLEND_OP_MIN,
+		e_max = VK_BLEND_OP_MAX,
+	}flag;
+	VkBlendOp vk_flag;
 
+	E_blend_op(){}
+	E_blend_op(const VkBlendOp flag_):flag(static_cast<decltype(flag)>(flag_) ){}
+	E_blend_op(const decltype(flag) flag_):flag(flag_){}
+
+	operator VkBlendOp&(){return vk_flag;}
+	operator VkBlendOp*()const{return const_cast<VkBlendOp*const>(&vk_flag);}
+	operator VkBlendOp*(){return &vk_flag;}
+
+	bool operator==(int flag_){return flag==flag_;}
+};
 /*	VkStencilOp
 */
-template<> struct my_class_convert<E_stencil_op> { using type = VkStencilOp;};template<> struct my_class_convert<VkStencilOp> { using type = E_stencil_op;};struct E_stencil_op{
-enum{
-	e_keep = VK_STENCIL_OP_KEEP,
-	e_zero = VK_STENCIL_OP_ZERO,
-	e_replace = VK_STENCIL_OP_REPLACE,
-	e_increment_and_clamp = VK_STENCIL_OP_INCREMENT_AND_CLAMP,
-	e_decrement_and_clamp = VK_STENCIL_OP_DECREMENT_AND_CLAMP,
-	e_invert = VK_STENCIL_OP_INVERT,
-	e_increment_and_wrap = VK_STENCIL_OP_INCREMENT_AND_WRAP,
-	e_decrement_and_wrap = VK_STENCIL_OP_DECREMENT_AND_WRAP,
-}flag;
-	E_stencil_op(){}
-	E_stencil_op(const decltype(flag) flag_):flag(flag_) {}
-	E_stencil_op(const E_stencil_op& e_):flag(e_.flag) {}
-	E_stencil_op(const VkStencilOp flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
-	operator VkStencilOp*(){ return reinterpret_cast<VkStencilOp*>(this); }
-	operator VkStencilOp&(){ return reinterpret_cast<VkStencilOp&>(*this); }
-	E_stencil_op& operator = (E_stencil_op e_) { flag = e_.flag; return *this; }
-};
-inline bool operator == (const E_stencil_op e1_,const E_stencil_op e2_){return e1_.flag == e2_.flag; }
-inline bool operator != (const E_stencil_op e1_,const E_stencil_op e2_){return e1_.flag != e2_.flag; }
+union E_stencil_op{
+	enum{
+		e_keep = VK_STENCIL_OP_KEEP,
+		e_zero = VK_STENCIL_OP_ZERO,
+		e_replace = VK_STENCIL_OP_REPLACE,
+		e_increment_and_clamp = VK_STENCIL_OP_INCREMENT_AND_CLAMP,
+		e_decrement_and_clamp = VK_STENCIL_OP_DECREMENT_AND_CLAMP,
+		e_invert = VK_STENCIL_OP_INVERT,
+		e_increment_and_wrap = VK_STENCIL_OP_INCREMENT_AND_WRAP,
+		e_decrement_and_wrap = VK_STENCIL_OP_DECREMENT_AND_WRAP,
+	}flag;
+	VkStencilOp vk_flag;
 
+	E_stencil_op(){}
+	E_stencil_op(const VkStencilOp flag_):flag(static_cast<decltype(flag)>(flag_) ){}
+	E_stencil_op(const decltype(flag) flag_):flag(flag_){}
+
+	operator VkStencilOp&(){return vk_flag;}
+	operator VkStencilOp*()const{return const_cast<VkStencilOp*const>(&vk_flag);}
+	operator VkStencilOp*(){return &vk_flag;}
+
+	bool operator==(int flag_){return flag==flag_;}
+};
 /*	VkLogicOp
 */
-template<> struct my_class_convert<E_logic_op> { using type = VkLogicOp;};template<> struct my_class_convert<VkLogicOp> { using type = E_logic_op;};struct E_logic_op{
-enum{
-	e_clear = VK_LOGIC_OP_CLEAR,
-	e_and = VK_LOGIC_OP_AND,
-	e_and_reverse = VK_LOGIC_OP_AND_REVERSE,
-	e_copy = VK_LOGIC_OP_COPY,
-	e_and_inverted = VK_LOGIC_OP_AND_INVERTED,
-	e_no_op = VK_LOGIC_OP_NO_OP,
-	e_xor = VK_LOGIC_OP_XOR,
-	e_or = VK_LOGIC_OP_OR,
-	e_nor = VK_LOGIC_OP_NOR,
-	e_equivalent = VK_LOGIC_OP_EQUIVALENT,
-	e_invert = VK_LOGIC_OP_INVERT,
-	e_or_reverse = VK_LOGIC_OP_OR_REVERSE,
-	e_copy_inverted = VK_LOGIC_OP_COPY_INVERTED,
-	e_or_inverted = VK_LOGIC_OP_OR_INVERTED,
-	e_nand = VK_LOGIC_OP_NAND,
-	e_set = VK_LOGIC_OP_SET,
-}flag;
-	E_logic_op(){}
-	E_logic_op(const decltype(flag) flag_):flag(flag_) {}
-	E_logic_op(const E_logic_op& e_):flag(e_.flag) {}
-	E_logic_op(const VkLogicOp flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
-	operator VkLogicOp*(){ return reinterpret_cast<VkLogicOp*>(this); }
-	operator VkLogicOp&(){ return reinterpret_cast<VkLogicOp&>(*this); }
-	E_logic_op& operator = (E_logic_op e_) { flag = e_.flag; return *this; }
-};
-inline bool operator == (const E_logic_op e1_,const E_logic_op e2_){return e1_.flag == e2_.flag; }
-inline bool operator != (const E_logic_op e1_,const E_logic_op e2_){return e1_.flag != e2_.flag; }
+union E_logic_op{
+	enum{
+		e_clear = VK_LOGIC_OP_CLEAR,
+		e_and = VK_LOGIC_OP_AND,
+		e_and_reverse = VK_LOGIC_OP_AND_REVERSE,
+		e_copy = VK_LOGIC_OP_COPY,
+		e_and_inverted = VK_LOGIC_OP_AND_INVERTED,
+		e_no_op = VK_LOGIC_OP_NO_OP,
+		e_xor = VK_LOGIC_OP_XOR,
+		e_or = VK_LOGIC_OP_OR,
+		e_nor = VK_LOGIC_OP_NOR,
+		e_equivalent = VK_LOGIC_OP_EQUIVALENT,
+		e_invert = VK_LOGIC_OP_INVERT,
+		e_or_reverse = VK_LOGIC_OP_OR_REVERSE,
+		e_copy_inverted = VK_LOGIC_OP_COPY_INVERTED,
+		e_or_inverted = VK_LOGIC_OP_OR_INVERTED,
+		e_nand = VK_LOGIC_OP_NAND,
+		e_set = VK_LOGIC_OP_SET,
+	}flag;
+	VkLogicOp vk_flag;
 
+	E_logic_op(){}
+	E_logic_op(const VkLogicOp flag_):flag(static_cast<decltype(flag)>(flag_) ){}
+	E_logic_op(const decltype(flag) flag_):flag(flag_){}
+
+	operator VkLogicOp&(){return vk_flag;}
+	operator VkLogicOp*()const{return const_cast<VkLogicOp*const>(&vk_flag);}
+	operator VkLogicOp*(){return &vk_flag;}
+
+	bool operator==(int flag_){return flag==flag_;}
+};
 /*	VkInternalAllocationType
 */
-template<> struct my_class_convert<E_internal_allocation_type> { using type = VkInternalAllocationType;};template<> struct my_class_convert<VkInternalAllocationType> { using type = E_internal_allocation_type;};struct E_internal_allocation_type{
-enum{
-	e_executable = VK_INTERNAL_ALLOCATION_TYPE_EXECUTABLE,
-}flag;
-	E_internal_allocation_type(){}
-	E_internal_allocation_type(const decltype(flag) flag_):flag(flag_) {}
-	E_internal_allocation_type(const E_internal_allocation_type& e_):flag(e_.flag) {}
-	E_internal_allocation_type(const VkInternalAllocationType flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
-	operator VkInternalAllocationType*(){ return reinterpret_cast<VkInternalAllocationType*>(this); }
-	operator VkInternalAllocationType&(){ return reinterpret_cast<VkInternalAllocationType&>(*this); }
-	E_internal_allocation_type& operator = (E_internal_allocation_type e_) { flag = e_.flag; return *this; }
-};
-inline bool operator == (const E_internal_allocation_type e1_,const E_internal_allocation_type e2_){return e1_.flag == e2_.flag; }
-inline bool operator != (const E_internal_allocation_type e1_,const E_internal_allocation_type e2_){return e1_.flag != e2_.flag; }
+union E_internal_allocation_type{
+	enum{
+		e_executable = VK_INTERNAL_ALLOCATION_TYPE_EXECUTABLE,
+	}flag;
+	VkInternalAllocationType vk_flag;
 
+	E_internal_allocation_type(){}
+	E_internal_allocation_type(const VkInternalAllocationType flag_):flag(static_cast<decltype(flag)>(flag_) ){}
+	E_internal_allocation_type(const decltype(flag) flag_):flag(flag_){}
+
+	operator VkInternalAllocationType&(){return vk_flag;}
+	operator VkInternalAllocationType*()const{return const_cast<VkInternalAllocationType*const>(&vk_flag);}
+	operator VkInternalAllocationType*(){return &vk_flag;}
+
+	bool operator==(int flag_){return flag==flag_;}
+};
 /*	VkSystemAllocationScope
 */
-template<> struct my_class_convert<E_system_allocation_scope> { using type = VkSystemAllocationScope;};template<> struct my_class_convert<VkSystemAllocationScope> { using type = E_system_allocation_scope;};struct E_system_allocation_scope{
-enum{
-	e_command = VK_SYSTEM_ALLOCATION_SCOPE_COMMAND,
-	e_object = VK_SYSTEM_ALLOCATION_SCOPE_OBJECT,
-	e_cache = VK_SYSTEM_ALLOCATION_SCOPE_CACHE,
-	e_device = VK_SYSTEM_ALLOCATION_SCOPE_DEVICE,
-	e_instance = VK_SYSTEM_ALLOCATION_SCOPE_INSTANCE,
-}flag;
-	E_system_allocation_scope(){}
-	E_system_allocation_scope(const decltype(flag) flag_):flag(flag_) {}
-	E_system_allocation_scope(const E_system_allocation_scope& e_):flag(e_.flag) {}
-	E_system_allocation_scope(const VkSystemAllocationScope flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
-	operator VkSystemAllocationScope*(){ return reinterpret_cast<VkSystemAllocationScope*>(this); }
-	operator VkSystemAllocationScope&(){ return reinterpret_cast<VkSystemAllocationScope&>(*this); }
-	E_system_allocation_scope& operator = (E_system_allocation_scope e_) { flag = e_.flag; return *this; }
-};
-inline bool operator == (const E_system_allocation_scope e1_,const E_system_allocation_scope e2_){return e1_.flag == e2_.flag; }
-inline bool operator != (const E_system_allocation_scope e1_,const E_system_allocation_scope e2_){return e1_.flag != e2_.flag; }
+union E_system_allocation_scope{
+	enum{
+		e_command = VK_SYSTEM_ALLOCATION_SCOPE_COMMAND,
+		e_object = VK_SYSTEM_ALLOCATION_SCOPE_OBJECT,
+		e_cache = VK_SYSTEM_ALLOCATION_SCOPE_CACHE,
+		e_device = VK_SYSTEM_ALLOCATION_SCOPE_DEVICE,
+		e_instance = VK_SYSTEM_ALLOCATION_SCOPE_INSTANCE,
+	}flag;
+	VkSystemAllocationScope vk_flag;
 
+	E_system_allocation_scope(){}
+	E_system_allocation_scope(const VkSystemAllocationScope flag_):flag(static_cast<decltype(flag)>(flag_) ){}
+	E_system_allocation_scope(const decltype(flag) flag_):flag(flag_){}
+
+	operator VkSystemAllocationScope&(){return vk_flag;}
+	operator VkSystemAllocationScope*()const{return const_cast<VkSystemAllocationScope*const>(&vk_flag);}
+	operator VkSystemAllocationScope*(){return &vk_flag;}
+
+	bool operator==(int flag_){return flag==flag_;}
+};
 /*	VkPhysicalDeviceType
 */
-template<> struct my_class_convert<E_physical_device_type> { using type = VkPhysicalDeviceType;};template<> struct my_class_convert<VkPhysicalDeviceType> { using type = E_physical_device_type;};struct E_physical_device_type{
-enum{
-	e_other = VK_PHYSICAL_DEVICE_TYPE_OTHER,
-	e_integrated_gpu = VK_PHYSICAL_DEVICE_TYPE_INTEGRATED_GPU,
-	e_discrete_gpu = VK_PHYSICAL_DEVICE_TYPE_DISCRETE_GPU,
-	e_virtual_gpu = VK_PHYSICAL_DEVICE_TYPE_VIRTUAL_GPU,
-	e_cpu = VK_PHYSICAL_DEVICE_TYPE_CPU,
-}flag;
-	E_physical_device_type(){}
-	E_physical_device_type(const decltype(flag) flag_):flag(flag_) {}
-	E_physical_device_type(const E_physical_device_type& e_):flag(e_.flag) {}
-	E_physical_device_type(const VkPhysicalDeviceType flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
-	operator VkPhysicalDeviceType*(){ return reinterpret_cast<VkPhysicalDeviceType*>(this); }
-	operator VkPhysicalDeviceType&(){ return reinterpret_cast<VkPhysicalDeviceType&>(*this); }
-	E_physical_device_type& operator = (E_physical_device_type e_) { flag = e_.flag; return *this; }
-};
-inline bool operator == (const E_physical_device_type e1_,const E_physical_device_type e2_){return e1_.flag == e2_.flag; }
-inline bool operator != (const E_physical_device_type e1_,const E_physical_device_type e2_){return e1_.flag != e2_.flag; }
+union E_physical_device_type{
+	enum{
+		e_other = VK_PHYSICAL_DEVICE_TYPE_OTHER,
+		e_integrated_gpu = VK_PHYSICAL_DEVICE_TYPE_INTEGRATED_GPU,
+		e_discrete_gpu = VK_PHYSICAL_DEVICE_TYPE_DISCRETE_GPU,
+		e_virtual_gpu = VK_PHYSICAL_DEVICE_TYPE_VIRTUAL_GPU,
+		e_cpu = VK_PHYSICAL_DEVICE_TYPE_CPU,
+	}flag;
+	VkPhysicalDeviceType vk_flag;
 
+	E_physical_device_type(){}
+	E_physical_device_type(const VkPhysicalDeviceType flag_):flag(static_cast<decltype(flag)>(flag_) ){}
+	E_physical_device_type(const decltype(flag) flag_):flag(flag_){}
+
+	operator VkPhysicalDeviceType&(){return vk_flag;}
+	operator VkPhysicalDeviceType*()const{return const_cast<VkPhysicalDeviceType*const>(&vk_flag);}
+	operator VkPhysicalDeviceType*(){return &vk_flag;}
+
+	bool operator==(int flag_){return flag==flag_;}
+};
 /*	VkVertexInputRate
 */
-template<> struct my_class_convert<E_vertex_input_rate> { using type = VkVertexInputRate;};template<> struct my_class_convert<VkVertexInputRate> { using type = E_vertex_input_rate;};struct E_vertex_input_rate{
-enum{
-	e_vertex = VK_VERTEX_INPUT_RATE_VERTEX,
-	e_instance = VK_VERTEX_INPUT_RATE_INSTANCE,
-}flag;
-	E_vertex_input_rate(){}
-	E_vertex_input_rate(const decltype(flag) flag_):flag(flag_) {}
-	E_vertex_input_rate(const E_vertex_input_rate& e_):flag(e_.flag) {}
-	E_vertex_input_rate(const VkVertexInputRate flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
-	operator VkVertexInputRate*(){ return reinterpret_cast<VkVertexInputRate*>(this); }
-	operator VkVertexInputRate&(){ return reinterpret_cast<VkVertexInputRate&>(*this); }
-	E_vertex_input_rate& operator = (E_vertex_input_rate e_) { flag = e_.flag; return *this; }
-};
-inline bool operator == (const E_vertex_input_rate e1_,const E_vertex_input_rate e2_){return e1_.flag == e2_.flag; }
-inline bool operator != (const E_vertex_input_rate e1_,const E_vertex_input_rate e2_){return e1_.flag != e2_.flag; }
+union E_vertex_input_rate{
+	enum{
+		e_vertex = VK_VERTEX_INPUT_RATE_VERTEX,
+		e_instance = VK_VERTEX_INPUT_RATE_INSTANCE,
+	}flag;
+	VkVertexInputRate vk_flag;
 
+	E_vertex_input_rate(){}
+	E_vertex_input_rate(const VkVertexInputRate flag_):flag(static_cast<decltype(flag)>(flag_) ){}
+	E_vertex_input_rate(const decltype(flag) flag_):flag(flag_){}
+
+	operator VkVertexInputRate&(){return vk_flag;}
+	operator VkVertexInputRate*()const{return const_cast<VkVertexInputRate*const>(&vk_flag);}
+	operator VkVertexInputRate*(){return &vk_flag;}
+
+	bool operator==(int flag_){return flag==flag_;}
+};
 /*	VkFormat
 Vulkan format definitions*/
-template<> struct my_class_convert<E_format> { using type = VkFormat;};template<> struct my_class_convert<VkFormat> { using type = E_format;};struct E_format{
-enum{
-	e_undefined = VK_FORMAT_UNDEFINED,
-	e_r4g4_unorm_pack8 = VK_FORMAT_R4G4_UNORM_PACK8,
-	e_r4g4b4a4_unorm_pack16 = VK_FORMAT_R4G4B4A4_UNORM_PACK16,
-	e_b4g4r4a4_unorm_pack16 = VK_FORMAT_B4G4R4A4_UNORM_PACK16,
-	e_r5g6b5_unorm_pack16 = VK_FORMAT_R5G6B5_UNORM_PACK16,
-	e_b5g6r5_unorm_pack16 = VK_FORMAT_B5G6R5_UNORM_PACK16,
-	e_r5g5b5a1_unorm_pack16 = VK_FORMAT_R5G5B5A1_UNORM_PACK16,
-	e_b5g5r5a1_unorm_pack16 = VK_FORMAT_B5G5R5A1_UNORM_PACK16,
-	e_a1r5g5b5_unorm_pack16 = VK_FORMAT_A1R5G5B5_UNORM_PACK16,
-	e_r8_unorm = VK_FORMAT_R8_UNORM,
-	e_r8_snorm = VK_FORMAT_R8_SNORM,
-	e_r8_uscaled = VK_FORMAT_R8_USCALED,
-	e_r8_sscaled = VK_FORMAT_R8_SSCALED,
-	e_r8_uint = VK_FORMAT_R8_UINT,
-	e_r8_sint = VK_FORMAT_R8_SINT,
-	e_r8_srgb = VK_FORMAT_R8_SRGB,
-	e_r8g8_unorm = VK_FORMAT_R8G8_UNORM,
-	e_r8g8_snorm = VK_FORMAT_R8G8_SNORM,
-	e_r8g8_uscaled = VK_FORMAT_R8G8_USCALED,
-	e_r8g8_sscaled = VK_FORMAT_R8G8_SSCALED,
-	e_r8g8_uint = VK_FORMAT_R8G8_UINT,
-	e_r8g8_sint = VK_FORMAT_R8G8_SINT,
-	e_r8g8_srgb = VK_FORMAT_R8G8_SRGB,
-	e_r8g8b8_unorm = VK_FORMAT_R8G8B8_UNORM,
-	e_r8g8b8_snorm = VK_FORMAT_R8G8B8_SNORM,
-	e_r8g8b8_uscaled = VK_FORMAT_R8G8B8_USCALED,
-	e_r8g8b8_sscaled = VK_FORMAT_R8G8B8_SSCALED,
-	e_r8g8b8_uint = VK_FORMAT_R8G8B8_UINT,
-	e_r8g8b8_sint = VK_FORMAT_R8G8B8_SINT,
-	e_r8g8b8_srgb = VK_FORMAT_R8G8B8_SRGB,
-	e_b8g8r8_unorm = VK_FORMAT_B8G8R8_UNORM,
-	e_b8g8r8_snorm = VK_FORMAT_B8G8R8_SNORM,
-	e_b8g8r8_uscaled = VK_FORMAT_B8G8R8_USCALED,
-	e_b8g8r8_sscaled = VK_FORMAT_B8G8R8_SSCALED,
-	e_b8g8r8_uint = VK_FORMAT_B8G8R8_UINT,
-	e_b8g8r8_sint = VK_FORMAT_B8G8R8_SINT,
-	e_b8g8r8_srgb = VK_FORMAT_B8G8R8_SRGB,
-	e_r8g8b8a8_unorm = VK_FORMAT_R8G8B8A8_UNORM,
-	e_r8g8b8a8_snorm = VK_FORMAT_R8G8B8A8_SNORM,
-	e_r8g8b8a8_uscaled = VK_FORMAT_R8G8B8A8_USCALED,
-	e_r8g8b8a8_sscaled = VK_FORMAT_R8G8B8A8_SSCALED,
-	e_r8g8b8a8_uint = VK_FORMAT_R8G8B8A8_UINT,
-	e_r8g8b8a8_sint = VK_FORMAT_R8G8B8A8_SINT,
-	e_r8g8b8a8_srgb = VK_FORMAT_R8G8B8A8_SRGB,
-	e_b8g8r8a8_unorm = VK_FORMAT_B8G8R8A8_UNORM,
-	e_b8g8r8a8_snorm = VK_FORMAT_B8G8R8A8_SNORM,
-	e_b8g8r8a8_uscaled = VK_FORMAT_B8G8R8A8_USCALED,
-	e_b8g8r8a8_sscaled = VK_FORMAT_B8G8R8A8_SSCALED,
-	e_b8g8r8a8_uint = VK_FORMAT_B8G8R8A8_UINT,
-	e_b8g8r8a8_sint = VK_FORMAT_B8G8R8A8_SINT,
-	e_b8g8r8a8_srgb = VK_FORMAT_B8G8R8A8_SRGB,
-	e_a8b8g8r8_unorm_pack32 = VK_FORMAT_A8B8G8R8_UNORM_PACK32,
-	e_a8b8g8r8_snorm_pack32 = VK_FORMAT_A8B8G8R8_SNORM_PACK32,
-	e_a8b8g8r8_uscaled_pack32 = VK_FORMAT_A8B8G8R8_USCALED_PACK32,
-	e_a8b8g8r8_sscaled_pack32 = VK_FORMAT_A8B8G8R8_SSCALED_PACK32,
-	e_a8b8g8r8_uint_pack32 = VK_FORMAT_A8B8G8R8_UINT_PACK32,
-	e_a8b8g8r8_sint_pack32 = VK_FORMAT_A8B8G8R8_SINT_PACK32,
-	e_a8b8g8r8_srgb_pack32 = VK_FORMAT_A8B8G8R8_SRGB_PACK32,
-	e_a2r10g10b10_unorm_pack32 = VK_FORMAT_A2R10G10B10_UNORM_PACK32,
-	e_a2r10g10b10_snorm_pack32 = VK_FORMAT_A2R10G10B10_SNORM_PACK32,
-	e_a2r10g10b10_uscaled_pack32 = VK_FORMAT_A2R10G10B10_USCALED_PACK32,
-	e_a2r10g10b10_sscaled_pack32 = VK_FORMAT_A2R10G10B10_SSCALED_PACK32,
-	e_a2r10g10b10_uint_pack32 = VK_FORMAT_A2R10G10B10_UINT_PACK32,
-	e_a2r10g10b10_sint_pack32 = VK_FORMAT_A2R10G10B10_SINT_PACK32,
-	e_a2b10g10r10_unorm_pack32 = VK_FORMAT_A2B10G10R10_UNORM_PACK32,
-	e_a2b10g10r10_snorm_pack32 = VK_FORMAT_A2B10G10R10_SNORM_PACK32,
-	e_a2b10g10r10_uscaled_pack32 = VK_FORMAT_A2B10G10R10_USCALED_PACK32,
-	e_a2b10g10r10_sscaled_pack32 = VK_FORMAT_A2B10G10R10_SSCALED_PACK32,
-	e_a2b10g10r10_uint_pack32 = VK_FORMAT_A2B10G10R10_UINT_PACK32,
-	e_a2b10g10r10_sint_pack32 = VK_FORMAT_A2B10G10R10_SINT_PACK32,
-	e_r16_unorm = VK_FORMAT_R16_UNORM,
-	e_r16_snorm = VK_FORMAT_R16_SNORM,
-	e_r16_uscaled = VK_FORMAT_R16_USCALED,
-	e_r16_sscaled = VK_FORMAT_R16_SSCALED,
-	e_r16_uint = VK_FORMAT_R16_UINT,
-	e_r16_sint = VK_FORMAT_R16_SINT,
-	e_r16_sfloat = VK_FORMAT_R16_SFLOAT,
-	e_r16g16_unorm = VK_FORMAT_R16G16_UNORM,
-	e_r16g16_snorm = VK_FORMAT_R16G16_SNORM,
-	e_r16g16_uscaled = VK_FORMAT_R16G16_USCALED,
-	e_r16g16_sscaled = VK_FORMAT_R16G16_SSCALED,
-	e_r16g16_uint = VK_FORMAT_R16G16_UINT,
-	e_r16g16_sint = VK_FORMAT_R16G16_SINT,
-	e_r16g16_sfloat = VK_FORMAT_R16G16_SFLOAT,
-	e_r16g16b16_unorm = VK_FORMAT_R16G16B16_UNORM,
-	e_r16g16b16_snorm = VK_FORMAT_R16G16B16_SNORM,
-	e_r16g16b16_uscaled = VK_FORMAT_R16G16B16_USCALED,
-	e_r16g16b16_sscaled = VK_FORMAT_R16G16B16_SSCALED,
-	e_r16g16b16_uint = VK_FORMAT_R16G16B16_UINT,
-	e_r16g16b16_sint = VK_FORMAT_R16G16B16_SINT,
-	e_r16g16b16_sfloat = VK_FORMAT_R16G16B16_SFLOAT,
-	e_r16g16b16a16_unorm = VK_FORMAT_R16G16B16A16_UNORM,
-	e_r16g16b16a16_snorm = VK_FORMAT_R16G16B16A16_SNORM,
-	e_r16g16b16a16_uscaled = VK_FORMAT_R16G16B16A16_USCALED,
-	e_r16g16b16a16_sscaled = VK_FORMAT_R16G16B16A16_SSCALED,
-	e_r16g16b16a16_uint = VK_FORMAT_R16G16B16A16_UINT,
-	e_r16g16b16a16_sint = VK_FORMAT_R16G16B16A16_SINT,
-	e_r16g16b16a16_sfloat = VK_FORMAT_R16G16B16A16_SFLOAT,
-	e_r32_uint = VK_FORMAT_R32_UINT,
-	e_r32_sint = VK_FORMAT_R32_SINT,
-	e_r32_sfloat = VK_FORMAT_R32_SFLOAT,
-	e_r32g32_uint = VK_FORMAT_R32G32_UINT,
-	e_r32g32_sint = VK_FORMAT_R32G32_SINT,
-	e_r32g32_sfloat = VK_FORMAT_R32G32_SFLOAT,
-	e_r32g32b32_uint = VK_FORMAT_R32G32B32_UINT,
-	e_r32g32b32_sint = VK_FORMAT_R32G32B32_SINT,
-	e_r32g32b32_sfloat = VK_FORMAT_R32G32B32_SFLOAT,
-	e_r32g32b32a32_uint = VK_FORMAT_R32G32B32A32_UINT,
-	e_r32g32b32a32_sint = VK_FORMAT_R32G32B32A32_SINT,
-	e_r32g32b32a32_sfloat = VK_FORMAT_R32G32B32A32_SFLOAT,
-	e_r64_uint = VK_FORMAT_R64_UINT,
-	e_r64_sint = VK_FORMAT_R64_SINT,
-	e_r64_sfloat = VK_FORMAT_R64_SFLOAT,
-	e_r64g64_uint = VK_FORMAT_R64G64_UINT,
-	e_r64g64_sint = VK_FORMAT_R64G64_SINT,
-	e_r64g64_sfloat = VK_FORMAT_R64G64_SFLOAT,
-	e_r64g64b64_uint = VK_FORMAT_R64G64B64_UINT,
-	e_r64g64b64_sint = VK_FORMAT_R64G64B64_SINT,
-	e_r64g64b64_sfloat = VK_FORMAT_R64G64B64_SFLOAT,
-	e_r64g64b64a64_uint = VK_FORMAT_R64G64B64A64_UINT,
-	e_r64g64b64a64_sint = VK_FORMAT_R64G64B64A64_SINT,
-	e_r64g64b64a64_sfloat = VK_FORMAT_R64G64B64A64_SFLOAT,
-	e_b10g11r11_ufloat_pack32 = VK_FORMAT_B10G11R11_UFLOAT_PACK32,
-	e_e5b9g9r9_ufloat_pack32 = VK_FORMAT_E5B9G9R9_UFLOAT_PACK32,
-	e_d16_unorm = VK_FORMAT_D16_UNORM,
-	e_x8_d24_unorm_pack32 = VK_FORMAT_X8_D24_UNORM_PACK32,
-	e_d32_sfloat = VK_FORMAT_D32_SFLOAT,
-	e_s8_uint = VK_FORMAT_S8_UINT,
-	e_d16_unorm_s8_uint = VK_FORMAT_D16_UNORM_S8_UINT,
-	e_d24_unorm_s8_uint = VK_FORMAT_D24_UNORM_S8_UINT,
-	e_d32_sfloat_s8_uint = VK_FORMAT_D32_SFLOAT_S8_UINT,
-	e_bc1_rgb_unorm_block = VK_FORMAT_BC1_RGB_UNORM_BLOCK,
-	e_bc1_rgb_srgb_block = VK_FORMAT_BC1_RGB_SRGB_BLOCK,
-	e_bc1_rgba_unorm_block = VK_FORMAT_BC1_RGBA_UNORM_BLOCK,
-	e_bc1_rgba_srgb_block = VK_FORMAT_BC1_RGBA_SRGB_BLOCK,
-	e_bc2_unorm_block = VK_FORMAT_BC2_UNORM_BLOCK,
-	e_bc2_srgb_block = VK_FORMAT_BC2_SRGB_BLOCK,
-	e_bc3_unorm_block = VK_FORMAT_BC3_UNORM_BLOCK,
-	e_bc3_srgb_block = VK_FORMAT_BC3_SRGB_BLOCK,
-	e_bc4_unorm_block = VK_FORMAT_BC4_UNORM_BLOCK,
-	e_bc4_snorm_block = VK_FORMAT_BC4_SNORM_BLOCK,
-	e_bc5_unorm_block = VK_FORMAT_BC5_UNORM_BLOCK,
-	e_bc5_snorm_block = VK_FORMAT_BC5_SNORM_BLOCK,
-	e_bc6h_ufloat_block = VK_FORMAT_BC6H_UFLOAT_BLOCK,
-	e_bc6h_sfloat_block = VK_FORMAT_BC6H_SFLOAT_BLOCK,
-	e_bc7_unorm_block = VK_FORMAT_BC7_UNORM_BLOCK,
-	e_bc7_srgb_block = VK_FORMAT_BC7_SRGB_BLOCK,
-	e_etc2_r8g8b8_unorm_block = VK_FORMAT_ETC2_R8G8B8_UNORM_BLOCK,
-	e_etc2_r8g8b8_srgb_block = VK_FORMAT_ETC2_R8G8B8_SRGB_BLOCK,
-	e_etc2_r8g8b8a1_unorm_block = VK_FORMAT_ETC2_R8G8B8A1_UNORM_BLOCK,
-	e_etc2_r8g8b8a1_srgb_block = VK_FORMAT_ETC2_R8G8B8A1_SRGB_BLOCK,
-	e_etc2_r8g8b8a8_unorm_block = VK_FORMAT_ETC2_R8G8B8A8_UNORM_BLOCK,
-	e_etc2_r8g8b8a8_srgb_block = VK_FORMAT_ETC2_R8G8B8A8_SRGB_BLOCK,
-	e_eac_r11_unorm_block = VK_FORMAT_EAC_R11_UNORM_BLOCK,
-	e_eac_r11_snorm_block = VK_FORMAT_EAC_R11_SNORM_BLOCK,
-	e_eac_r11g11_unorm_block = VK_FORMAT_EAC_R11G11_UNORM_BLOCK,
-	e_eac_r11g11_snorm_block = VK_FORMAT_EAC_R11G11_SNORM_BLOCK,
-	e_astc_4x4_unorm_block = VK_FORMAT_ASTC_4x4_UNORM_BLOCK,
-	e_astc_4x4_srgb_block = VK_FORMAT_ASTC_4x4_SRGB_BLOCK,
-	e_astc_5x4_unorm_block = VK_FORMAT_ASTC_5x4_UNORM_BLOCK,
-	e_astc_5x4_srgb_block = VK_FORMAT_ASTC_5x4_SRGB_BLOCK,
-	e_astc_5x5_unorm_block = VK_FORMAT_ASTC_5x5_UNORM_BLOCK,
-	e_astc_5x5_srgb_block = VK_FORMAT_ASTC_5x5_SRGB_BLOCK,
-	e_astc_6x5_unorm_block = VK_FORMAT_ASTC_6x5_UNORM_BLOCK,
-	e_astc_6x5_srgb_block = VK_FORMAT_ASTC_6x5_SRGB_BLOCK,
-	e_astc_6x6_unorm_block = VK_FORMAT_ASTC_6x6_UNORM_BLOCK,
-	e_astc_6x6_srgb_block = VK_FORMAT_ASTC_6x6_SRGB_BLOCK,
-	e_astc_8x5_unorm_block = VK_FORMAT_ASTC_8x5_UNORM_BLOCK,
-	e_astc_8x5_srgb_block = VK_FORMAT_ASTC_8x5_SRGB_BLOCK,
-	e_astc_8x6_unorm_block = VK_FORMAT_ASTC_8x6_UNORM_BLOCK,
-	e_astc_8x6_srgb_block = VK_FORMAT_ASTC_8x6_SRGB_BLOCK,
-	e_astc_8x8_unorm_block = VK_FORMAT_ASTC_8x8_UNORM_BLOCK,
-	e_astc_8x8_srgb_block = VK_FORMAT_ASTC_8x8_SRGB_BLOCK,
-	e_astc_10x5_unorm_block = VK_FORMAT_ASTC_10x5_UNORM_BLOCK,
-	e_astc_10x5_srgb_block = VK_FORMAT_ASTC_10x5_SRGB_BLOCK,
-	e_astc_10x6_unorm_block = VK_FORMAT_ASTC_10x6_UNORM_BLOCK,
-	e_astc_10x6_srgb_block = VK_FORMAT_ASTC_10x6_SRGB_BLOCK,
-	e_astc_10x8_unorm_block = VK_FORMAT_ASTC_10x8_UNORM_BLOCK,
-	e_astc_10x8_srgb_block = VK_FORMAT_ASTC_10x8_SRGB_BLOCK,
-	e_astc_10x10_unorm_block = VK_FORMAT_ASTC_10x10_UNORM_BLOCK,
-	e_astc_10x10_srgb_block = VK_FORMAT_ASTC_10x10_SRGB_BLOCK,
-	e_astc_12x10_unorm_block = VK_FORMAT_ASTC_12x10_UNORM_BLOCK,
-	e_astc_12x10_srgb_block = VK_FORMAT_ASTC_12x10_SRGB_BLOCK,
-	e_astc_12x12_unorm_block = VK_FORMAT_ASTC_12x12_UNORM_BLOCK,
-	e_astc_12x12_srgb_block = VK_FORMAT_ASTC_12x12_SRGB_BLOCK,
-}flag;
-	E_format(){}
-	E_format(const decltype(flag) flag_):flag(flag_) {}
-	E_format(const E_format& e_):flag(e_.flag) {}
-	E_format(const VkFormat flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
-	operator VkFormat*(){ return reinterpret_cast<VkFormat*>(this); }
-	operator VkFormat&(){ return reinterpret_cast<VkFormat&>(*this); }
-	E_format& operator = (E_format e_) { flag = e_.flag; return *this; }
-};
-inline bool operator == (const E_format e1_,const E_format e2_){return e1_.flag == e2_.flag; }
-inline bool operator != (const E_format e1_,const E_format e2_){return e1_.flag != e2_.flag; }
+union E_format{
+	enum{
+		e_undefined = VK_FORMAT_UNDEFINED,
+		e_r4g4_unorm_pack8 = VK_FORMAT_R4G4_UNORM_PACK8,
+		e_r4g4b4a4_unorm_pack16 = VK_FORMAT_R4G4B4A4_UNORM_PACK16,
+		e_b4g4r4a4_unorm_pack16 = VK_FORMAT_B4G4R4A4_UNORM_PACK16,
+		e_r5g6b5_unorm_pack16 = VK_FORMAT_R5G6B5_UNORM_PACK16,
+		e_b5g6r5_unorm_pack16 = VK_FORMAT_B5G6R5_UNORM_PACK16,
+		e_r5g5b5a1_unorm_pack16 = VK_FORMAT_R5G5B5A1_UNORM_PACK16,
+		e_b5g5r5a1_unorm_pack16 = VK_FORMAT_B5G5R5A1_UNORM_PACK16,
+		e_a1r5g5b5_unorm_pack16 = VK_FORMAT_A1R5G5B5_UNORM_PACK16,
+		e_r8_unorm = VK_FORMAT_R8_UNORM,
+		e_r8_snorm = VK_FORMAT_R8_SNORM,
+		e_r8_uscaled = VK_FORMAT_R8_USCALED,
+		e_r8_sscaled = VK_FORMAT_R8_SSCALED,
+		e_r8_uint = VK_FORMAT_R8_UINT,
+		e_r8_sint = VK_FORMAT_R8_SINT,
+		e_r8_srgb = VK_FORMAT_R8_SRGB,
+		e_r8g8_unorm = VK_FORMAT_R8G8_UNORM,
+		e_r8g8_snorm = VK_FORMAT_R8G8_SNORM,
+		e_r8g8_uscaled = VK_FORMAT_R8G8_USCALED,
+		e_r8g8_sscaled = VK_FORMAT_R8G8_SSCALED,
+		e_r8g8_uint = VK_FORMAT_R8G8_UINT,
+		e_r8g8_sint = VK_FORMAT_R8G8_SINT,
+		e_r8g8_srgb = VK_FORMAT_R8G8_SRGB,
+		e_r8g8b8_unorm = VK_FORMAT_R8G8B8_UNORM,
+		e_r8g8b8_snorm = VK_FORMAT_R8G8B8_SNORM,
+		e_r8g8b8_uscaled = VK_FORMAT_R8G8B8_USCALED,
+		e_r8g8b8_sscaled = VK_FORMAT_R8G8B8_SSCALED,
+		e_r8g8b8_uint = VK_FORMAT_R8G8B8_UINT,
+		e_r8g8b8_sint = VK_FORMAT_R8G8B8_SINT,
+		e_r8g8b8_srgb = VK_FORMAT_R8G8B8_SRGB,
+		e_b8g8r8_unorm = VK_FORMAT_B8G8R8_UNORM,
+		e_b8g8r8_snorm = VK_FORMAT_B8G8R8_SNORM,
+		e_b8g8r8_uscaled = VK_FORMAT_B8G8R8_USCALED,
+		e_b8g8r8_sscaled = VK_FORMAT_B8G8R8_SSCALED,
+		e_b8g8r8_uint = VK_FORMAT_B8G8R8_UINT,
+		e_b8g8r8_sint = VK_FORMAT_B8G8R8_SINT,
+		e_b8g8r8_srgb = VK_FORMAT_B8G8R8_SRGB,
+		e_r8g8b8a8_unorm = VK_FORMAT_R8G8B8A8_UNORM,
+		e_r8g8b8a8_snorm = VK_FORMAT_R8G8B8A8_SNORM,
+		e_r8g8b8a8_uscaled = VK_FORMAT_R8G8B8A8_USCALED,
+		e_r8g8b8a8_sscaled = VK_FORMAT_R8G8B8A8_SSCALED,
+		e_r8g8b8a8_uint = VK_FORMAT_R8G8B8A8_UINT,
+		e_r8g8b8a8_sint = VK_FORMAT_R8G8B8A8_SINT,
+		e_r8g8b8a8_srgb = VK_FORMAT_R8G8B8A8_SRGB,
+		e_b8g8r8a8_unorm = VK_FORMAT_B8G8R8A8_UNORM,
+		e_b8g8r8a8_snorm = VK_FORMAT_B8G8R8A8_SNORM,
+		e_b8g8r8a8_uscaled = VK_FORMAT_B8G8R8A8_USCALED,
+		e_b8g8r8a8_sscaled = VK_FORMAT_B8G8R8A8_SSCALED,
+		e_b8g8r8a8_uint = VK_FORMAT_B8G8R8A8_UINT,
+		e_b8g8r8a8_sint = VK_FORMAT_B8G8R8A8_SINT,
+		e_b8g8r8a8_srgb = VK_FORMAT_B8G8R8A8_SRGB,
+		e_a8b8g8r8_unorm_pack32 = VK_FORMAT_A8B8G8R8_UNORM_PACK32,
+		e_a8b8g8r8_snorm_pack32 = VK_FORMAT_A8B8G8R8_SNORM_PACK32,
+		e_a8b8g8r8_uscaled_pack32 = VK_FORMAT_A8B8G8R8_USCALED_PACK32,
+		e_a8b8g8r8_sscaled_pack32 = VK_FORMAT_A8B8G8R8_SSCALED_PACK32,
+		e_a8b8g8r8_uint_pack32 = VK_FORMAT_A8B8G8R8_UINT_PACK32,
+		e_a8b8g8r8_sint_pack32 = VK_FORMAT_A8B8G8R8_SINT_PACK32,
+		e_a8b8g8r8_srgb_pack32 = VK_FORMAT_A8B8G8R8_SRGB_PACK32,
+		e_a2r10g10b10_unorm_pack32 = VK_FORMAT_A2R10G10B10_UNORM_PACK32,
+		e_a2r10g10b10_snorm_pack32 = VK_FORMAT_A2R10G10B10_SNORM_PACK32,
+		e_a2r10g10b10_uscaled_pack32 = VK_FORMAT_A2R10G10B10_USCALED_PACK32,
+		e_a2r10g10b10_sscaled_pack32 = VK_FORMAT_A2R10G10B10_SSCALED_PACK32,
+		e_a2r10g10b10_uint_pack32 = VK_FORMAT_A2R10G10B10_UINT_PACK32,
+		e_a2r10g10b10_sint_pack32 = VK_FORMAT_A2R10G10B10_SINT_PACK32,
+		e_a2b10g10r10_unorm_pack32 = VK_FORMAT_A2B10G10R10_UNORM_PACK32,
+		e_a2b10g10r10_snorm_pack32 = VK_FORMAT_A2B10G10R10_SNORM_PACK32,
+		e_a2b10g10r10_uscaled_pack32 = VK_FORMAT_A2B10G10R10_USCALED_PACK32,
+		e_a2b10g10r10_sscaled_pack32 = VK_FORMAT_A2B10G10R10_SSCALED_PACK32,
+		e_a2b10g10r10_uint_pack32 = VK_FORMAT_A2B10G10R10_UINT_PACK32,
+		e_a2b10g10r10_sint_pack32 = VK_FORMAT_A2B10G10R10_SINT_PACK32,
+		e_r16_unorm = VK_FORMAT_R16_UNORM,
+		e_r16_snorm = VK_FORMAT_R16_SNORM,
+		e_r16_uscaled = VK_FORMAT_R16_USCALED,
+		e_r16_sscaled = VK_FORMAT_R16_SSCALED,
+		e_r16_uint = VK_FORMAT_R16_UINT,
+		e_r16_sint = VK_FORMAT_R16_SINT,
+		e_r16_sfloat = VK_FORMAT_R16_SFLOAT,
+		e_r16g16_unorm = VK_FORMAT_R16G16_UNORM,
+		e_r16g16_snorm = VK_FORMAT_R16G16_SNORM,
+		e_r16g16_uscaled = VK_FORMAT_R16G16_USCALED,
+		e_r16g16_sscaled = VK_FORMAT_R16G16_SSCALED,
+		e_r16g16_uint = VK_FORMAT_R16G16_UINT,
+		e_r16g16_sint = VK_FORMAT_R16G16_SINT,
+		e_r16g16_sfloat = VK_FORMAT_R16G16_SFLOAT,
+		e_r16g16b16_unorm = VK_FORMAT_R16G16B16_UNORM,
+		e_r16g16b16_snorm = VK_FORMAT_R16G16B16_SNORM,
+		e_r16g16b16_uscaled = VK_FORMAT_R16G16B16_USCALED,
+		e_r16g16b16_sscaled = VK_FORMAT_R16G16B16_SSCALED,
+		e_r16g16b16_uint = VK_FORMAT_R16G16B16_UINT,
+		e_r16g16b16_sint = VK_FORMAT_R16G16B16_SINT,
+		e_r16g16b16_sfloat = VK_FORMAT_R16G16B16_SFLOAT,
+		e_r16g16b16a16_unorm = VK_FORMAT_R16G16B16A16_UNORM,
+		e_r16g16b16a16_snorm = VK_FORMAT_R16G16B16A16_SNORM,
+		e_r16g16b16a16_uscaled = VK_FORMAT_R16G16B16A16_USCALED,
+		e_r16g16b16a16_sscaled = VK_FORMAT_R16G16B16A16_SSCALED,
+		e_r16g16b16a16_uint = VK_FORMAT_R16G16B16A16_UINT,
+		e_r16g16b16a16_sint = VK_FORMAT_R16G16B16A16_SINT,
+		e_r16g16b16a16_sfloat = VK_FORMAT_R16G16B16A16_SFLOAT,
+		e_r32_uint = VK_FORMAT_R32_UINT,
+		e_r32_sint = VK_FORMAT_R32_SINT,
+		e_r32_sfloat = VK_FORMAT_R32_SFLOAT,
+		e_r32g32_uint = VK_FORMAT_R32G32_UINT,
+		e_r32g32_sint = VK_FORMAT_R32G32_SINT,
+		e_r32g32_sfloat = VK_FORMAT_R32G32_SFLOAT,
+		e_r32g32b32_uint = VK_FORMAT_R32G32B32_UINT,
+		e_r32g32b32_sint = VK_FORMAT_R32G32B32_SINT,
+		e_r32g32b32_sfloat = VK_FORMAT_R32G32B32_SFLOAT,
+		e_r32g32b32a32_uint = VK_FORMAT_R32G32B32A32_UINT,
+		e_r32g32b32a32_sint = VK_FORMAT_R32G32B32A32_SINT,
+		e_r32g32b32a32_sfloat = VK_FORMAT_R32G32B32A32_SFLOAT,
+		e_r64_uint = VK_FORMAT_R64_UINT,
+		e_r64_sint = VK_FORMAT_R64_SINT,
+		e_r64_sfloat = VK_FORMAT_R64_SFLOAT,
+		e_r64g64_uint = VK_FORMAT_R64G64_UINT,
+		e_r64g64_sint = VK_FORMAT_R64G64_SINT,
+		e_r64g64_sfloat = VK_FORMAT_R64G64_SFLOAT,
+		e_r64g64b64_uint = VK_FORMAT_R64G64B64_UINT,
+		e_r64g64b64_sint = VK_FORMAT_R64G64B64_SINT,
+		e_r64g64b64_sfloat = VK_FORMAT_R64G64B64_SFLOAT,
+		e_r64g64b64a64_uint = VK_FORMAT_R64G64B64A64_UINT,
+		e_r64g64b64a64_sint = VK_FORMAT_R64G64B64A64_SINT,
+		e_r64g64b64a64_sfloat = VK_FORMAT_R64G64B64A64_SFLOAT,
+		e_b10g11r11_ufloat_pack32 = VK_FORMAT_B10G11R11_UFLOAT_PACK32,
+		e_e5b9g9r9_ufloat_pack32 = VK_FORMAT_E5B9G9R9_UFLOAT_PACK32,
+		e_d16_unorm = VK_FORMAT_D16_UNORM,
+		e_x8_d24_unorm_pack32 = VK_FORMAT_X8_D24_UNORM_PACK32,
+		e_d32_sfloat = VK_FORMAT_D32_SFLOAT,
+		e_s8_uint = VK_FORMAT_S8_UINT,
+		e_d16_unorm_s8_uint = VK_FORMAT_D16_UNORM_S8_UINT,
+		e_d24_unorm_s8_uint = VK_FORMAT_D24_UNORM_S8_UINT,
+		e_d32_sfloat_s8_uint = VK_FORMAT_D32_SFLOAT_S8_UINT,
+		e_bc1_rgb_unorm_block = VK_FORMAT_BC1_RGB_UNORM_BLOCK,
+		e_bc1_rgb_srgb_block = VK_FORMAT_BC1_RGB_SRGB_BLOCK,
+		e_bc1_rgba_unorm_block = VK_FORMAT_BC1_RGBA_UNORM_BLOCK,
+		e_bc1_rgba_srgb_block = VK_FORMAT_BC1_RGBA_SRGB_BLOCK,
+		e_bc2_unorm_block = VK_FORMAT_BC2_UNORM_BLOCK,
+		e_bc2_srgb_block = VK_FORMAT_BC2_SRGB_BLOCK,
+		e_bc3_unorm_block = VK_FORMAT_BC3_UNORM_BLOCK,
+		e_bc3_srgb_block = VK_FORMAT_BC3_SRGB_BLOCK,
+		e_bc4_unorm_block = VK_FORMAT_BC4_UNORM_BLOCK,
+		e_bc4_snorm_block = VK_FORMAT_BC4_SNORM_BLOCK,
+		e_bc5_unorm_block = VK_FORMAT_BC5_UNORM_BLOCK,
+		e_bc5_snorm_block = VK_FORMAT_BC5_SNORM_BLOCK,
+		e_bc6h_ufloat_block = VK_FORMAT_BC6H_UFLOAT_BLOCK,
+		e_bc6h_sfloat_block = VK_FORMAT_BC6H_SFLOAT_BLOCK,
+		e_bc7_unorm_block = VK_FORMAT_BC7_UNORM_BLOCK,
+		e_bc7_srgb_block = VK_FORMAT_BC7_SRGB_BLOCK,
+		e_etc2_r8g8b8_unorm_block = VK_FORMAT_ETC2_R8G8B8_UNORM_BLOCK,
+		e_etc2_r8g8b8_srgb_block = VK_FORMAT_ETC2_R8G8B8_SRGB_BLOCK,
+		e_etc2_r8g8b8a1_unorm_block = VK_FORMAT_ETC2_R8G8B8A1_UNORM_BLOCK,
+		e_etc2_r8g8b8a1_srgb_block = VK_FORMAT_ETC2_R8G8B8A1_SRGB_BLOCK,
+		e_etc2_r8g8b8a8_unorm_block = VK_FORMAT_ETC2_R8G8B8A8_UNORM_BLOCK,
+		e_etc2_r8g8b8a8_srgb_block = VK_FORMAT_ETC2_R8G8B8A8_SRGB_BLOCK,
+		e_eac_r11_unorm_block = VK_FORMAT_EAC_R11_UNORM_BLOCK,
+		e_eac_r11_snorm_block = VK_FORMAT_EAC_R11_SNORM_BLOCK,
+		e_eac_r11g11_unorm_block = VK_FORMAT_EAC_R11G11_UNORM_BLOCK,
+		e_eac_r11g11_snorm_block = VK_FORMAT_EAC_R11G11_SNORM_BLOCK,
+		e_astc_4x4_unorm_block = VK_FORMAT_ASTC_4x4_UNORM_BLOCK,
+		e_astc_4x4_srgb_block = VK_FORMAT_ASTC_4x4_SRGB_BLOCK,
+		e_astc_5x4_unorm_block = VK_FORMAT_ASTC_5x4_UNORM_BLOCK,
+		e_astc_5x4_srgb_block = VK_FORMAT_ASTC_5x4_SRGB_BLOCK,
+		e_astc_5x5_unorm_block = VK_FORMAT_ASTC_5x5_UNORM_BLOCK,
+		e_astc_5x5_srgb_block = VK_FORMAT_ASTC_5x5_SRGB_BLOCK,
+		e_astc_6x5_unorm_block = VK_FORMAT_ASTC_6x5_UNORM_BLOCK,
+		e_astc_6x5_srgb_block = VK_FORMAT_ASTC_6x5_SRGB_BLOCK,
+		e_astc_6x6_unorm_block = VK_FORMAT_ASTC_6x6_UNORM_BLOCK,
+		e_astc_6x6_srgb_block = VK_FORMAT_ASTC_6x6_SRGB_BLOCK,
+		e_astc_8x5_unorm_block = VK_FORMAT_ASTC_8x5_UNORM_BLOCK,
+		e_astc_8x5_srgb_block = VK_FORMAT_ASTC_8x5_SRGB_BLOCK,
+		e_astc_8x6_unorm_block = VK_FORMAT_ASTC_8x6_UNORM_BLOCK,
+		e_astc_8x6_srgb_block = VK_FORMAT_ASTC_8x6_SRGB_BLOCK,
+		e_astc_8x8_unorm_block = VK_FORMAT_ASTC_8x8_UNORM_BLOCK,
+		e_astc_8x8_srgb_block = VK_FORMAT_ASTC_8x8_SRGB_BLOCK,
+		e_astc_10x5_unorm_block = VK_FORMAT_ASTC_10x5_UNORM_BLOCK,
+		e_astc_10x5_srgb_block = VK_FORMAT_ASTC_10x5_SRGB_BLOCK,
+		e_astc_10x6_unorm_block = VK_FORMAT_ASTC_10x6_UNORM_BLOCK,
+		e_astc_10x6_srgb_block = VK_FORMAT_ASTC_10x6_SRGB_BLOCK,
+		e_astc_10x8_unorm_block = VK_FORMAT_ASTC_10x8_UNORM_BLOCK,
+		e_astc_10x8_srgb_block = VK_FORMAT_ASTC_10x8_SRGB_BLOCK,
+		e_astc_10x10_unorm_block = VK_FORMAT_ASTC_10x10_UNORM_BLOCK,
+		e_astc_10x10_srgb_block = VK_FORMAT_ASTC_10x10_SRGB_BLOCK,
+		e_astc_12x10_unorm_block = VK_FORMAT_ASTC_12x10_UNORM_BLOCK,
+		e_astc_12x10_srgb_block = VK_FORMAT_ASTC_12x10_SRGB_BLOCK,
+		e_astc_12x12_unorm_block = VK_FORMAT_ASTC_12x12_UNORM_BLOCK,
+		e_astc_12x12_srgb_block = VK_FORMAT_ASTC_12x12_SRGB_BLOCK,
+	}flag;
+	VkFormat vk_flag;
 
+	E_format(){}
+	E_format(const VkFormat flag_):flag(static_cast<decltype(flag)>(flag_) ){}
+	E_format(const decltype(flag) flag_):flag(flag_){}
+
+	operator VkFormat&(){return vk_flag;}
+	operator VkFormat*()const{return const_cast<VkFormat*const>(&vk_flag);}
+	operator VkFormat*(){return &vk_flag;}
+
+	bool operator==(int flag_){return flag==flag_;}
+};
 /*	VkStructureType
 Structure type enumerant*/
-template<> struct my_class_convert<E_structure_type> { using type = VkStructureType;};template<> struct my_class_convert<VkStructureType> { using type = E_structure_type;};struct E_structure_type{
-enum{
-	e_application_info = VK_STRUCTURE_TYPE_APPLICATION_INFO,
-	e_instance_create_info = VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO,
-	e_device_queue_create_info = VK_STRUCTURE_TYPE_DEVICE_QUEUE_CREATE_INFO,
-	e_device_create_info = VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO,
-	e_submit_info = VK_STRUCTURE_TYPE_SUBMIT_INFO,
-	e_memory_allocate_info = VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO,
-	e_mapped_memory_range = VK_STRUCTURE_TYPE_MAPPED_MEMORY_RANGE,
-	e_bind_sparse_info = VK_STRUCTURE_TYPE_BIND_SPARSE_INFO,
-	e_fence_create_info = VK_STRUCTURE_TYPE_FENCE_CREATE_INFO,
-	e_semaphore_create_info = VK_STRUCTURE_TYPE_SEMAPHORE_CREATE_INFO,
-	e_event_create_info = VK_STRUCTURE_TYPE_EVENT_CREATE_INFO,
-	e_query_pool_create_info = VK_STRUCTURE_TYPE_QUERY_POOL_CREATE_INFO,
-	e_buffer_create_info = VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO,
-	e_buffer_view_create_info = VK_STRUCTURE_TYPE_BUFFER_VIEW_CREATE_INFO,
-	e_image_create_info = VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO,
-	e_image_view_create_info = VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO,
-	e_shader_module_create_info = VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO,
-	e_pipeline_cache_create_info = VK_STRUCTURE_TYPE_PIPELINE_CACHE_CREATE_INFO,
-	e_pipeline_shader_stage_create_info = VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO,
-	e_pipeline_vertex_input_state_create_info = VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO,
-	e_pipeline_input_assembly_state_create_info = VK_STRUCTURE_TYPE_PIPELINE_INPUT_ASSEMBLY_STATE_CREATE_INFO,
-	e_pipeline_tessellation_state_create_info = VK_STRUCTURE_TYPE_PIPELINE_TESSELLATION_STATE_CREATE_INFO,
-	e_pipeline_viewport_state_create_info = VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_STATE_CREATE_INFO,
-	e_pipeline_rasterization_state_create_info = VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_STATE_CREATE_INFO,
-	e_pipeline_multisample_state_create_info = VK_STRUCTURE_TYPE_PIPELINE_MULTISAMPLE_STATE_CREATE_INFO,
-	e_pipeline_depth_stencil_state_create_info = VK_STRUCTURE_TYPE_PIPELINE_DEPTH_STENCIL_STATE_CREATE_INFO,
-	e_pipeline_color_blend_state_create_info = VK_STRUCTURE_TYPE_PIPELINE_COLOR_BLEND_STATE_CREATE_INFO,
-	e_pipeline_dynamic_state_create_info = VK_STRUCTURE_TYPE_PIPELINE_DYNAMIC_STATE_CREATE_INFO,
-	e_graphics_pipeline_create_info = VK_STRUCTURE_TYPE_GRAPHICS_PIPELINE_CREATE_INFO,
-	e_compute_pipeline_create_info = VK_STRUCTURE_TYPE_COMPUTE_PIPELINE_CREATE_INFO,
-	e_pipeline_layout_create_info = VK_STRUCTURE_TYPE_PIPELINE_LAYOUT_CREATE_INFO,
-	e_sampler_create_info = VK_STRUCTURE_TYPE_SAMPLER_CREATE_INFO,
-	e_descriptor_set_layout_create_info = VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_CREATE_INFO,
-	e_descriptor_pool_create_info = VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO,
-	e_descriptor_set_allocate_info = VK_STRUCTURE_TYPE_DESCRIPTOR_SET_ALLOCATE_INFO,
-	e_write_descriptor_set = VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET,
-	e_copy_descriptor_set = VK_STRUCTURE_TYPE_COPY_DESCRIPTOR_SET,
-	e_framebuffer_create_info = VK_STRUCTURE_TYPE_FRAMEBUFFER_CREATE_INFO,
-	e_render_pass_create_info = VK_STRUCTURE_TYPE_RENDER_PASS_CREATE_INFO,
-	e_command_pool_create_info = VK_STRUCTURE_TYPE_COMMAND_POOL_CREATE_INFO,
-	e_command_buffer_allocate_info = VK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO,
-	e_command_buffer_inheritance_info = VK_STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_INFO,
-	e_command_buffer_begin_info = VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO,
-	e_render_pass_begin_info = VK_STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO,
-	e_buffer_memory_barrier = VK_STRUCTURE_TYPE_BUFFER_MEMORY_BARRIER,
-	e_image_memory_barrier = VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER,
-	e_memory_barrier = VK_STRUCTURE_TYPE_MEMORY_BARRIER,
-	e_loader_instance_create_info = VK_STRUCTURE_TYPE_LOADER_INSTANCE_CREATE_INFO,
-	e_loader_device_create_info = VK_STRUCTURE_TYPE_LOADER_DEVICE_CREATE_INFO,
-}flag;
-	E_structure_type(){}
-	E_structure_type(const decltype(flag) flag_):flag(flag_) {}
-	E_structure_type(const E_structure_type& e_):flag(e_.flag) {}
-	E_structure_type(const VkStructureType flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
-	operator VkStructureType*(){ return reinterpret_cast<VkStructureType*>(this); }
-	operator VkStructureType&(){ return reinterpret_cast<VkStructureType&>(*this); }
-	E_structure_type& operator = (E_structure_type e_) { flag = e_.flag; return *this; }
-};
-inline bool operator == (const E_structure_type e1_,const E_structure_type e2_){return e1_.flag == e2_.flag; }
-inline bool operator != (const E_structure_type e1_,const E_structure_type e2_){return e1_.flag != e2_.flag; }
+union E_structure_type{
+	enum{
+		e_application_info = VK_STRUCTURE_TYPE_APPLICATION_INFO,
+		e_instance_create_info = VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO,
+		e_device_queue_create_info = VK_STRUCTURE_TYPE_DEVICE_QUEUE_CREATE_INFO,
+		e_device_create_info = VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO,
+		e_submit_info = VK_STRUCTURE_TYPE_SUBMIT_INFO,
+		e_memory_allocate_info = VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO,
+		e_mapped_memory_range = VK_STRUCTURE_TYPE_MAPPED_MEMORY_RANGE,
+		e_bind_sparse_info = VK_STRUCTURE_TYPE_BIND_SPARSE_INFO,
+		e_fence_create_info = VK_STRUCTURE_TYPE_FENCE_CREATE_INFO,
+		e_semaphore_create_info = VK_STRUCTURE_TYPE_SEMAPHORE_CREATE_INFO,
+		e_event_create_info = VK_STRUCTURE_TYPE_EVENT_CREATE_INFO,
+		e_query_pool_create_info = VK_STRUCTURE_TYPE_QUERY_POOL_CREATE_INFO,
+		e_buffer_create_info = VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO,
+		e_buffer_view_create_info = VK_STRUCTURE_TYPE_BUFFER_VIEW_CREATE_INFO,
+		e_image_create_info = VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO,
+		e_image_view_create_info = VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO,
+		e_shader_module_create_info = VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO,
+		e_pipeline_cache_create_info = VK_STRUCTURE_TYPE_PIPELINE_CACHE_CREATE_INFO,
+		e_pipeline_shader_stage_create_info = VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO,
+		e_pipeline_vertex_input_state_create_info = VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO,
+		e_pipeline_input_assembly_state_create_info = VK_STRUCTURE_TYPE_PIPELINE_INPUT_ASSEMBLY_STATE_CREATE_INFO,
+		e_pipeline_tessellation_state_create_info = VK_STRUCTURE_TYPE_PIPELINE_TESSELLATION_STATE_CREATE_INFO,
+		e_pipeline_viewport_state_create_info = VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_STATE_CREATE_INFO,
+		e_pipeline_rasterization_state_create_info = VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_STATE_CREATE_INFO,
+		e_pipeline_multisample_state_create_info = VK_STRUCTURE_TYPE_PIPELINE_MULTISAMPLE_STATE_CREATE_INFO,
+		e_pipeline_depth_stencil_state_create_info = VK_STRUCTURE_TYPE_PIPELINE_DEPTH_STENCIL_STATE_CREATE_INFO,
+		e_pipeline_color_blend_state_create_info = VK_STRUCTURE_TYPE_PIPELINE_COLOR_BLEND_STATE_CREATE_INFO,
+		e_pipeline_dynamic_state_create_info = VK_STRUCTURE_TYPE_PIPELINE_DYNAMIC_STATE_CREATE_INFO,
+		e_graphics_pipeline_create_info = VK_STRUCTURE_TYPE_GRAPHICS_PIPELINE_CREATE_INFO,
+		e_compute_pipeline_create_info = VK_STRUCTURE_TYPE_COMPUTE_PIPELINE_CREATE_INFO,
+		e_pipeline_layout_create_info = VK_STRUCTURE_TYPE_PIPELINE_LAYOUT_CREATE_INFO,
+		e_sampler_create_info = VK_STRUCTURE_TYPE_SAMPLER_CREATE_INFO,
+		e_descriptor_set_layout_create_info = VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_CREATE_INFO,
+		e_descriptor_pool_create_info = VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO,
+		e_descriptor_set_allocate_info = VK_STRUCTURE_TYPE_DESCRIPTOR_SET_ALLOCATE_INFO,
+		e_write_descriptor_set = VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET,
+		e_copy_descriptor_set = VK_STRUCTURE_TYPE_COPY_DESCRIPTOR_SET,
+		e_framebuffer_create_info = VK_STRUCTURE_TYPE_FRAMEBUFFER_CREATE_INFO,
+		e_render_pass_create_info = VK_STRUCTURE_TYPE_RENDER_PASS_CREATE_INFO,
+		e_command_pool_create_info = VK_STRUCTURE_TYPE_COMMAND_POOL_CREATE_INFO,
+		e_command_buffer_allocate_info = VK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO,
+		e_command_buffer_inheritance_info = VK_STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_INFO,
+		e_command_buffer_begin_info = VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO,
+		e_render_pass_begin_info = VK_STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO,
+		e_buffer_memory_barrier = VK_STRUCTURE_TYPE_BUFFER_MEMORY_BARRIER,
+		e_image_memory_barrier = VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER,
+		e_memory_barrier = VK_STRUCTURE_TYPE_MEMORY_BARRIER,
+		e_loader_instance_create_info = VK_STRUCTURE_TYPE_LOADER_INSTANCE_CREATE_INFO,
+		e_loader_device_create_info = VK_STRUCTURE_TYPE_LOADER_DEVICE_CREATE_INFO,
+	}flag;
+	VkStructureType vk_flag;
 
+	E_structure_type(){}
+	E_structure_type(const VkStructureType flag_):flag(static_cast<decltype(flag)>(flag_) ){}
+	E_structure_type(const decltype(flag) flag_):flag(flag_){}
+
+	operator VkStructureType&(){return vk_flag;}
+	operator VkStructureType*()const{return const_cast<VkStructureType*const>(&vk_flag);}
+	operator VkStructureType*(){return &vk_flag;}
+
+	bool operator==(int flag_){return flag==flag_;}
+};
 /*	VkSubpassContents
 */
-template<> struct my_class_convert<E_subpass_contents> { using type = VkSubpassContents;};template<> struct my_class_convert<VkSubpassContents> { using type = E_subpass_contents;};struct E_subpass_contents{
-enum{
-	e_inline = VK_SUBPASS_CONTENTS_INLINE,
-	e_secondary_command_buffers = VK_SUBPASS_CONTENTS_SECONDARY_COMMAND_BUFFERS,
-}flag;
-	E_subpass_contents(){}
-	E_subpass_contents(const decltype(flag) flag_):flag(flag_) {}
-	E_subpass_contents(const E_subpass_contents& e_):flag(e_.flag) {}
-	E_subpass_contents(const VkSubpassContents flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
-	operator VkSubpassContents*(){ return reinterpret_cast<VkSubpassContents*>(this); }
-	operator VkSubpassContents&(){ return reinterpret_cast<VkSubpassContents&>(*this); }
-	E_subpass_contents& operator = (E_subpass_contents e_) { flag = e_.flag; return *this; }
-};
-inline bool operator == (const E_subpass_contents e1_,const E_subpass_contents e2_){return e1_.flag == e2_.flag; }
-inline bool operator != (const E_subpass_contents e1_,const E_subpass_contents e2_){return e1_.flag != e2_.flag; }
+union E_subpass_contents{
+	enum{
+		e_inline = VK_SUBPASS_CONTENTS_INLINE,
+		e_secondary_command_buffers = VK_SUBPASS_CONTENTS_SECONDARY_COMMAND_BUFFERS,
+	}flag;
+	VkSubpassContents vk_flag;
 
+	E_subpass_contents(){}
+	E_subpass_contents(const VkSubpassContents flag_):flag(static_cast<decltype(flag)>(flag_) ){}
+	E_subpass_contents(const decltype(flag) flag_):flag(flag_){}
+
+	operator VkSubpassContents&(){return vk_flag;}
+	operator VkSubpassContents*()const{return const_cast<VkSubpassContents*const>(&vk_flag);}
+	operator VkSubpassContents*(){return &vk_flag;}
+
+	bool operator==(int flag_){return flag==flag_;}
+};
 /*	VkResult
 API result codes*/
-template<> struct my_class_convert<E_result> { using type = VkResult;};template<> struct my_class_convert<VkResult> { using type = E_result;};struct E_result{
-enum{
-	evk_success = VK_SUCCESS,
-	evk_not_ready = VK_NOT_READY,
-	evk_timeout = VK_TIMEOUT,
-	evk_event_set = VK_EVENT_SET,
-	evk_event_reset = VK_EVENT_RESET,
-	evk_incomplete = VK_INCOMPLETE,
-	evk_error_out_of_host_memory = VK_ERROR_OUT_OF_HOST_MEMORY,
-	evk_error_out_of_device_memory = VK_ERROR_OUT_OF_DEVICE_MEMORY,
-	evk_error_initialization_failed = VK_ERROR_INITIALIZATION_FAILED,
-	evk_error_device_lost = VK_ERROR_DEVICE_LOST,
-	evk_error_memory_map_failed = VK_ERROR_MEMORY_MAP_FAILED,
-	evk_error_layer_not_present = VK_ERROR_LAYER_NOT_PRESENT,
-	evk_error_extension_not_present = VK_ERROR_EXTENSION_NOT_PRESENT,
-	evk_error_feature_not_present = VK_ERROR_FEATURE_NOT_PRESENT,
-	evk_error_incompatible_driver = VK_ERROR_INCOMPATIBLE_DRIVER,
-	evk_error_too_many_objects = VK_ERROR_TOO_MANY_OBJECTS,
-	evk_error_format_not_supported = VK_ERROR_FORMAT_NOT_SUPPORTED,
-	evk_error_fragmented_pool = VK_ERROR_FRAGMENTED_POOL,
-}flag;
-	E_result(){}
-	E_result(const decltype(flag) flag_):flag(flag_) {}
-	E_result(const E_result& e_):flag(e_.flag) {}
-	E_result(const VkResult flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
-	operator VkResult*(){ return reinterpret_cast<VkResult*>(this); }
-	operator VkResult&(){ return reinterpret_cast<VkResult&>(*this); }
-	E_result& operator = (E_result e_) { flag = e_.flag; return *this; }
-};
-inline bool operator == (const E_result e1_,const E_result e2_){return e1_.flag == e2_.flag; }
-inline bool operator != (const E_result e1_,const E_result e2_){return e1_.flag != e2_.flag; }
+union E_result{
+	enum{
+		evk_success = VK_SUCCESS,
+		evk_not_ready = VK_NOT_READY,
+		evk_timeout = VK_TIMEOUT,
+		evk_event_set = VK_EVENT_SET,
+		evk_event_reset = VK_EVENT_RESET,
+		evk_incomplete = VK_INCOMPLETE,
+		evk_error_out_of_host_memory = VK_ERROR_OUT_OF_HOST_MEMORY,
+		evk_error_out_of_device_memory = VK_ERROR_OUT_OF_DEVICE_MEMORY,
+		evk_error_initialization_failed = VK_ERROR_INITIALIZATION_FAILED,
+		evk_error_device_lost = VK_ERROR_DEVICE_LOST,
+		evk_error_memory_map_failed = VK_ERROR_MEMORY_MAP_FAILED,
+		evk_error_layer_not_present = VK_ERROR_LAYER_NOT_PRESENT,
+		evk_error_extension_not_present = VK_ERROR_EXTENSION_NOT_PRESENT,
+		evk_error_feature_not_present = VK_ERROR_FEATURE_NOT_PRESENT,
+		evk_error_incompatible_driver = VK_ERROR_INCOMPATIBLE_DRIVER,
+		evk_error_too_many_objects = VK_ERROR_TOO_MANY_OBJECTS,
+		evk_error_format_not_supported = VK_ERROR_FORMAT_NOT_SUPPORTED,
+		evk_error_fragmented_pool = VK_ERROR_FRAGMENTED_POOL,
+	}flag;
+	VkResult vk_flag;
 
+	E_result(){}
+	E_result(const VkResult flag_):flag(static_cast<decltype(flag)>(flag_) ){}
+	E_result(const decltype(flag) flag_):flag(flag_){}
+
+	operator VkResult&(){return vk_flag;}
+	operator VkResult*()const{return const_cast<VkResult*const>(&vk_flag);}
+	operator VkResult*(){return &vk_flag;}
+
+	bool operator==(int flag_){return flag==flag_;}
+};
 /*	VkDynamicState
 */
-template<> struct my_class_convert<E_dynamic_state> { using type = VkDynamicState;};template<> struct my_class_convert<VkDynamicState> { using type = E_dynamic_state;};struct E_dynamic_state{
-enum{
-	e_viewport = VK_DYNAMIC_STATE_VIEWPORT,
-	e_scissor = VK_DYNAMIC_STATE_SCISSOR,
-	e_line_width = VK_DYNAMIC_STATE_LINE_WIDTH,
-	e_depth_bias = VK_DYNAMIC_STATE_DEPTH_BIAS,
-	e_blend_constants = VK_DYNAMIC_STATE_BLEND_CONSTANTS,
-	e_depth_bounds = VK_DYNAMIC_STATE_DEPTH_BOUNDS,
-	e_stencil_compare_mask = VK_DYNAMIC_STATE_STENCIL_COMPARE_MASK,
-	e_stencil_write_mask = VK_DYNAMIC_STATE_STENCIL_WRITE_MASK,
-	e_stencil_reference = VK_DYNAMIC_STATE_STENCIL_REFERENCE,
-}flag;
-	E_dynamic_state(){}
-	E_dynamic_state(const decltype(flag) flag_):flag(flag_) {}
-	E_dynamic_state(const E_dynamic_state& e_):flag(e_.flag) {}
-	E_dynamic_state(const VkDynamicState flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
-	operator VkDynamicState*(){ return reinterpret_cast<VkDynamicState*>(this); }
-	operator VkDynamicState&(){ return reinterpret_cast<VkDynamicState&>(*this); }
-	E_dynamic_state& operator = (E_dynamic_state e_) { flag = e_.flag; return *this; }
-};
-inline bool operator == (const E_dynamic_state e1_,const E_dynamic_state e2_){return e1_.flag == e2_.flag; }
-inline bool operator != (const E_dynamic_state e1_,const E_dynamic_state e2_){return e1_.flag != e2_.flag; }
+union E_dynamic_state{
+	enum{
+		e_viewport = VK_DYNAMIC_STATE_VIEWPORT,
+		e_scissor = VK_DYNAMIC_STATE_SCISSOR,
+		e_line_width = VK_DYNAMIC_STATE_LINE_WIDTH,
+		e_depth_bias = VK_DYNAMIC_STATE_DEPTH_BIAS,
+		e_blend_constants = VK_DYNAMIC_STATE_BLEND_CONSTANTS,
+		e_depth_bounds = VK_DYNAMIC_STATE_DEPTH_BOUNDS,
+		e_stencil_compare_mask = VK_DYNAMIC_STATE_STENCIL_COMPARE_MASK,
+		e_stencil_write_mask = VK_DYNAMIC_STATE_STENCIL_WRITE_MASK,
+		e_stencil_reference = VK_DYNAMIC_STATE_STENCIL_REFERENCE,
+	}flag;
+	VkDynamicState vk_flag;
 
+	E_dynamic_state(){}
+	E_dynamic_state(const VkDynamicState flag_):flag(static_cast<decltype(flag)>(flag_) ){}
+	E_dynamic_state(const decltype(flag) flag_):flag(flag_){}
+
+	operator VkDynamicState&(){return vk_flag;}
+	operator VkDynamicState*()const{return const_cast<VkDynamicState*const>(&vk_flag);}
+	operator VkDynamicState*(){return &vk_flag;}
+
+	bool operator==(int flag_){return flag==flag_;}
+};
 /*	VkDescriptorUpdateTemplateType
 */
-template<> struct my_class_convert<E_descriptor_update_template_type> { using type = VkDescriptorUpdateTemplateType;};template<> struct my_class_convert<VkDescriptorUpdateTemplateType> { using type = E_descriptor_update_template_type;};struct E_descriptor_update_template_type{
-enum{
-	e_descriptor_set = VK_DESCRIPTOR_UPDATE_TEMPLATE_TYPE_DESCRIPTOR_SET,
-}flag;
-	E_descriptor_update_template_type(){}
-	E_descriptor_update_template_type(const decltype(flag) flag_):flag(flag_) {}
-	E_descriptor_update_template_type(const E_descriptor_update_template_type& e_):flag(e_.flag) {}
-	E_descriptor_update_template_type(const VkDescriptorUpdateTemplateType flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
-	operator VkDescriptorUpdateTemplateType*(){ return reinterpret_cast<VkDescriptorUpdateTemplateType*>(this); }
-	operator VkDescriptorUpdateTemplateType&(){ return reinterpret_cast<VkDescriptorUpdateTemplateType&>(*this); }
-	E_descriptor_update_template_type& operator = (E_descriptor_update_template_type e_) { flag = e_.flag; return *this; }
-};
-inline bool operator == (const E_descriptor_update_template_type e1_,const E_descriptor_update_template_type e2_){return e1_.flag == e2_.flag; }
-inline bool operator != (const E_descriptor_update_template_type e1_,const E_descriptor_update_template_type e2_){return e1_.flag != e2_.flag; }
+union E_descriptor_update_template_type{
+	enum{
+		e_descriptor_set = VK_DESCRIPTOR_UPDATE_TEMPLATE_TYPE_DESCRIPTOR_SET,
+	}flag;
+	VkDescriptorUpdateTemplateType vk_flag;
 
+	E_descriptor_update_template_type(){}
+	E_descriptor_update_template_type(const VkDescriptorUpdateTemplateType flag_):flag(static_cast<decltype(flag)>(flag_) ){}
+	E_descriptor_update_template_type(const decltype(flag) flag_):flag(flag_){}
+
+	operator VkDescriptorUpdateTemplateType&(){return vk_flag;}
+	operator VkDescriptorUpdateTemplateType*()const{return const_cast<VkDescriptorUpdateTemplateType*const>(&vk_flag);}
+	operator VkDescriptorUpdateTemplateType*(){return &vk_flag;}
+
+	bool operator==(int flag_){return flag==flag_;}
+};
 /*	VkObjectType
 Enums to track objects of various types*/
-template<> struct my_class_convert<E_object_type> { using type = VkObjectType;};template<> struct my_class_convert<VkObjectType> { using type = E_object_type;};struct E_object_type{
-enum{
-	e_unknown = VK_OBJECT_TYPE_UNKNOWN,
-	e_instance = VK_OBJECT_TYPE_INSTANCE,
-	e_physical_device = VK_OBJECT_TYPE_PHYSICAL_DEVICE,
-	e_device = VK_OBJECT_TYPE_DEVICE,
-	e_queue = VK_OBJECT_TYPE_QUEUE,
-	e_semaphore = VK_OBJECT_TYPE_SEMAPHORE,
-	e_command_buffer = VK_OBJECT_TYPE_COMMAND_BUFFER,
-	e_fence = VK_OBJECT_TYPE_FENCE,
-	e_device_memory = VK_OBJECT_TYPE_DEVICE_MEMORY,
-	e_buffer = VK_OBJECT_TYPE_BUFFER,
-	e_image = VK_OBJECT_TYPE_IMAGE,
-	e_event = VK_OBJECT_TYPE_EVENT,
-	e_query_pool = VK_OBJECT_TYPE_QUERY_POOL,
-	e_buffer_view = VK_OBJECT_TYPE_BUFFER_VIEW,
-	e_image_view = VK_OBJECT_TYPE_IMAGE_VIEW,
-	e_shader_module = VK_OBJECT_TYPE_SHADER_MODULE,
-	e_pipeline_cache = VK_OBJECT_TYPE_PIPELINE_CACHE,
-	e_pipeline_layout = VK_OBJECT_TYPE_PIPELINE_LAYOUT,
-	e_render_pass = VK_OBJECT_TYPE_RENDER_PASS,
-	e_pipeline = VK_OBJECT_TYPE_PIPELINE,
-	e_descriptor_set_layout = VK_OBJECT_TYPE_DESCRIPTOR_SET_LAYOUT,
-	e_sampler = VK_OBJECT_TYPE_SAMPLER,
-	e_descriptor_pool = VK_OBJECT_TYPE_DESCRIPTOR_POOL,
-	e_descriptor_set = VK_OBJECT_TYPE_DESCRIPTOR_SET,
-	e_framebuffer = VK_OBJECT_TYPE_FRAMEBUFFER,
-	e_command_pool = VK_OBJECT_TYPE_COMMAND_POOL,
-}flag;
-	E_object_type(){}
-	E_object_type(const decltype(flag) flag_):flag(flag_) {}
-	E_object_type(const E_object_type& e_):flag(e_.flag) {}
-	E_object_type(const VkObjectType flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
-	operator VkObjectType*(){ return reinterpret_cast<VkObjectType*>(this); }
-	operator VkObjectType&(){ return reinterpret_cast<VkObjectType&>(*this); }
-	E_object_type& operator = (E_object_type e_) { flag = e_.flag; return *this; }
-};
-inline bool operator == (const E_object_type e1_,const E_object_type e2_){return e1_.flag == e2_.flag; }
-inline bool operator != (const E_object_type e1_,const E_object_type e2_){return e1_.flag != e2_.flag; }
+union E_object_type{
+	enum{
+		e_unknown = VK_OBJECT_TYPE_UNKNOWN,
+		e_instance = VK_OBJECT_TYPE_INSTANCE,
+		e_physical_device = VK_OBJECT_TYPE_PHYSICAL_DEVICE,
+		e_device = VK_OBJECT_TYPE_DEVICE,
+		e_queue = VK_OBJECT_TYPE_QUEUE,
+		e_semaphore = VK_OBJECT_TYPE_SEMAPHORE,
+		e_command_buffer = VK_OBJECT_TYPE_COMMAND_BUFFER,
+		e_fence = VK_OBJECT_TYPE_FENCE,
+		e_device_memory = VK_OBJECT_TYPE_DEVICE_MEMORY,
+		e_buffer = VK_OBJECT_TYPE_BUFFER,
+		e_image = VK_OBJECT_TYPE_IMAGE,
+		e_event = VK_OBJECT_TYPE_EVENT,
+		e_query_pool = VK_OBJECT_TYPE_QUERY_POOL,
+		e_buffer_view = VK_OBJECT_TYPE_BUFFER_VIEW,
+		e_image_view = VK_OBJECT_TYPE_IMAGE_VIEW,
+		e_shader_module = VK_OBJECT_TYPE_SHADER_MODULE,
+		e_pipeline_cache = VK_OBJECT_TYPE_PIPELINE_CACHE,
+		e_pipeline_layout = VK_OBJECT_TYPE_PIPELINE_LAYOUT,
+		e_render_pass = VK_OBJECT_TYPE_RENDER_PASS,
+		e_pipeline = VK_OBJECT_TYPE_PIPELINE,
+		e_descriptor_set_layout = VK_OBJECT_TYPE_DESCRIPTOR_SET_LAYOUT,
+		e_sampler = VK_OBJECT_TYPE_SAMPLER,
+		e_descriptor_pool = VK_OBJECT_TYPE_DESCRIPTOR_POOL,
+		e_descriptor_set = VK_OBJECT_TYPE_DESCRIPTOR_SET,
+		e_framebuffer = VK_OBJECT_TYPE_FRAMEBUFFER,
+		e_command_pool = VK_OBJECT_TYPE_COMMAND_POOL,
+	}flag;
+	VkObjectType vk_flag;
 
+	E_object_type(){}
+	E_object_type(const VkObjectType flag_):flag(static_cast<decltype(flag)>(flag_) ){}
+	E_object_type(const decltype(flag) flag_):flag(flag_){}
+
+	operator VkObjectType&(){return vk_flag;}
+	operator VkObjectType*()const{return const_cast<VkObjectType*const>(&vk_flag);}
+	operator VkObjectType*(){return &vk_flag;}
+
+	bool operator==(int flag_){return flag==flag_;}
+};
 /*	VkPresentModeKHR
 */
-template<> struct my_class_convert<E_present_mode_KHR> { using type = VkPresentModeKHR;};template<> struct my_class_convert<VkPresentModeKHR> { using type = E_present_mode_KHR;};struct E_present_mode_KHR{
-enum{
-	e_immediate_khr = VK_PRESENT_MODE_IMMEDIATE_KHR,
-	e_mailbox_khr = VK_PRESENT_MODE_MAILBOX_KHR,
-	e_fifo_khr = VK_PRESENT_MODE_FIFO_KHR,
-	e_fifo_relaxed_khr = VK_PRESENT_MODE_FIFO_RELAXED_KHR,
-}flag;
-	E_present_mode_KHR(){}
-	E_present_mode_KHR(const decltype(flag) flag_):flag(flag_) {}
-	E_present_mode_KHR(const E_present_mode_KHR& e_):flag(e_.flag) {}
-	E_present_mode_KHR(const VkPresentModeKHR flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
-	operator VkPresentModeKHR*(){ return reinterpret_cast<VkPresentModeKHR*>(this); }
-	operator VkPresentModeKHR&(){ return reinterpret_cast<VkPresentModeKHR&>(*this); }
-	E_present_mode_KHR& operator = (E_present_mode_KHR e_) { flag = e_.flag; return *this; }
-};
-inline bool operator == (const E_present_mode_KHR e1_,const E_present_mode_KHR e2_){return e1_.flag == e2_.flag; }
-inline bool operator != (const E_present_mode_KHR e1_,const E_present_mode_KHR e2_){return e1_.flag != e2_.flag; }
+union E_present_mode_KHR{
+	enum{
+		e_immediate_khr = VK_PRESENT_MODE_IMMEDIATE_KHR,
+		e_mailbox_khr = VK_PRESENT_MODE_MAILBOX_KHR,
+		e_fifo_khr = VK_PRESENT_MODE_FIFO_KHR,
+		e_fifo_relaxed_khr = VK_PRESENT_MODE_FIFO_RELAXED_KHR,
+	}flag;
+	VkPresentModeKHR vk_flag;
 
+	E_present_mode_KHR(){}
+	E_present_mode_KHR(const VkPresentModeKHR flag_):flag(static_cast<decltype(flag)>(flag_) ){}
+	E_present_mode_KHR(const decltype(flag) flag_):flag(flag_){}
+
+	operator VkPresentModeKHR&(){return vk_flag;}
+	operator VkPresentModeKHR*()const{return const_cast<VkPresentModeKHR*const>(&vk_flag);}
+	operator VkPresentModeKHR*(){return &vk_flag;}
+
+	bool operator==(int flag_){return flag==flag_;}
+};
 /*	VkColorSpaceKHR
 */
-template<> struct my_class_convert<E_color_space_KHR> { using type = VkColorSpaceKHR;};template<> struct my_class_convert<VkColorSpaceKHR> { using type = E_color_space_KHR;};struct E_color_space_KHR{
-enum{
-	e_srgb_nonlinear_khr = VK_COLOR_SPACE_SRGB_NONLINEAR_KHR,
-	evk_colorspace_srgb_nonlinear_khr = VK_COLORSPACE_SRGB_NONLINEAR_KHR,
-}flag;
-	E_color_space_KHR(){}
-	E_color_space_KHR(const decltype(flag) flag_):flag(flag_) {}
-	E_color_space_KHR(const E_color_space_KHR& e_):flag(e_.flag) {}
-	E_color_space_KHR(const VkColorSpaceKHR flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
-	operator VkColorSpaceKHR*(){ return reinterpret_cast<VkColorSpaceKHR*>(this); }
-	operator VkColorSpaceKHR&(){ return reinterpret_cast<VkColorSpaceKHR&>(*this); }
-	E_color_space_KHR& operator = (E_color_space_KHR e_) { flag = e_.flag; return *this; }
-};
-inline bool operator == (const E_color_space_KHR e1_,const E_color_space_KHR e2_){return e1_.flag == e2_.flag; }
-inline bool operator != (const E_color_space_KHR e1_,const E_color_space_KHR e2_){return e1_.flag != e2_.flag; }
+union E_color_space_KHR{
+	enum{
+		e_srgb_nonlinear_khr = VK_COLOR_SPACE_SRGB_NONLINEAR_KHR,
+		evk_colorspace_srgb_nonlinear_khr = VK_COLORSPACE_SRGB_NONLINEAR_KHR,
+	}flag;
+	VkColorSpaceKHR vk_flag;
 
+	E_color_space_KHR(){}
+	E_color_space_KHR(const VkColorSpaceKHR flag_):flag(static_cast<decltype(flag)>(flag_) ){}
+	E_color_space_KHR(const decltype(flag) flag_):flag(flag_){}
+
+	operator VkColorSpaceKHR&(){return vk_flag;}
+	operator VkColorSpaceKHR*()const{return const_cast<VkColorSpaceKHR*const>(&vk_flag);}
+	operator VkColorSpaceKHR*(){return &vk_flag;}
+
+	bool operator==(int flag_){return flag==flag_;}
+};
 /*	VkDebugReportObjectTypeEXT
 */
-template<> struct my_class_convert<E_debug_report_object_type_EXT> { using type = VkDebugReportObjectTypeEXT;};template<> struct my_class_convert<VkDebugReportObjectTypeEXT> { using type = E_debug_report_object_type_EXT;};struct E_debug_report_object_type_EXT{
-enum{
-	e_unknown_ext = VK_DEBUG_REPORT_OBJECT_TYPE_UNKNOWN_EXT,
-	e_instance_ext = VK_DEBUG_REPORT_OBJECT_TYPE_INSTANCE_EXT,
-	e_physical_device_ext = VK_DEBUG_REPORT_OBJECT_TYPE_PHYSICAL_DEVICE_EXT,
-	e_device_ext = VK_DEBUG_REPORT_OBJECT_TYPE_DEVICE_EXT,
-	e_queue_ext = VK_DEBUG_REPORT_OBJECT_TYPE_QUEUE_EXT,
-	e_semaphore_ext = VK_DEBUG_REPORT_OBJECT_TYPE_SEMAPHORE_EXT,
-	e_command_buffer_ext = VK_DEBUG_REPORT_OBJECT_TYPE_COMMAND_BUFFER_EXT,
-	e_fence_ext = VK_DEBUG_REPORT_OBJECT_TYPE_FENCE_EXT,
-	e_device_memory_ext = VK_DEBUG_REPORT_OBJECT_TYPE_DEVICE_MEMORY_EXT,
-	e_buffer_ext = VK_DEBUG_REPORT_OBJECT_TYPE_BUFFER_EXT,
-	e_image_ext = VK_DEBUG_REPORT_OBJECT_TYPE_IMAGE_EXT,
-	e_event_ext = VK_DEBUG_REPORT_OBJECT_TYPE_EVENT_EXT,
-	e_query_pool_ext = VK_DEBUG_REPORT_OBJECT_TYPE_QUERY_POOL_EXT,
-	e_buffer_view_ext = VK_DEBUG_REPORT_OBJECT_TYPE_BUFFER_VIEW_EXT,
-	e_image_view_ext = VK_DEBUG_REPORT_OBJECT_TYPE_IMAGE_VIEW_EXT,
-	e_shader_module_ext = VK_DEBUG_REPORT_OBJECT_TYPE_SHADER_MODULE_EXT,
-	e_pipeline_cache_ext = VK_DEBUG_REPORT_OBJECT_TYPE_PIPELINE_CACHE_EXT,
-	e_pipeline_layout_ext = VK_DEBUG_REPORT_OBJECT_TYPE_PIPELINE_LAYOUT_EXT,
-	e_render_pass_ext = VK_DEBUG_REPORT_OBJECT_TYPE_RENDER_PASS_EXT,
-	e_pipeline_ext = VK_DEBUG_REPORT_OBJECT_TYPE_PIPELINE_EXT,
-	e_descriptor_set_layout_ext = VK_DEBUG_REPORT_OBJECT_TYPE_DESCRIPTOR_SET_LAYOUT_EXT,
-	e_sampler_ext = VK_DEBUG_REPORT_OBJECT_TYPE_SAMPLER_EXT,
-	e_descriptor_pool_ext = VK_DEBUG_REPORT_OBJECT_TYPE_DESCRIPTOR_POOL_EXT,
-	e_descriptor_set_ext = VK_DEBUG_REPORT_OBJECT_TYPE_DESCRIPTOR_SET_EXT,
-	e_framebuffer_ext = VK_DEBUG_REPORT_OBJECT_TYPE_FRAMEBUFFER_EXT,
-	e_command_pool_ext = VK_DEBUG_REPORT_OBJECT_TYPE_COMMAND_POOL_EXT,
-	e_surface_khr_ext = VK_DEBUG_REPORT_OBJECT_TYPE_SURFACE_KHR_EXT,
-	e_swapchain_khr_ext = VK_DEBUG_REPORT_OBJECT_TYPE_SWAPCHAIN_KHR_EXT,
-	e_debug_report_callback_ext_ext = VK_DEBUG_REPORT_OBJECT_TYPE_DEBUG_REPORT_CALLBACK_EXT_EXT,
-	e_debug_report_ext = VK_DEBUG_REPORT_OBJECT_TYPE_DEBUG_REPORT_EXT,
-	e_display_khr_ext = VK_DEBUG_REPORT_OBJECT_TYPE_DISPLAY_KHR_EXT,
-	e_display_mode_khr_ext = VK_DEBUG_REPORT_OBJECT_TYPE_DISPLAY_MODE_KHR_EXT,
-	e_object_table_nvx_ext = VK_DEBUG_REPORT_OBJECT_TYPE_OBJECT_TABLE_NVX_EXT,
-	e_indirect_commands_layout_nvx_ext = VK_DEBUG_REPORT_OBJECT_TYPE_INDIRECT_COMMANDS_LAYOUT_NVX_EXT,
-	e_validation_cache_ext_ext = VK_DEBUG_REPORT_OBJECT_TYPE_VALIDATION_CACHE_EXT_EXT,
-	e_validation_cache_ext = VK_DEBUG_REPORT_OBJECT_TYPE_VALIDATION_CACHE_EXT,
-}flag;
-	E_debug_report_object_type_EXT(){}
-	E_debug_report_object_type_EXT(const decltype(flag) flag_):flag(flag_) {}
-	E_debug_report_object_type_EXT(const E_debug_report_object_type_EXT& e_):flag(e_.flag) {}
-	E_debug_report_object_type_EXT(const VkDebugReportObjectTypeEXT flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
-	operator VkDebugReportObjectTypeEXT*(){ return reinterpret_cast<VkDebugReportObjectTypeEXT*>(this); }
-	operator VkDebugReportObjectTypeEXT&(){ return reinterpret_cast<VkDebugReportObjectTypeEXT&>(*this); }
-	E_debug_report_object_type_EXT& operator = (E_debug_report_object_type_EXT e_) { flag = e_.flag; return *this; }
-};
-inline bool operator == (const E_debug_report_object_type_EXT e1_,const E_debug_report_object_type_EXT e2_){return e1_.flag == e2_.flag; }
-inline bool operator != (const E_debug_report_object_type_EXT e1_,const E_debug_report_object_type_EXT e2_){return e1_.flag != e2_.flag; }
+union E_debug_report_object_type_EXT{
+	enum{
+		e_unknown_ext = VK_DEBUG_REPORT_OBJECT_TYPE_UNKNOWN_EXT,
+		e_instance_ext = VK_DEBUG_REPORT_OBJECT_TYPE_INSTANCE_EXT,
+		e_physical_device_ext = VK_DEBUG_REPORT_OBJECT_TYPE_PHYSICAL_DEVICE_EXT,
+		e_device_ext = VK_DEBUG_REPORT_OBJECT_TYPE_DEVICE_EXT,
+		e_queue_ext = VK_DEBUG_REPORT_OBJECT_TYPE_QUEUE_EXT,
+		e_semaphore_ext = VK_DEBUG_REPORT_OBJECT_TYPE_SEMAPHORE_EXT,
+		e_command_buffer_ext = VK_DEBUG_REPORT_OBJECT_TYPE_COMMAND_BUFFER_EXT,
+		e_fence_ext = VK_DEBUG_REPORT_OBJECT_TYPE_FENCE_EXT,
+		e_device_memory_ext = VK_DEBUG_REPORT_OBJECT_TYPE_DEVICE_MEMORY_EXT,
+		e_buffer_ext = VK_DEBUG_REPORT_OBJECT_TYPE_BUFFER_EXT,
+		e_image_ext = VK_DEBUG_REPORT_OBJECT_TYPE_IMAGE_EXT,
+		e_event_ext = VK_DEBUG_REPORT_OBJECT_TYPE_EVENT_EXT,
+		e_query_pool_ext = VK_DEBUG_REPORT_OBJECT_TYPE_QUERY_POOL_EXT,
+		e_buffer_view_ext = VK_DEBUG_REPORT_OBJECT_TYPE_BUFFER_VIEW_EXT,
+		e_image_view_ext = VK_DEBUG_REPORT_OBJECT_TYPE_IMAGE_VIEW_EXT,
+		e_shader_module_ext = VK_DEBUG_REPORT_OBJECT_TYPE_SHADER_MODULE_EXT,
+		e_pipeline_cache_ext = VK_DEBUG_REPORT_OBJECT_TYPE_PIPELINE_CACHE_EXT,
+		e_pipeline_layout_ext = VK_DEBUG_REPORT_OBJECT_TYPE_PIPELINE_LAYOUT_EXT,
+		e_render_pass_ext = VK_DEBUG_REPORT_OBJECT_TYPE_RENDER_PASS_EXT,
+		e_pipeline_ext = VK_DEBUG_REPORT_OBJECT_TYPE_PIPELINE_EXT,
+		e_descriptor_set_layout_ext = VK_DEBUG_REPORT_OBJECT_TYPE_DESCRIPTOR_SET_LAYOUT_EXT,
+		e_sampler_ext = VK_DEBUG_REPORT_OBJECT_TYPE_SAMPLER_EXT,
+		e_descriptor_pool_ext = VK_DEBUG_REPORT_OBJECT_TYPE_DESCRIPTOR_POOL_EXT,
+		e_descriptor_set_ext = VK_DEBUG_REPORT_OBJECT_TYPE_DESCRIPTOR_SET_EXT,
+		e_framebuffer_ext = VK_DEBUG_REPORT_OBJECT_TYPE_FRAMEBUFFER_EXT,
+		e_command_pool_ext = VK_DEBUG_REPORT_OBJECT_TYPE_COMMAND_POOL_EXT,
+		e_surface_khr_ext = VK_DEBUG_REPORT_OBJECT_TYPE_SURFACE_KHR_EXT,
+		e_swapchain_khr_ext = VK_DEBUG_REPORT_OBJECT_TYPE_SWAPCHAIN_KHR_EXT,
+		e_debug_report_callback_ext_ext = VK_DEBUG_REPORT_OBJECT_TYPE_DEBUG_REPORT_CALLBACK_EXT_EXT,
+		e_debug_report_ext = VK_DEBUG_REPORT_OBJECT_TYPE_DEBUG_REPORT_EXT,
+		e_display_khr_ext = VK_DEBUG_REPORT_OBJECT_TYPE_DISPLAY_KHR_EXT,
+		e_display_mode_khr_ext = VK_DEBUG_REPORT_OBJECT_TYPE_DISPLAY_MODE_KHR_EXT,
+		e_object_table_nvx_ext = VK_DEBUG_REPORT_OBJECT_TYPE_OBJECT_TABLE_NVX_EXT,
+		e_indirect_commands_layout_nvx_ext = VK_DEBUG_REPORT_OBJECT_TYPE_INDIRECT_COMMANDS_LAYOUT_NVX_EXT,
+		e_validation_cache_ext_ext = VK_DEBUG_REPORT_OBJECT_TYPE_VALIDATION_CACHE_EXT_EXT,
+		e_validation_cache_ext = VK_DEBUG_REPORT_OBJECT_TYPE_VALIDATION_CACHE_EXT,
+	}flag;
+	VkDebugReportObjectTypeEXT vk_flag;
 
+	E_debug_report_object_type_EXT(){}
+	E_debug_report_object_type_EXT(const VkDebugReportObjectTypeEXT flag_):flag(static_cast<decltype(flag)>(flag_) ){}
+	E_debug_report_object_type_EXT(const decltype(flag) flag_):flag(flag_){}
+
+	operator VkDebugReportObjectTypeEXT&(){return vk_flag;}
+	operator VkDebugReportObjectTypeEXT*()const{return const_cast<VkDebugReportObjectTypeEXT*const>(&vk_flag);}
+	operator VkDebugReportObjectTypeEXT*(){return &vk_flag;}
+
+	bool operator==(int flag_){return flag==flag_;}
+};
 /*	VkRasterizationOrderAMD
 */
-template<> struct my_class_convert<E_rasterization_order_AMD> { using type = VkRasterizationOrderAMD;};template<> struct my_class_convert<VkRasterizationOrderAMD> { using type = E_rasterization_order_AMD;};struct E_rasterization_order_AMD{
-enum{
-	e_strict_amd = VK_RASTERIZATION_ORDER_STRICT_AMD,
-	e_relaxed_amd = VK_RASTERIZATION_ORDER_RELAXED_AMD,
-}flag;
-	E_rasterization_order_AMD(){}
-	E_rasterization_order_AMD(const decltype(flag) flag_):flag(flag_) {}
-	E_rasterization_order_AMD(const E_rasterization_order_AMD& e_):flag(e_.flag) {}
-	E_rasterization_order_AMD(const VkRasterizationOrderAMD flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
-	operator VkRasterizationOrderAMD*(){ return reinterpret_cast<VkRasterizationOrderAMD*>(this); }
-	operator VkRasterizationOrderAMD&(){ return reinterpret_cast<VkRasterizationOrderAMD&>(*this); }
-	E_rasterization_order_AMD& operator = (E_rasterization_order_AMD e_) { flag = e_.flag; return *this; }
-};
-inline bool operator == (const E_rasterization_order_AMD e1_,const E_rasterization_order_AMD e2_){return e1_.flag == e2_.flag; }
-inline bool operator != (const E_rasterization_order_AMD e1_,const E_rasterization_order_AMD e2_){return e1_.flag != e2_.flag; }
+union E_rasterization_order_AMD{
+	enum{
+		e_strict_amd = VK_RASTERIZATION_ORDER_STRICT_AMD,
+		e_relaxed_amd = VK_RASTERIZATION_ORDER_RELAXED_AMD,
+	}flag;
+	VkRasterizationOrderAMD vk_flag;
 
+	E_rasterization_order_AMD(){}
+	E_rasterization_order_AMD(const VkRasterizationOrderAMD flag_):flag(static_cast<decltype(flag)>(flag_) ){}
+	E_rasterization_order_AMD(const decltype(flag) flag_):flag(flag_){}
+
+	operator VkRasterizationOrderAMD&(){return vk_flag;}
+	operator VkRasterizationOrderAMD*()const{return const_cast<VkRasterizationOrderAMD*const>(&vk_flag);}
+	operator VkRasterizationOrderAMD*(){return &vk_flag;}
+
+	bool operator==(int flag_){return flag==flag_;}
+};
 /*	VkValidationCheckEXT
 */
-template<> struct my_class_convert<E_validation_check_EXT> { using type = VkValidationCheckEXT;};template<> struct my_class_convert<VkValidationCheckEXT> { using type = E_validation_check_EXT;};struct E_validation_check_EXT{
-enum{
-	e_all_ext = VK_VALIDATION_CHECK_ALL_EXT,
-	e_shaders_ext = VK_VALIDATION_CHECK_SHADERS_EXT,
-}flag;
-	E_validation_check_EXT(){}
-	E_validation_check_EXT(const decltype(flag) flag_):flag(flag_) {}
-	E_validation_check_EXT(const E_validation_check_EXT& e_):flag(e_.flag) {}
-	E_validation_check_EXT(const VkValidationCheckEXT flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
-	operator VkValidationCheckEXT*(){ return reinterpret_cast<VkValidationCheckEXT*>(this); }
-	operator VkValidationCheckEXT&(){ return reinterpret_cast<VkValidationCheckEXT&>(*this); }
-	E_validation_check_EXT& operator = (E_validation_check_EXT e_) { flag = e_.flag; return *this; }
-};
-inline bool operator == (const E_validation_check_EXT e1_,const E_validation_check_EXT e2_){return e1_.flag == e2_.flag; }
-inline bool operator != (const E_validation_check_EXT e1_,const E_validation_check_EXT e2_){return e1_.flag != e2_.flag; }
+union E_validation_check_EXT{
+	enum{
+		e_all_ext = VK_VALIDATION_CHECK_ALL_EXT,
+		e_shaders_ext = VK_VALIDATION_CHECK_SHADERS_EXT,
+	}flag;
+	VkValidationCheckEXT vk_flag;
 
+	E_validation_check_EXT(){}
+	E_validation_check_EXT(const VkValidationCheckEXT flag_):flag(static_cast<decltype(flag)>(flag_) ){}
+	E_validation_check_EXT(const decltype(flag) flag_):flag(flag_){}
+
+	operator VkValidationCheckEXT&(){return vk_flag;}
+	operator VkValidationCheckEXT*()const{return const_cast<VkValidationCheckEXT*const>(&vk_flag);}
+	operator VkValidationCheckEXT*(){return &vk_flag;}
+
+	bool operator==(int flag_){return flag==flag_;}
+};
 /*	VkIndirectCommandsTokenTypeNVX
 */
-template<> struct my_class_convert<E_indirect_commands_token_type_NVX> { using type = VkIndirectCommandsTokenTypeNVX;};template<> struct my_class_convert<VkIndirectCommandsTokenTypeNVX> { using type = E_indirect_commands_token_type_NVX;};struct E_indirect_commands_token_type_NVX{
-enum{
-	e_pipeline_nvx = VK_INDIRECT_COMMANDS_TOKEN_TYPE_PIPELINE_NVX,
-	e_descriptor_set_nvx = VK_INDIRECT_COMMANDS_TOKEN_TYPE_DESCRIPTOR_SET_NVX,
-	e_index_buffer_nvx = VK_INDIRECT_COMMANDS_TOKEN_TYPE_INDEX_BUFFER_NVX,
-	e_vertex_buffer_nvx = VK_INDIRECT_COMMANDS_TOKEN_TYPE_VERTEX_BUFFER_NVX,
-	e_push_constant_nvx = VK_INDIRECT_COMMANDS_TOKEN_TYPE_PUSH_CONSTANT_NVX,
-	e_draw_indexed_nvx = VK_INDIRECT_COMMANDS_TOKEN_TYPE_DRAW_INDEXED_NVX,
-	e_draw_nvx = VK_INDIRECT_COMMANDS_TOKEN_TYPE_DRAW_NVX,
-	e_dispatch_nvx = VK_INDIRECT_COMMANDS_TOKEN_TYPE_DISPATCH_NVX,
-}flag;
-	E_indirect_commands_token_type_NVX(){}
-	E_indirect_commands_token_type_NVX(const decltype(flag) flag_):flag(flag_) {}
-	E_indirect_commands_token_type_NVX(const E_indirect_commands_token_type_NVX& e_):flag(e_.flag) {}
-	E_indirect_commands_token_type_NVX(const VkIndirectCommandsTokenTypeNVX flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
-	operator VkIndirectCommandsTokenTypeNVX*(){ return reinterpret_cast<VkIndirectCommandsTokenTypeNVX*>(this); }
-	operator VkIndirectCommandsTokenTypeNVX&(){ return reinterpret_cast<VkIndirectCommandsTokenTypeNVX&>(*this); }
-	E_indirect_commands_token_type_NVX& operator = (E_indirect_commands_token_type_NVX e_) { flag = e_.flag; return *this; }
-};
-inline bool operator == (const E_indirect_commands_token_type_NVX e1_,const E_indirect_commands_token_type_NVX e2_){return e1_.flag == e2_.flag; }
-inline bool operator != (const E_indirect_commands_token_type_NVX e1_,const E_indirect_commands_token_type_NVX e2_){return e1_.flag != e2_.flag; }
+union E_indirect_commands_token_type_NVX{
+	enum{
+		e_pipeline_nvx = VK_INDIRECT_COMMANDS_TOKEN_TYPE_PIPELINE_NVX,
+		e_descriptor_set_nvx = VK_INDIRECT_COMMANDS_TOKEN_TYPE_DESCRIPTOR_SET_NVX,
+		e_index_buffer_nvx = VK_INDIRECT_COMMANDS_TOKEN_TYPE_INDEX_BUFFER_NVX,
+		e_vertex_buffer_nvx = VK_INDIRECT_COMMANDS_TOKEN_TYPE_VERTEX_BUFFER_NVX,
+		e_push_constant_nvx = VK_INDIRECT_COMMANDS_TOKEN_TYPE_PUSH_CONSTANT_NVX,
+		e_draw_indexed_nvx = VK_INDIRECT_COMMANDS_TOKEN_TYPE_DRAW_INDEXED_NVX,
+		e_draw_nvx = VK_INDIRECT_COMMANDS_TOKEN_TYPE_DRAW_NVX,
+		e_dispatch_nvx = VK_INDIRECT_COMMANDS_TOKEN_TYPE_DISPATCH_NVX,
+	}flag;
+	VkIndirectCommandsTokenTypeNVX vk_flag;
 
+	E_indirect_commands_token_type_NVX(){}
+	E_indirect_commands_token_type_NVX(const VkIndirectCommandsTokenTypeNVX flag_):flag(static_cast<decltype(flag)>(flag_) ){}
+	E_indirect_commands_token_type_NVX(const decltype(flag) flag_):flag(flag_){}
+
+	operator VkIndirectCommandsTokenTypeNVX&(){return vk_flag;}
+	operator VkIndirectCommandsTokenTypeNVX*()const{return const_cast<VkIndirectCommandsTokenTypeNVX*const>(&vk_flag);}
+	operator VkIndirectCommandsTokenTypeNVX*(){return &vk_flag;}
+
+	bool operator==(int flag_){return flag==flag_;}
+};
 /*	VkObjectEntryTypeNVX
 */
-template<> struct my_class_convert<E_object_entry_type_NVX> { using type = VkObjectEntryTypeNVX;};template<> struct my_class_convert<VkObjectEntryTypeNVX> { using type = E_object_entry_type_NVX;};struct E_object_entry_type_NVX{
-enum{
-	e_descriptor_set_nvx = VK_OBJECT_ENTRY_TYPE_DESCRIPTOR_SET_NVX,
-	e_pipeline_nvx = VK_OBJECT_ENTRY_TYPE_PIPELINE_NVX,
-	e_index_buffer_nvx = VK_OBJECT_ENTRY_TYPE_INDEX_BUFFER_NVX,
-	e_vertex_buffer_nvx = VK_OBJECT_ENTRY_TYPE_VERTEX_BUFFER_NVX,
-	e_push_constant_nvx = VK_OBJECT_ENTRY_TYPE_PUSH_CONSTANT_NVX,
-}flag;
-	E_object_entry_type_NVX(){}
-	E_object_entry_type_NVX(const decltype(flag) flag_):flag(flag_) {}
-	E_object_entry_type_NVX(const E_object_entry_type_NVX& e_):flag(e_.flag) {}
-	E_object_entry_type_NVX(const VkObjectEntryTypeNVX flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
-	operator VkObjectEntryTypeNVX*(){ return reinterpret_cast<VkObjectEntryTypeNVX*>(this); }
-	operator VkObjectEntryTypeNVX&(){ return reinterpret_cast<VkObjectEntryTypeNVX&>(*this); }
-	E_object_entry_type_NVX& operator = (E_object_entry_type_NVX e_) { flag = e_.flag; return *this; }
-};
-inline bool operator == (const E_object_entry_type_NVX e1_,const E_object_entry_type_NVX e2_){return e1_.flag == e2_.flag; }
-inline bool operator != (const E_object_entry_type_NVX e1_,const E_object_entry_type_NVX e2_){return e1_.flag != e2_.flag; }
+union E_object_entry_type_NVX{
+	enum{
+		e_descriptor_set_nvx = VK_OBJECT_ENTRY_TYPE_DESCRIPTOR_SET_NVX,
+		e_pipeline_nvx = VK_OBJECT_ENTRY_TYPE_PIPELINE_NVX,
+		e_index_buffer_nvx = VK_OBJECT_ENTRY_TYPE_INDEX_BUFFER_NVX,
+		e_vertex_buffer_nvx = VK_OBJECT_ENTRY_TYPE_VERTEX_BUFFER_NVX,
+		e_push_constant_nvx = VK_OBJECT_ENTRY_TYPE_PUSH_CONSTANT_NVX,
+	}flag;
+	VkObjectEntryTypeNVX vk_flag;
 
+	E_object_entry_type_NVX(){}
+	E_object_entry_type_NVX(const VkObjectEntryTypeNVX flag_):flag(static_cast<decltype(flag)>(flag_) ){}
+	E_object_entry_type_NVX(const decltype(flag) flag_):flag(flag_){}
+
+	operator VkObjectEntryTypeNVX&(){return vk_flag;}
+	operator VkObjectEntryTypeNVX*()const{return const_cast<VkObjectEntryTypeNVX*const>(&vk_flag);}
+	operator VkObjectEntryTypeNVX*(){return &vk_flag;}
+
+	bool operator==(int flag_){return flag==flag_;}
+};
 /*	VkDisplayPowerStateEXT
 */
-template<> struct my_class_convert<E_display_power_state_EXT> { using type = VkDisplayPowerStateEXT;};template<> struct my_class_convert<VkDisplayPowerStateEXT> { using type = E_display_power_state_EXT;};struct E_display_power_state_EXT{
-enum{
-	e_off_ext = VK_DISPLAY_POWER_STATE_OFF_EXT,
-	e_suspend_ext = VK_DISPLAY_POWER_STATE_SUSPEND_EXT,
-	e_on_ext = VK_DISPLAY_POWER_STATE_ON_EXT,
-}flag;
-	E_display_power_state_EXT(){}
-	E_display_power_state_EXT(const decltype(flag) flag_):flag(flag_) {}
-	E_display_power_state_EXT(const E_display_power_state_EXT& e_):flag(e_.flag) {}
-	E_display_power_state_EXT(const VkDisplayPowerStateEXT flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
-	operator VkDisplayPowerStateEXT*(){ return reinterpret_cast<VkDisplayPowerStateEXT*>(this); }
-	operator VkDisplayPowerStateEXT&(){ return reinterpret_cast<VkDisplayPowerStateEXT&>(*this); }
-	E_display_power_state_EXT& operator = (E_display_power_state_EXT e_) { flag = e_.flag; return *this; }
-};
-inline bool operator == (const E_display_power_state_EXT e1_,const E_display_power_state_EXT e2_){return e1_.flag == e2_.flag; }
-inline bool operator != (const E_display_power_state_EXT e1_,const E_display_power_state_EXT e2_){return e1_.flag != e2_.flag; }
+union E_display_power_state_EXT{
+	enum{
+		e_off_ext = VK_DISPLAY_POWER_STATE_OFF_EXT,
+		e_suspend_ext = VK_DISPLAY_POWER_STATE_SUSPEND_EXT,
+		e_on_ext = VK_DISPLAY_POWER_STATE_ON_EXT,
+	}flag;
+	VkDisplayPowerStateEXT vk_flag;
 
+	E_display_power_state_EXT(){}
+	E_display_power_state_EXT(const VkDisplayPowerStateEXT flag_):flag(static_cast<decltype(flag)>(flag_) ){}
+	E_display_power_state_EXT(const decltype(flag) flag_):flag(flag_){}
+
+	operator VkDisplayPowerStateEXT&(){return vk_flag;}
+	operator VkDisplayPowerStateEXT*()const{return const_cast<VkDisplayPowerStateEXT*const>(&vk_flag);}
+	operator VkDisplayPowerStateEXT*(){return &vk_flag;}
+
+	bool operator==(int flag_){return flag==flag_;}
+};
 /*	VkDeviceEventTypeEXT
 */
-template<> struct my_class_convert<E_device_event_type_EXT> { using type = VkDeviceEventTypeEXT;};template<> struct my_class_convert<VkDeviceEventTypeEXT> { using type = E_device_event_type_EXT;};struct E_device_event_type_EXT{
-enum{
-	e_display_hotplug_ext = VK_DEVICE_EVENT_TYPE_DISPLAY_HOTPLUG_EXT,
-}flag;
-	E_device_event_type_EXT(){}
-	E_device_event_type_EXT(const decltype(flag) flag_):flag(flag_) {}
-	E_device_event_type_EXT(const E_device_event_type_EXT& e_):flag(e_.flag) {}
-	E_device_event_type_EXT(const VkDeviceEventTypeEXT flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
-	operator VkDeviceEventTypeEXT*(){ return reinterpret_cast<VkDeviceEventTypeEXT*>(this); }
-	operator VkDeviceEventTypeEXT&(){ return reinterpret_cast<VkDeviceEventTypeEXT&>(*this); }
-	E_device_event_type_EXT& operator = (E_device_event_type_EXT e_) { flag = e_.flag; return *this; }
-};
-inline bool operator == (const E_device_event_type_EXT e1_,const E_device_event_type_EXT e2_){return e1_.flag == e2_.flag; }
-inline bool operator != (const E_device_event_type_EXT e1_,const E_device_event_type_EXT e2_){return e1_.flag != e2_.flag; }
+union E_device_event_type_EXT{
+	enum{
+		e_display_hotplug_ext = VK_DEVICE_EVENT_TYPE_DISPLAY_HOTPLUG_EXT,
+	}flag;
+	VkDeviceEventTypeEXT vk_flag;
 
+	E_device_event_type_EXT(){}
+	E_device_event_type_EXT(const VkDeviceEventTypeEXT flag_):flag(static_cast<decltype(flag)>(flag_) ){}
+	E_device_event_type_EXT(const decltype(flag) flag_):flag(flag_){}
+
+	operator VkDeviceEventTypeEXT&(){return vk_flag;}
+	operator VkDeviceEventTypeEXT*()const{return const_cast<VkDeviceEventTypeEXT*const>(&vk_flag);}
+	operator VkDeviceEventTypeEXT*(){return &vk_flag;}
+
+	bool operator==(int flag_){return flag==flag_;}
+};
 /*	VkDisplayEventTypeEXT
 */
-template<> struct my_class_convert<E_display_event_type_EXT> { using type = VkDisplayEventTypeEXT;};template<> struct my_class_convert<VkDisplayEventTypeEXT> { using type = E_display_event_type_EXT;};struct E_display_event_type_EXT{
-enum{
-	e_first_pixel_out_ext = VK_DISPLAY_EVENT_TYPE_FIRST_PIXEL_OUT_EXT,
-}flag;
-	E_display_event_type_EXT(){}
-	E_display_event_type_EXT(const decltype(flag) flag_):flag(flag_) {}
-	E_display_event_type_EXT(const E_display_event_type_EXT& e_):flag(e_.flag) {}
-	E_display_event_type_EXT(const VkDisplayEventTypeEXT flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
-	operator VkDisplayEventTypeEXT*(){ return reinterpret_cast<VkDisplayEventTypeEXT*>(this); }
-	operator VkDisplayEventTypeEXT&(){ return reinterpret_cast<VkDisplayEventTypeEXT&>(*this); }
-	E_display_event_type_EXT& operator = (E_display_event_type_EXT e_) { flag = e_.flag; return *this; }
-};
-inline bool operator == (const E_display_event_type_EXT e1_,const E_display_event_type_EXT e2_){return e1_.flag == e2_.flag; }
-inline bool operator != (const E_display_event_type_EXT e1_,const E_display_event_type_EXT e2_){return e1_.flag != e2_.flag; }
+union E_display_event_type_EXT{
+	enum{
+		e_first_pixel_out_ext = VK_DISPLAY_EVENT_TYPE_FIRST_PIXEL_OUT_EXT,
+	}flag;
+	VkDisplayEventTypeEXT vk_flag;
 
+	E_display_event_type_EXT(){}
+	E_display_event_type_EXT(const VkDisplayEventTypeEXT flag_):flag(static_cast<decltype(flag)>(flag_) ){}
+	E_display_event_type_EXT(const decltype(flag) flag_):flag(flag_){}
+
+	operator VkDisplayEventTypeEXT&(){return vk_flag;}
+	operator VkDisplayEventTypeEXT*()const{return const_cast<VkDisplayEventTypeEXT*const>(&vk_flag);}
+	operator VkDisplayEventTypeEXT*(){return &vk_flag;}
+
+	bool operator==(int flag_){return flag==flag_;}
+};
 /*	VkViewportCoordinateSwizzleNV
 */
-template<> struct my_class_convert<E_viewport_coordinate_swizzle_NV> { using type = VkViewportCoordinateSwizzleNV;};template<> struct my_class_convert<VkViewportCoordinateSwizzleNV> { using type = E_viewport_coordinate_swizzle_NV;};struct E_viewport_coordinate_swizzle_NV{
-enum{
-	e_positive_x_nv = VK_VIEWPORT_COORDINATE_SWIZZLE_POSITIVE_X_NV,
-	e_negative_x_nv = VK_VIEWPORT_COORDINATE_SWIZZLE_NEGATIVE_X_NV,
-	e_positive_y_nv = VK_VIEWPORT_COORDINATE_SWIZZLE_POSITIVE_Y_NV,
-	e_negative_y_nv = VK_VIEWPORT_COORDINATE_SWIZZLE_NEGATIVE_Y_NV,
-	e_positive_z_nv = VK_VIEWPORT_COORDINATE_SWIZZLE_POSITIVE_Z_NV,
-	e_negative_z_nv = VK_VIEWPORT_COORDINATE_SWIZZLE_NEGATIVE_Z_NV,
-	e_positive_w_nv = VK_VIEWPORT_COORDINATE_SWIZZLE_POSITIVE_W_NV,
-	e_negative_w_nv = VK_VIEWPORT_COORDINATE_SWIZZLE_NEGATIVE_W_NV,
-}flag;
-	E_viewport_coordinate_swizzle_NV(){}
-	E_viewport_coordinate_swizzle_NV(const decltype(flag) flag_):flag(flag_) {}
-	E_viewport_coordinate_swizzle_NV(const E_viewport_coordinate_swizzle_NV& e_):flag(e_.flag) {}
-	E_viewport_coordinate_swizzle_NV(const VkViewportCoordinateSwizzleNV flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
-	operator VkViewportCoordinateSwizzleNV*(){ return reinterpret_cast<VkViewportCoordinateSwizzleNV*>(this); }
-	operator VkViewportCoordinateSwizzleNV&(){ return reinterpret_cast<VkViewportCoordinateSwizzleNV&>(*this); }
-	E_viewport_coordinate_swizzle_NV& operator = (E_viewport_coordinate_swizzle_NV e_) { flag = e_.flag; return *this; }
-};
-inline bool operator == (const E_viewport_coordinate_swizzle_NV e1_,const E_viewport_coordinate_swizzle_NV e2_){return e1_.flag == e2_.flag; }
-inline bool operator != (const E_viewport_coordinate_swizzle_NV e1_,const E_viewport_coordinate_swizzle_NV e2_){return e1_.flag != e2_.flag; }
+union E_viewport_coordinate_swizzle_NV{
+	enum{
+		e_positive_x_nv = VK_VIEWPORT_COORDINATE_SWIZZLE_POSITIVE_X_NV,
+		e_negative_x_nv = VK_VIEWPORT_COORDINATE_SWIZZLE_NEGATIVE_X_NV,
+		e_positive_y_nv = VK_VIEWPORT_COORDINATE_SWIZZLE_POSITIVE_Y_NV,
+		e_negative_y_nv = VK_VIEWPORT_COORDINATE_SWIZZLE_NEGATIVE_Y_NV,
+		e_positive_z_nv = VK_VIEWPORT_COORDINATE_SWIZZLE_POSITIVE_Z_NV,
+		e_negative_z_nv = VK_VIEWPORT_COORDINATE_SWIZZLE_NEGATIVE_Z_NV,
+		e_positive_w_nv = VK_VIEWPORT_COORDINATE_SWIZZLE_POSITIVE_W_NV,
+		e_negative_w_nv = VK_VIEWPORT_COORDINATE_SWIZZLE_NEGATIVE_W_NV,
+	}flag;
+	VkViewportCoordinateSwizzleNV vk_flag;
 
+	E_viewport_coordinate_swizzle_NV(){}
+	E_viewport_coordinate_swizzle_NV(const VkViewportCoordinateSwizzleNV flag_):flag(static_cast<decltype(flag)>(flag_) ){}
+	E_viewport_coordinate_swizzle_NV(const decltype(flag) flag_):flag(flag_){}
+
+	operator VkViewportCoordinateSwizzleNV&(){return vk_flag;}
+	operator VkViewportCoordinateSwizzleNV*()const{return const_cast<VkViewportCoordinateSwizzleNV*const>(&vk_flag);}
+	operator VkViewportCoordinateSwizzleNV*(){return &vk_flag;}
+
+	bool operator==(int flag_){return flag==flag_;}
+};
 /*	VkDiscardRectangleModeEXT
 */
-template<> struct my_class_convert<E_discard_rectangle_mode_EXT> { using type = VkDiscardRectangleModeEXT;};template<> struct my_class_convert<VkDiscardRectangleModeEXT> { using type = E_discard_rectangle_mode_EXT;};struct E_discard_rectangle_mode_EXT{
-enum{
-	e_inclusive_ext = VK_DISCARD_RECTANGLE_MODE_INCLUSIVE_EXT,
-	e_exclusive_ext = VK_DISCARD_RECTANGLE_MODE_EXCLUSIVE_EXT,
-}flag;
-	E_discard_rectangle_mode_EXT(){}
-	E_discard_rectangle_mode_EXT(const decltype(flag) flag_):flag(flag_) {}
-	E_discard_rectangle_mode_EXT(const E_discard_rectangle_mode_EXT& e_):flag(e_.flag) {}
-	E_discard_rectangle_mode_EXT(const VkDiscardRectangleModeEXT flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
-	operator VkDiscardRectangleModeEXT*(){ return reinterpret_cast<VkDiscardRectangleModeEXT*>(this); }
-	operator VkDiscardRectangleModeEXT&(){ return reinterpret_cast<VkDiscardRectangleModeEXT&>(*this); }
-	E_discard_rectangle_mode_EXT& operator = (E_discard_rectangle_mode_EXT e_) { flag = e_.flag; return *this; }
-};
-inline bool operator == (const E_discard_rectangle_mode_EXT e1_,const E_discard_rectangle_mode_EXT e2_){return e1_.flag == e2_.flag; }
-inline bool operator != (const E_discard_rectangle_mode_EXT e1_,const E_discard_rectangle_mode_EXT e2_){return e1_.flag != e2_.flag; }
+union E_discard_rectangle_mode_EXT{
+	enum{
+		e_inclusive_ext = VK_DISCARD_RECTANGLE_MODE_INCLUSIVE_EXT,
+		e_exclusive_ext = VK_DISCARD_RECTANGLE_MODE_EXCLUSIVE_EXT,
+	}flag;
+	VkDiscardRectangleModeEXT vk_flag;
 
+	E_discard_rectangle_mode_EXT(){}
+	E_discard_rectangle_mode_EXT(const VkDiscardRectangleModeEXT flag_):flag(static_cast<decltype(flag)>(flag_) ){}
+	E_discard_rectangle_mode_EXT(const decltype(flag) flag_):flag(flag_){}
+
+	operator VkDiscardRectangleModeEXT&(){return vk_flag;}
+	operator VkDiscardRectangleModeEXT*()const{return const_cast<VkDiscardRectangleModeEXT*const>(&vk_flag);}
+	operator VkDiscardRectangleModeEXT*(){return &vk_flag;}
+
+	bool operator==(int flag_){return flag==flag_;}
+};
 /*	VkPointClippingBehavior
 */
-template<> struct my_class_convert<E_point_clipping_behavior> { using type = VkPointClippingBehavior;};template<> struct my_class_convert<VkPointClippingBehavior> { using type = E_point_clipping_behavior;};struct E_point_clipping_behavior{
-enum{
-	e_all_clip_planes = VK_POINT_CLIPPING_BEHAVIOR_ALL_CLIP_PLANES,
-	e_user_clip_planes_only = VK_POINT_CLIPPING_BEHAVIOR_USER_CLIP_PLANES_ONLY,
-}flag;
-	E_point_clipping_behavior(){}
-	E_point_clipping_behavior(const decltype(flag) flag_):flag(flag_) {}
-	E_point_clipping_behavior(const E_point_clipping_behavior& e_):flag(e_.flag) {}
-	E_point_clipping_behavior(const VkPointClippingBehavior flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
-	operator VkPointClippingBehavior*(){ return reinterpret_cast<VkPointClippingBehavior*>(this); }
-	operator VkPointClippingBehavior&(){ return reinterpret_cast<VkPointClippingBehavior&>(*this); }
-	E_point_clipping_behavior& operator = (E_point_clipping_behavior e_) { flag = e_.flag; return *this; }
-};
-inline bool operator == (const E_point_clipping_behavior e1_,const E_point_clipping_behavior e2_){return e1_.flag == e2_.flag; }
-inline bool operator != (const E_point_clipping_behavior e1_,const E_point_clipping_behavior e2_){return e1_.flag != e2_.flag; }
+union E_point_clipping_behavior{
+	enum{
+		e_all_clip_planes = VK_POINT_CLIPPING_BEHAVIOR_ALL_CLIP_PLANES,
+		e_user_clip_planes_only = VK_POINT_CLIPPING_BEHAVIOR_USER_CLIP_PLANES_ONLY,
+	}flag;
+	VkPointClippingBehavior vk_flag;
 
+	E_point_clipping_behavior(){}
+	E_point_clipping_behavior(const VkPointClippingBehavior flag_):flag(static_cast<decltype(flag)>(flag_) ){}
+	E_point_clipping_behavior(const decltype(flag) flag_):flag(flag_){}
+
+	operator VkPointClippingBehavior&(){return vk_flag;}
+	operator VkPointClippingBehavior*()const{return const_cast<VkPointClippingBehavior*const>(&vk_flag);}
+	operator VkPointClippingBehavior*(){return &vk_flag;}
+
+	bool operator==(int flag_){return flag==flag_;}
+};
 /*	VkSamplerReductionModeEXT
 */
-template<> struct my_class_convert<E_sampler_reduction_mode_EXT> { using type = VkSamplerReductionModeEXT;};template<> struct my_class_convert<VkSamplerReductionModeEXT> { using type = E_sampler_reduction_mode_EXT;};struct E_sampler_reduction_mode_EXT{
-enum{
-	e_weighted_average_ext = VK_SAMPLER_REDUCTION_MODE_WEIGHTED_AVERAGE_EXT,
-	e_min_ext = VK_SAMPLER_REDUCTION_MODE_MIN_EXT,
-	e_max_ext = VK_SAMPLER_REDUCTION_MODE_MAX_EXT,
-}flag;
-	E_sampler_reduction_mode_EXT(){}
-	E_sampler_reduction_mode_EXT(const decltype(flag) flag_):flag(flag_) {}
-	E_sampler_reduction_mode_EXT(const E_sampler_reduction_mode_EXT& e_):flag(e_.flag) {}
-	E_sampler_reduction_mode_EXT(const VkSamplerReductionModeEXT flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
-	operator VkSamplerReductionModeEXT*(){ return reinterpret_cast<VkSamplerReductionModeEXT*>(this); }
-	operator VkSamplerReductionModeEXT&(){ return reinterpret_cast<VkSamplerReductionModeEXT&>(*this); }
-	E_sampler_reduction_mode_EXT& operator = (E_sampler_reduction_mode_EXT e_) { flag = e_.flag; return *this; }
-};
-inline bool operator == (const E_sampler_reduction_mode_EXT e1_,const E_sampler_reduction_mode_EXT e2_){return e1_.flag == e2_.flag; }
-inline bool operator != (const E_sampler_reduction_mode_EXT e1_,const E_sampler_reduction_mode_EXT e2_){return e1_.flag != e2_.flag; }
+union E_sampler_reduction_mode_EXT{
+	enum{
+		e_weighted_average_ext = VK_SAMPLER_REDUCTION_MODE_WEIGHTED_AVERAGE_EXT,
+		e_min_ext = VK_SAMPLER_REDUCTION_MODE_MIN_EXT,
+		e_max_ext = VK_SAMPLER_REDUCTION_MODE_MAX_EXT,
+	}flag;
+	VkSamplerReductionModeEXT vk_flag;
 
+	E_sampler_reduction_mode_EXT(){}
+	E_sampler_reduction_mode_EXT(const VkSamplerReductionModeEXT flag_):flag(static_cast<decltype(flag)>(flag_) ){}
+	E_sampler_reduction_mode_EXT(const decltype(flag) flag_):flag(flag_){}
+
+	operator VkSamplerReductionModeEXT&(){return vk_flag;}
+	operator VkSamplerReductionModeEXT*()const{return const_cast<VkSamplerReductionModeEXT*const>(&vk_flag);}
+	operator VkSamplerReductionModeEXT*(){return &vk_flag;}
+
+	bool operator==(int flag_){return flag==flag_;}
+};
 /*	VkTessellationDomainOrigin
 */
-template<> struct my_class_convert<E_tessellation_domain_origin> { using type = VkTessellationDomainOrigin;};template<> struct my_class_convert<VkTessellationDomainOrigin> { using type = E_tessellation_domain_origin;};struct E_tessellation_domain_origin{
-enum{
-	e_upper_left = VK_TESSELLATION_DOMAIN_ORIGIN_UPPER_LEFT,
-	e_lower_left = VK_TESSELLATION_DOMAIN_ORIGIN_LOWER_LEFT,
-}flag;
-	E_tessellation_domain_origin(){}
-	E_tessellation_domain_origin(const decltype(flag) flag_):flag(flag_) {}
-	E_tessellation_domain_origin(const E_tessellation_domain_origin& e_):flag(e_.flag) {}
-	E_tessellation_domain_origin(const VkTessellationDomainOrigin flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
-	operator VkTessellationDomainOrigin*(){ return reinterpret_cast<VkTessellationDomainOrigin*>(this); }
-	operator VkTessellationDomainOrigin&(){ return reinterpret_cast<VkTessellationDomainOrigin&>(*this); }
-	E_tessellation_domain_origin& operator = (E_tessellation_domain_origin e_) { flag = e_.flag; return *this; }
-};
-inline bool operator == (const E_tessellation_domain_origin e1_,const E_tessellation_domain_origin e2_){return e1_.flag == e2_.flag; }
-inline bool operator != (const E_tessellation_domain_origin e1_,const E_tessellation_domain_origin e2_){return e1_.flag != e2_.flag; }
+union E_tessellation_domain_origin{
+	enum{
+		e_upper_left = VK_TESSELLATION_DOMAIN_ORIGIN_UPPER_LEFT,
+		e_lower_left = VK_TESSELLATION_DOMAIN_ORIGIN_LOWER_LEFT,
+	}flag;
+	VkTessellationDomainOrigin vk_flag;
 
+	E_tessellation_domain_origin(){}
+	E_tessellation_domain_origin(const VkTessellationDomainOrigin flag_):flag(static_cast<decltype(flag)>(flag_) ){}
+	E_tessellation_domain_origin(const decltype(flag) flag_):flag(flag_){}
+
+	operator VkTessellationDomainOrigin&(){return vk_flag;}
+	operator VkTessellationDomainOrigin*()const{return const_cast<VkTessellationDomainOrigin*const>(&vk_flag);}
+	operator VkTessellationDomainOrigin*(){return &vk_flag;}
+
+	bool operator==(int flag_){return flag==flag_;}
+};
 /*	VkSamplerYcbcrModelConversion
 */
-template<> struct my_class_convert<E_sampler_ycbcr_model_conversion> { using type = VkSamplerYcbcrModelConversion;};template<> struct my_class_convert<VkSamplerYcbcrModelConversion> { using type = E_sampler_ycbcr_model_conversion;};struct E_sampler_ycbcr_model_conversion{
-enum{
-	e_rgb_identity = VK_SAMPLER_YCBCR_MODEL_CONVERSION_RGB_IDENTITY,
-	e_ycbcr_identity = VK_SAMPLER_YCBCR_MODEL_CONVERSION_YCBCR_IDENTITY,
-	e_ycbcr_709 = VK_SAMPLER_YCBCR_MODEL_CONVERSION_YCBCR_709,
-	e_ycbcr_601 = VK_SAMPLER_YCBCR_MODEL_CONVERSION_YCBCR_601,
-	e_ycbcr_2020 = VK_SAMPLER_YCBCR_MODEL_CONVERSION_YCBCR_2020,
-}flag;
-	E_sampler_ycbcr_model_conversion(){}
-	E_sampler_ycbcr_model_conversion(const decltype(flag) flag_):flag(flag_) {}
-	E_sampler_ycbcr_model_conversion(const E_sampler_ycbcr_model_conversion& e_):flag(e_.flag) {}
-	E_sampler_ycbcr_model_conversion(const VkSamplerYcbcrModelConversion flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
-	operator VkSamplerYcbcrModelConversion*(){ return reinterpret_cast<VkSamplerYcbcrModelConversion*>(this); }
-	operator VkSamplerYcbcrModelConversion&(){ return reinterpret_cast<VkSamplerYcbcrModelConversion&>(*this); }
-	E_sampler_ycbcr_model_conversion& operator = (E_sampler_ycbcr_model_conversion e_) { flag = e_.flag; return *this; }
-};
-inline bool operator == (const E_sampler_ycbcr_model_conversion e1_,const E_sampler_ycbcr_model_conversion e2_){return e1_.flag == e2_.flag; }
-inline bool operator != (const E_sampler_ycbcr_model_conversion e1_,const E_sampler_ycbcr_model_conversion e2_){return e1_.flag != e2_.flag; }
+union E_sampler_ycbcr_model_conversion{
+	enum{
+		e_rgb_identity = VK_SAMPLER_YCBCR_MODEL_CONVERSION_RGB_IDENTITY,
+		e_ycbcr_identity = VK_SAMPLER_YCBCR_MODEL_CONVERSION_YCBCR_IDENTITY,
+		e_ycbcr_709 = VK_SAMPLER_YCBCR_MODEL_CONVERSION_YCBCR_709,
+		e_ycbcr_601 = VK_SAMPLER_YCBCR_MODEL_CONVERSION_YCBCR_601,
+		e_ycbcr_2020 = VK_SAMPLER_YCBCR_MODEL_CONVERSION_YCBCR_2020,
+	}flag;
+	VkSamplerYcbcrModelConversion vk_flag;
 
+	E_sampler_ycbcr_model_conversion(){}
+	E_sampler_ycbcr_model_conversion(const VkSamplerYcbcrModelConversion flag_):flag(static_cast<decltype(flag)>(flag_) ){}
+	E_sampler_ycbcr_model_conversion(const decltype(flag) flag_):flag(flag_){}
+
+	operator VkSamplerYcbcrModelConversion&(){return vk_flag;}
+	operator VkSamplerYcbcrModelConversion*()const{return const_cast<VkSamplerYcbcrModelConversion*const>(&vk_flag);}
+	operator VkSamplerYcbcrModelConversion*(){return &vk_flag;}
+
+	bool operator==(int flag_){return flag==flag_;}
+};
 /*	VkSamplerYcbcrRange
 */
-template<> struct my_class_convert<E_sampler_ycbcr_range> { using type = VkSamplerYcbcrRange;};template<> struct my_class_convert<VkSamplerYcbcrRange> { using type = E_sampler_ycbcr_range;};struct E_sampler_ycbcr_range{
-enum{
-	e_itu_full = VK_SAMPLER_YCBCR_RANGE_ITU_FULL,
-	e_itu_narrow = VK_SAMPLER_YCBCR_RANGE_ITU_NARROW,
-}flag;
-	E_sampler_ycbcr_range(){}
-	E_sampler_ycbcr_range(const decltype(flag) flag_):flag(flag_) {}
-	E_sampler_ycbcr_range(const E_sampler_ycbcr_range& e_):flag(e_.flag) {}
-	E_sampler_ycbcr_range(const VkSamplerYcbcrRange flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
-	operator VkSamplerYcbcrRange*(){ return reinterpret_cast<VkSamplerYcbcrRange*>(this); }
-	operator VkSamplerYcbcrRange&(){ return reinterpret_cast<VkSamplerYcbcrRange&>(*this); }
-	E_sampler_ycbcr_range& operator = (E_sampler_ycbcr_range e_) { flag = e_.flag; return *this; }
-};
-inline bool operator == (const E_sampler_ycbcr_range e1_,const E_sampler_ycbcr_range e2_){return e1_.flag == e2_.flag; }
-inline bool operator != (const E_sampler_ycbcr_range e1_,const E_sampler_ycbcr_range e2_){return e1_.flag != e2_.flag; }
+union E_sampler_ycbcr_range{
+	enum{
+		e_itu_full = VK_SAMPLER_YCBCR_RANGE_ITU_FULL,
+		e_itu_narrow = VK_SAMPLER_YCBCR_RANGE_ITU_NARROW,
+	}flag;
+	VkSamplerYcbcrRange vk_flag;
 
+	E_sampler_ycbcr_range(){}
+	E_sampler_ycbcr_range(const VkSamplerYcbcrRange flag_):flag(static_cast<decltype(flag)>(flag_) ){}
+	E_sampler_ycbcr_range(const decltype(flag) flag_):flag(flag_){}
+
+	operator VkSamplerYcbcrRange&(){return vk_flag;}
+	operator VkSamplerYcbcrRange*()const{return const_cast<VkSamplerYcbcrRange*const>(&vk_flag);}
+	operator VkSamplerYcbcrRange*(){return &vk_flag;}
+
+	bool operator==(int flag_){return flag==flag_;}
+};
 /*	VkChromaLocation
 */
-template<> struct my_class_convert<E_chroma_location> { using type = VkChromaLocation;};template<> struct my_class_convert<VkChromaLocation> { using type = E_chroma_location;};struct E_chroma_location{
-enum{
-	e_cosited_even = VK_CHROMA_LOCATION_COSITED_EVEN,
-	e_midpoint = VK_CHROMA_LOCATION_MIDPOINT,
-}flag;
-	E_chroma_location(){}
-	E_chroma_location(const decltype(flag) flag_):flag(flag_) {}
-	E_chroma_location(const E_chroma_location& e_):flag(e_.flag) {}
-	E_chroma_location(const VkChromaLocation flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
-	operator VkChromaLocation*(){ return reinterpret_cast<VkChromaLocation*>(this); }
-	operator VkChromaLocation&(){ return reinterpret_cast<VkChromaLocation&>(*this); }
-	E_chroma_location& operator = (E_chroma_location e_) { flag = e_.flag; return *this; }
-};
-inline bool operator == (const E_chroma_location e1_,const E_chroma_location e2_){return e1_.flag == e2_.flag; }
-inline bool operator != (const E_chroma_location e1_,const E_chroma_location e2_){return e1_.flag != e2_.flag; }
+union E_chroma_location{
+	enum{
+		e_cosited_even = VK_CHROMA_LOCATION_COSITED_EVEN,
+		e_midpoint = VK_CHROMA_LOCATION_MIDPOINT,
+	}flag;
+	VkChromaLocation vk_flag;
 
+	E_chroma_location(){}
+	E_chroma_location(const VkChromaLocation flag_):flag(static_cast<decltype(flag)>(flag_) ){}
+	E_chroma_location(const decltype(flag) flag_):flag(flag_){}
+
+	operator VkChromaLocation&(){return vk_flag;}
+	operator VkChromaLocation*()const{return const_cast<VkChromaLocation*const>(&vk_flag);}
+	operator VkChromaLocation*(){return &vk_flag;}
+
+	bool operator==(int flag_){return flag==flag_;}
+};
 /*	VkBlendOverlapEXT
 */
-template<> struct my_class_convert<E_blend_overlap_EXT> { using type = VkBlendOverlapEXT;};template<> struct my_class_convert<VkBlendOverlapEXT> { using type = E_blend_overlap_EXT;};struct E_blend_overlap_EXT{
-enum{
-	e_uncorrelated_ext = VK_BLEND_OVERLAP_UNCORRELATED_EXT,
-	e_disjoint_ext = VK_BLEND_OVERLAP_DISJOINT_EXT,
-	e_conjoint_ext = VK_BLEND_OVERLAP_CONJOINT_EXT,
-}flag;
-	E_blend_overlap_EXT(){}
-	E_blend_overlap_EXT(const decltype(flag) flag_):flag(flag_) {}
-	E_blend_overlap_EXT(const E_blend_overlap_EXT& e_):flag(e_.flag) {}
-	E_blend_overlap_EXT(const VkBlendOverlapEXT flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
-	operator VkBlendOverlapEXT*(){ return reinterpret_cast<VkBlendOverlapEXT*>(this); }
-	operator VkBlendOverlapEXT&(){ return reinterpret_cast<VkBlendOverlapEXT&>(*this); }
-	E_blend_overlap_EXT& operator = (E_blend_overlap_EXT e_) { flag = e_.flag; return *this; }
-};
-inline bool operator == (const E_blend_overlap_EXT e1_,const E_blend_overlap_EXT e2_){return e1_.flag == e2_.flag; }
-inline bool operator != (const E_blend_overlap_EXT e1_,const E_blend_overlap_EXT e2_){return e1_.flag != e2_.flag; }
+union E_blend_overlap_EXT{
+	enum{
+		e_uncorrelated_ext = VK_BLEND_OVERLAP_UNCORRELATED_EXT,
+		e_disjoint_ext = VK_BLEND_OVERLAP_DISJOINT_EXT,
+		e_conjoint_ext = VK_BLEND_OVERLAP_CONJOINT_EXT,
+	}flag;
+	VkBlendOverlapEXT vk_flag;
 
+	E_blend_overlap_EXT(){}
+	E_blend_overlap_EXT(const VkBlendOverlapEXT flag_):flag(static_cast<decltype(flag)>(flag_) ){}
+	E_blend_overlap_EXT(const decltype(flag) flag_):flag(flag_){}
+
+	operator VkBlendOverlapEXT&(){return vk_flag;}
+	operator VkBlendOverlapEXT*()const{return const_cast<VkBlendOverlapEXT*const>(&vk_flag);}
+	operator VkBlendOverlapEXT*(){return &vk_flag;}
+
+	bool operator==(int flag_){return flag==flag_;}
+};
 /*	VkCoverageModulationModeNV
 */
-template<> struct my_class_convert<E_coverage_modulation_mode_NV> { using type = VkCoverageModulationModeNV;};template<> struct my_class_convert<VkCoverageModulationModeNV> { using type = E_coverage_modulation_mode_NV;};struct E_coverage_modulation_mode_NV{
-enum{
-	e_none_nv = VK_COVERAGE_MODULATION_MODE_NONE_NV,
-	e_rgb_nv = VK_COVERAGE_MODULATION_MODE_RGB_NV,
-	e_alpha_nv = VK_COVERAGE_MODULATION_MODE_ALPHA_NV,
-	e_rgba_nv = VK_COVERAGE_MODULATION_MODE_RGBA_NV,
-}flag;
-	E_coverage_modulation_mode_NV(){}
-	E_coverage_modulation_mode_NV(const decltype(flag) flag_):flag(flag_) {}
-	E_coverage_modulation_mode_NV(const E_coverage_modulation_mode_NV& e_):flag(e_.flag) {}
-	E_coverage_modulation_mode_NV(const VkCoverageModulationModeNV flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
-	operator VkCoverageModulationModeNV*(){ return reinterpret_cast<VkCoverageModulationModeNV*>(this); }
-	operator VkCoverageModulationModeNV&(){ return reinterpret_cast<VkCoverageModulationModeNV&>(*this); }
-	E_coverage_modulation_mode_NV& operator = (E_coverage_modulation_mode_NV e_) { flag = e_.flag; return *this; }
-};
-inline bool operator == (const E_coverage_modulation_mode_NV e1_,const E_coverage_modulation_mode_NV e2_){return e1_.flag == e2_.flag; }
-inline bool operator != (const E_coverage_modulation_mode_NV e1_,const E_coverage_modulation_mode_NV e2_){return e1_.flag != e2_.flag; }
+union E_coverage_modulation_mode_NV{
+	enum{
+		e_none_nv = VK_COVERAGE_MODULATION_MODE_NONE_NV,
+		e_rgb_nv = VK_COVERAGE_MODULATION_MODE_RGB_NV,
+		e_alpha_nv = VK_COVERAGE_MODULATION_MODE_ALPHA_NV,
+		e_rgba_nv = VK_COVERAGE_MODULATION_MODE_RGBA_NV,
+	}flag;
+	VkCoverageModulationModeNV vk_flag;
 
+	E_coverage_modulation_mode_NV(){}
+	E_coverage_modulation_mode_NV(const VkCoverageModulationModeNV flag_):flag(static_cast<decltype(flag)>(flag_) ){}
+	E_coverage_modulation_mode_NV(const decltype(flag) flag_):flag(flag_){}
+
+	operator VkCoverageModulationModeNV&(){return vk_flag;}
+	operator VkCoverageModulationModeNV*()const{return const_cast<VkCoverageModulationModeNV*const>(&vk_flag);}
+	operator VkCoverageModulationModeNV*(){return &vk_flag;}
+
+	bool operator==(int flag_){return flag==flag_;}
+};
 /*	VkValidationCacheHeaderVersionEXT
 */
-template<> struct my_class_convert<E_validation_cache_header_version_EXT> { using type = VkValidationCacheHeaderVersionEXT;};template<> struct my_class_convert<VkValidationCacheHeaderVersionEXT> { using type = E_validation_cache_header_version_EXT;};struct E_validation_cache_header_version_EXT{
-enum{
-	e_one_ext = VK_VALIDATION_CACHE_HEADER_VERSION_ONE_EXT,
-}flag;
-	E_validation_cache_header_version_EXT(){}
-	E_validation_cache_header_version_EXT(const decltype(flag) flag_):flag(flag_) {}
-	E_validation_cache_header_version_EXT(const E_validation_cache_header_version_EXT& e_):flag(e_.flag) {}
-	E_validation_cache_header_version_EXT(const VkValidationCacheHeaderVersionEXT flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
-	operator VkValidationCacheHeaderVersionEXT*(){ return reinterpret_cast<VkValidationCacheHeaderVersionEXT*>(this); }
-	operator VkValidationCacheHeaderVersionEXT&(){ return reinterpret_cast<VkValidationCacheHeaderVersionEXT&>(*this); }
-	E_validation_cache_header_version_EXT& operator = (E_validation_cache_header_version_EXT e_) { flag = e_.flag; return *this; }
-};
-inline bool operator == (const E_validation_cache_header_version_EXT e1_,const E_validation_cache_header_version_EXT e2_){return e1_.flag == e2_.flag; }
-inline bool operator != (const E_validation_cache_header_version_EXT e1_,const E_validation_cache_header_version_EXT e2_){return e1_.flag != e2_.flag; }
+union E_validation_cache_header_version_EXT{
+	enum{
+		e_one_ext = VK_VALIDATION_CACHE_HEADER_VERSION_ONE_EXT,
+	}flag;
+	VkValidationCacheHeaderVersionEXT vk_flag;
 
+	E_validation_cache_header_version_EXT(){}
+	E_validation_cache_header_version_EXT(const VkValidationCacheHeaderVersionEXT flag_):flag(static_cast<decltype(flag)>(flag_) ){}
+	E_validation_cache_header_version_EXT(const decltype(flag) flag_):flag(flag_){}
+
+	operator VkValidationCacheHeaderVersionEXT&(){return vk_flag;}
+	operator VkValidationCacheHeaderVersionEXT*()const{return const_cast<VkValidationCacheHeaderVersionEXT*const>(&vk_flag);}
+	operator VkValidationCacheHeaderVersionEXT*(){return &vk_flag;}
+
+	bool operator==(int flag_){return flag==flag_;}
+};
 /*	VkShaderInfoTypeAMD
 */
-template<> struct my_class_convert<E_shader_info_type_AMD> { using type = VkShaderInfoTypeAMD;};template<> struct my_class_convert<VkShaderInfoTypeAMD> { using type = E_shader_info_type_AMD;};struct E_shader_info_type_AMD{
-enum{
-	e_statistics_amd = VK_SHADER_INFO_TYPE_STATISTICS_AMD,
-	e_binary_amd = VK_SHADER_INFO_TYPE_BINARY_AMD,
-	e_disassembly_amd = VK_SHADER_INFO_TYPE_DISASSEMBLY_AMD,
-}flag;
-	E_shader_info_type_AMD(){}
-	E_shader_info_type_AMD(const decltype(flag) flag_):flag(flag_) {}
-	E_shader_info_type_AMD(const E_shader_info_type_AMD& e_):flag(e_.flag) {}
-	E_shader_info_type_AMD(const VkShaderInfoTypeAMD flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
-	operator VkShaderInfoTypeAMD*(){ return reinterpret_cast<VkShaderInfoTypeAMD*>(this); }
-	operator VkShaderInfoTypeAMD&(){ return reinterpret_cast<VkShaderInfoTypeAMD&>(*this); }
-	E_shader_info_type_AMD& operator = (E_shader_info_type_AMD e_) { flag = e_.flag; return *this; }
-};
-inline bool operator == (const E_shader_info_type_AMD e1_,const E_shader_info_type_AMD e2_){return e1_.flag == e2_.flag; }
-inline bool operator != (const E_shader_info_type_AMD e1_,const E_shader_info_type_AMD e2_){return e1_.flag != e2_.flag; }
+union E_shader_info_type_AMD{
+	enum{
+		e_statistics_amd = VK_SHADER_INFO_TYPE_STATISTICS_AMD,
+		e_binary_amd = VK_SHADER_INFO_TYPE_BINARY_AMD,
+		e_disassembly_amd = VK_SHADER_INFO_TYPE_DISASSEMBLY_AMD,
+	}flag;
+	VkShaderInfoTypeAMD vk_flag;
 
+	E_shader_info_type_AMD(){}
+	E_shader_info_type_AMD(const VkShaderInfoTypeAMD flag_):flag(static_cast<decltype(flag)>(flag_) ){}
+	E_shader_info_type_AMD(const decltype(flag) flag_):flag(flag_){}
+
+	operator VkShaderInfoTypeAMD&(){return vk_flag;}
+	operator VkShaderInfoTypeAMD*()const{return const_cast<VkShaderInfoTypeAMD*const>(&vk_flag);}
+	operator VkShaderInfoTypeAMD*(){return &vk_flag;}
+
+	bool operator==(int flag_){return flag==flag_;}
+};
 /*	VkQueueGlobalPriorityEXT
 */
-template<> struct my_class_convert<E_queue_global_priority_EXT> { using type = VkQueueGlobalPriorityEXT;};template<> struct my_class_convert<VkQueueGlobalPriorityEXT> { using type = E_queue_global_priority_EXT;};struct E_queue_global_priority_EXT{
-enum{
-	e_low_ext = VK_QUEUE_GLOBAL_PRIORITY_LOW_EXT,
-	e_medium_ext = VK_QUEUE_GLOBAL_PRIORITY_MEDIUM_EXT,
-	e_high_ext = VK_QUEUE_GLOBAL_PRIORITY_HIGH_EXT,
-	e_realtime_ext = VK_QUEUE_GLOBAL_PRIORITY_REALTIME_EXT,
-}flag;
-	E_queue_global_priority_EXT(){}
-	E_queue_global_priority_EXT(const decltype(flag) flag_):flag(flag_) {}
-	E_queue_global_priority_EXT(const E_queue_global_priority_EXT& e_):flag(e_.flag) {}
-	E_queue_global_priority_EXT(const VkQueueGlobalPriorityEXT flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
-	operator VkQueueGlobalPriorityEXT*(){ return reinterpret_cast<VkQueueGlobalPriorityEXT*>(this); }
-	operator VkQueueGlobalPriorityEXT&(){ return reinterpret_cast<VkQueueGlobalPriorityEXT&>(*this); }
-	E_queue_global_priority_EXT& operator = (E_queue_global_priority_EXT e_) { flag = e_.flag; return *this; }
-};
-inline bool operator == (const E_queue_global_priority_EXT e1_,const E_queue_global_priority_EXT e2_){return e1_.flag == e2_.flag; }
-inline bool operator != (const E_queue_global_priority_EXT e1_,const E_queue_global_priority_EXT e2_){return e1_.flag != e2_.flag; }
+union E_queue_global_priority_EXT{
+	enum{
+		e_low_ext = VK_QUEUE_GLOBAL_PRIORITY_LOW_EXT,
+		e_medium_ext = VK_QUEUE_GLOBAL_PRIORITY_MEDIUM_EXT,
+		e_high_ext = VK_QUEUE_GLOBAL_PRIORITY_HIGH_EXT,
+		e_realtime_ext = VK_QUEUE_GLOBAL_PRIORITY_REALTIME_EXT,
+	}flag;
+	VkQueueGlobalPriorityEXT vk_flag;
 
+	E_queue_global_priority_EXT(){}
+	E_queue_global_priority_EXT(const VkQueueGlobalPriorityEXT flag_):flag(static_cast<decltype(flag)>(flag_) ){}
+	E_queue_global_priority_EXT(const decltype(flag) flag_):flag(flag_){}
+
+	operator VkQueueGlobalPriorityEXT&(){return vk_flag;}
+	operator VkQueueGlobalPriorityEXT*()const{return const_cast<VkQueueGlobalPriorityEXT*const>(&vk_flag);}
+	operator VkQueueGlobalPriorityEXT*(){return &vk_flag;}
+
+	bool operator==(int flag_){return flag==flag_;}
+};
 /*	VkConservativeRasterizationModeEXT
 */
-template<> struct my_class_convert<E_conservative_rasterization_mode_EXT> { using type = VkConservativeRasterizationModeEXT;};template<> struct my_class_convert<VkConservativeRasterizationModeEXT> { using type = E_conservative_rasterization_mode_EXT;};struct E_conservative_rasterization_mode_EXT{
-enum{
-	e_disabled_ext = VK_CONSERVATIVE_RASTERIZATION_MODE_DISABLED_EXT,
-	e_overestimate_ext = VK_CONSERVATIVE_RASTERIZATION_MODE_OVERESTIMATE_EXT,
-	e_underestimate_ext = VK_CONSERVATIVE_RASTERIZATION_MODE_UNDERESTIMATE_EXT,
-}flag;
-	E_conservative_rasterization_mode_EXT(){}
-	E_conservative_rasterization_mode_EXT(const decltype(flag) flag_):flag(flag_) {}
-	E_conservative_rasterization_mode_EXT(const E_conservative_rasterization_mode_EXT& e_):flag(e_.flag) {}
-	E_conservative_rasterization_mode_EXT(const VkConservativeRasterizationModeEXT flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
-	operator VkConservativeRasterizationModeEXT*(){ return reinterpret_cast<VkConservativeRasterizationModeEXT*>(this); }
-	operator VkConservativeRasterizationModeEXT&(){ return reinterpret_cast<VkConservativeRasterizationModeEXT&>(*this); }
-	E_conservative_rasterization_mode_EXT& operator = (E_conservative_rasterization_mode_EXT e_) { flag = e_.flag; return *this; }
-};
-inline bool operator == (const E_conservative_rasterization_mode_EXT e1_,const E_conservative_rasterization_mode_EXT e2_){return e1_.flag == e2_.flag; }
-inline bool operator != (const E_conservative_rasterization_mode_EXT e1_,const E_conservative_rasterization_mode_EXT e2_){return e1_.flag != e2_.flag; }
+union E_conservative_rasterization_mode_EXT{
+	enum{
+		e_disabled_ext = VK_CONSERVATIVE_RASTERIZATION_MODE_DISABLED_EXT,
+		e_overestimate_ext = VK_CONSERVATIVE_RASTERIZATION_MODE_OVERESTIMATE_EXT,
+		e_underestimate_ext = VK_CONSERVATIVE_RASTERIZATION_MODE_UNDERESTIMATE_EXT,
+	}flag;
+	VkConservativeRasterizationModeEXT vk_flag;
 
+	E_conservative_rasterization_mode_EXT(){}
+	E_conservative_rasterization_mode_EXT(const VkConservativeRasterizationModeEXT flag_):flag(static_cast<decltype(flag)>(flag_) ){}
+	E_conservative_rasterization_mode_EXT(const decltype(flag) flag_):flag(flag_){}
+
+	operator VkConservativeRasterizationModeEXT&(){return vk_flag;}
+	operator VkConservativeRasterizationModeEXT*()const{return const_cast<VkConservativeRasterizationModeEXT*const>(&vk_flag);}
+	operator VkConservativeRasterizationModeEXT*(){return &vk_flag;}
+
+	bool operator==(int flag_){return flag==flag_;}
+};
 /*	VkVendorId
 */
-template<> struct my_class_convert<E_vendor_id> { using type = VkVendorId;};template<> struct my_class_convert<VkVendorId> { using type = E_vendor_id;};struct E_vendor_id{
-enum{
-	e_viv = VK_VENDOR_ID_VIV,
-	e_vsi = VK_VENDOR_ID_VSI,
-	e_kazan = VK_VENDOR_ID_KAZAN,
-}flag;
+union E_vendor_id{
+	enum{
+		e_viv = VK_VENDOR_ID_VIV,
+		e_vsi = VK_VENDOR_ID_VSI,
+		e_kazan = VK_VENDOR_ID_KAZAN,
+	}flag;
+	VkVendorId vk_flag;
+
 	E_vendor_id(){}
-	E_vendor_id(const decltype(flag) flag_):flag(flag_) {}
-	E_vendor_id(const E_vendor_id& e_):flag(e_.flag) {}
-	E_vendor_id(const VkVendorId flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
-	operator VkVendorId*(){ return reinterpret_cast<VkVendorId*>(this); }
-	operator VkVendorId&(){ return reinterpret_cast<VkVendorId&>(*this); }
-	E_vendor_id& operator = (E_vendor_id e_) { flag = e_.flag; return *this; }
+	E_vendor_id(const VkVendorId flag_):flag(static_cast<decltype(flag)>(flag_) ){}
+	E_vendor_id(const decltype(flag) flag_):flag(flag_){}
+
+	operator VkVendorId&(){return vk_flag;}
+	operator VkVendorId*()const{return const_cast<VkVendorId*const>(&vk_flag);}
+	operator VkVendorId*(){return &vk_flag;}
+
+	bool operator==(int flag_){return flag==flag_;}
 };
-inline bool operator == (const E_vendor_id e1_,const E_vendor_id e2_){return e1_.flag == e2_.flag; }
-inline bool operator != (const E_vendor_id e1_,const E_vendor_id e2_){return e1_.flag != e2_.flag; }
-
-/*	VkDriverIdKHR
-*/
-#if 0
-template<> struct my_class_convert<E_driver_id_KHR> { using type = VkDriverIdKHR;};template<> struct my_class_convert<VkDriverIdKHR> { using type = E_driver_id_KHR;};struct E_driver_id_KHR{
-enum{
-	e_amd_proprietary_khr = VK_DRIVER_ID_AMD_PROPRIETARY_KHR,
-	e_amd_open_source_khr = VK_DRIVER_ID_AMD_OPEN_SOURCE_KHR,
-	e_mesa_radv_khr = VK_DRIVER_ID_MESA_RADV_KHR,
-	e_nvidia_proprietary_khr = VK_DRIVER_ID_NVIDIA_PROPRIETARY_KHR,
-	e_intel_proprietary_windows_khr = VK_DRIVER_ID_INTEL_PROPRIETARY_WINDOWS_KHR,
-	e_intel_open_source_mesa_khr = VK_DRIVER_ID_INTEL_OPEN_SOURCE_MESA_KHR,
-	e_imagination_proprietary_khr = VK_DRIVER_ID_IMAGINATION_PROPRIETARY_KHR,
-	e_qualcomm_proprietary_khr = VK_DRIVER_ID_QUALCOMM_PROPRIETARY_KHR,
-	e_arm_proprietary_khr = VK_DRIVER_ID_ARM_PROPRIETARY_KHR,
-}flag;
-	E_driver_id_KHR(){}
-	E_driver_id_KHR(const decltype(flag) flag_):flag(flag_) {}
-	E_driver_id_KHR(const E_driver_id_KHR& e_):flag(e_.flag) {}
-	E_driver_id_KHR(const VkDriverIdKHR flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
-	operator VkDriverIdKHR*(){ return reinterpret_cast<VkDriverIdKHR*>(this); }
-	operator VkDriverIdKHR&(){ return reinterpret_cast<VkDriverIdKHR&>(*this); }
-	E_driver_id_KHR& operator = (E_driver_id_KHR e_) { flag = e_.flag; return *this; }
-};
-inline bool operator == (const E_driver_id_KHR e1_,const E_driver_id_KHR e2_){return e1_.flag == e2_.flag; }
-inline bool operator != (const E_driver_id_KHR e1_,const E_driver_id_KHR e2_){return e1_.flag != e2_.flag; }
-
-#endif 
-
-/*	VkShadingRatePaletteEntryNV
-*/
-template<> struct my_class_convert<E_shading_rate_palette_entry_NV> { using type = VkShadingRatePaletteEntryNV;};template<> struct my_class_convert<VkShadingRatePaletteEntryNV> { using type = E_shading_rate_palette_entry_NV;};struct E_shading_rate_palette_entry_NV{
-enum{
-	e_no_invocations_nv = VK_SHADING_RATE_PALETTE_ENTRY_NO_INVOCATIONS_NV,
-	e_16_invocations_per_pixel_nv = VK_SHADING_RATE_PALETTE_ENTRY_16_INVOCATIONS_PER_PIXEL_NV,
-	e_8_invocations_per_pixel_nv = VK_SHADING_RATE_PALETTE_ENTRY_8_INVOCATIONS_PER_PIXEL_NV,
-	e_4_invocations_per_pixel_nv = VK_SHADING_RATE_PALETTE_ENTRY_4_INVOCATIONS_PER_PIXEL_NV,
-	e_2_invocations_per_pixel_nv = VK_SHADING_RATE_PALETTE_ENTRY_2_INVOCATIONS_PER_PIXEL_NV,
-	e_1_invocation_per_pixel_nv = VK_SHADING_RATE_PALETTE_ENTRY_1_INVOCATION_PER_PIXEL_NV,
-	e_1_invocation_per_2x1_pixels_nv = VK_SHADING_RATE_PALETTE_ENTRY_1_INVOCATION_PER_2X1_PIXELS_NV,
-	e_1_invocation_per_1x2_pixels_nv = VK_SHADING_RATE_PALETTE_ENTRY_1_INVOCATION_PER_1X2_PIXELS_NV,
-	e_1_invocation_per_2x2_pixels_nv = VK_SHADING_RATE_PALETTE_ENTRY_1_INVOCATION_PER_2X2_PIXELS_NV,
-	e_1_invocation_per_4x2_pixels_nv = VK_SHADING_RATE_PALETTE_ENTRY_1_INVOCATION_PER_4X2_PIXELS_NV,
-	e_1_invocation_per_2x4_pixels_nv = VK_SHADING_RATE_PALETTE_ENTRY_1_INVOCATION_PER_2X4_PIXELS_NV,
-	e_1_invocation_per_4x4_pixels_nv = VK_SHADING_RATE_PALETTE_ENTRY_1_INVOCATION_PER_4X4_PIXELS_NV,
-}flag;
-	E_shading_rate_palette_entry_NV(){}
-	E_shading_rate_palette_entry_NV(const decltype(flag) flag_):flag(flag_) {}
-	E_shading_rate_palette_entry_NV(const E_shading_rate_palette_entry_NV& e_):flag(e_.flag) {}
-	E_shading_rate_palette_entry_NV(const VkShadingRatePaletteEntryNV flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
-	operator VkShadingRatePaletteEntryNV*(){ return reinterpret_cast<VkShadingRatePaletteEntryNV*>(this); }
-	operator VkShadingRatePaletteEntryNV&(){ return reinterpret_cast<VkShadingRatePaletteEntryNV&>(*this); }
-	E_shading_rate_palette_entry_NV& operator = (E_shading_rate_palette_entry_NV e_) { flag = e_.flag; return *this; }
-};
-inline bool operator == (const E_shading_rate_palette_entry_NV e1_,const E_shading_rate_palette_entry_NV e2_){return e1_.flag == e2_.flag; }
-inline bool operator != (const E_shading_rate_palette_entry_NV e1_,const E_shading_rate_palette_entry_NV e2_){return e1_.flag != e2_.flag; }
-
-/*	VkCoarseSampleOrderTypeNV
-*/
-template<> struct my_class_convert<E_coarse_sample_order_type_NV> { using type = VkCoarseSampleOrderTypeNV;};template<> struct my_class_convert<VkCoarseSampleOrderTypeNV> { using type = E_coarse_sample_order_type_NV;};struct E_coarse_sample_order_type_NV{
-enum{
-	e_default_nv = VK_COARSE_SAMPLE_ORDER_TYPE_DEFAULT_NV,
-	e_custom_nv = VK_COARSE_SAMPLE_ORDER_TYPE_CUSTOM_NV,
-	e_pixel_major_nv = VK_COARSE_SAMPLE_ORDER_TYPE_PIXEL_MAJOR_NV,
-	e_sample_major_nv = VK_COARSE_SAMPLE_ORDER_TYPE_SAMPLE_MAJOR_NV,
-}flag;
-	E_coarse_sample_order_type_NV(){}
-	E_coarse_sample_order_type_NV(const decltype(flag) flag_):flag(flag_) {}
-	E_coarse_sample_order_type_NV(const E_coarse_sample_order_type_NV& e_):flag(e_.flag) {}
-	E_coarse_sample_order_type_NV(const VkCoarseSampleOrderTypeNV flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
-	operator VkCoarseSampleOrderTypeNV*(){ return reinterpret_cast<VkCoarseSampleOrderTypeNV*>(this); }
-	operator VkCoarseSampleOrderTypeNV&(){ return reinterpret_cast<VkCoarseSampleOrderTypeNV&>(*this); }
-	E_coarse_sample_order_type_NV& operator = (E_coarse_sample_order_type_NV e_) { flag = e_.flag; return *this; }
-};
-inline bool operator == (const E_coarse_sample_order_type_NV e1_,const E_coarse_sample_order_type_NV e2_){return e1_.flag == e2_.flag; }
-inline bool operator != (const E_coarse_sample_order_type_NV e1_,const E_coarse_sample_order_type_NV e2_){return e1_.flag != e2_.flag; }
-
-/*	VkCopyAccelerationStructureModeNVX
-*/
-template<> struct my_class_convert<E_copy_acceleration_structure_mode_NVX> { using type = VkCopyAccelerationStructureModeNVX;};template<> struct my_class_convert<VkCopyAccelerationStructureModeNVX> { using type = E_copy_acceleration_structure_mode_NVX;};struct E_copy_acceleration_structure_mode_NVX{
-enum{
-	e_clone_nvx = VK_COPY_ACCELERATION_STRUCTURE_MODE_CLONE_NVX,
-	e_compact_nvx = VK_COPY_ACCELERATION_STRUCTURE_MODE_COMPACT_NVX,
-}flag;
-	E_copy_acceleration_structure_mode_NVX(){}
-	E_copy_acceleration_structure_mode_NVX(const decltype(flag) flag_):flag(flag_) {}
-	E_copy_acceleration_structure_mode_NVX(const E_copy_acceleration_structure_mode_NVX& e_):flag(e_.flag) {}
-	E_copy_acceleration_structure_mode_NVX(const VkCopyAccelerationStructureModeNVX flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
-	operator VkCopyAccelerationStructureModeNVX*(){ return reinterpret_cast<VkCopyAccelerationStructureModeNVX*>(this); }
-	operator VkCopyAccelerationStructureModeNVX&(){ return reinterpret_cast<VkCopyAccelerationStructureModeNVX&>(*this); }
-	E_copy_acceleration_structure_mode_NVX& operator = (E_copy_acceleration_structure_mode_NVX e_) { flag = e_.flag; return *this; }
-};
-inline bool operator == (const E_copy_acceleration_structure_mode_NVX e1_,const E_copy_acceleration_structure_mode_NVX e2_){return e1_.flag == e2_.flag; }
-inline bool operator != (const E_copy_acceleration_structure_mode_NVX e1_,const E_copy_acceleration_structure_mode_NVX e2_){return e1_.flag != e2_.flag; }
-
-/*	VkAccelerationStructureTypeNVX
-*/
-template<> struct my_class_convert<E_acceleration_structure_type_NVX> { using type = VkAccelerationStructureTypeNVX;};template<> struct my_class_convert<VkAccelerationStructureTypeNVX> { using type = E_acceleration_structure_type_NVX;};struct E_acceleration_structure_type_NVX{
-enum{
-	e_top_level_nvx = VK_ACCELERATION_STRUCTURE_TYPE_TOP_LEVEL_NVX,
-	e_bottom_level_nvx = VK_ACCELERATION_STRUCTURE_TYPE_BOTTOM_LEVEL_NVX,
-}flag;
-	E_acceleration_structure_type_NVX(){}
-	E_acceleration_structure_type_NVX(const decltype(flag) flag_):flag(flag_) {}
-	E_acceleration_structure_type_NVX(const E_acceleration_structure_type_NVX& e_):flag(e_.flag) {}
-	E_acceleration_structure_type_NVX(const VkAccelerationStructureTypeNVX flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
-	operator VkAccelerationStructureTypeNVX*(){ return reinterpret_cast<VkAccelerationStructureTypeNVX*>(this); }
-	operator VkAccelerationStructureTypeNVX&(){ return reinterpret_cast<VkAccelerationStructureTypeNVX&>(*this); }
-	E_acceleration_structure_type_NVX& operator = (E_acceleration_structure_type_NVX e_) { flag = e_.flag; return *this; }
-};
-inline bool operator == (const E_acceleration_structure_type_NVX e1_,const E_acceleration_structure_type_NVX e2_){return e1_.flag == e2_.flag; }
-inline bool operator != (const E_acceleration_structure_type_NVX e1_,const E_acceleration_structure_type_NVX e2_){return e1_.flag != e2_.flag; }
-
-/*	VkGeometryTypeNVX
-*/
-template<> struct my_class_convert<E_geometry_type_NVX> { using type = VkGeometryTypeNVX;};template<> struct my_class_convert<VkGeometryTypeNVX> { using type = E_geometry_type_NVX;};struct E_geometry_type_NVX{
-enum{
-	e_triangles_nvx = VK_GEOMETRY_TYPE_TRIANGLES_NVX,
-	e_aabbs_nvx = VK_GEOMETRY_TYPE_AABBS_NVX,
-}flag;
-	E_geometry_type_NVX(){}
-	E_geometry_type_NVX(const decltype(flag) flag_):flag(flag_) {}
-	E_geometry_type_NVX(const E_geometry_type_NVX& e_):flag(e_.flag) {}
-	E_geometry_type_NVX(const VkGeometryTypeNVX flag_) :flag(static_cast<decltype(flag)>(flag_) ) {}
-	operator VkGeometryTypeNVX*(){ return reinterpret_cast<VkGeometryTypeNVX*>(this); }
-	operator VkGeometryTypeNVX&(){ return reinterpret_cast<VkGeometryTypeNVX&>(*this); }
-	E_geometry_type_NVX& operator = (E_geometry_type_NVX e_) { flag = e_.flag; return *this; }
-};
-inline bool operator == (const E_geometry_type_NVX e1_,const E_geometry_type_NVX e2_){return e1_.flag == e2_.flag; }
-inline bool operator != (const E_geometry_type_NVX e1_,const E_geometry_type_NVX e2_){return e1_.flag != e2_.flag; }
-
 /*	VkCullModeFlagBits*/
-template<> struct my_class_convert<F_cull_mode> { using type = VkCullModeFlagBits;};template<> struct my_class_convert<VkCullModeFlagBits> { using type = F_cull_mode;};union F_cull_mode {
-	uint32_t flag;
+union F_cull_mode {
+	VkCullModeFlags flags;
 	VkCullModeFlagBits vk_flag;
-	enum B{
+	enum {
 		b_none = VK_CULL_MODE_NONE,
 		b_front = VK_CULL_MODE_FRONT_BIT,
 		b_back = VK_CULL_MODE_BACK_BIT,
 		b_front_and_back = VK_CULL_MODE_FRONT_AND_BACK,
-	};
-	F_cull_mode():flag(0){}
-	F_cull_mode(const uint32_t flag_):flag(flag_){}
-	//F_cull_mode(const B flag_):flag(flag_){}
-	//F_cull_mode(const VkCullModeFlagBits flag_):vk_flag(flag_){}
-	//operator uint32_t(){return flag;}
-	operator VkCullModeFlagBits*(){ return reinterpret_cast<VkCullModeFlagBits*>(this); }
-	operator VkCullModeFlagBits(){return vk_flag;}
-	operator VkCullModeFlags&(){ return flag; }
-	F_cull_mode& operator=(const F_cull_mode flag_){flag=flag_.flag; return *this;}
-	F_cull_mode& operator|=(const F_cull_mode flag_){flag|=flag_.flag; return *this;}
-	F_cull_mode& operator&=(const F_cull_mode flag_){flag&=flag_.flag; return *this;}
-	F_cull_mode& operator^=(const F_cull_mode flag_){flag^=flag_.flag;return *this;}
-	F_cull_mode operator~(){return ~flag;}
-	bool operator==(const F_cull_mode flag_){return flag==flag_.flag;}
+	}flag;
+
+	F_cull_mode():flags(0){}
+	F_cull_mode(const uint32_t flag_):flags(flag_){}
+
+	operator VkCullModeFlagBits&(){return vk_flag;}
+	operator VkCullModeFlagBits*(){return &vk_flag; }
+	operator VkCullModeFlagBits*()const{return const_cast<VkCullModeFlagBits*const>(&vk_flag); }
+
+	operator VkCullModeFlags&(){return flags; }
+	operator VkCullModeFlags*()const{return const_cast<VkCullModeFlags*const>(&flags); }
+	operator VkCullModeFlags*(){return &flags; }
+
+	F_cull_mode& operator=(const F_cull_mode flag_){flags=flag_.flags; return *this;}
+	F_cull_mode& operator|=(const F_cull_mode flag_){flags|=flag_.flags; return *this;}
+	F_cull_mode& operator&=(const F_cull_mode flag_){flags&=flag_.flags; return *this;}
+	F_cull_mode& operator^=(const F_cull_mode flag_){flags^=flag_.flags;return *this;}
+	F_cull_mode operator~(){return ~flags;}
+
+	bool operator==(const F_cull_mode flag_){return flags==flag_.flags;}
 	bool operator!=(const F_cull_mode flag_){return !(*this==flag_);}
-	F_cull_mode& clear(){flag = 0;return *this;}
+
+	F_cull_mode& clear(){flags = 0;return *this;}
 	F_cull_mode all_flags(){ return b_none | b_front | b_back | b_front_and_back;}
-	F_cull_mode& on_none(){ flag |= b_none; return *this; }
-	F_cull_mode& off_none(){ flag &= ~b_none; return *this; }
-	F_cull_mode& on_front(){ flag |= b_front; return *this; }
-	F_cull_mode& off_front(){ flag &= ~b_front; return *this; }
-	F_cull_mode& on_back(){ flag |= b_back; return *this; }
-	F_cull_mode& off_back(){ flag &= ~b_back; return *this; }
-	F_cull_mode& on_front_and_back(){ flag |= b_front_and_back; return *this; }
-	F_cull_mode& off_front_and_back(){ flag &= ~b_front_and_back; return *this; }
+	F_cull_mode& on_none(){ flags |= b_none; return *this; }
+	F_cull_mode& off_none(){ flags &= ~b_none; return *this; }
+	F_cull_mode& on_front(){ flags |= b_front; return *this; }
+	F_cull_mode& off_front(){ flags &= ~b_front; return *this; }
+	F_cull_mode& on_back(){ flags |= b_back; return *this; }
+	F_cull_mode& off_back(){ flags &= ~b_back; return *this; }
+	F_cull_mode& on_front_and_back(){ flags |= b_front_and_back; return *this; }
+	F_cull_mode& off_front_and_back(){ flags &= ~b_front_and_back; return *this; }
 };
-inline F_cull_mode operator&(const F_cull_mode f1_, const F_cull_mode f2_){return f1_.flag&f2_.flag;}
-inline F_cull_mode operator&(const F_cull_mode f1_, const F_cull_mode::B f2_){return f1_.flag&uint32_t(f2_);}
-inline F_cull_mode operator&(const F_cull_mode::B f1_, const F_cull_mode f2_){return uint32_t(f1_)&f2_.flag;}
-inline F_cull_mode operator&(const F_cull_mode f1_, const VkCullModeFlagBits f2_){return f1_.flag&uint32_t(f2_);}
-inline F_cull_mode operator&(const VkCullModeFlagBits f1_, const F_cull_mode f2_){return uint32_t(f1_)&f2_.flag;}
-inline F_cull_mode operator|(const F_cull_mode f1_, const F_cull_mode f2_){return f1_.flag|f2_.flag;}
-inline F_cull_mode operator^(const F_cull_mode f1_, const F_cull_mode f2_){return f1_.flag^f2_.flag;}
 /*	VkQueueFlagBits*/
-template<> struct my_class_convert<F_queue> { using type = VkQueueFlagBits;};template<> struct my_class_convert<VkQueueFlagBits> { using type = F_queue;};union F_queue {
-	uint32_t flag;
+union F_queue {
+	VkQueueFlags flags;
 	VkQueueFlagBits vk_flag;
-	enum B{
+	enum {
 			/* Queue supports graphics operations */
 		b_graphics = VK_QUEUE_GRAPHICS_BIT,
 			/* Queue supports compute operations */
@@ -1740,52 +1671,48 @@ template<> struct my_class_convert<F_queue> { using type = VkQueueFlagBits;};tem
 		b_transfer = VK_QUEUE_TRANSFER_BIT,
 			/* Queue supports sparse resource memory management operations */
 		b_sparse_binding = VK_QUEUE_SPARSE_BINDING_BIT,
-	};
-	F_queue():flag(0){}
-	F_queue(const uint32_t flag_):flag(flag_){}
-	//F_queue(const B flag_):flag(flag_){}
-	//F_queue(const VkQueueFlagBits flag_):vk_flag(flag_){}
-	//operator uint32_t(){return flag;}
-	operator VkQueueFlagBits*(){ return reinterpret_cast<VkQueueFlagBits*>(this); }
-	operator VkQueueFlagBits(){return vk_flag;}
-	operator VkQueueFlags&(){ return flag; }
-	F_queue& operator=(const F_queue flag_){flag=flag_.flag; return *this;}
-	F_queue& operator|=(const F_queue flag_){flag|=flag_.flag; return *this;}
-	F_queue& operator&=(const F_queue flag_){flag&=flag_.flag; return *this;}
-	F_queue& operator^=(const F_queue flag_){flag^=flag_.flag;return *this;}
-	F_queue operator~(){return ~flag;}
-	bool operator==(const F_queue flag_){return flag==flag_.flag;}
-	bool operator!=(const F_queue flag_){return !(*this==flag_);}
-	F_queue& clear(){flag = 0;return *this;}
-	F_queue all_flags(){ return b_graphics | b_compute | b_transfer | b_sparse_binding;}
-	F_queue& on_graphics(){ flag |= b_graphics; return *this; }
-	F_queue& off_graphics(){ flag &= ~b_graphics; return *this; }
-	F_queue& on_compute(){ flag |= b_compute; return *this; }
-	F_queue& off_compute(){ flag &= ~b_compute; return *this; }
-	F_queue& on_transfer(){ flag |= b_transfer; return *this; }
-	F_queue& off_transfer(){ flag &= ~b_transfer; return *this; }
-	F_queue& on_sparse_binding(){ flag |= b_sparse_binding; return *this; }
-	F_queue& off_sparse_binding(){ flag &= ~b_sparse_binding; return *this; }
-};
-inline F_queue operator&(const F_queue f1_, const F_queue f2_){return f1_.flag&f2_.flag;}
-inline F_queue operator&(const F_queue f1_, const F_queue::B f2_){return f1_.flag&uint32_t(f2_);}
-inline F_queue operator&(const F_queue::B f1_, const F_queue f2_){return uint32_t(f1_)&f2_.flag;}
-inline F_queue operator&(const F_queue f1_, const VkQueueFlagBits f2_){return f1_.flag&uint32_t(f2_);}
-inline F_queue operator&(const VkQueueFlagBits f1_, const F_queue f2_){return uint32_t(f1_)&f2_.flag;}
-inline F_queue operator|(const F_queue f1_, const F_queue f2_){return f1_.flag|f2_.flag;}
-inline F_queue operator^(const F_queue f1_, const F_queue f2_){return f1_.flag^f2_.flag;}
-/*	VkRenderPassCreateFlagBits*/
-using F_render_pass_create = VkFlags;
+	}flag;
 
+	F_queue():flags(0){}
+	F_queue(const uint32_t flag_):flags(flag_){}
+
+	operator VkQueueFlagBits&(){return vk_flag;}
+	operator VkQueueFlagBits*(){return &vk_flag; }
+	operator VkQueueFlagBits*()const{return const_cast<VkQueueFlagBits*const>(&vk_flag); }
+
+	operator VkQueueFlags&(){return flags; }
+	operator VkQueueFlags*()const{return const_cast<VkQueueFlags*const>(&flags); }
+	operator VkQueueFlags*(){return &flags; }
+
+	F_queue& operator=(const F_queue flag_){flags=flag_.flags; return *this;}
+	F_queue& operator|=(const F_queue flag_){flags|=flag_.flags; return *this;}
+	F_queue& operator&=(const F_queue flag_){flags&=flag_.flags; return *this;}
+	F_queue& operator^=(const F_queue flag_){flags^=flag_.flags;return *this;}
+	F_queue operator~(){return ~flags;}
+
+	bool operator==(const F_queue flag_){return flags==flag_.flags;}
+	bool operator!=(const F_queue flag_){return !(*this==flag_);}
+
+	F_queue& clear(){flags = 0;return *this;}
+	F_queue all_flags(){ return b_graphics | b_compute | b_transfer | b_sparse_binding;}
+	F_queue& on_graphics(){ flags |= b_graphics; return *this; }
+	F_queue& off_graphics(){ flags &= ~b_graphics; return *this; }
+	F_queue& on_compute(){ flags |= b_compute; return *this; }
+	F_queue& off_compute(){ flags &= ~b_compute; return *this; }
+	F_queue& on_transfer(){ flags |= b_transfer; return *this; }
+	F_queue& off_transfer(){ flags &= ~b_transfer; return *this; }
+	F_queue& on_sparse_binding(){ flags |= b_sparse_binding; return *this; }
+	F_queue& off_sparse_binding(){ flags &= ~b_sparse_binding; return *this; }
+};
 /*	VkDeviceQueueCreateFlagBits*/
 using F_device_queue_create = 
 			VkDeviceQueueCreateFlagBits;
 
 /*	VkMemoryPropertyFlagBits*/
-template<> struct my_class_convert<F_memory_property> { using type = VkMemoryPropertyFlagBits;};template<> struct my_class_convert<VkMemoryPropertyFlagBits> { using type = F_memory_property;};union F_memory_property {
-	uint32_t flag;
+union F_memory_property {
+	VkMemoryPropertyFlags flags;
 	VkMemoryPropertyFlagBits vk_flag;
-	enum B{
+	enum {
 			/* If otherwise stated, then allocate memory on device */
 		b_device_local = VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT,
 			/* Memory is mappable by host */
@@ -1796,82 +1723,80 @@ template<> struct my_class_convert<F_memory_property> { using type = VkMemoryPro
 		b_host_cached = VK_MEMORY_PROPERTY_HOST_CACHED_BIT,
 			/* Memory may be allocated by the driver when it is required */
 		b_lazily_allocated = VK_MEMORY_PROPERTY_LAZILY_ALLOCATED_BIT,
-	};
-	F_memory_property():flag(0){}
-	F_memory_property(const uint32_t flag_):flag(flag_){}
-	//F_memory_property(const B flag_):flag(flag_){}
-	//F_memory_property(const VkMemoryPropertyFlagBits flag_):vk_flag(flag_){}
-	//operator uint32_t(){return flag;}
-	operator VkMemoryPropertyFlagBits*(){ return reinterpret_cast<VkMemoryPropertyFlagBits*>(this); }
-	operator VkMemoryPropertyFlagBits(){return vk_flag;}
-	operator VkMemoryPropertyFlags&(){ return flag; }
-	F_memory_property& operator=(const F_memory_property flag_){flag=flag_.flag; return *this;}
-	F_memory_property& operator|=(const F_memory_property flag_){flag|=flag_.flag; return *this;}
-	F_memory_property& operator&=(const F_memory_property flag_){flag&=flag_.flag; return *this;}
-	F_memory_property& operator^=(const F_memory_property flag_){flag^=flag_.flag;return *this;}
-	F_memory_property operator~(){return ~flag;}
-	bool operator==(const F_memory_property flag_){return flag==flag_.flag;}
+	}flag;
+
+	F_memory_property():flags(0){}
+	F_memory_property(const uint32_t flag_):flags(flag_){}
+
+	operator VkMemoryPropertyFlagBits&(){return vk_flag;}
+	operator VkMemoryPropertyFlagBits*(){return &vk_flag; }
+	operator VkMemoryPropertyFlagBits*()const{return const_cast<VkMemoryPropertyFlagBits*const>(&vk_flag); }
+
+	operator VkMemoryPropertyFlags&(){return flags; }
+	operator VkMemoryPropertyFlags*()const{return const_cast<VkMemoryPropertyFlags*const>(&flags); }
+	operator VkMemoryPropertyFlags*(){return &flags; }
+
+	F_memory_property& operator=(const F_memory_property flag_){flags=flag_.flags; return *this;}
+	F_memory_property& operator|=(const F_memory_property flag_){flags|=flag_.flags; return *this;}
+	F_memory_property& operator&=(const F_memory_property flag_){flags&=flag_.flags; return *this;}
+	F_memory_property& operator^=(const F_memory_property flag_){flags^=flag_.flags;return *this;}
+	F_memory_property operator~(){return ~flags;}
+
+	bool operator==(const F_memory_property flag_){return flags==flag_.flags;}
 	bool operator!=(const F_memory_property flag_){return !(*this==flag_);}
-	F_memory_property& clear(){flag = 0;return *this;}
+
+	F_memory_property& clear(){flags = 0;return *this;}
 	F_memory_property all_flags(){ return b_device_local | b_host_visible | b_host_coherent | b_host_cached | b_lazily_allocated;}
-	F_memory_property& on_device_local(){ flag |= b_device_local; return *this; }
-	F_memory_property& off_device_local(){ flag &= ~b_device_local; return *this; }
-	F_memory_property& on_host_visible(){ flag |= b_host_visible; return *this; }
-	F_memory_property& off_host_visible(){ flag &= ~b_host_visible; return *this; }
-	F_memory_property& on_host_coherent(){ flag |= b_host_coherent; return *this; }
-	F_memory_property& off_host_coherent(){ flag &= ~b_host_coherent; return *this; }
-	F_memory_property& on_host_cached(){ flag |= b_host_cached; return *this; }
-	F_memory_property& off_host_cached(){ flag &= ~b_host_cached; return *this; }
-	F_memory_property& on_lazily_allocated(){ flag |= b_lazily_allocated; return *this; }
-	F_memory_property& off_lazily_allocated(){ flag &= ~b_lazily_allocated; return *this; }
+	F_memory_property& on_device_local(){ flags |= b_device_local; return *this; }
+	F_memory_property& off_device_local(){ flags &= ~b_device_local; return *this; }
+	F_memory_property& on_host_visible(){ flags |= b_host_visible; return *this; }
+	F_memory_property& off_host_visible(){ flags &= ~b_host_visible; return *this; }
+	F_memory_property& on_host_coherent(){ flags |= b_host_coherent; return *this; }
+	F_memory_property& off_host_coherent(){ flags &= ~b_host_coherent; return *this; }
+	F_memory_property& on_host_cached(){ flags |= b_host_cached; return *this; }
+	F_memory_property& off_host_cached(){ flags &= ~b_host_cached; return *this; }
+	F_memory_property& on_lazily_allocated(){ flags |= b_lazily_allocated; return *this; }
+	F_memory_property& off_lazily_allocated(){ flags &= ~b_lazily_allocated; return *this; }
 };
-inline F_memory_property operator&(const F_memory_property f1_, const F_memory_property f2_){return f1_.flag&f2_.flag;}
-inline F_memory_property operator&(const F_memory_property f1_, const F_memory_property::B f2_){return f1_.flag&uint32_t(f2_);}
-inline F_memory_property operator&(const F_memory_property::B f1_, const F_memory_property f2_){return uint32_t(f1_)&f2_.flag;}
-inline F_memory_property operator&(const F_memory_property f1_, const VkMemoryPropertyFlagBits f2_){return f1_.flag&uint32_t(f2_);}
-inline F_memory_property operator&(const VkMemoryPropertyFlagBits f1_, const F_memory_property f2_){return uint32_t(f1_)&f2_.flag;}
-inline F_memory_property operator|(const F_memory_property f1_, const F_memory_property f2_){return f1_.flag|f2_.flag;}
-inline F_memory_property operator^(const F_memory_property f1_, const F_memory_property f2_){return f1_.flag^f2_.flag;}
 /*	VkMemoryHeapFlagBits*/
-template<> struct my_class_convert<F_memory_heap> { using type = VkMemoryHeapFlagBits;};template<> struct my_class_convert<VkMemoryHeapFlagBits> { using type = F_memory_heap;};union F_memory_heap {
-	uint32_t flag;
+union F_memory_heap {
+	VkMemoryHeapFlags flags;
 	VkMemoryHeapFlagBits vk_flag;
-	enum B{
+	enum {
 			/* If set, heap represents device memory */
 		b_device_local = VK_MEMORY_HEAP_DEVICE_LOCAL_BIT,
-	};
-	F_memory_heap():flag(0){}
-	F_memory_heap(const uint32_t flag_):flag(flag_){}
-	//F_memory_heap(const B flag_):flag(flag_){}
-	//F_memory_heap(const VkMemoryHeapFlagBits flag_):vk_flag(flag_){}
-	//operator uint32_t(){return flag;}
-	operator VkMemoryHeapFlagBits*(){ return reinterpret_cast<VkMemoryHeapFlagBits*>(this); }
-	operator VkMemoryHeapFlagBits(){return vk_flag;}
-	operator VkMemoryHeapFlags&(){ return flag; }
-	F_memory_heap& operator=(const F_memory_heap flag_){flag=flag_.flag; return *this;}
-	F_memory_heap& operator|=(const F_memory_heap flag_){flag|=flag_.flag; return *this;}
-	F_memory_heap& operator&=(const F_memory_heap flag_){flag&=flag_.flag; return *this;}
-	F_memory_heap& operator^=(const F_memory_heap flag_){flag^=flag_.flag;return *this;}
-	F_memory_heap operator~(){return ~flag;}
-	bool operator==(const F_memory_heap flag_){return flag==flag_.flag;}
+	}flag;
+
+	F_memory_heap():flags(0){}
+	F_memory_heap(const uint32_t flag_):flags(flag_){}
+
+	operator VkMemoryHeapFlagBits&(){return vk_flag;}
+	operator VkMemoryHeapFlagBits*(){return &vk_flag; }
+	operator VkMemoryHeapFlagBits*()const{return const_cast<VkMemoryHeapFlagBits*const>(&vk_flag); }
+
+	operator VkMemoryHeapFlags&(){return flags; }
+	operator VkMemoryHeapFlags*()const{return const_cast<VkMemoryHeapFlags*const>(&flags); }
+	operator VkMemoryHeapFlags*(){return &flags; }
+
+	F_memory_heap& operator=(const F_memory_heap flag_){flags=flag_.flags; return *this;}
+	F_memory_heap& operator|=(const F_memory_heap flag_){flags|=flag_.flags; return *this;}
+	F_memory_heap& operator&=(const F_memory_heap flag_){flags&=flag_.flags; return *this;}
+	F_memory_heap& operator^=(const F_memory_heap flag_){flags^=flag_.flags;return *this;}
+	F_memory_heap operator~(){return ~flags;}
+
+	bool operator==(const F_memory_heap flag_){return flags==flag_.flags;}
 	bool operator!=(const F_memory_heap flag_){return !(*this==flag_);}
-	F_memory_heap& clear(){flag = 0;return *this;}
+
+	F_memory_heap& clear(){flags = 0;return *this;}
 	F_memory_heap all_flags(){ return b_device_local;}
-	F_memory_heap& on_device_local(){ flag |= b_device_local; return *this; }
-	F_memory_heap& off_device_local(){ flag &= ~b_device_local; return *this; }
+	F_memory_heap& on_device_local(){ flags |= b_device_local; return *this; }
+	F_memory_heap& off_device_local(){ flags &= ~b_device_local; return *this; }
 };
-inline F_memory_heap operator&(const F_memory_heap f1_, const F_memory_heap f2_){return f1_.flag&f2_.flag;}
-inline F_memory_heap operator&(const F_memory_heap f1_, const F_memory_heap::B f2_){return f1_.flag&uint32_t(f2_);}
-inline F_memory_heap operator&(const F_memory_heap::B f1_, const F_memory_heap f2_){return uint32_t(f1_)&f2_.flag;}
-inline F_memory_heap operator&(const F_memory_heap f1_, const VkMemoryHeapFlagBits f2_){return f1_.flag&uint32_t(f2_);}
-inline F_memory_heap operator&(const VkMemoryHeapFlagBits f1_, const F_memory_heap f2_){return uint32_t(f1_)&f2_.flag;}
-inline F_memory_heap operator|(const F_memory_heap f1_, const F_memory_heap f2_){return f1_.flag|f2_.flag;}
-inline F_memory_heap operator^(const F_memory_heap f1_, const F_memory_heap f2_){return f1_.flag^f2_.flag;}
 /*	VkAccessFlagBits*/
-template<> struct my_class_convert<F_access> { using type = VkAccessFlagBits;};template<> struct my_class_convert<VkAccessFlagBits> { using type = F_access;};union F_access {
-	uint32_t flag;
+union F_access {
+	VkAccessFlags flags;
 	VkAccessFlagBits vk_flag;
-	enum B{
+	enum {
 			/* Controls coherency of indirect command reads */
 		b_indirect_command_read = VK_ACCESS_INDIRECT_COMMAND_READ_BIT,
 			/* Controls coherency of index reads */
@@ -1906,71 +1831,70 @@ template<> struct my_class_convert<F_access> { using type = VkAccessFlagBits;};t
 		b_memory_read = VK_ACCESS_MEMORY_READ_BIT,
 			/* Controls coherency of memory writes */
 		b_memory_write = VK_ACCESS_MEMORY_WRITE_BIT,
-	};
-	F_access():flag(0){}
-	F_access(const uint32_t flag_):flag(flag_){}
-	//F_access(const B flag_):flag(flag_){}
-	//F_access(const VkAccessFlagBits flag_):vk_flag(flag_){}
-	//operator uint32_t(){return flag;}
-	operator VkAccessFlagBits*(){ return reinterpret_cast<VkAccessFlagBits*>(this); }
-	operator VkAccessFlagBits(){return vk_flag;}
-	operator VkAccessFlags&(){ return flag; }
-	F_access& operator=(const F_access flag_){flag=flag_.flag; return *this;}
-	F_access& operator|=(const F_access flag_){flag|=flag_.flag; return *this;}
-	F_access& operator&=(const F_access flag_){flag&=flag_.flag; return *this;}
-	F_access& operator^=(const F_access flag_){flag^=flag_.flag;return *this;}
-	F_access operator~(){return ~flag;}
-	bool operator==(const F_access flag_){return flag==flag_.flag;}
+	}flag;
+
+	F_access():flags(0){}
+	F_access(const uint32_t flag_):flags(flag_){}
+
+	operator VkAccessFlagBits&(){return vk_flag;}
+	operator VkAccessFlagBits*(){return &vk_flag; }
+	operator VkAccessFlagBits*()const{return const_cast<VkAccessFlagBits*const>(&vk_flag); }
+
+	operator VkAccessFlags&(){return flags; }
+	operator VkAccessFlags*()const{return const_cast<VkAccessFlags*const>(&flags); }
+	operator VkAccessFlags*(){return &flags; }
+
+	F_access& operator=(const F_access flag_){flags=flag_.flags; return *this;}
+	F_access& operator|=(const F_access flag_){flags|=flag_.flags; return *this;}
+	F_access& operator&=(const F_access flag_){flags&=flag_.flags; return *this;}
+	F_access& operator^=(const F_access flag_){flags^=flag_.flags;return *this;}
+	F_access operator~(){return ~flags;}
+
+	bool operator==(const F_access flag_){return flags==flag_.flags;}
 	bool operator!=(const F_access flag_){return !(*this==flag_);}
-	F_access& clear(){flag = 0;return *this;}
+
+	F_access& clear(){flags = 0;return *this;}
 	F_access all_flags(){ return b_indirect_command_read | b_index_read | b_vertex_attribute_read | b_uniform_read | b_input_attachment_read | b_shader_read | b_shader_write | b_color_attachment_read | b_color_attachment_write | b_depth_stencil_attachment_read | b_depth_stencil_attachment_write | b_transfer_read | b_transfer_write | b_host_read | b_host_write | b_memory_read | b_memory_write;}
-	F_access& on_indirect_command_read(){ flag |= b_indirect_command_read; return *this; }
-	F_access& off_indirect_command_read(){ flag &= ~b_indirect_command_read; return *this; }
-	F_access& on_index_read(){ flag |= b_index_read; return *this; }
-	F_access& off_index_read(){ flag &= ~b_index_read; return *this; }
-	F_access& on_vertex_attribute_read(){ flag |= b_vertex_attribute_read; return *this; }
-	F_access& off_vertex_attribute_read(){ flag &= ~b_vertex_attribute_read; return *this; }
-	F_access& on_uniform_read(){ flag |= b_uniform_read; return *this; }
-	F_access& off_uniform_read(){ flag &= ~b_uniform_read; return *this; }
-	F_access& on_input_attachment_read(){ flag |= b_input_attachment_read; return *this; }
-	F_access& off_input_attachment_read(){ flag &= ~b_input_attachment_read; return *this; }
-	F_access& on_shader_read(){ flag |= b_shader_read; return *this; }
-	F_access& off_shader_read(){ flag &= ~b_shader_read; return *this; }
-	F_access& on_shader_write(){ flag |= b_shader_write; return *this; }
-	F_access& off_shader_write(){ flag &= ~b_shader_write; return *this; }
-	F_access& on_color_attachment_read(){ flag |= b_color_attachment_read; return *this; }
-	F_access& off_color_attachment_read(){ flag &= ~b_color_attachment_read; return *this; }
-	F_access& on_color_attachment_write(){ flag |= b_color_attachment_write; return *this; }
-	F_access& off_color_attachment_write(){ flag &= ~b_color_attachment_write; return *this; }
-	F_access& on_depth_stencil_attachment_read(){ flag |= b_depth_stencil_attachment_read; return *this; }
-	F_access& off_depth_stencil_attachment_read(){ flag &= ~b_depth_stencil_attachment_read; return *this; }
-	F_access& on_depth_stencil_attachment_write(){ flag |= b_depth_stencil_attachment_write; return *this; }
-	F_access& off_depth_stencil_attachment_write(){ flag &= ~b_depth_stencil_attachment_write; return *this; }
-	F_access& on_transfer_read(){ flag |= b_transfer_read; return *this; }
-	F_access& off_transfer_read(){ flag &= ~b_transfer_read; return *this; }
-	F_access& on_transfer_write(){ flag |= b_transfer_write; return *this; }
-	F_access& off_transfer_write(){ flag &= ~b_transfer_write; return *this; }
-	F_access& on_host_read(){ flag |= b_host_read; return *this; }
-	F_access& off_host_read(){ flag &= ~b_host_read; return *this; }
-	F_access& on_host_write(){ flag |= b_host_write; return *this; }
-	F_access& off_host_write(){ flag &= ~b_host_write; return *this; }
-	F_access& on_memory_read(){ flag |= b_memory_read; return *this; }
-	F_access& off_memory_read(){ flag &= ~b_memory_read; return *this; }
-	F_access& on_memory_write(){ flag |= b_memory_write; return *this; }
-	F_access& off_memory_write(){ flag &= ~b_memory_write; return *this; }
+	F_access& on_indirect_command_read(){ flags |= b_indirect_command_read; return *this; }
+	F_access& off_indirect_command_read(){ flags &= ~b_indirect_command_read; return *this; }
+	F_access& on_index_read(){ flags |= b_index_read; return *this; }
+	F_access& off_index_read(){ flags &= ~b_index_read; return *this; }
+	F_access& on_vertex_attribute_read(){ flags |= b_vertex_attribute_read; return *this; }
+	F_access& off_vertex_attribute_read(){ flags &= ~b_vertex_attribute_read; return *this; }
+	F_access& on_uniform_read(){ flags |= b_uniform_read; return *this; }
+	F_access& off_uniform_read(){ flags &= ~b_uniform_read; return *this; }
+	F_access& on_input_attachment_read(){ flags |= b_input_attachment_read; return *this; }
+	F_access& off_input_attachment_read(){ flags &= ~b_input_attachment_read; return *this; }
+	F_access& on_shader_read(){ flags |= b_shader_read; return *this; }
+	F_access& off_shader_read(){ flags &= ~b_shader_read; return *this; }
+	F_access& on_shader_write(){ flags |= b_shader_write; return *this; }
+	F_access& off_shader_write(){ flags &= ~b_shader_write; return *this; }
+	F_access& on_color_attachment_read(){ flags |= b_color_attachment_read; return *this; }
+	F_access& off_color_attachment_read(){ flags &= ~b_color_attachment_read; return *this; }
+	F_access& on_color_attachment_write(){ flags |= b_color_attachment_write; return *this; }
+	F_access& off_color_attachment_write(){ flags &= ~b_color_attachment_write; return *this; }
+	F_access& on_depth_stencil_attachment_read(){ flags |= b_depth_stencil_attachment_read; return *this; }
+	F_access& off_depth_stencil_attachment_read(){ flags &= ~b_depth_stencil_attachment_read; return *this; }
+	F_access& on_depth_stencil_attachment_write(){ flags |= b_depth_stencil_attachment_write; return *this; }
+	F_access& off_depth_stencil_attachment_write(){ flags &= ~b_depth_stencil_attachment_write; return *this; }
+	F_access& on_transfer_read(){ flags |= b_transfer_read; return *this; }
+	F_access& off_transfer_read(){ flags &= ~b_transfer_read; return *this; }
+	F_access& on_transfer_write(){ flags |= b_transfer_write; return *this; }
+	F_access& off_transfer_write(){ flags &= ~b_transfer_write; return *this; }
+	F_access& on_host_read(){ flags |= b_host_read; return *this; }
+	F_access& off_host_read(){ flags &= ~b_host_read; return *this; }
+	F_access& on_host_write(){ flags |= b_host_write; return *this; }
+	F_access& off_host_write(){ flags &= ~b_host_write; return *this; }
+	F_access& on_memory_read(){ flags |= b_memory_read; return *this; }
+	F_access& off_memory_read(){ flags &= ~b_memory_read; return *this; }
+	F_access& on_memory_write(){ flags |= b_memory_write; return *this; }
+	F_access& off_memory_write(){ flags &= ~b_memory_write; return *this; }
 };
-inline F_access operator&(const F_access f1_, const F_access f2_){return f1_.flag&f2_.flag;}
-inline F_access operator&(const F_access f1_, const F_access::B f2_){return f1_.flag&uint32_t(f2_);}
-inline F_access operator&(const F_access::B f1_, const F_access f2_){return uint32_t(f1_)&f2_.flag;}
-inline F_access operator&(const F_access f1_, const VkAccessFlagBits f2_){return f1_.flag&uint32_t(f2_);}
-inline F_access operator&(const VkAccessFlagBits f1_, const F_access f2_){return uint32_t(f1_)&f2_.flag;}
-inline F_access operator|(const F_access f1_, const F_access f2_){return f1_.flag|f2_.flag;}
-inline F_access operator^(const F_access f1_, const F_access f2_){return f1_.flag^f2_.flag;}
 /*	VkBufferUsageFlagBits*/
-template<> struct my_class_convert<F_buffer_usage> { using type = VkBufferUsageFlagBits;};template<> struct my_class_convert<VkBufferUsageFlagBits> { using type = F_buffer_usage;};union F_buffer_usage {
-	uint32_t flag;
+union F_buffer_usage {
+	VkBufferUsageFlags flags;
 	VkBufferUsageFlagBits vk_flag;
-	enum B{
+	enum {
 			/* Can be used as a source of transfer operations */
 		b_transfer_src = VK_BUFFER_USAGE_TRANSFER_SRC_BIT,
 			/* Can be used as a destination of transfer operations */
@@ -1989,98 +1913,96 @@ template<> struct my_class_convert<F_buffer_usage> { using type = VkBufferUsageF
 		b_vertex_buffer = VK_BUFFER_USAGE_VERTEX_BUFFER_BIT,
 			/* Can be the source of indirect parameters (e.g. indirect buffer, parameter buffer) */
 		b_indirect_buffer = VK_BUFFER_USAGE_INDIRECT_BUFFER_BIT,
-	};
-	F_buffer_usage():flag(0){}
-	F_buffer_usage(const uint32_t flag_):flag(flag_){}
-	//F_buffer_usage(const B flag_):flag(flag_){}
-	//F_buffer_usage(const VkBufferUsageFlagBits flag_):vk_flag(flag_){}
-	//operator uint32_t(){return flag;}
-	operator VkBufferUsageFlagBits*(){ return reinterpret_cast<VkBufferUsageFlagBits*>(this); }
-	operator VkBufferUsageFlagBits(){return vk_flag;}
-	operator VkBufferUsageFlags&(){ return flag; }
-	F_buffer_usage& operator=(const F_buffer_usage flag_){flag=flag_.flag; return *this;}
-	F_buffer_usage& operator|=(const F_buffer_usage flag_){flag|=flag_.flag; return *this;}
-	F_buffer_usage& operator&=(const F_buffer_usage flag_){flag&=flag_.flag; return *this;}
-	F_buffer_usage& operator^=(const F_buffer_usage flag_){flag^=flag_.flag;return *this;}
-	F_buffer_usage operator~(){return ~flag;}
-	bool operator==(const F_buffer_usage flag_){return flag==flag_.flag;}
+	}flag;
+
+	F_buffer_usage():flags(0){}
+	F_buffer_usage(const uint32_t flag_):flags(flag_){}
+
+	operator VkBufferUsageFlagBits&(){return vk_flag;}
+	operator VkBufferUsageFlagBits*(){return &vk_flag; }
+	operator VkBufferUsageFlagBits*()const{return const_cast<VkBufferUsageFlagBits*const>(&vk_flag); }
+
+	operator VkBufferUsageFlags&(){return flags; }
+	operator VkBufferUsageFlags*()const{return const_cast<VkBufferUsageFlags*const>(&flags); }
+	operator VkBufferUsageFlags*(){return &flags; }
+
+	F_buffer_usage& operator=(const F_buffer_usage flag_){flags=flag_.flags; return *this;}
+	F_buffer_usage& operator|=(const F_buffer_usage flag_){flags|=flag_.flags; return *this;}
+	F_buffer_usage& operator&=(const F_buffer_usage flag_){flags&=flag_.flags; return *this;}
+	F_buffer_usage& operator^=(const F_buffer_usage flag_){flags^=flag_.flags;return *this;}
+	F_buffer_usage operator~(){return ~flags;}
+
+	bool operator==(const F_buffer_usage flag_){return flags==flag_.flags;}
 	bool operator!=(const F_buffer_usage flag_){return !(*this==flag_);}
-	F_buffer_usage& clear(){flag = 0;return *this;}
+
+	F_buffer_usage& clear(){flags = 0;return *this;}
 	F_buffer_usage all_flags(){ return b_transfer_src | b_transfer_dst | b_uniform_texel_buffer | b_storage_texel_buffer | b_uniform_buffer | b_storage_buffer | b_index_buffer | b_vertex_buffer | b_indirect_buffer;}
-	F_buffer_usage& on_transfer_src(){ flag |= b_transfer_src; return *this; }
-	F_buffer_usage& off_transfer_src(){ flag &= ~b_transfer_src; return *this; }
-	F_buffer_usage& on_transfer_dst(){ flag |= b_transfer_dst; return *this; }
-	F_buffer_usage& off_transfer_dst(){ flag &= ~b_transfer_dst; return *this; }
-	F_buffer_usage& on_uniform_texel_buffer(){ flag |= b_uniform_texel_buffer; return *this; }
-	F_buffer_usage& off_uniform_texel_buffer(){ flag &= ~b_uniform_texel_buffer; return *this; }
-	F_buffer_usage& on_storage_texel_buffer(){ flag |= b_storage_texel_buffer; return *this; }
-	F_buffer_usage& off_storage_texel_buffer(){ flag &= ~b_storage_texel_buffer; return *this; }
-	F_buffer_usage& on_uniform_buffer(){ flag |= b_uniform_buffer; return *this; }
-	F_buffer_usage& off_uniform_buffer(){ flag &= ~b_uniform_buffer; return *this; }
-	F_buffer_usage& on_storage_buffer(){ flag |= b_storage_buffer; return *this; }
-	F_buffer_usage& off_storage_buffer(){ flag &= ~b_storage_buffer; return *this; }
-	F_buffer_usage& on_index_buffer(){ flag |= b_index_buffer; return *this; }
-	F_buffer_usage& off_index_buffer(){ flag &= ~b_index_buffer; return *this; }
-	F_buffer_usage& on_vertex_buffer(){ flag |= b_vertex_buffer; return *this; }
-	F_buffer_usage& off_vertex_buffer(){ flag &= ~b_vertex_buffer; return *this; }
-	F_buffer_usage& on_indirect_buffer(){ flag |= b_indirect_buffer; return *this; }
-	F_buffer_usage& off_indirect_buffer(){ flag &= ~b_indirect_buffer; return *this; }
+	F_buffer_usage& on_transfer_src(){ flags |= b_transfer_src; return *this; }
+	F_buffer_usage& off_transfer_src(){ flags &= ~b_transfer_src; return *this; }
+	F_buffer_usage& on_transfer_dst(){ flags |= b_transfer_dst; return *this; }
+	F_buffer_usage& off_transfer_dst(){ flags &= ~b_transfer_dst; return *this; }
+	F_buffer_usage& on_uniform_texel_buffer(){ flags |= b_uniform_texel_buffer; return *this; }
+	F_buffer_usage& off_uniform_texel_buffer(){ flags &= ~b_uniform_texel_buffer; return *this; }
+	F_buffer_usage& on_storage_texel_buffer(){ flags |= b_storage_texel_buffer; return *this; }
+	F_buffer_usage& off_storage_texel_buffer(){ flags &= ~b_storage_texel_buffer; return *this; }
+	F_buffer_usage& on_uniform_buffer(){ flags |= b_uniform_buffer; return *this; }
+	F_buffer_usage& off_uniform_buffer(){ flags &= ~b_uniform_buffer; return *this; }
+	F_buffer_usage& on_storage_buffer(){ flags |= b_storage_buffer; return *this; }
+	F_buffer_usage& off_storage_buffer(){ flags &= ~b_storage_buffer; return *this; }
+	F_buffer_usage& on_index_buffer(){ flags |= b_index_buffer; return *this; }
+	F_buffer_usage& off_index_buffer(){ flags &= ~b_index_buffer; return *this; }
+	F_buffer_usage& on_vertex_buffer(){ flags |= b_vertex_buffer; return *this; }
+	F_buffer_usage& off_vertex_buffer(){ flags &= ~b_vertex_buffer; return *this; }
+	F_buffer_usage& on_indirect_buffer(){ flags |= b_indirect_buffer; return *this; }
+	F_buffer_usage& off_indirect_buffer(){ flags &= ~b_indirect_buffer; return *this; }
 };
-inline F_buffer_usage operator&(const F_buffer_usage f1_, const F_buffer_usage f2_){return f1_.flag&f2_.flag;}
-inline F_buffer_usage operator&(const F_buffer_usage f1_, const F_buffer_usage::B f2_){return f1_.flag&uint32_t(f2_);}
-inline F_buffer_usage operator&(const F_buffer_usage::B f1_, const F_buffer_usage f2_){return uint32_t(f1_)&f2_.flag;}
-inline F_buffer_usage operator&(const F_buffer_usage f1_, const VkBufferUsageFlagBits f2_){return f1_.flag&uint32_t(f2_);}
-inline F_buffer_usage operator&(const VkBufferUsageFlagBits f1_, const F_buffer_usage f2_){return uint32_t(f1_)&f2_.flag;}
-inline F_buffer_usage operator|(const F_buffer_usage f1_, const F_buffer_usage f2_){return f1_.flag|f2_.flag;}
-inline F_buffer_usage operator^(const F_buffer_usage f1_, const F_buffer_usage f2_){return f1_.flag^f2_.flag;}
 /*	VkBufferCreateFlagBits*/
-template<> struct my_class_convert<F_buffer_create> { using type = VkBufferCreateFlagBits;};template<> struct my_class_convert<VkBufferCreateFlagBits> { using type = F_buffer_create;};union F_buffer_create {
-	uint32_t flag;
+union F_buffer_create {
+	VkBufferCreateFlags flags;
 	VkBufferCreateFlagBits vk_flag;
-	enum B{
+	enum {
 			/* Buffer should support sparse backing */
 		b_sparse_binding = VK_BUFFER_CREATE_SPARSE_BINDING_BIT,
 			/* Buffer should support sparse backing with partial residency */
 		b_sparse_residency = VK_BUFFER_CREATE_SPARSE_RESIDENCY_BIT,
 			/* Buffer should support constent data access to physical memory ranges mapped into multiple locations of sparse buffers */
 		b_sparse_aliased = VK_BUFFER_CREATE_SPARSE_ALIASED_BIT,
-	};
-	F_buffer_create():flag(0){}
-	F_buffer_create(const uint32_t flag_):flag(flag_){}
-	//F_buffer_create(const B flag_):flag(flag_){}
-	//F_buffer_create(const VkBufferCreateFlagBits flag_):vk_flag(flag_){}
-	//operator uint32_t(){return flag;}
-	operator VkBufferCreateFlagBits*(){ return reinterpret_cast<VkBufferCreateFlagBits*>(this); }
-	operator VkBufferCreateFlagBits(){return vk_flag;}
-	operator VkBufferCreateFlags&(){ return flag; }
-	F_buffer_create& operator=(const F_buffer_create flag_){flag=flag_.flag; return *this;}
-	F_buffer_create& operator|=(const F_buffer_create flag_){flag|=flag_.flag; return *this;}
-	F_buffer_create& operator&=(const F_buffer_create flag_){flag&=flag_.flag; return *this;}
-	F_buffer_create& operator^=(const F_buffer_create flag_){flag^=flag_.flag;return *this;}
-	F_buffer_create operator~(){return ~flag;}
-	bool operator==(const F_buffer_create flag_){return flag==flag_.flag;}
+	}flag;
+
+	F_buffer_create():flags(0){}
+	F_buffer_create(const uint32_t flag_):flags(flag_){}
+
+	operator VkBufferCreateFlagBits&(){return vk_flag;}
+	operator VkBufferCreateFlagBits*(){return &vk_flag; }
+	operator VkBufferCreateFlagBits*()const{return const_cast<VkBufferCreateFlagBits*const>(&vk_flag); }
+
+	operator VkBufferCreateFlags&(){return flags; }
+	operator VkBufferCreateFlags*()const{return const_cast<VkBufferCreateFlags*const>(&flags); }
+	operator VkBufferCreateFlags*(){return &flags; }
+
+	F_buffer_create& operator=(const F_buffer_create flag_){flags=flag_.flags; return *this;}
+	F_buffer_create& operator|=(const F_buffer_create flag_){flags|=flag_.flags; return *this;}
+	F_buffer_create& operator&=(const F_buffer_create flag_){flags&=flag_.flags; return *this;}
+	F_buffer_create& operator^=(const F_buffer_create flag_){flags^=flag_.flags;return *this;}
+	F_buffer_create operator~(){return ~flags;}
+
+	bool operator==(const F_buffer_create flag_){return flags==flag_.flags;}
 	bool operator!=(const F_buffer_create flag_){return !(*this==flag_);}
-	F_buffer_create& clear(){flag = 0;return *this;}
+
+	F_buffer_create& clear(){flags = 0;return *this;}
 	F_buffer_create all_flags(){ return b_sparse_binding | b_sparse_residency | b_sparse_aliased;}
-	F_buffer_create& on_sparse_binding(){ flag |= b_sparse_binding; return *this; }
-	F_buffer_create& off_sparse_binding(){ flag &= ~b_sparse_binding; return *this; }
-	F_buffer_create& on_sparse_residency(){ flag |= b_sparse_residency; return *this; }
-	F_buffer_create& off_sparse_residency(){ flag &= ~b_sparse_residency; return *this; }
-	F_buffer_create& on_sparse_aliased(){ flag |= b_sparse_aliased; return *this; }
-	F_buffer_create& off_sparse_aliased(){ flag &= ~b_sparse_aliased; return *this; }
+	F_buffer_create& on_sparse_binding(){ flags |= b_sparse_binding; return *this; }
+	F_buffer_create& off_sparse_binding(){ flags &= ~b_sparse_binding; return *this; }
+	F_buffer_create& on_sparse_residency(){ flags |= b_sparse_residency; return *this; }
+	F_buffer_create& off_sparse_residency(){ flags &= ~b_sparse_residency; return *this; }
+	F_buffer_create& on_sparse_aliased(){ flags |= b_sparse_aliased; return *this; }
+	F_buffer_create& off_sparse_aliased(){ flags &= ~b_sparse_aliased; return *this; }
 };
-inline F_buffer_create operator&(const F_buffer_create f1_, const F_buffer_create f2_){return f1_.flag&f2_.flag;}
-inline F_buffer_create operator&(const F_buffer_create f1_, const F_buffer_create::B f2_){return f1_.flag&uint32_t(f2_);}
-inline F_buffer_create operator&(const F_buffer_create::B f1_, const F_buffer_create f2_){return uint32_t(f1_)&f2_.flag;}
-inline F_buffer_create operator&(const F_buffer_create f1_, const VkBufferCreateFlagBits f2_){return f1_.flag&uint32_t(f2_);}
-inline F_buffer_create operator&(const VkBufferCreateFlagBits f1_, const F_buffer_create f2_){return uint32_t(f1_)&f2_.flag;}
-inline F_buffer_create operator|(const F_buffer_create f1_, const F_buffer_create f2_){return f1_.flag|f2_.flag;}
-inline F_buffer_create operator^(const F_buffer_create f1_, const F_buffer_create f2_){return f1_.flag^f2_.flag;}
 /*	VkShaderStageFlagBits*/
-template<> struct my_class_convert<F_shader_stage> { using type = VkShaderStageFlagBits;};template<> struct my_class_convert<VkShaderStageFlagBits> { using type = F_shader_stage;};union F_shader_stage {
-	uint32_t flag;
+union F_shader_stage {
+	VkShaderStageFlags flags;
 	VkShaderStageFlagBits vk_flag;
-	enum B{
+	enum {
 		b_vertex = VK_SHADER_STAGE_VERTEX_BIT,
 		b_tessellation_control = VK_SHADER_STAGE_TESSELLATION_CONTROL_BIT,
 		b_tessellation_evaluation = VK_SHADER_STAGE_TESSELLATION_EVALUATION_BIT,
@@ -2089,53 +2011,52 @@ template<> struct my_class_convert<F_shader_stage> { using type = VkShaderStageF
 		b_compute = VK_SHADER_STAGE_COMPUTE_BIT,
 		b_all_graphics = VK_SHADER_STAGE_ALL_GRAPHICS,
 		b_all = VK_SHADER_STAGE_ALL,
-	};
-	F_shader_stage():flag(0){}
-	F_shader_stage(const uint32_t flag_):flag(flag_){}
-	//F_shader_stage(const B flag_):flag(flag_){}
-	//F_shader_stage(const VkShaderStageFlagBits flag_):vk_flag(flag_){}
-	//operator uint32_t(){return flag;}
-	operator VkShaderStageFlagBits*(){ return reinterpret_cast<VkShaderStageFlagBits*>(this); }
-	operator VkShaderStageFlagBits(){return vk_flag;}
-	operator VkShaderStageFlags&(){ return flag; }
-	F_shader_stage& operator=(const F_shader_stage flag_){flag=flag_.flag; return *this;}
-	F_shader_stage& operator|=(const F_shader_stage flag_){flag|=flag_.flag; return *this;}
-	F_shader_stage& operator&=(const F_shader_stage flag_){flag&=flag_.flag; return *this;}
-	F_shader_stage& operator^=(const F_shader_stage flag_){flag^=flag_.flag;return *this;}
-	F_shader_stage operator~(){return ~flag;}
-	bool operator==(const F_shader_stage flag_){return flag==flag_.flag;}
+	}flag;
+
+	F_shader_stage():flags(0){}
+	F_shader_stage(const uint32_t flag_):flags(flag_){}
+
+	operator VkShaderStageFlagBits&(){return vk_flag;}
+	operator VkShaderStageFlagBits*(){return &vk_flag; }
+	operator VkShaderStageFlagBits*()const{return const_cast<VkShaderStageFlagBits*const>(&vk_flag); }
+
+	operator VkShaderStageFlags&(){return flags; }
+	operator VkShaderStageFlags*()const{return const_cast<VkShaderStageFlags*const>(&flags); }
+	operator VkShaderStageFlags*(){return &flags; }
+
+	F_shader_stage& operator=(const F_shader_stage flag_){flags=flag_.flags; return *this;}
+	F_shader_stage& operator|=(const F_shader_stage flag_){flags|=flag_.flags; return *this;}
+	F_shader_stage& operator&=(const F_shader_stage flag_){flags&=flag_.flags; return *this;}
+	F_shader_stage& operator^=(const F_shader_stage flag_){flags^=flag_.flags;return *this;}
+	F_shader_stage operator~(){return ~flags;}
+
+	bool operator==(const F_shader_stage flag_){return flags==flag_.flags;}
 	bool operator!=(const F_shader_stage flag_){return !(*this==flag_);}
-	F_shader_stage& clear(){flag = 0;return *this;}
+
+	F_shader_stage& clear(){flags = 0;return *this;}
 	F_shader_stage all_flags(){ return b_vertex | b_tessellation_control | b_tessellation_evaluation | b_geometry | b_fragment | b_compute | b_all_graphics | b_all;}
-	F_shader_stage& on_vertex(){ flag |= b_vertex; return *this; }
-	F_shader_stage& off_vertex(){ flag &= ~b_vertex; return *this; }
-	F_shader_stage& on_tessellation_control(){ flag |= b_tessellation_control; return *this; }
-	F_shader_stage& off_tessellation_control(){ flag &= ~b_tessellation_control; return *this; }
-	F_shader_stage& on_tessellation_evaluation(){ flag |= b_tessellation_evaluation; return *this; }
-	F_shader_stage& off_tessellation_evaluation(){ flag &= ~b_tessellation_evaluation; return *this; }
-	F_shader_stage& on_geometry(){ flag |= b_geometry; return *this; }
-	F_shader_stage& off_geometry(){ flag &= ~b_geometry; return *this; }
-	F_shader_stage& on_fragment(){ flag |= b_fragment; return *this; }
-	F_shader_stage& off_fragment(){ flag &= ~b_fragment; return *this; }
-	F_shader_stage& on_compute(){ flag |= b_compute; return *this; }
-	F_shader_stage& off_compute(){ flag &= ~b_compute; return *this; }
-	F_shader_stage& on_all_graphics(){ flag |= b_all_graphics; return *this; }
-	F_shader_stage& off_all_graphics(){ flag &= ~b_all_graphics; return *this; }
-	F_shader_stage& on_all(){ flag |= b_all; return *this; }
-	F_shader_stage& off_all(){ flag &= ~b_all; return *this; }
+	F_shader_stage& on_vertex(){ flags |= b_vertex; return *this; }
+	F_shader_stage& off_vertex(){ flags &= ~b_vertex; return *this; }
+	F_shader_stage& on_tessellation_control(){ flags |= b_tessellation_control; return *this; }
+	F_shader_stage& off_tessellation_control(){ flags &= ~b_tessellation_control; return *this; }
+	F_shader_stage& on_tessellation_evaluation(){ flags |= b_tessellation_evaluation; return *this; }
+	F_shader_stage& off_tessellation_evaluation(){ flags &= ~b_tessellation_evaluation; return *this; }
+	F_shader_stage& on_geometry(){ flags |= b_geometry; return *this; }
+	F_shader_stage& off_geometry(){ flags &= ~b_geometry; return *this; }
+	F_shader_stage& on_fragment(){ flags |= b_fragment; return *this; }
+	F_shader_stage& off_fragment(){ flags &= ~b_fragment; return *this; }
+	F_shader_stage& on_compute(){ flags |= b_compute; return *this; }
+	F_shader_stage& off_compute(){ flags &= ~b_compute; return *this; }
+	F_shader_stage& on_all_graphics(){ flags |= b_all_graphics; return *this; }
+	F_shader_stage& off_all_graphics(){ flags &= ~b_all_graphics; return *this; }
+	F_shader_stage& on_all(){ flags |= b_all; return *this; }
+	F_shader_stage& off_all(){ flags &= ~b_all; return *this; }
 };
-inline F_shader_stage operator&(const F_shader_stage f1_, const F_shader_stage f2_){return f1_.flag&f2_.flag;}
-inline F_shader_stage operator&(const F_shader_stage f1_, const F_shader_stage::B f2_){return f1_.flag&uint32_t(f2_);}
-inline F_shader_stage operator&(const F_shader_stage::B f1_, const F_shader_stage f2_){return uint32_t(f1_)&f2_.flag;}
-inline F_shader_stage operator&(const F_shader_stage f1_, const VkShaderStageFlagBits f2_){return f1_.flag&uint32_t(f2_);}
-inline F_shader_stage operator&(const VkShaderStageFlagBits f1_, const F_shader_stage f2_){return uint32_t(f1_)&f2_.flag;}
-inline F_shader_stage operator|(const F_shader_stage f1_, const F_shader_stage f2_){return f1_.flag|f2_.flag;}
-inline F_shader_stage operator^(const F_shader_stage f1_, const F_shader_stage f2_){return f1_.flag^f2_.flag;}
 /*	VkImageUsageFlagBits*/
-template<> struct my_class_convert<F_image_usage> { using type = VkImageUsageFlagBits;};template<> struct my_class_convert<VkImageUsageFlagBits> { using type = F_image_usage;};union F_image_usage {
-	uint32_t flag;
+union F_image_usage {
+	VkImageUsageFlags flags;
 	VkImageUsageFlagBits vk_flag;
-	enum B{
+	enum {
 			/* Can be used as a source of transfer operations */
 		b_transfer_src = VK_IMAGE_USAGE_TRANSFER_SRC_BIT,
 			/* Can be used as a destination of transfer operations */
@@ -2152,53 +2073,52 @@ template<> struct my_class_convert<F_image_usage> { using type = VkImageUsageFla
 		b_transient_attachment = VK_IMAGE_USAGE_TRANSIENT_ATTACHMENT_BIT,
 			/* Can be used as framebuffer input attachment */
 		b_input_attachment = VK_IMAGE_USAGE_INPUT_ATTACHMENT_BIT,
-	};
-	F_image_usage():flag(0){}
-	F_image_usage(const uint32_t flag_):flag(flag_){}
-	//F_image_usage(const B flag_):flag(flag_){}
-	//F_image_usage(const VkImageUsageFlagBits flag_):vk_flag(flag_){}
-	//operator uint32_t(){return flag;}
-	operator VkImageUsageFlagBits*(){ return reinterpret_cast<VkImageUsageFlagBits*>(this); }
-	operator VkImageUsageFlagBits(){return vk_flag;}
-	operator VkImageUsageFlags&(){ return flag; }
-	F_image_usage& operator=(const F_image_usage flag_){flag=flag_.flag; return *this;}
-	F_image_usage& operator|=(const F_image_usage flag_){flag|=flag_.flag; return *this;}
-	F_image_usage& operator&=(const F_image_usage flag_){flag&=flag_.flag; return *this;}
-	F_image_usage& operator^=(const F_image_usage flag_){flag^=flag_.flag;return *this;}
-	F_image_usage operator~(){return ~flag;}
-	bool operator==(const F_image_usage flag_){return flag==flag_.flag;}
+	}flag;
+
+	F_image_usage():flags(0){}
+	F_image_usage(const uint32_t flag_):flags(flag_){}
+
+	operator VkImageUsageFlagBits&(){return vk_flag;}
+	operator VkImageUsageFlagBits*(){return &vk_flag; }
+	operator VkImageUsageFlagBits*()const{return const_cast<VkImageUsageFlagBits*const>(&vk_flag); }
+
+	operator VkImageUsageFlags&(){return flags; }
+	operator VkImageUsageFlags*()const{return const_cast<VkImageUsageFlags*const>(&flags); }
+	operator VkImageUsageFlags*(){return &flags; }
+
+	F_image_usage& operator=(const F_image_usage flag_){flags=flag_.flags; return *this;}
+	F_image_usage& operator|=(const F_image_usage flag_){flags|=flag_.flags; return *this;}
+	F_image_usage& operator&=(const F_image_usage flag_){flags&=flag_.flags; return *this;}
+	F_image_usage& operator^=(const F_image_usage flag_){flags^=flag_.flags;return *this;}
+	F_image_usage operator~(){return ~flags;}
+
+	bool operator==(const F_image_usage flag_){return flags==flag_.flags;}
 	bool operator!=(const F_image_usage flag_){return !(*this==flag_);}
-	F_image_usage& clear(){flag = 0;return *this;}
+
+	F_image_usage& clear(){flags = 0;return *this;}
 	F_image_usage all_flags(){ return b_transfer_src | b_transfer_dst | b_sampled | b_storage | b_color_attachment | b_depth_stencil_attachment | b_transient_attachment | b_input_attachment;}
-	F_image_usage& on_transfer_src(){ flag |= b_transfer_src; return *this; }
-	F_image_usage& off_transfer_src(){ flag &= ~b_transfer_src; return *this; }
-	F_image_usage& on_transfer_dst(){ flag |= b_transfer_dst; return *this; }
-	F_image_usage& off_transfer_dst(){ flag &= ~b_transfer_dst; return *this; }
-	F_image_usage& on_sampled(){ flag |= b_sampled; return *this; }
-	F_image_usage& off_sampled(){ flag &= ~b_sampled; return *this; }
-	F_image_usage& on_storage(){ flag |= b_storage; return *this; }
-	F_image_usage& off_storage(){ flag &= ~b_storage; return *this; }
-	F_image_usage& on_color_attachment(){ flag |= b_color_attachment; return *this; }
-	F_image_usage& off_color_attachment(){ flag &= ~b_color_attachment; return *this; }
-	F_image_usage& on_depth_stencil_attachment(){ flag |= b_depth_stencil_attachment; return *this; }
-	F_image_usage& off_depth_stencil_attachment(){ flag &= ~b_depth_stencil_attachment; return *this; }
-	F_image_usage& on_transient_attachment(){ flag |= b_transient_attachment; return *this; }
-	F_image_usage& off_transient_attachment(){ flag &= ~b_transient_attachment; return *this; }
-	F_image_usage& on_input_attachment(){ flag |= b_input_attachment; return *this; }
-	F_image_usage& off_input_attachment(){ flag &= ~b_input_attachment; return *this; }
+	F_image_usage& on_transfer_src(){ flags |= b_transfer_src; return *this; }
+	F_image_usage& off_transfer_src(){ flags &= ~b_transfer_src; return *this; }
+	F_image_usage& on_transfer_dst(){ flags |= b_transfer_dst; return *this; }
+	F_image_usage& off_transfer_dst(){ flags &= ~b_transfer_dst; return *this; }
+	F_image_usage& on_sampled(){ flags |= b_sampled; return *this; }
+	F_image_usage& off_sampled(){ flags &= ~b_sampled; return *this; }
+	F_image_usage& on_storage(){ flags |= b_storage; return *this; }
+	F_image_usage& off_storage(){ flags &= ~b_storage; return *this; }
+	F_image_usage& on_color_attachment(){ flags |= b_color_attachment; return *this; }
+	F_image_usage& off_color_attachment(){ flags &= ~b_color_attachment; return *this; }
+	F_image_usage& on_depth_stencil_attachment(){ flags |= b_depth_stencil_attachment; return *this; }
+	F_image_usage& off_depth_stencil_attachment(){ flags &= ~b_depth_stencil_attachment; return *this; }
+	F_image_usage& on_transient_attachment(){ flags |= b_transient_attachment; return *this; }
+	F_image_usage& off_transient_attachment(){ flags &= ~b_transient_attachment; return *this; }
+	F_image_usage& on_input_attachment(){ flags |= b_input_attachment; return *this; }
+	F_image_usage& off_input_attachment(){ flags &= ~b_input_attachment; return *this; }
 };
-inline F_image_usage operator&(const F_image_usage f1_, const F_image_usage f2_){return f1_.flag&f2_.flag;}
-inline F_image_usage operator&(const F_image_usage f1_, const F_image_usage::B f2_){return f1_.flag&uint32_t(f2_);}
-inline F_image_usage operator&(const F_image_usage::B f1_, const F_image_usage f2_){return uint32_t(f1_)&f2_.flag;}
-inline F_image_usage operator&(const F_image_usage f1_, const VkImageUsageFlagBits f2_){return f1_.flag&uint32_t(f2_);}
-inline F_image_usage operator&(const VkImageUsageFlagBits f1_, const F_image_usage f2_){return uint32_t(f1_)&f2_.flag;}
-inline F_image_usage operator|(const F_image_usage f1_, const F_image_usage f2_){return f1_.flag|f2_.flag;}
-inline F_image_usage operator^(const F_image_usage f1_, const F_image_usage f2_){return f1_.flag^f2_.flag;}
 /*	VkImageCreateFlagBits*/
-template<> struct my_class_convert<F_image_create> { using type = VkImageCreateFlagBits;};template<> struct my_class_convert<VkImageCreateFlagBits> { using type = F_image_create;};union F_image_create {
-	uint32_t flag;
+union F_image_create {
+	VkImageCreateFlags flags;
 	VkImageCreateFlagBits vk_flag;
-	enum B{
+	enum {
 			/* Image should support sparse backing */
 		b_sparse_binding = VK_IMAGE_CREATE_SPARSE_BINDING_BIT,
 			/* Image should support sparse backing with partial residency */
@@ -2209,164 +2129,160 @@ template<> struct my_class_convert<F_image_create> { using type = VkImageCreateF
 		b_mutable_format = VK_IMAGE_CREATE_MUTABLE_FORMAT_BIT,
 			/* Allows creating image views with cube type from the created image */
 		b_cube_compatible = VK_IMAGE_CREATE_CUBE_COMPATIBLE_BIT,
-	};
-	F_image_create():flag(0){}
-	F_image_create(const uint32_t flag_):flag(flag_){}
-	//F_image_create(const B flag_):flag(flag_){}
-	//F_image_create(const VkImageCreateFlagBits flag_):vk_flag(flag_){}
-	//operator uint32_t(){return flag;}
-	operator VkImageCreateFlagBits*(){ return reinterpret_cast<VkImageCreateFlagBits*>(this); }
-	operator VkImageCreateFlagBits(){return vk_flag;}
-	operator VkImageCreateFlags&(){ return flag; }
-	F_image_create& operator=(const F_image_create flag_){flag=flag_.flag; return *this;}
-	F_image_create& operator|=(const F_image_create flag_){flag|=flag_.flag; return *this;}
-	F_image_create& operator&=(const F_image_create flag_){flag&=flag_.flag; return *this;}
-	F_image_create& operator^=(const F_image_create flag_){flag^=flag_.flag;return *this;}
-	F_image_create operator~(){return ~flag;}
-	bool operator==(const F_image_create flag_){return flag==flag_.flag;}
+	}flag;
+
+	F_image_create():flags(0){}
+	F_image_create(const uint32_t flag_):flags(flag_){}
+
+	operator VkImageCreateFlagBits&(){return vk_flag;}
+	operator VkImageCreateFlagBits*(){return &vk_flag; }
+	operator VkImageCreateFlagBits*()const{return const_cast<VkImageCreateFlagBits*const>(&vk_flag); }
+
+	operator VkImageCreateFlags&(){return flags; }
+	operator VkImageCreateFlags*()const{return const_cast<VkImageCreateFlags*const>(&flags); }
+	operator VkImageCreateFlags*(){return &flags; }
+
+	F_image_create& operator=(const F_image_create flag_){flags=flag_.flags; return *this;}
+	F_image_create& operator|=(const F_image_create flag_){flags|=flag_.flags; return *this;}
+	F_image_create& operator&=(const F_image_create flag_){flags&=flag_.flags; return *this;}
+	F_image_create& operator^=(const F_image_create flag_){flags^=flag_.flags;return *this;}
+	F_image_create operator~(){return ~flags;}
+
+	bool operator==(const F_image_create flag_){return flags==flag_.flags;}
 	bool operator!=(const F_image_create flag_){return !(*this==flag_);}
-	F_image_create& clear(){flag = 0;return *this;}
+
+	F_image_create& clear(){flags = 0;return *this;}
 	F_image_create all_flags(){ return b_sparse_binding | b_sparse_residency | b_sparse_aliased | b_mutable_format | b_cube_compatible;}
-	F_image_create& on_sparse_binding(){ flag |= b_sparse_binding; return *this; }
-	F_image_create& off_sparse_binding(){ flag &= ~b_sparse_binding; return *this; }
-	F_image_create& on_sparse_residency(){ flag |= b_sparse_residency; return *this; }
-	F_image_create& off_sparse_residency(){ flag &= ~b_sparse_residency; return *this; }
-	F_image_create& on_sparse_aliased(){ flag |= b_sparse_aliased; return *this; }
-	F_image_create& off_sparse_aliased(){ flag &= ~b_sparse_aliased; return *this; }
-	F_image_create& on_mutable_format(){ flag |= b_mutable_format; return *this; }
-	F_image_create& off_mutable_format(){ flag &= ~b_mutable_format; return *this; }
-	F_image_create& on_cube_compatible(){ flag |= b_cube_compatible; return *this; }
-	F_image_create& off_cube_compatible(){ flag &= ~b_cube_compatible; return *this; }
+	F_image_create& on_sparse_binding(){ flags |= b_sparse_binding; return *this; }
+	F_image_create& off_sparse_binding(){ flags &= ~b_sparse_binding; return *this; }
+	F_image_create& on_sparse_residency(){ flags |= b_sparse_residency; return *this; }
+	F_image_create& off_sparse_residency(){ flags &= ~b_sparse_residency; return *this; }
+	F_image_create& on_sparse_aliased(){ flags |= b_sparse_aliased; return *this; }
+	F_image_create& off_sparse_aliased(){ flags &= ~b_sparse_aliased; return *this; }
+	F_image_create& on_mutable_format(){ flags |= b_mutable_format; return *this; }
+	F_image_create& off_mutable_format(){ flags &= ~b_mutable_format; return *this; }
+	F_image_create& on_cube_compatible(){ flags |= b_cube_compatible; return *this; }
+	F_image_create& off_cube_compatible(){ flags &= ~b_cube_compatible; return *this; }
 };
-inline F_image_create operator&(const F_image_create f1_, const F_image_create f2_){return f1_.flag&f2_.flag;}
-inline F_image_create operator&(const F_image_create f1_, const F_image_create::B f2_){return f1_.flag&uint32_t(f2_);}
-inline F_image_create operator&(const F_image_create::B f1_, const F_image_create f2_){return uint32_t(f1_)&f2_.flag;}
-inline F_image_create operator&(const F_image_create f1_, const VkImageCreateFlagBits f2_){return f1_.flag&uint32_t(f2_);}
-inline F_image_create operator&(const VkImageCreateFlagBits f1_, const F_image_create f2_){return uint32_t(f1_)&f2_.flag;}
-inline F_image_create operator|(const F_image_create f1_, const F_image_create f2_){return f1_.flag|f2_.flag;}
-inline F_image_create operator^(const F_image_create f1_, const F_image_create f2_){return f1_.flag^f2_.flag;}
 /*	VkPipelineCreateFlagBits*/
-template<> struct my_class_convert<F_pipeline_create> { using type = VkPipelineCreateFlagBits;};template<> struct my_class_convert<VkPipelineCreateFlagBits> { using type = F_pipeline_create;};union F_pipeline_create {
-	uint32_t flag;
+union F_pipeline_create {
+	VkPipelineCreateFlags flags;
 	VkPipelineCreateFlagBits vk_flag;
-	enum B{
+	enum {
 		b_disable_optimization = VK_PIPELINE_CREATE_DISABLE_OPTIMIZATION_BIT,
 		b_allow_derivatives = VK_PIPELINE_CREATE_ALLOW_DERIVATIVES_BIT,
 		b_derivative = VK_PIPELINE_CREATE_DERIVATIVE_BIT,
-	};
-	F_pipeline_create():flag(0){}
-	F_pipeline_create(const uint32_t flag_):flag(flag_){}
-	//F_pipeline_create(const B flag_):flag(flag_){}
-	//F_pipeline_create(const VkPipelineCreateFlagBits flag_):vk_flag(flag_){}
-	//operator uint32_t(){return flag;}
-	operator VkPipelineCreateFlagBits*(){ return reinterpret_cast<VkPipelineCreateFlagBits*>(this); }
-	operator VkPipelineCreateFlagBits(){return vk_flag;}
-	operator VkPipelineCreateFlags&(){ return flag; }
-	F_pipeline_create& operator=(const F_pipeline_create flag_){flag=flag_.flag; return *this;}
-	F_pipeline_create& operator|=(const F_pipeline_create flag_){flag|=flag_.flag; return *this;}
-	F_pipeline_create& operator&=(const F_pipeline_create flag_){flag&=flag_.flag; return *this;}
-	F_pipeline_create& operator^=(const F_pipeline_create flag_){flag^=flag_.flag;return *this;}
-	F_pipeline_create operator~(){return ~flag;}
-	bool operator==(const F_pipeline_create flag_){return flag==flag_.flag;}
+	}flag;
+
+	F_pipeline_create():flags(0){}
+	F_pipeline_create(const uint32_t flag_):flags(flag_){}
+
+	operator VkPipelineCreateFlagBits&(){return vk_flag;}
+	operator VkPipelineCreateFlagBits*(){return &vk_flag; }
+	operator VkPipelineCreateFlagBits*()const{return const_cast<VkPipelineCreateFlagBits*const>(&vk_flag); }
+
+	operator VkPipelineCreateFlags&(){return flags; }
+	operator VkPipelineCreateFlags*()const{return const_cast<VkPipelineCreateFlags*const>(&flags); }
+	operator VkPipelineCreateFlags*(){return &flags; }
+
+	F_pipeline_create& operator=(const F_pipeline_create flag_){flags=flag_.flags; return *this;}
+	F_pipeline_create& operator|=(const F_pipeline_create flag_){flags|=flag_.flags; return *this;}
+	F_pipeline_create& operator&=(const F_pipeline_create flag_){flags&=flag_.flags; return *this;}
+	F_pipeline_create& operator^=(const F_pipeline_create flag_){flags^=flag_.flags;return *this;}
+	F_pipeline_create operator~(){return ~flags;}
+
+	bool operator==(const F_pipeline_create flag_){return flags==flag_.flags;}
 	bool operator!=(const F_pipeline_create flag_){return !(*this==flag_);}
-	F_pipeline_create& clear(){flag = 0;return *this;}
+
+	F_pipeline_create& clear(){flags = 0;return *this;}
 	F_pipeline_create all_flags(){ return b_disable_optimization | b_allow_derivatives | b_derivative;}
-	F_pipeline_create& on_disable_optimization(){ flag |= b_disable_optimization; return *this; }
-	F_pipeline_create& off_disable_optimization(){ flag &= ~b_disable_optimization; return *this; }
-	F_pipeline_create& on_allow_derivatives(){ flag |= b_allow_derivatives; return *this; }
-	F_pipeline_create& off_allow_derivatives(){ flag &= ~b_allow_derivatives; return *this; }
-	F_pipeline_create& on_derivative(){ flag |= b_derivative; return *this; }
-	F_pipeline_create& off_derivative(){ flag &= ~b_derivative; return *this; }
+	F_pipeline_create& on_disable_optimization(){ flags |= b_disable_optimization; return *this; }
+	F_pipeline_create& off_disable_optimization(){ flags &= ~b_disable_optimization; return *this; }
+	F_pipeline_create& on_allow_derivatives(){ flags |= b_allow_derivatives; return *this; }
+	F_pipeline_create& off_allow_derivatives(){ flags &= ~b_allow_derivatives; return *this; }
+	F_pipeline_create& on_derivative(){ flags |= b_derivative; return *this; }
+	F_pipeline_create& off_derivative(){ flags &= ~b_derivative; return *this; }
 };
-inline F_pipeline_create operator&(const F_pipeline_create f1_, const F_pipeline_create f2_){return f1_.flag&f2_.flag;}
-inline F_pipeline_create operator&(const F_pipeline_create f1_, const F_pipeline_create::B f2_){return f1_.flag&uint32_t(f2_);}
-inline F_pipeline_create operator&(const F_pipeline_create::B f1_, const F_pipeline_create f2_){return uint32_t(f1_)&f2_.flag;}
-inline F_pipeline_create operator&(const F_pipeline_create f1_, const VkPipelineCreateFlagBits f2_){return f1_.flag&uint32_t(f2_);}
-inline F_pipeline_create operator&(const VkPipelineCreateFlagBits f1_, const F_pipeline_create f2_){return uint32_t(f1_)&f2_.flag;}
-inline F_pipeline_create operator|(const F_pipeline_create f1_, const F_pipeline_create f2_){return f1_.flag|f2_.flag;}
-inline F_pipeline_create operator^(const F_pipeline_create f1_, const F_pipeline_create f2_){return f1_.flag^f2_.flag;}
 /*	VkColorComponentFlagBits*/
-template<> struct my_class_convert<F_color_component> { using type = VkColorComponentFlagBits;};template<> struct my_class_convert<VkColorComponentFlagBits> { using type = F_color_component;};union F_color_component {
-	uint32_t flag;
+union F_color_component {
+	VkColorComponentFlags flags;
 	VkColorComponentFlagBits vk_flag;
-	enum B{
+	enum {
 		b_r = VK_COLOR_COMPONENT_R_BIT,
 		b_g = VK_COLOR_COMPONENT_G_BIT,
 		b_b = VK_COLOR_COMPONENT_B_BIT,
 		b_a = VK_COLOR_COMPONENT_A_BIT,
-	};
-	F_color_component():flag(0){}
-	F_color_component(const uint32_t flag_):flag(flag_){}
-	//F_color_component(const B flag_):flag(flag_){}
-	//F_color_component(const VkColorComponentFlagBits flag_):vk_flag(flag_){}
-	//operator uint32_t(){return flag;}
-	operator VkColorComponentFlagBits*(){ return reinterpret_cast<VkColorComponentFlagBits*>(this); }
-	operator VkColorComponentFlagBits(){return vk_flag;}
-	operator VkColorComponentFlags&(){ return flag; }
-	F_color_component& operator=(const F_color_component flag_){flag=flag_.flag; return *this;}
-	F_color_component& operator|=(const F_color_component flag_){flag|=flag_.flag; return *this;}
-	F_color_component& operator&=(const F_color_component flag_){flag&=flag_.flag; return *this;}
-	F_color_component& operator^=(const F_color_component flag_){flag^=flag_.flag;return *this;}
-	F_color_component operator~(){return ~flag;}
-	bool operator==(const F_color_component flag_){return flag==flag_.flag;}
+	}flag;
+
+	F_color_component():flags(0){}
+	F_color_component(const uint32_t flag_):flags(flag_){}
+
+	operator VkColorComponentFlagBits&(){return vk_flag;}
+	operator VkColorComponentFlagBits*(){return &vk_flag; }
+	operator VkColorComponentFlagBits*()const{return const_cast<VkColorComponentFlagBits*const>(&vk_flag); }
+
+	operator VkColorComponentFlags&(){return flags; }
+	operator VkColorComponentFlags*()const{return const_cast<VkColorComponentFlags*const>(&flags); }
+	operator VkColorComponentFlags*(){return &flags; }
+
+	F_color_component& operator=(const F_color_component flag_){flags=flag_.flags; return *this;}
+	F_color_component& operator|=(const F_color_component flag_){flags|=flag_.flags; return *this;}
+	F_color_component& operator&=(const F_color_component flag_){flags&=flag_.flags; return *this;}
+	F_color_component& operator^=(const F_color_component flag_){flags^=flag_.flags;return *this;}
+	F_color_component operator~(){return ~flags;}
+
+	bool operator==(const F_color_component flag_){return flags==flag_.flags;}
 	bool operator!=(const F_color_component flag_){return !(*this==flag_);}
-	F_color_component& clear(){flag = 0;return *this;}
+
+	F_color_component& clear(){flags = 0;return *this;}
 	F_color_component all_flags(){ return b_r | b_g | b_b | b_a;}
-	F_color_component& on_r(){ flag |= b_r; return *this; }
-	F_color_component& off_r(){ flag &= ~b_r; return *this; }
-	F_color_component& on_g(){ flag |= b_g; return *this; }
-	F_color_component& off_g(){ flag &= ~b_g; return *this; }
-	F_color_component& on_b(){ flag |= b_b; return *this; }
-	F_color_component& off_b(){ flag &= ~b_b; return *this; }
-	F_color_component& on_a(){ flag |= b_a; return *this; }
-	F_color_component& off_a(){ flag &= ~b_a; return *this; }
+	F_color_component& on_r(){ flags |= b_r; return *this; }
+	F_color_component& off_r(){ flags &= ~b_r; return *this; }
+	F_color_component& on_g(){ flags |= b_g; return *this; }
+	F_color_component& off_g(){ flags &= ~b_g; return *this; }
+	F_color_component& on_b(){ flags |= b_b; return *this; }
+	F_color_component& off_b(){ flags &= ~b_b; return *this; }
+	F_color_component& on_a(){ flags |= b_a; return *this; }
+	F_color_component& off_a(){ flags &= ~b_a; return *this; }
 };
-inline F_color_component operator&(const F_color_component f1_, const F_color_component f2_){return f1_.flag&f2_.flag;}
-inline F_color_component operator&(const F_color_component f1_, const F_color_component::B f2_){return f1_.flag&uint32_t(f2_);}
-inline F_color_component operator&(const F_color_component::B f1_, const F_color_component f2_){return uint32_t(f1_)&f2_.flag;}
-inline F_color_component operator&(const F_color_component f1_, const VkColorComponentFlagBits f2_){return f1_.flag&uint32_t(f2_);}
-inline F_color_component operator&(const VkColorComponentFlagBits f1_, const F_color_component f2_){return uint32_t(f1_)&f2_.flag;}
-inline F_color_component operator|(const F_color_component f1_, const F_color_component f2_){return f1_.flag|f2_.flag;}
-inline F_color_component operator^(const F_color_component f1_, const F_color_component f2_){return f1_.flag^f2_.flag;}
 /*	VkFenceCreateFlagBits*/
-template<> struct my_class_convert<F_fence_create> { using type = VkFenceCreateFlagBits;};template<> struct my_class_convert<VkFenceCreateFlagBits> { using type = F_fence_create;};union F_fence_create {
-	uint32_t flag;
+union F_fence_create {
+	VkFenceCreateFlags flags;
 	VkFenceCreateFlagBits vk_flag;
-	enum B{
+	enum {
 		b_signaled = VK_FENCE_CREATE_SIGNALED_BIT,
-	};
-	F_fence_create():flag(0){}
-	F_fence_create(const uint32_t flag_):flag(flag_){}
-	//F_fence_create(const B flag_):flag(flag_){}
-	//F_fence_create(const VkFenceCreateFlagBits flag_):vk_flag(flag_){}
-	//operator uint32_t(){return flag;}
-	operator VkFenceCreateFlagBits*(){ return reinterpret_cast<VkFenceCreateFlagBits*>(this); }
-	operator VkFenceCreateFlagBits(){return vk_flag;}
-	operator VkFenceCreateFlags&(){ return flag; }
-	F_fence_create& operator=(const F_fence_create flag_){flag=flag_.flag; return *this;}
-	F_fence_create& operator|=(const F_fence_create flag_){flag|=flag_.flag; return *this;}
-	F_fence_create& operator&=(const F_fence_create flag_){flag&=flag_.flag; return *this;}
-	F_fence_create& operator^=(const F_fence_create flag_){flag^=flag_.flag;return *this;}
-	F_fence_create operator~(){return ~flag;}
-	bool operator==(const F_fence_create flag_){return flag==flag_.flag;}
+	}flag;
+
+	F_fence_create():flags(0){}
+	F_fence_create(const uint32_t flag_):flags(flag_){}
+
+	operator VkFenceCreateFlagBits&(){return vk_flag;}
+	operator VkFenceCreateFlagBits*(){return &vk_flag; }
+	operator VkFenceCreateFlagBits*()const{return const_cast<VkFenceCreateFlagBits*const>(&vk_flag); }
+
+	operator VkFenceCreateFlags&(){return flags; }
+	operator VkFenceCreateFlags*()const{return const_cast<VkFenceCreateFlags*const>(&flags); }
+	operator VkFenceCreateFlags*(){return &flags; }
+
+	F_fence_create& operator=(const F_fence_create flag_){flags=flag_.flags; return *this;}
+	F_fence_create& operator|=(const F_fence_create flag_){flags|=flag_.flags; return *this;}
+	F_fence_create& operator&=(const F_fence_create flag_){flags&=flag_.flags; return *this;}
+	F_fence_create& operator^=(const F_fence_create flag_){flags^=flag_.flags;return *this;}
+	F_fence_create operator~(){return ~flags;}
+
+	bool operator==(const F_fence_create flag_){return flags==flag_.flags;}
 	bool operator!=(const F_fence_create flag_){return !(*this==flag_);}
-	F_fence_create& clear(){flag = 0;return *this;}
+
+	F_fence_create& clear(){flags = 0;return *this;}
 	F_fence_create all_flags(){ return b_signaled;}
-	F_fence_create& on_signaled(){ flag |= b_signaled; return *this; }
-	F_fence_create& off_signaled(){ flag &= ~b_signaled; return *this; }
+	F_fence_create& on_signaled(){ flags |= b_signaled; return *this; }
+	F_fence_create& off_signaled(){ flags &= ~b_signaled; return *this; }
 };
-inline F_fence_create operator&(const F_fence_create f1_, const F_fence_create f2_){return f1_.flag&f2_.flag;}
-inline F_fence_create operator&(const F_fence_create f1_, const F_fence_create::B f2_){return f1_.flag&uint32_t(f2_);}
-inline F_fence_create operator&(const F_fence_create::B f1_, const F_fence_create f2_){return uint32_t(f1_)&f2_.flag;}
-inline F_fence_create operator&(const F_fence_create f1_, const VkFenceCreateFlagBits f2_){return f1_.flag&uint32_t(f2_);}
-inline F_fence_create operator&(const VkFenceCreateFlagBits f1_, const F_fence_create f2_){return uint32_t(f1_)&f2_.flag;}
-inline F_fence_create operator|(const F_fence_create f1_, const F_fence_create f2_){return f1_.flag|f2_.flag;}
-inline F_fence_create operator^(const F_fence_create f1_, const F_fence_create f2_){return f1_.flag^f2_.flag;}
 /*	VkFormatFeatureFlagBits*/
-template<> struct my_class_convert<F_format_feature> { using type = VkFormatFeatureFlagBits;};template<> struct my_class_convert<VkFormatFeatureFlagBits> { using type = F_format_feature;};union F_format_feature {
-	uint32_t flag;
+union F_format_feature {
+	VkFormatFeatureFlags flags;
 	VkFormatFeatureFlagBits vk_flag;
-	enum B{
+	enum {
 			/* Format can be used for sampled images (SAMPLED_IMAGE and COMBINED_IMAGE_SAMPLER descriptor types) */
 		b_sampled_image = VK_FORMAT_FEATURE_SAMPLED_IMAGE_BIT,
 			/* Format can be used for storage images (STORAGE_IMAGE descriptor type) */
@@ -2393,98 +2309,96 @@ template<> struct my_class_convert<F_format_feature> { using type = VkFormatFeat
 		b_blit_dst = VK_FORMAT_FEATURE_BLIT_DST_BIT,
 			/* Format can be filtered with VK_FILTER_LINEAR when being sampled */
 		b_sampled_image_filter_linear = VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT,
-	};
-	F_format_feature():flag(0){}
-	F_format_feature(const uint32_t flag_):flag(flag_){}
-	//F_format_feature(const B flag_):flag(flag_){}
-	//F_format_feature(const VkFormatFeatureFlagBits flag_):vk_flag(flag_){}
-	//operator uint32_t(){return flag;}
-	operator VkFormatFeatureFlagBits*(){ return reinterpret_cast<VkFormatFeatureFlagBits*>(this); }
-	operator VkFormatFeatureFlagBits(){return vk_flag;}
-	operator VkFormatFeatureFlags&(){ return flag; }
-	F_format_feature& operator=(const F_format_feature flag_){flag=flag_.flag; return *this;}
-	F_format_feature& operator|=(const F_format_feature flag_){flag|=flag_.flag; return *this;}
-	F_format_feature& operator&=(const F_format_feature flag_){flag&=flag_.flag; return *this;}
-	F_format_feature& operator^=(const F_format_feature flag_){flag^=flag_.flag;return *this;}
-	F_format_feature operator~(){return ~flag;}
-	bool operator==(const F_format_feature flag_){return flag==flag_.flag;}
+	}flag;
+
+	F_format_feature():flags(0){}
+	F_format_feature(const uint32_t flag_):flags(flag_){}
+
+	operator VkFormatFeatureFlagBits&(){return vk_flag;}
+	operator VkFormatFeatureFlagBits*(){return &vk_flag; }
+	operator VkFormatFeatureFlagBits*()const{return const_cast<VkFormatFeatureFlagBits*const>(&vk_flag); }
+
+	operator VkFormatFeatureFlags&(){return flags; }
+	operator VkFormatFeatureFlags*()const{return const_cast<VkFormatFeatureFlags*const>(&flags); }
+	operator VkFormatFeatureFlags*(){return &flags; }
+
+	F_format_feature& operator=(const F_format_feature flag_){flags=flag_.flags; return *this;}
+	F_format_feature& operator|=(const F_format_feature flag_){flags|=flag_.flags; return *this;}
+	F_format_feature& operator&=(const F_format_feature flag_){flags&=flag_.flags; return *this;}
+	F_format_feature& operator^=(const F_format_feature flag_){flags^=flag_.flags;return *this;}
+	F_format_feature operator~(){return ~flags;}
+
+	bool operator==(const F_format_feature flag_){return flags==flag_.flags;}
 	bool operator!=(const F_format_feature flag_){return !(*this==flag_);}
-	F_format_feature& clear(){flag = 0;return *this;}
+
+	F_format_feature& clear(){flags = 0;return *this;}
 	F_format_feature all_flags(){ return b_sampled_image | b_storage_image | b_storage_image_atomic | b_uniform_texel_buffer | b_storage_texel_buffer | b_storage_texel_buffer_atomic | b_vertex_buffer | b_color_attachment | b_color_attachment_blend | b_depth_stencil_attachment | b_blit_src | b_blit_dst | b_sampled_image_filter_linear;}
-	F_format_feature& on_sampled_image(){ flag |= b_sampled_image; return *this; }
-	F_format_feature& off_sampled_image(){ flag &= ~b_sampled_image; return *this; }
-	F_format_feature& on_storage_image(){ flag |= b_storage_image; return *this; }
-	F_format_feature& off_storage_image(){ flag &= ~b_storage_image; return *this; }
-	F_format_feature& on_storage_image_atomic(){ flag |= b_storage_image_atomic; return *this; }
-	F_format_feature& off_storage_image_atomic(){ flag &= ~b_storage_image_atomic; return *this; }
-	F_format_feature& on_uniform_texel_buffer(){ flag |= b_uniform_texel_buffer; return *this; }
-	F_format_feature& off_uniform_texel_buffer(){ flag &= ~b_uniform_texel_buffer; return *this; }
-	F_format_feature& on_storage_texel_buffer(){ flag |= b_storage_texel_buffer; return *this; }
-	F_format_feature& off_storage_texel_buffer(){ flag &= ~b_storage_texel_buffer; return *this; }
-	F_format_feature& on_storage_texel_buffer_atomic(){ flag |= b_storage_texel_buffer_atomic; return *this; }
-	F_format_feature& off_storage_texel_buffer_atomic(){ flag &= ~b_storage_texel_buffer_atomic; return *this; }
-	F_format_feature& on_vertex_buffer(){ flag |= b_vertex_buffer; return *this; }
-	F_format_feature& off_vertex_buffer(){ flag &= ~b_vertex_buffer; return *this; }
-	F_format_feature& on_color_attachment(){ flag |= b_color_attachment; return *this; }
-	F_format_feature& off_color_attachment(){ flag &= ~b_color_attachment; return *this; }
-	F_format_feature& on_color_attachment_blend(){ flag |= b_color_attachment_blend; return *this; }
-	F_format_feature& off_color_attachment_blend(){ flag &= ~b_color_attachment_blend; return *this; }
-	F_format_feature& on_depth_stencil_attachment(){ flag |= b_depth_stencil_attachment; return *this; }
-	F_format_feature& off_depth_stencil_attachment(){ flag &= ~b_depth_stencil_attachment; return *this; }
-	F_format_feature& on_blit_src(){ flag |= b_blit_src; return *this; }
-	F_format_feature& off_blit_src(){ flag &= ~b_blit_src; return *this; }
-	F_format_feature& on_blit_dst(){ flag |= b_blit_dst; return *this; }
-	F_format_feature& off_blit_dst(){ flag &= ~b_blit_dst; return *this; }
-	F_format_feature& on_sampled_image_filter_linear(){ flag |= b_sampled_image_filter_linear; return *this; }
-	F_format_feature& off_sampled_image_filter_linear(){ flag &= ~b_sampled_image_filter_linear; return *this; }
+	F_format_feature& on_sampled_image(){ flags |= b_sampled_image; return *this; }
+	F_format_feature& off_sampled_image(){ flags &= ~b_sampled_image; return *this; }
+	F_format_feature& on_storage_image(){ flags |= b_storage_image; return *this; }
+	F_format_feature& off_storage_image(){ flags &= ~b_storage_image; return *this; }
+	F_format_feature& on_storage_image_atomic(){ flags |= b_storage_image_atomic; return *this; }
+	F_format_feature& off_storage_image_atomic(){ flags &= ~b_storage_image_atomic; return *this; }
+	F_format_feature& on_uniform_texel_buffer(){ flags |= b_uniform_texel_buffer; return *this; }
+	F_format_feature& off_uniform_texel_buffer(){ flags &= ~b_uniform_texel_buffer; return *this; }
+	F_format_feature& on_storage_texel_buffer(){ flags |= b_storage_texel_buffer; return *this; }
+	F_format_feature& off_storage_texel_buffer(){ flags &= ~b_storage_texel_buffer; return *this; }
+	F_format_feature& on_storage_texel_buffer_atomic(){ flags |= b_storage_texel_buffer_atomic; return *this; }
+	F_format_feature& off_storage_texel_buffer_atomic(){ flags &= ~b_storage_texel_buffer_atomic; return *this; }
+	F_format_feature& on_vertex_buffer(){ flags |= b_vertex_buffer; return *this; }
+	F_format_feature& off_vertex_buffer(){ flags &= ~b_vertex_buffer; return *this; }
+	F_format_feature& on_color_attachment(){ flags |= b_color_attachment; return *this; }
+	F_format_feature& off_color_attachment(){ flags &= ~b_color_attachment; return *this; }
+	F_format_feature& on_color_attachment_blend(){ flags |= b_color_attachment_blend; return *this; }
+	F_format_feature& off_color_attachment_blend(){ flags &= ~b_color_attachment_blend; return *this; }
+	F_format_feature& on_depth_stencil_attachment(){ flags |= b_depth_stencil_attachment; return *this; }
+	F_format_feature& off_depth_stencil_attachment(){ flags &= ~b_depth_stencil_attachment; return *this; }
+	F_format_feature& on_blit_src(){ flags |= b_blit_src; return *this; }
+	F_format_feature& off_blit_src(){ flags &= ~b_blit_src; return *this; }
+	F_format_feature& on_blit_dst(){ flags |= b_blit_dst; return *this; }
+	F_format_feature& off_blit_dst(){ flags &= ~b_blit_dst; return *this; }
+	F_format_feature& on_sampled_image_filter_linear(){ flags |= b_sampled_image_filter_linear; return *this; }
+	F_format_feature& off_sampled_image_filter_linear(){ flags &= ~b_sampled_image_filter_linear; return *this; }
 };
-inline F_format_feature operator&(const F_format_feature f1_, const F_format_feature f2_){return f1_.flag&f2_.flag;}
-inline F_format_feature operator&(const F_format_feature f1_, const F_format_feature::B f2_){return f1_.flag&uint32_t(f2_);}
-inline F_format_feature operator&(const F_format_feature::B f1_, const F_format_feature f2_){return uint32_t(f1_)&f2_.flag;}
-inline F_format_feature operator&(const F_format_feature f1_, const VkFormatFeatureFlagBits f2_){return f1_.flag&uint32_t(f2_);}
-inline F_format_feature operator&(const VkFormatFeatureFlagBits f1_, const F_format_feature f2_){return uint32_t(f1_)&f2_.flag;}
-inline F_format_feature operator|(const F_format_feature f1_, const F_format_feature f2_){return f1_.flag|f2_.flag;}
-inline F_format_feature operator^(const F_format_feature f1_, const F_format_feature f2_){return f1_.flag^f2_.flag;}
 /*	VkQueryControlFlagBits*/
-template<> struct my_class_convert<F_query_control> { using type = VkQueryControlFlagBits;};template<> struct my_class_convert<VkQueryControlFlagBits> { using type = F_query_control;};union F_query_control {
-	uint32_t flag;
+union F_query_control {
+	VkQueryControlFlags flags;
 	VkQueryControlFlagBits vk_flag;
-	enum B{
+	enum {
 			/* Require precise results to be collected by the query */
 		b_precise = VK_QUERY_CONTROL_PRECISE_BIT,
-	};
-	F_query_control():flag(0){}
-	F_query_control(const uint32_t flag_):flag(flag_){}
-	//F_query_control(const B flag_):flag(flag_){}
-	//F_query_control(const VkQueryControlFlagBits flag_):vk_flag(flag_){}
-	//operator uint32_t(){return flag;}
-	operator VkQueryControlFlagBits*(){ return reinterpret_cast<VkQueryControlFlagBits*>(this); }
-	operator VkQueryControlFlagBits(){return vk_flag;}
-	operator VkQueryControlFlags&(){ return flag; }
-	F_query_control& operator=(const F_query_control flag_){flag=flag_.flag; return *this;}
-	F_query_control& operator|=(const F_query_control flag_){flag|=flag_.flag; return *this;}
-	F_query_control& operator&=(const F_query_control flag_){flag&=flag_.flag; return *this;}
-	F_query_control& operator^=(const F_query_control flag_){flag^=flag_.flag;return *this;}
-	F_query_control operator~(){return ~flag;}
-	bool operator==(const F_query_control flag_){return flag==flag_.flag;}
+	}flag;
+
+	F_query_control():flags(0){}
+	F_query_control(const uint32_t flag_):flags(flag_){}
+
+	operator VkQueryControlFlagBits&(){return vk_flag;}
+	operator VkQueryControlFlagBits*(){return &vk_flag; }
+	operator VkQueryControlFlagBits*()const{return const_cast<VkQueryControlFlagBits*const>(&vk_flag); }
+
+	operator VkQueryControlFlags&(){return flags; }
+	operator VkQueryControlFlags*()const{return const_cast<VkQueryControlFlags*const>(&flags); }
+	operator VkQueryControlFlags*(){return &flags; }
+
+	F_query_control& operator=(const F_query_control flag_){flags=flag_.flags; return *this;}
+	F_query_control& operator|=(const F_query_control flag_){flags|=flag_.flags; return *this;}
+	F_query_control& operator&=(const F_query_control flag_){flags&=flag_.flags; return *this;}
+	F_query_control& operator^=(const F_query_control flag_){flags^=flag_.flags;return *this;}
+	F_query_control operator~(){return ~flags;}
+
+	bool operator==(const F_query_control flag_){return flags==flag_.flags;}
 	bool operator!=(const F_query_control flag_){return !(*this==flag_);}
-	F_query_control& clear(){flag = 0;return *this;}
+
+	F_query_control& clear(){flags = 0;return *this;}
 	F_query_control all_flags(){ return b_precise;}
-	F_query_control& on_precise(){ flag |= b_precise; return *this; }
-	F_query_control& off_precise(){ flag &= ~b_precise; return *this; }
+	F_query_control& on_precise(){ flags |= b_precise; return *this; }
+	F_query_control& off_precise(){ flags &= ~b_precise; return *this; }
 };
-inline F_query_control operator&(const F_query_control f1_, const F_query_control f2_){return f1_.flag&f2_.flag;}
-inline F_query_control operator&(const F_query_control f1_, const F_query_control::B f2_){return f1_.flag&uint32_t(f2_);}
-inline F_query_control operator&(const F_query_control::B f1_, const F_query_control f2_){return uint32_t(f1_)&f2_.flag;}
-inline F_query_control operator&(const F_query_control f1_, const VkQueryControlFlagBits f2_){return f1_.flag&uint32_t(f2_);}
-inline F_query_control operator&(const VkQueryControlFlagBits f1_, const F_query_control f2_){return uint32_t(f1_)&f2_.flag;}
-inline F_query_control operator|(const F_query_control f1_, const F_query_control f2_){return f1_.flag|f2_.flag;}
-inline F_query_control operator^(const F_query_control f1_, const F_query_control f2_){return f1_.flag^f2_.flag;}
 /*	VkQueryResultFlagBits*/
-template<> struct my_class_convert<F_query_result> { using type = VkQueryResultFlagBits;};template<> struct my_class_convert<VkQueryResultFlagBits> { using type = F_query_result;};union F_query_result {
-	uint32_t flag;
+union F_query_result {
+	VkQueryResultFlags flags;
 	VkQueryResultFlagBits vk_flag;
-	enum B{
+	enum {
 			/* Results of the queries are written to the destination buffer as 64-bit values */
 		b_64 = VK_QUERY_RESULT_64_BIT,
 			/* Results of the queries are waited on before proceeding with the result copy */
@@ -2493,86 +2407,84 @@ template<> struct my_class_convert<F_query_result> { using type = VkQueryResultF
 		b_with_availability = VK_QUERY_RESULT_WITH_AVAILABILITY_BIT,
 			/* Copy the partial results of the query even if the final results are not available */
 		b_partial = VK_QUERY_RESULT_PARTIAL_BIT,
-	};
-	F_query_result():flag(0){}
-	F_query_result(const uint32_t flag_):flag(flag_){}
-	//F_query_result(const B flag_):flag(flag_){}
-	//F_query_result(const VkQueryResultFlagBits flag_):vk_flag(flag_){}
-	//operator uint32_t(){return flag;}
-	operator VkQueryResultFlagBits*(){ return reinterpret_cast<VkQueryResultFlagBits*>(this); }
-	operator VkQueryResultFlagBits(){return vk_flag;}
-	operator VkQueryResultFlags&(){ return flag; }
-	F_query_result& operator=(const F_query_result flag_){flag=flag_.flag; return *this;}
-	F_query_result& operator|=(const F_query_result flag_){flag|=flag_.flag; return *this;}
-	F_query_result& operator&=(const F_query_result flag_){flag&=flag_.flag; return *this;}
-	F_query_result& operator^=(const F_query_result flag_){flag^=flag_.flag;return *this;}
-	F_query_result operator~(){return ~flag;}
-	bool operator==(const F_query_result flag_){return flag==flag_.flag;}
+	}flag;
+
+	F_query_result():flags(0){}
+	F_query_result(const uint32_t flag_):flags(flag_){}
+
+	operator VkQueryResultFlagBits&(){return vk_flag;}
+	operator VkQueryResultFlagBits*(){return &vk_flag; }
+	operator VkQueryResultFlagBits*()const{return const_cast<VkQueryResultFlagBits*const>(&vk_flag); }
+
+	operator VkQueryResultFlags&(){return flags; }
+	operator VkQueryResultFlags*()const{return const_cast<VkQueryResultFlags*const>(&flags); }
+	operator VkQueryResultFlags*(){return &flags; }
+
+	F_query_result& operator=(const F_query_result flag_){flags=flag_.flags; return *this;}
+	F_query_result& operator|=(const F_query_result flag_){flags|=flag_.flags; return *this;}
+	F_query_result& operator&=(const F_query_result flag_){flags&=flag_.flags; return *this;}
+	F_query_result& operator^=(const F_query_result flag_){flags^=flag_.flags;return *this;}
+	F_query_result operator~(){return ~flags;}
+
+	bool operator==(const F_query_result flag_){return flags==flag_.flags;}
 	bool operator!=(const F_query_result flag_){return !(*this==flag_);}
-	F_query_result& clear(){flag = 0;return *this;}
+
+	F_query_result& clear(){flags = 0;return *this;}
 	F_query_result all_flags(){ return b_64 | b_wait | b_with_availability | b_partial;}
-	F_query_result& on_64(){ flag |= b_64; return *this; }
-	F_query_result& off_64(){ flag &= ~b_64; return *this; }
-	F_query_result& on_wait(){ flag |= b_wait; return *this; }
-	F_query_result& off_wait(){ flag &= ~b_wait; return *this; }
-	F_query_result& on_with_availability(){ flag |= b_with_availability; return *this; }
-	F_query_result& off_with_availability(){ flag &= ~b_with_availability; return *this; }
-	F_query_result& on_partial(){ flag |= b_partial; return *this; }
-	F_query_result& off_partial(){ flag &= ~b_partial; return *this; }
+	F_query_result& on_64(){ flags |= b_64; return *this; }
+	F_query_result& off_64(){ flags &= ~b_64; return *this; }
+	F_query_result& on_wait(){ flags |= b_wait; return *this; }
+	F_query_result& off_wait(){ flags &= ~b_wait; return *this; }
+	F_query_result& on_with_availability(){ flags |= b_with_availability; return *this; }
+	F_query_result& off_with_availability(){ flags &= ~b_with_availability; return *this; }
+	F_query_result& on_partial(){ flags |= b_partial; return *this; }
+	F_query_result& off_partial(){ flags &= ~b_partial; return *this; }
 };
-inline F_query_result operator&(const F_query_result f1_, const F_query_result f2_){return f1_.flag&f2_.flag;}
-inline F_query_result operator&(const F_query_result f1_, const F_query_result::B f2_){return f1_.flag&uint32_t(f2_);}
-inline F_query_result operator&(const F_query_result::B f1_, const F_query_result f2_){return uint32_t(f1_)&f2_.flag;}
-inline F_query_result operator&(const F_query_result f1_, const VkQueryResultFlagBits f2_){return f1_.flag&uint32_t(f2_);}
-inline F_query_result operator&(const VkQueryResultFlagBits f1_, const F_query_result f2_){return uint32_t(f1_)&f2_.flag;}
-inline F_query_result operator|(const F_query_result f1_, const F_query_result f2_){return f1_.flag|f2_.flag;}
-inline F_query_result operator^(const F_query_result f1_, const F_query_result f2_){return f1_.flag^f2_.flag;}
 /*	VkCommandBufferUsageFlagBits*/
-template<> struct my_class_convert<F_command_buffer_usage> { using type = VkCommandBufferUsageFlagBits;};template<> struct my_class_convert<VkCommandBufferUsageFlagBits> { using type = F_command_buffer_usage;};union F_command_buffer_usage {
-	uint32_t flag;
+union F_command_buffer_usage {
+	VkCommandBufferUsageFlags flags;
 	VkCommandBufferUsageFlagBits vk_flag;
-	enum B{
+	enum {
 		b_one_time_submit = VK_COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT,
 		b_render_pass_continue = VK_COMMAND_BUFFER_USAGE_RENDER_PASS_CONTINUE_BIT,
 			/* Command buffer may be submitted/executed more than once simultaneously */
 		b_simultaneous_use = VK_COMMAND_BUFFER_USAGE_SIMULTANEOUS_USE_BIT,
-	};
-	F_command_buffer_usage():flag(0){}
-	F_command_buffer_usage(const uint32_t flag_):flag(flag_){}
-	//F_command_buffer_usage(const B flag_):flag(flag_){}
-	//F_command_buffer_usage(const VkCommandBufferUsageFlagBits flag_):vk_flag(flag_){}
-	//operator uint32_t(){return flag;}
-	operator VkCommandBufferUsageFlagBits*(){ return reinterpret_cast<VkCommandBufferUsageFlagBits*>(this); }
-	operator VkCommandBufferUsageFlagBits(){return vk_flag;}
-	operator VkCommandBufferUsageFlags&(){ return flag; }
-	F_command_buffer_usage& operator=(const F_command_buffer_usage flag_){flag=flag_.flag; return *this;}
-	F_command_buffer_usage& operator|=(const F_command_buffer_usage flag_){flag|=flag_.flag; return *this;}
-	F_command_buffer_usage& operator&=(const F_command_buffer_usage flag_){flag&=flag_.flag; return *this;}
-	F_command_buffer_usage& operator^=(const F_command_buffer_usage flag_){flag^=flag_.flag;return *this;}
-	F_command_buffer_usage operator~(){return ~flag;}
-	bool operator==(const F_command_buffer_usage flag_){return flag==flag_.flag;}
+	}flag;
+
+	F_command_buffer_usage():flags(0){}
+	F_command_buffer_usage(const uint32_t flag_):flags(flag_){}
+
+	operator VkCommandBufferUsageFlagBits&(){return vk_flag;}
+	operator VkCommandBufferUsageFlagBits*(){return &vk_flag; }
+	operator VkCommandBufferUsageFlagBits*()const{return const_cast<VkCommandBufferUsageFlagBits*const>(&vk_flag); }
+
+	operator VkCommandBufferUsageFlags&(){return flags; }
+	operator VkCommandBufferUsageFlags*()const{return const_cast<VkCommandBufferUsageFlags*const>(&flags); }
+	operator VkCommandBufferUsageFlags*(){return &flags; }
+
+	F_command_buffer_usage& operator=(const F_command_buffer_usage flag_){flags=flag_.flags; return *this;}
+	F_command_buffer_usage& operator|=(const F_command_buffer_usage flag_){flags|=flag_.flags; return *this;}
+	F_command_buffer_usage& operator&=(const F_command_buffer_usage flag_){flags&=flag_.flags; return *this;}
+	F_command_buffer_usage& operator^=(const F_command_buffer_usage flag_){flags^=flag_.flags;return *this;}
+	F_command_buffer_usage operator~(){return ~flags;}
+
+	bool operator==(const F_command_buffer_usage flag_){return flags==flag_.flags;}
 	bool operator!=(const F_command_buffer_usage flag_){return !(*this==flag_);}
-	F_command_buffer_usage& clear(){flag = 0;return *this;}
+
+	F_command_buffer_usage& clear(){flags = 0;return *this;}
 	F_command_buffer_usage all_flags(){ return b_one_time_submit | b_render_pass_continue | b_simultaneous_use;}
-	F_command_buffer_usage& on_one_time_submit(){ flag |= b_one_time_submit; return *this; }
-	F_command_buffer_usage& off_one_time_submit(){ flag &= ~b_one_time_submit; return *this; }
-	F_command_buffer_usage& on_render_pass_continue(){ flag |= b_render_pass_continue; return *this; }
-	F_command_buffer_usage& off_render_pass_continue(){ flag &= ~b_render_pass_continue; return *this; }
-	F_command_buffer_usage& on_simultaneous_use(){ flag |= b_simultaneous_use; return *this; }
-	F_command_buffer_usage& off_simultaneous_use(){ flag &= ~b_simultaneous_use; return *this; }
+	F_command_buffer_usage& on_one_time_submit(){ flags |= b_one_time_submit; return *this; }
+	F_command_buffer_usage& off_one_time_submit(){ flags &= ~b_one_time_submit; return *this; }
+	F_command_buffer_usage& on_render_pass_continue(){ flags |= b_render_pass_continue; return *this; }
+	F_command_buffer_usage& off_render_pass_continue(){ flags &= ~b_render_pass_continue; return *this; }
+	F_command_buffer_usage& on_simultaneous_use(){ flags |= b_simultaneous_use; return *this; }
+	F_command_buffer_usage& off_simultaneous_use(){ flags &= ~b_simultaneous_use; return *this; }
 };
-inline F_command_buffer_usage operator&(const F_command_buffer_usage f1_, const F_command_buffer_usage f2_){return f1_.flag&f2_.flag;}
-inline F_command_buffer_usage operator&(const F_command_buffer_usage f1_, const F_command_buffer_usage::B f2_){return f1_.flag&uint32_t(f2_);}
-inline F_command_buffer_usage operator&(const F_command_buffer_usage::B f1_, const F_command_buffer_usage f2_){return uint32_t(f1_)&f2_.flag;}
-inline F_command_buffer_usage operator&(const F_command_buffer_usage f1_, const VkCommandBufferUsageFlagBits f2_){return f1_.flag&uint32_t(f2_);}
-inline F_command_buffer_usage operator&(const VkCommandBufferUsageFlagBits f1_, const F_command_buffer_usage f2_){return uint32_t(f1_)&f2_.flag;}
-inline F_command_buffer_usage operator|(const F_command_buffer_usage f1_, const F_command_buffer_usage f2_){return f1_.flag|f2_.flag;}
-inline F_command_buffer_usage operator^(const F_command_buffer_usage f1_, const F_command_buffer_usage f2_){return f1_.flag^f2_.flag;}
 /*	VkQueryPipelineStatisticFlagBits*/
-template<> struct my_class_convert<F_query_pipeline_statistic> { using type = VkQueryPipelineStatisticFlagBits;};template<> struct my_class_convert<VkQueryPipelineStatisticFlagBits> { using type = F_query_pipeline_statistic;};union F_query_pipeline_statistic {
-	uint32_t flag;
+union F_query_pipeline_statistic {
+	VkQueryPipelineStatisticFlags flags;
 	VkQueryPipelineStatisticFlagBits vk_flag;
-	enum B{
+	enum {
 			/* Optional */
 		b_input_assembly_vertices = VK_QUERY_PIPELINE_STATISTIC_INPUT_ASSEMBLY_VERTICES_BIT,
 			/* Optional */
@@ -2595,180 +2507,176 @@ template<> struct my_class_convert<F_query_pipeline_statistic> { using type = Vk
 		b_tessellation_evaluation_shader_invocations = VK_QUERY_PIPELINE_STATISTIC_TESSELLATION_EVALUATION_SHADER_INVOCATIONS_BIT,
 			/* Optional */
 		b_compute_shader_invocations = VK_QUERY_PIPELINE_STATISTIC_COMPUTE_SHADER_INVOCATIONS_BIT,
-	};
-	F_query_pipeline_statistic():flag(0){}
-	F_query_pipeline_statistic(const uint32_t flag_):flag(flag_){}
-	//F_query_pipeline_statistic(const B flag_):flag(flag_){}
-	//F_query_pipeline_statistic(const VkQueryPipelineStatisticFlagBits flag_):vk_flag(flag_){}
-	//operator uint32_t(){return flag;}
-	operator VkQueryPipelineStatisticFlagBits*(){ return reinterpret_cast<VkQueryPipelineStatisticFlagBits*>(this); }
-	operator VkQueryPipelineStatisticFlagBits(){return vk_flag;}
-	operator VkQueryPipelineStatisticFlags&(){ return flag; }
-	F_query_pipeline_statistic& operator=(const F_query_pipeline_statistic flag_){flag=flag_.flag; return *this;}
-	F_query_pipeline_statistic& operator|=(const F_query_pipeline_statistic flag_){flag|=flag_.flag; return *this;}
-	F_query_pipeline_statistic& operator&=(const F_query_pipeline_statistic flag_){flag&=flag_.flag; return *this;}
-	F_query_pipeline_statistic& operator^=(const F_query_pipeline_statistic flag_){flag^=flag_.flag;return *this;}
-	F_query_pipeline_statistic operator~(){return ~flag;}
-	bool operator==(const F_query_pipeline_statistic flag_){return flag==flag_.flag;}
+	}flag;
+
+	F_query_pipeline_statistic():flags(0){}
+	F_query_pipeline_statistic(const uint32_t flag_):flags(flag_){}
+
+	operator VkQueryPipelineStatisticFlagBits&(){return vk_flag;}
+	operator VkQueryPipelineStatisticFlagBits*(){return &vk_flag; }
+	operator VkQueryPipelineStatisticFlagBits*()const{return const_cast<VkQueryPipelineStatisticFlagBits*const>(&vk_flag); }
+
+	operator VkQueryPipelineStatisticFlags&(){return flags; }
+	operator VkQueryPipelineStatisticFlags*()const{return const_cast<VkQueryPipelineStatisticFlags*const>(&flags); }
+	operator VkQueryPipelineStatisticFlags*(){return &flags; }
+
+	F_query_pipeline_statistic& operator=(const F_query_pipeline_statistic flag_){flags=flag_.flags; return *this;}
+	F_query_pipeline_statistic& operator|=(const F_query_pipeline_statistic flag_){flags|=flag_.flags; return *this;}
+	F_query_pipeline_statistic& operator&=(const F_query_pipeline_statistic flag_){flags&=flag_.flags; return *this;}
+	F_query_pipeline_statistic& operator^=(const F_query_pipeline_statistic flag_){flags^=flag_.flags;return *this;}
+	F_query_pipeline_statistic operator~(){return ~flags;}
+
+	bool operator==(const F_query_pipeline_statistic flag_){return flags==flag_.flags;}
 	bool operator!=(const F_query_pipeline_statistic flag_){return !(*this==flag_);}
-	F_query_pipeline_statistic& clear(){flag = 0;return *this;}
+
+	F_query_pipeline_statistic& clear(){flags = 0;return *this;}
 	F_query_pipeline_statistic all_flags(){ return b_input_assembly_vertices | b_input_assembly_primitives | b_vertex_shader_invocations | b_geometry_shader_invocations | b_geometry_shader_primitives | b_clipping_invocations | b_clipping_primitives | b_fragment_shader_invocations | b_tessellation_control_shader_patches | b_tessellation_evaluation_shader_invocations | b_compute_shader_invocations;}
-	F_query_pipeline_statistic& on_input_assembly_vertices(){ flag |= b_input_assembly_vertices; return *this; }
-	F_query_pipeline_statistic& off_input_assembly_vertices(){ flag &= ~b_input_assembly_vertices; return *this; }
-	F_query_pipeline_statistic& on_input_assembly_primitives(){ flag |= b_input_assembly_primitives; return *this; }
-	F_query_pipeline_statistic& off_input_assembly_primitives(){ flag &= ~b_input_assembly_primitives; return *this; }
-	F_query_pipeline_statistic& on_vertex_shader_invocations(){ flag |= b_vertex_shader_invocations; return *this; }
-	F_query_pipeline_statistic& off_vertex_shader_invocations(){ flag &= ~b_vertex_shader_invocations; return *this; }
-	F_query_pipeline_statistic& on_geometry_shader_invocations(){ flag |= b_geometry_shader_invocations; return *this; }
-	F_query_pipeline_statistic& off_geometry_shader_invocations(){ flag &= ~b_geometry_shader_invocations; return *this; }
-	F_query_pipeline_statistic& on_geometry_shader_primitives(){ flag |= b_geometry_shader_primitives; return *this; }
-	F_query_pipeline_statistic& off_geometry_shader_primitives(){ flag &= ~b_geometry_shader_primitives; return *this; }
-	F_query_pipeline_statistic& on_clipping_invocations(){ flag |= b_clipping_invocations; return *this; }
-	F_query_pipeline_statistic& off_clipping_invocations(){ flag &= ~b_clipping_invocations; return *this; }
-	F_query_pipeline_statistic& on_clipping_primitives(){ flag |= b_clipping_primitives; return *this; }
-	F_query_pipeline_statistic& off_clipping_primitives(){ flag &= ~b_clipping_primitives; return *this; }
-	F_query_pipeline_statistic& on_fragment_shader_invocations(){ flag |= b_fragment_shader_invocations; return *this; }
-	F_query_pipeline_statistic& off_fragment_shader_invocations(){ flag &= ~b_fragment_shader_invocations; return *this; }
-	F_query_pipeline_statistic& on_tessellation_control_shader_patches(){ flag |= b_tessellation_control_shader_patches; return *this; }
-	F_query_pipeline_statistic& off_tessellation_control_shader_patches(){ flag &= ~b_tessellation_control_shader_patches; return *this; }
-	F_query_pipeline_statistic& on_tessellation_evaluation_shader_invocations(){ flag |= b_tessellation_evaluation_shader_invocations; return *this; }
-	F_query_pipeline_statistic& off_tessellation_evaluation_shader_invocations(){ flag &= ~b_tessellation_evaluation_shader_invocations; return *this; }
-	F_query_pipeline_statistic& on_compute_shader_invocations(){ flag |= b_compute_shader_invocations; return *this; }
-	F_query_pipeline_statistic& off_compute_shader_invocations(){ flag &= ~b_compute_shader_invocations; return *this; }
+	F_query_pipeline_statistic& on_input_assembly_vertices(){ flags |= b_input_assembly_vertices; return *this; }
+	F_query_pipeline_statistic& off_input_assembly_vertices(){ flags &= ~b_input_assembly_vertices; return *this; }
+	F_query_pipeline_statistic& on_input_assembly_primitives(){ flags |= b_input_assembly_primitives; return *this; }
+	F_query_pipeline_statistic& off_input_assembly_primitives(){ flags &= ~b_input_assembly_primitives; return *this; }
+	F_query_pipeline_statistic& on_vertex_shader_invocations(){ flags |= b_vertex_shader_invocations; return *this; }
+	F_query_pipeline_statistic& off_vertex_shader_invocations(){ flags &= ~b_vertex_shader_invocations; return *this; }
+	F_query_pipeline_statistic& on_geometry_shader_invocations(){ flags |= b_geometry_shader_invocations; return *this; }
+	F_query_pipeline_statistic& off_geometry_shader_invocations(){ flags &= ~b_geometry_shader_invocations; return *this; }
+	F_query_pipeline_statistic& on_geometry_shader_primitives(){ flags |= b_geometry_shader_primitives; return *this; }
+	F_query_pipeline_statistic& off_geometry_shader_primitives(){ flags &= ~b_geometry_shader_primitives; return *this; }
+	F_query_pipeline_statistic& on_clipping_invocations(){ flags |= b_clipping_invocations; return *this; }
+	F_query_pipeline_statistic& off_clipping_invocations(){ flags &= ~b_clipping_invocations; return *this; }
+	F_query_pipeline_statistic& on_clipping_primitives(){ flags |= b_clipping_primitives; return *this; }
+	F_query_pipeline_statistic& off_clipping_primitives(){ flags &= ~b_clipping_primitives; return *this; }
+	F_query_pipeline_statistic& on_fragment_shader_invocations(){ flags |= b_fragment_shader_invocations; return *this; }
+	F_query_pipeline_statistic& off_fragment_shader_invocations(){ flags &= ~b_fragment_shader_invocations; return *this; }
+	F_query_pipeline_statistic& on_tessellation_control_shader_patches(){ flags |= b_tessellation_control_shader_patches; return *this; }
+	F_query_pipeline_statistic& off_tessellation_control_shader_patches(){ flags &= ~b_tessellation_control_shader_patches; return *this; }
+	F_query_pipeline_statistic& on_tessellation_evaluation_shader_invocations(){ flags |= b_tessellation_evaluation_shader_invocations; return *this; }
+	F_query_pipeline_statistic& off_tessellation_evaluation_shader_invocations(){ flags &= ~b_tessellation_evaluation_shader_invocations; return *this; }
+	F_query_pipeline_statistic& on_compute_shader_invocations(){ flags |= b_compute_shader_invocations; return *this; }
+	F_query_pipeline_statistic& off_compute_shader_invocations(){ flags &= ~b_compute_shader_invocations; return *this; }
 };
-inline F_query_pipeline_statistic operator&(const F_query_pipeline_statistic f1_, const F_query_pipeline_statistic f2_){return f1_.flag&f2_.flag;}
-inline F_query_pipeline_statistic operator&(const F_query_pipeline_statistic f1_, const F_query_pipeline_statistic::B f2_){return f1_.flag&uint32_t(f2_);}
-inline F_query_pipeline_statistic operator&(const F_query_pipeline_statistic::B f1_, const F_query_pipeline_statistic f2_){return uint32_t(f1_)&f2_.flag;}
-inline F_query_pipeline_statistic operator&(const F_query_pipeline_statistic f1_, const VkQueryPipelineStatisticFlagBits f2_){return f1_.flag&uint32_t(f2_);}
-inline F_query_pipeline_statistic operator&(const VkQueryPipelineStatisticFlagBits f1_, const F_query_pipeline_statistic f2_){return uint32_t(f1_)&f2_.flag;}
-inline F_query_pipeline_statistic operator|(const F_query_pipeline_statistic f1_, const F_query_pipeline_statistic f2_){return f1_.flag|f2_.flag;}
-inline F_query_pipeline_statistic operator^(const F_query_pipeline_statistic f1_, const F_query_pipeline_statistic f2_){return f1_.flag^f2_.flag;}
 /*	VkImageAspectFlagBits*/
-template<> struct my_class_convert<F_image_aspect> { using type = VkImageAspectFlagBits;};template<> struct my_class_convert<VkImageAspectFlagBits> { using type = F_image_aspect;};union F_image_aspect {
-	uint32_t flag;
+union F_image_aspect {
+	VkImageAspectFlags flags;
 	VkImageAspectFlagBits vk_flag;
-	enum B{
+	enum {
 		b_color = VK_IMAGE_ASPECT_COLOR_BIT,
 		b_depth = VK_IMAGE_ASPECT_DEPTH_BIT,
 		b_stencil = VK_IMAGE_ASPECT_STENCIL_BIT,
 		b_metadata = VK_IMAGE_ASPECT_METADATA_BIT,
-	};
-	F_image_aspect():flag(0){}
-	F_image_aspect(const uint32_t flag_):flag(flag_){}
-	//F_image_aspect(const B flag_):flag(flag_){}
-	//F_image_aspect(const VkImageAspectFlagBits flag_):vk_flag(flag_){}
-	//operator uint32_t(){return flag;}
-	operator VkImageAspectFlagBits*(){ return reinterpret_cast<VkImageAspectFlagBits*>(this); }
-	operator VkImageAspectFlagBits(){return vk_flag;}
-	operator VkImageAspectFlags&(){ return flag; }
-	F_image_aspect& operator=(const F_image_aspect flag_){flag=flag_.flag; return *this;}
-	F_image_aspect& operator|=(const F_image_aspect flag_){flag|=flag_.flag; return *this;}
-	F_image_aspect& operator&=(const F_image_aspect flag_){flag&=flag_.flag; return *this;}
-	F_image_aspect& operator^=(const F_image_aspect flag_){flag^=flag_.flag;return *this;}
-	F_image_aspect operator~(){return ~flag;}
-	bool operator==(const F_image_aspect flag_){return flag==flag_.flag;}
+	}flag;
+
+	F_image_aspect():flags(0){}
+	F_image_aspect(const uint32_t flag_):flags(flag_){}
+
+	operator VkImageAspectFlagBits&(){return vk_flag;}
+	operator VkImageAspectFlagBits*(){return &vk_flag; }
+	operator VkImageAspectFlagBits*()const{return const_cast<VkImageAspectFlagBits*const>(&vk_flag); }
+
+	operator VkImageAspectFlags&(){return flags; }
+	operator VkImageAspectFlags*()const{return const_cast<VkImageAspectFlags*const>(&flags); }
+	operator VkImageAspectFlags*(){return &flags; }
+
+	F_image_aspect& operator=(const F_image_aspect flag_){flags=flag_.flags; return *this;}
+	F_image_aspect& operator|=(const F_image_aspect flag_){flags|=flag_.flags; return *this;}
+	F_image_aspect& operator&=(const F_image_aspect flag_){flags&=flag_.flags; return *this;}
+	F_image_aspect& operator^=(const F_image_aspect flag_){flags^=flag_.flags;return *this;}
+	F_image_aspect operator~(){return ~flags;}
+
+	bool operator==(const F_image_aspect flag_){return flags==flag_.flags;}
 	bool operator!=(const F_image_aspect flag_){return !(*this==flag_);}
-	F_image_aspect& clear(){flag = 0;return *this;}
+
+	F_image_aspect& clear(){flags = 0;return *this;}
 	F_image_aspect all_flags(){ return b_color | b_depth | b_stencil | b_metadata;}
-	F_image_aspect& on_color(){ flag |= b_color; return *this; }
-	F_image_aspect& off_color(){ flag &= ~b_color; return *this; }
-	F_image_aspect& on_depth(){ flag |= b_depth; return *this; }
-	F_image_aspect& off_depth(){ flag &= ~b_depth; return *this; }
-	F_image_aspect& on_stencil(){ flag |= b_stencil; return *this; }
-	F_image_aspect& off_stencil(){ flag &= ~b_stencil; return *this; }
-	F_image_aspect& on_metadata(){ flag |= b_metadata; return *this; }
-	F_image_aspect& off_metadata(){ flag &= ~b_metadata; return *this; }
+	F_image_aspect& on_color(){ flags |= b_color; return *this; }
+	F_image_aspect& off_color(){ flags &= ~b_color; return *this; }
+	F_image_aspect& on_depth(){ flags |= b_depth; return *this; }
+	F_image_aspect& off_depth(){ flags &= ~b_depth; return *this; }
+	F_image_aspect& on_stencil(){ flags |= b_stencil; return *this; }
+	F_image_aspect& off_stencil(){ flags &= ~b_stencil; return *this; }
+	F_image_aspect& on_metadata(){ flags |= b_metadata; return *this; }
+	F_image_aspect& off_metadata(){ flags &= ~b_metadata; return *this; }
 };
-inline F_image_aspect operator&(const F_image_aspect f1_, const F_image_aspect f2_){return f1_.flag&f2_.flag;}
-inline F_image_aspect operator&(const F_image_aspect f1_, const F_image_aspect::B f2_){return f1_.flag&uint32_t(f2_);}
-inline F_image_aspect operator&(const F_image_aspect::B f1_, const F_image_aspect f2_){return uint32_t(f1_)&f2_.flag;}
-inline F_image_aspect operator&(const F_image_aspect f1_, const VkImageAspectFlagBits f2_){return f1_.flag&uint32_t(f2_);}
-inline F_image_aspect operator&(const VkImageAspectFlagBits f1_, const F_image_aspect f2_){return uint32_t(f1_)&f2_.flag;}
-inline F_image_aspect operator|(const F_image_aspect f1_, const F_image_aspect f2_){return f1_.flag|f2_.flag;}
-inline F_image_aspect operator^(const F_image_aspect f1_, const F_image_aspect f2_){return f1_.flag^f2_.flag;}
 /*	VkSparseImageFormatFlagBits*/
-template<> struct my_class_convert<F_sparse_image_format> { using type = VkSparseImageFormatFlagBits;};template<> struct my_class_convert<VkSparseImageFormatFlagBits> { using type = F_sparse_image_format;};union F_sparse_image_format {
-	uint32_t flag;
+union F_sparse_image_format {
+	VkSparseImageFormatFlags flags;
 	VkSparseImageFormatFlagBits vk_flag;
-	enum B{
+	enum {
 			/* Image uses a single mip tail region for all array layers */
 		b_single_miptail = VK_SPARSE_IMAGE_FORMAT_SINGLE_MIPTAIL_BIT,
 			/* Image requires mip level dimensions to be an integer multiple of the sparse image block dimensions for non-tail mip levels. */
 		b_aligned_mip_size = VK_SPARSE_IMAGE_FORMAT_ALIGNED_MIP_SIZE_BIT,
 			/* Image uses a non-standard sparse image block dimensions */
 		b_nonstandard_block_size = VK_SPARSE_IMAGE_FORMAT_NONSTANDARD_BLOCK_SIZE_BIT,
-	};
-	F_sparse_image_format():flag(0){}
-	F_sparse_image_format(const uint32_t flag_):flag(flag_){}
-	//F_sparse_image_format(const B flag_):flag(flag_){}
-	//F_sparse_image_format(const VkSparseImageFormatFlagBits flag_):vk_flag(flag_){}
-	//operator uint32_t(){return flag;}
-	operator VkSparseImageFormatFlagBits*(){ return reinterpret_cast<VkSparseImageFormatFlagBits*>(this); }
-	operator VkSparseImageFormatFlagBits(){return vk_flag;}
-	operator VkSparseImageFormatFlags&(){ return flag; }
-	F_sparse_image_format& operator=(const F_sparse_image_format flag_){flag=flag_.flag; return *this;}
-	F_sparse_image_format& operator|=(const F_sparse_image_format flag_){flag|=flag_.flag; return *this;}
-	F_sparse_image_format& operator&=(const F_sparse_image_format flag_){flag&=flag_.flag; return *this;}
-	F_sparse_image_format& operator^=(const F_sparse_image_format flag_){flag^=flag_.flag;return *this;}
-	F_sparse_image_format operator~(){return ~flag;}
-	bool operator==(const F_sparse_image_format flag_){return flag==flag_.flag;}
+	}flag;
+
+	F_sparse_image_format():flags(0){}
+	F_sparse_image_format(const uint32_t flag_):flags(flag_){}
+
+	operator VkSparseImageFormatFlagBits&(){return vk_flag;}
+	operator VkSparseImageFormatFlagBits*(){return &vk_flag; }
+	operator VkSparseImageFormatFlagBits*()const{return const_cast<VkSparseImageFormatFlagBits*const>(&vk_flag); }
+
+	operator VkSparseImageFormatFlags&(){return flags; }
+	operator VkSparseImageFormatFlags*()const{return const_cast<VkSparseImageFormatFlags*const>(&flags); }
+	operator VkSparseImageFormatFlags*(){return &flags; }
+
+	F_sparse_image_format& operator=(const F_sparse_image_format flag_){flags=flag_.flags; return *this;}
+	F_sparse_image_format& operator|=(const F_sparse_image_format flag_){flags|=flag_.flags; return *this;}
+	F_sparse_image_format& operator&=(const F_sparse_image_format flag_){flags&=flag_.flags; return *this;}
+	F_sparse_image_format& operator^=(const F_sparse_image_format flag_){flags^=flag_.flags;return *this;}
+	F_sparse_image_format operator~(){return ~flags;}
+
+	bool operator==(const F_sparse_image_format flag_){return flags==flag_.flags;}
 	bool operator!=(const F_sparse_image_format flag_){return !(*this==flag_);}
-	F_sparse_image_format& clear(){flag = 0;return *this;}
+
+	F_sparse_image_format& clear(){flags = 0;return *this;}
 	F_sparse_image_format all_flags(){ return b_single_miptail | b_aligned_mip_size | b_nonstandard_block_size;}
-	F_sparse_image_format& on_single_miptail(){ flag |= b_single_miptail; return *this; }
-	F_sparse_image_format& off_single_miptail(){ flag &= ~b_single_miptail; return *this; }
-	F_sparse_image_format& on_aligned_mip_size(){ flag |= b_aligned_mip_size; return *this; }
-	F_sparse_image_format& off_aligned_mip_size(){ flag &= ~b_aligned_mip_size; return *this; }
-	F_sparse_image_format& on_nonstandard_block_size(){ flag |= b_nonstandard_block_size; return *this; }
-	F_sparse_image_format& off_nonstandard_block_size(){ flag &= ~b_nonstandard_block_size; return *this; }
+	F_sparse_image_format& on_single_miptail(){ flags |= b_single_miptail; return *this; }
+	F_sparse_image_format& off_single_miptail(){ flags &= ~b_single_miptail; return *this; }
+	F_sparse_image_format& on_aligned_mip_size(){ flags |= b_aligned_mip_size; return *this; }
+	F_sparse_image_format& off_aligned_mip_size(){ flags &= ~b_aligned_mip_size; return *this; }
+	F_sparse_image_format& on_nonstandard_block_size(){ flags |= b_nonstandard_block_size; return *this; }
+	F_sparse_image_format& off_nonstandard_block_size(){ flags &= ~b_nonstandard_block_size; return *this; }
 };
-inline F_sparse_image_format operator&(const F_sparse_image_format f1_, const F_sparse_image_format f2_){return f1_.flag&f2_.flag;}
-inline F_sparse_image_format operator&(const F_sparse_image_format f1_, const F_sparse_image_format::B f2_){return f1_.flag&uint32_t(f2_);}
-inline F_sparse_image_format operator&(const F_sparse_image_format::B f1_, const F_sparse_image_format f2_){return uint32_t(f1_)&f2_.flag;}
-inline F_sparse_image_format operator&(const F_sparse_image_format f1_, const VkSparseImageFormatFlagBits f2_){return f1_.flag&uint32_t(f2_);}
-inline F_sparse_image_format operator&(const VkSparseImageFormatFlagBits f1_, const F_sparse_image_format f2_){return uint32_t(f1_)&f2_.flag;}
-inline F_sparse_image_format operator|(const F_sparse_image_format f1_, const F_sparse_image_format f2_){return f1_.flag|f2_.flag;}
-inline F_sparse_image_format operator^(const F_sparse_image_format f1_, const F_sparse_image_format f2_){return f1_.flag^f2_.flag;}
 /*	VkSparseMemoryBindFlagBits*/
-template<> struct my_class_convert<F_sparse_memory_bind> { using type = VkSparseMemoryBindFlagBits;};template<> struct my_class_convert<VkSparseMemoryBindFlagBits> { using type = F_sparse_memory_bind;};union F_sparse_memory_bind {
-	uint32_t flag;
+union F_sparse_memory_bind {
+	VkSparseMemoryBindFlags flags;
 	VkSparseMemoryBindFlagBits vk_flag;
-	enum B{
+	enum {
 			/* Operation binds resource metadata to memory */
 		b_metadata = VK_SPARSE_MEMORY_BIND_METADATA_BIT,
-	};
-	F_sparse_memory_bind():flag(0){}
-	F_sparse_memory_bind(const uint32_t flag_):flag(flag_){}
-	//F_sparse_memory_bind(const B flag_):flag(flag_){}
-	//F_sparse_memory_bind(const VkSparseMemoryBindFlagBits flag_):vk_flag(flag_){}
-	//operator uint32_t(){return flag;}
-	operator VkSparseMemoryBindFlagBits*(){ return reinterpret_cast<VkSparseMemoryBindFlagBits*>(this); }
-	operator VkSparseMemoryBindFlagBits(){return vk_flag;}
-	operator VkSparseMemoryBindFlags&(){ return flag; }
-	F_sparse_memory_bind& operator=(const F_sparse_memory_bind flag_){flag=flag_.flag; return *this;}
-	F_sparse_memory_bind& operator|=(const F_sparse_memory_bind flag_){flag|=flag_.flag; return *this;}
-	F_sparse_memory_bind& operator&=(const F_sparse_memory_bind flag_){flag&=flag_.flag; return *this;}
-	F_sparse_memory_bind& operator^=(const F_sparse_memory_bind flag_){flag^=flag_.flag;return *this;}
-	F_sparse_memory_bind operator~(){return ~flag;}
-	bool operator==(const F_sparse_memory_bind flag_){return flag==flag_.flag;}
+	}flag;
+
+	F_sparse_memory_bind():flags(0){}
+	F_sparse_memory_bind(const uint32_t flag_):flags(flag_){}
+
+	operator VkSparseMemoryBindFlagBits&(){return vk_flag;}
+	operator VkSparseMemoryBindFlagBits*(){return &vk_flag; }
+	operator VkSparseMemoryBindFlagBits*()const{return const_cast<VkSparseMemoryBindFlagBits*const>(&vk_flag); }
+
+	operator VkSparseMemoryBindFlags&(){return flags; }
+	operator VkSparseMemoryBindFlags*()const{return const_cast<VkSparseMemoryBindFlags*const>(&flags); }
+	operator VkSparseMemoryBindFlags*(){return &flags; }
+
+	F_sparse_memory_bind& operator=(const F_sparse_memory_bind flag_){flags=flag_.flags; return *this;}
+	F_sparse_memory_bind& operator|=(const F_sparse_memory_bind flag_){flags|=flag_.flags; return *this;}
+	F_sparse_memory_bind& operator&=(const F_sparse_memory_bind flag_){flags&=flag_.flags; return *this;}
+	F_sparse_memory_bind& operator^=(const F_sparse_memory_bind flag_){flags^=flag_.flags;return *this;}
+	F_sparse_memory_bind operator~(){return ~flags;}
+
+	bool operator==(const F_sparse_memory_bind flag_){return flags==flag_.flags;}
 	bool operator!=(const F_sparse_memory_bind flag_){return !(*this==flag_);}
-	F_sparse_memory_bind& clear(){flag = 0;return *this;}
+
+	F_sparse_memory_bind& clear(){flags = 0;return *this;}
 	F_sparse_memory_bind all_flags(){ return b_metadata;}
-	F_sparse_memory_bind& on_metadata(){ flag |= b_metadata; return *this; }
-	F_sparse_memory_bind& off_metadata(){ flag &= ~b_metadata; return *this; }
+	F_sparse_memory_bind& on_metadata(){ flags |= b_metadata; return *this; }
+	F_sparse_memory_bind& off_metadata(){ flags &= ~b_metadata; return *this; }
 };
-inline F_sparse_memory_bind operator&(const F_sparse_memory_bind f1_, const F_sparse_memory_bind f2_){return f1_.flag&f2_.flag;}
-inline F_sparse_memory_bind operator&(const F_sparse_memory_bind f1_, const F_sparse_memory_bind::B f2_){return f1_.flag&uint32_t(f2_);}
-inline F_sparse_memory_bind operator&(const F_sparse_memory_bind::B f1_, const F_sparse_memory_bind f2_){return uint32_t(f1_)&f2_.flag;}
-inline F_sparse_memory_bind operator&(const F_sparse_memory_bind f1_, const VkSparseMemoryBindFlagBits f2_){return f1_.flag&uint32_t(f2_);}
-inline F_sparse_memory_bind operator&(const VkSparseMemoryBindFlagBits f1_, const F_sparse_memory_bind f2_){return uint32_t(f1_)&f2_.flag;}
-inline F_sparse_memory_bind operator|(const F_sparse_memory_bind f1_, const F_sparse_memory_bind f2_){return f1_.flag|f2_.flag;}
-inline F_sparse_memory_bind operator^(const F_sparse_memory_bind f1_, const F_sparse_memory_bind f2_){return f1_.flag^f2_.flag;}
 /*	VkPipelineStageFlagBits*/
-template<> struct my_class_convert<F_pipeline_stage> { using type = VkPipelineStageFlagBits;};template<> struct my_class_convert<VkPipelineStageFlagBits> { using type = F_pipeline_stage;};union F_pipeline_stage {
-	uint32_t flag;
+union F_pipeline_stage {
+	VkPipelineStageFlags flags;
 	VkPipelineStageFlagBits vk_flag;
-	enum B{
+	enum {
 			/* Before subsequent commands are processed */
 		b_top_of_pipe = VK_PIPELINE_STAGE_TOP_OF_PIPE_BIT,
 			/* Draw/DispatchIndirect command fetch */
@@ -2803,180 +2711,176 @@ template<> struct my_class_convert<F_pipeline_stage> { using type = VkPipelineSt
 		b_all_graphics = VK_PIPELINE_STAGE_ALL_GRAPHICS_BIT,
 			/* All stages supported on the queue */
 		b_all_commands = VK_PIPELINE_STAGE_ALL_COMMANDS_BIT,
-	};
-	F_pipeline_stage():flag(0){}
-	F_pipeline_stage(const uint32_t flag_):flag(flag_){}
-	//F_pipeline_stage(const B flag_):flag(flag_){}
-	//F_pipeline_stage(const VkPipelineStageFlagBits flag_):vk_flag(flag_){}
-	//operator uint32_t(){return flag;}
-	operator VkPipelineStageFlagBits*(){ return reinterpret_cast<VkPipelineStageFlagBits*>(this); }
-	operator VkPipelineStageFlagBits(){return vk_flag;}
-	operator VkPipelineStageFlags&(){ return flag; }
-	F_pipeline_stage& operator=(const F_pipeline_stage flag_){flag=flag_.flag; return *this;}
-	F_pipeline_stage& operator|=(const F_pipeline_stage flag_){flag|=flag_.flag; return *this;}
-	F_pipeline_stage& operator&=(const F_pipeline_stage flag_){flag&=flag_.flag; return *this;}
-	F_pipeline_stage& operator^=(const F_pipeline_stage flag_){flag^=flag_.flag;return *this;}
-	F_pipeline_stage operator~(){return ~flag;}
-	bool operator==(const F_pipeline_stage flag_){return flag==flag_.flag;}
+	}flag;
+
+	F_pipeline_stage():flags(0){}
+	F_pipeline_stage(const uint32_t flag_):flags(flag_){}
+
+	operator VkPipelineStageFlagBits&(){return vk_flag;}
+	operator VkPipelineStageFlagBits*(){return &vk_flag; }
+	operator VkPipelineStageFlagBits*()const{return const_cast<VkPipelineStageFlagBits*const>(&vk_flag); }
+
+	operator VkPipelineStageFlags&(){return flags; }
+	operator VkPipelineStageFlags*()const{return const_cast<VkPipelineStageFlags*const>(&flags); }
+	operator VkPipelineStageFlags*(){return &flags; }
+
+	F_pipeline_stage& operator=(const F_pipeline_stage flag_){flags=flag_.flags; return *this;}
+	F_pipeline_stage& operator|=(const F_pipeline_stage flag_){flags|=flag_.flags; return *this;}
+	F_pipeline_stage& operator&=(const F_pipeline_stage flag_){flags&=flag_.flags; return *this;}
+	F_pipeline_stage& operator^=(const F_pipeline_stage flag_){flags^=flag_.flags;return *this;}
+	F_pipeline_stage operator~(){return ~flags;}
+
+	bool operator==(const F_pipeline_stage flag_){return flags==flag_.flags;}
 	bool operator!=(const F_pipeline_stage flag_){return !(*this==flag_);}
-	F_pipeline_stage& clear(){flag = 0;return *this;}
+
+	F_pipeline_stage& clear(){flags = 0;return *this;}
 	F_pipeline_stage all_flags(){ return b_top_of_pipe | b_draw_indirect | b_vertex_input | b_vertex_shader | b_tessellation_control_shader | b_tessellation_evaluation_shader | b_geometry_shader | b_fragment_shader | b_early_fragment_tests | b_late_fragment_tests | b_color_attachment_output | b_compute_shader | b_transfer | b_bottom_of_pipe | b_host | b_all_graphics | b_all_commands;}
-	F_pipeline_stage& on_top_of_pipe(){ flag |= b_top_of_pipe; return *this; }
-	F_pipeline_stage& off_top_of_pipe(){ flag &= ~b_top_of_pipe; return *this; }
-	F_pipeline_stage& on_draw_indirect(){ flag |= b_draw_indirect; return *this; }
-	F_pipeline_stage& off_draw_indirect(){ flag &= ~b_draw_indirect; return *this; }
-	F_pipeline_stage& on_vertex_input(){ flag |= b_vertex_input; return *this; }
-	F_pipeline_stage& off_vertex_input(){ flag &= ~b_vertex_input; return *this; }
-	F_pipeline_stage& on_vertex_shader(){ flag |= b_vertex_shader; return *this; }
-	F_pipeline_stage& off_vertex_shader(){ flag &= ~b_vertex_shader; return *this; }
-	F_pipeline_stage& on_tessellation_control_shader(){ flag |= b_tessellation_control_shader; return *this; }
-	F_pipeline_stage& off_tessellation_control_shader(){ flag &= ~b_tessellation_control_shader; return *this; }
-	F_pipeline_stage& on_tessellation_evaluation_shader(){ flag |= b_tessellation_evaluation_shader; return *this; }
-	F_pipeline_stage& off_tessellation_evaluation_shader(){ flag &= ~b_tessellation_evaluation_shader; return *this; }
-	F_pipeline_stage& on_geometry_shader(){ flag |= b_geometry_shader; return *this; }
-	F_pipeline_stage& off_geometry_shader(){ flag &= ~b_geometry_shader; return *this; }
-	F_pipeline_stage& on_fragment_shader(){ flag |= b_fragment_shader; return *this; }
-	F_pipeline_stage& off_fragment_shader(){ flag &= ~b_fragment_shader; return *this; }
-	F_pipeline_stage& on_early_fragment_tests(){ flag |= b_early_fragment_tests; return *this; }
-	F_pipeline_stage& off_early_fragment_tests(){ flag &= ~b_early_fragment_tests; return *this; }
-	F_pipeline_stage& on_late_fragment_tests(){ flag |= b_late_fragment_tests; return *this; }
-	F_pipeline_stage& off_late_fragment_tests(){ flag &= ~b_late_fragment_tests; return *this; }
-	F_pipeline_stage& on_color_attachment_output(){ flag |= b_color_attachment_output; return *this; }
-	F_pipeline_stage& off_color_attachment_output(){ flag &= ~b_color_attachment_output; return *this; }
-	F_pipeline_stage& on_compute_shader(){ flag |= b_compute_shader; return *this; }
-	F_pipeline_stage& off_compute_shader(){ flag &= ~b_compute_shader; return *this; }
-	F_pipeline_stage& on_transfer(){ flag |= b_transfer; return *this; }
-	F_pipeline_stage& off_transfer(){ flag &= ~b_transfer; return *this; }
-	F_pipeline_stage& on_bottom_of_pipe(){ flag |= b_bottom_of_pipe; return *this; }
-	F_pipeline_stage& off_bottom_of_pipe(){ flag &= ~b_bottom_of_pipe; return *this; }
-	F_pipeline_stage& on_host(){ flag |= b_host; return *this; }
-	F_pipeline_stage& off_host(){ flag &= ~b_host; return *this; }
-	F_pipeline_stage& on_all_graphics(){ flag |= b_all_graphics; return *this; }
-	F_pipeline_stage& off_all_graphics(){ flag &= ~b_all_graphics; return *this; }
-	F_pipeline_stage& on_all_commands(){ flag |= b_all_commands; return *this; }
-	F_pipeline_stage& off_all_commands(){ flag &= ~b_all_commands; return *this; }
+	F_pipeline_stage& on_top_of_pipe(){ flags |= b_top_of_pipe; return *this; }
+	F_pipeline_stage& off_top_of_pipe(){ flags &= ~b_top_of_pipe; return *this; }
+	F_pipeline_stage& on_draw_indirect(){ flags |= b_draw_indirect; return *this; }
+	F_pipeline_stage& off_draw_indirect(){ flags &= ~b_draw_indirect; return *this; }
+	F_pipeline_stage& on_vertex_input(){ flags |= b_vertex_input; return *this; }
+	F_pipeline_stage& off_vertex_input(){ flags &= ~b_vertex_input; return *this; }
+	F_pipeline_stage& on_vertex_shader(){ flags |= b_vertex_shader; return *this; }
+	F_pipeline_stage& off_vertex_shader(){ flags &= ~b_vertex_shader; return *this; }
+	F_pipeline_stage& on_tessellation_control_shader(){ flags |= b_tessellation_control_shader; return *this; }
+	F_pipeline_stage& off_tessellation_control_shader(){ flags &= ~b_tessellation_control_shader; return *this; }
+	F_pipeline_stage& on_tessellation_evaluation_shader(){ flags |= b_tessellation_evaluation_shader; return *this; }
+	F_pipeline_stage& off_tessellation_evaluation_shader(){ flags &= ~b_tessellation_evaluation_shader; return *this; }
+	F_pipeline_stage& on_geometry_shader(){ flags |= b_geometry_shader; return *this; }
+	F_pipeline_stage& off_geometry_shader(){ flags &= ~b_geometry_shader; return *this; }
+	F_pipeline_stage& on_fragment_shader(){ flags |= b_fragment_shader; return *this; }
+	F_pipeline_stage& off_fragment_shader(){ flags &= ~b_fragment_shader; return *this; }
+	F_pipeline_stage& on_early_fragment_tests(){ flags |= b_early_fragment_tests; return *this; }
+	F_pipeline_stage& off_early_fragment_tests(){ flags &= ~b_early_fragment_tests; return *this; }
+	F_pipeline_stage& on_late_fragment_tests(){ flags |= b_late_fragment_tests; return *this; }
+	F_pipeline_stage& off_late_fragment_tests(){ flags &= ~b_late_fragment_tests; return *this; }
+	F_pipeline_stage& on_color_attachment_output(){ flags |= b_color_attachment_output; return *this; }
+	F_pipeline_stage& off_color_attachment_output(){ flags &= ~b_color_attachment_output; return *this; }
+	F_pipeline_stage& on_compute_shader(){ flags |= b_compute_shader; return *this; }
+	F_pipeline_stage& off_compute_shader(){ flags &= ~b_compute_shader; return *this; }
+	F_pipeline_stage& on_transfer(){ flags |= b_transfer; return *this; }
+	F_pipeline_stage& off_transfer(){ flags &= ~b_transfer; return *this; }
+	F_pipeline_stage& on_bottom_of_pipe(){ flags |= b_bottom_of_pipe; return *this; }
+	F_pipeline_stage& off_bottom_of_pipe(){ flags &= ~b_bottom_of_pipe; return *this; }
+	F_pipeline_stage& on_host(){ flags |= b_host; return *this; }
+	F_pipeline_stage& off_host(){ flags &= ~b_host; return *this; }
+	F_pipeline_stage& on_all_graphics(){ flags |= b_all_graphics; return *this; }
+	F_pipeline_stage& off_all_graphics(){ flags &= ~b_all_graphics; return *this; }
+	F_pipeline_stage& on_all_commands(){ flags |= b_all_commands; return *this; }
+	F_pipeline_stage& off_all_commands(){ flags &= ~b_all_commands; return *this; }
 };
-inline F_pipeline_stage operator&(const F_pipeline_stage f1_, const F_pipeline_stage f2_){return f1_.flag&f2_.flag;}
-inline F_pipeline_stage operator&(const F_pipeline_stage f1_, const F_pipeline_stage::B f2_){return f1_.flag&uint32_t(f2_);}
-inline F_pipeline_stage operator&(const F_pipeline_stage::B f1_, const F_pipeline_stage f2_){return uint32_t(f1_)&f2_.flag;}
-inline F_pipeline_stage operator&(const F_pipeline_stage f1_, const VkPipelineStageFlagBits f2_){return f1_.flag&uint32_t(f2_);}
-inline F_pipeline_stage operator&(const VkPipelineStageFlagBits f1_, const F_pipeline_stage f2_){return uint32_t(f1_)&f2_.flag;}
-inline F_pipeline_stage operator|(const F_pipeline_stage f1_, const F_pipeline_stage f2_){return f1_.flag|f2_.flag;}
-inline F_pipeline_stage operator^(const F_pipeline_stage f1_, const F_pipeline_stage f2_){return f1_.flag^f2_.flag;}
 /*	VkCommandPoolCreateFlagBits*/
-template<> struct my_class_convert<F_command_pool_create> { using type = VkCommandPoolCreateFlagBits;};template<> struct my_class_convert<VkCommandPoolCreateFlagBits> { using type = F_command_pool_create;};union F_command_pool_create {
-	uint32_t flag;
+union F_command_pool_create {
+	VkCommandPoolCreateFlags flags;
 	VkCommandPoolCreateFlagBits vk_flag;
-	enum B{
+	enum {
 			/* Command buffers have a short lifetime */
 		b_transient = VK_COMMAND_POOL_CREATE_TRANSIENT_BIT,
 			/* Command buffers may release their memory individually */
 		b_reset_command_buffer = VK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT,
-	};
-	F_command_pool_create():flag(0){}
-	F_command_pool_create(const uint32_t flag_):flag(flag_){}
-	//F_command_pool_create(const B flag_):flag(flag_){}
-	//F_command_pool_create(const VkCommandPoolCreateFlagBits flag_):vk_flag(flag_){}
-	//operator uint32_t(){return flag;}
-	operator VkCommandPoolCreateFlagBits*(){ return reinterpret_cast<VkCommandPoolCreateFlagBits*>(this); }
-	operator VkCommandPoolCreateFlagBits(){return vk_flag;}
-	operator VkCommandPoolCreateFlags&(){ return flag; }
-	F_command_pool_create& operator=(const F_command_pool_create flag_){flag=flag_.flag; return *this;}
-	F_command_pool_create& operator|=(const F_command_pool_create flag_){flag|=flag_.flag; return *this;}
-	F_command_pool_create& operator&=(const F_command_pool_create flag_){flag&=flag_.flag; return *this;}
-	F_command_pool_create& operator^=(const F_command_pool_create flag_){flag^=flag_.flag;return *this;}
-	F_command_pool_create operator~(){return ~flag;}
-	bool operator==(const F_command_pool_create flag_){return flag==flag_.flag;}
+	}flag;
+
+	F_command_pool_create():flags(0){}
+	F_command_pool_create(const uint32_t flag_):flags(flag_){}
+
+	operator VkCommandPoolCreateFlagBits&(){return vk_flag;}
+	operator VkCommandPoolCreateFlagBits*(){return &vk_flag; }
+	operator VkCommandPoolCreateFlagBits*()const{return const_cast<VkCommandPoolCreateFlagBits*const>(&vk_flag); }
+
+	operator VkCommandPoolCreateFlags&(){return flags; }
+	operator VkCommandPoolCreateFlags*()const{return const_cast<VkCommandPoolCreateFlags*const>(&flags); }
+	operator VkCommandPoolCreateFlags*(){return &flags; }
+
+	F_command_pool_create& operator=(const F_command_pool_create flag_){flags=flag_.flags; return *this;}
+	F_command_pool_create& operator|=(const F_command_pool_create flag_){flags|=flag_.flags; return *this;}
+	F_command_pool_create& operator&=(const F_command_pool_create flag_){flags&=flag_.flags; return *this;}
+	F_command_pool_create& operator^=(const F_command_pool_create flag_){flags^=flag_.flags;return *this;}
+	F_command_pool_create operator~(){return ~flags;}
+
+	bool operator==(const F_command_pool_create flag_){return flags==flag_.flags;}
 	bool operator!=(const F_command_pool_create flag_){return !(*this==flag_);}
-	F_command_pool_create& clear(){flag = 0;return *this;}
+
+	F_command_pool_create& clear(){flags = 0;return *this;}
 	F_command_pool_create all_flags(){ return b_transient | b_reset_command_buffer;}
-	F_command_pool_create& on_transient(){ flag |= b_transient; return *this; }
-	F_command_pool_create& off_transient(){ flag &= ~b_transient; return *this; }
-	F_command_pool_create& on_reset_command_buffer(){ flag |= b_reset_command_buffer; return *this; }
-	F_command_pool_create& off_reset_command_buffer(){ flag &= ~b_reset_command_buffer; return *this; }
+	F_command_pool_create& on_transient(){ flags |= b_transient; return *this; }
+	F_command_pool_create& off_transient(){ flags &= ~b_transient; return *this; }
+	F_command_pool_create& on_reset_command_buffer(){ flags |= b_reset_command_buffer; return *this; }
+	F_command_pool_create& off_reset_command_buffer(){ flags &= ~b_reset_command_buffer; return *this; }
 };
-inline F_command_pool_create operator&(const F_command_pool_create f1_, const F_command_pool_create f2_){return f1_.flag&f2_.flag;}
-inline F_command_pool_create operator&(const F_command_pool_create f1_, const F_command_pool_create::B f2_){return f1_.flag&uint32_t(f2_);}
-inline F_command_pool_create operator&(const F_command_pool_create::B f1_, const F_command_pool_create f2_){return uint32_t(f1_)&f2_.flag;}
-inline F_command_pool_create operator&(const F_command_pool_create f1_, const VkCommandPoolCreateFlagBits f2_){return f1_.flag&uint32_t(f2_);}
-inline F_command_pool_create operator&(const VkCommandPoolCreateFlagBits f1_, const F_command_pool_create f2_){return uint32_t(f1_)&f2_.flag;}
-inline F_command_pool_create operator|(const F_command_pool_create f1_, const F_command_pool_create f2_){return f1_.flag|f2_.flag;}
-inline F_command_pool_create operator^(const F_command_pool_create f1_, const F_command_pool_create f2_){return f1_.flag^f2_.flag;}
 /*	VkCommandPoolResetFlagBits*/
-template<> struct my_class_convert<F_command_pool_reset> { using type = VkCommandPoolResetFlagBits;};template<> struct my_class_convert<VkCommandPoolResetFlagBits> { using type = F_command_pool_reset;};union F_command_pool_reset {
-	uint32_t flag;
+union F_command_pool_reset {
+	VkCommandPoolResetFlags flags;
 	VkCommandPoolResetFlagBits vk_flag;
-	enum B{
+	enum {
 			/* Release resources owned by the pool */
 		b_release_resources = VK_COMMAND_POOL_RESET_RELEASE_RESOURCES_BIT,
-	};
-	F_command_pool_reset():flag(0){}
-	F_command_pool_reset(const uint32_t flag_):flag(flag_){}
-	//F_command_pool_reset(const B flag_):flag(flag_){}
-	//F_command_pool_reset(const VkCommandPoolResetFlagBits flag_):vk_flag(flag_){}
-	//operator uint32_t(){return flag;}
-	operator VkCommandPoolResetFlagBits*(){ return reinterpret_cast<VkCommandPoolResetFlagBits*>(this); }
-	operator VkCommandPoolResetFlagBits(){return vk_flag;}
-	operator VkCommandPoolResetFlags&(){ return flag; }
-	F_command_pool_reset& operator=(const F_command_pool_reset flag_){flag=flag_.flag; return *this;}
-	F_command_pool_reset& operator|=(const F_command_pool_reset flag_){flag|=flag_.flag; return *this;}
-	F_command_pool_reset& operator&=(const F_command_pool_reset flag_){flag&=flag_.flag; return *this;}
-	F_command_pool_reset& operator^=(const F_command_pool_reset flag_){flag^=flag_.flag;return *this;}
-	F_command_pool_reset operator~(){return ~flag;}
-	bool operator==(const F_command_pool_reset flag_){return flag==flag_.flag;}
+	}flag;
+
+	F_command_pool_reset():flags(0){}
+	F_command_pool_reset(const uint32_t flag_):flags(flag_){}
+
+	operator VkCommandPoolResetFlagBits&(){return vk_flag;}
+	operator VkCommandPoolResetFlagBits*(){return &vk_flag; }
+	operator VkCommandPoolResetFlagBits*()const{return const_cast<VkCommandPoolResetFlagBits*const>(&vk_flag); }
+
+	operator VkCommandPoolResetFlags&(){return flags; }
+	operator VkCommandPoolResetFlags*()const{return const_cast<VkCommandPoolResetFlags*const>(&flags); }
+	operator VkCommandPoolResetFlags*(){return &flags; }
+
+	F_command_pool_reset& operator=(const F_command_pool_reset flag_){flags=flag_.flags; return *this;}
+	F_command_pool_reset& operator|=(const F_command_pool_reset flag_){flags|=flag_.flags; return *this;}
+	F_command_pool_reset& operator&=(const F_command_pool_reset flag_){flags&=flag_.flags; return *this;}
+	F_command_pool_reset& operator^=(const F_command_pool_reset flag_){flags^=flag_.flags;return *this;}
+	F_command_pool_reset operator~(){return ~flags;}
+
+	bool operator==(const F_command_pool_reset flag_){return flags==flag_.flags;}
 	bool operator!=(const F_command_pool_reset flag_){return !(*this==flag_);}
-	F_command_pool_reset& clear(){flag = 0;return *this;}
+
+	F_command_pool_reset& clear(){flags = 0;return *this;}
 	F_command_pool_reset all_flags(){ return b_release_resources;}
-	F_command_pool_reset& on_release_resources(){ flag |= b_release_resources; return *this; }
-	F_command_pool_reset& off_release_resources(){ flag &= ~b_release_resources; return *this; }
+	F_command_pool_reset& on_release_resources(){ flags |= b_release_resources; return *this; }
+	F_command_pool_reset& off_release_resources(){ flags &= ~b_release_resources; return *this; }
 };
-inline F_command_pool_reset operator&(const F_command_pool_reset f1_, const F_command_pool_reset f2_){return f1_.flag&f2_.flag;}
-inline F_command_pool_reset operator&(const F_command_pool_reset f1_, const F_command_pool_reset::B f2_){return f1_.flag&uint32_t(f2_);}
-inline F_command_pool_reset operator&(const F_command_pool_reset::B f1_, const F_command_pool_reset f2_){return uint32_t(f1_)&f2_.flag;}
-inline F_command_pool_reset operator&(const F_command_pool_reset f1_, const VkCommandPoolResetFlagBits f2_){return f1_.flag&uint32_t(f2_);}
-inline F_command_pool_reset operator&(const VkCommandPoolResetFlagBits f1_, const F_command_pool_reset f2_){return uint32_t(f1_)&f2_.flag;}
-inline F_command_pool_reset operator|(const F_command_pool_reset f1_, const F_command_pool_reset f2_){return f1_.flag|f2_.flag;}
-inline F_command_pool_reset operator^(const F_command_pool_reset f1_, const F_command_pool_reset f2_){return f1_.flag^f2_.flag;}
 /*	VkCommandBufferResetFlagBits*/
-template<> struct my_class_convert<F_command_buffer_reset> { using type = VkCommandBufferResetFlagBits;};template<> struct my_class_convert<VkCommandBufferResetFlagBits> { using type = F_command_buffer_reset;};union F_command_buffer_reset {
-	uint32_t flag;
+union F_command_buffer_reset {
+	VkCommandBufferResetFlags flags;
 	VkCommandBufferResetFlagBits vk_flag;
-	enum B{
+	enum {
 			/* Release resources owned by the buffer */
 		b_release_resources = VK_COMMAND_BUFFER_RESET_RELEASE_RESOURCES_BIT,
-	};
-	F_command_buffer_reset():flag(0){}
-	F_command_buffer_reset(const uint32_t flag_):flag(flag_){}
-	//F_command_buffer_reset(const B flag_):flag(flag_){}
-	//F_command_buffer_reset(const VkCommandBufferResetFlagBits flag_):vk_flag(flag_){}
-	//operator uint32_t(){return flag;}
-	operator VkCommandBufferResetFlagBits*(){ return reinterpret_cast<VkCommandBufferResetFlagBits*>(this); }
-	operator VkCommandBufferResetFlagBits(){return vk_flag;}
-	operator VkCommandBufferResetFlags&(){ return flag; }
-	F_command_buffer_reset& operator=(const F_command_buffer_reset flag_){flag=flag_.flag; return *this;}
-	F_command_buffer_reset& operator|=(const F_command_buffer_reset flag_){flag|=flag_.flag; return *this;}
-	F_command_buffer_reset& operator&=(const F_command_buffer_reset flag_){flag&=flag_.flag; return *this;}
-	F_command_buffer_reset& operator^=(const F_command_buffer_reset flag_){flag^=flag_.flag;return *this;}
-	F_command_buffer_reset operator~(){return ~flag;}
-	bool operator==(const F_command_buffer_reset flag_){return flag==flag_.flag;}
+	}flag;
+
+	F_command_buffer_reset():flags(0){}
+	F_command_buffer_reset(const uint32_t flag_):flags(flag_){}
+
+	operator VkCommandBufferResetFlagBits&(){return vk_flag;}
+	operator VkCommandBufferResetFlagBits*(){return &vk_flag; }
+	operator VkCommandBufferResetFlagBits*()const{return const_cast<VkCommandBufferResetFlagBits*const>(&vk_flag); }
+
+	operator VkCommandBufferResetFlags&(){return flags; }
+	operator VkCommandBufferResetFlags*()const{return const_cast<VkCommandBufferResetFlags*const>(&flags); }
+	operator VkCommandBufferResetFlags*(){return &flags; }
+
+	F_command_buffer_reset& operator=(const F_command_buffer_reset flag_){flags=flag_.flags; return *this;}
+	F_command_buffer_reset& operator|=(const F_command_buffer_reset flag_){flags|=flag_.flags; return *this;}
+	F_command_buffer_reset& operator&=(const F_command_buffer_reset flag_){flags&=flag_.flags; return *this;}
+	F_command_buffer_reset& operator^=(const F_command_buffer_reset flag_){flags^=flag_.flags;return *this;}
+	F_command_buffer_reset operator~(){return ~flags;}
+
+	bool operator==(const F_command_buffer_reset flag_){return flags==flag_.flags;}
 	bool operator!=(const F_command_buffer_reset flag_){return !(*this==flag_);}
-	F_command_buffer_reset& clear(){flag = 0;return *this;}
+
+	F_command_buffer_reset& clear(){flags = 0;return *this;}
 	F_command_buffer_reset all_flags(){ return b_release_resources;}
-	F_command_buffer_reset& on_release_resources(){ flag |= b_release_resources; return *this; }
-	F_command_buffer_reset& off_release_resources(){ flag &= ~b_release_resources; return *this; }
+	F_command_buffer_reset& on_release_resources(){ flags |= b_release_resources; return *this; }
+	F_command_buffer_reset& off_release_resources(){ flags &= ~b_release_resources; return *this; }
 };
-inline F_command_buffer_reset operator&(const F_command_buffer_reset f1_, const F_command_buffer_reset f2_){return f1_.flag&f2_.flag;}
-inline F_command_buffer_reset operator&(const F_command_buffer_reset f1_, const F_command_buffer_reset::B f2_){return f1_.flag&uint32_t(f2_);}
-inline F_command_buffer_reset operator&(const F_command_buffer_reset::B f1_, const F_command_buffer_reset f2_){return uint32_t(f1_)&f2_.flag;}
-inline F_command_buffer_reset operator&(const F_command_buffer_reset f1_, const VkCommandBufferResetFlagBits f2_){return f1_.flag&uint32_t(f2_);}
-inline F_command_buffer_reset operator&(const VkCommandBufferResetFlagBits f1_, const F_command_buffer_reset f2_){return uint32_t(f1_)&f2_.flag;}
-inline F_command_buffer_reset operator|(const F_command_buffer_reset f1_, const F_command_buffer_reset f2_){return f1_.flag|f2_.flag;}
-inline F_command_buffer_reset operator^(const F_command_buffer_reset f1_, const F_command_buffer_reset f2_){return f1_.flag^f2_.flag;}
 /*	VkSampleCountFlagBits*/
-template<> struct my_class_convert<F_sample_count> { using type = VkSampleCountFlagBits;};template<> struct my_class_convert<VkSampleCountFlagBits> { using type = F_sample_count;};union F_sample_count {
-	uint32_t flag;
+union F_sample_count {
+	VkSampleCountFlags flags;
 	VkSampleCountFlagBits vk_flag;
-	enum B{
+	enum {
 			/* Sample count 1 supported */
 		b_1 = VK_SAMPLE_COUNT_1_BIT,
 			/* Sample count 2 supported */
@@ -2991,285 +2895,278 @@ template<> struct my_class_convert<F_sample_count> { using type = VkSampleCountF
 		b_32 = VK_SAMPLE_COUNT_32_BIT,
 			/* Sample count 64 supported */
 		b_64 = VK_SAMPLE_COUNT_64_BIT,
-	};
-	F_sample_count():flag(0){}
-	F_sample_count(const uint32_t flag_):flag(flag_){}
-	//F_sample_count(const B flag_):flag(flag_){}
-	//F_sample_count(const VkSampleCountFlagBits flag_):vk_flag(flag_){}
-	//operator uint32_t(){return flag;}
-	operator VkSampleCountFlagBits*(){ return reinterpret_cast<VkSampleCountFlagBits*>(this); }
-	operator VkSampleCountFlagBits(){return vk_flag;}
-	operator VkSampleCountFlags&(){ return flag; }
-	F_sample_count& operator=(const F_sample_count flag_){flag=flag_.flag; return *this;}
-	F_sample_count& operator|=(const F_sample_count flag_){flag|=flag_.flag; return *this;}
-	F_sample_count& operator&=(const F_sample_count flag_){flag&=flag_.flag; return *this;}
-	F_sample_count& operator^=(const F_sample_count flag_){flag^=flag_.flag;return *this;}
-	F_sample_count operator~(){return ~flag;}
-	bool operator==(const F_sample_count flag_){return flag==flag_.flag;}
+	}flag;
+
+	F_sample_count():flags(0){}
+	F_sample_count(const uint32_t flag_):flags(flag_){}
+
+	operator VkSampleCountFlagBits&(){return vk_flag;}
+	operator VkSampleCountFlagBits*(){return &vk_flag; }
+	operator VkSampleCountFlagBits*()const{return const_cast<VkSampleCountFlagBits*const>(&vk_flag); }
+
+	operator VkSampleCountFlags&(){return flags; }
+	operator VkSampleCountFlags*()const{return const_cast<VkSampleCountFlags*const>(&flags); }
+	operator VkSampleCountFlags*(){return &flags; }
+
+	F_sample_count& operator=(const F_sample_count flag_){flags=flag_.flags; return *this;}
+	F_sample_count& operator|=(const F_sample_count flag_){flags|=flag_.flags; return *this;}
+	F_sample_count& operator&=(const F_sample_count flag_){flags&=flag_.flags; return *this;}
+	F_sample_count& operator^=(const F_sample_count flag_){flags^=flag_.flags;return *this;}
+	F_sample_count operator~(){return ~flags;}
+
+	bool operator==(const F_sample_count flag_){return flags==flag_.flags;}
 	bool operator!=(const F_sample_count flag_){return !(*this==flag_);}
-	F_sample_count& clear(){flag = 0;return *this;}
+
+	F_sample_count& clear(){flags = 0;return *this;}
 	F_sample_count all_flags(){ return b_1 | b_2 | b_4 | b_8 | b_16 | b_32 | b_64;}
-	F_sample_count& on_1(){ flag |= b_1; return *this; }
-	F_sample_count& off_1(){ flag &= ~b_1; return *this; }
-	F_sample_count& on_2(){ flag |= b_2; return *this; }
-	F_sample_count& off_2(){ flag &= ~b_2; return *this; }
-	F_sample_count& on_4(){ flag |= b_4; return *this; }
-	F_sample_count& off_4(){ flag &= ~b_4; return *this; }
-	F_sample_count& on_8(){ flag |= b_8; return *this; }
-	F_sample_count& off_8(){ flag &= ~b_8; return *this; }
-	F_sample_count& on_16(){ flag |= b_16; return *this; }
-	F_sample_count& off_16(){ flag &= ~b_16; return *this; }
-	F_sample_count& on_32(){ flag |= b_32; return *this; }
-	F_sample_count& off_32(){ flag &= ~b_32; return *this; }
-	F_sample_count& on_64(){ flag |= b_64; return *this; }
-	F_sample_count& off_64(){ flag &= ~b_64; return *this; }
+	F_sample_count& on_1(){ flags |= b_1; return *this; }
+	F_sample_count& off_1(){ flags &= ~b_1; return *this; }
+	F_sample_count& on_2(){ flags |= b_2; return *this; }
+	F_sample_count& off_2(){ flags &= ~b_2; return *this; }
+	F_sample_count& on_4(){ flags |= b_4; return *this; }
+	F_sample_count& off_4(){ flags &= ~b_4; return *this; }
+	F_sample_count& on_8(){ flags |= b_8; return *this; }
+	F_sample_count& off_8(){ flags &= ~b_8; return *this; }
+	F_sample_count& on_16(){ flags |= b_16; return *this; }
+	F_sample_count& off_16(){ flags &= ~b_16; return *this; }
+	F_sample_count& on_32(){ flags |= b_32; return *this; }
+	F_sample_count& off_32(){ flags &= ~b_32; return *this; }
+	F_sample_count& on_64(){ flags |= b_64; return *this; }
+	F_sample_count& off_64(){ flags &= ~b_64; return *this; }
 };
-inline F_sample_count operator&(const F_sample_count f1_, const F_sample_count f2_){return f1_.flag&f2_.flag;}
-inline F_sample_count operator&(const F_sample_count f1_, const F_sample_count::B f2_){return f1_.flag&uint32_t(f2_);}
-inline F_sample_count operator&(const F_sample_count::B f1_, const F_sample_count f2_){return uint32_t(f1_)&f2_.flag;}
-inline F_sample_count operator&(const F_sample_count f1_, const VkSampleCountFlagBits f2_){return f1_.flag&uint32_t(f2_);}
-inline F_sample_count operator&(const VkSampleCountFlagBits f1_, const F_sample_count f2_){return uint32_t(f1_)&f2_.flag;}
-inline F_sample_count operator|(const F_sample_count f1_, const F_sample_count f2_){return f1_.flag|f2_.flag;}
-inline F_sample_count operator^(const F_sample_count f1_, const F_sample_count f2_){return f1_.flag^f2_.flag;}
 /*	VkAttachmentDescriptionFlagBits*/
-template<> struct my_class_convert<F_attachment_description> { using type = VkAttachmentDescriptionFlagBits;};template<> struct my_class_convert<VkAttachmentDescriptionFlagBits> { using type = F_attachment_description;};union F_attachment_description {
-	uint32_t flag;
+union F_attachment_description {
+	VkAttachmentDescriptionFlags flags;
 	VkAttachmentDescriptionFlagBits vk_flag;
-	enum B{
+	enum {
 			/* The attachment may alias physical memory of another attachment in the same render pass */
 		b_may_alias = VK_ATTACHMENT_DESCRIPTION_MAY_ALIAS_BIT,
-	};
-	F_attachment_description():flag(0){}
-	F_attachment_description(const uint32_t flag_):flag(flag_){}
-	//F_attachment_description(const B flag_):flag(flag_){}
-	//F_attachment_description(const VkAttachmentDescriptionFlagBits flag_):vk_flag(flag_){}
-	//operator uint32_t(){return flag;}
-	operator VkAttachmentDescriptionFlagBits*(){ return reinterpret_cast<VkAttachmentDescriptionFlagBits*>(this); }
-	operator VkAttachmentDescriptionFlagBits(){return vk_flag;}
-	operator VkAttachmentDescriptionFlags&(){ return flag; }
-	F_attachment_description& operator=(const F_attachment_description flag_){flag=flag_.flag; return *this;}
-	F_attachment_description& operator|=(const F_attachment_description flag_){flag|=flag_.flag; return *this;}
-	F_attachment_description& operator&=(const F_attachment_description flag_){flag&=flag_.flag; return *this;}
-	F_attachment_description& operator^=(const F_attachment_description flag_){flag^=flag_.flag;return *this;}
-	F_attachment_description operator~(){return ~flag;}
-	bool operator==(const F_attachment_description flag_){return flag==flag_.flag;}
+	}flag;
+
+	F_attachment_description():flags(0){}
+	F_attachment_description(const uint32_t flag_):flags(flag_){}
+
+	operator VkAttachmentDescriptionFlagBits&(){return vk_flag;}
+	operator VkAttachmentDescriptionFlagBits*(){return &vk_flag; }
+	operator VkAttachmentDescriptionFlagBits*()const{return const_cast<VkAttachmentDescriptionFlagBits*const>(&vk_flag); }
+
+	operator VkAttachmentDescriptionFlags&(){return flags; }
+	operator VkAttachmentDescriptionFlags*()const{return const_cast<VkAttachmentDescriptionFlags*const>(&flags); }
+	operator VkAttachmentDescriptionFlags*(){return &flags; }
+
+	F_attachment_description& operator=(const F_attachment_description flag_){flags=flag_.flags; return *this;}
+	F_attachment_description& operator|=(const F_attachment_description flag_){flags|=flag_.flags; return *this;}
+	F_attachment_description& operator&=(const F_attachment_description flag_){flags&=flag_.flags; return *this;}
+	F_attachment_description& operator^=(const F_attachment_description flag_){flags^=flag_.flags;return *this;}
+	F_attachment_description operator~(){return ~flags;}
+
+	bool operator==(const F_attachment_description flag_){return flags==flag_.flags;}
 	bool operator!=(const F_attachment_description flag_){return !(*this==flag_);}
-	F_attachment_description& clear(){flag = 0;return *this;}
+
+	F_attachment_description& clear(){flags = 0;return *this;}
 	F_attachment_description all_flags(){ return b_may_alias;}
-	F_attachment_description& on_may_alias(){ flag |= b_may_alias; return *this; }
-	F_attachment_description& off_may_alias(){ flag &= ~b_may_alias; return *this; }
+	F_attachment_description& on_may_alias(){ flags |= b_may_alias; return *this; }
+	F_attachment_description& off_may_alias(){ flags &= ~b_may_alias; return *this; }
 };
-inline F_attachment_description operator&(const F_attachment_description f1_, const F_attachment_description f2_){return f1_.flag&f2_.flag;}
-inline F_attachment_description operator&(const F_attachment_description f1_, const F_attachment_description::B f2_){return f1_.flag&uint32_t(f2_);}
-inline F_attachment_description operator&(const F_attachment_description::B f1_, const F_attachment_description f2_){return uint32_t(f1_)&f2_.flag;}
-inline F_attachment_description operator&(const F_attachment_description f1_, const VkAttachmentDescriptionFlagBits f2_){return f1_.flag&uint32_t(f2_);}
-inline F_attachment_description operator&(const VkAttachmentDescriptionFlagBits f1_, const F_attachment_description f2_){return uint32_t(f1_)&f2_.flag;}
-inline F_attachment_description operator|(const F_attachment_description f1_, const F_attachment_description f2_){return f1_.flag|f2_.flag;}
-inline F_attachment_description operator^(const F_attachment_description f1_, const F_attachment_description f2_){return f1_.flag^f2_.flag;}
 /*	VkStencilFaceFlagBits*/
-template<> struct my_class_convert<F_stencil_face> { using type = VkStencilFaceFlagBits;};template<> struct my_class_convert<VkStencilFaceFlagBits> { using type = F_stencil_face;};union F_stencil_face {
-	uint32_t flag;
+union F_stencil_face {
+	VkStencilFaceFlags flags;
 	VkStencilFaceFlagBits vk_flag;
-	enum B{
+	enum {
 			/* Front face */
 		b_front = VK_STENCIL_FACE_FRONT_BIT,
 			/* Back face */
 		b_back = VK_STENCIL_FACE_BACK_BIT,
 			/* Front and back faces */
 		b_vk_stencil_front_and_back = VK_STENCIL_FRONT_AND_BACK,
-	};
-	F_stencil_face():flag(0){}
-	F_stencil_face(const uint32_t flag_):flag(flag_){}
-	//F_stencil_face(const B flag_):flag(flag_){}
-	//F_stencil_face(const VkStencilFaceFlagBits flag_):vk_flag(flag_){}
-	//operator uint32_t(){return flag;}
-	operator VkStencilFaceFlagBits*(){ return reinterpret_cast<VkStencilFaceFlagBits*>(this); }
-	operator VkStencilFaceFlagBits(){return vk_flag;}
-	operator VkStencilFaceFlags&(){ return flag; }
-	F_stencil_face& operator=(const F_stencil_face flag_){flag=flag_.flag; return *this;}
-	F_stencil_face& operator|=(const F_stencil_face flag_){flag|=flag_.flag; return *this;}
-	F_stencil_face& operator&=(const F_stencil_face flag_){flag&=flag_.flag; return *this;}
-	F_stencil_face& operator^=(const F_stencil_face flag_){flag^=flag_.flag;return *this;}
-	F_stencil_face operator~(){return ~flag;}
-	bool operator==(const F_stencil_face flag_){return flag==flag_.flag;}
+	}flag;
+
+	F_stencil_face():flags(0){}
+	F_stencil_face(const uint32_t flag_):flags(flag_){}
+
+	operator VkStencilFaceFlagBits&(){return vk_flag;}
+	operator VkStencilFaceFlagBits*(){return &vk_flag; }
+	operator VkStencilFaceFlagBits*()const{return const_cast<VkStencilFaceFlagBits*const>(&vk_flag); }
+
+	operator VkStencilFaceFlags&(){return flags; }
+	operator VkStencilFaceFlags*()const{return const_cast<VkStencilFaceFlags*const>(&flags); }
+	operator VkStencilFaceFlags*(){return &flags; }
+
+	F_stencil_face& operator=(const F_stencil_face flag_){flags=flag_.flags; return *this;}
+	F_stencil_face& operator|=(const F_stencil_face flag_){flags|=flag_.flags; return *this;}
+	F_stencil_face& operator&=(const F_stencil_face flag_){flags&=flag_.flags; return *this;}
+	F_stencil_face& operator^=(const F_stencil_face flag_){flags^=flag_.flags;return *this;}
+	F_stencil_face operator~(){return ~flags;}
+
+	bool operator==(const F_stencil_face flag_){return flags==flag_.flags;}
 	bool operator!=(const F_stencil_face flag_){return !(*this==flag_);}
-	F_stencil_face& clear(){flag = 0;return *this;}
+
+	F_stencil_face& clear(){flags = 0;return *this;}
 	F_stencil_face all_flags(){ return b_front | b_back | b_vk_stencil_front_and_back;}
-	F_stencil_face& on_front(){ flag |= b_front; return *this; }
-	F_stencil_face& off_front(){ flag &= ~b_front; return *this; }
-	F_stencil_face& on_back(){ flag |= b_back; return *this; }
-	F_stencil_face& off_back(){ flag &= ~b_back; return *this; }
-	F_stencil_face& on_vk_stencil_front_and_back(){ flag |= b_vk_stencil_front_and_back; return *this; }
-	F_stencil_face& off_vk_stencil_front_and_back(){ flag &= ~b_vk_stencil_front_and_back; return *this; }
+	F_stencil_face& on_front(){ flags |= b_front; return *this; }
+	F_stencil_face& off_front(){ flags &= ~b_front; return *this; }
+	F_stencil_face& on_back(){ flags |= b_back; return *this; }
+	F_stencil_face& off_back(){ flags &= ~b_back; return *this; }
+	F_stencil_face& on_vk_stencil_front_and_back(){ flags |= b_vk_stencil_front_and_back; return *this; }
+	F_stencil_face& off_vk_stencil_front_and_back(){ flags &= ~b_vk_stencil_front_and_back; return *this; }
 };
-inline F_stencil_face operator&(const F_stencil_face f1_, const F_stencil_face f2_){return f1_.flag&f2_.flag;}
-inline F_stencil_face operator&(const F_stencil_face f1_, const F_stencil_face::B f2_){return f1_.flag&uint32_t(f2_);}
-inline F_stencil_face operator&(const F_stencil_face::B f1_, const F_stencil_face f2_){return uint32_t(f1_)&f2_.flag;}
-inline F_stencil_face operator&(const F_stencil_face f1_, const VkStencilFaceFlagBits f2_){return f1_.flag&uint32_t(f2_);}
-inline F_stencil_face operator&(const VkStencilFaceFlagBits f1_, const F_stencil_face f2_){return uint32_t(f1_)&f2_.flag;}
-inline F_stencil_face operator|(const F_stencil_face f1_, const F_stencil_face f2_){return f1_.flag|f2_.flag;}
-inline F_stencil_face operator^(const F_stencil_face f1_, const F_stencil_face f2_){return f1_.flag^f2_.flag;}
 /*	VkDescriptorPoolCreateFlagBits*/
-template<> struct my_class_convert<F_descriptor_pool_create> { using type = VkDescriptorPoolCreateFlagBits;};template<> struct my_class_convert<VkDescriptorPoolCreateFlagBits> { using type = F_descriptor_pool_create;};union F_descriptor_pool_create {
-	uint32_t flag;
+union F_descriptor_pool_create {
+	VkDescriptorPoolCreateFlags flags;
 	VkDescriptorPoolCreateFlagBits vk_flag;
-	enum B{
+	enum {
 			/* Descriptor sets may be freed individually */
 		b_free_descriptor_set = VK_DESCRIPTOR_POOL_CREATE_FREE_DESCRIPTOR_SET_BIT,
-	};
-	F_descriptor_pool_create():flag(0){}
-	F_descriptor_pool_create(const uint32_t flag_):flag(flag_){}
-	//F_descriptor_pool_create(const B flag_):flag(flag_){}
-	//F_descriptor_pool_create(const VkDescriptorPoolCreateFlagBits flag_):vk_flag(flag_){}
-	//operator uint32_t(){return flag;}
-	operator VkDescriptorPoolCreateFlagBits*(){ return reinterpret_cast<VkDescriptorPoolCreateFlagBits*>(this); }
-	operator VkDescriptorPoolCreateFlagBits(){return vk_flag;}
-	operator VkDescriptorPoolCreateFlags&(){ return flag; }
-	F_descriptor_pool_create& operator=(const F_descriptor_pool_create flag_){flag=flag_.flag; return *this;}
-	F_descriptor_pool_create& operator|=(const F_descriptor_pool_create flag_){flag|=flag_.flag; return *this;}
-	F_descriptor_pool_create& operator&=(const F_descriptor_pool_create flag_){flag&=flag_.flag; return *this;}
-	F_descriptor_pool_create& operator^=(const F_descriptor_pool_create flag_){flag^=flag_.flag;return *this;}
-	F_descriptor_pool_create operator~(){return ~flag;}
-	bool operator==(const F_descriptor_pool_create flag_){return flag==flag_.flag;}
+	}flag;
+
+	F_descriptor_pool_create():flags(0){}
+	F_descriptor_pool_create(const uint32_t flag_):flags(flag_){}
+
+	operator VkDescriptorPoolCreateFlagBits&(){return vk_flag;}
+	operator VkDescriptorPoolCreateFlagBits*(){return &vk_flag; }
+	operator VkDescriptorPoolCreateFlagBits*()const{return const_cast<VkDescriptorPoolCreateFlagBits*const>(&vk_flag); }
+
+	operator VkDescriptorPoolCreateFlags&(){return flags; }
+	operator VkDescriptorPoolCreateFlags*()const{return const_cast<VkDescriptorPoolCreateFlags*const>(&flags); }
+	operator VkDescriptorPoolCreateFlags*(){return &flags; }
+
+	F_descriptor_pool_create& operator=(const F_descriptor_pool_create flag_){flags=flag_.flags; return *this;}
+	F_descriptor_pool_create& operator|=(const F_descriptor_pool_create flag_){flags|=flag_.flags; return *this;}
+	F_descriptor_pool_create& operator&=(const F_descriptor_pool_create flag_){flags&=flag_.flags; return *this;}
+	F_descriptor_pool_create& operator^=(const F_descriptor_pool_create flag_){flags^=flag_.flags;return *this;}
+	F_descriptor_pool_create operator~(){return ~flags;}
+
+	bool operator==(const F_descriptor_pool_create flag_){return flags==flag_.flags;}
 	bool operator!=(const F_descriptor_pool_create flag_){return !(*this==flag_);}
-	F_descriptor_pool_create& clear(){flag = 0;return *this;}
+
+	F_descriptor_pool_create& clear(){flags = 0;return *this;}
 	F_descriptor_pool_create all_flags(){ return b_free_descriptor_set;}
-	F_descriptor_pool_create& on_free_descriptor_set(){ flag |= b_free_descriptor_set; return *this; }
-	F_descriptor_pool_create& off_free_descriptor_set(){ flag &= ~b_free_descriptor_set; return *this; }
+	F_descriptor_pool_create& on_free_descriptor_set(){ flags |= b_free_descriptor_set; return *this; }
+	F_descriptor_pool_create& off_free_descriptor_set(){ flags &= ~b_free_descriptor_set; return *this; }
 };
-inline F_descriptor_pool_create operator&(const F_descriptor_pool_create f1_, const F_descriptor_pool_create f2_){return f1_.flag&f2_.flag;}
-inline F_descriptor_pool_create operator&(const F_descriptor_pool_create f1_, const F_descriptor_pool_create::B f2_){return f1_.flag&uint32_t(f2_);}
-inline F_descriptor_pool_create operator&(const F_descriptor_pool_create::B f1_, const F_descriptor_pool_create f2_){return uint32_t(f1_)&f2_.flag;}
-inline F_descriptor_pool_create operator&(const F_descriptor_pool_create f1_, const VkDescriptorPoolCreateFlagBits f2_){return f1_.flag&uint32_t(f2_);}
-inline F_descriptor_pool_create operator&(const VkDescriptorPoolCreateFlagBits f1_, const F_descriptor_pool_create f2_){return uint32_t(f1_)&f2_.flag;}
-inline F_descriptor_pool_create operator|(const F_descriptor_pool_create f1_, const F_descriptor_pool_create f2_){return f1_.flag|f2_.flag;}
-inline F_descriptor_pool_create operator^(const F_descriptor_pool_create f1_, const F_descriptor_pool_create f2_){return f1_.flag^f2_.flag;}
 /*	VkDependencyFlagBits*/
-template<> struct my_class_convert<F_dependency> { using type = VkDependencyFlagBits;};template<> struct my_class_convert<VkDependencyFlagBits> { using type = F_dependency;};union F_dependency {
-	uint32_t flag;
+union F_dependency {
+	VkDependencyFlags flags;
 	VkDependencyFlagBits vk_flag;
-	enum B{
+	enum {
 			/* Dependency is per pixel region  */
 		b_by_region = VK_DEPENDENCY_BY_REGION_BIT,
-	};
-	F_dependency():flag(0){}
-	F_dependency(const uint32_t flag_):flag(flag_){}
-	//F_dependency(const B flag_):flag(flag_){}
-	//F_dependency(const VkDependencyFlagBits flag_):vk_flag(flag_){}
-	//operator uint32_t(){return flag;}
-	operator VkDependencyFlagBits*(){ return reinterpret_cast<VkDependencyFlagBits*>(this); }
-	operator VkDependencyFlagBits(){return vk_flag;}
-	operator VkDependencyFlags&(){ return flag; }
-	F_dependency& operator=(const F_dependency flag_){flag=flag_.flag; return *this;}
-	F_dependency& operator|=(const F_dependency flag_){flag|=flag_.flag; return *this;}
-	F_dependency& operator&=(const F_dependency flag_){flag&=flag_.flag; return *this;}
-	F_dependency& operator^=(const F_dependency flag_){flag^=flag_.flag;return *this;}
-	F_dependency operator~(){return ~flag;}
-	bool operator==(const F_dependency flag_){return flag==flag_.flag;}
+	}flag;
+
+	F_dependency():flags(0){}
+	F_dependency(const uint32_t flag_):flags(flag_){}
+
+	operator VkDependencyFlagBits&(){return vk_flag;}
+	operator VkDependencyFlagBits*(){return &vk_flag; }
+	operator VkDependencyFlagBits*()const{return const_cast<VkDependencyFlagBits*const>(&vk_flag); }
+
+	operator VkDependencyFlags&(){return flags; }
+	operator VkDependencyFlags*()const{return const_cast<VkDependencyFlags*const>(&flags); }
+	operator VkDependencyFlags*(){return &flags; }
+
+	F_dependency& operator=(const F_dependency flag_){flags=flag_.flags; return *this;}
+	F_dependency& operator|=(const F_dependency flag_){flags|=flag_.flags; return *this;}
+	F_dependency& operator&=(const F_dependency flag_){flags&=flag_.flags; return *this;}
+	F_dependency& operator^=(const F_dependency flag_){flags^=flag_.flags;return *this;}
+	F_dependency operator~(){return ~flags;}
+
+	bool operator==(const F_dependency flag_){return flags==flag_.flags;}
 	bool operator!=(const F_dependency flag_){return !(*this==flag_);}
-	F_dependency& clear(){flag = 0;return *this;}
+
+	F_dependency& clear(){flags = 0;return *this;}
 	F_dependency all_flags(){ return b_by_region;}
-	F_dependency& on_by_region(){ flag |= b_by_region; return *this; }
-	F_dependency& off_by_region(){ flag &= ~b_by_region; return *this; }
+	F_dependency& on_by_region(){ flags |= b_by_region; return *this; }
+	F_dependency& off_by_region(){ flags &= ~b_by_region; return *this; }
 };
-inline F_dependency operator&(const F_dependency f1_, const F_dependency f2_){return f1_.flag&f2_.flag;}
-inline F_dependency operator&(const F_dependency f1_, const F_dependency::B f2_){return f1_.flag&uint32_t(f2_);}
-inline F_dependency operator&(const F_dependency::B f1_, const F_dependency f2_){return uint32_t(f1_)&f2_.flag;}
-inline F_dependency operator&(const F_dependency f1_, const VkDependencyFlagBits f2_){return f1_.flag&uint32_t(f2_);}
-inline F_dependency operator&(const VkDependencyFlagBits f1_, const F_dependency f2_){return uint32_t(f1_)&f2_.flag;}
-inline F_dependency operator|(const F_dependency f1_, const F_dependency f2_){return f1_.flag|f2_.flag;}
-inline F_dependency operator^(const F_dependency f1_, const F_dependency f2_){return f1_.flag^f2_.flag;}
 /*	VkDisplayPlaneAlphaFlagBitsKHR*/
-template<> struct my_class_convert<F_display_plane_alpha_KHR> { using type = VkDisplayPlaneAlphaFlagBitsKHR;};template<> struct my_class_convert<VkDisplayPlaneAlphaFlagBitsKHR> { using type = F_display_plane_alpha_KHR;};union F_display_plane_alpha_KHR {
-	uint32_t flag;
+union F_display_plane_alpha_KHR {
+	VkDisplayPlaneAlphaFlagsKHR flags;
 	VkDisplayPlaneAlphaFlagBitsKHR vk_flag;
-	enum B{
+	enum {
 		b_opaque_khr = VK_DISPLAY_PLANE_ALPHA_OPAQUE_BIT_KHR,
 		b_global_khr = VK_DISPLAY_PLANE_ALPHA_GLOBAL_BIT_KHR,
 		b_per_pixel_khr = VK_DISPLAY_PLANE_ALPHA_PER_PIXEL_BIT_KHR,
 		b_per_pixel_premultiplied_khr = VK_DISPLAY_PLANE_ALPHA_PER_PIXEL_PREMULTIPLIED_BIT_KHR,
-	};
-	F_display_plane_alpha_KHR():flag(0){}
-	F_display_plane_alpha_KHR(const uint32_t flag_):flag(flag_){}
-	//F_display_plane_alpha_KHR(const B flag_):flag(flag_){}
-	//F_display_plane_alpha_KHR(const VkDisplayPlaneAlphaFlagBitsKHR flag_):vk_flag(flag_){}
-	//operator uint32_t(){return flag;}
-	operator VkDisplayPlaneAlphaFlagBitsKHR*(){ return reinterpret_cast<VkDisplayPlaneAlphaFlagBitsKHR*>(this); }
-	operator VkDisplayPlaneAlphaFlagBitsKHR(){return vk_flag;}
-	operator VkDisplayPlaneAlphaFlagsKHR&(){ return flag; }
-	F_display_plane_alpha_KHR& operator=(const F_display_plane_alpha_KHR flag_){flag=flag_.flag; return *this;}
-	F_display_plane_alpha_KHR& operator|=(const F_display_plane_alpha_KHR flag_){flag|=flag_.flag; return *this;}
-	F_display_plane_alpha_KHR& operator&=(const F_display_plane_alpha_KHR flag_){flag&=flag_.flag; return *this;}
-	F_display_plane_alpha_KHR& operator^=(const F_display_plane_alpha_KHR flag_){flag^=flag_.flag;return *this;}
-	F_display_plane_alpha_KHR operator~(){return ~flag;}
-	bool operator==(const F_display_plane_alpha_KHR flag_){return flag==flag_.flag;}
+	}flag;
+
+	F_display_plane_alpha_KHR():flags(0){}
+	F_display_plane_alpha_KHR(const uint32_t flag_):flags(flag_){}
+
+	operator VkDisplayPlaneAlphaFlagBitsKHR&(){return vk_flag;}
+	operator VkDisplayPlaneAlphaFlagBitsKHR*(){return &vk_flag; }
+	operator VkDisplayPlaneAlphaFlagBitsKHR*()const{return const_cast<VkDisplayPlaneAlphaFlagBitsKHR*const>(&vk_flag); }
+
+	operator VkDisplayPlaneAlphaFlagsKHR&(){return flags; }
+	operator VkDisplayPlaneAlphaFlagsKHR*()const{return const_cast<VkDisplayPlaneAlphaFlagsKHR*const>(&flags); }
+	operator VkDisplayPlaneAlphaFlagsKHR*(){return &flags; }
+
+	F_display_plane_alpha_KHR& operator=(const F_display_plane_alpha_KHR flag_){flags=flag_.flags; return *this;}
+	F_display_plane_alpha_KHR& operator|=(const F_display_plane_alpha_KHR flag_){flags|=flag_.flags; return *this;}
+	F_display_plane_alpha_KHR& operator&=(const F_display_plane_alpha_KHR flag_){flags&=flag_.flags; return *this;}
+	F_display_plane_alpha_KHR& operator^=(const F_display_plane_alpha_KHR flag_){flags^=flag_.flags;return *this;}
+	F_display_plane_alpha_KHR operator~(){return ~flags;}
+
+	bool operator==(const F_display_plane_alpha_KHR flag_){return flags==flag_.flags;}
 	bool operator!=(const F_display_plane_alpha_KHR flag_){return !(*this==flag_);}
-	F_display_plane_alpha_KHR& clear(){flag = 0;return *this;}
+
+	F_display_plane_alpha_KHR& clear(){flags = 0;return *this;}
 	F_display_plane_alpha_KHR all_flags(){ return b_opaque_khr | b_global_khr | b_per_pixel_khr | b_per_pixel_premultiplied_khr;}
-	F_display_plane_alpha_KHR& on_opaque_khr(){ flag |= b_opaque_khr; return *this; }
-	F_display_plane_alpha_KHR& off_opaque_khr(){ flag &= ~b_opaque_khr; return *this; }
-	F_display_plane_alpha_KHR& on_global_khr(){ flag |= b_global_khr; return *this; }
-	F_display_plane_alpha_KHR& off_global_khr(){ flag &= ~b_global_khr; return *this; }
-	F_display_plane_alpha_KHR& on_per_pixel_khr(){ flag |= b_per_pixel_khr; return *this; }
-	F_display_plane_alpha_KHR& off_per_pixel_khr(){ flag &= ~b_per_pixel_khr; return *this; }
-	F_display_plane_alpha_KHR& on_per_pixel_premultiplied_khr(){ flag |= b_per_pixel_premultiplied_khr; return *this; }
-	F_display_plane_alpha_KHR& off_per_pixel_premultiplied_khr(){ flag &= ~b_per_pixel_premultiplied_khr; return *this; }
+	F_display_plane_alpha_KHR& on_opaque_khr(){ flags |= b_opaque_khr; return *this; }
+	F_display_plane_alpha_KHR& off_opaque_khr(){ flags &= ~b_opaque_khr; return *this; }
+	F_display_plane_alpha_KHR& on_global_khr(){ flags |= b_global_khr; return *this; }
+	F_display_plane_alpha_KHR& off_global_khr(){ flags &= ~b_global_khr; return *this; }
+	F_display_plane_alpha_KHR& on_per_pixel_khr(){ flags |= b_per_pixel_khr; return *this; }
+	F_display_plane_alpha_KHR& off_per_pixel_khr(){ flags &= ~b_per_pixel_khr; return *this; }
+	F_display_plane_alpha_KHR& on_per_pixel_premultiplied_khr(){ flags |= b_per_pixel_premultiplied_khr; return *this; }
+	F_display_plane_alpha_KHR& off_per_pixel_premultiplied_khr(){ flags &= ~b_per_pixel_premultiplied_khr; return *this; }
 };
-inline F_display_plane_alpha_KHR operator&(const F_display_plane_alpha_KHR f1_, const F_display_plane_alpha_KHR f2_){return f1_.flag&f2_.flag;}
-inline F_display_plane_alpha_KHR operator&(const F_display_plane_alpha_KHR f1_, const F_display_plane_alpha_KHR::B f2_){return f1_.flag&uint32_t(f2_);}
-inline F_display_plane_alpha_KHR operator&(const F_display_plane_alpha_KHR::B f1_, const F_display_plane_alpha_KHR f2_){return uint32_t(f1_)&f2_.flag;}
-inline F_display_plane_alpha_KHR operator&(const F_display_plane_alpha_KHR f1_, const VkDisplayPlaneAlphaFlagBitsKHR f2_){return f1_.flag&uint32_t(f2_);}
-inline F_display_plane_alpha_KHR operator&(const VkDisplayPlaneAlphaFlagBitsKHR f1_, const F_display_plane_alpha_KHR f2_){return uint32_t(f1_)&f2_.flag;}
-inline F_display_plane_alpha_KHR operator|(const F_display_plane_alpha_KHR f1_, const F_display_plane_alpha_KHR f2_){return f1_.flag|f2_.flag;}
-inline F_display_plane_alpha_KHR operator^(const F_display_plane_alpha_KHR f1_, const F_display_plane_alpha_KHR f2_){return f1_.flag^f2_.flag;}
 /*	VkCompositeAlphaFlagBitsKHR*/
-template<> struct my_class_convert<F_composite_alpha_KHR> { using type = VkCompositeAlphaFlagBitsKHR;};template<> struct my_class_convert<VkCompositeAlphaFlagBitsKHR> { using type = F_composite_alpha_KHR;};union F_composite_alpha_KHR {
-	uint32_t flag;
+union F_composite_alpha_KHR {
+	VkCompositeAlphaFlagsKHR flags;
 	VkCompositeAlphaFlagBitsKHR vk_flag;
-	enum B{
+	enum {
 		b_opaque_khr = VK_COMPOSITE_ALPHA_OPAQUE_BIT_KHR,
 		b_pre_multiplied_khr = VK_COMPOSITE_ALPHA_PRE_MULTIPLIED_BIT_KHR,
 		b_post_multiplied_khr = VK_COMPOSITE_ALPHA_POST_MULTIPLIED_BIT_KHR,
 		b_inherit_khr = VK_COMPOSITE_ALPHA_INHERIT_BIT_KHR,
-	};
-	F_composite_alpha_KHR():flag(0){}
-	F_composite_alpha_KHR(const uint32_t flag_):flag(flag_){}
-	//F_composite_alpha_KHR(const B flag_):flag(flag_){}
-	//F_composite_alpha_KHR(const VkCompositeAlphaFlagBitsKHR flag_):vk_flag(flag_){}
-	//operator uint32_t(){return flag;}
-	operator VkCompositeAlphaFlagBitsKHR*(){ return reinterpret_cast<VkCompositeAlphaFlagBitsKHR*>(this); }
-	operator VkCompositeAlphaFlagBitsKHR(){return vk_flag;}
-	operator VkCompositeAlphaFlagsKHR&(){ return flag; }
-	F_composite_alpha_KHR& operator=(const F_composite_alpha_KHR flag_){flag=flag_.flag; return *this;}
-	F_composite_alpha_KHR& operator|=(const F_composite_alpha_KHR flag_){flag|=flag_.flag; return *this;}
-	F_composite_alpha_KHR& operator&=(const F_composite_alpha_KHR flag_){flag&=flag_.flag; return *this;}
-	F_composite_alpha_KHR& operator^=(const F_composite_alpha_KHR flag_){flag^=flag_.flag;return *this;}
-	F_composite_alpha_KHR operator~(){return ~flag;}
-	bool operator==(const F_composite_alpha_KHR flag_){return flag==flag_.flag;}
+	}flag;
+
+	F_composite_alpha_KHR():flags(0){}
+	F_composite_alpha_KHR(const uint32_t flag_):flags(flag_){}
+
+	operator VkCompositeAlphaFlagBitsKHR&(){return vk_flag;}
+	operator VkCompositeAlphaFlagBitsKHR*(){return &vk_flag; }
+	operator VkCompositeAlphaFlagBitsKHR*()const{return const_cast<VkCompositeAlphaFlagBitsKHR*const>(&vk_flag); }
+
+	operator VkCompositeAlphaFlagsKHR&(){return flags; }
+	operator VkCompositeAlphaFlagsKHR*()const{return const_cast<VkCompositeAlphaFlagsKHR*const>(&flags); }
+	operator VkCompositeAlphaFlagsKHR*(){return &flags; }
+
+	F_composite_alpha_KHR& operator=(const F_composite_alpha_KHR flag_){flags=flag_.flags; return *this;}
+	F_composite_alpha_KHR& operator|=(const F_composite_alpha_KHR flag_){flags|=flag_.flags; return *this;}
+	F_composite_alpha_KHR& operator&=(const F_composite_alpha_KHR flag_){flags&=flag_.flags; return *this;}
+	F_composite_alpha_KHR& operator^=(const F_composite_alpha_KHR flag_){flags^=flag_.flags;return *this;}
+	F_composite_alpha_KHR operator~(){return ~flags;}
+
+	bool operator==(const F_composite_alpha_KHR flag_){return flags==flag_.flags;}
 	bool operator!=(const F_composite_alpha_KHR flag_){return !(*this==flag_);}
-	F_composite_alpha_KHR& clear(){flag = 0;return *this;}
+
+	F_composite_alpha_KHR& clear(){flags = 0;return *this;}
 	F_composite_alpha_KHR all_flags(){ return b_opaque_khr | b_pre_multiplied_khr | b_post_multiplied_khr | b_inherit_khr;}
-	F_composite_alpha_KHR& on_opaque_khr(){ flag |= b_opaque_khr; return *this; }
-	F_composite_alpha_KHR& off_opaque_khr(){ flag &= ~b_opaque_khr; return *this; }
-	F_composite_alpha_KHR& on_pre_multiplied_khr(){ flag |= b_pre_multiplied_khr; return *this; }
-	F_composite_alpha_KHR& off_pre_multiplied_khr(){ flag &= ~b_pre_multiplied_khr; return *this; }
-	F_composite_alpha_KHR& on_post_multiplied_khr(){ flag |= b_post_multiplied_khr; return *this; }
-	F_composite_alpha_KHR& off_post_multiplied_khr(){ flag &= ~b_post_multiplied_khr; return *this; }
-	F_composite_alpha_KHR& on_inherit_khr(){ flag |= b_inherit_khr; return *this; }
-	F_composite_alpha_KHR& off_inherit_khr(){ flag &= ~b_inherit_khr; return *this; }
+	F_composite_alpha_KHR& on_opaque_khr(){ flags |= b_opaque_khr; return *this; }
+	F_composite_alpha_KHR& off_opaque_khr(){ flags &= ~b_opaque_khr; return *this; }
+	F_composite_alpha_KHR& on_pre_multiplied_khr(){ flags |= b_pre_multiplied_khr; return *this; }
+	F_composite_alpha_KHR& off_pre_multiplied_khr(){ flags &= ~b_pre_multiplied_khr; return *this; }
+	F_composite_alpha_KHR& on_post_multiplied_khr(){ flags |= b_post_multiplied_khr; return *this; }
+	F_composite_alpha_KHR& off_post_multiplied_khr(){ flags &= ~b_post_multiplied_khr; return *this; }
+	F_composite_alpha_KHR& on_inherit_khr(){ flags |= b_inherit_khr; return *this; }
+	F_composite_alpha_KHR& off_inherit_khr(){ flags &= ~b_inherit_khr; return *this; }
 };
-inline F_composite_alpha_KHR operator&(const F_composite_alpha_KHR f1_, const F_composite_alpha_KHR f2_){return f1_.flag&f2_.flag;}
-inline F_composite_alpha_KHR operator&(const F_composite_alpha_KHR f1_, const F_composite_alpha_KHR::B f2_){return f1_.flag&uint32_t(f2_);}
-inline F_composite_alpha_KHR operator&(const F_composite_alpha_KHR::B f1_, const F_composite_alpha_KHR f2_){return uint32_t(f1_)&f2_.flag;}
-inline F_composite_alpha_KHR operator&(const F_composite_alpha_KHR f1_, const VkCompositeAlphaFlagBitsKHR f2_){return f1_.flag&uint32_t(f2_);}
-inline F_composite_alpha_KHR operator&(const VkCompositeAlphaFlagBitsKHR f1_, const F_composite_alpha_KHR f2_){return uint32_t(f1_)&f2_.flag;}
-inline F_composite_alpha_KHR operator|(const F_composite_alpha_KHR f1_, const F_composite_alpha_KHR f2_){return f1_.flag|f2_.flag;}
-inline F_composite_alpha_KHR operator^(const F_composite_alpha_KHR f1_, const F_composite_alpha_KHR f2_){return f1_.flag^f2_.flag;}
 /*	VkSurfaceTransformFlagBitsKHR*/
-template<> struct my_class_convert<F_surface_transform_KHR> { using type = VkSurfaceTransformFlagBitsKHR;};template<> struct my_class_convert<VkSurfaceTransformFlagBitsKHR> { using type = F_surface_transform_KHR;};union F_surface_transform_KHR {
-	uint32_t flag;
+union F_surface_transform_KHR {
+	VkSurfaceTransformFlagsKHR flags;
 	VkSurfaceTransformFlagBitsKHR vk_flag;
-	enum B{
+	enum {
 		b_identity_khr = VK_SURFACE_TRANSFORM_IDENTITY_BIT_KHR,
 		b_rotate_90_khr = VK_SURFACE_TRANSFORM_ROTATE_90_BIT_KHR,
 		b_rotate_180_khr = VK_SURFACE_TRANSFORM_ROTATE_180_BIT_KHR,
@@ -3279,184 +3176,180 @@ template<> struct my_class_convert<F_surface_transform_KHR> { using type = VkSur
 		b_horizontal_mirror_rotate_180_khr = VK_SURFACE_TRANSFORM_HORIZONTAL_MIRROR_ROTATE_180_BIT_KHR,
 		b_horizontal_mirror_rotate_270_khr = VK_SURFACE_TRANSFORM_HORIZONTAL_MIRROR_ROTATE_270_BIT_KHR,
 		b_inherit_khr = VK_SURFACE_TRANSFORM_INHERIT_BIT_KHR,
-	};
-	F_surface_transform_KHR():flag(0){}
-	F_surface_transform_KHR(const uint32_t flag_):flag(flag_){}
-	//F_surface_transform_KHR(const B flag_):flag(flag_){}
-	//F_surface_transform_KHR(const VkSurfaceTransformFlagBitsKHR flag_):vk_flag(flag_){}
-	//operator uint32_t(){return flag;}
-	operator VkSurfaceTransformFlagBitsKHR*(){ return reinterpret_cast<VkSurfaceTransformFlagBitsKHR*>(this); }
-	operator VkSurfaceTransformFlagBitsKHR(){return vk_flag;}
-	operator VkSurfaceTransformFlagsKHR&(){ return flag; }
-	F_surface_transform_KHR& operator=(const F_surface_transform_KHR flag_){flag=flag_.flag; return *this;}
-	F_surface_transform_KHR& operator|=(const F_surface_transform_KHR flag_){flag|=flag_.flag; return *this;}
-	F_surface_transform_KHR& operator&=(const F_surface_transform_KHR flag_){flag&=flag_.flag; return *this;}
-	F_surface_transform_KHR& operator^=(const F_surface_transform_KHR flag_){flag^=flag_.flag;return *this;}
-	F_surface_transform_KHR operator~(){return ~flag;}
-	bool operator==(const F_surface_transform_KHR flag_){return flag==flag_.flag;}
+	}flag;
+
+	F_surface_transform_KHR():flags(0){}
+	F_surface_transform_KHR(const uint32_t flag_):flags(flag_){}
+
+	operator VkSurfaceTransformFlagBitsKHR&(){return vk_flag;}
+	operator VkSurfaceTransformFlagBitsKHR*(){return &vk_flag; }
+	operator VkSurfaceTransformFlagBitsKHR*()const{return const_cast<VkSurfaceTransformFlagBitsKHR*const>(&vk_flag); }
+
+	operator VkSurfaceTransformFlagsKHR&(){return flags; }
+	operator VkSurfaceTransformFlagsKHR*()const{return const_cast<VkSurfaceTransformFlagsKHR*const>(&flags); }
+	operator VkSurfaceTransformFlagsKHR*(){return &flags; }
+
+	F_surface_transform_KHR& operator=(const F_surface_transform_KHR flag_){flags=flag_.flags; return *this;}
+	F_surface_transform_KHR& operator|=(const F_surface_transform_KHR flag_){flags|=flag_.flags; return *this;}
+	F_surface_transform_KHR& operator&=(const F_surface_transform_KHR flag_){flags&=flag_.flags; return *this;}
+	F_surface_transform_KHR& operator^=(const F_surface_transform_KHR flag_){flags^=flag_.flags;return *this;}
+	F_surface_transform_KHR operator~(){return ~flags;}
+
+	bool operator==(const F_surface_transform_KHR flag_){return flags==flag_.flags;}
 	bool operator!=(const F_surface_transform_KHR flag_){return !(*this==flag_);}
-	F_surface_transform_KHR& clear(){flag = 0;return *this;}
+
+	F_surface_transform_KHR& clear(){flags = 0;return *this;}
 	F_surface_transform_KHR all_flags(){ return b_identity_khr | b_rotate_90_khr | b_rotate_180_khr | b_rotate_270_khr | b_horizontal_mirror_khr | b_horizontal_mirror_rotate_90_khr | b_horizontal_mirror_rotate_180_khr | b_horizontal_mirror_rotate_270_khr | b_inherit_khr;}
-	F_surface_transform_KHR& on_identity_khr(){ flag |= b_identity_khr; return *this; }
-	F_surface_transform_KHR& off_identity_khr(){ flag &= ~b_identity_khr; return *this; }
-	F_surface_transform_KHR& on_rotate_90_khr(){ flag |= b_rotate_90_khr; return *this; }
-	F_surface_transform_KHR& off_rotate_90_khr(){ flag &= ~b_rotate_90_khr; return *this; }
-	F_surface_transform_KHR& on_rotate_180_khr(){ flag |= b_rotate_180_khr; return *this; }
-	F_surface_transform_KHR& off_rotate_180_khr(){ flag &= ~b_rotate_180_khr; return *this; }
-	F_surface_transform_KHR& on_rotate_270_khr(){ flag |= b_rotate_270_khr; return *this; }
-	F_surface_transform_KHR& off_rotate_270_khr(){ flag &= ~b_rotate_270_khr; return *this; }
-	F_surface_transform_KHR& on_horizontal_mirror_khr(){ flag |= b_horizontal_mirror_khr; return *this; }
-	F_surface_transform_KHR& off_horizontal_mirror_khr(){ flag &= ~b_horizontal_mirror_khr; return *this; }
-	F_surface_transform_KHR& on_horizontal_mirror_rotate_90_khr(){ flag |= b_horizontal_mirror_rotate_90_khr; return *this; }
-	F_surface_transform_KHR& off_horizontal_mirror_rotate_90_khr(){ flag &= ~b_horizontal_mirror_rotate_90_khr; return *this; }
-	F_surface_transform_KHR& on_horizontal_mirror_rotate_180_khr(){ flag |= b_horizontal_mirror_rotate_180_khr; return *this; }
-	F_surface_transform_KHR& off_horizontal_mirror_rotate_180_khr(){ flag &= ~b_horizontal_mirror_rotate_180_khr; return *this; }
-	F_surface_transform_KHR& on_horizontal_mirror_rotate_270_khr(){ flag |= b_horizontal_mirror_rotate_270_khr; return *this; }
-	F_surface_transform_KHR& off_horizontal_mirror_rotate_270_khr(){ flag &= ~b_horizontal_mirror_rotate_270_khr; return *this; }
-	F_surface_transform_KHR& on_inherit_khr(){ flag |= b_inherit_khr; return *this; }
-	F_surface_transform_KHR& off_inherit_khr(){ flag &= ~b_inherit_khr; return *this; }
+	F_surface_transform_KHR& on_identity_khr(){ flags |= b_identity_khr; return *this; }
+	F_surface_transform_KHR& off_identity_khr(){ flags &= ~b_identity_khr; return *this; }
+	F_surface_transform_KHR& on_rotate_90_khr(){ flags |= b_rotate_90_khr; return *this; }
+	F_surface_transform_KHR& off_rotate_90_khr(){ flags &= ~b_rotate_90_khr; return *this; }
+	F_surface_transform_KHR& on_rotate_180_khr(){ flags |= b_rotate_180_khr; return *this; }
+	F_surface_transform_KHR& off_rotate_180_khr(){ flags &= ~b_rotate_180_khr; return *this; }
+	F_surface_transform_KHR& on_rotate_270_khr(){ flags |= b_rotate_270_khr; return *this; }
+	F_surface_transform_KHR& off_rotate_270_khr(){ flags &= ~b_rotate_270_khr; return *this; }
+	F_surface_transform_KHR& on_horizontal_mirror_khr(){ flags |= b_horizontal_mirror_khr; return *this; }
+	F_surface_transform_KHR& off_horizontal_mirror_khr(){ flags &= ~b_horizontal_mirror_khr; return *this; }
+	F_surface_transform_KHR& on_horizontal_mirror_rotate_90_khr(){ flags |= b_horizontal_mirror_rotate_90_khr; return *this; }
+	F_surface_transform_KHR& off_horizontal_mirror_rotate_90_khr(){ flags &= ~b_horizontal_mirror_rotate_90_khr; return *this; }
+	F_surface_transform_KHR& on_horizontal_mirror_rotate_180_khr(){ flags |= b_horizontal_mirror_rotate_180_khr; return *this; }
+	F_surface_transform_KHR& off_horizontal_mirror_rotate_180_khr(){ flags &= ~b_horizontal_mirror_rotate_180_khr; return *this; }
+	F_surface_transform_KHR& on_horizontal_mirror_rotate_270_khr(){ flags |= b_horizontal_mirror_rotate_270_khr; return *this; }
+	F_surface_transform_KHR& off_horizontal_mirror_rotate_270_khr(){ flags &= ~b_horizontal_mirror_rotate_270_khr; return *this; }
+	F_surface_transform_KHR& on_inherit_khr(){ flags |= b_inherit_khr; return *this; }
+	F_surface_transform_KHR& off_inherit_khr(){ flags &= ~b_inherit_khr; return *this; }
 };
-inline F_surface_transform_KHR operator&(const F_surface_transform_KHR f1_, const F_surface_transform_KHR f2_){return f1_.flag&f2_.flag;}
-inline F_surface_transform_KHR operator&(const F_surface_transform_KHR f1_, const F_surface_transform_KHR::B f2_){return f1_.flag&uint32_t(f2_);}
-inline F_surface_transform_KHR operator&(const F_surface_transform_KHR::B f1_, const F_surface_transform_KHR f2_){return uint32_t(f1_)&f2_.flag;}
-inline F_surface_transform_KHR operator&(const F_surface_transform_KHR f1_, const VkSurfaceTransformFlagBitsKHR f2_){return f1_.flag&uint32_t(f2_);}
-inline F_surface_transform_KHR operator&(const VkSurfaceTransformFlagBitsKHR f1_, const F_surface_transform_KHR f2_){return uint32_t(f1_)&f2_.flag;}
-inline F_surface_transform_KHR operator|(const F_surface_transform_KHR f1_, const F_surface_transform_KHR f2_){return f1_.flag|f2_.flag;}
-inline F_surface_transform_KHR operator^(const F_surface_transform_KHR f1_, const F_surface_transform_KHR f2_){return f1_.flag^f2_.flag;}
 /*	VkDebugReportFlagBitsEXT*/
-template<> struct my_class_convert<F_debug_report_EXT> { using type = VkDebugReportFlagBitsEXT;};template<> struct my_class_convert<VkDebugReportFlagBitsEXT> { using type = F_debug_report_EXT;};union F_debug_report_EXT {
-	uint32_t flag;
+union F_debug_report_EXT {
+	VkDebugReportFlagsEXT flags;
 	VkDebugReportFlagBitsEXT vk_flag;
-	enum B{
+	enum {
 		b_information_ext = VK_DEBUG_REPORT_INFORMATION_BIT_EXT,
 		b_warning_ext = VK_DEBUG_REPORT_WARNING_BIT_EXT,
 		b_performance_warning_ext = VK_DEBUG_REPORT_PERFORMANCE_WARNING_BIT_EXT,
 		b_error_ext = VK_DEBUG_REPORT_ERROR_BIT_EXT,
 		b_debug_ext = VK_DEBUG_REPORT_DEBUG_BIT_EXT,
-	};
-	F_debug_report_EXT():flag(0){}
-	F_debug_report_EXT(const uint32_t flag_):flag(flag_){}
-	//F_debug_report_EXT(const B flag_):flag(flag_){}
-	//F_debug_report_EXT(const VkDebugReportFlagBitsEXT flag_):vk_flag(flag_){}
-	//operator uint32_t(){return flag;}
-	operator VkDebugReportFlagBitsEXT*(){ return reinterpret_cast<VkDebugReportFlagBitsEXT*>(this); }
-	operator VkDebugReportFlagBitsEXT(){return vk_flag;}
-	operator VkDebugReportFlagsEXT&(){ return flag; }
-	F_debug_report_EXT& operator=(const F_debug_report_EXT flag_){flag=flag_.flag; return *this;}
-	F_debug_report_EXT& operator|=(const F_debug_report_EXT flag_){flag|=flag_.flag; return *this;}
-	F_debug_report_EXT& operator&=(const F_debug_report_EXT flag_){flag&=flag_.flag; return *this;}
-	F_debug_report_EXT& operator^=(const F_debug_report_EXT flag_){flag^=flag_.flag;return *this;}
-	F_debug_report_EXT operator~(){return ~flag;}
-	bool operator==(const F_debug_report_EXT flag_){return flag==flag_.flag;}
+	}flag;
+
+	F_debug_report_EXT():flags(0){}
+	F_debug_report_EXT(const uint32_t flag_):flags(flag_){}
+
+	operator VkDebugReportFlagBitsEXT&(){return vk_flag;}
+	operator VkDebugReportFlagBitsEXT*(){return &vk_flag; }
+	operator VkDebugReportFlagBitsEXT*()const{return const_cast<VkDebugReportFlagBitsEXT*const>(&vk_flag); }
+
+	operator VkDebugReportFlagsEXT&(){return flags; }
+	operator VkDebugReportFlagsEXT*()const{return const_cast<VkDebugReportFlagsEXT*const>(&flags); }
+	operator VkDebugReportFlagsEXT*(){return &flags; }
+
+	F_debug_report_EXT& operator=(const F_debug_report_EXT flag_){flags=flag_.flags; return *this;}
+	F_debug_report_EXT& operator|=(const F_debug_report_EXT flag_){flags|=flag_.flags; return *this;}
+	F_debug_report_EXT& operator&=(const F_debug_report_EXT flag_){flags&=flag_.flags; return *this;}
+	F_debug_report_EXT& operator^=(const F_debug_report_EXT flag_){flags^=flag_.flags;return *this;}
+	F_debug_report_EXT operator~(){return ~flags;}
+
+	bool operator==(const F_debug_report_EXT flag_){return flags==flag_.flags;}
 	bool operator!=(const F_debug_report_EXT flag_){return !(*this==flag_);}
-	F_debug_report_EXT& clear(){flag = 0;return *this;}
+
+	F_debug_report_EXT& clear(){flags = 0;return *this;}
 	F_debug_report_EXT all_flags(){ return b_information_ext | b_warning_ext | b_performance_warning_ext | b_error_ext | b_debug_ext;}
-	F_debug_report_EXT& on_information_ext(){ flag |= b_information_ext; return *this; }
-	F_debug_report_EXT& off_information_ext(){ flag &= ~b_information_ext; return *this; }
-	F_debug_report_EXT& on_warning_ext(){ flag |= b_warning_ext; return *this; }
-	F_debug_report_EXT& off_warning_ext(){ flag &= ~b_warning_ext; return *this; }
-	F_debug_report_EXT& on_performance_warning_ext(){ flag |= b_performance_warning_ext; return *this; }
-	F_debug_report_EXT& off_performance_warning_ext(){ flag &= ~b_performance_warning_ext; return *this; }
-	F_debug_report_EXT& on_error_ext(){ flag |= b_error_ext; return *this; }
-	F_debug_report_EXT& off_error_ext(){ flag &= ~b_error_ext; return *this; }
-	F_debug_report_EXT& on_debug_ext(){ flag |= b_debug_ext; return *this; }
-	F_debug_report_EXT& off_debug_ext(){ flag &= ~b_debug_ext; return *this; }
+	F_debug_report_EXT& on_information_ext(){ flags |= b_information_ext; return *this; }
+	F_debug_report_EXT& off_information_ext(){ flags &= ~b_information_ext; return *this; }
+	F_debug_report_EXT& on_warning_ext(){ flags |= b_warning_ext; return *this; }
+	F_debug_report_EXT& off_warning_ext(){ flags &= ~b_warning_ext; return *this; }
+	F_debug_report_EXT& on_performance_warning_ext(){ flags |= b_performance_warning_ext; return *this; }
+	F_debug_report_EXT& off_performance_warning_ext(){ flags &= ~b_performance_warning_ext; return *this; }
+	F_debug_report_EXT& on_error_ext(){ flags |= b_error_ext; return *this; }
+	F_debug_report_EXT& off_error_ext(){ flags &= ~b_error_ext; return *this; }
+	F_debug_report_EXT& on_debug_ext(){ flags |= b_debug_ext; return *this; }
+	F_debug_report_EXT& off_debug_ext(){ flags &= ~b_debug_ext; return *this; }
 };
-inline F_debug_report_EXT operator&(const F_debug_report_EXT f1_, const F_debug_report_EXT f2_){return f1_.flag&f2_.flag;}
-inline F_debug_report_EXT operator&(const F_debug_report_EXT f1_, const F_debug_report_EXT::B f2_){return f1_.flag&uint32_t(f2_);}
-inline F_debug_report_EXT operator&(const F_debug_report_EXT::B f1_, const F_debug_report_EXT f2_){return uint32_t(f1_)&f2_.flag;}
-inline F_debug_report_EXT operator&(const F_debug_report_EXT f1_, const VkDebugReportFlagBitsEXT f2_){return f1_.flag&uint32_t(f2_);}
-inline F_debug_report_EXT operator&(const VkDebugReportFlagBitsEXT f1_, const F_debug_report_EXT f2_){return uint32_t(f1_)&f2_.flag;}
-inline F_debug_report_EXT operator|(const F_debug_report_EXT f1_, const F_debug_report_EXT f2_){return f1_.flag|f2_.flag;}
-inline F_debug_report_EXT operator^(const F_debug_report_EXT f1_, const F_debug_report_EXT f2_){return f1_.flag^f2_.flag;}
 /*	VkExternalMemoryHandleTypeFlagBitsNV*/
-template<> struct my_class_convert<F_external_memory_handle_type_NV> { using type = VkExternalMemoryHandleTypeFlagBitsNV;};template<> struct my_class_convert<VkExternalMemoryHandleTypeFlagBitsNV> { using type = F_external_memory_handle_type_NV;};union F_external_memory_handle_type_NV {
-	uint32_t flag;
+union F_external_memory_handle_type_NV {
+	VkExternalMemoryHandleTypeFlagsNV flags;
 	VkExternalMemoryHandleTypeFlagBitsNV vk_flag;
-	enum B{
+	enum {
 		b_opaque_win32_nv = VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_BIT_NV,
 		b_opaque_win32_kmt_nv = VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT_NV,
 		b_d3d11_image_nv = VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_IMAGE_BIT_NV,
 		b_d3d11_image_kmt_nv = VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_IMAGE_KMT_BIT_NV,
-	};
-	F_external_memory_handle_type_NV():flag(0){}
-	F_external_memory_handle_type_NV(const uint32_t flag_):flag(flag_){}
-	//F_external_memory_handle_type_NV(const B flag_):flag(flag_){}
-	//F_external_memory_handle_type_NV(const VkExternalMemoryHandleTypeFlagBitsNV flag_):vk_flag(flag_){}
-	//operator uint32_t(){return flag;}
-	operator VkExternalMemoryHandleTypeFlagBitsNV*(){ return reinterpret_cast<VkExternalMemoryHandleTypeFlagBitsNV*>(this); }
-	operator VkExternalMemoryHandleTypeFlagBitsNV(){return vk_flag;}
-	operator VkExternalMemoryHandleTypeFlagsNV&(){ return flag; }
-	F_external_memory_handle_type_NV& operator=(const F_external_memory_handle_type_NV flag_){flag=flag_.flag; return *this;}
-	F_external_memory_handle_type_NV& operator|=(const F_external_memory_handle_type_NV flag_){flag|=flag_.flag; return *this;}
-	F_external_memory_handle_type_NV& operator&=(const F_external_memory_handle_type_NV flag_){flag&=flag_.flag; return *this;}
-	F_external_memory_handle_type_NV& operator^=(const F_external_memory_handle_type_NV flag_){flag^=flag_.flag;return *this;}
-	F_external_memory_handle_type_NV operator~(){return ~flag;}
-	bool operator==(const F_external_memory_handle_type_NV flag_){return flag==flag_.flag;}
+	}flag;
+
+	F_external_memory_handle_type_NV():flags(0){}
+	F_external_memory_handle_type_NV(const uint32_t flag_):flags(flag_){}
+
+	operator VkExternalMemoryHandleTypeFlagBitsNV&(){return vk_flag;}
+	operator VkExternalMemoryHandleTypeFlagBitsNV*(){return &vk_flag; }
+	operator VkExternalMemoryHandleTypeFlagBitsNV*()const{return const_cast<VkExternalMemoryHandleTypeFlagBitsNV*const>(&vk_flag); }
+
+	operator VkExternalMemoryHandleTypeFlagsNV&(){return flags; }
+	operator VkExternalMemoryHandleTypeFlagsNV*()const{return const_cast<VkExternalMemoryHandleTypeFlagsNV*const>(&flags); }
+	operator VkExternalMemoryHandleTypeFlagsNV*(){return &flags; }
+
+	F_external_memory_handle_type_NV& operator=(const F_external_memory_handle_type_NV flag_){flags=flag_.flags; return *this;}
+	F_external_memory_handle_type_NV& operator|=(const F_external_memory_handle_type_NV flag_){flags|=flag_.flags; return *this;}
+	F_external_memory_handle_type_NV& operator&=(const F_external_memory_handle_type_NV flag_){flags&=flag_.flags; return *this;}
+	F_external_memory_handle_type_NV& operator^=(const F_external_memory_handle_type_NV flag_){flags^=flag_.flags;return *this;}
+	F_external_memory_handle_type_NV operator~(){return ~flags;}
+
+	bool operator==(const F_external_memory_handle_type_NV flag_){return flags==flag_.flags;}
 	bool operator!=(const F_external_memory_handle_type_NV flag_){return !(*this==flag_);}
-	F_external_memory_handle_type_NV& clear(){flag = 0;return *this;}
+
+	F_external_memory_handle_type_NV& clear(){flags = 0;return *this;}
 	F_external_memory_handle_type_NV all_flags(){ return b_opaque_win32_nv | b_opaque_win32_kmt_nv | b_d3d11_image_nv | b_d3d11_image_kmt_nv;}
-	F_external_memory_handle_type_NV& on_opaque_win32_nv(){ flag |= b_opaque_win32_nv; return *this; }
-	F_external_memory_handle_type_NV& off_opaque_win32_nv(){ flag &= ~b_opaque_win32_nv; return *this; }
-	F_external_memory_handle_type_NV& on_opaque_win32_kmt_nv(){ flag |= b_opaque_win32_kmt_nv; return *this; }
-	F_external_memory_handle_type_NV& off_opaque_win32_kmt_nv(){ flag &= ~b_opaque_win32_kmt_nv; return *this; }
-	F_external_memory_handle_type_NV& on_d3d11_image_nv(){ flag |= b_d3d11_image_nv; return *this; }
-	F_external_memory_handle_type_NV& off_d3d11_image_nv(){ flag &= ~b_d3d11_image_nv; return *this; }
-	F_external_memory_handle_type_NV& on_d3d11_image_kmt_nv(){ flag |= b_d3d11_image_kmt_nv; return *this; }
-	F_external_memory_handle_type_NV& off_d3d11_image_kmt_nv(){ flag &= ~b_d3d11_image_kmt_nv; return *this; }
+	F_external_memory_handle_type_NV& on_opaque_win32_nv(){ flags |= b_opaque_win32_nv; return *this; }
+	F_external_memory_handle_type_NV& off_opaque_win32_nv(){ flags &= ~b_opaque_win32_nv; return *this; }
+	F_external_memory_handle_type_NV& on_opaque_win32_kmt_nv(){ flags |= b_opaque_win32_kmt_nv; return *this; }
+	F_external_memory_handle_type_NV& off_opaque_win32_kmt_nv(){ flags &= ~b_opaque_win32_kmt_nv; return *this; }
+	F_external_memory_handle_type_NV& on_d3d11_image_nv(){ flags |= b_d3d11_image_nv; return *this; }
+	F_external_memory_handle_type_NV& off_d3d11_image_nv(){ flags &= ~b_d3d11_image_nv; return *this; }
+	F_external_memory_handle_type_NV& on_d3d11_image_kmt_nv(){ flags |= b_d3d11_image_kmt_nv; return *this; }
+	F_external_memory_handle_type_NV& off_d3d11_image_kmt_nv(){ flags &= ~b_d3d11_image_kmt_nv; return *this; }
 };
-inline F_external_memory_handle_type_NV operator&(const F_external_memory_handle_type_NV f1_, const F_external_memory_handle_type_NV f2_){return f1_.flag&f2_.flag;}
-inline F_external_memory_handle_type_NV operator&(const F_external_memory_handle_type_NV f1_, const F_external_memory_handle_type_NV::B f2_){return f1_.flag&uint32_t(f2_);}
-inline F_external_memory_handle_type_NV operator&(const F_external_memory_handle_type_NV::B f1_, const F_external_memory_handle_type_NV f2_){return uint32_t(f1_)&f2_.flag;}
-inline F_external_memory_handle_type_NV operator&(const F_external_memory_handle_type_NV f1_, const VkExternalMemoryHandleTypeFlagBitsNV f2_){return f1_.flag&uint32_t(f2_);}
-inline F_external_memory_handle_type_NV operator&(const VkExternalMemoryHandleTypeFlagBitsNV f1_, const F_external_memory_handle_type_NV f2_){return uint32_t(f1_)&f2_.flag;}
-inline F_external_memory_handle_type_NV operator|(const F_external_memory_handle_type_NV f1_, const F_external_memory_handle_type_NV f2_){return f1_.flag|f2_.flag;}
-inline F_external_memory_handle_type_NV operator^(const F_external_memory_handle_type_NV f1_, const F_external_memory_handle_type_NV f2_){return f1_.flag^f2_.flag;}
 /*	VkExternalMemoryFeatureFlagBitsNV*/
-template<> struct my_class_convert<F_external_memory_feature_NV> { using type = VkExternalMemoryFeatureFlagBitsNV;};template<> struct my_class_convert<VkExternalMemoryFeatureFlagBitsNV> { using type = F_external_memory_feature_NV;};union F_external_memory_feature_NV {
-	uint32_t flag;
+union F_external_memory_feature_NV {
+	VkExternalMemoryFeatureFlagsNV flags;
 	VkExternalMemoryFeatureFlagBitsNV vk_flag;
-	enum B{
+	enum {
 		b_dedicated_only_nv = VK_EXTERNAL_MEMORY_FEATURE_DEDICATED_ONLY_BIT_NV,
 		b_exportable_nv = VK_EXTERNAL_MEMORY_FEATURE_EXPORTABLE_BIT_NV,
 		b_importable_nv = VK_EXTERNAL_MEMORY_FEATURE_IMPORTABLE_BIT_NV,
-	};
-	F_external_memory_feature_NV():flag(0){}
-	F_external_memory_feature_NV(const uint32_t flag_):flag(flag_){}
-	//F_external_memory_feature_NV(const B flag_):flag(flag_){}
-	//F_external_memory_feature_NV(const VkExternalMemoryFeatureFlagBitsNV flag_):vk_flag(flag_){}
-	//operator uint32_t(){return flag;}
-	operator VkExternalMemoryFeatureFlagBitsNV*(){ return reinterpret_cast<VkExternalMemoryFeatureFlagBitsNV*>(this); }
-	operator VkExternalMemoryFeatureFlagBitsNV(){return vk_flag;}
-	operator VkExternalMemoryFeatureFlagsNV&(){ return flag; }
-	F_external_memory_feature_NV& operator=(const F_external_memory_feature_NV flag_){flag=flag_.flag; return *this;}
-	F_external_memory_feature_NV& operator|=(const F_external_memory_feature_NV flag_){flag|=flag_.flag; return *this;}
-	F_external_memory_feature_NV& operator&=(const F_external_memory_feature_NV flag_){flag&=flag_.flag; return *this;}
-	F_external_memory_feature_NV& operator^=(const F_external_memory_feature_NV flag_){flag^=flag_.flag;return *this;}
-	F_external_memory_feature_NV operator~(){return ~flag;}
-	bool operator==(const F_external_memory_feature_NV flag_){return flag==flag_.flag;}
+	}flag;
+
+	F_external_memory_feature_NV():flags(0){}
+	F_external_memory_feature_NV(const uint32_t flag_):flags(flag_){}
+
+	operator VkExternalMemoryFeatureFlagBitsNV&(){return vk_flag;}
+	operator VkExternalMemoryFeatureFlagBitsNV*(){return &vk_flag; }
+	operator VkExternalMemoryFeatureFlagBitsNV*()const{return const_cast<VkExternalMemoryFeatureFlagBitsNV*const>(&vk_flag); }
+
+	operator VkExternalMemoryFeatureFlagsNV&(){return flags; }
+	operator VkExternalMemoryFeatureFlagsNV*()const{return const_cast<VkExternalMemoryFeatureFlagsNV*const>(&flags); }
+	operator VkExternalMemoryFeatureFlagsNV*(){return &flags; }
+
+	F_external_memory_feature_NV& operator=(const F_external_memory_feature_NV flag_){flags=flag_.flags; return *this;}
+	F_external_memory_feature_NV& operator|=(const F_external_memory_feature_NV flag_){flags|=flag_.flags; return *this;}
+	F_external_memory_feature_NV& operator&=(const F_external_memory_feature_NV flag_){flags&=flag_.flags; return *this;}
+	F_external_memory_feature_NV& operator^=(const F_external_memory_feature_NV flag_){flags^=flag_.flags;return *this;}
+	F_external_memory_feature_NV operator~(){return ~flags;}
+
+	bool operator==(const F_external_memory_feature_NV flag_){return flags==flag_.flags;}
 	bool operator!=(const F_external_memory_feature_NV flag_){return !(*this==flag_);}
-	F_external_memory_feature_NV& clear(){flag = 0;return *this;}
+
+	F_external_memory_feature_NV& clear(){flags = 0;return *this;}
 	F_external_memory_feature_NV all_flags(){ return b_dedicated_only_nv | b_exportable_nv | b_importable_nv;}
-	F_external_memory_feature_NV& on_dedicated_only_nv(){ flag |= b_dedicated_only_nv; return *this; }
-	F_external_memory_feature_NV& off_dedicated_only_nv(){ flag &= ~b_dedicated_only_nv; return *this; }
-	F_external_memory_feature_NV& on_exportable_nv(){ flag |= b_exportable_nv; return *this; }
-	F_external_memory_feature_NV& off_exportable_nv(){ flag &= ~b_exportable_nv; return *this; }
-	F_external_memory_feature_NV& on_importable_nv(){ flag |= b_importable_nv; return *this; }
-	F_external_memory_feature_NV& off_importable_nv(){ flag &= ~b_importable_nv; return *this; }
+	F_external_memory_feature_NV& on_dedicated_only_nv(){ flags |= b_dedicated_only_nv; return *this; }
+	F_external_memory_feature_NV& off_dedicated_only_nv(){ flags &= ~b_dedicated_only_nv; return *this; }
+	F_external_memory_feature_NV& on_exportable_nv(){ flags |= b_exportable_nv; return *this; }
+	F_external_memory_feature_NV& off_exportable_nv(){ flags &= ~b_exportable_nv; return *this; }
+	F_external_memory_feature_NV& on_importable_nv(){ flags |= b_importable_nv; return *this; }
+	F_external_memory_feature_NV& off_importable_nv(){ flags &= ~b_importable_nv; return *this; }
 };
-inline F_external_memory_feature_NV operator&(const F_external_memory_feature_NV f1_, const F_external_memory_feature_NV f2_){return f1_.flag&f2_.flag;}
-inline F_external_memory_feature_NV operator&(const F_external_memory_feature_NV f1_, const F_external_memory_feature_NV::B f2_){return f1_.flag&uint32_t(f2_);}
-inline F_external_memory_feature_NV operator&(const F_external_memory_feature_NV::B f1_, const F_external_memory_feature_NV f2_){return uint32_t(f1_)&f2_.flag;}
-inline F_external_memory_feature_NV operator&(const F_external_memory_feature_NV f1_, const VkExternalMemoryFeatureFlagBitsNV f2_){return f1_.flag&uint32_t(f2_);}
-inline F_external_memory_feature_NV operator&(const VkExternalMemoryFeatureFlagBitsNV f1_, const F_external_memory_feature_NV f2_){return uint32_t(f1_)&f2_.flag;}
-inline F_external_memory_feature_NV operator|(const F_external_memory_feature_NV f1_, const F_external_memory_feature_NV f2_){return f1_.flag|f2_.flag;}
-inline F_external_memory_feature_NV operator^(const F_external_memory_feature_NV f1_, const F_external_memory_feature_NV f2_){return f1_.flag^f2_.flag;}
 /*	VkSubgroupFeatureFlagBits*/
-template<> struct my_class_convert<F_subgroup_feature> { using type = VkSubgroupFeatureFlagBits;};template<> struct my_class_convert<VkSubgroupFeatureFlagBits> { using type = F_subgroup_feature;};union F_subgroup_feature {
-	uint32_t flag;
+union F_subgroup_feature {
+	VkSubgroupFeatureFlags flags;
 	VkSubgroupFeatureFlagBits vk_flag;
-	enum B{
+	enum {
 			/* Basic subgroup operations */
 		b_basic = VK_SUBGROUP_FEATURE_BASIC_BIT,
 			/* Vote subgroup operations */
@@ -3473,137 +3366,134 @@ template<> struct my_class_convert<F_subgroup_feature> { using type = VkSubgroup
 		b_clustered = VK_SUBGROUP_FEATURE_CLUSTERED_BIT,
 			/* Quad subgroup operations */
 		b_quad = VK_SUBGROUP_FEATURE_QUAD_BIT,
-	};
-	F_subgroup_feature():flag(0){}
-	F_subgroup_feature(const uint32_t flag_):flag(flag_){}
-	//F_subgroup_feature(const B flag_):flag(flag_){}
-	//F_subgroup_feature(const VkSubgroupFeatureFlagBits flag_):vk_flag(flag_){}
-	//operator uint32_t(){return flag;}
-	operator VkSubgroupFeatureFlagBits*(){ return reinterpret_cast<VkSubgroupFeatureFlagBits*>(this); }
-	operator VkSubgroupFeatureFlagBits(){return vk_flag;}
-	operator VkSubgroupFeatureFlags&(){ return flag; }
-	F_subgroup_feature& operator=(const F_subgroup_feature flag_){flag=flag_.flag; return *this;}
-	F_subgroup_feature& operator|=(const F_subgroup_feature flag_){flag|=flag_.flag; return *this;}
-	F_subgroup_feature& operator&=(const F_subgroup_feature flag_){flag&=flag_.flag; return *this;}
-	F_subgroup_feature& operator^=(const F_subgroup_feature flag_){flag^=flag_.flag;return *this;}
-	F_subgroup_feature operator~(){return ~flag;}
-	bool operator==(const F_subgroup_feature flag_){return flag==flag_.flag;}
+	}flag;
+
+	F_subgroup_feature():flags(0){}
+	F_subgroup_feature(const uint32_t flag_):flags(flag_){}
+
+	operator VkSubgroupFeatureFlagBits&(){return vk_flag;}
+	operator VkSubgroupFeatureFlagBits*(){return &vk_flag; }
+	operator VkSubgroupFeatureFlagBits*()const{return const_cast<VkSubgroupFeatureFlagBits*const>(&vk_flag); }
+
+	operator VkSubgroupFeatureFlags&(){return flags; }
+	operator VkSubgroupFeatureFlags*()const{return const_cast<VkSubgroupFeatureFlags*const>(&flags); }
+	operator VkSubgroupFeatureFlags*(){return &flags; }
+
+	F_subgroup_feature& operator=(const F_subgroup_feature flag_){flags=flag_.flags; return *this;}
+	F_subgroup_feature& operator|=(const F_subgroup_feature flag_){flags|=flag_.flags; return *this;}
+	F_subgroup_feature& operator&=(const F_subgroup_feature flag_){flags&=flag_.flags; return *this;}
+	F_subgroup_feature& operator^=(const F_subgroup_feature flag_){flags^=flag_.flags;return *this;}
+	F_subgroup_feature operator~(){return ~flags;}
+
+	bool operator==(const F_subgroup_feature flag_){return flags==flag_.flags;}
 	bool operator!=(const F_subgroup_feature flag_){return !(*this==flag_);}
-	F_subgroup_feature& clear(){flag = 0;return *this;}
+
+	F_subgroup_feature& clear(){flags = 0;return *this;}
 	F_subgroup_feature all_flags(){ return b_basic | b_vote | b_arithmetic | b_ballot | b_shuffle | b_shuffle_relative | b_clustered | b_quad;}
-	F_subgroup_feature& on_basic(){ flag |= b_basic; return *this; }
-	F_subgroup_feature& off_basic(){ flag &= ~b_basic; return *this; }
-	F_subgroup_feature& on_vote(){ flag |= b_vote; return *this; }
-	F_subgroup_feature& off_vote(){ flag &= ~b_vote; return *this; }
-	F_subgroup_feature& on_arithmetic(){ flag |= b_arithmetic; return *this; }
-	F_subgroup_feature& off_arithmetic(){ flag &= ~b_arithmetic; return *this; }
-	F_subgroup_feature& on_ballot(){ flag |= b_ballot; return *this; }
-	F_subgroup_feature& off_ballot(){ flag &= ~b_ballot; return *this; }
-	F_subgroup_feature& on_shuffle(){ flag |= b_shuffle; return *this; }
-	F_subgroup_feature& off_shuffle(){ flag &= ~b_shuffle; return *this; }
-	F_subgroup_feature& on_shuffle_relative(){ flag |= b_shuffle_relative; return *this; }
-	F_subgroup_feature& off_shuffle_relative(){ flag &= ~b_shuffle_relative; return *this; }
-	F_subgroup_feature& on_clustered(){ flag |= b_clustered; return *this; }
-	F_subgroup_feature& off_clustered(){ flag &= ~b_clustered; return *this; }
-	F_subgroup_feature& on_quad(){ flag |= b_quad; return *this; }
-	F_subgroup_feature& off_quad(){ flag &= ~b_quad; return *this; }
+	F_subgroup_feature& on_basic(){ flags |= b_basic; return *this; }
+	F_subgroup_feature& off_basic(){ flags &= ~b_basic; return *this; }
+	F_subgroup_feature& on_vote(){ flags |= b_vote; return *this; }
+	F_subgroup_feature& off_vote(){ flags &= ~b_vote; return *this; }
+	F_subgroup_feature& on_arithmetic(){ flags |= b_arithmetic; return *this; }
+	F_subgroup_feature& off_arithmetic(){ flags &= ~b_arithmetic; return *this; }
+	F_subgroup_feature& on_ballot(){ flags |= b_ballot; return *this; }
+	F_subgroup_feature& off_ballot(){ flags &= ~b_ballot; return *this; }
+	F_subgroup_feature& on_shuffle(){ flags |= b_shuffle; return *this; }
+	F_subgroup_feature& off_shuffle(){ flags &= ~b_shuffle; return *this; }
+	F_subgroup_feature& on_shuffle_relative(){ flags |= b_shuffle_relative; return *this; }
+	F_subgroup_feature& off_shuffle_relative(){ flags &= ~b_shuffle_relative; return *this; }
+	F_subgroup_feature& on_clustered(){ flags |= b_clustered; return *this; }
+	F_subgroup_feature& off_clustered(){ flags &= ~b_clustered; return *this; }
+	F_subgroup_feature& on_quad(){ flags |= b_quad; return *this; }
+	F_subgroup_feature& off_quad(){ flags &= ~b_quad; return *this; }
 };
-inline F_subgroup_feature operator&(const F_subgroup_feature f1_, const F_subgroup_feature f2_){return f1_.flag&f2_.flag;}
-inline F_subgroup_feature operator&(const F_subgroup_feature f1_, const F_subgroup_feature::B f2_){return f1_.flag&uint32_t(f2_);}
-inline F_subgroup_feature operator&(const F_subgroup_feature::B f1_, const F_subgroup_feature f2_){return uint32_t(f1_)&f2_.flag;}
-inline F_subgroup_feature operator&(const F_subgroup_feature f1_, const VkSubgroupFeatureFlagBits f2_){return f1_.flag&uint32_t(f2_);}
-inline F_subgroup_feature operator&(const VkSubgroupFeatureFlagBits f1_, const F_subgroup_feature f2_){return uint32_t(f1_)&f2_.flag;}
-inline F_subgroup_feature operator|(const F_subgroup_feature f1_, const F_subgroup_feature f2_){return f1_.flag|f2_.flag;}
-inline F_subgroup_feature operator^(const F_subgroup_feature f1_, const F_subgroup_feature f2_){return f1_.flag^f2_.flag;}
 /*	VkIndirectCommandsLayoutUsageFlagBitsNVX*/
-template<> struct my_class_convert<F_indirect_commands_layout_usage_NVX> { using type = VkIndirectCommandsLayoutUsageFlagBitsNVX;};template<> struct my_class_convert<VkIndirectCommandsLayoutUsageFlagBitsNVX> { using type = F_indirect_commands_layout_usage_NVX;};union F_indirect_commands_layout_usage_NVX {
-	uint32_t flag;
+union F_indirect_commands_layout_usage_NVX {
+	VkIndirectCommandsLayoutUsageFlagsNVX flags;
 	VkIndirectCommandsLayoutUsageFlagBitsNVX vk_flag;
-	enum B{
+	enum {
 		b_unordered_sequences_nvx = VK_INDIRECT_COMMANDS_LAYOUT_USAGE_UNORDERED_SEQUENCES_BIT_NVX,
 		b_sparse_sequences_nvx = VK_INDIRECT_COMMANDS_LAYOUT_USAGE_SPARSE_SEQUENCES_BIT_NVX,
 		b_empty_executions_nvx = VK_INDIRECT_COMMANDS_LAYOUT_USAGE_EMPTY_EXECUTIONS_BIT_NVX,
 		b_indexed_sequences_nvx = VK_INDIRECT_COMMANDS_LAYOUT_USAGE_INDEXED_SEQUENCES_BIT_NVX,
-	};
-	F_indirect_commands_layout_usage_NVX():flag(0){}
-	F_indirect_commands_layout_usage_NVX(const uint32_t flag_):flag(flag_){}
-	//F_indirect_commands_layout_usage_NVX(const B flag_):flag(flag_){}
-	//F_indirect_commands_layout_usage_NVX(const VkIndirectCommandsLayoutUsageFlagBitsNVX flag_):vk_flag(flag_){}
-	//operator uint32_t(){return flag;}
-	operator VkIndirectCommandsLayoutUsageFlagBitsNVX*(){ return reinterpret_cast<VkIndirectCommandsLayoutUsageFlagBitsNVX*>(this); }
-	operator VkIndirectCommandsLayoutUsageFlagBitsNVX(){return vk_flag;}
-	operator VkIndirectCommandsLayoutUsageFlagsNVX&(){ return flag; }
-	F_indirect_commands_layout_usage_NVX& operator=(const F_indirect_commands_layout_usage_NVX flag_){flag=flag_.flag; return *this;}
-	F_indirect_commands_layout_usage_NVX& operator|=(const F_indirect_commands_layout_usage_NVX flag_){flag|=flag_.flag; return *this;}
-	F_indirect_commands_layout_usage_NVX& operator&=(const F_indirect_commands_layout_usage_NVX flag_){flag&=flag_.flag; return *this;}
-	F_indirect_commands_layout_usage_NVX& operator^=(const F_indirect_commands_layout_usage_NVX flag_){flag^=flag_.flag;return *this;}
-	F_indirect_commands_layout_usage_NVX operator~(){return ~flag;}
-	bool operator==(const F_indirect_commands_layout_usage_NVX flag_){return flag==flag_.flag;}
+	}flag;
+
+	F_indirect_commands_layout_usage_NVX():flags(0){}
+	F_indirect_commands_layout_usage_NVX(const uint32_t flag_):flags(flag_){}
+
+	operator VkIndirectCommandsLayoutUsageFlagBitsNVX&(){return vk_flag;}
+	operator VkIndirectCommandsLayoutUsageFlagBitsNVX*(){return &vk_flag; }
+	operator VkIndirectCommandsLayoutUsageFlagBitsNVX*()const{return const_cast<VkIndirectCommandsLayoutUsageFlagBitsNVX*const>(&vk_flag); }
+
+	operator VkIndirectCommandsLayoutUsageFlagsNVX&(){return flags; }
+	operator VkIndirectCommandsLayoutUsageFlagsNVX*()const{return const_cast<VkIndirectCommandsLayoutUsageFlagsNVX*const>(&flags); }
+	operator VkIndirectCommandsLayoutUsageFlagsNVX*(){return &flags; }
+
+	F_indirect_commands_layout_usage_NVX& operator=(const F_indirect_commands_layout_usage_NVX flag_){flags=flag_.flags; return *this;}
+	F_indirect_commands_layout_usage_NVX& operator|=(const F_indirect_commands_layout_usage_NVX flag_){flags|=flag_.flags; return *this;}
+	F_indirect_commands_layout_usage_NVX& operator&=(const F_indirect_commands_layout_usage_NVX flag_){flags&=flag_.flags; return *this;}
+	F_indirect_commands_layout_usage_NVX& operator^=(const F_indirect_commands_layout_usage_NVX flag_){flags^=flag_.flags;return *this;}
+	F_indirect_commands_layout_usage_NVX operator~(){return ~flags;}
+
+	bool operator==(const F_indirect_commands_layout_usage_NVX flag_){return flags==flag_.flags;}
 	bool operator!=(const F_indirect_commands_layout_usage_NVX flag_){return !(*this==flag_);}
-	F_indirect_commands_layout_usage_NVX& clear(){flag = 0;return *this;}
+
+	F_indirect_commands_layout_usage_NVX& clear(){flags = 0;return *this;}
 	F_indirect_commands_layout_usage_NVX all_flags(){ return b_unordered_sequences_nvx | b_sparse_sequences_nvx | b_empty_executions_nvx | b_indexed_sequences_nvx;}
-	F_indirect_commands_layout_usage_NVX& on_unordered_sequences_nvx(){ flag |= b_unordered_sequences_nvx; return *this; }
-	F_indirect_commands_layout_usage_NVX& off_unordered_sequences_nvx(){ flag &= ~b_unordered_sequences_nvx; return *this; }
-	F_indirect_commands_layout_usage_NVX& on_sparse_sequences_nvx(){ flag |= b_sparse_sequences_nvx; return *this; }
-	F_indirect_commands_layout_usage_NVX& off_sparse_sequences_nvx(){ flag &= ~b_sparse_sequences_nvx; return *this; }
-	F_indirect_commands_layout_usage_NVX& on_empty_executions_nvx(){ flag |= b_empty_executions_nvx; return *this; }
-	F_indirect_commands_layout_usage_NVX& off_empty_executions_nvx(){ flag &= ~b_empty_executions_nvx; return *this; }
-	F_indirect_commands_layout_usage_NVX& on_indexed_sequences_nvx(){ flag |= b_indexed_sequences_nvx; return *this; }
-	F_indirect_commands_layout_usage_NVX& off_indexed_sequences_nvx(){ flag &= ~b_indexed_sequences_nvx; return *this; }
+	F_indirect_commands_layout_usage_NVX& on_unordered_sequences_nvx(){ flags |= b_unordered_sequences_nvx; return *this; }
+	F_indirect_commands_layout_usage_NVX& off_unordered_sequences_nvx(){ flags &= ~b_unordered_sequences_nvx; return *this; }
+	F_indirect_commands_layout_usage_NVX& on_sparse_sequences_nvx(){ flags |= b_sparse_sequences_nvx; return *this; }
+	F_indirect_commands_layout_usage_NVX& off_sparse_sequences_nvx(){ flags &= ~b_sparse_sequences_nvx; return *this; }
+	F_indirect_commands_layout_usage_NVX& on_empty_executions_nvx(){ flags |= b_empty_executions_nvx; return *this; }
+	F_indirect_commands_layout_usage_NVX& off_empty_executions_nvx(){ flags &= ~b_empty_executions_nvx; return *this; }
+	F_indirect_commands_layout_usage_NVX& on_indexed_sequences_nvx(){ flags |= b_indexed_sequences_nvx; return *this; }
+	F_indirect_commands_layout_usage_NVX& off_indexed_sequences_nvx(){ flags &= ~b_indexed_sequences_nvx; return *this; }
 };
-inline F_indirect_commands_layout_usage_NVX operator&(const F_indirect_commands_layout_usage_NVX f1_, const F_indirect_commands_layout_usage_NVX f2_){return f1_.flag&f2_.flag;}
-inline F_indirect_commands_layout_usage_NVX operator&(const F_indirect_commands_layout_usage_NVX f1_, const F_indirect_commands_layout_usage_NVX::B f2_){return f1_.flag&uint32_t(f2_);}
-inline F_indirect_commands_layout_usage_NVX operator&(const F_indirect_commands_layout_usage_NVX::B f1_, const F_indirect_commands_layout_usage_NVX f2_){return uint32_t(f1_)&f2_.flag;}
-inline F_indirect_commands_layout_usage_NVX operator&(const F_indirect_commands_layout_usage_NVX f1_, const VkIndirectCommandsLayoutUsageFlagBitsNVX f2_){return f1_.flag&uint32_t(f2_);}
-inline F_indirect_commands_layout_usage_NVX operator&(const VkIndirectCommandsLayoutUsageFlagBitsNVX f1_, const F_indirect_commands_layout_usage_NVX f2_){return uint32_t(f1_)&f2_.flag;}
-inline F_indirect_commands_layout_usage_NVX operator|(const F_indirect_commands_layout_usage_NVX f1_, const F_indirect_commands_layout_usage_NVX f2_){return f1_.flag|f2_.flag;}
-inline F_indirect_commands_layout_usage_NVX operator^(const F_indirect_commands_layout_usage_NVX f1_, const F_indirect_commands_layout_usage_NVX f2_){return f1_.flag^f2_.flag;}
 /*	VkObjectEntryUsageFlagBitsNVX*/
-template<> struct my_class_convert<F_object_entry_usage_NVX> { using type = VkObjectEntryUsageFlagBitsNVX;};template<> struct my_class_convert<VkObjectEntryUsageFlagBitsNVX> { using type = F_object_entry_usage_NVX;};union F_object_entry_usage_NVX {
-	uint32_t flag;
+union F_object_entry_usage_NVX {
+	VkObjectEntryUsageFlagsNVX flags;
 	VkObjectEntryUsageFlagBitsNVX vk_flag;
-	enum B{
+	enum {
 		b_graphics_nvx = VK_OBJECT_ENTRY_USAGE_GRAPHICS_BIT_NVX,
 		b_compute_nvx = VK_OBJECT_ENTRY_USAGE_COMPUTE_BIT_NVX,
-	};
-	F_object_entry_usage_NVX():flag(0){}
-	F_object_entry_usage_NVX(const uint32_t flag_):flag(flag_){}
-	//F_object_entry_usage_NVX(const B flag_):flag(flag_){}
-	//F_object_entry_usage_NVX(const VkObjectEntryUsageFlagBitsNVX flag_):vk_flag(flag_){}
-	//operator uint32_t(){return flag;}
-	operator VkObjectEntryUsageFlagBitsNVX*(){ return reinterpret_cast<VkObjectEntryUsageFlagBitsNVX*>(this); }
-	operator VkObjectEntryUsageFlagBitsNVX(){return vk_flag;}
-	operator VkObjectEntryUsageFlagsNVX&(){ return flag; }
-	F_object_entry_usage_NVX& operator=(const F_object_entry_usage_NVX flag_){flag=flag_.flag; return *this;}
-	F_object_entry_usage_NVX& operator|=(const F_object_entry_usage_NVX flag_){flag|=flag_.flag; return *this;}
-	F_object_entry_usage_NVX& operator&=(const F_object_entry_usage_NVX flag_){flag&=flag_.flag; return *this;}
-	F_object_entry_usage_NVX& operator^=(const F_object_entry_usage_NVX flag_){flag^=flag_.flag;return *this;}
-	F_object_entry_usage_NVX operator~(){return ~flag;}
-	bool operator==(const F_object_entry_usage_NVX flag_){return flag==flag_.flag;}
+	}flag;
+
+	F_object_entry_usage_NVX():flags(0){}
+	F_object_entry_usage_NVX(const uint32_t flag_):flags(flag_){}
+
+	operator VkObjectEntryUsageFlagBitsNVX&(){return vk_flag;}
+	operator VkObjectEntryUsageFlagBitsNVX*(){return &vk_flag; }
+	operator VkObjectEntryUsageFlagBitsNVX*()const{return const_cast<VkObjectEntryUsageFlagBitsNVX*const>(&vk_flag); }
+
+	operator VkObjectEntryUsageFlagsNVX&(){return flags; }
+	operator VkObjectEntryUsageFlagsNVX*()const{return const_cast<VkObjectEntryUsageFlagsNVX*const>(&flags); }
+	operator VkObjectEntryUsageFlagsNVX*(){return &flags; }
+
+	F_object_entry_usage_NVX& operator=(const F_object_entry_usage_NVX flag_){flags=flag_.flags; return *this;}
+	F_object_entry_usage_NVX& operator|=(const F_object_entry_usage_NVX flag_){flags|=flag_.flags; return *this;}
+	F_object_entry_usage_NVX& operator&=(const F_object_entry_usage_NVX flag_){flags&=flag_.flags; return *this;}
+	F_object_entry_usage_NVX& operator^=(const F_object_entry_usage_NVX flag_){flags^=flag_.flags;return *this;}
+	F_object_entry_usage_NVX operator~(){return ~flags;}
+
+	bool operator==(const F_object_entry_usage_NVX flag_){return flags==flag_.flags;}
 	bool operator!=(const F_object_entry_usage_NVX flag_){return !(*this==flag_);}
-	F_object_entry_usage_NVX& clear(){flag = 0;return *this;}
+
+	F_object_entry_usage_NVX& clear(){flags = 0;return *this;}
 	F_object_entry_usage_NVX all_flags(){ return b_graphics_nvx | b_compute_nvx;}
-	F_object_entry_usage_NVX& on_graphics_nvx(){ flag |= b_graphics_nvx; return *this; }
-	F_object_entry_usage_NVX& off_graphics_nvx(){ flag &= ~b_graphics_nvx; return *this; }
-	F_object_entry_usage_NVX& on_compute_nvx(){ flag |= b_compute_nvx; return *this; }
-	F_object_entry_usage_NVX& off_compute_nvx(){ flag &= ~b_compute_nvx; return *this; }
+	F_object_entry_usage_NVX& on_graphics_nvx(){ flags |= b_graphics_nvx; return *this; }
+	F_object_entry_usage_NVX& off_graphics_nvx(){ flags &= ~b_graphics_nvx; return *this; }
+	F_object_entry_usage_NVX& on_compute_nvx(){ flags |= b_compute_nvx; return *this; }
+	F_object_entry_usage_NVX& off_compute_nvx(){ flags &= ~b_compute_nvx; return *this; }
 };
-inline F_object_entry_usage_NVX operator&(const F_object_entry_usage_NVX f1_, const F_object_entry_usage_NVX f2_){return f1_.flag&f2_.flag;}
-inline F_object_entry_usage_NVX operator&(const F_object_entry_usage_NVX f1_, const F_object_entry_usage_NVX::B f2_){return f1_.flag&uint32_t(f2_);}
-inline F_object_entry_usage_NVX operator&(const F_object_entry_usage_NVX::B f1_, const F_object_entry_usage_NVX f2_){return uint32_t(f1_)&f2_.flag;}
-inline F_object_entry_usage_NVX operator&(const F_object_entry_usage_NVX f1_, const VkObjectEntryUsageFlagBitsNVX f2_){return f1_.flag&uint32_t(f2_);}
-inline F_object_entry_usage_NVX operator&(const VkObjectEntryUsageFlagBitsNVX f1_, const F_object_entry_usage_NVX f2_){return uint32_t(f1_)&f2_.flag;}
-inline F_object_entry_usage_NVX operator|(const F_object_entry_usage_NVX f1_, const F_object_entry_usage_NVX f2_){return f1_.flag|f2_.flag;}
-inline F_object_entry_usage_NVX operator^(const F_object_entry_usage_NVX f1_, const F_object_entry_usage_NVX f2_){return f1_.flag^f2_.flag;}
 /*	VkDescriptorSetLayoutCreateFlagBits*/
 using F_descriptor_set_layout_create = 
 			VkDescriptorSetLayoutCreateFlagBits;
 
 /*	VkExternalMemoryHandleTypeFlagBits*/
-template<> struct my_class_convert<F_external_memory_handle_type> { using type = VkExternalMemoryHandleTypeFlagBits;};template<> struct my_class_convert<VkExternalMemoryHandleTypeFlagBits> { using type = F_external_memory_handle_type;};union F_external_memory_handle_type {
-	uint32_t flag;
+union F_external_memory_handle_type {
+	VkExternalMemoryHandleTypeFlags flags;
 	VkExternalMemoryHandleTypeFlagBits vk_flag;
-	enum B{
+	enum {
 		b_opaque_fd = VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_FD_BIT,
 		b_opaque_win32 = VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_BIT,
 		b_opaque_win32_kmt = VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT,
@@ -3611,356 +3501,347 @@ template<> struct my_class_convert<F_external_memory_handle_type> { using type =
 		b_d3d11_texture_kmt = VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D11_TEXTURE_KMT_BIT,
 		b_d3d12_heap = VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_HEAP_BIT,
 		b_d3d12_resource = VK_EXTERNAL_MEMORY_HANDLE_TYPE_D3D12_RESOURCE_BIT,
-	};
-	F_external_memory_handle_type():flag(0){}
-	F_external_memory_handle_type(const uint32_t flag_):flag(flag_){}
-	//F_external_memory_handle_type(const B flag_):flag(flag_){}
-	//F_external_memory_handle_type(const VkExternalMemoryHandleTypeFlagBits flag_):vk_flag(flag_){}
-	//operator uint32_t(){return flag;}
-	operator VkExternalMemoryHandleTypeFlagBits*(){ return reinterpret_cast<VkExternalMemoryHandleTypeFlagBits*>(this); }
-	operator VkExternalMemoryHandleTypeFlagBits(){return vk_flag;}
-	operator VkExternalMemoryHandleTypeFlags&(){ return flag; }
-	F_external_memory_handle_type& operator=(const F_external_memory_handle_type flag_){flag=flag_.flag; return *this;}
-	F_external_memory_handle_type& operator|=(const F_external_memory_handle_type flag_){flag|=flag_.flag; return *this;}
-	F_external_memory_handle_type& operator&=(const F_external_memory_handle_type flag_){flag&=flag_.flag; return *this;}
-	F_external_memory_handle_type& operator^=(const F_external_memory_handle_type flag_){flag^=flag_.flag;return *this;}
-	F_external_memory_handle_type operator~(){return ~flag;}
-	bool operator==(const F_external_memory_handle_type flag_){return flag==flag_.flag;}
+	}flag;
+
+	F_external_memory_handle_type():flags(0){}
+	F_external_memory_handle_type(const uint32_t flag_):flags(flag_){}
+
+	operator VkExternalMemoryHandleTypeFlagBits&(){return vk_flag;}
+	operator VkExternalMemoryHandleTypeFlagBits*(){return &vk_flag; }
+	operator VkExternalMemoryHandleTypeFlagBits*()const{return const_cast<VkExternalMemoryHandleTypeFlagBits*const>(&vk_flag); }
+
+	operator VkExternalMemoryHandleTypeFlags&(){return flags; }
+	operator VkExternalMemoryHandleTypeFlags*()const{return const_cast<VkExternalMemoryHandleTypeFlags*const>(&flags); }
+	operator VkExternalMemoryHandleTypeFlags*(){return &flags; }
+
+	F_external_memory_handle_type& operator=(const F_external_memory_handle_type flag_){flags=flag_.flags; return *this;}
+	F_external_memory_handle_type& operator|=(const F_external_memory_handle_type flag_){flags|=flag_.flags; return *this;}
+	F_external_memory_handle_type& operator&=(const F_external_memory_handle_type flag_){flags&=flag_.flags; return *this;}
+	F_external_memory_handle_type& operator^=(const F_external_memory_handle_type flag_){flags^=flag_.flags;return *this;}
+	F_external_memory_handle_type operator~(){return ~flags;}
+
+	bool operator==(const F_external_memory_handle_type flag_){return flags==flag_.flags;}
 	bool operator!=(const F_external_memory_handle_type flag_){return !(*this==flag_);}
-	F_external_memory_handle_type& clear(){flag = 0;return *this;}
+
+	F_external_memory_handle_type& clear(){flags = 0;return *this;}
 	F_external_memory_handle_type all_flags(){ return b_opaque_fd | b_opaque_win32 | b_opaque_win32_kmt | b_d3d11_texture | b_d3d11_texture_kmt | b_d3d12_heap | b_d3d12_resource;}
-	F_external_memory_handle_type& on_opaque_fd(){ flag |= b_opaque_fd; return *this; }
-	F_external_memory_handle_type& off_opaque_fd(){ flag &= ~b_opaque_fd; return *this; }
-	F_external_memory_handle_type& on_opaque_win32(){ flag |= b_opaque_win32; return *this; }
-	F_external_memory_handle_type& off_opaque_win32(){ flag &= ~b_opaque_win32; return *this; }
-	F_external_memory_handle_type& on_opaque_win32_kmt(){ flag |= b_opaque_win32_kmt; return *this; }
-	F_external_memory_handle_type& off_opaque_win32_kmt(){ flag &= ~b_opaque_win32_kmt; return *this; }
-	F_external_memory_handle_type& on_d3d11_texture(){ flag |= b_d3d11_texture; return *this; }
-	F_external_memory_handle_type& off_d3d11_texture(){ flag &= ~b_d3d11_texture; return *this; }
-	F_external_memory_handle_type& on_d3d11_texture_kmt(){ flag |= b_d3d11_texture_kmt; return *this; }
-	F_external_memory_handle_type& off_d3d11_texture_kmt(){ flag &= ~b_d3d11_texture_kmt; return *this; }
-	F_external_memory_handle_type& on_d3d12_heap(){ flag |= b_d3d12_heap; return *this; }
-	F_external_memory_handle_type& off_d3d12_heap(){ flag &= ~b_d3d12_heap; return *this; }
-	F_external_memory_handle_type& on_d3d12_resource(){ flag |= b_d3d12_resource; return *this; }
-	F_external_memory_handle_type& off_d3d12_resource(){ flag &= ~b_d3d12_resource; return *this; }
+	F_external_memory_handle_type& on_opaque_fd(){ flags |= b_opaque_fd; return *this; }
+	F_external_memory_handle_type& off_opaque_fd(){ flags &= ~b_opaque_fd; return *this; }
+	F_external_memory_handle_type& on_opaque_win32(){ flags |= b_opaque_win32; return *this; }
+	F_external_memory_handle_type& off_opaque_win32(){ flags &= ~b_opaque_win32; return *this; }
+	F_external_memory_handle_type& on_opaque_win32_kmt(){ flags |= b_opaque_win32_kmt; return *this; }
+	F_external_memory_handle_type& off_opaque_win32_kmt(){ flags &= ~b_opaque_win32_kmt; return *this; }
+	F_external_memory_handle_type& on_d3d11_texture(){ flags |= b_d3d11_texture; return *this; }
+	F_external_memory_handle_type& off_d3d11_texture(){ flags &= ~b_d3d11_texture; return *this; }
+	F_external_memory_handle_type& on_d3d11_texture_kmt(){ flags |= b_d3d11_texture_kmt; return *this; }
+	F_external_memory_handle_type& off_d3d11_texture_kmt(){ flags &= ~b_d3d11_texture_kmt; return *this; }
+	F_external_memory_handle_type& on_d3d12_heap(){ flags |= b_d3d12_heap; return *this; }
+	F_external_memory_handle_type& off_d3d12_heap(){ flags &= ~b_d3d12_heap; return *this; }
+	F_external_memory_handle_type& on_d3d12_resource(){ flags |= b_d3d12_resource; return *this; }
+	F_external_memory_handle_type& off_d3d12_resource(){ flags &= ~b_d3d12_resource; return *this; }
 };
-inline F_external_memory_handle_type operator&(const F_external_memory_handle_type f1_, const F_external_memory_handle_type f2_){return f1_.flag&f2_.flag;}
-inline F_external_memory_handle_type operator&(const F_external_memory_handle_type f1_, const F_external_memory_handle_type::B f2_){return f1_.flag&uint32_t(f2_);}
-inline F_external_memory_handle_type operator&(const F_external_memory_handle_type::B f1_, const F_external_memory_handle_type f2_){return uint32_t(f1_)&f2_.flag;}
-inline F_external_memory_handle_type operator&(const F_external_memory_handle_type f1_, const VkExternalMemoryHandleTypeFlagBits f2_){return f1_.flag&uint32_t(f2_);}
-inline F_external_memory_handle_type operator&(const VkExternalMemoryHandleTypeFlagBits f1_, const F_external_memory_handle_type f2_){return uint32_t(f1_)&f2_.flag;}
-inline F_external_memory_handle_type operator|(const F_external_memory_handle_type f1_, const F_external_memory_handle_type f2_){return f1_.flag|f2_.flag;}
-inline F_external_memory_handle_type operator^(const F_external_memory_handle_type f1_, const F_external_memory_handle_type f2_){return f1_.flag^f2_.flag;}
 /*	VkExternalMemoryFeatureFlagBits*/
-template<> struct my_class_convert<F_external_memory_feature> { using type = VkExternalMemoryFeatureFlagBits;};template<> struct my_class_convert<VkExternalMemoryFeatureFlagBits> { using type = F_external_memory_feature;};union F_external_memory_feature {
-	uint32_t flag;
+union F_external_memory_feature {
+	VkExternalMemoryFeatureFlags flags;
 	VkExternalMemoryFeatureFlagBits vk_flag;
-	enum B{
+	enum {
 		b_dedicated_only = VK_EXTERNAL_MEMORY_FEATURE_DEDICATED_ONLY_BIT,
 		b_exportable = VK_EXTERNAL_MEMORY_FEATURE_EXPORTABLE_BIT,
 		b_importable = VK_EXTERNAL_MEMORY_FEATURE_IMPORTABLE_BIT,
-	};
-	F_external_memory_feature():flag(0){}
-	F_external_memory_feature(const uint32_t flag_):flag(flag_){}
-	//F_external_memory_feature(const B flag_):flag(flag_){}
-	//F_external_memory_feature(const VkExternalMemoryFeatureFlagBits flag_):vk_flag(flag_){}
-	//operator uint32_t(){return flag;}
-	operator VkExternalMemoryFeatureFlagBits*(){ return reinterpret_cast<VkExternalMemoryFeatureFlagBits*>(this); }
-	operator VkExternalMemoryFeatureFlagBits(){return vk_flag;}
-	operator VkExternalMemoryFeatureFlags&(){ return flag; }
-	F_external_memory_feature& operator=(const F_external_memory_feature flag_){flag=flag_.flag; return *this;}
-	F_external_memory_feature& operator|=(const F_external_memory_feature flag_){flag|=flag_.flag; return *this;}
-	F_external_memory_feature& operator&=(const F_external_memory_feature flag_){flag&=flag_.flag; return *this;}
-	F_external_memory_feature& operator^=(const F_external_memory_feature flag_){flag^=flag_.flag;return *this;}
-	F_external_memory_feature operator~(){return ~flag;}
-	bool operator==(const F_external_memory_feature flag_){return flag==flag_.flag;}
+	}flag;
+
+	F_external_memory_feature():flags(0){}
+	F_external_memory_feature(const uint32_t flag_):flags(flag_){}
+
+	operator VkExternalMemoryFeatureFlagBits&(){return vk_flag;}
+	operator VkExternalMemoryFeatureFlagBits*(){return &vk_flag; }
+	operator VkExternalMemoryFeatureFlagBits*()const{return const_cast<VkExternalMemoryFeatureFlagBits*const>(&vk_flag); }
+
+	operator VkExternalMemoryFeatureFlags&(){return flags; }
+	operator VkExternalMemoryFeatureFlags*()const{return const_cast<VkExternalMemoryFeatureFlags*const>(&flags); }
+	operator VkExternalMemoryFeatureFlags*(){return &flags; }
+
+	F_external_memory_feature& operator=(const F_external_memory_feature flag_){flags=flag_.flags; return *this;}
+	F_external_memory_feature& operator|=(const F_external_memory_feature flag_){flags|=flag_.flags; return *this;}
+	F_external_memory_feature& operator&=(const F_external_memory_feature flag_){flags&=flag_.flags; return *this;}
+	F_external_memory_feature& operator^=(const F_external_memory_feature flag_){flags^=flag_.flags;return *this;}
+	F_external_memory_feature operator~(){return ~flags;}
+
+	bool operator==(const F_external_memory_feature flag_){return flags==flag_.flags;}
 	bool operator!=(const F_external_memory_feature flag_){return !(*this==flag_);}
-	F_external_memory_feature& clear(){flag = 0;return *this;}
+
+	F_external_memory_feature& clear(){flags = 0;return *this;}
 	F_external_memory_feature all_flags(){ return b_dedicated_only | b_exportable | b_importable;}
-	F_external_memory_feature& on_dedicated_only(){ flag |= b_dedicated_only; return *this; }
-	F_external_memory_feature& off_dedicated_only(){ flag &= ~b_dedicated_only; return *this; }
-	F_external_memory_feature& on_exportable(){ flag |= b_exportable; return *this; }
-	F_external_memory_feature& off_exportable(){ flag &= ~b_exportable; return *this; }
-	F_external_memory_feature& on_importable(){ flag |= b_importable; return *this; }
-	F_external_memory_feature& off_importable(){ flag &= ~b_importable; return *this; }
+	F_external_memory_feature& on_dedicated_only(){ flags |= b_dedicated_only; return *this; }
+	F_external_memory_feature& off_dedicated_only(){ flags &= ~b_dedicated_only; return *this; }
+	F_external_memory_feature& on_exportable(){ flags |= b_exportable; return *this; }
+	F_external_memory_feature& off_exportable(){ flags &= ~b_exportable; return *this; }
+	F_external_memory_feature& on_importable(){ flags |= b_importable; return *this; }
+	F_external_memory_feature& off_importable(){ flags &= ~b_importable; return *this; }
 };
-inline F_external_memory_feature operator&(const F_external_memory_feature f1_, const F_external_memory_feature f2_){return f1_.flag&f2_.flag;}
-inline F_external_memory_feature operator&(const F_external_memory_feature f1_, const F_external_memory_feature::B f2_){return f1_.flag&uint32_t(f2_);}
-inline F_external_memory_feature operator&(const F_external_memory_feature::B f1_, const F_external_memory_feature f2_){return uint32_t(f1_)&f2_.flag;}
-inline F_external_memory_feature operator&(const F_external_memory_feature f1_, const VkExternalMemoryFeatureFlagBits f2_){return f1_.flag&uint32_t(f2_);}
-inline F_external_memory_feature operator&(const VkExternalMemoryFeatureFlagBits f1_, const F_external_memory_feature f2_){return uint32_t(f1_)&f2_.flag;}
-inline F_external_memory_feature operator|(const F_external_memory_feature f1_, const F_external_memory_feature f2_){return f1_.flag|f2_.flag;}
-inline F_external_memory_feature operator^(const F_external_memory_feature f1_, const F_external_memory_feature f2_){return f1_.flag^f2_.flag;}
 /*	VkExternalSemaphoreHandleTypeFlagBits*/
-template<> struct my_class_convert<F_external_semaphore_handle_type> { using type = VkExternalSemaphoreHandleTypeFlagBits;};template<> struct my_class_convert<VkExternalSemaphoreHandleTypeFlagBits> { using type = F_external_semaphore_handle_type;};union F_external_semaphore_handle_type {
-	uint32_t flag;
+union F_external_semaphore_handle_type {
+	VkExternalSemaphoreHandleTypeFlags flags;
 	VkExternalSemaphoreHandleTypeFlagBits vk_flag;
-	enum B{
+	enum {
 		b_opaque_fd = VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_FD_BIT,
 		b_opaque_win32 = VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_BIT,
 		b_opaque_win32_kmt = VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT,
 		b_d3d12_fence = VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_D3D12_FENCE_BIT,
 		b_sync_fd = VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_SYNC_FD_BIT,
-	};
-	F_external_semaphore_handle_type():flag(0){}
-	F_external_semaphore_handle_type(const uint32_t flag_):flag(flag_){}
-	//F_external_semaphore_handle_type(const B flag_):flag(flag_){}
-	//F_external_semaphore_handle_type(const VkExternalSemaphoreHandleTypeFlagBits flag_):vk_flag(flag_){}
-	//operator uint32_t(){return flag;}
-	operator VkExternalSemaphoreHandleTypeFlagBits*(){ return reinterpret_cast<VkExternalSemaphoreHandleTypeFlagBits*>(this); }
-	operator VkExternalSemaphoreHandleTypeFlagBits(){return vk_flag;}
-	operator VkExternalSemaphoreHandleTypeFlags&(){ return flag; }
-	F_external_semaphore_handle_type& operator=(const F_external_semaphore_handle_type flag_){flag=flag_.flag; return *this;}
-	F_external_semaphore_handle_type& operator|=(const F_external_semaphore_handle_type flag_){flag|=flag_.flag; return *this;}
-	F_external_semaphore_handle_type& operator&=(const F_external_semaphore_handle_type flag_){flag&=flag_.flag; return *this;}
-	F_external_semaphore_handle_type& operator^=(const F_external_semaphore_handle_type flag_){flag^=flag_.flag;return *this;}
-	F_external_semaphore_handle_type operator~(){return ~flag;}
-	bool operator==(const F_external_semaphore_handle_type flag_){return flag==flag_.flag;}
+	}flag;
+
+	F_external_semaphore_handle_type():flags(0){}
+	F_external_semaphore_handle_type(const uint32_t flag_):flags(flag_){}
+
+	operator VkExternalSemaphoreHandleTypeFlagBits&(){return vk_flag;}
+	operator VkExternalSemaphoreHandleTypeFlagBits*(){return &vk_flag; }
+	operator VkExternalSemaphoreHandleTypeFlagBits*()const{return const_cast<VkExternalSemaphoreHandleTypeFlagBits*const>(&vk_flag); }
+
+	operator VkExternalSemaphoreHandleTypeFlags&(){return flags; }
+	operator VkExternalSemaphoreHandleTypeFlags*()const{return const_cast<VkExternalSemaphoreHandleTypeFlags*const>(&flags); }
+	operator VkExternalSemaphoreHandleTypeFlags*(){return &flags; }
+
+	F_external_semaphore_handle_type& operator=(const F_external_semaphore_handle_type flag_){flags=flag_.flags; return *this;}
+	F_external_semaphore_handle_type& operator|=(const F_external_semaphore_handle_type flag_){flags|=flag_.flags; return *this;}
+	F_external_semaphore_handle_type& operator&=(const F_external_semaphore_handle_type flag_){flags&=flag_.flags; return *this;}
+	F_external_semaphore_handle_type& operator^=(const F_external_semaphore_handle_type flag_){flags^=flag_.flags;return *this;}
+	F_external_semaphore_handle_type operator~(){return ~flags;}
+
+	bool operator==(const F_external_semaphore_handle_type flag_){return flags==flag_.flags;}
 	bool operator!=(const F_external_semaphore_handle_type flag_){return !(*this==flag_);}
-	F_external_semaphore_handle_type& clear(){flag = 0;return *this;}
+
+	F_external_semaphore_handle_type& clear(){flags = 0;return *this;}
 	F_external_semaphore_handle_type all_flags(){ return b_opaque_fd | b_opaque_win32 | b_opaque_win32_kmt | b_d3d12_fence | b_sync_fd;}
-	F_external_semaphore_handle_type& on_opaque_fd(){ flag |= b_opaque_fd; return *this; }
-	F_external_semaphore_handle_type& off_opaque_fd(){ flag &= ~b_opaque_fd; return *this; }
-	F_external_semaphore_handle_type& on_opaque_win32(){ flag |= b_opaque_win32; return *this; }
-	F_external_semaphore_handle_type& off_opaque_win32(){ flag &= ~b_opaque_win32; return *this; }
-	F_external_semaphore_handle_type& on_opaque_win32_kmt(){ flag |= b_opaque_win32_kmt; return *this; }
-	F_external_semaphore_handle_type& off_opaque_win32_kmt(){ flag &= ~b_opaque_win32_kmt; return *this; }
-	F_external_semaphore_handle_type& on_d3d12_fence(){ flag |= b_d3d12_fence; return *this; }
-	F_external_semaphore_handle_type& off_d3d12_fence(){ flag &= ~b_d3d12_fence; return *this; }
-	F_external_semaphore_handle_type& on_sync_fd(){ flag |= b_sync_fd; return *this; }
-	F_external_semaphore_handle_type& off_sync_fd(){ flag &= ~b_sync_fd; return *this; }
+	F_external_semaphore_handle_type& on_opaque_fd(){ flags |= b_opaque_fd; return *this; }
+	F_external_semaphore_handle_type& off_opaque_fd(){ flags &= ~b_opaque_fd; return *this; }
+	F_external_semaphore_handle_type& on_opaque_win32(){ flags |= b_opaque_win32; return *this; }
+	F_external_semaphore_handle_type& off_opaque_win32(){ flags &= ~b_opaque_win32; return *this; }
+	F_external_semaphore_handle_type& on_opaque_win32_kmt(){ flags |= b_opaque_win32_kmt; return *this; }
+	F_external_semaphore_handle_type& off_opaque_win32_kmt(){ flags &= ~b_opaque_win32_kmt; return *this; }
+	F_external_semaphore_handle_type& on_d3d12_fence(){ flags |= b_d3d12_fence; return *this; }
+	F_external_semaphore_handle_type& off_d3d12_fence(){ flags &= ~b_d3d12_fence; return *this; }
+	F_external_semaphore_handle_type& on_sync_fd(){ flags |= b_sync_fd; return *this; }
+	F_external_semaphore_handle_type& off_sync_fd(){ flags &= ~b_sync_fd; return *this; }
 };
-inline F_external_semaphore_handle_type operator&(const F_external_semaphore_handle_type f1_, const F_external_semaphore_handle_type f2_){return f1_.flag&f2_.flag;}
-inline F_external_semaphore_handle_type operator&(const F_external_semaphore_handle_type f1_, const F_external_semaphore_handle_type::B f2_){return f1_.flag&uint32_t(f2_);}
-inline F_external_semaphore_handle_type operator&(const F_external_semaphore_handle_type::B f1_, const F_external_semaphore_handle_type f2_){return uint32_t(f1_)&f2_.flag;}
-inline F_external_semaphore_handle_type operator&(const F_external_semaphore_handle_type f1_, const VkExternalSemaphoreHandleTypeFlagBits f2_){return f1_.flag&uint32_t(f2_);}
-inline F_external_semaphore_handle_type operator&(const VkExternalSemaphoreHandleTypeFlagBits f1_, const F_external_semaphore_handle_type f2_){return uint32_t(f1_)&f2_.flag;}
-inline F_external_semaphore_handle_type operator|(const F_external_semaphore_handle_type f1_, const F_external_semaphore_handle_type f2_){return f1_.flag|f2_.flag;}
-inline F_external_semaphore_handle_type operator^(const F_external_semaphore_handle_type f1_, const F_external_semaphore_handle_type f2_){return f1_.flag^f2_.flag;}
 /*	VkExternalSemaphoreFeatureFlagBits*/
-template<> struct my_class_convert<F_external_semaphore_feature> { using type = VkExternalSemaphoreFeatureFlagBits;};template<> struct my_class_convert<VkExternalSemaphoreFeatureFlagBits> { using type = F_external_semaphore_feature;};union F_external_semaphore_feature {
-	uint32_t flag;
+union F_external_semaphore_feature {
+	VkExternalSemaphoreFeatureFlags flags;
 	VkExternalSemaphoreFeatureFlagBits vk_flag;
-	enum B{
+	enum {
 		b_exportable = VK_EXTERNAL_SEMAPHORE_FEATURE_EXPORTABLE_BIT,
 		b_importable = VK_EXTERNAL_SEMAPHORE_FEATURE_IMPORTABLE_BIT,
-	};
-	F_external_semaphore_feature():flag(0){}
-	F_external_semaphore_feature(const uint32_t flag_):flag(flag_){}
-	//F_external_semaphore_feature(const B flag_):flag(flag_){}
-	//F_external_semaphore_feature(const VkExternalSemaphoreFeatureFlagBits flag_):vk_flag(flag_){}
-	//operator uint32_t(){return flag;}
-	operator VkExternalSemaphoreFeatureFlagBits*(){ return reinterpret_cast<VkExternalSemaphoreFeatureFlagBits*>(this); }
-	operator VkExternalSemaphoreFeatureFlagBits(){return vk_flag;}
-	operator VkExternalSemaphoreFeatureFlags&(){ return flag; }
-	F_external_semaphore_feature& operator=(const F_external_semaphore_feature flag_){flag=flag_.flag; return *this;}
-	F_external_semaphore_feature& operator|=(const F_external_semaphore_feature flag_){flag|=flag_.flag; return *this;}
-	F_external_semaphore_feature& operator&=(const F_external_semaphore_feature flag_){flag&=flag_.flag; return *this;}
-	F_external_semaphore_feature& operator^=(const F_external_semaphore_feature flag_){flag^=flag_.flag;return *this;}
-	F_external_semaphore_feature operator~(){return ~flag;}
-	bool operator==(const F_external_semaphore_feature flag_){return flag==flag_.flag;}
+	}flag;
+
+	F_external_semaphore_feature():flags(0){}
+	F_external_semaphore_feature(const uint32_t flag_):flags(flag_){}
+
+	operator VkExternalSemaphoreFeatureFlagBits&(){return vk_flag;}
+	operator VkExternalSemaphoreFeatureFlagBits*(){return &vk_flag; }
+	operator VkExternalSemaphoreFeatureFlagBits*()const{return const_cast<VkExternalSemaphoreFeatureFlagBits*const>(&vk_flag); }
+
+	operator VkExternalSemaphoreFeatureFlags&(){return flags; }
+	operator VkExternalSemaphoreFeatureFlags*()const{return const_cast<VkExternalSemaphoreFeatureFlags*const>(&flags); }
+	operator VkExternalSemaphoreFeatureFlags*(){return &flags; }
+
+	F_external_semaphore_feature& operator=(const F_external_semaphore_feature flag_){flags=flag_.flags; return *this;}
+	F_external_semaphore_feature& operator|=(const F_external_semaphore_feature flag_){flags|=flag_.flags; return *this;}
+	F_external_semaphore_feature& operator&=(const F_external_semaphore_feature flag_){flags&=flag_.flags; return *this;}
+	F_external_semaphore_feature& operator^=(const F_external_semaphore_feature flag_){flags^=flag_.flags;return *this;}
+	F_external_semaphore_feature operator~(){return ~flags;}
+
+	bool operator==(const F_external_semaphore_feature flag_){return flags==flag_.flags;}
 	bool operator!=(const F_external_semaphore_feature flag_){return !(*this==flag_);}
-	F_external_semaphore_feature& clear(){flag = 0;return *this;}
+
+	F_external_semaphore_feature& clear(){flags = 0;return *this;}
 	F_external_semaphore_feature all_flags(){ return b_exportable | b_importable;}
-	F_external_semaphore_feature& on_exportable(){ flag |= b_exportable; return *this; }
-	F_external_semaphore_feature& off_exportable(){ flag &= ~b_exportable; return *this; }
-	F_external_semaphore_feature& on_importable(){ flag |= b_importable; return *this; }
-	F_external_semaphore_feature& off_importable(){ flag &= ~b_importable; return *this; }
+	F_external_semaphore_feature& on_exportable(){ flags |= b_exportable; return *this; }
+	F_external_semaphore_feature& off_exportable(){ flags &= ~b_exportable; return *this; }
+	F_external_semaphore_feature& on_importable(){ flags |= b_importable; return *this; }
+	F_external_semaphore_feature& off_importable(){ flags &= ~b_importable; return *this; }
 };
-inline F_external_semaphore_feature operator&(const F_external_semaphore_feature f1_, const F_external_semaphore_feature f2_){return f1_.flag&f2_.flag;}
-inline F_external_semaphore_feature operator&(const F_external_semaphore_feature f1_, const F_external_semaphore_feature::B f2_){return f1_.flag&uint32_t(f2_);}
-inline F_external_semaphore_feature operator&(const F_external_semaphore_feature::B f1_, const F_external_semaphore_feature f2_){return uint32_t(f1_)&f2_.flag;}
-inline F_external_semaphore_feature operator&(const F_external_semaphore_feature f1_, const VkExternalSemaphoreFeatureFlagBits f2_){return f1_.flag&uint32_t(f2_);}
-inline F_external_semaphore_feature operator&(const VkExternalSemaphoreFeatureFlagBits f1_, const F_external_semaphore_feature f2_){return uint32_t(f1_)&f2_.flag;}
-inline F_external_semaphore_feature operator|(const F_external_semaphore_feature f1_, const F_external_semaphore_feature f2_){return f1_.flag|f2_.flag;}
-inline F_external_semaphore_feature operator^(const F_external_semaphore_feature f1_, const F_external_semaphore_feature f2_){return f1_.flag^f2_.flag;}
 /*	VkSemaphoreImportFlagBits*/
-template<> struct my_class_convert<F_semaphore_import> { using type = VkSemaphoreImportFlagBits;};template<> struct my_class_convert<VkSemaphoreImportFlagBits> { using type = F_semaphore_import;};union F_semaphore_import {
-	uint32_t flag;
+union F_semaphore_import {
+	VkSemaphoreImportFlags flags;
 	VkSemaphoreImportFlagBits vk_flag;
-	enum B{
+	enum {
 		b_temporary = VK_SEMAPHORE_IMPORT_TEMPORARY_BIT,
-	};
-	F_semaphore_import():flag(0){}
-	F_semaphore_import(const uint32_t flag_):flag(flag_){}
-	//F_semaphore_import(const B flag_):flag(flag_){}
-	//F_semaphore_import(const VkSemaphoreImportFlagBits flag_):vk_flag(flag_){}
-	//operator uint32_t(){return flag;}
-	operator VkSemaphoreImportFlagBits*(){ return reinterpret_cast<VkSemaphoreImportFlagBits*>(this); }
-	operator VkSemaphoreImportFlagBits(){return vk_flag;}
-	operator VkSemaphoreImportFlags&(){ return flag; }
-	F_semaphore_import& operator=(const F_semaphore_import flag_){flag=flag_.flag; return *this;}
-	F_semaphore_import& operator|=(const F_semaphore_import flag_){flag|=flag_.flag; return *this;}
-	F_semaphore_import& operator&=(const F_semaphore_import flag_){flag&=flag_.flag; return *this;}
-	F_semaphore_import& operator^=(const F_semaphore_import flag_){flag^=flag_.flag;return *this;}
-	F_semaphore_import operator~(){return ~flag;}
-	bool operator==(const F_semaphore_import flag_){return flag==flag_.flag;}
+	}flag;
+
+	F_semaphore_import():flags(0){}
+	F_semaphore_import(const uint32_t flag_):flags(flag_){}
+
+	operator VkSemaphoreImportFlagBits&(){return vk_flag;}
+	operator VkSemaphoreImportFlagBits*(){return &vk_flag; }
+	operator VkSemaphoreImportFlagBits*()const{return const_cast<VkSemaphoreImportFlagBits*const>(&vk_flag); }
+
+	operator VkSemaphoreImportFlags&(){return flags; }
+	operator VkSemaphoreImportFlags*()const{return const_cast<VkSemaphoreImportFlags*const>(&flags); }
+	operator VkSemaphoreImportFlags*(){return &flags; }
+
+	F_semaphore_import& operator=(const F_semaphore_import flag_){flags=flag_.flags; return *this;}
+	F_semaphore_import& operator|=(const F_semaphore_import flag_){flags|=flag_.flags; return *this;}
+	F_semaphore_import& operator&=(const F_semaphore_import flag_){flags&=flag_.flags; return *this;}
+	F_semaphore_import& operator^=(const F_semaphore_import flag_){flags^=flag_.flags;return *this;}
+	F_semaphore_import operator~(){return ~flags;}
+
+	bool operator==(const F_semaphore_import flag_){return flags==flag_.flags;}
 	bool operator!=(const F_semaphore_import flag_){return !(*this==flag_);}
-	F_semaphore_import& clear(){flag = 0;return *this;}
+
+	F_semaphore_import& clear(){flags = 0;return *this;}
 	F_semaphore_import all_flags(){ return b_temporary;}
-	F_semaphore_import& on_temporary(){ flag |= b_temporary; return *this; }
-	F_semaphore_import& off_temporary(){ flag &= ~b_temporary; return *this; }
+	F_semaphore_import& on_temporary(){ flags |= b_temporary; return *this; }
+	F_semaphore_import& off_temporary(){ flags &= ~b_temporary; return *this; }
 };
-inline F_semaphore_import operator&(const F_semaphore_import f1_, const F_semaphore_import f2_){return f1_.flag&f2_.flag;}
-inline F_semaphore_import operator&(const F_semaphore_import f1_, const F_semaphore_import::B f2_){return f1_.flag&uint32_t(f2_);}
-inline F_semaphore_import operator&(const F_semaphore_import::B f1_, const F_semaphore_import f2_){return uint32_t(f1_)&f2_.flag;}
-inline F_semaphore_import operator&(const F_semaphore_import f1_, const VkSemaphoreImportFlagBits f2_){return f1_.flag&uint32_t(f2_);}
-inline F_semaphore_import operator&(const VkSemaphoreImportFlagBits f1_, const F_semaphore_import f2_){return uint32_t(f1_)&f2_.flag;}
-inline F_semaphore_import operator|(const F_semaphore_import f1_, const F_semaphore_import f2_){return f1_.flag|f2_.flag;}
-inline F_semaphore_import operator^(const F_semaphore_import f1_, const F_semaphore_import f2_){return f1_.flag^f2_.flag;}
 /*	VkExternalFenceHandleTypeFlagBits*/
-template<> struct my_class_convert<F_external_fence_handle_type> { using type = VkExternalFenceHandleTypeFlagBits;};template<> struct my_class_convert<VkExternalFenceHandleTypeFlagBits> { using type = F_external_fence_handle_type;};union F_external_fence_handle_type {
-	uint32_t flag;
+union F_external_fence_handle_type {
+	VkExternalFenceHandleTypeFlags flags;
 	VkExternalFenceHandleTypeFlagBits vk_flag;
-	enum B{
+	enum {
 		b_opaque_fd = VK_EXTERNAL_FENCE_HANDLE_TYPE_OPAQUE_FD_BIT,
 		b_opaque_win32 = VK_EXTERNAL_FENCE_HANDLE_TYPE_OPAQUE_WIN32_BIT,
 		b_opaque_win32_kmt = VK_EXTERNAL_FENCE_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT,
 		b_sync_fd = VK_EXTERNAL_FENCE_HANDLE_TYPE_SYNC_FD_BIT,
-	};
-	F_external_fence_handle_type():flag(0){}
-	F_external_fence_handle_type(const uint32_t flag_):flag(flag_){}
-	//F_external_fence_handle_type(const B flag_):flag(flag_){}
-	//F_external_fence_handle_type(const VkExternalFenceHandleTypeFlagBits flag_):vk_flag(flag_){}
-	//operator uint32_t(){return flag;}
-	operator VkExternalFenceHandleTypeFlagBits*(){ return reinterpret_cast<VkExternalFenceHandleTypeFlagBits*>(this); }
-	operator VkExternalFenceHandleTypeFlagBits(){return vk_flag;}
-	operator VkExternalFenceHandleTypeFlags&(){ return flag; }
-	F_external_fence_handle_type& operator=(const F_external_fence_handle_type flag_){flag=flag_.flag; return *this;}
-	F_external_fence_handle_type& operator|=(const F_external_fence_handle_type flag_){flag|=flag_.flag; return *this;}
-	F_external_fence_handle_type& operator&=(const F_external_fence_handle_type flag_){flag&=flag_.flag; return *this;}
-	F_external_fence_handle_type& operator^=(const F_external_fence_handle_type flag_){flag^=flag_.flag;return *this;}
-	F_external_fence_handle_type operator~(){return ~flag;}
-	bool operator==(const F_external_fence_handle_type flag_){return flag==flag_.flag;}
+	}flag;
+
+	F_external_fence_handle_type():flags(0){}
+	F_external_fence_handle_type(const uint32_t flag_):flags(flag_){}
+
+	operator VkExternalFenceHandleTypeFlagBits&(){return vk_flag;}
+	operator VkExternalFenceHandleTypeFlagBits*(){return &vk_flag; }
+	operator VkExternalFenceHandleTypeFlagBits*()const{return const_cast<VkExternalFenceHandleTypeFlagBits*const>(&vk_flag); }
+
+	operator VkExternalFenceHandleTypeFlags&(){return flags; }
+	operator VkExternalFenceHandleTypeFlags*()const{return const_cast<VkExternalFenceHandleTypeFlags*const>(&flags); }
+	operator VkExternalFenceHandleTypeFlags*(){return &flags; }
+
+	F_external_fence_handle_type& operator=(const F_external_fence_handle_type flag_){flags=flag_.flags; return *this;}
+	F_external_fence_handle_type& operator|=(const F_external_fence_handle_type flag_){flags|=flag_.flags; return *this;}
+	F_external_fence_handle_type& operator&=(const F_external_fence_handle_type flag_){flags&=flag_.flags; return *this;}
+	F_external_fence_handle_type& operator^=(const F_external_fence_handle_type flag_){flags^=flag_.flags;return *this;}
+	F_external_fence_handle_type operator~(){return ~flags;}
+
+	bool operator==(const F_external_fence_handle_type flag_){return flags==flag_.flags;}
 	bool operator!=(const F_external_fence_handle_type flag_){return !(*this==flag_);}
-	F_external_fence_handle_type& clear(){flag = 0;return *this;}
+
+	F_external_fence_handle_type& clear(){flags = 0;return *this;}
 	F_external_fence_handle_type all_flags(){ return b_opaque_fd | b_opaque_win32 | b_opaque_win32_kmt | b_sync_fd;}
-	F_external_fence_handle_type& on_opaque_fd(){ flag |= b_opaque_fd; return *this; }
-	F_external_fence_handle_type& off_opaque_fd(){ flag &= ~b_opaque_fd; return *this; }
-	F_external_fence_handle_type& on_opaque_win32(){ flag |= b_opaque_win32; return *this; }
-	F_external_fence_handle_type& off_opaque_win32(){ flag &= ~b_opaque_win32; return *this; }
-	F_external_fence_handle_type& on_opaque_win32_kmt(){ flag |= b_opaque_win32_kmt; return *this; }
-	F_external_fence_handle_type& off_opaque_win32_kmt(){ flag &= ~b_opaque_win32_kmt; return *this; }
-	F_external_fence_handle_type& on_sync_fd(){ flag |= b_sync_fd; return *this; }
-	F_external_fence_handle_type& off_sync_fd(){ flag &= ~b_sync_fd; return *this; }
+	F_external_fence_handle_type& on_opaque_fd(){ flags |= b_opaque_fd; return *this; }
+	F_external_fence_handle_type& off_opaque_fd(){ flags &= ~b_opaque_fd; return *this; }
+	F_external_fence_handle_type& on_opaque_win32(){ flags |= b_opaque_win32; return *this; }
+	F_external_fence_handle_type& off_opaque_win32(){ flags &= ~b_opaque_win32; return *this; }
+	F_external_fence_handle_type& on_opaque_win32_kmt(){ flags |= b_opaque_win32_kmt; return *this; }
+	F_external_fence_handle_type& off_opaque_win32_kmt(){ flags &= ~b_opaque_win32_kmt; return *this; }
+	F_external_fence_handle_type& on_sync_fd(){ flags |= b_sync_fd; return *this; }
+	F_external_fence_handle_type& off_sync_fd(){ flags &= ~b_sync_fd; return *this; }
 };
-inline F_external_fence_handle_type operator&(const F_external_fence_handle_type f1_, const F_external_fence_handle_type f2_){return f1_.flag&f2_.flag;}
-inline F_external_fence_handle_type operator&(const F_external_fence_handle_type f1_, const F_external_fence_handle_type::B f2_){return f1_.flag&uint32_t(f2_);}
-inline F_external_fence_handle_type operator&(const F_external_fence_handle_type::B f1_, const F_external_fence_handle_type f2_){return uint32_t(f1_)&f2_.flag;}
-inline F_external_fence_handle_type operator&(const F_external_fence_handle_type f1_, const VkExternalFenceHandleTypeFlagBits f2_){return f1_.flag&uint32_t(f2_);}
-inline F_external_fence_handle_type operator&(const VkExternalFenceHandleTypeFlagBits f1_, const F_external_fence_handle_type f2_){return uint32_t(f1_)&f2_.flag;}
-inline F_external_fence_handle_type operator|(const F_external_fence_handle_type f1_, const F_external_fence_handle_type f2_){return f1_.flag|f2_.flag;}
-inline F_external_fence_handle_type operator^(const F_external_fence_handle_type f1_, const F_external_fence_handle_type f2_){return f1_.flag^f2_.flag;}
 /*	VkExternalFenceFeatureFlagBits*/
-template<> struct my_class_convert<F_external_fence_feature> { using type = VkExternalFenceFeatureFlagBits;};template<> struct my_class_convert<VkExternalFenceFeatureFlagBits> { using type = F_external_fence_feature;};union F_external_fence_feature {
-	uint32_t flag;
+union F_external_fence_feature {
+	VkExternalFenceFeatureFlags flags;
 	VkExternalFenceFeatureFlagBits vk_flag;
-	enum B{
+	enum {
 		b_exportable = VK_EXTERNAL_FENCE_FEATURE_EXPORTABLE_BIT,
 		b_importable = VK_EXTERNAL_FENCE_FEATURE_IMPORTABLE_BIT,
-	};
-	F_external_fence_feature():flag(0){}
-	F_external_fence_feature(const uint32_t flag_):flag(flag_){}
-	//F_external_fence_feature(const B flag_):flag(flag_){}
-	//F_external_fence_feature(const VkExternalFenceFeatureFlagBits flag_):vk_flag(flag_){}
-	//operator uint32_t(){return flag;}
-	operator VkExternalFenceFeatureFlagBits*(){ return reinterpret_cast<VkExternalFenceFeatureFlagBits*>(this); }
-	operator VkExternalFenceFeatureFlagBits(){return vk_flag;}
-	operator VkExternalFenceFeatureFlags&(){ return flag; }
-	F_external_fence_feature& operator=(const F_external_fence_feature flag_){flag=flag_.flag; return *this;}
-	F_external_fence_feature& operator|=(const F_external_fence_feature flag_){flag|=flag_.flag; return *this;}
-	F_external_fence_feature& operator&=(const F_external_fence_feature flag_){flag&=flag_.flag; return *this;}
-	F_external_fence_feature& operator^=(const F_external_fence_feature flag_){flag^=flag_.flag;return *this;}
-	F_external_fence_feature operator~(){return ~flag;}
-	bool operator==(const F_external_fence_feature flag_){return flag==flag_.flag;}
+	}flag;
+
+	F_external_fence_feature():flags(0){}
+	F_external_fence_feature(const uint32_t flag_):flags(flag_){}
+
+	operator VkExternalFenceFeatureFlagBits&(){return vk_flag;}
+	operator VkExternalFenceFeatureFlagBits*(){return &vk_flag; }
+	operator VkExternalFenceFeatureFlagBits*()const{return const_cast<VkExternalFenceFeatureFlagBits*const>(&vk_flag); }
+
+	operator VkExternalFenceFeatureFlags&(){return flags; }
+	operator VkExternalFenceFeatureFlags*()const{return const_cast<VkExternalFenceFeatureFlags*const>(&flags); }
+	operator VkExternalFenceFeatureFlags*(){return &flags; }
+
+	F_external_fence_feature& operator=(const F_external_fence_feature flag_){flags=flag_.flags; return *this;}
+	F_external_fence_feature& operator|=(const F_external_fence_feature flag_){flags|=flag_.flags; return *this;}
+	F_external_fence_feature& operator&=(const F_external_fence_feature flag_){flags&=flag_.flags; return *this;}
+	F_external_fence_feature& operator^=(const F_external_fence_feature flag_){flags^=flag_.flags;return *this;}
+	F_external_fence_feature operator~(){return ~flags;}
+
+	bool operator==(const F_external_fence_feature flag_){return flags==flag_.flags;}
 	bool operator!=(const F_external_fence_feature flag_){return !(*this==flag_);}
-	F_external_fence_feature& clear(){flag = 0;return *this;}
+
+	F_external_fence_feature& clear(){flags = 0;return *this;}
 	F_external_fence_feature all_flags(){ return b_exportable | b_importable;}
-	F_external_fence_feature& on_exportable(){ flag |= b_exportable; return *this; }
-	F_external_fence_feature& off_exportable(){ flag &= ~b_exportable; return *this; }
-	F_external_fence_feature& on_importable(){ flag |= b_importable; return *this; }
-	F_external_fence_feature& off_importable(){ flag &= ~b_importable; return *this; }
+	F_external_fence_feature& on_exportable(){ flags |= b_exportable; return *this; }
+	F_external_fence_feature& off_exportable(){ flags &= ~b_exportable; return *this; }
+	F_external_fence_feature& on_importable(){ flags |= b_importable; return *this; }
+	F_external_fence_feature& off_importable(){ flags &= ~b_importable; return *this; }
 };
-inline F_external_fence_feature operator&(const F_external_fence_feature f1_, const F_external_fence_feature f2_){return f1_.flag&f2_.flag;}
-inline F_external_fence_feature operator&(const F_external_fence_feature f1_, const F_external_fence_feature::B f2_){return f1_.flag&uint32_t(f2_);}
-inline F_external_fence_feature operator&(const F_external_fence_feature::B f1_, const F_external_fence_feature f2_){return uint32_t(f1_)&f2_.flag;}
-inline F_external_fence_feature operator&(const F_external_fence_feature f1_, const VkExternalFenceFeatureFlagBits f2_){return f1_.flag&uint32_t(f2_);}
-inline F_external_fence_feature operator&(const VkExternalFenceFeatureFlagBits f1_, const F_external_fence_feature f2_){return uint32_t(f1_)&f2_.flag;}
-inline F_external_fence_feature operator|(const F_external_fence_feature f1_, const F_external_fence_feature f2_){return f1_.flag|f2_.flag;}
-inline F_external_fence_feature operator^(const F_external_fence_feature f1_, const F_external_fence_feature f2_){return f1_.flag^f2_.flag;}
 /*	VkFenceImportFlagBits*/
-template<> struct my_class_convert<F_fence_import> { using type = VkFenceImportFlagBits;};template<> struct my_class_convert<VkFenceImportFlagBits> { using type = F_fence_import;};union F_fence_import {
-	uint32_t flag;
+union F_fence_import {
+	VkFenceImportFlags flags;
 	VkFenceImportFlagBits vk_flag;
-	enum B{
+	enum {
 		b_temporary = VK_FENCE_IMPORT_TEMPORARY_BIT,
-	};
-	F_fence_import():flag(0){}
-	F_fence_import(const uint32_t flag_):flag(flag_){}
-	//F_fence_import(const B flag_):flag(flag_){}
-	//F_fence_import(const VkFenceImportFlagBits flag_):vk_flag(flag_){}
-	//operator uint32_t(){return flag;}
-	operator VkFenceImportFlagBits*(){ return reinterpret_cast<VkFenceImportFlagBits*>(this); }
-	operator VkFenceImportFlagBits(){return vk_flag;}
-	operator VkFenceImportFlags&(){ return flag; }
-	F_fence_import& operator=(const F_fence_import flag_){flag=flag_.flag; return *this;}
-	F_fence_import& operator|=(const F_fence_import flag_){flag|=flag_.flag; return *this;}
-	F_fence_import& operator&=(const F_fence_import flag_){flag&=flag_.flag; return *this;}
-	F_fence_import& operator^=(const F_fence_import flag_){flag^=flag_.flag;return *this;}
-	F_fence_import operator~(){return ~flag;}
-	bool operator==(const F_fence_import flag_){return flag==flag_.flag;}
+	}flag;
+
+	F_fence_import():flags(0){}
+	F_fence_import(const uint32_t flag_):flags(flag_){}
+
+	operator VkFenceImportFlagBits&(){return vk_flag;}
+	operator VkFenceImportFlagBits*(){return &vk_flag; }
+	operator VkFenceImportFlagBits*()const{return const_cast<VkFenceImportFlagBits*const>(&vk_flag); }
+
+	operator VkFenceImportFlags&(){return flags; }
+	operator VkFenceImportFlags*()const{return const_cast<VkFenceImportFlags*const>(&flags); }
+	operator VkFenceImportFlags*(){return &flags; }
+
+	F_fence_import& operator=(const F_fence_import flag_){flags=flag_.flags; return *this;}
+	F_fence_import& operator|=(const F_fence_import flag_){flags|=flag_.flags; return *this;}
+	F_fence_import& operator&=(const F_fence_import flag_){flags&=flag_.flags; return *this;}
+	F_fence_import& operator^=(const F_fence_import flag_){flags^=flag_.flags;return *this;}
+	F_fence_import operator~(){return ~flags;}
+
+	bool operator==(const F_fence_import flag_){return flags==flag_.flags;}
 	bool operator!=(const F_fence_import flag_){return !(*this==flag_);}
-	F_fence_import& clear(){flag = 0;return *this;}
+
+	F_fence_import& clear(){flags = 0;return *this;}
 	F_fence_import all_flags(){ return b_temporary;}
-	F_fence_import& on_temporary(){ flag |= b_temporary; return *this; }
-	F_fence_import& off_temporary(){ flag &= ~b_temporary; return *this; }
+	F_fence_import& on_temporary(){ flags |= b_temporary; return *this; }
+	F_fence_import& off_temporary(){ flags &= ~b_temporary; return *this; }
 };
-inline F_fence_import operator&(const F_fence_import f1_, const F_fence_import f2_){return f1_.flag&f2_.flag;}
-inline F_fence_import operator&(const F_fence_import f1_, const F_fence_import::B f2_){return f1_.flag&uint32_t(f2_);}
-inline F_fence_import operator&(const F_fence_import::B f1_, const F_fence_import f2_){return uint32_t(f1_)&f2_.flag;}
-inline F_fence_import operator&(const F_fence_import f1_, const VkFenceImportFlagBits f2_){return f1_.flag&uint32_t(f2_);}
-inline F_fence_import operator&(const VkFenceImportFlagBits f1_, const F_fence_import f2_){return uint32_t(f1_)&f2_.flag;}
-inline F_fence_import operator|(const F_fence_import f1_, const F_fence_import f2_){return f1_.flag|f2_.flag;}
-inline F_fence_import operator^(const F_fence_import f1_, const F_fence_import f2_){return f1_.flag^f2_.flag;}
 /*	VkSurfaceCounterFlagBitsEXT*/
-template<> struct my_class_convert<F_surface_counter_EXT> { using type = VkSurfaceCounterFlagBitsEXT;};template<> struct my_class_convert<VkSurfaceCounterFlagBitsEXT> { using type = F_surface_counter_EXT;};union F_surface_counter_EXT {
-	uint32_t flag;
+union F_surface_counter_EXT {
+	VkSurfaceCounterFlagsEXT flags;
 	VkSurfaceCounterFlagBitsEXT vk_flag;
-	enum B{
+	enum {
 		b_vblank_ext = VK_SURFACE_COUNTER_VBLANK_EXT,
-	};
-	F_surface_counter_EXT():flag(0){}
-	F_surface_counter_EXT(const uint32_t flag_):flag(flag_){}
-	//F_surface_counter_EXT(const B flag_):flag(flag_){}
-	//F_surface_counter_EXT(const VkSurfaceCounterFlagBitsEXT flag_):vk_flag(flag_){}
-	//operator uint32_t(){return flag;}
-	operator VkSurfaceCounterFlagBitsEXT*(){ return reinterpret_cast<VkSurfaceCounterFlagBitsEXT*>(this); }
-	operator VkSurfaceCounterFlagBitsEXT(){return vk_flag;}
-	operator VkSurfaceCounterFlagsEXT&(){ return flag; }
-	F_surface_counter_EXT& operator=(const F_surface_counter_EXT flag_){flag=flag_.flag; return *this;}
-	F_surface_counter_EXT& operator|=(const F_surface_counter_EXT flag_){flag|=flag_.flag; return *this;}
-	F_surface_counter_EXT& operator&=(const F_surface_counter_EXT flag_){flag&=flag_.flag; return *this;}
-	F_surface_counter_EXT& operator^=(const F_surface_counter_EXT flag_){flag^=flag_.flag;return *this;}
-	F_surface_counter_EXT operator~(){return ~flag;}
-	bool operator==(const F_surface_counter_EXT flag_){return flag==flag_.flag;}
+	}flag;
+
+	F_surface_counter_EXT():flags(0){}
+	F_surface_counter_EXT(const uint32_t flag_):flags(flag_){}
+
+	operator VkSurfaceCounterFlagBitsEXT&(){return vk_flag;}
+	operator VkSurfaceCounterFlagBitsEXT*(){return &vk_flag; }
+	operator VkSurfaceCounterFlagBitsEXT*()const{return const_cast<VkSurfaceCounterFlagBitsEXT*const>(&vk_flag); }
+
+	operator VkSurfaceCounterFlagsEXT&(){return flags; }
+	operator VkSurfaceCounterFlagsEXT*()const{return const_cast<VkSurfaceCounterFlagsEXT*const>(&flags); }
+	operator VkSurfaceCounterFlagsEXT*(){return &flags; }
+
+	F_surface_counter_EXT& operator=(const F_surface_counter_EXT flag_){flags=flag_.flags; return *this;}
+	F_surface_counter_EXT& operator|=(const F_surface_counter_EXT flag_){flags|=flag_.flags; return *this;}
+	F_surface_counter_EXT& operator&=(const F_surface_counter_EXT flag_){flags&=flag_.flags; return *this;}
+	F_surface_counter_EXT& operator^=(const F_surface_counter_EXT flag_){flags^=flag_.flags;return *this;}
+	F_surface_counter_EXT operator~(){return ~flags;}
+
+	bool operator==(const F_surface_counter_EXT flag_){return flags==flag_.flags;}
 	bool operator!=(const F_surface_counter_EXT flag_){return !(*this==flag_);}
-	F_surface_counter_EXT& clear(){flag = 0;return *this;}
+
+	F_surface_counter_EXT& clear(){flags = 0;return *this;}
 	F_surface_counter_EXT all_flags(){ return b_vblank_ext;}
-	F_surface_counter_EXT& on_vblank_ext(){ flag |= b_vblank_ext; return *this; }
-	F_surface_counter_EXT& off_vblank_ext(){ flag &= ~b_vblank_ext; return *this; }
+	F_surface_counter_EXT& on_vblank_ext(){ flags |= b_vblank_ext; return *this; }
+	F_surface_counter_EXT& off_vblank_ext(){ flags &= ~b_vblank_ext; return *this; }
 };
-inline F_surface_counter_EXT operator&(const F_surface_counter_EXT f1_, const F_surface_counter_EXT f2_){return f1_.flag&f2_.flag;}
-inline F_surface_counter_EXT operator&(const F_surface_counter_EXT f1_, const F_surface_counter_EXT::B f2_){return f1_.flag&uint32_t(f2_);}
-inline F_surface_counter_EXT operator&(const F_surface_counter_EXT::B f1_, const F_surface_counter_EXT f2_){return uint32_t(f1_)&f2_.flag;}
-inline F_surface_counter_EXT operator&(const F_surface_counter_EXT f1_, const VkSurfaceCounterFlagBitsEXT f2_){return f1_.flag&uint32_t(f2_);}
-inline F_surface_counter_EXT operator&(const VkSurfaceCounterFlagBitsEXT f1_, const F_surface_counter_EXT f2_){return uint32_t(f1_)&f2_.flag;}
-inline F_surface_counter_EXT operator|(const F_surface_counter_EXT f1_, const F_surface_counter_EXT f2_){return f1_.flag|f2_.flag;}
-inline F_surface_counter_EXT operator^(const F_surface_counter_EXT f1_, const F_surface_counter_EXT f2_){return f1_.flag^f2_.flag;}
 /*	VkPeerMemoryFeatureFlagBits*/
-template<> struct my_class_convert<F_peer_memory_feature> { using type = VkPeerMemoryFeatureFlagBits;};template<> struct my_class_convert<VkPeerMemoryFeatureFlagBits> { using type = F_peer_memory_feature;};union F_peer_memory_feature {
-	uint32_t flag;
+union F_peer_memory_feature {
+	VkPeerMemoryFeatureFlags flags;
 	VkPeerMemoryFeatureFlagBits vk_flag;
-	enum B{
+	enum {
 			/* Can read with vkCmdCopy commands */
 		b_copy_src = VK_PEER_MEMORY_FEATURE_COPY_SRC_BIT,
 			/* Can write with vkCmdCopy commands */
@@ -3969,80 +3850,78 @@ template<> struct my_class_convert<F_peer_memory_feature> { using type = VkPeerM
 		b_generic_src = VK_PEER_MEMORY_FEATURE_GENERIC_SRC_BIT,
 			/* Can write with and access type/command */
 		b_generic_dst = VK_PEER_MEMORY_FEATURE_GENERIC_DST_BIT,
-	};
-	F_peer_memory_feature():flag(0){}
-	F_peer_memory_feature(const uint32_t flag_):flag(flag_){}
-	//F_peer_memory_feature(const B flag_):flag(flag_){}
-	//F_peer_memory_feature(const VkPeerMemoryFeatureFlagBits flag_):vk_flag(flag_){}
-	//operator uint32_t(){return flag;}
-	operator VkPeerMemoryFeatureFlagBits*(){ return reinterpret_cast<VkPeerMemoryFeatureFlagBits*>(this); }
-	operator VkPeerMemoryFeatureFlagBits(){return vk_flag;}
-	operator VkPeerMemoryFeatureFlags&(){ return flag; }
-	F_peer_memory_feature& operator=(const F_peer_memory_feature flag_){flag=flag_.flag; return *this;}
-	F_peer_memory_feature& operator|=(const F_peer_memory_feature flag_){flag|=flag_.flag; return *this;}
-	F_peer_memory_feature& operator&=(const F_peer_memory_feature flag_){flag&=flag_.flag; return *this;}
-	F_peer_memory_feature& operator^=(const F_peer_memory_feature flag_){flag^=flag_.flag;return *this;}
-	F_peer_memory_feature operator~(){return ~flag;}
-	bool operator==(const F_peer_memory_feature flag_){return flag==flag_.flag;}
+	}flag;
+
+	F_peer_memory_feature():flags(0){}
+	F_peer_memory_feature(const uint32_t flag_):flags(flag_){}
+
+	operator VkPeerMemoryFeatureFlagBits&(){return vk_flag;}
+	operator VkPeerMemoryFeatureFlagBits*(){return &vk_flag; }
+	operator VkPeerMemoryFeatureFlagBits*()const{return const_cast<VkPeerMemoryFeatureFlagBits*const>(&vk_flag); }
+
+	operator VkPeerMemoryFeatureFlags&(){return flags; }
+	operator VkPeerMemoryFeatureFlags*()const{return const_cast<VkPeerMemoryFeatureFlags*const>(&flags); }
+	operator VkPeerMemoryFeatureFlags*(){return &flags; }
+
+	F_peer_memory_feature& operator=(const F_peer_memory_feature flag_){flags=flag_.flags; return *this;}
+	F_peer_memory_feature& operator|=(const F_peer_memory_feature flag_){flags|=flag_.flags; return *this;}
+	F_peer_memory_feature& operator&=(const F_peer_memory_feature flag_){flags&=flag_.flags; return *this;}
+	F_peer_memory_feature& operator^=(const F_peer_memory_feature flag_){flags^=flag_.flags;return *this;}
+	F_peer_memory_feature operator~(){return ~flags;}
+
+	bool operator==(const F_peer_memory_feature flag_){return flags==flag_.flags;}
 	bool operator!=(const F_peer_memory_feature flag_){return !(*this==flag_);}
-	F_peer_memory_feature& clear(){flag = 0;return *this;}
+
+	F_peer_memory_feature& clear(){flags = 0;return *this;}
 	F_peer_memory_feature all_flags(){ return b_copy_src | b_copy_dst | b_generic_src | b_generic_dst;}
-	F_peer_memory_feature& on_copy_src(){ flag |= b_copy_src; return *this; }
-	F_peer_memory_feature& off_copy_src(){ flag &= ~b_copy_src; return *this; }
-	F_peer_memory_feature& on_copy_dst(){ flag |= b_copy_dst; return *this; }
-	F_peer_memory_feature& off_copy_dst(){ flag &= ~b_copy_dst; return *this; }
-	F_peer_memory_feature& on_generic_src(){ flag |= b_generic_src; return *this; }
-	F_peer_memory_feature& off_generic_src(){ flag &= ~b_generic_src; return *this; }
-	F_peer_memory_feature& on_generic_dst(){ flag |= b_generic_dst; return *this; }
-	F_peer_memory_feature& off_generic_dst(){ flag &= ~b_generic_dst; return *this; }
+	F_peer_memory_feature& on_copy_src(){ flags |= b_copy_src; return *this; }
+	F_peer_memory_feature& off_copy_src(){ flags &= ~b_copy_src; return *this; }
+	F_peer_memory_feature& on_copy_dst(){ flags |= b_copy_dst; return *this; }
+	F_peer_memory_feature& off_copy_dst(){ flags &= ~b_copy_dst; return *this; }
+	F_peer_memory_feature& on_generic_src(){ flags |= b_generic_src; return *this; }
+	F_peer_memory_feature& off_generic_src(){ flags &= ~b_generic_src; return *this; }
+	F_peer_memory_feature& on_generic_dst(){ flags |= b_generic_dst; return *this; }
+	F_peer_memory_feature& off_generic_dst(){ flags &= ~b_generic_dst; return *this; }
 };
-inline F_peer_memory_feature operator&(const F_peer_memory_feature f1_, const F_peer_memory_feature f2_){return f1_.flag&f2_.flag;}
-inline F_peer_memory_feature operator&(const F_peer_memory_feature f1_, const F_peer_memory_feature::B f2_){return f1_.flag&uint32_t(f2_);}
-inline F_peer_memory_feature operator&(const F_peer_memory_feature::B f1_, const F_peer_memory_feature f2_){return uint32_t(f1_)&f2_.flag;}
-inline F_peer_memory_feature operator&(const F_peer_memory_feature f1_, const VkPeerMemoryFeatureFlagBits f2_){return f1_.flag&uint32_t(f2_);}
-inline F_peer_memory_feature operator&(const VkPeerMemoryFeatureFlagBits f1_, const F_peer_memory_feature f2_){return uint32_t(f1_)&f2_.flag;}
-inline F_peer_memory_feature operator|(const F_peer_memory_feature f1_, const F_peer_memory_feature f2_){return f1_.flag|f2_.flag;}
-inline F_peer_memory_feature operator^(const F_peer_memory_feature f1_, const F_peer_memory_feature f2_){return f1_.flag^f2_.flag;}
 /*	VkMemoryAllocateFlagBits*/
-template<> struct my_class_convert<F_memory_allocate> { using type = VkMemoryAllocateFlagBits;};template<> struct my_class_convert<VkMemoryAllocateFlagBits> { using type = F_memory_allocate;};union F_memory_allocate {
-	uint32_t flag;
+union F_memory_allocate {
+	VkMemoryAllocateFlags flags;
 	VkMemoryAllocateFlagBits vk_flag;
-	enum B{
+	enum {
 			/* Force allocation on specific devices */
 		b_device_mask = VK_MEMORY_ALLOCATE_DEVICE_MASK_BIT,
-	};
-	F_memory_allocate():flag(0){}
-	F_memory_allocate(const uint32_t flag_):flag(flag_){}
-	//F_memory_allocate(const B flag_):flag(flag_){}
-	//F_memory_allocate(const VkMemoryAllocateFlagBits flag_):vk_flag(flag_){}
-	//operator uint32_t(){return flag;}
-	operator VkMemoryAllocateFlagBits*(){ return reinterpret_cast<VkMemoryAllocateFlagBits*>(this); }
-	operator VkMemoryAllocateFlagBits(){return vk_flag;}
-	operator VkMemoryAllocateFlags&(){ return flag; }
-	F_memory_allocate& operator=(const F_memory_allocate flag_){flag=flag_.flag; return *this;}
-	F_memory_allocate& operator|=(const F_memory_allocate flag_){flag|=flag_.flag; return *this;}
-	F_memory_allocate& operator&=(const F_memory_allocate flag_){flag&=flag_.flag; return *this;}
-	F_memory_allocate& operator^=(const F_memory_allocate flag_){flag^=flag_.flag;return *this;}
-	F_memory_allocate operator~(){return ~flag;}
-	bool operator==(const F_memory_allocate flag_){return flag==flag_.flag;}
+	}flag;
+
+	F_memory_allocate():flags(0){}
+	F_memory_allocate(const uint32_t flag_):flags(flag_){}
+
+	operator VkMemoryAllocateFlagBits&(){return vk_flag;}
+	operator VkMemoryAllocateFlagBits*(){return &vk_flag; }
+	operator VkMemoryAllocateFlagBits*()const{return const_cast<VkMemoryAllocateFlagBits*const>(&vk_flag); }
+
+	operator VkMemoryAllocateFlags&(){return flags; }
+	operator VkMemoryAllocateFlags*()const{return const_cast<VkMemoryAllocateFlags*const>(&flags); }
+	operator VkMemoryAllocateFlags*(){return &flags; }
+
+	F_memory_allocate& operator=(const F_memory_allocate flag_){flags=flag_.flags; return *this;}
+	F_memory_allocate& operator|=(const F_memory_allocate flag_){flags|=flag_.flags; return *this;}
+	F_memory_allocate& operator&=(const F_memory_allocate flag_){flags&=flag_.flags; return *this;}
+	F_memory_allocate& operator^=(const F_memory_allocate flag_){flags^=flag_.flags;return *this;}
+	F_memory_allocate operator~(){return ~flags;}
+
+	bool operator==(const F_memory_allocate flag_){return flags==flag_.flags;}
 	bool operator!=(const F_memory_allocate flag_){return !(*this==flag_);}
-	F_memory_allocate& clear(){flag = 0;return *this;}
+
+	F_memory_allocate& clear(){flags = 0;return *this;}
 	F_memory_allocate all_flags(){ return b_device_mask;}
-	F_memory_allocate& on_device_mask(){ flag |= b_device_mask; return *this; }
-	F_memory_allocate& off_device_mask(){ flag &= ~b_device_mask; return *this; }
+	F_memory_allocate& on_device_mask(){ flags |= b_device_mask; return *this; }
+	F_memory_allocate& off_device_mask(){ flags &= ~b_device_mask; return *this; }
 };
-inline F_memory_allocate operator&(const F_memory_allocate f1_, const F_memory_allocate f2_){return f1_.flag&f2_.flag;}
-inline F_memory_allocate operator&(const F_memory_allocate f1_, const F_memory_allocate::B f2_){return f1_.flag&uint32_t(f2_);}
-inline F_memory_allocate operator&(const F_memory_allocate::B f1_, const F_memory_allocate f2_){return uint32_t(f1_)&f2_.flag;}
-inline F_memory_allocate operator&(const F_memory_allocate f1_, const VkMemoryAllocateFlagBits f2_){return f1_.flag&uint32_t(f2_);}
-inline F_memory_allocate operator&(const VkMemoryAllocateFlagBits f1_, const F_memory_allocate f2_){return uint32_t(f1_)&f2_.flag;}
-inline F_memory_allocate operator|(const F_memory_allocate f1_, const F_memory_allocate f2_){return f1_.flag|f2_.flag;}
-inline F_memory_allocate operator^(const F_memory_allocate f1_, const F_memory_allocate f2_){return f1_.flag^f2_.flag;}
 /*	VkDeviceGroupPresentModeFlagBitsKHR*/
-template<> struct my_class_convert<F_device_group_present_mode_KHR> { using type = VkDeviceGroupPresentModeFlagBitsKHR;};template<> struct my_class_convert<VkDeviceGroupPresentModeFlagBitsKHR> { using type = F_device_group_present_mode_KHR;};union F_device_group_present_mode_KHR {
-	uint32_t flag;
+union F_device_group_present_mode_KHR {
+	VkDeviceGroupPresentModeFlagsKHR flags;
 	VkDeviceGroupPresentModeFlagBitsKHR vk_flag;
-	enum B{
+	enum {
 			/* Present from local memory */
 		b_local_khr = VK_DEVICE_GROUP_PRESENT_MODE_LOCAL_BIT_KHR,
 			/* Present from remote memory */
@@ -4051,40 +3930,39 @@ template<> struct my_class_convert<F_device_group_present_mode_KHR> { using type
 		b_sum_khr = VK_DEVICE_GROUP_PRESENT_MODE_SUM_BIT_KHR,
 			/* Each physical device presents from local memory */
 		b_local_multi_device_khr = VK_DEVICE_GROUP_PRESENT_MODE_LOCAL_MULTI_DEVICE_BIT_KHR,
-	};
-	F_device_group_present_mode_KHR():flag(0){}
-	F_device_group_present_mode_KHR(const uint32_t flag_):flag(flag_){}
-	//F_device_group_present_mode_KHR(const B flag_):flag(flag_){}
-	//F_device_group_present_mode_KHR(const VkDeviceGroupPresentModeFlagBitsKHR flag_):vk_flag(flag_){}
-	//operator uint32_t(){return flag;}
-	operator VkDeviceGroupPresentModeFlagBitsKHR*(){ return reinterpret_cast<VkDeviceGroupPresentModeFlagBitsKHR*>(this); }
-	operator VkDeviceGroupPresentModeFlagBitsKHR(){return vk_flag;}
-	operator VkDeviceGroupPresentModeFlagsKHR&(){ return flag; }
-	F_device_group_present_mode_KHR& operator=(const F_device_group_present_mode_KHR flag_){flag=flag_.flag; return *this;}
-	F_device_group_present_mode_KHR& operator|=(const F_device_group_present_mode_KHR flag_){flag|=flag_.flag; return *this;}
-	F_device_group_present_mode_KHR& operator&=(const F_device_group_present_mode_KHR flag_){flag&=flag_.flag; return *this;}
-	F_device_group_present_mode_KHR& operator^=(const F_device_group_present_mode_KHR flag_){flag^=flag_.flag;return *this;}
-	F_device_group_present_mode_KHR operator~(){return ~flag;}
-	bool operator==(const F_device_group_present_mode_KHR flag_){return flag==flag_.flag;}
+	}flag;
+
+	F_device_group_present_mode_KHR():flags(0){}
+	F_device_group_present_mode_KHR(const uint32_t flag_):flags(flag_){}
+
+	operator VkDeviceGroupPresentModeFlagBitsKHR&(){return vk_flag;}
+	operator VkDeviceGroupPresentModeFlagBitsKHR*(){return &vk_flag; }
+	operator VkDeviceGroupPresentModeFlagBitsKHR*()const{return const_cast<VkDeviceGroupPresentModeFlagBitsKHR*const>(&vk_flag); }
+
+	operator VkDeviceGroupPresentModeFlagsKHR&(){return flags; }
+	operator VkDeviceGroupPresentModeFlagsKHR*()const{return const_cast<VkDeviceGroupPresentModeFlagsKHR*const>(&flags); }
+	operator VkDeviceGroupPresentModeFlagsKHR*(){return &flags; }
+
+	F_device_group_present_mode_KHR& operator=(const F_device_group_present_mode_KHR flag_){flags=flag_.flags; return *this;}
+	F_device_group_present_mode_KHR& operator|=(const F_device_group_present_mode_KHR flag_){flags|=flag_.flags; return *this;}
+	F_device_group_present_mode_KHR& operator&=(const F_device_group_present_mode_KHR flag_){flags&=flag_.flags; return *this;}
+	F_device_group_present_mode_KHR& operator^=(const F_device_group_present_mode_KHR flag_){flags^=flag_.flags;return *this;}
+	F_device_group_present_mode_KHR operator~(){return ~flags;}
+
+	bool operator==(const F_device_group_present_mode_KHR flag_){return flags==flag_.flags;}
 	bool operator!=(const F_device_group_present_mode_KHR flag_){return !(*this==flag_);}
-	F_device_group_present_mode_KHR& clear(){flag = 0;return *this;}
+
+	F_device_group_present_mode_KHR& clear(){flags = 0;return *this;}
 	F_device_group_present_mode_KHR all_flags(){ return b_local_khr | b_remote_khr | b_sum_khr | b_local_multi_device_khr;}
-	F_device_group_present_mode_KHR& on_local_khr(){ flag |= b_local_khr; return *this; }
-	F_device_group_present_mode_KHR& off_local_khr(){ flag &= ~b_local_khr; return *this; }
-	F_device_group_present_mode_KHR& on_remote_khr(){ flag |= b_remote_khr; return *this; }
-	F_device_group_present_mode_KHR& off_remote_khr(){ flag &= ~b_remote_khr; return *this; }
-	F_device_group_present_mode_KHR& on_sum_khr(){ flag |= b_sum_khr; return *this; }
-	F_device_group_present_mode_KHR& off_sum_khr(){ flag &= ~b_sum_khr; return *this; }
-	F_device_group_present_mode_KHR& on_local_multi_device_khr(){ flag |= b_local_multi_device_khr; return *this; }
-	F_device_group_present_mode_KHR& off_local_multi_device_khr(){ flag &= ~b_local_multi_device_khr; return *this; }
+	F_device_group_present_mode_KHR& on_local_khr(){ flags |= b_local_khr; return *this; }
+	F_device_group_present_mode_KHR& off_local_khr(){ flags &= ~b_local_khr; return *this; }
+	F_device_group_present_mode_KHR& on_remote_khr(){ flags |= b_remote_khr; return *this; }
+	F_device_group_present_mode_KHR& off_remote_khr(){ flags &= ~b_remote_khr; return *this; }
+	F_device_group_present_mode_KHR& on_sum_khr(){ flags |= b_sum_khr; return *this; }
+	F_device_group_present_mode_KHR& off_sum_khr(){ flags &= ~b_sum_khr; return *this; }
+	F_device_group_present_mode_KHR& on_local_multi_device_khr(){ flags |= b_local_multi_device_khr; return *this; }
+	F_device_group_present_mode_KHR& off_local_multi_device_khr(){ flags &= ~b_local_multi_device_khr; return *this; }
 };
-inline F_device_group_present_mode_KHR operator&(const F_device_group_present_mode_KHR f1_, const F_device_group_present_mode_KHR f2_){return f1_.flag&f2_.flag;}
-inline F_device_group_present_mode_KHR operator&(const F_device_group_present_mode_KHR f1_, const F_device_group_present_mode_KHR::B f2_){return f1_.flag&uint32_t(f2_);}
-inline F_device_group_present_mode_KHR operator&(const F_device_group_present_mode_KHR::B f1_, const F_device_group_present_mode_KHR f2_){return uint32_t(f1_)&f2_.flag;}
-inline F_device_group_present_mode_KHR operator&(const F_device_group_present_mode_KHR f1_, const VkDeviceGroupPresentModeFlagBitsKHR f2_){return f1_.flag&uint32_t(f2_);}
-inline F_device_group_present_mode_KHR operator&(const VkDeviceGroupPresentModeFlagBitsKHR f1_, const F_device_group_present_mode_KHR f2_){return uint32_t(f1_)&f2_.flag;}
-inline F_device_group_present_mode_KHR operator|(const F_device_group_present_mode_KHR f1_, const F_device_group_present_mode_KHR f2_){return f1_.flag|f2_.flag;}
-inline F_device_group_present_mode_KHR operator^(const F_device_group_present_mode_KHR f1_, const F_device_group_present_mode_KHR f2_){return f1_.flag^f2_.flag;}
 /*	VkSwapchainCreateFlagBitsKHR*/
 using F_swapchain_create_KHR = 
 			VkSwapchainCreateFlagBitsKHR;
@@ -4094,291 +3972,161 @@ using F_subpass_description =
 			VkSubpassDescriptionFlagBits;
 
 /*	VkDebugUtilsMessageSeverityFlagBitsEXT*/
-template<> struct my_class_convert<F_debug_utils_message_severity_EXT> { using type = VkDebugUtilsMessageSeverityFlagBitsEXT;};template<> struct my_class_convert<VkDebugUtilsMessageSeverityFlagBitsEXT> { using type = F_debug_utils_message_severity_EXT;};union F_debug_utils_message_severity_EXT {
-	uint32_t flag;
+union F_debug_utils_message_severity_EXT {
+	VkDebugUtilsMessageSeverityFlagsEXT flags;
 	VkDebugUtilsMessageSeverityFlagBitsEXT vk_flag;
-	enum B{
+	enum {
 		b_verbose_ext = VK_DEBUG_UTILS_MESSAGE_SEVERITY_VERBOSE_BIT_EXT,
 		b_info_ext = VK_DEBUG_UTILS_MESSAGE_SEVERITY_INFO_BIT_EXT,
 		b_warning_ext = VK_DEBUG_UTILS_MESSAGE_SEVERITY_WARNING_BIT_EXT,
 		b_error_ext = VK_DEBUG_UTILS_MESSAGE_SEVERITY_ERROR_BIT_EXT,
-	};
-	F_debug_utils_message_severity_EXT():flag(0){}
-	F_debug_utils_message_severity_EXT(const uint32_t flag_):flag(flag_){}
-	//F_debug_utils_message_severity_EXT(const B flag_):flag(flag_){}
-	//F_debug_utils_message_severity_EXT(const VkDebugUtilsMessageSeverityFlagBitsEXT flag_):vk_flag(flag_){}
-	//operator uint32_t(){return flag;}
-	operator VkDebugUtilsMessageSeverityFlagBitsEXT*(){ return reinterpret_cast<VkDebugUtilsMessageSeverityFlagBitsEXT*>(this); }
-	operator VkDebugUtilsMessageSeverityFlagBitsEXT(){return vk_flag;}
-	operator VkDebugUtilsMessageSeverityFlagsEXT&(){ return flag; }
-	F_debug_utils_message_severity_EXT& operator=(const F_debug_utils_message_severity_EXT flag_){flag=flag_.flag; return *this;}
-	F_debug_utils_message_severity_EXT& operator|=(const F_debug_utils_message_severity_EXT flag_){flag|=flag_.flag; return *this;}
-	F_debug_utils_message_severity_EXT& operator&=(const F_debug_utils_message_severity_EXT flag_){flag&=flag_.flag; return *this;}
-	F_debug_utils_message_severity_EXT& operator^=(const F_debug_utils_message_severity_EXT flag_){flag^=flag_.flag;return *this;}
-	F_debug_utils_message_severity_EXT operator~(){return ~flag;}
-	bool operator==(const F_debug_utils_message_severity_EXT flag_){return flag==flag_.flag;}
+	}flag;
+
+	F_debug_utils_message_severity_EXT():flags(0){}
+	F_debug_utils_message_severity_EXT(const uint32_t flag_):flags(flag_){}
+
+	operator VkDebugUtilsMessageSeverityFlagBitsEXT&(){return vk_flag;}
+	operator VkDebugUtilsMessageSeverityFlagBitsEXT*(){return &vk_flag; }
+	operator VkDebugUtilsMessageSeverityFlagBitsEXT*()const{return const_cast<VkDebugUtilsMessageSeverityFlagBitsEXT*const>(&vk_flag); }
+
+	operator VkDebugUtilsMessageSeverityFlagsEXT&(){return flags; }
+	operator VkDebugUtilsMessageSeverityFlagsEXT*()const{return const_cast<VkDebugUtilsMessageSeverityFlagsEXT*const>(&flags); }
+	operator VkDebugUtilsMessageSeverityFlagsEXT*(){return &flags; }
+
+	F_debug_utils_message_severity_EXT& operator=(const F_debug_utils_message_severity_EXT flag_){flags=flag_.flags; return *this;}
+	F_debug_utils_message_severity_EXT& operator|=(const F_debug_utils_message_severity_EXT flag_){flags|=flag_.flags; return *this;}
+	F_debug_utils_message_severity_EXT& operator&=(const F_debug_utils_message_severity_EXT flag_){flags&=flag_.flags; return *this;}
+	F_debug_utils_message_severity_EXT& operator^=(const F_debug_utils_message_severity_EXT flag_){flags^=flag_.flags;return *this;}
+	F_debug_utils_message_severity_EXT operator~(){return ~flags;}
+
+	bool operator==(const F_debug_utils_message_severity_EXT flag_){return flags==flag_.flags;}
 	bool operator!=(const F_debug_utils_message_severity_EXT flag_){return !(*this==flag_);}
-	F_debug_utils_message_severity_EXT& clear(){flag = 0;return *this;}
+
+	F_debug_utils_message_severity_EXT& clear(){flags = 0;return *this;}
 	F_debug_utils_message_severity_EXT all_flags(){ return b_verbose_ext | b_info_ext | b_warning_ext | b_error_ext;}
-	F_debug_utils_message_severity_EXT& on_verbose_ext(){ flag |= b_verbose_ext; return *this; }
-	F_debug_utils_message_severity_EXT& off_verbose_ext(){ flag &= ~b_verbose_ext; return *this; }
-	F_debug_utils_message_severity_EXT& on_info_ext(){ flag |= b_info_ext; return *this; }
-	F_debug_utils_message_severity_EXT& off_info_ext(){ flag &= ~b_info_ext; return *this; }
-	F_debug_utils_message_severity_EXT& on_warning_ext(){ flag |= b_warning_ext; return *this; }
-	F_debug_utils_message_severity_EXT& off_warning_ext(){ flag &= ~b_warning_ext; return *this; }
-	F_debug_utils_message_severity_EXT& on_error_ext(){ flag |= b_error_ext; return *this; }
-	F_debug_utils_message_severity_EXT& off_error_ext(){ flag &= ~b_error_ext; return *this; }
+	F_debug_utils_message_severity_EXT& on_verbose_ext(){ flags |= b_verbose_ext; return *this; }
+	F_debug_utils_message_severity_EXT& off_verbose_ext(){ flags &= ~b_verbose_ext; return *this; }
+	F_debug_utils_message_severity_EXT& on_info_ext(){ flags |= b_info_ext; return *this; }
+	F_debug_utils_message_severity_EXT& off_info_ext(){ flags &= ~b_info_ext; return *this; }
+	F_debug_utils_message_severity_EXT& on_warning_ext(){ flags |= b_warning_ext; return *this; }
+	F_debug_utils_message_severity_EXT& off_warning_ext(){ flags &= ~b_warning_ext; return *this; }
+	F_debug_utils_message_severity_EXT& on_error_ext(){ flags |= b_error_ext; return *this; }
+	F_debug_utils_message_severity_EXT& off_error_ext(){ flags &= ~b_error_ext; return *this; }
 };
-inline F_debug_utils_message_severity_EXT operator&(const F_debug_utils_message_severity_EXT f1_, const F_debug_utils_message_severity_EXT f2_){return f1_.flag&f2_.flag;}
-inline F_debug_utils_message_severity_EXT operator&(const F_debug_utils_message_severity_EXT f1_, const F_debug_utils_message_severity_EXT::B f2_){return f1_.flag&uint32_t(f2_);}
-inline F_debug_utils_message_severity_EXT operator&(const F_debug_utils_message_severity_EXT::B f1_, const F_debug_utils_message_severity_EXT f2_){return uint32_t(f1_)&f2_.flag;}
-inline F_debug_utils_message_severity_EXT operator&(const F_debug_utils_message_severity_EXT f1_, const VkDebugUtilsMessageSeverityFlagBitsEXT f2_){return f1_.flag&uint32_t(f2_);}
-inline F_debug_utils_message_severity_EXT operator&(const VkDebugUtilsMessageSeverityFlagBitsEXT f1_, const F_debug_utils_message_severity_EXT f2_){return uint32_t(f1_)&f2_.flag;}
-inline F_debug_utils_message_severity_EXT operator|(const F_debug_utils_message_severity_EXT f1_, const F_debug_utils_message_severity_EXT f2_){return f1_.flag|f2_.flag;}
-inline F_debug_utils_message_severity_EXT operator^(const F_debug_utils_message_severity_EXT f1_, const F_debug_utils_message_severity_EXT f2_){return f1_.flag^f2_.flag;}
 /*	VkDebugUtilsMessageTypeFlagBitsEXT*/
-template<> struct my_class_convert<F_debug_utils_message_type_EXT> { using type = VkDebugUtilsMessageTypeFlagBitsEXT;};template<> struct my_class_convert<VkDebugUtilsMessageTypeFlagBitsEXT> { using type = F_debug_utils_message_type_EXT;};union F_debug_utils_message_type_EXT {
-	uint32_t flag;
+union F_debug_utils_message_type_EXT {
+	VkDebugUtilsMessageTypeFlagsEXT flags;
 	VkDebugUtilsMessageTypeFlagBitsEXT vk_flag;
-	enum B{
+	enum {
 		b_general_ext = VK_DEBUG_UTILS_MESSAGE_TYPE_GENERAL_BIT_EXT,
 		b_validation_ext = VK_DEBUG_UTILS_MESSAGE_TYPE_VALIDATION_BIT_EXT,
 		b_performance_ext = VK_DEBUG_UTILS_MESSAGE_TYPE_PERFORMANCE_BIT_EXT,
-	};
-	F_debug_utils_message_type_EXT():flag(0){}
-	F_debug_utils_message_type_EXT(const uint32_t flag_):flag(flag_){}
-	//F_debug_utils_message_type_EXT(const B flag_):flag(flag_){}
-	//F_debug_utils_message_type_EXT(const VkDebugUtilsMessageTypeFlagBitsEXT flag_):vk_flag(flag_){}
-	//operator uint32_t(){return flag;}
-	operator VkDebugUtilsMessageTypeFlagBitsEXT*(){ return reinterpret_cast<VkDebugUtilsMessageTypeFlagBitsEXT*>(this); }
-	operator VkDebugUtilsMessageTypeFlagBitsEXT(){return vk_flag;}
-	operator VkDebugUtilsMessageTypeFlagsEXT&(){ return flag; }
-	F_debug_utils_message_type_EXT& operator=(const F_debug_utils_message_type_EXT flag_){flag=flag_.flag; return *this;}
-	F_debug_utils_message_type_EXT& operator|=(const F_debug_utils_message_type_EXT flag_){flag|=flag_.flag; return *this;}
-	F_debug_utils_message_type_EXT& operator&=(const F_debug_utils_message_type_EXT flag_){flag&=flag_.flag; return *this;}
-	F_debug_utils_message_type_EXT& operator^=(const F_debug_utils_message_type_EXT flag_){flag^=flag_.flag;return *this;}
-	F_debug_utils_message_type_EXT operator~(){return ~flag;}
-	bool operator==(const F_debug_utils_message_type_EXT flag_){return flag==flag_.flag;}
+	}flag;
+
+	F_debug_utils_message_type_EXT():flags(0){}
+	F_debug_utils_message_type_EXT(const uint32_t flag_):flags(flag_){}
+
+	operator VkDebugUtilsMessageTypeFlagBitsEXT&(){return vk_flag;}
+	operator VkDebugUtilsMessageTypeFlagBitsEXT*(){return &vk_flag; }
+	operator VkDebugUtilsMessageTypeFlagBitsEXT*()const{return const_cast<VkDebugUtilsMessageTypeFlagBitsEXT*const>(&vk_flag); }
+
+	operator VkDebugUtilsMessageTypeFlagsEXT&(){return flags; }
+	operator VkDebugUtilsMessageTypeFlagsEXT*()const{return const_cast<VkDebugUtilsMessageTypeFlagsEXT*const>(&flags); }
+	operator VkDebugUtilsMessageTypeFlagsEXT*(){return &flags; }
+
+	F_debug_utils_message_type_EXT& operator=(const F_debug_utils_message_type_EXT flag_){flags=flag_.flags; return *this;}
+	F_debug_utils_message_type_EXT& operator|=(const F_debug_utils_message_type_EXT flag_){flags|=flag_.flags; return *this;}
+	F_debug_utils_message_type_EXT& operator&=(const F_debug_utils_message_type_EXT flag_){flags&=flag_.flags; return *this;}
+	F_debug_utils_message_type_EXT& operator^=(const F_debug_utils_message_type_EXT flag_){flags^=flag_.flags;return *this;}
+	F_debug_utils_message_type_EXT operator~(){return ~flags;}
+
+	bool operator==(const F_debug_utils_message_type_EXT flag_){return flags==flag_.flags;}
 	bool operator!=(const F_debug_utils_message_type_EXT flag_){return !(*this==flag_);}
-	F_debug_utils_message_type_EXT& clear(){flag = 0;return *this;}
+
+	F_debug_utils_message_type_EXT& clear(){flags = 0;return *this;}
 	F_debug_utils_message_type_EXT all_flags(){ return b_general_ext | b_validation_ext | b_performance_ext;}
-	F_debug_utils_message_type_EXT& on_general_ext(){ flag |= b_general_ext; return *this; }
-	F_debug_utils_message_type_EXT& off_general_ext(){ flag &= ~b_general_ext; return *this; }
-	F_debug_utils_message_type_EXT& on_validation_ext(){ flag |= b_validation_ext; return *this; }
-	F_debug_utils_message_type_EXT& off_validation_ext(){ flag &= ~b_validation_ext; return *this; }
-	F_debug_utils_message_type_EXT& on_performance_ext(){ flag |= b_performance_ext; return *this; }
-	F_debug_utils_message_type_EXT& off_performance_ext(){ flag &= ~b_performance_ext; return *this; }
+	F_debug_utils_message_type_EXT& on_general_ext(){ flags |= b_general_ext; return *this; }
+	F_debug_utils_message_type_EXT& off_general_ext(){ flags &= ~b_general_ext; return *this; }
+	F_debug_utils_message_type_EXT& on_validation_ext(){ flags |= b_validation_ext; return *this; }
+	F_debug_utils_message_type_EXT& off_validation_ext(){ flags &= ~b_validation_ext; return *this; }
+	F_debug_utils_message_type_EXT& on_performance_ext(){ flags |= b_performance_ext; return *this; }
+	F_debug_utils_message_type_EXT& off_performance_ext(){ flags &= ~b_performance_ext; return *this; }
 };
-inline F_debug_utils_message_type_EXT operator&(const F_debug_utils_message_type_EXT f1_, const F_debug_utils_message_type_EXT f2_){return f1_.flag&f2_.flag;}
-inline F_debug_utils_message_type_EXT operator&(const F_debug_utils_message_type_EXT f1_, const F_debug_utils_message_type_EXT::B f2_){return f1_.flag&uint32_t(f2_);}
-inline F_debug_utils_message_type_EXT operator&(const F_debug_utils_message_type_EXT::B f1_, const F_debug_utils_message_type_EXT f2_){return uint32_t(f1_)&f2_.flag;}
-inline F_debug_utils_message_type_EXT operator&(const F_debug_utils_message_type_EXT f1_, const VkDebugUtilsMessageTypeFlagBitsEXT f2_){return f1_.flag&uint32_t(f2_);}
-inline F_debug_utils_message_type_EXT operator&(const VkDebugUtilsMessageTypeFlagBitsEXT f1_, const F_debug_utils_message_type_EXT f2_){return uint32_t(f1_)&f2_.flag;}
-inline F_debug_utils_message_type_EXT operator|(const F_debug_utils_message_type_EXT f1_, const F_debug_utils_message_type_EXT f2_){return f1_.flag|f2_.flag;}
-inline F_debug_utils_message_type_EXT operator^(const F_debug_utils_message_type_EXT f1_, const F_debug_utils_message_type_EXT f2_){return f1_.flag^f2_.flag;}
 /*	VkDescriptorBindingFlagBitsEXT*/
-template<> struct my_class_convert<F_descriptor_binding_EXT> { using type = VkDescriptorBindingFlagBitsEXT;};template<> struct my_class_convert<VkDescriptorBindingFlagBitsEXT> { using type = F_descriptor_binding_EXT;};union F_descriptor_binding_EXT {
-	uint32_t flag;
+union F_descriptor_binding_EXT {
+	VkDescriptorBindingFlagsEXT flags;
 	VkDescriptorBindingFlagBitsEXT vk_flag;
-	enum B{
+	enum {
 		b_update_after_bind_ext = VK_DESCRIPTOR_BINDING_UPDATE_AFTER_BIND_BIT_EXT,
 		b_update_unused_while_pending_ext = VK_DESCRIPTOR_BINDING_UPDATE_UNUSED_WHILE_PENDING_BIT_EXT,
 		b_partially_bound_ext = VK_DESCRIPTOR_BINDING_PARTIALLY_BOUND_BIT_EXT,
 		b_variable_descriptor_count_ext = VK_DESCRIPTOR_BINDING_VARIABLE_DESCRIPTOR_COUNT_BIT_EXT,
-	};
-	F_descriptor_binding_EXT():flag(0){}
-	F_descriptor_binding_EXT(const uint32_t flag_):flag(flag_){}
-	//F_descriptor_binding_EXT(const B flag_):flag(flag_){}
-	//F_descriptor_binding_EXT(const VkDescriptorBindingFlagBitsEXT flag_):vk_flag(flag_){}
-	//operator uint32_t(){return flag;}
-	operator VkDescriptorBindingFlagBitsEXT*(){ return reinterpret_cast<VkDescriptorBindingFlagBitsEXT*>(this); }
-	operator VkDescriptorBindingFlagBitsEXT(){return vk_flag;}
-	operator VkDescriptorBindingFlagsEXT&(){ return flag; }
-	F_descriptor_binding_EXT& operator=(const F_descriptor_binding_EXT flag_){flag=flag_.flag; return *this;}
-	F_descriptor_binding_EXT& operator|=(const F_descriptor_binding_EXT flag_){flag|=flag_.flag; return *this;}
-	F_descriptor_binding_EXT& operator&=(const F_descriptor_binding_EXT flag_){flag&=flag_.flag; return *this;}
-	F_descriptor_binding_EXT& operator^=(const F_descriptor_binding_EXT flag_){flag^=flag_.flag;return *this;}
-	F_descriptor_binding_EXT operator~(){return ~flag;}
-	bool operator==(const F_descriptor_binding_EXT flag_){return flag==flag_.flag;}
+	}flag;
+
+	F_descriptor_binding_EXT():flags(0){}
+	F_descriptor_binding_EXT(const uint32_t flag_):flags(flag_){}
+
+	operator VkDescriptorBindingFlagBitsEXT&(){return vk_flag;}
+	operator VkDescriptorBindingFlagBitsEXT*(){return &vk_flag; }
+	operator VkDescriptorBindingFlagBitsEXT*()const{return const_cast<VkDescriptorBindingFlagBitsEXT*const>(&vk_flag); }
+
+	operator VkDescriptorBindingFlagsEXT&(){return flags; }
+	operator VkDescriptorBindingFlagsEXT*()const{return const_cast<VkDescriptorBindingFlagsEXT*const>(&flags); }
+	operator VkDescriptorBindingFlagsEXT*(){return &flags; }
+
+	F_descriptor_binding_EXT& operator=(const F_descriptor_binding_EXT flag_){flags=flag_.flags; return *this;}
+	F_descriptor_binding_EXT& operator|=(const F_descriptor_binding_EXT flag_){flags|=flag_.flags; return *this;}
+	F_descriptor_binding_EXT& operator&=(const F_descriptor_binding_EXT flag_){flags&=flag_.flags; return *this;}
+	F_descriptor_binding_EXT& operator^=(const F_descriptor_binding_EXT flag_){flags^=flag_.flags;return *this;}
+	F_descriptor_binding_EXT operator~(){return ~flags;}
+
+	bool operator==(const F_descriptor_binding_EXT flag_){return flags==flag_.flags;}
 	bool operator!=(const F_descriptor_binding_EXT flag_){return !(*this==flag_);}
-	F_descriptor_binding_EXT& clear(){flag = 0;return *this;}
+
+	F_descriptor_binding_EXT& clear(){flags = 0;return *this;}
 	F_descriptor_binding_EXT all_flags(){ return b_update_after_bind_ext | b_update_unused_while_pending_ext | b_partially_bound_ext | b_variable_descriptor_count_ext;}
-	F_descriptor_binding_EXT& on_update_after_bind_ext(){ flag |= b_update_after_bind_ext; return *this; }
-	F_descriptor_binding_EXT& off_update_after_bind_ext(){ flag &= ~b_update_after_bind_ext; return *this; }
-	F_descriptor_binding_EXT& on_update_unused_while_pending_ext(){ flag |= b_update_unused_while_pending_ext; return *this; }
-	F_descriptor_binding_EXT& off_update_unused_while_pending_ext(){ flag &= ~b_update_unused_while_pending_ext; return *this; }
-	F_descriptor_binding_EXT& on_partially_bound_ext(){ flag |= b_partially_bound_ext; return *this; }
-	F_descriptor_binding_EXT& off_partially_bound_ext(){ flag &= ~b_partially_bound_ext; return *this; }
-	F_descriptor_binding_EXT& on_variable_descriptor_count_ext(){ flag |= b_variable_descriptor_count_ext; return *this; }
-	F_descriptor_binding_EXT& off_variable_descriptor_count_ext(){ flag &= ~b_variable_descriptor_count_ext; return *this; }
+	F_descriptor_binding_EXT& on_update_after_bind_ext(){ flags |= b_update_after_bind_ext; return *this; }
+	F_descriptor_binding_EXT& off_update_after_bind_ext(){ flags &= ~b_update_after_bind_ext; return *this; }
+	F_descriptor_binding_EXT& on_update_unused_while_pending_ext(){ flags |= b_update_unused_while_pending_ext; return *this; }
+	F_descriptor_binding_EXT& off_update_unused_while_pending_ext(){ flags &= ~b_update_unused_while_pending_ext; return *this; }
+	F_descriptor_binding_EXT& on_partially_bound_ext(){ flags |= b_partially_bound_ext; return *this; }
+	F_descriptor_binding_EXT& off_partially_bound_ext(){ flags &= ~b_partially_bound_ext; return *this; }
+	F_descriptor_binding_EXT& on_variable_descriptor_count_ext(){ flags |= b_variable_descriptor_count_ext; return *this; }
+	F_descriptor_binding_EXT& off_variable_descriptor_count_ext(){ flags &= ~b_variable_descriptor_count_ext; return *this; }
 };
-inline F_descriptor_binding_EXT operator&(const F_descriptor_binding_EXT f1_, const F_descriptor_binding_EXT f2_){return f1_.flag&f2_.flag;}
-inline F_descriptor_binding_EXT operator&(const F_descriptor_binding_EXT f1_, const F_descriptor_binding_EXT::B f2_){return f1_.flag&uint32_t(f2_);}
-inline F_descriptor_binding_EXT operator&(const F_descriptor_binding_EXT::B f1_, const F_descriptor_binding_EXT f2_){return uint32_t(f1_)&f2_.flag;}
-inline F_descriptor_binding_EXT operator&(const F_descriptor_binding_EXT f1_, const VkDescriptorBindingFlagBitsEXT f2_){return f1_.flag&uint32_t(f2_);}
-inline F_descriptor_binding_EXT operator&(const VkDescriptorBindingFlagBitsEXT f1_, const F_descriptor_binding_EXT f2_){return uint32_t(f1_)&f2_.flag;}
-inline F_descriptor_binding_EXT operator|(const F_descriptor_binding_EXT f1_, const F_descriptor_binding_EXT f2_){return f1_.flag|f2_.flag;}
-inline F_descriptor_binding_EXT operator^(const F_descriptor_binding_EXT f1_, const F_descriptor_binding_EXT f2_){return f1_.flag^f2_.flag;}
 /*	VkConditionalRenderingFlagBitsEXT*/
-template<> struct my_class_convert<F_conditional_rendering_EXT> { using type = VkConditionalRenderingFlagBitsEXT;};template<> struct my_class_convert<VkConditionalRenderingFlagBitsEXT> { using type = F_conditional_rendering_EXT;};union F_conditional_rendering_EXT {
-	uint32_t flag;
+union F_conditional_rendering_EXT {
+	VkConditionalRenderingFlagsEXT flags;
 	VkConditionalRenderingFlagBitsEXT vk_flag;
-	enum B{
+	enum {
 		b_inverted_ext = VK_CONDITIONAL_RENDERING_INVERTED_BIT_EXT,
-	};
-	F_conditional_rendering_EXT():flag(0){}
-	F_conditional_rendering_EXT(const uint32_t flag_):flag(flag_){}
-	//F_conditional_rendering_EXT(const B flag_):flag(flag_){}
-	//F_conditional_rendering_EXT(const VkConditionalRenderingFlagBitsEXT flag_):vk_flag(flag_){}
-	//operator uint32_t(){return flag;}
-	operator VkConditionalRenderingFlagBitsEXT*(){ return reinterpret_cast<VkConditionalRenderingFlagBitsEXT*>(this); }
-	operator VkConditionalRenderingFlagBitsEXT(){return vk_flag;}
-	operator VkConditionalRenderingFlagsEXT&(){ return flag; }
-	F_conditional_rendering_EXT& operator=(const F_conditional_rendering_EXT flag_){flag=flag_.flag; return *this;}
-	F_conditional_rendering_EXT& operator|=(const F_conditional_rendering_EXT flag_){flag|=flag_.flag; return *this;}
-	F_conditional_rendering_EXT& operator&=(const F_conditional_rendering_EXT flag_){flag&=flag_.flag; return *this;}
-	F_conditional_rendering_EXT& operator^=(const F_conditional_rendering_EXT flag_){flag^=flag_.flag;return *this;}
-	F_conditional_rendering_EXT operator~(){return ~flag;}
-	bool operator==(const F_conditional_rendering_EXT flag_){return flag==flag_.flag;}
+	}flag;
+
+	F_conditional_rendering_EXT():flags(0){}
+	F_conditional_rendering_EXT(const uint32_t flag_):flags(flag_){}
+
+	operator VkConditionalRenderingFlagBitsEXT&(){return vk_flag;}
+	operator VkConditionalRenderingFlagBitsEXT*(){return &vk_flag; }
+	operator VkConditionalRenderingFlagBitsEXT*()const{return const_cast<VkConditionalRenderingFlagBitsEXT*const>(&vk_flag); }
+
+	operator VkConditionalRenderingFlagsEXT&(){return flags; }
+	operator VkConditionalRenderingFlagsEXT*()const{return const_cast<VkConditionalRenderingFlagsEXT*const>(&flags); }
+	operator VkConditionalRenderingFlagsEXT*(){return &flags; }
+
+	F_conditional_rendering_EXT& operator=(const F_conditional_rendering_EXT flag_){flags=flag_.flags; return *this;}
+	F_conditional_rendering_EXT& operator|=(const F_conditional_rendering_EXT flag_){flags|=flag_.flags; return *this;}
+	F_conditional_rendering_EXT& operator&=(const F_conditional_rendering_EXT flag_){flags&=flag_.flags; return *this;}
+	F_conditional_rendering_EXT& operator^=(const F_conditional_rendering_EXT flag_){flags^=flag_.flags;return *this;}
+	F_conditional_rendering_EXT operator~(){return ~flags;}
+
+	bool operator==(const F_conditional_rendering_EXT flag_){return flags==flag_.flags;}
 	bool operator!=(const F_conditional_rendering_EXT flag_){return !(*this==flag_);}
-	F_conditional_rendering_EXT& clear(){flag = 0;return *this;}
+
+	F_conditional_rendering_EXT& clear(){flags = 0;return *this;}
 	F_conditional_rendering_EXT all_flags(){ return b_inverted_ext;}
-	F_conditional_rendering_EXT& on_inverted_ext(){ flag |= b_inverted_ext; return *this; }
-	F_conditional_rendering_EXT& off_inverted_ext(){ flag &= ~b_inverted_ext; return *this; }
+	F_conditional_rendering_EXT& on_inverted_ext(){ flags |= b_inverted_ext; return *this; }
+	F_conditional_rendering_EXT& off_inverted_ext(){ flags &= ~b_inverted_ext; return *this; }
 };
-inline F_conditional_rendering_EXT operator&(const F_conditional_rendering_EXT f1_, const F_conditional_rendering_EXT f2_){return f1_.flag&f2_.flag;}
-inline F_conditional_rendering_EXT operator&(const F_conditional_rendering_EXT f1_, const F_conditional_rendering_EXT::B f2_){return f1_.flag&uint32_t(f2_);}
-inline F_conditional_rendering_EXT operator&(const F_conditional_rendering_EXT::B f1_, const F_conditional_rendering_EXT f2_){return uint32_t(f1_)&f2_.flag;}
-inline F_conditional_rendering_EXT operator&(const F_conditional_rendering_EXT f1_, const VkConditionalRenderingFlagBitsEXT f2_){return f1_.flag&uint32_t(f2_);}
-inline F_conditional_rendering_EXT operator&(const VkConditionalRenderingFlagBitsEXT f1_, const F_conditional_rendering_EXT f2_){return uint32_t(f1_)&f2_.flag;}
-inline F_conditional_rendering_EXT operator|(const F_conditional_rendering_EXT f1_, const F_conditional_rendering_EXT f2_){return f1_.flag|f2_.flag;}
-inline F_conditional_rendering_EXT operator^(const F_conditional_rendering_EXT f1_, const F_conditional_rendering_EXT f2_){return f1_.flag^f2_.flag;}
-/*	VkGeometryInstanceFlagBitsNVX*/
-template<> struct my_class_convert<F_geometry_instance_NVX> { using type = VkGeometryInstanceFlagBitsNVX;};template<> struct my_class_convert<VkGeometryInstanceFlagBitsNVX> { using type = F_geometry_instance_NVX;};union F_geometry_instance_NVX {
-	uint32_t flag;
-	VkGeometryInstanceFlagBitsNVX vk_flag;
-	enum B{
-		b_triangle_cull_disable_nvx = VK_GEOMETRY_INSTANCE_TRIANGLE_CULL_DISABLE_BIT_NVX,
-		b_triangle_cull_flip_winding_nvx = VK_GEOMETRY_INSTANCE_TRIANGLE_CULL_FLIP_WINDING_BIT_NVX,
-		b_force_opaque_nvx = VK_GEOMETRY_INSTANCE_FORCE_OPAQUE_BIT_NVX,
-		b_force_no_opaque_nvx = VK_GEOMETRY_INSTANCE_FORCE_NO_OPAQUE_BIT_NVX,
-	};
-	F_geometry_instance_NVX():flag(0){}
-	F_geometry_instance_NVX(const uint32_t flag_):flag(flag_){}
-	//F_geometry_instance_NVX(const B flag_):flag(flag_){}
-	//F_geometry_instance_NVX(const VkGeometryInstanceFlagBitsNVX flag_):vk_flag(flag_){}
-	//operator uint32_t(){return flag;}
-	operator VkGeometryInstanceFlagBitsNVX*(){ return reinterpret_cast<VkGeometryInstanceFlagBitsNVX*>(this); }
-	operator VkGeometryInstanceFlagBitsNVX(){return vk_flag;}
-	operator VkGeometryInstanceFlagsNVX&(){ return flag; }
-	F_geometry_instance_NVX& operator=(const F_geometry_instance_NVX flag_){flag=flag_.flag; return *this;}
-	F_geometry_instance_NVX& operator|=(const F_geometry_instance_NVX flag_){flag|=flag_.flag; return *this;}
-	F_geometry_instance_NVX& operator&=(const F_geometry_instance_NVX flag_){flag&=flag_.flag; return *this;}
-	F_geometry_instance_NVX& operator^=(const F_geometry_instance_NVX flag_){flag^=flag_.flag;return *this;}
-	F_geometry_instance_NVX operator~(){return ~flag;}
-	bool operator==(const F_geometry_instance_NVX flag_){return flag==flag_.flag;}
-	bool operator!=(const F_geometry_instance_NVX flag_){return !(*this==flag_);}
-	F_geometry_instance_NVX& clear(){flag = 0;return *this;}
-	F_geometry_instance_NVX all_flags(){ return b_triangle_cull_disable_nvx | b_triangle_cull_flip_winding_nvx | b_force_opaque_nvx | b_force_no_opaque_nvx;}
-	F_geometry_instance_NVX& on_triangle_cull_disable_nvx(){ flag |= b_triangle_cull_disable_nvx; return *this; }
-	F_geometry_instance_NVX& off_triangle_cull_disable_nvx(){ flag &= ~b_triangle_cull_disable_nvx; return *this; }
-	F_geometry_instance_NVX& on_triangle_cull_flip_winding_nvx(){ flag |= b_triangle_cull_flip_winding_nvx; return *this; }
-	F_geometry_instance_NVX& off_triangle_cull_flip_winding_nvx(){ flag &= ~b_triangle_cull_flip_winding_nvx; return *this; }
-	F_geometry_instance_NVX& on_force_opaque_nvx(){ flag |= b_force_opaque_nvx; return *this; }
-	F_geometry_instance_NVX& off_force_opaque_nvx(){ flag &= ~b_force_opaque_nvx; return *this; }
-	F_geometry_instance_NVX& on_force_no_opaque_nvx(){ flag |= b_force_no_opaque_nvx; return *this; }
-	F_geometry_instance_NVX& off_force_no_opaque_nvx(){ flag &= ~b_force_no_opaque_nvx; return *this; }
-};
-inline F_geometry_instance_NVX operator&(const F_geometry_instance_NVX f1_, const F_geometry_instance_NVX f2_){return f1_.flag&f2_.flag;}
-inline F_geometry_instance_NVX operator&(const F_geometry_instance_NVX f1_, const F_geometry_instance_NVX::B f2_){return f1_.flag&uint32_t(f2_);}
-inline F_geometry_instance_NVX operator&(const F_geometry_instance_NVX::B f1_, const F_geometry_instance_NVX f2_){return uint32_t(f1_)&f2_.flag;}
-inline F_geometry_instance_NVX operator&(const F_geometry_instance_NVX f1_, const VkGeometryInstanceFlagBitsNVX f2_){return f1_.flag&uint32_t(f2_);}
-inline F_geometry_instance_NVX operator&(const VkGeometryInstanceFlagBitsNVX f1_, const F_geometry_instance_NVX f2_){return uint32_t(f1_)&f2_.flag;}
-inline F_geometry_instance_NVX operator|(const F_geometry_instance_NVX f1_, const F_geometry_instance_NVX f2_){return f1_.flag|f2_.flag;}
-inline F_geometry_instance_NVX operator^(const F_geometry_instance_NVX f1_, const F_geometry_instance_NVX f2_){return f1_.flag^f2_.flag;}
-/*	VkGeometryFlagBitsNVX*/
-template<> struct my_class_convert<F_geometry_NVX> { using type = VkGeometryFlagBitsNVX;};template<> struct my_class_convert<VkGeometryFlagBitsNVX> { using type = F_geometry_NVX;};union F_geometry_NVX {
-	uint32_t flag;
-	VkGeometryFlagBitsNVX vk_flag;
-	enum B{
-		b_opaque_nvx = VK_GEOMETRY_OPAQUE_BIT_NVX,
-		b_no_duplicate_any_hit_invocation_nvx = VK_GEOMETRY_NO_DUPLICATE_ANY_HIT_INVOCATION_BIT_NVX,
-	};
-	F_geometry_NVX():flag(0){}
-	F_geometry_NVX(const uint32_t flag_):flag(flag_){}
-	//F_geometry_NVX(const B flag_):flag(flag_){}
-	//F_geometry_NVX(const VkGeometryFlagBitsNVX flag_):vk_flag(flag_){}
-	//operator uint32_t(){return flag;}
-	operator VkGeometryFlagBitsNVX*(){ return reinterpret_cast<VkGeometryFlagBitsNVX*>(this); }
-	operator VkGeometryFlagBitsNVX(){return vk_flag;}
-	operator VkGeometryFlagsNVX&(){ return flag; }
-	F_geometry_NVX& operator=(const F_geometry_NVX flag_){flag=flag_.flag; return *this;}
-	F_geometry_NVX& operator|=(const F_geometry_NVX flag_){flag|=flag_.flag; return *this;}
-	F_geometry_NVX& operator&=(const F_geometry_NVX flag_){flag&=flag_.flag; return *this;}
-	F_geometry_NVX& operator^=(const F_geometry_NVX flag_){flag^=flag_.flag;return *this;}
-	F_geometry_NVX operator~(){return ~flag;}
-	bool operator==(const F_geometry_NVX flag_){return flag==flag_.flag;}
-	bool operator!=(const F_geometry_NVX flag_){return !(*this==flag_);}
-	F_geometry_NVX& clear(){flag = 0;return *this;}
-	F_geometry_NVX all_flags(){ return b_opaque_nvx | b_no_duplicate_any_hit_invocation_nvx;}
-	F_geometry_NVX& on_opaque_nvx(){ flag |= b_opaque_nvx; return *this; }
-	F_geometry_NVX& off_opaque_nvx(){ flag &= ~b_opaque_nvx; return *this; }
-	F_geometry_NVX& on_no_duplicate_any_hit_invocation_nvx(){ flag |= b_no_duplicate_any_hit_invocation_nvx; return *this; }
-	F_geometry_NVX& off_no_duplicate_any_hit_invocation_nvx(){ flag &= ~b_no_duplicate_any_hit_invocation_nvx; return *this; }
-};
-inline F_geometry_NVX operator&(const F_geometry_NVX f1_, const F_geometry_NVX f2_){return f1_.flag&f2_.flag;}
-inline F_geometry_NVX operator&(const F_geometry_NVX f1_, const F_geometry_NVX::B f2_){return f1_.flag&uint32_t(f2_);}
-inline F_geometry_NVX operator&(const F_geometry_NVX::B f1_, const F_geometry_NVX f2_){return uint32_t(f1_)&f2_.flag;}
-inline F_geometry_NVX operator&(const F_geometry_NVX f1_, const VkGeometryFlagBitsNVX f2_){return f1_.flag&uint32_t(f2_);}
-inline F_geometry_NVX operator&(const VkGeometryFlagBitsNVX f1_, const F_geometry_NVX f2_){return uint32_t(f1_)&f2_.flag;}
-inline F_geometry_NVX operator|(const F_geometry_NVX f1_, const F_geometry_NVX f2_){return f1_.flag|f2_.flag;}
-inline F_geometry_NVX operator^(const F_geometry_NVX f1_, const F_geometry_NVX f2_){return f1_.flag^f2_.flag;}
-/*	VkBuildAccelerationStructureFlagBitsNVX*/
-template<> struct my_class_convert<F_build_acceleration_structure_NVX> { using type = VkBuildAccelerationStructureFlagBitsNVX;};template<> struct my_class_convert<VkBuildAccelerationStructureFlagBitsNVX> { using type = F_build_acceleration_structure_NVX;};union F_build_acceleration_structure_NVX {
-	uint32_t flag;
-	VkBuildAccelerationStructureFlagBitsNVX vk_flag;
-	enum B{
-		b_allow_update_nvx = VK_BUILD_ACCELERATION_STRUCTURE_ALLOW_UPDATE_BIT_NVX,
-		b_allow_compaction_nvx = VK_BUILD_ACCELERATION_STRUCTURE_ALLOW_COMPACTION_BIT_NVX,
-		b_prefer_fast_trace_nvx = VK_BUILD_ACCELERATION_STRUCTURE_PREFER_FAST_TRACE_BIT_NVX,
-		b_prefer_fast_build_nvx = VK_BUILD_ACCELERATION_STRUCTURE_PREFER_FAST_BUILD_BIT_NVX,
-		b_low_memory_nvx = VK_BUILD_ACCELERATION_STRUCTURE_LOW_MEMORY_BIT_NVX,
-	};
-	F_build_acceleration_structure_NVX():flag(0){}
-	F_build_acceleration_structure_NVX(const uint32_t flag_):flag(flag_){}
-	//F_build_acceleration_structure_NVX(const B flag_):flag(flag_){}
-	//F_build_acceleration_structure_NVX(const VkBuildAccelerationStructureFlagBitsNVX flag_):vk_flag(flag_){}
-	//operator uint32_t(){return flag;}
-	operator VkBuildAccelerationStructureFlagBitsNVX*(){ return reinterpret_cast<VkBuildAccelerationStructureFlagBitsNVX*>(this); }
-	operator VkBuildAccelerationStructureFlagBitsNVX(){return vk_flag;}
-	operator VkBuildAccelerationStructureFlagsNVX&(){ return flag; }
-	F_build_acceleration_structure_NVX& operator=(const F_build_acceleration_structure_NVX flag_){flag=flag_.flag; return *this;}
-	F_build_acceleration_structure_NVX& operator|=(const F_build_acceleration_structure_NVX flag_){flag|=flag_.flag; return *this;}
-	F_build_acceleration_structure_NVX& operator&=(const F_build_acceleration_structure_NVX flag_){flag&=flag_.flag; return *this;}
-	F_build_acceleration_structure_NVX& operator^=(const F_build_acceleration_structure_NVX flag_){flag^=flag_.flag;return *this;}
-	F_build_acceleration_structure_NVX operator~(){return ~flag;}
-	bool operator==(const F_build_acceleration_structure_NVX flag_){return flag==flag_.flag;}
-	bool operator!=(const F_build_acceleration_structure_NVX flag_){return !(*this==flag_);}
-	F_build_acceleration_structure_NVX& clear(){flag = 0;return *this;}
-	F_build_acceleration_structure_NVX all_flags(){ return b_allow_update_nvx | b_allow_compaction_nvx | b_prefer_fast_trace_nvx | b_prefer_fast_build_nvx | b_low_memory_nvx;}
-	F_build_acceleration_structure_NVX& on_allow_update_nvx(){ flag |= b_allow_update_nvx; return *this; }
-	F_build_acceleration_structure_NVX& off_allow_update_nvx(){ flag &= ~b_allow_update_nvx; return *this; }
-	F_build_acceleration_structure_NVX& on_allow_compaction_nvx(){ flag |= b_allow_compaction_nvx; return *this; }
-	F_build_acceleration_structure_NVX& off_allow_compaction_nvx(){ flag &= ~b_allow_compaction_nvx; return *this; }
-	F_build_acceleration_structure_NVX& on_prefer_fast_trace_nvx(){ flag |= b_prefer_fast_trace_nvx; return *this; }
-	F_build_acceleration_structure_NVX& off_prefer_fast_trace_nvx(){ flag &= ~b_prefer_fast_trace_nvx; return *this; }
-	F_build_acceleration_structure_NVX& on_prefer_fast_build_nvx(){ flag |= b_prefer_fast_build_nvx; return *this; }
-	F_build_acceleration_structure_NVX& off_prefer_fast_build_nvx(){ flag &= ~b_prefer_fast_build_nvx; return *this; }
-	F_build_acceleration_structure_NVX& on_low_memory_nvx(){ flag |= b_low_memory_nvx; return *this; }
-	F_build_acceleration_structure_NVX& off_low_memory_nvx(){ flag &= ~b_low_memory_nvx; return *this; }
-};
-inline F_build_acceleration_structure_NVX operator&(const F_build_acceleration_structure_NVX f1_, const F_build_acceleration_structure_NVX f2_){return f1_.flag&f2_.flag;}
-inline F_build_acceleration_structure_NVX operator&(const F_build_acceleration_structure_NVX f1_, const F_build_acceleration_structure_NVX::B f2_){return f1_.flag&uint32_t(f2_);}
-inline F_build_acceleration_structure_NVX operator&(const F_build_acceleration_structure_NVX::B f1_, const F_build_acceleration_structure_NVX f2_){return uint32_t(f1_)&f2_.flag;}
-inline F_build_acceleration_structure_NVX operator&(const F_build_acceleration_structure_NVX f1_, const VkBuildAccelerationStructureFlagBitsNVX f2_){return f1_.flag&uint32_t(f2_);}
-inline F_build_acceleration_structure_NVX operator&(const VkBuildAccelerationStructureFlagBitsNVX f1_, const F_build_acceleration_structure_NVX f2_){return uint32_t(f1_)&f2_.flag;}
-inline F_build_acceleration_structure_NVX operator|(const F_build_acceleration_structure_NVX f1_, const F_build_acceleration_structure_NVX f2_){return f1_.flag|f2_.flag;}
-inline F_build_acceleration_structure_NVX operator^(const F_build_acceleration_structure_NVX f1_, const F_build_acceleration_structure_NVX f2_){return f1_.flag^f2_.flag;}
 struct S_base_structure
 {VkStructureType sType; void * pNext = nullptr;};
 
@@ -4546,8 +4294,6 @@ struct S_physical_device_memory_properties2;
 struct S_sparse_image_format_properties2;
 struct S_physical_device_sparse_image_format_info2;
 struct S_physical_device_push_descriptor_properties_KHR;
-struct S_conformance_version_KHR;
-struct S_physical_device_driver_properties_KHR;
 struct S_present_regions_KHR;
 struct S_present_region_KHR;
 struct S_rect_layer_KHR;
@@ -4677,10 +4423,6 @@ struct S_sampler_reduction_mode_create_info_EXT;
 struct S_physical_device_blend_operation_advanced_features_EXT;
 struct S_physical_device_blend_operation_advanced_properties_EXT;
 struct S_pipeline_color_blend_advanced_state_create_info_EXT;
-struct S_physical_device_inline_uniform_block_features_EXT;
-struct S_physical_device_inline_uniform_block_properties_EXT;
-struct S_write_descriptor_set_inline_uniform_block_EXT;
-struct S_descriptor_pool_inline_uniform_block_create_info_EXT;
 struct S_pipeline_coverage_modulation_state_create_info_NV;
 struct S_image_format_list_create_info_KHR;
 struct S_validation_cache_create_info_EXT;
@@ -4727,136 +4469,103 @@ struct S_command_buffer_inheritance_conditional_rendering_info_EXT;
 struct S_external_format_ANDROID;
 struct S_physical_device_8bit_storage_features_KHR;
 struct S_physical_device_conditional_rendering_features_EXT;
-struct S_physical_device_vulkan_memory_model_features_KHR;
-struct S_physical_device_shader_atomic_int64_features_KHR;
-struct S_physical_device_vertex_attribute_divisor_features_EXT;
 struct S_queue_family_checkpoint_properties_NV;
 struct S_checkpoint_data_NV;
-struct S_image_view_astc_decode_mode_EXT;
-struct S_physical_device_astc_decode_features_EXT;
-struct S_physical_device_representative_fragment_test_features_NV;
-struct S_pipeline_representative_fragment_test_state_create_info_NV;
-struct S_physical_device_exclusive_scissor_features_NV;
-struct S_pipeline_viewport_exclusive_scissor_state_create_info_NV;
-struct S_physical_device_corner_sampled_image_features_NV;
-struct S_physical_device_compute_shader_derivatives_features_NV;
-struct S_physical_device_fragment_shader_barycentric_features_NV;
-struct S_physical_device_shader_image_footprint_features_NV;
-struct S_shading_rate_palette_NV;
-struct S_pipeline_viewport_shading_rate_image_state_create_info_NV;
-struct S_physical_device_shading_rate_image_features_NV;
-struct S_physical_device_shading_rate_image_properties_NV;
-struct S_coarse_sample_location_NV;
-struct S_coarse_sample_order_custom_NV;
-struct S_pipeline_viewport_coarse_sample_order_state_create_info_NV;
-struct S_physical_device_mesh_shader_features_NV;
-struct S_physical_device_mesh_shader_properties_NV;
-struct S_draw_mesh_tasks_indirect_command_NV;
-struct S_raytracing_pipeline_create_info_NVX;
-struct S_geometry_triangles_NVX;
-struct S_geometry_aabb_NVX;
-struct S_geometry_data_NVX;
-struct S_geometry_NVX;
-struct S_acceleration_structure_create_info_NVX;
-struct S_bind_acceleration_structure_memory_info_NVX;
-struct S_descriptor_acceleration_structure_info_NVX;
-struct S_acceleration_structure_memory_requirements_info_NVX;
-struct S_physical_device_raytracing_properties_NVX;
-struct S_drm_format_modifier_properties_list_EXT;
-struct S_drm_format_modifier_properties_EXT;
-struct S_physical_device_image_drm_format_modifier_info_EXT;
-struct S_image_drm_format_modifier_list_create_info_EXT;
-struct S_image_drm_format_modifier_explicit_create_info_EXT;
-struct S_image_drm_format_modifier_properties_EXT;
 #endif
 
 /*	VkOffset2D
 */
-template<> struct my_class_convert<S_offset_2d> { using type = VkOffset2D;};
-template<> struct my_class_convert<VkOffset2D> { using type = S_offset_2d;};
-struct		S_offset_2d:VkOffset2D{
+struct	S_offset_2d:VkOffset2D{
 	using VkOffset2D::x;
 	using VkOffset2D::y;
+
+	S_offset_2d& operator=(const VkOffset2D& rhs){static_cast<VkOffset2D&>(*this)=rhs; return *this;}
+	operator VkOffset2D*()const{return const_cast<VkOffset2D*>(static_cast<const VkOffset2D*>(this));}
 };
 
 /*	VkOffset3D
 */
-template<> struct my_class_convert<S_offset_3d> { using type = VkOffset3D;};
-template<> struct my_class_convert<VkOffset3D> { using type = S_offset_3d;};
-struct		S_offset_3d:VkOffset3D{
+struct	S_offset_3d:VkOffset3D{
 	using VkOffset3D::x;
 	using VkOffset3D::y;
 	using VkOffset3D::z;
+
+	S_offset_3d& operator=(const VkOffset3D& rhs){static_cast<VkOffset3D&>(*this)=rhs; return *this;}
+	operator VkOffset3D*()const{return const_cast<VkOffset3D*>(static_cast<const VkOffset3D*>(this));}
 };
 
 /*	VkExtent2D
 */
-template<> struct my_class_convert<S_extent_2d> { using type = VkExtent2D;};
-template<> struct my_class_convert<VkExtent2D> { using type = S_extent_2d;};
-struct		S_extent_2d:VkExtent2D{
+struct	S_extent_2d:VkExtent2D{
 	using VkExtent2D::width;
 	using VkExtent2D::height;
+
+	S_extent_2d& operator=(const VkExtent2D& rhs){static_cast<VkExtent2D&>(*this)=rhs; return *this;}
+	operator VkExtent2D*()const{return const_cast<VkExtent2D*>(static_cast<const VkExtent2D*>(this));}
 };
 
 /*	VkExtent3D
 */
-template<> struct my_class_convert<S_extent_3d> { using type = VkExtent3D;};
-template<> struct my_class_convert<VkExtent3D> { using type = S_extent_3d;};
-struct		S_extent_3d:VkExtent3D{
+struct	S_extent_3d:VkExtent3D{
 	using VkExtent3D::width;
 	using VkExtent3D::height;
 	using VkExtent3D::depth;
+
+	S_extent_3d& operator=(const VkExtent3D& rhs){static_cast<VkExtent3D&>(*this)=rhs; return *this;}
+	operator VkExtent3D*()const{return const_cast<VkExtent3D*>(static_cast<const VkExtent3D*>(this));}
 };
 
 /*	VkViewport
 */
-template<> struct my_class_convert<S_viewport> { using type = VkViewport;};
-template<> struct my_class_convert<VkViewport> { using type = S_viewport;};
-struct		S_viewport:VkViewport{
+struct	S_viewport:VkViewport{
 	using VkViewport::x;
 	using VkViewport::y;
 	using VkViewport::width;
 	using VkViewport::height;
 	using VkViewport::minDepth;
 	using VkViewport::maxDepth;
+
+	S_viewport& operator=(const VkViewport& rhs){static_cast<VkViewport&>(*this)=rhs; return *this;}
+	operator VkViewport*()const{return const_cast<VkViewport*>(static_cast<const VkViewport*>(this));}
 };
 
 /*	VkRect2D
 */
-template<> struct my_class_convert<S_rect_2d> { using type = VkRect2D;};
-template<> struct my_class_convert<VkRect2D> { using type = S_rect_2d;};
-struct		S_rect_2d:VkRect2D{
+struct	S_rect_2d:VkRect2D{
 	using VkRect2D::offset;
 	using VkRect2D::extent;
+
+	S_rect_2d& operator=(const VkRect2D& rhs){static_cast<VkRect2D&>(*this)=rhs; return *this;}
+	operator VkRect2D*()const{return const_cast<VkRect2D*>(static_cast<const VkRect2D*>(this));}
 };
 
 /*	VkClearRect
 */
-template<> struct my_class_convert<S_clear_rect> { using type = VkClearRect;};
-template<> struct my_class_convert<VkClearRect> { using type = S_clear_rect;};
-struct		S_clear_rect:VkClearRect{
+struct	S_clear_rect:VkClearRect{
 	using VkClearRect::rect;
 	using VkClearRect::baseArrayLayer;
 	using VkClearRect::layerCount;
+
+	S_clear_rect& operator=(const VkClearRect& rhs){static_cast<VkClearRect&>(*this)=rhs; return *this;}
+	operator VkClearRect*()const{return const_cast<VkClearRect*>(static_cast<const VkClearRect*>(this));}
 };
 
 /*	VkComponentMapping
 */
-template<> struct my_class_convert<S_component_mapping> { using type = VkComponentMapping;};
-template<> struct my_class_convert<VkComponentMapping> { using type = S_component_mapping;};
-struct		S_component_mapping:VkComponentMapping{
+struct	S_component_mapping:VkComponentMapping{
 	using VkComponentMapping::r;
 	using VkComponentMapping::g;
 	using VkComponentMapping::b;
 	using VkComponentMapping::a;
+
+	S_component_mapping& operator=(const VkComponentMapping& rhs){static_cast<VkComponentMapping&>(*this)=rhs; return *this;}
+	operator VkComponentMapping*()const{return const_cast<VkComponentMapping*>(static_cast<const VkComponentMapping*>(this));}
 };
 
 /*	VkPhysicalDeviceLimits
 (returnedonly)
 */
-template<> struct my_class_convert<S_physical_device_limits> { using type = VkPhysicalDeviceLimits;};
-template<> struct my_class_convert<VkPhysicalDeviceLimits> { using type = S_physical_device_limits;};
-struct		S_physical_device_limits:VkPhysicalDeviceLimits{
+struct	S_physical_device_limits:VkPhysicalDeviceLimits{
 	using VkPhysicalDeviceLimits::maxImageDimension1D;
 	using VkPhysicalDeviceLimits::maxImageDimension2D;
 	using VkPhysicalDeviceLimits::maxImageDimension3D;
@@ -4963,27 +4672,29 @@ struct		S_physical_device_limits:VkPhysicalDeviceLimits{
 	using VkPhysicalDeviceLimits::optimalBufferCopyOffsetAlignment;
 	using VkPhysicalDeviceLimits::optimalBufferCopyRowPitchAlignment;
 	using VkPhysicalDeviceLimits::nonCoherentAtomSize;
+
+	S_physical_device_limits& operator=(const VkPhysicalDeviceLimits& rhs){static_cast<VkPhysicalDeviceLimits&>(*this)=rhs; return *this;}
+	operator VkPhysicalDeviceLimits*()const{return const_cast<VkPhysicalDeviceLimits*>(static_cast<const VkPhysicalDeviceLimits*>(this));}
 };
 
 /*	VkPhysicalDeviceSparseProperties
 (returnedonly)
 */
-template<> struct my_class_convert<S_physical_device_sparse_properties> { using type = VkPhysicalDeviceSparseProperties;};
-template<> struct my_class_convert<VkPhysicalDeviceSparseProperties> { using type = S_physical_device_sparse_properties;};
-struct		S_physical_device_sparse_properties:VkPhysicalDeviceSparseProperties{
+struct	S_physical_device_sparse_properties:VkPhysicalDeviceSparseProperties{
 	using VkPhysicalDeviceSparseProperties::residencyStandard2DBlockShape;
 	using VkPhysicalDeviceSparseProperties::residencyStandard2DMultisampleBlockShape;
 	using VkPhysicalDeviceSparseProperties::residencyStandard3DBlockShape;
 	using VkPhysicalDeviceSparseProperties::residencyAlignedMipSize;
 	using VkPhysicalDeviceSparseProperties::residencyNonResidentStrict;
+
+	S_physical_device_sparse_properties& operator=(const VkPhysicalDeviceSparseProperties& rhs){static_cast<VkPhysicalDeviceSparseProperties&>(*this)=rhs; return *this;}
+	operator VkPhysicalDeviceSparseProperties*()const{return const_cast<VkPhysicalDeviceSparseProperties*>(static_cast<const VkPhysicalDeviceSparseProperties*>(this));}
 };
 
 /*	VkPhysicalDeviceProperties
 (returnedonly)
 */
-template<> struct my_class_convert<S_physical_device_properties> { using type = VkPhysicalDeviceProperties;};
-template<> struct my_class_convert<VkPhysicalDeviceProperties> { using type = S_physical_device_properties;};
-struct		S_physical_device_properties:VkPhysicalDeviceProperties{
+struct	S_physical_device_properties:VkPhysicalDeviceProperties{
 	using VkPhysicalDeviceProperties::apiVersion;
 	using VkPhysicalDeviceProperties::driverVersion;
 	using VkPhysicalDeviceProperties::vendorID;
@@ -4993,35 +4704,38 @@ struct		S_physical_device_properties:VkPhysicalDeviceProperties{
 	using VkPhysicalDeviceProperties::pipelineCacheUUID;
 	using VkPhysicalDeviceProperties::limits;
 	using VkPhysicalDeviceProperties::sparseProperties;
+
+	S_physical_device_properties& operator=(const VkPhysicalDeviceProperties& rhs){static_cast<VkPhysicalDeviceProperties&>(*this)=rhs; return *this;}
+	operator VkPhysicalDeviceProperties*()const{return const_cast<VkPhysicalDeviceProperties*>(static_cast<const VkPhysicalDeviceProperties*>(this));}
 };
 
 /*	VkExtensionProperties
 (returnedonly)
 */
-template<> struct my_class_convert<S_extension_properties> { using type = VkExtensionProperties;};
-template<> struct my_class_convert<VkExtensionProperties> { using type = S_extension_properties;};
-struct		S_extension_properties:VkExtensionProperties{
+struct	S_extension_properties:VkExtensionProperties{
 	using VkExtensionProperties::extensionName;
 	using VkExtensionProperties::specVersion;
+
+	S_extension_properties& operator=(const VkExtensionProperties& rhs){static_cast<VkExtensionProperties&>(*this)=rhs; return *this;}
+	operator VkExtensionProperties*()const{return const_cast<VkExtensionProperties*>(static_cast<const VkExtensionProperties*>(this));}
 };
 
 /*	VkLayerProperties
 (returnedonly)
 */
-template<> struct my_class_convert<S_layer_properties> { using type = VkLayerProperties;};
-template<> struct my_class_convert<VkLayerProperties> { using type = S_layer_properties;};
-struct		S_layer_properties:VkLayerProperties{
+struct	S_layer_properties:VkLayerProperties{
 	using VkLayerProperties::layerName;
 	using VkLayerProperties::specVersion;
 	using VkLayerProperties::implementationVersion;
 	using VkLayerProperties::description;
+
+	S_layer_properties& operator=(const VkLayerProperties& rhs){static_cast<VkLayerProperties&>(*this)=rhs; return *this;}
+	operator VkLayerProperties*()const{return const_cast<VkLayerProperties*>(static_cast<const VkLayerProperties*>(this));}
 };
 
 /*	VkApplicationInfo
 */
-template<> struct my_class_convert<S_application_info> { using type = VkApplicationInfo;};
-template<> struct my_class_convert<VkApplicationInfo> { using type = S_application_info;};
-struct		S_application_info:VkApplicationInfo{
+struct	S_application_info:VkApplicationInfo{
 private:
 	using VkApplicationInfo::sType;
 	using VkApplicationInfo::pNext;
@@ -5047,28 +4761,31 @@ S_application_info(
 	,pEngineName_
 	,engineVersion_
 	,apiVersion_}
-	{	}
+	{
+	}
+
+	S_application_info& operator=(const VkApplicationInfo& rhs){static_cast<VkApplicationInfo&>(*this)=rhs; return *this;}
+	operator VkApplicationInfo*()const{return const_cast<VkApplicationInfo*>(static_cast<const VkApplicationInfo*>(this));}
 };
 
 /*	VkAllocationCallbacks
 */
-template<> struct my_class_convert<S_allocation_callbacks> { using type = VkAllocationCallbacks;};
-template<> struct my_class_convert<VkAllocationCallbacks> { using type = S_allocation_callbacks;};
-struct		S_allocation_callbacks:VkAllocationCallbacks{
+struct	S_allocation_callbacks:VkAllocationCallbacks{
 	using VkAllocationCallbacks::pUserData;
 	using VkAllocationCallbacks::pfnAllocation;
 	using VkAllocationCallbacks::pfnReallocation;
 	using VkAllocationCallbacks::pfnFree;
 	using VkAllocationCallbacks::pfnInternalAllocation;
 	using VkAllocationCallbacks::pfnInternalFree;
+
+	S_allocation_callbacks& operator=(const VkAllocationCallbacks& rhs){static_cast<VkAllocationCallbacks&>(*this)=rhs; return *this;}
+	operator VkAllocationCallbacks*()const{return const_cast<VkAllocationCallbacks*>(static_cast<const VkAllocationCallbacks*>(this));}
 };
 
 /*	VkDeviceQueueGlobalPriorityCreateInfoEXT
 ex to: VkDeviceQueueCreateInfo
 */
-template<> struct my_class_convert<S_device_queue_global_priority_create_info_EXT> { using type = VkDeviceQueueGlobalPriorityCreateInfoEXT;};
-template<> struct my_class_convert<VkDeviceQueueGlobalPriorityCreateInfoEXT> { using type = S_device_queue_global_priority_create_info_EXT;};
-struct		S_device_queue_global_priority_create_info_EXT:VkDeviceQueueGlobalPriorityCreateInfoEXT{
+struct	S_device_queue_global_priority_create_info_EXT:VkDeviceQueueGlobalPriorityCreateInfoEXT{
 private:
 	using VkDeviceQueueGlobalPriorityCreateInfoEXT::sType;
 	using VkDeviceQueueGlobalPriorityCreateInfoEXT::pNext;
@@ -5082,9 +4799,13 @@ S_device_queue_global_priority_create_info_EXT(
 	VK_STRUCTURE_TYPE_DEVICE_QUEUE_GLOBAL_PRIORITY_CREATE_INFO_EXT
 	,nullptr
 	,globalPriority_}
-	{	}
+	{
+	}
 
 friend S_device_queue_create_info;
+
+	S_device_queue_global_priority_create_info_EXT& operator=(const VkDeviceQueueGlobalPriorityCreateInfoEXT& rhs){static_cast<VkDeviceQueueGlobalPriorityCreateInfoEXT&>(*this)=rhs; return *this;}
+	operator VkDeviceQueueGlobalPriorityCreateInfoEXT*()const{return const_cast<VkDeviceQueueGlobalPriorityCreateInfoEXT*>(static_cast<const VkDeviceQueueGlobalPriorityCreateInfoEXT*>(this));}
 };
 
 /*	VkDeviceQueueCreateInfo
@@ -5099,9 +4820,7 @@ public:
 operator void*() { return pNext; }
 N_device_queue_create_info& n_device_queue_global_priority_create_info_EXT(S_device_queue_global_priority_create_info_EXT const& next_);
 };
-template<> struct my_class_convert<S_device_queue_create_info> { using type = VkDeviceQueueCreateInfo;};
-template<> struct my_class_convert<VkDeviceQueueCreateInfo> { using type = S_device_queue_create_info;};
-struct		S_device_queue_create_info:VkDeviceQueueCreateInfo{
+struct	S_device_queue_create_info:VkDeviceQueueCreateInfo{
 private:
 	using VkDeviceQueueCreateInfo::sType;
 	using VkDeviceQueueCreateInfo::pNext;
@@ -5120,11 +4839,15 @@ S_device_queue_create_info(
 	:VkDeviceQueueCreateInfo{
 	VK_STRUCTURE_TYPE_DEVICE_QUEUE_CREATE_INFO
 	,nullptr
-	,flags_
+	,static_cast<VkFlags>(flags_)
 	,queueFamilyIndex_
 	,queueCount_
 	,pQueuePriorities_}
-	{	}
+	{
+	}
+
+	S_device_queue_create_info& operator=(const VkDeviceQueueCreateInfo& rhs){static_cast<VkDeviceQueueCreateInfo&>(*this)=rhs; return *this;}
+	operator VkDeviceQueueCreateInfo*()const{return const_cast<VkDeviceQueueCreateInfo*>(static_cast<const VkDeviceQueueCreateInfo*>(this));}
 
 S_device_queue_create_info& n_device_queue_global_priority_create_info_EXT(S_device_queue_global_priority_create_info_EXT const& next_);
 void set_pNext(N_device_queue_create_info n_){pNext = n_;}
@@ -5132,9 +4855,7 @@ void set_pNext(N_device_queue_create_info n_){pNext = n_;}
 
 /*	VkPhysicalDeviceFeatures
 */
-template<> struct my_class_convert<S_physical_device_features> { using type = VkPhysicalDeviceFeatures;};
-template<> struct my_class_convert<VkPhysicalDeviceFeatures> { using type = S_physical_device_features;};
-struct		S_physical_device_features:VkPhysicalDeviceFeatures{
+struct	S_physical_device_features:VkPhysicalDeviceFeatures{
 	using VkPhysicalDeviceFeatures::robustBufferAccess;
 	using VkPhysicalDeviceFeatures::fullDrawIndexUint32;
 	using VkPhysicalDeviceFeatures::imageCubeArray;
@@ -5190,14 +4911,15 @@ struct		S_physical_device_features:VkPhysicalDeviceFeatures{
 	using VkPhysicalDeviceFeatures::sparseResidencyAliased;
 	using VkPhysicalDeviceFeatures::variableMultisampleRate;
 	using VkPhysicalDeviceFeatures::inheritedQueries;
+
+	S_physical_device_features& operator=(const VkPhysicalDeviceFeatures& rhs){static_cast<VkPhysicalDeviceFeatures&>(*this)=rhs; return *this;}
+	operator VkPhysicalDeviceFeatures*()const{return const_cast<VkPhysicalDeviceFeatures*>(static_cast<const VkPhysicalDeviceFeatures*>(this));}
 };
 
 /*	VkPhysicalDeviceVariablePointerFeatures
 ex to: VkPhysicalDeviceFeatures2,VkDeviceCreateInfo
 */
-template<> struct my_class_convert<S_physical_device_variable_pointer_features> { using type = VkPhysicalDeviceVariablePointerFeatures;};
-template<> struct my_class_convert<VkPhysicalDeviceVariablePointerFeatures> { using type = S_physical_device_variable_pointer_features;};
-struct		S_physical_device_variable_pointer_features:VkPhysicalDeviceVariablePointerFeatures{
+struct	S_physical_device_variable_pointer_features:VkPhysicalDeviceVariablePointerFeatures{
 private:
 	using VkPhysicalDeviceVariablePointerFeatures::sType;
 	using VkPhysicalDeviceVariablePointerFeatures::pNext;
@@ -5214,18 +4936,20 @@ S_physical_device_variable_pointer_features(
 	,nullptr
 	,variablePointersStorageBuffer_
 	,variablePointers_}
-	{	}
+	{
+	}
 
 friend S_physical_device_features2;
 friend S_device_create_info;
+
+	S_physical_device_variable_pointer_features& operator=(const VkPhysicalDeviceVariablePointerFeatures& rhs){static_cast<VkPhysicalDeviceVariablePointerFeatures&>(*this)=rhs; return *this;}
+	operator VkPhysicalDeviceVariablePointerFeatures*()const{return const_cast<VkPhysicalDeviceVariablePointerFeatures*>(static_cast<const VkPhysicalDeviceVariablePointerFeatures*>(this));}
 };
 
 /*	VkPhysicalDeviceMultiviewFeatures
 ex to: VkPhysicalDeviceFeatures2,VkDeviceCreateInfo
 */
-template<> struct my_class_convert<S_physical_device_multiview_features> { using type = VkPhysicalDeviceMultiviewFeatures;};
-template<> struct my_class_convert<VkPhysicalDeviceMultiviewFeatures> { using type = S_physical_device_multiview_features;};
-struct		S_physical_device_multiview_features:VkPhysicalDeviceMultiviewFeatures{
+struct	S_physical_device_multiview_features:VkPhysicalDeviceMultiviewFeatures{
 private:
 	using VkPhysicalDeviceMultiviewFeatures::sType;
 	using VkPhysicalDeviceMultiviewFeatures::pNext;
@@ -5245,18 +4969,20 @@ S_physical_device_multiview_features(
 	,multiview_
 	,multiviewGeometryShader_
 	,multiviewTessellationShader_}
-	{	}
+	{
+	}
 
 friend S_physical_device_features2;
 friend S_device_create_info;
+
+	S_physical_device_multiview_features& operator=(const VkPhysicalDeviceMultiviewFeatures& rhs){static_cast<VkPhysicalDeviceMultiviewFeatures&>(*this)=rhs; return *this;}
+	operator VkPhysicalDeviceMultiviewFeatures*()const{return const_cast<VkPhysicalDeviceMultiviewFeatures*>(static_cast<const VkPhysicalDeviceMultiviewFeatures*>(this));}
 };
 
 /*	VkPhysicalDevice16BitStorageFeatures
 ex to: VkPhysicalDeviceFeatures2,VkDeviceCreateInfo
 */
-template<> struct my_class_convert<S_physical_device_16bit_storage_features> { using type = VkPhysicalDevice16BitStorageFeatures;};
-template<> struct my_class_convert<VkPhysicalDevice16BitStorageFeatures> { using type = S_physical_device_16bit_storage_features;};
-struct		S_physical_device_16bit_storage_features:VkPhysicalDevice16BitStorageFeatures{
+struct	S_physical_device_16bit_storage_features:VkPhysicalDevice16BitStorageFeatures{
 private:
 	using VkPhysicalDevice16BitStorageFeatures::sType;
 	using VkPhysicalDevice16BitStorageFeatures::pNext;
@@ -5279,18 +5005,20 @@ S_physical_device_16bit_storage_features(
 	,uniformAndStorageBuffer16BitAccess_
 	,storagePushConstant16_
 	,storageInputOutput16_}
-	{	}
+	{
+	}
 
 friend S_physical_device_features2;
 friend S_device_create_info;
+
+	S_physical_device_16bit_storage_features& operator=(const VkPhysicalDevice16BitStorageFeatures& rhs){static_cast<VkPhysicalDevice16BitStorageFeatures&>(*this)=rhs; return *this;}
+	operator VkPhysicalDevice16BitStorageFeatures*()const{return const_cast<VkPhysicalDevice16BitStorageFeatures*>(static_cast<const VkPhysicalDevice16BitStorageFeatures*>(this));}
 };
 
 /*	VkPhysicalDeviceSamplerYcbcrConversionFeatures
 ex to: VkPhysicalDeviceFeatures2,VkDeviceCreateInfo
 */
-template<> struct my_class_convert<S_physical_device_sampler_ycbcr_conversion_features> { using type = VkPhysicalDeviceSamplerYcbcrConversionFeatures;};
-template<> struct my_class_convert<VkPhysicalDeviceSamplerYcbcrConversionFeatures> { using type = S_physical_device_sampler_ycbcr_conversion_features;};
-struct		S_physical_device_sampler_ycbcr_conversion_features:VkPhysicalDeviceSamplerYcbcrConversionFeatures{
+struct	S_physical_device_sampler_ycbcr_conversion_features:VkPhysicalDeviceSamplerYcbcrConversionFeatures{
 private:
 	using VkPhysicalDeviceSamplerYcbcrConversionFeatures::sType;
 	using VkPhysicalDeviceSamplerYcbcrConversionFeatures::pNext;
@@ -5304,18 +5032,20 @@ S_physical_device_sampler_ycbcr_conversion_features(
 	VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SAMPLER_YCBCR_CONVERSION_FEATURES
 	,nullptr
 	,samplerYcbcrConversion_}
-	{	}
+	{
+	}
 
 friend S_physical_device_features2;
 friend S_device_create_info;
+
+	S_physical_device_sampler_ycbcr_conversion_features& operator=(const VkPhysicalDeviceSamplerYcbcrConversionFeatures& rhs){static_cast<VkPhysicalDeviceSamplerYcbcrConversionFeatures&>(*this)=rhs; return *this;}
+	operator VkPhysicalDeviceSamplerYcbcrConversionFeatures*()const{return const_cast<VkPhysicalDeviceSamplerYcbcrConversionFeatures*>(static_cast<const VkPhysicalDeviceSamplerYcbcrConversionFeatures*>(this));}
 };
 
 /*	VkPhysicalDeviceProtectedMemoryFeatures
 ex to: VkPhysicalDeviceFeatures2,VkDeviceCreateInfo
 */
-template<> struct my_class_convert<S_physical_device_protected_memory_features> { using type = VkPhysicalDeviceProtectedMemoryFeatures;};
-template<> struct my_class_convert<VkPhysicalDeviceProtectedMemoryFeatures> { using type = S_physical_device_protected_memory_features;};
-struct		S_physical_device_protected_memory_features:VkPhysicalDeviceProtectedMemoryFeatures{
+struct	S_physical_device_protected_memory_features:VkPhysicalDeviceProtectedMemoryFeatures{
 private:
 	using VkPhysicalDeviceProtectedMemoryFeatures::sType;
 	using VkPhysicalDeviceProtectedMemoryFeatures::pNext;
@@ -5329,18 +5059,20 @@ S_physical_device_protected_memory_features(
 	VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROTECTED_MEMORY_FEATURES
 	,nullptr
 	,protectedMemory_}
-	{	}
+	{
+	}
 
 friend S_physical_device_features2;
 friend S_device_create_info;
+
+	S_physical_device_protected_memory_features& operator=(const VkPhysicalDeviceProtectedMemoryFeatures& rhs){static_cast<VkPhysicalDeviceProtectedMemoryFeatures&>(*this)=rhs; return *this;}
+	operator VkPhysicalDeviceProtectedMemoryFeatures*()const{return const_cast<VkPhysicalDeviceProtectedMemoryFeatures*>(static_cast<const VkPhysicalDeviceProtectedMemoryFeatures*>(this));}
 };
 
 /*	VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT
-ex to: VkPhysicalDeviceFeatures2,VkDeviceCreateInfo
+ex to: VkPhysicalDeviceFeatures2
 */
-template<> struct my_class_convert<S_physical_device_blend_operation_advanced_features_EXT> { using type = VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT;};
-template<> struct my_class_convert<VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT> { using type = S_physical_device_blend_operation_advanced_features_EXT;};
-struct		S_physical_device_blend_operation_advanced_features_EXT:VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT{
+struct	S_physical_device_blend_operation_advanced_features_EXT:VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT{
 private:
 	using VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT::sType;
 	using VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT::pNext;
@@ -5354,47 +5086,19 @@ S_physical_device_blend_operation_advanced_features_EXT(
 	VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_BLEND_OPERATION_ADVANCED_FEATURES_EXT
 	,nullptr
 	,advancedBlendCoherentOperations_}
-	{	}
+	{
+	}
 
 friend S_physical_device_features2;
-friend S_device_create_info;
-};
 
-/*	VkPhysicalDeviceInlineUniformBlockFeaturesEXT
-(returnedonly)
-ex to: VkPhysicalDeviceFeatures2,VkDeviceCreateInfo
-*/
-template<> struct my_class_convert<S_physical_device_inline_uniform_block_features_EXT> { using type = VkPhysicalDeviceInlineUniformBlockFeaturesEXT;};
-template<> struct my_class_convert<VkPhysicalDeviceInlineUniformBlockFeaturesEXT> { using type = S_physical_device_inline_uniform_block_features_EXT;};
-struct		S_physical_device_inline_uniform_block_features_EXT:VkPhysicalDeviceInlineUniformBlockFeaturesEXT{
-private:
-	using VkPhysicalDeviceInlineUniformBlockFeaturesEXT::sType;
-	using VkPhysicalDeviceInlineUniformBlockFeaturesEXT::pNext;
-public:
-	using VkPhysicalDeviceInlineUniformBlockFeaturesEXT::inlineUniformBlock;
-	using VkPhysicalDeviceInlineUniformBlockFeaturesEXT::descriptorBindingInlineUniformBlockUpdateAfterBind;
-
-S_physical_device_inline_uniform_block_features_EXT():VkPhysicalDeviceInlineUniformBlockFeaturesEXT{VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_INLINE_UNIFORM_BLOCK_FEATURES_EXT,nullptr}{}
-S_physical_device_inline_uniform_block_features_EXT(
-	VkBool32 inlineUniformBlock_,
-	VkBool32 descriptorBindingInlineUniformBlockUpdateAfterBind_)
-	:VkPhysicalDeviceInlineUniformBlockFeaturesEXT{
-	VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_INLINE_UNIFORM_BLOCK_FEATURES_EXT
-	,nullptr
-	,inlineUniformBlock_
-	,descriptorBindingInlineUniformBlockUpdateAfterBind_}
-	{	}
-
-friend S_physical_device_features2;
-friend S_device_create_info;
+	S_physical_device_blend_operation_advanced_features_EXT& operator=(const VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT& rhs){static_cast<VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT&>(*this)=rhs; return *this;}
+	operator VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT*()const{return const_cast<VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT*>(static_cast<const VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT*>(this));}
 };
 
 /*	VkPhysicalDeviceShaderDrawParameterFeatures
-ex to: VkPhysicalDeviceFeatures2,VkDeviceCreateInfo
+ex to: VkPhysicalDeviceFeatures2
 */
-template<> struct my_class_convert<S_physical_device_shader_draw_parameter_features> { using type = VkPhysicalDeviceShaderDrawParameterFeatures;};
-template<> struct my_class_convert<VkPhysicalDeviceShaderDrawParameterFeatures> { using type = S_physical_device_shader_draw_parameter_features;};
-struct		S_physical_device_shader_draw_parameter_features:VkPhysicalDeviceShaderDrawParameterFeatures{
+struct	S_physical_device_shader_draw_parameter_features:VkPhysicalDeviceShaderDrawParameterFeatures{
 private:
 	using VkPhysicalDeviceShaderDrawParameterFeatures::sType;
 	using VkPhysicalDeviceShaderDrawParameterFeatures::pNext;
@@ -5408,18 +5112,19 @@ S_physical_device_shader_draw_parameter_features(
 	VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_DRAW_PARAMETER_FEATURES
 	,nullptr
 	,shaderDrawParameters_}
-	{	}
+	{
+	}
 
 friend S_physical_device_features2;
-friend S_device_create_info;
+
+	S_physical_device_shader_draw_parameter_features& operator=(const VkPhysicalDeviceShaderDrawParameterFeatures& rhs){static_cast<VkPhysicalDeviceShaderDrawParameterFeatures&>(*this)=rhs; return *this;}
+	operator VkPhysicalDeviceShaderDrawParameterFeatures*()const{return const_cast<VkPhysicalDeviceShaderDrawParameterFeatures*>(static_cast<const VkPhysicalDeviceShaderDrawParameterFeatures*>(this));}
 };
 
 /*	VkPhysicalDeviceDescriptorIndexingFeaturesEXT
 ex to: VkPhysicalDeviceFeatures2,VkDeviceCreateInfo
 */
-template<> struct my_class_convert<S_physical_device_descriptor_indexing_features_EXT> { using type = VkPhysicalDeviceDescriptorIndexingFeaturesEXT;};
-template<> struct my_class_convert<VkPhysicalDeviceDescriptorIndexingFeaturesEXT> { using type = S_physical_device_descriptor_indexing_features_EXT;};
-struct		S_physical_device_descriptor_indexing_features_EXT:VkPhysicalDeviceDescriptorIndexingFeaturesEXT{
+struct	S_physical_device_descriptor_indexing_features_EXT:VkPhysicalDeviceDescriptorIndexingFeaturesEXT{
 private:
 	using VkPhysicalDeviceDescriptorIndexingFeaturesEXT::sType;
 	using VkPhysicalDeviceDescriptorIndexingFeaturesEXT::pNext;
@@ -5490,18 +5195,20 @@ S_physical_device_descriptor_indexing_features_EXT(
 	,descriptorBindingPartiallyBound_
 	,descriptorBindingVariableDescriptorCount_
 	,runtimeDescriptorArray_}
-	{	}
+	{
+	}
 
 friend S_physical_device_features2;
 friend S_device_create_info;
+
+	S_physical_device_descriptor_indexing_features_EXT& operator=(const VkPhysicalDeviceDescriptorIndexingFeaturesEXT& rhs){static_cast<VkPhysicalDeviceDescriptorIndexingFeaturesEXT&>(*this)=rhs; return *this;}
+	operator VkPhysicalDeviceDescriptorIndexingFeaturesEXT*()const{return const_cast<VkPhysicalDeviceDescriptorIndexingFeaturesEXT*>(static_cast<const VkPhysicalDeviceDescriptorIndexingFeaturesEXT*>(this));}
 };
 
 /*	VkPhysicalDevice8BitStorageFeaturesKHR
 ex to: VkPhysicalDeviceFeatures2,VkDeviceCreateInfo
 */
-template<> struct my_class_convert<S_physical_device_8bit_storage_features_KHR> { using type = VkPhysicalDevice8BitStorageFeaturesKHR;};
-template<> struct my_class_convert<VkPhysicalDevice8BitStorageFeaturesKHR> { using type = S_physical_device_8bit_storage_features_KHR;};
-struct		S_physical_device_8bit_storage_features_KHR:VkPhysicalDevice8BitStorageFeaturesKHR{
+struct	S_physical_device_8bit_storage_features_KHR:VkPhysicalDevice8BitStorageFeaturesKHR{
 private:
 	using VkPhysicalDevice8BitStorageFeaturesKHR::sType;
 	using VkPhysicalDevice8BitStorageFeaturesKHR::pNext;
@@ -5521,18 +5228,20 @@ S_physical_device_8bit_storage_features_KHR(
 	,storageBuffer8BitAccess_
 	,uniformAndStorageBuffer8BitAccess_
 	,storagePushConstant8_}
-	{	}
+	{
+	}
 
 friend S_physical_device_features2;
 friend S_device_create_info;
+
+	S_physical_device_8bit_storage_features_KHR& operator=(const VkPhysicalDevice8BitStorageFeaturesKHR& rhs){static_cast<VkPhysicalDevice8BitStorageFeaturesKHR&>(*this)=rhs; return *this;}
+	operator VkPhysicalDevice8BitStorageFeaturesKHR*()const{return const_cast<VkPhysicalDevice8BitStorageFeaturesKHR*>(static_cast<const VkPhysicalDevice8BitStorageFeaturesKHR*>(this));}
 };
 
 /*	VkPhysicalDeviceConditionalRenderingFeaturesEXT
 ex to: VkPhysicalDeviceFeatures2,VkDeviceCreateInfo
 */
-template<> struct my_class_convert<S_physical_device_conditional_rendering_features_EXT> { using type = VkPhysicalDeviceConditionalRenderingFeaturesEXT;};
-template<> struct my_class_convert<VkPhysicalDeviceConditionalRenderingFeaturesEXT> { using type = S_physical_device_conditional_rendering_features_EXT;};
-struct		S_physical_device_conditional_rendering_features_EXT:VkPhysicalDeviceConditionalRenderingFeaturesEXT{
+struct	S_physical_device_conditional_rendering_features_EXT:VkPhysicalDeviceConditionalRenderingFeaturesEXT{
 private:
 	using VkPhysicalDeviceConditionalRenderingFeaturesEXT::sType;
 	using VkPhysicalDeviceConditionalRenderingFeaturesEXT::pNext;
@@ -5549,331 +5258,14 @@ S_physical_device_conditional_rendering_features_EXT(
 	,nullptr
 	,conditionalRendering_
 	,inheritedConditionalRendering_}
-	{	}
+	{
+	}
 
 friend S_physical_device_features2;
 friend S_device_create_info;
-};
 
-/*	VkPhysicalDeviceVulkanMemoryModelFeaturesKHR
-(returnedonly)
-ex to: VkPhysicalDeviceFeatures2,VkDeviceCreateInfo
-*/
-template<> struct my_class_convert<S_physical_device_vulkan_memory_model_features_KHR> { using type = VkPhysicalDeviceVulkanMemoryModelFeaturesKHR;};
-template<> struct my_class_convert<VkPhysicalDeviceVulkanMemoryModelFeaturesKHR> { using type = S_physical_device_vulkan_memory_model_features_KHR;};
-struct		S_physical_device_vulkan_memory_model_features_KHR:VkPhysicalDeviceVulkanMemoryModelFeaturesKHR{
-private:
-	using VkPhysicalDeviceVulkanMemoryModelFeaturesKHR::sType;
-	using VkPhysicalDeviceVulkanMemoryModelFeaturesKHR::pNext;
-public:
-	using VkPhysicalDeviceVulkanMemoryModelFeaturesKHR::vulkanMemoryModel;
-	using VkPhysicalDeviceVulkanMemoryModelFeaturesKHR::vulkanMemoryModelDeviceScope;
-
-S_physical_device_vulkan_memory_model_features_KHR():VkPhysicalDeviceVulkanMemoryModelFeaturesKHR{VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_MEMORY_MODEL_FEATURES_KHR,nullptr}{}
-S_physical_device_vulkan_memory_model_features_KHR(
-	VkBool32 vulkanMemoryModel_,
-	VkBool32 vulkanMemoryModelDeviceScope_)
-	:VkPhysicalDeviceVulkanMemoryModelFeaturesKHR{
-	VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_MEMORY_MODEL_FEATURES_KHR
-	,nullptr
-	,vulkanMemoryModel_
-	,vulkanMemoryModelDeviceScope_}
-	{	}
-
-friend S_physical_device_features2;
-friend S_device_create_info;
-};
-
-/*	VkPhysicalDeviceShaderAtomicInt64FeaturesKHR
-ex to: VkPhysicalDeviceFeatures2,VkDeviceCreateInfo
-*/
-#ifdef LAKA_UNKNOW
-template<> struct my_class_convert<S_physical_device_shader_atomic_int64_features_KHR> { using type = VkPhysicalDeviceShaderAtomicInt64FeaturesKHR;};
-template<> struct my_class_convert<VkPhysicalDeviceShaderAtomicInt64FeaturesKHR> { using type = S_physical_device_shader_atomic_int64_features_KHR;};
-struct		S_physical_device_shader_atomic_int64_features_KHR:VkPhysicalDeviceShaderAtomicInt64FeaturesKHR{
-private:
-	using VkPhysicalDeviceShaderAtomicInt64FeaturesKHR::sType;
-	using VkPhysicalDeviceShaderAtomicInt64FeaturesKHR::pNext;
-public:
-	using VkPhysicalDeviceShaderAtomicInt64FeaturesKHR::shaderBufferInt64Atomics;
-	using VkPhysicalDeviceShaderAtomicInt64FeaturesKHR::shaderSharedInt64Atomics;
-
-S_physical_device_shader_atomic_int64_features_KHR():VkPhysicalDeviceShaderAtomicInt64FeaturesKHR{VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_ATOMIC_INT64_FEATURES_KHR,nullptr}{}
-S_physical_device_shader_atomic_int64_features_KHR(
-	VkBool32 shaderBufferInt64Atomics_,
-	VkBool32 shaderSharedInt64Atomics_)
-	:VkPhysicalDeviceShaderAtomicInt64FeaturesKHR{
-	VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_ATOMIC_INT64_FEATURES_KHR
-	,nullptr
-	,shaderBufferInt64Atomics_
-	,shaderSharedInt64Atomics_}
-	{	}
-
-friend S_physical_device_features2;
-friend S_device_create_info;
-};
-#endif //LAKA_UNKNOW
-
-/*	VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT
-ex to: VkPhysicalDeviceFeatures2,VkDeviceCreateInfo
-*/
-template<> struct my_class_convert<S_physical_device_vertex_attribute_divisor_features_EXT> { using type = VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT;};
-template<> struct my_class_convert<VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT> { using type = S_physical_device_vertex_attribute_divisor_features_EXT;};
-struct		S_physical_device_vertex_attribute_divisor_features_EXT:VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT{
-private:
-	using VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT::sType;
-	using VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT::pNext;
-public:
-	using VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT::vertexAttributeInstanceRateDivisor;
-	using VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT::vertexAttributeInstanceRateZeroDivisor;
-
-S_physical_device_vertex_attribute_divisor_features_EXT():VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT{VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_DIVISOR_FEATURES_EXT,nullptr}{}
-S_physical_device_vertex_attribute_divisor_features_EXT(
-	VkBool32 vertexAttributeInstanceRateDivisor_,
-	VkBool32 vertexAttributeInstanceRateZeroDivisor_)
-	:VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT{
-	VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_DIVISOR_FEATURES_EXT
-	,nullptr
-	,vertexAttributeInstanceRateDivisor_
-	,vertexAttributeInstanceRateZeroDivisor_}
-	{	}
-
-friend S_physical_device_features2;
-friend S_device_create_info;
-};
-
-/*	VkPhysicalDeviceASTCDecodeFeaturesEXT
-ex to: VkPhysicalDeviceFeatures2,VkDeviceCreateInfo
-*/
-template<> struct my_class_convert<S_physical_device_astc_decode_features_EXT> { using type = VkPhysicalDeviceASTCDecodeFeaturesEXT;};
-template<> struct my_class_convert<VkPhysicalDeviceASTCDecodeFeaturesEXT> { using type = S_physical_device_astc_decode_features_EXT;};
-struct		S_physical_device_astc_decode_features_EXT:VkPhysicalDeviceASTCDecodeFeaturesEXT{
-private:
-	using VkPhysicalDeviceASTCDecodeFeaturesEXT::sType;
-	using VkPhysicalDeviceASTCDecodeFeaturesEXT::pNext;
-public:
-	using VkPhysicalDeviceASTCDecodeFeaturesEXT::decodeModeSharedExponent;
-
-S_physical_device_astc_decode_features_EXT():VkPhysicalDeviceASTCDecodeFeaturesEXT{VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ASTC_DECODE_FEATURES_EXT,nullptr}{}
-S_physical_device_astc_decode_features_EXT(
-	VkBool32 decodeModeSharedExponent_)
-	:VkPhysicalDeviceASTCDecodeFeaturesEXT{
-	VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ASTC_DECODE_FEATURES_EXT
-	,nullptr
-	,decodeModeSharedExponent_}
-	{	}
-
-friend S_physical_device_features2;
-friend S_device_create_info;
-};
-
-/*	VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV
-ex to: VkPhysicalDeviceFeatures2,VkDeviceCreateInfo
-*/
-template<> struct my_class_convert<S_physical_device_representative_fragment_test_features_NV> { using type = VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV;};
-template<> struct my_class_convert<VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV> { using type = S_physical_device_representative_fragment_test_features_NV;};
-struct		S_physical_device_representative_fragment_test_features_NV:VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV{
-private:
-	using VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV::sType;
-	using VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV::pNext;
-public:
-	using VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV::representativeFragmentTest;
-
-S_physical_device_representative_fragment_test_features_NV():VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV{VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_REPRESENTATIVE_FRAGMENT_TEST_FEATURES_NV,nullptr}{}
-S_physical_device_representative_fragment_test_features_NV(
-	VkBool32 representativeFragmentTest_)
-	:VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV{
-	VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_REPRESENTATIVE_FRAGMENT_TEST_FEATURES_NV
-	,nullptr
-	,representativeFragmentTest_}
-	{	}
-
-friend S_physical_device_features2;
-friend S_device_create_info;
-};
-
-/*	VkPhysicalDeviceExclusiveScissorFeaturesNV
-ex to: VkPhysicalDeviceFeatures2,VkDeviceCreateInfo
-*/
-template<> struct my_class_convert<S_physical_device_exclusive_scissor_features_NV> { using type = VkPhysicalDeviceExclusiveScissorFeaturesNV;};
-template<> struct my_class_convert<VkPhysicalDeviceExclusiveScissorFeaturesNV> { using type = S_physical_device_exclusive_scissor_features_NV;};
-struct		S_physical_device_exclusive_scissor_features_NV:VkPhysicalDeviceExclusiveScissorFeaturesNV{
-private:
-	using VkPhysicalDeviceExclusiveScissorFeaturesNV::sType;
-	using VkPhysicalDeviceExclusiveScissorFeaturesNV::pNext;
-public:
-	using VkPhysicalDeviceExclusiveScissorFeaturesNV::exclusiveScissor;
-
-S_physical_device_exclusive_scissor_features_NV():VkPhysicalDeviceExclusiveScissorFeaturesNV{VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXCLUSIVE_SCISSOR_FEATURES_NV,nullptr}{}
-S_physical_device_exclusive_scissor_features_NV(
-	VkBool32 exclusiveScissor_)
-	:VkPhysicalDeviceExclusiveScissorFeaturesNV{
-	VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXCLUSIVE_SCISSOR_FEATURES_NV
-	,nullptr
-	,exclusiveScissor_}
-	{	}
-
-friend S_physical_device_features2;
-friend S_device_create_info;
-};
-
-/*	VkPhysicalDeviceCornerSampledImageFeaturesNV
-ex to: VkPhysicalDeviceFeatures2,VkDeviceCreateInfo
-*/
-template<> struct my_class_convert<S_physical_device_corner_sampled_image_features_NV> { using type = VkPhysicalDeviceCornerSampledImageFeaturesNV;};
-template<> struct my_class_convert<VkPhysicalDeviceCornerSampledImageFeaturesNV> { using type = S_physical_device_corner_sampled_image_features_NV;};
-struct		S_physical_device_corner_sampled_image_features_NV:VkPhysicalDeviceCornerSampledImageFeaturesNV{
-private:
-	using VkPhysicalDeviceCornerSampledImageFeaturesNV::sType;
-	using VkPhysicalDeviceCornerSampledImageFeaturesNV::pNext;
-public:
-	using VkPhysicalDeviceCornerSampledImageFeaturesNV::cornerSampledImage;
-
-S_physical_device_corner_sampled_image_features_NV():VkPhysicalDeviceCornerSampledImageFeaturesNV{VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CORNER_SAMPLED_IMAGE_FEATURES_NV,nullptr}{}
-S_physical_device_corner_sampled_image_features_NV(
-	VkBool32 cornerSampledImage_)
-	:VkPhysicalDeviceCornerSampledImageFeaturesNV{
-	VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CORNER_SAMPLED_IMAGE_FEATURES_NV
-	,nullptr
-	,cornerSampledImage_}
-	{	}
-
-friend S_physical_device_features2;
-friend S_device_create_info;
-};
-
-/*	VkPhysicalDeviceComputeShaderDerivativesFeaturesNV
-ex to: VkPhysicalDeviceFeatures2,VkDeviceCreateInfo
-*/
-template<> struct my_class_convert<S_physical_device_compute_shader_derivatives_features_NV> { using type = VkPhysicalDeviceComputeShaderDerivativesFeaturesNV;};
-template<> struct my_class_convert<VkPhysicalDeviceComputeShaderDerivativesFeaturesNV> { using type = S_physical_device_compute_shader_derivatives_features_NV;};
-struct		S_physical_device_compute_shader_derivatives_features_NV:VkPhysicalDeviceComputeShaderDerivativesFeaturesNV{
-private:
-	using VkPhysicalDeviceComputeShaderDerivativesFeaturesNV::sType;
-	using VkPhysicalDeviceComputeShaderDerivativesFeaturesNV::pNext;
-public:
-	using VkPhysicalDeviceComputeShaderDerivativesFeaturesNV::computeDerivativeGroupQuads;
-	using VkPhysicalDeviceComputeShaderDerivativesFeaturesNV::computeDerivativeGroupLinear;
-
-S_physical_device_compute_shader_derivatives_features_NV():VkPhysicalDeviceComputeShaderDerivativesFeaturesNV{VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COMPUTE_SHADER_DERIVATIVES_FEATURES_NV,nullptr}{}
-S_physical_device_compute_shader_derivatives_features_NV(
-	VkBool32 computeDerivativeGroupQuads_,
-	VkBool32 computeDerivativeGroupLinear_)
-	:VkPhysicalDeviceComputeShaderDerivativesFeaturesNV{
-	VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COMPUTE_SHADER_DERIVATIVES_FEATURES_NV
-	,nullptr
-	,computeDerivativeGroupQuads_
-	,computeDerivativeGroupLinear_}
-	{	}
-
-friend S_physical_device_features2;
-friend S_device_create_info;
-};
-
-/*	VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV
-ex to: VkPhysicalDeviceFeatures2,VkDeviceCreateInfo
-*/
-template<> struct my_class_convert<S_physical_device_fragment_shader_barycentric_features_NV> { using type = VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV;};
-template<> struct my_class_convert<VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV> { using type = S_physical_device_fragment_shader_barycentric_features_NV;};
-struct		S_physical_device_fragment_shader_barycentric_features_NV:VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV{
-private:
-	using VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV::sType;
-	using VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV::pNext;
-public:
-	using VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV::fragmentShaderBarycentric;
-
-S_physical_device_fragment_shader_barycentric_features_NV():VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV{VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_SHADER_BARYCENTRIC_FEATURES_NV,nullptr}{}
-S_physical_device_fragment_shader_barycentric_features_NV(
-	VkBool32 fragmentShaderBarycentric_)
-	:VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV{
-	VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_SHADER_BARYCENTRIC_FEATURES_NV
-	,nullptr
-	,fragmentShaderBarycentric_}
-	{	}
-
-friend S_physical_device_features2;
-friend S_device_create_info;
-};
-
-/*	VkPhysicalDeviceShaderImageFootprintFeaturesNV
-ex to: VkPhysicalDeviceFeatures2,VkDeviceCreateInfo
-*/
-template<> struct my_class_convert<S_physical_device_shader_image_footprint_features_NV> { using type = VkPhysicalDeviceShaderImageFootprintFeaturesNV;};
-template<> struct my_class_convert<VkPhysicalDeviceShaderImageFootprintFeaturesNV> { using type = S_physical_device_shader_image_footprint_features_NV;};
-struct		S_physical_device_shader_image_footprint_features_NV:VkPhysicalDeviceShaderImageFootprintFeaturesNV{
-private:
-	using VkPhysicalDeviceShaderImageFootprintFeaturesNV::sType;
-	using VkPhysicalDeviceShaderImageFootprintFeaturesNV::pNext;
-public:
-	using VkPhysicalDeviceShaderImageFootprintFeaturesNV::imageFootprint;
-
-S_physical_device_shader_image_footprint_features_NV():VkPhysicalDeviceShaderImageFootprintFeaturesNV{VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_IMAGE_FOOTPRINT_FEATURES_NV,nullptr}{}
-S_physical_device_shader_image_footprint_features_NV(
-	VkBool32 imageFootprint_)
-	:VkPhysicalDeviceShaderImageFootprintFeaturesNV{
-	VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_IMAGE_FOOTPRINT_FEATURES_NV
-	,nullptr
-	,imageFootprint_}
-	{	}
-
-friend S_physical_device_features2;
-friend S_device_create_info;
-};
-
-/*	VkPhysicalDeviceShadingRateImageFeaturesNV
-ex to: VkPhysicalDeviceFeatures2,VkDeviceCreateInfo
-*/
-template<> struct my_class_convert<S_physical_device_shading_rate_image_features_NV> { using type = VkPhysicalDeviceShadingRateImageFeaturesNV;};
-template<> struct my_class_convert<VkPhysicalDeviceShadingRateImageFeaturesNV> { using type = S_physical_device_shading_rate_image_features_NV;};
-struct		S_physical_device_shading_rate_image_features_NV:VkPhysicalDeviceShadingRateImageFeaturesNV{
-private:
-	using VkPhysicalDeviceShadingRateImageFeaturesNV::sType;
-	using VkPhysicalDeviceShadingRateImageFeaturesNV::pNext;
-public:
-	using VkPhysicalDeviceShadingRateImageFeaturesNV::shadingRateImage;
-	using VkPhysicalDeviceShadingRateImageFeaturesNV::shadingRateCoarseSampleOrder;
-
-S_physical_device_shading_rate_image_features_NV():VkPhysicalDeviceShadingRateImageFeaturesNV{VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADING_RATE_IMAGE_FEATURES_NV,nullptr}{}
-S_physical_device_shading_rate_image_features_NV(
-	VkBool32 shadingRateImage_,
-	VkBool32 shadingRateCoarseSampleOrder_)
-	:VkPhysicalDeviceShadingRateImageFeaturesNV{
-	VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADING_RATE_IMAGE_FEATURES_NV
-	,nullptr
-	,shadingRateImage_
-	,shadingRateCoarseSampleOrder_}
-	{	}
-
-friend S_physical_device_features2;
-friend S_device_create_info;
-};
-
-/*	VkPhysicalDeviceMeshShaderFeaturesNV
-ex to: VkPhysicalDeviceFeatures2,VkDeviceCreateInfo
-*/
-template<> struct my_class_convert<S_physical_device_mesh_shader_features_NV> { using type = VkPhysicalDeviceMeshShaderFeaturesNV;};
-template<> struct my_class_convert<VkPhysicalDeviceMeshShaderFeaturesNV> { using type = S_physical_device_mesh_shader_features_NV;};
-struct		S_physical_device_mesh_shader_features_NV:VkPhysicalDeviceMeshShaderFeaturesNV{
-private:
-	using VkPhysicalDeviceMeshShaderFeaturesNV::sType;
-	using VkPhysicalDeviceMeshShaderFeaturesNV::pNext;
-public:
-	using VkPhysicalDeviceMeshShaderFeaturesNV::taskShader;
-	using VkPhysicalDeviceMeshShaderFeaturesNV::meshShader;
-
-S_physical_device_mesh_shader_features_NV():VkPhysicalDeviceMeshShaderFeaturesNV{VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MESH_SHADER_FEATURES_NV,nullptr}{}
-S_physical_device_mesh_shader_features_NV(
-	VkBool32 taskShader_,
-	VkBool32 meshShader_)
-	:VkPhysicalDeviceMeshShaderFeaturesNV{
-	VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MESH_SHADER_FEATURES_NV
-	,nullptr
-	,taskShader_
-	,meshShader_}
-	{	}
-
-friend S_physical_device_features2;
-friend S_device_create_info;
+	S_physical_device_conditional_rendering_features_EXT& operator=(const VkPhysicalDeviceConditionalRenderingFeaturesEXT& rhs){static_cast<VkPhysicalDeviceConditionalRenderingFeaturesEXT&>(*this)=rhs; return *this;}
+	operator VkPhysicalDeviceConditionalRenderingFeaturesEXT*()const{return const_cast<VkPhysicalDeviceConditionalRenderingFeaturesEXT*>(static_cast<const VkPhysicalDeviceConditionalRenderingFeaturesEXT*>(this));}
 };
 
 /*	VkPhysicalDeviceFeatures2
@@ -5885,23 +5277,10 @@ ex:
 	VkPhysicalDeviceSamplerYcbcrConversionFeatures
 	VkPhysicalDeviceProtectedMemoryFeatures
 	VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT
-	VkPhysicalDeviceInlineUniformBlockFeaturesEXT
 	VkPhysicalDeviceShaderDrawParameterFeatures
 	VkPhysicalDeviceDescriptorIndexingFeaturesEXT
 	VkPhysicalDevice8BitStorageFeaturesKHR
 	VkPhysicalDeviceConditionalRenderingFeaturesEXT
-	VkPhysicalDeviceVulkanMemoryModelFeaturesKHR
-	VkPhysicalDeviceShaderAtomicInt64FeaturesKHR
-	VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT
-	VkPhysicalDeviceASTCDecodeFeaturesEXT
-	VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV
-	VkPhysicalDeviceExclusiveScissorFeaturesNV
-	VkPhysicalDeviceCornerSampledImageFeaturesNV
-	VkPhysicalDeviceComputeShaderDerivativesFeaturesNV
-	VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV
-	VkPhysicalDeviceShaderImageFootprintFeaturesNV
-	VkPhysicalDeviceShadingRateImageFeaturesNV
-	VkPhysicalDeviceMeshShaderFeaturesNV
 */
 
 struct N_physical_device_features2{
@@ -5915,29 +5294,12 @@ N_physical_device_features2& n_physical_device_16bit_storage_features(S_physical
 N_physical_device_features2& n_physical_device_sampler_ycbcr_conversion_features(S_physical_device_sampler_ycbcr_conversion_features const& next_);
 N_physical_device_features2& n_physical_device_protected_memory_features(S_physical_device_protected_memory_features const& next_);
 N_physical_device_features2& n_physical_device_blend_operation_advanced_features_EXT(S_physical_device_blend_operation_advanced_features_EXT const& next_);
-N_physical_device_features2& n_physical_device_inline_uniform_block_features_EXT(S_physical_device_inline_uniform_block_features_EXT const& next_);
 N_physical_device_features2& n_physical_device_shader_draw_parameter_features(S_physical_device_shader_draw_parameter_features const& next_);
 N_physical_device_features2& n_physical_device_descriptor_indexing_features_EXT(S_physical_device_descriptor_indexing_features_EXT const& next_);
 N_physical_device_features2& n_physical_device_8bit_storage_features_KHR(S_physical_device_8bit_storage_features_KHR const& next_);
 N_physical_device_features2& n_physical_device_conditional_rendering_features_EXT(S_physical_device_conditional_rendering_features_EXT const& next_);
-N_physical_device_features2& n_physical_device_vulkan_memory_model_features_KHR(S_physical_device_vulkan_memory_model_features_KHR const& next_);
-#ifdef LAKA_UNKNOW
-N_physical_device_features2& n_physical_device_shader_atomic_int64_features_KHR(S_physical_device_shader_atomic_int64_features_KHR const& next_);
-#endif
-N_physical_device_features2& n_physical_device_vertex_attribute_divisor_features_EXT(S_physical_device_vertex_attribute_divisor_features_EXT const& next_);
-N_physical_device_features2& n_physical_device_astc_decode_features_EXT(S_physical_device_astc_decode_features_EXT const& next_);
-N_physical_device_features2& n_physical_device_representative_fragment_test_features_NV(S_physical_device_representative_fragment_test_features_NV const& next_);
-N_physical_device_features2& n_physical_device_exclusive_scissor_features_NV(S_physical_device_exclusive_scissor_features_NV const& next_);
-N_physical_device_features2& n_physical_device_corner_sampled_image_features_NV(S_physical_device_corner_sampled_image_features_NV const& next_);
-N_physical_device_features2& n_physical_device_compute_shader_derivatives_features_NV(S_physical_device_compute_shader_derivatives_features_NV const& next_);
-N_physical_device_features2& n_physical_device_fragment_shader_barycentric_features_NV(S_physical_device_fragment_shader_barycentric_features_NV const& next_);
-N_physical_device_features2& n_physical_device_shader_image_footprint_features_NV(S_physical_device_shader_image_footprint_features_NV const& next_);
-N_physical_device_features2& n_physical_device_shading_rate_image_features_NV(S_physical_device_shading_rate_image_features_NV const& next_);
-N_physical_device_features2& n_physical_device_mesh_shader_features_NV(S_physical_device_mesh_shader_features_NV const& next_);
 };
-template<> struct my_class_convert<S_physical_device_features2> { using type = VkPhysicalDeviceFeatures2;};
-template<> struct my_class_convert<VkPhysicalDeviceFeatures2> { using type = S_physical_device_features2;};
-struct		S_physical_device_features2:VkPhysicalDeviceFeatures2{
+struct	S_physical_device_features2:VkPhysicalDeviceFeatures2{
 private:
 	using VkPhysicalDeviceFeatures2::sType;
 	using VkPhysicalDeviceFeatures2::pNext;
@@ -5951,9 +5313,13 @@ S_physical_device_features2(
 	VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FEATURES_2
 	,nullptr
 	,features_}
-	{	}
+	{
+	}
 
 friend S_device_create_info;
+
+	S_physical_device_features2& operator=(const VkPhysicalDeviceFeatures2& rhs){static_cast<VkPhysicalDeviceFeatures2&>(*this)=rhs; return *this;}
+	operator VkPhysicalDeviceFeatures2*()const{return const_cast<VkPhysicalDeviceFeatures2*>(static_cast<const VkPhysicalDeviceFeatures2*>(this));}
 
 S_physical_device_features2& n_physical_device_variable_pointer_features(S_physical_device_variable_pointer_features const& next_);
 S_physical_device_features2& n_physical_device_multiview_features(S_physical_device_multiview_features const& next_);
@@ -5961,34 +5327,17 @@ S_physical_device_features2& n_physical_device_16bit_storage_features(S_physical
 S_physical_device_features2& n_physical_device_sampler_ycbcr_conversion_features(S_physical_device_sampler_ycbcr_conversion_features const& next_);
 S_physical_device_features2& n_physical_device_protected_memory_features(S_physical_device_protected_memory_features const& next_);
 S_physical_device_features2& n_physical_device_blend_operation_advanced_features_EXT(S_physical_device_blend_operation_advanced_features_EXT const& next_);
-S_physical_device_features2& n_physical_device_inline_uniform_block_features_EXT(S_physical_device_inline_uniform_block_features_EXT const& next_);
 S_physical_device_features2& n_physical_device_shader_draw_parameter_features(S_physical_device_shader_draw_parameter_features const& next_);
 S_physical_device_features2& n_physical_device_descriptor_indexing_features_EXT(S_physical_device_descriptor_indexing_features_EXT const& next_);
 S_physical_device_features2& n_physical_device_8bit_storage_features_KHR(S_physical_device_8bit_storage_features_KHR const& next_);
 S_physical_device_features2& n_physical_device_conditional_rendering_features_EXT(S_physical_device_conditional_rendering_features_EXT const& next_);
-S_physical_device_features2& n_physical_device_vulkan_memory_model_features_KHR(S_physical_device_vulkan_memory_model_features_KHR const& next_);
-#ifdef LAKA_UNKNOW
-S_physical_device_features2& n_physical_device_shader_atomic_int64_features_KHR(S_physical_device_shader_atomic_int64_features_KHR const& next_);
-#endif
-S_physical_device_features2& n_physical_device_vertex_attribute_divisor_features_EXT(S_physical_device_vertex_attribute_divisor_features_EXT const& next_);
-S_physical_device_features2& n_physical_device_astc_decode_features_EXT(S_physical_device_astc_decode_features_EXT const& next_);
-S_physical_device_features2& n_physical_device_representative_fragment_test_features_NV(S_physical_device_representative_fragment_test_features_NV const& next_);
-S_physical_device_features2& n_physical_device_exclusive_scissor_features_NV(S_physical_device_exclusive_scissor_features_NV const& next_);
-S_physical_device_features2& n_physical_device_corner_sampled_image_features_NV(S_physical_device_corner_sampled_image_features_NV const& next_);
-S_physical_device_features2& n_physical_device_compute_shader_derivatives_features_NV(S_physical_device_compute_shader_derivatives_features_NV const& next_);
-S_physical_device_features2& n_physical_device_fragment_shader_barycentric_features_NV(S_physical_device_fragment_shader_barycentric_features_NV const& next_);
-S_physical_device_features2& n_physical_device_shader_image_footprint_features_NV(S_physical_device_shader_image_footprint_features_NV const& next_);
-S_physical_device_features2& n_physical_device_shading_rate_image_features_NV(S_physical_device_shading_rate_image_features_NV const& next_);
-S_physical_device_features2& n_physical_device_mesh_shader_features_NV(S_physical_device_mesh_shader_features_NV const& next_);
 void set_pNext(N_physical_device_features2 n_){pNext = n_;}
 };
 
 /*	VkDeviceGroupDeviceCreateInfo
 ex to: VkDeviceCreateInfo
 */
-template<> struct my_class_convert<S_device_group_device_create_info> { using type = VkDeviceGroupDeviceCreateInfo;};
-template<> struct my_class_convert<VkDeviceGroupDeviceCreateInfo> { using type = S_device_group_device_create_info;};
-struct		S_device_group_device_create_info:VkDeviceGroupDeviceCreateInfo{
+struct	S_device_group_device_create_info:VkDeviceGroupDeviceCreateInfo{
 private:
 	using VkDeviceGroupDeviceCreateInfo::sType;
 	using VkDeviceGroupDeviceCreateInfo::pNext;
@@ -6005,9 +5354,13 @@ S_device_group_device_create_info(
 	,nullptr
 	,physicalDeviceCount_
 	,pPhysicalDevices_}
-	{	}
+	{
+	}
 
 friend S_device_create_info;
+
+	S_device_group_device_create_info& operator=(const VkDeviceGroupDeviceCreateInfo& rhs){static_cast<VkDeviceGroupDeviceCreateInfo&>(*this)=rhs; return *this;}
+	operator VkDeviceGroupDeviceCreateInfo*()const{return const_cast<VkDeviceGroupDeviceCreateInfo*>(static_cast<const VkDeviceGroupDeviceCreateInfo*>(this));}
 };
 
 /*	VkDeviceCreateInfo
@@ -6019,24 +5372,9 @@ ex:
 	VkPhysicalDevice16BitStorageFeatures
 	VkPhysicalDeviceSamplerYcbcrConversionFeatures
 	VkPhysicalDeviceProtectedMemoryFeatures
-	VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT
-	VkPhysicalDeviceInlineUniformBlockFeaturesEXT
-	VkPhysicalDeviceShaderDrawParameterFeatures
 	VkPhysicalDeviceDescriptorIndexingFeaturesEXT
 	VkPhysicalDevice8BitStorageFeaturesKHR
 	VkPhysicalDeviceConditionalRenderingFeaturesEXT
-	VkPhysicalDeviceVulkanMemoryModelFeaturesKHR
-	VkPhysicalDeviceShaderAtomicInt64FeaturesKHR
-	VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT
-	VkPhysicalDeviceASTCDecodeFeaturesEXT
-	VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV
-	VkPhysicalDeviceExclusiveScissorFeaturesNV
-	VkPhysicalDeviceCornerSampledImageFeaturesNV
-	VkPhysicalDeviceComputeShaderDerivativesFeaturesNV
-	VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV
-	VkPhysicalDeviceShaderImageFootprintFeaturesNV
-	VkPhysicalDeviceShadingRateImageFeaturesNV
-	VkPhysicalDeviceMeshShaderFeaturesNV
 */
 
 struct N_device_create_info{
@@ -6051,30 +5389,11 @@ N_device_create_info& n_device_group_device_create_info(S_device_group_device_cr
 N_device_create_info& n_physical_device_16bit_storage_features(S_physical_device_16bit_storage_features const& next_);
 N_device_create_info& n_physical_device_sampler_ycbcr_conversion_features(S_physical_device_sampler_ycbcr_conversion_features const& next_);
 N_device_create_info& n_physical_device_protected_memory_features(S_physical_device_protected_memory_features const& next_);
-N_device_create_info& n_physical_device_blend_operation_advanced_features_EXT(S_physical_device_blend_operation_advanced_features_EXT const& next_);
-N_device_create_info& n_physical_device_inline_uniform_block_features_EXT(S_physical_device_inline_uniform_block_features_EXT const& next_);
-N_device_create_info& n_physical_device_shader_draw_parameter_features(S_physical_device_shader_draw_parameter_features const& next_);
 N_device_create_info& n_physical_device_descriptor_indexing_features_EXT(S_physical_device_descriptor_indexing_features_EXT const& next_);
 N_device_create_info& n_physical_device_8bit_storage_features_KHR(S_physical_device_8bit_storage_features_KHR const& next_);
 N_device_create_info& n_physical_device_conditional_rendering_features_EXT(S_physical_device_conditional_rendering_features_EXT const& next_);
-N_device_create_info& n_physical_device_vulkan_memory_model_features_KHR(S_physical_device_vulkan_memory_model_features_KHR const& next_);
-#ifdef LAKA_UNKNOW
-N_device_create_info& n_physical_device_shader_atomic_int64_features_KHR(S_physical_device_shader_atomic_int64_features_KHR const& next_);
-#endif
-N_device_create_info& n_physical_device_vertex_attribute_divisor_features_EXT(S_physical_device_vertex_attribute_divisor_features_EXT const& next_);
-N_device_create_info& n_physical_device_astc_decode_features_EXT(S_physical_device_astc_decode_features_EXT const& next_);
-N_device_create_info& n_physical_device_representative_fragment_test_features_NV(S_physical_device_representative_fragment_test_features_NV const& next_);
-N_device_create_info& n_physical_device_exclusive_scissor_features_NV(S_physical_device_exclusive_scissor_features_NV const& next_);
-N_device_create_info& n_physical_device_corner_sampled_image_features_NV(S_physical_device_corner_sampled_image_features_NV const& next_);
-N_device_create_info& n_physical_device_compute_shader_derivatives_features_NV(S_physical_device_compute_shader_derivatives_features_NV const& next_);
-N_device_create_info& n_physical_device_fragment_shader_barycentric_features_NV(S_physical_device_fragment_shader_barycentric_features_NV const& next_);
-N_device_create_info& n_physical_device_shader_image_footprint_features_NV(S_physical_device_shader_image_footprint_features_NV const& next_);
-N_device_create_info& n_physical_device_shading_rate_image_features_NV(S_physical_device_shading_rate_image_features_NV const& next_);
-N_device_create_info& n_physical_device_mesh_shader_features_NV(S_physical_device_mesh_shader_features_NV const& next_);
 };
-template<> struct my_class_convert<S_device_create_info> { using type = VkDeviceCreateInfo;};
-template<> struct my_class_convert<VkDeviceCreateInfo> { using type = S_device_create_info;};
-struct		S_device_create_info:VkDeviceCreateInfo{
+struct	S_device_create_info:VkDeviceCreateInfo{
 private:
 	using VkDeviceCreateInfo::sType;
 	using VkDeviceCreateInfo::pNext;
@@ -6109,7 +5428,11 @@ S_device_create_info(
 	,enabledExtensionCount_
 	,ppEnabledExtensionNames_
 	,pEnabledFeatures_}
-	{	}
+	{
+	}
+
+	S_device_create_info& operator=(const VkDeviceCreateInfo& rhs){static_cast<VkDeviceCreateInfo&>(*this)=rhs; return *this;}
+	operator VkDeviceCreateInfo*()const{return const_cast<VkDeviceCreateInfo*>(static_cast<const VkDeviceCreateInfo*>(this));}
 
 S_device_create_info& n_physical_device_features2(S_physical_device_features2 const& next_);
 S_device_create_info& n_physical_device_variable_pointer_features(S_physical_device_variable_pointer_features const& next_);
@@ -6118,35 +5441,16 @@ S_device_create_info& n_device_group_device_create_info(S_device_group_device_cr
 S_device_create_info& n_physical_device_16bit_storage_features(S_physical_device_16bit_storage_features const& next_);
 S_device_create_info& n_physical_device_sampler_ycbcr_conversion_features(S_physical_device_sampler_ycbcr_conversion_features const& next_);
 S_device_create_info& n_physical_device_protected_memory_features(S_physical_device_protected_memory_features const& next_);
-S_device_create_info& n_physical_device_blend_operation_advanced_features_EXT(S_physical_device_blend_operation_advanced_features_EXT const& next_);
-S_device_create_info& n_physical_device_inline_uniform_block_features_EXT(S_physical_device_inline_uniform_block_features_EXT const& next_);
-S_device_create_info& n_physical_device_shader_draw_parameter_features(S_physical_device_shader_draw_parameter_features const& next_);
 S_device_create_info& n_physical_device_descriptor_indexing_features_EXT(S_physical_device_descriptor_indexing_features_EXT const& next_);
 S_device_create_info& n_physical_device_8bit_storage_features_KHR(S_physical_device_8bit_storage_features_KHR const& next_);
 S_device_create_info& n_physical_device_conditional_rendering_features_EXT(S_physical_device_conditional_rendering_features_EXT const& next_);
-S_device_create_info& n_physical_device_vulkan_memory_model_features_KHR(S_physical_device_vulkan_memory_model_features_KHR const& next_);
-#ifdef LAKA_UNKNOW
-S_device_create_info& n_physical_device_shader_atomic_int64_features_KHR(S_physical_device_shader_atomic_int64_features_KHR const& next_);
-#endif
-S_device_create_info& n_physical_device_vertex_attribute_divisor_features_EXT(S_physical_device_vertex_attribute_divisor_features_EXT const& next_);
-S_device_create_info& n_physical_device_astc_decode_features_EXT(S_physical_device_astc_decode_features_EXT const& next_);
-S_device_create_info& n_physical_device_representative_fragment_test_features_NV(S_physical_device_representative_fragment_test_features_NV const& next_);
-S_device_create_info& n_physical_device_exclusive_scissor_features_NV(S_physical_device_exclusive_scissor_features_NV const& next_);
-S_device_create_info& n_physical_device_corner_sampled_image_features_NV(S_physical_device_corner_sampled_image_features_NV const& next_);
-S_device_create_info& n_physical_device_compute_shader_derivatives_features_NV(S_physical_device_compute_shader_derivatives_features_NV const& next_);
-S_device_create_info& n_physical_device_fragment_shader_barycentric_features_NV(S_physical_device_fragment_shader_barycentric_features_NV const& next_);
-S_device_create_info& n_physical_device_shader_image_footprint_features_NV(S_physical_device_shader_image_footprint_features_NV const& next_);
-S_device_create_info& n_physical_device_shading_rate_image_features_NV(S_physical_device_shading_rate_image_features_NV const& next_);
-S_device_create_info& n_physical_device_mesh_shader_features_NV(S_physical_device_mesh_shader_features_NV const& next_);
 void set_pNext(N_device_create_info n_){pNext = n_;}
 };
 
 /*	VkDebugReportCallbackCreateInfoEXT
 ex to: VkInstanceCreateInfo
 */
-template<> struct my_class_convert<S_debug_report_callback_create_info_EXT> { using type = VkDebugReportCallbackCreateInfoEXT;};
-template<> struct my_class_convert<VkDebugReportCallbackCreateInfoEXT> { using type = S_debug_report_callback_create_info_EXT;};
-struct		S_debug_report_callback_create_info_EXT:VkDebugReportCallbackCreateInfoEXT{
+struct	S_debug_report_callback_create_info_EXT:VkDebugReportCallbackCreateInfoEXT{
 private:
 	using VkDebugReportCallbackCreateInfoEXT::sType;
 	using VkDebugReportCallbackCreateInfoEXT::pNext;
@@ -6166,17 +5470,19 @@ S_debug_report_callback_create_info_EXT(
 	,flags_
 	,pfnCallback_
 	,pUserData_}
-	{	}
+	{
+	}
 
 friend S_instance_create_info;
+
+	S_debug_report_callback_create_info_EXT& operator=(const VkDebugReportCallbackCreateInfoEXT& rhs){static_cast<VkDebugReportCallbackCreateInfoEXT&>(*this)=rhs; return *this;}
+	operator VkDebugReportCallbackCreateInfoEXT*()const{return const_cast<VkDebugReportCallbackCreateInfoEXT*>(static_cast<const VkDebugReportCallbackCreateInfoEXT*>(this));}
 };
 
 /*	VkValidationFlagsEXT
 ex to: VkInstanceCreateInfo
 */
-template<> struct my_class_convert<S_validation_flags_EXT> { using type = VkValidationFlagsEXT;};
-template<> struct my_class_convert<VkValidationFlagsEXT> { using type = S_validation_flags_EXT;};
-struct		S_validation_flags_EXT:VkValidationFlagsEXT{
+struct	S_validation_flags_EXT:VkValidationFlagsEXT{
 private:
 	using VkValidationFlagsEXT::sType;
 	using VkValidationFlagsEXT::pNext;
@@ -6193,17 +5499,19 @@ S_validation_flags_EXT(
 	,nullptr
 	,disabledValidationCheckCount_
 	,*pDisabledValidationChecks_}
-	{	}
+	{
+	}
 
 friend S_instance_create_info;
+
+	S_validation_flags_EXT& operator=(const VkValidationFlagsEXT& rhs){static_cast<VkValidationFlagsEXT&>(*this)=rhs; return *this;}
+	operator VkValidationFlagsEXT*()const{return const_cast<VkValidationFlagsEXT*>(static_cast<const VkValidationFlagsEXT*>(this));}
 };
 
 /*	VkDebugUtilsMessengerCreateInfoEXT
 ex to: VkInstanceCreateInfo
 */
-template<> struct my_class_convert<S_debug_utils_messenger_create_info_EXT> { using type = VkDebugUtilsMessengerCreateInfoEXT;};
-template<> struct my_class_convert<VkDebugUtilsMessengerCreateInfoEXT> { using type = S_debug_utils_messenger_create_info_EXT;};
-struct		S_debug_utils_messenger_create_info_EXT:VkDebugUtilsMessengerCreateInfoEXT{
+struct	S_debug_utils_messenger_create_info_EXT:VkDebugUtilsMessengerCreateInfoEXT{
 private:
 	using VkDebugUtilsMessengerCreateInfoEXT::sType;
 	using VkDebugUtilsMessengerCreateInfoEXT::pNext;
@@ -6229,9 +5537,13 @@ S_debug_utils_messenger_create_info_EXT(
 	,messageType_
 	,pfnUserCallback_
 	,pUserData_}
-	{	}
+	{
+	}
 
 friend S_instance_create_info;
+
+	S_debug_utils_messenger_create_info_EXT& operator=(const VkDebugUtilsMessengerCreateInfoEXT& rhs){static_cast<VkDebugUtilsMessengerCreateInfoEXT&>(*this)=rhs; return *this;}
+	operator VkDebugUtilsMessengerCreateInfoEXT*()const{return const_cast<VkDebugUtilsMessengerCreateInfoEXT*>(static_cast<const VkDebugUtilsMessengerCreateInfoEXT*>(this));}
 };
 
 /*	VkInstanceCreateInfo
@@ -6250,9 +5562,7 @@ N_instance_create_info& n_debug_report_callback_create_info_EXT(S_debug_report_c
 N_instance_create_info& n_validation_flags_EXT(S_validation_flags_EXT const& next_);
 N_instance_create_info& n_debug_utils_messenger_create_info_EXT(S_debug_utils_messenger_create_info_EXT const& next_);
 };
-template<> struct my_class_convert<S_instance_create_info> { using type = VkInstanceCreateInfo;};
-template<> struct my_class_convert<VkInstanceCreateInfo> { using type = S_instance_create_info;};
-struct		S_instance_create_info:VkInstanceCreateInfo{
+struct	S_instance_create_info:VkInstanceCreateInfo{
 private:
 	using VkInstanceCreateInfo::sType;
 	using VkInstanceCreateInfo::pNext;
@@ -6281,7 +5591,11 @@ S_instance_create_info(
 	,ppEnabledLayerNames_
 	,enabledExtensionCount_
 	,ppEnabledExtensionNames_}
-	{	}
+	{
+	}
+
+	S_instance_create_info& operator=(const VkInstanceCreateInfo& rhs){static_cast<VkInstanceCreateInfo&>(*this)=rhs; return *this;}
+	operator VkInstanceCreateInfo*()const{return const_cast<VkInstanceCreateInfo*>(static_cast<const VkInstanceCreateInfo*>(this));}
 
 S_instance_create_info& n_debug_report_callback_create_info_EXT(S_debug_report_callback_create_info_EXT const& next_);
 S_instance_create_info& n_validation_flags_EXT(S_validation_flags_EXT const& next_);
@@ -6292,53 +5606,55 @@ void set_pNext(N_instance_create_info n_){pNext = n_;}
 /*	VkQueueFamilyProperties
 (returnedonly)
 */
-template<> struct my_class_convert<S_queue_family_properties> { using type = VkQueueFamilyProperties;};
-template<> struct my_class_convert<VkQueueFamilyProperties> { using type = S_queue_family_properties;};
-struct		S_queue_family_properties:VkQueueFamilyProperties{
+struct	S_queue_family_properties:VkQueueFamilyProperties{
 	using VkQueueFamilyProperties::queueFlags;
 	using VkQueueFamilyProperties::queueCount;
 	using VkQueueFamilyProperties::timestampValidBits;
 	using VkQueueFamilyProperties::minImageTransferGranularity;
+
+	S_queue_family_properties& operator=(const VkQueueFamilyProperties& rhs){static_cast<VkQueueFamilyProperties&>(*this)=rhs; return *this;}
+	operator VkQueueFamilyProperties*()const{return const_cast<VkQueueFamilyProperties*>(static_cast<const VkQueueFamilyProperties*>(this));}
 };
 
 /*	VkMemoryType
 (returnedonly)
 */
-template<> struct my_class_convert<S_memory_type> { using type = VkMemoryType;};
-template<> struct my_class_convert<VkMemoryType> { using type = S_memory_type;};
-struct		S_memory_type:VkMemoryType{
+struct	S_memory_type:VkMemoryType{
 	using VkMemoryType::propertyFlags;
 	using VkMemoryType::heapIndex;
+
+	S_memory_type& operator=(const VkMemoryType& rhs){static_cast<VkMemoryType&>(*this)=rhs; return *this;}
+	operator VkMemoryType*()const{return const_cast<VkMemoryType*>(static_cast<const VkMemoryType*>(this));}
 };
 
 /*	VkMemoryHeap
 (returnedonly)
 */
-template<> struct my_class_convert<S_memory_heap> { using type = VkMemoryHeap;};
-template<> struct my_class_convert<VkMemoryHeap> { using type = S_memory_heap;};
-struct		S_memory_heap:VkMemoryHeap{
+struct	S_memory_heap:VkMemoryHeap{
 	using VkMemoryHeap::size;
 	using VkMemoryHeap::flags;
+
+	S_memory_heap& operator=(const VkMemoryHeap& rhs){static_cast<VkMemoryHeap&>(*this)=rhs; return *this;}
+	operator VkMemoryHeap*()const{return const_cast<VkMemoryHeap*>(static_cast<const VkMemoryHeap*>(this));}
 };
 
 /*	VkPhysicalDeviceMemoryProperties
 (returnedonly)
 */
-template<> struct my_class_convert<S_physical_device_memory_properties> { using type = VkPhysicalDeviceMemoryProperties;};
-template<> struct my_class_convert<VkPhysicalDeviceMemoryProperties> { using type = S_physical_device_memory_properties;};
-struct		S_physical_device_memory_properties:VkPhysicalDeviceMemoryProperties{
+struct	S_physical_device_memory_properties:VkPhysicalDeviceMemoryProperties{
 	using VkPhysicalDeviceMemoryProperties::memoryTypeCount;
 	using VkPhysicalDeviceMemoryProperties::memoryTypes;
 	using VkPhysicalDeviceMemoryProperties::memoryHeapCount;
 	using VkPhysicalDeviceMemoryProperties::memoryHeaps;
+
+	S_physical_device_memory_properties& operator=(const VkPhysicalDeviceMemoryProperties& rhs){static_cast<VkPhysicalDeviceMemoryProperties&>(*this)=rhs; return *this;}
+	operator VkPhysicalDeviceMemoryProperties*()const{return const_cast<VkPhysicalDeviceMemoryProperties*>(static_cast<const VkPhysicalDeviceMemoryProperties*>(this));}
 };
 
 /*	VkDedicatedAllocationMemoryAllocateInfoNV
 ex to: VkMemoryAllocateInfo
 */
-template<> struct my_class_convert<S_dedicated_allocation_memory_allocate_info_NV> { using type = VkDedicatedAllocationMemoryAllocateInfoNV;};
-template<> struct my_class_convert<VkDedicatedAllocationMemoryAllocateInfoNV> { using type = S_dedicated_allocation_memory_allocate_info_NV;};
-struct		S_dedicated_allocation_memory_allocate_info_NV:VkDedicatedAllocationMemoryAllocateInfoNV{
+struct	S_dedicated_allocation_memory_allocate_info_NV:VkDedicatedAllocationMemoryAllocateInfoNV{
 private:
 	using VkDedicatedAllocationMemoryAllocateInfoNV::sType;
 	using VkDedicatedAllocationMemoryAllocateInfoNV::pNext;
@@ -6355,17 +5671,19 @@ S_dedicated_allocation_memory_allocate_info_NV(
 	,nullptr
 	,image_
 	,buffer_}
-	{	}
+	{
+	}
 
 friend S_memory_allocate_info;
+
+	S_dedicated_allocation_memory_allocate_info_NV& operator=(const VkDedicatedAllocationMemoryAllocateInfoNV& rhs){static_cast<VkDedicatedAllocationMemoryAllocateInfoNV&>(*this)=rhs; return *this;}
+	operator VkDedicatedAllocationMemoryAllocateInfoNV*()const{return const_cast<VkDedicatedAllocationMemoryAllocateInfoNV*>(static_cast<const VkDedicatedAllocationMemoryAllocateInfoNV*>(this));}
 };
 
 /*	VkExportMemoryAllocateInfoNV
 ex to: VkMemoryAllocateInfo
 */
-template<> struct my_class_convert<S_export_memory_allocate_info_NV> { using type = VkExportMemoryAllocateInfoNV;};
-template<> struct my_class_convert<VkExportMemoryAllocateInfoNV> { using type = S_export_memory_allocate_info_NV;};
-struct		S_export_memory_allocate_info_NV:VkExportMemoryAllocateInfoNV{
+struct	S_export_memory_allocate_info_NV:VkExportMemoryAllocateInfoNV{
 private:
 	using VkExportMemoryAllocateInfoNV::sType;
 	using VkExportMemoryAllocateInfoNV::pNext;
@@ -6379,18 +5697,20 @@ S_export_memory_allocate_info_NV(
 	VK_STRUCTURE_TYPE_EXPORT_MEMORY_ALLOCATE_INFO_NV
 	,nullptr
 	,handleTypes_}
-	{	}
+	{
+	}
 
 friend S_memory_allocate_info;
+
+	S_export_memory_allocate_info_NV& operator=(const VkExportMemoryAllocateInfoNV& rhs){static_cast<VkExportMemoryAllocateInfoNV&>(*this)=rhs; return *this;}
+	operator VkExportMemoryAllocateInfoNV*()const{return const_cast<VkExportMemoryAllocateInfoNV*>(static_cast<const VkExportMemoryAllocateInfoNV*>(this));}
 };
 
 /*	VkImportMemoryWin32HandleInfoNV
 ex to: VkMemoryAllocateInfo
 */
 #ifdef VK_USE_PLATFORM_WIN32_NV
-template<> struct my_class_convert<S_import_memory_win32_handle_info_NV> { using type = VkImportMemoryWin32HandleInfoNV;};
-template<> struct my_class_convert<VkImportMemoryWin32HandleInfoNV> { using type = S_import_memory_win32_handle_info_NV;};
-struct		S_import_memory_win32_handle_info_NV:VkImportMemoryWin32HandleInfoNV{
+struct	S_import_memory_win32_handle_info_NV:VkImportMemoryWin32HandleInfoNV{
 private:
 	using VkImportMemoryWin32HandleInfoNV::sType;
 	using VkImportMemoryWin32HandleInfoNV::pNext;
@@ -6407,9 +5727,13 @@ S_import_memory_win32_handle_info_NV(
 	,nullptr
 	,handleType_
 	,handle_}
-	{	}
+	{
+	}
 
 friend S_memory_allocate_info;
+
+	S_import_memory_win32_handle_info_NV& operator=(const VkImportMemoryWin32HandleInfoNV& rhs){static_cast<VkImportMemoryWin32HandleInfoNV&>(*this)=rhs; return *this;}
+	operator VkImportMemoryWin32HandleInfoNV*()const{return const_cast<VkImportMemoryWin32HandleInfoNV*>(static_cast<const VkImportMemoryWin32HandleInfoNV*>(this));}
 };
 #endif //VK_USE_PLATFORM_WIN32_NV
 
@@ -6417,9 +5741,7 @@ friend S_memory_allocate_info;
 ex to: VkMemoryAllocateInfo
 */
 #ifdef VK_USE_PLATFORM_WIN32_NV
-template<> struct my_class_convert<S_export_memory_win32_handle_info_NV> { using type = VkExportMemoryWin32HandleInfoNV;};
-template<> struct my_class_convert<VkExportMemoryWin32HandleInfoNV> { using type = S_export_memory_win32_handle_info_NV;};
-struct		S_export_memory_win32_handle_info_NV:VkExportMemoryWin32HandleInfoNV{
+struct	S_export_memory_win32_handle_info_NV:VkExportMemoryWin32HandleInfoNV{
 private:
 	using VkExportMemoryWin32HandleInfoNV::sType;
 	using VkExportMemoryWin32HandleInfoNV::pNext;
@@ -6436,18 +5758,20 @@ S_export_memory_win32_handle_info_NV(
 	,nullptr
 	,pAttributes_
 	,dwAccess_}
-	{	}
+	{
+	}
 
 friend S_memory_allocate_info;
+
+	S_export_memory_win32_handle_info_NV& operator=(const VkExportMemoryWin32HandleInfoNV& rhs){static_cast<VkExportMemoryWin32HandleInfoNV&>(*this)=rhs; return *this;}
+	operator VkExportMemoryWin32HandleInfoNV*()const{return const_cast<VkExportMemoryWin32HandleInfoNV*>(static_cast<const VkExportMemoryWin32HandleInfoNV*>(this));}
 };
 #endif //VK_USE_PLATFORM_WIN32_NV
 
 /*	VkExportMemoryAllocateInfo
 ex to: VkMemoryAllocateInfo
 */
-template<> struct my_class_convert<S_export_memory_allocate_info> { using type = VkExportMemoryAllocateInfo;};
-template<> struct my_class_convert<VkExportMemoryAllocateInfo> { using type = S_export_memory_allocate_info;};
-struct		S_export_memory_allocate_info:VkExportMemoryAllocateInfo{
+struct	S_export_memory_allocate_info:VkExportMemoryAllocateInfo{
 private:
 	using VkExportMemoryAllocateInfo::sType;
 	using VkExportMemoryAllocateInfo::pNext;
@@ -6461,18 +5785,20 @@ S_export_memory_allocate_info(
 	VK_STRUCTURE_TYPE_EXPORT_MEMORY_ALLOCATE_INFO
 	,nullptr
 	,handleTypes_}
-	{	}
+	{
+	}
 
 friend S_memory_allocate_info;
+
+	S_export_memory_allocate_info& operator=(const VkExportMemoryAllocateInfo& rhs){static_cast<VkExportMemoryAllocateInfo&>(*this)=rhs; return *this;}
+	operator VkExportMemoryAllocateInfo*()const{return const_cast<VkExportMemoryAllocateInfo*>(static_cast<const VkExportMemoryAllocateInfo*>(this));}
 };
 
 /*	VkImportMemoryWin32HandleInfoKHR
 ex to: VkMemoryAllocateInfo
 */
 #ifdef VK_USE_PLATFORM_WIN32_KHR
-template<> struct my_class_convert<S_import_memory_win32_handle_info_KHR> { using type = VkImportMemoryWin32HandleInfoKHR;};
-template<> struct my_class_convert<VkImportMemoryWin32HandleInfoKHR> { using type = S_import_memory_win32_handle_info_KHR;};
-struct		S_import_memory_win32_handle_info_KHR:VkImportMemoryWin32HandleInfoKHR{
+struct	S_import_memory_win32_handle_info_KHR:VkImportMemoryWin32HandleInfoKHR{
 private:
 	using VkImportMemoryWin32HandleInfoKHR::sType;
 	using VkImportMemoryWin32HandleInfoKHR::pNext;
@@ -6492,9 +5818,13 @@ S_import_memory_win32_handle_info_KHR(
 	,handleType_
 	,handle_
 	,name_}
-	{	}
+	{
+	}
 
 friend S_memory_allocate_info;
+
+	S_import_memory_win32_handle_info_KHR& operator=(const VkImportMemoryWin32HandleInfoKHR& rhs){static_cast<VkImportMemoryWin32HandleInfoKHR&>(*this)=rhs; return *this;}
+	operator VkImportMemoryWin32HandleInfoKHR*()const{return const_cast<VkImportMemoryWin32HandleInfoKHR*>(static_cast<const VkImportMemoryWin32HandleInfoKHR*>(this));}
 };
 #endif //VK_USE_PLATFORM_WIN32_KHR
 
@@ -6502,9 +5832,7 @@ friend S_memory_allocate_info;
 ex to: VkMemoryAllocateInfo
 */
 #ifdef VK_USE_PLATFORM_WIN32_KHR
-template<> struct my_class_convert<S_export_memory_win32_handle_info_KHR> { using type = VkExportMemoryWin32HandleInfoKHR;};
-template<> struct my_class_convert<VkExportMemoryWin32HandleInfoKHR> { using type = S_export_memory_win32_handle_info_KHR;};
-struct		S_export_memory_win32_handle_info_KHR:VkExportMemoryWin32HandleInfoKHR{
+struct	S_export_memory_win32_handle_info_KHR:VkExportMemoryWin32HandleInfoKHR{
 private:
 	using VkExportMemoryWin32HandleInfoKHR::sType;
 	using VkExportMemoryWin32HandleInfoKHR::pNext;
@@ -6524,18 +5852,20 @@ S_export_memory_win32_handle_info_KHR(
 	,pAttributes_
 	,dwAccess_
 	,name_}
-	{	}
+	{
+	}
 
 friend S_memory_allocate_info;
+
+	S_export_memory_win32_handle_info_KHR& operator=(const VkExportMemoryWin32HandleInfoKHR& rhs){static_cast<VkExportMemoryWin32HandleInfoKHR&>(*this)=rhs; return *this;}
+	operator VkExportMemoryWin32HandleInfoKHR*()const{return const_cast<VkExportMemoryWin32HandleInfoKHR*>(static_cast<const VkExportMemoryWin32HandleInfoKHR*>(this));}
 };
 #endif //VK_USE_PLATFORM_WIN32_KHR
 
 /*	VkImportMemoryFdInfoKHR
 ex to: VkMemoryAllocateInfo
 */
-template<> struct my_class_convert<S_import_memory_fd_info_KHR> { using type = VkImportMemoryFdInfoKHR;};
-template<> struct my_class_convert<VkImportMemoryFdInfoKHR> { using type = S_import_memory_fd_info_KHR;};
-struct		S_import_memory_fd_info_KHR:VkImportMemoryFdInfoKHR{
+struct	S_import_memory_fd_info_KHR:VkImportMemoryFdInfoKHR{
 private:
 	using VkImportMemoryFdInfoKHR::sType;
 	using VkImportMemoryFdInfoKHR::pNext;
@@ -6552,17 +5882,19 @@ S_import_memory_fd_info_KHR(
 	,nullptr
 	,handleType_
 	,fd_}
-	{	}
+	{
+	}
 
 friend S_memory_allocate_info;
+
+	S_import_memory_fd_info_KHR& operator=(const VkImportMemoryFdInfoKHR& rhs){static_cast<VkImportMemoryFdInfoKHR&>(*this)=rhs; return *this;}
+	operator VkImportMemoryFdInfoKHR*()const{return const_cast<VkImportMemoryFdInfoKHR*>(static_cast<const VkImportMemoryFdInfoKHR*>(this));}
 };
 
 /*	VkMemoryAllocateFlagsInfo
 ex to: VkMemoryAllocateInfo
 */
-template<> struct my_class_convert<S_memory_allocate_flags_info> { using type = VkMemoryAllocateFlagsInfo;};
-template<> struct my_class_convert<VkMemoryAllocateFlagsInfo> { using type = S_memory_allocate_flags_info;};
-struct		S_memory_allocate_flags_info:VkMemoryAllocateFlagsInfo{
+struct	S_memory_allocate_flags_info:VkMemoryAllocateFlagsInfo{
 private:
 	using VkMemoryAllocateFlagsInfo::sType;
 	using VkMemoryAllocateFlagsInfo::pNext;
@@ -6579,17 +5911,19 @@ S_memory_allocate_flags_info(
 	,nullptr
 	,flags_
 	,deviceMask_}
-	{	}
+	{
+	}
 
 friend S_memory_allocate_info;
+
+	S_memory_allocate_flags_info& operator=(const VkMemoryAllocateFlagsInfo& rhs){static_cast<VkMemoryAllocateFlagsInfo&>(*this)=rhs; return *this;}
+	operator VkMemoryAllocateFlagsInfo*()const{return const_cast<VkMemoryAllocateFlagsInfo*>(static_cast<const VkMemoryAllocateFlagsInfo*>(this));}
 };
 
 /*	VkMemoryDedicatedAllocateInfo
 ex to: VkMemoryAllocateInfo
 */
-template<> struct my_class_convert<S_memory_dedicated_allocate_info> { using type = VkMemoryDedicatedAllocateInfo;};
-template<> struct my_class_convert<VkMemoryDedicatedAllocateInfo> { using type = S_memory_dedicated_allocate_info;};
-struct		S_memory_dedicated_allocate_info:VkMemoryDedicatedAllocateInfo{
+struct	S_memory_dedicated_allocate_info:VkMemoryDedicatedAllocateInfo{
 private:
 	using VkMemoryDedicatedAllocateInfo::sType;
 	using VkMemoryDedicatedAllocateInfo::pNext;
@@ -6606,17 +5940,19 @@ S_memory_dedicated_allocate_info(
 	,nullptr
 	,image_
 	,buffer_}
-	{	}
+	{
+	}
 
 friend S_memory_allocate_info;
+
+	S_memory_dedicated_allocate_info& operator=(const VkMemoryDedicatedAllocateInfo& rhs){static_cast<VkMemoryDedicatedAllocateInfo&>(*this)=rhs; return *this;}
+	operator VkMemoryDedicatedAllocateInfo*()const{return const_cast<VkMemoryDedicatedAllocateInfo*>(static_cast<const VkMemoryDedicatedAllocateInfo*>(this));}
 };
 
 /*	VkImportMemoryHostPointerInfoEXT
 ex to: VkMemoryAllocateInfo
 */
-template<> struct my_class_convert<S_import_memory_host_pointer_info_EXT> { using type = VkImportMemoryHostPointerInfoEXT;};
-template<> struct my_class_convert<VkImportMemoryHostPointerInfoEXT> { using type = S_import_memory_host_pointer_info_EXT;};
-struct		S_import_memory_host_pointer_info_EXT:VkImportMemoryHostPointerInfoEXT{
+struct	S_import_memory_host_pointer_info_EXT:VkImportMemoryHostPointerInfoEXT{
 private:
 	using VkImportMemoryHostPointerInfoEXT::sType;
 	using VkImportMemoryHostPointerInfoEXT::pNext;
@@ -6633,18 +5969,20 @@ S_import_memory_host_pointer_info_EXT(
 	,nullptr
 	,handleType_
 	,pHostPointer_}
-	{	}
+	{
+	}
 
 friend S_memory_allocate_info;
+
+	S_import_memory_host_pointer_info_EXT& operator=(const VkImportMemoryHostPointerInfoEXT& rhs){static_cast<VkImportMemoryHostPointerInfoEXT&>(*this)=rhs; return *this;}
+	operator VkImportMemoryHostPointerInfoEXT*()const{return const_cast<VkImportMemoryHostPointerInfoEXT*>(static_cast<const VkImportMemoryHostPointerInfoEXT*>(this));}
 };
 
 /*	VkImportAndroidHardwareBufferInfoANDROID
 ex to: VkMemoryAllocateInfo
 */
 #ifdef VK_USE_PLATFORM_ANDROID_KHR
-template<> struct my_class_convert<S_import_android_hardware_buffer_info_ANDROID> { using type = VkImportAndroidHardwareBufferInfoANDROID;};
-template<> struct my_class_convert<VkImportAndroidHardwareBufferInfoANDROID> { using type = S_import_android_hardware_buffer_info_ANDROID;};
-struct		S_import_android_hardware_buffer_info_ANDROID:VkImportAndroidHardwareBufferInfoANDROID{
+struct	S_import_android_hardware_buffer_info_ANDROID:VkImportAndroidHardwareBufferInfoANDROID{
 private:
 	using VkImportAndroidHardwareBufferInfoANDROID::sType;
 	using VkImportAndroidHardwareBufferInfoANDROID::pNext;
@@ -6658,9 +5996,13 @@ S_import_android_hardware_buffer_info_ANDROID(
 	VK_STRUCTURE_TYPE_IMPORT_ANDROID_HARDWARE_BUFFER_INFO_ANDROID
 	,nullptr
 	,buffer_}
-	{	}
+	{
+	}
 
 friend S_memory_allocate_info;
+
+	S_import_android_hardware_buffer_info_ANDROID& operator=(const VkImportAndroidHardwareBufferInfoANDROID& rhs){static_cast<VkImportAndroidHardwareBufferInfoANDROID&>(*this)=rhs; return *this;}
+	operator VkImportAndroidHardwareBufferInfoANDROID*()const{return const_cast<VkImportAndroidHardwareBufferInfoANDROID*>(static_cast<const VkImportAndroidHardwareBufferInfoANDROID*>(this));}
 };
 #endif //VK_USE_PLATFORM_ANDROID_KHR
 
@@ -6708,9 +6050,7 @@ N_memory_allocate_info& n_import_memory_host_pointer_info_EXT(S_import_memory_ho
 N_memory_allocate_info& n_import_android_hardware_buffer_info_ANDROID(S_import_android_hardware_buffer_info_ANDROID const& next_);
 #endif
 };
-template<> struct my_class_convert<S_memory_allocate_info> { using type = VkMemoryAllocateInfo;};
-template<> struct my_class_convert<VkMemoryAllocateInfo> { using type = S_memory_allocate_info;};
-struct		S_memory_allocate_info:VkMemoryAllocateInfo{
+struct	S_memory_allocate_info:VkMemoryAllocateInfo{
 private:
 	using VkMemoryAllocateInfo::sType;
 	using VkMemoryAllocateInfo::pNext;
@@ -6727,7 +6067,11 @@ S_memory_allocate_info(
 	,nullptr
 	,allocationSize_
 	,memoryTypeIndex_}
-	{	}
+	{
+	}
+
+	S_memory_allocate_info& operator=(const VkMemoryAllocateInfo& rhs){static_cast<VkMemoryAllocateInfo&>(*this)=rhs; return *this;}
+	operator VkMemoryAllocateInfo*()const{return const_cast<VkMemoryAllocateInfo*>(static_cast<const VkMemoryAllocateInfo*>(this));}
 
 S_memory_allocate_info& n_dedicated_allocation_memory_allocate_info_NV(S_dedicated_allocation_memory_allocate_info_NV const& next_);
 S_memory_allocate_info& n_export_memory_allocate_info_NV(S_export_memory_allocate_info_NV const& next_);
@@ -6757,43 +6101,44 @@ void set_pNext(N_memory_allocate_info n_){pNext = n_;}
 /*	VkMemoryRequirements
 (returnedonly)
 */
-template<> struct my_class_convert<S_memory_requirements> { using type = VkMemoryRequirements;};
-template<> struct my_class_convert<VkMemoryRequirements> { using type = S_memory_requirements;};
-struct		S_memory_requirements:VkMemoryRequirements{
+struct	S_memory_requirements:VkMemoryRequirements{
 	using VkMemoryRequirements::size;
 	using VkMemoryRequirements::alignment;
 	using VkMemoryRequirements::memoryTypeBits;
+
+	S_memory_requirements& operator=(const VkMemoryRequirements& rhs){static_cast<VkMemoryRequirements&>(*this)=rhs; return *this;}
+	operator VkMemoryRequirements*()const{return const_cast<VkMemoryRequirements*>(static_cast<const VkMemoryRequirements*>(this));}
 };
 
 /*	VkSparseImageFormatProperties
 (returnedonly)
 */
-template<> struct my_class_convert<S_sparse_image_format_properties> { using type = VkSparseImageFormatProperties;};
-template<> struct my_class_convert<VkSparseImageFormatProperties> { using type = S_sparse_image_format_properties;};
-struct		S_sparse_image_format_properties:VkSparseImageFormatProperties{
+struct	S_sparse_image_format_properties:VkSparseImageFormatProperties{
 	using VkSparseImageFormatProperties::aspectMask;
 	using VkSparseImageFormatProperties::imageGranularity;
 	using VkSparseImageFormatProperties::flags;
+
+	S_sparse_image_format_properties& operator=(const VkSparseImageFormatProperties& rhs){static_cast<VkSparseImageFormatProperties&>(*this)=rhs; return *this;}
+	operator VkSparseImageFormatProperties*()const{return const_cast<VkSparseImageFormatProperties*>(static_cast<const VkSparseImageFormatProperties*>(this));}
 };
 
 /*	VkSparseImageMemoryRequirements
 (returnedonly)
 */
-template<> struct my_class_convert<S_sparse_image_memory_requirements> { using type = VkSparseImageMemoryRequirements;};
-template<> struct my_class_convert<VkSparseImageMemoryRequirements> { using type = S_sparse_image_memory_requirements;};
-struct		S_sparse_image_memory_requirements:VkSparseImageMemoryRequirements{
+struct	S_sparse_image_memory_requirements:VkSparseImageMemoryRequirements{
 	using VkSparseImageMemoryRequirements::formatProperties;
 	using VkSparseImageMemoryRequirements::imageMipTailFirstLod;
 	using VkSparseImageMemoryRequirements::imageMipTailSize;
 	using VkSparseImageMemoryRequirements::imageMipTailOffset;
 	using VkSparseImageMemoryRequirements::imageMipTailStride;
+
+	S_sparse_image_memory_requirements& operator=(const VkSparseImageMemoryRequirements& rhs){static_cast<VkSparseImageMemoryRequirements&>(*this)=rhs; return *this;}
+	operator VkSparseImageMemoryRequirements*()const{return const_cast<VkSparseImageMemoryRequirements*>(static_cast<const VkSparseImageMemoryRequirements*>(this));}
 };
 
 /*	VkMappedMemoryRange
 */
-template<> struct my_class_convert<S_mapped_memory_range> { using type = VkMappedMemoryRange;};
-template<> struct my_class_convert<VkMappedMemoryRange> { using type = S_mapped_memory_range;};
-struct		S_mapped_memory_range:VkMappedMemoryRange{
+struct	S_mapped_memory_range:VkMappedMemoryRange{
 private:
 	using VkMappedMemoryRange::sType;
 	using VkMappedMemoryRange::pNext;
@@ -6813,124 +6158,64 @@ S_mapped_memory_range(
 	,memory_
 	,offset_
 	,size_}
-	{	}
+	{
+	}
+
+	S_mapped_memory_range& operator=(const VkMappedMemoryRange& rhs){static_cast<VkMappedMemoryRange&>(*this)=rhs; return *this;}
+	operator VkMappedMemoryRange*()const{return const_cast<VkMappedMemoryRange*>(static_cast<const VkMappedMemoryRange*>(this));}
 };
 
 /*	VkFormatProperties
 (returnedonly)
 */
-template<> struct my_class_convert<S_format_properties> { using type = VkFormatProperties;};
-template<> struct my_class_convert<VkFormatProperties> { using type = S_format_properties;};
-struct		S_format_properties:VkFormatProperties{
+struct	S_format_properties:VkFormatProperties{
 	using VkFormatProperties::linearTilingFeatures;
 	using VkFormatProperties::optimalTilingFeatures;
 	using VkFormatProperties::bufferFeatures;
+
+	S_format_properties& operator=(const VkFormatProperties& rhs){static_cast<VkFormatProperties&>(*this)=rhs; return *this;}
+	operator VkFormatProperties*()const{return const_cast<VkFormatProperties*>(static_cast<const VkFormatProperties*>(this));}
 };
 
 /*	VkImageFormatProperties
 (returnedonly)
 */
-template<> struct my_class_convert<S_image_format_properties> { using type = VkImageFormatProperties;};
-template<> struct my_class_convert<VkImageFormatProperties> { using type = S_image_format_properties;};
-struct		S_image_format_properties:VkImageFormatProperties{
+struct	S_image_format_properties:VkImageFormatProperties{
 	using VkImageFormatProperties::maxExtent;
 	using VkImageFormatProperties::maxMipLevels;
 	using VkImageFormatProperties::maxArrayLayers;
 	using VkImageFormatProperties::sampleCounts;
 	using VkImageFormatProperties::maxResourceSize;
+
+	S_image_format_properties& operator=(const VkImageFormatProperties& rhs){static_cast<VkImageFormatProperties&>(*this)=rhs; return *this;}
+	operator VkImageFormatProperties*()const{return const_cast<VkImageFormatProperties*>(static_cast<const VkImageFormatProperties*>(this));}
 };
 
 /*	VkDescriptorBufferInfo
 */
-template<> struct my_class_convert<S_descriptor_buffer_info> { using type = VkDescriptorBufferInfo;};
-template<> struct my_class_convert<VkDescriptorBufferInfo> { using type = S_descriptor_buffer_info;};
-struct		S_descriptor_buffer_info:VkDescriptorBufferInfo{
+struct	S_descriptor_buffer_info:VkDescriptorBufferInfo{
 	using VkDescriptorBufferInfo::buffer;
 	using VkDescriptorBufferInfo::offset;
 	using VkDescriptorBufferInfo::range;
+
+	S_descriptor_buffer_info& operator=(const VkDescriptorBufferInfo& rhs){static_cast<VkDescriptorBufferInfo&>(*this)=rhs; return *this;}
+	operator VkDescriptorBufferInfo*()const{return const_cast<VkDescriptorBufferInfo*>(static_cast<const VkDescriptorBufferInfo*>(this));}
 };
 
 /*	VkDescriptorImageInfo
 */
-template<> struct my_class_convert<S_descriptor_image_info> { using type = VkDescriptorImageInfo;};
-template<> struct my_class_convert<VkDescriptorImageInfo> { using type = S_descriptor_image_info;};
-struct		S_descriptor_image_info:VkDescriptorImageInfo{
+struct	S_descriptor_image_info:VkDescriptorImageInfo{
 	using VkDescriptorImageInfo::sampler;
 	using VkDescriptorImageInfo::imageView;
 	using VkDescriptorImageInfo::imageLayout;
-};
 
-/*	VkWriteDescriptorSetInlineUniformBlockEXT
-ex to: VkWriteDescriptorSet
-*/
-template<> struct my_class_convert<S_write_descriptor_set_inline_uniform_block_EXT> { using type = VkWriteDescriptorSetInlineUniformBlockEXT;};
-template<> struct my_class_convert<VkWriteDescriptorSetInlineUniformBlockEXT> { using type = S_write_descriptor_set_inline_uniform_block_EXT;};
-struct		S_write_descriptor_set_inline_uniform_block_EXT:VkWriteDescriptorSetInlineUniformBlockEXT{
-private:
-	using VkWriteDescriptorSetInlineUniformBlockEXT::sType;
-	using VkWriteDescriptorSetInlineUniformBlockEXT::pNext;
-public:
-	using VkWriteDescriptorSetInlineUniformBlockEXT::dataSize;
-	using VkWriteDescriptorSetInlineUniformBlockEXT::pData;
-
-S_write_descriptor_set_inline_uniform_block_EXT():VkWriteDescriptorSetInlineUniformBlockEXT{VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET_INLINE_UNIFORM_BLOCK_EXT,nullptr}{}
-S_write_descriptor_set_inline_uniform_block_EXT(
-	uint32_t dataSize_,
-	const void * pData_)
-	:VkWriteDescriptorSetInlineUniformBlockEXT{
-	VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET_INLINE_UNIFORM_BLOCK_EXT
-	,nullptr
-	,dataSize_
-	,pData_}
-	{	}
-
-friend S_write_descriptor_set;
-};
-
-/*	VkDescriptorAccelerationStructureInfoNVX
-ex to: VkWriteDescriptorSet
-*/
-template<> struct my_class_convert<S_descriptor_acceleration_structure_info_NVX> { using type = VkDescriptorAccelerationStructureInfoNVX;};
-template<> struct my_class_convert<VkDescriptorAccelerationStructureInfoNVX> { using type = S_descriptor_acceleration_structure_info_NVX;};
-struct		S_descriptor_acceleration_structure_info_NVX:VkDescriptorAccelerationStructureInfoNVX{
-private:
-	using VkDescriptorAccelerationStructureInfoNVX::sType;
-	using VkDescriptorAccelerationStructureInfoNVX::pNext;
-public:
-	using VkDescriptorAccelerationStructureInfoNVX::accelerationStructureCount;
-	using VkDescriptorAccelerationStructureInfoNVX::pAccelerationStructures;
-
-S_descriptor_acceleration_structure_info_NVX():VkDescriptorAccelerationStructureInfoNVX{VK_STRUCTURE_TYPE_DESCRIPTOR_ACCELERATION_STRUCTURE_INFO_NVX,nullptr}{}
-S_descriptor_acceleration_structure_info_NVX(
-	uint32_t accelerationStructureCount_,
-	const VkAccelerationStructureNVX * pAccelerationStructures_)
-	:VkDescriptorAccelerationStructureInfoNVX{
-	VK_STRUCTURE_TYPE_DESCRIPTOR_ACCELERATION_STRUCTURE_INFO_NVX
-	,nullptr
-	,accelerationStructureCount_
-	,pAccelerationStructures_}
-	{	}
-
-friend S_write_descriptor_set;
+	S_descriptor_image_info& operator=(const VkDescriptorImageInfo& rhs){static_cast<VkDescriptorImageInfo&>(*this)=rhs; return *this;}
+	operator VkDescriptorImageInfo*()const{return const_cast<VkDescriptorImageInfo*>(static_cast<const VkDescriptorImageInfo*>(this));}
 };
 
 /*	VkWriteDescriptorSet
-ex:
-	VkWriteDescriptorSetInlineUniformBlockEXT
-	VkDescriptorAccelerationStructureInfoNVX
 */
-
-struct N_write_descriptor_set{
-private:
-	void* pNext = nullptr;
-public:
-operator void*() { return pNext; }
-N_write_descriptor_set& n_write_descriptor_set_inline_uniform_block_EXT(S_write_descriptor_set_inline_uniform_block_EXT const& next_);
-N_write_descriptor_set& n_descriptor_acceleration_structure_info_NVX(S_descriptor_acceleration_structure_info_NVX const& next_);
-};
-template<> struct my_class_convert<S_write_descriptor_set> { using type = VkWriteDescriptorSet;};
-template<> struct my_class_convert<VkWriteDescriptorSet> { using type = S_write_descriptor_set;};
-struct		S_write_descriptor_set:VkWriteDescriptorSet{
+struct	S_write_descriptor_set:VkWriteDescriptorSet{
 private:
 	using VkWriteDescriptorSet::sType;
 	using VkWriteDescriptorSet::pNext;
@@ -6965,18 +6250,16 @@ S_write_descriptor_set(
 	,pImageInfo_
 	,pBufferInfo_
 	,pTexelBufferView_}
-	{	}
+	{
+	}
 
-S_write_descriptor_set& n_write_descriptor_set_inline_uniform_block_EXT(S_write_descriptor_set_inline_uniform_block_EXT const& next_);
-S_write_descriptor_set& n_descriptor_acceleration_structure_info_NVX(S_descriptor_acceleration_structure_info_NVX const& next_);
-void set_pNext(N_write_descriptor_set n_){pNext = n_;}
+	S_write_descriptor_set& operator=(const VkWriteDescriptorSet& rhs){static_cast<VkWriteDescriptorSet&>(*this)=rhs; return *this;}
+	operator VkWriteDescriptorSet*()const{return const_cast<VkWriteDescriptorSet*>(static_cast<const VkWriteDescriptorSet*>(this));}
 };
 
 /*	VkCopyDescriptorSet
 */
-template<> struct my_class_convert<S_copy_descriptor_set> { using type = VkCopyDescriptorSet;};
-template<> struct my_class_convert<VkCopyDescriptorSet> { using type = S_copy_descriptor_set;};
-struct		S_copy_descriptor_set:VkCopyDescriptorSet{
+struct	S_copy_descriptor_set:VkCopyDescriptorSet{
 private:
 	using VkCopyDescriptorSet::sType;
 	using VkCopyDescriptorSet::pNext;
@@ -7008,15 +6291,17 @@ S_copy_descriptor_set(
 	,dstBinding_
 	,dstArrayElement_
 	,descriptorCount_}
-	{	}
+	{
+	}
+
+	S_copy_descriptor_set& operator=(const VkCopyDescriptorSet& rhs){static_cast<VkCopyDescriptorSet&>(*this)=rhs; return *this;}
+	operator VkCopyDescriptorSet*()const{return const_cast<VkCopyDescriptorSet*>(static_cast<const VkCopyDescriptorSet*>(this));}
 };
 
 /*	VkDedicatedAllocationBufferCreateInfoNV
 ex to: VkBufferCreateInfo
 */
-template<> struct my_class_convert<S_dedicated_allocation_buffer_create_info_NV> { using type = VkDedicatedAllocationBufferCreateInfoNV;};
-template<> struct my_class_convert<VkDedicatedAllocationBufferCreateInfoNV> { using type = S_dedicated_allocation_buffer_create_info_NV;};
-struct		S_dedicated_allocation_buffer_create_info_NV:VkDedicatedAllocationBufferCreateInfoNV{
+struct	S_dedicated_allocation_buffer_create_info_NV:VkDedicatedAllocationBufferCreateInfoNV{
 private:
 	using VkDedicatedAllocationBufferCreateInfoNV::sType;
 	using VkDedicatedAllocationBufferCreateInfoNV::pNext;
@@ -7030,17 +6315,19 @@ S_dedicated_allocation_buffer_create_info_NV(
 	VK_STRUCTURE_TYPE_DEDICATED_ALLOCATION_BUFFER_CREATE_INFO_NV
 	,nullptr
 	,dedicatedAllocation_}
-	{	}
+	{
+	}
 
 friend S_buffer_create_info;
+
+	S_dedicated_allocation_buffer_create_info_NV& operator=(const VkDedicatedAllocationBufferCreateInfoNV& rhs){static_cast<VkDedicatedAllocationBufferCreateInfoNV&>(*this)=rhs; return *this;}
+	operator VkDedicatedAllocationBufferCreateInfoNV*()const{return const_cast<VkDedicatedAllocationBufferCreateInfoNV*>(static_cast<const VkDedicatedAllocationBufferCreateInfoNV*>(this));}
 };
 
 /*	VkExternalMemoryBufferCreateInfo
 ex to: VkBufferCreateInfo
 */
-template<> struct my_class_convert<S_external_memory_buffer_create_info> { using type = VkExternalMemoryBufferCreateInfo;};
-template<> struct my_class_convert<VkExternalMemoryBufferCreateInfo> { using type = S_external_memory_buffer_create_info;};
-struct		S_external_memory_buffer_create_info:VkExternalMemoryBufferCreateInfo{
+struct	S_external_memory_buffer_create_info:VkExternalMemoryBufferCreateInfo{
 private:
 	using VkExternalMemoryBufferCreateInfo::sType;
 	using VkExternalMemoryBufferCreateInfo::pNext;
@@ -7054,9 +6341,13 @@ S_external_memory_buffer_create_info(
 	VK_STRUCTURE_TYPE_EXTERNAL_MEMORY_BUFFER_CREATE_INFO
 	,nullptr
 	,handleTypes_}
-	{	}
+	{
+	}
 
 friend S_buffer_create_info;
+
+	S_external_memory_buffer_create_info& operator=(const VkExternalMemoryBufferCreateInfo& rhs){static_cast<VkExternalMemoryBufferCreateInfo&>(*this)=rhs; return *this;}
+	operator VkExternalMemoryBufferCreateInfo*()const{return const_cast<VkExternalMemoryBufferCreateInfo*>(static_cast<const VkExternalMemoryBufferCreateInfo*>(this));}
 };
 
 /*	VkBufferCreateInfo
@@ -7073,9 +6364,7 @@ operator void*() { return pNext; }
 N_buffer_create_info& n_dedicated_allocation_buffer_create_info_NV(S_dedicated_allocation_buffer_create_info_NV const& next_);
 N_buffer_create_info& n_external_memory_buffer_create_info(S_external_memory_buffer_create_info const& next_);
 };
-template<> struct my_class_convert<S_buffer_create_info> { using type = VkBufferCreateInfo;};
-template<> struct my_class_convert<VkBufferCreateInfo> { using type = S_buffer_create_info;};
-struct		S_buffer_create_info:VkBufferCreateInfo{
+struct	S_buffer_create_info:VkBufferCreateInfo{
 private:
 	using VkBufferCreateInfo::sType;
 	using VkBufferCreateInfo::pNext;
@@ -7104,7 +6393,11 @@ S_buffer_create_info(
 	,sharingMode_
 	,queueFamilyIndexCount_
 	,pQueueFamilyIndices_}
-	{	}
+	{
+	}
+
+	S_buffer_create_info& operator=(const VkBufferCreateInfo& rhs){static_cast<VkBufferCreateInfo&>(*this)=rhs; return *this;}
+	operator VkBufferCreateInfo*()const{return const_cast<VkBufferCreateInfo*>(static_cast<const VkBufferCreateInfo*>(this));}
 
 S_buffer_create_info& n_dedicated_allocation_buffer_create_info_NV(S_dedicated_allocation_buffer_create_info_NV const& next_);
 S_buffer_create_info& n_external_memory_buffer_create_info(S_external_memory_buffer_create_info const& next_);
@@ -7113,9 +6406,7 @@ void set_pNext(N_buffer_create_info n_){pNext = n_;}
 
 /*	VkBufferViewCreateInfo
 */
-template<> struct my_class_convert<S_buffer_view_create_info> { using type = VkBufferViewCreateInfo;};
-template<> struct my_class_convert<VkBufferViewCreateInfo> { using type = S_buffer_view_create_info;};
-struct		S_buffer_view_create_info:VkBufferViewCreateInfo{
+struct	S_buffer_view_create_info:VkBufferViewCreateInfo{
 private:
 	using VkBufferViewCreateInfo::sType;
 	using VkBufferViewCreateInfo::pNext;
@@ -7141,47 +6432,52 @@ S_buffer_view_create_info(
 	,format_
 	,offset_
 	,range_}
-	{	}
+	{
+	}
+
+	S_buffer_view_create_info& operator=(const VkBufferViewCreateInfo& rhs){static_cast<VkBufferViewCreateInfo&>(*this)=rhs; return *this;}
+	operator VkBufferViewCreateInfo*()const{return const_cast<VkBufferViewCreateInfo*>(static_cast<const VkBufferViewCreateInfo*>(this));}
 };
 
 /*	VkImageSubresource
 */
-template<> struct my_class_convert<S_image_subresource> { using type = VkImageSubresource;};
-template<> struct my_class_convert<VkImageSubresource> { using type = S_image_subresource;};
-struct		S_image_subresource:VkImageSubresource{
+struct	S_image_subresource:VkImageSubresource{
 	using VkImageSubresource::aspectMask;
 	using VkImageSubresource::mipLevel;
 	using VkImageSubresource::arrayLayer;
+
+	S_image_subresource& operator=(const VkImageSubresource& rhs){static_cast<VkImageSubresource&>(*this)=rhs; return *this;}
+	operator VkImageSubresource*()const{return const_cast<VkImageSubresource*>(static_cast<const VkImageSubresource*>(this));}
 };
 
 /*	VkImageSubresourceLayers
 */
-template<> struct my_class_convert<S_image_subresource_layers> { using type = VkImageSubresourceLayers;};
-template<> struct my_class_convert<VkImageSubresourceLayers> { using type = S_image_subresource_layers;};
-struct		S_image_subresource_layers:VkImageSubresourceLayers{
+struct	S_image_subresource_layers:VkImageSubresourceLayers{
 	using VkImageSubresourceLayers::aspectMask;
 	using VkImageSubresourceLayers::mipLevel;
 	using VkImageSubresourceLayers::baseArrayLayer;
 	using VkImageSubresourceLayers::layerCount;
+
+	S_image_subresource_layers& operator=(const VkImageSubresourceLayers& rhs){static_cast<VkImageSubresourceLayers&>(*this)=rhs; return *this;}
+	operator VkImageSubresourceLayers*()const{return const_cast<VkImageSubresourceLayers*>(static_cast<const VkImageSubresourceLayers*>(this));}
 };
 
 /*	VkImageSubresourceRange
 */
-template<> struct my_class_convert<S_image_subresource_range> { using type = VkImageSubresourceRange;};
-template<> struct my_class_convert<VkImageSubresourceRange> { using type = S_image_subresource_range;};
-struct		S_image_subresource_range:VkImageSubresourceRange{
+struct	S_image_subresource_range:VkImageSubresourceRange{
 	using VkImageSubresourceRange::aspectMask;
 	using VkImageSubresourceRange::baseMipLevel;
 	using VkImageSubresourceRange::levelCount;
 	using VkImageSubresourceRange::baseArrayLayer;
 	using VkImageSubresourceRange::layerCount;
+
+	S_image_subresource_range& operator=(const VkImageSubresourceRange& rhs){static_cast<VkImageSubresourceRange&>(*this)=rhs; return *this;}
+	operator VkImageSubresourceRange*()const{return const_cast<VkImageSubresourceRange*>(static_cast<const VkImageSubresourceRange*>(this));}
 };
 
 /*	VkMemoryBarrier
 */
-template<> struct my_class_convert<S_memory_barrier> { using type = VkMemoryBarrier;};
-template<> struct my_class_convert<VkMemoryBarrier> { using type = S_memory_barrier;};
-struct		S_memory_barrier:VkMemoryBarrier{
+struct	S_memory_barrier:VkMemoryBarrier{
 private:
 	using VkMemoryBarrier::sType;
 	using VkMemoryBarrier::pNext;
@@ -7198,14 +6494,16 @@ S_memory_barrier(
 	,nullptr
 	,srcAccessMask_
 	,dstAccessMask_}
-	{	}
+	{
+	}
+
+	S_memory_barrier& operator=(const VkMemoryBarrier& rhs){static_cast<VkMemoryBarrier&>(*this)=rhs; return *this;}
+	operator VkMemoryBarrier*()const{return const_cast<VkMemoryBarrier*>(static_cast<const VkMemoryBarrier*>(this));}
 };
 
 /*	VkBufferMemoryBarrier
 */
-template<> struct my_class_convert<S_buffer_memory_barrier> { using type = VkBufferMemoryBarrier;};
-template<> struct my_class_convert<VkBufferMemoryBarrier> { using type = S_buffer_memory_barrier;};
-struct		S_buffer_memory_barrier:VkBufferMemoryBarrier{
+struct	S_buffer_memory_barrier:VkBufferMemoryBarrier{
 private:
 	using VkBufferMemoryBarrier::sType;
 	using VkBufferMemoryBarrier::pNext;
@@ -7237,24 +6535,27 @@ S_buffer_memory_barrier(
 	,buffer_
 	,offset_
 	,size_}
-	{	}
+	{
+	}
+
+	S_buffer_memory_barrier& operator=(const VkBufferMemoryBarrier& rhs){static_cast<VkBufferMemoryBarrier&>(*this)=rhs; return *this;}
+	operator VkBufferMemoryBarrier*()const{return const_cast<VkBufferMemoryBarrier*>(static_cast<const VkBufferMemoryBarrier*>(this));}
 };
 
 /*	VkSampleLocationEXT
 */
-template<> struct my_class_convert<S_sample_location_EXT> { using type = VkSampleLocationEXT;};
-template<> struct my_class_convert<VkSampleLocationEXT> { using type = S_sample_location_EXT;};
-struct		S_sample_location_EXT:VkSampleLocationEXT{
+struct	S_sample_location_EXT:VkSampleLocationEXT{
 	using VkSampleLocationEXT::x;
 	using VkSampleLocationEXT::y;
+
+	S_sample_location_EXT& operator=(const VkSampleLocationEXT& rhs){static_cast<VkSampleLocationEXT&>(*this)=rhs; return *this;}
+	operator VkSampleLocationEXT*()const{return const_cast<VkSampleLocationEXT*>(static_cast<const VkSampleLocationEXT*>(this));}
 };
 
 /*	VkSampleLocationsInfoEXT
 ex to: VkImageMemoryBarrier
 */
-template<> struct my_class_convert<S_sample_locations_info_EXT> { using type = VkSampleLocationsInfoEXT;};
-template<> struct my_class_convert<VkSampleLocationsInfoEXT> { using type = S_sample_locations_info_EXT;};
-struct		S_sample_locations_info_EXT:VkSampleLocationsInfoEXT{
+struct	S_sample_locations_info_EXT:VkSampleLocationsInfoEXT{
 private:
 	using VkSampleLocationsInfoEXT::sType;
 	using VkSampleLocationsInfoEXT::pNext;
@@ -7277,9 +6578,13 @@ S_sample_locations_info_EXT(
 	,sampleLocationGridSize_
 	,sampleLocationsCount_
 	,pSampleLocations_}
-	{	}
+	{
+	}
 
 friend S_image_memory_barrier;
+
+	S_sample_locations_info_EXT& operator=(const VkSampleLocationsInfoEXT& rhs){static_cast<VkSampleLocationsInfoEXT&>(*this)=rhs; return *this;}
+	operator VkSampleLocationsInfoEXT*()const{return const_cast<VkSampleLocationsInfoEXT*>(static_cast<const VkSampleLocationsInfoEXT*>(this));}
 };
 
 /*	VkImageMemoryBarrier
@@ -7294,9 +6599,7 @@ public:
 operator void*() { return pNext; }
 N_image_memory_barrier& n_sample_locations_info_EXT(S_sample_locations_info_EXT const& next_);
 };
-template<> struct my_class_convert<S_image_memory_barrier> { using type = VkImageMemoryBarrier;};
-template<> struct my_class_convert<VkImageMemoryBarrier> { using type = S_image_memory_barrier;};
-struct		S_image_memory_barrier:VkImageMemoryBarrier{
+struct	S_image_memory_barrier:VkImageMemoryBarrier{
 private:
 	using VkImageMemoryBarrier::sType;
 	using VkImageMemoryBarrier::pNext;
@@ -7331,7 +6634,11 @@ S_image_memory_barrier(
 	,dstQueueFamilyIndex_
 	,image_
 	,subresourceRange_}
-	{	}
+	{
+	}
+
+	S_image_memory_barrier& operator=(const VkImageMemoryBarrier& rhs){static_cast<VkImageMemoryBarrier&>(*this)=rhs; return *this;}
+	operator VkImageMemoryBarrier*()const{return const_cast<VkImageMemoryBarrier*>(static_cast<const VkImageMemoryBarrier*>(this));}
 
 S_image_memory_barrier& n_sample_locations_info_EXT(S_sample_locations_info_EXT const& next_);
 void set_pNext(N_image_memory_barrier n_){pNext = n_;}
@@ -7340,9 +6647,7 @@ void set_pNext(N_image_memory_barrier n_){pNext = n_;}
 /*	VkDedicatedAllocationImageCreateInfoNV
 ex to: VkImageCreateInfo
 */
-template<> struct my_class_convert<S_dedicated_allocation_image_create_info_NV> { using type = VkDedicatedAllocationImageCreateInfoNV;};
-template<> struct my_class_convert<VkDedicatedAllocationImageCreateInfoNV> { using type = S_dedicated_allocation_image_create_info_NV;};
-struct		S_dedicated_allocation_image_create_info_NV:VkDedicatedAllocationImageCreateInfoNV{
+struct	S_dedicated_allocation_image_create_info_NV:VkDedicatedAllocationImageCreateInfoNV{
 private:
 	using VkDedicatedAllocationImageCreateInfoNV::sType;
 	using VkDedicatedAllocationImageCreateInfoNV::pNext;
@@ -7356,17 +6661,19 @@ S_dedicated_allocation_image_create_info_NV(
 	VK_STRUCTURE_TYPE_DEDICATED_ALLOCATION_IMAGE_CREATE_INFO_NV
 	,nullptr
 	,dedicatedAllocation_}
-	{	}
+	{
+	}
 
 friend S_image_create_info;
+
+	S_dedicated_allocation_image_create_info_NV& operator=(const VkDedicatedAllocationImageCreateInfoNV& rhs){static_cast<VkDedicatedAllocationImageCreateInfoNV&>(*this)=rhs; return *this;}
+	operator VkDedicatedAllocationImageCreateInfoNV*()const{return const_cast<VkDedicatedAllocationImageCreateInfoNV*>(static_cast<const VkDedicatedAllocationImageCreateInfoNV*>(this));}
 };
 
 /*	VkExternalMemoryImageCreateInfoNV
 ex to: VkImageCreateInfo
 */
-template<> struct my_class_convert<S_external_memory_image_create_info_NV> { using type = VkExternalMemoryImageCreateInfoNV;};
-template<> struct my_class_convert<VkExternalMemoryImageCreateInfoNV> { using type = S_external_memory_image_create_info_NV;};
-struct		S_external_memory_image_create_info_NV:VkExternalMemoryImageCreateInfoNV{
+struct	S_external_memory_image_create_info_NV:VkExternalMemoryImageCreateInfoNV{
 private:
 	using VkExternalMemoryImageCreateInfoNV::sType;
 	using VkExternalMemoryImageCreateInfoNV::pNext;
@@ -7380,17 +6687,19 @@ S_external_memory_image_create_info_NV(
 	VK_STRUCTURE_TYPE_EXTERNAL_MEMORY_IMAGE_CREATE_INFO_NV
 	,nullptr
 	,handleTypes_}
-	{	}
+	{
+	}
 
 friend S_image_create_info;
+
+	S_external_memory_image_create_info_NV& operator=(const VkExternalMemoryImageCreateInfoNV& rhs){static_cast<VkExternalMemoryImageCreateInfoNV&>(*this)=rhs; return *this;}
+	operator VkExternalMemoryImageCreateInfoNV*()const{return const_cast<VkExternalMemoryImageCreateInfoNV*>(static_cast<const VkExternalMemoryImageCreateInfoNV*>(this));}
 };
 
 /*	VkExternalMemoryImageCreateInfo
 ex to: VkImageCreateInfo
 */
-template<> struct my_class_convert<S_external_memory_image_create_info> { using type = VkExternalMemoryImageCreateInfo;};
-template<> struct my_class_convert<VkExternalMemoryImageCreateInfo> { using type = S_external_memory_image_create_info;};
-struct		S_external_memory_image_create_info:VkExternalMemoryImageCreateInfo{
+struct	S_external_memory_image_create_info:VkExternalMemoryImageCreateInfo{
 private:
 	using VkExternalMemoryImageCreateInfo::sType;
 	using VkExternalMemoryImageCreateInfo::pNext;
@@ -7404,17 +6713,19 @@ S_external_memory_image_create_info(
 	VK_STRUCTURE_TYPE_EXTERNAL_MEMORY_IMAGE_CREATE_INFO
 	,nullptr
 	,handleTypes_}
-	{	}
+	{
+	}
 
 friend S_image_create_info;
+
+	S_external_memory_image_create_info& operator=(const VkExternalMemoryImageCreateInfo& rhs){static_cast<VkExternalMemoryImageCreateInfo&>(*this)=rhs; return *this;}
+	operator VkExternalMemoryImageCreateInfo*()const{return const_cast<VkExternalMemoryImageCreateInfo*>(static_cast<const VkExternalMemoryImageCreateInfo*>(this));}
 };
 
 /*	VkImageSwapchainCreateInfoKHR
 ex to: VkImageCreateInfo
 */
-template<> struct my_class_convert<S_image_swapchain_create_info_KHR> { using type = VkImageSwapchainCreateInfoKHR;};
-template<> struct my_class_convert<VkImageSwapchainCreateInfoKHR> { using type = S_image_swapchain_create_info_KHR;};
-struct		S_image_swapchain_create_info_KHR:VkImageSwapchainCreateInfoKHR{
+struct	S_image_swapchain_create_info_KHR:VkImageSwapchainCreateInfoKHR{
 private:
 	using VkImageSwapchainCreateInfoKHR::sType;
 	using VkImageSwapchainCreateInfoKHR::pNext;
@@ -7428,17 +6739,19 @@ S_image_swapchain_create_info_KHR(
 	VK_STRUCTURE_TYPE_IMAGE_SWAPCHAIN_CREATE_INFO_KHR
 	,nullptr
 	,swapchain_}
-	{	}
+	{
+	}
 
 friend S_image_create_info;
+
+	S_image_swapchain_create_info_KHR& operator=(const VkImageSwapchainCreateInfoKHR& rhs){static_cast<VkImageSwapchainCreateInfoKHR&>(*this)=rhs; return *this;}
+	operator VkImageSwapchainCreateInfoKHR*()const{return const_cast<VkImageSwapchainCreateInfoKHR*>(static_cast<const VkImageSwapchainCreateInfoKHR*>(this));}
 };
 
 /*	VkImageFormatListCreateInfoKHR
 ex to: VkImageCreateInfo
 */
-template<> struct my_class_convert<S_image_format_list_create_info_KHR> { using type = VkImageFormatListCreateInfoKHR;};
-template<> struct my_class_convert<VkImageFormatListCreateInfoKHR> { using type = S_image_format_list_create_info_KHR;};
-struct		S_image_format_list_create_info_KHR:VkImageFormatListCreateInfoKHR{
+struct	S_image_format_list_create_info_KHR:VkImageFormatListCreateInfoKHR{
 private:
 	using VkImageFormatListCreateInfoKHR::sType;
 	using VkImageFormatListCreateInfoKHR::pNext;
@@ -7455,18 +6768,20 @@ S_image_format_list_create_info_KHR(
 	,nullptr
 	,viewFormatCount_
 	,*pViewFormats_}
-	{	}
+	{
+	}
 
 friend S_image_create_info;
+
+	S_image_format_list_create_info_KHR& operator=(const VkImageFormatListCreateInfoKHR& rhs){static_cast<VkImageFormatListCreateInfoKHR&>(*this)=rhs; return *this;}
+	operator VkImageFormatListCreateInfoKHR*()const{return const_cast<VkImageFormatListCreateInfoKHR*>(static_cast<const VkImageFormatListCreateInfoKHR*>(this));}
 };
 
 /*	VkExternalFormatANDROID
 ex to: VkImageCreateInfo,VkSamplerYcbcrConversionCreateInfo
 */
 #ifdef VK_USE_PLATFORM_ANDROID_KHR
-template<> struct my_class_convert<S_external_format_ANDROID> { using type = VkExternalFormatANDROID;};
-template<> struct my_class_convert<VkExternalFormatANDROID> { using type = S_external_format_ANDROID;};
-struct		S_external_format_ANDROID:VkExternalFormatANDROID{
+struct	S_external_format_ANDROID:VkExternalFormatANDROID{
 private:
 	using VkExternalFormatANDROID::sType;
 	using VkExternalFormatANDROID::pNext;
@@ -7480,86 +6795,16 @@ S_external_format_ANDROID(
 	VK_STRUCTURE_TYPE_EXTERNAL_FORMAT_ANDROID
 	,nullptr
 	,externalFormat_}
-	{	}
+	{
+	}
 
 friend S_image_create_info;
 friend S_sampler_ycbcr_conversion_create_info;
+
+	S_external_format_ANDROID& operator=(const VkExternalFormatANDROID& rhs){static_cast<VkExternalFormatANDROID&>(*this)=rhs; return *this;}
+	operator VkExternalFormatANDROID*()const{return const_cast<VkExternalFormatANDROID*>(static_cast<const VkExternalFormatANDROID*>(this));}
 };
 #endif //VK_USE_PLATFORM_ANDROID_KHR
-
-/*	VkImageDrmFormatModifierListCreateInfoEXT
-ex to: VkImageCreateInfo
-*/
-#ifdef LAKA_UNKNOW
-template<> struct my_class_convert<S_image_drm_format_modifier_list_create_info_EXT> { using type = VkImageDrmFormatModifierListCreateInfoEXT;};
-template<> struct my_class_convert<VkImageDrmFormatModifierListCreateInfoEXT> { using type = S_image_drm_format_modifier_list_create_info_EXT;};
-struct		S_image_drm_format_modifier_list_create_info_EXT:VkImageDrmFormatModifierListCreateInfoEXT{
-private:
-	using VkImageDrmFormatModifierListCreateInfoEXT::sType;
-	using VkImageDrmFormatModifierListCreateInfoEXT::pNext;
-public:
-	using VkImageDrmFormatModifierListCreateInfoEXT::drmFormatModifierCount;
-	using VkImageDrmFormatModifierListCreateInfoEXT::pDrmFormatModifiers;
-
-S_image_drm_format_modifier_list_create_info_EXT():VkImageDrmFormatModifierListCreateInfoEXT{VK_STRUCTURE_TYPE_IMAGE_DRM_FORMAT_MODIFIER_LIST_CREATE_INFO_EXT,nullptr}{}
-S_image_drm_format_modifier_list_create_info_EXT(
-	uint32_t drmFormatModifierCount_,
-	const uint64_t * pDrmFormatModifiers_)
-	:VkImageDrmFormatModifierListCreateInfoEXT{
-	VK_STRUCTURE_TYPE_IMAGE_DRM_FORMAT_MODIFIER_LIST_CREATE_INFO_EXT
-	,nullptr
-	,drmFormatModifierCount_
-	,pDrmFormatModifiers_}
-	{	}
-
-friend S_image_create_info;
-};
-#endif //LAKA_UNKNOW
-
-/*	VkSubresourceLayout
-(returnedonly)
-*/
-template<> struct my_class_convert<S_subresource_layout> { using type = VkSubresourceLayout;};
-template<> struct my_class_convert<VkSubresourceLayout> { using type = S_subresource_layout;};
-struct		S_subresource_layout:VkSubresourceLayout{
-	using VkSubresourceLayout::offset;
-	using VkSubresourceLayout::size;
-	using VkSubresourceLayout::rowPitch;
-	using VkSubresourceLayout::arrayPitch;
-	using VkSubresourceLayout::depthPitch;
-};
-
-/*	VkImageDrmFormatModifierExplicitCreateInfoEXT
-ex to: VkImageCreateInfo
-*/
-#ifdef LAKA_UNKNOW
-template<> struct my_class_convert<S_image_drm_format_modifier_explicit_create_info_EXT> { using type = VkImageDrmFormatModifierExplicitCreateInfoEXT;};
-template<> struct my_class_convert<VkImageDrmFormatModifierExplicitCreateInfoEXT> { using type = S_image_drm_format_modifier_explicit_create_info_EXT;};
-struct		S_image_drm_format_modifier_explicit_create_info_EXT:VkImageDrmFormatModifierExplicitCreateInfoEXT{
-private:
-	using VkImageDrmFormatModifierExplicitCreateInfoEXT::sType;
-	using VkImageDrmFormatModifierExplicitCreateInfoEXT::pNext;
-public:
-	using VkImageDrmFormatModifierExplicitCreateInfoEXT::drmFormatModifier;
-	using VkImageDrmFormatModifierExplicitCreateInfoEXT::drmFormatModifierPlaneCount;
-	using VkImageDrmFormatModifierExplicitCreateInfoEXT::pPlaneLayouts;
-
-S_image_drm_format_modifier_explicit_create_info_EXT():VkImageDrmFormatModifierExplicitCreateInfoEXT{VK_STRUCTURE_TYPE_IMAGE_EXCPLICIT_DRM_FORMAT_MODIFIER_CREATE_INFO_EXT,nullptr}{}
-S_image_drm_format_modifier_explicit_create_info_EXT(
-	uint64_t drmFormatModifier_,
-	uint32_t drmFormatModifierPlaneCount_,
-	const S_subresource_layout * pPlaneLayouts_)
-	:VkImageDrmFormatModifierExplicitCreateInfoEXT{
-	VK_STRUCTURE_TYPE_IMAGE_EXCPLICIT_DRM_FORMAT_MODIFIER_CREATE_INFO_EXT
-	,nullptr
-	,drmFormatModifier_
-	,drmFormatModifierPlaneCount_
-	,pPlaneLayouts_}
-	{	}
-
-friend S_image_create_info;
-};
-#endif //LAKA_UNKNOW
 
 /*	VkImageCreateInfo
 ex:
@@ -7569,8 +6814,6 @@ ex:
 	VkImageSwapchainCreateInfoKHR
 	VkImageFormatListCreateInfoKHR
 	VkExternalFormatANDROID
-	VkImageDrmFormatModifierListCreateInfoEXT
-	VkImageDrmFormatModifierExplicitCreateInfoEXT
 */
 
 struct N_image_create_info{
@@ -7586,16 +6829,8 @@ N_image_create_info& n_image_format_list_create_info_KHR(S_image_format_list_cre
 #ifdef VK_USE_PLATFORM_ANDROID_KHR
 N_image_create_info& n_external_format_ANDROID(S_external_format_ANDROID const& next_);
 #endif
-#ifdef LAKA_UNKNOW
-N_image_create_info& n_image_drm_format_modifier_list_create_info_EXT(S_image_drm_format_modifier_list_create_info_EXT const& next_);
-#endif
-#ifdef LAKA_UNKNOW
-N_image_create_info& n_image_drm_format_modifier_explicit_create_info_EXT(S_image_drm_format_modifier_explicit_create_info_EXT const& next_);
-#endif
 };
-template<> struct my_class_convert<S_image_create_info> { using type = VkImageCreateInfo;};
-template<> struct my_class_convert<VkImageCreateInfo> { using type = S_image_create_info;};
-struct		S_image_create_info:VkImageCreateInfo{
+struct	S_image_create_info:VkImageCreateInfo{
 private:
 	using VkImageCreateInfo::sType;
 	using VkImageCreateInfo::pNext;
@@ -7645,7 +6880,11 @@ S_image_create_info(
 	,queueFamilyIndexCount_
 	,pQueueFamilyIndices_
 	,initialLayout_}
-	{	}
+	{
+	}
+
+	S_image_create_info& operator=(const VkImageCreateInfo& rhs){static_cast<VkImageCreateInfo&>(*this)=rhs; return *this;}
+	operator VkImageCreateInfo*()const{return const_cast<VkImageCreateInfo*>(static_cast<const VkImageCreateInfo*>(this));}
 
 S_image_create_info& n_dedicated_allocation_image_create_info_NV(S_dedicated_allocation_image_create_info_NV const& next_);
 S_image_create_info& n_external_memory_image_create_info_NV(S_external_memory_image_create_info_NV const& next_);
@@ -7655,21 +6894,27 @@ S_image_create_info& n_image_format_list_create_info_KHR(S_image_format_list_cre
 #ifdef VK_USE_PLATFORM_ANDROID_KHR
 S_image_create_info& n_external_format_ANDROID(S_external_format_ANDROID const& next_);
 #endif
-#ifdef LAKA_UNKNOW
-S_image_create_info& n_image_drm_format_modifier_list_create_info_EXT(S_image_drm_format_modifier_list_create_info_EXT const& next_);
-#endif
-#ifdef LAKA_UNKNOW
-S_image_create_info& n_image_drm_format_modifier_explicit_create_info_EXT(S_image_drm_format_modifier_explicit_create_info_EXT const& next_);
-#endif
 void set_pNext(N_image_create_info n_){pNext = n_;}
+};
+
+/*	VkSubresourceLayout
+(returnedonly)
+*/
+struct	S_subresource_layout:VkSubresourceLayout{
+	using VkSubresourceLayout::offset;
+	using VkSubresourceLayout::size;
+	using VkSubresourceLayout::rowPitch;
+	using VkSubresourceLayout::arrayPitch;
+	using VkSubresourceLayout::depthPitch;
+
+	S_subresource_layout& operator=(const VkSubresourceLayout& rhs){static_cast<VkSubresourceLayout&>(*this)=rhs; return *this;}
+	operator VkSubresourceLayout*()const{return const_cast<VkSubresourceLayout*>(static_cast<const VkSubresourceLayout*>(this));}
 };
 
 /*	VkImageViewUsageCreateInfo
 ex to: VkImageViewCreateInfo
 */
-template<> struct my_class_convert<S_image_view_usage_create_info> { using type = VkImageViewUsageCreateInfo;};
-template<> struct my_class_convert<VkImageViewUsageCreateInfo> { using type = S_image_view_usage_create_info;};
-struct		S_image_view_usage_create_info:VkImageViewUsageCreateInfo{
+struct	S_image_view_usage_create_info:VkImageViewUsageCreateInfo{
 private:
 	using VkImageViewUsageCreateInfo::sType;
 	using VkImageViewUsageCreateInfo::pNext;
@@ -7683,17 +6928,19 @@ S_image_view_usage_create_info(
 	VK_STRUCTURE_TYPE_IMAGE_VIEW_USAGE_CREATE_INFO
 	,nullptr
 	,usage_}
-	{	}
+	{
+	}
 
 friend S_image_view_create_info;
+
+	S_image_view_usage_create_info& operator=(const VkImageViewUsageCreateInfo& rhs){static_cast<VkImageViewUsageCreateInfo&>(*this)=rhs; return *this;}
+	operator VkImageViewUsageCreateInfo*()const{return const_cast<VkImageViewUsageCreateInfo*>(static_cast<const VkImageViewUsageCreateInfo*>(this));}
 };
 
 /*	VkSamplerYcbcrConversionInfo
 ex to: VkSamplerCreateInfo,VkImageViewCreateInfo
 */
-template<> struct my_class_convert<S_sampler_ycbcr_conversion_info> { using type = VkSamplerYcbcrConversionInfo;};
-template<> struct my_class_convert<VkSamplerYcbcrConversionInfo> { using type = S_sampler_ycbcr_conversion_info;};
-struct		S_sampler_ycbcr_conversion_info:VkSamplerYcbcrConversionInfo{
+struct	S_sampler_ycbcr_conversion_info:VkSamplerYcbcrConversionInfo{
 private:
 	using VkSamplerYcbcrConversionInfo::sType;
 	using VkSamplerYcbcrConversionInfo::pNext;
@@ -7707,41 +6954,20 @@ S_sampler_ycbcr_conversion_info(
 	VK_STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_INFO
 	,nullptr
 	,conversion_}
-	{	}
+	{
+	}
 
 friend S_sampler_create_info;
 friend S_image_view_create_info;
-};
 
-/*	VkImageViewASTCDecodeModeEXT
-ex to: VkImageViewCreateInfo
-*/
-template<> struct my_class_convert<S_image_view_astc_decode_mode_EXT> { using type = VkImageViewASTCDecodeModeEXT;};
-template<> struct my_class_convert<VkImageViewASTCDecodeModeEXT> { using type = S_image_view_astc_decode_mode_EXT;};
-struct		S_image_view_astc_decode_mode_EXT:VkImageViewASTCDecodeModeEXT{
-private:
-	using VkImageViewASTCDecodeModeEXT::sType;
-	using VkImageViewASTCDecodeModeEXT::pNext;
-public:
-	using VkImageViewASTCDecodeModeEXT::decodeMode;
-
-S_image_view_astc_decode_mode_EXT():VkImageViewASTCDecodeModeEXT{VK_STRUCTURE_TYPE_IMAGE_VIEW_ASTC_DECODE_MODE_EXT,nullptr}{}
-S_image_view_astc_decode_mode_EXT(
-	E_format decodeMode_)
-	:VkImageViewASTCDecodeModeEXT{
-	VK_STRUCTURE_TYPE_IMAGE_VIEW_ASTC_DECODE_MODE_EXT
-	,nullptr
-	,decodeMode_}
-	{	}
-
-friend S_image_view_create_info;
+	S_sampler_ycbcr_conversion_info& operator=(const VkSamplerYcbcrConversionInfo& rhs){static_cast<VkSamplerYcbcrConversionInfo&>(*this)=rhs; return *this;}
+	operator VkSamplerYcbcrConversionInfo*()const{return const_cast<VkSamplerYcbcrConversionInfo*>(static_cast<const VkSamplerYcbcrConversionInfo*>(this));}
 };
 
 /*	VkImageViewCreateInfo
 ex:
 	VkImageViewUsageCreateInfo
 	VkSamplerYcbcrConversionInfo
-	VkImageViewASTCDecodeModeEXT
 */
 
 struct N_image_view_create_info{
@@ -7751,11 +6977,8 @@ public:
 operator void*() { return pNext; }
 N_image_view_create_info& n_image_view_usage_create_info(S_image_view_usage_create_info const& next_);
 N_image_view_create_info& n_sampler_ycbcr_conversion_info(S_sampler_ycbcr_conversion_info const& next_);
-N_image_view_create_info& n_image_view_astc_decode_mode_EXT(S_image_view_astc_decode_mode_EXT const& next_);
 };
-template<> struct my_class_convert<S_image_view_create_info> { using type = VkImageViewCreateInfo;};
-template<> struct my_class_convert<VkImageViewCreateInfo> { using type = S_image_view_create_info;};
-struct		S_image_view_create_info:VkImageViewCreateInfo{
+struct	S_image_view_create_info:VkImageViewCreateInfo{
 private:
 	using VkImageViewCreateInfo::sType;
 	using VkImageViewCreateInfo::pNext;
@@ -7784,85 +7007,92 @@ S_image_view_create_info(
 	,format_
 	,components_
 	,subresourceRange_}
-	{	}
+	{
+	}
+
+	S_image_view_create_info& operator=(const VkImageViewCreateInfo& rhs){static_cast<VkImageViewCreateInfo&>(*this)=rhs; return *this;}
+	operator VkImageViewCreateInfo*()const{return const_cast<VkImageViewCreateInfo*>(static_cast<const VkImageViewCreateInfo*>(this));}
 
 S_image_view_create_info& n_image_view_usage_create_info(S_image_view_usage_create_info const& next_);
 S_image_view_create_info& n_sampler_ycbcr_conversion_info(S_sampler_ycbcr_conversion_info const& next_);
-S_image_view_create_info& n_image_view_astc_decode_mode_EXT(S_image_view_astc_decode_mode_EXT const& next_);
 void set_pNext(N_image_view_create_info n_){pNext = n_;}
 };
 
 /*	VkBufferCopy
 */
-template<> struct my_class_convert<S_buffer_copy> { using type = VkBufferCopy;};
-template<> struct my_class_convert<VkBufferCopy> { using type = S_buffer_copy;};
-struct		S_buffer_copy:VkBufferCopy{
+struct	S_buffer_copy:VkBufferCopy{
 	using VkBufferCopy::srcOffset;
 	using VkBufferCopy::dstOffset;
 	using VkBufferCopy::size;
+
+	S_buffer_copy& operator=(const VkBufferCopy& rhs){static_cast<VkBufferCopy&>(*this)=rhs; return *this;}
+	operator VkBufferCopy*()const{return const_cast<VkBufferCopy*>(static_cast<const VkBufferCopy*>(this));}
 };
 
 /*	VkSparseMemoryBind
 */
-template<> struct my_class_convert<S_sparse_memory_bind> { using type = VkSparseMemoryBind;};
-template<> struct my_class_convert<VkSparseMemoryBind> { using type = S_sparse_memory_bind;};
-struct		S_sparse_memory_bind:VkSparseMemoryBind{
+struct	S_sparse_memory_bind:VkSparseMemoryBind{
 	using VkSparseMemoryBind::resourceOffset;
 	using VkSparseMemoryBind::size;
 	using VkSparseMemoryBind::memory;
 	using VkSparseMemoryBind::memoryOffset;
 	using VkSparseMemoryBind::flags;
+
+	S_sparse_memory_bind& operator=(const VkSparseMemoryBind& rhs){static_cast<VkSparseMemoryBind&>(*this)=rhs; return *this;}
+	operator VkSparseMemoryBind*()const{return const_cast<VkSparseMemoryBind*>(static_cast<const VkSparseMemoryBind*>(this));}
 };
 
 /*	VkSparseImageMemoryBind
 */
-template<> struct my_class_convert<S_sparse_image_memory_bind> { using type = VkSparseImageMemoryBind;};
-template<> struct my_class_convert<VkSparseImageMemoryBind> { using type = S_sparse_image_memory_bind;};
-struct		S_sparse_image_memory_bind:VkSparseImageMemoryBind{
+struct	S_sparse_image_memory_bind:VkSparseImageMemoryBind{
 	using VkSparseImageMemoryBind::subresource;
 	using VkSparseImageMemoryBind::offset;
 	using VkSparseImageMemoryBind::extent;
 	using VkSparseImageMemoryBind::memory;
 	using VkSparseImageMemoryBind::memoryOffset;
 	using VkSparseImageMemoryBind::flags;
+
+	S_sparse_image_memory_bind& operator=(const VkSparseImageMemoryBind& rhs){static_cast<VkSparseImageMemoryBind&>(*this)=rhs; return *this;}
+	operator VkSparseImageMemoryBind*()const{return const_cast<VkSparseImageMemoryBind*>(static_cast<const VkSparseImageMemoryBind*>(this));}
 };
 
 /*	VkSparseBufferMemoryBindInfo
 */
-template<> struct my_class_convert<S_sparse_buffer_memory_bind_info> { using type = VkSparseBufferMemoryBindInfo;};
-template<> struct my_class_convert<VkSparseBufferMemoryBindInfo> { using type = S_sparse_buffer_memory_bind_info;};
-struct		S_sparse_buffer_memory_bind_info:VkSparseBufferMemoryBindInfo{
+struct	S_sparse_buffer_memory_bind_info:VkSparseBufferMemoryBindInfo{
 	using VkSparseBufferMemoryBindInfo::buffer;
 	using VkSparseBufferMemoryBindInfo::bindCount;
 	using VkSparseBufferMemoryBindInfo::pBinds;
+
+	S_sparse_buffer_memory_bind_info& operator=(const VkSparseBufferMemoryBindInfo& rhs){static_cast<VkSparseBufferMemoryBindInfo&>(*this)=rhs; return *this;}
+	operator VkSparseBufferMemoryBindInfo*()const{return const_cast<VkSparseBufferMemoryBindInfo*>(static_cast<const VkSparseBufferMemoryBindInfo*>(this));}
 };
 
 /*	VkSparseImageOpaqueMemoryBindInfo
 */
-template<> struct my_class_convert<S_sparse_image_opaque_memory_bind_info> { using type = VkSparseImageOpaqueMemoryBindInfo;};
-template<> struct my_class_convert<VkSparseImageOpaqueMemoryBindInfo> { using type = S_sparse_image_opaque_memory_bind_info;};
-struct		S_sparse_image_opaque_memory_bind_info:VkSparseImageOpaqueMemoryBindInfo{
+struct	S_sparse_image_opaque_memory_bind_info:VkSparseImageOpaqueMemoryBindInfo{
 	using VkSparseImageOpaqueMemoryBindInfo::image;
 	using VkSparseImageOpaqueMemoryBindInfo::bindCount;
 	using VkSparseImageOpaqueMemoryBindInfo::pBinds;
+
+	S_sparse_image_opaque_memory_bind_info& operator=(const VkSparseImageOpaqueMemoryBindInfo& rhs){static_cast<VkSparseImageOpaqueMemoryBindInfo&>(*this)=rhs; return *this;}
+	operator VkSparseImageOpaqueMemoryBindInfo*()const{return const_cast<VkSparseImageOpaqueMemoryBindInfo*>(static_cast<const VkSparseImageOpaqueMemoryBindInfo*>(this));}
 };
 
 /*	VkSparseImageMemoryBindInfo
 */
-template<> struct my_class_convert<S_sparse_image_memory_bind_info> { using type = VkSparseImageMemoryBindInfo;};
-template<> struct my_class_convert<VkSparseImageMemoryBindInfo> { using type = S_sparse_image_memory_bind_info;};
-struct		S_sparse_image_memory_bind_info:VkSparseImageMemoryBindInfo{
+struct	S_sparse_image_memory_bind_info:VkSparseImageMemoryBindInfo{
 	using VkSparseImageMemoryBindInfo::image;
 	using VkSparseImageMemoryBindInfo::bindCount;
 	using VkSparseImageMemoryBindInfo::pBinds;
+
+	S_sparse_image_memory_bind_info& operator=(const VkSparseImageMemoryBindInfo& rhs){static_cast<VkSparseImageMemoryBindInfo&>(*this)=rhs; return *this;}
+	operator VkSparseImageMemoryBindInfo*()const{return const_cast<VkSparseImageMemoryBindInfo*>(static_cast<const VkSparseImageMemoryBindInfo*>(this));}
 };
 
 /*	VkDeviceGroupBindSparseInfo
 ex to: VkBindSparseInfo
 */
-template<> struct my_class_convert<S_device_group_bind_sparse_info> { using type = VkDeviceGroupBindSparseInfo;};
-template<> struct my_class_convert<VkDeviceGroupBindSparseInfo> { using type = S_device_group_bind_sparse_info;};
-struct		S_device_group_bind_sparse_info:VkDeviceGroupBindSparseInfo{
+struct	S_device_group_bind_sparse_info:VkDeviceGroupBindSparseInfo{
 private:
 	using VkDeviceGroupBindSparseInfo::sType;
 	using VkDeviceGroupBindSparseInfo::pNext;
@@ -7879,9 +7109,13 @@ S_device_group_bind_sparse_info(
 	,nullptr
 	,resourceDeviceIndex_
 	,memoryDeviceIndex_}
-	{	}
+	{
+	}
 
 friend S_bind_sparse_info;
+
+	S_device_group_bind_sparse_info& operator=(const VkDeviceGroupBindSparseInfo& rhs){static_cast<VkDeviceGroupBindSparseInfo&>(*this)=rhs; return *this;}
+	operator VkDeviceGroupBindSparseInfo*()const{return const_cast<VkDeviceGroupBindSparseInfo*>(static_cast<const VkDeviceGroupBindSparseInfo*>(this));}
 };
 
 /*	VkBindSparseInfo
@@ -7896,9 +7130,7 @@ public:
 operator void*() { return pNext; }
 N_bind_sparse_info& n_device_group_bind_sparse_info(S_device_group_bind_sparse_info const& next_);
 };
-template<> struct my_class_convert<S_bind_sparse_info> { using type = VkBindSparseInfo;};
-template<> struct my_class_convert<VkBindSparseInfo> { using type = S_bind_sparse_info;};
-struct		S_bind_sparse_info:VkBindSparseInfo{
+struct	S_bind_sparse_info:VkBindSparseInfo{
 private:
 	using VkBindSparseInfo::sType;
 	using VkBindSparseInfo::pNext;
@@ -7939,7 +7171,11 @@ S_bind_sparse_info(
 	,pImageBinds_
 	,signalSemaphoreCount_
 	,pSignalSemaphores_}
-	{	}
+	{
+	}
+
+	S_bind_sparse_info& operator=(const VkBindSparseInfo& rhs){static_cast<VkBindSparseInfo&>(*this)=rhs; return *this;}
+	operator VkBindSparseInfo*()const{return const_cast<VkBindSparseInfo*>(static_cast<const VkBindSparseInfo*>(this));}
 
 S_bind_sparse_info& n_device_group_bind_sparse_info(S_device_group_bind_sparse_info const& next_);
 void set_pNext(N_bind_sparse_info n_){pNext = n_;}
@@ -7947,58 +7183,60 @@ void set_pNext(N_bind_sparse_info n_){pNext = n_;}
 
 /*	VkImageCopy
 */
-template<> struct my_class_convert<S_image_copy> { using type = VkImageCopy;};
-template<> struct my_class_convert<VkImageCopy> { using type = S_image_copy;};
-struct		S_image_copy:VkImageCopy{
+struct	S_image_copy:VkImageCopy{
 	using VkImageCopy::srcSubresource;
 	using VkImageCopy::srcOffset;
 	using VkImageCopy::dstSubresource;
 	using VkImageCopy::dstOffset;
 	using VkImageCopy::extent;
+
+	S_image_copy& operator=(const VkImageCopy& rhs){static_cast<VkImageCopy&>(*this)=rhs; return *this;}
+	operator VkImageCopy*()const{return const_cast<VkImageCopy*>(static_cast<const VkImageCopy*>(this));}
 };
 
 /*	VkImageBlit
 */
-template<> struct my_class_convert<S_image_blit> { using type = VkImageBlit;};
-template<> struct my_class_convert<VkImageBlit> { using type = S_image_blit;};
-struct		S_image_blit:VkImageBlit{
+struct	S_image_blit:VkImageBlit{
 	using VkImageBlit::srcSubresource;
 	using VkImageBlit::srcOffsets;
 	using VkImageBlit::dstSubresource;
 	using VkImageBlit::dstOffsets;
+
+	S_image_blit& operator=(const VkImageBlit& rhs){static_cast<VkImageBlit&>(*this)=rhs; return *this;}
+	operator VkImageBlit*()const{return const_cast<VkImageBlit*>(static_cast<const VkImageBlit*>(this));}
 };
 
 /*	VkBufferImageCopy
 */
-template<> struct my_class_convert<S_buffer_image_copy> { using type = VkBufferImageCopy;};
-template<> struct my_class_convert<VkBufferImageCopy> { using type = S_buffer_image_copy;};
-struct		S_buffer_image_copy:VkBufferImageCopy{
+struct	S_buffer_image_copy:VkBufferImageCopy{
 	using VkBufferImageCopy::bufferOffset;
 	using VkBufferImageCopy::bufferRowLength;
 	using VkBufferImageCopy::bufferImageHeight;
 	using VkBufferImageCopy::imageSubresource;
 	using VkBufferImageCopy::imageOffset;
 	using VkBufferImageCopy::imageExtent;
+
+	S_buffer_image_copy& operator=(const VkBufferImageCopy& rhs){static_cast<VkBufferImageCopy&>(*this)=rhs; return *this;}
+	operator VkBufferImageCopy*()const{return const_cast<VkBufferImageCopy*>(static_cast<const VkBufferImageCopy*>(this));}
 };
 
 /*	VkImageResolve
 */
-template<> struct my_class_convert<S_image_resolve> { using type = VkImageResolve;};
-template<> struct my_class_convert<VkImageResolve> { using type = S_image_resolve;};
-struct		S_image_resolve:VkImageResolve{
+struct	S_image_resolve:VkImageResolve{
 	using VkImageResolve::srcSubresource;
 	using VkImageResolve::srcOffset;
 	using VkImageResolve::dstSubresource;
 	using VkImageResolve::dstOffset;
 	using VkImageResolve::extent;
+
+	S_image_resolve& operator=(const VkImageResolve& rhs){static_cast<VkImageResolve&>(*this)=rhs; return *this;}
+	operator VkImageResolve*()const{return const_cast<VkImageResolve*>(static_cast<const VkImageResolve*>(this));}
 };
 
 /*	VkShaderModuleValidationCacheCreateInfoEXT
 ex to: VkShaderModuleCreateInfo
 */
-template<> struct my_class_convert<S_shader_module_validation_cache_create_info_EXT> { using type = VkShaderModuleValidationCacheCreateInfoEXT;};
-template<> struct my_class_convert<VkShaderModuleValidationCacheCreateInfoEXT> { using type = S_shader_module_validation_cache_create_info_EXT;};
-struct		S_shader_module_validation_cache_create_info_EXT:VkShaderModuleValidationCacheCreateInfoEXT{
+struct	S_shader_module_validation_cache_create_info_EXT:VkShaderModuleValidationCacheCreateInfoEXT{
 private:
 	using VkShaderModuleValidationCacheCreateInfoEXT::sType;
 	using VkShaderModuleValidationCacheCreateInfoEXT::pNext;
@@ -8012,9 +7250,13 @@ S_shader_module_validation_cache_create_info_EXT(
 	VK_STRUCTURE_TYPE_SHADER_MODULE_VALIDATION_CACHE_CREATE_INFO_EXT
 	,nullptr
 	,validationCache_}
-	{	}
+	{
+	}
 
 friend S_shader_module_create_info;
+
+	S_shader_module_validation_cache_create_info_EXT& operator=(const VkShaderModuleValidationCacheCreateInfoEXT& rhs){static_cast<VkShaderModuleValidationCacheCreateInfoEXT&>(*this)=rhs; return *this;}
+	operator VkShaderModuleValidationCacheCreateInfoEXT*()const{return const_cast<VkShaderModuleValidationCacheCreateInfoEXT*>(static_cast<const VkShaderModuleValidationCacheCreateInfoEXT*>(this));}
 };
 
 /*	VkShaderModuleCreateInfo
@@ -8029,9 +7271,7 @@ public:
 operator void*() { return pNext; }
 N_shader_module_create_info& n_shader_module_validation_cache_create_info_EXT(S_shader_module_validation_cache_create_info_EXT const& next_);
 };
-template<> struct my_class_convert<S_shader_module_create_info> { using type = VkShaderModuleCreateInfo;};
-template<> struct my_class_convert<VkShaderModuleCreateInfo> { using type = S_shader_module_create_info;};
-struct		S_shader_module_create_info:VkShaderModuleCreateInfo{
+struct	S_shader_module_create_info:VkShaderModuleCreateInfo{
 private:
 	using VkShaderModuleCreateInfo::sType;
 	using VkShaderModuleCreateInfo::pNext;
@@ -8051,7 +7291,11 @@ S_shader_module_create_info(
 	,flags_
 	,codeSize_
 	,pCode_}
-	{	}
+	{
+	}
+
+	S_shader_module_create_info& operator=(const VkShaderModuleCreateInfo& rhs){static_cast<VkShaderModuleCreateInfo&>(*this)=rhs; return *this;}
+	operator VkShaderModuleCreateInfo*()const{return const_cast<VkShaderModuleCreateInfo*>(static_cast<const VkShaderModuleCreateInfo*>(this));}
 
 S_shader_module_create_info& n_shader_module_validation_cache_create_info_EXT(S_shader_module_validation_cache_create_info_EXT const& next_);
 void set_pNext(N_shader_module_create_info n_){pNext = n_;}
@@ -8059,22 +7303,21 @@ void set_pNext(N_shader_module_create_info n_){pNext = n_;}
 
 /*	VkDescriptorSetLayoutBinding
 */
-template<> struct my_class_convert<S_descriptor_set_layout_binding> { using type = VkDescriptorSetLayoutBinding;};
-template<> struct my_class_convert<VkDescriptorSetLayoutBinding> { using type = S_descriptor_set_layout_binding;};
-struct		S_descriptor_set_layout_binding:VkDescriptorSetLayoutBinding{
+struct	S_descriptor_set_layout_binding:VkDescriptorSetLayoutBinding{
 	using VkDescriptorSetLayoutBinding::binding;
 	using VkDescriptorSetLayoutBinding::descriptorType;
 	using VkDescriptorSetLayoutBinding::descriptorCount;
 	using VkDescriptorSetLayoutBinding::stageFlags;
 	using VkDescriptorSetLayoutBinding::pImmutableSamplers;
+
+	S_descriptor_set_layout_binding& operator=(const VkDescriptorSetLayoutBinding& rhs){static_cast<VkDescriptorSetLayoutBinding&>(*this)=rhs; return *this;}
+	operator VkDescriptorSetLayoutBinding*()const{return const_cast<VkDescriptorSetLayoutBinding*>(static_cast<const VkDescriptorSetLayoutBinding*>(this));}
 };
 
 /*	VkDescriptorSetLayoutBindingFlagsCreateInfoEXT
 ex to: VkDescriptorSetLayoutCreateInfo
 */
-template<> struct my_class_convert<S_descriptor_set_layout_binding_flags_create_info_EXT> { using type = VkDescriptorSetLayoutBindingFlagsCreateInfoEXT;};
-template<> struct my_class_convert<VkDescriptorSetLayoutBindingFlagsCreateInfoEXT> { using type = S_descriptor_set_layout_binding_flags_create_info_EXT;};
-struct		S_descriptor_set_layout_binding_flags_create_info_EXT:VkDescriptorSetLayoutBindingFlagsCreateInfoEXT{
+struct	S_descriptor_set_layout_binding_flags_create_info_EXT:VkDescriptorSetLayoutBindingFlagsCreateInfoEXT{
 private:
 	using VkDescriptorSetLayoutBindingFlagsCreateInfoEXT::sType;
 	using VkDescriptorSetLayoutBindingFlagsCreateInfoEXT::pNext;
@@ -8090,10 +7333,14 @@ S_descriptor_set_layout_binding_flags_create_info_EXT(
 	VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_BINDING_FLAGS_CREATE_INFO_EXT
 	,nullptr
 	,bindingCount_
-	,pBindingFlags_}
-	{	}
+	,*pBindingFlags_}
+	{
+	}
 
 friend S_descriptor_set_layout_create_info;
+
+	S_descriptor_set_layout_binding_flags_create_info_EXT& operator=(const VkDescriptorSetLayoutBindingFlagsCreateInfoEXT& rhs){static_cast<VkDescriptorSetLayoutBindingFlagsCreateInfoEXT&>(*this)=rhs; return *this;}
+	operator VkDescriptorSetLayoutBindingFlagsCreateInfoEXT*()const{return const_cast<VkDescriptorSetLayoutBindingFlagsCreateInfoEXT*>(static_cast<const VkDescriptorSetLayoutBindingFlagsCreateInfoEXT*>(this));}
 };
 
 /*	VkDescriptorSetLayoutCreateInfo
@@ -8108,9 +7355,7 @@ public:
 operator void*() { return pNext; }
 N_descriptor_set_layout_create_info& n_descriptor_set_layout_binding_flags_create_info_EXT(S_descriptor_set_layout_binding_flags_create_info_EXT const& next_);
 };
-template<> struct my_class_convert<S_descriptor_set_layout_create_info> { using type = VkDescriptorSetLayoutCreateInfo;};
-template<> struct my_class_convert<VkDescriptorSetLayoutCreateInfo> { using type = S_descriptor_set_layout_create_info;};
-struct		S_descriptor_set_layout_create_info:VkDescriptorSetLayoutCreateInfo{
+struct	S_descriptor_set_layout_create_info:VkDescriptorSetLayoutCreateInfo{
 private:
 	using VkDescriptorSetLayoutCreateInfo::sType;
 	using VkDescriptorSetLayoutCreateInfo::pNext;
@@ -8127,10 +7372,14 @@ S_descriptor_set_layout_create_info(
 	:VkDescriptorSetLayoutCreateInfo{
 	VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_CREATE_INFO
 	,nullptr
-	,flags_
+	,static_cast<VkFlags>(flags_)
 	,bindingCount_
 	,pBindings_}
-	{	}
+	{
+	}
+
+	S_descriptor_set_layout_create_info& operator=(const VkDescriptorSetLayoutCreateInfo& rhs){static_cast<VkDescriptorSetLayoutCreateInfo&>(*this)=rhs; return *this;}
+	operator VkDescriptorSetLayoutCreateInfo*()const{return const_cast<VkDescriptorSetLayoutCreateInfo*>(static_cast<const VkDescriptorSetLayoutCreateInfo*>(this));}
 
 S_descriptor_set_layout_create_info& n_descriptor_set_layout_binding_flags_create_info_EXT(S_descriptor_set_layout_binding_flags_create_info_EXT const& next_);
 void set_pNext(N_descriptor_set_layout_create_info n_){pNext = n_;}
@@ -8138,52 +7387,17 @@ void set_pNext(N_descriptor_set_layout_create_info n_){pNext = n_;}
 
 /*	VkDescriptorPoolSize
 */
-template<> struct my_class_convert<S_descriptor_pool_size> { using type = VkDescriptorPoolSize;};
-template<> struct my_class_convert<VkDescriptorPoolSize> { using type = S_descriptor_pool_size;};
-struct		S_descriptor_pool_size:VkDescriptorPoolSize{
+struct	S_descriptor_pool_size:VkDescriptorPoolSize{
 	using VkDescriptorPoolSize::type;
 	using VkDescriptorPoolSize::descriptorCount;
-};
 
-/*	VkDescriptorPoolInlineUniformBlockCreateInfoEXT
-ex to: VkDescriptorPoolCreateInfo
-*/
-template<> struct my_class_convert<S_descriptor_pool_inline_uniform_block_create_info_EXT> { using type = VkDescriptorPoolInlineUniformBlockCreateInfoEXT;};
-template<> struct my_class_convert<VkDescriptorPoolInlineUniformBlockCreateInfoEXT> { using type = S_descriptor_pool_inline_uniform_block_create_info_EXT;};
-struct		S_descriptor_pool_inline_uniform_block_create_info_EXT:VkDescriptorPoolInlineUniformBlockCreateInfoEXT{
-private:
-	using VkDescriptorPoolInlineUniformBlockCreateInfoEXT::sType;
-	using VkDescriptorPoolInlineUniformBlockCreateInfoEXT::pNext;
-public:
-	using VkDescriptorPoolInlineUniformBlockCreateInfoEXT::maxInlineUniformBlockBindings;
-
-S_descriptor_pool_inline_uniform_block_create_info_EXT():VkDescriptorPoolInlineUniformBlockCreateInfoEXT{VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_INLINE_UNIFORM_BLOCK_CREATE_INFO_EXT,nullptr}{}
-S_descriptor_pool_inline_uniform_block_create_info_EXT(
-	uint32_t maxInlineUniformBlockBindings_)
-	:VkDescriptorPoolInlineUniformBlockCreateInfoEXT{
-	VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_INLINE_UNIFORM_BLOCK_CREATE_INFO_EXT
-	,nullptr
-	,maxInlineUniformBlockBindings_}
-	{	}
-
-friend S_descriptor_pool_create_info;
+	S_descriptor_pool_size& operator=(const VkDescriptorPoolSize& rhs){static_cast<VkDescriptorPoolSize&>(*this)=rhs; return *this;}
+	operator VkDescriptorPoolSize*()const{return const_cast<VkDescriptorPoolSize*>(static_cast<const VkDescriptorPoolSize*>(this));}
 };
 
 /*	VkDescriptorPoolCreateInfo
-ex:
-	VkDescriptorPoolInlineUniformBlockCreateInfoEXT
 */
-
-struct N_descriptor_pool_create_info{
-private:
-	void* pNext = nullptr;
-public:
-operator void*() { return pNext; }
-N_descriptor_pool_create_info& n_descriptor_pool_inline_uniform_block_create_info_EXT(S_descriptor_pool_inline_uniform_block_create_info_EXT const& next_);
-};
-template<> struct my_class_convert<S_descriptor_pool_create_info> { using type = VkDescriptorPoolCreateInfo;};
-template<> struct my_class_convert<VkDescriptorPoolCreateInfo> { using type = S_descriptor_pool_create_info;};
-struct		S_descriptor_pool_create_info:VkDescriptorPoolCreateInfo{
+struct	S_descriptor_pool_create_info:VkDescriptorPoolCreateInfo{
 private:
 	using VkDescriptorPoolCreateInfo::sType;
 	using VkDescriptorPoolCreateInfo::pNext;
@@ -8206,18 +7420,17 @@ S_descriptor_pool_create_info(
 	,maxSets_
 	,poolSizeCount_
 	,pPoolSizes_}
-	{	}
+	{
+	}
 
-S_descriptor_pool_create_info& n_descriptor_pool_inline_uniform_block_create_info_EXT(S_descriptor_pool_inline_uniform_block_create_info_EXT const& next_);
-void set_pNext(N_descriptor_pool_create_info n_){pNext = n_;}
+	S_descriptor_pool_create_info& operator=(const VkDescriptorPoolCreateInfo& rhs){static_cast<VkDescriptorPoolCreateInfo&>(*this)=rhs; return *this;}
+	operator VkDescriptorPoolCreateInfo*()const{return const_cast<VkDescriptorPoolCreateInfo*>(static_cast<const VkDescriptorPoolCreateInfo*>(this));}
 };
 
 /*	VkDescriptorSetVariableDescriptorCountAllocateInfoEXT
 ex to: VkDescriptorSetAllocateInfo
 */
-template<> struct my_class_convert<S_descriptor_set_variable_descriptor_count_allocate_info_EXT> { using type = VkDescriptorSetVariableDescriptorCountAllocateInfoEXT;};
-template<> struct my_class_convert<VkDescriptorSetVariableDescriptorCountAllocateInfoEXT> { using type = S_descriptor_set_variable_descriptor_count_allocate_info_EXT;};
-struct		S_descriptor_set_variable_descriptor_count_allocate_info_EXT:VkDescriptorSetVariableDescriptorCountAllocateInfoEXT{
+struct	S_descriptor_set_variable_descriptor_count_allocate_info_EXT:VkDescriptorSetVariableDescriptorCountAllocateInfoEXT{
 private:
 	using VkDescriptorSetVariableDescriptorCountAllocateInfoEXT::sType;
 	using VkDescriptorSetVariableDescriptorCountAllocateInfoEXT::pNext;
@@ -8234,9 +7447,13 @@ S_descriptor_set_variable_descriptor_count_allocate_info_EXT(
 	,nullptr
 	,descriptorSetCount_
 	,pDescriptorCounts_}
-	{	}
+	{
+	}
 
 friend S_descriptor_set_allocate_info;
+
+	S_descriptor_set_variable_descriptor_count_allocate_info_EXT& operator=(const VkDescriptorSetVariableDescriptorCountAllocateInfoEXT& rhs){static_cast<VkDescriptorSetVariableDescriptorCountAllocateInfoEXT&>(*this)=rhs; return *this;}
+	operator VkDescriptorSetVariableDescriptorCountAllocateInfoEXT*()const{return const_cast<VkDescriptorSetVariableDescriptorCountAllocateInfoEXT*>(static_cast<const VkDescriptorSetVariableDescriptorCountAllocateInfoEXT*>(this));}
 };
 
 /*	VkDescriptorSetAllocateInfo
@@ -8251,9 +7468,7 @@ public:
 operator void*() { return pNext; }
 N_descriptor_set_allocate_info& n_descriptor_set_variable_descriptor_count_allocate_info_EXT(S_descriptor_set_variable_descriptor_count_allocate_info_EXT const& next_);
 };
-template<> struct my_class_convert<S_descriptor_set_allocate_info> { using type = VkDescriptorSetAllocateInfo;};
-template<> struct my_class_convert<VkDescriptorSetAllocateInfo> { using type = S_descriptor_set_allocate_info;};
-struct		S_descriptor_set_allocate_info:VkDescriptorSetAllocateInfo{
+struct	S_descriptor_set_allocate_info:VkDescriptorSetAllocateInfo{
 private:
 	using VkDescriptorSetAllocateInfo::sType;
 	using VkDescriptorSetAllocateInfo::pNext;
@@ -8273,7 +7488,11 @@ S_descriptor_set_allocate_info(
 	,descriptorPool_
 	,descriptorSetCount_
 	,pSetLayouts_}
-	{	}
+	{
+	}
+
+	S_descriptor_set_allocate_info& operator=(const VkDescriptorSetAllocateInfo& rhs){static_cast<VkDescriptorSetAllocateInfo&>(*this)=rhs; return *this;}
+	operator VkDescriptorSetAllocateInfo*()const{return const_cast<VkDescriptorSetAllocateInfo*>(static_cast<const VkDescriptorSetAllocateInfo*>(this));}
 
 S_descriptor_set_allocate_info& n_descriptor_set_variable_descriptor_count_allocate_info_EXT(S_descriptor_set_variable_descriptor_count_allocate_info_EXT const& next_);
 void set_pNext(N_descriptor_set_allocate_info n_){pNext = n_;}
@@ -8281,30 +7500,30 @@ void set_pNext(N_descriptor_set_allocate_info n_){pNext = n_;}
 
 /*	VkSpecializationMapEntry
 */
-template<> struct my_class_convert<S_specialization_map_entry> { using type = VkSpecializationMapEntry;};
-template<> struct my_class_convert<VkSpecializationMapEntry> { using type = S_specialization_map_entry;};
-struct		S_specialization_map_entry:VkSpecializationMapEntry{
+struct	S_specialization_map_entry:VkSpecializationMapEntry{
 	using VkSpecializationMapEntry::constantID;
 	using VkSpecializationMapEntry::offset;
 	using VkSpecializationMapEntry::size;
+
+	S_specialization_map_entry& operator=(const VkSpecializationMapEntry& rhs){static_cast<VkSpecializationMapEntry&>(*this)=rhs; return *this;}
+	operator VkSpecializationMapEntry*()const{return const_cast<VkSpecializationMapEntry*>(static_cast<const VkSpecializationMapEntry*>(this));}
 };
 
 /*	VkSpecializationInfo
 */
-template<> struct my_class_convert<S_specialization_info> { using type = VkSpecializationInfo;};
-template<> struct my_class_convert<VkSpecializationInfo> { using type = S_specialization_info;};
-struct		S_specialization_info:VkSpecializationInfo{
+struct	S_specialization_info:VkSpecializationInfo{
 	using VkSpecializationInfo::mapEntryCount;
 	using VkSpecializationInfo::pMapEntries;
 	using VkSpecializationInfo::dataSize;
 	using VkSpecializationInfo::pData;
+
+	S_specialization_info& operator=(const VkSpecializationInfo& rhs){static_cast<VkSpecializationInfo&>(*this)=rhs; return *this;}
+	operator VkSpecializationInfo*()const{return const_cast<VkSpecializationInfo*>(static_cast<const VkSpecializationInfo*>(this));}
 };
 
 /*	VkPipelineShaderStageCreateInfo
 */
-template<> struct my_class_convert<S_pipeline_shader_stage_create_info> { using type = VkPipelineShaderStageCreateInfo;};
-template<> struct my_class_convert<VkPipelineShaderStageCreateInfo> { using type = S_pipeline_shader_stage_create_info;};
-struct		S_pipeline_shader_stage_create_info:VkPipelineShaderStageCreateInfo{
+struct	S_pipeline_shader_stage_create_info:VkPipelineShaderStageCreateInfo{
 private:
 	using VkPipelineShaderStageCreateInfo::sType;
 	using VkPipelineShaderStageCreateInfo::pNext;
@@ -8330,14 +7549,16 @@ S_pipeline_shader_stage_create_info(
 	,module_
 	,pName_
 	,pSpecializationInfo_}
-	{	}
+	{
+	}
+
+	S_pipeline_shader_stage_create_info& operator=(const VkPipelineShaderStageCreateInfo& rhs){static_cast<VkPipelineShaderStageCreateInfo&>(*this)=rhs; return *this;}
+	operator VkPipelineShaderStageCreateInfo*()const{return const_cast<VkPipelineShaderStageCreateInfo*>(static_cast<const VkPipelineShaderStageCreateInfo*>(this));}
 };
 
 /*	VkComputePipelineCreateInfo
 */
-template<> struct my_class_convert<S_compute_pipeline_create_info> { using type = VkComputePipelineCreateInfo;};
-template<> struct my_class_convert<VkComputePipelineCreateInfo> { using type = S_compute_pipeline_create_info;};
-struct		S_compute_pipeline_create_info:VkComputePipelineCreateInfo{
+struct	S_compute_pipeline_create_info:VkComputePipelineCreateInfo{
 private:
 	using VkComputePipelineCreateInfo::sType;
 	using VkComputePipelineCreateInfo::pNext;
@@ -8363,45 +7584,50 @@ S_compute_pipeline_create_info(
 	,layout_
 	,basePipelineHandle_
 	,basePipelineIndex_}
-	{	}
+	{
+	}
+
+	S_compute_pipeline_create_info& operator=(const VkComputePipelineCreateInfo& rhs){static_cast<VkComputePipelineCreateInfo&>(*this)=rhs; return *this;}
+	operator VkComputePipelineCreateInfo*()const{return const_cast<VkComputePipelineCreateInfo*>(static_cast<const VkComputePipelineCreateInfo*>(this));}
 };
 
 /*	VkVertexInputBindingDescription
 */
-template<> struct my_class_convert<S_vertex_input_binding_description> { using type = VkVertexInputBindingDescription;};
-template<> struct my_class_convert<VkVertexInputBindingDescription> { using type = S_vertex_input_binding_description;};
-struct		S_vertex_input_binding_description:VkVertexInputBindingDescription{
+struct	S_vertex_input_binding_description:VkVertexInputBindingDescription{
 	using VkVertexInputBindingDescription::binding;
 	using VkVertexInputBindingDescription::stride;
 	using VkVertexInputBindingDescription::inputRate;
+
+	S_vertex_input_binding_description& operator=(const VkVertexInputBindingDescription& rhs){static_cast<VkVertexInputBindingDescription&>(*this)=rhs; return *this;}
+	operator VkVertexInputBindingDescription*()const{return const_cast<VkVertexInputBindingDescription*>(static_cast<const VkVertexInputBindingDescription*>(this));}
 };
 
 /*	VkVertexInputAttributeDescription
 */
-template<> struct my_class_convert<S_vertex_input_attribute_description> { using type = VkVertexInputAttributeDescription;};
-template<> struct my_class_convert<VkVertexInputAttributeDescription> { using type = S_vertex_input_attribute_description;};
-struct		S_vertex_input_attribute_description:VkVertexInputAttributeDescription{
+struct	S_vertex_input_attribute_description:VkVertexInputAttributeDescription{
 	using VkVertexInputAttributeDescription::location;
 	using VkVertexInputAttributeDescription::binding;
 	using VkVertexInputAttributeDescription::format;
 	using VkVertexInputAttributeDescription::offset;
+
+	S_vertex_input_attribute_description& operator=(const VkVertexInputAttributeDescription& rhs){static_cast<VkVertexInputAttributeDescription&>(*this)=rhs; return *this;}
+	operator VkVertexInputAttributeDescription*()const{return const_cast<VkVertexInputAttributeDescription*>(static_cast<const VkVertexInputAttributeDescription*>(this));}
 };
 
 /*	VkVertexInputBindingDivisorDescriptionEXT
 */
-template<> struct my_class_convert<S_vertex_input_binding_divisor_description_EXT> { using type = VkVertexInputBindingDivisorDescriptionEXT;};
-template<> struct my_class_convert<VkVertexInputBindingDivisorDescriptionEXT> { using type = S_vertex_input_binding_divisor_description_EXT;};
-struct		S_vertex_input_binding_divisor_description_EXT:VkVertexInputBindingDivisorDescriptionEXT{
+struct	S_vertex_input_binding_divisor_description_EXT:VkVertexInputBindingDivisorDescriptionEXT{
 	using VkVertexInputBindingDivisorDescriptionEXT::binding;
 	using VkVertexInputBindingDivisorDescriptionEXT::divisor;
+
+	S_vertex_input_binding_divisor_description_EXT& operator=(const VkVertexInputBindingDivisorDescriptionEXT& rhs){static_cast<VkVertexInputBindingDivisorDescriptionEXT&>(*this)=rhs; return *this;}
+	operator VkVertexInputBindingDivisorDescriptionEXT*()const{return const_cast<VkVertexInputBindingDivisorDescriptionEXT*>(static_cast<const VkVertexInputBindingDivisorDescriptionEXT*>(this));}
 };
 
 /*	VkPipelineVertexInputDivisorStateCreateInfoEXT
 ex to: VkPipelineVertexInputStateCreateInfo
 */
-template<> struct my_class_convert<S_pipeline_vertex_input_divisor_state_create_info_EXT> { using type = VkPipelineVertexInputDivisorStateCreateInfoEXT;};
-template<> struct my_class_convert<VkPipelineVertexInputDivisorStateCreateInfoEXT> { using type = S_pipeline_vertex_input_divisor_state_create_info_EXT;};
-struct		S_pipeline_vertex_input_divisor_state_create_info_EXT:VkPipelineVertexInputDivisorStateCreateInfoEXT{
+struct	S_pipeline_vertex_input_divisor_state_create_info_EXT:VkPipelineVertexInputDivisorStateCreateInfoEXT{
 private:
 	using VkPipelineVertexInputDivisorStateCreateInfoEXT::sType;
 	using VkPipelineVertexInputDivisorStateCreateInfoEXT::pNext;
@@ -8418,9 +7644,13 @@ S_pipeline_vertex_input_divisor_state_create_info_EXT(
 	,nullptr
 	,vertexBindingDivisorCount_
 	,pVertexBindingDivisors_}
-	{	}
+	{
+	}
 
 friend S_pipeline_vertex_input_state_create_info;
+
+	S_pipeline_vertex_input_divisor_state_create_info_EXT& operator=(const VkPipelineVertexInputDivisorStateCreateInfoEXT& rhs){static_cast<VkPipelineVertexInputDivisorStateCreateInfoEXT&>(*this)=rhs; return *this;}
+	operator VkPipelineVertexInputDivisorStateCreateInfoEXT*()const{return const_cast<VkPipelineVertexInputDivisorStateCreateInfoEXT*>(static_cast<const VkPipelineVertexInputDivisorStateCreateInfoEXT*>(this));}
 };
 
 /*	VkPipelineVertexInputStateCreateInfo
@@ -8435,9 +7665,7 @@ public:
 operator void*() { return pNext; }
 N_pipeline_vertex_input_state_create_info& n_pipeline_vertex_input_divisor_state_create_info_EXT(S_pipeline_vertex_input_divisor_state_create_info_EXT const& next_);
 };
-template<> struct my_class_convert<S_pipeline_vertex_input_state_create_info> { using type = VkPipelineVertexInputStateCreateInfo;};
-template<> struct my_class_convert<VkPipelineVertexInputStateCreateInfo> { using type = S_pipeline_vertex_input_state_create_info;};
-struct		S_pipeline_vertex_input_state_create_info:VkPipelineVertexInputStateCreateInfo{
+struct	S_pipeline_vertex_input_state_create_info:VkPipelineVertexInputStateCreateInfo{
 private:
 	using VkPipelineVertexInputStateCreateInfo::sType;
 	using VkPipelineVertexInputStateCreateInfo::pNext;
@@ -8463,7 +7691,11 @@ S_pipeline_vertex_input_state_create_info(
 	,pVertexBindingDescriptions_
 	,vertexAttributeDescriptionCount_
 	,pVertexAttributeDescriptions_}
-	{	}
+	{
+	}
+
+	S_pipeline_vertex_input_state_create_info& operator=(const VkPipelineVertexInputStateCreateInfo& rhs){static_cast<VkPipelineVertexInputStateCreateInfo&>(*this)=rhs; return *this;}
+	operator VkPipelineVertexInputStateCreateInfo*()const{return const_cast<VkPipelineVertexInputStateCreateInfo*>(static_cast<const VkPipelineVertexInputStateCreateInfo*>(this));}
 
 S_pipeline_vertex_input_state_create_info& n_pipeline_vertex_input_divisor_state_create_info_EXT(S_pipeline_vertex_input_divisor_state_create_info_EXT const& next_);
 void set_pNext(N_pipeline_vertex_input_state_create_info n_){pNext = n_;}
@@ -8471,9 +7703,7 @@ void set_pNext(N_pipeline_vertex_input_state_create_info n_){pNext = n_;}
 
 /*	VkPipelineInputAssemblyStateCreateInfo
 */
-template<> struct my_class_convert<S_pipeline_input_assembly_state_create_info> { using type = VkPipelineInputAssemblyStateCreateInfo;};
-template<> struct my_class_convert<VkPipelineInputAssemblyStateCreateInfo> { using type = S_pipeline_input_assembly_state_create_info;};
-struct		S_pipeline_input_assembly_state_create_info:VkPipelineInputAssemblyStateCreateInfo{
+struct	S_pipeline_input_assembly_state_create_info:VkPipelineInputAssemblyStateCreateInfo{
 private:
 	using VkPipelineInputAssemblyStateCreateInfo::sType;
 	using VkPipelineInputAssemblyStateCreateInfo::pNext;
@@ -8493,15 +7723,17 @@ S_pipeline_input_assembly_state_create_info(
 	,flags_
 	,topology_
 	,primitiveRestartEnable_}
-	{	}
+	{
+	}
+
+	S_pipeline_input_assembly_state_create_info& operator=(const VkPipelineInputAssemblyStateCreateInfo& rhs){static_cast<VkPipelineInputAssemblyStateCreateInfo&>(*this)=rhs; return *this;}
+	operator VkPipelineInputAssemblyStateCreateInfo*()const{return const_cast<VkPipelineInputAssemblyStateCreateInfo*>(static_cast<const VkPipelineInputAssemblyStateCreateInfo*>(this));}
 };
 
 /*	VkPipelineTessellationDomainOriginStateCreateInfo
 ex to: VkPipelineTessellationStateCreateInfo
 */
-template<> struct my_class_convert<S_pipeline_tessellation_domain_origin_state_create_info> { using type = VkPipelineTessellationDomainOriginStateCreateInfo;};
-template<> struct my_class_convert<VkPipelineTessellationDomainOriginStateCreateInfo> { using type = S_pipeline_tessellation_domain_origin_state_create_info;};
-struct		S_pipeline_tessellation_domain_origin_state_create_info:VkPipelineTessellationDomainOriginStateCreateInfo{
+struct	S_pipeline_tessellation_domain_origin_state_create_info:VkPipelineTessellationDomainOriginStateCreateInfo{
 private:
 	using VkPipelineTessellationDomainOriginStateCreateInfo::sType;
 	using VkPipelineTessellationDomainOriginStateCreateInfo::pNext;
@@ -8515,9 +7747,13 @@ S_pipeline_tessellation_domain_origin_state_create_info(
 	VK_STRUCTURE_TYPE_PIPELINE_TESSELLATION_DOMAIN_ORIGIN_STATE_CREATE_INFO
 	,nullptr
 	,domainOrigin_}
-	{	}
+	{
+	}
 
 friend S_pipeline_tessellation_state_create_info;
+
+	S_pipeline_tessellation_domain_origin_state_create_info& operator=(const VkPipelineTessellationDomainOriginStateCreateInfo& rhs){static_cast<VkPipelineTessellationDomainOriginStateCreateInfo&>(*this)=rhs; return *this;}
+	operator VkPipelineTessellationDomainOriginStateCreateInfo*()const{return const_cast<VkPipelineTessellationDomainOriginStateCreateInfo*>(static_cast<const VkPipelineTessellationDomainOriginStateCreateInfo*>(this));}
 };
 
 /*	VkPipelineTessellationStateCreateInfo
@@ -8532,9 +7768,7 @@ public:
 operator void*() { return pNext; }
 N_pipeline_tessellation_state_create_info& n_pipeline_tessellation_domain_origin_state_create_info(S_pipeline_tessellation_domain_origin_state_create_info const& next_);
 };
-template<> struct my_class_convert<S_pipeline_tessellation_state_create_info> { using type = VkPipelineTessellationStateCreateInfo;};
-template<> struct my_class_convert<VkPipelineTessellationStateCreateInfo> { using type = S_pipeline_tessellation_state_create_info;};
-struct		S_pipeline_tessellation_state_create_info:VkPipelineTessellationStateCreateInfo{
+struct	S_pipeline_tessellation_state_create_info:VkPipelineTessellationStateCreateInfo{
 private:
 	using VkPipelineTessellationStateCreateInfo::sType;
 	using VkPipelineTessellationStateCreateInfo::pNext;
@@ -8551,7 +7785,11 @@ S_pipeline_tessellation_state_create_info(
 	,nullptr
 	,flags_
 	,patchControlPoints_}
-	{	}
+	{
+	}
+
+	S_pipeline_tessellation_state_create_info& operator=(const VkPipelineTessellationStateCreateInfo& rhs){static_cast<VkPipelineTessellationStateCreateInfo&>(*this)=rhs; return *this;}
+	operator VkPipelineTessellationStateCreateInfo*()const{return const_cast<VkPipelineTessellationStateCreateInfo*>(static_cast<const VkPipelineTessellationStateCreateInfo*>(this));}
 
 S_pipeline_tessellation_state_create_info& n_pipeline_tessellation_domain_origin_state_create_info(S_pipeline_tessellation_domain_origin_state_create_info const& next_);
 void set_pNext(N_pipeline_tessellation_state_create_info n_){pNext = n_;}
@@ -8559,19 +7797,18 @@ void set_pNext(N_pipeline_tessellation_state_create_info n_){pNext = n_;}
 
 /*	VkViewportWScalingNV
 */
-template<> struct my_class_convert<S_viewport_w_scaling_NV> { using type = VkViewportWScalingNV;};
-template<> struct my_class_convert<VkViewportWScalingNV> { using type = S_viewport_w_scaling_NV;};
-struct		S_viewport_w_scaling_NV:VkViewportWScalingNV{
+struct	S_viewport_w_scaling_NV:VkViewportWScalingNV{
 	using VkViewportWScalingNV::xcoeff;
 	using VkViewportWScalingNV::ycoeff;
+
+	S_viewport_w_scaling_NV& operator=(const VkViewportWScalingNV& rhs){static_cast<VkViewportWScalingNV&>(*this)=rhs; return *this;}
+	operator VkViewportWScalingNV*()const{return const_cast<VkViewportWScalingNV*>(static_cast<const VkViewportWScalingNV*>(this));}
 };
 
 /*	VkPipelineViewportWScalingStateCreateInfoNV
 ex to: VkPipelineViewportStateCreateInfo
 */
-template<> struct my_class_convert<S_pipeline_viewport_w_scaling_state_create_info_NV> { using type = VkPipelineViewportWScalingStateCreateInfoNV;};
-template<> struct my_class_convert<VkPipelineViewportWScalingStateCreateInfoNV> { using type = S_pipeline_viewport_w_scaling_state_create_info_NV;};
-struct		S_pipeline_viewport_w_scaling_state_create_info_NV:VkPipelineViewportWScalingStateCreateInfoNV{
+struct	S_pipeline_viewport_w_scaling_state_create_info_NV:VkPipelineViewportWScalingStateCreateInfoNV{
 private:
 	using VkPipelineViewportWScalingStateCreateInfoNV::sType;
 	using VkPipelineViewportWScalingStateCreateInfoNV::pNext;
@@ -8591,28 +7828,31 @@ S_pipeline_viewport_w_scaling_state_create_info_NV(
 	,viewportWScalingEnable_
 	,viewportCount_
 	,pViewportWScalings_}
-	{	}
+	{
+	}
 
 friend S_pipeline_viewport_state_create_info;
+
+	S_pipeline_viewport_w_scaling_state_create_info_NV& operator=(const VkPipelineViewportWScalingStateCreateInfoNV& rhs){static_cast<VkPipelineViewportWScalingStateCreateInfoNV&>(*this)=rhs; return *this;}
+	operator VkPipelineViewportWScalingStateCreateInfoNV*()const{return const_cast<VkPipelineViewportWScalingStateCreateInfoNV*>(static_cast<const VkPipelineViewportWScalingStateCreateInfoNV*>(this));}
 };
 
 /*	VkViewportSwizzleNV
 */
-template<> struct my_class_convert<S_viewport_swizzle_NV> { using type = VkViewportSwizzleNV;};
-template<> struct my_class_convert<VkViewportSwizzleNV> { using type = S_viewport_swizzle_NV;};
-struct		S_viewport_swizzle_NV:VkViewportSwizzleNV{
+struct	S_viewport_swizzle_NV:VkViewportSwizzleNV{
 	using VkViewportSwizzleNV::x;
 	using VkViewportSwizzleNV::y;
 	using VkViewportSwizzleNV::z;
 	using VkViewportSwizzleNV::w;
+
+	S_viewport_swizzle_NV& operator=(const VkViewportSwizzleNV& rhs){static_cast<VkViewportSwizzleNV&>(*this)=rhs; return *this;}
+	operator VkViewportSwizzleNV*()const{return const_cast<VkViewportSwizzleNV*>(static_cast<const VkViewportSwizzleNV*>(this));}
 };
 
 /*	VkPipelineViewportSwizzleStateCreateInfoNV
 ex to: VkPipelineViewportStateCreateInfo
 */
-template<> struct my_class_convert<S_pipeline_viewport_swizzle_state_create_info_NV> { using type = VkPipelineViewportSwizzleStateCreateInfoNV;};
-template<> struct my_class_convert<VkPipelineViewportSwizzleStateCreateInfoNV> { using type = S_pipeline_viewport_swizzle_state_create_info_NV;};
-struct		S_pipeline_viewport_swizzle_state_create_info_NV:VkPipelineViewportSwizzleStateCreateInfoNV{
+struct	S_pipeline_viewport_swizzle_state_create_info_NV:VkPipelineViewportSwizzleStateCreateInfoNV{
 private:
 	using VkPipelineViewportSwizzleStateCreateInfoNV::sType;
 	using VkPipelineViewportSwizzleStateCreateInfoNV::pNext;
@@ -8632,135 +7872,19 @@ S_pipeline_viewport_swizzle_state_create_info_NV(
 	,flags_
 	,viewportCount_
 	,pViewportSwizzles_}
-	{	}
+	{
+	}
 
 friend S_pipeline_viewport_state_create_info;
-};
 
-/*	VkPipelineViewportExclusiveScissorStateCreateInfoNV
-ex to: VkPipelineViewportStateCreateInfo
-*/
-template<> struct my_class_convert<S_pipeline_viewport_exclusive_scissor_state_create_info_NV> { using type = VkPipelineViewportExclusiveScissorStateCreateInfoNV;};
-template<> struct my_class_convert<VkPipelineViewportExclusiveScissorStateCreateInfoNV> { using type = S_pipeline_viewport_exclusive_scissor_state_create_info_NV;};
-struct		S_pipeline_viewport_exclusive_scissor_state_create_info_NV:VkPipelineViewportExclusiveScissorStateCreateInfoNV{
-private:
-	using VkPipelineViewportExclusiveScissorStateCreateInfoNV::sType;
-	using VkPipelineViewportExclusiveScissorStateCreateInfoNV::pNext;
-public:
-	using VkPipelineViewportExclusiveScissorStateCreateInfoNV::exclusiveScissorCount;
-	using VkPipelineViewportExclusiveScissorStateCreateInfoNV::pExclusiveScissors;
-
-S_pipeline_viewport_exclusive_scissor_state_create_info_NV():VkPipelineViewportExclusiveScissorStateCreateInfoNV{VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_EXCLUSIVE_SCISSOR_STATE_CREATE_INFO_NV,nullptr}{}
-S_pipeline_viewport_exclusive_scissor_state_create_info_NV(
-	uint32_t exclusiveScissorCount_,
-	const S_rect_2d * pExclusiveScissors_)
-	:VkPipelineViewportExclusiveScissorStateCreateInfoNV{
-	VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_EXCLUSIVE_SCISSOR_STATE_CREATE_INFO_NV
-	,nullptr
-	,exclusiveScissorCount_
-	,pExclusiveScissors_}
-	{	}
-
-friend S_pipeline_viewport_state_create_info;
-};
-
-/*	VkShadingRatePaletteNV
-*/
-template<> struct my_class_convert<S_shading_rate_palette_NV> { using type = VkShadingRatePaletteNV;};
-template<> struct my_class_convert<VkShadingRatePaletteNV> { using type = S_shading_rate_palette_NV;};
-struct		S_shading_rate_palette_NV:VkShadingRatePaletteNV{
-	using VkShadingRatePaletteNV::shadingRatePaletteEntryCount;
-	using VkShadingRatePaletteNV::pShadingRatePaletteEntries;
-};
-
-/*	VkPipelineViewportShadingRateImageStateCreateInfoNV
-ex to: VkPipelineViewportStateCreateInfo
-*/
-template<> struct my_class_convert<S_pipeline_viewport_shading_rate_image_state_create_info_NV> { using type = VkPipelineViewportShadingRateImageStateCreateInfoNV;};
-template<> struct my_class_convert<VkPipelineViewportShadingRateImageStateCreateInfoNV> { using type = S_pipeline_viewport_shading_rate_image_state_create_info_NV;};
-struct		S_pipeline_viewport_shading_rate_image_state_create_info_NV:VkPipelineViewportShadingRateImageStateCreateInfoNV{
-private:
-	using VkPipelineViewportShadingRateImageStateCreateInfoNV::sType;
-	using VkPipelineViewportShadingRateImageStateCreateInfoNV::pNext;
-public:
-	using VkPipelineViewportShadingRateImageStateCreateInfoNV::shadingRateImageEnable;
-	using VkPipelineViewportShadingRateImageStateCreateInfoNV::viewportCount;
-	using VkPipelineViewportShadingRateImageStateCreateInfoNV::pShadingRatePalettes;
-
-S_pipeline_viewport_shading_rate_image_state_create_info_NV():VkPipelineViewportShadingRateImageStateCreateInfoNV{VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_SHADING_RATE_IMAGE_STATE_CREATE_INFO_NV,nullptr}{}
-S_pipeline_viewport_shading_rate_image_state_create_info_NV(
-	VkBool32 shadingRateImageEnable_,
-	uint32_t viewportCount_,
-	const S_shading_rate_palette_NV * pShadingRatePalettes_)
-	:VkPipelineViewportShadingRateImageStateCreateInfoNV{
-	VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_SHADING_RATE_IMAGE_STATE_CREATE_INFO_NV
-	,nullptr
-	,shadingRateImageEnable_
-	,viewportCount_
-	,pShadingRatePalettes_}
-	{	}
-
-friend S_pipeline_viewport_state_create_info;
-};
-
-/*	VkCoarseSampleLocationNV
-*/
-template<> struct my_class_convert<S_coarse_sample_location_NV> { using type = VkCoarseSampleLocationNV;};
-template<> struct my_class_convert<VkCoarseSampleLocationNV> { using type = S_coarse_sample_location_NV;};
-struct		S_coarse_sample_location_NV:VkCoarseSampleLocationNV{
-	using VkCoarseSampleLocationNV::pixelX;
-	using VkCoarseSampleLocationNV::pixelY;
-	using VkCoarseSampleLocationNV::sample;
-};
-
-/*	VkCoarseSampleOrderCustomNV
-*/
-template<> struct my_class_convert<S_coarse_sample_order_custom_NV> { using type = VkCoarseSampleOrderCustomNV;};
-template<> struct my_class_convert<VkCoarseSampleOrderCustomNV> { using type = S_coarse_sample_order_custom_NV;};
-struct		S_coarse_sample_order_custom_NV:VkCoarseSampleOrderCustomNV{
-	using VkCoarseSampleOrderCustomNV::shadingRate;
-	using VkCoarseSampleOrderCustomNV::sampleCount;
-	using VkCoarseSampleOrderCustomNV::sampleLocationCount;
-	using VkCoarseSampleOrderCustomNV::pSampleLocations;
-};
-
-/*	VkPipelineViewportCoarseSampleOrderStateCreateInfoNV
-ex to: VkPipelineViewportStateCreateInfo
-*/
-template<> struct my_class_convert<S_pipeline_viewport_coarse_sample_order_state_create_info_NV> { using type = VkPipelineViewportCoarseSampleOrderStateCreateInfoNV;};
-template<> struct my_class_convert<VkPipelineViewportCoarseSampleOrderStateCreateInfoNV> { using type = S_pipeline_viewport_coarse_sample_order_state_create_info_NV;};
-struct		S_pipeline_viewport_coarse_sample_order_state_create_info_NV:VkPipelineViewportCoarseSampleOrderStateCreateInfoNV{
-private:
-	using VkPipelineViewportCoarseSampleOrderStateCreateInfoNV::sType;
-	using VkPipelineViewportCoarseSampleOrderStateCreateInfoNV::pNext;
-public:
-	using VkPipelineViewportCoarseSampleOrderStateCreateInfoNV::sampleOrderType;
-	using VkPipelineViewportCoarseSampleOrderStateCreateInfoNV::customSampleOrderCount;
-	using VkPipelineViewportCoarseSampleOrderStateCreateInfoNV::pCustomSampleOrders;
-
-S_pipeline_viewport_coarse_sample_order_state_create_info_NV():VkPipelineViewportCoarseSampleOrderStateCreateInfoNV{VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_COARSE_SAMPLE_ORDER_STATE_CREATE_INFO_NV,nullptr}{}
-S_pipeline_viewport_coarse_sample_order_state_create_info_NV(
-	E_coarse_sample_order_type_NV sampleOrderType_,
-	uint32_t customSampleOrderCount_,
-	const S_coarse_sample_order_custom_NV * pCustomSampleOrders_)
-	:VkPipelineViewportCoarseSampleOrderStateCreateInfoNV{
-	VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_COARSE_SAMPLE_ORDER_STATE_CREATE_INFO_NV
-	,nullptr
-	,sampleOrderType_
-	,customSampleOrderCount_
-	,pCustomSampleOrders_}
-	{	}
-
-friend S_pipeline_viewport_state_create_info;
+	S_pipeline_viewport_swizzle_state_create_info_NV& operator=(const VkPipelineViewportSwizzleStateCreateInfoNV& rhs){static_cast<VkPipelineViewportSwizzleStateCreateInfoNV&>(*this)=rhs; return *this;}
+	operator VkPipelineViewportSwizzleStateCreateInfoNV*()const{return const_cast<VkPipelineViewportSwizzleStateCreateInfoNV*>(static_cast<const VkPipelineViewportSwizzleStateCreateInfoNV*>(this));}
 };
 
 /*	VkPipelineViewportStateCreateInfo
 ex:
 	VkPipelineViewportWScalingStateCreateInfoNV
 	VkPipelineViewportSwizzleStateCreateInfoNV
-	VkPipelineViewportExclusiveScissorStateCreateInfoNV
-	VkPipelineViewportShadingRateImageStateCreateInfoNV
-	VkPipelineViewportCoarseSampleOrderStateCreateInfoNV
 */
 
 struct N_pipeline_viewport_state_create_info{
@@ -8770,13 +7894,8 @@ public:
 operator void*() { return pNext; }
 N_pipeline_viewport_state_create_info& n_pipeline_viewport_w_scaling_state_create_info_NV(S_pipeline_viewport_w_scaling_state_create_info_NV const& next_);
 N_pipeline_viewport_state_create_info& n_pipeline_viewport_swizzle_state_create_info_NV(S_pipeline_viewport_swizzle_state_create_info_NV const& next_);
-N_pipeline_viewport_state_create_info& n_pipeline_viewport_exclusive_scissor_state_create_info_NV(S_pipeline_viewport_exclusive_scissor_state_create_info_NV const& next_);
-N_pipeline_viewport_state_create_info& n_pipeline_viewport_shading_rate_image_state_create_info_NV(S_pipeline_viewport_shading_rate_image_state_create_info_NV const& next_);
-N_pipeline_viewport_state_create_info& n_pipeline_viewport_coarse_sample_order_state_create_info_NV(S_pipeline_viewport_coarse_sample_order_state_create_info_NV const& next_);
 };
-template<> struct my_class_convert<S_pipeline_viewport_state_create_info> { using type = VkPipelineViewportStateCreateInfo;};
-template<> struct my_class_convert<VkPipelineViewportStateCreateInfo> { using type = S_pipeline_viewport_state_create_info;};
-struct		S_pipeline_viewport_state_create_info:VkPipelineViewportStateCreateInfo{
+struct	S_pipeline_viewport_state_create_info:VkPipelineViewportStateCreateInfo{
 private:
 	using VkPipelineViewportStateCreateInfo::sType;
 	using VkPipelineViewportStateCreateInfo::pNext;
@@ -8802,22 +7921,21 @@ S_pipeline_viewport_state_create_info(
 	,pViewports_
 	,scissorCount_
 	,pScissors_}
-	{	}
+	{
+	}
+
+	S_pipeline_viewport_state_create_info& operator=(const VkPipelineViewportStateCreateInfo& rhs){static_cast<VkPipelineViewportStateCreateInfo&>(*this)=rhs; return *this;}
+	operator VkPipelineViewportStateCreateInfo*()const{return const_cast<VkPipelineViewportStateCreateInfo*>(static_cast<const VkPipelineViewportStateCreateInfo*>(this));}
 
 S_pipeline_viewport_state_create_info& n_pipeline_viewport_w_scaling_state_create_info_NV(S_pipeline_viewport_w_scaling_state_create_info_NV const& next_);
 S_pipeline_viewport_state_create_info& n_pipeline_viewport_swizzle_state_create_info_NV(S_pipeline_viewport_swizzle_state_create_info_NV const& next_);
-S_pipeline_viewport_state_create_info& n_pipeline_viewport_exclusive_scissor_state_create_info_NV(S_pipeline_viewport_exclusive_scissor_state_create_info_NV const& next_);
-S_pipeline_viewport_state_create_info& n_pipeline_viewport_shading_rate_image_state_create_info_NV(S_pipeline_viewport_shading_rate_image_state_create_info_NV const& next_);
-S_pipeline_viewport_state_create_info& n_pipeline_viewport_coarse_sample_order_state_create_info_NV(S_pipeline_viewport_coarse_sample_order_state_create_info_NV const& next_);
 void set_pNext(N_pipeline_viewport_state_create_info n_){pNext = n_;}
 };
 
 /*	VkPipelineRasterizationStateRasterizationOrderAMD
 ex to: VkPipelineRasterizationStateCreateInfo
 */
-template<> struct my_class_convert<S_pipeline_rasterization_state_rasterization_order_AMD> { using type = VkPipelineRasterizationStateRasterizationOrderAMD;};
-template<> struct my_class_convert<VkPipelineRasterizationStateRasterizationOrderAMD> { using type = S_pipeline_rasterization_state_rasterization_order_AMD;};
-struct		S_pipeline_rasterization_state_rasterization_order_AMD:VkPipelineRasterizationStateRasterizationOrderAMD{
+struct	S_pipeline_rasterization_state_rasterization_order_AMD:VkPipelineRasterizationStateRasterizationOrderAMD{
 private:
 	using VkPipelineRasterizationStateRasterizationOrderAMD::sType;
 	using VkPipelineRasterizationStateRasterizationOrderAMD::pNext;
@@ -8831,17 +7949,19 @@ S_pipeline_rasterization_state_rasterization_order_AMD(
 	VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_STATE_RASTERIZATION_ORDER_AMD
 	,nullptr
 	,rasterizationOrder_}
-	{	}
+	{
+	}
 
 friend S_pipeline_rasterization_state_create_info;
+
+	S_pipeline_rasterization_state_rasterization_order_AMD& operator=(const VkPipelineRasterizationStateRasterizationOrderAMD& rhs){static_cast<VkPipelineRasterizationStateRasterizationOrderAMD&>(*this)=rhs; return *this;}
+	operator VkPipelineRasterizationStateRasterizationOrderAMD*()const{return const_cast<VkPipelineRasterizationStateRasterizationOrderAMD*>(static_cast<const VkPipelineRasterizationStateRasterizationOrderAMD*>(this));}
 };
 
 /*	VkPipelineRasterizationConservativeStateCreateInfoEXT
 ex to: VkPipelineRasterizationStateCreateInfo
 */
-template<> struct my_class_convert<S_pipeline_rasterization_conservative_state_create_info_EXT> { using type = VkPipelineRasterizationConservativeStateCreateInfoEXT;};
-template<> struct my_class_convert<VkPipelineRasterizationConservativeStateCreateInfoEXT> { using type = S_pipeline_rasterization_conservative_state_create_info_EXT;};
-struct		S_pipeline_rasterization_conservative_state_create_info_EXT:VkPipelineRasterizationConservativeStateCreateInfoEXT{
+struct	S_pipeline_rasterization_conservative_state_create_info_EXT:VkPipelineRasterizationConservativeStateCreateInfoEXT{
 private:
 	using VkPipelineRasterizationConservativeStateCreateInfoEXT::sType;
 	using VkPipelineRasterizationConservativeStateCreateInfoEXT::pNext;
@@ -8861,9 +7981,13 @@ S_pipeline_rasterization_conservative_state_create_info_EXT(
 	,flags_
 	,conservativeRasterizationMode_
 	,extraPrimitiveOverestimationSize_}
-	{	}
+	{
+	}
 
 friend S_pipeline_rasterization_state_create_info;
+
+	S_pipeline_rasterization_conservative_state_create_info_EXT& operator=(const VkPipelineRasterizationConservativeStateCreateInfoEXT& rhs){static_cast<VkPipelineRasterizationConservativeStateCreateInfoEXT&>(*this)=rhs; return *this;}
+	operator VkPipelineRasterizationConservativeStateCreateInfoEXT*()const{return const_cast<VkPipelineRasterizationConservativeStateCreateInfoEXT*>(static_cast<const VkPipelineRasterizationConservativeStateCreateInfoEXT*>(this));}
 };
 
 /*	VkPipelineRasterizationStateCreateInfo
@@ -8880,9 +8004,7 @@ operator void*() { return pNext; }
 N_pipeline_rasterization_state_create_info& n_pipeline_rasterization_state_rasterization_order_AMD(S_pipeline_rasterization_state_rasterization_order_AMD const& next_);
 N_pipeline_rasterization_state_create_info& n_pipeline_rasterization_conservative_state_create_info_EXT(S_pipeline_rasterization_conservative_state_create_info_EXT const& next_);
 };
-template<> struct my_class_convert<S_pipeline_rasterization_state_create_info> { using type = VkPipelineRasterizationStateCreateInfo;};
-template<> struct my_class_convert<VkPipelineRasterizationStateCreateInfo> { using type = S_pipeline_rasterization_state_create_info;};
-struct		S_pipeline_rasterization_state_create_info:VkPipelineRasterizationStateCreateInfo{
+struct	S_pipeline_rasterization_state_create_info:VkPipelineRasterizationStateCreateInfo{
 private:
 	using VkPipelineRasterizationStateCreateInfo::sType;
 	using VkPipelineRasterizationStateCreateInfo::pNext;
@@ -8926,7 +8048,11 @@ S_pipeline_rasterization_state_create_info(
 	,depthBiasClamp_
 	,depthBiasSlopeFactor_
 	,lineWidth_}
-	{	}
+	{
+	}
+
+	S_pipeline_rasterization_state_create_info& operator=(const VkPipelineRasterizationStateCreateInfo& rhs){static_cast<VkPipelineRasterizationStateCreateInfo&>(*this)=rhs; return *this;}
+	operator VkPipelineRasterizationStateCreateInfo*()const{return const_cast<VkPipelineRasterizationStateCreateInfo*>(static_cast<const VkPipelineRasterizationStateCreateInfo*>(this));}
 
 S_pipeline_rasterization_state_create_info& n_pipeline_rasterization_state_rasterization_order_AMD(S_pipeline_rasterization_state_rasterization_order_AMD const& next_);
 S_pipeline_rasterization_state_create_info& n_pipeline_rasterization_conservative_state_create_info_EXT(S_pipeline_rasterization_conservative_state_create_info_EXT const& next_);
@@ -8936,9 +8062,7 @@ void set_pNext(N_pipeline_rasterization_state_create_info n_){pNext = n_;}
 /*	VkPipelineCoverageToColorStateCreateInfoNV
 ex to: VkPipelineMultisampleStateCreateInfo
 */
-template<> struct my_class_convert<S_pipeline_coverage_to_color_state_create_info_NV> { using type = VkPipelineCoverageToColorStateCreateInfoNV;};
-template<> struct my_class_convert<VkPipelineCoverageToColorStateCreateInfoNV> { using type = S_pipeline_coverage_to_color_state_create_info_NV;};
-struct		S_pipeline_coverage_to_color_state_create_info_NV:VkPipelineCoverageToColorStateCreateInfoNV{
+struct	S_pipeline_coverage_to_color_state_create_info_NV:VkPipelineCoverageToColorStateCreateInfoNV{
 private:
 	using VkPipelineCoverageToColorStateCreateInfoNV::sType;
 	using VkPipelineCoverageToColorStateCreateInfoNV::pNext;
@@ -8958,17 +8082,19 @@ S_pipeline_coverage_to_color_state_create_info_NV(
 	,flags_
 	,coverageToColorEnable_
 	,coverageToColorLocation_}
-	{	}
+	{
+	}
 
 friend S_pipeline_multisample_state_create_info;
+
+	S_pipeline_coverage_to_color_state_create_info_NV& operator=(const VkPipelineCoverageToColorStateCreateInfoNV& rhs){static_cast<VkPipelineCoverageToColorStateCreateInfoNV&>(*this)=rhs; return *this;}
+	operator VkPipelineCoverageToColorStateCreateInfoNV*()const{return const_cast<VkPipelineCoverageToColorStateCreateInfoNV*>(static_cast<const VkPipelineCoverageToColorStateCreateInfoNV*>(this));}
 };
 
 /*	VkPipelineSampleLocationsStateCreateInfoEXT
 ex to: VkPipelineMultisampleStateCreateInfo
 */
-template<> struct my_class_convert<S_pipeline_sample_locations_state_create_info_EXT> { using type = VkPipelineSampleLocationsStateCreateInfoEXT;};
-template<> struct my_class_convert<VkPipelineSampleLocationsStateCreateInfoEXT> { using type = S_pipeline_sample_locations_state_create_info_EXT;};
-struct		S_pipeline_sample_locations_state_create_info_EXT:VkPipelineSampleLocationsStateCreateInfoEXT{
+struct	S_pipeline_sample_locations_state_create_info_EXT:VkPipelineSampleLocationsStateCreateInfoEXT{
 private:
 	using VkPipelineSampleLocationsStateCreateInfoEXT::sType;
 	using VkPipelineSampleLocationsStateCreateInfoEXT::pNext;
@@ -8985,17 +8111,19 @@ S_pipeline_sample_locations_state_create_info_EXT(
 	,nullptr
 	,sampleLocationsEnable_
 	,sampleLocationsInfo_}
-	{	}
+	{
+	}
 
 friend S_pipeline_multisample_state_create_info;
+
+	S_pipeline_sample_locations_state_create_info_EXT& operator=(const VkPipelineSampleLocationsStateCreateInfoEXT& rhs){static_cast<VkPipelineSampleLocationsStateCreateInfoEXT&>(*this)=rhs; return *this;}
+	operator VkPipelineSampleLocationsStateCreateInfoEXT*()const{return const_cast<VkPipelineSampleLocationsStateCreateInfoEXT*>(static_cast<const VkPipelineSampleLocationsStateCreateInfoEXT*>(this));}
 };
 
 /*	VkPipelineCoverageModulationStateCreateInfoNV
 ex to: VkPipelineMultisampleStateCreateInfo
 */
-template<> struct my_class_convert<S_pipeline_coverage_modulation_state_create_info_NV> { using type = VkPipelineCoverageModulationStateCreateInfoNV;};
-template<> struct my_class_convert<VkPipelineCoverageModulationStateCreateInfoNV> { using type = S_pipeline_coverage_modulation_state_create_info_NV;};
-struct		S_pipeline_coverage_modulation_state_create_info_NV:VkPipelineCoverageModulationStateCreateInfoNV{
+struct	S_pipeline_coverage_modulation_state_create_info_NV:VkPipelineCoverageModulationStateCreateInfoNV{
 private:
 	using VkPipelineCoverageModulationStateCreateInfoNV::sType;
 	using VkPipelineCoverageModulationStateCreateInfoNV::pNext;
@@ -9021,9 +8149,13 @@ S_pipeline_coverage_modulation_state_create_info_NV(
 	,coverageModulationTableEnable_
 	,coverageModulationTableCount_
 	,pCoverageModulationTable_}
-	{	}
+	{
+	}
 
 friend S_pipeline_multisample_state_create_info;
+
+	S_pipeline_coverage_modulation_state_create_info_NV& operator=(const VkPipelineCoverageModulationStateCreateInfoNV& rhs){static_cast<VkPipelineCoverageModulationStateCreateInfoNV&>(*this)=rhs; return *this;}
+	operator VkPipelineCoverageModulationStateCreateInfoNV*()const{return const_cast<VkPipelineCoverageModulationStateCreateInfoNV*>(static_cast<const VkPipelineCoverageModulationStateCreateInfoNV*>(this));}
 };
 
 /*	VkPipelineMultisampleStateCreateInfo
@@ -9042,9 +8174,7 @@ N_pipeline_multisample_state_create_info& n_pipeline_coverage_to_color_state_cre
 N_pipeline_multisample_state_create_info& n_pipeline_sample_locations_state_create_info_EXT(S_pipeline_sample_locations_state_create_info_EXT const& next_);
 N_pipeline_multisample_state_create_info& n_pipeline_coverage_modulation_state_create_info_NV(S_pipeline_coverage_modulation_state_create_info_NV const& next_);
 };
-template<> struct my_class_convert<S_pipeline_multisample_state_create_info> { using type = VkPipelineMultisampleStateCreateInfo;};
-template<> struct my_class_convert<VkPipelineMultisampleStateCreateInfo> { using type = S_pipeline_multisample_state_create_info;};
-struct		S_pipeline_multisample_state_create_info:VkPipelineMultisampleStateCreateInfo{
+struct	S_pipeline_multisample_state_create_info:VkPipelineMultisampleStateCreateInfo{
 private:
 	using VkPipelineMultisampleStateCreateInfo::sType;
 	using VkPipelineMultisampleStateCreateInfo::pNext;
@@ -9076,7 +8206,11 @@ S_pipeline_multisample_state_create_info(
 	,pSampleMask_
 	,alphaToCoverageEnable_
 	,alphaToOneEnable_}
-	{	}
+	{
+	}
+
+	S_pipeline_multisample_state_create_info& operator=(const VkPipelineMultisampleStateCreateInfo& rhs){static_cast<VkPipelineMultisampleStateCreateInfo&>(*this)=rhs; return *this;}
+	operator VkPipelineMultisampleStateCreateInfo*()const{return const_cast<VkPipelineMultisampleStateCreateInfo*>(static_cast<const VkPipelineMultisampleStateCreateInfo*>(this));}
 
 S_pipeline_multisample_state_create_info& n_pipeline_coverage_to_color_state_create_info_NV(S_pipeline_coverage_to_color_state_create_info_NV const& next_);
 S_pipeline_multisample_state_create_info& n_pipeline_sample_locations_state_create_info_EXT(S_pipeline_sample_locations_state_create_info_EXT const& next_);
@@ -9086,9 +8220,7 @@ void set_pNext(N_pipeline_multisample_state_create_info n_){pNext = n_;}
 
 /*	VkPipelineColorBlendAttachmentState
 */
-template<> struct my_class_convert<S_pipeline_color_blend_attachment_state> { using type = VkPipelineColorBlendAttachmentState;};
-template<> struct my_class_convert<VkPipelineColorBlendAttachmentState> { using type = S_pipeline_color_blend_attachment_state;};
-struct		S_pipeline_color_blend_attachment_state:VkPipelineColorBlendAttachmentState{
+struct	S_pipeline_color_blend_attachment_state:VkPipelineColorBlendAttachmentState{
 	using VkPipelineColorBlendAttachmentState::blendEnable;
 	using VkPipelineColorBlendAttachmentState::srcColorBlendFactor;
 	using VkPipelineColorBlendAttachmentState::dstColorBlendFactor;
@@ -9097,14 +8229,15 @@ struct		S_pipeline_color_blend_attachment_state:VkPipelineColorBlendAttachmentSt
 	using VkPipelineColorBlendAttachmentState::dstAlphaBlendFactor;
 	using VkPipelineColorBlendAttachmentState::alphaBlendOp;
 	using VkPipelineColorBlendAttachmentState::colorWriteMask;
+
+	S_pipeline_color_blend_attachment_state& operator=(const VkPipelineColorBlendAttachmentState& rhs){static_cast<VkPipelineColorBlendAttachmentState&>(*this)=rhs; return *this;}
+	operator VkPipelineColorBlendAttachmentState*()const{return const_cast<VkPipelineColorBlendAttachmentState*>(static_cast<const VkPipelineColorBlendAttachmentState*>(this));}
 };
 
 /*	VkPipelineColorBlendAdvancedStateCreateInfoEXT
 ex to: VkPipelineColorBlendStateCreateInfo
 */
-template<> struct my_class_convert<S_pipeline_color_blend_advanced_state_create_info_EXT> { using type = VkPipelineColorBlendAdvancedStateCreateInfoEXT;};
-template<> struct my_class_convert<VkPipelineColorBlendAdvancedStateCreateInfoEXT> { using type = S_pipeline_color_blend_advanced_state_create_info_EXT;};
-struct		S_pipeline_color_blend_advanced_state_create_info_EXT:VkPipelineColorBlendAdvancedStateCreateInfoEXT{
+struct	S_pipeline_color_blend_advanced_state_create_info_EXT:VkPipelineColorBlendAdvancedStateCreateInfoEXT{
 private:
 	using VkPipelineColorBlendAdvancedStateCreateInfoEXT::sType;
 	using VkPipelineColorBlendAdvancedStateCreateInfoEXT::pNext;
@@ -9124,9 +8257,13 @@ S_pipeline_color_blend_advanced_state_create_info_EXT(
 	,srcPremultiplied_
 	,dstPremultiplied_
 	,blendOverlap_}
-	{	}
+	{
+	}
 
 friend S_pipeline_color_blend_state_create_info;
+
+	S_pipeline_color_blend_advanced_state_create_info_EXT& operator=(const VkPipelineColorBlendAdvancedStateCreateInfoEXT& rhs){static_cast<VkPipelineColorBlendAdvancedStateCreateInfoEXT&>(*this)=rhs; return *this;}
+	operator VkPipelineColorBlendAdvancedStateCreateInfoEXT*()const{return const_cast<VkPipelineColorBlendAdvancedStateCreateInfoEXT*>(static_cast<const VkPipelineColorBlendAdvancedStateCreateInfoEXT*>(this));}
 };
 
 /*	VkPipelineColorBlendStateCreateInfo
@@ -9141,9 +8278,7 @@ public:
 operator void*() { return pNext; }
 N_pipeline_color_blend_state_create_info& n_pipeline_color_blend_advanced_state_create_info_EXT(S_pipeline_color_blend_advanced_state_create_info_EXT const& next_);
 };
-template<> struct my_class_convert<S_pipeline_color_blend_state_create_info> { using type = VkPipelineColorBlendStateCreateInfo;};
-template<> struct my_class_convert<VkPipelineColorBlendStateCreateInfo> { using type = S_pipeline_color_blend_state_create_info;};
-struct		S_pipeline_color_blend_state_create_info:VkPipelineColorBlendStateCreateInfo{
+struct	S_pipeline_color_blend_state_create_info:VkPipelineColorBlendStateCreateInfo{
 private:
 	using VkPipelineColorBlendStateCreateInfo::sType;
 	using VkPipelineColorBlendStateCreateInfo::pNext;
@@ -9171,8 +8306,13 @@ S_pipeline_color_blend_state_create_info(
 	,logicOp_
 	,attachmentCount_
 	,pAttachments_
-	,blendConstants_}
-	{	}
+	,{}}
+	{
+		memcpy(blendConstants,blendConstants_,sizeof(blendConstants_) );
+	}
+
+	S_pipeline_color_blend_state_create_info& operator=(const VkPipelineColorBlendStateCreateInfo& rhs){static_cast<VkPipelineColorBlendStateCreateInfo&>(*this)=rhs; return *this;}
+	operator VkPipelineColorBlendStateCreateInfo*()const{return const_cast<VkPipelineColorBlendStateCreateInfo*>(static_cast<const VkPipelineColorBlendStateCreateInfo*>(this));}
 
 S_pipeline_color_blend_state_create_info& n_pipeline_color_blend_advanced_state_create_info_EXT(S_pipeline_color_blend_advanced_state_create_info_EXT const& next_);
 void set_pNext(N_pipeline_color_blend_state_create_info n_){pNext = n_;}
@@ -9180,9 +8320,7 @@ void set_pNext(N_pipeline_color_blend_state_create_info n_){pNext = n_;}
 
 /*	VkPipelineDynamicStateCreateInfo
 */
-template<> struct my_class_convert<S_pipeline_dynamic_state_create_info> { using type = VkPipelineDynamicStateCreateInfo;};
-template<> struct my_class_convert<VkPipelineDynamicStateCreateInfo> { using type = S_pipeline_dynamic_state_create_info;};
-struct		S_pipeline_dynamic_state_create_info:VkPipelineDynamicStateCreateInfo{
+struct	S_pipeline_dynamic_state_create_info:VkPipelineDynamicStateCreateInfo{
 private:
 	using VkPipelineDynamicStateCreateInfo::sType;
 	using VkPipelineDynamicStateCreateInfo::pNext;
@@ -9202,14 +8340,16 @@ S_pipeline_dynamic_state_create_info(
 	,flags_
 	,dynamicStateCount_
 	,*pDynamicStates_}
-	{	}
+	{
+	}
+
+	S_pipeline_dynamic_state_create_info& operator=(const VkPipelineDynamicStateCreateInfo& rhs){static_cast<VkPipelineDynamicStateCreateInfo&>(*this)=rhs; return *this;}
+	operator VkPipelineDynamicStateCreateInfo*()const{return const_cast<VkPipelineDynamicStateCreateInfo*>(static_cast<const VkPipelineDynamicStateCreateInfo*>(this));}
 };
 
 /*	VkStencilOpState
 */
-template<> struct my_class_convert<S_stencil_op_state> { using type = VkStencilOpState;};
-template<> struct my_class_convert<VkStencilOpState> { using type = S_stencil_op_state;};
-struct		S_stencil_op_state:VkStencilOpState{
+struct	S_stencil_op_state:VkStencilOpState{
 	using VkStencilOpState::failOp;
 	using VkStencilOpState::passOp;
 	using VkStencilOpState::depthFailOp;
@@ -9217,13 +8357,14 @@ struct		S_stencil_op_state:VkStencilOpState{
 	using VkStencilOpState::compareMask;
 	using VkStencilOpState::writeMask;
 	using VkStencilOpState::reference;
+
+	S_stencil_op_state& operator=(const VkStencilOpState& rhs){static_cast<VkStencilOpState&>(*this)=rhs; return *this;}
+	operator VkStencilOpState*()const{return const_cast<VkStencilOpState*>(static_cast<const VkStencilOpState*>(this));}
 };
 
 /*	VkPipelineDepthStencilStateCreateInfo
 */
-template<> struct my_class_convert<S_pipeline_depth_stencil_state_create_info> { using type = VkPipelineDepthStencilStateCreateInfo;};
-template<> struct my_class_convert<VkPipelineDepthStencilStateCreateInfo> { using type = S_pipeline_depth_stencil_state_create_info;};
-struct		S_pipeline_depth_stencil_state_create_info:VkPipelineDepthStencilStateCreateInfo{
+struct	S_pipeline_depth_stencil_state_create_info:VkPipelineDepthStencilStateCreateInfo{
 private:
 	using VkPipelineDepthStencilStateCreateInfo::sType;
 	using VkPipelineDepthStencilStateCreateInfo::pNext;
@@ -9264,15 +8405,17 @@ S_pipeline_depth_stencil_state_create_info(
 	,back_
 	,minDepthBounds_
 	,maxDepthBounds_}
-	{	}
+	{
+	}
+
+	S_pipeline_depth_stencil_state_create_info& operator=(const VkPipelineDepthStencilStateCreateInfo& rhs){static_cast<VkPipelineDepthStencilStateCreateInfo&>(*this)=rhs; return *this;}
+	operator VkPipelineDepthStencilStateCreateInfo*()const{return const_cast<VkPipelineDepthStencilStateCreateInfo*>(static_cast<const VkPipelineDepthStencilStateCreateInfo*>(this));}
 };
 
 /*	VkPipelineDiscardRectangleStateCreateInfoEXT
 ex to: VkGraphicsPipelineCreateInfo
 */
-template<> struct my_class_convert<S_pipeline_discard_rectangle_state_create_info_EXT> { using type = VkPipelineDiscardRectangleStateCreateInfoEXT;};
-template<> struct my_class_convert<VkPipelineDiscardRectangleStateCreateInfoEXT> { using type = S_pipeline_discard_rectangle_state_create_info_EXT;};
-struct		S_pipeline_discard_rectangle_state_create_info_EXT:VkPipelineDiscardRectangleStateCreateInfoEXT{
+struct	S_pipeline_discard_rectangle_state_create_info_EXT:VkPipelineDiscardRectangleStateCreateInfoEXT{
 private:
 	using VkPipelineDiscardRectangleStateCreateInfoEXT::sType;
 	using VkPipelineDiscardRectangleStateCreateInfoEXT::pNext;
@@ -9295,39 +8438,18 @@ S_pipeline_discard_rectangle_state_create_info_EXT(
 	,discardRectangleMode_
 	,discardRectangleCount_
 	,pDiscardRectangles_}
-	{	}
+	{
+	}
 
 friend S_graphics_pipeline_create_info;
-};
 
-/*	VkPipelineRepresentativeFragmentTestStateCreateInfoNV
-ex to: VkGraphicsPipelineCreateInfo
-*/
-template<> struct my_class_convert<S_pipeline_representative_fragment_test_state_create_info_NV> { using type = VkPipelineRepresentativeFragmentTestStateCreateInfoNV;};
-template<> struct my_class_convert<VkPipelineRepresentativeFragmentTestStateCreateInfoNV> { using type = S_pipeline_representative_fragment_test_state_create_info_NV;};
-struct		S_pipeline_representative_fragment_test_state_create_info_NV:VkPipelineRepresentativeFragmentTestStateCreateInfoNV{
-private:
-	using VkPipelineRepresentativeFragmentTestStateCreateInfoNV::sType;
-	using VkPipelineRepresentativeFragmentTestStateCreateInfoNV::pNext;
-public:
-	using VkPipelineRepresentativeFragmentTestStateCreateInfoNV::representativeFragmentTestEnable;
-
-S_pipeline_representative_fragment_test_state_create_info_NV():VkPipelineRepresentativeFragmentTestStateCreateInfoNV{VK_STRUCTURE_TYPE_PIPELINE_REPRESENTATIVE_FRAGMENT_TEST_STATE_CREATE_INFO_NV,nullptr}{}
-S_pipeline_representative_fragment_test_state_create_info_NV(
-	VkBool32 representativeFragmentTestEnable_)
-	:VkPipelineRepresentativeFragmentTestStateCreateInfoNV{
-	VK_STRUCTURE_TYPE_PIPELINE_REPRESENTATIVE_FRAGMENT_TEST_STATE_CREATE_INFO_NV
-	,nullptr
-	,representativeFragmentTestEnable_}
-	{	}
-
-friend S_graphics_pipeline_create_info;
+	S_pipeline_discard_rectangle_state_create_info_EXT& operator=(const VkPipelineDiscardRectangleStateCreateInfoEXT& rhs){static_cast<VkPipelineDiscardRectangleStateCreateInfoEXT&>(*this)=rhs; return *this;}
+	operator VkPipelineDiscardRectangleStateCreateInfoEXT*()const{return const_cast<VkPipelineDiscardRectangleStateCreateInfoEXT*>(static_cast<const VkPipelineDiscardRectangleStateCreateInfoEXT*>(this));}
 };
 
 /*	VkGraphicsPipelineCreateInfo
 ex:
 	VkPipelineDiscardRectangleStateCreateInfoEXT
-	VkPipelineRepresentativeFragmentTestStateCreateInfoNV
 */
 
 struct N_graphics_pipeline_create_info{
@@ -9336,11 +8458,8 @@ private:
 public:
 operator void*() { return pNext; }
 N_graphics_pipeline_create_info& n_pipeline_discard_rectangle_state_create_info_EXT(S_pipeline_discard_rectangle_state_create_info_EXT const& next_);
-N_graphics_pipeline_create_info& n_pipeline_representative_fragment_test_state_create_info_NV(S_pipeline_representative_fragment_test_state_create_info_NV const& next_);
 };
-template<> struct my_class_convert<S_graphics_pipeline_create_info> { using type = VkGraphicsPipelineCreateInfo;};
-template<> struct my_class_convert<VkGraphicsPipelineCreateInfo> { using type = S_graphics_pipeline_create_info;};
-struct		S_graphics_pipeline_create_info:VkGraphicsPipelineCreateInfo{
+struct	S_graphics_pipeline_create_info:VkGraphicsPipelineCreateInfo{
 private:
 	using VkGraphicsPipelineCreateInfo::sType;
 	using VkGraphicsPipelineCreateInfo::pNext;
@@ -9402,18 +8521,19 @@ S_graphics_pipeline_create_info(
 	,subpass_
 	,basePipelineHandle_
 	,basePipelineIndex_}
-	{	}
+	{
+	}
+
+	S_graphics_pipeline_create_info& operator=(const VkGraphicsPipelineCreateInfo& rhs){static_cast<VkGraphicsPipelineCreateInfo&>(*this)=rhs; return *this;}
+	operator VkGraphicsPipelineCreateInfo*()const{return const_cast<VkGraphicsPipelineCreateInfo*>(static_cast<const VkGraphicsPipelineCreateInfo*>(this));}
 
 S_graphics_pipeline_create_info& n_pipeline_discard_rectangle_state_create_info_EXT(S_pipeline_discard_rectangle_state_create_info_EXT const& next_);
-S_graphics_pipeline_create_info& n_pipeline_representative_fragment_test_state_create_info_NV(S_pipeline_representative_fragment_test_state_create_info_NV const& next_);
 void set_pNext(N_graphics_pipeline_create_info n_){pNext = n_;}
 };
 
 /*	VkPipelineCacheCreateInfo
 */
-template<> struct my_class_convert<S_pipeline_cache_create_info> { using type = VkPipelineCacheCreateInfo;};
-template<> struct my_class_convert<VkPipelineCacheCreateInfo> { using type = S_pipeline_cache_create_info;};
-struct		S_pipeline_cache_create_info:VkPipelineCacheCreateInfo{
+struct	S_pipeline_cache_create_info:VkPipelineCacheCreateInfo{
 private:
 	using VkPipelineCacheCreateInfo::sType;
 	using VkPipelineCacheCreateInfo::pNext;
@@ -9433,24 +8553,27 @@ S_pipeline_cache_create_info(
 	,flags_
 	,initialDataSize_
 	,pInitialData_}
-	{	}
+	{
+	}
+
+	S_pipeline_cache_create_info& operator=(const VkPipelineCacheCreateInfo& rhs){static_cast<VkPipelineCacheCreateInfo&>(*this)=rhs; return *this;}
+	operator VkPipelineCacheCreateInfo*()const{return const_cast<VkPipelineCacheCreateInfo*>(static_cast<const VkPipelineCacheCreateInfo*>(this));}
 };
 
 /*	VkPushConstantRange
 */
-template<> struct my_class_convert<S_push_constant_range> { using type = VkPushConstantRange;};
-template<> struct my_class_convert<VkPushConstantRange> { using type = S_push_constant_range;};
-struct		S_push_constant_range:VkPushConstantRange{
+struct	S_push_constant_range:VkPushConstantRange{
 	using VkPushConstantRange::stageFlags;
 	using VkPushConstantRange::offset;
 	using VkPushConstantRange::size;
+
+	S_push_constant_range& operator=(const VkPushConstantRange& rhs){static_cast<VkPushConstantRange&>(*this)=rhs; return *this;}
+	operator VkPushConstantRange*()const{return const_cast<VkPushConstantRange*>(static_cast<const VkPushConstantRange*>(this));}
 };
 
 /*	VkPipelineLayoutCreateInfo
 */
-template<> struct my_class_convert<S_pipeline_layout_create_info> { using type = VkPipelineLayoutCreateInfo;};
-template<> struct my_class_convert<VkPipelineLayoutCreateInfo> { using type = S_pipeline_layout_create_info;};
-struct		S_pipeline_layout_create_info:VkPipelineLayoutCreateInfo{
+struct	S_pipeline_layout_create_info:VkPipelineLayoutCreateInfo{
 private:
 	using VkPipelineLayoutCreateInfo::sType;
 	using VkPipelineLayoutCreateInfo::pNext;
@@ -9476,15 +8599,17 @@ S_pipeline_layout_create_info(
 	,pSetLayouts_
 	,pushConstantRangeCount_
 	,pPushConstantRanges_}
-	{	}
+	{
+	}
+
+	S_pipeline_layout_create_info& operator=(const VkPipelineLayoutCreateInfo& rhs){static_cast<VkPipelineLayoutCreateInfo&>(*this)=rhs; return *this;}
+	operator VkPipelineLayoutCreateInfo*()const{return const_cast<VkPipelineLayoutCreateInfo*>(static_cast<const VkPipelineLayoutCreateInfo*>(this));}
 };
 
 /*	VkSamplerReductionModeCreateInfoEXT
 ex to: VkSamplerCreateInfo
 */
-template<> struct my_class_convert<S_sampler_reduction_mode_create_info_EXT> { using type = VkSamplerReductionModeCreateInfoEXT;};
-template<> struct my_class_convert<VkSamplerReductionModeCreateInfoEXT> { using type = S_sampler_reduction_mode_create_info_EXT;};
-struct		S_sampler_reduction_mode_create_info_EXT:VkSamplerReductionModeCreateInfoEXT{
+struct	S_sampler_reduction_mode_create_info_EXT:VkSamplerReductionModeCreateInfoEXT{
 private:
 	using VkSamplerReductionModeCreateInfoEXT::sType;
 	using VkSamplerReductionModeCreateInfoEXT::pNext;
@@ -9498,9 +8623,13 @@ S_sampler_reduction_mode_create_info_EXT(
 	VK_STRUCTURE_TYPE_SAMPLER_REDUCTION_MODE_CREATE_INFO_EXT
 	,nullptr
 	,reductionMode_}
-	{	}
+	{
+	}
 
 friend S_sampler_create_info;
+
+	S_sampler_reduction_mode_create_info_EXT& operator=(const VkSamplerReductionModeCreateInfoEXT& rhs){static_cast<VkSamplerReductionModeCreateInfoEXT&>(*this)=rhs; return *this;}
+	operator VkSamplerReductionModeCreateInfoEXT*()const{return const_cast<VkSamplerReductionModeCreateInfoEXT*>(static_cast<const VkSamplerReductionModeCreateInfoEXT*>(this));}
 };
 
 /*	VkSamplerCreateInfo
@@ -9517,9 +8646,7 @@ operator void*() { return pNext; }
 N_sampler_create_info& n_sampler_ycbcr_conversion_info(S_sampler_ycbcr_conversion_info const& next_);
 N_sampler_create_info& n_sampler_reduction_mode_create_info_EXT(S_sampler_reduction_mode_create_info_EXT const& next_);
 };
-template<> struct my_class_convert<S_sampler_create_info> { using type = VkSamplerCreateInfo;};
-template<> struct my_class_convert<VkSamplerCreateInfo> { using type = S_sampler_create_info;};
-struct		S_sampler_create_info:VkSamplerCreateInfo{
+struct	S_sampler_create_info:VkSamplerCreateInfo{
 private:
 	using VkSamplerCreateInfo::sType;
 	using VkSamplerCreateInfo::pNext;
@@ -9578,7 +8705,11 @@ S_sampler_create_info(
 	,maxLod_
 	,borderColor_
 	,unnormalizedCoordinates_}
-	{	}
+	{
+	}
+
+	S_sampler_create_info& operator=(const VkSamplerCreateInfo& rhs){static_cast<VkSamplerCreateInfo&>(*this)=rhs; return *this;}
+	operator VkSamplerCreateInfo*()const{return const_cast<VkSamplerCreateInfo*>(static_cast<const VkSamplerCreateInfo*>(this));}
 
 S_sampler_create_info& n_sampler_ycbcr_conversion_info(S_sampler_ycbcr_conversion_info const& next_);
 S_sampler_create_info& n_sampler_reduction_mode_create_info_EXT(S_sampler_reduction_mode_create_info_EXT const& next_);
@@ -9587,9 +8718,7 @@ void set_pNext(N_sampler_create_info n_){pNext = n_;}
 
 /*	VkCommandPoolCreateInfo
 */
-template<> struct my_class_convert<S_command_pool_create_info> { using type = VkCommandPoolCreateInfo;};
-template<> struct my_class_convert<VkCommandPoolCreateInfo> { using type = S_command_pool_create_info;};
-struct		S_command_pool_create_info:VkCommandPoolCreateInfo{
+struct	S_command_pool_create_info:VkCommandPoolCreateInfo{
 private:
 	using VkCommandPoolCreateInfo::sType;
 	using VkCommandPoolCreateInfo::pNext;
@@ -9606,14 +8735,16 @@ S_command_pool_create_info(
 	,nullptr
 	,flags_
 	,queueFamilyIndex_}
-	{	}
+	{
+	}
+
+	S_command_pool_create_info& operator=(const VkCommandPoolCreateInfo& rhs){static_cast<VkCommandPoolCreateInfo&>(*this)=rhs; return *this;}
+	operator VkCommandPoolCreateInfo*()const{return const_cast<VkCommandPoolCreateInfo*>(static_cast<const VkCommandPoolCreateInfo*>(this));}
 };
 
 /*	VkCommandBufferAllocateInfo
 */
-template<> struct my_class_convert<S_command_buffer_allocate_info> { using type = VkCommandBufferAllocateInfo;};
-template<> struct my_class_convert<VkCommandBufferAllocateInfo> { using type = S_command_buffer_allocate_info;};
-struct		S_command_buffer_allocate_info:VkCommandBufferAllocateInfo{
+struct	S_command_buffer_allocate_info:VkCommandBufferAllocateInfo{
 private:
 	using VkCommandBufferAllocateInfo::sType;
 	using VkCommandBufferAllocateInfo::pNext;
@@ -9633,15 +8764,17 @@ S_command_buffer_allocate_info(
 	,commandPool_
 	,level_
 	,commandBufferCount_}
-	{	}
+	{
+	}
+
+	S_command_buffer_allocate_info& operator=(const VkCommandBufferAllocateInfo& rhs){static_cast<VkCommandBufferAllocateInfo&>(*this)=rhs; return *this;}
+	operator VkCommandBufferAllocateInfo*()const{return const_cast<VkCommandBufferAllocateInfo*>(static_cast<const VkCommandBufferAllocateInfo*>(this));}
 };
 
 /*	VkCommandBufferInheritanceConditionalRenderingInfoEXT
 ex to: VkCommandBufferInheritanceInfo
 */
-template<> struct my_class_convert<S_command_buffer_inheritance_conditional_rendering_info_EXT> { using type = VkCommandBufferInheritanceConditionalRenderingInfoEXT;};
-template<> struct my_class_convert<VkCommandBufferInheritanceConditionalRenderingInfoEXT> { using type = S_command_buffer_inheritance_conditional_rendering_info_EXT;};
-struct		S_command_buffer_inheritance_conditional_rendering_info_EXT:VkCommandBufferInheritanceConditionalRenderingInfoEXT{
+struct	S_command_buffer_inheritance_conditional_rendering_info_EXT:VkCommandBufferInheritanceConditionalRenderingInfoEXT{
 private:
 	using VkCommandBufferInheritanceConditionalRenderingInfoEXT::sType;
 	using VkCommandBufferInheritanceConditionalRenderingInfoEXT::pNext;
@@ -9655,9 +8788,13 @@ S_command_buffer_inheritance_conditional_rendering_info_EXT(
 	VK_STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_CONDITIONAL_RENDERING_INFO_EXT
 	,nullptr
 	,conditionalRenderingEnable_}
-	{	}
+	{
+	}
 
 friend S_command_buffer_inheritance_info;
+
+	S_command_buffer_inheritance_conditional_rendering_info_EXT& operator=(const VkCommandBufferInheritanceConditionalRenderingInfoEXT& rhs){static_cast<VkCommandBufferInheritanceConditionalRenderingInfoEXT&>(*this)=rhs; return *this;}
+	operator VkCommandBufferInheritanceConditionalRenderingInfoEXT*()const{return const_cast<VkCommandBufferInheritanceConditionalRenderingInfoEXT*>(static_cast<const VkCommandBufferInheritanceConditionalRenderingInfoEXT*>(this));}
 };
 
 /*	VkCommandBufferInheritanceInfo
@@ -9672,9 +8809,7 @@ public:
 operator void*() { return pNext; }
 N_command_buffer_inheritance_info& n_command_buffer_inheritance_conditional_rendering_info_EXT(S_command_buffer_inheritance_conditional_rendering_info_EXT const& next_);
 };
-template<> struct my_class_convert<S_command_buffer_inheritance_info> { using type = VkCommandBufferInheritanceInfo;};
-template<> struct my_class_convert<VkCommandBufferInheritanceInfo> { using type = S_command_buffer_inheritance_info;};
-struct		S_command_buffer_inheritance_info:VkCommandBufferInheritanceInfo{
+struct	S_command_buffer_inheritance_info:VkCommandBufferInheritanceInfo{
 private:
 	using VkCommandBufferInheritanceInfo::sType;
 	using VkCommandBufferInheritanceInfo::pNext;
@@ -9703,7 +8838,11 @@ S_command_buffer_inheritance_info(
 	,occlusionQueryEnable_
 	,queryFlags_
 	,pipelineStatistics_}
-	{	}
+	{
+	}
+
+	S_command_buffer_inheritance_info& operator=(const VkCommandBufferInheritanceInfo& rhs){static_cast<VkCommandBufferInheritanceInfo&>(*this)=rhs; return *this;}
+	operator VkCommandBufferInheritanceInfo*()const{return const_cast<VkCommandBufferInheritanceInfo*>(static_cast<const VkCommandBufferInheritanceInfo*>(this));}
 
 S_command_buffer_inheritance_info& n_command_buffer_inheritance_conditional_rendering_info_EXT(S_command_buffer_inheritance_conditional_rendering_info_EXT const& next_);
 void set_pNext(N_command_buffer_inheritance_info n_){pNext = n_;}
@@ -9712,9 +8851,7 @@ void set_pNext(N_command_buffer_inheritance_info n_){pNext = n_;}
 /*	VkDeviceGroupCommandBufferBeginInfo
 ex to: VkCommandBufferBeginInfo
 */
-template<> struct my_class_convert<S_device_group_command_buffer_begin_info> { using type = VkDeviceGroupCommandBufferBeginInfo;};
-template<> struct my_class_convert<VkDeviceGroupCommandBufferBeginInfo> { using type = S_device_group_command_buffer_begin_info;};
-struct		S_device_group_command_buffer_begin_info:VkDeviceGroupCommandBufferBeginInfo{
+struct	S_device_group_command_buffer_begin_info:VkDeviceGroupCommandBufferBeginInfo{
 private:
 	using VkDeviceGroupCommandBufferBeginInfo::sType;
 	using VkDeviceGroupCommandBufferBeginInfo::pNext;
@@ -9728,9 +8865,13 @@ S_device_group_command_buffer_begin_info(
 	VK_STRUCTURE_TYPE_DEVICE_GROUP_COMMAND_BUFFER_BEGIN_INFO
 	,nullptr
 	,deviceMask_}
-	{	}
+	{
+	}
 
 friend S_command_buffer_begin_info;
+
+	S_device_group_command_buffer_begin_info& operator=(const VkDeviceGroupCommandBufferBeginInfo& rhs){static_cast<VkDeviceGroupCommandBufferBeginInfo&>(*this)=rhs; return *this;}
+	operator VkDeviceGroupCommandBufferBeginInfo*()const{return const_cast<VkDeviceGroupCommandBufferBeginInfo*>(static_cast<const VkDeviceGroupCommandBufferBeginInfo*>(this));}
 };
 
 /*	VkCommandBufferBeginInfo
@@ -9745,9 +8886,7 @@ public:
 operator void*() { return pNext; }
 N_command_buffer_begin_info& n_device_group_command_buffer_begin_info(S_device_group_command_buffer_begin_info const& next_);
 };
-template<> struct my_class_convert<S_command_buffer_begin_info> { using type = VkCommandBufferBeginInfo;};
-template<> struct my_class_convert<VkCommandBufferBeginInfo> { using type = S_command_buffer_begin_info;};
-struct		S_command_buffer_begin_info:VkCommandBufferBeginInfo{
+struct	S_command_buffer_begin_info:VkCommandBufferBeginInfo{
 private:
 	using VkCommandBufferBeginInfo::sType;
 	using VkCommandBufferBeginInfo::pNext;
@@ -9764,7 +8903,11 @@ S_command_buffer_begin_info(
 	,nullptr
 	,flags_
 	,pInheritanceInfo_}
-	{	}
+	{
+	}
+
+	S_command_buffer_begin_info& operator=(const VkCommandBufferBeginInfo& rhs){static_cast<VkCommandBufferBeginInfo&>(*this)=rhs; return *this;}
+	operator VkCommandBufferBeginInfo*()const{return const_cast<VkCommandBufferBeginInfo*>(static_cast<const VkCommandBufferBeginInfo*>(this));}
 
 S_command_buffer_begin_info& n_device_group_command_buffer_begin_info(S_device_group_command_buffer_begin_info const& next_);
 void set_pNext(N_command_buffer_begin_info n_){pNext = n_;}
@@ -9773,9 +8916,7 @@ void set_pNext(N_command_buffer_begin_info n_){pNext = n_;}
 /*	VkDeviceGroupRenderPassBeginInfo
 ex to: VkRenderPassBeginInfo
 */
-template<> struct my_class_convert<S_device_group_render_pass_begin_info> { using type = VkDeviceGroupRenderPassBeginInfo;};
-template<> struct my_class_convert<VkDeviceGroupRenderPassBeginInfo> { using type = S_device_group_render_pass_begin_info;};
-struct		S_device_group_render_pass_begin_info:VkDeviceGroupRenderPassBeginInfo{
+struct	S_device_group_render_pass_begin_info:VkDeviceGroupRenderPassBeginInfo{
 private:
 	using VkDeviceGroupRenderPassBeginInfo::sType;
 	using VkDeviceGroupRenderPassBeginInfo::pNext;
@@ -9795,35 +8936,39 @@ S_device_group_render_pass_begin_info(
 	,deviceMask_
 	,deviceRenderAreaCount_
 	,pDeviceRenderAreas_}
-	{	}
+	{
+	}
 
 friend S_render_pass_begin_info;
+
+	S_device_group_render_pass_begin_info& operator=(const VkDeviceGroupRenderPassBeginInfo& rhs){static_cast<VkDeviceGroupRenderPassBeginInfo&>(*this)=rhs; return *this;}
+	operator VkDeviceGroupRenderPassBeginInfo*()const{return const_cast<VkDeviceGroupRenderPassBeginInfo*>(static_cast<const VkDeviceGroupRenderPassBeginInfo*>(this));}
 };
 
 /*	VkAttachmentSampleLocationsEXT
 */
-template<> struct my_class_convert<S_attachment_sample_locations_EXT> { using type = VkAttachmentSampleLocationsEXT;};
-template<> struct my_class_convert<VkAttachmentSampleLocationsEXT> { using type = S_attachment_sample_locations_EXT;};
-struct		S_attachment_sample_locations_EXT:VkAttachmentSampleLocationsEXT{
+struct	S_attachment_sample_locations_EXT:VkAttachmentSampleLocationsEXT{
 	using VkAttachmentSampleLocationsEXT::attachmentIndex;
 	using VkAttachmentSampleLocationsEXT::sampleLocationsInfo;
+
+	S_attachment_sample_locations_EXT& operator=(const VkAttachmentSampleLocationsEXT& rhs){static_cast<VkAttachmentSampleLocationsEXT&>(*this)=rhs; return *this;}
+	operator VkAttachmentSampleLocationsEXT*()const{return const_cast<VkAttachmentSampleLocationsEXT*>(static_cast<const VkAttachmentSampleLocationsEXT*>(this));}
 };
 
 /*	VkSubpassSampleLocationsEXT
 */
-template<> struct my_class_convert<S_subpass_sample_locations_EXT> { using type = VkSubpassSampleLocationsEXT;};
-template<> struct my_class_convert<VkSubpassSampleLocationsEXT> { using type = S_subpass_sample_locations_EXT;};
-struct		S_subpass_sample_locations_EXT:VkSubpassSampleLocationsEXT{
+struct	S_subpass_sample_locations_EXT:VkSubpassSampleLocationsEXT{
 	using VkSubpassSampleLocationsEXT::subpassIndex;
 	using VkSubpassSampleLocationsEXT::sampleLocationsInfo;
+
+	S_subpass_sample_locations_EXT& operator=(const VkSubpassSampleLocationsEXT& rhs){static_cast<VkSubpassSampleLocationsEXT&>(*this)=rhs; return *this;}
+	operator VkSubpassSampleLocationsEXT*()const{return const_cast<VkSubpassSampleLocationsEXT*>(static_cast<const VkSubpassSampleLocationsEXT*>(this));}
 };
 
 /*	VkRenderPassSampleLocationsBeginInfoEXT
 ex to: VkRenderPassBeginInfo
 */
-template<> struct my_class_convert<S_render_pass_sample_locations_begin_info_EXT> { using type = VkRenderPassSampleLocationsBeginInfoEXT;};
-template<> struct my_class_convert<VkRenderPassSampleLocationsBeginInfoEXT> { using type = S_render_pass_sample_locations_begin_info_EXT;};
-struct		S_render_pass_sample_locations_begin_info_EXT:VkRenderPassSampleLocationsBeginInfoEXT{
+struct	S_render_pass_sample_locations_begin_info_EXT:VkRenderPassSampleLocationsBeginInfoEXT{
 private:
 	using VkRenderPassSampleLocationsBeginInfoEXT::sType;
 	using VkRenderPassSampleLocationsBeginInfoEXT::pNext;
@@ -9846,9 +8991,13 @@ S_render_pass_sample_locations_begin_info_EXT(
 	,pAttachmentInitialSampleLocations_
 	,postSubpassSampleLocationsCount_
 	,pPostSubpassSampleLocations_}
-	{	}
+	{
+	}
 
 friend S_render_pass_begin_info;
+
+	S_render_pass_sample_locations_begin_info_EXT& operator=(const VkRenderPassSampleLocationsBeginInfoEXT& rhs){static_cast<VkRenderPassSampleLocationsBeginInfoEXT&>(*this)=rhs; return *this;}
+	operator VkRenderPassSampleLocationsBeginInfoEXT*()const{return const_cast<VkRenderPassSampleLocationsBeginInfoEXT*>(static_cast<const VkRenderPassSampleLocationsBeginInfoEXT*>(this));}
 };
 
 /*	VkRenderPassBeginInfo
@@ -9865,9 +9014,7 @@ operator void*() { return pNext; }
 N_render_pass_begin_info& n_device_group_render_pass_begin_info(S_device_group_render_pass_begin_info const& next_);
 N_render_pass_begin_info& n_render_pass_sample_locations_begin_info_EXT(S_render_pass_sample_locations_begin_info_EXT const& next_);
 };
-template<> struct my_class_convert<S_render_pass_begin_info> { using type = VkRenderPassBeginInfo;};
-template<> struct my_class_convert<VkRenderPassBeginInfo> { using type = S_render_pass_begin_info;};
-struct		S_render_pass_begin_info:VkRenderPassBeginInfo{
+struct	S_render_pass_begin_info:VkRenderPassBeginInfo{
 private:
 	using VkRenderPassBeginInfo::sType;
 	using VkRenderPassBeginInfo::pNext;
@@ -9893,7 +9040,11 @@ S_render_pass_begin_info(
 	,renderArea_
 	,clearValueCount_
 	,pClearValues_}
-	{	}
+	{
+	}
+
+	S_render_pass_begin_info& operator=(const VkRenderPassBeginInfo& rhs){static_cast<VkRenderPassBeginInfo&>(*this)=rhs; return *this;}
+	operator VkRenderPassBeginInfo*()const{return const_cast<VkRenderPassBeginInfo*>(static_cast<const VkRenderPassBeginInfo*>(this));}
 
 S_render_pass_begin_info& n_device_group_render_pass_begin_info(S_device_group_render_pass_begin_info const& next_);
 S_render_pass_begin_info& n_render_pass_sample_locations_begin_info_EXT(S_render_pass_sample_locations_begin_info_EXT const& next_);
@@ -9902,28 +9053,28 @@ void set_pNext(N_render_pass_begin_info n_){pNext = n_;}
 
 /*	VkClearDepthStencilValue
 */
-template<> struct my_class_convert<S_clear_depth_stencil_value> { using type = VkClearDepthStencilValue;};
-template<> struct my_class_convert<VkClearDepthStencilValue> { using type = S_clear_depth_stencil_value;};
-struct		S_clear_depth_stencil_value:VkClearDepthStencilValue{
+struct	S_clear_depth_stencil_value:VkClearDepthStencilValue{
 	using VkClearDepthStencilValue::depth;
 	using VkClearDepthStencilValue::stencil;
+
+	S_clear_depth_stencil_value& operator=(const VkClearDepthStencilValue& rhs){static_cast<VkClearDepthStencilValue&>(*this)=rhs; return *this;}
+	operator VkClearDepthStencilValue*()const{return const_cast<VkClearDepthStencilValue*>(static_cast<const VkClearDepthStencilValue*>(this));}
 };
 
 /*	VkClearAttachment
 */
-template<> struct my_class_convert<S_clear_attachment> { using type = VkClearAttachment;};
-template<> struct my_class_convert<VkClearAttachment> { using type = S_clear_attachment;};
-struct		S_clear_attachment:VkClearAttachment{
+struct	S_clear_attachment:VkClearAttachment{
 	using VkClearAttachment::aspectMask;
 	using VkClearAttachment::colorAttachment;
 	using VkClearAttachment::clearValue;
+
+	S_clear_attachment& operator=(const VkClearAttachment& rhs){static_cast<VkClearAttachment&>(*this)=rhs; return *this;}
+	operator VkClearAttachment*()const{return const_cast<VkClearAttachment*>(static_cast<const VkClearAttachment*>(this));}
 };
 
 /*	VkAttachmentDescription
 */
-template<> struct my_class_convert<S_attachment_description> { using type = VkAttachmentDescription;};
-template<> struct my_class_convert<VkAttachmentDescription> { using type = S_attachment_description;};
-struct		S_attachment_description:VkAttachmentDescription{
+struct	S_attachment_description:VkAttachmentDescription{
 	using VkAttachmentDescription::flags;
 	using VkAttachmentDescription::format;
 	using VkAttachmentDescription::samples;
@@ -9933,22 +9084,24 @@ struct		S_attachment_description:VkAttachmentDescription{
 	using VkAttachmentDescription::stencilStoreOp;
 	using VkAttachmentDescription::initialLayout;
 	using VkAttachmentDescription::finalLayout;
+
+	S_attachment_description& operator=(const VkAttachmentDescription& rhs){static_cast<VkAttachmentDescription&>(*this)=rhs; return *this;}
+	operator VkAttachmentDescription*()const{return const_cast<VkAttachmentDescription*>(static_cast<const VkAttachmentDescription*>(this));}
 };
 
 /*	VkAttachmentReference
 */
-template<> struct my_class_convert<S_attachment_reference> { using type = VkAttachmentReference;};
-template<> struct my_class_convert<VkAttachmentReference> { using type = S_attachment_reference;};
-struct		S_attachment_reference:VkAttachmentReference{
+struct	S_attachment_reference:VkAttachmentReference{
 	using VkAttachmentReference::attachment;
 	using VkAttachmentReference::layout;
+
+	S_attachment_reference& operator=(const VkAttachmentReference& rhs){static_cast<VkAttachmentReference&>(*this)=rhs; return *this;}
+	operator VkAttachmentReference*()const{return const_cast<VkAttachmentReference*>(static_cast<const VkAttachmentReference*>(this));}
 };
 
 /*	VkSubpassDescription
 */
-template<> struct my_class_convert<S_subpass_description> { using type = VkSubpassDescription;};
-template<> struct my_class_convert<VkSubpassDescription> { using type = S_subpass_description;};
-struct		S_subpass_description:VkSubpassDescription{
+struct	S_subpass_description:VkSubpassDescription{
 	using VkSubpassDescription::flags;
 	using VkSubpassDescription::pipelineBindPoint;
 	using VkSubpassDescription::inputAttachmentCount;
@@ -9959,13 +9112,14 @@ struct		S_subpass_description:VkSubpassDescription{
 	using VkSubpassDescription::pDepthStencilAttachment;
 	using VkSubpassDescription::preserveAttachmentCount;
 	using VkSubpassDescription::pPreserveAttachments;
+
+	S_subpass_description& operator=(const VkSubpassDescription& rhs){static_cast<VkSubpassDescription&>(*this)=rhs; return *this;}
+	operator VkSubpassDescription*()const{return const_cast<VkSubpassDescription*>(static_cast<const VkSubpassDescription*>(this));}
 };
 
 /*	VkSubpassDependency
 */
-template<> struct my_class_convert<S_subpass_dependency> { using type = VkSubpassDependency;};
-template<> struct my_class_convert<VkSubpassDependency> { using type = S_subpass_dependency;};
-struct		S_subpass_dependency:VkSubpassDependency{
+struct	S_subpass_dependency:VkSubpassDependency{
 	using VkSubpassDependency::srcSubpass;
 	using VkSubpassDependency::dstSubpass;
 	using VkSubpassDependency::srcStageMask;
@@ -9973,14 +9127,15 @@ struct		S_subpass_dependency:VkSubpassDependency{
 	using VkSubpassDependency::srcAccessMask;
 	using VkSubpassDependency::dstAccessMask;
 	using VkSubpassDependency::dependencyFlags;
+
+	S_subpass_dependency& operator=(const VkSubpassDependency& rhs){static_cast<VkSubpassDependency&>(*this)=rhs; return *this;}
+	operator VkSubpassDependency*()const{return const_cast<VkSubpassDependency*>(static_cast<const VkSubpassDependency*>(this));}
 };
 
 /*	VkRenderPassMultiviewCreateInfo
 ex to: VkRenderPassCreateInfo
 */
-template<> struct my_class_convert<S_render_pass_multiview_create_info> { using type = VkRenderPassMultiviewCreateInfo;};
-template<> struct my_class_convert<VkRenderPassMultiviewCreateInfo> { using type = S_render_pass_multiview_create_info;};
-struct		S_render_pass_multiview_create_info:VkRenderPassMultiviewCreateInfo{
+struct	S_render_pass_multiview_create_info:VkRenderPassMultiviewCreateInfo{
 private:
 	using VkRenderPassMultiviewCreateInfo::sType;
 	using VkRenderPassMultiviewCreateInfo::pNext;
@@ -10009,27 +9164,30 @@ S_render_pass_multiview_create_info(
 	,pViewOffsets_
 	,correlationMaskCount_
 	,pCorrelationMasks_}
-	{	}
+	{
+	}
 
 friend S_render_pass_create_info;
+
+	S_render_pass_multiview_create_info& operator=(const VkRenderPassMultiviewCreateInfo& rhs){static_cast<VkRenderPassMultiviewCreateInfo&>(*this)=rhs; return *this;}
+	operator VkRenderPassMultiviewCreateInfo*()const{return const_cast<VkRenderPassMultiviewCreateInfo*>(static_cast<const VkRenderPassMultiviewCreateInfo*>(this));}
 };
 
 /*	VkInputAttachmentAspectReference
 */
-template<> struct my_class_convert<S_input_attachment_aspect_reference> { using type = VkInputAttachmentAspectReference;};
-template<> struct my_class_convert<VkInputAttachmentAspectReference> { using type = S_input_attachment_aspect_reference;};
-struct		S_input_attachment_aspect_reference:VkInputAttachmentAspectReference{
+struct	S_input_attachment_aspect_reference:VkInputAttachmentAspectReference{
 	using VkInputAttachmentAspectReference::subpass;
 	using VkInputAttachmentAspectReference::inputAttachmentIndex;
 	using VkInputAttachmentAspectReference::aspectMask;
+
+	S_input_attachment_aspect_reference& operator=(const VkInputAttachmentAspectReference& rhs){static_cast<VkInputAttachmentAspectReference&>(*this)=rhs; return *this;}
+	operator VkInputAttachmentAspectReference*()const{return const_cast<VkInputAttachmentAspectReference*>(static_cast<const VkInputAttachmentAspectReference*>(this));}
 };
 
 /*	VkRenderPassInputAttachmentAspectCreateInfo
 ex to: VkRenderPassCreateInfo
 */
-template<> struct my_class_convert<S_render_pass_input_attachment_aspect_create_info> { using type = VkRenderPassInputAttachmentAspectCreateInfo;};
-template<> struct my_class_convert<VkRenderPassInputAttachmentAspectCreateInfo> { using type = S_render_pass_input_attachment_aspect_create_info;};
-struct		S_render_pass_input_attachment_aspect_create_info:VkRenderPassInputAttachmentAspectCreateInfo{
+struct	S_render_pass_input_attachment_aspect_create_info:VkRenderPassInputAttachmentAspectCreateInfo{
 private:
 	using VkRenderPassInputAttachmentAspectCreateInfo::sType;
 	using VkRenderPassInputAttachmentAspectCreateInfo::pNext;
@@ -10046,9 +9204,13 @@ S_render_pass_input_attachment_aspect_create_info(
 	,nullptr
 	,aspectReferenceCount_
 	,pAspectReferences_}
-	{	}
+	{
+	}
 
 friend S_render_pass_create_info;
+
+	S_render_pass_input_attachment_aspect_create_info& operator=(const VkRenderPassInputAttachmentAspectCreateInfo& rhs){static_cast<VkRenderPassInputAttachmentAspectCreateInfo&>(*this)=rhs; return *this;}
+	operator VkRenderPassInputAttachmentAspectCreateInfo*()const{return const_cast<VkRenderPassInputAttachmentAspectCreateInfo*>(static_cast<const VkRenderPassInputAttachmentAspectCreateInfo*>(this));}
 };
 
 /*	VkRenderPassCreateInfo
@@ -10065,9 +9227,7 @@ operator void*() { return pNext; }
 N_render_pass_create_info& n_render_pass_multiview_create_info(S_render_pass_multiview_create_info const& next_);
 N_render_pass_create_info& n_render_pass_input_attachment_aspect_create_info(S_render_pass_input_attachment_aspect_create_info const& next_);
 };
-template<> struct my_class_convert<S_render_pass_create_info> { using type = VkRenderPassCreateInfo;};
-template<> struct my_class_convert<VkRenderPassCreateInfo> { using type = S_render_pass_create_info;};
-struct		S_render_pass_create_info:VkRenderPassCreateInfo{
+struct	S_render_pass_create_info:VkRenderPassCreateInfo{
 private:
 	using VkRenderPassCreateInfo::sType;
 	using VkRenderPassCreateInfo::pNext;
@@ -10082,7 +9242,7 @@ public:
 
 S_render_pass_create_info():VkRenderPassCreateInfo{VK_STRUCTURE_TYPE_RENDER_PASS_CREATE_INFO,nullptr}{}
 S_render_pass_create_info(
-	F_render_pass_create flags_,
+	VkRenderPassCreateFlags flags_,
 	uint32_t attachmentCount_,
 	const S_attachment_description * pAttachments_,
 	uint32_t subpassCount_,
@@ -10099,7 +9259,11 @@ S_render_pass_create_info(
 	,pSubpasses_
 	,dependencyCount_
 	,pDependencies_}
-	{	}
+	{
+	}
+
+	S_render_pass_create_info& operator=(const VkRenderPassCreateInfo& rhs){static_cast<VkRenderPassCreateInfo&>(*this)=rhs; return *this;}
+	operator VkRenderPassCreateInfo*()const{return const_cast<VkRenderPassCreateInfo*>(static_cast<const VkRenderPassCreateInfo*>(this));}
 
 S_render_pass_create_info& n_render_pass_multiview_create_info(S_render_pass_multiview_create_info const& next_);
 S_render_pass_create_info& n_render_pass_input_attachment_aspect_create_info(S_render_pass_input_attachment_aspect_create_info const& next_);
@@ -10108,9 +9272,7 @@ void set_pNext(N_render_pass_create_info n_){pNext = n_;}
 
 /*	VkEventCreateInfo
 */
-template<> struct my_class_convert<S_event_create_info> { using type = VkEventCreateInfo;};
-template<> struct my_class_convert<VkEventCreateInfo> { using type = S_event_create_info;};
-struct		S_event_create_info:VkEventCreateInfo{
+struct	S_event_create_info:VkEventCreateInfo{
 private:
 	using VkEventCreateInfo::sType;
 	using VkEventCreateInfo::pNext;
@@ -10124,15 +9286,17 @@ S_event_create_info(
 	VK_STRUCTURE_TYPE_EVENT_CREATE_INFO
 	,nullptr
 	,flags_}
-	{	}
+	{
+	}
+
+	S_event_create_info& operator=(const VkEventCreateInfo& rhs){static_cast<VkEventCreateInfo&>(*this)=rhs; return *this;}
+	operator VkEventCreateInfo*()const{return const_cast<VkEventCreateInfo*>(static_cast<const VkEventCreateInfo*>(this));}
 };
 
 /*	VkExportFenceCreateInfo
 ex to: VkFenceCreateInfo
 */
-template<> struct my_class_convert<S_export_fence_create_info> { using type = VkExportFenceCreateInfo;};
-template<> struct my_class_convert<VkExportFenceCreateInfo> { using type = S_export_fence_create_info;};
-struct		S_export_fence_create_info:VkExportFenceCreateInfo{
+struct	S_export_fence_create_info:VkExportFenceCreateInfo{
 private:
 	using VkExportFenceCreateInfo::sType;
 	using VkExportFenceCreateInfo::pNext;
@@ -10146,18 +9310,20 @@ S_export_fence_create_info(
 	VK_STRUCTURE_TYPE_EXPORT_FENCE_CREATE_INFO
 	,nullptr
 	,handleTypes_}
-	{	}
+	{
+	}
 
 friend S_fence_create_info;
+
+	S_export_fence_create_info& operator=(const VkExportFenceCreateInfo& rhs){static_cast<VkExportFenceCreateInfo&>(*this)=rhs; return *this;}
+	operator VkExportFenceCreateInfo*()const{return const_cast<VkExportFenceCreateInfo*>(static_cast<const VkExportFenceCreateInfo*>(this));}
 };
 
 /*	VkExportFenceWin32HandleInfoKHR
 ex to: VkFenceCreateInfo
 */
 #ifdef VK_USE_PLATFORM_WIN32_KHR
-template<> struct my_class_convert<S_export_fence_win32_handle_info_KHR> { using type = VkExportFenceWin32HandleInfoKHR;};
-template<> struct my_class_convert<VkExportFenceWin32HandleInfoKHR> { using type = S_export_fence_win32_handle_info_KHR;};
-struct		S_export_fence_win32_handle_info_KHR:VkExportFenceWin32HandleInfoKHR{
+struct	S_export_fence_win32_handle_info_KHR:VkExportFenceWin32HandleInfoKHR{
 private:
 	using VkExportFenceWin32HandleInfoKHR::sType;
 	using VkExportFenceWin32HandleInfoKHR::pNext;
@@ -10177,9 +9343,13 @@ S_export_fence_win32_handle_info_KHR(
 	,pAttributes_
 	,dwAccess_
 	,name_}
-	{	}
+	{
+	}
 
 friend S_fence_create_info;
+
+	S_export_fence_win32_handle_info_KHR& operator=(const VkExportFenceWin32HandleInfoKHR& rhs){static_cast<VkExportFenceWin32HandleInfoKHR&>(*this)=rhs; return *this;}
+	operator VkExportFenceWin32HandleInfoKHR*()const{return const_cast<VkExportFenceWin32HandleInfoKHR*>(static_cast<const VkExportFenceWin32HandleInfoKHR*>(this));}
 };
 #endif //VK_USE_PLATFORM_WIN32_KHR
 
@@ -10199,9 +9369,7 @@ N_fence_create_info& n_export_fence_create_info(S_export_fence_create_info const
 N_fence_create_info& n_export_fence_win32_handle_info_KHR(S_export_fence_win32_handle_info_KHR const& next_);
 #endif
 };
-template<> struct my_class_convert<S_fence_create_info> { using type = VkFenceCreateInfo;};
-template<> struct my_class_convert<VkFenceCreateInfo> { using type = S_fence_create_info;};
-struct		S_fence_create_info:VkFenceCreateInfo{
+struct	S_fence_create_info:VkFenceCreateInfo{
 private:
 	using VkFenceCreateInfo::sType;
 	using VkFenceCreateInfo::pNext;
@@ -10215,7 +9383,11 @@ S_fence_create_info(
 	VK_STRUCTURE_TYPE_FENCE_CREATE_INFO
 	,nullptr
 	,flags_}
-	{	}
+	{
+	}
+
+	S_fence_create_info& operator=(const VkFenceCreateInfo& rhs){static_cast<VkFenceCreateInfo&>(*this)=rhs; return *this;}
+	operator VkFenceCreateInfo*()const{return const_cast<VkFenceCreateInfo*>(static_cast<const VkFenceCreateInfo*>(this));}
 
 S_fence_create_info& n_export_fence_create_info(S_export_fence_create_info const& next_);
 #ifdef VK_USE_PLATFORM_WIN32_KHR
@@ -10227,9 +9399,7 @@ void set_pNext(N_fence_create_info n_){pNext = n_;}
 /*	VkExportSemaphoreCreateInfo
 ex to: VkSemaphoreCreateInfo
 */
-template<> struct my_class_convert<S_export_semaphore_create_info> { using type = VkExportSemaphoreCreateInfo;};
-template<> struct my_class_convert<VkExportSemaphoreCreateInfo> { using type = S_export_semaphore_create_info;};
-struct		S_export_semaphore_create_info:VkExportSemaphoreCreateInfo{
+struct	S_export_semaphore_create_info:VkExportSemaphoreCreateInfo{
 private:
 	using VkExportSemaphoreCreateInfo::sType;
 	using VkExportSemaphoreCreateInfo::pNext;
@@ -10243,18 +9413,20 @@ S_export_semaphore_create_info(
 	VK_STRUCTURE_TYPE_EXPORT_SEMAPHORE_CREATE_INFO
 	,nullptr
 	,handleTypes_}
-	{	}
+	{
+	}
 
 friend S_semaphore_create_info;
+
+	S_export_semaphore_create_info& operator=(const VkExportSemaphoreCreateInfo& rhs){static_cast<VkExportSemaphoreCreateInfo&>(*this)=rhs; return *this;}
+	operator VkExportSemaphoreCreateInfo*()const{return const_cast<VkExportSemaphoreCreateInfo*>(static_cast<const VkExportSemaphoreCreateInfo*>(this));}
 };
 
 /*	VkExportSemaphoreWin32HandleInfoKHR
 ex to: VkSemaphoreCreateInfo
 */
 #ifdef VK_USE_PLATFORM_WIN32_KHR
-template<> struct my_class_convert<S_export_semaphore_win32_handle_info_KHR> { using type = VkExportSemaphoreWin32HandleInfoKHR;};
-template<> struct my_class_convert<VkExportSemaphoreWin32HandleInfoKHR> { using type = S_export_semaphore_win32_handle_info_KHR;};
-struct		S_export_semaphore_win32_handle_info_KHR:VkExportSemaphoreWin32HandleInfoKHR{
+struct	S_export_semaphore_win32_handle_info_KHR:VkExportSemaphoreWin32HandleInfoKHR{
 private:
 	using VkExportSemaphoreWin32HandleInfoKHR::sType;
 	using VkExportSemaphoreWin32HandleInfoKHR::pNext;
@@ -10274,9 +9446,13 @@ S_export_semaphore_win32_handle_info_KHR(
 	,pAttributes_
 	,dwAccess_
 	,name_}
-	{	}
+	{
+	}
 
 friend S_semaphore_create_info;
+
+	S_export_semaphore_win32_handle_info_KHR& operator=(const VkExportSemaphoreWin32HandleInfoKHR& rhs){static_cast<VkExportSemaphoreWin32HandleInfoKHR&>(*this)=rhs; return *this;}
+	operator VkExportSemaphoreWin32HandleInfoKHR*()const{return const_cast<VkExportSemaphoreWin32HandleInfoKHR*>(static_cast<const VkExportSemaphoreWin32HandleInfoKHR*>(this));}
 };
 #endif //VK_USE_PLATFORM_WIN32_KHR
 
@@ -10296,9 +9472,7 @@ N_semaphore_create_info& n_export_semaphore_create_info(S_export_semaphore_creat
 N_semaphore_create_info& n_export_semaphore_win32_handle_info_KHR(S_export_semaphore_win32_handle_info_KHR const& next_);
 #endif
 };
-template<> struct my_class_convert<S_semaphore_create_info> { using type = VkSemaphoreCreateInfo;};
-template<> struct my_class_convert<VkSemaphoreCreateInfo> { using type = S_semaphore_create_info;};
-struct		S_semaphore_create_info:VkSemaphoreCreateInfo{
+struct	S_semaphore_create_info:VkSemaphoreCreateInfo{
 private:
 	using VkSemaphoreCreateInfo::sType;
 	using VkSemaphoreCreateInfo::pNext;
@@ -10312,7 +9486,11 @@ S_semaphore_create_info(
 	VK_STRUCTURE_TYPE_SEMAPHORE_CREATE_INFO
 	,nullptr
 	,flags_}
-	{	}
+	{
+	}
+
+	S_semaphore_create_info& operator=(const VkSemaphoreCreateInfo& rhs){static_cast<VkSemaphoreCreateInfo&>(*this)=rhs; return *this;}
+	operator VkSemaphoreCreateInfo*()const{return const_cast<VkSemaphoreCreateInfo*>(static_cast<const VkSemaphoreCreateInfo*>(this));}
 
 S_semaphore_create_info& n_export_semaphore_create_info(S_export_semaphore_create_info const& next_);
 #ifdef VK_USE_PLATFORM_WIN32_KHR
@@ -10323,9 +9501,7 @@ void set_pNext(N_semaphore_create_info n_){pNext = n_;}
 
 /*	VkQueryPoolCreateInfo
 */
-template<> struct my_class_convert<S_query_pool_create_info> { using type = VkQueryPoolCreateInfo;};
-template<> struct my_class_convert<VkQueryPoolCreateInfo> { using type = S_query_pool_create_info;};
-struct		S_query_pool_create_info:VkQueryPoolCreateInfo{
+struct	S_query_pool_create_info:VkQueryPoolCreateInfo{
 private:
 	using VkQueryPoolCreateInfo::sType;
 	using VkQueryPoolCreateInfo::pNext;
@@ -10348,14 +9524,16 @@ S_query_pool_create_info(
 	,queryType_
 	,queryCount_
 	,pipelineStatistics_}
-	{	}
+	{
+	}
+
+	S_query_pool_create_info& operator=(const VkQueryPoolCreateInfo& rhs){static_cast<VkQueryPoolCreateInfo&>(*this)=rhs; return *this;}
+	operator VkQueryPoolCreateInfo*()const{return const_cast<VkQueryPoolCreateInfo*>(static_cast<const VkQueryPoolCreateInfo*>(this));}
 };
 
 /*	VkFramebufferCreateInfo
 */
-template<> struct my_class_convert<S_framebuffer_create_info> { using type = VkFramebufferCreateInfo;};
-template<> struct my_class_convert<VkFramebufferCreateInfo> { using type = S_framebuffer_create_info;};
-struct		S_framebuffer_create_info:VkFramebufferCreateInfo{
+struct	S_framebuffer_create_info:VkFramebufferCreateInfo{
 private:
 	using VkFramebufferCreateInfo::sType;
 	using VkFramebufferCreateInfo::pNext;
@@ -10387,49 +9565,54 @@ S_framebuffer_create_info(
 	,width_
 	,height_
 	,layers_}
-	{	}
+	{
+	}
+
+	S_framebuffer_create_info& operator=(const VkFramebufferCreateInfo& rhs){static_cast<VkFramebufferCreateInfo&>(*this)=rhs; return *this;}
+	operator VkFramebufferCreateInfo*()const{return const_cast<VkFramebufferCreateInfo*>(static_cast<const VkFramebufferCreateInfo*>(this));}
 };
 
 /*	VkDrawIndirectCommand
 */
-template<> struct my_class_convert<S_draw_indirect_command> { using type = VkDrawIndirectCommand;};
-template<> struct my_class_convert<VkDrawIndirectCommand> { using type = S_draw_indirect_command;};
-struct		S_draw_indirect_command:VkDrawIndirectCommand{
+struct	S_draw_indirect_command:VkDrawIndirectCommand{
 	using VkDrawIndirectCommand::vertexCount;
 	using VkDrawIndirectCommand::instanceCount;
 	using VkDrawIndirectCommand::firstVertex;
 	using VkDrawIndirectCommand::firstInstance;
+
+	S_draw_indirect_command& operator=(const VkDrawIndirectCommand& rhs){static_cast<VkDrawIndirectCommand&>(*this)=rhs; return *this;}
+	operator VkDrawIndirectCommand*()const{return const_cast<VkDrawIndirectCommand*>(static_cast<const VkDrawIndirectCommand*>(this));}
 };
 
 /*	VkDrawIndexedIndirectCommand
 */
-template<> struct my_class_convert<S_draw_indexed_indirect_command> { using type = VkDrawIndexedIndirectCommand;};
-template<> struct my_class_convert<VkDrawIndexedIndirectCommand> { using type = S_draw_indexed_indirect_command;};
-struct		S_draw_indexed_indirect_command:VkDrawIndexedIndirectCommand{
+struct	S_draw_indexed_indirect_command:VkDrawIndexedIndirectCommand{
 	using VkDrawIndexedIndirectCommand::indexCount;
 	using VkDrawIndexedIndirectCommand::instanceCount;
 	using VkDrawIndexedIndirectCommand::firstIndex;
 	using VkDrawIndexedIndirectCommand::vertexOffset;
 	using VkDrawIndexedIndirectCommand::firstInstance;
+
+	S_draw_indexed_indirect_command& operator=(const VkDrawIndexedIndirectCommand& rhs){static_cast<VkDrawIndexedIndirectCommand&>(*this)=rhs; return *this;}
+	operator VkDrawIndexedIndirectCommand*()const{return const_cast<VkDrawIndexedIndirectCommand*>(static_cast<const VkDrawIndexedIndirectCommand*>(this));}
 };
 
 /*	VkDispatchIndirectCommand
 */
-template<> struct my_class_convert<S_dispatch_indirect_command> { using type = VkDispatchIndirectCommand;};
-template<> struct my_class_convert<VkDispatchIndirectCommand> { using type = S_dispatch_indirect_command;};
-struct		S_dispatch_indirect_command:VkDispatchIndirectCommand{
+struct	S_dispatch_indirect_command:VkDispatchIndirectCommand{
 	using VkDispatchIndirectCommand::x;
 	using VkDispatchIndirectCommand::y;
 	using VkDispatchIndirectCommand::z;
+
+	S_dispatch_indirect_command& operator=(const VkDispatchIndirectCommand& rhs){static_cast<VkDispatchIndirectCommand&>(*this)=rhs; return *this;}
+	operator VkDispatchIndirectCommand*()const{return const_cast<VkDispatchIndirectCommand*>(static_cast<const VkDispatchIndirectCommand*>(this));}
 };
 
 /*	VkWin32KeyedMutexAcquireReleaseInfoNV
 ex to: VkSubmitInfo
 */
 #ifdef VK_USE_PLATFORM_WIN32_KHR
-template<> struct my_class_convert<S_win32_keyed_mutex_acquire_release_info_NV> { using type = VkWin32KeyedMutexAcquireReleaseInfoNV;};
-template<> struct my_class_convert<VkWin32KeyedMutexAcquireReleaseInfoNV> { using type = S_win32_keyed_mutex_acquire_release_info_NV;};
-struct		S_win32_keyed_mutex_acquire_release_info_NV:VkWin32KeyedMutexAcquireReleaseInfoNV{
+struct	S_win32_keyed_mutex_acquire_release_info_NV:VkWin32KeyedMutexAcquireReleaseInfoNV{
 private:
 	using VkWin32KeyedMutexAcquireReleaseInfoNV::sType;
 	using VkWin32KeyedMutexAcquireReleaseInfoNV::pNext;
@@ -10461,9 +9644,13 @@ S_win32_keyed_mutex_acquire_release_info_NV(
 	,releaseCount_
 	,pReleaseSyncs_
 	,pReleaseKeys_}
-	{	}
+	{
+	}
 
 friend S_submit_info;
+
+	S_win32_keyed_mutex_acquire_release_info_NV& operator=(const VkWin32KeyedMutexAcquireReleaseInfoNV& rhs){static_cast<VkWin32KeyedMutexAcquireReleaseInfoNV&>(*this)=rhs; return *this;}
+	operator VkWin32KeyedMutexAcquireReleaseInfoNV*()const{return const_cast<VkWin32KeyedMutexAcquireReleaseInfoNV*>(static_cast<const VkWin32KeyedMutexAcquireReleaseInfoNV*>(this));}
 };
 #endif //VK_USE_PLATFORM_WIN32_KHR
 
@@ -10471,9 +9658,7 @@ friend S_submit_info;
 ex to: VkSubmitInfo
 */
 #ifdef VK_USE_PLATFORM_WIN32_KHR
-template<> struct my_class_convert<S_win32_keyed_mutex_acquire_release_info_KHR> { using type = VkWin32KeyedMutexAcquireReleaseInfoKHR;};
-template<> struct my_class_convert<VkWin32KeyedMutexAcquireReleaseInfoKHR> { using type = S_win32_keyed_mutex_acquire_release_info_KHR;};
-struct		S_win32_keyed_mutex_acquire_release_info_KHR:VkWin32KeyedMutexAcquireReleaseInfoKHR{
+struct	S_win32_keyed_mutex_acquire_release_info_KHR:VkWin32KeyedMutexAcquireReleaseInfoKHR{
 private:
 	using VkWin32KeyedMutexAcquireReleaseInfoKHR::sType;
 	using VkWin32KeyedMutexAcquireReleaseInfoKHR::pNext;
@@ -10505,9 +9690,13 @@ S_win32_keyed_mutex_acquire_release_info_KHR(
 	,releaseCount_
 	,pReleaseSyncs_
 	,pReleaseKeys_}
-	{	}
+	{
+	}
 
 friend S_submit_info;
+
+	S_win32_keyed_mutex_acquire_release_info_KHR& operator=(const VkWin32KeyedMutexAcquireReleaseInfoKHR& rhs){static_cast<VkWin32KeyedMutexAcquireReleaseInfoKHR&>(*this)=rhs; return *this;}
+	operator VkWin32KeyedMutexAcquireReleaseInfoKHR*()const{return const_cast<VkWin32KeyedMutexAcquireReleaseInfoKHR*>(static_cast<const VkWin32KeyedMutexAcquireReleaseInfoKHR*>(this));}
 };
 #endif //VK_USE_PLATFORM_WIN32_KHR
 
@@ -10515,9 +9704,7 @@ friend S_submit_info;
 ex to: VkSubmitInfo
 */
 #ifdef VK_USE_PLATFORM_WIN32_KHR
-template<> struct my_class_convert<S_d_3d12_fence_submit_info_KHR> { using type = VkD3D12FenceSubmitInfoKHR;};
-template<> struct my_class_convert<VkD3D12FenceSubmitInfoKHR> { using type = S_d_3d12_fence_submit_info_KHR;};
-struct		S_d_3d12_fence_submit_info_KHR:VkD3D12FenceSubmitInfoKHR{
+struct	S_d_3d12_fence_submit_info_KHR:VkD3D12FenceSubmitInfoKHR{
 private:
 	using VkD3D12FenceSubmitInfoKHR::sType;
 	using VkD3D12FenceSubmitInfoKHR::pNext;
@@ -10540,18 +9727,20 @@ S_d_3d12_fence_submit_info_KHR(
 	,pWaitSemaphoreValues_
 	,signalSemaphoreValuesCount_
 	,pSignalSemaphoreValues_}
-	{	}
+	{
+	}
 
 friend S_submit_info;
+
+	S_d_3d12_fence_submit_info_KHR& operator=(const VkD3D12FenceSubmitInfoKHR& rhs){static_cast<VkD3D12FenceSubmitInfoKHR&>(*this)=rhs; return *this;}
+	operator VkD3D12FenceSubmitInfoKHR*()const{return const_cast<VkD3D12FenceSubmitInfoKHR*>(static_cast<const VkD3D12FenceSubmitInfoKHR*>(this));}
 };
 #endif //VK_USE_PLATFORM_WIN32_KHR
 
 /*	VkDeviceGroupSubmitInfo
 ex to: VkSubmitInfo
 */
-template<> struct my_class_convert<S_device_group_submit_info> { using type = VkDeviceGroupSubmitInfo;};
-template<> struct my_class_convert<VkDeviceGroupSubmitInfo> { using type = S_device_group_submit_info;};
-struct		S_device_group_submit_info:VkDeviceGroupSubmitInfo{
+struct	S_device_group_submit_info:VkDeviceGroupSubmitInfo{
 private:
 	using VkDeviceGroupSubmitInfo::sType;
 	using VkDeviceGroupSubmitInfo::pNext;
@@ -10580,17 +9769,19 @@ S_device_group_submit_info(
 	,pCommandBufferDeviceMasks_
 	,signalSemaphoreCount_
 	,pSignalSemaphoreDeviceIndices_}
-	{	}
+	{
+	}
 
 friend S_submit_info;
+
+	S_device_group_submit_info& operator=(const VkDeviceGroupSubmitInfo& rhs){static_cast<VkDeviceGroupSubmitInfo&>(*this)=rhs; return *this;}
+	operator VkDeviceGroupSubmitInfo*()const{return const_cast<VkDeviceGroupSubmitInfo*>(static_cast<const VkDeviceGroupSubmitInfo*>(this));}
 };
 
 /*	VkProtectedSubmitInfo
 ex to: VkSubmitInfo
 */
-template<> struct my_class_convert<S_protected_submit_info> { using type = VkProtectedSubmitInfo;};
-template<> struct my_class_convert<VkProtectedSubmitInfo> { using type = S_protected_submit_info;};
-struct		S_protected_submit_info:VkProtectedSubmitInfo{
+struct	S_protected_submit_info:VkProtectedSubmitInfo{
 private:
 	using VkProtectedSubmitInfo::sType;
 	using VkProtectedSubmitInfo::pNext;
@@ -10604,9 +9795,13 @@ S_protected_submit_info(
 	VK_STRUCTURE_TYPE_PROTECTED_SUBMIT_INFO
 	,nullptr
 	,protectedSubmit_}
-	{	}
+	{
+	}
 
 friend S_submit_info;
+
+	S_protected_submit_info& operator=(const VkProtectedSubmitInfo& rhs){static_cast<VkProtectedSubmitInfo&>(*this)=rhs; return *this;}
+	operator VkProtectedSubmitInfo*()const{return const_cast<VkProtectedSubmitInfo*>(static_cast<const VkProtectedSubmitInfo*>(this));}
 };
 
 /*	VkSubmitInfo
@@ -10635,9 +9830,7 @@ N_submit_info& n_d_3d12_fence_submit_info_KHR(S_d_3d12_fence_submit_info_KHR con
 N_submit_info& n_device_group_submit_info(S_device_group_submit_info const& next_);
 N_submit_info& n_protected_submit_info(S_protected_submit_info const& next_);
 };
-template<> struct my_class_convert<S_submit_info> { using type = VkSubmitInfo;};
-template<> struct my_class_convert<VkSubmitInfo> { using type = S_submit_info;};
-struct		S_submit_info:VkSubmitInfo{
+struct	S_submit_info:VkSubmitInfo{
 private:
 	using VkSubmitInfo::sType;
 	using VkSubmitInfo::pNext;
@@ -10664,12 +9857,16 @@ S_submit_info(
 	,nullptr
 	,waitSemaphoreCount_
 	,pWaitSemaphores_
-	,pWaitDstStageMask_
+	,*pWaitDstStageMask_
 	,commandBufferCount_
 	,pCommandBuffers_
 	,signalSemaphoreCount_
 	,pSignalSemaphores_}
-	{	}
+	{
+	}
+
+	S_submit_info& operator=(const VkSubmitInfo& rhs){static_cast<VkSubmitInfo&>(*this)=rhs; return *this;}
+	operator VkSubmitInfo*()const{return const_cast<VkSubmitInfo*>(static_cast<const VkSubmitInfo*>(this));}
 
 #ifdef VK_USE_PLATFORM_WIN32_KHR
 S_submit_info& n_win32_keyed_mutex_acquire_release_info_NV(S_win32_keyed_mutex_acquire_release_info_NV const& next_);
@@ -10688,9 +9885,7 @@ void set_pNext(N_submit_info n_){pNext = n_;}
 /*	VkDisplayPropertiesKHR
 (returnedonly)
 */
-template<> struct my_class_convert<S_display_properties_KHR> { using type = VkDisplayPropertiesKHR;};
-template<> struct my_class_convert<VkDisplayPropertiesKHR> { using type = S_display_properties_KHR;};
-struct		S_display_properties_KHR:VkDisplayPropertiesKHR{
+struct	S_display_properties_KHR:VkDisplayPropertiesKHR{
 	using VkDisplayPropertiesKHR::display;
 	using VkDisplayPropertiesKHR::displayName;
 	using VkDisplayPropertiesKHR::physicalDimensions;
@@ -10698,42 +9893,46 @@ struct		S_display_properties_KHR:VkDisplayPropertiesKHR{
 	using VkDisplayPropertiesKHR::supportedTransforms;
 	using VkDisplayPropertiesKHR::planeReorderPossible;
 	using VkDisplayPropertiesKHR::persistentContent;
+
+	S_display_properties_KHR& operator=(const VkDisplayPropertiesKHR& rhs){static_cast<VkDisplayPropertiesKHR&>(*this)=rhs; return *this;}
+	operator VkDisplayPropertiesKHR*()const{return const_cast<VkDisplayPropertiesKHR*>(static_cast<const VkDisplayPropertiesKHR*>(this));}
 };
 
 /*	VkDisplayPlanePropertiesKHR
 (returnedonly)
 */
-template<> struct my_class_convert<S_display_plane_properties_KHR> { using type = VkDisplayPlanePropertiesKHR;};
-template<> struct my_class_convert<VkDisplayPlanePropertiesKHR> { using type = S_display_plane_properties_KHR;};
-struct		S_display_plane_properties_KHR:VkDisplayPlanePropertiesKHR{
+struct	S_display_plane_properties_KHR:VkDisplayPlanePropertiesKHR{
 	using VkDisplayPlanePropertiesKHR::currentDisplay;
 	using VkDisplayPlanePropertiesKHR::currentStackIndex;
+
+	S_display_plane_properties_KHR& operator=(const VkDisplayPlanePropertiesKHR& rhs){static_cast<VkDisplayPlanePropertiesKHR&>(*this)=rhs; return *this;}
+	operator VkDisplayPlanePropertiesKHR*()const{return const_cast<VkDisplayPlanePropertiesKHR*>(static_cast<const VkDisplayPlanePropertiesKHR*>(this));}
 };
 
 /*	VkDisplayModeParametersKHR
 */
-template<> struct my_class_convert<S_display_mode_parameters_KHR> { using type = VkDisplayModeParametersKHR;};
-template<> struct my_class_convert<VkDisplayModeParametersKHR> { using type = S_display_mode_parameters_KHR;};
-struct		S_display_mode_parameters_KHR:VkDisplayModeParametersKHR{
+struct	S_display_mode_parameters_KHR:VkDisplayModeParametersKHR{
 	using VkDisplayModeParametersKHR::visibleRegion;
 	using VkDisplayModeParametersKHR::refreshRate;
+
+	S_display_mode_parameters_KHR& operator=(const VkDisplayModeParametersKHR& rhs){static_cast<VkDisplayModeParametersKHR&>(*this)=rhs; return *this;}
+	operator VkDisplayModeParametersKHR*()const{return const_cast<VkDisplayModeParametersKHR*>(static_cast<const VkDisplayModeParametersKHR*>(this));}
 };
 
 /*	VkDisplayModePropertiesKHR
 (returnedonly)
 */
-template<> struct my_class_convert<S_display_mode_properties_KHR> { using type = VkDisplayModePropertiesKHR;};
-template<> struct my_class_convert<VkDisplayModePropertiesKHR> { using type = S_display_mode_properties_KHR;};
-struct		S_display_mode_properties_KHR:VkDisplayModePropertiesKHR{
+struct	S_display_mode_properties_KHR:VkDisplayModePropertiesKHR{
 	using VkDisplayModePropertiesKHR::displayMode;
 	using VkDisplayModePropertiesKHR::parameters;
+
+	S_display_mode_properties_KHR& operator=(const VkDisplayModePropertiesKHR& rhs){static_cast<VkDisplayModePropertiesKHR&>(*this)=rhs; return *this;}
+	operator VkDisplayModePropertiesKHR*()const{return const_cast<VkDisplayModePropertiesKHR*>(static_cast<const VkDisplayModePropertiesKHR*>(this));}
 };
 
 /*	VkDisplayModeCreateInfoKHR
 */
-template<> struct my_class_convert<S_display_mode_create_info_KHR> { using type = VkDisplayModeCreateInfoKHR;};
-template<> struct my_class_convert<VkDisplayModeCreateInfoKHR> { using type = S_display_mode_create_info_KHR;};
-struct		S_display_mode_create_info_KHR:VkDisplayModeCreateInfoKHR{
+struct	S_display_mode_create_info_KHR:VkDisplayModeCreateInfoKHR{
 private:
 	using VkDisplayModeCreateInfoKHR::sType;
 	using VkDisplayModeCreateInfoKHR::pNext;
@@ -10750,15 +9949,17 @@ S_display_mode_create_info_KHR(
 	,nullptr
 	,flags_
 	,parameters_}
-	{	}
+	{
+	}
+
+	S_display_mode_create_info_KHR& operator=(const VkDisplayModeCreateInfoKHR& rhs){static_cast<VkDisplayModeCreateInfoKHR&>(*this)=rhs; return *this;}
+	operator VkDisplayModeCreateInfoKHR*()const{return const_cast<VkDisplayModeCreateInfoKHR*>(static_cast<const VkDisplayModeCreateInfoKHR*>(this));}
 };
 
 /*	VkDisplayPlaneCapabilitiesKHR
 (returnedonly)
 */
-template<> struct my_class_convert<S_display_plane_capabilities_KHR> { using type = VkDisplayPlaneCapabilitiesKHR;};
-template<> struct my_class_convert<VkDisplayPlaneCapabilitiesKHR> { using type = S_display_plane_capabilities_KHR;};
-struct		S_display_plane_capabilities_KHR:VkDisplayPlaneCapabilitiesKHR{
+struct	S_display_plane_capabilities_KHR:VkDisplayPlaneCapabilitiesKHR{
 	using VkDisplayPlaneCapabilitiesKHR::supportedAlpha;
 	using VkDisplayPlaneCapabilitiesKHR::minSrcPosition;
 	using VkDisplayPlaneCapabilitiesKHR::maxSrcPosition;
@@ -10768,13 +9969,14 @@ struct		S_display_plane_capabilities_KHR:VkDisplayPlaneCapabilitiesKHR{
 	using VkDisplayPlaneCapabilitiesKHR::maxDstPosition;
 	using VkDisplayPlaneCapabilitiesKHR::minDstExtent;
 	using VkDisplayPlaneCapabilitiesKHR::maxDstExtent;
+
+	S_display_plane_capabilities_KHR& operator=(const VkDisplayPlaneCapabilitiesKHR& rhs){static_cast<VkDisplayPlaneCapabilitiesKHR&>(*this)=rhs; return *this;}
+	operator VkDisplayPlaneCapabilitiesKHR*()const{return const_cast<VkDisplayPlaneCapabilitiesKHR*>(static_cast<const VkDisplayPlaneCapabilitiesKHR*>(this));}
 };
 
 /*	VkDisplaySurfaceCreateInfoKHR
 */
-template<> struct my_class_convert<S_display_surface_create_info_KHR> { using type = VkDisplaySurfaceCreateInfoKHR;};
-template<> struct my_class_convert<VkDisplaySurfaceCreateInfoKHR> { using type = S_display_surface_create_info_KHR;};
-struct		S_display_surface_create_info_KHR:VkDisplaySurfaceCreateInfoKHR{
+struct	S_display_surface_create_info_KHR:VkDisplaySurfaceCreateInfoKHR{
 private:
 	using VkDisplaySurfaceCreateInfoKHR::sType;
 	using VkDisplaySurfaceCreateInfoKHR::pNext;
@@ -10809,15 +10011,17 @@ S_display_surface_create_info_KHR(
 	,globalAlpha_
 	,alphaMode_
 	,imageExtent_}
-	{	}
+	{
+	}
+
+	S_display_surface_create_info_KHR& operator=(const VkDisplaySurfaceCreateInfoKHR& rhs){static_cast<VkDisplaySurfaceCreateInfoKHR&>(*this)=rhs; return *this;}
+	operator VkDisplaySurfaceCreateInfoKHR*()const{return const_cast<VkDisplaySurfaceCreateInfoKHR*>(static_cast<const VkDisplaySurfaceCreateInfoKHR*>(this));}
 };
 
 /*	VkDisplayPresentInfoKHR
 ex to: VkPresentInfoKHR
 */
-template<> struct my_class_convert<S_display_present_info_KHR> { using type = VkDisplayPresentInfoKHR;};
-template<> struct my_class_convert<VkDisplayPresentInfoKHR> { using type = S_display_present_info_KHR;};
-struct		S_display_present_info_KHR:VkDisplayPresentInfoKHR{
+struct	S_display_present_info_KHR:VkDisplayPresentInfoKHR{
 private:
 	using VkDisplayPresentInfoKHR::sType;
 	using VkDisplayPresentInfoKHR::pNext;
@@ -10837,17 +10041,19 @@ S_display_present_info_KHR(
 	,srcRect_
 	,dstRect_
 	,persistent_}
-	{	}
+	{
+	}
 
 friend S_present_info_KHR;
+
+	S_display_present_info_KHR& operator=(const VkDisplayPresentInfoKHR& rhs){static_cast<VkDisplayPresentInfoKHR&>(*this)=rhs; return *this;}
+	operator VkDisplayPresentInfoKHR*()const{return const_cast<VkDisplayPresentInfoKHR*>(static_cast<const VkDisplayPresentInfoKHR*>(this));}
 };
 
 /*	VkSurfaceCapabilitiesKHR
 (returnedonly)
 */
-template<> struct my_class_convert<S_surface_capabilities_KHR> { using type = VkSurfaceCapabilitiesKHR;};
-template<> struct my_class_convert<VkSurfaceCapabilitiesKHR> { using type = S_surface_capabilities_KHR;};
-struct		S_surface_capabilities_KHR:VkSurfaceCapabilitiesKHR{
+struct	S_surface_capabilities_KHR:VkSurfaceCapabilitiesKHR{
 	using VkSurfaceCapabilitiesKHR::minImageCount;
 	using VkSurfaceCapabilitiesKHR::maxImageCount;
 	using VkSurfaceCapabilitiesKHR::currentExtent;
@@ -10858,14 +10064,15 @@ struct		S_surface_capabilities_KHR:VkSurfaceCapabilitiesKHR{
 	using VkSurfaceCapabilitiesKHR::currentTransform;
 	using VkSurfaceCapabilitiesKHR::supportedCompositeAlpha;
 	using VkSurfaceCapabilitiesKHR::supportedUsageFlags;
+
+	S_surface_capabilities_KHR& operator=(const VkSurfaceCapabilitiesKHR& rhs){static_cast<VkSurfaceCapabilitiesKHR&>(*this)=rhs; return *this;}
+	operator VkSurfaceCapabilitiesKHR*()const{return const_cast<VkSurfaceCapabilitiesKHR*>(static_cast<const VkSurfaceCapabilitiesKHR*>(this));}
 };
 
 /*	VkAndroidSurfaceCreateInfoKHR
 */
 #ifdef VK_USE_PLATFORM_ANDROID_KHR
-template<> struct my_class_convert<S_android_surface_create_info_KHR> { using type = VkAndroidSurfaceCreateInfoKHR;};
-template<> struct my_class_convert<VkAndroidSurfaceCreateInfoKHR> { using type = S_android_surface_create_info_KHR;};
-struct		S_android_surface_create_info_KHR:VkAndroidSurfaceCreateInfoKHR{
+struct	S_android_surface_create_info_KHR:VkAndroidSurfaceCreateInfoKHR{
 private:
 	using VkAndroidSurfaceCreateInfoKHR::sType;
 	using VkAndroidSurfaceCreateInfoKHR::pNext;
@@ -10882,16 +10089,18 @@ S_android_surface_create_info_KHR(
 	,nullptr
 	,flags_
 	,window_}
-	{	}
+	{
+	}
+
+	S_android_surface_create_info_KHR& operator=(const VkAndroidSurfaceCreateInfoKHR& rhs){static_cast<VkAndroidSurfaceCreateInfoKHR&>(*this)=rhs; return *this;}
+	operator VkAndroidSurfaceCreateInfoKHR*()const{return const_cast<VkAndroidSurfaceCreateInfoKHR*>(static_cast<const VkAndroidSurfaceCreateInfoKHR*>(this));}
 };
 #endif //VK_USE_PLATFORM_ANDROID_KHR
 
 /*	VkMirSurfaceCreateInfoKHR
 */
 #ifdef VK_USE_PLATFORM_MIR_KHR
-template<> struct my_class_convert<S_mir_surface_create_info_KHR> { using type = VkMirSurfaceCreateInfoKHR;};
-template<> struct my_class_convert<VkMirSurfaceCreateInfoKHR> { using type = S_mir_surface_create_info_KHR;};
-struct		S_mir_surface_create_info_KHR:VkMirSurfaceCreateInfoKHR{
+struct	S_mir_surface_create_info_KHR:VkMirSurfaceCreateInfoKHR{
 private:
 	using VkMirSurfaceCreateInfoKHR::sType;
 	using VkMirSurfaceCreateInfoKHR::pNext;
@@ -10911,16 +10120,18 @@ S_mir_surface_create_info_KHR(
 	,flags_
 	,connection_
 	,mirSurface_}
-	{	}
+	{
+	}
+
+	S_mir_surface_create_info_KHR& operator=(const VkMirSurfaceCreateInfoKHR& rhs){static_cast<VkMirSurfaceCreateInfoKHR&>(*this)=rhs; return *this;}
+	operator VkMirSurfaceCreateInfoKHR*()const{return const_cast<VkMirSurfaceCreateInfoKHR*>(static_cast<const VkMirSurfaceCreateInfoKHR*>(this));}
 };
 #endif //VK_USE_PLATFORM_MIR_KHR
 
 /*	VkViSurfaceCreateInfoNN
 */
 #ifdef VK_USE_PLATFORM_VI_NN
-template<> struct my_class_convert<S_vi_surface_create_info_NN> { using type = VkViSurfaceCreateInfoNN;};
-template<> struct my_class_convert<VkViSurfaceCreateInfoNN> { using type = S_vi_surface_create_info_NN;};
-struct		S_vi_surface_create_info_NN:VkViSurfaceCreateInfoNN{
+struct	S_vi_surface_create_info_NN:VkViSurfaceCreateInfoNN{
 private:
 	using VkViSurfaceCreateInfoNN::sType;
 	using VkViSurfaceCreateInfoNN::pNext;
@@ -10937,16 +10148,18 @@ S_vi_surface_create_info_NN(
 	,nullptr
 	,flags_
 	,window_}
-	{	}
+	{
+	}
+
+	S_vi_surface_create_info_NN& operator=(const VkViSurfaceCreateInfoNN& rhs){static_cast<VkViSurfaceCreateInfoNN&>(*this)=rhs; return *this;}
+	operator VkViSurfaceCreateInfoNN*()const{return const_cast<VkViSurfaceCreateInfoNN*>(static_cast<const VkViSurfaceCreateInfoNN*>(this));}
 };
 #endif //VK_USE_PLATFORM_VI_NN
 
 /*	VkWaylandSurfaceCreateInfoKHR
 */
 #ifdef VK_USE_PLATFORM_WAYLAND_KHR
-template<> struct my_class_convert<S_wayland_surface_create_info_KHR> { using type = VkWaylandSurfaceCreateInfoKHR;};
-template<> struct my_class_convert<VkWaylandSurfaceCreateInfoKHR> { using type = S_wayland_surface_create_info_KHR;};
-struct		S_wayland_surface_create_info_KHR:VkWaylandSurfaceCreateInfoKHR{
+struct	S_wayland_surface_create_info_KHR:VkWaylandSurfaceCreateInfoKHR{
 private:
 	using VkWaylandSurfaceCreateInfoKHR::sType;
 	using VkWaylandSurfaceCreateInfoKHR::pNext;
@@ -10966,16 +10179,18 @@ S_wayland_surface_create_info_KHR(
 	,flags_
 	,display_
 	,surface_}
-	{	}
+	{
+	}
+
+	S_wayland_surface_create_info_KHR& operator=(const VkWaylandSurfaceCreateInfoKHR& rhs){static_cast<VkWaylandSurfaceCreateInfoKHR&>(*this)=rhs; return *this;}
+	operator VkWaylandSurfaceCreateInfoKHR*()const{return const_cast<VkWaylandSurfaceCreateInfoKHR*>(static_cast<const VkWaylandSurfaceCreateInfoKHR*>(this));}
 };
 #endif //VK_USE_PLATFORM_WAYLAND_KHR
 
 /*	VkWin32SurfaceCreateInfoKHR
 */
 #ifdef VK_USE_PLATFORM_WIN32_KHR
-template<> struct my_class_convert<S_win32_surface_create_info_KHR> { using type = VkWin32SurfaceCreateInfoKHR;};
-template<> struct my_class_convert<VkWin32SurfaceCreateInfoKHR> { using type = S_win32_surface_create_info_KHR;};
-struct		S_win32_surface_create_info_KHR:VkWin32SurfaceCreateInfoKHR{
+struct	S_win32_surface_create_info_KHR:VkWin32SurfaceCreateInfoKHR{
 private:
 	using VkWin32SurfaceCreateInfoKHR::sType;
 	using VkWin32SurfaceCreateInfoKHR::pNext;
@@ -10995,16 +10210,18 @@ S_win32_surface_create_info_KHR(
 	,flags_
 	,hinstance_
 	,hwnd_}
-	{	}
+	{
+	}
+
+	S_win32_surface_create_info_KHR& operator=(const VkWin32SurfaceCreateInfoKHR& rhs){static_cast<VkWin32SurfaceCreateInfoKHR&>(*this)=rhs; return *this;}
+	operator VkWin32SurfaceCreateInfoKHR*()const{return const_cast<VkWin32SurfaceCreateInfoKHR*>(static_cast<const VkWin32SurfaceCreateInfoKHR*>(this));}
 };
 #endif //VK_USE_PLATFORM_WIN32_KHR
 
 /*	VkXlibSurfaceCreateInfoKHR
 */
 #ifdef VK_USE_PLATFORM_XLIB_KHR
-template<> struct my_class_convert<S_xlib_surface_create_info_KHR> { using type = VkXlibSurfaceCreateInfoKHR;};
-template<> struct my_class_convert<VkXlibSurfaceCreateInfoKHR> { using type = S_xlib_surface_create_info_KHR;};
-struct		S_xlib_surface_create_info_KHR:VkXlibSurfaceCreateInfoKHR{
+struct	S_xlib_surface_create_info_KHR:VkXlibSurfaceCreateInfoKHR{
 private:
 	using VkXlibSurfaceCreateInfoKHR::sType;
 	using VkXlibSurfaceCreateInfoKHR::pNext;
@@ -11024,16 +10241,18 @@ S_xlib_surface_create_info_KHR(
 	,flags_
 	,dpy_
 	,window_}
-	{	}
+	{
+	}
+
+	S_xlib_surface_create_info_KHR& operator=(const VkXlibSurfaceCreateInfoKHR& rhs){static_cast<VkXlibSurfaceCreateInfoKHR&>(*this)=rhs; return *this;}
+	operator VkXlibSurfaceCreateInfoKHR*()const{return const_cast<VkXlibSurfaceCreateInfoKHR*>(static_cast<const VkXlibSurfaceCreateInfoKHR*>(this));}
 };
 #endif //VK_USE_PLATFORM_XLIB_KHR
 
 /*	VkXcbSurfaceCreateInfoKHR
 */
 #ifdef VK_USE_PLATFORM_XCB_KHR
-template<> struct my_class_convert<S_xcb_surface_create_info_KHR> { using type = VkXcbSurfaceCreateInfoKHR;};
-template<> struct my_class_convert<VkXcbSurfaceCreateInfoKHR> { using type = S_xcb_surface_create_info_KHR;};
-struct		S_xcb_surface_create_info_KHR:VkXcbSurfaceCreateInfoKHR{
+struct	S_xcb_surface_create_info_KHR:VkXcbSurfaceCreateInfoKHR{
 private:
 	using VkXcbSurfaceCreateInfoKHR::sType;
 	using VkXcbSurfaceCreateInfoKHR::pNext;
@@ -11053,26 +10272,29 @@ S_xcb_surface_create_info_KHR(
 	,flags_
 	,connection_
 	,window_}
-	{	}
+	{
+	}
+
+	S_xcb_surface_create_info_KHR& operator=(const VkXcbSurfaceCreateInfoKHR& rhs){static_cast<VkXcbSurfaceCreateInfoKHR&>(*this)=rhs; return *this;}
+	operator VkXcbSurfaceCreateInfoKHR*()const{return const_cast<VkXcbSurfaceCreateInfoKHR*>(static_cast<const VkXcbSurfaceCreateInfoKHR*>(this));}
 };
 #endif //VK_USE_PLATFORM_XCB_KHR
 
 /*	VkSurfaceFormatKHR
 (returnedonly)
 */
-template<> struct my_class_convert<S_surface_format_KHR> { using type = VkSurfaceFormatKHR;};
-template<> struct my_class_convert<VkSurfaceFormatKHR> { using type = S_surface_format_KHR;};
-struct		S_surface_format_KHR:VkSurfaceFormatKHR{
+struct	S_surface_format_KHR:VkSurfaceFormatKHR{
 	using VkSurfaceFormatKHR::format;
 	using VkSurfaceFormatKHR::colorSpace;
+
+	S_surface_format_KHR& operator=(const VkSurfaceFormatKHR& rhs){static_cast<VkSurfaceFormatKHR&>(*this)=rhs; return *this;}
+	operator VkSurfaceFormatKHR*()const{return const_cast<VkSurfaceFormatKHR*>(static_cast<const VkSurfaceFormatKHR*>(this));}
 };
 
 /*	VkSwapchainCounterCreateInfoEXT
 ex to: VkSwapchainCreateInfoKHR
 */
-template<> struct my_class_convert<S_swapchain_counter_create_info_EXT> { using type = VkSwapchainCounterCreateInfoEXT;};
-template<> struct my_class_convert<VkSwapchainCounterCreateInfoEXT> { using type = S_swapchain_counter_create_info_EXT;};
-struct		S_swapchain_counter_create_info_EXT:VkSwapchainCounterCreateInfoEXT{
+struct	S_swapchain_counter_create_info_EXT:VkSwapchainCounterCreateInfoEXT{
 private:
 	using VkSwapchainCounterCreateInfoEXT::sType;
 	using VkSwapchainCounterCreateInfoEXT::pNext;
@@ -11086,17 +10308,19 @@ S_swapchain_counter_create_info_EXT(
 	VK_STRUCTURE_TYPE_SWAPCHAIN_COUNTER_CREATE_INFO_EXT
 	,nullptr
 	,surfaceCounters_}
-	{	}
+	{
+	}
 
 friend S_swapchain_create_info_KHR;
+
+	S_swapchain_counter_create_info_EXT& operator=(const VkSwapchainCounterCreateInfoEXT& rhs){static_cast<VkSwapchainCounterCreateInfoEXT&>(*this)=rhs; return *this;}
+	operator VkSwapchainCounterCreateInfoEXT*()const{return const_cast<VkSwapchainCounterCreateInfoEXT*>(static_cast<const VkSwapchainCounterCreateInfoEXT*>(this));}
 };
 
 /*	VkDeviceGroupSwapchainCreateInfoKHR
 ex to: VkSwapchainCreateInfoKHR
 */
-template<> struct my_class_convert<S_device_group_swapchain_create_info_KHR> { using type = VkDeviceGroupSwapchainCreateInfoKHR;};
-template<> struct my_class_convert<VkDeviceGroupSwapchainCreateInfoKHR> { using type = S_device_group_swapchain_create_info_KHR;};
-struct		S_device_group_swapchain_create_info_KHR:VkDeviceGroupSwapchainCreateInfoKHR{
+struct	S_device_group_swapchain_create_info_KHR:VkDeviceGroupSwapchainCreateInfoKHR{
 private:
 	using VkDeviceGroupSwapchainCreateInfoKHR::sType;
 	using VkDeviceGroupSwapchainCreateInfoKHR::pNext;
@@ -11110,9 +10334,13 @@ S_device_group_swapchain_create_info_KHR(
 	VK_STRUCTURE_TYPE_DEVICE_GROUP_SWAPCHAIN_CREATE_INFO_KHR
 	,nullptr
 	,modes_}
-	{	}
+	{
+	}
 
 friend S_swapchain_create_info_KHR;
+
+	S_device_group_swapchain_create_info_KHR& operator=(const VkDeviceGroupSwapchainCreateInfoKHR& rhs){static_cast<VkDeviceGroupSwapchainCreateInfoKHR&>(*this)=rhs; return *this;}
+	operator VkDeviceGroupSwapchainCreateInfoKHR*()const{return const_cast<VkDeviceGroupSwapchainCreateInfoKHR*>(static_cast<const VkDeviceGroupSwapchainCreateInfoKHR*>(this));}
 };
 
 /*	VkSwapchainCreateInfoKHR
@@ -11129,9 +10357,7 @@ operator void*() { return pNext; }
 N_swapchain_create_info_KHR& n_swapchain_counter_create_info_EXT(S_swapchain_counter_create_info_EXT const& next_);
 N_swapchain_create_info_KHR& n_device_group_swapchain_create_info_KHR(S_device_group_swapchain_create_info_KHR const& next_);
 };
-template<> struct my_class_convert<S_swapchain_create_info_KHR> { using type = VkSwapchainCreateInfoKHR;};
-template<> struct my_class_convert<VkSwapchainCreateInfoKHR> { using type = S_swapchain_create_info_KHR;};
-struct		S_swapchain_create_info_KHR:VkSwapchainCreateInfoKHR{
+struct	S_swapchain_create_info_KHR:VkSwapchainCreateInfoKHR{
 private:
 	using VkSwapchainCreateInfoKHR::sType;
 	using VkSwapchainCreateInfoKHR::pNext;
@@ -11174,7 +10400,7 @@ S_swapchain_create_info_KHR(
 	:VkSwapchainCreateInfoKHR{
 	VK_STRUCTURE_TYPE_SWAPCHAIN_CREATE_INFO_KHR
 	,nullptr
-	,flags_
+	,static_cast<VkFlags>(flags_)
 	,surface_
 	,minImageCount_
 	,imageFormat_
@@ -11190,7 +10416,11 @@ S_swapchain_create_info_KHR(
 	,presentMode_
 	,clipped_
 	,oldSwapchain_}
-	{	}
+	{
+	}
+
+	S_swapchain_create_info_KHR& operator=(const VkSwapchainCreateInfoKHR& rhs){static_cast<VkSwapchainCreateInfoKHR&>(*this)=rhs; return *this;}
+	operator VkSwapchainCreateInfoKHR*()const{return const_cast<VkSwapchainCreateInfoKHR*>(static_cast<const VkSwapchainCreateInfoKHR*>(this));}
 
 S_swapchain_create_info_KHR& n_swapchain_counter_create_info_EXT(S_swapchain_counter_create_info_EXT const& next_);
 S_swapchain_create_info_KHR& n_device_group_swapchain_create_info_KHR(S_device_group_swapchain_create_info_KHR const& next_);
@@ -11199,29 +10429,29 @@ void set_pNext(N_swapchain_create_info_KHR n_){pNext = n_;}
 
 /*	VkRectLayerKHR
 */
-template<> struct my_class_convert<S_rect_layer_KHR> { using type = VkRectLayerKHR;};
-template<> struct my_class_convert<VkRectLayerKHR> { using type = S_rect_layer_KHR;};
-struct		S_rect_layer_KHR:VkRectLayerKHR{
+struct	S_rect_layer_KHR:VkRectLayerKHR{
 	using VkRectLayerKHR::offset;
 	using VkRectLayerKHR::extent;
 	using VkRectLayerKHR::layer;
+
+	S_rect_layer_KHR& operator=(const VkRectLayerKHR& rhs){static_cast<VkRectLayerKHR&>(*this)=rhs; return *this;}
+	operator VkRectLayerKHR*()const{return const_cast<VkRectLayerKHR*>(static_cast<const VkRectLayerKHR*>(this));}
 };
 
 /*	VkPresentRegionKHR
 */
-template<> struct my_class_convert<S_present_region_KHR> { using type = VkPresentRegionKHR;};
-template<> struct my_class_convert<VkPresentRegionKHR> { using type = S_present_region_KHR;};
-struct		S_present_region_KHR:VkPresentRegionKHR{
+struct	S_present_region_KHR:VkPresentRegionKHR{
 	using VkPresentRegionKHR::rectangleCount;
 	using VkPresentRegionKHR::pRectangles;
+
+	S_present_region_KHR& operator=(const VkPresentRegionKHR& rhs){static_cast<VkPresentRegionKHR&>(*this)=rhs; return *this;}
+	operator VkPresentRegionKHR*()const{return const_cast<VkPresentRegionKHR*>(static_cast<const VkPresentRegionKHR*>(this));}
 };
 
 /*	VkPresentRegionsKHR
 ex to: VkPresentInfoKHR
 */
-template<> struct my_class_convert<S_present_regions_KHR> { using type = VkPresentRegionsKHR;};
-template<> struct my_class_convert<VkPresentRegionsKHR> { using type = S_present_regions_KHR;};
-struct		S_present_regions_KHR:VkPresentRegionsKHR{
+struct	S_present_regions_KHR:VkPresentRegionsKHR{
 private:
 	using VkPresentRegionsKHR::sType;
 	using VkPresentRegionsKHR::pNext;
@@ -11238,17 +10468,19 @@ S_present_regions_KHR(
 	,nullptr
 	,swapchainCount_
 	,pRegions_}
-	{	}
+	{
+	}
 
 friend S_present_info_KHR;
+
+	S_present_regions_KHR& operator=(const VkPresentRegionsKHR& rhs){static_cast<VkPresentRegionsKHR&>(*this)=rhs; return *this;}
+	operator VkPresentRegionsKHR*()const{return const_cast<VkPresentRegionsKHR*>(static_cast<const VkPresentRegionsKHR*>(this));}
 };
 
 /*	VkDeviceGroupPresentInfoKHR
 ex to: VkPresentInfoKHR
 */
-template<> struct my_class_convert<S_device_group_present_info_KHR> { using type = VkDeviceGroupPresentInfoKHR;};
-template<> struct my_class_convert<VkDeviceGroupPresentInfoKHR> { using type = S_device_group_present_info_KHR;};
-struct		S_device_group_present_info_KHR:VkDeviceGroupPresentInfoKHR{
+struct	S_device_group_present_info_KHR:VkDeviceGroupPresentInfoKHR{
 private:
 	using VkDeviceGroupPresentInfoKHR::sType;
 	using VkDeviceGroupPresentInfoKHR::pNext;
@@ -11268,26 +10500,29 @@ S_device_group_present_info_KHR(
 	,swapchainCount_
 	,pDeviceMasks_
 	,mode_}
-	{	}
+	{
+	}
 
 friend S_present_info_KHR;
+
+	S_device_group_present_info_KHR& operator=(const VkDeviceGroupPresentInfoKHR& rhs){static_cast<VkDeviceGroupPresentInfoKHR&>(*this)=rhs; return *this;}
+	operator VkDeviceGroupPresentInfoKHR*()const{return const_cast<VkDeviceGroupPresentInfoKHR*>(static_cast<const VkDeviceGroupPresentInfoKHR*>(this));}
 };
 
 /*	VkPresentTimeGOOGLE
 */
-template<> struct my_class_convert<S_present_time_GOOGLE> { using type = VkPresentTimeGOOGLE;};
-template<> struct my_class_convert<VkPresentTimeGOOGLE> { using type = S_present_time_GOOGLE;};
-struct		S_present_time_GOOGLE:VkPresentTimeGOOGLE{
+struct	S_present_time_GOOGLE:VkPresentTimeGOOGLE{
 	using VkPresentTimeGOOGLE::presentID;
 	using VkPresentTimeGOOGLE::desiredPresentTime;
+
+	S_present_time_GOOGLE& operator=(const VkPresentTimeGOOGLE& rhs){static_cast<VkPresentTimeGOOGLE&>(*this)=rhs; return *this;}
+	operator VkPresentTimeGOOGLE*()const{return const_cast<VkPresentTimeGOOGLE*>(static_cast<const VkPresentTimeGOOGLE*>(this));}
 };
 
 /*	VkPresentTimesInfoGOOGLE
 ex to: VkPresentInfoKHR
 */
-template<> struct my_class_convert<S_present_times_info_GOOGLE> { using type = VkPresentTimesInfoGOOGLE;};
-template<> struct my_class_convert<VkPresentTimesInfoGOOGLE> { using type = S_present_times_info_GOOGLE;};
-struct		S_present_times_info_GOOGLE:VkPresentTimesInfoGOOGLE{
+struct	S_present_times_info_GOOGLE:VkPresentTimesInfoGOOGLE{
 private:
 	using VkPresentTimesInfoGOOGLE::sType;
 	using VkPresentTimesInfoGOOGLE::pNext;
@@ -11304,9 +10539,13 @@ S_present_times_info_GOOGLE(
 	,nullptr
 	,swapchainCount_
 	,pTimes_}
-	{	}
+	{
+	}
 
 friend S_present_info_KHR;
+
+	S_present_times_info_GOOGLE& operator=(const VkPresentTimesInfoGOOGLE& rhs){static_cast<VkPresentTimesInfoGOOGLE&>(*this)=rhs; return *this;}
+	operator VkPresentTimesInfoGOOGLE*()const{return const_cast<VkPresentTimesInfoGOOGLE*>(static_cast<const VkPresentTimesInfoGOOGLE*>(this));}
 };
 
 /*	VkPresentInfoKHR
@@ -11327,9 +10566,7 @@ N_present_info_KHR& n_present_regions_KHR(S_present_regions_KHR const& next_);
 N_present_info_KHR& n_device_group_present_info_KHR(S_device_group_present_info_KHR const& next_);
 N_present_info_KHR& n_present_times_info_GOOGLE(S_present_times_info_GOOGLE const& next_);
 };
-template<> struct my_class_convert<S_present_info_KHR> { using type = VkPresentInfoKHR;};
-template<> struct my_class_convert<VkPresentInfoKHR> { using type = S_present_info_KHR;};
-struct		S_present_info_KHR:VkPresentInfoKHR{
+struct	S_present_info_KHR:VkPresentInfoKHR{
 private:
 	using VkPresentInfoKHR::sType;
 	using VkPresentInfoKHR::pNext;
@@ -11358,7 +10595,11 @@ S_present_info_KHR(
 	,pSwapchains_
 	,pImageIndices_
 	,*pResults_}
-	{	}
+	{
+	}
+
+	S_present_info_KHR& operator=(const VkPresentInfoKHR& rhs){static_cast<VkPresentInfoKHR&>(*this)=rhs; return *this;}
+	operator VkPresentInfoKHR*()const{return const_cast<VkPresentInfoKHR*>(static_cast<const VkPresentInfoKHR*>(this));}
 
 S_present_info_KHR& n_display_present_info_KHR(S_display_present_info_KHR const& next_);
 S_present_info_KHR& n_present_regions_KHR(S_present_regions_KHR const& next_);
@@ -11369,9 +10610,7 @@ void set_pNext(N_present_info_KHR n_){pNext = n_;}
 
 /*	VkDebugMarkerObjectNameInfoEXT
 */
-template<> struct my_class_convert<S_debug_marker_object_name_info_EXT> { using type = VkDebugMarkerObjectNameInfoEXT;};
-template<> struct my_class_convert<VkDebugMarkerObjectNameInfoEXT> { using type = S_debug_marker_object_name_info_EXT;};
-struct		S_debug_marker_object_name_info_EXT:VkDebugMarkerObjectNameInfoEXT{
+struct	S_debug_marker_object_name_info_EXT:VkDebugMarkerObjectNameInfoEXT{
 private:
 	using VkDebugMarkerObjectNameInfoEXT::sType;
 	using VkDebugMarkerObjectNameInfoEXT::pNext;
@@ -11391,14 +10630,16 @@ S_debug_marker_object_name_info_EXT(
 	,objectType_
 	,object_
 	,pObjectName_}
-	{	}
+	{
+	}
+
+	S_debug_marker_object_name_info_EXT& operator=(const VkDebugMarkerObjectNameInfoEXT& rhs){static_cast<VkDebugMarkerObjectNameInfoEXT&>(*this)=rhs; return *this;}
+	operator VkDebugMarkerObjectNameInfoEXT*()const{return const_cast<VkDebugMarkerObjectNameInfoEXT*>(static_cast<const VkDebugMarkerObjectNameInfoEXT*>(this));}
 };
 
 /*	VkDebugMarkerObjectTagInfoEXT
 */
-template<> struct my_class_convert<S_debug_marker_object_tag_info_EXT> { using type = VkDebugMarkerObjectTagInfoEXT;};
-template<> struct my_class_convert<VkDebugMarkerObjectTagInfoEXT> { using type = S_debug_marker_object_tag_info_EXT;};
-struct		S_debug_marker_object_tag_info_EXT:VkDebugMarkerObjectTagInfoEXT{
+struct	S_debug_marker_object_tag_info_EXT:VkDebugMarkerObjectTagInfoEXT{
 private:
 	using VkDebugMarkerObjectTagInfoEXT::sType;
 	using VkDebugMarkerObjectTagInfoEXT::pNext;
@@ -11424,14 +10665,16 @@ S_debug_marker_object_tag_info_EXT(
 	,tagName_
 	,tagSize_
 	,pTag_}
-	{	}
+	{
+	}
+
+	S_debug_marker_object_tag_info_EXT& operator=(const VkDebugMarkerObjectTagInfoEXT& rhs){static_cast<VkDebugMarkerObjectTagInfoEXT&>(*this)=rhs; return *this;}
+	operator VkDebugMarkerObjectTagInfoEXT*()const{return const_cast<VkDebugMarkerObjectTagInfoEXT*>(static_cast<const VkDebugMarkerObjectTagInfoEXT*>(this));}
 };
 
 /*	VkDebugMarkerMarkerInfoEXT
 */
-template<> struct my_class_convert<S_debug_marker_marker_info_EXT> { using type = VkDebugMarkerMarkerInfoEXT;};
-template<> struct my_class_convert<VkDebugMarkerMarkerInfoEXT> { using type = S_debug_marker_marker_info_EXT;};
-struct		S_debug_marker_marker_info_EXT:VkDebugMarkerMarkerInfoEXT{
+struct	S_debug_marker_marker_info_EXT:VkDebugMarkerMarkerInfoEXT{
 private:
 	using VkDebugMarkerMarkerInfoEXT::sType;
 	using VkDebugMarkerMarkerInfoEXT::pNext;
@@ -11447,27 +10690,31 @@ S_debug_marker_marker_info_EXT(
 	VK_STRUCTURE_TYPE_DEBUG_MARKER_MARKER_INFO_EXT
 	,nullptr
 	,pMarkerName_
-	,color_}
-	{	}
+	,{}}
+	{
+		memcpy(color,color_,sizeof(color_) );
+	}
+
+	S_debug_marker_marker_info_EXT& operator=(const VkDebugMarkerMarkerInfoEXT& rhs){static_cast<VkDebugMarkerMarkerInfoEXT&>(*this)=rhs; return *this;}
+	operator VkDebugMarkerMarkerInfoEXT*()const{return const_cast<VkDebugMarkerMarkerInfoEXT*>(static_cast<const VkDebugMarkerMarkerInfoEXT*>(this));}
 };
 
 /*	VkExternalImageFormatPropertiesNV
 (returnedonly)
 */
-template<> struct my_class_convert<S_external_image_format_properties_NV> { using type = VkExternalImageFormatPropertiesNV;};
-template<> struct my_class_convert<VkExternalImageFormatPropertiesNV> { using type = S_external_image_format_properties_NV;};
-struct		S_external_image_format_properties_NV:VkExternalImageFormatPropertiesNV{
+struct	S_external_image_format_properties_NV:VkExternalImageFormatPropertiesNV{
 	using VkExternalImageFormatPropertiesNV::imageFormatProperties;
 	using VkExternalImageFormatPropertiesNV::externalMemoryFeatures;
 	using VkExternalImageFormatPropertiesNV::exportFromImportedHandleTypes;
 	using VkExternalImageFormatPropertiesNV::compatibleHandleTypes;
+
+	S_external_image_format_properties_NV& operator=(const VkExternalImageFormatPropertiesNV& rhs){static_cast<VkExternalImageFormatPropertiesNV&>(*this)=rhs; return *this;}
+	operator VkExternalImageFormatPropertiesNV*()const{return const_cast<VkExternalImageFormatPropertiesNV*>(static_cast<const VkExternalImageFormatPropertiesNV*>(this));}
 };
 
 /*	VkDeviceGeneratedCommandsFeaturesNVX
 */
-template<> struct my_class_convert<S_device_generated_commands_features_NVX> { using type = VkDeviceGeneratedCommandsFeaturesNVX;};
-template<> struct my_class_convert<VkDeviceGeneratedCommandsFeaturesNVX> { using type = S_device_generated_commands_features_NVX;};
-struct		S_device_generated_commands_features_NVX:VkDeviceGeneratedCommandsFeaturesNVX{
+struct	S_device_generated_commands_features_NVX:VkDeviceGeneratedCommandsFeaturesNVX{
 private:
 	using VkDeviceGeneratedCommandsFeaturesNVX::sType;
 	using VkDeviceGeneratedCommandsFeaturesNVX::pNext;
@@ -11481,14 +10728,16 @@ S_device_generated_commands_features_NVX(
 	VK_STRUCTURE_TYPE_DEVICE_GENERATED_COMMANDS_FEATURES_NVX
 	,nullptr
 	,computeBindingPointSupport_}
-	{	}
+	{
+	}
+
+	S_device_generated_commands_features_NVX& operator=(const VkDeviceGeneratedCommandsFeaturesNVX& rhs){static_cast<VkDeviceGeneratedCommandsFeaturesNVX&>(*this)=rhs; return *this;}
+	operator VkDeviceGeneratedCommandsFeaturesNVX*()const{return const_cast<VkDeviceGeneratedCommandsFeaturesNVX*>(static_cast<const VkDeviceGeneratedCommandsFeaturesNVX*>(this));}
 };
 
 /*	VkDeviceGeneratedCommandsLimitsNVX
 */
-template<> struct my_class_convert<S_device_generated_commands_limits_NVX> { using type = VkDeviceGeneratedCommandsLimitsNVX;};
-template<> struct my_class_convert<VkDeviceGeneratedCommandsLimitsNVX> { using type = S_device_generated_commands_limits_NVX;};
-struct		S_device_generated_commands_limits_NVX:VkDeviceGeneratedCommandsLimitsNVX{
+struct	S_device_generated_commands_limits_NVX:VkDeviceGeneratedCommandsLimitsNVX{
 private:
 	using VkDeviceGeneratedCommandsLimitsNVX::sType;
 	using VkDeviceGeneratedCommandsLimitsNVX::pNext;
@@ -11514,35 +10763,39 @@ S_device_generated_commands_limits_NVX(
 	,minSequenceCountBufferOffsetAlignment_
 	,minSequenceIndexBufferOffsetAlignment_
 	,minCommandsTokenBufferOffsetAlignment_}
-	{	}
+	{
+	}
+
+	S_device_generated_commands_limits_NVX& operator=(const VkDeviceGeneratedCommandsLimitsNVX& rhs){static_cast<VkDeviceGeneratedCommandsLimitsNVX&>(*this)=rhs; return *this;}
+	operator VkDeviceGeneratedCommandsLimitsNVX*()const{return const_cast<VkDeviceGeneratedCommandsLimitsNVX*>(static_cast<const VkDeviceGeneratedCommandsLimitsNVX*>(this));}
 };
 
 /*	VkIndirectCommandsTokenNVX
 */
-template<> struct my_class_convert<S_indirect_commands_token_NVX> { using type = VkIndirectCommandsTokenNVX;};
-template<> struct my_class_convert<VkIndirectCommandsTokenNVX> { using type = S_indirect_commands_token_NVX;};
-struct		S_indirect_commands_token_NVX:VkIndirectCommandsTokenNVX{
+struct	S_indirect_commands_token_NVX:VkIndirectCommandsTokenNVX{
 	using VkIndirectCommandsTokenNVX::tokenType;
 	using VkIndirectCommandsTokenNVX::buffer;
 	using VkIndirectCommandsTokenNVX::offset;
+
+	S_indirect_commands_token_NVX& operator=(const VkIndirectCommandsTokenNVX& rhs){static_cast<VkIndirectCommandsTokenNVX&>(*this)=rhs; return *this;}
+	operator VkIndirectCommandsTokenNVX*()const{return const_cast<VkIndirectCommandsTokenNVX*>(static_cast<const VkIndirectCommandsTokenNVX*>(this));}
 };
 
 /*	VkIndirectCommandsLayoutTokenNVX
 */
-template<> struct my_class_convert<S_indirect_commands_layout_token_NVX> { using type = VkIndirectCommandsLayoutTokenNVX;};
-template<> struct my_class_convert<VkIndirectCommandsLayoutTokenNVX> { using type = S_indirect_commands_layout_token_NVX;};
-struct		S_indirect_commands_layout_token_NVX:VkIndirectCommandsLayoutTokenNVX{
+struct	S_indirect_commands_layout_token_NVX:VkIndirectCommandsLayoutTokenNVX{
 	using VkIndirectCommandsLayoutTokenNVX::tokenType;
 	using VkIndirectCommandsLayoutTokenNVX::bindingUnit;
 	using VkIndirectCommandsLayoutTokenNVX::dynamicCount;
 	using VkIndirectCommandsLayoutTokenNVX::divisor;
+
+	S_indirect_commands_layout_token_NVX& operator=(const VkIndirectCommandsLayoutTokenNVX& rhs){static_cast<VkIndirectCommandsLayoutTokenNVX&>(*this)=rhs; return *this;}
+	operator VkIndirectCommandsLayoutTokenNVX*()const{return const_cast<VkIndirectCommandsLayoutTokenNVX*>(static_cast<const VkIndirectCommandsLayoutTokenNVX*>(this));}
 };
 
 /*	VkIndirectCommandsLayoutCreateInfoNVX
 */
-template<> struct my_class_convert<S_indirect_commands_layout_create_info_NVX> { using type = VkIndirectCommandsLayoutCreateInfoNVX;};
-template<> struct my_class_convert<VkIndirectCommandsLayoutCreateInfoNVX> { using type = S_indirect_commands_layout_create_info_NVX;};
-struct		S_indirect_commands_layout_create_info_NVX:VkIndirectCommandsLayoutCreateInfoNVX{
+struct	S_indirect_commands_layout_create_info_NVX:VkIndirectCommandsLayoutCreateInfoNVX{
 private:
 	using VkIndirectCommandsLayoutCreateInfoNVX::sType;
 	using VkIndirectCommandsLayoutCreateInfoNVX::pNext;
@@ -11565,14 +10818,16 @@ S_indirect_commands_layout_create_info_NVX(
 	,flags_
 	,tokenCount_
 	,pTokens_}
-	{	}
+	{
+	}
+
+	S_indirect_commands_layout_create_info_NVX& operator=(const VkIndirectCommandsLayoutCreateInfoNVX& rhs){static_cast<VkIndirectCommandsLayoutCreateInfoNVX&>(*this)=rhs; return *this;}
+	operator VkIndirectCommandsLayoutCreateInfoNVX*()const{return const_cast<VkIndirectCommandsLayoutCreateInfoNVX*>(static_cast<const VkIndirectCommandsLayoutCreateInfoNVX*>(this));}
 };
 
 /*	VkCmdProcessCommandsInfoNVX
 */
-template<> struct my_class_convert<S_cmd_process_commands_info_NVX> { using type = VkCmdProcessCommandsInfoNVX;};
-template<> struct my_class_convert<VkCmdProcessCommandsInfoNVX> { using type = S_cmd_process_commands_info_NVX;};
-struct		S_cmd_process_commands_info_NVX:VkCmdProcessCommandsInfoNVX{
+struct	S_cmd_process_commands_info_NVX:VkCmdProcessCommandsInfoNVX{
 private:
 	using VkCmdProcessCommandsInfoNVX::sType;
 	using VkCmdProcessCommandsInfoNVX::pNext;
@@ -11613,14 +10868,16 @@ S_cmd_process_commands_info_NVX(
 	,sequencesCountOffset_
 	,sequencesIndexBuffer_
 	,sequencesIndexOffset_}
-	{	}
+	{
+	}
+
+	S_cmd_process_commands_info_NVX& operator=(const VkCmdProcessCommandsInfoNVX& rhs){static_cast<VkCmdProcessCommandsInfoNVX&>(*this)=rhs; return *this;}
+	operator VkCmdProcessCommandsInfoNVX*()const{return const_cast<VkCmdProcessCommandsInfoNVX*>(static_cast<const VkCmdProcessCommandsInfoNVX*>(this));}
 };
 
 /*	VkCmdReserveSpaceForCommandsInfoNVX
 */
-template<> struct my_class_convert<S_cmd_reserve_space_for_commands_info_NVX> { using type = VkCmdReserveSpaceForCommandsInfoNVX;};
-template<> struct my_class_convert<VkCmdReserveSpaceForCommandsInfoNVX> { using type = S_cmd_reserve_space_for_commands_info_NVX;};
-struct		S_cmd_reserve_space_for_commands_info_NVX:VkCmdReserveSpaceForCommandsInfoNVX{
+struct	S_cmd_reserve_space_for_commands_info_NVX:VkCmdReserveSpaceForCommandsInfoNVX{
 private:
 	using VkCmdReserveSpaceForCommandsInfoNVX::sType;
 	using VkCmdReserveSpaceForCommandsInfoNVX::pNext;
@@ -11640,14 +10897,16 @@ S_cmd_reserve_space_for_commands_info_NVX(
 	,objectTable_
 	,indirectCommandsLayout_
 	,maxSequencesCount_}
-	{	}
+	{
+	}
+
+	S_cmd_reserve_space_for_commands_info_NVX& operator=(const VkCmdReserveSpaceForCommandsInfoNVX& rhs){static_cast<VkCmdReserveSpaceForCommandsInfoNVX&>(*this)=rhs; return *this;}
+	operator VkCmdReserveSpaceForCommandsInfoNVX*()const{return const_cast<VkCmdReserveSpaceForCommandsInfoNVX*>(static_cast<const VkCmdReserveSpaceForCommandsInfoNVX*>(this));}
 };
 
 /*	VkObjectTableCreateInfoNVX
 */
-template<> struct my_class_convert<S_object_table_create_info_NVX> { using type = VkObjectTableCreateInfoNVX;};
-template<> struct my_class_convert<VkObjectTableCreateInfoNVX> { using type = S_object_table_create_info_NVX;};
-struct		S_object_table_create_info_NVX:VkObjectTableCreateInfoNVX{
+struct	S_object_table_create_info_NVX:VkObjectTableCreateInfoNVX{
 private:
 	using VkObjectTableCreateInfoNVX::sType;
 	using VkObjectTableCreateInfoNVX::pNext;
@@ -11679,83 +10938,91 @@ S_object_table_create_info_NVX(
 	,objectCount_
 	,*pObjectEntryTypes_
 	,pObjectEntryCounts_
-	,pObjectEntryUsageFlags_
+	,*pObjectEntryUsageFlags_
 	,maxUniformBuffersPerDescriptor_
 	,maxStorageBuffersPerDescriptor_
 	,maxStorageImagesPerDescriptor_
 	,maxSampledImagesPerDescriptor_
 	,maxPipelineLayouts_}
-	{	}
+	{
+	}
+
+	S_object_table_create_info_NVX& operator=(const VkObjectTableCreateInfoNVX& rhs){static_cast<VkObjectTableCreateInfoNVX&>(*this)=rhs; return *this;}
+	operator VkObjectTableCreateInfoNVX*()const{return const_cast<VkObjectTableCreateInfoNVX*>(static_cast<const VkObjectTableCreateInfoNVX*>(this));}
 };
 
 /*	VkObjectTableEntryNVX
 */
-template<> struct my_class_convert<S_object_table_entry_NVX> { using type = VkObjectTableEntryNVX;};
-template<> struct my_class_convert<VkObjectTableEntryNVX> { using type = S_object_table_entry_NVX;};
-struct		S_object_table_entry_NVX:VkObjectTableEntryNVX{
+struct	S_object_table_entry_NVX:VkObjectTableEntryNVX{
 	using VkObjectTableEntryNVX::type;
 	using VkObjectTableEntryNVX::flags;
+
+	S_object_table_entry_NVX& operator=(const VkObjectTableEntryNVX& rhs){static_cast<VkObjectTableEntryNVX&>(*this)=rhs; return *this;}
+	operator VkObjectTableEntryNVX*()const{return const_cast<VkObjectTableEntryNVX*>(static_cast<const VkObjectTableEntryNVX*>(this));}
 };
 
 /*	VkObjectTablePipelineEntryNVX
 */
-template<> struct my_class_convert<S_object_table_pipeline_entry_NVX> { using type = VkObjectTablePipelineEntryNVX;};
-template<> struct my_class_convert<VkObjectTablePipelineEntryNVX> { using type = S_object_table_pipeline_entry_NVX;};
-struct		S_object_table_pipeline_entry_NVX:VkObjectTablePipelineEntryNVX{
+struct	S_object_table_pipeline_entry_NVX:VkObjectTablePipelineEntryNVX{
 	using VkObjectTablePipelineEntryNVX::type;
 	using VkObjectTablePipelineEntryNVX::flags;
 	using VkObjectTablePipelineEntryNVX::pipeline;
+
+	S_object_table_pipeline_entry_NVX& operator=(const VkObjectTablePipelineEntryNVX& rhs){static_cast<VkObjectTablePipelineEntryNVX&>(*this)=rhs; return *this;}
+	operator VkObjectTablePipelineEntryNVX*()const{return const_cast<VkObjectTablePipelineEntryNVX*>(static_cast<const VkObjectTablePipelineEntryNVX*>(this));}
 };
 
 /*	VkObjectTableDescriptorSetEntryNVX
 */
-template<> struct my_class_convert<S_object_table_descriptor_set_entry_NVX> { using type = VkObjectTableDescriptorSetEntryNVX;};
-template<> struct my_class_convert<VkObjectTableDescriptorSetEntryNVX> { using type = S_object_table_descriptor_set_entry_NVX;};
-struct		S_object_table_descriptor_set_entry_NVX:VkObjectTableDescriptorSetEntryNVX{
+struct	S_object_table_descriptor_set_entry_NVX:VkObjectTableDescriptorSetEntryNVX{
 	using VkObjectTableDescriptorSetEntryNVX::type;
 	using VkObjectTableDescriptorSetEntryNVX::flags;
 	using VkObjectTableDescriptorSetEntryNVX::pipelineLayout;
 	using VkObjectTableDescriptorSetEntryNVX::descriptorSet;
+
+	S_object_table_descriptor_set_entry_NVX& operator=(const VkObjectTableDescriptorSetEntryNVX& rhs){static_cast<VkObjectTableDescriptorSetEntryNVX&>(*this)=rhs; return *this;}
+	operator VkObjectTableDescriptorSetEntryNVX*()const{return const_cast<VkObjectTableDescriptorSetEntryNVX*>(static_cast<const VkObjectTableDescriptorSetEntryNVX*>(this));}
 };
 
 /*	VkObjectTableVertexBufferEntryNVX
 */
-template<> struct my_class_convert<S_object_table_vertex_buffer_entry_NVX> { using type = VkObjectTableVertexBufferEntryNVX;};
-template<> struct my_class_convert<VkObjectTableVertexBufferEntryNVX> { using type = S_object_table_vertex_buffer_entry_NVX;};
-struct		S_object_table_vertex_buffer_entry_NVX:VkObjectTableVertexBufferEntryNVX{
+struct	S_object_table_vertex_buffer_entry_NVX:VkObjectTableVertexBufferEntryNVX{
 	using VkObjectTableVertexBufferEntryNVX::type;
 	using VkObjectTableVertexBufferEntryNVX::flags;
 	using VkObjectTableVertexBufferEntryNVX::buffer;
+
+	S_object_table_vertex_buffer_entry_NVX& operator=(const VkObjectTableVertexBufferEntryNVX& rhs){static_cast<VkObjectTableVertexBufferEntryNVX&>(*this)=rhs; return *this;}
+	operator VkObjectTableVertexBufferEntryNVX*()const{return const_cast<VkObjectTableVertexBufferEntryNVX*>(static_cast<const VkObjectTableVertexBufferEntryNVX*>(this));}
 };
 
 /*	VkObjectTableIndexBufferEntryNVX
 */
-template<> struct my_class_convert<S_object_table_index_buffer_entry_NVX> { using type = VkObjectTableIndexBufferEntryNVX;};
-template<> struct my_class_convert<VkObjectTableIndexBufferEntryNVX> { using type = S_object_table_index_buffer_entry_NVX;};
-struct		S_object_table_index_buffer_entry_NVX:VkObjectTableIndexBufferEntryNVX{
+struct	S_object_table_index_buffer_entry_NVX:VkObjectTableIndexBufferEntryNVX{
 	using VkObjectTableIndexBufferEntryNVX::type;
 	using VkObjectTableIndexBufferEntryNVX::flags;
 	using VkObjectTableIndexBufferEntryNVX::buffer;
 	using VkObjectTableIndexBufferEntryNVX::indexType;
+
+	S_object_table_index_buffer_entry_NVX& operator=(const VkObjectTableIndexBufferEntryNVX& rhs){static_cast<VkObjectTableIndexBufferEntryNVX&>(*this)=rhs; return *this;}
+	operator VkObjectTableIndexBufferEntryNVX*()const{return const_cast<VkObjectTableIndexBufferEntryNVX*>(static_cast<const VkObjectTableIndexBufferEntryNVX*>(this));}
 };
 
 /*	VkObjectTablePushConstantEntryNVX
 */
-template<> struct my_class_convert<S_object_table_push_constant_entry_NVX> { using type = VkObjectTablePushConstantEntryNVX;};
-template<> struct my_class_convert<VkObjectTablePushConstantEntryNVX> { using type = S_object_table_push_constant_entry_NVX;};
-struct		S_object_table_push_constant_entry_NVX:VkObjectTablePushConstantEntryNVX{
+struct	S_object_table_push_constant_entry_NVX:VkObjectTablePushConstantEntryNVX{
 	using VkObjectTablePushConstantEntryNVX::type;
 	using VkObjectTablePushConstantEntryNVX::flags;
 	using VkObjectTablePushConstantEntryNVX::pipelineLayout;
 	using VkObjectTablePushConstantEntryNVX::stageFlags;
+
+	S_object_table_push_constant_entry_NVX& operator=(const VkObjectTablePushConstantEntryNVX& rhs){static_cast<VkObjectTablePushConstantEntryNVX&>(*this)=rhs; return *this;}
+	operator VkObjectTablePushConstantEntryNVX*()const{return const_cast<VkObjectTablePushConstantEntryNVX*>(static_cast<const VkObjectTablePushConstantEntryNVX*>(this));}
 };
 
 /*	VkPhysicalDevicePushDescriptorPropertiesKHR
 ex to: VkPhysicalDeviceProperties2
 */
-template<> struct my_class_convert<S_physical_device_push_descriptor_properties_KHR> { using type = VkPhysicalDevicePushDescriptorPropertiesKHR;};
-template<> struct my_class_convert<VkPhysicalDevicePushDescriptorPropertiesKHR> { using type = S_physical_device_push_descriptor_properties_KHR;};
-struct		S_physical_device_push_descriptor_properties_KHR:VkPhysicalDevicePushDescriptorPropertiesKHR{
+struct	S_physical_device_push_descriptor_properties_KHR:VkPhysicalDevicePushDescriptorPropertiesKHR{
 private:
 	using VkPhysicalDevicePushDescriptorPropertiesKHR::sType;
 	using VkPhysicalDevicePushDescriptorPropertiesKHR::pNext;
@@ -11769,67 +11036,20 @@ S_physical_device_push_descriptor_properties_KHR(
 	VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PUSH_DESCRIPTOR_PROPERTIES_KHR
 	,nullptr
 	,maxPushDescriptors_}
-	{	}
+	{
+	}
 
 friend S_physical_device_properties2;
+
+	S_physical_device_push_descriptor_properties_KHR& operator=(const VkPhysicalDevicePushDescriptorPropertiesKHR& rhs){static_cast<VkPhysicalDevicePushDescriptorPropertiesKHR&>(*this)=rhs; return *this;}
+	operator VkPhysicalDevicePushDescriptorPropertiesKHR*()const{return const_cast<VkPhysicalDevicePushDescriptorPropertiesKHR*>(static_cast<const VkPhysicalDevicePushDescriptorPropertiesKHR*>(this));}
 };
-
-/*	VkConformanceVersionKHR
-*/
-#ifdef LAKA_UNKNOW
-template<> struct my_class_convert<S_conformance_version_KHR> { using type = VkConformanceVersionKHR;};
-template<> struct my_class_convert<VkConformanceVersionKHR> { using type = S_conformance_version_KHR;};
-struct		S_conformance_version_KHR:VkConformanceVersionKHR{
-	using VkConformanceVersionKHR::major;
-	using VkConformanceVersionKHR::minor;
-	using VkConformanceVersionKHR::subminor;
-	using VkConformanceVersionKHR::patch;
-};
-#endif //LAKA_UNKNOW
-
-/*	VkPhysicalDeviceDriverPropertiesKHR
-(returnedonly)
-ex to: VkPhysicalDeviceProperties2
-*/
-#ifdef LAKA_UNKNOW
-template<> struct my_class_convert<S_physical_device_driver_properties_KHR> { using type = VkPhysicalDeviceDriverPropertiesKHR;};
-template<> struct my_class_convert<VkPhysicalDeviceDriverPropertiesKHR> { using type = S_physical_device_driver_properties_KHR;};
-struct		S_physical_device_driver_properties_KHR:VkPhysicalDeviceDriverPropertiesKHR{
-private:
-	using VkPhysicalDeviceDriverPropertiesKHR::sType;
-	using VkPhysicalDeviceDriverPropertiesKHR::pNext;
-public:
-	using VkPhysicalDeviceDriverPropertiesKHR::driverID;
-	using VkPhysicalDeviceDriverPropertiesKHR::driverName;
-	using VkPhysicalDeviceDriverPropertiesKHR::driverInfo;
-	using VkPhysicalDeviceDriverPropertiesKHR::conformanceVersion;
-
-S_physical_device_driver_properties_KHR():VkPhysicalDeviceDriverPropertiesKHR{VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DRIVER_PROPERTIES_KHR,nullptr}{}
-S_physical_device_driver_properties_KHR(
-	uint32_t driverID_,
-	char driverName_[VK_MAX_DRIVER_NAME_SIZE_KHR],
-	char driverInfo_[VK_MAX_DRIVER_INFO_SIZE_KHR],
-	S_conformance_version_KHR conformanceVersion_)
-	:VkPhysicalDeviceDriverPropertiesKHR{
-	VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DRIVER_PROPERTIES_KHR
-	,nullptr
-	,driverID_
-	,driverName_
-	,driverInfo_
-	,conformanceVersion_}
-	{	}
-
-friend S_physical_device_properties2;
-};
-#endif //LAKA_UNKNOW
 
 /*	VkPhysicalDeviceIDProperties
 (returnedonly)
 ex to: VkPhysicalDeviceProperties2
 */
-template<> struct my_class_convert<S_physical_device_id_properties> { using type = VkPhysicalDeviceIDProperties;};
-template<> struct my_class_convert<VkPhysicalDeviceIDProperties> { using type = S_physical_device_id_properties;};
-struct		S_physical_device_id_properties:VkPhysicalDeviceIDProperties{
+struct	S_physical_device_id_properties:VkPhysicalDeviceIDProperties{
 private:
 	using VkPhysicalDeviceIDProperties::sType;
 	using VkPhysicalDeviceIDProperties::pNext;
@@ -11850,23 +11070,28 @@ S_physical_device_id_properties(
 	:VkPhysicalDeviceIDProperties{
 	VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ID_PROPERTIES
 	,nullptr
-	,deviceUUID_
-	,driverUUID_
-	,deviceLUID_
+	,{}
+	,{}
+	,{}
 	,deviceNodeMask_
 	,deviceLUIDValid_}
-	{	}
+	{
+		memcpy(deviceUUID,deviceUUID_,sizeof(deviceUUID_) );
+		memcpy(driverUUID,driverUUID_,sizeof(driverUUID_) );
+		memcpy(deviceLUID,deviceLUID_,sizeof(deviceLUID_) );
+	}
 
 friend S_physical_device_properties2;
+
+	S_physical_device_id_properties& operator=(const VkPhysicalDeviceIDProperties& rhs){static_cast<VkPhysicalDeviceIDProperties&>(*this)=rhs; return *this;}
+	operator VkPhysicalDeviceIDProperties*()const{return const_cast<VkPhysicalDeviceIDProperties*>(static_cast<const VkPhysicalDeviceIDProperties*>(this));}
 };
 
 /*	VkPhysicalDeviceMultiviewProperties
 (returnedonly)
 ex to: VkPhysicalDeviceProperties2
 */
-template<> struct my_class_convert<S_physical_device_multiview_properties> { using type = VkPhysicalDeviceMultiviewProperties;};
-template<> struct my_class_convert<VkPhysicalDeviceMultiviewProperties> { using type = S_physical_device_multiview_properties;};
-struct		S_physical_device_multiview_properties:VkPhysicalDeviceMultiviewProperties{
+struct	S_physical_device_multiview_properties:VkPhysicalDeviceMultiviewProperties{
 private:
 	using VkPhysicalDeviceMultiviewProperties::sType;
 	using VkPhysicalDeviceMultiviewProperties::pNext;
@@ -11883,17 +11108,19 @@ S_physical_device_multiview_properties(
 	,nullptr
 	,maxMultiviewViewCount_
 	,maxMultiviewInstanceIndex_}
-	{	}
+	{
+	}
 
 friend S_physical_device_properties2;
+
+	S_physical_device_multiview_properties& operator=(const VkPhysicalDeviceMultiviewProperties& rhs){static_cast<VkPhysicalDeviceMultiviewProperties&>(*this)=rhs; return *this;}
+	operator VkPhysicalDeviceMultiviewProperties*()const{return const_cast<VkPhysicalDeviceMultiviewProperties*>(static_cast<const VkPhysicalDeviceMultiviewProperties*>(this));}
 };
 
 /*	VkPhysicalDeviceDiscardRectanglePropertiesEXT
 ex to: VkPhysicalDeviceProperties2
 */
-template<> struct my_class_convert<S_physical_device_discard_rectangle_properties_EXT> { using type = VkPhysicalDeviceDiscardRectanglePropertiesEXT;};
-template<> struct my_class_convert<VkPhysicalDeviceDiscardRectanglePropertiesEXT> { using type = S_physical_device_discard_rectangle_properties_EXT;};
-struct		S_physical_device_discard_rectangle_properties_EXT:VkPhysicalDeviceDiscardRectanglePropertiesEXT{
+struct	S_physical_device_discard_rectangle_properties_EXT:VkPhysicalDeviceDiscardRectanglePropertiesEXT{
 private:
 	using VkPhysicalDeviceDiscardRectanglePropertiesEXT::sType;
 	using VkPhysicalDeviceDiscardRectanglePropertiesEXT::pNext;
@@ -11907,18 +11134,20 @@ S_physical_device_discard_rectangle_properties_EXT(
 	VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DISCARD_RECTANGLE_PROPERTIES_EXT
 	,nullptr
 	,maxDiscardRectangles_}
-	{	}
+	{
+	}
 
 friend S_physical_device_properties2;
+
+	S_physical_device_discard_rectangle_properties_EXT& operator=(const VkPhysicalDeviceDiscardRectanglePropertiesEXT& rhs){static_cast<VkPhysicalDeviceDiscardRectanglePropertiesEXT&>(*this)=rhs; return *this;}
+	operator VkPhysicalDeviceDiscardRectanglePropertiesEXT*()const{return const_cast<VkPhysicalDeviceDiscardRectanglePropertiesEXT*>(static_cast<const VkPhysicalDeviceDiscardRectanglePropertiesEXT*>(this));}
 };
 
 /*	VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX
 (returnedonly)
 ex to: VkPhysicalDeviceProperties2
 */
-template<> struct my_class_convert<S_physical_device_multiview_per_view_attributes_properties_NVX> { using type = VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX;};
-template<> struct my_class_convert<VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX> { using type = S_physical_device_multiview_per_view_attributes_properties_NVX;};
-struct		S_physical_device_multiview_per_view_attributes_properties_NVX:VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX{
+struct	S_physical_device_multiview_per_view_attributes_properties_NVX:VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX{
 private:
 	using VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX::sType;
 	using VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX::pNext;
@@ -11932,18 +11161,20 @@ S_physical_device_multiview_per_view_attributes_properties_NVX(
 	VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTIVIEW_PER_VIEW_ATTRIBUTES_PROPERTIES_NVX
 	,nullptr
 	,perViewPositionAllComponents_}
-	{	}
+	{
+	}
 
 friend S_physical_device_properties2;
+
+	S_physical_device_multiview_per_view_attributes_properties_NVX& operator=(const VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX& rhs){static_cast<VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX&>(*this)=rhs; return *this;}
+	operator VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX*()const{return const_cast<VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX*>(static_cast<const VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX*>(this));}
 };
 
 /*	VkPhysicalDeviceSubgroupProperties
 (returnedonly)
 ex to: VkPhysicalDeviceProperties2
 */
-template<> struct my_class_convert<S_physical_device_subgroup_properties> { using type = VkPhysicalDeviceSubgroupProperties;};
-template<> struct my_class_convert<VkPhysicalDeviceSubgroupProperties> { using type = S_physical_device_subgroup_properties;};
-struct		S_physical_device_subgroup_properties:VkPhysicalDeviceSubgroupProperties{
+struct	S_physical_device_subgroup_properties:VkPhysicalDeviceSubgroupProperties{
 private:
 	using VkPhysicalDeviceSubgroupProperties::sType;
 	using VkPhysicalDeviceSubgroupProperties::pNext;
@@ -11966,18 +11197,20 @@ S_physical_device_subgroup_properties(
 	,supportedStages_
 	,supportedOperations_
 	,quadOperationsInAllStages_}
-	{	}
+	{
+	}
 
 friend S_physical_device_properties2;
+
+	S_physical_device_subgroup_properties& operator=(const VkPhysicalDeviceSubgroupProperties& rhs){static_cast<VkPhysicalDeviceSubgroupProperties&>(*this)=rhs; return *this;}
+	operator VkPhysicalDeviceSubgroupProperties*()const{return const_cast<VkPhysicalDeviceSubgroupProperties*>(static_cast<const VkPhysicalDeviceSubgroupProperties*>(this));}
 };
 
 /*	VkPhysicalDevicePointClippingProperties
 (returnedonly)
 ex to: VkPhysicalDeviceProperties2
 */
-template<> struct my_class_convert<S_physical_device_point_clipping_properties> { using type = VkPhysicalDevicePointClippingProperties;};
-template<> struct my_class_convert<VkPhysicalDevicePointClippingProperties> { using type = S_physical_device_point_clipping_properties;};
-struct		S_physical_device_point_clipping_properties:VkPhysicalDevicePointClippingProperties{
+struct	S_physical_device_point_clipping_properties:VkPhysicalDevicePointClippingProperties{
 private:
 	using VkPhysicalDevicePointClippingProperties::sType;
 	using VkPhysicalDevicePointClippingProperties::pNext;
@@ -11991,17 +11224,19 @@ S_physical_device_point_clipping_properties(
 	VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_POINT_CLIPPING_PROPERTIES
 	,nullptr
 	,pointClippingBehavior_}
-	{	}
+	{
+	}
 
 friend S_physical_device_properties2;
+
+	S_physical_device_point_clipping_properties& operator=(const VkPhysicalDevicePointClippingProperties& rhs){static_cast<VkPhysicalDevicePointClippingProperties&>(*this)=rhs; return *this;}
+	operator VkPhysicalDevicePointClippingProperties*()const{return const_cast<VkPhysicalDevicePointClippingProperties*>(static_cast<const VkPhysicalDevicePointClippingProperties*>(this));}
 };
 
 /*	VkPhysicalDeviceProtectedMemoryProperties
 ex to: VkPhysicalDeviceProperties2
 */
-template<> struct my_class_convert<S_physical_device_protected_memory_properties> { using type = VkPhysicalDeviceProtectedMemoryProperties;};
-template<> struct my_class_convert<VkPhysicalDeviceProtectedMemoryProperties> { using type = S_physical_device_protected_memory_properties;};
-struct		S_physical_device_protected_memory_properties:VkPhysicalDeviceProtectedMemoryProperties{
+struct	S_physical_device_protected_memory_properties:VkPhysicalDeviceProtectedMemoryProperties{
 private:
 	using VkPhysicalDeviceProtectedMemoryProperties::sType;
 	using VkPhysicalDeviceProtectedMemoryProperties::pNext;
@@ -12015,18 +11250,20 @@ S_physical_device_protected_memory_properties(
 	VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROTECTED_MEMORY_PROPERTIES
 	,nullptr
 	,protectedNoFault_}
-	{	}
+	{
+	}
 
 friend S_physical_device_properties2;
+
+	S_physical_device_protected_memory_properties& operator=(const VkPhysicalDeviceProtectedMemoryProperties& rhs){static_cast<VkPhysicalDeviceProtectedMemoryProperties&>(*this)=rhs; return *this;}
+	operator VkPhysicalDeviceProtectedMemoryProperties*()const{return const_cast<VkPhysicalDeviceProtectedMemoryProperties*>(static_cast<const VkPhysicalDeviceProtectedMemoryProperties*>(this));}
 };
 
 /*	VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT
 (returnedonly)
 ex to: VkPhysicalDeviceProperties2
 */
-template<> struct my_class_convert<S_physical_device_sampler_filter_minmax_properties_EXT> { using type = VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT;};
-template<> struct my_class_convert<VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT> { using type = S_physical_device_sampler_filter_minmax_properties_EXT;};
-struct		S_physical_device_sampler_filter_minmax_properties_EXT:VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT{
+struct	S_physical_device_sampler_filter_minmax_properties_EXT:VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT{
 private:
 	using VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT::sType;
 	using VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT::pNext;
@@ -12043,18 +11280,20 @@ S_physical_device_sampler_filter_minmax_properties_EXT(
 	,nullptr
 	,filterMinmaxSingleComponentFormats_
 	,filterMinmaxImageComponentMapping_}
-	{	}
+	{
+	}
 
 friend S_physical_device_properties2;
+
+	S_physical_device_sampler_filter_minmax_properties_EXT& operator=(const VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT& rhs){static_cast<VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT&>(*this)=rhs; return *this;}
+	operator VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT*()const{return const_cast<VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT*>(static_cast<const VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT*>(this));}
 };
 
 /*	VkPhysicalDeviceSampleLocationsPropertiesEXT
 (returnedonly)
 ex to: VkPhysicalDeviceProperties2
 */
-template<> struct my_class_convert<S_physical_device_sample_locations_properties_EXT> { using type = VkPhysicalDeviceSampleLocationsPropertiesEXT;};
-template<> struct my_class_convert<VkPhysicalDeviceSampleLocationsPropertiesEXT> { using type = S_physical_device_sample_locations_properties_EXT;};
-struct		S_physical_device_sample_locations_properties_EXT:VkPhysicalDeviceSampleLocationsPropertiesEXT{
+struct	S_physical_device_sample_locations_properties_EXT:VkPhysicalDeviceSampleLocationsPropertiesEXT{
 private:
 	using VkPhysicalDeviceSampleLocationsPropertiesEXT::sType;
 	using VkPhysicalDeviceSampleLocationsPropertiesEXT::pNext;
@@ -12077,21 +11316,24 @@ S_physical_device_sample_locations_properties_EXT(
 	,nullptr
 	,sampleLocationSampleCounts_
 	,maxSampleLocationGridSize_
-	,sampleLocationCoordinateRange_
+	,{}
 	,sampleLocationSubPixelBits_
 	,variableSampleLocations_}
-	{	}
+	{
+		memcpy(sampleLocationCoordinateRange,sampleLocationCoordinateRange_,sizeof(sampleLocationCoordinateRange_) );
+	}
 
 friend S_physical_device_properties2;
+
+	S_physical_device_sample_locations_properties_EXT& operator=(const VkPhysicalDeviceSampleLocationsPropertiesEXT& rhs){static_cast<VkPhysicalDeviceSampleLocationsPropertiesEXT&>(*this)=rhs; return *this;}
+	operator VkPhysicalDeviceSampleLocationsPropertiesEXT*()const{return const_cast<VkPhysicalDeviceSampleLocationsPropertiesEXT*>(static_cast<const VkPhysicalDeviceSampleLocationsPropertiesEXT*>(this));}
 };
 
 /*	VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT
 (returnedonly)
 ex to: VkPhysicalDeviceProperties2
 */
-template<> struct my_class_convert<S_physical_device_blend_operation_advanced_properties_EXT> { using type = VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT;};
-template<> struct my_class_convert<VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT> { using type = S_physical_device_blend_operation_advanced_properties_EXT;};
-struct		S_physical_device_blend_operation_advanced_properties_EXT:VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT{
+struct	S_physical_device_blend_operation_advanced_properties_EXT:VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT{
 private:
 	using VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT::sType;
 	using VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT::pNext;
@@ -12120,55 +11362,20 @@ S_physical_device_blend_operation_advanced_properties_EXT(
 	,advancedBlendNonPremultipliedDstColor_
 	,advancedBlendCorrelatedOverlap_
 	,advancedBlendAllOperations_}
-	{	}
+	{
+	}
 
 friend S_physical_device_properties2;
-};
 
-/*	VkPhysicalDeviceInlineUniformBlockPropertiesEXT
-(returnedonly)
-ex to: VkPhysicalDeviceProperties2
-*/
-template<> struct my_class_convert<S_physical_device_inline_uniform_block_properties_EXT> { using type = VkPhysicalDeviceInlineUniformBlockPropertiesEXT;};
-template<> struct my_class_convert<VkPhysicalDeviceInlineUniformBlockPropertiesEXT> { using type = S_physical_device_inline_uniform_block_properties_EXT;};
-struct		S_physical_device_inline_uniform_block_properties_EXT:VkPhysicalDeviceInlineUniformBlockPropertiesEXT{
-private:
-	using VkPhysicalDeviceInlineUniformBlockPropertiesEXT::sType;
-	using VkPhysicalDeviceInlineUniformBlockPropertiesEXT::pNext;
-public:
-	using VkPhysicalDeviceInlineUniformBlockPropertiesEXT::maxInlineUniformBlockSize;
-	using VkPhysicalDeviceInlineUniformBlockPropertiesEXT::maxPerStageDescriptorInlineUniformBlocks;
-	using VkPhysicalDeviceInlineUniformBlockPropertiesEXT::maxPerStageDescriptorUpdateAfterBindInlineUniformBlocks;
-	using VkPhysicalDeviceInlineUniformBlockPropertiesEXT::maxDescriptorSetInlineUniformBlocks;
-	using VkPhysicalDeviceInlineUniformBlockPropertiesEXT::maxDescriptorSetUpdateAfterBindInlineUniformBlocks;
-
-S_physical_device_inline_uniform_block_properties_EXT():VkPhysicalDeviceInlineUniformBlockPropertiesEXT{VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_INLINE_UNIFORM_BLOCK_PROPERTIES_EXT,nullptr}{}
-S_physical_device_inline_uniform_block_properties_EXT(
-	uint32_t maxInlineUniformBlockSize_,
-	uint32_t maxPerStageDescriptorInlineUniformBlocks_,
-	uint32_t maxPerStageDescriptorUpdateAfterBindInlineUniformBlocks_,
-	uint32_t maxDescriptorSetInlineUniformBlocks_,
-	uint32_t maxDescriptorSetUpdateAfterBindInlineUniformBlocks_)
-	:VkPhysicalDeviceInlineUniformBlockPropertiesEXT{
-	VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_INLINE_UNIFORM_BLOCK_PROPERTIES_EXT
-	,nullptr
-	,maxInlineUniformBlockSize_
-	,maxPerStageDescriptorInlineUniformBlocks_
-	,maxPerStageDescriptorUpdateAfterBindInlineUniformBlocks_
-	,maxDescriptorSetInlineUniformBlocks_
-	,maxDescriptorSetUpdateAfterBindInlineUniformBlocks_}
-	{	}
-
-friend S_physical_device_properties2;
+	S_physical_device_blend_operation_advanced_properties_EXT& operator=(const VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT& rhs){static_cast<VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT&>(*this)=rhs; return *this;}
+	operator VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT*()const{return const_cast<VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT*>(static_cast<const VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT*>(this));}
 };
 
 /*	VkPhysicalDeviceMaintenance3Properties
 (returnedonly)
 ex to: VkPhysicalDeviceProperties2
 */
-template<> struct my_class_convert<S_physical_device_maintenance3_properties> { using type = VkPhysicalDeviceMaintenance3Properties;};
-template<> struct my_class_convert<VkPhysicalDeviceMaintenance3Properties> { using type = S_physical_device_maintenance3_properties;};
-struct		S_physical_device_maintenance3_properties:VkPhysicalDeviceMaintenance3Properties{
+struct	S_physical_device_maintenance3_properties:VkPhysicalDeviceMaintenance3Properties{
 private:
 	using VkPhysicalDeviceMaintenance3Properties::sType;
 	using VkPhysicalDeviceMaintenance3Properties::pNext;
@@ -12185,17 +11392,19 @@ S_physical_device_maintenance3_properties(
 	,nullptr
 	,maxPerSetDescriptors_
 	,maxMemoryAllocationSize_}
-	{	}
+	{
+	}
 
 friend S_physical_device_properties2;
+
+	S_physical_device_maintenance3_properties& operator=(const VkPhysicalDeviceMaintenance3Properties& rhs){static_cast<VkPhysicalDeviceMaintenance3Properties&>(*this)=rhs; return *this;}
+	operator VkPhysicalDeviceMaintenance3Properties*()const{return const_cast<VkPhysicalDeviceMaintenance3Properties*>(static_cast<const VkPhysicalDeviceMaintenance3Properties*>(this));}
 };
 
 /*	VkPhysicalDeviceExternalMemoryHostPropertiesEXT
 ex to: VkPhysicalDeviceProperties2
 */
-template<> struct my_class_convert<S_physical_device_external_memory_host_properties_EXT> { using type = VkPhysicalDeviceExternalMemoryHostPropertiesEXT;};
-template<> struct my_class_convert<VkPhysicalDeviceExternalMemoryHostPropertiesEXT> { using type = S_physical_device_external_memory_host_properties_EXT;};
-struct		S_physical_device_external_memory_host_properties_EXT:VkPhysicalDeviceExternalMemoryHostPropertiesEXT{
+struct	S_physical_device_external_memory_host_properties_EXT:VkPhysicalDeviceExternalMemoryHostPropertiesEXT{
 private:
 	using VkPhysicalDeviceExternalMemoryHostPropertiesEXT::sType;
 	using VkPhysicalDeviceExternalMemoryHostPropertiesEXT::pNext;
@@ -12209,17 +11418,19 @@ S_physical_device_external_memory_host_properties_EXT(
 	VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_MEMORY_HOST_PROPERTIES_EXT
 	,nullptr
 	,minImportedHostPointerAlignment_}
-	{	}
+	{
+	}
 
 friend S_physical_device_properties2;
+
+	S_physical_device_external_memory_host_properties_EXT& operator=(const VkPhysicalDeviceExternalMemoryHostPropertiesEXT& rhs){static_cast<VkPhysicalDeviceExternalMemoryHostPropertiesEXT&>(*this)=rhs; return *this;}
+	operator VkPhysicalDeviceExternalMemoryHostPropertiesEXT*()const{return const_cast<VkPhysicalDeviceExternalMemoryHostPropertiesEXT*>(static_cast<const VkPhysicalDeviceExternalMemoryHostPropertiesEXT*>(this));}
 };
 
 /*	VkPhysicalDeviceConservativeRasterizationPropertiesEXT
 ex to: VkPhysicalDeviceProperties2
 */
-template<> struct my_class_convert<S_physical_device_conservative_rasterization_properties_EXT> { using type = VkPhysicalDeviceConservativeRasterizationPropertiesEXT;};
-template<> struct my_class_convert<VkPhysicalDeviceConservativeRasterizationPropertiesEXT> { using type = S_physical_device_conservative_rasterization_properties_EXT;};
-struct		S_physical_device_conservative_rasterization_properties_EXT:VkPhysicalDeviceConservativeRasterizationPropertiesEXT{
+struct	S_physical_device_conservative_rasterization_properties_EXT:VkPhysicalDeviceConservativeRasterizationPropertiesEXT{
 private:
 	using VkPhysicalDeviceConservativeRasterizationPropertiesEXT::sType;
 	using VkPhysicalDeviceConservativeRasterizationPropertiesEXT::pNext;
@@ -12257,18 +11468,20 @@ S_physical_device_conservative_rasterization_properties_EXT(
 	,degenerateLinesRasterized_
 	,fullyCoveredFragmentShaderInputVariable_
 	,conservativeRasterizationPostDepthCoverage_}
-	{	}
+	{
+	}
 
 friend S_physical_device_properties2;
+
+	S_physical_device_conservative_rasterization_properties_EXT& operator=(const VkPhysicalDeviceConservativeRasterizationPropertiesEXT& rhs){static_cast<VkPhysicalDeviceConservativeRasterizationPropertiesEXT&>(*this)=rhs; return *this;}
+	operator VkPhysicalDeviceConservativeRasterizationPropertiesEXT*()const{return const_cast<VkPhysicalDeviceConservativeRasterizationPropertiesEXT*>(static_cast<const VkPhysicalDeviceConservativeRasterizationPropertiesEXT*>(this));}
 };
 
 /*	VkPhysicalDeviceShaderCorePropertiesAMD
 (returnedonly)
 ex to: VkPhysicalDeviceProperties2
 */
-template<> struct my_class_convert<S_physical_device_shader_core_properties_AMD> { using type = VkPhysicalDeviceShaderCorePropertiesAMD;};
-template<> struct my_class_convert<VkPhysicalDeviceShaderCorePropertiesAMD> { using type = S_physical_device_shader_core_properties_AMD;};
-struct		S_physical_device_shader_core_properties_AMD:VkPhysicalDeviceShaderCorePropertiesAMD{
+struct	S_physical_device_shader_core_properties_AMD:VkPhysicalDeviceShaderCorePropertiesAMD{
 private:
 	using VkPhysicalDeviceShaderCorePropertiesAMD::sType;
 	using VkPhysicalDeviceShaderCorePropertiesAMD::pNext;
@@ -12321,18 +11534,20 @@ S_physical_device_shader_core_properties_AMD(
 	,minVgprAllocation_
 	,maxVgprAllocation_
 	,vgprAllocationGranularity_}
-	{	}
+	{
+	}
 
 friend S_physical_device_properties2;
+
+	S_physical_device_shader_core_properties_AMD& operator=(const VkPhysicalDeviceShaderCorePropertiesAMD& rhs){static_cast<VkPhysicalDeviceShaderCorePropertiesAMD&>(*this)=rhs; return *this;}
+	operator VkPhysicalDeviceShaderCorePropertiesAMD*()const{return const_cast<VkPhysicalDeviceShaderCorePropertiesAMD*>(static_cast<const VkPhysicalDeviceShaderCorePropertiesAMD*>(this));}
 };
 
 /*	VkPhysicalDeviceDescriptorIndexingPropertiesEXT
 (returnedonly)
 ex to: VkPhysicalDeviceProperties2
 */
-template<> struct my_class_convert<S_physical_device_descriptor_indexing_properties_EXT> { using type = VkPhysicalDeviceDescriptorIndexingPropertiesEXT;};
-template<> struct my_class_convert<VkPhysicalDeviceDescriptorIndexingPropertiesEXT> { using type = S_physical_device_descriptor_indexing_properties_EXT;};
-struct		S_physical_device_descriptor_indexing_properties_EXT:VkPhysicalDeviceDescriptorIndexingPropertiesEXT{
+struct	S_physical_device_descriptor_indexing_properties_EXT:VkPhysicalDeviceDescriptorIndexingPropertiesEXT{
 private:
 	using VkPhysicalDeviceDescriptorIndexingPropertiesEXT::sType;
 	using VkPhysicalDeviceDescriptorIndexingPropertiesEXT::pNext;
@@ -12412,17 +11627,19 @@ S_physical_device_descriptor_indexing_properties_EXT(
 	,maxDescriptorSetUpdateAfterBindSampledImages_
 	,maxDescriptorSetUpdateAfterBindStorageImages_
 	,maxDescriptorSetUpdateAfterBindInputAttachments_}
-	{	}
+	{
+	}
 
 friend S_physical_device_properties2;
+
+	S_physical_device_descriptor_indexing_properties_EXT& operator=(const VkPhysicalDeviceDescriptorIndexingPropertiesEXT& rhs){static_cast<VkPhysicalDeviceDescriptorIndexingPropertiesEXT&>(*this)=rhs; return *this;}
+	operator VkPhysicalDeviceDescriptorIndexingPropertiesEXT*()const{return const_cast<VkPhysicalDeviceDescriptorIndexingPropertiesEXT*>(static_cast<const VkPhysicalDeviceDescriptorIndexingPropertiesEXT*>(this));}
 };
 
 /*	VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT
 ex to: VkPhysicalDeviceProperties2
 */
-template<> struct my_class_convert<S_physical_device_vertex_attribute_divisor_properties_EXT> { using type = VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT;};
-template<> struct my_class_convert<VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT> { using type = S_physical_device_vertex_attribute_divisor_properties_EXT;};
-struct		S_physical_device_vertex_attribute_divisor_properties_EXT:VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT{
+struct	S_physical_device_vertex_attribute_divisor_properties_EXT:VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT{
 private:
 	using VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT::sType;
 	using VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT::pNext;
@@ -12436,137 +11653,19 @@ S_physical_device_vertex_attribute_divisor_properties_EXT(
 	VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_DIVISOR_PROPERTIES_EXT
 	,nullptr
 	,maxVertexAttribDivisor_}
-	{	}
+	{
+	}
 
 friend S_physical_device_properties2;
-};
 
-/*	VkPhysicalDeviceShadingRateImagePropertiesNV
-(returnedonly)
-ex to: VkPhysicalDeviceProperties2
-*/
-template<> struct my_class_convert<S_physical_device_shading_rate_image_properties_NV> { using type = VkPhysicalDeviceShadingRateImagePropertiesNV;};
-template<> struct my_class_convert<VkPhysicalDeviceShadingRateImagePropertiesNV> { using type = S_physical_device_shading_rate_image_properties_NV;};
-struct		S_physical_device_shading_rate_image_properties_NV:VkPhysicalDeviceShadingRateImagePropertiesNV{
-private:
-	using VkPhysicalDeviceShadingRateImagePropertiesNV::sType;
-	using VkPhysicalDeviceShadingRateImagePropertiesNV::pNext;
-public:
-	using VkPhysicalDeviceShadingRateImagePropertiesNV::shadingRateTexelSize;
-	using VkPhysicalDeviceShadingRateImagePropertiesNV::shadingRatePaletteSize;
-	using VkPhysicalDeviceShadingRateImagePropertiesNV::shadingRateMaxCoarseSamples;
-
-S_physical_device_shading_rate_image_properties_NV():VkPhysicalDeviceShadingRateImagePropertiesNV{VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADING_RATE_IMAGE_PROPERTIES_NV,nullptr}{}
-S_physical_device_shading_rate_image_properties_NV(
-	S_extent_2d shadingRateTexelSize_,
-	uint32_t shadingRatePaletteSize_,
-	uint32_t shadingRateMaxCoarseSamples_)
-	:VkPhysicalDeviceShadingRateImagePropertiesNV{
-	VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADING_RATE_IMAGE_PROPERTIES_NV
-	,nullptr
-	,shadingRateTexelSize_
-	,shadingRatePaletteSize_
-	,shadingRateMaxCoarseSamples_}
-	{	}
-
-friend S_physical_device_properties2;
-};
-
-/*	VkPhysicalDeviceMeshShaderPropertiesNV
-ex to: VkPhysicalDeviceProperties2
-*/
-template<> struct my_class_convert<S_physical_device_mesh_shader_properties_NV> { using type = VkPhysicalDeviceMeshShaderPropertiesNV;};
-template<> struct my_class_convert<VkPhysicalDeviceMeshShaderPropertiesNV> { using type = S_physical_device_mesh_shader_properties_NV;};
-struct		S_physical_device_mesh_shader_properties_NV:VkPhysicalDeviceMeshShaderPropertiesNV{
-private:
-	using VkPhysicalDeviceMeshShaderPropertiesNV::sType;
-	using VkPhysicalDeviceMeshShaderPropertiesNV::pNext;
-public:
-	using VkPhysicalDeviceMeshShaderPropertiesNV::maxDrawMeshTasksCount;
-	using VkPhysicalDeviceMeshShaderPropertiesNV::maxTaskWorkGroupInvocations;
-	using VkPhysicalDeviceMeshShaderPropertiesNV::maxTaskWorkGroupSize;
-	using VkPhysicalDeviceMeshShaderPropertiesNV::maxTaskTotalMemorySize;
-	using VkPhysicalDeviceMeshShaderPropertiesNV::maxTaskOutputCount;
-	using VkPhysicalDeviceMeshShaderPropertiesNV::maxMeshWorkGroupInvocations;
-	using VkPhysicalDeviceMeshShaderPropertiesNV::maxMeshWorkGroupSize;
-	using VkPhysicalDeviceMeshShaderPropertiesNV::maxMeshTotalMemorySize;
-	using VkPhysicalDeviceMeshShaderPropertiesNV::maxMeshOutputVertices;
-	using VkPhysicalDeviceMeshShaderPropertiesNV::maxMeshOutputPrimitives;
-	using VkPhysicalDeviceMeshShaderPropertiesNV::maxMeshMultiviewViewCount;
-	using VkPhysicalDeviceMeshShaderPropertiesNV::meshOutputPerVertexGranularity;
-	using VkPhysicalDeviceMeshShaderPropertiesNV::meshOutputPerPrimitiveGranularity;
-
-S_physical_device_mesh_shader_properties_NV():VkPhysicalDeviceMeshShaderPropertiesNV{VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MESH_SHADER_PROPERTIES_NV,nullptr}{}
-S_physical_device_mesh_shader_properties_NV(
-	uint32_t maxDrawMeshTasksCount_,
-	uint32_t maxTaskWorkGroupInvocations_,
-	uint32_t maxTaskWorkGroupSize_[3],
-	uint32_t maxTaskTotalMemorySize_,
-	uint32_t maxTaskOutputCount_,
-	uint32_t maxMeshWorkGroupInvocations_,
-	uint32_t maxMeshWorkGroupSize_[3],
-	uint32_t maxMeshTotalMemorySize_,
-	uint32_t maxMeshOutputVertices_,
-	uint32_t maxMeshOutputPrimitives_,
-	uint32_t maxMeshMultiviewViewCount_,
-	uint32_t meshOutputPerVertexGranularity_,
-	uint32_t meshOutputPerPrimitiveGranularity_)
-	:VkPhysicalDeviceMeshShaderPropertiesNV{
-	VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MESH_SHADER_PROPERTIES_NV
-	,nullptr
-	,maxDrawMeshTasksCount_
-	,maxTaskWorkGroupInvocations_
-	,maxTaskWorkGroupSize_
-	,maxTaskTotalMemorySize_
-	,maxTaskOutputCount_
-	,maxMeshWorkGroupInvocations_
-	,maxMeshWorkGroupSize_
-	,maxMeshTotalMemorySize_
-	,maxMeshOutputVertices_
-	,maxMeshOutputPrimitives_
-	,maxMeshMultiviewViewCount_
-	,meshOutputPerVertexGranularity_
-	,meshOutputPerPrimitiveGranularity_}
-	{	}
-
-friend S_physical_device_properties2;
-};
-
-/*	VkPhysicalDeviceRaytracingPropertiesNVX
-ex to: VkPhysicalDeviceProperties2
-*/
-template<> struct my_class_convert<S_physical_device_raytracing_properties_NVX> { using type = VkPhysicalDeviceRaytracingPropertiesNVX;};
-template<> struct my_class_convert<VkPhysicalDeviceRaytracingPropertiesNVX> { using type = S_physical_device_raytracing_properties_NVX;};
-struct		S_physical_device_raytracing_properties_NVX:VkPhysicalDeviceRaytracingPropertiesNVX{
-private:
-	using VkPhysicalDeviceRaytracingPropertiesNVX::sType;
-	using VkPhysicalDeviceRaytracingPropertiesNVX::pNext;
-public:
-	using VkPhysicalDeviceRaytracingPropertiesNVX::shaderHeaderSize;
-	using VkPhysicalDeviceRaytracingPropertiesNVX::maxRecursionDepth;
-	using VkPhysicalDeviceRaytracingPropertiesNVX::maxGeometryCount;
-
-S_physical_device_raytracing_properties_NVX():VkPhysicalDeviceRaytracingPropertiesNVX{VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RAYTRACING_PROPERTIES_NVX,nullptr}{}
-S_physical_device_raytracing_properties_NVX(
-	uint32_t shaderHeaderSize_,
-	uint32_t maxRecursionDepth_,
-	uint32_t maxGeometryCount_)
-	:VkPhysicalDeviceRaytracingPropertiesNVX{
-	VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RAYTRACING_PROPERTIES_NVX
-	,nullptr
-	,shaderHeaderSize_
-	,maxRecursionDepth_
-	,maxGeometryCount_}
-	{	}
-
-friend S_physical_device_properties2;
+	S_physical_device_vertex_attribute_divisor_properties_EXT& operator=(const VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT& rhs){static_cast<VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT&>(*this)=rhs; return *this;}
+	operator VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT*()const{return const_cast<VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT*>(static_cast<const VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT*>(this));}
 };
 
 /*	VkPhysicalDeviceProperties2
 (returnedonly)
 ex:
 	VkPhysicalDevicePushDescriptorPropertiesKHR
-	VkPhysicalDeviceDriverPropertiesKHR
 	VkPhysicalDeviceIDProperties
 	VkPhysicalDeviceMultiviewProperties
 	VkPhysicalDeviceDiscardRectanglePropertiesEXT
@@ -12577,16 +11676,12 @@ ex:
 	VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT
 	VkPhysicalDeviceSampleLocationsPropertiesEXT
 	VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT
-	VkPhysicalDeviceInlineUniformBlockPropertiesEXT
 	VkPhysicalDeviceMaintenance3Properties
 	VkPhysicalDeviceExternalMemoryHostPropertiesEXT
 	VkPhysicalDeviceConservativeRasterizationPropertiesEXT
 	VkPhysicalDeviceShaderCorePropertiesAMD
 	VkPhysicalDeviceDescriptorIndexingPropertiesEXT
 	VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT
-	VkPhysicalDeviceShadingRateImagePropertiesNV
-	VkPhysicalDeviceMeshShaderPropertiesNV
-	VkPhysicalDeviceRaytracingPropertiesNVX
 */
 
 struct N_physical_device_properties2{
@@ -12595,9 +11690,6 @@ private:
 public:
 operator void*() { return pNext; }
 N_physical_device_properties2& n_physical_device_push_descriptor_properties_KHR(S_physical_device_push_descriptor_properties_KHR const& next_);
-#ifdef LAKA_UNKNOW
-N_physical_device_properties2& n_physical_device_driver_properties_KHR(S_physical_device_driver_properties_KHR const& next_);
-#endif
 N_physical_device_properties2& n_physical_device_id_properties(S_physical_device_id_properties const& next_);
 N_physical_device_properties2& n_physical_device_multiview_properties(S_physical_device_multiview_properties const& next_);
 N_physical_device_properties2& n_physical_device_discard_rectangle_properties_EXT(S_physical_device_discard_rectangle_properties_EXT const& next_);
@@ -12608,20 +11700,14 @@ N_physical_device_properties2& n_physical_device_protected_memory_properties(S_p
 N_physical_device_properties2& n_physical_device_sampler_filter_minmax_properties_EXT(S_physical_device_sampler_filter_minmax_properties_EXT const& next_);
 N_physical_device_properties2& n_physical_device_sample_locations_properties_EXT(S_physical_device_sample_locations_properties_EXT const& next_);
 N_physical_device_properties2& n_physical_device_blend_operation_advanced_properties_EXT(S_physical_device_blend_operation_advanced_properties_EXT const& next_);
-N_physical_device_properties2& n_physical_device_inline_uniform_block_properties_EXT(S_physical_device_inline_uniform_block_properties_EXT const& next_);
 N_physical_device_properties2& n_physical_device_maintenance3_properties(S_physical_device_maintenance3_properties const& next_);
 N_physical_device_properties2& n_physical_device_external_memory_host_properties_EXT(S_physical_device_external_memory_host_properties_EXT const& next_);
 N_physical_device_properties2& n_physical_device_conservative_rasterization_properties_EXT(S_physical_device_conservative_rasterization_properties_EXT const& next_);
 N_physical_device_properties2& n_physical_device_shader_core_properties_AMD(S_physical_device_shader_core_properties_AMD const& next_);
 N_physical_device_properties2& n_physical_device_descriptor_indexing_properties_EXT(S_physical_device_descriptor_indexing_properties_EXT const& next_);
 N_physical_device_properties2& n_physical_device_vertex_attribute_divisor_properties_EXT(S_physical_device_vertex_attribute_divisor_properties_EXT const& next_);
-N_physical_device_properties2& n_physical_device_shading_rate_image_properties_NV(S_physical_device_shading_rate_image_properties_NV const& next_);
-N_physical_device_properties2& n_physical_device_mesh_shader_properties_NV(S_physical_device_mesh_shader_properties_NV const& next_);
-N_physical_device_properties2& n_physical_device_raytracing_properties_NVX(S_physical_device_raytracing_properties_NVX const& next_);
 };
-template<> struct my_class_convert<S_physical_device_properties2> { using type = VkPhysicalDeviceProperties2;};
-template<> struct my_class_convert<VkPhysicalDeviceProperties2> { using type = S_physical_device_properties2;};
-struct		S_physical_device_properties2:VkPhysicalDeviceProperties2{
+struct	S_physical_device_properties2:VkPhysicalDeviceProperties2{
 private:
 	using VkPhysicalDeviceProperties2::sType;
 	using VkPhysicalDeviceProperties2::pNext;
@@ -12635,12 +11721,13 @@ S_physical_device_properties2(
 	VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROPERTIES_2
 	,nullptr
 	,properties_}
-	{	}
+	{
+	}
+
+	S_physical_device_properties2& operator=(const VkPhysicalDeviceProperties2& rhs){static_cast<VkPhysicalDeviceProperties2&>(*this)=rhs; return *this;}
+	operator VkPhysicalDeviceProperties2*()const{return const_cast<VkPhysicalDeviceProperties2*>(static_cast<const VkPhysicalDeviceProperties2*>(this));}
 
 S_physical_device_properties2& n_physical_device_push_descriptor_properties_KHR(S_physical_device_push_descriptor_properties_KHR const& next_);
-#ifdef LAKA_UNKNOW
-S_physical_device_properties2& n_physical_device_driver_properties_KHR(S_physical_device_driver_properties_KHR const& next_);
-#endif
 S_physical_device_properties2& n_physical_device_id_properties(S_physical_device_id_properties const& next_);
 S_physical_device_properties2& n_physical_device_multiview_properties(S_physical_device_multiview_properties const& next_);
 S_physical_device_properties2& n_physical_device_discard_rectangle_properties_EXT(S_physical_device_discard_rectangle_properties_EXT const& next_);
@@ -12651,79 +11738,19 @@ S_physical_device_properties2& n_physical_device_protected_memory_properties(S_p
 S_physical_device_properties2& n_physical_device_sampler_filter_minmax_properties_EXT(S_physical_device_sampler_filter_minmax_properties_EXT const& next_);
 S_physical_device_properties2& n_physical_device_sample_locations_properties_EXT(S_physical_device_sample_locations_properties_EXT const& next_);
 S_physical_device_properties2& n_physical_device_blend_operation_advanced_properties_EXT(S_physical_device_blend_operation_advanced_properties_EXT const& next_);
-S_physical_device_properties2& n_physical_device_inline_uniform_block_properties_EXT(S_physical_device_inline_uniform_block_properties_EXT const& next_);
 S_physical_device_properties2& n_physical_device_maintenance3_properties(S_physical_device_maintenance3_properties const& next_);
 S_physical_device_properties2& n_physical_device_external_memory_host_properties_EXT(S_physical_device_external_memory_host_properties_EXT const& next_);
 S_physical_device_properties2& n_physical_device_conservative_rasterization_properties_EXT(S_physical_device_conservative_rasterization_properties_EXT const& next_);
 S_physical_device_properties2& n_physical_device_shader_core_properties_AMD(S_physical_device_shader_core_properties_AMD const& next_);
 S_physical_device_properties2& n_physical_device_descriptor_indexing_properties_EXT(S_physical_device_descriptor_indexing_properties_EXT const& next_);
 S_physical_device_properties2& n_physical_device_vertex_attribute_divisor_properties_EXT(S_physical_device_vertex_attribute_divisor_properties_EXT const& next_);
-S_physical_device_properties2& n_physical_device_shading_rate_image_properties_NV(S_physical_device_shading_rate_image_properties_NV const& next_);
-S_physical_device_properties2& n_physical_device_mesh_shader_properties_NV(S_physical_device_mesh_shader_properties_NV const& next_);
-S_physical_device_properties2& n_physical_device_raytracing_properties_NVX(S_physical_device_raytracing_properties_NVX const& next_);
 void set_pNext(N_physical_device_properties2 n_){pNext = n_;}
 };
 
-/*	VkDrmFormatModifierPropertiesEXT
-(returnedonly)
-*/
-#ifdef LAKA_UNKNOW
-template<> struct my_class_convert<S_drm_format_modifier_properties_EXT> { using type = VkDrmFormatModifierPropertiesEXT;};
-template<> struct my_class_convert<VkDrmFormatModifierPropertiesEXT> { using type = S_drm_format_modifier_properties_EXT;};
-struct		S_drm_format_modifier_properties_EXT:VkDrmFormatModifierPropertiesEXT{
-	using VkDrmFormatModifierPropertiesEXT::drmFormatModifier;
-	using VkDrmFormatModifierPropertiesEXT::drmFormatModifierPlaneCount;
-	using VkDrmFormatModifierPropertiesEXT::drmFormatModifierTilingFeatures;
-};
-#endif //LAKA_UNKNOW
-
-/*	VkDrmFormatModifierPropertiesListEXT
-ex to: VkFormatProperties2
-*/
-#ifdef LAKA_UNKNOW
-template<> struct my_class_convert<S_drm_format_modifier_properties_list_EXT> { using type = VkDrmFormatModifierPropertiesListEXT;};
-template<> struct my_class_convert<VkDrmFormatModifierPropertiesListEXT> { using type = S_drm_format_modifier_properties_list_EXT;};
-struct		S_drm_format_modifier_properties_list_EXT:VkDrmFormatModifierPropertiesListEXT{
-private:
-	using VkDrmFormatModifierPropertiesListEXT::sType;
-	using VkDrmFormatModifierPropertiesListEXT::pNext;
-public:
-	using VkDrmFormatModifierPropertiesListEXT::drmFormatModifierCount;
-	using VkDrmFormatModifierPropertiesListEXT::pDrmFormatModifierProperties;
-
-S_drm_format_modifier_properties_list_EXT():VkDrmFormatModifierPropertiesListEXT{VK_STRUCTURE_TYPE_DRM_FORMAT_MODIFIER_PROPERTIES_LIST_EXT,nullptr}{}
-S_drm_format_modifier_properties_list_EXT(
-	uint32_t drmFormatModifierCount_,
-	S_drm_format_modifier_properties_EXT * pDrmFormatModifierProperties_)
-	:VkDrmFormatModifierPropertiesListEXT{
-	VK_STRUCTURE_TYPE_DRM_FORMAT_MODIFIER_PROPERTIES_LIST_EXT
-	,nullptr
-	,drmFormatModifierCount_
-	,pDrmFormatModifierProperties_}
-	{	}
-
-friend S_format_properties2;
-};
-#endif //LAKA_UNKNOW
-
 /*	VkFormatProperties2
 (returnedonly)
-ex:
-	VkDrmFormatModifierPropertiesListEXT
 */
-
-struct N_format_properties2{
-private:
-	void* pNext = nullptr;
-public:
-operator void*() { return pNext; }
-#ifdef LAKA_UNKNOW
-N_format_properties2& n_drm_format_modifier_properties_list_EXT(S_drm_format_modifier_properties_list_EXT const& next_);
-#endif
-};
-template<> struct my_class_convert<S_format_properties2> { using type = VkFormatProperties2;};
-template<> struct my_class_convert<VkFormatProperties2> { using type = S_format_properties2;};
-struct		S_format_properties2:VkFormatProperties2{
+struct	S_format_properties2:VkFormatProperties2{
 private:
 	using VkFormatProperties2::sType;
 	using VkFormatProperties2::pNext;
@@ -12737,32 +11764,30 @@ S_format_properties2(
 	VK_STRUCTURE_TYPE_FORMAT_PROPERTIES_2
 	,nullptr
 	,formatProperties_}
-	{	}
+	{
+	}
 
-#ifdef LAKA_UNKNOW
-S_format_properties2& n_drm_format_modifier_properties_list_EXT(S_drm_format_modifier_properties_list_EXT const& next_);
-#endif
-void set_pNext(N_format_properties2 n_){pNext = n_;}
+	S_format_properties2& operator=(const VkFormatProperties2& rhs){static_cast<VkFormatProperties2&>(*this)=rhs; return *this;}
+	operator VkFormatProperties2*()const{return const_cast<VkFormatProperties2*>(static_cast<const VkFormatProperties2*>(this));}
 };
 
 /*	VkExternalMemoryProperties
 (returnedonly)
 */
-template<> struct my_class_convert<S_external_memory_properties> { using type = VkExternalMemoryProperties;};
-template<> struct my_class_convert<VkExternalMemoryProperties> { using type = S_external_memory_properties;};
-struct		S_external_memory_properties:VkExternalMemoryProperties{
+struct	S_external_memory_properties:VkExternalMemoryProperties{
 	using VkExternalMemoryProperties::externalMemoryFeatures;
 	using VkExternalMemoryProperties::exportFromImportedHandleTypes;
 	using VkExternalMemoryProperties::compatibleHandleTypes;
+
+	S_external_memory_properties& operator=(const VkExternalMemoryProperties& rhs){static_cast<VkExternalMemoryProperties&>(*this)=rhs; return *this;}
+	operator VkExternalMemoryProperties*()const{return const_cast<VkExternalMemoryProperties*>(static_cast<const VkExternalMemoryProperties*>(this));}
 };
 
 /*	VkExternalImageFormatProperties
 (returnedonly)
 ex to: VkImageFormatProperties2
 */
-template<> struct my_class_convert<S_external_image_format_properties> { using type = VkExternalImageFormatProperties;};
-template<> struct my_class_convert<VkExternalImageFormatProperties> { using type = S_external_image_format_properties;};
-struct		S_external_image_format_properties:VkExternalImageFormatProperties{
+struct	S_external_image_format_properties:VkExternalImageFormatProperties{
 private:
 	using VkExternalImageFormatProperties::sType;
 	using VkExternalImageFormatProperties::pNext;
@@ -12776,18 +11801,20 @@ S_external_image_format_properties(
 	VK_STRUCTURE_TYPE_EXTERNAL_IMAGE_FORMAT_PROPERTIES
 	,nullptr
 	,externalMemoryProperties_}
-	{	}
+	{
+	}
 
 friend S_image_format_properties2;
+
+	S_external_image_format_properties& operator=(const VkExternalImageFormatProperties& rhs){static_cast<VkExternalImageFormatProperties&>(*this)=rhs; return *this;}
+	operator VkExternalImageFormatProperties*()const{return const_cast<VkExternalImageFormatProperties*>(static_cast<const VkExternalImageFormatProperties*>(this));}
 };
 
 /*	VkSamplerYcbcrConversionImageFormatProperties
 (returnedonly)
 ex to: VkImageFormatProperties2
 */
-template<> struct my_class_convert<S_sampler_ycbcr_conversion_image_format_properties> { using type = VkSamplerYcbcrConversionImageFormatProperties;};
-template<> struct my_class_convert<VkSamplerYcbcrConversionImageFormatProperties> { using type = S_sampler_ycbcr_conversion_image_format_properties;};
-struct		S_sampler_ycbcr_conversion_image_format_properties:VkSamplerYcbcrConversionImageFormatProperties{
+struct	S_sampler_ycbcr_conversion_image_format_properties:VkSamplerYcbcrConversionImageFormatProperties{
 private:
 	using VkSamplerYcbcrConversionImageFormatProperties::sType;
 	using VkSamplerYcbcrConversionImageFormatProperties::pNext;
@@ -12801,18 +11828,20 @@ S_sampler_ycbcr_conversion_image_format_properties(
 	VK_STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_IMAGE_FORMAT_PROPERTIES
 	,nullptr
 	,combinedImageSamplerDescriptorCount_}
-	{	}
+	{
+	}
 
 friend S_image_format_properties2;
+
+	S_sampler_ycbcr_conversion_image_format_properties& operator=(const VkSamplerYcbcrConversionImageFormatProperties& rhs){static_cast<VkSamplerYcbcrConversionImageFormatProperties&>(*this)=rhs; return *this;}
+	operator VkSamplerYcbcrConversionImageFormatProperties*()const{return const_cast<VkSamplerYcbcrConversionImageFormatProperties*>(static_cast<const VkSamplerYcbcrConversionImageFormatProperties*>(this));}
 };
 
 /*	VkTextureLODGatherFormatPropertiesAMD
 (returnedonly)
 ex to: VkImageFormatProperties2
 */
-template<> struct my_class_convert<S_texture_lod_gather_format_properties_AMD> { using type = VkTextureLODGatherFormatPropertiesAMD;};
-template<> struct my_class_convert<VkTextureLODGatherFormatPropertiesAMD> { using type = S_texture_lod_gather_format_properties_AMD;};
-struct		S_texture_lod_gather_format_properties_AMD:VkTextureLODGatherFormatPropertiesAMD{
+struct	S_texture_lod_gather_format_properties_AMD:VkTextureLODGatherFormatPropertiesAMD{
 private:
 	using VkTextureLODGatherFormatPropertiesAMD::sType;
 	using VkTextureLODGatherFormatPropertiesAMD::pNext;
@@ -12826,9 +11855,13 @@ S_texture_lod_gather_format_properties_AMD(
 	VK_STRUCTURE_TYPE_TEXTURE_LOD_GATHER_FORMAT_PROPERTIES_AMD
 	,nullptr
 	,supportsTextureGatherLODBiasAMD_}
-	{	}
+	{
+	}
 
 friend S_image_format_properties2;
+
+	S_texture_lod_gather_format_properties_AMD& operator=(const VkTextureLODGatherFormatPropertiesAMD& rhs){static_cast<VkTextureLODGatherFormatPropertiesAMD&>(*this)=rhs; return *this;}
+	operator VkTextureLODGatherFormatPropertiesAMD*()const{return const_cast<VkTextureLODGatherFormatPropertiesAMD*>(static_cast<const VkTextureLODGatherFormatPropertiesAMD*>(this));}
 };
 
 /*	VkAndroidHardwareBufferUsageANDROID
@@ -12836,9 +11869,7 @@ friend S_image_format_properties2;
 ex to: VkImageFormatProperties2
 */
 #ifdef VK_USE_PLATFORM_ANDROID_KHR
-template<> struct my_class_convert<S_android_hardware_buffer_usage_ANDROID> { using type = VkAndroidHardwareBufferUsageANDROID;};
-template<> struct my_class_convert<VkAndroidHardwareBufferUsageANDROID> { using type = S_android_hardware_buffer_usage_ANDROID;};
-struct		S_android_hardware_buffer_usage_ANDROID:VkAndroidHardwareBufferUsageANDROID{
+struct	S_android_hardware_buffer_usage_ANDROID:VkAndroidHardwareBufferUsageANDROID{
 private:
 	using VkAndroidHardwareBufferUsageANDROID::sType;
 	using VkAndroidHardwareBufferUsageANDROID::pNext;
@@ -12852,9 +11883,13 @@ S_android_hardware_buffer_usage_ANDROID(
 	VK_STRUCTURE_TYPE_ANDROID_HARDWARE_BUFFER_USAGE_ANDROID
 	,nullptr
 	,androidHardwareBufferUsage_}
-	{	}
+	{
+	}
 
 friend S_image_format_properties2;
+
+	S_android_hardware_buffer_usage_ANDROID& operator=(const VkAndroidHardwareBufferUsageANDROID& rhs){static_cast<VkAndroidHardwareBufferUsageANDROID&>(*this)=rhs; return *this;}
+	operator VkAndroidHardwareBufferUsageANDROID*()const{return const_cast<VkAndroidHardwareBufferUsageANDROID*>(static_cast<const VkAndroidHardwareBufferUsageANDROID*>(this));}
 };
 #endif //VK_USE_PLATFORM_ANDROID_KHR
 
@@ -12879,9 +11914,7 @@ N_image_format_properties2& n_texture_lod_gather_format_properties_AMD(S_texture
 N_image_format_properties2& n_android_hardware_buffer_usage_ANDROID(S_android_hardware_buffer_usage_ANDROID const& next_);
 #endif
 };
-template<> struct my_class_convert<S_image_format_properties2> { using type = VkImageFormatProperties2;};
-template<> struct my_class_convert<VkImageFormatProperties2> { using type = S_image_format_properties2;};
-struct		S_image_format_properties2:VkImageFormatProperties2{
+struct	S_image_format_properties2:VkImageFormatProperties2{
 private:
 	using VkImageFormatProperties2::sType;
 	using VkImageFormatProperties2::pNext;
@@ -12895,7 +11928,11 @@ S_image_format_properties2(
 	VK_STRUCTURE_TYPE_IMAGE_FORMAT_PROPERTIES_2
 	,nullptr
 	,imageFormatProperties_}
-	{	}
+	{
+	}
+
+	S_image_format_properties2& operator=(const VkImageFormatProperties2& rhs){static_cast<VkImageFormatProperties2&>(*this)=rhs; return *this;}
+	operator VkImageFormatProperties2*()const{return const_cast<VkImageFormatProperties2*>(static_cast<const VkImageFormatProperties2*>(this));}
 
 S_image_format_properties2& n_external_image_format_properties(S_external_image_format_properties const& next_);
 S_image_format_properties2& n_sampler_ycbcr_conversion_image_format_properties(S_sampler_ycbcr_conversion_image_format_properties const& next_);
@@ -12909,9 +11946,7 @@ void set_pNext(N_image_format_properties2 n_){pNext = n_;}
 /*	VkPhysicalDeviceExternalImageFormatInfo
 ex to: VkPhysicalDeviceImageFormatInfo2
 */
-template<> struct my_class_convert<S_physical_device_external_image_format_info> { using type = VkPhysicalDeviceExternalImageFormatInfo;};
-template<> struct my_class_convert<VkPhysicalDeviceExternalImageFormatInfo> { using type = S_physical_device_external_image_format_info;};
-struct		S_physical_device_external_image_format_info:VkPhysicalDeviceExternalImageFormatInfo{
+struct	S_physical_device_external_image_format_info:VkPhysicalDeviceExternalImageFormatInfo{
 private:
 	using VkPhysicalDeviceExternalImageFormatInfo::sType;
 	using VkPhysicalDeviceExternalImageFormatInfo::pNext;
@@ -12925,41 +11960,18 @@ S_physical_device_external_image_format_info(
 	VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_IMAGE_FORMAT_INFO
 	,nullptr
 	,handleType_}
-	{	}
+	{
+	}
 
 friend S_physical_device_image_format_info2;
+
+	S_physical_device_external_image_format_info& operator=(const VkPhysicalDeviceExternalImageFormatInfo& rhs){static_cast<VkPhysicalDeviceExternalImageFormatInfo&>(*this)=rhs; return *this;}
+	operator VkPhysicalDeviceExternalImageFormatInfo*()const{return const_cast<VkPhysicalDeviceExternalImageFormatInfo*>(static_cast<const VkPhysicalDeviceExternalImageFormatInfo*>(this));}
 };
-
-/*	VkPhysicalDeviceImageDrmFormatModifierInfoEXT
-ex to: VkPhysicalDeviceImageFormatInfo2
-*/
-#ifdef LAKA_UNKNOW
-template<> struct my_class_convert<S_physical_device_image_drm_format_modifier_info_EXT> { using type = VkPhysicalDeviceImageDrmFormatModifierInfoEXT;};
-template<> struct my_class_convert<VkPhysicalDeviceImageDrmFormatModifierInfoEXT> { using type = S_physical_device_image_drm_format_modifier_info_EXT;};
-struct		S_physical_device_image_drm_format_modifier_info_EXT:VkPhysicalDeviceImageDrmFormatModifierInfoEXT{
-private:
-	using VkPhysicalDeviceImageDrmFormatModifierInfoEXT::sType;
-	using VkPhysicalDeviceImageDrmFormatModifierInfoEXT::pNext;
-public:
-	using VkPhysicalDeviceImageDrmFormatModifierInfoEXT::drmFormatModifier;
-
-S_physical_device_image_drm_format_modifier_info_EXT():VkPhysicalDeviceImageDrmFormatModifierInfoEXT{VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_DRM_FORMAT_MODIFIER_INFO_EXT,nullptr}{}
-S_physical_device_image_drm_format_modifier_info_EXT(
-	uint64_t drmFormatModifier_)
-	:VkPhysicalDeviceImageDrmFormatModifierInfoEXT{
-	VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_DRM_FORMAT_MODIFIER_INFO_EXT
-	,nullptr
-	,drmFormatModifier_}
-	{	}
-
-friend S_physical_device_image_format_info2;
-};
-#endif //LAKA_UNKNOW
 
 /*	VkPhysicalDeviceImageFormatInfo2
 ex:
 	VkPhysicalDeviceExternalImageFormatInfo
-	VkPhysicalDeviceImageDrmFormatModifierInfoEXT
 */
 
 struct N_physical_device_image_format_info2{
@@ -12968,13 +11980,8 @@ private:
 public:
 operator void*() { return pNext; }
 N_physical_device_image_format_info2& n_physical_device_external_image_format_info(S_physical_device_external_image_format_info const& next_);
-#ifdef LAKA_UNKNOW
-N_physical_device_image_format_info2& n_physical_device_image_drm_format_modifier_info_EXT(S_physical_device_image_drm_format_modifier_info_EXT const& next_);
-#endif
 };
-template<> struct my_class_convert<S_physical_device_image_format_info2> { using type = VkPhysicalDeviceImageFormatInfo2;};
-template<> struct my_class_convert<VkPhysicalDeviceImageFormatInfo2> { using type = S_physical_device_image_format_info2;};
-struct		S_physical_device_image_format_info2:VkPhysicalDeviceImageFormatInfo2{
+struct	S_physical_device_image_format_info2:VkPhysicalDeviceImageFormatInfo2{
 private:
 	using VkPhysicalDeviceImageFormatInfo2::sType;
 	using VkPhysicalDeviceImageFormatInfo2::pNext;
@@ -13000,12 +12007,13 @@ S_physical_device_image_format_info2(
 	,tiling_
 	,usage_
 	,flags_}
-	{	}
+	{
+	}
+
+	S_physical_device_image_format_info2& operator=(const VkPhysicalDeviceImageFormatInfo2& rhs){static_cast<VkPhysicalDeviceImageFormatInfo2&>(*this)=rhs; return *this;}
+	operator VkPhysicalDeviceImageFormatInfo2*()const{return const_cast<VkPhysicalDeviceImageFormatInfo2*>(static_cast<const VkPhysicalDeviceImageFormatInfo2*>(this));}
 
 S_physical_device_image_format_info2& n_physical_device_external_image_format_info(S_physical_device_external_image_format_info const& next_);
-#ifdef LAKA_UNKNOW
-S_physical_device_image_format_info2& n_physical_device_image_drm_format_modifier_info_EXT(S_physical_device_image_drm_format_modifier_info_EXT const& next_);
-#endif
 void set_pNext(N_physical_device_image_format_info2 n_){pNext = n_;}
 };
 
@@ -13013,9 +12021,7 @@ void set_pNext(N_physical_device_image_format_info2 n_){pNext = n_;}
 (returnedonly)
 ex to: VkQueueFamilyProperties2
 */
-template<> struct my_class_convert<S_queue_family_checkpoint_properties_NV> { using type = VkQueueFamilyCheckpointPropertiesNV;};
-template<> struct my_class_convert<VkQueueFamilyCheckpointPropertiesNV> { using type = S_queue_family_checkpoint_properties_NV;};
-struct		S_queue_family_checkpoint_properties_NV:VkQueueFamilyCheckpointPropertiesNV{
+struct	S_queue_family_checkpoint_properties_NV:VkQueueFamilyCheckpointPropertiesNV{
 private:
 	using VkQueueFamilyCheckpointPropertiesNV::sType;
 	using VkQueueFamilyCheckpointPropertiesNV::pNext;
@@ -13029,9 +12035,13 @@ S_queue_family_checkpoint_properties_NV(
 	VK_STRUCTURE_TYPE_QUEUE_FAMILY_CHECKPOINT_PROPERTIES_NV
 	,nullptr
 	,checkpointExecutionStageMask_}
-	{	}
+	{
+	}
 
 friend S_queue_family_properties2;
+
+	S_queue_family_checkpoint_properties_NV& operator=(const VkQueueFamilyCheckpointPropertiesNV& rhs){static_cast<VkQueueFamilyCheckpointPropertiesNV&>(*this)=rhs; return *this;}
+	operator VkQueueFamilyCheckpointPropertiesNV*()const{return const_cast<VkQueueFamilyCheckpointPropertiesNV*>(static_cast<const VkQueueFamilyCheckpointPropertiesNV*>(this));}
 };
 
 /*	VkQueueFamilyProperties2
@@ -13047,9 +12057,7 @@ public:
 operator void*() { return pNext; }
 N_queue_family_properties2& n_queue_family_checkpoint_properties_NV(S_queue_family_checkpoint_properties_NV const& next_);
 };
-template<> struct my_class_convert<S_queue_family_properties2> { using type = VkQueueFamilyProperties2;};
-template<> struct my_class_convert<VkQueueFamilyProperties2> { using type = S_queue_family_properties2;};
-struct		S_queue_family_properties2:VkQueueFamilyProperties2{
+struct	S_queue_family_properties2:VkQueueFamilyProperties2{
 private:
 	using VkQueueFamilyProperties2::sType;
 	using VkQueueFamilyProperties2::pNext;
@@ -13063,7 +12071,11 @@ S_queue_family_properties2(
 	VK_STRUCTURE_TYPE_QUEUE_FAMILY_PROPERTIES_2
 	,nullptr
 	,queueFamilyProperties_}
-	{	}
+	{
+	}
+
+	S_queue_family_properties2& operator=(const VkQueueFamilyProperties2& rhs){static_cast<VkQueueFamilyProperties2&>(*this)=rhs; return *this;}
+	operator VkQueueFamilyProperties2*()const{return const_cast<VkQueueFamilyProperties2*>(static_cast<const VkQueueFamilyProperties2*>(this));}
 
 S_queue_family_properties2& n_queue_family_checkpoint_properties_NV(S_queue_family_checkpoint_properties_NV const& next_);
 void set_pNext(N_queue_family_properties2 n_){pNext = n_;}
@@ -13072,9 +12084,7 @@ void set_pNext(N_queue_family_properties2 n_){pNext = n_;}
 /*	VkPhysicalDeviceMemoryProperties2
 (returnedonly)
 */
-template<> struct my_class_convert<S_physical_device_memory_properties2> { using type = VkPhysicalDeviceMemoryProperties2;};
-template<> struct my_class_convert<VkPhysicalDeviceMemoryProperties2> { using type = S_physical_device_memory_properties2;};
-struct		S_physical_device_memory_properties2:VkPhysicalDeviceMemoryProperties2{
+struct	S_physical_device_memory_properties2:VkPhysicalDeviceMemoryProperties2{
 private:
 	using VkPhysicalDeviceMemoryProperties2::sType;
 	using VkPhysicalDeviceMemoryProperties2::pNext;
@@ -13088,15 +12098,17 @@ S_physical_device_memory_properties2(
 	VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MEMORY_PROPERTIES_2
 	,nullptr
 	,memoryProperties_}
-	{	}
+	{
+	}
+
+	S_physical_device_memory_properties2& operator=(const VkPhysicalDeviceMemoryProperties2& rhs){static_cast<VkPhysicalDeviceMemoryProperties2&>(*this)=rhs; return *this;}
+	operator VkPhysicalDeviceMemoryProperties2*()const{return const_cast<VkPhysicalDeviceMemoryProperties2*>(static_cast<const VkPhysicalDeviceMemoryProperties2*>(this));}
 };
 
 /*	VkSparseImageFormatProperties2
 (returnedonly)
 */
-template<> struct my_class_convert<S_sparse_image_format_properties2> { using type = VkSparseImageFormatProperties2;};
-template<> struct my_class_convert<VkSparseImageFormatProperties2> { using type = S_sparse_image_format_properties2;};
-struct		S_sparse_image_format_properties2:VkSparseImageFormatProperties2{
+struct	S_sparse_image_format_properties2:VkSparseImageFormatProperties2{
 private:
 	using VkSparseImageFormatProperties2::sType;
 	using VkSparseImageFormatProperties2::pNext;
@@ -13110,14 +12122,16 @@ S_sparse_image_format_properties2(
 	VK_STRUCTURE_TYPE_SPARSE_IMAGE_FORMAT_PROPERTIES_2
 	,nullptr
 	,properties_}
-	{	}
+	{
+	}
+
+	S_sparse_image_format_properties2& operator=(const VkSparseImageFormatProperties2& rhs){static_cast<VkSparseImageFormatProperties2&>(*this)=rhs; return *this;}
+	operator VkSparseImageFormatProperties2*()const{return const_cast<VkSparseImageFormatProperties2*>(static_cast<const VkSparseImageFormatProperties2*>(this));}
 };
 
 /*	VkPhysicalDeviceSparseImageFormatInfo2
 */
-template<> struct my_class_convert<S_physical_device_sparse_image_format_info2> { using type = VkPhysicalDeviceSparseImageFormatInfo2;};
-template<> struct my_class_convert<VkPhysicalDeviceSparseImageFormatInfo2> { using type = S_physical_device_sparse_image_format_info2;};
-struct		S_physical_device_sparse_image_format_info2:VkPhysicalDeviceSparseImageFormatInfo2{
+struct	S_physical_device_sparse_image_format_info2:VkPhysicalDeviceSparseImageFormatInfo2{
 private:
 	using VkPhysicalDeviceSparseImageFormatInfo2::sType;
 	using VkPhysicalDeviceSparseImageFormatInfo2::pNext;
@@ -13143,14 +12157,16 @@ S_physical_device_sparse_image_format_info2(
 	,samples_
 	,usage_
 	,tiling_}
-	{	}
+	{
+	}
+
+	S_physical_device_sparse_image_format_info2& operator=(const VkPhysicalDeviceSparseImageFormatInfo2& rhs){static_cast<VkPhysicalDeviceSparseImageFormatInfo2&>(*this)=rhs; return *this;}
+	operator VkPhysicalDeviceSparseImageFormatInfo2*()const{return const_cast<VkPhysicalDeviceSparseImageFormatInfo2*>(static_cast<const VkPhysicalDeviceSparseImageFormatInfo2*>(this));}
 };
 
 /*	VkPhysicalDeviceExternalBufferInfo
 */
-template<> struct my_class_convert<S_physical_device_external_buffer_info> { using type = VkPhysicalDeviceExternalBufferInfo;};
-template<> struct my_class_convert<VkPhysicalDeviceExternalBufferInfo> { using type = S_physical_device_external_buffer_info;};
-struct		S_physical_device_external_buffer_info:VkPhysicalDeviceExternalBufferInfo{
+struct	S_physical_device_external_buffer_info:VkPhysicalDeviceExternalBufferInfo{
 private:
 	using VkPhysicalDeviceExternalBufferInfo::sType;
 	using VkPhysicalDeviceExternalBufferInfo::pNext;
@@ -13170,15 +12186,17 @@ S_physical_device_external_buffer_info(
 	,flags_
 	,usage_
 	,handleType_}
-	{	}
+	{
+	}
+
+	S_physical_device_external_buffer_info& operator=(const VkPhysicalDeviceExternalBufferInfo& rhs){static_cast<VkPhysicalDeviceExternalBufferInfo&>(*this)=rhs; return *this;}
+	operator VkPhysicalDeviceExternalBufferInfo*()const{return const_cast<VkPhysicalDeviceExternalBufferInfo*>(static_cast<const VkPhysicalDeviceExternalBufferInfo*>(this));}
 };
 
 /*	VkExternalBufferProperties
 (returnedonly)
 */
-template<> struct my_class_convert<S_external_buffer_properties> { using type = VkExternalBufferProperties;};
-template<> struct my_class_convert<VkExternalBufferProperties> { using type = S_external_buffer_properties;};
-struct		S_external_buffer_properties:VkExternalBufferProperties{
+struct	S_external_buffer_properties:VkExternalBufferProperties{
 private:
 	using VkExternalBufferProperties::sType;
 	using VkExternalBufferProperties::pNext;
@@ -13192,16 +12210,18 @@ S_external_buffer_properties(
 	VK_STRUCTURE_TYPE_EXTERNAL_BUFFER_PROPERTIES
 	,nullptr
 	,externalMemoryProperties_}
-	{	}
+	{
+	}
+
+	S_external_buffer_properties& operator=(const VkExternalBufferProperties& rhs){static_cast<VkExternalBufferProperties&>(*this)=rhs; return *this;}
+	operator VkExternalBufferProperties*()const{return const_cast<VkExternalBufferProperties*>(static_cast<const VkExternalBufferProperties*>(this));}
 };
 
 /*	VkMemoryWin32HandlePropertiesKHR
 (returnedonly)
 */
 #ifdef VK_USE_PLATFORM_WIN32_KHR
-template<> struct my_class_convert<S_memory_win32_handle_properties_KHR> { using type = VkMemoryWin32HandlePropertiesKHR;};
-template<> struct my_class_convert<VkMemoryWin32HandlePropertiesKHR> { using type = S_memory_win32_handle_properties_KHR;};
-struct		S_memory_win32_handle_properties_KHR:VkMemoryWin32HandlePropertiesKHR{
+struct	S_memory_win32_handle_properties_KHR:VkMemoryWin32HandlePropertiesKHR{
 private:
 	using VkMemoryWin32HandlePropertiesKHR::sType;
 	using VkMemoryWin32HandlePropertiesKHR::pNext;
@@ -13215,16 +12235,18 @@ S_memory_win32_handle_properties_KHR(
 	VK_STRUCTURE_TYPE_MEMORY_WIN32_HANDLE_PROPERTIES_KHR
 	,nullptr
 	,memoryTypeBits_}
-	{	}
+	{
+	}
+
+	S_memory_win32_handle_properties_KHR& operator=(const VkMemoryWin32HandlePropertiesKHR& rhs){static_cast<VkMemoryWin32HandlePropertiesKHR&>(*this)=rhs; return *this;}
+	operator VkMemoryWin32HandlePropertiesKHR*()const{return const_cast<VkMemoryWin32HandlePropertiesKHR*>(static_cast<const VkMemoryWin32HandlePropertiesKHR*>(this));}
 };
 #endif //VK_USE_PLATFORM_WIN32_KHR
 
 /*	VkMemoryGetWin32HandleInfoKHR
 */
 #ifdef VK_USE_PLATFORM_WIN32_KHR
-template<> struct my_class_convert<S_memory_get_win32_handle_info_KHR> { using type = VkMemoryGetWin32HandleInfoKHR;};
-template<> struct my_class_convert<VkMemoryGetWin32HandleInfoKHR> { using type = S_memory_get_win32_handle_info_KHR;};
-struct		S_memory_get_win32_handle_info_KHR:VkMemoryGetWin32HandleInfoKHR{
+struct	S_memory_get_win32_handle_info_KHR:VkMemoryGetWin32HandleInfoKHR{
 private:
 	using VkMemoryGetWin32HandleInfoKHR::sType;
 	using VkMemoryGetWin32HandleInfoKHR::pNext;
@@ -13241,16 +12263,18 @@ S_memory_get_win32_handle_info_KHR(
 	,nullptr
 	,memory_
 	,handleType_}
-	{	}
+	{
+	}
+
+	S_memory_get_win32_handle_info_KHR& operator=(const VkMemoryGetWin32HandleInfoKHR& rhs){static_cast<VkMemoryGetWin32HandleInfoKHR&>(*this)=rhs; return *this;}
+	operator VkMemoryGetWin32HandleInfoKHR*()const{return const_cast<VkMemoryGetWin32HandleInfoKHR*>(static_cast<const VkMemoryGetWin32HandleInfoKHR*>(this));}
 };
 #endif //VK_USE_PLATFORM_WIN32_KHR
 
 /*	VkMemoryFdPropertiesKHR
 (returnedonly)
 */
-template<> struct my_class_convert<S_memory_fd_properties_KHR> { using type = VkMemoryFdPropertiesKHR;};
-template<> struct my_class_convert<VkMemoryFdPropertiesKHR> { using type = S_memory_fd_properties_KHR;};
-struct		S_memory_fd_properties_KHR:VkMemoryFdPropertiesKHR{
+struct	S_memory_fd_properties_KHR:VkMemoryFdPropertiesKHR{
 private:
 	using VkMemoryFdPropertiesKHR::sType;
 	using VkMemoryFdPropertiesKHR::pNext;
@@ -13264,14 +12288,16 @@ S_memory_fd_properties_KHR(
 	VK_STRUCTURE_TYPE_MEMORY_FD_PROPERTIES_KHR
 	,nullptr
 	,memoryTypeBits_}
-	{	}
+	{
+	}
+
+	S_memory_fd_properties_KHR& operator=(const VkMemoryFdPropertiesKHR& rhs){static_cast<VkMemoryFdPropertiesKHR&>(*this)=rhs; return *this;}
+	operator VkMemoryFdPropertiesKHR*()const{return const_cast<VkMemoryFdPropertiesKHR*>(static_cast<const VkMemoryFdPropertiesKHR*>(this));}
 };
 
 /*	VkMemoryGetFdInfoKHR
 */
-template<> struct my_class_convert<S_memory_get_fd_info_KHR> { using type = VkMemoryGetFdInfoKHR;};
-template<> struct my_class_convert<VkMemoryGetFdInfoKHR> { using type = S_memory_get_fd_info_KHR;};
-struct		S_memory_get_fd_info_KHR:VkMemoryGetFdInfoKHR{
+struct	S_memory_get_fd_info_KHR:VkMemoryGetFdInfoKHR{
 private:
 	using VkMemoryGetFdInfoKHR::sType;
 	using VkMemoryGetFdInfoKHR::pNext;
@@ -13288,14 +12314,16 @@ S_memory_get_fd_info_KHR(
 	,nullptr
 	,memory_
 	,handleType_}
-	{	}
+	{
+	}
+
+	S_memory_get_fd_info_KHR& operator=(const VkMemoryGetFdInfoKHR& rhs){static_cast<VkMemoryGetFdInfoKHR&>(*this)=rhs; return *this;}
+	operator VkMemoryGetFdInfoKHR*()const{return const_cast<VkMemoryGetFdInfoKHR*>(static_cast<const VkMemoryGetFdInfoKHR*>(this));}
 };
 
 /*	VkPhysicalDeviceExternalSemaphoreInfo
 */
-template<> struct my_class_convert<S_physical_device_external_semaphore_info> { using type = VkPhysicalDeviceExternalSemaphoreInfo;};
-template<> struct my_class_convert<VkPhysicalDeviceExternalSemaphoreInfo> { using type = S_physical_device_external_semaphore_info;};
-struct		S_physical_device_external_semaphore_info:VkPhysicalDeviceExternalSemaphoreInfo{
+struct	S_physical_device_external_semaphore_info:VkPhysicalDeviceExternalSemaphoreInfo{
 private:
 	using VkPhysicalDeviceExternalSemaphoreInfo::sType;
 	using VkPhysicalDeviceExternalSemaphoreInfo::pNext;
@@ -13309,15 +12337,17 @@ S_physical_device_external_semaphore_info(
 	VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_SEMAPHORE_INFO
 	,nullptr
 	,handleType_}
-	{	}
+	{
+	}
+
+	S_physical_device_external_semaphore_info& operator=(const VkPhysicalDeviceExternalSemaphoreInfo& rhs){static_cast<VkPhysicalDeviceExternalSemaphoreInfo&>(*this)=rhs; return *this;}
+	operator VkPhysicalDeviceExternalSemaphoreInfo*()const{return const_cast<VkPhysicalDeviceExternalSemaphoreInfo*>(static_cast<const VkPhysicalDeviceExternalSemaphoreInfo*>(this));}
 };
 
 /*	VkExternalSemaphoreProperties
 (returnedonly)
 */
-template<> struct my_class_convert<S_external_semaphore_properties> { using type = VkExternalSemaphoreProperties;};
-template<> struct my_class_convert<VkExternalSemaphoreProperties> { using type = S_external_semaphore_properties;};
-struct		S_external_semaphore_properties:VkExternalSemaphoreProperties{
+struct	S_external_semaphore_properties:VkExternalSemaphoreProperties{
 private:
 	using VkExternalSemaphoreProperties::sType;
 	using VkExternalSemaphoreProperties::pNext;
@@ -13337,15 +12367,17 @@ S_external_semaphore_properties(
 	,exportFromImportedHandleTypes_
 	,compatibleHandleTypes_
 	,externalSemaphoreFeatures_}
-	{	}
+	{
+	}
+
+	S_external_semaphore_properties& operator=(const VkExternalSemaphoreProperties& rhs){static_cast<VkExternalSemaphoreProperties&>(*this)=rhs; return *this;}
+	operator VkExternalSemaphoreProperties*()const{return const_cast<VkExternalSemaphoreProperties*>(static_cast<const VkExternalSemaphoreProperties*>(this));}
 };
 
 /*	VkImportSemaphoreWin32HandleInfoKHR
 */
 #ifdef VK_USE_PLATFORM_WIN32_KHR
-template<> struct my_class_convert<S_import_semaphore_win32_handle_info_KHR> { using type = VkImportSemaphoreWin32HandleInfoKHR;};
-template<> struct my_class_convert<VkImportSemaphoreWin32HandleInfoKHR> { using type = S_import_semaphore_win32_handle_info_KHR;};
-struct		S_import_semaphore_win32_handle_info_KHR:VkImportSemaphoreWin32HandleInfoKHR{
+struct	S_import_semaphore_win32_handle_info_KHR:VkImportSemaphoreWin32HandleInfoKHR{
 private:
 	using VkImportSemaphoreWin32HandleInfoKHR::sType;
 	using VkImportSemaphoreWin32HandleInfoKHR::pNext;
@@ -13371,16 +12403,18 @@ S_import_semaphore_win32_handle_info_KHR(
 	,handleType_
 	,handle_
 	,name_}
-	{	}
+	{
+	}
+
+	S_import_semaphore_win32_handle_info_KHR& operator=(const VkImportSemaphoreWin32HandleInfoKHR& rhs){static_cast<VkImportSemaphoreWin32HandleInfoKHR&>(*this)=rhs; return *this;}
+	operator VkImportSemaphoreWin32HandleInfoKHR*()const{return const_cast<VkImportSemaphoreWin32HandleInfoKHR*>(static_cast<const VkImportSemaphoreWin32HandleInfoKHR*>(this));}
 };
 #endif //VK_USE_PLATFORM_WIN32_KHR
 
 /*	VkSemaphoreGetWin32HandleInfoKHR
 */
 #ifdef VK_USE_PLATFORM_WIN32_KHR
-template<> struct my_class_convert<S_semaphore_get_win32_handle_info_KHR> { using type = VkSemaphoreGetWin32HandleInfoKHR;};
-template<> struct my_class_convert<VkSemaphoreGetWin32HandleInfoKHR> { using type = S_semaphore_get_win32_handle_info_KHR;};
-struct		S_semaphore_get_win32_handle_info_KHR:VkSemaphoreGetWin32HandleInfoKHR{
+struct	S_semaphore_get_win32_handle_info_KHR:VkSemaphoreGetWin32HandleInfoKHR{
 private:
 	using VkSemaphoreGetWin32HandleInfoKHR::sType;
 	using VkSemaphoreGetWin32HandleInfoKHR::pNext;
@@ -13397,15 +12431,17 @@ S_semaphore_get_win32_handle_info_KHR(
 	,nullptr
 	,semaphore_
 	,handleType_}
-	{	}
+	{
+	}
+
+	S_semaphore_get_win32_handle_info_KHR& operator=(const VkSemaphoreGetWin32HandleInfoKHR& rhs){static_cast<VkSemaphoreGetWin32HandleInfoKHR&>(*this)=rhs; return *this;}
+	operator VkSemaphoreGetWin32HandleInfoKHR*()const{return const_cast<VkSemaphoreGetWin32HandleInfoKHR*>(static_cast<const VkSemaphoreGetWin32HandleInfoKHR*>(this));}
 };
 #endif //VK_USE_PLATFORM_WIN32_KHR
 
 /*	VkImportSemaphoreFdInfoKHR
 */
-template<> struct my_class_convert<S_import_semaphore_fd_info_KHR> { using type = VkImportSemaphoreFdInfoKHR;};
-template<> struct my_class_convert<VkImportSemaphoreFdInfoKHR> { using type = S_import_semaphore_fd_info_KHR;};
-struct		S_import_semaphore_fd_info_KHR:VkImportSemaphoreFdInfoKHR{
+struct	S_import_semaphore_fd_info_KHR:VkImportSemaphoreFdInfoKHR{
 private:
 	using VkImportSemaphoreFdInfoKHR::sType;
 	using VkImportSemaphoreFdInfoKHR::pNext;
@@ -13428,14 +12464,16 @@ S_import_semaphore_fd_info_KHR(
 	,flags_
 	,handleType_
 	,fd_}
-	{	}
+	{
+	}
+
+	S_import_semaphore_fd_info_KHR& operator=(const VkImportSemaphoreFdInfoKHR& rhs){static_cast<VkImportSemaphoreFdInfoKHR&>(*this)=rhs; return *this;}
+	operator VkImportSemaphoreFdInfoKHR*()const{return const_cast<VkImportSemaphoreFdInfoKHR*>(static_cast<const VkImportSemaphoreFdInfoKHR*>(this));}
 };
 
 /*	VkSemaphoreGetFdInfoKHR
 */
-template<> struct my_class_convert<S_semaphore_get_fd_info_KHR> { using type = VkSemaphoreGetFdInfoKHR;};
-template<> struct my_class_convert<VkSemaphoreGetFdInfoKHR> { using type = S_semaphore_get_fd_info_KHR;};
-struct		S_semaphore_get_fd_info_KHR:VkSemaphoreGetFdInfoKHR{
+struct	S_semaphore_get_fd_info_KHR:VkSemaphoreGetFdInfoKHR{
 private:
 	using VkSemaphoreGetFdInfoKHR::sType;
 	using VkSemaphoreGetFdInfoKHR::pNext;
@@ -13452,14 +12490,16 @@ S_semaphore_get_fd_info_KHR(
 	,nullptr
 	,semaphore_
 	,handleType_}
-	{	}
+	{
+	}
+
+	S_semaphore_get_fd_info_KHR& operator=(const VkSemaphoreGetFdInfoKHR& rhs){static_cast<VkSemaphoreGetFdInfoKHR&>(*this)=rhs; return *this;}
+	operator VkSemaphoreGetFdInfoKHR*()const{return const_cast<VkSemaphoreGetFdInfoKHR*>(static_cast<const VkSemaphoreGetFdInfoKHR*>(this));}
 };
 
 /*	VkPhysicalDeviceExternalFenceInfo
 */
-template<> struct my_class_convert<S_physical_device_external_fence_info> { using type = VkPhysicalDeviceExternalFenceInfo;};
-template<> struct my_class_convert<VkPhysicalDeviceExternalFenceInfo> { using type = S_physical_device_external_fence_info;};
-struct		S_physical_device_external_fence_info:VkPhysicalDeviceExternalFenceInfo{
+struct	S_physical_device_external_fence_info:VkPhysicalDeviceExternalFenceInfo{
 private:
 	using VkPhysicalDeviceExternalFenceInfo::sType;
 	using VkPhysicalDeviceExternalFenceInfo::pNext;
@@ -13473,15 +12513,17 @@ S_physical_device_external_fence_info(
 	VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_FENCE_INFO
 	,nullptr
 	,handleType_}
-	{	}
+	{
+	}
+
+	S_physical_device_external_fence_info& operator=(const VkPhysicalDeviceExternalFenceInfo& rhs){static_cast<VkPhysicalDeviceExternalFenceInfo&>(*this)=rhs; return *this;}
+	operator VkPhysicalDeviceExternalFenceInfo*()const{return const_cast<VkPhysicalDeviceExternalFenceInfo*>(static_cast<const VkPhysicalDeviceExternalFenceInfo*>(this));}
 };
 
 /*	VkExternalFenceProperties
 (returnedonly)
 */
-template<> struct my_class_convert<S_external_fence_properties> { using type = VkExternalFenceProperties;};
-template<> struct my_class_convert<VkExternalFenceProperties> { using type = S_external_fence_properties;};
-struct		S_external_fence_properties:VkExternalFenceProperties{
+struct	S_external_fence_properties:VkExternalFenceProperties{
 private:
 	using VkExternalFenceProperties::sType;
 	using VkExternalFenceProperties::pNext;
@@ -13501,15 +12543,17 @@ S_external_fence_properties(
 	,exportFromImportedHandleTypes_
 	,compatibleHandleTypes_
 	,externalFenceFeatures_}
-	{	}
+	{
+	}
+
+	S_external_fence_properties& operator=(const VkExternalFenceProperties& rhs){static_cast<VkExternalFenceProperties&>(*this)=rhs; return *this;}
+	operator VkExternalFenceProperties*()const{return const_cast<VkExternalFenceProperties*>(static_cast<const VkExternalFenceProperties*>(this));}
 };
 
 /*	VkImportFenceWin32HandleInfoKHR
 */
 #ifdef VK_USE_PLATFORM_WIN32_KHR
-template<> struct my_class_convert<S_import_fence_win32_handle_info_KHR> { using type = VkImportFenceWin32HandleInfoKHR;};
-template<> struct my_class_convert<VkImportFenceWin32HandleInfoKHR> { using type = S_import_fence_win32_handle_info_KHR;};
-struct		S_import_fence_win32_handle_info_KHR:VkImportFenceWin32HandleInfoKHR{
+struct	S_import_fence_win32_handle_info_KHR:VkImportFenceWin32HandleInfoKHR{
 private:
 	using VkImportFenceWin32HandleInfoKHR::sType;
 	using VkImportFenceWin32HandleInfoKHR::pNext;
@@ -13535,16 +12579,18 @@ S_import_fence_win32_handle_info_KHR(
 	,handleType_
 	,handle_
 	,name_}
-	{	}
+	{
+	}
+
+	S_import_fence_win32_handle_info_KHR& operator=(const VkImportFenceWin32HandleInfoKHR& rhs){static_cast<VkImportFenceWin32HandleInfoKHR&>(*this)=rhs; return *this;}
+	operator VkImportFenceWin32HandleInfoKHR*()const{return const_cast<VkImportFenceWin32HandleInfoKHR*>(static_cast<const VkImportFenceWin32HandleInfoKHR*>(this));}
 };
 #endif //VK_USE_PLATFORM_WIN32_KHR
 
 /*	VkFenceGetWin32HandleInfoKHR
 */
 #ifdef VK_USE_PLATFORM_WIN32_KHR
-template<> struct my_class_convert<S_fence_get_win32_handle_info_KHR> { using type = VkFenceGetWin32HandleInfoKHR;};
-template<> struct my_class_convert<VkFenceGetWin32HandleInfoKHR> { using type = S_fence_get_win32_handle_info_KHR;};
-struct		S_fence_get_win32_handle_info_KHR:VkFenceGetWin32HandleInfoKHR{
+struct	S_fence_get_win32_handle_info_KHR:VkFenceGetWin32HandleInfoKHR{
 private:
 	using VkFenceGetWin32HandleInfoKHR::sType;
 	using VkFenceGetWin32HandleInfoKHR::pNext;
@@ -13561,15 +12607,17 @@ S_fence_get_win32_handle_info_KHR(
 	,nullptr
 	,fence_
 	,handleType_}
-	{	}
+	{
+	}
+
+	S_fence_get_win32_handle_info_KHR& operator=(const VkFenceGetWin32HandleInfoKHR& rhs){static_cast<VkFenceGetWin32HandleInfoKHR&>(*this)=rhs; return *this;}
+	operator VkFenceGetWin32HandleInfoKHR*()const{return const_cast<VkFenceGetWin32HandleInfoKHR*>(static_cast<const VkFenceGetWin32HandleInfoKHR*>(this));}
 };
 #endif //VK_USE_PLATFORM_WIN32_KHR
 
 /*	VkImportFenceFdInfoKHR
 */
-template<> struct my_class_convert<S_import_fence_fd_info_KHR> { using type = VkImportFenceFdInfoKHR;};
-template<> struct my_class_convert<VkImportFenceFdInfoKHR> { using type = S_import_fence_fd_info_KHR;};
-struct		S_import_fence_fd_info_KHR:VkImportFenceFdInfoKHR{
+struct	S_import_fence_fd_info_KHR:VkImportFenceFdInfoKHR{
 private:
 	using VkImportFenceFdInfoKHR::sType;
 	using VkImportFenceFdInfoKHR::pNext;
@@ -13592,14 +12640,16 @@ S_import_fence_fd_info_KHR(
 	,flags_
 	,handleType_
 	,fd_}
-	{	}
+	{
+	}
+
+	S_import_fence_fd_info_KHR& operator=(const VkImportFenceFdInfoKHR& rhs){static_cast<VkImportFenceFdInfoKHR&>(*this)=rhs; return *this;}
+	operator VkImportFenceFdInfoKHR*()const{return const_cast<VkImportFenceFdInfoKHR*>(static_cast<const VkImportFenceFdInfoKHR*>(this));}
 };
 
 /*	VkFenceGetFdInfoKHR
 */
-template<> struct my_class_convert<S_fence_get_fd_info_KHR> { using type = VkFenceGetFdInfoKHR;};
-template<> struct my_class_convert<VkFenceGetFdInfoKHR> { using type = S_fence_get_fd_info_KHR;};
-struct		S_fence_get_fd_info_KHR:VkFenceGetFdInfoKHR{
+struct	S_fence_get_fd_info_KHR:VkFenceGetFdInfoKHR{
 private:
 	using VkFenceGetFdInfoKHR::sType;
 	using VkFenceGetFdInfoKHR::pNext;
@@ -13616,15 +12666,17 @@ S_fence_get_fd_info_KHR(
 	,nullptr
 	,fence_
 	,handleType_}
-	{	}
+	{
+	}
+
+	S_fence_get_fd_info_KHR& operator=(const VkFenceGetFdInfoKHR& rhs){static_cast<VkFenceGetFdInfoKHR&>(*this)=rhs; return *this;}
+	operator VkFenceGetFdInfoKHR*()const{return const_cast<VkFenceGetFdInfoKHR*>(static_cast<const VkFenceGetFdInfoKHR*>(this));}
 };
 
 /*	VkSurfaceCapabilities2EXT
 (returnedonly)
 */
-template<> struct my_class_convert<S_surface_capabilities2_EXT> { using type = VkSurfaceCapabilities2EXT;};
-template<> struct my_class_convert<VkSurfaceCapabilities2EXT> { using type = S_surface_capabilities2_EXT;};
-struct		S_surface_capabilities2_EXT:VkSurfaceCapabilities2EXT{
+struct	S_surface_capabilities2_EXT:VkSurfaceCapabilities2EXT{
 private:
 	using VkSurfaceCapabilities2EXT::sType;
 	using VkSurfaceCapabilities2EXT::pNext;
@@ -13668,14 +12720,16 @@ S_surface_capabilities2_EXT(
 	,supportedCompositeAlpha_
 	,supportedUsageFlags_
 	,supportedSurfaceCounters_}
-	{	}
+	{
+	}
+
+	S_surface_capabilities2_EXT& operator=(const VkSurfaceCapabilities2EXT& rhs){static_cast<VkSurfaceCapabilities2EXT&>(*this)=rhs; return *this;}
+	operator VkSurfaceCapabilities2EXT*()const{return const_cast<VkSurfaceCapabilities2EXT*>(static_cast<const VkSurfaceCapabilities2EXT*>(this));}
 };
 
 /*	VkDisplayPowerInfoEXT
 */
-template<> struct my_class_convert<S_display_power_info_EXT> { using type = VkDisplayPowerInfoEXT;};
-template<> struct my_class_convert<VkDisplayPowerInfoEXT> { using type = S_display_power_info_EXT;};
-struct		S_display_power_info_EXT:VkDisplayPowerInfoEXT{
+struct	S_display_power_info_EXT:VkDisplayPowerInfoEXT{
 private:
 	using VkDisplayPowerInfoEXT::sType;
 	using VkDisplayPowerInfoEXT::pNext;
@@ -13689,14 +12743,16 @@ S_display_power_info_EXT(
 	VK_STRUCTURE_TYPE_DISPLAY_POWER_INFO_EXT
 	,nullptr
 	,powerState_}
-	{	}
+	{
+	}
+
+	S_display_power_info_EXT& operator=(const VkDisplayPowerInfoEXT& rhs){static_cast<VkDisplayPowerInfoEXT&>(*this)=rhs; return *this;}
+	operator VkDisplayPowerInfoEXT*()const{return const_cast<VkDisplayPowerInfoEXT*>(static_cast<const VkDisplayPowerInfoEXT*>(this));}
 };
 
 /*	VkDeviceEventInfoEXT
 */
-template<> struct my_class_convert<S_device_event_info_EXT> { using type = VkDeviceEventInfoEXT;};
-template<> struct my_class_convert<VkDeviceEventInfoEXT> { using type = S_device_event_info_EXT;};
-struct		S_device_event_info_EXT:VkDeviceEventInfoEXT{
+struct	S_device_event_info_EXT:VkDeviceEventInfoEXT{
 private:
 	using VkDeviceEventInfoEXT::sType;
 	using VkDeviceEventInfoEXT::pNext;
@@ -13710,14 +12766,16 @@ S_device_event_info_EXT(
 	VK_STRUCTURE_TYPE_DEVICE_EVENT_INFO_EXT
 	,nullptr
 	,deviceEvent_}
-	{	}
+	{
+	}
+
+	S_device_event_info_EXT& operator=(const VkDeviceEventInfoEXT& rhs){static_cast<VkDeviceEventInfoEXT&>(*this)=rhs; return *this;}
+	operator VkDeviceEventInfoEXT*()const{return const_cast<VkDeviceEventInfoEXT*>(static_cast<const VkDeviceEventInfoEXT*>(this));}
 };
 
 /*	VkDisplayEventInfoEXT
 */
-template<> struct my_class_convert<S_display_event_info_EXT> { using type = VkDisplayEventInfoEXT;};
-template<> struct my_class_convert<VkDisplayEventInfoEXT> { using type = S_display_event_info_EXT;};
-struct		S_display_event_info_EXT:VkDisplayEventInfoEXT{
+struct	S_display_event_info_EXT:VkDisplayEventInfoEXT{
 private:
 	using VkDisplayEventInfoEXT::sType;
 	using VkDisplayEventInfoEXT::pNext;
@@ -13731,15 +12789,17 @@ S_display_event_info_EXT(
 	VK_STRUCTURE_TYPE_DISPLAY_EVENT_INFO_EXT
 	,nullptr
 	,displayEvent_}
-	{	}
+	{
+	}
+
+	S_display_event_info_EXT& operator=(const VkDisplayEventInfoEXT& rhs){static_cast<VkDisplayEventInfoEXT&>(*this)=rhs; return *this;}
+	operator VkDisplayEventInfoEXT*()const{return const_cast<VkDisplayEventInfoEXT*>(static_cast<const VkDisplayEventInfoEXT*>(this));}
 };
 
 /*	VkPhysicalDeviceGroupProperties
 (returnedonly)
 */
-template<> struct my_class_convert<S_physical_device_group_properties> { using type = VkPhysicalDeviceGroupProperties;};
-template<> struct my_class_convert<VkPhysicalDeviceGroupProperties> { using type = S_physical_device_group_properties;};
-struct		S_physical_device_group_properties:VkPhysicalDeviceGroupProperties{
+struct	S_physical_device_group_properties:VkPhysicalDeviceGroupProperties{
 private:
 	using VkPhysicalDeviceGroupProperties::sType;
 	using VkPhysicalDeviceGroupProperties::pNext;
@@ -13757,17 +12817,20 @@ S_physical_device_group_properties(
 	VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_GROUP_PROPERTIES
 	,nullptr
 	,physicalDeviceCount_
-	,physicalDevices_
+	,{}
 	,subsetAllocation_}
-	{	}
+	{
+		memcpy(physicalDevices,physicalDevices_,sizeof(physicalDevices_) );
+	}
+
+	S_physical_device_group_properties& operator=(const VkPhysicalDeviceGroupProperties& rhs){static_cast<VkPhysicalDeviceGroupProperties&>(*this)=rhs; return *this;}
+	operator VkPhysicalDeviceGroupProperties*()const{return const_cast<VkPhysicalDeviceGroupProperties*>(static_cast<const VkPhysicalDeviceGroupProperties*>(this));}
 };
 
 /*	VkBindBufferMemoryDeviceGroupInfo
 ex to: VkBindBufferMemoryInfo
 */
-template<> struct my_class_convert<S_bind_buffer_memory_device_group_info> { using type = VkBindBufferMemoryDeviceGroupInfo;};
-template<> struct my_class_convert<VkBindBufferMemoryDeviceGroupInfo> { using type = S_bind_buffer_memory_device_group_info;};
-struct		S_bind_buffer_memory_device_group_info:VkBindBufferMemoryDeviceGroupInfo{
+struct	S_bind_buffer_memory_device_group_info:VkBindBufferMemoryDeviceGroupInfo{
 private:
 	using VkBindBufferMemoryDeviceGroupInfo::sType;
 	using VkBindBufferMemoryDeviceGroupInfo::pNext;
@@ -13784,9 +12847,13 @@ S_bind_buffer_memory_device_group_info(
 	,nullptr
 	,deviceIndexCount_
 	,pDeviceIndices_}
-	{	}
+	{
+	}
 
 friend S_bind_buffer_memory_info;
+
+	S_bind_buffer_memory_device_group_info& operator=(const VkBindBufferMemoryDeviceGroupInfo& rhs){static_cast<VkBindBufferMemoryDeviceGroupInfo&>(*this)=rhs; return *this;}
+	operator VkBindBufferMemoryDeviceGroupInfo*()const{return const_cast<VkBindBufferMemoryDeviceGroupInfo*>(static_cast<const VkBindBufferMemoryDeviceGroupInfo*>(this));}
 };
 
 /*	VkBindBufferMemoryInfo
@@ -13801,9 +12868,7 @@ public:
 operator void*() { return pNext; }
 N_bind_buffer_memory_info& n_bind_buffer_memory_device_group_info(S_bind_buffer_memory_device_group_info const& next_);
 };
-template<> struct my_class_convert<S_bind_buffer_memory_info> { using type = VkBindBufferMemoryInfo;};
-template<> struct my_class_convert<VkBindBufferMemoryInfo> { using type = S_bind_buffer_memory_info;};
-struct		S_bind_buffer_memory_info:VkBindBufferMemoryInfo{
+struct	S_bind_buffer_memory_info:VkBindBufferMemoryInfo{
 private:
 	using VkBindBufferMemoryInfo::sType;
 	using VkBindBufferMemoryInfo::pNext;
@@ -13823,7 +12888,11 @@ S_bind_buffer_memory_info(
 	,buffer_
 	,memory_
 	,memoryOffset_}
-	{	}
+	{
+	}
+
+	S_bind_buffer_memory_info& operator=(const VkBindBufferMemoryInfo& rhs){static_cast<VkBindBufferMemoryInfo&>(*this)=rhs; return *this;}
+	operator VkBindBufferMemoryInfo*()const{return const_cast<VkBindBufferMemoryInfo*>(static_cast<const VkBindBufferMemoryInfo*>(this));}
 
 S_bind_buffer_memory_info& n_bind_buffer_memory_device_group_info(S_bind_buffer_memory_device_group_info const& next_);
 void set_pNext(N_bind_buffer_memory_info n_){pNext = n_;}
@@ -13832,9 +12901,7 @@ void set_pNext(N_bind_buffer_memory_info n_){pNext = n_;}
 /*	VkBindImageMemoryDeviceGroupInfo
 ex to: VkBindImageMemoryInfo
 */
-template<> struct my_class_convert<S_bind_image_memory_device_group_info> { using type = VkBindImageMemoryDeviceGroupInfo;};
-template<> struct my_class_convert<VkBindImageMemoryDeviceGroupInfo> { using type = S_bind_image_memory_device_group_info;};
-struct		S_bind_image_memory_device_group_info:VkBindImageMemoryDeviceGroupInfo{
+struct	S_bind_image_memory_device_group_info:VkBindImageMemoryDeviceGroupInfo{
 private:
 	using VkBindImageMemoryDeviceGroupInfo::sType;
 	using VkBindImageMemoryDeviceGroupInfo::pNext;
@@ -13857,17 +12924,19 @@ S_bind_image_memory_device_group_info(
 	,pDeviceIndices_
 	,splitInstanceBindRegionCount_
 	,pSplitInstanceBindRegions_}
-	{	}
+	{
+	}
 
 friend S_bind_image_memory_info;
+
+	S_bind_image_memory_device_group_info& operator=(const VkBindImageMemoryDeviceGroupInfo& rhs){static_cast<VkBindImageMemoryDeviceGroupInfo&>(*this)=rhs; return *this;}
+	operator VkBindImageMemoryDeviceGroupInfo*()const{return const_cast<VkBindImageMemoryDeviceGroupInfo*>(static_cast<const VkBindImageMemoryDeviceGroupInfo*>(this));}
 };
 
 /*	VkBindImageMemorySwapchainInfoKHR
 ex to: VkBindImageMemoryInfo
 */
-template<> struct my_class_convert<S_bind_image_memory_swapchain_info_KHR> { using type = VkBindImageMemorySwapchainInfoKHR;};
-template<> struct my_class_convert<VkBindImageMemorySwapchainInfoKHR> { using type = S_bind_image_memory_swapchain_info_KHR;};
-struct		S_bind_image_memory_swapchain_info_KHR:VkBindImageMemorySwapchainInfoKHR{
+struct	S_bind_image_memory_swapchain_info_KHR:VkBindImageMemorySwapchainInfoKHR{
 private:
 	using VkBindImageMemorySwapchainInfoKHR::sType;
 	using VkBindImageMemorySwapchainInfoKHR::pNext;
@@ -13884,17 +12953,19 @@ S_bind_image_memory_swapchain_info_KHR(
 	,nullptr
 	,swapchain_
 	,imageIndex_}
-	{	}
+	{
+	}
 
 friend S_bind_image_memory_info;
+
+	S_bind_image_memory_swapchain_info_KHR& operator=(const VkBindImageMemorySwapchainInfoKHR& rhs){static_cast<VkBindImageMemorySwapchainInfoKHR&>(*this)=rhs; return *this;}
+	operator VkBindImageMemorySwapchainInfoKHR*()const{return const_cast<VkBindImageMemorySwapchainInfoKHR*>(static_cast<const VkBindImageMemorySwapchainInfoKHR*>(this));}
 };
 
 /*	VkBindImagePlaneMemoryInfo
 ex to: VkBindImageMemoryInfo
 */
-template<> struct my_class_convert<S_bind_image_plane_memory_info> { using type = VkBindImagePlaneMemoryInfo;};
-template<> struct my_class_convert<VkBindImagePlaneMemoryInfo> { using type = S_bind_image_plane_memory_info;};
-struct		S_bind_image_plane_memory_info:VkBindImagePlaneMemoryInfo{
+struct	S_bind_image_plane_memory_info:VkBindImagePlaneMemoryInfo{
 private:
 	using VkBindImagePlaneMemoryInfo::sType;
 	using VkBindImagePlaneMemoryInfo::pNext;
@@ -13908,9 +12979,13 @@ S_bind_image_plane_memory_info(
 	VK_STRUCTURE_TYPE_BIND_IMAGE_PLANE_MEMORY_INFO
 	,nullptr
 	,planeAspect_}
-	{	}
+	{
+	}
 
 friend S_bind_image_memory_info;
+
+	S_bind_image_plane_memory_info& operator=(const VkBindImagePlaneMemoryInfo& rhs){static_cast<VkBindImagePlaneMemoryInfo&>(*this)=rhs; return *this;}
+	operator VkBindImagePlaneMemoryInfo*()const{return const_cast<VkBindImagePlaneMemoryInfo*>(static_cast<const VkBindImagePlaneMemoryInfo*>(this));}
 };
 
 /*	VkBindImageMemoryInfo
@@ -13929,9 +13004,7 @@ N_bind_image_memory_info& n_bind_image_memory_device_group_info(S_bind_image_mem
 N_bind_image_memory_info& n_bind_image_memory_swapchain_info_KHR(S_bind_image_memory_swapchain_info_KHR const& next_);
 N_bind_image_memory_info& n_bind_image_plane_memory_info(S_bind_image_plane_memory_info const& next_);
 };
-template<> struct my_class_convert<S_bind_image_memory_info> { using type = VkBindImageMemoryInfo;};
-template<> struct my_class_convert<VkBindImageMemoryInfo> { using type = S_bind_image_memory_info;};
-struct		S_bind_image_memory_info:VkBindImageMemoryInfo{
+struct	S_bind_image_memory_info:VkBindImageMemoryInfo{
 private:
 	using VkBindImageMemoryInfo::sType;
 	using VkBindImageMemoryInfo::pNext;
@@ -13951,7 +13024,11 @@ S_bind_image_memory_info(
 	,image_
 	,memory_
 	,memoryOffset_}
-	{	}
+	{
+	}
+
+	S_bind_image_memory_info& operator=(const VkBindImageMemoryInfo& rhs){static_cast<VkBindImageMemoryInfo&>(*this)=rhs; return *this;}
+	operator VkBindImageMemoryInfo*()const{return const_cast<VkBindImageMemoryInfo*>(static_cast<const VkBindImageMemoryInfo*>(this));}
 
 S_bind_image_memory_info& n_bind_image_memory_device_group_info(S_bind_image_memory_device_group_info const& next_);
 S_bind_image_memory_info& n_bind_image_memory_swapchain_info_KHR(S_bind_image_memory_swapchain_info_KHR const& next_);
@@ -13962,9 +13039,7 @@ void set_pNext(N_bind_image_memory_info n_){pNext = n_;}
 /*	VkDeviceGroupPresentCapabilitiesKHR
 (returnedonly)
 */
-template<> struct my_class_convert<S_device_group_present_capabilities_KHR> { using type = VkDeviceGroupPresentCapabilitiesKHR;};
-template<> struct my_class_convert<VkDeviceGroupPresentCapabilitiesKHR> { using type = S_device_group_present_capabilities_KHR;};
-struct		S_device_group_present_capabilities_KHR:VkDeviceGroupPresentCapabilitiesKHR{
+struct	S_device_group_present_capabilities_KHR:VkDeviceGroupPresentCapabilitiesKHR{
 private:
 	using VkDeviceGroupPresentCapabilitiesKHR::sType;
 	using VkDeviceGroupPresentCapabilitiesKHR::pNext;
@@ -13979,16 +13054,19 @@ S_device_group_present_capabilities_KHR(
 	:VkDeviceGroupPresentCapabilitiesKHR{
 	VK_STRUCTURE_TYPE_DEVICE_GROUP_PRESENT_CAPABILITIES_KHR
 	,nullptr
-	,presentMask_
+	,{}
 	,modes_}
-	{	}
+	{
+		memcpy(presentMask,presentMask_,sizeof(presentMask_) );
+	}
+
+	S_device_group_present_capabilities_KHR& operator=(const VkDeviceGroupPresentCapabilitiesKHR& rhs){static_cast<VkDeviceGroupPresentCapabilitiesKHR&>(*this)=rhs; return *this;}
+	operator VkDeviceGroupPresentCapabilitiesKHR*()const{return const_cast<VkDeviceGroupPresentCapabilitiesKHR*>(static_cast<const VkDeviceGroupPresentCapabilitiesKHR*>(this));}
 };
 
 /*	VkAcquireNextImageInfoKHR
 */
-template<> struct my_class_convert<S_acquire_next_image_info_KHR> { using type = VkAcquireNextImageInfoKHR;};
-template<> struct my_class_convert<VkAcquireNextImageInfoKHR> { using type = S_acquire_next_image_info_KHR;};
-struct		S_acquire_next_image_info_KHR:VkAcquireNextImageInfoKHR{
+struct	S_acquire_next_image_info_KHR:VkAcquireNextImageInfoKHR{
 private:
 	using VkAcquireNextImageInfoKHR::sType;
 	using VkAcquireNextImageInfoKHR::pNext;
@@ -14014,27 +13092,30 @@ S_acquire_next_image_info_KHR(
 	,semaphore_
 	,fence_
 	,deviceMask_}
-	{	}
+	{
+	}
+
+	S_acquire_next_image_info_KHR& operator=(const VkAcquireNextImageInfoKHR& rhs){static_cast<VkAcquireNextImageInfoKHR&>(*this)=rhs; return *this;}
+	operator VkAcquireNextImageInfoKHR*()const{return const_cast<VkAcquireNextImageInfoKHR*>(static_cast<const VkAcquireNextImageInfoKHR*>(this));}
 };
 
 /*	VkDescriptorUpdateTemplateEntry
 */
-template<> struct my_class_convert<S_descriptor_update_template_entry> { using type = VkDescriptorUpdateTemplateEntry;};
-template<> struct my_class_convert<VkDescriptorUpdateTemplateEntry> { using type = S_descriptor_update_template_entry;};
-struct		S_descriptor_update_template_entry:VkDescriptorUpdateTemplateEntry{
+struct	S_descriptor_update_template_entry:VkDescriptorUpdateTemplateEntry{
 	using VkDescriptorUpdateTemplateEntry::dstBinding;
 	using VkDescriptorUpdateTemplateEntry::dstArrayElement;
 	using VkDescriptorUpdateTemplateEntry::descriptorCount;
 	using VkDescriptorUpdateTemplateEntry::descriptorType;
 	using VkDescriptorUpdateTemplateEntry::offset;
 	using VkDescriptorUpdateTemplateEntry::stride;
+
+	S_descriptor_update_template_entry& operator=(const VkDescriptorUpdateTemplateEntry& rhs){static_cast<VkDescriptorUpdateTemplateEntry&>(*this)=rhs; return *this;}
+	operator VkDescriptorUpdateTemplateEntry*()const{return const_cast<VkDescriptorUpdateTemplateEntry*>(static_cast<const VkDescriptorUpdateTemplateEntry*>(this));}
 };
 
 /*	VkDescriptorUpdateTemplateCreateInfo
 */
-template<> struct my_class_convert<S_descriptor_update_template_create_info> { using type = VkDescriptorUpdateTemplateCreateInfo;};
-template<> struct my_class_convert<VkDescriptorUpdateTemplateCreateInfo> { using type = S_descriptor_update_template_create_info;};
-struct		S_descriptor_update_template_create_info:VkDescriptorUpdateTemplateCreateInfo{
+struct	S_descriptor_update_template_create_info:VkDescriptorUpdateTemplateCreateInfo{
 private:
 	using VkDescriptorUpdateTemplateCreateInfo::sType;
 	using VkDescriptorUpdateTemplateCreateInfo::pNext;
@@ -14069,23 +13150,26 @@ S_descriptor_update_template_create_info(
 	,pipelineBindPoint_
 	,pipelineLayout_
 	,set_}
-	{	}
+	{
+	}
+
+	S_descriptor_update_template_create_info& operator=(const VkDescriptorUpdateTemplateCreateInfo& rhs){static_cast<VkDescriptorUpdateTemplateCreateInfo&>(*this)=rhs; return *this;}
+	operator VkDescriptorUpdateTemplateCreateInfo*()const{return const_cast<VkDescriptorUpdateTemplateCreateInfo*>(static_cast<const VkDescriptorUpdateTemplateCreateInfo*>(this));}
 };
 
 /*	VkXYColorEXT
 Chromaticity coordinate*/
-template<> struct my_class_convert<S_xy_color_EXT> { using type = VkXYColorEXT;};
-template<> struct my_class_convert<VkXYColorEXT> { using type = S_xy_color_EXT;};
-struct		S_xy_color_EXT:VkXYColorEXT{
+struct	S_xy_color_EXT:VkXYColorEXT{
 	using VkXYColorEXT::x;
 	using VkXYColorEXT::y;
+
+	S_xy_color_EXT& operator=(const VkXYColorEXT& rhs){static_cast<VkXYColorEXT&>(*this)=rhs; return *this;}
+	operator VkXYColorEXT*()const{return const_cast<VkXYColorEXT*>(static_cast<const VkXYColorEXT*>(this));}
 };
 
 /*	VkHdrMetadataEXT
 */
-template<> struct my_class_convert<S_hdr_metadata_EXT> { using type = VkHdrMetadataEXT;};
-template<> struct my_class_convert<VkHdrMetadataEXT> { using type = S_hdr_metadata_EXT;};
-struct		S_hdr_metadata_EXT:VkHdrMetadataEXT{
+struct	S_hdr_metadata_EXT:VkHdrMetadataEXT{
 private:
 	using VkHdrMetadataEXT::sType;
 	using VkHdrMetadataEXT::pNext;
@@ -14120,37 +13204,41 @@ S_hdr_metadata_EXT(
 	,minLuminance_
 	,maxContentLightLevel_
 	,maxFrameAverageLightLevel_}
-	{	}
+	{
+	}
+
+	S_hdr_metadata_EXT& operator=(const VkHdrMetadataEXT& rhs){static_cast<VkHdrMetadataEXT&>(*this)=rhs; return *this;}
+	operator VkHdrMetadataEXT*()const{return const_cast<VkHdrMetadataEXT*>(static_cast<const VkHdrMetadataEXT*>(this));}
 };
 
 /*	VkRefreshCycleDurationGOOGLE
 (returnedonly)
 */
-template<> struct my_class_convert<S_refresh_cycle_duration_GOOGLE> { using type = VkRefreshCycleDurationGOOGLE;};
-template<> struct my_class_convert<VkRefreshCycleDurationGOOGLE> { using type = S_refresh_cycle_duration_GOOGLE;};
-struct		S_refresh_cycle_duration_GOOGLE:VkRefreshCycleDurationGOOGLE{
+struct	S_refresh_cycle_duration_GOOGLE:VkRefreshCycleDurationGOOGLE{
 	using VkRefreshCycleDurationGOOGLE::refreshDuration;
+
+	S_refresh_cycle_duration_GOOGLE& operator=(const VkRefreshCycleDurationGOOGLE& rhs){static_cast<VkRefreshCycleDurationGOOGLE&>(*this)=rhs; return *this;}
+	operator VkRefreshCycleDurationGOOGLE*()const{return const_cast<VkRefreshCycleDurationGOOGLE*>(static_cast<const VkRefreshCycleDurationGOOGLE*>(this));}
 };
 
 /*	VkPastPresentationTimingGOOGLE
 (returnedonly)
 */
-template<> struct my_class_convert<S_past_presentation_timing_GOOGLE> { using type = VkPastPresentationTimingGOOGLE;};
-template<> struct my_class_convert<VkPastPresentationTimingGOOGLE> { using type = S_past_presentation_timing_GOOGLE;};
-struct		S_past_presentation_timing_GOOGLE:VkPastPresentationTimingGOOGLE{
+struct	S_past_presentation_timing_GOOGLE:VkPastPresentationTimingGOOGLE{
 	using VkPastPresentationTimingGOOGLE::presentID;
 	using VkPastPresentationTimingGOOGLE::desiredPresentTime;
 	using VkPastPresentationTimingGOOGLE::actualPresentTime;
 	using VkPastPresentationTimingGOOGLE::earliestPresentTime;
 	using VkPastPresentationTimingGOOGLE::presentMargin;
+
+	S_past_presentation_timing_GOOGLE& operator=(const VkPastPresentationTimingGOOGLE& rhs){static_cast<VkPastPresentationTimingGOOGLE&>(*this)=rhs; return *this;}
+	operator VkPastPresentationTimingGOOGLE*()const{return const_cast<VkPastPresentationTimingGOOGLE*>(static_cast<const VkPastPresentationTimingGOOGLE*>(this));}
 };
 
 /*	VkIOSSurfaceCreateInfoMVK
 */
 #ifdef VK_USE_PLATFORM_IOS_MVK
-template<> struct my_class_convert<S_ios_surface_create_info_MVK> { using type = VkIOSSurfaceCreateInfoMVK;};
-template<> struct my_class_convert<VkIOSSurfaceCreateInfoMVK> { using type = S_ios_surface_create_info_MVK;};
-struct		S_ios_surface_create_info_MVK:VkIOSSurfaceCreateInfoMVK{
+struct	S_ios_surface_create_info_MVK:VkIOSSurfaceCreateInfoMVK{
 private:
 	using VkIOSSurfaceCreateInfoMVK::sType;
 	using VkIOSSurfaceCreateInfoMVK::pNext;
@@ -14167,16 +13255,18 @@ S_ios_surface_create_info_MVK(
 	,nullptr
 	,flags_
 	,pView_}
-	{	}
+	{
+	}
+
+	S_ios_surface_create_info_MVK& operator=(const VkIOSSurfaceCreateInfoMVK& rhs){static_cast<VkIOSSurfaceCreateInfoMVK&>(*this)=rhs; return *this;}
+	operator VkIOSSurfaceCreateInfoMVK*()const{return const_cast<VkIOSSurfaceCreateInfoMVK*>(static_cast<const VkIOSSurfaceCreateInfoMVK*>(this));}
 };
 #endif //VK_USE_PLATFORM_IOS_MVK
 
 /*	VkMacOSSurfaceCreateInfoMVK
 */
 #ifdef VK_USE_PLATFORM_MACOS_MVK
-template<> struct my_class_convert<S_mac_os_surface_create_info_MVK> { using type = VkMacOSSurfaceCreateInfoMVK;};
-template<> struct my_class_convert<VkMacOSSurfaceCreateInfoMVK> { using type = S_mac_os_surface_create_info_MVK;};
-struct		S_mac_os_surface_create_info_MVK:VkMacOSSurfaceCreateInfoMVK{
+struct	S_mac_os_surface_create_info_MVK:VkMacOSSurfaceCreateInfoMVK{
 private:
 	using VkMacOSSurfaceCreateInfoMVK::sType;
 	using VkMacOSSurfaceCreateInfoMVK::pNext;
@@ -14193,15 +13283,17 @@ S_mac_os_surface_create_info_MVK(
 	,nullptr
 	,flags_
 	,pView_}
-	{	}
+	{
+	}
+
+	S_mac_os_surface_create_info_MVK& operator=(const VkMacOSSurfaceCreateInfoMVK& rhs){static_cast<VkMacOSSurfaceCreateInfoMVK&>(*this)=rhs; return *this;}
+	operator VkMacOSSurfaceCreateInfoMVK*()const{return const_cast<VkMacOSSurfaceCreateInfoMVK*>(static_cast<const VkMacOSSurfaceCreateInfoMVK*>(this));}
 };
 #endif //VK_USE_PLATFORM_MACOS_MVK
 
 /*	VkPhysicalDeviceSurfaceInfo2KHR
 */
-template<> struct my_class_convert<S_physical_device_surface_info2_KHR> { using type = VkPhysicalDeviceSurfaceInfo2KHR;};
-template<> struct my_class_convert<VkPhysicalDeviceSurfaceInfo2KHR> { using type = S_physical_device_surface_info2_KHR;};
-struct		S_physical_device_surface_info2_KHR:VkPhysicalDeviceSurfaceInfo2KHR{
+struct	S_physical_device_surface_info2_KHR:VkPhysicalDeviceSurfaceInfo2KHR{
 private:
 	using VkPhysicalDeviceSurfaceInfo2KHR::sType;
 	using VkPhysicalDeviceSurfaceInfo2KHR::pNext;
@@ -14215,16 +13307,18 @@ S_physical_device_surface_info2_KHR(
 	VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SURFACE_INFO_2_KHR
 	,nullptr
 	,surface_}
-	{	}
+	{
+	}
+
+	S_physical_device_surface_info2_KHR& operator=(const VkPhysicalDeviceSurfaceInfo2KHR& rhs){static_cast<VkPhysicalDeviceSurfaceInfo2KHR&>(*this)=rhs; return *this;}
+	operator VkPhysicalDeviceSurfaceInfo2KHR*()const{return const_cast<VkPhysicalDeviceSurfaceInfo2KHR*>(static_cast<const VkPhysicalDeviceSurfaceInfo2KHR*>(this));}
 };
 
 /*	VkSharedPresentSurfaceCapabilitiesKHR
 (returnedonly)
 ex to: VkSurfaceCapabilities2KHR
 */
-template<> struct my_class_convert<S_shared_present_surface_capabilities_KHR> { using type = VkSharedPresentSurfaceCapabilitiesKHR;};
-template<> struct my_class_convert<VkSharedPresentSurfaceCapabilitiesKHR> { using type = S_shared_present_surface_capabilities_KHR;};
-struct		S_shared_present_surface_capabilities_KHR:VkSharedPresentSurfaceCapabilitiesKHR{
+struct	S_shared_present_surface_capabilities_KHR:VkSharedPresentSurfaceCapabilitiesKHR{
 private:
 	using VkSharedPresentSurfaceCapabilitiesKHR::sType;
 	using VkSharedPresentSurfaceCapabilitiesKHR::pNext;
@@ -14238,9 +13332,13 @@ S_shared_present_surface_capabilities_KHR(
 	VK_STRUCTURE_TYPE_SHARED_PRESENT_SURFACE_CAPABILITIES_KHR
 	,nullptr
 	,sharedPresentSupportedUsageFlags_}
-	{	}
+	{
+	}
 
 friend S_surface_capabilities2_KHR;
+
+	S_shared_present_surface_capabilities_KHR& operator=(const VkSharedPresentSurfaceCapabilitiesKHR& rhs){static_cast<VkSharedPresentSurfaceCapabilitiesKHR&>(*this)=rhs; return *this;}
+	operator VkSharedPresentSurfaceCapabilitiesKHR*()const{return const_cast<VkSharedPresentSurfaceCapabilitiesKHR*>(static_cast<const VkSharedPresentSurfaceCapabilitiesKHR*>(this));}
 };
 
 /*	VkSurfaceCapabilities2KHR
@@ -14256,9 +13354,7 @@ public:
 operator void*() { return pNext; }
 N_surface_capabilities2_KHR& n_shared_present_surface_capabilities_KHR(S_shared_present_surface_capabilities_KHR const& next_);
 };
-template<> struct my_class_convert<S_surface_capabilities2_KHR> { using type = VkSurfaceCapabilities2KHR;};
-template<> struct my_class_convert<VkSurfaceCapabilities2KHR> { using type = S_surface_capabilities2_KHR;};
-struct		S_surface_capabilities2_KHR:VkSurfaceCapabilities2KHR{
+struct	S_surface_capabilities2_KHR:VkSurfaceCapabilities2KHR{
 private:
 	using VkSurfaceCapabilities2KHR::sType;
 	using VkSurfaceCapabilities2KHR::pNext;
@@ -14272,7 +13368,11 @@ S_surface_capabilities2_KHR(
 	VK_STRUCTURE_TYPE_SURFACE_CAPABILITIES_2_KHR
 	,nullptr
 	,surfaceCapabilities_}
-	{	}
+	{
+	}
+
+	S_surface_capabilities2_KHR& operator=(const VkSurfaceCapabilities2KHR& rhs){static_cast<VkSurfaceCapabilities2KHR&>(*this)=rhs; return *this;}
+	operator VkSurfaceCapabilities2KHR*()const{return const_cast<VkSurfaceCapabilities2KHR*>(static_cast<const VkSurfaceCapabilities2KHR*>(this));}
 
 S_surface_capabilities2_KHR& n_shared_present_surface_capabilities_KHR(S_shared_present_surface_capabilities_KHR const& next_);
 void set_pNext(N_surface_capabilities2_KHR n_){pNext = n_;}
@@ -14281,9 +13381,7 @@ void set_pNext(N_surface_capabilities2_KHR n_){pNext = n_;}
 /*	VkSurfaceFormat2KHR
 (returnedonly)
 */
-template<> struct my_class_convert<S_surface_format2_KHR> { using type = VkSurfaceFormat2KHR;};
-template<> struct my_class_convert<VkSurfaceFormat2KHR> { using type = S_surface_format2_KHR;};
-struct		S_surface_format2_KHR:VkSurfaceFormat2KHR{
+struct	S_surface_format2_KHR:VkSurfaceFormat2KHR{
 private:
 	using VkSurfaceFormat2KHR::sType;
 	using VkSurfaceFormat2KHR::pNext;
@@ -14297,15 +13395,17 @@ S_surface_format2_KHR(
 	VK_STRUCTURE_TYPE_SURFACE_FORMAT_2_KHR
 	,nullptr
 	,surfaceFormat_}
-	{	}
+	{
+	}
+
+	S_surface_format2_KHR& operator=(const VkSurfaceFormat2KHR& rhs){static_cast<VkSurfaceFormat2KHR&>(*this)=rhs; return *this;}
+	operator VkSurfaceFormat2KHR*()const{return const_cast<VkSurfaceFormat2KHR*>(static_cast<const VkSurfaceFormat2KHR*>(this));}
 };
 
 /*	VkDisplayProperties2KHR
 (returnedonly)
 */
-template<> struct my_class_convert<S_display_properties2_KHR> { using type = VkDisplayProperties2KHR;};
-template<> struct my_class_convert<VkDisplayProperties2KHR> { using type = S_display_properties2_KHR;};
-struct		S_display_properties2_KHR:VkDisplayProperties2KHR{
+struct	S_display_properties2_KHR:VkDisplayProperties2KHR{
 private:
 	using VkDisplayProperties2KHR::sType;
 	using VkDisplayProperties2KHR::pNext;
@@ -14319,15 +13419,17 @@ S_display_properties2_KHR(
 	VK_STRUCTURE_TYPE_DISPLAY_PROPERTIES_2_KHR
 	,nullptr
 	,displayProperties_}
-	{	}
+	{
+	}
+
+	S_display_properties2_KHR& operator=(const VkDisplayProperties2KHR& rhs){static_cast<VkDisplayProperties2KHR&>(*this)=rhs; return *this;}
+	operator VkDisplayProperties2KHR*()const{return const_cast<VkDisplayProperties2KHR*>(static_cast<const VkDisplayProperties2KHR*>(this));}
 };
 
 /*	VkDisplayPlaneProperties2KHR
 (returnedonly)
 */
-template<> struct my_class_convert<S_display_plane_properties2_KHR> { using type = VkDisplayPlaneProperties2KHR;};
-template<> struct my_class_convert<VkDisplayPlaneProperties2KHR> { using type = S_display_plane_properties2_KHR;};
-struct		S_display_plane_properties2_KHR:VkDisplayPlaneProperties2KHR{
+struct	S_display_plane_properties2_KHR:VkDisplayPlaneProperties2KHR{
 private:
 	using VkDisplayPlaneProperties2KHR::sType;
 	using VkDisplayPlaneProperties2KHR::pNext;
@@ -14341,15 +13443,17 @@ S_display_plane_properties2_KHR(
 	VK_STRUCTURE_TYPE_DISPLAY_PLANE_PROPERTIES_2_KHR
 	,nullptr
 	,displayPlaneProperties_}
-	{	}
+	{
+	}
+
+	S_display_plane_properties2_KHR& operator=(const VkDisplayPlaneProperties2KHR& rhs){static_cast<VkDisplayPlaneProperties2KHR&>(*this)=rhs; return *this;}
+	operator VkDisplayPlaneProperties2KHR*()const{return const_cast<VkDisplayPlaneProperties2KHR*>(static_cast<const VkDisplayPlaneProperties2KHR*>(this));}
 };
 
 /*	VkDisplayModeProperties2KHR
 (returnedonly)
 */
-template<> struct my_class_convert<S_display_mode_properties2_KHR> { using type = VkDisplayModeProperties2KHR;};
-template<> struct my_class_convert<VkDisplayModeProperties2KHR> { using type = S_display_mode_properties2_KHR;};
-struct		S_display_mode_properties2_KHR:VkDisplayModeProperties2KHR{
+struct	S_display_mode_properties2_KHR:VkDisplayModeProperties2KHR{
 private:
 	using VkDisplayModeProperties2KHR::sType;
 	using VkDisplayModeProperties2KHR::pNext;
@@ -14363,14 +13467,16 @@ S_display_mode_properties2_KHR(
 	VK_STRUCTURE_TYPE_DISPLAY_MODE_PROPERTIES_2_KHR
 	,nullptr
 	,displayModeProperties_}
-	{	}
+	{
+	}
+
+	S_display_mode_properties2_KHR& operator=(const VkDisplayModeProperties2KHR& rhs){static_cast<VkDisplayModeProperties2KHR&>(*this)=rhs; return *this;}
+	operator VkDisplayModeProperties2KHR*()const{return const_cast<VkDisplayModeProperties2KHR*>(static_cast<const VkDisplayModeProperties2KHR*>(this));}
 };
 
 /*	VkDisplayPlaneInfo2KHR
 */
-template<> struct my_class_convert<S_display_plane_info2_KHR> { using type = VkDisplayPlaneInfo2KHR;};
-template<> struct my_class_convert<VkDisplayPlaneInfo2KHR> { using type = S_display_plane_info2_KHR;};
-struct		S_display_plane_info2_KHR:VkDisplayPlaneInfo2KHR{
+struct	S_display_plane_info2_KHR:VkDisplayPlaneInfo2KHR{
 private:
 	using VkDisplayPlaneInfo2KHR::sType;
 	using VkDisplayPlaneInfo2KHR::pNext;
@@ -14387,15 +13493,17 @@ S_display_plane_info2_KHR(
 	,nullptr
 	,mode_
 	,planeIndex_}
-	{	}
+	{
+	}
+
+	S_display_plane_info2_KHR& operator=(const VkDisplayPlaneInfo2KHR& rhs){static_cast<VkDisplayPlaneInfo2KHR&>(*this)=rhs; return *this;}
+	operator VkDisplayPlaneInfo2KHR*()const{return const_cast<VkDisplayPlaneInfo2KHR*>(static_cast<const VkDisplayPlaneInfo2KHR*>(this));}
 };
 
 /*	VkDisplayPlaneCapabilities2KHR
 (returnedonly)
 */
-template<> struct my_class_convert<S_display_plane_capabilities2_KHR> { using type = VkDisplayPlaneCapabilities2KHR;};
-template<> struct my_class_convert<VkDisplayPlaneCapabilities2KHR> { using type = S_display_plane_capabilities2_KHR;};
-struct		S_display_plane_capabilities2_KHR:VkDisplayPlaneCapabilities2KHR{
+struct	S_display_plane_capabilities2_KHR:VkDisplayPlaneCapabilities2KHR{
 private:
 	using VkDisplayPlaneCapabilities2KHR::sType;
 	using VkDisplayPlaneCapabilities2KHR::pNext;
@@ -14409,14 +13517,16 @@ S_display_plane_capabilities2_KHR(
 	VK_STRUCTURE_TYPE_DISPLAY_PLANE_CAPABILITIES_2_KHR
 	,nullptr
 	,capabilities_}
-	{	}
+	{
+	}
+
+	S_display_plane_capabilities2_KHR& operator=(const VkDisplayPlaneCapabilities2KHR& rhs){static_cast<VkDisplayPlaneCapabilities2KHR&>(*this)=rhs; return *this;}
+	operator VkDisplayPlaneCapabilities2KHR*()const{return const_cast<VkDisplayPlaneCapabilities2KHR*>(static_cast<const VkDisplayPlaneCapabilities2KHR*>(this));}
 };
 
 /*	VkBufferMemoryRequirementsInfo2
 */
-template<> struct my_class_convert<S_buffer_memory_requirements_info2> { using type = VkBufferMemoryRequirementsInfo2;};
-template<> struct my_class_convert<VkBufferMemoryRequirementsInfo2> { using type = S_buffer_memory_requirements_info2;};
-struct		S_buffer_memory_requirements_info2:VkBufferMemoryRequirementsInfo2{
+struct	S_buffer_memory_requirements_info2:VkBufferMemoryRequirementsInfo2{
 private:
 	using VkBufferMemoryRequirementsInfo2::sType;
 	using VkBufferMemoryRequirementsInfo2::pNext;
@@ -14430,15 +13540,17 @@ S_buffer_memory_requirements_info2(
 	VK_STRUCTURE_TYPE_BUFFER_MEMORY_REQUIREMENTS_INFO_2
 	,nullptr
 	,buffer_}
-	{	}
+	{
+	}
+
+	S_buffer_memory_requirements_info2& operator=(const VkBufferMemoryRequirementsInfo2& rhs){static_cast<VkBufferMemoryRequirementsInfo2&>(*this)=rhs; return *this;}
+	operator VkBufferMemoryRequirementsInfo2*()const{return const_cast<VkBufferMemoryRequirementsInfo2*>(static_cast<const VkBufferMemoryRequirementsInfo2*>(this));}
 };
 
 /*	VkImagePlaneMemoryRequirementsInfo
 ex to: VkImageMemoryRequirementsInfo2
 */
-template<> struct my_class_convert<S_image_plane_memory_requirements_info> { using type = VkImagePlaneMemoryRequirementsInfo;};
-template<> struct my_class_convert<VkImagePlaneMemoryRequirementsInfo> { using type = S_image_plane_memory_requirements_info;};
-struct		S_image_plane_memory_requirements_info:VkImagePlaneMemoryRequirementsInfo{
+struct	S_image_plane_memory_requirements_info:VkImagePlaneMemoryRequirementsInfo{
 private:
 	using VkImagePlaneMemoryRequirementsInfo::sType;
 	using VkImagePlaneMemoryRequirementsInfo::pNext;
@@ -14452,9 +13564,13 @@ S_image_plane_memory_requirements_info(
 	VK_STRUCTURE_TYPE_IMAGE_PLANE_MEMORY_REQUIREMENTS_INFO
 	,nullptr
 	,planeAspect_}
-	{	}
+	{
+	}
 
 friend S_image_memory_requirements_info2;
+
+	S_image_plane_memory_requirements_info& operator=(const VkImagePlaneMemoryRequirementsInfo& rhs){static_cast<VkImagePlaneMemoryRequirementsInfo&>(*this)=rhs; return *this;}
+	operator VkImagePlaneMemoryRequirementsInfo*()const{return const_cast<VkImagePlaneMemoryRequirementsInfo*>(static_cast<const VkImagePlaneMemoryRequirementsInfo*>(this));}
 };
 
 /*	VkImageMemoryRequirementsInfo2
@@ -14469,9 +13585,7 @@ public:
 operator void*() { return pNext; }
 N_image_memory_requirements_info2& n_image_plane_memory_requirements_info(S_image_plane_memory_requirements_info const& next_);
 };
-template<> struct my_class_convert<S_image_memory_requirements_info2> { using type = VkImageMemoryRequirementsInfo2;};
-template<> struct my_class_convert<VkImageMemoryRequirementsInfo2> { using type = S_image_memory_requirements_info2;};
-struct		S_image_memory_requirements_info2:VkImageMemoryRequirementsInfo2{
+struct	S_image_memory_requirements_info2:VkImageMemoryRequirementsInfo2{
 private:
 	using VkImageMemoryRequirementsInfo2::sType;
 	using VkImageMemoryRequirementsInfo2::pNext;
@@ -14485,7 +13599,11 @@ S_image_memory_requirements_info2(
 	VK_STRUCTURE_TYPE_IMAGE_MEMORY_REQUIREMENTS_INFO_2
 	,nullptr
 	,image_}
-	{	}
+	{
+	}
+
+	S_image_memory_requirements_info2& operator=(const VkImageMemoryRequirementsInfo2& rhs){static_cast<VkImageMemoryRequirementsInfo2&>(*this)=rhs; return *this;}
+	operator VkImageMemoryRequirementsInfo2*()const{return const_cast<VkImageMemoryRequirementsInfo2*>(static_cast<const VkImageMemoryRequirementsInfo2*>(this));}
 
 S_image_memory_requirements_info2& n_image_plane_memory_requirements_info(S_image_plane_memory_requirements_info const& next_);
 void set_pNext(N_image_memory_requirements_info2 n_){pNext = n_;}
@@ -14493,9 +13611,7 @@ void set_pNext(N_image_memory_requirements_info2 n_){pNext = n_;}
 
 /*	VkImageSparseMemoryRequirementsInfo2
 */
-template<> struct my_class_convert<S_image_sparse_memory_requirements_info2> { using type = VkImageSparseMemoryRequirementsInfo2;};
-template<> struct my_class_convert<VkImageSparseMemoryRequirementsInfo2> { using type = S_image_sparse_memory_requirements_info2;};
-struct		S_image_sparse_memory_requirements_info2:VkImageSparseMemoryRequirementsInfo2{
+struct	S_image_sparse_memory_requirements_info2:VkImageSparseMemoryRequirementsInfo2{
 private:
 	using VkImageSparseMemoryRequirementsInfo2::sType;
 	using VkImageSparseMemoryRequirementsInfo2::pNext;
@@ -14509,16 +13625,18 @@ S_image_sparse_memory_requirements_info2(
 	VK_STRUCTURE_TYPE_IMAGE_SPARSE_MEMORY_REQUIREMENTS_INFO_2
 	,nullptr
 	,image_}
-	{	}
+	{
+	}
+
+	S_image_sparse_memory_requirements_info2& operator=(const VkImageSparseMemoryRequirementsInfo2& rhs){static_cast<VkImageSparseMemoryRequirementsInfo2&>(*this)=rhs; return *this;}
+	operator VkImageSparseMemoryRequirementsInfo2*()const{return const_cast<VkImageSparseMemoryRequirementsInfo2*>(static_cast<const VkImageSparseMemoryRequirementsInfo2*>(this));}
 };
 
 /*	VkMemoryDedicatedRequirements
 (returnedonly)
 ex to: VkMemoryRequirements2
 */
-template<> struct my_class_convert<S_memory_dedicated_requirements> { using type = VkMemoryDedicatedRequirements;};
-template<> struct my_class_convert<VkMemoryDedicatedRequirements> { using type = S_memory_dedicated_requirements;};
-struct		S_memory_dedicated_requirements:VkMemoryDedicatedRequirements{
+struct	S_memory_dedicated_requirements:VkMemoryDedicatedRequirements{
 private:
 	using VkMemoryDedicatedRequirements::sType;
 	using VkMemoryDedicatedRequirements::pNext;
@@ -14535,9 +13653,13 @@ S_memory_dedicated_requirements(
 	,nullptr
 	,prefersDedicatedAllocation_
 	,requiresDedicatedAllocation_}
-	{	}
+	{
+	}
 
 friend S_memory_requirements2;
+
+	S_memory_dedicated_requirements& operator=(const VkMemoryDedicatedRequirements& rhs){static_cast<VkMemoryDedicatedRequirements&>(*this)=rhs; return *this;}
+	operator VkMemoryDedicatedRequirements*()const{return const_cast<VkMemoryDedicatedRequirements*>(static_cast<const VkMemoryDedicatedRequirements*>(this));}
 };
 
 /*	VkMemoryRequirements2
@@ -14553,9 +13675,7 @@ public:
 operator void*() { return pNext; }
 N_memory_requirements2& n_memory_dedicated_requirements(S_memory_dedicated_requirements const& next_);
 };
-template<> struct my_class_convert<S_memory_requirements2> { using type = VkMemoryRequirements2;};
-template<> struct my_class_convert<VkMemoryRequirements2> { using type = S_memory_requirements2;};
-struct		S_memory_requirements2:VkMemoryRequirements2{
+struct	S_memory_requirements2:VkMemoryRequirements2{
 private:
 	using VkMemoryRequirements2::sType;
 	using VkMemoryRequirements2::pNext;
@@ -14569,7 +13689,11 @@ S_memory_requirements2(
 	VK_STRUCTURE_TYPE_MEMORY_REQUIREMENTS_2
 	,nullptr
 	,memoryRequirements_}
-	{	}
+	{
+	}
+
+	S_memory_requirements2& operator=(const VkMemoryRequirements2& rhs){static_cast<VkMemoryRequirements2&>(*this)=rhs; return *this;}
+	operator VkMemoryRequirements2*()const{return const_cast<VkMemoryRequirements2*>(static_cast<const VkMemoryRequirements2*>(this));}
 
 S_memory_requirements2& n_memory_dedicated_requirements(S_memory_dedicated_requirements const& next_);
 void set_pNext(N_memory_requirements2 n_){pNext = n_;}
@@ -14578,9 +13702,7 @@ void set_pNext(N_memory_requirements2 n_){pNext = n_;}
 /*	VkSparseImageMemoryRequirements2
 (returnedonly)
 */
-template<> struct my_class_convert<S_sparse_image_memory_requirements2> { using type = VkSparseImageMemoryRequirements2;};
-template<> struct my_class_convert<VkSparseImageMemoryRequirements2> { using type = S_sparse_image_memory_requirements2;};
-struct		S_sparse_image_memory_requirements2:VkSparseImageMemoryRequirements2{
+struct	S_sparse_image_memory_requirements2:VkSparseImageMemoryRequirements2{
 private:
 	using VkSparseImageMemoryRequirements2::sType;
 	using VkSparseImageMemoryRequirements2::pNext;
@@ -14594,7 +13716,11 @@ S_sparse_image_memory_requirements2(
 	VK_STRUCTURE_TYPE_SPARSE_IMAGE_MEMORY_REQUIREMENTS_2
 	,nullptr
 	,memoryRequirements_}
-	{	}
+	{
+	}
+
+	S_sparse_image_memory_requirements2& operator=(const VkSparseImageMemoryRequirements2& rhs){static_cast<VkSparseImageMemoryRequirements2&>(*this)=rhs; return *this;}
+	operator VkSparseImageMemoryRequirements2*()const{return const_cast<VkSparseImageMemoryRequirements2*>(static_cast<const VkSparseImageMemoryRequirements2*>(this));}
 };
 
 /*	VkSamplerYcbcrConversionCreateInfo
@@ -14611,9 +13737,7 @@ operator void*() { return pNext; }
 N_sampler_ycbcr_conversion_create_info& n_external_format_ANDROID(S_external_format_ANDROID const& next_);
 #endif
 };
-template<> struct my_class_convert<S_sampler_ycbcr_conversion_create_info> { using type = VkSamplerYcbcrConversionCreateInfo;};
-template<> struct my_class_convert<VkSamplerYcbcrConversionCreateInfo> { using type = S_sampler_ycbcr_conversion_create_info;};
-struct		S_sampler_ycbcr_conversion_create_info:VkSamplerYcbcrConversionCreateInfo{
+struct	S_sampler_ycbcr_conversion_create_info:VkSamplerYcbcrConversionCreateInfo{
 private:
 	using VkSamplerYcbcrConversionCreateInfo::sType;
 	using VkSamplerYcbcrConversionCreateInfo::pNext;
@@ -14648,7 +13772,11 @@ S_sampler_ycbcr_conversion_create_info(
 	,yChromaOffset_
 	,chromaFilter_
 	,forceExplicitReconstruction_}
-	{	}
+	{
+	}
+
+	S_sampler_ycbcr_conversion_create_info& operator=(const VkSamplerYcbcrConversionCreateInfo& rhs){static_cast<VkSamplerYcbcrConversionCreateInfo&>(*this)=rhs; return *this;}
+	operator VkSamplerYcbcrConversionCreateInfo*()const{return const_cast<VkSamplerYcbcrConversionCreateInfo*>(static_cast<const VkSamplerYcbcrConversionCreateInfo*>(this));}
 
 #ifdef VK_USE_PLATFORM_ANDROID_KHR
 S_sampler_ycbcr_conversion_create_info& n_external_format_ANDROID(S_external_format_ANDROID const& next_);
@@ -14658,9 +13786,7 @@ void set_pNext(N_sampler_ycbcr_conversion_create_info n_){pNext = n_;}
 
 /*	VkConditionalRenderingBeginInfoEXT
 */
-template<> struct my_class_convert<S_conditional_rendering_begin_info_EXT> { using type = VkConditionalRenderingBeginInfoEXT;};
-template<> struct my_class_convert<VkConditionalRenderingBeginInfoEXT> { using type = S_conditional_rendering_begin_info_EXT;};
-struct		S_conditional_rendering_begin_info_EXT:VkConditionalRenderingBeginInfoEXT{
+struct	S_conditional_rendering_begin_info_EXT:VkConditionalRenderingBeginInfoEXT{
 private:
 	using VkConditionalRenderingBeginInfoEXT::sType;
 	using VkConditionalRenderingBeginInfoEXT::pNext;
@@ -14680,14 +13806,16 @@ S_conditional_rendering_begin_info_EXT(
 	,buffer_
 	,offset_
 	,flags_}
-	{	}
+	{
+	}
+
+	S_conditional_rendering_begin_info_EXT& operator=(const VkConditionalRenderingBeginInfoEXT& rhs){static_cast<VkConditionalRenderingBeginInfoEXT&>(*this)=rhs; return *this;}
+	operator VkConditionalRenderingBeginInfoEXT*()const{return const_cast<VkConditionalRenderingBeginInfoEXT*>(static_cast<const VkConditionalRenderingBeginInfoEXT*>(this));}
 };
 
 /*	VkDeviceQueueInfo2
 */
-template<> struct my_class_convert<S_device_queue_info2> { using type = VkDeviceQueueInfo2;};
-template<> struct my_class_convert<VkDeviceQueueInfo2> { using type = S_device_queue_info2;};
-struct		S_device_queue_info2:VkDeviceQueueInfo2{
+struct	S_device_queue_info2:VkDeviceQueueInfo2{
 private:
 	using VkDeviceQueueInfo2::sType;
 	using VkDeviceQueueInfo2::pNext;
@@ -14704,18 +13832,20 @@ S_device_queue_info2(
 	:VkDeviceQueueInfo2{
 	VK_STRUCTURE_TYPE_DEVICE_QUEUE_INFO_2
 	,nullptr
-	,flags_
+	,static_cast<VkFlags>(flags_)
 	,queueFamilyIndex_
 	,queueIndex_}
-	{	}
+	{
+	}
+
+	S_device_queue_info2& operator=(const VkDeviceQueueInfo2& rhs){static_cast<VkDeviceQueueInfo2&>(*this)=rhs; return *this;}
+	operator VkDeviceQueueInfo2*()const{return const_cast<VkDeviceQueueInfo2*>(static_cast<const VkDeviceQueueInfo2*>(this));}
 };
 
 /*	VkMultisamplePropertiesEXT
 (returnedonly)
 */
-template<> struct my_class_convert<S_multisample_properties_EXT> { using type = VkMultisamplePropertiesEXT;};
-template<> struct my_class_convert<VkMultisamplePropertiesEXT> { using type = S_multisample_properties_EXT;};
-struct		S_multisample_properties_EXT:VkMultisamplePropertiesEXT{
+struct	S_multisample_properties_EXT:VkMultisamplePropertiesEXT{
 private:
 	using VkMultisamplePropertiesEXT::sType;
 	using VkMultisamplePropertiesEXT::pNext;
@@ -14729,14 +13859,16 @@ S_multisample_properties_EXT(
 	VK_STRUCTURE_TYPE_MULTISAMPLE_PROPERTIES_EXT
 	,nullptr
 	,maxSampleLocationGridSize_}
-	{	}
+	{
+	}
+
+	S_multisample_properties_EXT& operator=(const VkMultisamplePropertiesEXT& rhs){static_cast<VkMultisamplePropertiesEXT&>(*this)=rhs; return *this;}
+	operator VkMultisamplePropertiesEXT*()const{return const_cast<VkMultisamplePropertiesEXT*>(static_cast<const VkMultisamplePropertiesEXT*>(this));}
 };
 
 /*	VkValidationCacheCreateInfoEXT
 */
-template<> struct my_class_convert<S_validation_cache_create_info_EXT> { using type = VkValidationCacheCreateInfoEXT;};
-template<> struct my_class_convert<VkValidationCacheCreateInfoEXT> { using type = S_validation_cache_create_info_EXT;};
-struct		S_validation_cache_create_info_EXT:VkValidationCacheCreateInfoEXT{
+struct	S_validation_cache_create_info_EXT:VkValidationCacheCreateInfoEXT{
 private:
 	using VkValidationCacheCreateInfoEXT::sType;
 	using VkValidationCacheCreateInfoEXT::pNext;
@@ -14756,16 +13888,18 @@ S_validation_cache_create_info_EXT(
 	,flags_
 	,initialDataSize_
 	,pInitialData_}
-	{	}
+	{
+	}
+
+	S_validation_cache_create_info_EXT& operator=(const VkValidationCacheCreateInfoEXT& rhs){static_cast<VkValidationCacheCreateInfoEXT&>(*this)=rhs; return *this;}
+	operator VkValidationCacheCreateInfoEXT*()const{return const_cast<VkValidationCacheCreateInfoEXT*>(static_cast<const VkValidationCacheCreateInfoEXT*>(this));}
 };
 
 /*	VkDescriptorSetVariableDescriptorCountLayoutSupportEXT
 (returnedonly)
 ex to: VkDescriptorSetLayoutSupport
 */
-template<> struct my_class_convert<S_descriptor_set_variable_descriptor_count_layout_support_EXT> { using type = VkDescriptorSetVariableDescriptorCountLayoutSupportEXT;};
-template<> struct my_class_convert<VkDescriptorSetVariableDescriptorCountLayoutSupportEXT> { using type = S_descriptor_set_variable_descriptor_count_layout_support_EXT;};
-struct		S_descriptor_set_variable_descriptor_count_layout_support_EXT:VkDescriptorSetVariableDescriptorCountLayoutSupportEXT{
+struct	S_descriptor_set_variable_descriptor_count_layout_support_EXT:VkDescriptorSetVariableDescriptorCountLayoutSupportEXT{
 private:
 	using VkDescriptorSetVariableDescriptorCountLayoutSupportEXT::sType;
 	using VkDescriptorSetVariableDescriptorCountLayoutSupportEXT::pNext;
@@ -14779,9 +13913,13 @@ S_descriptor_set_variable_descriptor_count_layout_support_EXT(
 	VK_STRUCTURE_TYPE_DESCRIPTOR_SET_VARIABLE_DESCRIPTOR_COUNT_LAYOUT_SUPPORT_EXT
 	,nullptr
 	,maxVariableDescriptorCount_}
-	{	}
+	{
+	}
 
 friend S_descriptor_set_layout_support;
+
+	S_descriptor_set_variable_descriptor_count_layout_support_EXT& operator=(const VkDescriptorSetVariableDescriptorCountLayoutSupportEXT& rhs){static_cast<VkDescriptorSetVariableDescriptorCountLayoutSupportEXT&>(*this)=rhs; return *this;}
+	operator VkDescriptorSetVariableDescriptorCountLayoutSupportEXT*()const{return const_cast<VkDescriptorSetVariableDescriptorCountLayoutSupportEXT*>(static_cast<const VkDescriptorSetVariableDescriptorCountLayoutSupportEXT*>(this));}
 };
 
 /*	VkDescriptorSetLayoutSupport
@@ -14797,9 +13935,7 @@ public:
 operator void*() { return pNext; }
 N_descriptor_set_layout_support& n_descriptor_set_variable_descriptor_count_layout_support_EXT(S_descriptor_set_variable_descriptor_count_layout_support_EXT const& next_);
 };
-template<> struct my_class_convert<S_descriptor_set_layout_support> { using type = VkDescriptorSetLayoutSupport;};
-template<> struct my_class_convert<VkDescriptorSetLayoutSupport> { using type = S_descriptor_set_layout_support;};
-struct		S_descriptor_set_layout_support:VkDescriptorSetLayoutSupport{
+struct	S_descriptor_set_layout_support:VkDescriptorSetLayoutSupport{
 private:
 	using VkDescriptorSetLayoutSupport::sType;
 	using VkDescriptorSetLayoutSupport::pNext;
@@ -14813,7 +13949,11 @@ S_descriptor_set_layout_support(
 	VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_SUPPORT
 	,nullptr
 	,supported_}
-	{	}
+	{
+	}
+
+	S_descriptor_set_layout_support& operator=(const VkDescriptorSetLayoutSupport& rhs){static_cast<VkDescriptorSetLayoutSupport&>(*this)=rhs; return *this;}
+	operator VkDescriptorSetLayoutSupport*()const{return const_cast<VkDescriptorSetLayoutSupport*>(static_cast<const VkDescriptorSetLayoutSupport*>(this));}
 
 S_descriptor_set_layout_support& n_descriptor_set_variable_descriptor_count_layout_support_EXT(S_descriptor_set_variable_descriptor_count_layout_support_EXT const& next_);
 void set_pNext(N_descriptor_set_layout_support n_){pNext = n_;}
@@ -14822,9 +13962,7 @@ void set_pNext(N_descriptor_set_layout_support n_){pNext = n_;}
 /*	VkNativeBufferANDROID
 */
 #ifdef VK_USE_PLATFORM_ANDROID_KHR
-template<> struct my_class_convert<S_native_buffer_ANDROID> { using type = VkNativeBufferANDROID;};
-template<> struct my_class_convert<VkNativeBufferANDROID> { using type = S_native_buffer_ANDROID;};
-struct		S_native_buffer_ANDROID:VkNativeBufferANDROID{
+struct	S_native_buffer_ANDROID:VkNativeBufferANDROID{
 private:
 	using VkNativeBufferANDROID::sType;
 	using VkNativeBufferANDROID::pNext;
@@ -14847,29 +13985,32 @@ S_native_buffer_ANDROID(
 	,stride_
 	,format_
 	,usage_}
-	{	}
+	{
+	}
+
+	S_native_buffer_ANDROID& operator=(const VkNativeBufferANDROID& rhs){static_cast<VkNativeBufferANDROID&>(*this)=rhs; return *this;}
+	operator VkNativeBufferANDROID*()const{return const_cast<VkNativeBufferANDROID*>(static_cast<const VkNativeBufferANDROID*>(this));}
 };
 #endif //VK_USE_PLATFORM_ANDROID_KHR
 
 /*	VkShaderResourceUsageAMD
 (returnedonly)
 */
-template<> struct my_class_convert<S_shader_resource_usage_AMD> { using type = VkShaderResourceUsageAMD;};
-template<> struct my_class_convert<VkShaderResourceUsageAMD> { using type = S_shader_resource_usage_AMD;};
-struct		S_shader_resource_usage_AMD:VkShaderResourceUsageAMD{
+struct	S_shader_resource_usage_AMD:VkShaderResourceUsageAMD{
 	using VkShaderResourceUsageAMD::numUsedVgprs;
 	using VkShaderResourceUsageAMD::numUsedSgprs;
 	using VkShaderResourceUsageAMD::ldsSizePerLocalWorkGroup;
 	using VkShaderResourceUsageAMD::ldsUsageSizeInBytes;
 	using VkShaderResourceUsageAMD::scratchMemUsageInBytes;
+
+	S_shader_resource_usage_AMD& operator=(const VkShaderResourceUsageAMD& rhs){static_cast<VkShaderResourceUsageAMD&>(*this)=rhs; return *this;}
+	operator VkShaderResourceUsageAMD*()const{return const_cast<VkShaderResourceUsageAMD*>(static_cast<const VkShaderResourceUsageAMD*>(this));}
 };
 
 /*	VkShaderStatisticsInfoAMD
 (returnedonly)
 */
-template<> struct my_class_convert<S_shader_statistics_info_AMD> { using type = VkShaderStatisticsInfoAMD;};
-template<> struct my_class_convert<VkShaderStatisticsInfoAMD> { using type = S_shader_statistics_info_AMD;};
-struct		S_shader_statistics_info_AMD:VkShaderStatisticsInfoAMD{
+struct	S_shader_statistics_info_AMD:VkShaderStatisticsInfoAMD{
 	using VkShaderStatisticsInfoAMD::shaderStageMask;
 	using VkShaderStatisticsInfoAMD::resourceUsage;
 	using VkShaderStatisticsInfoAMD::numPhysicalVgprs;
@@ -14877,13 +14018,14 @@ struct		S_shader_statistics_info_AMD:VkShaderStatisticsInfoAMD{
 	using VkShaderStatisticsInfoAMD::numAvailableVgprs;
 	using VkShaderStatisticsInfoAMD::numAvailableSgprs;
 	using VkShaderStatisticsInfoAMD::computeWorkGroupSize;
+
+	S_shader_statistics_info_AMD& operator=(const VkShaderStatisticsInfoAMD& rhs){static_cast<VkShaderStatisticsInfoAMD&>(*this)=rhs; return *this;}
+	operator VkShaderStatisticsInfoAMD*()const{return const_cast<VkShaderStatisticsInfoAMD*>(static_cast<const VkShaderStatisticsInfoAMD*>(this));}
 };
 
 /*	VkDebugUtilsObjectNameInfoEXT
 */
-template<> struct my_class_convert<S_debug_utils_object_name_info_EXT> { using type = VkDebugUtilsObjectNameInfoEXT;};
-template<> struct my_class_convert<VkDebugUtilsObjectNameInfoEXT> { using type = S_debug_utils_object_name_info_EXT;};
-struct		S_debug_utils_object_name_info_EXT:VkDebugUtilsObjectNameInfoEXT{
+struct	S_debug_utils_object_name_info_EXT:VkDebugUtilsObjectNameInfoEXT{
 private:
 	using VkDebugUtilsObjectNameInfoEXT::sType;
 	using VkDebugUtilsObjectNameInfoEXT::pNext;
@@ -14903,14 +14045,16 @@ S_debug_utils_object_name_info_EXT(
 	,objectType_
 	,objectHandle_
 	,pObjectName_}
-	{	}
+	{
+	}
+
+	S_debug_utils_object_name_info_EXT& operator=(const VkDebugUtilsObjectNameInfoEXT& rhs){static_cast<VkDebugUtilsObjectNameInfoEXT&>(*this)=rhs; return *this;}
+	operator VkDebugUtilsObjectNameInfoEXT*()const{return const_cast<VkDebugUtilsObjectNameInfoEXT*>(static_cast<const VkDebugUtilsObjectNameInfoEXT*>(this));}
 };
 
 /*	VkDebugUtilsObjectTagInfoEXT
 */
-template<> struct my_class_convert<S_debug_utils_object_tag_info_EXT> { using type = VkDebugUtilsObjectTagInfoEXT;};
-template<> struct my_class_convert<VkDebugUtilsObjectTagInfoEXT> { using type = S_debug_utils_object_tag_info_EXT;};
-struct		S_debug_utils_object_tag_info_EXT:VkDebugUtilsObjectTagInfoEXT{
+struct	S_debug_utils_object_tag_info_EXT:VkDebugUtilsObjectTagInfoEXT{
 private:
 	using VkDebugUtilsObjectTagInfoEXT::sType;
 	using VkDebugUtilsObjectTagInfoEXT::pNext;
@@ -14936,14 +14080,16 @@ S_debug_utils_object_tag_info_EXT(
 	,tagName_
 	,tagSize_
 	,pTag_}
-	{	}
+	{
+	}
+
+	S_debug_utils_object_tag_info_EXT& operator=(const VkDebugUtilsObjectTagInfoEXT& rhs){static_cast<VkDebugUtilsObjectTagInfoEXT&>(*this)=rhs; return *this;}
+	operator VkDebugUtilsObjectTagInfoEXT*()const{return const_cast<VkDebugUtilsObjectTagInfoEXT*>(static_cast<const VkDebugUtilsObjectTagInfoEXT*>(this));}
 };
 
 /*	VkDebugUtilsLabelEXT
 */
-template<> struct my_class_convert<S_debug_utils_label_EXT> { using type = VkDebugUtilsLabelEXT;};
-template<> struct my_class_convert<VkDebugUtilsLabelEXT> { using type = S_debug_utils_label_EXT;};
-struct		S_debug_utils_label_EXT:VkDebugUtilsLabelEXT{
+struct	S_debug_utils_label_EXT:VkDebugUtilsLabelEXT{
 private:
 	using VkDebugUtilsLabelEXT::sType;
 	using VkDebugUtilsLabelEXT::pNext;
@@ -14959,15 +14105,18 @@ S_debug_utils_label_EXT(
 	VK_STRUCTURE_TYPE_DEBUG_UTILS_LABEL_EXT
 	,nullptr
 	,pLabelName_
-	,color_}
-	{	}
+	,{}}
+	{
+		memcpy(color,color_,sizeof(color_) );
+	}
+
+	S_debug_utils_label_EXT& operator=(const VkDebugUtilsLabelEXT& rhs){static_cast<VkDebugUtilsLabelEXT&>(*this)=rhs; return *this;}
+	operator VkDebugUtilsLabelEXT*()const{return const_cast<VkDebugUtilsLabelEXT*>(static_cast<const VkDebugUtilsLabelEXT*>(this));}
 };
 
 /*	VkDebugUtilsMessengerCallbackDataEXT
 */
-template<> struct my_class_convert<S_debug_utils_messenger_callback_data_EXT> { using type = VkDebugUtilsMessengerCallbackDataEXT;};
-template<> struct my_class_convert<VkDebugUtilsMessengerCallbackDataEXT> { using type = S_debug_utils_messenger_callback_data_EXT;};
-struct		S_debug_utils_messenger_callback_data_EXT:VkDebugUtilsMessengerCallbackDataEXT{
+struct	S_debug_utils_messenger_callback_data_EXT:VkDebugUtilsMessengerCallbackDataEXT{
 private:
 	using VkDebugUtilsMessengerCallbackDataEXT::sType;
 	using VkDebugUtilsMessengerCallbackDataEXT::pNext;
@@ -15008,14 +14157,16 @@ S_debug_utils_messenger_callback_data_EXT(
 	,pCmdBufLabels_
 	,objectCount_
 	,pObjects_}
-	{	}
+	{
+	}
+
+	S_debug_utils_messenger_callback_data_EXT& operator=(const VkDebugUtilsMessengerCallbackDataEXT& rhs){static_cast<VkDebugUtilsMessengerCallbackDataEXT&>(*this)=rhs; return *this;}
+	operator VkDebugUtilsMessengerCallbackDataEXT*()const{return const_cast<VkDebugUtilsMessengerCallbackDataEXT*>(static_cast<const VkDebugUtilsMessengerCallbackDataEXT*>(this));}
 };
 
 /*	VkMemoryHostPointerPropertiesEXT
 */
-template<> struct my_class_convert<S_memory_host_pointer_properties_EXT> { using type = VkMemoryHostPointerPropertiesEXT;};
-template<> struct my_class_convert<VkMemoryHostPointerPropertiesEXT> { using type = S_memory_host_pointer_properties_EXT;};
-struct		S_memory_host_pointer_properties_EXT:VkMemoryHostPointerPropertiesEXT{
+struct	S_memory_host_pointer_properties_EXT:VkMemoryHostPointerPropertiesEXT{
 private:
 	using VkMemoryHostPointerPropertiesEXT::sType;
 	using VkMemoryHostPointerPropertiesEXT::pNext;
@@ -15029,14 +14180,16 @@ S_memory_host_pointer_properties_EXT(
 	VK_STRUCTURE_TYPE_MEMORY_HOST_POINTER_PROPERTIES_EXT
 	,nullptr
 	,memoryTypeBits_}
-	{	}
+	{
+	}
+
+	S_memory_host_pointer_properties_EXT& operator=(const VkMemoryHostPointerPropertiesEXT& rhs){static_cast<VkMemoryHostPointerPropertiesEXT&>(*this)=rhs; return *this;}
+	operator VkMemoryHostPointerPropertiesEXT*()const{return const_cast<VkMemoryHostPointerPropertiesEXT*>(static_cast<const VkMemoryHostPointerPropertiesEXT*>(this));}
 };
 
 /*	VkAttachmentDescription2KHR
 */
-template<> struct my_class_convert<S_attachment_description2_KHR> { using type = VkAttachmentDescription2KHR;};
-template<> struct my_class_convert<VkAttachmentDescription2KHR> { using type = S_attachment_description2_KHR;};
-struct		S_attachment_description2_KHR:VkAttachmentDescription2KHR{
+struct	S_attachment_description2_KHR:VkAttachmentDescription2KHR{
 private:
 	using VkAttachmentDescription2KHR::sType;
 	using VkAttachmentDescription2KHR::pNext;
@@ -15074,14 +14227,16 @@ S_attachment_description2_KHR(
 	,stencilStoreOp_
 	,initialLayout_
 	,finalLayout_}
-	{	}
+	{
+	}
+
+	S_attachment_description2_KHR& operator=(const VkAttachmentDescription2KHR& rhs){static_cast<VkAttachmentDescription2KHR&>(*this)=rhs; return *this;}
+	operator VkAttachmentDescription2KHR*()const{return const_cast<VkAttachmentDescription2KHR*>(static_cast<const VkAttachmentDescription2KHR*>(this));}
 };
 
 /*	VkAttachmentReference2KHR
 */
-template<> struct my_class_convert<S_attachment_reference2_KHR> { using type = VkAttachmentReference2KHR;};
-template<> struct my_class_convert<VkAttachmentReference2KHR> { using type = S_attachment_reference2_KHR;};
-struct		S_attachment_reference2_KHR:VkAttachmentReference2KHR{
+struct	S_attachment_reference2_KHR:VkAttachmentReference2KHR{
 private:
 	using VkAttachmentReference2KHR::sType;
 	using VkAttachmentReference2KHR::pNext;
@@ -15101,14 +14256,16 @@ S_attachment_reference2_KHR(
 	,attachment_
 	,layout_
 	,aspectMask_}
-	{	}
+	{
+	}
+
+	S_attachment_reference2_KHR& operator=(const VkAttachmentReference2KHR& rhs){static_cast<VkAttachmentReference2KHR&>(*this)=rhs; return *this;}
+	operator VkAttachmentReference2KHR*()const{return const_cast<VkAttachmentReference2KHR*>(static_cast<const VkAttachmentReference2KHR*>(this));}
 };
 
 /*	VkSubpassDescription2KHR
 */
-template<> struct my_class_convert<S_subpass_description2_KHR> { using type = VkSubpassDescription2KHR;};
-template<> struct my_class_convert<VkSubpassDescription2KHR> { using type = S_subpass_description2_KHR;};
-struct		S_subpass_description2_KHR:VkSubpassDescription2KHR{
+struct	S_subpass_description2_KHR:VkSubpassDescription2KHR{
 private:
 	using VkSubpassDescription2KHR::sType;
 	using VkSubpassDescription2KHR::pNext;
@@ -15141,7 +14298,7 @@ S_subpass_description2_KHR(
 	:VkSubpassDescription2KHR{
 	VK_STRUCTURE_TYPE_SUBPASS_DESCRIPTION_2_KHR
 	,nullptr
-	,flags_
+	,static_cast<VkFlags>(flags_)
 	,pipelineBindPoint_
 	,viewMask_
 	,inputAttachmentCount_
@@ -15152,14 +14309,16 @@ S_subpass_description2_KHR(
 	,pDepthStencilAttachment_
 	,preserveAttachmentCount_
 	,pPreserveAttachments_}
-	{	}
+	{
+	}
+
+	S_subpass_description2_KHR& operator=(const VkSubpassDescription2KHR& rhs){static_cast<VkSubpassDescription2KHR&>(*this)=rhs; return *this;}
+	operator VkSubpassDescription2KHR*()const{return const_cast<VkSubpassDescription2KHR*>(static_cast<const VkSubpassDescription2KHR*>(this));}
 };
 
 /*	VkSubpassDependency2KHR
 */
-template<> struct my_class_convert<S_subpass_dependency2_KHR> { using type = VkSubpassDependency2KHR;};
-template<> struct my_class_convert<VkSubpassDependency2KHR> { using type = S_subpass_dependency2_KHR;};
-struct		S_subpass_dependency2_KHR:VkSubpassDependency2KHR{
+struct	S_subpass_dependency2_KHR:VkSubpassDependency2KHR{
 private:
 	using VkSubpassDependency2KHR::sType;
 	using VkSubpassDependency2KHR::pNext;
@@ -15194,14 +14353,16 @@ S_subpass_dependency2_KHR(
 	,dstAccessMask_
 	,dependencyFlags_
 	,viewOffset_}
-	{	}
+	{
+	}
+
+	S_subpass_dependency2_KHR& operator=(const VkSubpassDependency2KHR& rhs){static_cast<VkSubpassDependency2KHR&>(*this)=rhs; return *this;}
+	operator VkSubpassDependency2KHR*()const{return const_cast<VkSubpassDependency2KHR*>(static_cast<const VkSubpassDependency2KHR*>(this));}
 };
 
 /*	VkRenderPassCreateInfo2KHR
 */
-template<> struct my_class_convert<S_render_pass_create_info2_KHR> { using type = VkRenderPassCreateInfo2KHR;};
-template<> struct my_class_convert<VkRenderPassCreateInfo2KHR> { using type = S_render_pass_create_info2_KHR;};
-struct		S_render_pass_create_info2_KHR:VkRenderPassCreateInfo2KHR{
+struct	S_render_pass_create_info2_KHR:VkRenderPassCreateInfo2KHR{
 private:
 	using VkRenderPassCreateInfo2KHR::sType;
 	using VkRenderPassCreateInfo2KHR::pNext;
@@ -15218,7 +14379,7 @@ public:
 
 S_render_pass_create_info2_KHR():VkRenderPassCreateInfo2KHR{VK_STRUCTURE_TYPE_RENDER_PASS_CREATE_INFO_2_KHR,nullptr}{}
 S_render_pass_create_info2_KHR(
-	F_render_pass_create flags_,
+	VkRenderPassCreateFlags flags_,
 	uint32_t attachmentCount_,
 	const S_attachment_description2_KHR * pAttachments_,
 	uint32_t subpassCount_,
@@ -15239,14 +14400,16 @@ S_render_pass_create_info2_KHR(
 	,pDependencies_
 	,correlatedViewMaskCount_
 	,pCorrelatedViewMasks_}
-	{	}
+	{
+	}
+
+	S_render_pass_create_info2_KHR& operator=(const VkRenderPassCreateInfo2KHR& rhs){static_cast<VkRenderPassCreateInfo2KHR&>(*this)=rhs; return *this;}
+	operator VkRenderPassCreateInfo2KHR*()const{return const_cast<VkRenderPassCreateInfo2KHR*>(static_cast<const VkRenderPassCreateInfo2KHR*>(this));}
 };
 
 /*	VkSubpassBeginInfoKHR
 */
-template<> struct my_class_convert<S_subpass_begin_info_KHR> { using type = VkSubpassBeginInfoKHR;};
-template<> struct my_class_convert<VkSubpassBeginInfoKHR> { using type = S_subpass_begin_info_KHR;};
-struct		S_subpass_begin_info_KHR:VkSubpassBeginInfoKHR{
+struct	S_subpass_begin_info_KHR:VkSubpassBeginInfoKHR{
 private:
 	using VkSubpassBeginInfoKHR::sType;
 	using VkSubpassBeginInfoKHR::pNext;
@@ -15260,19 +14423,24 @@ S_subpass_begin_info_KHR(
 	VK_STRUCTURE_TYPE_SUBPASS_BEGIN_INFO_KHR
 	,nullptr
 	,contents_}
-	{	}
+	{
+	}
+
+	S_subpass_begin_info_KHR& operator=(const VkSubpassBeginInfoKHR& rhs){static_cast<VkSubpassBeginInfoKHR&>(*this)=rhs; return *this;}
+	operator VkSubpassBeginInfoKHR*()const{return const_cast<VkSubpassBeginInfoKHR*>(static_cast<const VkSubpassBeginInfoKHR*>(this));}
 };
 
 /*	VkSubpassEndInfoKHR
 */
-template<> struct my_class_convert<S_subpass_end_info_KHR> { using type = VkSubpassEndInfoKHR;};
-template<> struct my_class_convert<VkSubpassEndInfoKHR> { using type = S_subpass_end_info_KHR;};
-struct		S_subpass_end_info_KHR:VkSubpassEndInfoKHR{
+struct	S_subpass_end_info_KHR:VkSubpassEndInfoKHR{
 private:
 	using VkSubpassEndInfoKHR::sType;
 	using VkSubpassEndInfoKHR::pNext;
 
 S_subpass_end_info_KHR():VkSubpassEndInfoKHR{VK_STRUCTURE_TYPE_SUBPASS_END_INFO_KHR,nullptr}{}
+
+	S_subpass_end_info_KHR& operator=(const VkSubpassEndInfoKHR& rhs){static_cast<VkSubpassEndInfoKHR&>(*this)=rhs; return *this;}
+	operator VkSubpassEndInfoKHR*()const{return const_cast<VkSubpassEndInfoKHR*>(static_cast<const VkSubpassEndInfoKHR*>(this));}
 };
 
 /*	VkAndroidHardwareBufferFormatPropertiesANDROID
@@ -15280,9 +14448,7 @@ S_subpass_end_info_KHR():VkSubpassEndInfoKHR{VK_STRUCTURE_TYPE_SUBPASS_END_INFO_
 ex to: VkAndroidHardwareBufferPropertiesANDROID
 */
 #ifdef VK_USE_PLATFORM_ANDROID_KHR
-template<> struct my_class_convert<S_android_hardware_buffer_format_properties_ANDROID> { using type = VkAndroidHardwareBufferFormatPropertiesANDROID;};
-template<> struct my_class_convert<VkAndroidHardwareBufferFormatPropertiesANDROID> { using type = S_android_hardware_buffer_format_properties_ANDROID;};
-struct		S_android_hardware_buffer_format_properties_ANDROID:VkAndroidHardwareBufferFormatPropertiesANDROID{
+struct	S_android_hardware_buffer_format_properties_ANDROID:VkAndroidHardwareBufferFormatPropertiesANDROID{
 private:
 	using VkAndroidHardwareBufferFormatPropertiesANDROID::sType;
 	using VkAndroidHardwareBufferFormatPropertiesANDROID::pNext;
@@ -15317,11 +14483,15 @@ S_android_hardware_buffer_format_properties_ANDROID(
 	,suggestedYcbcrRange_
 	,suggestedXChromaOffset_
 	,suggestedYChromaOffset_}
-	{	}
+	{
+	}
 
 #ifdef VK_USE_PLATFORM_ANDROID_KHR
 friend S_android_hardware_buffer_properties_ANDROID;
 #endif
+
+	S_android_hardware_buffer_format_properties_ANDROID& operator=(const VkAndroidHardwareBufferFormatPropertiesANDROID& rhs){static_cast<VkAndroidHardwareBufferFormatPropertiesANDROID&>(*this)=rhs; return *this;}
+	operator VkAndroidHardwareBufferFormatPropertiesANDROID*()const{return const_cast<VkAndroidHardwareBufferFormatPropertiesANDROID*>(static_cast<const VkAndroidHardwareBufferFormatPropertiesANDROID*>(this));}
 };
 #endif //VK_USE_PLATFORM_ANDROID_KHR
 
@@ -15341,9 +14511,7 @@ operator void*() { return pNext; }
 N_android_hardware_buffer_properties_ANDROID& n_android_hardware_buffer_format_properties_ANDROID(S_android_hardware_buffer_format_properties_ANDROID const& next_);
 #endif
 };
-template<> struct my_class_convert<S_android_hardware_buffer_properties_ANDROID> { using type = VkAndroidHardwareBufferPropertiesANDROID;};
-template<> struct my_class_convert<VkAndroidHardwareBufferPropertiesANDROID> { using type = S_android_hardware_buffer_properties_ANDROID;};
-struct		S_android_hardware_buffer_properties_ANDROID:VkAndroidHardwareBufferPropertiesANDROID{
+struct	S_android_hardware_buffer_properties_ANDROID:VkAndroidHardwareBufferPropertiesANDROID{
 private:
 	using VkAndroidHardwareBufferPropertiesANDROID::sType;
 	using VkAndroidHardwareBufferPropertiesANDROID::pNext;
@@ -15360,7 +14528,11 @@ S_android_hardware_buffer_properties_ANDROID(
 	,nullptr
 	,allocationSize_
 	,memoryTypeBits_}
-	{	}
+	{
+	}
+
+	S_android_hardware_buffer_properties_ANDROID& operator=(const VkAndroidHardwareBufferPropertiesANDROID& rhs){static_cast<VkAndroidHardwareBufferPropertiesANDROID&>(*this)=rhs; return *this;}
+	operator VkAndroidHardwareBufferPropertiesANDROID*()const{return const_cast<VkAndroidHardwareBufferPropertiesANDROID*>(static_cast<const VkAndroidHardwareBufferPropertiesANDROID*>(this));}
 
 #ifdef VK_USE_PLATFORM_ANDROID_KHR
 S_android_hardware_buffer_properties_ANDROID& n_android_hardware_buffer_format_properties_ANDROID(S_android_hardware_buffer_format_properties_ANDROID const& next_);
@@ -15372,9 +14544,7 @@ void set_pNext(N_android_hardware_buffer_properties_ANDROID n_){pNext = n_;}
 /*	VkMemoryGetAndroidHardwareBufferInfoANDROID
 */
 #ifdef VK_USE_PLATFORM_ANDROID_KHR
-template<> struct my_class_convert<S_memory_get_android_hardware_buffer_info_ANDROID> { using type = VkMemoryGetAndroidHardwareBufferInfoANDROID;};
-template<> struct my_class_convert<VkMemoryGetAndroidHardwareBufferInfoANDROID> { using type = S_memory_get_android_hardware_buffer_info_ANDROID;};
-struct		S_memory_get_android_hardware_buffer_info_ANDROID:VkMemoryGetAndroidHardwareBufferInfoANDROID{
+struct	S_memory_get_android_hardware_buffer_info_ANDROID:VkMemoryGetAndroidHardwareBufferInfoANDROID{
 private:
 	using VkMemoryGetAndroidHardwareBufferInfoANDROID::sType;
 	using VkMemoryGetAndroidHardwareBufferInfoANDROID::pNext;
@@ -15388,16 +14558,18 @@ S_memory_get_android_hardware_buffer_info_ANDROID(
 	VK_STRUCTURE_TYPE_MEMORY_GET_ANDROID_HARDWARE_BUFFER_INFO_ANDROID
 	,nullptr
 	,memory_}
-	{	}
+	{
+	}
+
+	S_memory_get_android_hardware_buffer_info_ANDROID& operator=(const VkMemoryGetAndroidHardwareBufferInfoANDROID& rhs){static_cast<VkMemoryGetAndroidHardwareBufferInfoANDROID&>(*this)=rhs; return *this;}
+	operator VkMemoryGetAndroidHardwareBufferInfoANDROID*()const{return const_cast<VkMemoryGetAndroidHardwareBufferInfoANDROID*>(static_cast<const VkMemoryGetAndroidHardwareBufferInfoANDROID*>(this));}
 };
 #endif //VK_USE_PLATFORM_ANDROID_KHR
 
 /*	VkCheckpointDataNV
 (returnedonly)
 */
-template<> struct my_class_convert<S_checkpoint_data_NV> { using type = VkCheckpointDataNV;};
-template<> struct my_class_convert<VkCheckpointDataNV> { using type = S_checkpoint_data_NV;};
-struct		S_checkpoint_data_NV:VkCheckpointDataNV{
+struct	S_checkpoint_data_NV:VkCheckpointDataNV{
 private:
 	using VkCheckpointDataNV::sType;
 	using VkCheckpointDataNV::pNext;
@@ -15414,290 +14586,12 @@ S_checkpoint_data_NV(
 	,nullptr
 	,stage_
 	,pCheckpointMarker_}
-	{	}
+	{
+	}
+
+	S_checkpoint_data_NV& operator=(const VkCheckpointDataNV& rhs){static_cast<VkCheckpointDataNV&>(*this)=rhs; return *this;}
+	operator VkCheckpointDataNV*()const{return const_cast<VkCheckpointDataNV*>(static_cast<const VkCheckpointDataNV*>(this));}
 };
-
-/*	VkDrawMeshTasksIndirectCommandNV
-*/
-template<> struct my_class_convert<S_draw_mesh_tasks_indirect_command_NV> { using type = VkDrawMeshTasksIndirectCommandNV;};
-template<> struct my_class_convert<VkDrawMeshTasksIndirectCommandNV> { using type = S_draw_mesh_tasks_indirect_command_NV;};
-struct		S_draw_mesh_tasks_indirect_command_NV:VkDrawMeshTasksIndirectCommandNV{
-	using VkDrawMeshTasksIndirectCommandNV::taskCount;
-	using VkDrawMeshTasksIndirectCommandNV::firstTask;
-};
-
-/*	VkRaytracingPipelineCreateInfoNVX
-*/
-template<> struct my_class_convert<S_raytracing_pipeline_create_info_NVX> { using type = VkRaytracingPipelineCreateInfoNVX;};
-template<> struct my_class_convert<VkRaytracingPipelineCreateInfoNVX> { using type = S_raytracing_pipeline_create_info_NVX;};
-struct		S_raytracing_pipeline_create_info_NVX:VkRaytracingPipelineCreateInfoNVX{
-private:
-	using VkRaytracingPipelineCreateInfoNVX::sType;
-	using VkRaytracingPipelineCreateInfoNVX::pNext;
-public:
-	using VkRaytracingPipelineCreateInfoNVX::flags;
-	using VkRaytracingPipelineCreateInfoNVX::stageCount;
-	using VkRaytracingPipelineCreateInfoNVX::pStages;
-	using VkRaytracingPipelineCreateInfoNVX::pGroupNumbers;
-	using VkRaytracingPipelineCreateInfoNVX::maxRecursionDepth;
-	using VkRaytracingPipelineCreateInfoNVX::layout;
-	using VkRaytracingPipelineCreateInfoNVX::basePipelineHandle;
-	using VkRaytracingPipelineCreateInfoNVX::basePipelineIndex;
-
-S_raytracing_pipeline_create_info_NVX():VkRaytracingPipelineCreateInfoNVX{VK_STRUCTURE_TYPE_RAYTRACING_PIPELINE_CREATE_INFO_NVX,nullptr}{}
-S_raytracing_pipeline_create_info_NVX(
-	F_pipeline_create flags_,
-	uint32_t stageCount_,
-	const S_pipeline_shader_stage_create_info * pStages_,
-	const uint32_t * pGroupNumbers_,
-	uint32_t maxRecursionDepth_,
-	VkPipelineLayout layout_,
-	VkPipeline basePipelineHandle_,
-	int32_t basePipelineIndex_)
-	:VkRaytracingPipelineCreateInfoNVX{
-	VK_STRUCTURE_TYPE_RAYTRACING_PIPELINE_CREATE_INFO_NVX
-	,nullptr
-	,flags_
-	,stageCount_
-	,pStages_
-	,pGroupNumbers_
-	,maxRecursionDepth_
-	,layout_
-	,basePipelineHandle_
-	,basePipelineIndex_}
-	{	}
-};
-
-/*	VkGeometryTrianglesNVX
-*/
-template<> struct my_class_convert<S_geometry_triangles_NVX> { using type = VkGeometryTrianglesNVX;};
-template<> struct my_class_convert<VkGeometryTrianglesNVX> { using type = S_geometry_triangles_NVX;};
-struct		S_geometry_triangles_NVX:VkGeometryTrianglesNVX{
-private:
-	using VkGeometryTrianglesNVX::sType;
-	using VkGeometryTrianglesNVX::pNext;
-public:
-	using VkGeometryTrianglesNVX::vertexData;
-	using VkGeometryTrianglesNVX::vertexOffset;
-	using VkGeometryTrianglesNVX::vertexCount;
-	using VkGeometryTrianglesNVX::vertexStride;
-	using VkGeometryTrianglesNVX::vertexFormat;
-	using VkGeometryTrianglesNVX::indexData;
-	using VkGeometryTrianglesNVX::indexOffset;
-	using VkGeometryTrianglesNVX::indexCount;
-	using VkGeometryTrianglesNVX::indexType;
-	using VkGeometryTrianglesNVX::transformData;
-	using VkGeometryTrianglesNVX::transformOffset;
-
-S_geometry_triangles_NVX():VkGeometryTrianglesNVX{VK_STRUCTURE_TYPE_GEOMETRY_TRIANGLES_NVX,nullptr}{}
-S_geometry_triangles_NVX(
-	VkBuffer vertexData_,
-	VkDeviceSize vertexOffset_,
-	uint32_t vertexCount_,
-	VkDeviceSize vertexStride_,
-	E_format vertexFormat_,
-	VkBuffer indexData_,
-	VkDeviceSize indexOffset_,
-	uint32_t indexCount_,
-	E_index_type indexType_,
-	VkBuffer transformData_,
-	VkDeviceSize transformOffset_)
-	:VkGeometryTrianglesNVX{
-	VK_STRUCTURE_TYPE_GEOMETRY_TRIANGLES_NVX
-	,nullptr
-	,vertexData_
-	,vertexOffset_
-	,vertexCount_
-	,vertexStride_
-	,vertexFormat_
-	,indexData_
-	,indexOffset_
-	,indexCount_
-	,indexType_
-	,transformData_
-	,transformOffset_}
-	{	}
-};
-
-/*	VkGeometryAABBNVX
-*/
-template<> struct my_class_convert<S_geometry_aabb_NVX> { using type = VkGeometryAABBNVX;};
-template<> struct my_class_convert<VkGeometryAABBNVX> { using type = S_geometry_aabb_NVX;};
-struct		S_geometry_aabb_NVX:VkGeometryAABBNVX{
-private:
-	using VkGeometryAABBNVX::sType;
-	using VkGeometryAABBNVX::pNext;
-public:
-	using VkGeometryAABBNVX::aabbData;
-	using VkGeometryAABBNVX::numAABBs;
-	using VkGeometryAABBNVX::stride;
-	using VkGeometryAABBNVX::offset;
-
-S_geometry_aabb_NVX():VkGeometryAABBNVX{VK_STRUCTURE_TYPE_GEOMETRY_AABB_NVX,nullptr}{}
-S_geometry_aabb_NVX(
-	VkBuffer aabbData_,
-	uint32_t numAABBs_,
-	uint32_t stride_,
-	VkDeviceSize offset_)
-	:VkGeometryAABBNVX{
-	VK_STRUCTURE_TYPE_GEOMETRY_AABB_NVX
-	,nullptr
-	,aabbData_
-	,numAABBs_
-	,stride_
-	,offset_}
-	{	}
-};
-
-/*	VkGeometryDataNVX
-*/
-template<> struct my_class_convert<S_geometry_data_NVX> { using type = VkGeometryDataNVX;};
-template<> struct my_class_convert<VkGeometryDataNVX> { using type = S_geometry_data_NVX;};
-struct		S_geometry_data_NVX:VkGeometryDataNVX{
-	using VkGeometryDataNVX::triangles;
-	using VkGeometryDataNVX::aabbs;
-};
-
-/*	VkGeometryNVX
-*/
-template<> struct my_class_convert<S_geometry_NVX> { using type = VkGeometryNVX;};
-template<> struct my_class_convert<VkGeometryNVX> { using type = S_geometry_NVX;};
-struct		S_geometry_NVX:VkGeometryNVX{
-private:
-	using VkGeometryNVX::sType;
-	using VkGeometryNVX::pNext;
-public:
-	using VkGeometryNVX::geometryType;
-	using VkGeometryNVX::geometry;
-	using VkGeometryNVX::flags;
-
-S_geometry_NVX():VkGeometryNVX{VK_STRUCTURE_TYPE_GEOMETRY_NVX,nullptr}{}
-S_geometry_NVX(
-	E_geometry_type_NVX geometryType_,
-	S_geometry_data_NVX geometry_,
-	F_geometry_NVX flags_)
-	:VkGeometryNVX{
-	VK_STRUCTURE_TYPE_GEOMETRY_NVX
-	,nullptr
-	,geometryType_
-	,geometry_
-	,flags_}
-	{	}
-};
-
-/*	VkAccelerationStructureCreateInfoNVX
-*/
-template<> struct my_class_convert<S_acceleration_structure_create_info_NVX> { using type = VkAccelerationStructureCreateInfoNVX;};
-template<> struct my_class_convert<VkAccelerationStructureCreateInfoNVX> { using type = S_acceleration_structure_create_info_NVX;};
-struct		S_acceleration_structure_create_info_NVX:VkAccelerationStructureCreateInfoNVX{
-private:
-	using VkAccelerationStructureCreateInfoNVX::sType;
-	using VkAccelerationStructureCreateInfoNVX::pNext;
-public:
-	using VkAccelerationStructureCreateInfoNVX::type;
-	using VkAccelerationStructureCreateInfoNVX::flags;
-	using VkAccelerationStructureCreateInfoNVX::compactedSize;
-	using VkAccelerationStructureCreateInfoNVX::instanceCount;
-	using VkAccelerationStructureCreateInfoNVX::geometryCount;
-	using VkAccelerationStructureCreateInfoNVX::pGeometries;
-
-S_acceleration_structure_create_info_NVX():VkAccelerationStructureCreateInfoNVX{VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_CREATE_INFO_NVX,nullptr}{}
-S_acceleration_structure_create_info_NVX(
-	E_acceleration_structure_type_NVX type_,
-	F_build_acceleration_structure_NVX flags_,
-	VkDeviceSize compactedSize_,
-	uint32_t instanceCount_,
-	uint32_t geometryCount_,
-	const S_geometry_NVX * pGeometries_)
-	:VkAccelerationStructureCreateInfoNVX{
-	VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_CREATE_INFO_NVX
-	,nullptr
-	,type_
-	,flags_
-	,compactedSize_
-	,instanceCount_
-	,geometryCount_
-	,pGeometries_}
-	{	}
-};
-
-/*	VkBindAccelerationStructureMemoryInfoNVX
-*/
-template<> struct my_class_convert<S_bind_acceleration_structure_memory_info_NVX> { using type = VkBindAccelerationStructureMemoryInfoNVX;};
-template<> struct my_class_convert<VkBindAccelerationStructureMemoryInfoNVX> { using type = S_bind_acceleration_structure_memory_info_NVX;};
-struct		S_bind_acceleration_structure_memory_info_NVX:VkBindAccelerationStructureMemoryInfoNVX{
-private:
-	using VkBindAccelerationStructureMemoryInfoNVX::sType;
-	using VkBindAccelerationStructureMemoryInfoNVX::pNext;
-public:
-	using VkBindAccelerationStructureMemoryInfoNVX::accelerationStructure;
-	using VkBindAccelerationStructureMemoryInfoNVX::memory;
-	using VkBindAccelerationStructureMemoryInfoNVX::memoryOffset;
-	using VkBindAccelerationStructureMemoryInfoNVX::deviceIndexCount;
-	using VkBindAccelerationStructureMemoryInfoNVX::pDeviceIndices;
-
-S_bind_acceleration_structure_memory_info_NVX():VkBindAccelerationStructureMemoryInfoNVX{VK_STRUCTURE_TYPE_BIND_ACCELERATION_STRUCTURE_MEMORY_INFO_NVX,nullptr}{}
-S_bind_acceleration_structure_memory_info_NVX(
-	VkAccelerationStructureNVX accelerationStructure_,
-	VkDeviceMemory memory_,
-	VkDeviceSize memoryOffset_,
-	uint32_t deviceIndexCount_,
-	const uint32_t * pDeviceIndices_)
-	:VkBindAccelerationStructureMemoryInfoNVX{
-	VK_STRUCTURE_TYPE_BIND_ACCELERATION_STRUCTURE_MEMORY_INFO_NVX
-	,nullptr
-	,accelerationStructure_
-	,memory_
-	,memoryOffset_
-	,deviceIndexCount_
-	,pDeviceIndices_}
-	{	}
-};
-
-/*	VkAccelerationStructureMemoryRequirementsInfoNVX
-*/
-template<> struct my_class_convert<S_acceleration_structure_memory_requirements_info_NVX> { using type = VkAccelerationStructureMemoryRequirementsInfoNVX;};
-template<> struct my_class_convert<VkAccelerationStructureMemoryRequirementsInfoNVX> { using type = S_acceleration_structure_memory_requirements_info_NVX;};
-struct		S_acceleration_structure_memory_requirements_info_NVX:VkAccelerationStructureMemoryRequirementsInfoNVX{
-private:
-	using VkAccelerationStructureMemoryRequirementsInfoNVX::sType;
-	using VkAccelerationStructureMemoryRequirementsInfoNVX::pNext;
-public:
-	using VkAccelerationStructureMemoryRequirementsInfoNVX::accelerationStructure;
-
-S_acceleration_structure_memory_requirements_info_NVX():VkAccelerationStructureMemoryRequirementsInfoNVX{VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_MEMORY_REQUIREMENTS_INFO_NVX,nullptr}{}
-S_acceleration_structure_memory_requirements_info_NVX(
-	VkAccelerationStructureNVX accelerationStructure_)
-	:VkAccelerationStructureMemoryRequirementsInfoNVX{
-	VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_MEMORY_REQUIREMENTS_INFO_NVX
-	,nullptr
-	,accelerationStructure_}
-	{	}
-};
-
-/*	VkImageDrmFormatModifierPropertiesEXT
-(returnedonly)
-*/
-#ifdef LAKA_UNKNOW
-template<> struct my_class_convert<S_image_drm_format_modifier_properties_EXT> { using type = VkImageDrmFormatModifierPropertiesEXT;};
-template<> struct my_class_convert<VkImageDrmFormatModifierPropertiesEXT> { using type = S_image_drm_format_modifier_properties_EXT;};
-struct		S_image_drm_format_modifier_properties_EXT:VkImageDrmFormatModifierPropertiesEXT{
-private:
-	using VkImageDrmFormatModifierPropertiesEXT::sType;
-	using VkImageDrmFormatModifierPropertiesEXT::pNext;
-public:
-	using VkImageDrmFormatModifierPropertiesEXT::drmFormatModifier;
-
-S_image_drm_format_modifier_properties_EXT():VkImageDrmFormatModifierPropertiesEXT{VK_STRUCTURE_TYPE_IMAGE_DRM_FORMAT_MODIFIER_PROPERTIES_EXT,nullptr}{}
-S_image_drm_format_modifier_properties_EXT(
-	uint64_t drmFormatModifier_)
-	:VkImageDrmFormatModifierPropertiesEXT{
-	VK_STRUCTURE_TYPE_IMAGE_DRM_FORMAT_MODIFIER_PROPERTIES_EXT
-	,nullptr
-	,drmFormatModifier_}
-	{	}
-};
-#endif //LAKA_UNKNOW
 
 
 }}

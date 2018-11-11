@@ -105,19 +105,6 @@ return *this;
 }
 
 N_physical_device_features2& N_physical_device_features2::
-n_physical_device_inline_uniform_block_features_EXT(S_physical_device_inline_uniform_block_features_EXT const& next_)
-{
-void* next = (void*)&next_;void* tail;
-if (pNext != nullptr){
-do {tail = next;next = ((S_base_structure*)next)->pNext;} 
-while (next != nullptr);
-((S_base_structure*)tail)->pNext = (void*)pNext;
-}
-pNext = (void*)&next_;
-return *this;
-}
-
-N_physical_device_features2& N_physical_device_features2::
 n_physical_device_shader_draw_parameter_features(S_physical_device_shader_draw_parameter_features const& next_)
 {
 void* next = (void*)&next_;void* tail;
@@ -158,163 +145,6 @@ return *this;
 
 N_physical_device_features2& N_physical_device_features2::
 n_physical_device_conditional_rendering_features_EXT(S_physical_device_conditional_rendering_features_EXT const& next_)
-{
-void* next = (void*)&next_;void* tail;
-if (pNext != nullptr){
-do {tail = next;next = ((S_base_structure*)next)->pNext;} 
-while (next != nullptr);
-((S_base_structure*)tail)->pNext = (void*)pNext;
-}
-pNext = (void*)&next_;
-return *this;
-}
-
-N_physical_device_features2& N_physical_device_features2::
-n_physical_device_vulkan_memory_model_features_KHR(S_physical_device_vulkan_memory_model_features_KHR const& next_)
-{
-void* next = (void*)&next_;void* tail;
-if (pNext != nullptr){
-do {tail = next;next = ((S_base_structure*)next)->pNext;} 
-while (next != nullptr);
-((S_base_structure*)tail)->pNext = (void*)pNext;
-}
-pNext = (void*)&next_;
-return *this;
-}
-
-#ifdef LAKA_UNKNOW
-N_physical_device_features2& N_physical_device_features2::
-n_physical_device_shader_atomic_int64_features_KHR(S_physical_device_shader_atomic_int64_features_KHR const& next_)
-{
-void* next = (void*)&next_;void* tail;
-if (pNext != nullptr){
-do {tail = next;next = ((S_base_structure*)next)->pNext;} 
-while (next != nullptr);
-((S_base_structure*)tail)->pNext = (void*)pNext;
-}
-pNext = (void*)&next_;
-return *this;
-}
-#endif
-N_physical_device_features2& N_physical_device_features2::
-n_physical_device_vertex_attribute_divisor_features_EXT(S_physical_device_vertex_attribute_divisor_features_EXT const& next_)
-{
-void* next = (void*)&next_;void* tail;
-if (pNext != nullptr){
-do {tail = next;next = ((S_base_structure*)next)->pNext;} 
-while (next != nullptr);
-((S_base_structure*)tail)->pNext = (void*)pNext;
-}
-pNext = (void*)&next_;
-return *this;
-}
-
-N_physical_device_features2& N_physical_device_features2::
-n_physical_device_astc_decode_features_EXT(S_physical_device_astc_decode_features_EXT const& next_)
-{
-void* next = (void*)&next_;void* tail;
-if (pNext != nullptr){
-do {tail = next;next = ((S_base_structure*)next)->pNext;} 
-while (next != nullptr);
-((S_base_structure*)tail)->pNext = (void*)pNext;
-}
-pNext = (void*)&next_;
-return *this;
-}
-
-N_physical_device_features2& N_physical_device_features2::
-n_physical_device_representative_fragment_test_features_NV(S_physical_device_representative_fragment_test_features_NV const& next_)
-{
-void* next = (void*)&next_;void* tail;
-if (pNext != nullptr){
-do {tail = next;next = ((S_base_structure*)next)->pNext;} 
-while (next != nullptr);
-((S_base_structure*)tail)->pNext = (void*)pNext;
-}
-pNext = (void*)&next_;
-return *this;
-}
-
-N_physical_device_features2& N_physical_device_features2::
-n_physical_device_exclusive_scissor_features_NV(S_physical_device_exclusive_scissor_features_NV const& next_)
-{
-void* next = (void*)&next_;void* tail;
-if (pNext != nullptr){
-do {tail = next;next = ((S_base_structure*)next)->pNext;} 
-while (next != nullptr);
-((S_base_structure*)tail)->pNext = (void*)pNext;
-}
-pNext = (void*)&next_;
-return *this;
-}
-
-N_physical_device_features2& N_physical_device_features2::
-n_physical_device_corner_sampled_image_features_NV(S_physical_device_corner_sampled_image_features_NV const& next_)
-{
-void* next = (void*)&next_;void* tail;
-if (pNext != nullptr){
-do {tail = next;next = ((S_base_structure*)next)->pNext;} 
-while (next != nullptr);
-((S_base_structure*)tail)->pNext = (void*)pNext;
-}
-pNext = (void*)&next_;
-return *this;
-}
-
-N_physical_device_features2& N_physical_device_features2::
-n_physical_device_compute_shader_derivatives_features_NV(S_physical_device_compute_shader_derivatives_features_NV const& next_)
-{
-void* next = (void*)&next_;void* tail;
-if (pNext != nullptr){
-do {tail = next;next = ((S_base_structure*)next)->pNext;} 
-while (next != nullptr);
-((S_base_structure*)tail)->pNext = (void*)pNext;
-}
-pNext = (void*)&next_;
-return *this;
-}
-
-N_physical_device_features2& N_physical_device_features2::
-n_physical_device_fragment_shader_barycentric_features_NV(S_physical_device_fragment_shader_barycentric_features_NV const& next_)
-{
-void* next = (void*)&next_;void* tail;
-if (pNext != nullptr){
-do {tail = next;next = ((S_base_structure*)next)->pNext;} 
-while (next != nullptr);
-((S_base_structure*)tail)->pNext = (void*)pNext;
-}
-pNext = (void*)&next_;
-return *this;
-}
-
-N_physical_device_features2& N_physical_device_features2::
-n_physical_device_shader_image_footprint_features_NV(S_physical_device_shader_image_footprint_features_NV const& next_)
-{
-void* next = (void*)&next_;void* tail;
-if (pNext != nullptr){
-do {tail = next;next = ((S_base_structure*)next)->pNext;} 
-while (next != nullptr);
-((S_base_structure*)tail)->pNext = (void*)pNext;
-}
-pNext = (void*)&next_;
-return *this;
-}
-
-N_physical_device_features2& N_physical_device_features2::
-n_physical_device_shading_rate_image_features_NV(S_physical_device_shading_rate_image_features_NV const& next_)
-{
-void* next = (void*)&next_;void* tail;
-if (pNext != nullptr){
-do {tail = next;next = ((S_base_structure*)next)->pNext;} 
-while (next != nullptr);
-((S_base_structure*)tail)->pNext = (void*)pNext;
-}
-pNext = (void*)&next_;
-return *this;
-}
-
-N_physical_device_features2& N_physical_device_features2::
-n_physical_device_mesh_shader_features_NV(S_physical_device_mesh_shader_features_NV const& next_)
 {
 void* next = (void*)&next_;void* tail;
 if (pNext != nullptr){
@@ -405,19 +235,6 @@ return *this;
 }
 
 S_physical_device_features2& S_physical_device_features2::
-n_physical_device_inline_uniform_block_features_EXT(S_physical_device_inline_uniform_block_features_EXT const& next_)
-{
-void* next = (void*)&next_;void* tail;
-if (pNext != nullptr){
-do {tail = next;next = ((S_base_structure*)next)->pNext;} 
-while (next != nullptr);
-((S_base_structure*)tail)->pNext = (void*)pNext;
-}
-pNext = (void*)&next_;
-return *this;
-}
-
-S_physical_device_features2& S_physical_device_features2::
 n_physical_device_shader_draw_parameter_features(S_physical_device_shader_draw_parameter_features const& next_)
 {
 void* next = (void*)&next_;void* tail;
@@ -458,163 +275,6 @@ return *this;
 
 S_physical_device_features2& S_physical_device_features2::
 n_physical_device_conditional_rendering_features_EXT(S_physical_device_conditional_rendering_features_EXT const& next_)
-{
-void* next = (void*)&next_;void* tail;
-if (pNext != nullptr){
-do {tail = next;next = ((S_base_structure*)next)->pNext;} 
-while (next != nullptr);
-((S_base_structure*)tail)->pNext = (void*)pNext;
-}
-pNext = (void*)&next_;
-return *this;
-}
-
-S_physical_device_features2& S_physical_device_features2::
-n_physical_device_vulkan_memory_model_features_KHR(S_physical_device_vulkan_memory_model_features_KHR const& next_)
-{
-void* next = (void*)&next_;void* tail;
-if (pNext != nullptr){
-do {tail = next;next = ((S_base_structure*)next)->pNext;} 
-while (next != nullptr);
-((S_base_structure*)tail)->pNext = (void*)pNext;
-}
-pNext = (void*)&next_;
-return *this;
-}
-
-#ifdef LAKA_UNKNOW
-S_physical_device_features2& S_physical_device_features2::
-n_physical_device_shader_atomic_int64_features_KHR(S_physical_device_shader_atomic_int64_features_KHR const& next_)
-{
-void* next = (void*)&next_;void* tail;
-if (pNext != nullptr){
-do {tail = next;next = ((S_base_structure*)next)->pNext;} 
-while (next != nullptr);
-((S_base_structure*)tail)->pNext = (void*)pNext;
-}
-pNext = (void*)&next_;
-return *this;
-}
-#endif
-S_physical_device_features2& S_physical_device_features2::
-n_physical_device_vertex_attribute_divisor_features_EXT(S_physical_device_vertex_attribute_divisor_features_EXT const& next_)
-{
-void* next = (void*)&next_;void* tail;
-if (pNext != nullptr){
-do {tail = next;next = ((S_base_structure*)next)->pNext;} 
-while (next != nullptr);
-((S_base_structure*)tail)->pNext = (void*)pNext;
-}
-pNext = (void*)&next_;
-return *this;
-}
-
-S_physical_device_features2& S_physical_device_features2::
-n_physical_device_astc_decode_features_EXT(S_physical_device_astc_decode_features_EXT const& next_)
-{
-void* next = (void*)&next_;void* tail;
-if (pNext != nullptr){
-do {tail = next;next = ((S_base_structure*)next)->pNext;} 
-while (next != nullptr);
-((S_base_structure*)tail)->pNext = (void*)pNext;
-}
-pNext = (void*)&next_;
-return *this;
-}
-
-S_physical_device_features2& S_physical_device_features2::
-n_physical_device_representative_fragment_test_features_NV(S_physical_device_representative_fragment_test_features_NV const& next_)
-{
-void* next = (void*)&next_;void* tail;
-if (pNext != nullptr){
-do {tail = next;next = ((S_base_structure*)next)->pNext;} 
-while (next != nullptr);
-((S_base_structure*)tail)->pNext = (void*)pNext;
-}
-pNext = (void*)&next_;
-return *this;
-}
-
-S_physical_device_features2& S_physical_device_features2::
-n_physical_device_exclusive_scissor_features_NV(S_physical_device_exclusive_scissor_features_NV const& next_)
-{
-void* next = (void*)&next_;void* tail;
-if (pNext != nullptr){
-do {tail = next;next = ((S_base_structure*)next)->pNext;} 
-while (next != nullptr);
-((S_base_structure*)tail)->pNext = (void*)pNext;
-}
-pNext = (void*)&next_;
-return *this;
-}
-
-S_physical_device_features2& S_physical_device_features2::
-n_physical_device_corner_sampled_image_features_NV(S_physical_device_corner_sampled_image_features_NV const& next_)
-{
-void* next = (void*)&next_;void* tail;
-if (pNext != nullptr){
-do {tail = next;next = ((S_base_structure*)next)->pNext;} 
-while (next != nullptr);
-((S_base_structure*)tail)->pNext = (void*)pNext;
-}
-pNext = (void*)&next_;
-return *this;
-}
-
-S_physical_device_features2& S_physical_device_features2::
-n_physical_device_compute_shader_derivatives_features_NV(S_physical_device_compute_shader_derivatives_features_NV const& next_)
-{
-void* next = (void*)&next_;void* tail;
-if (pNext != nullptr){
-do {tail = next;next = ((S_base_structure*)next)->pNext;} 
-while (next != nullptr);
-((S_base_structure*)tail)->pNext = (void*)pNext;
-}
-pNext = (void*)&next_;
-return *this;
-}
-
-S_physical_device_features2& S_physical_device_features2::
-n_physical_device_fragment_shader_barycentric_features_NV(S_physical_device_fragment_shader_barycentric_features_NV const& next_)
-{
-void* next = (void*)&next_;void* tail;
-if (pNext != nullptr){
-do {tail = next;next = ((S_base_structure*)next)->pNext;} 
-while (next != nullptr);
-((S_base_structure*)tail)->pNext = (void*)pNext;
-}
-pNext = (void*)&next_;
-return *this;
-}
-
-S_physical_device_features2& S_physical_device_features2::
-n_physical_device_shader_image_footprint_features_NV(S_physical_device_shader_image_footprint_features_NV const& next_)
-{
-void* next = (void*)&next_;void* tail;
-if (pNext != nullptr){
-do {tail = next;next = ((S_base_structure*)next)->pNext;} 
-while (next != nullptr);
-((S_base_structure*)tail)->pNext = (void*)pNext;
-}
-pNext = (void*)&next_;
-return *this;
-}
-
-S_physical_device_features2& S_physical_device_features2::
-n_physical_device_shading_rate_image_features_NV(S_physical_device_shading_rate_image_features_NV const& next_)
-{
-void* next = (void*)&next_;void* tail;
-if (pNext != nullptr){
-do {tail = next;next = ((S_base_structure*)next)->pNext;} 
-while (next != nullptr);
-((S_base_structure*)tail)->pNext = (void*)pNext;
-}
-pNext = (void*)&next_;
-return *this;
-}
-
-S_physical_device_features2& S_physical_device_features2::
-n_physical_device_mesh_shader_features_NV(S_physical_device_mesh_shader_features_NV const& next_)
 {
 void* next = (void*)&next_;void* tail;
 if (pNext != nullptr){
@@ -718,45 +378,6 @@ return *this;
 }
 
 N_device_create_info& N_device_create_info::
-n_physical_device_blend_operation_advanced_features_EXT(S_physical_device_blend_operation_advanced_features_EXT const& next_)
-{
-void* next = (void*)&next_;void* tail;
-if (pNext != nullptr){
-do {tail = next;next = ((S_base_structure*)next)->pNext;} 
-while (next != nullptr);
-((S_base_structure*)tail)->pNext = (void*)pNext;
-}
-pNext = (void*)&next_;
-return *this;
-}
-
-N_device_create_info& N_device_create_info::
-n_physical_device_inline_uniform_block_features_EXT(S_physical_device_inline_uniform_block_features_EXT const& next_)
-{
-void* next = (void*)&next_;void* tail;
-if (pNext != nullptr){
-do {tail = next;next = ((S_base_structure*)next)->pNext;} 
-while (next != nullptr);
-((S_base_structure*)tail)->pNext = (void*)pNext;
-}
-pNext = (void*)&next_;
-return *this;
-}
-
-N_device_create_info& N_device_create_info::
-n_physical_device_shader_draw_parameter_features(S_physical_device_shader_draw_parameter_features const& next_)
-{
-void* next = (void*)&next_;void* tail;
-if (pNext != nullptr){
-do {tail = next;next = ((S_base_structure*)next)->pNext;} 
-while (next != nullptr);
-((S_base_structure*)tail)->pNext = (void*)pNext;
-}
-pNext = (void*)&next_;
-return *this;
-}
-
-N_device_create_info& N_device_create_info::
 n_physical_device_descriptor_indexing_features_EXT(S_physical_device_descriptor_indexing_features_EXT const& next_)
 {
 void* next = (void*)&next_;void* tail;
@@ -784,163 +405,6 @@ return *this;
 
 N_device_create_info& N_device_create_info::
 n_physical_device_conditional_rendering_features_EXT(S_physical_device_conditional_rendering_features_EXT const& next_)
-{
-void* next = (void*)&next_;void* tail;
-if (pNext != nullptr){
-do {tail = next;next = ((S_base_structure*)next)->pNext;} 
-while (next != nullptr);
-((S_base_structure*)tail)->pNext = (void*)pNext;
-}
-pNext = (void*)&next_;
-return *this;
-}
-
-N_device_create_info& N_device_create_info::
-n_physical_device_vulkan_memory_model_features_KHR(S_physical_device_vulkan_memory_model_features_KHR const& next_)
-{
-void* next = (void*)&next_;void* tail;
-if (pNext != nullptr){
-do {tail = next;next = ((S_base_structure*)next)->pNext;} 
-while (next != nullptr);
-((S_base_structure*)tail)->pNext = (void*)pNext;
-}
-pNext = (void*)&next_;
-return *this;
-}
-
-#ifdef LAKA_UNKNOW
-N_device_create_info& N_device_create_info::
-n_physical_device_shader_atomic_int64_features_KHR(S_physical_device_shader_atomic_int64_features_KHR const& next_)
-{
-void* next = (void*)&next_;void* tail;
-if (pNext != nullptr){
-do {tail = next;next = ((S_base_structure*)next)->pNext;} 
-while (next != nullptr);
-((S_base_structure*)tail)->pNext = (void*)pNext;
-}
-pNext = (void*)&next_;
-return *this;
-}
-#endif
-N_device_create_info& N_device_create_info::
-n_physical_device_vertex_attribute_divisor_features_EXT(S_physical_device_vertex_attribute_divisor_features_EXT const& next_)
-{
-void* next = (void*)&next_;void* tail;
-if (pNext != nullptr){
-do {tail = next;next = ((S_base_structure*)next)->pNext;} 
-while (next != nullptr);
-((S_base_structure*)tail)->pNext = (void*)pNext;
-}
-pNext = (void*)&next_;
-return *this;
-}
-
-N_device_create_info& N_device_create_info::
-n_physical_device_astc_decode_features_EXT(S_physical_device_astc_decode_features_EXT const& next_)
-{
-void* next = (void*)&next_;void* tail;
-if (pNext != nullptr){
-do {tail = next;next = ((S_base_structure*)next)->pNext;} 
-while (next != nullptr);
-((S_base_structure*)tail)->pNext = (void*)pNext;
-}
-pNext = (void*)&next_;
-return *this;
-}
-
-N_device_create_info& N_device_create_info::
-n_physical_device_representative_fragment_test_features_NV(S_physical_device_representative_fragment_test_features_NV const& next_)
-{
-void* next = (void*)&next_;void* tail;
-if (pNext != nullptr){
-do {tail = next;next = ((S_base_structure*)next)->pNext;} 
-while (next != nullptr);
-((S_base_structure*)tail)->pNext = (void*)pNext;
-}
-pNext = (void*)&next_;
-return *this;
-}
-
-N_device_create_info& N_device_create_info::
-n_physical_device_exclusive_scissor_features_NV(S_physical_device_exclusive_scissor_features_NV const& next_)
-{
-void* next = (void*)&next_;void* tail;
-if (pNext != nullptr){
-do {tail = next;next = ((S_base_structure*)next)->pNext;} 
-while (next != nullptr);
-((S_base_structure*)tail)->pNext = (void*)pNext;
-}
-pNext = (void*)&next_;
-return *this;
-}
-
-N_device_create_info& N_device_create_info::
-n_physical_device_corner_sampled_image_features_NV(S_physical_device_corner_sampled_image_features_NV const& next_)
-{
-void* next = (void*)&next_;void* tail;
-if (pNext != nullptr){
-do {tail = next;next = ((S_base_structure*)next)->pNext;} 
-while (next != nullptr);
-((S_base_structure*)tail)->pNext = (void*)pNext;
-}
-pNext = (void*)&next_;
-return *this;
-}
-
-N_device_create_info& N_device_create_info::
-n_physical_device_compute_shader_derivatives_features_NV(S_physical_device_compute_shader_derivatives_features_NV const& next_)
-{
-void* next = (void*)&next_;void* tail;
-if (pNext != nullptr){
-do {tail = next;next = ((S_base_structure*)next)->pNext;} 
-while (next != nullptr);
-((S_base_structure*)tail)->pNext = (void*)pNext;
-}
-pNext = (void*)&next_;
-return *this;
-}
-
-N_device_create_info& N_device_create_info::
-n_physical_device_fragment_shader_barycentric_features_NV(S_physical_device_fragment_shader_barycentric_features_NV const& next_)
-{
-void* next = (void*)&next_;void* tail;
-if (pNext != nullptr){
-do {tail = next;next = ((S_base_structure*)next)->pNext;} 
-while (next != nullptr);
-((S_base_structure*)tail)->pNext = (void*)pNext;
-}
-pNext = (void*)&next_;
-return *this;
-}
-
-N_device_create_info& N_device_create_info::
-n_physical_device_shader_image_footprint_features_NV(S_physical_device_shader_image_footprint_features_NV const& next_)
-{
-void* next = (void*)&next_;void* tail;
-if (pNext != nullptr){
-do {tail = next;next = ((S_base_structure*)next)->pNext;} 
-while (next != nullptr);
-((S_base_structure*)tail)->pNext = (void*)pNext;
-}
-pNext = (void*)&next_;
-return *this;
-}
-
-N_device_create_info& N_device_create_info::
-n_physical_device_shading_rate_image_features_NV(S_physical_device_shading_rate_image_features_NV const& next_)
-{
-void* next = (void*)&next_;void* tail;
-if (pNext != nullptr){
-do {tail = next;next = ((S_base_structure*)next)->pNext;} 
-while (next != nullptr);
-((S_base_structure*)tail)->pNext = (void*)pNext;
-}
-pNext = (void*)&next_;
-return *this;
-}
-
-N_device_create_info& N_device_create_info::
-n_physical_device_mesh_shader_features_NV(S_physical_device_mesh_shader_features_NV const& next_)
 {
 void* next = (void*)&next_;void* tail;
 if (pNext != nullptr){
@@ -1044,45 +508,6 @@ return *this;
 }
 
 S_device_create_info& S_device_create_info::
-n_physical_device_blend_operation_advanced_features_EXT(S_physical_device_blend_operation_advanced_features_EXT const& next_)
-{
-void* next = (void*)&next_;void* tail;
-if (pNext != nullptr){
-do {tail = next;next = ((S_base_structure*)next)->pNext;} 
-while (next != nullptr);
-((S_base_structure*)tail)->pNext = (void*)pNext;
-}
-pNext = (void*)&next_;
-return *this;
-}
-
-S_device_create_info& S_device_create_info::
-n_physical_device_inline_uniform_block_features_EXT(S_physical_device_inline_uniform_block_features_EXT const& next_)
-{
-void* next = (void*)&next_;void* tail;
-if (pNext != nullptr){
-do {tail = next;next = ((S_base_structure*)next)->pNext;} 
-while (next != nullptr);
-((S_base_structure*)tail)->pNext = (void*)pNext;
-}
-pNext = (void*)&next_;
-return *this;
-}
-
-S_device_create_info& S_device_create_info::
-n_physical_device_shader_draw_parameter_features(S_physical_device_shader_draw_parameter_features const& next_)
-{
-void* next = (void*)&next_;void* tail;
-if (pNext != nullptr){
-do {tail = next;next = ((S_base_structure*)next)->pNext;} 
-while (next != nullptr);
-((S_base_structure*)tail)->pNext = (void*)pNext;
-}
-pNext = (void*)&next_;
-return *this;
-}
-
-S_device_create_info& S_device_create_info::
 n_physical_device_descriptor_indexing_features_EXT(S_physical_device_descriptor_indexing_features_EXT const& next_)
 {
 void* next = (void*)&next_;void* tail;
@@ -1110,163 +535,6 @@ return *this;
 
 S_device_create_info& S_device_create_info::
 n_physical_device_conditional_rendering_features_EXT(S_physical_device_conditional_rendering_features_EXT const& next_)
-{
-void* next = (void*)&next_;void* tail;
-if (pNext != nullptr){
-do {tail = next;next = ((S_base_structure*)next)->pNext;} 
-while (next != nullptr);
-((S_base_structure*)tail)->pNext = (void*)pNext;
-}
-pNext = (void*)&next_;
-return *this;
-}
-
-S_device_create_info& S_device_create_info::
-n_physical_device_vulkan_memory_model_features_KHR(S_physical_device_vulkan_memory_model_features_KHR const& next_)
-{
-void* next = (void*)&next_;void* tail;
-if (pNext != nullptr){
-do {tail = next;next = ((S_base_structure*)next)->pNext;} 
-while (next != nullptr);
-((S_base_structure*)tail)->pNext = (void*)pNext;
-}
-pNext = (void*)&next_;
-return *this;
-}
-
-#ifdef LAKA_UNKNOW
-S_device_create_info& S_device_create_info::
-n_physical_device_shader_atomic_int64_features_KHR(S_physical_device_shader_atomic_int64_features_KHR const& next_)
-{
-void* next = (void*)&next_;void* tail;
-if (pNext != nullptr){
-do {tail = next;next = ((S_base_structure*)next)->pNext;} 
-while (next != nullptr);
-((S_base_structure*)tail)->pNext = (void*)pNext;
-}
-pNext = (void*)&next_;
-return *this;
-}
-#endif
-S_device_create_info& S_device_create_info::
-n_physical_device_vertex_attribute_divisor_features_EXT(S_physical_device_vertex_attribute_divisor_features_EXT const& next_)
-{
-void* next = (void*)&next_;void* tail;
-if (pNext != nullptr){
-do {tail = next;next = ((S_base_structure*)next)->pNext;} 
-while (next != nullptr);
-((S_base_structure*)tail)->pNext = (void*)pNext;
-}
-pNext = (void*)&next_;
-return *this;
-}
-
-S_device_create_info& S_device_create_info::
-n_physical_device_astc_decode_features_EXT(S_physical_device_astc_decode_features_EXT const& next_)
-{
-void* next = (void*)&next_;void* tail;
-if (pNext != nullptr){
-do {tail = next;next = ((S_base_structure*)next)->pNext;} 
-while (next != nullptr);
-((S_base_structure*)tail)->pNext = (void*)pNext;
-}
-pNext = (void*)&next_;
-return *this;
-}
-
-S_device_create_info& S_device_create_info::
-n_physical_device_representative_fragment_test_features_NV(S_physical_device_representative_fragment_test_features_NV const& next_)
-{
-void* next = (void*)&next_;void* tail;
-if (pNext != nullptr){
-do {tail = next;next = ((S_base_structure*)next)->pNext;} 
-while (next != nullptr);
-((S_base_structure*)tail)->pNext = (void*)pNext;
-}
-pNext = (void*)&next_;
-return *this;
-}
-
-S_device_create_info& S_device_create_info::
-n_physical_device_exclusive_scissor_features_NV(S_physical_device_exclusive_scissor_features_NV const& next_)
-{
-void* next = (void*)&next_;void* tail;
-if (pNext != nullptr){
-do {tail = next;next = ((S_base_structure*)next)->pNext;} 
-while (next != nullptr);
-((S_base_structure*)tail)->pNext = (void*)pNext;
-}
-pNext = (void*)&next_;
-return *this;
-}
-
-S_device_create_info& S_device_create_info::
-n_physical_device_corner_sampled_image_features_NV(S_physical_device_corner_sampled_image_features_NV const& next_)
-{
-void* next = (void*)&next_;void* tail;
-if (pNext != nullptr){
-do {tail = next;next = ((S_base_structure*)next)->pNext;} 
-while (next != nullptr);
-((S_base_structure*)tail)->pNext = (void*)pNext;
-}
-pNext = (void*)&next_;
-return *this;
-}
-
-S_device_create_info& S_device_create_info::
-n_physical_device_compute_shader_derivatives_features_NV(S_physical_device_compute_shader_derivatives_features_NV const& next_)
-{
-void* next = (void*)&next_;void* tail;
-if (pNext != nullptr){
-do {tail = next;next = ((S_base_structure*)next)->pNext;} 
-while (next != nullptr);
-((S_base_structure*)tail)->pNext = (void*)pNext;
-}
-pNext = (void*)&next_;
-return *this;
-}
-
-S_device_create_info& S_device_create_info::
-n_physical_device_fragment_shader_barycentric_features_NV(S_physical_device_fragment_shader_barycentric_features_NV const& next_)
-{
-void* next = (void*)&next_;void* tail;
-if (pNext != nullptr){
-do {tail = next;next = ((S_base_structure*)next)->pNext;} 
-while (next != nullptr);
-((S_base_structure*)tail)->pNext = (void*)pNext;
-}
-pNext = (void*)&next_;
-return *this;
-}
-
-S_device_create_info& S_device_create_info::
-n_physical_device_shader_image_footprint_features_NV(S_physical_device_shader_image_footprint_features_NV const& next_)
-{
-void* next = (void*)&next_;void* tail;
-if (pNext != nullptr){
-do {tail = next;next = ((S_base_structure*)next)->pNext;} 
-while (next != nullptr);
-((S_base_structure*)tail)->pNext = (void*)pNext;
-}
-pNext = (void*)&next_;
-return *this;
-}
-
-S_device_create_info& S_device_create_info::
-n_physical_device_shading_rate_image_features_NV(S_physical_device_shading_rate_image_features_NV const& next_)
-{
-void* next = (void*)&next_;void* tail;
-if (pNext != nullptr){
-do {tail = next;next = ((S_base_structure*)next)->pNext;} 
-while (next != nullptr);
-((S_base_structure*)tail)->pNext = (void*)pNext;
-}
-pNext = (void*)&next_;
-return *this;
-}
-
-S_device_create_info& S_device_create_info::
-n_physical_device_mesh_shader_features_NV(S_physical_device_mesh_shader_features_NV const& next_)
 {
 void* next = (void*)&next_;void* tail;
 if (pNext != nullptr){
@@ -1678,58 +946,6 @@ pNext = (void*)&next_;
 return *this;
 }
 #endif
-N_write_descriptor_set& N_write_descriptor_set::
-n_write_descriptor_set_inline_uniform_block_EXT(S_write_descriptor_set_inline_uniform_block_EXT const& next_)
-{
-void* next = (void*)&next_;void* tail;
-if (pNext != nullptr){
-do {tail = next;next = ((S_base_structure*)next)->pNext;} 
-while (next != nullptr);
-((S_base_structure*)tail)->pNext = (void*)pNext;
-}
-pNext = (void*)&next_;
-return *this;
-}
-
-N_write_descriptor_set& N_write_descriptor_set::
-n_descriptor_acceleration_structure_info_NVX(S_descriptor_acceleration_structure_info_NVX const& next_)
-{
-void* next = (void*)&next_;void* tail;
-if (pNext != nullptr){
-do {tail = next;next = ((S_base_structure*)next)->pNext;} 
-while (next != nullptr);
-((S_base_structure*)tail)->pNext = (void*)pNext;
-}
-pNext = (void*)&next_;
-return *this;
-}
-
-S_write_descriptor_set& S_write_descriptor_set::
-n_write_descriptor_set_inline_uniform_block_EXT(S_write_descriptor_set_inline_uniform_block_EXT const& next_)
-{
-void* next = (void*)&next_;void* tail;
-if (pNext != nullptr){
-do {tail = next;next = ((S_base_structure*)next)->pNext;} 
-while (next != nullptr);
-((S_base_structure*)tail)->pNext = (void*)pNext;
-}
-pNext = (void*)&next_;
-return *this;
-}
-
-S_write_descriptor_set& S_write_descriptor_set::
-n_descriptor_acceleration_structure_info_NVX(S_descriptor_acceleration_structure_info_NVX const& next_)
-{
-void* next = (void*)&next_;void* tail;
-if (pNext != nullptr){
-do {tail = next;next = ((S_base_structure*)next)->pNext;} 
-while (next != nullptr);
-((S_base_structure*)tail)->pNext = (void*)pNext;
-}
-pNext = (void*)&next_;
-return *this;
-}
-
 N_buffer_create_info& N_buffer_create_info::
 n_dedicated_allocation_buffer_create_info_NV(S_dedicated_allocation_buffer_create_info_NV const& next_)
 {
@@ -1887,34 +1103,6 @@ pNext = (void*)&next_;
 return *this;
 }
 #endif
-#ifdef LAKA_UNKNOW
-N_image_create_info& N_image_create_info::
-n_image_drm_format_modifier_list_create_info_EXT(S_image_drm_format_modifier_list_create_info_EXT const& next_)
-{
-void* next = (void*)&next_;void* tail;
-if (pNext != nullptr){
-do {tail = next;next = ((S_base_structure*)next)->pNext;} 
-while (next != nullptr);
-((S_base_structure*)tail)->pNext = (void*)pNext;
-}
-pNext = (void*)&next_;
-return *this;
-}
-#endif
-#ifdef LAKA_UNKNOW
-N_image_create_info& N_image_create_info::
-n_image_drm_format_modifier_explicit_create_info_EXT(S_image_drm_format_modifier_explicit_create_info_EXT const& next_)
-{
-void* next = (void*)&next_;void* tail;
-if (pNext != nullptr){
-do {tail = next;next = ((S_base_structure*)next)->pNext;} 
-while (next != nullptr);
-((S_base_structure*)tail)->pNext = (void*)pNext;
-}
-pNext = (void*)&next_;
-return *this;
-}
-#endif
 S_image_create_info& S_image_create_info::
 n_dedicated_allocation_image_create_info_NV(S_dedicated_allocation_image_create_info_NV const& next_)
 {
@@ -1994,34 +1182,6 @@ pNext = (void*)&next_;
 return *this;
 }
 #endif
-#ifdef LAKA_UNKNOW
-S_image_create_info& S_image_create_info::
-n_image_drm_format_modifier_list_create_info_EXT(S_image_drm_format_modifier_list_create_info_EXT const& next_)
-{
-void* next = (void*)&next_;void* tail;
-if (pNext != nullptr){
-do {tail = next;next = ((S_base_structure*)next)->pNext;} 
-while (next != nullptr);
-((S_base_structure*)tail)->pNext = (void*)pNext;
-}
-pNext = (void*)&next_;
-return *this;
-}
-#endif
-#ifdef LAKA_UNKNOW
-S_image_create_info& S_image_create_info::
-n_image_drm_format_modifier_explicit_create_info_EXT(S_image_drm_format_modifier_explicit_create_info_EXT const& next_)
-{
-void* next = (void*)&next_;void* tail;
-if (pNext != nullptr){
-do {tail = next;next = ((S_base_structure*)next)->pNext;} 
-while (next != nullptr);
-((S_base_structure*)tail)->pNext = (void*)pNext;
-}
-pNext = (void*)&next_;
-return *this;
-}
-#endif
 N_image_view_create_info& N_image_view_create_info::
 n_image_view_usage_create_info(S_image_view_usage_create_info const& next_)
 {
@@ -2048,19 +1208,6 @@ pNext = (void*)&next_;
 return *this;
 }
 
-N_image_view_create_info& N_image_view_create_info::
-n_image_view_astc_decode_mode_EXT(S_image_view_astc_decode_mode_EXT const& next_)
-{
-void* next = (void*)&next_;void* tail;
-if (pNext != nullptr){
-do {tail = next;next = ((S_base_structure*)next)->pNext;} 
-while (next != nullptr);
-((S_base_structure*)tail)->pNext = (void*)pNext;
-}
-pNext = (void*)&next_;
-return *this;
-}
-
 S_image_view_create_info& S_image_view_create_info::
 n_image_view_usage_create_info(S_image_view_usage_create_info const& next_)
 {
@@ -2076,19 +1223,6 @@ return *this;
 
 S_image_view_create_info& S_image_view_create_info::
 n_sampler_ycbcr_conversion_info(S_sampler_ycbcr_conversion_info const& next_)
-{
-void* next = (void*)&next_;void* tail;
-if (pNext != nullptr){
-do {tail = next;next = ((S_base_structure*)next)->pNext;} 
-while (next != nullptr);
-((S_base_structure*)tail)->pNext = (void*)pNext;
-}
-pNext = (void*)&next_;
-return *this;
-}
-
-S_image_view_create_info& S_image_view_create_info::
-n_image_view_astc_decode_mode_EXT(S_image_view_astc_decode_mode_EXT const& next_)
 {
 void* next = (void*)&next_;void* tail;
 if (pNext != nullptr){
@@ -2167,32 +1301,6 @@ return *this;
 
 S_descriptor_set_layout_create_info& S_descriptor_set_layout_create_info::
 n_descriptor_set_layout_binding_flags_create_info_EXT(S_descriptor_set_layout_binding_flags_create_info_EXT const& next_)
-{
-void* next = (void*)&next_;void* tail;
-if (pNext != nullptr){
-do {tail = next;next = ((S_base_structure*)next)->pNext;} 
-while (next != nullptr);
-((S_base_structure*)tail)->pNext = (void*)pNext;
-}
-pNext = (void*)&next_;
-return *this;
-}
-
-N_descriptor_pool_create_info& N_descriptor_pool_create_info::
-n_descriptor_pool_inline_uniform_block_create_info_EXT(S_descriptor_pool_inline_uniform_block_create_info_EXT const& next_)
-{
-void* next = (void*)&next_;void* tail;
-if (pNext != nullptr){
-do {tail = next;next = ((S_base_structure*)next)->pNext;} 
-while (next != nullptr);
-((S_base_structure*)tail)->pNext = (void*)pNext;
-}
-pNext = (void*)&next_;
-return *this;
-}
-
-S_descriptor_pool_create_info& S_descriptor_pool_create_info::
-n_descriptor_pool_inline_uniform_block_create_info_EXT(S_descriptor_pool_inline_uniform_block_create_info_EXT const& next_)
 {
 void* next = (void*)&next_;void* tail;
 if (pNext != nullptr){
@@ -2308,45 +1416,6 @@ pNext = (void*)&next_;
 return *this;
 }
 
-N_pipeline_viewport_state_create_info& N_pipeline_viewport_state_create_info::
-n_pipeline_viewport_exclusive_scissor_state_create_info_NV(S_pipeline_viewport_exclusive_scissor_state_create_info_NV const& next_)
-{
-void* next = (void*)&next_;void* tail;
-if (pNext != nullptr){
-do {tail = next;next = ((S_base_structure*)next)->pNext;} 
-while (next != nullptr);
-((S_base_structure*)tail)->pNext = (void*)pNext;
-}
-pNext = (void*)&next_;
-return *this;
-}
-
-N_pipeline_viewport_state_create_info& N_pipeline_viewport_state_create_info::
-n_pipeline_viewport_shading_rate_image_state_create_info_NV(S_pipeline_viewport_shading_rate_image_state_create_info_NV const& next_)
-{
-void* next = (void*)&next_;void* tail;
-if (pNext != nullptr){
-do {tail = next;next = ((S_base_structure*)next)->pNext;} 
-while (next != nullptr);
-((S_base_structure*)tail)->pNext = (void*)pNext;
-}
-pNext = (void*)&next_;
-return *this;
-}
-
-N_pipeline_viewport_state_create_info& N_pipeline_viewport_state_create_info::
-n_pipeline_viewport_coarse_sample_order_state_create_info_NV(S_pipeline_viewport_coarse_sample_order_state_create_info_NV const& next_)
-{
-void* next = (void*)&next_;void* tail;
-if (pNext != nullptr){
-do {tail = next;next = ((S_base_structure*)next)->pNext;} 
-while (next != nullptr);
-((S_base_structure*)tail)->pNext = (void*)pNext;
-}
-pNext = (void*)&next_;
-return *this;
-}
-
 S_pipeline_viewport_state_create_info& S_pipeline_viewport_state_create_info::
 n_pipeline_viewport_w_scaling_state_create_info_NV(S_pipeline_viewport_w_scaling_state_create_info_NV const& next_)
 {
@@ -2362,45 +1431,6 @@ return *this;
 
 S_pipeline_viewport_state_create_info& S_pipeline_viewport_state_create_info::
 n_pipeline_viewport_swizzle_state_create_info_NV(S_pipeline_viewport_swizzle_state_create_info_NV const& next_)
-{
-void* next = (void*)&next_;void* tail;
-if (pNext != nullptr){
-do {tail = next;next = ((S_base_structure*)next)->pNext;} 
-while (next != nullptr);
-((S_base_structure*)tail)->pNext = (void*)pNext;
-}
-pNext = (void*)&next_;
-return *this;
-}
-
-S_pipeline_viewport_state_create_info& S_pipeline_viewport_state_create_info::
-n_pipeline_viewport_exclusive_scissor_state_create_info_NV(S_pipeline_viewport_exclusive_scissor_state_create_info_NV const& next_)
-{
-void* next = (void*)&next_;void* tail;
-if (pNext != nullptr){
-do {tail = next;next = ((S_base_structure*)next)->pNext;} 
-while (next != nullptr);
-((S_base_structure*)tail)->pNext = (void*)pNext;
-}
-pNext = (void*)&next_;
-return *this;
-}
-
-S_pipeline_viewport_state_create_info& S_pipeline_viewport_state_create_info::
-n_pipeline_viewport_shading_rate_image_state_create_info_NV(S_pipeline_viewport_shading_rate_image_state_create_info_NV const& next_)
-{
-void* next = (void*)&next_;void* tail;
-if (pNext != nullptr){
-do {tail = next;next = ((S_base_structure*)next)->pNext;} 
-while (next != nullptr);
-((S_base_structure*)tail)->pNext = (void*)pNext;
-}
-pNext = (void*)&next_;
-return *this;
-}
-
-S_pipeline_viewport_state_create_info& S_pipeline_viewport_state_create_info::
-n_pipeline_viewport_coarse_sample_order_state_create_info_NV(S_pipeline_viewport_coarse_sample_order_state_create_info_NV const& next_)
 {
 void* next = (void*)&next_;void* tail;
 if (pNext != nullptr){
@@ -2581,34 +1611,8 @@ pNext = (void*)&next_;
 return *this;
 }
 
-N_graphics_pipeline_create_info& N_graphics_pipeline_create_info::
-n_pipeline_representative_fragment_test_state_create_info_NV(S_pipeline_representative_fragment_test_state_create_info_NV const& next_)
-{
-void* next = (void*)&next_;void* tail;
-if (pNext != nullptr){
-do {tail = next;next = ((S_base_structure*)next)->pNext;} 
-while (next != nullptr);
-((S_base_structure*)tail)->pNext = (void*)pNext;
-}
-pNext = (void*)&next_;
-return *this;
-}
-
 S_graphics_pipeline_create_info& S_graphics_pipeline_create_info::
 n_pipeline_discard_rectangle_state_create_info_EXT(S_pipeline_discard_rectangle_state_create_info_EXT const& next_)
-{
-void* next = (void*)&next_;void* tail;
-if (pNext != nullptr){
-do {tail = next;next = ((S_base_structure*)next)->pNext;} 
-while (next != nullptr);
-((S_base_structure*)tail)->pNext = (void*)pNext;
-}
-pNext = (void*)&next_;
-return *this;
-}
-
-S_graphics_pipeline_create_info& S_graphics_pipeline_create_info::
-n_pipeline_representative_fragment_test_state_create_info_NV(S_pipeline_representative_fragment_test_state_create_info_NV const& next_)
 {
 void* next = (void*)&next_;void* tail;
 if (pNext != nullptr){
@@ -3241,20 +2245,6 @@ pNext = (void*)&next_;
 return *this;
 }
 
-#ifdef LAKA_UNKNOW
-N_physical_device_properties2& N_physical_device_properties2::
-n_physical_device_driver_properties_KHR(S_physical_device_driver_properties_KHR const& next_)
-{
-void* next = (void*)&next_;void* tail;
-if (pNext != nullptr){
-do {tail = next;next = ((S_base_structure*)next)->pNext;} 
-while (next != nullptr);
-((S_base_structure*)tail)->pNext = (void*)pNext;
-}
-pNext = (void*)&next_;
-return *this;
-}
-#endif
 N_physical_device_properties2& N_physical_device_properties2::
 n_physical_device_id_properties(S_physical_device_id_properties const& next_)
 {
@@ -3386,19 +2376,6 @@ return *this;
 }
 
 N_physical_device_properties2& N_physical_device_properties2::
-n_physical_device_inline_uniform_block_properties_EXT(S_physical_device_inline_uniform_block_properties_EXT const& next_)
-{
-void* next = (void*)&next_;void* tail;
-if (pNext != nullptr){
-do {tail = next;next = ((S_base_structure*)next)->pNext;} 
-while (next != nullptr);
-((S_base_structure*)tail)->pNext = (void*)pNext;
-}
-pNext = (void*)&next_;
-return *this;
-}
-
-N_physical_device_properties2& N_physical_device_properties2::
 n_physical_device_maintenance3_properties(S_physical_device_maintenance3_properties const& next_)
 {
 void* next = (void*)&next_;void* tail;
@@ -3465,45 +2442,6 @@ return *this;
 
 N_physical_device_properties2& N_physical_device_properties2::
 n_physical_device_vertex_attribute_divisor_properties_EXT(S_physical_device_vertex_attribute_divisor_properties_EXT const& next_)
-{
-void* next = (void*)&next_;void* tail;
-if (pNext != nullptr){
-do {tail = next;next = ((S_base_structure*)next)->pNext;} 
-while (next != nullptr);
-((S_base_structure*)tail)->pNext = (void*)pNext;
-}
-pNext = (void*)&next_;
-return *this;
-}
-
-N_physical_device_properties2& N_physical_device_properties2::
-n_physical_device_shading_rate_image_properties_NV(S_physical_device_shading_rate_image_properties_NV const& next_)
-{
-void* next = (void*)&next_;void* tail;
-if (pNext != nullptr){
-do {tail = next;next = ((S_base_structure*)next)->pNext;} 
-while (next != nullptr);
-((S_base_structure*)tail)->pNext = (void*)pNext;
-}
-pNext = (void*)&next_;
-return *this;
-}
-
-N_physical_device_properties2& N_physical_device_properties2::
-n_physical_device_mesh_shader_properties_NV(S_physical_device_mesh_shader_properties_NV const& next_)
-{
-void* next = (void*)&next_;void* tail;
-if (pNext != nullptr){
-do {tail = next;next = ((S_base_structure*)next)->pNext;} 
-while (next != nullptr);
-((S_base_structure*)tail)->pNext = (void*)pNext;
-}
-pNext = (void*)&next_;
-return *this;
-}
-
-N_physical_device_properties2& N_physical_device_properties2::
-n_physical_device_raytracing_properties_NVX(S_physical_device_raytracing_properties_NVX const& next_)
 {
 void* next = (void*)&next_;void* tail;
 if (pNext != nullptr){
@@ -3528,20 +2466,6 @@ pNext = (void*)&next_;
 return *this;
 }
 
-#ifdef LAKA_UNKNOW
-S_physical_device_properties2& S_physical_device_properties2::
-n_physical_device_driver_properties_KHR(S_physical_device_driver_properties_KHR const& next_)
-{
-void* next = (void*)&next_;void* tail;
-if (pNext != nullptr){
-do {tail = next;next = ((S_base_structure*)next)->pNext;} 
-while (next != nullptr);
-((S_base_structure*)tail)->pNext = (void*)pNext;
-}
-pNext = (void*)&next_;
-return *this;
-}
-#endif
 S_physical_device_properties2& S_physical_device_properties2::
 n_physical_device_id_properties(S_physical_device_id_properties const& next_)
 {
@@ -3673,19 +2597,6 @@ return *this;
 }
 
 S_physical_device_properties2& S_physical_device_properties2::
-n_physical_device_inline_uniform_block_properties_EXT(S_physical_device_inline_uniform_block_properties_EXT const& next_)
-{
-void* next = (void*)&next_;void* tail;
-if (pNext != nullptr){
-do {tail = next;next = ((S_base_structure*)next)->pNext;} 
-while (next != nullptr);
-((S_base_structure*)tail)->pNext = (void*)pNext;
-}
-pNext = (void*)&next_;
-return *this;
-}
-
-S_physical_device_properties2& S_physical_device_properties2::
 n_physical_device_maintenance3_properties(S_physical_device_maintenance3_properties const& next_)
 {
 void* next = (void*)&next_;void* tail;
@@ -3763,73 +2674,6 @@ pNext = (void*)&next_;
 return *this;
 }
 
-S_physical_device_properties2& S_physical_device_properties2::
-n_physical_device_shading_rate_image_properties_NV(S_physical_device_shading_rate_image_properties_NV const& next_)
-{
-void* next = (void*)&next_;void* tail;
-if (pNext != nullptr){
-do {tail = next;next = ((S_base_structure*)next)->pNext;} 
-while (next != nullptr);
-((S_base_structure*)tail)->pNext = (void*)pNext;
-}
-pNext = (void*)&next_;
-return *this;
-}
-
-S_physical_device_properties2& S_physical_device_properties2::
-n_physical_device_mesh_shader_properties_NV(S_physical_device_mesh_shader_properties_NV const& next_)
-{
-void* next = (void*)&next_;void* tail;
-if (pNext != nullptr){
-do {tail = next;next = ((S_base_structure*)next)->pNext;} 
-while (next != nullptr);
-((S_base_structure*)tail)->pNext = (void*)pNext;
-}
-pNext = (void*)&next_;
-return *this;
-}
-
-S_physical_device_properties2& S_physical_device_properties2::
-n_physical_device_raytracing_properties_NVX(S_physical_device_raytracing_properties_NVX const& next_)
-{
-void* next = (void*)&next_;void* tail;
-if (pNext != nullptr){
-do {tail = next;next = ((S_base_structure*)next)->pNext;} 
-while (next != nullptr);
-((S_base_structure*)tail)->pNext = (void*)pNext;
-}
-pNext = (void*)&next_;
-return *this;
-}
-
-#ifdef LAKA_UNKNOW
-N_format_properties2& N_format_properties2::
-n_drm_format_modifier_properties_list_EXT(S_drm_format_modifier_properties_list_EXT const& next_)
-{
-void* next = (void*)&next_;void* tail;
-if (pNext != nullptr){
-do {tail = next;next = ((S_base_structure*)next)->pNext;} 
-while (next != nullptr);
-((S_base_structure*)tail)->pNext = (void*)pNext;
-}
-pNext = (void*)&next_;
-return *this;
-}
-#endif
-#ifdef LAKA_UNKNOW
-S_format_properties2& S_format_properties2::
-n_drm_format_modifier_properties_list_EXT(S_drm_format_modifier_properties_list_EXT const& next_)
-{
-void* next = (void*)&next_;void* tail;
-if (pNext != nullptr){
-do {tail = next;next = ((S_base_structure*)next)->pNext;} 
-while (next != nullptr);
-((S_base_structure*)tail)->pNext = (void*)pNext;
-}
-pNext = (void*)&next_;
-return *this;
-}
-#endif
 N_image_format_properties2& N_image_format_properties2::
 n_external_image_format_properties(S_external_image_format_properties const& next_)
 {
@@ -3949,20 +2793,6 @@ pNext = (void*)&next_;
 return *this;
 }
 
-#ifdef LAKA_UNKNOW
-N_physical_device_image_format_info2& N_physical_device_image_format_info2::
-n_physical_device_image_drm_format_modifier_info_EXT(S_physical_device_image_drm_format_modifier_info_EXT const& next_)
-{
-void* next = (void*)&next_;void* tail;
-if (pNext != nullptr){
-do {tail = next;next = ((S_base_structure*)next)->pNext;} 
-while (next != nullptr);
-((S_base_structure*)tail)->pNext = (void*)pNext;
-}
-pNext = (void*)&next_;
-return *this;
-}
-#endif
 S_physical_device_image_format_info2& S_physical_device_image_format_info2::
 n_physical_device_external_image_format_info(S_physical_device_external_image_format_info const& next_)
 {
@@ -3976,20 +2806,6 @@ pNext = (void*)&next_;
 return *this;
 }
 
-#ifdef LAKA_UNKNOW
-S_physical_device_image_format_info2& S_physical_device_image_format_info2::
-n_physical_device_image_drm_format_modifier_info_EXT(S_physical_device_image_drm_format_modifier_info_EXT const& next_)
-{
-void* next = (void*)&next_;void* tail;
-if (pNext != nullptr){
-do {tail = next;next = ((S_base_structure*)next)->pNext;} 
-while (next != nullptr);
-((S_base_structure*)tail)->pNext = (void*)pNext;
-}
-pNext = (void*)&next_;
-return *this;
-}
-#endif
 N_queue_family_properties2& N_queue_family_properties2::
 n_queue_family_checkpoint_properties_NV(S_queue_family_checkpoint_properties_NV const& next_)
 {
