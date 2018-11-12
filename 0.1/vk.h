@@ -476,11 +476,11 @@ namespace laka { namespace vk {
 #define laka_vk_can_use_group(class_type__,api_ptr_name__)                                  \
 class Group;                                                                                \
 Group get_group() { Group g(&api_ptr_name__, { handle }); return g; }                       \
-class Group                                                                                 \
-    :public Group_base<                                                                     \
+class Group:public Group_base<                                                              \
         class_type__,                                                                       \
         std::remove_cv<decltype(class_type__::handle)>::type,                               \
-        decltype(&api_ptr_name__)>{                                                         \
+        decltype(&api_ptr_name__)>                                                          \
+{                                                                                           \
 public:                                                                                     \
     Group() :Group_base() {}                                                                \
     Group(decltype(&api_ptr_name__) api_) : Group_base(api_) {}                             \
@@ -489,7 +489,26 @@ public:                                                                         
         :Group_base(api_, handles_)                                                         \
     {}                                                                                      \
 
-#define laka_vk_over_group  }
+
+#define laka_vk_can_use_group_extra(class_type__,api_ptr_type__)                            \
+class Group;                                                                                \
+Group get_group();                                                                          \
+class Group :public Group_base<                                                             \
+    class_type__,                                                                           \
+    std::remove_cv<decltype(class_type__::handle)>::type,                                   \
+    api_ptr_type__>                                                                         \
+{                                                                                           \
+public:                                                                                     \
+    Group() :Group_base() {}                                                                \
+    Group(api_ptr_type__ api_) : Group_base(api_) {}                                        \
+    Group(                                                                                  \
+        api_ptr_type__ api_,                                                                \
+        Array_value<const std::remove_cv<decltype(class_type__::handle)>::type> handles_)   \
+        :Group_base(api_, handles_)\
+    {}\
+
+#define laka_vk_over_group  \
+}
 
     template <typename T__>
     class Ahandle {
@@ -1276,6 +1295,31 @@ public:                                                                         
         Alloc_callback_ptr allocation_callbacks;
     };
 
+    //没有功能函数
+    class Image_view : public std::enable_shared_from_this<Image_view> {
+    public:
+        using Sptr = std::shared_ptr<Image_view>;
+
+        ~Image_view();
+
+        const VkImageView handle;
+        std::shared_ptr<Image> image;
+
+        operator VkImageView*() { return const_cast<VkImageView*>(&handle); }
+        
+        laka_vk_can_use_group_extra(Image_view, Device::Api*)
+        laka_vk_over_group;
+
+    private:
+        friend class Image;
+        Image_view(
+            std::shared_ptr<Image>          image_,
+            VkImageView                     handle_,
+            Alloc_callback_ptr allocator_);
+
+        Alloc_callback_ptr allocation_callbacks;
+    };
+
     class Image : public std::enable_shared_from_this<Image> {
     public:
         using Sptr = std::shared_ptr<Image>;
@@ -1308,6 +1352,13 @@ public:                                                                         
         E_image_layout layout;
 
         laka_vk_can_use_group(Image, device->api)
+            std::shared_ptr<Image_view> get_image_views(
+                E_image_view_type           view_type_,
+                E_format                    format_,
+                S_component_mapping         components_,
+                S_image_subresource_range   subresourceRange_,
+                N_image_view_create_info    next_ = {},
+                Alloc_callback_ptr allocator_ = default_allocation_cb());
         laka_vk_over_group;
     private:
         friend class Device;
@@ -1315,28 +1366,6 @@ public:                                                                         
             std::shared_ptr<Device> device_,
             VkImage handle_,
             E_image_layout layout_,
-            Alloc_callback_ptr allocator_);
-
-        Alloc_callback_ptr allocation_callbacks;
-    };
-
-    //没有功能函数
-    class Image_view : public std::enable_shared_from_this<Image_view> {
-    public:
-        using Sptr = std::shared_ptr<Image_view>;
-
-        ~Image_view();
-
-        const VkImageView handle;
-        std::shared_ptr<Image> image;
-
-        operator VkImageView*() { return const_cast<VkImageView*>(&handle); }
-
-    private:
-        friend class Image;
-        Image_view(
-            std::shared_ptr<Image>          image_,
-            VkImageView                     handle_,
             Alloc_callback_ptr allocator_);
 
         Alloc_callback_ptr allocation_callbacks;
