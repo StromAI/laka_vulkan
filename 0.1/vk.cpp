@@ -2260,6 +2260,39 @@ shared_ptr<Surface> Instance::get_a_surface(
         return image_sptr;
     }
 
+#ifdef VK_KHR_swapchain
+    std::shared_ptr<Image::Group> Swapchain::get_images()
+    {
+        shared_ptr<Image::Group> sptr;
+        uint32_t count = 0;
+        auto ret = device->api.vkGetSwapchainImagesKHR(
+            device->handle,
+            handle,
+            &count,
+            nullptr
+        );
+        show_result(ret);
+        if (ret < 0)
+        {
+            return sptr;
+        }
+        sptr.reset(new Image::Group() );
+        sptr->api = &device->api;
+        sptr->handles.resize(count);
+        if (count == 0)
+        {
+            return sptr;
+        }
+        ret = device->api.vkGetSwapchainImagesKHR(
+            device->handle,
+            handle,
+            &count,
+            sptr->handles.data()
+        );
+        return sptr;
+    }
+#endif
+
     Image::Image(
         Device::Sptr        device_,
         VkImage             handle_,

@@ -803,40 +803,6 @@ public:                                                                         
         Alloc_callback_ptr  allocation_callbacks;
     };
 
-#ifdef VK_KHR_swapchain
-    class Swapchain : public std::enable_shared_from_this<Swapchain>{
-    public:
-        using Sptr = std::shared_ptr<Swapchain>;
-
-        // vkGetSwapchainImagesKHR 
-        /*
-            todo: 像这种能批量创建的对象,复数形式会有点不一样
-            todo: 提供重载函数用于返回VkResult值
-            todo: 参数,我自己设置的自动转换类型 需要规划一下
-        */
-
-        // 获取要使用的可用可呈现图像，并检索该图像的索引
-        uint32_t acquire_next_image(
-            uint64_t            timeout_,
-            Ahandle<Semaphore>  semaphore_,
-            Ahandle<Fence>      fence_);
-
-        ~Swapchain();
-        
-        const VkSwapchainKHR handle;
-        std::shared_ptr<Device> device;
-        
-        operator VkSwapchainKHR*() { return const_cast<VkSwapchainKHR*>(&handle); }
-    private:
-        friend Device;
-        Swapchain(
-            std::shared_ptr<Device> device_,
-            VkSwapchainKHR          handle_,
-            Alloc_callback_ptr      allocator_);
-
-        Alloc_callback_ptr allocation_callbacks;
-    };
-#endif
 
     //为帮助创建Device而存在
     class Device_creator : public std::enable_shared_from_this<Device_creator> {
@@ -1340,6 +1306,9 @@ public:                                                                         
         const VkImage handle;
         std::shared_ptr<Device> device;
         E_image_layout layout;
+
+        laka_vk_can_use_group(Image, device->api)
+        laka_vk_over_group;
     private:
         friend class Device;
         Image(
@@ -1372,6 +1341,42 @@ public:                                                                         
 
         Alloc_callback_ptr allocation_callbacks;
     };
+
+#ifdef VK_KHR_swapchain
+    class Swapchain : public std::enable_shared_from_this<Swapchain> {
+    public:
+        using Sptr = std::shared_ptr<Swapchain>;
+
+        // vkGetSwapchainImagesKHR 
+        /*
+            todo: 像这种能批量创建的对象,复数形式会有点不一样
+            todo: 提供重载函数用于返回VkResult值
+            todo: 参数,我自己设置的自动转换类型 需要规划一下
+        */
+        std::shared_ptr<Image::Group> get_images();
+
+        // 获取要使用的可用可呈现图像，并检索该图像的索引
+        uint32_t acquire_next_image(
+            uint64_t            timeout_,
+            Ahandle<Semaphore>  semaphore_,
+            Ahandle<Fence>      fence_);
+
+        ~Swapchain();
+
+        const VkSwapchainKHR handle;
+        std::shared_ptr<Device> device;
+
+        operator VkSwapchainKHR*() { return const_cast<VkSwapchainKHR*>(&handle); }
+    private:
+        friend Device;
+        Swapchain(
+            std::shared_ptr<Device> device_,
+            VkSwapchainKHR          handle_,
+            Alloc_callback_ptr      allocator_);
+
+        Alloc_callback_ptr allocation_callbacks;
+    };
+#endif
 
     //没有功能函数
     class Sampler : public std::enable_shared_from_this<Sampler> {
