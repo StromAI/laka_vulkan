@@ -2405,29 +2405,6 @@ shared_ptr<Surface> Instance::get_a_surface(
         return image_view_sptr;
     }
 
-    shared_ptr<Image_view> Image::Group::get_image_views(
-        E_image_view_type           view_type_,
-        E_format                    format_,
-        S_component_mapping         components_,
-        S_image_subresource_range   subresourceRange_,
-        N_image_view_create_info    next_ /*= {}*/,
-        Alloc_callback_ptr allocator_ /*= default_allocation_cb()*/)
-    {
-        shared_ptr<Image_view::Group> image_view();
-
-        S_image_view_create_info ci{
-            0,
-            VK_NULL_HANDLE,
-            view_type_,
-            format_,
-            components_,
-            subresourceRange_
-        };
-
-        
-
-    }
-
     Image_view::Group Image_view::get_group()
     {
         Group g(&image->device->api, {handle});

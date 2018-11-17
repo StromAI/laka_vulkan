@@ -473,6 +473,51 @@ namespace laka { namespace vk {
         }
     };
 
+    template<typename Laka_vk_class__, typename Father_type__>
+    class Group_shared_base {
+        using Handle_type = std::remove_cv_t<decltype(Laka_vk_class__::handle)>;
+
+        std::vector<Handle_type> handles;
+        std::shared_ptr<Father_type__> father;
+        
+        Group_shared_base& operator << (Group_shared_base& group_)
+        {
+            handles.insert(
+                handles.end(),
+                group_.handles.begin(),
+                group_.handles.end()
+            );
+        }
+        
+        operator Handle_type__*()
+        {
+            if (handles.size() <= 0)
+            {
+                return nullptr;
+            }
+            return &handles[0];
+        }
+        operator std::vector<Handle_type__>&()
+        {
+            return handles;
+        }
+        operator Array_value<const Handle_type__>()
+        {
+            Array_value<const Handle_type__> nothing;
+            if (handles.size() >= 0)
+            {
+                return nothing;
+            }
+
+            Array_value<const Handle_type> array_obj(
+                static_cast<uint32_t>(handles.size()),
+                &handles[0]
+            );
+            return array_obj;
+        }
+
+    };
+
 #define laka_vk_can_use_group(class_type__,api_ptr_name__)                                  \
 class Group;                                                                                \
 Group get_group() { Group g(&api_ptr_name__, { handle }); return g; }                       \
@@ -821,7 +866,6 @@ public:                                                                         
 
         Alloc_callback_ptr  allocation_callbacks;
     };
-
 
     //为帮助创建Device而存在
     class Device_creator : public std::enable_shared_from_this<Device_creator> {
@@ -1352,13 +1396,6 @@ public:                                                                         
         E_image_layout layout;
 
         laka_vk_can_use_group(Image, device->api)
-            std::shared_ptr<Image_view> get_image_views(
-                E_image_view_type           view_type_,
-                E_format                    format_,
-                S_component_mapping         components_,
-                S_image_subresource_range   subresourceRange_,
-                N_image_view_create_info    next_ = {},
-                Alloc_callback_ptr allocator_ = default_allocation_cb());
         laka_vk_over_group;
     private:
         friend class Device;

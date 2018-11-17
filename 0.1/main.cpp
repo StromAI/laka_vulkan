@@ -236,7 +236,14 @@ int main()
     }
     auto swapchain = vk_dev->get_a_swapchain(swapchain_ci);
 
-    //auto images = swapchain->get_images()
+    auto images = swapchain->get_images();
+
+    std::vector<std::shared_ptr<Image_view::Group>> image_views;
+
+    image_views.resize(images->handles.size());
+
+    size_t count = 0;
+    
 
     
 
