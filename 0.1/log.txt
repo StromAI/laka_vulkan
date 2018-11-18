@@ -22221,3 +22221,8 @@
 [2018-11-12 08:42:41 线程:14524] __cdecl laka::vk::Command_pool::~Command_pool(void)
 [2018-11-12 08:42:41 线程:14524] __cdecl laka::vk::Device::~Device(void)
 [2018-11-12 08:42:41 线程:14524] __cdecl laka::vk::Instance::~Instance(void)
+[2018-11-18 18:16:58 线程:16040] debug
+[2018-11-18 18:16:58 线程:16040] info
+[2018-11-18 18:16:58 线程:16040] warring
+[2018-11-18 18:16:58 线程:16040] error
+[2018-11-18 18:16:58 线程:16040] critical

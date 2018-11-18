@@ -12,6 +12,9 @@
     <Filter Include="基础文件">
       <UniqueIdentifier>{8a95ad0e-0ad8-4b52-bde2-cdd28d8aa574}</UniqueIdentifier>
     </Filter>
+    <Filter Include="主要文件\旧文件">
+      <UniqueIdentifier>{bf50b4f9-ed86-423b-b680-a64aa6167f92}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\common_files\src\common.cpp">
@@ -20,14 +23,20 @@
     <ClCompile Include="..\common_files\src\types.cpp">
       <Filter>基础文件</Filter>
     </ClCompile>
-    <ClCompile Include="vk.cpp">
-      <Filter>主要文件</Filter>
+    <ClCompile Include="..\common_files\src\vk_mean.cpp">
+      <Filter>基础文件</Filter>
+    </ClCompile>
+    <ClCompile Include="old_main.cpp">
+      <Filter>主要文件\旧文件</Filter>
+    </ClCompile>
+    <ClCompile Include="old_vk.cpp">
+      <Filter>主要文件\旧文件</Filter>
     </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>主要文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\common_files\src\vk_mean.cpp">
-      <Filter>基础文件</Filter>
+    <ClCompile Include="vk.cpp">
+      <Filter>主要文件</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -40,11 +49,14 @@
     <ClInclude Include="..\common_files\include\types.h">
       <Filter>基础文件</Filter>
     </ClInclude>
-    <ClInclude Include="vk.h">
-      <Filter>主要文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\common_files\include\vk_mean.h">
       <Filter>基础文件</Filter>
+    </ClInclude>
+    <ClInclude Include="old_vk.h">
+      <Filter>主要文件\旧文件</Filter>
+    </ClInclude>
+    <ClInclude Include="vk.h">
+      <Filter>主要文件</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
