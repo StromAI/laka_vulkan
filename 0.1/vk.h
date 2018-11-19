@@ -13,6 +13,13 @@ Permission is granted to anyone to use this software for any purpose, including 
 
 */
 
+/*
+待办:
+函数参数,如果过程不麻烦,而且很多个参数的.
+改用封装好的结构体.
+涉及多个步骤和结构体的,新建结构体以代替.
+*/
+
 #pragma once
 #include <memory>
 #include <array>
@@ -24,6 +31,7 @@ Permission is granted to anyone to use this software for any purpose, including 
 namespace laka {namespace vk {
 
 #if 1   /*  global  */
+
 #   if 1    /*  前置声明  */
     class Instance;
     class Physical_device;
@@ -70,8 +78,8 @@ namespace laka {namespace vk {
     class Frame_buffer;
     struct Queue_family_info;
 
-    struct Pramater_choose_physical_device;
-    struct Pramater_choose_queue_family;
+    struct P_choose_physical_device;
+    struct P_choose_queue_family;
 
     union Alloc_callbacks_ptr;
 #   endif   /*  前置声明  */
@@ -450,21 +458,45 @@ namespace laka {namespace vk {
         bool operator!=(std::nullptr_t) { return s != nullptr; }
     };
 
+    template<typename Handle_type__>
+    class Have_handles {
+    public:
+        std::vector<Handle_type__> handles;
+
+        operator Handle_type__*()
+        {
+            return &handles[0];
+        }
+        operator Array_value<Handle_type__>()
+        {
+            return Array_value<Handle_type__>(
+                static_cast<uint32_t>(handles.size()),
+                &handles[0]
+            );
+        }
+        operator Array_value<const Handle_type__>()
+        {
+            return Array_value<const Handle_type__>(
+                static_cast<uint32_t>(handles.size()),
+                &handles[0]
+            );
+        }
+    };
+
     //暂时不检测非同一个设备上的对象的情况.
     template<typename Vk_obj_type__>
-    class Group_base {
+    class Group_base : public Have_handles< std::remove_cv_t<decltype(Vk_obj_type__::handle)> >{
     public:
         using Handle_type = std::remove_cv_t<decltype(Vk_obj_type__::handle)>;
 
-        std::vector<Handle_type> handles;
         decltype(Vk_obj_type__::father) father;
 
-        Group_base& operator << (Group_base& group_)
+        Group_base& operator << (Aref<Group_base> group_)
         {
-            handles.insert(
-                handles.end(),
-                group_.handles.begin(),
-                group_.handles.end()
+            Have_handles::handles.insert(
+                Have_handles::handles.end(),
+                group_.ref.handles.begin(),
+                group_.ref.handles.end()
             );
         }
         Group_base& operator << (Ahandle<Vk_obj_type__> vk_obj_handle_)
@@ -472,49 +504,28 @@ namespace laka {namespace vk {
             operator<<(vk_obj_handle_);
             return *this;
         }
-        
-        operator Handle_type*()
-        {
-            return &handles[0];
-        }
-        operator Handle_type* const()
-        {
-            return &handles[0];
-        }
-        operator Array_value<Handle_type__>()
-        {
-            return Array_value<Handle_type>(
-                static_cast<uint32_t>(handles.size()),
-                &handles[0]
-            );
-        }
-        operator Array_value<const Handle_type__>()
-        {
-            return Array_value<const Handle_type>(
-                static_cast<uint32_t>(handles.size()),
-                &handles[0]
-            );
-        }
 
         virtual std::shared_ptr<Vk_obj_type__> detach(size_t index_) = 0;
-        
     };
 
-    template<typename Father_type__,typename Handle_type__>
-    class Vk_obj {
+    template<typename Handle_type__>
+    class Have_handle {
     public:
-        std::shared_ptr<Father_type__> father;
         Handle_type__ handle;
 
         operator Handle_type__() { return handle; }
         operator Handle_type__*() { return &handle; }
-        operator Handle_type__*()const { return &handle; }
+        operator Handle_type__*()const { return const_cast<Handle_type__*const>(&handle); }
+    };
 
-        std::shared_ptr<Group_base<Vk_obj>> operator<<
+    template<typename Father_type__,typename Handle_type__>
+    class Vk_obj : public Have_handle<Handle_type__>{
+    public:
+        std::shared_ptr<Father_type__> father;
 
     protected:
         friend Father_type__;
-        Alloc_callbacks_ptr alloc_call_backs_ptr;
+        Alloc_callbacks_ptr alloc_cb_ptr;
     };
 
     
@@ -522,6 +533,607 @@ namespace laka {namespace vk {
 
 
 #endif  /*  global  */
+
+#if 1   /*  Instance  */
+
+    struct User_choose_queue_info {
+        uint32_t queue_family_index;//想要哪个索引的队列族中创建队列
+        std::vector<float> queue_priorities;//每个队列各自的优先级
+        F_device_queue_create create_flags;
+        E_queue_global_priority_EXT global_priority;
+    };
+    struct P_choose_physical_device {
+        Physical_device& if_you_feel_the_physical_device_not_ok_so_return_false;
+    };
+    struct P_choose_queue_family {
+        std::vector<Queue_family_info> const& give_you_queue_family_info_;
+        std::vector<User_choose_queue_info>& waiting_for_your_filled_info_;
+    };
+
+    class Instance 
+        : public std::enable_shared_from_this<Instance> 
+        , public Have_handle<VkInstance>{
+    public:
+        using Sptr = std::shared_ptr<Instance>;
+
+        ~Instance();
+
+        static Sptr get_new(
+            Array_value<const char*>    enabled_extension_names_ = {},
+            uint32_t                    api_version_ = VK_MAKE_VERSION(1, 1, 82),
+            N_instance_create_info      next_ = {},
+            Alloc_callbacks_ptr         allocator_ = nullptr,
+            Array_value<const char*>    enabled_layer_names_ = {},
+            const char*                 app_name_ = "laka::vk",
+            uint32_t                    app_version_ = VK_MAKE_VERSION(0, 0, 1),
+            const char*                 engine_name_ = "laka::vk::engine",
+            uint32_t                    engine_version_ = VK_MAKE_VERSION(0, 0, 1));
+
+        std::shared_ptr<Device_creator> get_a_device_creator(
+            bool(*choose_physical_device_)(P_choose_physical_device& pramater_),
+            bool(*choose_queue_family_)(P_choose_queue_family& pramater_),
+            Alloc_callbacks_ptr allocator_ = father_allocation_cb());
+
+        std::shared_ptr<Surface> get_a_surface(
+            surface_create_info&            create_info_,
+            Alloc_callbacks_ptr allocator_ = father_allocation_cb());
+
+        Alloc_callbacks_ptr alloc_cb_ptr;
+
+        struct Api {
+            table_vk_api_instance(vk_fun ZK, , , YK FH)
+                table_vk_api_physical_device(vk_fun ZK, , , YK FH)
+                table_vk_api_platform(vk_fun ZK, , , YK FH)
+                table_vk_api_khr_surface(vk_fun ZK, , , YK FH)
+                table_vk_api_instance_khr_swapchain(vk_fun ZK, , , YK FH)
+        }api;
+
+    private:
+        S_allocation_callbacks alloc_cb;
+    };
+
+    class Physical_device : public Have_handle<VkPhysicalDevice>{
+    public:
+        Instance*                       instance;
+        std::vector<Queue_family_info>  queue_familys;
+
+        std::shared_ptr<std::vector<S_layer_properties>>
+            get_layer_propertiess();
+
+        std::shared_ptr<std::vector<S_extension_properties>>
+            get_extension_properties(const char* layer_name_);
+
+        std::shared_ptr <S_physical_device_features>
+            get_features();
+
+        std::shared_ptr<S_physical_device_properties>
+            get_properties();
+
+        std::shared_ptr<S_physical_device_memory_properties>
+            get_memory_properties();
+
+        std::shared_ptr<std::vector<S_queue_family_properties>>
+            get_queue_family_properties();
+
+        std::shared_ptr<S_format_properties>
+            get_format_properties(E_format format_);
+
+        std::shared_ptr<S_external_buffer_properties>
+            get_external_buffer_properties(S_physical_device_external_buffer_info info_);
+
+        std::shared_ptr<S_external_fence_properties>
+            get_external_fence_properties(
+                F_external_fence_handle_type    handle_type_);
+
+        std::shared_ptr<S_external_semaphore_properties>
+            get_external_semphore_properties(
+                F_external_semaphore_handle_type    handle_type_);
+
+        std::shared_ptr<S_image_format_properties2>
+            get_image_format_properties(
+                const S_physical_device_image_format_info2& info_);
+
+        std::shared_ptr<std::vector<VkSparseImageFormatProperties2>>
+            get_sparse_image_format_properties(
+                const S_physical_device_sparse_image_format_info2& format_info_);
+
+#ifdef VK_KHR_surface
+        bool get_surface_support(Ahandle<Surface> surface_, uint32_t queue_index_);
+
+        std::shared_ptr< std::vector<VkSurfaceFormatKHR> >
+            get_surface_formats(Ahandle<Surface> surface_);
+
+        std::shared_ptr< VkSurfaceCapabilitiesKHR >
+            get_surface_capabilities(Ahandle<Surface> surface_);
+
+        std::shared_ptr< std::vector< VkPresentModeKHR>>
+            get_surface_present_modes(Ahandle<Surface> surface_);
+#endif
+
+#ifdef VK_KHR_swapchain
+        std::shared_ptr< std::vector<VkRect2D> >
+            get_present_rectangles(Ahandle<Surface> surface_);
+#endif 
+
+        struct Group {
+        public:
+            Instance* father;
+            std::vector<Physical_device*> physical_devices;
+            S_physical_device_group_properties properties;
+        };
+    };
+
+
+    struct Queue_family_info {
+        uint32_t index;
+        S_queue_family_properties properties;
+        std::vector<bool> is_support_your_surface;
+    };
+
+#endif  /*  Instance  */
+
+    class Surface 
+        : public std::enable_shared_from_this<Surface> 
+        , public Vk_obj<Instance,VkSurfaceKHR>{
+    public:
+        using Sptr = std::shared_ptr<Surface>;
+
+#if defined(VK_USE_PLATFORM_WIN32_KHR)
+
+        bool get_physical_device_presentation_support(
+            Ahandle<Physical_device>    physical_device_,
+            uint32_t                    queuefamily_index_);
+
+        HANDLE get_memory_handle(
+            Ahandle<Device>                             device_,
+            Aref<S_memory_get_win32_handle_info_KHR>    info_);
+
+        std::shared_ptr<VkMemoryWin32HandlePropertiesKHR> get_memory_handle_proerties(
+            Ahandle<Device>                 device_,
+            F_external_memory_handle_type   handle_type_,
+            HANDLE                          handle_);
+
+        VkResult import_semaphore_handle(
+            Ahandle<Device>                                 device_,
+            Aref<S_import_semaphore_win32_handle_info_KHR>  pImportSemaphoreWin32HandleInfo_);
+
+        HANDLE get_Semaphore_handle(
+            Ahandle<Device>                             device_,
+            Aref<S_semaphore_get_win32_handle_info_KHR> semaphore_get_win32_handle_info_);
+
+        VkResult import_fence_handle(
+            Ahandle<Device>                             device_,
+            Aref <S_import_fence_win32_handle_info_KHR> info_);
+
+        HANDLE get_fence_handle(
+            Ahandle<Device>                             device_,
+            Aref<S_fence_get_win32_handle_info_KHR>     pGetWin32HandleInfo_);
+
+#elif defined(VK_USE_PLATFORM_ANDROID_KHR)
+
+        std::shared_ptr<S_android_hardware_buffer_format_properties_ANDROID>
+            get_hardware_buffer_properties(
+                Ahandle<Device>         device_,
+                Aref<AHardwareBuffer>   buffer_);
+
+        struct AHardwareBuffer* get_memory_hardware_buffer(
+            Ahandle<Device>                                         device_,
+            Aref<S_memory_get_android_hardware_buffer_info_ANDROID> pInfo_);
+
+#elif defined(VK_USE_PLATFORM_IOS_MVK)
+
+#elif defined(VK_USE_PLATFORM_MACOS_MVK)
+
+#elif defined(VK_USE_PLATFORM_MIR_KHR)
+
+        bool get_physical_device_presentation_support(
+            Ahandle<Physical_device>    physical_device_,
+            uint32_t                    queueFamilyIndex_,
+            MirConnection*              connection_);
+
+#elif defined(VK_USE_PLATFORM_VI_NN)
+
+#elif defined(VK_USE_PLATFORM_WAYLAND_KHR)
+
+        bool get_physical_device_presentation_support(
+            Ahandle<Physical_device>    physical_device_,
+            uint32_t                    queueFamilyIndex_,
+            struct wl_display*          wl_display_);
+
+#elif defined(VK_USE_PLATFORM_XCB_KHR)
+
+        bool get_physical_device_presentation_support(
+            Ahandle<Physical_device>    physical_device_,
+            uint32_t                    queueFamilyIndex_,
+            xcb_connection_t*           connection_,
+            xcb_visualid_t              visual_id_);
+
+#elif defined(VK_USE_PLATFORM_XLIB_KHR)
+
+        bool get_physical_device_presentation_support(
+            Ahandle<Physical_device>    physical_device_,
+            uint32_t                    queueFamilyIndex_,
+            Display*                    display_,
+            VisualID                    visualID_);
+
+#elif defined(VK_USE_PLATFORM_XLIB_XRANDR_EXT)
+
+#endif
+        ~Surface();
+    };
+
+#if 1   /*  Device  */
+    class Device_creator :public std::enable_shared_from_this<Device_creator> {
+    public:
+        using Sptr = std::shared_ptr<Device_creator>;
+
+        std::shared_ptr<Device> get_a_device(
+            Physical_device& physical_device_,
+            S_device_create_info& create_info_);
+
+        std::shared_ptr<Device> get_a_device(
+            Physical_device& physical_device_,
+            Array_value<Ahandle<Surface>> surfaces_ = {},
+            Array_value<const char*> enabled_extensions_ = {},
+            S_physical_device_features* features_ = nullptr);//todo:这里可以接收匿名函数回调
+
+        std::shared_ptr<Device> get_a_device(
+            Physical_device_group& physica_device_group_,
+            Array_value<Ahandle<Surface>> surfaces_ = {},
+            Array_value<const char*> enabled_extensions_ = {},
+            S_physical_device_features* features_ = nullptr);//todo:这里可以接收匿名函数回调
+
+        std::shared_ptr<Device> get_a_device(
+            Array_value<Ahandle<Surface>> surfaces_ = {},
+            Array_value<const char*> enabled_extensions_ = {},
+            S_physical_device_features* features_ = nullptr);
+
+        //std::shared_ptr<Device> get_a_device(
+        //    std::list<Physical_device>& physical_devices_,
+        //    std::vector<char*>* enabled_extensions_ = nullptr,
+        //    VkPhysicalDeviceFeatures* features_ = nullptr);
+
+        std::shared_ptr<Instance> instance;
+
+        bool(*choose_physical_device_function)(P_choose_physical_device& physical_device_);
+        bool(*choose_queue_family_function)(P_choose_queue_family& parmatwr_);
+    private:
+        Alloc_callbacks_ptr alloc_cb_ptr;
+        friend Device;
+        friend Instance;
+    };
+
+    class Queue_family {
+    public:
+        uint32_t qf_index;
+        S_queue_family_properties properties;
+        std::vector<Queue> queues;
+    };
+    struct P_choose_memory_type {
+        uint32_t memory_type_count;
+        S_memory_type* memory_types;
+    };
+    struct P_choose_result {
+        uint32_t memory_type_index;
+    };
+    class Device
+        : public std::enable_shared_from_this<Device>
+        , public Vk_obj<Instance, VkDevice> {
+    public:
+        using Sptr = std::shared_ptr<Device>;
+
+
+        VkResult invalidate_mapped_memory_ranges(
+            Array_value<S_mapped_memory_range> mapped_memory_ranges_);
+
+        F_peer_memory_feature get_peer_memory_feature(
+            uint32_t    heapIndex_,
+            uint32_t    localDeviceIndex_,
+            uint32_t    remoteDeviceIndex_);
+
+        VkResult wait_idle();
+        VkResult wait_for_fences(
+            Array_value<VkFence>    fences_,
+            uint64_t                timeout_,
+            bool wait_all_ = true);
+
+        ~Device();
+
+        std::shared_ptr <Semaphore> get_a_semaphore(
+            N_semaphore_create_info next_ = {},
+            Alloc_callbacks_ptr allocator_ = father_allocation_cb());
+
+        std::shared_ptr <Fence> get_a_fence(
+            N_fence_create_info next_ = {},
+            Alloc_callbacks_ptr allocator_ = father_allocation_cb());
+
+        std::shared_ptr <Event> get_a_event(
+            Alloc_callbacks_ptr allocator_ = father_allocation_cb());
+
+        std::shared_ptr<Shader_module> get_a_shader_module(
+            const uint32_t*     code_ptr_,
+            size_t              code_size_,
+            N_shader_module_create_info next_ = {},
+            Alloc_callbacks_ptr allocator_ = father_allocation_cb());
+
+        std::shared_ptr<Device_memory> get_a_device_memory(
+            VkDeviceSize memory_size_,
+            bool(*choose_memory_type_index_)(
+                P_choose_memory_type& pramater_choose_,
+                P_choose_result& choose_result_),
+            N_memory_allocate_info next_ = {},
+            Alloc_callbacks_ptr allocation_callbacks_ = father_allocation_cb());
+
+        std::shared_ptr<Buffer> get_a_buffer(
+            VkDeviceSize            buffer_size_,
+            F_buffer_create         create_flags_,
+            F_buffer_usage          usage_flags_,
+            E_sharing_mode          sharing_mode_,
+            Array_value<uint32_t>   queue_family_indices_,
+            N_buffer_create_info    next_ = {},
+            Alloc_callbacks_ptr allocator_ = father_allocation_cb());
+
+        std::shared_ptr<Image> get_a_image(
+            F_image_create          create_fb_,
+            E_image_type            imageType_,
+            E_format                format_,
+            S_extent_3d             extent_,
+            uint32_t                mipLevels_,
+            uint32_t                arrayLayers_,
+            F_sample_count          samples_,
+            F_image_usage           usage_fb_,
+            E_sharing_mode          sharingMode_,
+            E_image_tiling          tiling_,
+            Array_value<uint32_t>   queue_family_indices_,
+            E_image_layout          initialLayout_,
+            N_image_create_info     next_ = {},
+            Alloc_callbacks_ptr allocator_ = father_allocation_cb());
+
+        std::shared_ptr<Sampler> get_a_sampler(
+            E_filter                magFilter_,
+            E_filter                minFilter_,
+            E_sampler_mipmap_mode   mipmapMode_,
+            E_sampler_address_mode  addressModeU_,
+            E_sampler_address_mode  addressModeV_,
+            E_sampler_address_mode  addressModeW_,
+            float                   mipLodBias_,
+            VkBool32                anisotropyEnable_,
+            float                   maxAnisotropy_,
+            VkBool32                compareEnable_,
+            E_compare_op            compareOp_,
+            float                   minLod_,
+            float                   maxLod_,
+            E_border_color          borderColor_,
+            VkBool32                unnormalizedCoordinates_,
+            N_sampler_create_info   next_ = {},
+            Alloc_callbacks_ptr allocator_ = father_allocation_cb());
+
+        std::shared_ptr<Sampler_Ycbcr_conversion> get_a_sampler_ycbcr_conversion(
+            E_format                            format_,
+            E_sampler_ycbcr_model_conversion    ycbcrModel_,
+            E_sampler_ycbcr_range               ycbcrRange_,
+            S_component_mapping             components_,
+            E_chroma_location               xChromaOffset_,
+            E_chroma_location               yChromaOffset_,
+            E_filter                        chromaFilter_,
+            VkBool32                        forceExplicitReconstruction_,
+            N_sampler_ycbcr_conversion_create_info next_ = {},
+            Alloc_callbacks_ptr allocator_ = father_allocation_cb());
+
+        std::shared_ptr<Command_pool> get_a_command_pool(
+            uint32_t                        queueFamilyIndex_,
+            F_command_pool_create           flags_,
+            Alloc_callbacks_ptr allocator_ = father_allocation_cb());
+
+        std::shared_ptr<Descriptor_pool> get_a_descriptor_pool(
+            uint32_t                            maxSets_,
+            Array_value<S_descriptor_pool_size> poolSizes_,
+            F_descriptor_pool_create            flags_,
+            Alloc_callbacks_ptr allocator_ = father_allocation_cb());
+
+        std::shared_ptr<Query_pool> get_a_query_pool(
+            E_query_type                query_type_,
+            uint32_t                    query_count_,
+            F_query_pipeline_statistic  queue_pipeline_statistic_flags_,
+            Alloc_callbacks_ptr allocator_ = father_allocation_cb());
+
+        std::shared_ptr<Descriptor_set_layout> get_a_descriptor_set_layout(
+            F_descriptor_set_layout_create                  flags_,//手册中有但vk.xml中没有
+            Array_value<S_descriptor_set_layout_binding>    bindings_ = {},
+            N_descriptor_set_layout_create_info             next_ = {},
+            Alloc_callbacks_ptr allocator_ = father_allocation_cb());
+
+        std::shared_ptr<Render_pass> get_a_render_pass(
+            Array_value<S_attachment_description>   attachments = {},
+            Array_value<S_subpass_description>      subpasses = {},
+            Array_value<S_subpass_dependency>       dependencies = {},
+            N_render_pass_create_info               next_ = {},
+            Alloc_callbacks_ptr allocator_ = father_allocation_cb());
+
+        std::shared_ptr<Pipeline_layout> get_a_pipeline_layout(
+            Array_value<S_push_constant_range>  push_constant_ranges_ = {},
+            Alloc_callbacks_ptr allocator_ = father_allocation_cb());
+
+        std::shared_ptr<Pipeline_cache> get_a_pipeline_cache(
+            size_t      initial_data_size = 0,
+            const void* initial_data_ = nullptr,
+            Alloc_callbacks_ptr allocator_ = father_allocation_cb());
+
+#ifdef VK_KHR_swapchain
+
+        std::shared_ptr<Swapchain> get_a_swapchain(
+            S_swapchain_create_info_KHR info_,
+            Alloc_callbacks_ptr allocator_ = father_allocation_cb());
+
+        VkDeviceGroupPresentModeFlagsKHR get_present_modes(Ahandle<Surface> surface_);
+
+        std::shared_ptr<VkDeviceGroupPresentCapabilitiesKHR> get_present_capabilities();
+
+#endif 
+        std::vector<Queue_family> queue_familys;
+        std::vector<Physical_device*> physical_devices;
+
+        struct Api {
+            table_vk_api_device(vk_fun ZK, , , YK FH)
+                table_vk_api_cmd(vk_fun ZK, , , YK FH)
+                table_vk_api_khr_swapchain(vk_fun ZK, , , YK FH)
+                table_vk_api_device_khr_swapchain(vk_fun ZK, , , YK FH)
+        }api;
+
+    private:
+        friend Device_creator;
+        PFN_vkVoidFunction return_api(const char* api_name_);
+    };
+#endif  /*  Device  */
+
+    class Queue :public Have_handle<VkQueue> {
+    public:
+        VkResult wait_idle();
+        //...
+        VkResult submit(
+            Array_value<S_submit_info>& pSubmitInfo_,
+            Aptr<Fence>                 fence_ = nullptr);
+        //...
+        VkResult bind_sparse(
+            Array_value<S_bind_sparse_info>&    pBindInfo_,
+            Aptr < Fence >                      fence_ = nullptr);
+
+#ifdef VK_KHR_swapchain
+        // 排队所有渲染命令并将图像转换为正确的布局后，排队图像以进行演示
+        VkResult present(Aref<S_present_info_KHR> present_info_);
+#endif
+        uint32_t index;
+        uint32_t family_index;
+
+        Device::Api* api;
+        class Group : Have_handles<VkQueue> {
+            Device::Api* api;
+        };
+    };
+
+    //  没功能函数
+    class Semaphore
+        : public std::enable_shared_from_this<Semaphore>
+        , public Vk_obj<Device,VkSemaphore> {
+    public:
+        using Sptr = std::shared_ptr<Semaphore>;
+
+        ~Semaphore();
+
+        class Group :public Group_base<Semaphore> {
+        public:
+            std::shared_ptr<Semaphore> detach(size_t index_);
+        };
+
+    };
+
+    //  没功能函数
+    class Fence
+        : public std::enable_shared_from_this<Fence>
+        , public Vk_obj<Device, VkFence> {
+    public:
+        using Sptr = std::shared_ptr<Fence>;
+        ~Fence();
+
+        class Group :public Group_base<Fence> {
+        public:
+            std::shared_ptr<Fence> detach(size_t index_);
+        };
+    };
+
+    //  没功能函数
+    class Event
+        : public std::enable_shared_from_this<Event>
+        , public Vk_obj<Device, VkEvent> {
+    public:
+        using Sptr = std::shared_ptr<Event>;
+        ~Event();
+
+        class Group :public Group_base<Event> {
+        public:
+            std::shared_ptr<Event> detach(size_t index_);
+        };
+    };
+
+    //  没功能函数
+    class Shader_module 
+        : public std::enable_shared_from_this<Shader_module>
+        , public Vk_obj<Device, VkShaderModule>{
+    public:
+        using Sptr = std::shared_ptr<Shader_module>;
+
+        ~Shader_module();
+
+        class Group :public Group_base<Shader_module> {
+        public:
+            std::shared_ptr<Shader_module> detach(size_t index_);
+        };
+    };
+
+    class Device_memory
+        : public std::enable_shared_from_this<Device_memory>
+        , public Vk_obj<Device, VkDeviceMemory> {
+    public:
+        using Sptr = std::shared_ptr<Device_memory>;
+
+        VkDeviceSize get_commitment();
+
+        void* map_memory(
+            VkDeviceSize        offset_,
+            VkDeviceSize        size_,
+            VkMemoryMapFlags    flags_ = 0);//is a bitmask type for setting a mask, but is currently reserved for future use.
+
+        void unmap_memory();
+
+        ~Device_memory();
+
+        class Group : public Group_base<Device_memory> {
+        public:
+            std::shared_ptr<Device_memory> detach(size_t index_);
+        };
+    };
+
+    class Buffer
+        : public std::enable_shared_from_this<Buffer>
+        , public Vk_obj<Device, VkBuffer> {
+    public:
+        using Sptr = std::shared_ptr<Buffer>;
+
+        S_memory_requirements get_memory_requirements();
+
+        VkResult bind(
+            std::shared_ptr<Device_memory> device_memroy_,
+            VkDeviceSize memory_offset_);//绑定后是否会影响生命周期? 待查待提问.
+
+        ~Buffer();
+
+        std::shared_ptr<Buffer_view> get_a_buffer_view(
+            E_format        format_,
+            VkDeviceSize    offset_,
+            VkDeviceSize    range_,
+            Alloc_callbacks_ptr allocator_ = father_allocation_cb());
+
+        class Group :public Group_base<Buffer> {
+        public:
+            std::shared_ptr<Buffer> detach(size_t index_);
+        };
+    };
+
+    //没有功能函数
+    class Buffer_view 
+        : public std::enable_shared_from_this<Buffer_view> 
+        , public Vk_obj<Buffer,VkBufferView>{
+    public:
+        using Sptr = std::shared_ptr<Buffer_view>;
+
+        ~Buffer_view();
+
+        class Group :public Group_base<Buffer_view> {
+        public:
+            std::shared_ptr<Buffer_view> detach(size_t index_);
+        };
+    };
+
 
 
 

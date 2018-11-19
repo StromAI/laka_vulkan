@@ -1077,8 +1077,8 @@ shared_ptr<Surface> Instance::get_a_surface(
 
 #if 1   /* VkDeviceCreatorInfo  */
     shared_ptr<Device_creator> Instance::get_a_device_creator(
-        bool(*choose_physical_device_)(Pramater_choose_physical_device& pramater_),
-        bool(*choose_queue_family_)(Pramater_choose_queue_family& pramater_),
+        bool(*choose_physical_device_)(P_choose_physical_device& pramater_),
+        bool(*choose_queue_family_)(P_choose_queue_family& pramater_),
         Alloc_callbacks_ptr allocator_ /*= default_allocation_cb*/)
     {
         shared_ptr<Device_creator> sptr(
@@ -1093,8 +1093,8 @@ shared_ptr<Surface> Instance::get_a_surface(
 
     Device_creator::Device_creator(
         shared_ptr<Instance> instance_,
-        bool(*choose_physical_device_)(Pramater_choose_physical_device& physical_device_),
-        bool(*choose_queue_family_)(Pramater_choose_queue_family& parmatwr_),
+        bool(*choose_physical_device_)(P_choose_physical_device& physical_device_),
+        bool(*choose_queue_family_)(P_choose_queue_family& parmatwr_),
         Alloc_callbacks_ptr allocator_)
         : instance(instance_)
         , choose_physical_device_function(choose_physical_device_)
@@ -1112,7 +1112,7 @@ shared_ptr<Surface> Instance::get_a_surface(
         init_show;
         shared_ptr<Device> device_sptr;
 
-        Pramater_choose_physical_device p1{ physical_device_ };
+        P_choose_physical_device p1{ physical_device_ };
         if (choose_physical_device_function(p1) == false)
             return device_sptr;
 
@@ -1161,7 +1161,7 @@ shared_ptr<Surface> Instance::get_a_surface(
         init_show;
         shared_ptr<Device> device_sptr;
 
-        Pramater_choose_physical_device p1{
+        P_choose_physical_device p1{
             physical_device_
         };
         if (choose_physical_device_function(p1) == false)
@@ -1189,7 +1189,7 @@ shared_ptr<Surface> Instance::get_a_surface(
         }
         vector<User_choose_queue_info> user_choosed_q_create_infos;
 
-        Pramater_choose_queue_family choose_qf_parmater{ my_queue_familys, user_choosed_q_create_infos };
+        P_choose_queue_family choose_qf_parmater{ my_queue_familys, user_choosed_q_create_infos };
 
         if (choose_queue_family_function(choose_qf_parmater) == false)
         {
@@ -1284,7 +1284,7 @@ shared_ptr<Surface> Instance::get_a_surface(
         list<Physical_device*> ok_physical_device_list;
         for (auto&& physical_device : physica_device_group_.physical_devices)
         {
-            Pramater_choose_physical_device p1{ *physical_device };
+            P_choose_physical_device p1{ *physical_device };
             if (choose_physical_device_function(p1) == false)
             {
                 show_wrn("一个设备不合适:{}", (void*)p1.if_you_feel_the_physical_device_not_ok_so_return_false.handle);
@@ -1325,7 +1325,7 @@ shared_ptr<Surface> Instance::get_a_surface(
         }
         vector<User_choose_queue_info> user_choosed_q_create_infos;
 
-        Pramater_choose_queue_family choose_qf_parmater{ my_queue_familys, user_choosed_q_create_infos };
+        P_choose_queue_family choose_qf_parmater{ my_queue_familys, user_choosed_q_create_infos };
 
         if (choose_queue_family_function(choose_qf_parmater) == false)
         {
@@ -1430,7 +1430,7 @@ shared_ptr<Surface> Instance::get_a_surface(
         shared_ptr<Device> device_sptr;
         for (auto&& phy:instance->physical_devices)
         {
-            Pramater_choose_physical_device p{ phy };
+            P_choose_physical_device p{ phy };
             if (choose_physical_device_function(p) == false)
             {
                 show_wrn("一个设备不合适:{}", (void*)p.if_you_feel_the_physical_device_not_ok_so_return_false.handle);
@@ -1455,7 +1455,7 @@ shared_ptr<Surface> Instance::get_a_surface(
             }
             vector<User_choose_queue_info> user_choosed_q_create_infos;
 
-            Pramater_choose_queue_family choose_qf_parmater{ my_queue_familys, user_choosed_q_create_infos };
+            P_choose_queue_family choose_qf_parmater{ my_queue_familys, user_choosed_q_create_infos };
 
             if (choose_queue_family_function(choose_qf_parmater) == false)
             {
@@ -1966,8 +1966,8 @@ shared_ptr<Surface> Instance::get_a_surface(
     shared_ptr<Device_memory> Device::get_a_device_memory(
         VkDeviceSize                        memory_size_,
         bool(*choose_memory_type_index_)(
-            Pramater_choose_memory_type& pramater_choose_,
-            Pramater_choose_result& choose_result_),
+            P_choose_memory_type& pramater_choose_,
+            P_choose_result& choose_result_),
         N_memory_allocate_info              next_ /* = nullptr */,
         Alloc_callbacks_ptr allocator_ /* = default_allocation_cb */)
     {
@@ -1981,11 +1981,11 @@ shared_ptr<Surface> Instance::get_a_surface(
         }
 
         auto pdev_memory_properties = physical_devices[0]->get_memory_properties();
-        Pramater_choose_memory_type memory_properties{
+        P_choose_memory_type memory_properties{
             pdev_memory_properties->memoryTypeCount,
             static_cast<S_memory_type*>(&pdev_memory_properties->memoryTypes[0])
         };
-        Pramater_choose_result choose_result{ 0 };
+        P_choose_result choose_result{ 0 };
 
         if (choose_memory_type_index_(memory_properties, choose_result) == false)
             return device_memroy_sptr;

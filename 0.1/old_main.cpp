@@ -53,7 +53,7 @@ int main()
     auto vk_dc = vk_instance->get_a_device_creator(
         // 挑选设备的回调函数. 
         // 你将通过参数,得到一个物理设备对象,该函数负责判断一个设备是否符合要求.
-        [](Pramater_choose_physical_device& p_)->bool{
+        [](P_choose_physical_device& p_)->bool{
             auto phsical_device = p_.if_you_feel_the_physical_device_not_ok_so_return_false;
             
             // 找出通过设备的条件 例如:
@@ -71,7 +71,7 @@ int main()
         // 设置逻辑设备队列的回调函数
         // 你将通过参数,得到所挑选设备的所有队列信息,如不满意则返回false.laka将跳过此设备
         // 满意的话,就填写waiting_for_your_filled_info_,并且返回true;
-        [](Pramater_choose_queue_family& pramater_)->bool{
+        [](P_choose_queue_family& pramater_)->bool{
             init_show;
             bool is_ok = false;
 

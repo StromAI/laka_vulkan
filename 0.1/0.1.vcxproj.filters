@@ -26,12 +26,6 @@
     <ClCompile Include="..\common_files\src\vk_mean.cpp">
       <Filter>基础文件</Filter>
     </ClCompile>
-    <ClCompile Include="old_main.cpp">
-      <Filter>主要文件\旧文件</Filter>
-    </ClCompile>
-    <ClCompile Include="old_vk.cpp">
-      <Filter>主要文件\旧文件</Filter>
-    </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>主要文件</Filter>
     </ClCompile>
@@ -52,9 +46,6 @@
     <ClInclude Include="..\common_files\include\vk_mean.h">
       <Filter>基础文件</Filter>
     </ClInclude>
-    <ClInclude Include="old_vk.h">
-      <Filter>主要文件\旧文件</Filter>
-    </ClInclude>
     <ClInclude Include="vk.h">
       <Filter>主要文件</Filter>
     </ClInclude>
@@ -67,6 +58,15 @@
   <ItemGroup>
     <None Include="..\common_files\code_generation\vk_types.py">
       <Filter>资源文件</Filter>
+    </None>
+    <None Include="old_vk.cpp">
+      <Filter>主要文件\旧文件</Filter>
+    </None>
+    <None Include="old_main.cpp">
+      <Filter>主要文件\旧文件</Filter>
+    </None>
+    <None Include="old_vk.h">
+      <Filter>主要文件\旧文件</Filter>
     </None>
   </ItemGroup>
 </Project>

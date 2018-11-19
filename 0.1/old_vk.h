@@ -70,8 +70,8 @@ namespace laka { namespace vk {
     class Frame_buffer;
     struct Queue_family_info;
 
-    struct Pramater_choose_physical_device;
-    struct Pramater_choose_queue_family;
+    struct P_choose_physical_device;
+    struct P_choose_queue_family;
 
 #if defined(VK_USE_PLATFORM_WIN32_KHR)
 
@@ -595,15 +595,15 @@ public:                                                                         
 #endif  /*  global  */
 
     struct User_choose_queue_info {
-        uint32_t queue_family_index;//想要从index队列族创建队列
+        uint32_t queue_family_index;//想要哪个索引的队列族中创建队列
         std::vector<float> queue_priorities;//每个队列各自的优先级
         F_device_queue_create create_flags;
         E_queue_global_priority_EXT global_priority;
     };
-    struct Pramater_choose_physical_device {
+    struct P_choose_physical_device {
         Physical_device& if_you_feel_the_physical_device_not_ok_so_return_false;
     };
-    struct Pramater_choose_queue_family {
+    struct P_choose_queue_family {
         std::vector<Queue_family_info> const& give_you_queue_family_info_;
         std::vector<User_choose_queue_info>& waiting_for_your_filled_info_;
     };
@@ -625,8 +625,8 @@ public:                                                                         
             uint32_t                    engine_version_ = VK_MAKE_VERSION(0, 0, 1)  );
 
         std::shared_ptr<Device_creator> get_a_device_creator(
-            bool(*choose_physical_device_)(Pramater_choose_physical_device& pramater_),
-            bool(*choose_queue_family_)(Pramater_choose_queue_family& pramater_),
+            bool(*choose_physical_device_)(P_choose_physical_device& pramater_),
+            bool(*choose_queue_family_)(P_choose_queue_family& pramater_),
             Alloc_callbacks_ptr allocator_ = father_allocation_cb() );
 
         std::shared_ptr<Surface> get_a_surface(
@@ -634,8 +634,8 @@ public:                                                                         
             Alloc_callbacks_ptr allocator_ = father_allocation_cb() );
 
         const VkInstance                    handle;
-        Alloc_callbacks_ptr                  allocator_callbacks_ptr;
-        std::vector<Physical_device_group>  physical_device_groups;
+        Alloc_callbacks_ptr                 allocator_callbacks_ptr;
+        std::vector<Physical_device::Group>  physical_device_groups;
         std::vector<Physical_device>        physical_devices;
 
         operator VkInstance*() { return const_cast<VkInstance*>(&handle); }
@@ -699,7 +699,6 @@ public:                                                                         
                 const S_physical_device_sparse_image_format_info2& format_info_);
 
 #ifdef VK_KHR_surface
-        
         bool get_surface_support(Ahandle<Surface> surface_,uint32_t queue_index_);
 
         std::shared_ptr< std::vector<VkSurfaceFormatKHR> >
@@ -710,13 +709,11 @@ public:                                                                         
 
         std::shared_ptr< std::vector< VkPresentModeKHR>>
             get_surface_present_modes(Ahandle<Surface> surface_);
-
 #endif
-#ifdef VK_KHR_swapchain
 
+#ifdef VK_KHR_swapchain
         std::shared_ptr< std::vector<VkRect2D> >
             get_present_rectangles(Ahandle<Surface> surface_);
-
 #endif 
 
         VkPhysicalDevice                handle;
@@ -898,25 +895,25 @@ public:                                                                         
 
         std::shared_ptr<Instance> instance;
 
-        bool(*choose_physical_device_function)(Pramater_choose_physical_device& physical_device_);
-        bool(*choose_queue_family_function)(Pramater_choose_queue_family& parmatwr_);
+        bool(*choose_physical_device_function)(P_choose_physical_device& physical_device_);
+        bool(*choose_queue_family_function)(P_choose_queue_family& parmatwr_);
     private:
         friend class Device;
         friend class Instance;
         Device_creator(
             std::shared_ptr<Instance>       instance_,
-            bool(*choose_physical_device_)(Pramater_choose_physical_device&),
-            bool(*choose_queue_family_)(Pramater_choose_queue_family&),
+            bool(*choose_physical_device_)(P_choose_physical_device&),
+            bool(*choose_queue_family_)(P_choose_queue_family&),
             Alloc_callbacks_ptr allocator_);
 
         Alloc_callbacks_ptr  allocation_callbacks;
     };
 
-    struct Pramater_choose_memory_type {
+    struct P_choose_memory_type {
         uint32_t        memory_type_count;
         S_memory_type*   memory_types;
     };
-    struct Pramater_choose_result
+    struct P_choose_result
     {
         uint32_t memory_type_index;
     };
@@ -960,8 +957,8 @@ public:                                                                         
         std::shared_ptr<Device_memory> get_a_device_memory(
             VkDeviceSize memory_size_,
             bool(*choose_memory_type_index_)(
-                Pramater_choose_memory_type& pramater_choose_,
-                Pramater_choose_result& choose_result_),
+                P_choose_memory_type& pramater_choose_,
+                P_choose_result& choose_result_),
             N_memory_allocate_info next_ = {},
             Alloc_callbacks_ptr allocation_callbacks_ = father_allocation_cb());
 
