@@ -411,11 +411,11 @@ namespace laka {namespace vk {
 #   if 1    /*  全局函数  */
     void show_result(VkResult ret_);
     void show_result_assert(VkResult ret_);
+
     std::string version_str(uint32_t version);
     uint32_t get_instance_version();
 
     Alloc_callbacks_ptr father_allocation_cb();
-
 #   endif   /*  全局函数  */
 
 #   if 1    /*  基础模板  */
@@ -1335,13 +1335,13 @@ namespace laka {namespace vk {
     };
 
     //  没功能函数
-    class Descriptor_set_laout
-        : public std::enable_shared_from_this<Descriptor_set_laout>
+    class Descriptor_set_layout
+        : public std::enable_shared_from_this<Descriptor_set_layout>
         , public Vk_obj<Device, VkDescriptorSetLayout> {
     public:
-        using Sptr = std::shared_ptr<Descriptor_set_laout>;
+        using Sptr = std::shared_ptr<Descriptor_set_layout>;
 
-        ~Descriptor_set_laout();
+        ~Descriptor_set_layout();
 
         std::shared_ptr<Descriptor_update_template> get_a_descriptor_update_template(
             Array_value<VkDescriptorUpdateTemplateEntry> entrys_,
@@ -1427,9 +1427,132 @@ namespace laka {namespace vk {
     public:
         using Sptr = std::shared_ptr<Command_buffer>;
 
+        ~Command_buffer();
 
+        class Group :public Group_base<Command_buffer> {
+        public:
+            std::shared_ptr<Command_buffer> detach(size_t index_);
+        };
+    };
+
+    //  没功能函数
+    class Pipeline_layout
+        : public std::enable_shared_from_this<Pipeline_layout>
+        , public Vk_obj<Device, VkPipelineLayout> {
+    public:
+        using Sptr = std::shared_ptr<Pipeline_layout>;
+
+        ~Pipeline_layout();
+
+        std::shared_ptr<Descriptor_update_template> get_a_descriptor_update_template(
+            Array_value<S_descriptor_update_template_entry> entrys_,
+            E_pipeline_bind_point                           bind_point_,
+            uint32_t                                        set_,
+            Alloc_callbacks_ptr allocator_ = father_allocation_cb());
+
+        std::shared_ptr<Compute_pipeline> get_a_compute_pipeline(
+            F_pipeline_create                   flags_,
+            std::shared_ptr<Pipeline_cache>     pipeline_cache_,
+            std::shared_ptr<Shader_module>      module_,
+            const char*                         pName_,//shader 入口点名称
+            F_shader_stage                      stage_flags_,
+            const S_specialization_info*        pSpecializationInfo_ = nullptr,
+            Alloc_callbacks_ptr allocator_ = father_allocation_cb());
+
+        std::shared_ptr<Graphics_pipeline> get_a_graphics_pipeline(
+            F_pipeline_create                                   flag_,
+            Render_pass&                                        render_pass_,
+            uint32_t                                            subpass,
+            Pipeline_cache*                                     cache_,
+            Array_value<S_pipeline_shader_stage_create_info>    stages_,
+            const S_pipeline_vertex_input_state_create_info*    vertex_input_state_,
+            const S_pipeline_input_assembly_state_create_info*  input_assembly_state_,
+            const S_pipeline_tessellation_state_create_info*    tessellation_state_,
+            const S_pipeline_viewport_state_create_info*        view_port_state_,
+            const S_pipeline_rasterization_state_create_info*   rasterization_state_,
+            const S_pipeline_multisample_state_create_info*     multi_sample_state_,
+            const S_pipeline_depth_stencil_state_create_info*   depth_stencil_state_,
+            const S_pipeline_color_blend_state_create_info*     color_blend_state_,
+            const S_pipeline_dynamic_state_create_info*         dynamic_satate_,
+            N_graphics_pipeline_create_info                     next_ = {},
+            Alloc_callbacks_ptr allocator_ = father_allocation_cb());
+
+        class Group :public Group_base<Pipeline_layout> {
+        public:
+            std::shared_ptr<Pipeline_layout> detach(size_t index_);
+        };
+    };
+
+    class Pipeline_cache
+        : public std::enable_shared_from_this<Pipeline_cache>
+        , public Vk_obj<Device, VkPipelineLayout> {
+    public:
+        using Sptr = std::shared_ptr<Pipeline_cache>;
+
+        //std::shared_ptr<std::vector<char>> get_data();
+        //对pData这种,大概得用vector<uchar>
+        VkResult get_data(size_t* pDataSize, void* pData);
+        VkResult merge(Aref<Pipeline_cache>  srcCache);
+
+        ~Pipeline_cache();
+
+        class Group :public Group_base<Pipeline_cache> {
+        public:
+            std::shared_ptr<Pipeline_cache> detach(size_t index_);
+        };
+    };
+
+    class Compute_pipeline
+        : public std::enable_shared_from_this<Compute_pipeline>
+        , public Vk_obj<Pipeline_layout, VkPipeline> {
+    public:
+        using Sptr = std::shared_ptr<Compute_pipeline>;
+
+        ~Compute_pipeline();
+
+        std::shared_ptr<Compute_pipeline> get_a_compute_pipeline(
+            F_pipeline_create                   flags,
+            std::shared_ptr<Pipeline_cache>     pipeline_cache_,
+            std::shared_ptr<Shader_module>      module_,
+            const char*                         rukou_name_,
+            F_shader_stage                      stage_flags,
+            std::shared_ptr< Pipeline_layout>   pipeline_layout_ = nullptr,
+            const S_specialization_info*        pSpecializationInfo = nullptr,
+            Alloc_callbacks_ptr allocator_ = father_allocation_cb());
+
+        std::shared_ptr<Pipeline_cache>     pipeline_cache;
+        std::shared_ptr<Shader_module>      shader_module;
+        std::shared_ptr<Compute_pipeline>   base_pipeline;
+
+        class Group :public Group_base<Compute_pipeline> {
+        public:
+            std::shared_ptr<Compute_pipeline> detach(size_t index_);
+        };
+
+    private:
+        int32_t index;
+    };
+
+    class Graphics_pipeline
+        : public std::enable_shared_from_this<Graphics_pipeline>
+        , public Vk_obj<Pipeline_layout, VkPipeline> {
+    public:
+        using Sptr = std::shared_ptr<Graphics_pipeline>;
+
+        ~Graphics_pipeline();
+
+        std::shared_ptr<Pipeline_cache>                 pipeline_cache;
+        std::vector<std::shared_ptr<Shader_module>>     shader_modules;
+        std::shared_ptr<Render_pass>                    render_pass;
+
+        class Group : public Group_base<Graphics_pipeline> {
+        public:
+            std::shared_ptr<Graphics_pipeline> detach(size_t index_);
+        };
 
     };
+
+
 
 
 }}
