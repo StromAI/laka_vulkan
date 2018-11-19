@@ -1104,7 +1104,7 @@ public:                                                                         
         PFN_vkVoidFunction return_api(const char* api_name_);
     };
 
-    class Queue {
+    class Queue {Buffer_view
     public:
         VkResult wait_idle();
         //...

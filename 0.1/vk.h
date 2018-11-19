@@ -1119,7 +1119,7 @@ namespace laka {namespace vk {
         };
     };
 
-    //没有功能函数
+    //  没有功能函数
     class Buffer_view 
         : public std::enable_shared_from_this<Buffer_view> 
         , public Vk_obj<Buffer,VkBufferView>{
@@ -1134,7 +1134,302 @@ namespace laka {namespace vk {
         };
     };
 
+    //  没有功能函数
+    class Image_view
+        : public std::enable_shared_from_this<Image_view>
+        , public Vk_obj<Image, VkImageView> {
+    public:
+        using Sptr = std::shared_ptr<Image_view>;
 
+        ~Image_view();
+
+        class Group :public Group_base<Image_view> {
+        public:
+            std::shared_ptr<Image_view> detach(size_t index_);
+        };
+    };
+
+    class Image
+        : public std::enable_shared_from_this<Image>
+        , public Vk_obj<Device, VkImage> {
+    public:
+        using Sptr = std::shared_ptr<Image>;
+
+        S_memory_requirements get_image_memory_requirements();
+
+        S_subresource_layout get_subresource_layout(const S_image_subresource&);
+        //...
+        std::shared_ptr<std::vector<S_sparse_image_memory_requirements>>
+            get_sparse_memory_requirements();
+
+        VkResult bind(
+            Aptr<Device_memory> device_memory_,
+            VkDeviceSize        memory_offset_);
+
+        ~Image();
+
+        std::shared_ptr<Image_view> get_a_image_view(
+            E_image_view_type           view_type_,
+            E_format                    format_,
+            S_component_mapping         components_,
+            S_image_subresource_range   subresourceRange_,
+            N_image_view_create_info    next_ = {},
+            Alloc_callbacks_ptr allocator_ = father_allocation_cb());
+
+        class Group :public Group_base<Image> {
+        public:
+            std::shared_ptr<Image> detach(size_t index_);
+        };
+#ifdef VK_KHR_swapchain
+        friend Swapchain;
+#endif 
+    };
+
+#ifdef VK_KHR_swapchain
+
+    class Swapchain
+        : public std::enable_shared_from_this<Swapchain>
+        , public Vk_obj<Device, VkSwapchainKHR> {
+    public:
+        using Sptr = std::shared_ptr<Swapchain>;
+
+        // vkGetSwapchainImagesKHR 
+        /*
+            todo: 像这种能批量创建的对象,复数形式会有点不一样
+            todo: 提供重载函数用于返回VkResult值
+            todo: 参数,我自己设置的自动转换类型 需要规划一下
+        */
+        std::shared_ptr<Image::Group> get_images();
+
+        // 获取要使用的可用可呈现图像，并检索该图像的索引
+        uint32_t acquire_next_image(
+            uint64_t            timeout_,
+            Ahandle<Semaphore>  semaphore_,
+            Ahandle<Fence>      fence_);
+
+        ~Swapchain();
+
+
+
+    };
+
+#endif  /*  Vk_KHR_swapchain  */
+
+    //  没功能函数
+    class Sampler
+        : public std::enable_shared_from_this<Sampler>
+        , public Vk_obj<Device, VkSampler> {
+    public:
+        using Sptr = std::shared_ptr<Sampler>;
+
+        ~Sampler();
+
+        class Group :public Group_base<Sampler> {
+        public:
+            std::shared_ptr<Sampler> detach(size_t index_);
+        };
+    };
+
+    class Query_pool
+        : public std::enable_shared_from_this<Query_pool>
+        , public Vk_obj<Device, VkQueryPool> {
+    public:
+        using Sptr = std::shared_ptr<Query_pool>;
+
+        VkResult get_results(
+            uint32_t        firstQuery_,
+            uint32_t        queryCount_,
+            size_t          dataSize_,
+            void*           pData_,
+            VkDeviceSize    stride_,
+            F_query_result  flags_);
+
+        ~Query_pool();
+
+        class Group :public Group_base<Query_pool> {
+        public:
+            std::shared_ptr<Query_pool> detach(size_t index_);
+        };
+
+    };
+
+    class Render_pass
+        : public std::enable_shared_from_this<Render_pass>
+        , public Vk_obj<Device, VkRenderPass> {
+    public:
+        using Sptr = std::shared_ptr<Render_pass>;
+
+        S_extent_2d get_area_granularity();
+
+        ~Render_pass();
+
+        std::shared_ptr<Frame_buffer> get_a_frame_buffer(
+            Array_value<VkImageView> attachments_,
+            uint32_t width_,
+            uint32_t height_,
+            uint32_t layers_,
+            Alloc_callbacks_ptr allocator_ = father_allocation_cb());
+
+        class Group :public Group_base<Render_pass> {
+        public:
+            std::shared_ptr<Render_pass> detach(size_t index_);
+        };
+    };
+
+    //  没功能函数
+    class Frame_buffer
+        : public std::enable_shared_from_this<Frame_buffer>
+        , public Vk_obj<Render_pass, VkFramebuffer> {
+    public:
+        using Sptr = std::shared_ptr<Frame_buffer>;
+
+        ~Frame_buffer();
+
+        class Group :public Group_base<Frame_buffer> {
+        public:
+            std::shared_ptr<Frame_buffer> detach(size_t index_);
+        };
+    };
+
+    class Descriptor_pool
+        : public std::enable_shared_from_this<Descriptor_pool>
+        , public Vk_obj<Device, VkDescriptorPool> {
+    public:
+        using Sptr = std::shared_ptr<Descriptor_pool>;
+
+        VkResult reset(VkDescriptorPoolResetFlags flags = 0);//is a bitmask type for setting a mask, but is currently reserved for future use.
+
+        ~Descriptor_pool();
+
+        std::shared_ptr<Descriptor_set_group> get_a_descriptor_set_group(
+            Aref<Descriptor_set_layout> set_layout_,
+            uint32_t                    count_,
+            N_descriptor_set_allocate_info next_ = {});
+
+        class Group :public Group_base<Descriptor_pool> {
+        public:
+            std::shared_ptr<Descriptor_pool> detach(size_t index_);
+        };
+    };
+
+    class Descriptor_set
+        : public std::enable_shared_from_this<Descriptor_set>
+        , public Vk_obj<Device, VkDescriptorSet> {
+    public:
+        using Sptr = std::shared_ptr<Descriptor_set>;
+
+        void update_with_template(
+            Descriptor_update_template& descriptorUpdateTemplate,
+            const void*                 pData);
+
+        void update(
+            S_write_descriptor_set&     pDescriptorWrites,
+            S_copy_descriptor_set&      pDescriptorCopies);
+
+        ~Descriptor_set();
+
+        class Group : public Group_base<Descriptor_set> {
+        public:
+            std::shared_ptr<Descriptor_set> detach(size_t index_);
+        };
+    };
+
+    //  没功能函数
+    class Descriptor_set_laout
+        : public std::enable_shared_from_this<Descriptor_set_laout>
+        , public Vk_obj<Device, VkDescriptorSetLayout> {
+    public:
+        using Sptr = std::shared_ptr<Descriptor_set_laout>;
+
+        ~Descriptor_set_laout();
+
+        std::shared_ptr<Descriptor_update_template> get_a_descriptor_update_template(
+            Array_value<VkDescriptorUpdateTemplateEntry> entrys_,
+            Alloc_callbacks_ptr allocator_ = father_allocation_cb());
+
+        class Group :public Group_base<Descriptor_set_layout> {
+            std::shared_ptr<Descriptor_set_layout> detach(size_t index_);
+        };
+    };
+
+    /*
+    typedef struct VkDescriptorUpdateTemplateCreateInfo {
+    uint32_t                                  descriptorUpdateEntryCount;
+    const VkDescriptorUpdateTemplateEntry*    pDescriptorUpdateEntries;
+
+    VkDescriptorUpdateTemplateType            templateType;
+        如果设置为VK_DESCRIPTOR_UPDATE_TEMPLATE_TYPE_DESCRIPTOR_SET，
+            则它只能用于使用固定的descriptorSetLayout更新描述符集。
+        如果设置为VK_DESCRIPTOR_UPDATE_TEMPLATE_TYPE_PUSH_DESCRIPTORS_KHR，
+            则它只能用于使用提供的pipelineBindPoint，pipelineLayout和
+            set number推送描述符集。
+
+    VkDescriptorSetLayout                     descriptorSetLayout;
+        如果templateType不是VK_DESCRIPTOR_UPDATE_TEMPLATE_TYPE_DESCRIPTOR_SET，则忽略此参数。
+        参数更新模板将使用的描述符集布局。
+        必须使用此布局创建将通过新创建的描述符更新模板更新的所有描述符集。
+        descriptorSetLayout是用于构建描述符更新模板的描述符集布局。
+        将通过新创建的描述符更新模板更新的所有描述符集必须使用与
+        此布局匹配（与其相同或定义相同）的布局来创建。
+
+    VkPipelineBindPoint                       pipelineBindPoint;
+        如果templateType不是VK_DESCRIPTOR_UPDATE_TEMPLATE_TYPE_PUSH_DESCRIPTORS_KHR，则忽略此参数
+        pipelineBindPoint是一个VkPipelineBindPoint，指示描述符是由图形管道还是计算管道使用。
+
+    VkPipelineLayout                          pipelineLayout;
+        如果templateType不是VK_DESCRIPTOR_UPDATE_TEMPLATE_TYPE_PUSH_DESCRIPTORS_KHR，则忽略此参数
+        pipelineLayout是一个VkPipelineLayout对象，用于对绑定进行编程。
+
+    uint32_t                                  set;
+        如果templateType不是VK_DESCRIPTOR_UPDATE_TEMPLATE_TYPE_PUSH_DESCRIPTORS_KHR，则忽略此参数
+        set是将更新的管道布局中设置的描述符的集合编号。
+    } VkDescriptorUpdateTemplateCreateInfo;
+    */
+    //  没有功能函数
+    class Descriptor_update_template
+        : public std::enable_shared_from_this<Descriptor_update_template>
+        , public Vk_obj<Descriptor_set_layout, VkDescriptorUpdateTemplate> {
+    public:
+        using Sptr = std::shared_ptr<Descriptor_update_template>;
+
+        ~Descriptor_update_template();
+
+        std::shared_ptr<Pipeline_layout> father_pipeline_layout;
+
+        class Group :public Group_base<Descriptor_update_template> {
+            std::shared_ptr<Descriptor_update_template> detach(size_t index_);
+        };
+    };
+
+    class Command_pool
+        : public std::enable_shared_from_this<Command_pool>
+        , public Vk_obj<Device, VkCommandPool> {
+    public:
+        using Sptr = std::shared_ptr<Command_pool>;
+
+        VkResult reset(F_command_pool_reset flags_);
+
+        void trim(VkCommandPoolTrimFlags flags_ = 0);//is a bitmask type for setting a mask, but is currently reserved for future use.
+
+        ~Command_pool();
+
+        std::shared_ptr<Command_buffer_group>
+            get_a_command_buffer_group(uint32_t count_, E_command_buffer_level level);
+
+        class Group :public Group_base<Command_pool> {
+            std::shared_ptr<Command_pool> detach(size_t index_);
+        };
+    };
+
+    class Command_buffer
+        : public std::enable_shared_from_this<Command_buffer>
+        , public Vk_obj<Command_pool, VkCommandBuffer> {
+    public:
+        using Sptr = std::shared_ptr<Command_buffer>;
+
+
+
+    };
 
 
 }}
