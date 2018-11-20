@@ -76,7 +76,8 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(VULKAN_SDK)\Include;$(SolutionDir)common_files\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(VULKAN_SDK)\Include;$(SolutionDir)common_files\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>VK_NO_PROTOTYPES;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -125,17 +126,17 @@
     <ClCompile Include="..\common_files\src\types.cpp" />
     <ClCompile Include="..\common_files\src\vk_mean.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="vk.cpp" />
     <None Include="old_main.cpp" />
     <None Include="old_vk.cpp" />
+    <ClCompile Include="vk.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\common_files\include\common.h" />
     <ClInclude Include="..\common_files\include\laka_vk_define.h" />
     <ClInclude Include="..\common_files\include\types.h" />
     <ClInclude Include="..\common_files\include\vk_mean.h" />
-    <ClInclude Include="vk.h" />
     <None Include="old_vk.h" />
+    <ClInclude Include="vk.h" />
   </ItemGroup>
   <ItemGroup>
     <Xml Include="..\common_files\vk.xml">

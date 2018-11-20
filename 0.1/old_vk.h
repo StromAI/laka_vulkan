@@ -2269,3 +2269,5 @@ public:                                                                         
 #undef laka_vk_can_use_group
 #undef laka_vk_over_group
 }}
+
+//*/

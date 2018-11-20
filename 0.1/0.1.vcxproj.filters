@@ -59,13 +59,13 @@
     <None Include="..\common_files\code_generation\vk_types.py">
       <Filter>资源文件</Filter>
     </None>
+    <None Include="old_vk.h">
+      <Filter>主要文件\旧文件</Filter>
+    </None>
     <None Include="old_vk.cpp">
       <Filter>主要文件\旧文件</Filter>
     </None>
     <None Include="old_main.cpp">
-      <Filter>主要文件\旧文件</Filter>
-    </None>
-    <None Include="old_vk.h">
       <Filter>主要文件\旧文件</Filter>
     </None>
   </ItemGroup>

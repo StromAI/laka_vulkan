@@ -771,13 +771,15 @@ def out_struct(s,cpp_out_str):
         out+="void set_pNext("+N_name+" n_){pNext = n_;}\n"
     out+="};\n"
 
+    #out+="using "+s.my_name+" = struct " + s.my_name+";\n"
+
     # 处理pNext
     is_ex_to = len(s.struct_extends_to_array) > 0
     is_ex_base = len(s.struct_extends) > 0
     is_pNext = is_ex_base or is_ex_to
 
-    if s.have_sType==1:
-        temp_h_out += "static_assert(\n\tsizeof(" + s.my_name + ") == sizeof(" + s.vk_name + "),\n\t\"struct and wrapper have different size!\");\n"
+    #if s.have_sType==1:
+    #    temp_h_out += "static_assert(\n\tsizeof(" + s.my_name + ") == sizeof(" + s.vk_name + "),\n\t\"struct and wrapper have different size!\");\n"
 
     #宏结束
     if s.is_wsi == 1:

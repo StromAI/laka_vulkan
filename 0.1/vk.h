@@ -442,6 +442,7 @@ namespace laka {namespace vk {
         VkAllocationCallbacks* vks;
         friend class Instance;
     public:
+        Alloc_callbacks_ptr() :s(nullptr) {}
         Alloc_callbacks_ptr(std::nullptr_t n_) :s(n_) {}
         Alloc_callbacks_ptr(Alloc_callbacks_ptr& acb_) :s(acb_.s) {}
         Alloc_callbacks_ptr(S_allocation_callbacks* cb_) :s(cb_) {}
@@ -457,6 +458,7 @@ namespace laka {namespace vk {
         bool operator==(std::nullptr_t) { return s == nullptr; }
         bool operator!=(std::nullptr_t) { return s != nullptr; }
     };
+    using Alloc_callbacks_ptr = union Alloc_callbacks_ptr;
 
     template<typename Handle_type__>
     class Have_handles {
@@ -522,8 +524,8 @@ namespace laka {namespace vk {
     class Vk_obj : public Have_handle<Handle_type__>{
     public:
         std::shared_ptr<Father_type__> father;
-
     protected:
+        Vk_obj<Father_type__, Handle_type__>() {}
         friend Father_type__;
         Alloc_callbacks_ptr alloc_cb_ptr;
     };
@@ -534,65 +536,7 @@ namespace laka {namespace vk {
 
 #endif  /*  global  */
 
-#if 1   /*  Instance  */
-
-    struct User_choose_queue_info {
-        uint32_t queue_family_index;//想要哪个索引的队列族中创建队列
-        std::vector<float> queue_priorities;//每个队列各自的优先级
-        F_device_queue_create create_flags;
-        E_queue_global_priority_EXT global_priority;
-    };
-    struct P_choose_physical_device {
-        Physical_device& if_you_feel_the_physical_device_not_ok_so_return_false;
-    };
-    struct P_choose_queue_family {
-        std::vector<Queue_family_info> const& give_you_queue_family_info_;
-        std::vector<User_choose_queue_info>& waiting_for_your_filled_info_;
-    };
-
-    class Instance 
-        : public std::enable_shared_from_this<Instance> 
-        , public Have_handle<VkInstance>{
-    public:
-        using Sptr = std::shared_ptr<Instance>;
-
-        ~Instance();
-
-        static Sptr get_new(
-            Array_value<const char*>    enabled_extension_names_ = {},
-            uint32_t                    api_version_ = VK_MAKE_VERSION(1, 1, 82),
-            N_instance_create_info      next_ = {},
-            Alloc_callbacks_ptr         allocator_ = nullptr,
-            Array_value<const char*>    enabled_layer_names_ = {},
-            const char*                 app_name_ = "laka::vk",
-            uint32_t                    app_version_ = VK_MAKE_VERSION(0, 0, 1),
-            const char*                 engine_name_ = "laka::vk::engine",
-            uint32_t                    engine_version_ = VK_MAKE_VERSION(0, 0, 1));
-
-        std::shared_ptr<Device_creator> get_a_device_creator(
-            bool(*choose_physical_device_)(P_choose_physical_device& pramater_),
-            bool(*choose_queue_family_)(P_choose_queue_family& pramater_),
-            Alloc_callbacks_ptr allocator_ = father_allocation_cb());
-
-        std::shared_ptr<Surface> get_a_surface(
-            surface_create_info&            create_info_,
-            Alloc_callbacks_ptr allocator_ = father_allocation_cb());
-
-        Alloc_callbacks_ptr alloc_cb_ptr;
-
-        struct Api {
-            table_vk_api_instance(vk_fun ZK, , , YK FH)
-                table_vk_api_physical_device(vk_fun ZK, , , YK FH)
-                table_vk_api_platform(vk_fun ZK, , , YK FH)
-                table_vk_api_khr_surface(vk_fun ZK, , , YK FH)
-                table_vk_api_instance_khr_swapchain(vk_fun ZK, , , YK FH)
-        }api;
-
-    private:
-        S_allocation_callbacks alloc_cb;
-    };
-
-    class Physical_device : public Have_handle<VkPhysicalDevice>{
+    class Physical_device : public Have_handle<VkPhysicalDevice> {
     public:
         Instance*                       instance;
         std::vector<Queue_family_info>  queue_familys;
@@ -663,6 +607,66 @@ namespace laka {namespace vk {
         };
     };
 
+#if 1   /*  Instance  */
+    struct User_choose_queue_info {
+        uint32_t queue_family_index;//想要哪个索引的队列族中创建队列
+        std::vector<float> queue_priorities;//每个队列各自的优先级
+        F_device_queue_create create_flags;
+        E_queue_global_priority_EXT global_priority;
+    };
+    struct P_choose_physical_device {
+        Physical_device& if_you_feel_the_physical_device_not_ok_so_return_false;
+    };
+    struct P_choose_queue_family {
+        std::vector<Queue_family_info> const& give_you_queue_family_info_;
+        std::vector<User_choose_queue_info>& waiting_for_your_filled_info_;
+    };
+
+    class Instance 
+        : public std::enable_shared_from_this<Instance> 
+        , public Have_handle<VkInstance>{
+    public:
+        using Sptr = std::shared_ptr<Instance>;
+
+        ~Instance();
+
+        static Sptr get_new(
+            Array_value<const char*>    enabled_extension_names_ = {},
+            uint32_t                    api_version_ = VK_MAKE_VERSION(1, 1, 82),
+            N_instance_create_info      next_ = {},
+            Alloc_callbacks_ptr         allocator_ = nullptr,
+            Array_value<const char*>    enabled_layer_names_ = {},
+            const char*                 app_name_ = "laka::vk",
+            uint32_t                    app_version_ = VK_MAKE_VERSION(0, 0, 1),
+            const char*                 engine_name_ = "laka::vk::engine",
+            uint32_t                    engine_version_ = VK_MAKE_VERSION(0, 0, 1));
+
+        std::shared_ptr<Device_creator> get_a_device_creator(
+            bool(*choose_physical_device_)(P_choose_physical_device& pramater_),
+            bool(*choose_queue_family_)(P_choose_queue_family& pramater_),
+            Alloc_callbacks_ptr allocator_ = father_allocation_cb());
+
+        std::shared_ptr<Surface> get_a_surface(
+            surface_create_info&            create_info_,
+            Alloc_callbacks_ptr allocator_ = father_allocation_cb());
+
+        struct Api {
+            table_vk_api_instance(vk_fun ZK, , , YK FH)
+                table_vk_api_physical_device(vk_fun ZK, , , YK FH)
+                table_vk_api_platform(vk_fun ZK, , , YK FH)
+                table_vk_api_khr_surface(vk_fun ZK, , , YK FH)
+                table_vk_api_instance_khr_swapchain(vk_fun ZK, , , YK FH)
+        }api;
+
+        Instance(VkInstance handle_, Alloc_callbacks_ptr allocator_callbacks_ptr_);
+
+        std::vector<Physical_device::Group>  physical_device_groups;
+        std::vector<Physical_device>        physical_devices;
+        Alloc_callbacks_ptr alloc_cb_ptr;
+        
+    private:
+        S_allocation_callbacks alloc_cb;
+    };
 
     struct Queue_family_info {
         uint32_t index;
@@ -759,6 +763,8 @@ namespace laka {namespace vk {
 #elif defined(VK_USE_PLATFORM_XLIB_XRANDR_EXT)
 
 #endif
+        Instance::Api* api;
+
         ~Surface();
     };
 
@@ -778,7 +784,7 @@ namespace laka {namespace vk {
             S_physical_device_features* features_ = nullptr);//todo:这里可以接收匿名函数回调
 
         std::shared_ptr<Device> get_a_device(
-            Physical_device_group& physica_device_group_,
+            Physical_device::Group& physica_device_group_,
             Array_value<Ahandle<Surface>> surfaces_ = {},
             Array_value<const char*> enabled_extensions_ = {},
             S_physical_device_features* features_ = nullptr);//todo:这里可以接收匿名函数回调
@@ -983,6 +989,15 @@ namespace laka {namespace vk {
     private:
         friend Device_creator;
         PFN_vkVoidFunction return_api(const char* api_name_);
+
+        Device(
+            std::shared_ptr<Instance>               instance_,
+            std::shared_ptr<Device_creator>         device_creator_,
+            std::vector<Physical_device*>&          physical_devices_,
+            std::vector<User_choose_queue_info>&    queue_infos_,
+            std::vector<S_queue_family_properties>& qf_properties_,
+            VkDevice                                handle_,
+            Alloc_callbacks_ptr allocation_callbacks_);
     };
 #endif  /*  Device  */
 
@@ -1027,28 +1042,35 @@ namespace laka {namespace vk {
 
     };
 
-    //  没功能函数
     class Fence
         : public std::enable_shared_from_this<Fence>
         , public Vk_obj<Device, VkFence> {
     public:
         using Sptr = std::shared_ptr<Fence>;
-        ~Fence();
 
+        VkResult get_status();
+        VkResult reset(Array_value<VkFence> fences_);
+        VkResult wait(uint64_t timeout_);
+        VkResult wait(bool wait_all_, uint64_t timeout_, Array_value<VkFence> fences_);
+
+        ~Fence();
         class Group :public Group_base<Fence> {
         public:
             std::shared_ptr<Fence> detach(size_t index_);
         };
     };
 
-    //  没功能函数
     class Event
         : public std::enable_shared_from_this<Event>
         , public Vk_obj<Device, VkEvent> {
     public:
         using Sptr = std::shared_ptr<Event>;
-        ~Event();
 
+        VkResult set();
+        VkResult get_event_status();
+        void reset();
+
+        ~Event();
         class Group :public Group_base<Event> {
         public:
             std::shared_ptr<Event> detach(size_t index_);
@@ -1208,8 +1230,6 @@ namespace laka {namespace vk {
             Ahandle<Fence>      fence_);
 
         ~Swapchain();
-
-
 
     };
 

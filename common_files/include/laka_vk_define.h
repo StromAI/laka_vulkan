@@ -340,7 +340,7 @@ a aa## vkGetMemoryWin32HandleNV #bb b \
 
 #define surface_create_fun(...) api.vkCreateWin32SurfaceKHR(__VA_ARGS__)
 
-#define surface_destroy_fun(...) api.vkDestroySurfaceKHR(__VA_ARGS__)
+#define surface_destroy_fun(...) api->vkDestroySurfaceKHR(__VA_ARGS__)
 
 #elif defined(VK_USE_PLATFORM_ANDROID_KHR)
 #define platform_name   android
@@ -809,10 +809,9 @@ a aa## VkMemoryDedicatedAllocateInfo ##bb b \
 
 //a aa## VkImportAndroidHardwareBufferInfoANDROID ##bb b \
 
+#include "vulkan/vulkan.h"
 
 #define vk_fun(name__) PFN_##name__ name__
-
-#include "vulkan/vulkan.h"
 
 #ifdef VK_KHR_surface
 
@@ -853,5 +852,6 @@ a aa## vkQueuePresentKHR ##bb b \
 #define table_vk_api_device_khr_swapchain(a,aa,bb,b)
 
 #endif 
+
 
 

@@ -358,7 +358,7 @@ public:
     T__* ptr;
 
     Aptr(std::shared_ptr<T__> sptr_) :ptr(sptr_.get()) {}
-    Aptr(const T__ const* ptr_) :ptr(const_cast<T__*>(ptr_) ) {}
+    Aptr(const T__* ptr_) :ptr(const_cast<T__*>(ptr_) ) {}
     constexpr Aptr(std::nullptr_t) noexcept : ptr(nullptr) {}
 
     operator T__*() { return ptr; }
